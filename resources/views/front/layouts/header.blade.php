@@ -15,7 +15,7 @@
                 <div>
                     <nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
                         <ul>
-                            <li class="active has-submenu">
+                            {{-- <li class="active has-submenu">
                                 <a href="javascript:void(0);">Home</a>
 
                                 <ul class="submenu">
@@ -24,8 +24,9 @@
                                     <li><a href="index_3.html">Home 3</a></li>
                                     <li><a href="index_4.html">Home Shop</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
+                            <li> <a href="{{ route('home') }}">{{ __('home') }}</a> </li>
                             <li>
                                 <a href="about.html">About</a>
                             </li>
