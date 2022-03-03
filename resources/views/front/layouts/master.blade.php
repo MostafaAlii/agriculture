@@ -514,6 +514,7 @@
                     }(window, document));
                 </script>
                 @yield('content')
+                @include('front.layouts.section-item')
                 @include('front.layouts.footer_get_in_touch')
                 @include('front.layouts.footer_map')
             </main>

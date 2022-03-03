@@ -27,7 +27,7 @@
                                             </li> --}}
                             <li> <a href="{{ route('home') }}">{{ __('home') }}</a> </li>
                             <li>
-                                <a href="about.html">About</a>
+                                <a href="{{ route('aboutUs') }}">{{ __('about') }}</a>
                             </li>
 
                             <li class="has-submenu">
