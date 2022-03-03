@@ -15,21 +15,21 @@
                 <div>
                     <nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
                         <ul>
-                                            {{-- <li class="active has-submenu">
-                                                <a href="javascript:void(0);">Home</a>
+                            {{-- <li class="active has-submenu">
+                                <a href="javascript:void(0);">Home</a>
 
-                                                <ul class="submenu">
-                                                    <li class="active"><a href="index.html">Home 1</a></li>
-                                                    <li><a href="index_2.html">Home 2</a></li>
-                                                    <li><a href="index_3.html">Home 3</a></li>
-                                                    <li><a href="index_4.html">Home Shop</a></li>
-                                                </ul>
-                                            </li> --}}
+                                <ul class="submenu">
+                                    <li class="active"><a href="index.html">Home 1</a></li>
+                                    <li><a href="index_2.html">Home 2</a></li>
+                                    <li><a href="index_3.html">Home 3</a></li>
+                                    <li><a href="index_4.html">Home Shop</a></li>
+                                </ul>
+                            </li> --}}
+                            {{--  start links in navebar *************************************************************************--}}
                             <li> <a href="{{ route('home') }}">{{ __('home') }}</a> </li>
-                            <li>
-                                <a href="{{ route('aboutUs') }}">{{ __('about') }}</a>
-                            </li>
+                            <li> <a href="{{ route('aboutUs') }}">{{ __('about') }}</a> </li>
 
+                            {{--  start links in navebar *************************************************************************--}}
                             <li class="has-submenu">
                                 <a href="javascript:void(0);">Pages</a>
 
