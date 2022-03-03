@@ -27,6 +27,7 @@
                             </li> --}}
 
                             <li> <a href="{{ route('home') }}">{{ __('home') }}</a> </li>
+                            
                             <li>
                                 <a href="about.html">About</a>
                             </li>
