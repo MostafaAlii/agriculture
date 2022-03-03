@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('fronthome');
 });
+
+Route::get('/test', function () {
+    return view('layouts.admin');
+});
