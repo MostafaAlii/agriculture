@@ -1,5 +1,8 @@
 @extends('front.layouts.master')
 @section('title', 'home Page ')
+@section('css')
+
+@endsection
 @section('content')
      <!-- start section -->
      <section class="section">
@@ -90,7 +93,7 @@
             </div>
             <!-- end feature -->
         </div>
-    </section>
+     </section>
     <!-- end section -->
 
     <!-- start section -->
@@ -694,6 +697,8 @@
         </div>
     </section>
 
-    
-@endsection
 
+@endsection
+@section('js')
+
+@endsection
