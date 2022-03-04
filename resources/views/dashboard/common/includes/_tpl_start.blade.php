@@ -34,9 +34,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
     <!-- END: Page CSS-->
     @yield('style')
-    <!-- BEGIN: Custom CSS--
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style-rtl.css">
-    -- END: Custom CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
+    <!-- END: Custom CSS-->
 
 </head>
 <!-- END: Head-->
