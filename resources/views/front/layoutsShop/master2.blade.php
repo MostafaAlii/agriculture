@@ -14,7 +14,7 @@
 
 			<!-- start hero -->
 			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
-                 style="background-image: url( {{ URL::asset('frontassets/img/intro_img/12.jpg') }});
+                 style="background-image: url( {{ URL::asset('frontassets/img/pic2.jpg') }});
                         color: #333;">
 				<div class="container">
 					<div class="row">
