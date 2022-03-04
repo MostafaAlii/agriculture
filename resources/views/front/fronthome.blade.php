@@ -635,10 +635,11 @@
     </section>
     <!-- end section -->
 
-    
 
 
-@endsection
-@section('js')
 
 @endsection
+@push('js')
+
+@endpush
+
