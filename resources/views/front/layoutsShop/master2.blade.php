@@ -13,7 +13,9 @@
 			<!-- end header -->
 
 			<!-- start hero -->
-			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%" style="background-image: url(img/intro_img/12.jpg);color: #333;">
+			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
+                 style="background-image: url( {{ URL::asset('frontassets/img/intro_img/12.jpg') }});
+                        color: #333;">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-md-7">
@@ -86,7 +88,7 @@
 						<div class="col-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="footer__item">
 								<a class="site-logo" href="index.html">
-									<img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
+									<img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif')}}" data-src="{{ asset('frontassets/img/site_logo.png')}}" alt="demo" />
 								</a>
 							</div>
 						</div>
