@@ -19,8 +19,20 @@ Route::get('/', function () {
 
 
 // Dashboard prifex in RouteServiceProvider
-Route::group(['namespace'=>'Dashboard'/*, 'prefix'=>'dashboard'*/], function() {
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'dashboard'], function() {
     Route::get('/', function () {
         return view('layouts.admin');
     });
 });
+
+
+require __DIR__.'/auth.php';
+/*Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';*/
