@@ -1,9 +1,9 @@
 <?php
-use App\Http\Controllers\Dashboard\Admin\DashboardController;
+use App\Http\Controllers\Dashboard\Farmer\DashboardController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
-| Admin Routes
+| Farmer Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -12,13 +12,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 // Dashboard prifex in RouteServiceProvider
-Route::group(['namespace'=>'Dashboard', 'prefix'=>'dashboard_admin', 'middleware' => 'auth:admin'], function() {
+Route::group(['namespace'=>'Dashboard', 'prefix'=>'dashboard_farmer', 'middleware' => 'auth'], function() {
     /********************************* Start Admins Dashboard Routes ************************************/
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');
     /********************************* End Admins Pages Routes ************************************/
 });
 require __DIR__.'/auth.php';

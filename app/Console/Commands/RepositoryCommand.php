@@ -3,28 +3,11 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Pluralizer;
 use Illuminate\Filesystem\Filesystem;
-class RepositoryCommand extends Command
-{
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+class RepositoryCommand extends Command {
     protected $files;
     protected $signature = 'make:repository {name}';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create Custom Repository';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct(Filesystem $files) {
         parent::__construct();
         $this->files = $files;
@@ -70,11 +53,6 @@ class RepositoryCommand extends Command
         return $path;
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle() {
         $path = $this->getSourceFilePath();
         $this->makeDirectory(dirname($path));
