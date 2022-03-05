@@ -3,28 +3,11 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Pluralizer;
 use Illuminate\Filesystem\Filesystem;
-class InterfaceCommand extends Command
-{
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+class InterfaceCommand extends Command {
     protected $files;
     protected $signature = 'make:interface {name}';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Make Interface';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct(Filesystem $files) {
         parent::__construct();
         $this->files = $files;
@@ -65,15 +48,9 @@ class InterfaceCommand extends Command
         if (! $this->files->isDirectory($path)) {
             $this->files->makeDirectory($path, 0777, true, true);
         }
-
         return $path;
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle() {
         $path = $this->getSourceFilePath();
         $this->makeDirectory(dirname($path));
