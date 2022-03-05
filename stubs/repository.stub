@@ -1,0 +1,22 @@
+<?php
+namespace  $REPOSITORY_NAMESPACE$;
+use $MODEL_NAMESPACE$;
+use $INTERFACE_NAMESPACE$;
+use Illuminate\Http\Request;
+class $REPOSITORY_NAME$RepositoryInterface implements {
+    public function index() {
+
+    }
+
+    public function store($request) {
+
+    }
+
+    public function update($request) {
+
+    }
+
+    public function destroy($request) {
+
+    }
+}
