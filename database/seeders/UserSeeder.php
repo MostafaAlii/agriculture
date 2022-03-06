@@ -13,17 +13,21 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->delete();
         User::create([
-            'name' => 'ahmed ragab',
+            'firstname' => 'ahmed',
+            'lastname' => 'ragab',
             'email' => 'ahmedragabyasin2020@gmail.com',
             'password' => Hash::make('258258258'),
             'phone'=>'00201021493036',
+            'address'=>'egypt',
+            'image'=>null,
+            'status'=>'vendor',
             'remember_token' => Str::random(10),
         ]);
-        User::create([
-            'name' => 'wolf',
-            'email' => 'wolf@gmail.com',
-            'password' => Hash::make('258258258'),
-            'remember_token' => Str::random(10),
-        ]);
+        // User::create([
+        //     'name' => 'wolf',
+        //     'email' => 'wolf@gmail.com',
+        //     'password' => Hash::make('258258258'),
+        //     'remember_token' => Str::random(10),
+        // ]);
     }
 }
