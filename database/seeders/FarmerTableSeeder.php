@@ -4,6 +4,8 @@ use App\Models\Farmer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
 class FarmerTableSeeder extends Seeder {
     public function run() {
         DB::table('users')->delete();
@@ -12,6 +14,11 @@ class FarmerTableSeeder extends Seeder {
             'email'         =>  'farmer@app.com',
             'password'      =>  bcrypt('123123'),
             'remember_token' => Str::random(10),
+        ]);
+        Farmer::create([
+            'name' => 'Ahmed',
+            'email' => 'ahmed@gmail.com',
+            'password' => Hash::make('258258258'),
         ]);
     }
 }
