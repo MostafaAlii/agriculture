@@ -36,10 +36,18 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'web' => [ // web guard for farmer
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'farmers',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'vendor' => [
+            'driver' => 'session',
+            'provider' => 'vendors',
+        ]
     ],
 
     /*
@@ -60,20 +68,19 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
 
-        'admin' => [
+        'admins' => [ // Access To Dashboard & Website
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'farmers' => [ // Access To Dashboard & Website
+            'driver' => 'eloquent',
+            'model' => App\Models\Farmer::class,
+        ],
+        'vendors' => [ // Access To Website Only
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ]
     ],
 
     /*
