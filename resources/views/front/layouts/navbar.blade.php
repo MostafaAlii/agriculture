@@ -22,14 +22,27 @@
                 <li class="menu-item" >
                     <a title="Order" href="#">Change Password</a>
                 </li>
-                <li class="menu-item" >
-                    <a title="Logout" href="{{ route('logout.user') }}" onclick="event.preventDefault(); document.getElementById('log-out').submit();">
-                        Log out
-                    </a>
-                </li>
-                <form id="log-out" action="{{ route('logout.user') }}" method="POST">
-                    @csrf
-                </form>
+                @if(auth('web')->check())
+                    <li class="menu-item" >
+                        <a title="Logout" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('log-out-farmer').submit();">
+                            Log out
+                        </a>
+                    </li>
+                    <form id="log-out-farmer" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                @else
+                    <li class="menu-item" >
+                        <a title="Logout" href="{{ route('logout.user') }}"
+                        onclick="event.preventDefault(); document.getElementById('log-out').submit();">
+                            Log out
+                        </a>
+                    </li>
+                    <form id="log-out" action="{{ route('logout.user') }}" method="POST">
+                        @csrf
+                    </form>
+                @endif
             </ul>
         </li>
     @endauth

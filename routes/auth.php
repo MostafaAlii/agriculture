@@ -58,11 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
-    Route::post('logout/user', [UserAuthenticatedSessionController::class, 'destroy'])
-        ->name('logout.user');
-});
-    // Route::middleware('auth:vendor')->group(function () {
 
-    //     Route::post('logout/user', [UserAuthenticatedSessionController::class, 'destroy'])
-    //                 ->name('logout.user');
-    // });
+});
+Route::post('logout/user', [UserAuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth:vendor')
+    ->name('logout.user');
+
