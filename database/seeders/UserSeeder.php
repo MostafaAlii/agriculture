@@ -19,8 +19,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('258258258'),
             'phone'=>'00201021493036',
             'address'=>'egypt',
-            'image'=>null,
-            'status'=>'vendor',
             'remember_token' => Str::random(10),
         ]);
         // User::create([

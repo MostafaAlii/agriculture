@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\UserAuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -26,7 +27,14 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.update');
+
+    // route for user login *****************************
+    Route::get('User/login', [UserAuthenticatedSessionController::class, 'create'])->name('user.login');
+    Route::post('User/login', [UserAuthenticatedSessionController::class, 'store'])->name('User.login.post');
+
+   // end route for user login ****************************
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
@@ -47,4 +55,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+    Route::post('logout/user', [UserAuthenticatedSessionController::class, 'destroy'])
+        ->name('logout.user');
 });
+    // Route::middleware('auth:vendor')->group(function () {
+
+    //     Route::post('logout/user', [UserAuthenticatedSessionController::class, 'destroy'])
+    //                 ->name('logout.user');
+    // });

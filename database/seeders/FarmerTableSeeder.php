@@ -4,7 +4,7 @@ use App\Models\Farmer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+
 
 class FarmerTableSeeder extends Seeder {
     public function run() {
@@ -18,7 +18,8 @@ class FarmerTableSeeder extends Seeder {
         Farmer::create([
             'name' => 'Ahmed',
             'email' => 'ahmed@gmail.com',
-            'password' => Hash::make('258258258'),
+            'password' => bcrypt('258258258'),
+            'remember_token' => Str::random(10),
         ]);
     }
 }
