@@ -24,6 +24,8 @@ class UserAuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
         return redirect()->intended(RouteServiceProvider::FRONT);
+        // return $request;
+        // dd($request->email);
     }
 
     public function destroy(Request $request) {

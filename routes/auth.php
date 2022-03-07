@@ -16,6 +16,12 @@ Route::middleware('guest')->group(function () {
     Route::get('Farmer/login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('Farmer/login', [AuthenticatedSessionController::class, 'store'])->name('farmer.login.post');
 
+    // route for user login *****************************
+    Route::get('User/login', [UserAuthenticatedSessionController::class, 'create'])->name('user.login');
+    Route::post('User/login', [UserAuthenticatedSessionController::class, 'store'])->name('User.login');
+
+   // end route for user login ****************************
+
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
 
@@ -28,11 +34,7 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.update');
 
-    // route for user login *****************************
-    Route::get('User/login', [UserAuthenticatedSessionController::class, 'create'])->name('user.login');
-    Route::post('User/login', [UserAuthenticatedSessionController::class, 'store'])->name('User.login.post');
 
-   // end route for user login ****************************
 });
 
 
@@ -55,6 +57,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
     Route::post('logout/user', [UserAuthenticatedSessionController::class, 'destroy'])
         ->name('logout.user');
 });
