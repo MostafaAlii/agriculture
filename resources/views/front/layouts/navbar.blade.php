@@ -37,7 +37,7 @@
     @endif
     @if(Auth::guard('vendor')->user())
         <li class="menu-item menu-item-has-children parent" >
-            <a title="My Account" href="#">My Account {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            {{-- <a title="My Account" href="#">My Account {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a> --}}
             <ul class="submenu curency" >
                 <li class="menu-item" >
                     <a title="Dashboard" href="#">Dashboard</a>
