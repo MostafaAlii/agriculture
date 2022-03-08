@@ -45,7 +45,9 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::HOME);
             }
          if (auth('vendor')->check()) {
-                return redirect(RouteServiceProvider::FRONT);
+                // return redirect(RouteServiceProvider::FRONT);
+                // return redirect()->route('home.user');
+                return redirect()->route('front');
             }
 
         return $next($request);

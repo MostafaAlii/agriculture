@@ -84,39 +84,43 @@
 
                 </div>
 
-                {{-- <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2">
+                <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2">
                     <h2>Sign <span>Up</span></h2>
 
                     <!-- start form -->
-                    <form class="auth-form" action="#">
+                    <form class="auth-form" action="{{ route('user.register.post') }}" method="post">
+                        @csrf
                         <div class="input-wrp">
-                            <input class="textfield" type="text" placeholder="Full name *" />
+                            <input class="textfield" type="text" placeholder="First name *" name="firstname"/>
+                        </div>
+                        <div class="input-wrp">
+                            <input class="textfield" type="text" placeholder="Last name *" name="lastname"/>
                         </div>
 
                         <div class="input-wrp">
-                            <input class="textfield" type="text" placeholder="Email *" />
+                            <input class="textfield" type="email" placeholder="Email *" name="email"/>
                         </div>
 
                         <div class="input-wrp">
-                            <input class="textfield" type="text" placeholder="Password" />
+                            <input class="textfield" type="password" placeholder="Password" name="password"/>
                         </div>
 
-                        <div class="input-wrp">
-                            <input class="textfield" type="text" placeholder="Confirm password" />
-                        </div>
+                        {{-- <div class="input-wrp">
+                            <input class="textfield" type="password" placeholder="Confirm password" name="confirm"/>
+                        </div> --}}
 
                         <div class="d-table mt-8">
                             <div class="d-table-cell align-middle">
-                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">Sign up</button>
+                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">Register Now</button>
                             </div>
 
-                            <div class="d-table-cell align-middle">
+                            {{-- <div class="d-table-cell align-middle">
                                 <a class="link-to" href="#">Sign in</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </form>
                     <!-- end form -->
-                </div> --}}
+                </div>
             </div>
         </div>
 
