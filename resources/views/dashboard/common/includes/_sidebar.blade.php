@@ -14,7 +14,7 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 <li class=" nav-item"><a href="index.html"><i class="material-icons">settings_input_svideo</i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="dashboard-ecommerce.html"><i class="material-icons"></i><span data-i18n="eCommerce">eCommerce</span></a>
+                        <li><a class="menu-item" href="{{route('settings')}}"><i class="material-icons"></i><span data-i18n="eCommerce">Settings</span></a>
                         </li>
                         <li class="active"><a class="menu-item" href="dashboard-crypto.html"><i class="material-icons"></i><span data-i18n="Crypto">Crypto</span></a>
                         </li>
