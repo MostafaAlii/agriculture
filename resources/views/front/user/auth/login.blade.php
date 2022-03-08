@@ -105,9 +105,9 @@
                             <input class="textfield" type="password" placeholder="Password" name="password"/>
                         </div>
 
-                        {{-- <div class="input-wrp">
-                            <input class="textfield" type="password" placeholder="Confirm password" name="confirm"/>
-                        </div> --}}
+                        <div class="input-wrp">
+                            <input class="textfield" type="password" placeholder="Confirm password" name="password_confirmation"/>
+                        </div>
 
                         <div class="d-table mt-8">
                             <div class="d-table-cell align-middle">
