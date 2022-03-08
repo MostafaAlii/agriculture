@@ -1,6 +1,6 @@
 <?php
 /*
- * jQuery File Upload Plugin PHP Class
+ * jQuery File UploadTrait Plugin PHP Class
  * https://github.com/blueimp/jQuery-File-Upload
  *
  * Copyright 2010, Sebastian Tschan
@@ -15,7 +15,7 @@ class UploadHandler
 
     protected $options;
 
-    // PHP File Upload error message codes:
+    // PHP File UploadTrait error message codes:
     // http://php.net/manual/en/features.file-upload.errors.php
     protected $error_messages = array(
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',

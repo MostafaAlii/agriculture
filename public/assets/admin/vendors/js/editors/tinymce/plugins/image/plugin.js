@@ -969,7 +969,7 @@ var image = (function () {
         return handler === defaultHandler;
       };
       var upload = function (blobInfo) {
-        return !settings.url && isDefaultHandler(settings.handler) ? global$1.reject('Upload url missing from the settings.') : uploadBlob(blobInfo, settings.handler);
+        return !settings.url && isDefaultHandler(settings.handler) ? global$1.reject('UploadTrait url missing from the settings.') : uploadBlob(blobInfo, settings.handler);
       };
       settings = global$2.extend({
         credentials: false,
@@ -1020,7 +1020,7 @@ var image = (function () {
     var acceptExts = '.jpg,.jpeg,.png,.gif';
     var makeTab$2 = function (editor) {
       return {
-        title: 'Upload',
+        title: 'UploadTrait',
         type: 'form',
         layout: 'flex',
         direction: 'column',
