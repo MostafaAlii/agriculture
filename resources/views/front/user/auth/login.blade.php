@@ -26,20 +26,24 @@
     </div>
 
     <div class="container">
-        <div class="form-group">
-            <h2><label for="">Select your Type</label></h2>
-            <select name="" id="sectionselect" class="form-control ">
-                <option value="" selected disabled>---- Choose ----</option>
-                <option value="user">Vendor</option>
-                <option value="farmer">Farmer</option>
-            </select>
+        <div class="raw">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <h2><label for="">Select your Type</label></h2>
+                    <select name="" id="sectionselect" class="custom-btn custom-btn--medium custom-btn--style-2" >
+                        <option class="custom-btn custom-btn--style-2" value="" selected disabled>--- Select Type---</option>
+                        <option class="custom-btn custom-btn--medium custom-btn--style-2" value="user">Vendor</option>
+                        <option class="custom-btn custom-btn--medium custom-btn--style-2" value="farmer">Farmer</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         {{-- form user --}}
         <div class="panel" id="user">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-                    <h2>Sign <span>in as vendor</span></h2>
+                    <h2>Sign <span>in as </span>vendor</h2>
 
                     <!-- start form -->
                     <form class="auth-form" name="form-login" method="POST" action="{{ route('User.login') }}">
@@ -85,7 +89,7 @@
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2">
-                    <h2>Sign <span>Up</span></h2>
+                    <h2>Become <span>A Vendor</span></h2>
 
                     <!-- start form -->
                     <form class="auth-form" action="{{ route('user.register.post') }}" method="post">
