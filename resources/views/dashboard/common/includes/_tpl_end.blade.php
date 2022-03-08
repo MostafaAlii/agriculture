@@ -16,6 +16,7 @@
     <script src="{{ asset('assets/admin/js/scripts/pages/material-app.js') }}"></script>
     <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-crypto.js') }}"></script>
     <!-- END: Page JS-->
+    @yield('js')
 
 </body>
 <!-- END: Body-->
