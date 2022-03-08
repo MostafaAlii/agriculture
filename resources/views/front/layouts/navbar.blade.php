@@ -1,5 +1,4 @@
 <ul>
-
     {{--  start links in navebar *************************************************************************--}}
     <li> <a href="{{ route('front') }}">{{ __('home') }}</a> </li>
     <li> <a href="{{ route('aboutUs') }}">{{ __('about') }}</a> </li>
@@ -42,14 +41,16 @@
         {{-- <li class="li-btn">
             <a class="custom-btn custom-btn--small custom-btn--style-4" href="#">Get in Touch</a>
         </li> --}}
-    @guest
+
+    @check_guard
        {{-- <li class="menu-item" ><a title="Login" href="{{ route('user.login') }}">Login</a></li> --}}
        <li class="li-btn">
             <a class="custom-btn custom-btn--medium custom-btn--style-1" title="Login" href="{{ route('user.login') }}">
                 Login
             </a>
         </li>
-    @endguest
+    @endcheck_guard
+
     @if(Auth::guard('web')->user())
         <li class="menu-item menu-item-has-children parent" >
             <a title="My Account" href="#">My Account {{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -79,7 +80,7 @@
     @endif
     @if(Auth::guard('vendor')->user())
         <li class="menu-item menu-item-has-children parent" >
-            {{-- <a title="My Account" href="#">My Account {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a> --}}
+            <a title="My Account" href="#">My Account {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
                     <a title="Dashboard" href="#">Dashboard</a>
@@ -104,8 +105,5 @@
             </ul>
         </li>
     @endif
-
-
-    {{-- @endif --}}
 
 </ul>
