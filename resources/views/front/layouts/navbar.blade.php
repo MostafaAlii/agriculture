@@ -50,7 +50,9 @@
             </a>
         </li>
     @endcheck_guard
-
+{{-- fix bug navbar *******************************--}}
+{{-- fix bug navbar *******************************--}}
+{{-- fix bug navbar *******************************--}}
     @if(Auth::guard('web')->user())
         <li class="menu-item menu-item-has-children parent" >
             <a title="My Account" href="#">My Account {{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
