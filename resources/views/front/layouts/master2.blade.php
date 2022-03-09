@@ -9,7 +9,7 @@
 		<div id="app">
 			<!-- start header -->
 
-             @include('front.layoutsShop.header2')
+             @include('front.layouts.header2')
 			<!-- end header -->
 
 			<!-- start hero -->
@@ -76,8 +76,8 @@
 						w.lazyLoadOptions = o;
 					}(window, document));
 				</script>
-                {{-- {{ $slot }} --}}
-				@yield('content')
+                {{ $slot }}
+				{{-- @yield('content') --}}
 			</main>
 			<!-- end main -->
 
