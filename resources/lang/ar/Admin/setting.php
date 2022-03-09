@@ -1,9 +1,7 @@
-
-
-
 <?php
-
 return [
+    'page_title_in_sidebar' =>  'الاعدادات العامة',
+    'settingPageTitle'=>  'الاعدادات العامة',
     'dashboard' => 'اللوحة الرئيسية',
     'setting_info' => 'معلومات الإعدادات',
     'settings' => 'الإعدادات',
@@ -22,6 +20,4 @@ return [
     'facebook'=>'فيس بوك',
     'twitter'=>'تويتر',
     'inestergrame'=>'انستغرام'
-
-
 ];

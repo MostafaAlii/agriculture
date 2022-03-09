@@ -1,10 +1,6 @@
 <?php
-
 namespace App\Http\Controllers\Dashboard\Admin;
-
 use App\Http\Controllers\Controller;
-
-
 use App\Models\Setting;
 use App\Models\Image;
 use Illuminate\Http\Request;
@@ -15,7 +11,7 @@ class SettingController extends Controller
     use UploadT;
     public function index()
     {
-        return view('dashboard.admin.settings');
+        return view('dashboard.admin.settings.settings');
     }
 
 
