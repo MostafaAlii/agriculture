@@ -42,7 +42,8 @@ class RedirectIfAuthenticated
         // }
 
          if (auth('web')->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // return redirect(RouteServiceProvider::FRONT);
+                return redirect()->route('front');
             }
          if (auth('vendor')->check()) {
                 // return redirect(RouteServiceProvider::FRONT);
