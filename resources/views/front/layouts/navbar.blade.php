@@ -18,7 +18,7 @@
             </ul>
         </li>
 
-        {{-- <li class="has-submenu">
+        <li class="has-submenu">
             <a href="javascript:void(0);">Shop</a>
 
             <ul class="submenu">
@@ -28,7 +28,7 @@
                 <li><a href="checkout.html">Checkout</a></li>
                 <li><a href="sign_in.html">Sign In/Up</a></li>
             </ul>
-        </li> --}}
+        </li>
 
         <li>
             <a href="blog.html">Blog</a>
@@ -104,6 +104,25 @@
                     @csrf
                 </form>
 
+            </ul>
+        </li>
+    @endif
+    @if(Auth::guard('admin')->user())
+        <li class="menu-item menu-item-has-children parent" >
+            <a title="My Account" href="#">Welcom Mr : {{ Auth::guard('admin')->user()->name }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <ul class="submenu curency" >
+                <li class="menu-item" >
+                    <a title="Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                </li>
+                <li class="menu-item" >
+                    <a title="Logout" href="{{ route('logout.admin') }}"
+                    onclick="event.preventDefault(); document.getElementById('log-out').submit();">
+                        Log out
+                    </a>
+                </li>
+                <form id="log-out" action="{{ route('logout.admin') }}" method="POST">
+                    @csrf
+                </form>
             </ul>
         </li>
     @endif

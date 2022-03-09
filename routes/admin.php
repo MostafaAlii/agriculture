@@ -3,7 +3,7 @@ use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use App\Http\Controllers\front;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -22,6 +22,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 //Route::group(['namespace'=>'Dashboard', 'prefix'=>'dashboard_admin', 'middleware' => 'auth:admin'], function() {
 //    /********************************* Start Admins Dashboard Routes ************************************/
 //    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard1');
+route::get('/home/admin',[front\HomeController::class,'index'])->name('home.admin');
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),

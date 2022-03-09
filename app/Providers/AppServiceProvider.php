@@ -29,7 +29,10 @@ class AppServiceProvider extends ServiceProvider
                return false;
             }elseif(Auth::guard('web')->check()){
                 return false;
-            }else{
+            }elseif(Auth::guard('admin')->check()){
+                return false;
+            }
+            else{
                 return true;
             }
 
