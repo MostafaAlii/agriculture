@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\UserLoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthenticatedSessionController extends Controller
+class UserAuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
@@ -16,17 +16,20 @@ class AuthenticatedSessionController extends Controller
      * @return \Illuminate\View\View
      */
     public function create() {
-        return view('dashboard.farmer.auth.login');
+        return view('front.user.auth.login');
+
     }
 
-    public function store(LoginRequest $request) {
+    public function store(UserLoginRequest $request) {
         $request->authenticate();
         $request->session()->regenerate();
         return redirect()->intended(RouteServiceProvider::FRONT);
+        // return $request;
+        // dd($request->email);
     }
 
     public function destroy(Request $request) {
-        Auth::guard('web')->logout();
+        Auth::guard('vendor')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');

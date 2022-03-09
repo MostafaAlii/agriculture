@@ -1,4 +1,5 @@
 @extends('front.layouts.master')
+{{-- @extends('front.layoutsShop.master3') --}}
 @section('title', 'home Page ')
 @section('css')
 

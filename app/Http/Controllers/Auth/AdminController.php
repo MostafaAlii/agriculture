@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\AdminLoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthenticatedSessionController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display the login view.
@@ -16,17 +16,17 @@ class AuthenticatedSessionController extends Controller
      * @return \Illuminate\View\View
      */
     public function create() {
-        return view('dashboard.farmer.auth.login');
+        return view('dashboard.admin.auth.login');
     }
 
-    public function store(LoginRequest $request) {
+    public function store(AdminLoginRequest $request) {
         $request->authenticate();
         $request->session()->regenerate();
-        return redirect()->intended(RouteServiceProvider::FRONT);
+        return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
     }
 
     public function destroy(Request $request) {
-        Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');

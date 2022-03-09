@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Dashboard\Farmer\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire;
 /*
 |--------------------------------------------------------------------------
 | Farmer Routes
@@ -14,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 
 // Dashboard prifex in RouteServiceProvider
-Route::group(['namespace'=>'Dashboard', 'prefix'=>'dashboard_farmer', 'middleware' => 'auth'], function() {
+Route::group(['prefix'=>'dashboard_farmer', 'middleware' =>'auth'], function() {
     /********************************* Start Admins Dashboard Routes ************************************/
-    Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');
+    // Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');
+    route::get('/product',Livewire\front\Farmer\Product::class)->name('farmer.product');
     /********************************* End Admins Pages Routes ************************************/
 });
 require __DIR__.'/auth.php';

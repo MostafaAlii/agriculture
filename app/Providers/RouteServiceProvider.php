@@ -17,8 +17,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard_farmer';
-    public const ADMIN_DASHBOARD = '/dashboard/admin';
+    // public const HOME = '/dashboard_farmer';
+    public const ADMIN_DASHBOARD = 'dashboard_admin/dashboard';
+    public const FRONT = '/home';
     //public const FARMER_DASHBOARD = '/farmer_dashboard';
 
     /**
@@ -44,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
-            
+
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
@@ -52,7 +53,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/farmer.php'));
-            
+
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/site.php'));

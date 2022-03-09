@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 class DashboardController extends Controller {
     public function index() {
-        return view('dashboard.Farmer.dashboard');
-        //return 'Farmer Dashboard';
+        // return view('dashboard.Farmer.dashboard');
+        return 'Farmer Dashboard';
     }
 }
