@@ -37,28 +37,23 @@
         <li>
             <a href="contacts.html">Contacts</a>
         </li>
-
-        {{-- <li class="li-btn">
-            <a class="custom-btn custom-btn--small custom-btn--style-4" href="#">Get in Touch</a>
-        </li> --}}
-
+    {{-- function to check if not auth (guest) ******************************************************** --}}
     @check_guard
-       {{-- <li class="menu-item" ><a title="Login" href="{{ route('user.login') }}">Login</a></li> --}}
        <li class="li-btn">
-            <a class="custom-btn custom-btn--medium custom-btn--style-1" title="Login" href="{{ route('user.login') }}">
+            <a class="custom-btn custom-btn--medium custom-btn--style-1" title="Login"
+               href="{{ route('user.login') }}">
                 Login
             </a>
         </li>
     @endcheck_guard
-{{-- fix bug navbar *******************************--}}
-{{-- fix bug navbar *******************************--}}
-{{-- fix bug navbar *******************************--}}
+    {{-- End function to check if not auth (guest) ******************************************************--}}
+    {{-- links for farmer الفلاح****************************************************--}}
     @if(Auth::guard('web')->user())
         <li class="menu-item menu-item-has-children parent" >
             <a title="My Account" href="#">My Account {{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('farmer.dashboard') }}">Dashboard</a>
+                    <a title="Dashboard" href="{{ route('farmer.product') }}">Dashboard</a>
                 </li>
                 <li class="menu-item" >
                     <a title="Order" href="#">My Order</a>
@@ -80,12 +75,13 @@
             </ul>
         </li>
     @endif
+    {{-- links for vendor or user  التاجر*******************************************--}}
     @if(Auth::guard('vendor')->user())
         <li class="menu-item menu-item-has-children parent" >
             <a title="My Account" href="#">My Account {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="#">Dashboard</a>
+                    <a title="Dashboard" href="{{ route('user.dash') }}">Dashboard</a>
                 </li>
                 <li class="menu-item" >
                     <a title="Order" href="#">My Order</a>
@@ -107,6 +103,7 @@
             </ul>
         </li>
     @endif
+    {{-- links for admin الادمنز والاداره************************************************--}}
     @if(Auth::guard('admin')->user())
         <li class="menu-item menu-item-has-children parent" >
             <a title="My Account" href="#">Welcom Mr : {{ Auth::guard('admin')->user()->name }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>

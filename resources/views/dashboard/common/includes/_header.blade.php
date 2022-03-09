@@ -218,10 +218,12 @@
                     </li>
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">{{ Auth::user()->name }}</span><span class="avatar avatar-online"><img src="{{ asset('assets/admin/images/portrait/small/avatar-s-19.png') }}" alt="avatar"><i></i></span></a>
                         <div class="dropdown-menu dropdown-menu-right">
+                            {{-- route to go website ******************************************** --}}
                             <a class="dropdown-item" href="{{ route('home.admin') }}">
                                 {{-- <i class="material-icons">person_outline</i> --}}
                                  Web Site
                             </a>
+                            {{-- route to go website ******************************************** --}}
                             <a class="dropdown-item" href="user-profile.html">
                                 <i class="material-icons">person_outline</i>
                                  Edit Profile
