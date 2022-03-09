@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     // routes for admin login  ***********************************************************************************
-    Route::group(
-        [
-            'prefix' => LaravelLocalization::setLocale(),
-            'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-    
-        ], function(){
+    // Route::group(
+    //     [
+    //         'prefix' => LaravelLocalization::setLocale(),
+    //         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+
+    //     ], function(){
             Route::get('agro', [AdminController::class, 'create'])->name('admin.login');
             Route::post('Admin/login', [AdminController::class, 'store'])->name('admin.login.post');
-        });
+        // });
     // end routes for admin login ********************************************************************************
 
     Route::post('Farmer/login', [AuthenticatedSessionController::class, 'store'])->name('farmer.login.post');

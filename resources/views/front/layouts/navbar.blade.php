@@ -1,12 +1,11 @@
 <ul>
     {{--  start links in navebar *************************************************************************--}}
     <li> <a href="{{ route('front') }}">{{ __('home') }}</a> </li>
+    <li> <a href="{{ route('shop') }}">{{ __('Shop') }}</a> </li>
     <li> <a href="{{ route('aboutUs') }}">{{ __('about') }}</a> </li>
-    <li> <a href="/shop">{{ __('Shop') }}</a> </li>
         {{--  start links in navebar *************************************************************************--}}
         <li class="has-submenu">
             <a href="javascript:void(0);">Pages</a>
-
             <ul class="submenu">
                 <li><a href="services.html">Services</a></li>
                 <li><a href="products.html">Products</a></li>
