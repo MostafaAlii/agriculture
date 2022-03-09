@@ -8,8 +8,9 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
 class {{ class }} extends Model {
-    use HasFactory;
+    use HasFactory,Translatable;
     protected $table = "";
     protected $guarded = [];
+    public $translatedAttributes = [];
     public $timestamps = true;
 }
