@@ -15,7 +15,7 @@ class SettingController extends Controller
     use UploadT;
     public function index()
     {
-        return view('dashboard\admin.settings');
+        return view('dashboard.admin.settings');
     }
 
 

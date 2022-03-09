@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="rtl">
 <!-- BEGIN: Head-->
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +9,7 @@
     <meta name="keywords" content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
     <meta name="author" content="PIXINVENT">
     <title>{{ trans('Admin/dashboard.dashboard') }} | @yield('pageTitle')</title>
+
 
     <link rel="apple-touch-icon" href="{{ asset('assets/admin/images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/admin/images/ico/favicon.ico') }}">
@@ -49,19 +49,40 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}">
 
     @endif
-
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
     <!-- END: Page CSS-->
-
+    <style> body {font-family: 'Cairo', sans-serif;} </style>
     <!-- BEGIN: Custom CSS-->
     <!-- END: Custom CSS-->
-    @yield('css')
-
+     @yield('css')
 </head>
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
+<body class="vertical-layout vertical-menu-modern 1-column  bg-full-screen-image blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 
-<body class="vertical-layout vertical-menu material-vertical-layout material-layout 2-columns   fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+    <!-- BEGIN: Vendor JS-->
+    <script src="{{ asset('assets/admin/vendors/js/material-vendors.min.js') }}"></script>
+    <!-- BEGIN Vendor JS-->
+
+
+    <!-- BEGIN: Theme JS-->
+    <script src="{{ asset('assets/admin/js/core/app-menu.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/core/app.js') }}"></script>
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+
+</body>
+<!-- END: Body-->
+</html>

@@ -57,7 +57,7 @@
                                                     <div class="form-group">
                                                         <label for="projectinput1">{{trans('Admin\setting.site_name')}}</label>
                                                         <input type="text" id="projectinput1" class="form-control"
-                                                               placeholder="Site Name" name="site_name">
+                                                               placeholder="{{trans('Admin\setting.site_name')}}" name="site_name">
                                                     </div>
 
                                                 </div>
@@ -65,7 +65,7 @@
                                                     <div class="form-group">
                                                         <label for="projectinput2">{{trans('Admin\setting.supporting_mail')}}</label>
                                                         <input type="text" id="projectinput2" class="form-control"
-                                                               placeholder="Support Mail" name="support_mail">
+                                                               placeholder="{{trans('Admin\setting.supporting_mail')}}" name="support_mail">
                                                     </div>
                                                 </div>
                                             </div>
@@ -74,14 +74,14 @@
                                                     <div class="form-group">
                                                         <label for="projectinput3">{{trans('Admin\setting.primary_phone')}}</label>
                                                         <input type="text" id="projectinput3" class="form-control"
-                                                               placeholder="primary_phone" name="primary_phone">
+                                                               placeholder="{{trans('Admin\setting.primary_phone')}}" name="primary_phone">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="projectinput4">{{trans('Admin\setting.secondery_phone')}}</label>
                                                         <input type="text" id="projectinput4" class="form-control"
-                                                               placeholder="secondery_phone" name="secondery_phone">
+                                                               placeholder="{{trans('Admin\setting.secondery_phone')}}" name="secondery_phone">
                                                     </div>
                                                 </div>
                                             </div>
@@ -90,21 +90,21 @@
                                                     <div class="form-group">
                                                         <label for="projectinput4"> {{trans('Admin\setting.facebook')}}</label>
                                                         <input type="text" id="projectinput4" class="form-control"
-                                                               placeholder="side_slug" name="facebook">
+                                                               placeholder="{{trans('Admin\setting.facebook')}}" name="facebook">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="projectinput4"> {{trans('Admin\setting.inestegram')}}</label>
+                                                        <label for="projectinput4"> {{trans('Admin\setting.inestergrame')}}</label>
                                                         <input type="text" id="projectinput4" class="form-control"
-                                                               placeholder="side_slug" name="inestegram">
+                                                               placeholder="{{trans('Admin\setting.inestergrame')}}" name="inestegram">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="projectinput4">{{trans('Admin\setting.twitter')}} </label>
                                                         <input type="text" id="projectinput4" class="form-control"
-                                                               placeholder="social_link" name="twitter">
+                                                               placeholder="{{trans('Admin\setting.twitter')}}" name="twitter">
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +113,7 @@
                                                     <div class="form-group">
                                                         <label for="companyName">{{trans('Admin\setting.address')}}</label>
                                                         <input type="text" id="companyName" class="form-control"
-                                                               placeholder="address " name="address">
+                                                               placeholder="{{trans('Admin\setting.address')}}" name="address">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -121,7 +121,7 @@
                                                         <label for="projectinput8">{{trans('Admin\setting.message_maintenance')}}</label>
                                                         <textarea id="projectinput8" rows="5" class="form-control"
                                                                   name="message_maintenance"
-                                                                  placeholder="message_maintenance "></textarea>
+                                                                  placeholder="{{trans('Admin\setting.message_maintenance')}}"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -131,7 +131,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
 
-                                                        <label>{{trans('Admin\setting.site_icon')}} </label>
+                                                        <label>{{trans('Admin\setting.site_icon')}}</label>
                                                         <label id="projectinput7" class="file center-block">
                                                             <input type="file" accept="image/*" name="site_icon"
                                                                 onchange="loadFile1(event)">

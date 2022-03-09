@@ -14,8 +14,10 @@ class AdminLoginRequest extends FormRequest {
 
     public function rules() {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            //'email' => ['required', 'string', 'email'],
+            //'password' => ['required', 'string'],
+            'email' => 'required', 'string', 'email', 'max:255', 'unique:admins',
+            'password' => 'required|string|min:6',
         ];
     }
 
@@ -47,5 +49,17 @@ class AdminLoginRequest extends FormRequest {
 
     public function throttleKey() {
         return Str::lower($this->input('email')).'|'.$this->ip();
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required'           =>  trans('Admin/login.email_required') ,
+            'email.unique'           =>  trans('Admin/login.email_unique'),
+            'email.string'          =>  trans('Admin/login.email_string'),
+            'email.email' => trans('Admin/login.email_real_email'),
+            'password.required'           =>  trans('Admin/login.password_required') ,
+            'password.min'           =>  trans('Admin/login.password_min') ,
+        ];
     }
 }

@@ -2,7 +2,7 @@
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+//use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\front;
 /*
 |--------------------------------------------------------------------------
@@ -27,16 +27,16 @@ use App\Http\Controllers\front;
 
 Route::get('/home/admin',[front\HomeController::class,'index'])->name('home.admin')->middleware('auth:admin'); // route for admin to go to website
 
-Route::group(
+/*Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'auth:admin']
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'auth:admin']*/
 
 //    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'auth:admin']
 
     ], function(){
 
@@ -44,13 +44,11 @@ Route::group(
         /********************************* Start Admins Dashboard Routes ************************************/
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-        Route::get('settings', [SettingController::class,'index'])->name('settings');
-        Route::post('settings/store', [SettingController::class,'store'])->name('settings.store');
-
     /********************************* End Admins Pages Routes ************************************/
 
     /********************************* Start settings Routes ************************************/
-
+    Route::get('settings', [SettingController::class,'index'])->name('settings');
+    Route::post('settings/store', [SettingController::class,'store'])->name('settings.store');
     /********************************* End settings Pages Routes ************************************/
 
             require __DIR__.'/auth.php';
