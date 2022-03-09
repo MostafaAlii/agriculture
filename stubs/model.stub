@@ -4,11 +4,13 @@ namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
 
-class {{ class }} extends Model
-{
-    use HasFactory;
+class {{ class }} extends Model {
+    use HasFactory,Translatable;
     protected $table = "";
     protected $guarded = [];
+    public $translatedAttributes = [];
     public $timestamps = true;
 }
