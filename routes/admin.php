@@ -2,8 +2,9 @@
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
-//use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\front;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -26,13 +27,6 @@ use App\Http\Controllers\front;
 
 
 Route::get('/home/admin',[front\HomeController::class,'index'])->name('home.admin')->middleware('auth:admin'); // route for admin to go to website
-
-/*Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'auth:admin']*/
-
-//    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -50,7 +44,6 @@ Route::group(
     Route::get('settings', [SettingController::class,'index'])->name('settings');
     Route::post('settings/store', [SettingController::class,'store'])->name('settings.store');
     /********************************* End settings Pages Routes ************************************/
-
             require __DIR__.'/auth.php';
         });
 });
