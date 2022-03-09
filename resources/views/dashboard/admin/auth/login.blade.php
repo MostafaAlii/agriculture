@@ -12,8 +12,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('farmer.login.post') }}">
-            
+        <form method="POST" action="{{ route('admin.login.post') }}">
+
             @csrf
 
             <!-- Email Address -->
