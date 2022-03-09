@@ -15,7 +15,7 @@ use App\Http\Livewire;
 
 
 // Dashboard prifex in RouteServiceProvider
-Route::group(['prefix'=>'dashboard_farmer', 'middleware' =>'auth:farmer'], function() {
+Route::group(['prefix'=>'dashboard_farmer', 'middleware' =>'auth'], function() {
     /********************************* Start Admins Dashboard Routes ************************************/
     // Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');
     route::get('/product',Livewire\front\Farmer\Product::class)->name('farmer.product');
