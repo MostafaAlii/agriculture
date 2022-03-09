@@ -2,7 +2,7 @@
 @section('css')
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/setting.settingPageTitle') }}
+    {{ trans('Admin/admins.settingPageTitle') }}
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -16,7 +16,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{trans('Admin\setting.dashboard')}}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{-- route('Admins.index') --}}">{{trans('Admin\admin.admins')}}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Admins.index') }}">{{trans('Admin\admins.page_title_in_sidebar')}}</a>
                             </li>
                         </ol>
                     </div>
