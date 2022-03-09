@@ -48,4 +48,5 @@ Route::group(
     /********************************* End settings Pages Routes ************************************/
             require __DIR__.'/auth.php';
         });
+        
 });
