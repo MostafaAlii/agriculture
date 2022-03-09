@@ -22,7 +22,10 @@ use App\Http\Controllers\front;
 //Route::group(['namespace'=>'Dashboard', 'prefix'=>'dashboard_admin', 'middleware' => 'auth:admin'], function() {
 //    /********************************* Start Admins Dashboard Routes ************************************/
 //    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard1');
-route::get('/home/admin',[front\HomeController::class,'index'])->name('home.admin');
+
+
+Route::get('/home/admin',[front\HomeController::class,'index'])->name('home.admin')->middleware('auth:admin'); // route for admin to go to website
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
