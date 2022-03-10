@@ -25,8 +25,8 @@ class UserController extends Controller {
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at->format('Y-m-d');
             })
-            // ->addColumn('actions', 'admin.users.data_table.actions')
-            // ->rawColumns([ 'actions'])
+            ->addColumn('actions', 'dashboard.admin.users.data_table.actions')
+            ->rawColumns([ 'actions'])
             ->toJson();
 
     }// end of data

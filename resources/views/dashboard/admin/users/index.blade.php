@@ -58,9 +58,9 @@
                                                 <tr>
                                                     <th>{{ __('users.firstname') }}</th>
                                                     <th>{{ __('users.lastname') }}</th>
-                                                    <th>{{ __('users.phone') }}</th>
                                                     <th>{{ __('users.email') }}</th>
-                                                    {{-- <th>{{ __('users.action') }}</th> --}}
+                                                    <th>{{ __('users.phone') }}</th>
+                                                    <th>{{ __('users.action') }}</th>
                                                     <th>{{ __('users.creat_at') }}</th>
                                                 </tr>
                                             </thead>
@@ -110,7 +110,7 @@
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
             {data: 'created_at', name: 'created_at', searchable: false},
-            // {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+            {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
         order: [[4, 'desc']],
     });
