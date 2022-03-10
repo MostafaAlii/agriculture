@@ -36,16 +36,16 @@
         <li>
             <a href="contacts.html">Contacts</a>
         </li>
-    {{-- function to check if not auth (guest) ******************************************************** --}}
-    @check_guard
-       <li class="li-btn">
-            <a class="custom-btn custom-btn--medium custom-btn--style-1" title="Login"
-               href="{{ route('user.login') }}">
-               {{ __('website\home.login') }}
-            </a>
-        </li>
-    @endcheck_guard
-    {{-- End function to check if not auth (guest) ******************************************************--}}
+    {{-- function to check if not auth  *****************(guest)************(guest)*************************** --}}
+            @check_guard
+            <li class="li-btn">
+                    <a class="custom-btn custom-btn--medium custom-btn--style-1" title="Login"
+                    href="{{ route('user.login') }}">
+                    {{ __('website\home.login') }}
+                    </a>
+                </li>
+            @endcheck_guard
+    {{-- End function to check if not auth  ******************(guest)************(guest)************************--}}
     {{-- links for farmer الفلاح****************************************************--}}
     @if(Auth::guard('web')->user())
         <li class="menu-item menu-item-has-children parent" >
@@ -123,21 +123,14 @@
         </li>
     @endif
 
-
+    {{-- translate link and flags ************************************************************** --}}
     <li class="">
         <div class="has-submenu">
             <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
                aria-expanded="false">
                 @if (App::getLocale() == 'ar')
-                    {{--<span class="avatar country-Flag mr-0 align-self-center bg-transparent">--}}
-                        {{--<img  src="{{URL::asset('admin\images\flags\ar.png')}}" alt="Lang">--}}
-
-                    {{-- <i class="flag-icon flag-icon-eg"></i> --}}
-                    {{--</span>--}}
-
-
                     <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
-                            <img src="{{ asset('assets/admin/images/flags/ar.png') }}" alt="" width="50">
+                    <img src="{{ asset('assets/admin/images/flags/ar.png') }}" alt="" width="50">
                 @else
                     <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
                     <img src="{{ asset('assets/admin/images/flags/hi.png') }}" alt="" width="50">
@@ -161,4 +154,5 @@
             </div>
         </div>
     </li>
+
 </ul>
