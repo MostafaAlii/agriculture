@@ -32,12 +32,20 @@ class UserController extends Controller {
     }// end of data
 
     public function create() {
-        //
+        return view('dashboard.admin.users.create');
     }
 
-    public function store(Request $request) {
-        //
-    }
+    public function store(UserRequest $request)
+    {
+        $requestData = $request->validated();
+        $requestData['password'] = bcrypt($request->password);
+
+        User::create($requestData);
+
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('users.index');
+
+    }// end of store
 
     public function show($id) {
         //
