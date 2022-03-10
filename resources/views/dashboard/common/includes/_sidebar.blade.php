@@ -12,19 +12,23 @@
         </div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                <!-- Start Dashboard Dropdown Menu -->
                 <li class=" nav-item">
-                    <a href="{{ route('admin.dashboard') }}">
-                        <i class="material-icons"></i>
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <!--<i class="material-icons">drag_indicator</i>-->
                         <span class="menu-title" data-i18n="Dashboard">{{ trans('Admin/setting.dashboard') }}</span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start Admins & Moderators -->
                         <li>
-                            <a class="menu-item" href="#"><i class="material-icons"></i><span data-i18n="Vertical">{{trans('Admin\admins.admins')}}</span></a>
+                            <a class="menu-item" href="#">
+                                <i class="material-icons">face</i> 
+                                <span data-i18n="Vertical">{{trans('Admin\admins.admins')}}</span>
+                            </a>
                             <ul class="menu-content">
                                 <li>
                                     <a class="menu-item" href="{{ route('Admins.index') }}">
-                                        <i class="material-icons"></i>
+                                        <i class="material-icons">face</i> 
                                         <span data-i18n="{{trans('Admin\admins.admin')}}">{{trans('Admin\admins.admin')}}</span></a>
                                 </li>
                             </ul>
@@ -33,13 +37,32 @@
                         <!-- Start Setting -->
                         <li>
                             <a class="menu-item" href="{{route('settings')}}">
-                                <i class="material-icons"></i>
+                                <i class="material-icons">tune</i> 
                                 <span data-i18n="eCommerce">{{ trans('Admin/setting.page_title_in_sidebar') }}</span>
                             </a>
                         </li>
                         <!-- End Setting -->
                     </ul>
                 </li>
+                <!-- End Dashboard Dropdown Menu -->
+                <!-- Start Department Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">account_balance</i>
+                        <span class="menu-title" data-i18n="Departments">{{ trans('Admin/department.department_title_in_sidebar') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start Department -->
+                        <li>
+                            <a class="menu-item" href="{{route('Departments.index')}}">                           
+                                <i class="material-icons">account_balance</i>
+                                <span data-i18n="Departments">{{ trans('Admin/department.department_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Department -->
+                    </ul>
+                </li>
+                <!-- End Department Dropdown Menu -->
                 <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title" data-i18n="Templates">Templates</span></a>
                     <ul class="menu-content">
                         <li><a class="menu-item" href="#"><i class="material-icons"></i><span data-i18n="Vertical">Vertical</span></a>

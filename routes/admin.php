@@ -6,7 +6,7 @@ use App\Http\Controllers\front;
 use App\Http\Livewire;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -27,8 +27,6 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth:admin'],
 
     ], function () {
-        //Route::get('/home/admin', [front\HomeController::class, 'index'])->name('home.admin');
-
         route::get('/home/admin', Livewire\front\Home::class)->name('home.admin'); 
         // route for admin to go to website
 
@@ -37,11 +35,7 @@ Route::group(
             Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
             /********************************* End Admins Pages Routes ************************************/
 
-
             /********************************* Start settings Routes ************************************/
-
-
-            
             Route::get('Settings', [SettingController::class, 'index'])->name('settings');
             Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
             /********************************* End settings Pages Routes ************************************/
@@ -49,6 +43,10 @@ Route::group(
             /********************************* Start Admin & Employee Routes ************************************/
             Route::resource('Admins', AdminController::class)->except(['show']);
             /********************************* End Admin & Employee Routes ************************************/
+
+            /********************************* Department Routes ************************************/
+            Route::resource('Departments', DepartmentController::class)->except(['show']);
+            /********************************* End Department Routes ************************************/
          
         });
       
