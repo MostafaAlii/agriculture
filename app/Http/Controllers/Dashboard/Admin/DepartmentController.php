@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
-use App\Http\Interfaces\DepartmentInterface;
+use App\Http\Interfaces\Admin\DepartmentInterface;
 use App\Http\Requests\Dashboard\DepartmentRequest;
 use Illuminate\Http\Request;
 class DepartmentController extends Controller

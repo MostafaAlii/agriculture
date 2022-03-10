@@ -49,14 +49,14 @@
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">account_balance</i>
-                        <span class="menu-title" data-i18n="Departments">{{ trans('Admin/department.department_title_in_sidebar') }}</span>
+                        <span class="menu-title" data-i18n="Departments">{{ trans('Admin/departments.departments_title_in_sidebar') }}</span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start Department -->
                         <li>
                             <a class="menu-item" href="{{route('Departments.index')}}">                           
                                 <i class="material-icons">account_balance</i>
-                                <span data-i18n="Departments">{{ trans('Admin/department.department_title_in_sidebar') }}</span>
+                                <span data-i18n="Departments">{{ trans('Admin/departments.departments_title_in_sidebar') }}</span>
                             </a>
                         </li>
                         <!-- End Department -->

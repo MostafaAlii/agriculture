@@ -10,7 +10,10 @@
         <div class="content-header row">
             <!-- Start content-header-left & Breadcrumb -->
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\setting.dashboard')}}</h3>
+                <h3 class="content-header-title">
+                    <i class="material-icons">account_balance</i>
+                    {{trans('Admin\departments.departments_title_in_sidebar')}}
+                </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
