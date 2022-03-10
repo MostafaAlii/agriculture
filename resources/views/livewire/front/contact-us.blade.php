@@ -78,7 +78,7 @@
                             </button>
                         </div>
                     @endif
-                        <form class="contact-form js-contact-form" wire:submit.prevent='sendMessage' >
+                        <form class="contact-form js-contact-form" wire:submit.prevent='sendMessage' autocomplete="off">
                             <div class="input-wrp">
                                 <input class="textfield" name="firstname" type="text" placeholder="{{ __('website\home.firstname') }}" wire:model='firstname'/>
                                 @error('firstname')

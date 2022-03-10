@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Front;
 
 use App\Models\Contact;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ContactUs extends Component
@@ -37,15 +38,22 @@ class ContactUs extends Component
         'email'        =>'required|email',
         'comment'      =>'required|regex:/^[A-Za-z0-9-أ-ي-pL\s\-]+$/u',
        ]);
-       $contact = new Contact();
-       $contact->firstname = $this->firstname;
-       $contact->lastname = $this->lastname;
-       $contact->phone = $this->phone;
-       $contact->email = $this->email;
-       $contact->comment = $this->comment;
-       $contact->save();
-       session()->flash('message','Thanks your message has been sent successfully !');
-       $this->resetFields();
+       try {
+            $contact = new Contact();
+            $contact->firstname = $this->firstname;
+            $contact->lastname = $this->lastname;
+            $contact->phone = $this->phone;
+            $contact->email = $this->email;
+            $contact->comment = $this->comment;
+            $contact->save();
+            session()->flash('message','Thanks your message has been sent successfully !');
+            $this->resetFields();
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+
+        }
     }
     public function render()
     {
