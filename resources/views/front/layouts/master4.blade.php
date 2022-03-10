@@ -2,13 +2,13 @@
 <html class="no-js" lang="en">
 
 	<head>
-		@include('front.layouts.headcss')
+		@include('front.layouts.include.headcss')
 	</head>
 
 	<body>
 		<div id="app">
 			<!-- start header -->
-			@include('front.layouts.header3')
+			@include('front.layouts.include.header3')
 			<!-- end header -->
 
 			<!-- start hero -->
@@ -164,6 +164,6 @@
 			<a id="btn-to-top" class="circled" href="javascript:void(0);" data-visible-offset="800"></a>
 		</div>
 
-        @include('front.layouts.footerjs')
+        @include('front.layouts.include.footerjs')
 	</body>
 </html>

@@ -2,13 +2,13 @@
 <html class="no-js" lang="en">
 
 	<head>
-        @include('front.layouts.headcss')
+        @include('front.layouts.include.headcss')
 	</head>
 
 	<body class="woocommerce-page shop-home-page">
 		<div id="app">
 			<!-- start header -->
-			@include('front.layouts.header1')
+			@include('front.layouts.include.header1')
 			<!-- end header -->
 
 			<!-- start start screen slider -->
@@ -135,7 +135,7 @@
 					}(window, document));
 				</script>
 
-             {{ $slot }} 
+             {{ $slot }}
 			</main>
 			<!-- end main -->
 
@@ -253,6 +253,6 @@
 			<!-- end footer -->
 		</div>
 
-        @include('front.layouts.footerjs')
+        @include('front.layouts.include.footerjs')
 	</body>
 </html>

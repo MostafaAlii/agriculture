@@ -1,5 +1,7 @@
+{{-- header2 for shop page --}}
 <header id="top-bar" class="top-bar top-bar--style-2">
-    <div class="top-bar__bg" style="background-color: #FFF;background-image: url({{ URL::asset('frontassets/img/top_bar_bg-2.png') }});background-repeat: no-repeat;background-position: center bottom;"></div>
+    <div class="top-bar__bg" style="background-color: #FFF;background-image: url({{ URL::asset('frontassets/img/top_bar_bg-2.png') }});
+    background-repeat: no-repeat;background-position: center bottom;"></div>
 
     <div class="container position-relative">
         <div class="row justify-content-between no-gutters">
@@ -14,7 +16,7 @@
                 <div>
                     <div class="d-lg-flex flex-lg-column-reverse align-items-lg-end">
                         <nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
-                            @include('front.layouts.navbar')
+                            @include('front.layouts.include.navbar')
                         </nav>
 
                         <div class="top-bar__contacts">

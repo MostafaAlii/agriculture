@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
-	    @include('front.layouts.headcss')
+	    @include('front.layouts.include.headcss')
     </head>
 	<body>
 		<div id="app">
 			<!-- start header -->
-			@include('front.layouts.header')
+			@include('front.layouts.include.header')
 			<!-- end header -->
 			<!-- start start screen -->
 			<div id="start-screen" class="start-screen start-screen--style-1" data-scroll-discover="true">
