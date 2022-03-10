@@ -15,39 +15,51 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/admin/images/ico/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/fonts/material-icons/material-icons.css') }}">
-
-    <!-- BEGIN: Vendor CSS-->
-    <!-- END: Vendor CSS-->
-    <!-- END: Vendor CSS-->
     @if(app()->getLocale()=='ar')
-    <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/components.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap-extended.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material-extended.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material-colors.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/custom-rtl.css') }}">
-    <!-- END: Theme CSS-->
-
-    <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/material-vertical-menu.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
+        <!-- BEGIN: Vendor CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
+        <!-- END: Vendor CSS-->
+        <!-- BEGIN: Theme CSS-->
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material.css') }}"> --}}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap-extended.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/colors.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/components.css') }}">
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material-extended.css') }}"> --}}
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material-colors.css') }}"> --}}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/custom-rtl.css') }}">
+        <!-- END: Theme CSS-->
+        <!-- BEGIN: Page CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
+        <!-- END: Page CSS-->
+        <!-- BEGIN: Page CSS-->
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
 
     @else
-
-    <!-- BEGIN: Theme CSS-->
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/components.css') }}">
+        <!-- BEGIN: Vendor CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
+        <!-- END: Vendor CSS-->
+        <!-- BEGIN: Theme CSS-->
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material.css') }}"> --}}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap-extended.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material-extended.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material-colors.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/colors.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/components.css') }}">
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material-extended.css') }}"> --}}
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material-colors.css') }}"> --}}
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/custom.css') }}">
+        <!-- BEGIN: Page CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/colors/palette-gradient.css')}}">
+        <!-- END: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
         <!-- END: Theme CSS-->
-
         <!-- BEGIN: Page CSS-->
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}">
-
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
     @endif
 
 
