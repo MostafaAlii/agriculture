@@ -37,7 +37,11 @@ Route::group(
             Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
             /********************************* End Admins Pages Routes ************************************/
 
+
             /********************************* Start settings Routes ************************************/
+
+
+            
             Route::get('Settings', [SettingController::class, 'index'])->name('settings');
             Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
             /********************************* End settings Pages Routes ************************************/
