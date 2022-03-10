@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/fonts/material-icons/material-icons.css') }}">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/material-vendors-rtl.min.css') }}">
+    <!-- END: Vendor CSS-->
     <!-- END: Vendor CSS-->
     @if(app()->getLocale()=='ar')
     <!-- BEGIN: Theme CSS-->
