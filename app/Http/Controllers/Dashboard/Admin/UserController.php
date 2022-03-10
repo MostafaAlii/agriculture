@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 //use App\Http\Interfaces\AdminInterface;
 use Illuminate\Http\Request;
@@ -37,14 +38,15 @@ class UserController extends Controller {
 
     public function store(UserRequest $request)
     {
-        $requestData = $request->validated();
-        $requestData['password'] = bcrypt($request->password);
-
-        User::create($requestData);
-
-        session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('users.index');
-
+         try{
+            $requestData = $request->validated();
+            $requestData['password'] = bcrypt($request->password);
+            User::create($requestData);
+            session()->flash('add');
+            return redirect()->route('users.index');
+         } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+         }
     }// end of store
 
     public function show($id) {

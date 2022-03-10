@@ -14,9 +14,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{trans('Admin\setting.dashboard')}}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('settings') }}">{{trans('Admin\setting.settings')}}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Vendors</a>
                             </li>
 
                         </ol>
@@ -52,24 +52,36 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form">
+                                    <form class="form" method="post" action="{{ route('users.store') }}">
+                                        @csrf
+                                        @method('post')
                                         <div class="form-body">
+                                            <div class="form-group">
+                                                <label for="eventRegInput1">First Name<span class="text-danger">*</span></label>
+                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="firstname" name="firstname" value="{{ old('firstname') }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eventRegInput1">last Name<span class="text-danger">*</span></label>
+                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="lastname" name="lastname" value="{{ old('lastname') }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eventRegInput4">Email<span class="text-danger">*</span></label>
+                                                <input type="email" id="eventRegInput4" class="form-control" placeholder="email" name="email" value="{{ old('email') }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eventRegInput5">Contact Number<span class="text-danger">*</span></label>
+                                                <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="contact number" value="{{ old('phone') }}" required>
+                                            </div>
+                                             {{--password--}}
+                                            <div class="form-group">
+                                                <label>{{ __('users.password') }}<span class="text-danger">*</span></label>
+                                                <input type="password" name="password" class="form-control" value="{{ old('password') }}" required>
+                                            </div>
 
+                                            {{--password_confirmation--}}
                                             <div class="form-group">
-                                                <label for="eventRegInput1">First Name</label>
-                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="firstname" name="firstname">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput1">last Name</label>
-                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="lastname" name="lastname">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput4">Email</label>
-                                                <input type="email" id="eventRegInput4" class="form-control" placeholder="email" name="email">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput5">Contact Number</label>
-                                                <input type="tel" id="eventRegInput5" class="form-control" name="contact" placeholder="contact number">
+                                                <label>{{ ('users.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
                                             </div>
                                         </div>
 
