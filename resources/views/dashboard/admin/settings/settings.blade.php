@@ -6,7 +6,7 @@
     {{ trans('Admin/setting.settingPageTitle') }}
 @endsection
 @section('content')
-    @include('dashboard.common._partial.messages')
+    @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
