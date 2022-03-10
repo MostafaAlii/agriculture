@@ -18,8 +18,8 @@
             </ul>
         </li> --}}
 
-        {{-- <li class="has-submenu">
-            <a href="javascript:void(0);">Shop</a>
+        <li class="has-submenu">
+            <a href="javascript:void(0);">test</a>
 
             <ul class="submenu">
                 <li><a href="shop_catalog.html">Shop Catalog</a></li>
@@ -28,11 +28,11 @@
                 <li><a href="checkout.html">Checkout</a></li>
                 <li><a href="sign_in.html">Sign In/Up</a></li>
             </ul>
-        </li> --}}
-{{--
+        </li>
+
         <li>
-            <a href="blog.html">Blog</a>
-        </li> --}}
+            <a href="blog.html">test</a>
+        </li>
 
 
     {{-- function to check if not auth  *****************(guest)************(guest)*************************** --}}

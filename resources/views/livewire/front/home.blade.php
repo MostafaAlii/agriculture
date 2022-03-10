@@ -2,7 +2,6 @@
 <div>
     <!-- start section -->
 
-    {{-- {{ asset('frontassets/                  ') }} --}}
     <section class="section section--no-pt section--no-pb">
         <div class="container-fluid">
             <!-- start promo banners -->
