@@ -46,7 +46,7 @@
                                 <div class="d-table">
                                     <div class="d-table-cell align-middle">
                                         <i class="__ico">
-                                            <img class="img-fluid  lazy" src="img/blank.gif" data-src="img/ico/ico_count_1-1.png" alt="demo" />
+                                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/ico/ico_count_1-1.png') }}" alt="demo" />
                                         </i>
                                     </div>
 
@@ -66,7 +66,7 @@
                                 <div class="d-table">
                                     <div class="d-table-cell align-middle">
                                         <i class="__ico">
-                                            <img class="img-fluid  lazy" src="img/blank.gif" data-src="img/ico/ico_count_2-1.png" alt="demo" />
+                                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/ico/ico_count_2-1.png') }}" alt="demo" />
                                         </i>
                                     </div>
 
@@ -86,7 +86,7 @@
                                 <div class="d-table">
                                     <div class="d-table-cell align-middle">
                                         <i class="__ico">
-                                            <img class="img-fluid  lazy" src="img/blank.gif" data-src="img/ico/ico_count_3-1.png" alt="demo" />
+                                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/ico/ico_count_3-1.png') }}" alt="demo" />
                                         </i>
                                     </div>
 
@@ -106,7 +106,7 @@
                                 <div class="d-table">
                                     <div class="d-table-cell align-middle">
                                         <i class="__ico">
-                                            <img class="img-fluid  lazy" src="img/blank.gif" data-src="img/ico/ico_count_4-1.png" alt="demo" />
+                                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/ico/ico_count_4-1.png') }}" alt="demo" />
                                         </i>
                                     </div>
 
@@ -242,7 +242,7 @@
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="__item" data-aos="fade" data-aos-delay="100" data-aos-offset="0">
                                 <figure class="__image">
-                                    <img class="lazy" src="img/blank.gif" data-src="img/team_img/1.jpg" alt="demo" />
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/1.jpg') }}" alt="demo" />
                                 </figure>
 
                                 <div class="__content">
@@ -258,7 +258,7 @@
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="__item" data-aos="fade" data-aos-delay="200" data-aos-offset="0">
                                 <figure class="__image">
-                                    <img class="lazy" src="img/blank.gif" data-src="img/team_img/2.jpg" alt="demo" />
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/2.jpg') }}" alt="demo" />
                                 </figure>
 
                                 <div class="__content">
@@ -274,7 +274,7 @@
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="__item" data-aos="fade" data-aos-delay="300" data-aos-offset="0">
                                 <figure class="__image">
-                                    <img class="lazy" src="img/blank.gif" data-src="img/team_img/3.jpg" alt="demo" />
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/3.jpg') }}" alt="demo" />
                                 </figure>
 
                                 <div class="__content">
@@ -290,7 +290,7 @@
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="__item" data-aos="fade" data-aos-delay="400" data-aos-offset="0">
                                 <figure class="__image">
-                                    <img class="lazy" src="img/blank.gif" data-src="img/team_img/4.jpg" alt="demo" />
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/4.jpg') }}" alt="demo" />
                                 </figure>
 
                                 <div class="__content">
@@ -306,7 +306,7 @@
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="__item" data-aos="fade" data-aos-delay="500" data-aos-offset="0">
                                 <figure class="__image">
-                                    <img class="lazy" src="img/blank.gif" data-src="img/team_img/5.jpg" alt="demo" />
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/5.jpg') }}" alt="demo" />
                                 </figure>
 
                                 <div class="__content">
@@ -322,7 +322,7 @@
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="__item" data-aos="fade" data-aos-delay="600" data-aos-offset="0">
                                 <figure class="__image">
-                                    <img class="lazy" src="img/blank.gif" data-src="img/team_img/6.jpg" alt="demo" />
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/6.jpg') }}" alt="demo" />
                                 </figure>
 
                                 <div class="__content">
@@ -386,23 +386,23 @@
                         }
                     ]}'>
                     <div class="__item">
-                        <img class="img-fluid m-auto" src="img/partners_img/1.jpg" alt="demo" />
+                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/1.jpg') }}" alt="demo" />
                     </div>
 
                     <div class="__item">
-                        <img class="img-fluid m-auto" src="img/partners_img/2.jpg" alt="demo" />
+                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/2.jpg') }}" alt="demo" />
                     </div>
 
                     <div class="__item">
-                        <img class="img-fluid m-auto" src="img/partners_img/3.jpg" alt="demo" />
+                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/3.jpg') }}" alt="demo" />
                     </div>
 
                     <div class="__item">
-                        <img class="img-fluid m-auto" src="img/partners_img/4.jpg" alt="demo" />
+                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/4.jpg') }}" alt="demo" />
                     </div>
 
                     <div class="__item">
-                        <img class="img-fluid m-auto" src="img/partners_img/5.jpg" alt="demo" />
+                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/5.jpg') }}" alt="demo" />
                     </div>
                 </div>
             </div>
@@ -449,7 +449,7 @@
     <!-- start section -->
     <section class="section section--no-pt section--no-pb">
         <!-- this is demo key "AIzaSyBXQROV5YMCERGIIuwxrmaZbBl_Wm4Dy5U" -->
-        <div class="g_map" data-api-key="AIzaSyBXQROV5YMCERGIIuwxrmaZbBl_Wm4Dy5U" data-longitude="44.958309" data-latitude="34.109925" data-marker="img/marker.png" style="min-height: 255px"></div>
+        <div class="g_map" data-api-key="AIzaSyBXQROV5YMCERGIIuwxrmaZbBl_Wm4Dy5U" data-longitude="44.958309" data-latitude="34.109925" data-marker="img/marker.png') }}" style="min-height: 255px"></div>
     </section>
     <!-- end section -->
 </div>
