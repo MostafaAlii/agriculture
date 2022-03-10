@@ -6,7 +6,7 @@
     {{ trans('Admin/admins.settingPageTitle') }}
 @endsection
 @section('content')
-@include('dashboard.common._partial.messages')
+@include('dashboard.common._partials.messages')
 <div class="content-wrapper">
         <!-- Start Content Header -->
         <div class="content-header row">
