@@ -131,13 +131,16 @@
                 @if (App::getLocale() == 'ar')
                     {{--<span class="avatar country-Flag mr-0 align-self-center bg-transparent">--}}
                         {{--<img  src="{{URL::asset('admin\images\flags\ar.png')}}" alt="Lang">--}}
-                    <i class="flag-icon flag-icon-eg"></i>
+
+                    {{-- <i class="flag-icon flag-icon-eg"></i> --}}
                     {{--</span>--}}
-                    <strong
-                            class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+
+
+                    <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+                            <img src="{{ asset('assets/admin/images/flags/ar.png') }}" alt="" width="50">
                 @else
-                    <strong
-                            class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+                    <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+                    <img src="{{ asset('assets/admin/images/flags/hi.png') }}" alt="" width="50">
                 @endif
                 <div class="my-auto">
                 </div>
@@ -147,7 +150,8 @@
                     <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
                        href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                         @if($properties['native'] == "English")
-                            <i class="flag-icon flag-icon-us"></i>
+                            {{-- <i class="flag-icon flag-icon-us"></i> --}}
+
                         @elseif($properties['native'] == "العربية")
                             <i class="flag-icon flag-icon-eg"></i>
                         @endif
