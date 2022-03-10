@@ -1,7 +1,9 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
 @endsection
-
+@section('pageTitle')
+    {{ trans('Admin/setting.settingPageTitle') }}
+@endsection
 @section('content')
 
     <div class="content-wrapper">
@@ -11,9 +13,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{trans('Admin\setting.dashboard')}}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{trans('Admin\setting.dashboard')}}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">{{trans('Admin\setting.settings')}}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('settings') }}">{{trans('Admin\setting.settings')}}</a>
                             </li>
 
                         </ol>
@@ -175,8 +177,8 @@
             <!-- // Basic form layout section end -->
         </div>
     </div>
-    </div>
-    <!-- END: Content-->
+</div>
+<!-- END: Content-->
 
 @endsection
 @section('js')

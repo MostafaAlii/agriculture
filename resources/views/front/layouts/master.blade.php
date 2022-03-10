@@ -514,7 +514,8 @@
                     }(window, document));
                 </script>
 
-                @yield('content')
+                {{-- @yield('content') --}}
+                {{ $slot }}
                 @include('front.layouts.section-item')
                 @include('front.layouts.footer_get_in_touch')
                 @include('front.layouts.footer_map')

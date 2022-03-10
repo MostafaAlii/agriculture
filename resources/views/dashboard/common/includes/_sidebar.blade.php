@@ -12,14 +12,32 @@
         </div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a href="index.html"><i class="material-icons">settings_input_svideo</i><span class="menu-title" data-i18n="Dashboard">Dashboard</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
+                <li class=" nav-item">
+                    <a href="{{ route('admin.dashboard') }}">
+                        <i class="material-icons"></i>
+                        <span class="menu-title" data-i18n="Dashboard">{{ trans('Admin/setting.dashboard') }}</span>
+                    </a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="{{route('settings')}}"><i class="material-icons"></i><span data-i18n="eCommerce">Settings</span></a>
+                        <!-- Start Admins & Moderators -->
+                        <li>
+                            <a class="menu-item" href="#"><i class="material-icons"></i><span data-i18n="Vertical">{{trans('Admin\admins.admins')}}</span></a>
+                            <ul class="menu-content">
+                                <li>
+                                    <a class="menu-item" href="{{ route('Admins.index') }}">
+                                        <i class="material-icons"></i>
+                                        <span data-i18n="{{trans('Admin\admins.admin')}}">{{trans('Admin\admins.admin')}}</span></a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="active"><a class="menu-item" href="dashboard-crypto.html"><i class="material-icons"></i><span data-i18n="Crypto">Crypto</span></a>
+                        <!-- End Admins & Moderators -->
+                        <!-- Start Setting -->
+                        <li>
+                            <a class="menu-item" href="{{route('settings')}}">
+                                <i class="material-icons"></i>
+                                <span data-i18n="eCommerce">{{ trans('Admin/setting.page_title_in_sidebar') }}</span>
+                            </a>
                         </li>
-                        <li><a class="menu-item" href="dashboard-sales.html"><i class="material-icons"></i><span data-i18n="Sales">Sales</span></a>
-                        </li>
+                        <!-- End Setting -->
                     </ul>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title" data-i18n="Templates">Templates</span></a>
