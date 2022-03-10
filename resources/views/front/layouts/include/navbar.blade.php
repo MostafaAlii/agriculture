@@ -130,7 +130,7 @@
                aria-expanded="false">
                 @if (App::getLocale() == 'ar')
                     <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
-                    <img src="{{ asset('assets/admin/images/flags/ar.png') }}" alt="" width="50">
+                    <img src="{{ asset('assets/admin/images/flags/saa.jpg') }}" alt="" width="50">
                 @else
                     <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
                     <img src="{{ asset('assets/admin/images/flags/hi.png') }}" alt="" width="50">
