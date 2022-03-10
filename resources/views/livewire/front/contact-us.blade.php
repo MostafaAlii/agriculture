@@ -1,4 +1,8 @@
 <div>
+@section('title', __('website\home.contactus'))
+@section('css')
+
+@endsection
    <!-- start section -->
    <section class="section">
     <div class="container">
@@ -62,25 +66,53 @@
                 <div class="row justify-content-end">
                     <div class="col-md-11">
                         <div class="section-heading section-heading--white">
-                            <h2 class="__title">Get <span>in touch</span></h2>
+                            <h2 class="__title">{{ __('website\home.get') }} <span>{{ __('website\home.touch') }} </span></h2>
 
-                            <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
+                            <p>{{ __('website\home.contactsms') }}</p>
                         </div>
-
-                        <form class="contact-form js-contact-form" action="#">
+                        @if (session()->has('message'))
+                        <div class="alert alert-success " role="alert">
+                            <strong style="padding-right: 35px;">{{ session()->get('message') }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                        <form class="contact-form js-contact-form" wire:submit.prevent='sendMessage' >
                             <div class="input-wrp">
-                                <input class="textfield" name="name" type="text" placeholder="Name" />
+                                <input class="textfield" name="firstname" type="text" placeholder="{{ __('website\home.firstname') }}" wire:model='firstname'/>
+                                @error('firstname')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="input-wrp">
+                                <input class="textfield" name="lastname" type="text" placeholder="{{ __('website\home.lastname') }}" wire:model='lastname'/>
+                                @error('lastname')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="input-wrp">
+                                <input class="textfield" name="phone" type="number" placeholder="{{ __('website\home.phone') }}" wire:model='phone'/>
+                                @error('phone')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="input-wrp">
-                                <input class="textfield" name="email" type="text" placeholder="E-mail" />
+                                <input class="textfield" name="email" type="email" placeholder="{{ __('website\home.email') }}" wire:model='email'/>
+                                @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="input-wrp">
-                                <textarea class="textfield" name="message" placeholder="Comments"></textarea>
+                                <textarea class="textfield" name="message" placeholder="{{ __('website\home.comment') }}" wire:model='comment'></textarea>
+                                @error('comment')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
-                            <button class="custom-btn custom-btn--medium custom-btn--style-3 wide" type="submit" role="button">Send</button>
+                            <button class="custom-btn custom-btn--medium custom-btn--style-3 wide" type="submit" role="button">{{ __('website\home.send') }}</button>
 
                             <div class="form__note"></div>
                         </form>
@@ -100,4 +132,8 @@
     </div>
 </section>
 <!-- end section -->
+
+@push('js')
+
+@endpush
 </div>

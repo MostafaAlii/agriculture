@@ -1,7 +1,10 @@
 
 <div>
     <!-- start section -->
+    @section('title', __('website\home.home'))
+    @section('css')
 
+    @endsection
     <section class="section section--no-pt section--no-pb">
         <div class="container-fluid">
             <!-- start promo banners -->

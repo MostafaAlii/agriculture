@@ -23,7 +23,7 @@ Route::group(
 
 
 
-        Route::middleware(['web','auth:vendor'])->group(function () {
+        Route::middleware(['auth:vendor'])->group(function () {
         /********************************* Start  front pages with login by user auth Routes ************************************/
         // route::get('/home',[front\HomeController::class,'index'])->name('home.user');
         route::get('/home',Livewire\front\Home::class)->name('home.user');
