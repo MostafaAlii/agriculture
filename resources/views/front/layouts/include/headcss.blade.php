@@ -22,12 +22,10 @@
     {{-- font cairo --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-        <style>
-            body{
-                font-family: 'Cairo', sans-serif;
-            }
-        </style>
+       
+          <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+          <!-- END: Page CSS-->
+          <style> body {font-family: 'Cairo', sans-serif;} </style>
     {{-- font cairo --}}
 
     <!-- Critical styles
