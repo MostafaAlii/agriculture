@@ -38,8 +38,8 @@
                                 </li>
                                 <li>
                                     <a class="menu-item" href="{{ route('users.index') }}">
-                                        <i class="material-icons">face</i>
-                                        <span data-i18n="{{trans('Admin\admins.admin')}}">Users</span></a>
+                                        <i class="fa fa-user"></i>
+                                        <span data-i18n="{{trans('Admin\admins.users')}}">Users</span></a>
                                 </li>
                             </ul>
                         </li>

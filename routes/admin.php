@@ -56,6 +56,7 @@ Route::group(
             /********************************* end Farmer routes ************************************/
             /********************************* Start User or vendor Routes ************************************/
             Route::resource('users', UserController::class)->except(['show']);
+            Route::get('/users/data', [UserController::class,'data'])->name('users.data');
             /********************************* end User or vendor Routes ************************************/
 
         });
