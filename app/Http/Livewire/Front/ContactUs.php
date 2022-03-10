@@ -47,6 +47,7 @@ class ContactUs extends Component
             $contact->comment = $this->comment;
             $contact->save();
             session()->flash('message','Thanks your message has been sent successfully !');
+            // session()->flash('add');
             $this->resetFields();
 
         } catch (\Exception $e) {
