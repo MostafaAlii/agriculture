@@ -52,19 +52,19 @@
             <a title="My Account" href="#">My Account {{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('farmer.product') }}">Dashboard</a>
+                    <a title="Dashboard" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">My Order</a>
+                    <a title="Order" href="#">{{ trans('Website/home.my_order') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">Change Password</a>
+                    <a title="Order" href="#">{{ trans('Website/home.change_password') }}</a>
                 </li>
 
                 <li class="menu-item" >
                     <a title="Logout" href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('log-out-farmer').submit();">
-                        Log out
+                    {{ trans('Website/home.logout') }}
                     </a>
                 </li>
                 <form id="log-out-farmer" action="{{ route('logout') }}" method="POST">
@@ -80,19 +80,19 @@
             <a title="My Account" href="#">My Account {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('user.dash') }}">Dashboard</a>
+                    <a title="Dashboard" href="{{ route('user.dash') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">My Order</a>
+                    <a title="Order" href="#">{{ trans('Website/home.my_order') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">Change Password</a>
+                    <a title="Order" href="#">{{ trans('Website/home.change_password') }}</a>
                 </li>
 
                 <li class="menu-item" >
                     <a title="Logout" href="{{ route('logout.user') }}"
                     onclick="event.preventDefault(); document.getElementById('log-out').submit();">
-                        Log out
+                    {{ trans('Website/home.logout') }}
                     </a>
                 </li>
                 <form id="log-out" action="{{ route('logout.user') }}" method="POST">
@@ -108,12 +108,12 @@
             <a title="My Account" href="#">Welcom Mr : {{ Auth::guard('admin')->user()->name }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                    <a title="Dashboard" href="{{ route('admin.dashboard') }}"target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="Logout" href="{{ route('logout.admin') }}"
                     onclick="event.preventDefault(); document.getElementById('log-out').submit();">
-                        Log out
+                        {{ trans('Website/home.logout') }}
                     </a>
                 </li>
                 <form id="log-out" action="{{ route('logout.admin') }}" method="POST">
