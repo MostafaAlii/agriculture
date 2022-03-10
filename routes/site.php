@@ -16,11 +16,10 @@ Route::group(
     ], function(){
 
         // front routes
-        // route::get('/',[front\HomeController::class,'index'])->name('front');
         route::get('/',Livewire\front\Home::class)->name('front');
         route::get('/shop',Livewire\front\shop::class)->name('shop');
         route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');
-        // route::get('/aboutUs',[front\AboutUsController::class,'index'])->name('aboutUs');
+        route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');
 
 
 

@@ -3,8 +3,9 @@
     <li> <a href="{{ route('front') }}">{{ __('website\home.home') }}</a> </li>
     <li> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
     <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
+    <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
         {{--  start links in navebar *************************************************************************--}}
-        <li class="has-submenu">
+        {{-- <li class="has-submenu">
             <a href="javascript:void(0);">Pages</a>
             <ul class="submenu">
                 <li><a href="services.html">Services</a></li>
@@ -15,9 +16,9 @@
                 <li><a href="typography.html">Typography</a></li>
                 <li><a href="404.html">404 page</a></li>
             </ul>
-        </li>
+        </li> --}}
 
-        <li class="has-submenu">
+        {{-- <li class="has-submenu">
             <a href="javascript:void(0);">Shop</a>
 
             <ul class="submenu">
@@ -27,15 +28,13 @@
                 <li><a href="checkout.html">Checkout</a></li>
                 <li><a href="sign_in.html">Sign In/Up</a></li>
             </ul>
-        </li>
-
+        </li> --}}
+{{--
         <li>
             <a href="blog.html">Blog</a>
-        </li>
+        </li> --}}
 
-        <li>
-            <a href="contacts.html">Contacts</a>
-        </li>
+
     {{-- function to check if not auth  *****************(guest)************(guest)*************************** --}}
             @check_guard
             <li class="li-btn">
