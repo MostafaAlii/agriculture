@@ -4,7 +4,6 @@
 
 <!-- BEGIN: Content-->
 <div class="app-content content">
-    @include('dashboard.common._partials.messages')
     @yield('content')
 </div>
 
