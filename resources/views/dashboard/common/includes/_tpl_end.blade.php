@@ -4,6 +4,7 @@
     <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     {{-- <script src="{{ asset('assets/admin/vendors/js/material-vendors.min.js') }}"></script> --}}
     <!-- END: Page Vendor JS-->
+    <script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <!-- BEGIN: Theme JS-->
     <script src="{{ asset('assets/admin/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('assets/admin/js/core/app.js') }}"></script>
@@ -20,7 +21,8 @@
     {{-- <script src="{{ asset('assets/admin/js/scripts/pages/material-app.js') }}"></script> --}}
     <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-crypto.js') }}"></script>
     <!-- END: Page JS-->
-
+    <script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js')}}"></script>
     {{-- <script src="{{ asset('assets/admin/noty/noty.min.js') }}"></script> --}}
     @yield('js')
 
