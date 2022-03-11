@@ -51,4 +51,8 @@ return [
     'change_password' => 'Change password',
     'edit_profile' => 'Edit profile',
     'incorrect_old_password' => 'Incorrect old password',
+
+
+    'farmer'=>'Farmers',
+    'warning' => 'Are you sure to delete ?'
 ];

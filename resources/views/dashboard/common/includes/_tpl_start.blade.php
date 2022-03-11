@@ -28,9 +28,9 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap-extended.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/colors.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/components.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/custom-rtl.css') }}">
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material-extended.css') }}"> --}}
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material-colors.css') }}"> --}}
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/custom-rtl.css') }}">
         <!-- END: Theme CSS-->
         <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
@@ -53,7 +53,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/components.css') }}">
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material-extended.css') }}"> --}}
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material-colors.css') }}"> --}}
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/custom.css') }}">
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/custom.css') }}"> --}}
         <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/colors/palette-gradient.css')}}">
@@ -64,7 +64,7 @@
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
     @endif
     {{--noty--}}
-        <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}"> --}}
 
     {{--noty--}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">

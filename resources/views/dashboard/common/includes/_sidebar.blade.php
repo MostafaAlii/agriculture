@@ -33,13 +33,12 @@
                                 </li>
                                 <li>
                                     <a class="menu-item" href="{{ route('farmers.index') }}">
-                                        <i class="icon-user-follow"></i>
-                                        <span data-i18n="{{trans('Admin\admins.admin')}}">Farmers</span></a>
+                                        <i class="material-icons">face</i>
+                                        <span data-i18n="{{ __('Admin/site.farmer') }}">{{ __('Admin/site.farmer') }}</span></a>
                                 </li>
                                 <li>
-                                    <a class="menu-item" href="{{ route('users.index') }}">
-                                        <i class="material-icons">face</i>
-                                        <span data-i18n="{{trans('Admin\admins.users')}}">Users</span></a>
+                                    <a class="menu-item" href="{{ route('users.index') }}"> <i class="icon-user"></i>
+                                        <span data-i18n="{{ __('Admin/site.users') }}">{{ __('Admin/site.users') }}</span></a>
                                 </li>
                             </ul>
                         </li>

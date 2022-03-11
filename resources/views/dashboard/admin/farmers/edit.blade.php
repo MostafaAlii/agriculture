@@ -14,11 +14,12 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('farmers.index') }}">farmers</a>
+                            <li class="breadcrumb-item"><a href="{{ route('farmers.index') }}">{{ __('Admin/site.farmer') }}</a>
                             </li>
-
+                            <li class="breadcrumb-item active">{{ __('Admin/site.edit') }}
+                            </li>
                         </ol>
                     </div>
                 </div>
@@ -57,20 +58,20 @@
                                         @method('put')
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label for="eventRegInput1">First Name<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="firstname" name="firstname" value="{{ old('firstname',$farmer->firstname) }}" required>
+                                                <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
+                                                <input type="text" id="eventRegInput1" class="form-control"  name="firstname" value="{{ old('firstname',$farmer->firstname) }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="eventRegInput1">last Name<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="lastname" name="lastname" value="{{ old('lastname',$farmer->lastname) }}" required>
+                                                <label for="eventRegInput1">{{ __('Admin/site.lastname') }}<span class="text-danger">*</span></label>
+                                                <input type="text" id="eventRegInput1" class="form-control"  name="lastname" value="{{ old('lastname',$farmer->lastname) }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="eventRegInput4">Email<span class="text-danger">*</span></label>
-                                                <input type="email" id="eventRegInput4" class="form-control" placeholder="email" name="email" value="{{ old('email',$farmer->email) }}" required>
+                                                <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
+                                                <input type="email" id="eventRegInput4" class="form-control" name="email" value="{{ old('email',$farmer->email) }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="eventRegInput5">Contact Number<span class="text-danger">*</span></label>
-                                                <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="contact number" value="{{ old('phone',$farmer->phone) }}" required>
+                                                <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
+                                                <input type="tel" id="eventRegInput5" class="form-control" name="phone"  value="{{ old('phone',$farmer->phone) }}" required>
                                             </div>
                                         </div>
 
