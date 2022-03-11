@@ -10,15 +10,13 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">Basic DataTables</h3>
+                <h3 class="content-header-title">{{ __('Admin/site.farmer') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a>
+                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">farmers</a>
-                            </li>
-                            <li class="breadcrumb-item active">farmers Pages
+                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/site.farmer') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -45,17 +43,17 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('farmers.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('farmer.create') }}</a>
+                                    <a href="{{ route('farmers.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/site.create') }}</a>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="farmer-table">
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('users.firstname') }}</th>
-                                                    <th>{{ __('users.lastname') }}</th>
-                                                    <th>{{ __('users.email') }}</th>
-                                                    <th>{{ __('users.phone') }}</th>
-                                                    <th>{{ __('users.action') }}</th>
-                                                    <th>{{ __('users.creat_at') }}</th>
+                                                    <th>{{ __('Admin/site.firstname') }}</th>
+                                                    <th>{{ __('Admin/site.lastname') }}</th>
+                                                    <th>{{ __('Admin/site.email') }}</th>
+                                                    <th>{{ __('Admin/site.phone') }}</th>
+                                                    <th>{{ __('Admin/site.created_at') }}</th>
+                                                    <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
                                             </thead>
                                         </table>

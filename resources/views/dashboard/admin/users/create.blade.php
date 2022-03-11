@@ -14,11 +14,12 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Vendors</a>
+                            <li class="breadcrumb-item"><a href="{{ route('users.index') }}">{{ __('Admin/site.users') }}</a>
                             </li>
-
+                            <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
+                            </li>
                         </ol>
                     </div>
                 </div>
@@ -57,30 +58,30 @@
                                         @method('post')
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label for="eventRegInput1">First Name<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="firstname" name="firstname" value="{{ old('firstname') }}" required>
+                                                <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
+                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="eventRegInput1">last Name<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="lastname" name="lastname" value="{{ old('lastname') }}" required>
+                                                <label for="eventRegInput1">{{ __('Admin/site.lastname') }}<span class="text-danger">*</span></label>
+                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="eventRegInput4">Email<span class="text-danger">*</span></label>
-                                                <input type="email" id="eventRegInput4" class="form-control" placeholder="email" name="email" value="{{ old('email') }}" required>
+                                                <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
+                                                <input type="email" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/site.email') }}" name="email" value="{{ old('email') }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="eventRegInput5">Contact Number<span class="text-danger">*</span></label>
-                                                <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="contact number" value="{{ old('phone') }}" required>
+                                                <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
+                                                <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone') }}" required>
                                             </div>
                                              {{--password--}}
                                             <div class="form-group">
-                                                <label>{{ __('users.password') }}<span class="text-danger">*</span></label>
+                                                <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
                                                 <input type="password" name="password" class="form-control" value="{{ old('password') }}" required>
                                             </div>
 
                                             {{--password_confirmation--}}
                                             <div class="form-group">
-                                                <label>{{ ('users.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
                                                 <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
                                             </div>
                                         </div>

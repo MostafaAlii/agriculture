@@ -33,7 +33,7 @@
                                 </li>
                                 <li>
                                     <a class="menu-item" href="{{ route('farmers.index') }}">
-                                        <i class="material-icons">face</i>
+                                        <i class="icon-user-follow"></i>
                                         <span data-i18n="{{trans('Admin\admins.admin')}}">Farmers</span></a>
                                 </li>
                                 <li>

@@ -1,7 +1,7 @@
 
     <a href="{{ route('farmers.edit', $id) }}" class="btn btn-success btn-sm">
         <i class="fa fa-edit"></i>
-        {{ __('user.edit') }}
+        {{ __('Admin/site.edit') }}
     </a>
 
 
@@ -11,7 +11,7 @@
         @method('delete')
         <button type="submit" class="btn btn-danger btn-sm " onclick="confirm('{{ __('site.Warning') }}') ? this.parentElement.submit() : ''">
             <i class="fa fa-trash"></i>
-            {{ __('user.delete') }}
+            {{ __('Admin/site.delete') }}
         </button>
     </form>
 
