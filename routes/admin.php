@@ -47,8 +47,8 @@ Route::group(
     /********************************* End Admins Pages Routes ************************************/
 
     /********************************* Start settings Routes ************************************/
-    Route::get('settings', [SettingController::class,'index'])->name('settings');
-    Route::post('settings/store', [SettingController::class,'store'])->name('settings.store');
+    Route::get('settings', [SettingController::class,'setting'])->name('settings');
+    Route::post('settings/store', [SettingController::class,'save_setting'])->name('settings.store');
     /********************************* End settings Pages Routes ************************************/
 
             require __DIR__.'/auth.php';

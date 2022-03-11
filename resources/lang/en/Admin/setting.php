@@ -19,5 +19,20 @@ return [
     'facebook'=>' Facebook',
     'twitter'=>'Twitter',
     'inestergrame'=>'Instegram',
+    'status'=>' Site Status',
+
+
+
+    'email.required' => 'Email is required',
+    'primary_phone.required' => 'Primary Phone is required',
+    'secondery_phone.required' => 'Secondery Phone is required',
+
+    'facebook.required' => 'Facebook is required',
+    'twitter.required' =>  'twitter is required',
+    'inestegram.required' =>  'inestegram is required',
+
+    'site_name.required' => 'Site Name is required',
+    'status.required' => 'Status is Required',
+    'message_maintenance.required'=>'Message Maintenance Required',
 
 ];

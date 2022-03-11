@@ -7,53 +7,59 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Setting;
 use App\Models\Image;
+use App\Models\SettingTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Traits\UploadT;
+
+use App\Http\Requests\SettingRequest;
+use Illuminate\Support\Facades\Storage;
+
 class SettingController extends Controller
 {
     use UploadT;
-    public function index()
+    public function setting()
     {
-        return view('dashboard.admin.settings');
+        $setting = Setting::orderBy('id','desc')->first();
+        $setting_t = SettingTranslation::orderBy('id','desc')->first();
+      return view('dashboard.admin.setting',compact('setting','setting_t'));
     }
 
 
 
 
-    public function store(Request $request)
+    public function save_setting(SettingRequest $request)
     {
-        $request->validate([
-            'support_mail' => 'required|unique:settings|supporting_mail',
-            'primary_phone' => 'required',
-            'primary_phone'    => 'required|regex:/(0)[0-9]{9}/',
-            'secondery_phone'    => 'required|regex:/(0)[0-9]{9}/',
-            'facebook'=> 'required|url',
-            'twitter'=> 'required|url',
-            'inestegram'=> 'required|url',
-            'site_name'=>'required|string'
-
-        ]);
+        $validated = $request->validated();
+//
         DB::beginTransaction();
         try {
 
-            $setting = new Setting();
+            $setting = Setting::OrderBy('id','desc')->first();
             $setting->support_mail = $request->support_mail;
             $setting->primary_phone = $request->primary_phone;
             $setting->secondery_phone = $request->secondery_phone;
             $setting->facebook = $request->facebook;
             $setting->twitter = $request->twitter;
             $setting->inestegram = $request->inestegram;
+            $setting->status = $request->status;
+            if(request()->hasFile('site_logo')){
+                !empty($setting->site_logo)?Storage::delete($setting->site_logo):'';
+                $setting->site_logo  =  request()->file('site_logo')->store('settings') ;
 
-            $setting->save();
+            }
+            if(request()->hasFile('site_icon')){
+               !empty($setting->site_icon)?Storage::delete($setting->site_icon):'';
 
-            $setting->site_name = $request->site_name;
-            $setting->address = $request->address;
+                $setting->site_icon  =  request()->file('site_icon')->store('settings') ;
+
+            }
+
+            $setting->update();
+            $setting->site_name= $request->site_name;
+            $setting->address= $request->address;
             $setting->message_maintenance = $request->message_maintenance;
-            $setting->save();
-            // upload image
-            UploadT::verifyAndStoreImage($request, 'site_logo', 'settings', 'upload_image', $setting->id, 'App\Models\Setting');
-            UploadT::verifyAndStoreImage($request, 'site_icon', 'settings', 'upload_image', $setting->id, 'App\Models\Setting');
+            $setting->update();
 
             DB::commit();
             session()->flash('add');

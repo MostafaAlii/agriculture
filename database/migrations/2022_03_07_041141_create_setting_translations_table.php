@@ -27,7 +27,7 @@ class CreateSettingTranslationsTable extends Migration
             // Actual fields you want to translate
 
             $table->string('site_name');
-            $table->longText('address');
+            $table->longText('address')->nullable();
             $table->longText('message_maintenance')->nullable();
 
 

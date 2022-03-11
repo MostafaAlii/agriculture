@@ -12,13 +12,16 @@ class Setting extends Model implements TranslatableContract
     use HasFactory,Translatable;
     protected $table = "settings";
     protected $fillable = [
-        'support_mail','primary_phone','secondery_phone', 'side_slug', 'social_link','site_name', 'address','message_maintenance'];
+        'support_mail','primary_phone','secondery_phone', 'facebook', 'twitter','inestegram',
+        'site_name', 'address','message_maintenance','status',
+        'site_logo','site_icon'
+    ];
     // 3. To define which attributes needs to be translated
     public $translatedAttributes = ['site_name', 'address','message_maintenance'];
 
 
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
+//    public function image()
+//    {
+//        return $this->morphOne(Image::class, 'imageable');
+//    }
 }
