@@ -20,9 +20,11 @@ class AuthenticatedSessionController extends Controller
     }
 
     public function store(LoginRequest $request) {
-        $request->authenticate();
-        $request->session()->regenerate();
-        return redirect()->intended(RouteServiceProvider::FRONT);
+        if( $request->authenticate()){
+            $request->session()->regenerate();
+            return redirect()->intended(RouteServiceProvider::FRONT);
+        }
+       return redirect()->back()->withErrors(['name'=>(trans('Admin/auth.failed'))]);
     }
 
     public function destroy(Request $request) {

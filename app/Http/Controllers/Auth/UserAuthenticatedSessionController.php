@@ -21,11 +21,11 @@ class UserAuthenticatedSessionController extends Controller
     }
 
     public function store(UserLoginRequest $request) {
-        $request->authenticate();
-        $request->session()->regenerate();
-        return redirect()->intended(RouteServiceProvider::FRONT);
-        // return $request;
-        // dd($request->email);
+        if( $request->authenticate()){
+            $request->session()->regenerate();
+            return redirect()->intended(RouteServiceProvider::FRONT);
+        }
+       return redirect()->route('user.login')->withErrors(['email'=>(trans('Admin/auth.failed'))]);
     }
 
     public function destroy(Request $request) {

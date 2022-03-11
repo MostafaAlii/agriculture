@@ -20,10 +20,13 @@ class AdminController extends Controller
     }
 
     public function store(AdminLoginRequest $request) {
-        $request->authenticate();
-        $request->session()->regenerate();
-        return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
+        if( $request->authenticate()){
+            $request->session()->regenerate();
+            return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
+        }
+       return redirect()->back()->withErrors(['email'=>(trans('Admin/auth.failed'))]);
     }
+
 
     public function destroy(Request $request) {
         Auth::guard('admin')->logout();

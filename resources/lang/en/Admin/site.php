@@ -33,8 +33,10 @@ return [
     'show_all' => 'Show all ...',
 
     'save'=>'Save',
-    'firstname' => 'First Name',
-    'lastname' => 'Last Name',
+    'firstnamear' => 'First Name by arabic',
+    'lastnamear' => 'Last Name by arabic',
+    'firstnameen' => 'First Name by english',
+    'lastnameen' => 'Last Name by english',
     'email' => 'E-mail',
     'phone' => 'Phone',
     'action' => 'Action',
@@ -52,7 +54,8 @@ return [
     'edit_profile' => 'Edit profile',
     'incorrect_old_password' => 'Incorrect old password',
 
-
+    'newuser'=>'New User',
+    'newfarmer'=>'New Farmer',
     'farmer'=>'Farmers',
     'warning' => 'Are you sure to delete ?'
 ];

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Interfaces\Admin\UserInterface;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 //use App\Http\Interfaces\AdminInterface;
@@ -8,73 +9,45 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class UserController extends Controller {
-    // protected $Data;
-    /*public function __construct(AdminInterface $Data) {
+    protected $Data;
+    public function __construct(UserInterface $Data) {
         $this->Data = $Data;
-    }*/
+    }
 
     public function index() {
-        //return $this->Data->index();
-        return view('dashboard.admin.users.index');
+        return $this->Data->index();
+
     }
 
     public function data()
     {
-        $users = User::select();
-
-        return DataTables::of($users)
-            ->editColumn('created_at', function (User $user) {
-                return $user->created_at->format('Y-m-d');
-            })
-            ->addColumn('actions', 'dashboard.admin.users.data_table.actions')
-            ->rawColumns([ 'actions'])
-            ->toJson();
+        return $this->Data->data();
 
     }// end of data
 
     public function create() {
-        return view('dashboard.admin.users.create');
+        return $this->Data->create();
     }
 
     public function store(UserRequest $request)
     {
-         try{
-            $requestData = $request->validated();
-            $requestData['password'] = bcrypt($request->password);
-            User::create($requestData);
-            // session()->flash('Add', __('Admin/site.added_successfully'));
-            toastr()->success(__('Admin/site.added_successfully'));
-            return redirect()->route('users.index');
-         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-         }
+        return $this->Data->store($request);
     }// end of store
 
     public function edit(User $user)
     {
-        return view('dashboard.admin.users.edit', compact('user'));
+        return $this->Data->edit($user);
 
     }// end of edit
 
     public function update(UserRequest $request, User $user)
     {
-        try{
-            $user->update($request->validated());
-
-            session()->flash('Edit', __('Admin/site.updated_successfully'));
-            toastr()->success( __('Admin/site.updated_successfully'));
-            return redirect()->route('users.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+        return $this->Data->update($request,$user);
     }// end of update
 
     public function destroy(User $user)
     {
-        $user->delete();
-        // session()->flash('Delete', __('Admin/site.deleted_successfully'));
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('users.index');
+        return $this->Data->destroy($user);
 
     }// end of destroy
 }
