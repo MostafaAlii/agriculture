@@ -11,14 +11,15 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('support_mail');
-            $table->string('facebook');
-            $table->string('inestegram');
-            $table->string('twitter');
-            $table->string('primary_phone');
+            $table->string('support_mail')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('inestegram')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('primary_phone')->nullable();
             $table->string('secondery_phone')->nullable();
-            $table->string('social_link');
-
+            $table->enum('status',['open','close'])->default('open');
+            $table->string('site_logo')->nullable();
+            $table->string('site_icon')->nullable();
             $table->timestamps();
         });
     }

@@ -47,6 +47,13 @@ Route::group(
             /********************************* End Admin & Employee Routes ************************************/
 
 
+    /********************************* Start settings Routes ************************************/
+    Route::get('settings', [SettingController::class,'setting'])->name('settings');
+    Route::post('settings/store', [SettingController::class,'save_setting'])->name('settings.store');
+    /********************************* End settings Pages Routes ************************************/
+
+
+
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);
             /********************************* End Department Routes ************************************/

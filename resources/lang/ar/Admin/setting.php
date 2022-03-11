@@ -19,5 +19,23 @@ return [
     'site_icon'=>'رمز الموقع',
     'facebook'=>'فيس بوك',
     'twitter'=>'تويتر',
+    'inestergrame'=>'انستغرام',
+    'status'=>'حالة الموقع',
+
+
+
+    'email.required' => 'البريد الإلكتروني مطلوب',
+    'primary_phone.required' => 'الرقم الرئيسي للهاتف',
+    'secondery_phone.required' => 'الرقم الثانوي للهاتف',
+
+    'facebook.required' => 'عنوان الفيس بوك مطلوب',
+    'twitter.required' => 'عنوان التويتر مطلوب',
+    'inestegram.required' => 'عنوان الانستغرام مطلوب',
+
+    'site_name.required' => 'اسم الموقع مطلوب',
+    'status.required' => 'حالة الموقع مطلوبة',
+    'message_maintenance.required'=>'رسالة الصيانة مطلوبة',
+
+
     'inestergrame'=>'انستغرام'
 ];

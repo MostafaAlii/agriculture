@@ -1,16 +1,9 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
-@section('pageTitle')
-    {{ trans('Admin/setting.settingPageTitle') }}
-@endsection
+
 @section('content')
-<<<<<<< HEAD:resources/views/dashboard/admin/settings.blade.php
     @include('dashboard\common\_partials.messages')
-=======
-    @include('dashboard.common._partials.messages')
->>>>>>> 74ac38a5c6678b746c1c5b48d318c4d81b42aa7d:resources/views/dashboard/admin/settings/settings.blade.php
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
@@ -18,9 +11,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{trans('Admin\setting.dashboard')}}</a>
+                            <li class="breadcrumb-item"><a href="index.html">{{trans('Admin\setting.dashboard')}}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('settings') }}">{{trans('Admin\setting.settings')}}</a>
+                            <li class="breadcrumb-item"><a href="#">{{trans('Admin\setting.settings')}}</a>
                             </li>
 
                         </ol>
@@ -55,7 +48,7 @@
                                     <div class="card-text">
                                         <p></p>
                                     </div>
-                                    <form class="form" action="{{route('settings')}}" method="get"
+                                    <form class="form" action="{{route('settings.store')}}" method="post"
                                           enctype="multipart/form-data" autocomplete="off">
                                         {{ csrf_field() }}
                                         <div class="form-body">
@@ -69,7 +62,8 @@
                                                         <input type="text" id="projectinput1" class="form-control"
                                                                placeholder="{{trans('Admin\setting.site_name')}}"
                                                                name="site_name"
-                                                               value="{{$setting_t->site_name}}" >
+                                                               value="{{$setting_t->site_name}}"
+                                                        >
                                                         <input type="hidden" id="projectinput1" class="form-control"
 
                                                                name="id"
@@ -83,8 +77,7 @@
                                                         <label for="projectinput2">{{trans('Admin\setting.supporting_mail')}}</label>
                                                         <input type="text" id="projectinput2" class="form-control"
                                                                placeholder="{{trans('Admin\setting.supporting_mail')}}"
-                                                               name="support_mail"
-                                                               value="{{$setting->support_mail}}">
+                                                               name="support_mail" value="{{$setting->support_mail}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,12 +126,29 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-md-12">
+                                                <div class="form-group">
+
+                                                        <label for="companyName">{{trans('Admin\setting.status')}}</label>
+                                                        <select class=" form-control" name="status" >
+                                                            <option value="" disabled selected>Choose your option</option>
+                                                            <option value="0">Close</option>
+                                                            <option value="1">Open </option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="companyName">{{trans('Admin\setting.address')}}</label>
-                                                        <input type="text" id="companyName" class="form-control"
-                                                               placeholder="{{trans('Admin\setting.address')}}"
-                                                               name="address"value="{{$setting_t->address}}">
+
+
+                                                        <textarea id="projectinput8" rows="5" class="form-control"
+                                                                  name="message_maintenance" value="{{$setting_t->address}}"
+                                                                  placeholder="{{trans('Admin\setting.address')}}"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -158,16 +168,14 @@
 
                                                         <label>{{trans('Admin\setting.site_icon')}}</label>
                                                         <label id="projectinput7" class="file center-block">
-                                                            {{--<input type="file" accept="image/*" name="site_icon" --}}
-                                                            {{--onchange="loadFile1(event)">--}}
-                                                            <input type="file" accept="image/*" name="site_icon">
-                                                            <img src="{{Storage::url(setting()->site_icon)}}"
-                                                                 height="50 px" width="50 px" id="output1">
-                                                            @if(!empty(setting()->site_icon))
 
-                                                                <img src="{{Storage::url(setting()->site_icon)}}"
-                                                                     height="50 px" width="50 px" id="output1">
-                                                            @endif
+                                                            <input type="file" accept="image/*" name="site_icon">
+
+                                                            {{--@if(!empty($setting->site_icon))--}}
+
+                                                                <img src="{{Storage::url($setting->site_icon)}}"
+                                                                     height="50 px" width="50 px">
+                                                            {{--@endif--}}
                                                         </label>
                                                     </div>
                                                 </div>
@@ -176,15 +184,11 @@
                                                         <label>{{trans('Admin\setting.site_logo')}} </label>
                                                         <label id="projectinput7" class="file center-block">
                                                             <input type="file" accept="image/*" name="site_logo">
-                                                            {{--<input type="file" accept="image/*" name="site_logo"--}}
-                                                            {{--onchange="loadFile(event)">--}}
-                                                            <img src="{{Storage::url(setting()->site_logo)}}"
-                                                                 height="50 px" width="50 px" id="output1">
-                                                            @if(!empty(setting()->site_logo))
 
-                                                                {{--<img src="{{Storage::url(setting()->site_logo)}}"--}}
-                                                                     {{--height="50 px" width="50 px" id="output1">--}}
-                                                            @endif
+                                                            {{--@if(!empty($setting->site_logo))--}}
+
+                                                                <img src="{{Storage::url($setting->site_logo)}}" height="50 px" width="50 px" >
+                                                            {{--@endif--}}
                                                         </label>
                                                     </div>
                                                 </div>
@@ -214,34 +218,11 @@
             <!-- // Basic form layout section end -->
         </div>
     </div>
-</div>
-<!-- END: Content-->
+    </div>
+    <!-- END: Content-->
 
 @endsection
 @section('js')
-    <script type="text/javascript">
 
-        var loadFile = function (event) {
-            var img = document.getElementById('output');
-            img.src = URL.createObjectURL(event.target.files[0]);
-            output.img = function () {
-                URL.revokeObjectURL(img.src)
-            }
 
-        };
-    </script>
-
-    <script type="text/javascript">
-
-        var loadFile1 = function (event) {
-            var output = document.getElementById('output1');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function () {
-                URL.revokeObjectURL(output.src)
-            }
-
-        };
-    </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
