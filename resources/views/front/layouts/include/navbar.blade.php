@@ -48,7 +48,7 @@
     {{-- links for farmer الفلاح****************************************************--}}
     @if(Auth::guard('web')->user())
         <li class="menu-item menu-item-has-children parent" >
-            <a title="My Account" href="#">My Account {{ Auth::user()->name }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a title="My Account" href="#">My Account {{ Auth::user()->firstname }} {{ Auth::user()->lasttname }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
                     <a title="Dashboard" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>

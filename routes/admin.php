@@ -60,6 +60,7 @@ Route::group(
 
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);
+            Route::get('/farmers/data', [FarmerController::class,'data'])->name('farmers.data');
             /********************************* end Farmer routes ************************************/
             /********************************* Start User or vendor Routes ************************************/
             Route::resource('users', UserController::class)->except(['show']);
