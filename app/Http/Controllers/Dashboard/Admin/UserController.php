@@ -4,7 +4,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\UserInterface;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-//use App\Http\Interfaces\AdminInterface;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
