@@ -25,7 +25,7 @@
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material.css') }}"> --}}
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap-extended.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/colors.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/components.css') }}">
