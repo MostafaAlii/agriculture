@@ -2,39 +2,97 @@
 <html class="no-js" lang="en">
 
 	<head>
-        @include('front.layouts.headcss')
+        @include('front.layouts.include.headcss')
 	</head>
 
-	<body class="woocommerce-page catalog-page">
+	<body class="woocommerce-page shop-home-page">
 		<div id="app">
 			<!-- start header -->
-
-             @include('front.layoutsShop.header2')
+			@include('front.layouts.include.header1')
 			<!-- end header -->
 
-			<!-- start hero -->
-			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
-                 style="background-image: url( {{ URL::asset('frontassets/img/pic2.jpg') }});
-                        color: #333;">
-				<div class="container">
-					<div class="row">
-						<div class="col-12 col-md-7">
-							<h1 class="__title"><span>Agro Shop</span> Catalog</h1>
+			<!-- start start screen slider -->
+			<div
+				id="start-screen"
+				class="start-screen start-screen--style-4 js-slick"
+				data-slick='{
+					"autoplay": true,
+					"fade": true,
+					"speed": 1200,
+					"arrows": true,
+					"dots": false
+				}'>
+				<div class="start-screen__slide">
+					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_7.jpg') }});background-position: top 30% right 30%;"></div>
+					<div class="start-screen__content__item align-items-center">
+						<div class="container">
+							<div class="row">
+								<div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
+									<h2 class="__title"><span>Get the</span> Fresh Food <span>from our</span> Agro Market</h2>
 
-							<p>
-								The point of using is that it has a more-or-less normal distribution of letters, as opposed to using Content here content here making it look
-							</p>
+									<p>
+										<span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-1" href="#">Discover</a></span>
+										<span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-1" href="#">Discover</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="start-screen__slide">
+					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_8.jpg') }});background-position: top 30% left 70%;"></div>
+
+					<div class="start-screen__content__item align-items-center">
+						<div class="container">
+							<div class="row justify-content-end">
+								<div class="col-12 col-sm-10 col-md-9 col-lg-8 col-xl-7">
+									<h2 class="__title"><span>Awesome</span> Organic Cosmetic <span>from Agro</span></h2>
+
+									<p>
+										Bitterling duckbilled barracudina New Zealand sand diver, "oldwife sarcastic fringehead sea toad bighead carp sculpin tadpole fish creek chub." Dottyback sand
+									</p>
+
+									<p class="mt-5 mt-md-8">
+										<span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-2" href="#">Discover</a></span>
+										<span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-2" href="#">Discover</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="start-screen__slide">
+					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_9.jpg') }});"></div>
+
+					<div class="start-screen__content__item align-items-center">
+						<div class="container">
+							<div class="row justify-content-center text-center">
+								<div class="col-12 col-md-9 col-lg-8 col-xl-7">
+									<h2 class="__title text-white"><span>Fresh</span> Blueberries & Citrus <span>from Agro</span></h2>
+
+									<p class="text-white">
+										Bitterling duckbilled barracudina New Zealand sand diver, "oldwife sarcastic fringehead sea toad bighead carp sculpin tadpole fish creek chub." Dottyback sand goby
+									</p>
+
+									<p class="mt-5 mt-md-8">
+										<span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-3" href="#">Discover</a></span>
+										<span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-3" href="#">Discover</a></span>
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- end hero -->
+			<!-- end start screen -->
 
 			<!-- start main -->
 			<main role="main">
 				<!-- Common styles
 				================================================== -->
-                <link rel="stylesheet" href="{{ asset('frontassets/css/style.min.css') }}" type="text/css">
+				<link rel="stylesheet" href="{{ asset('frontassets/css/style.min.css') }}" type="text/css">
 
 				<!-- Load lazyLoad scripts
 				================================================== -->
@@ -76,8 +134,8 @@
 						w.lazyLoadOptions = o;
 					}(window, document));
 				</script>
-                {{ $slot }}
-				{{-- @yield('content') --}}
+
+             {{ $slot }}
 			</main>
 			<!-- end main -->
 
@@ -88,7 +146,7 @@
 						<div class="col-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="footer__item">
 								<a class="site-logo" href="index.html">
-									<img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif')}}" data-src="{{ asset('frontassets/img/site_logo.png')}}" alt="demo" />
+									<img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
 								</a>
 							</div>
 						</div>
@@ -195,6 +253,6 @@
 			<!-- end footer -->
 		</div>
 
-        @include('front.layouts.footerjs')
+        @include('front.layouts.include.footerjs')
 	</body>
 </html>

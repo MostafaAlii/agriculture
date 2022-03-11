@@ -1,9 +1,14 @@
 <?php
+use App\Http\Controllers\Dashboard\Admin\AdminController;
+use App\Http\Controllers\Dashboard\Admin\UserController;
+use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
-//use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\front;
+use App\Http\Livewire;
+use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -13,44 +18,54 @@ use App\Http\Controllers\front;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-// Dashboard prifex in RouteServiceProvider
-//Route::group(['namespace'=>'Dashboard', 'prefix'=>'dashboard_admin', 'middleware' => 'auth:admin'], function() {
-//    /********************************* Start Admins Dashboard Routes ************************************/
-
-//    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard1');
+ */
 
 
-Route::get('/home/admin',[front\HomeController::class,'index'])->name('home.admin')->middleware('auth:admin'); // route for admin to go to website
+require __DIR__ . '/auth.php';
 
-/*Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'auth:admin']*/
-
-//    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ,'auth:admin']
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth:admin'],
 
-    ], function(){
+    ], function () {
+        route::get('/home/admin', Livewire\front\Home::class)->name('home.admin');
+        // route for admin to go to website
 
-        Route::group(['namespace'=>'Dashboard\Admin', 'prefix'=>'dashboard_admin'], function() {
-        /********************************* Start Admins Dashboard Routes ************************************/
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-        Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-    /********************************* End Admins Pages Routes ************************************/
+        Route::group(['prefix' => 'dashboard_admin'], function () {
+            /********************************* Start Admins Dashboard Routes ************************************/
+            Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+            /********************************* End Admins Pages Routes ************************************/
+
+            /********************************* Start settings Routes ************************************/
+            Route::get('Settings', [SettingController::class, 'index'])->name('settings');
+            Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
+            /********************************* End settings Pages Routes ************************************/
+
+            /********************************* Start Admin & Employee Routes ************************************/
+            Route::resource('Admins', AdminController::class)->except(['show']);
+            /********************************* End Admin & Employee Routes ************************************/
+
 
     /********************************* Start settings Routes ************************************/
     Route::get('settings', [SettingController::class,'setting'])->name('settings');
     Route::post('settings/store', [SettingController::class,'save_setting'])->name('settings.store');
     /********************************* End settings Pages Routes ************************************/
 
-            require __DIR__.'/auth.php';
+
+
+            /********************************* Department Routes ************************************/
+            Route::resource('Departments', DepartmentController::class)->except(['show']);
+            /********************************* End Department Routes ************************************/
+
+            /********************************* Start Farmer routes ************************************/
+            Route::resource('farmers',FarmerController::class)->except(['show']);
+            /********************************* end Farmer routes ************************************/
+            /********************************* Start User or vendor Routes ************************************/
+            Route::resource('users', UserController::class)->except(['show']);
+            Route::get('/users/data', [UserController::class,'data'])->name('users.data');
+            /********************************* end User or vendor Routes ************************************/
+
         });
-});
+
+    });

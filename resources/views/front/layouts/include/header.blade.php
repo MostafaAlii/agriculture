@@ -14,7 +14,7 @@
             <div id="top-bar__inner" class="top-bar__inner">
                 <div>
                     <nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
-                      @include('front.layouts.navbar')
+                      @include('front.layouts.include.navbar')
                     </nav>
                 </div>
             </div>

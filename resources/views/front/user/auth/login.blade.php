@@ -1,5 +1,5 @@
 {{-- @extends('front.layouts.master') --}}
-@extends('front.layoutsShop.master3')
+@extends('front.layouts.master4')
 @section('title', 'User login page ')
 @section('css')
  <style>

@@ -1,10 +1,6 @@
 <?php
-
 namespace App\Http\Controllers\Dashboard\Admin;
-
 use App\Http\Controllers\Controller;
-
-
 use App\Models\Setting;
 use App\Models\Image;
 use App\Models\SettingTranslation;
@@ -20,9 +16,13 @@ class SettingController extends Controller
     use UploadT;
     public function setting()
     {
+
         $setting = Setting::orderBy('id','desc')->first();
         $setting_t = SettingTranslation::orderBy('id','desc')->first();
       return view('dashboard.admin.setting',compact('setting','setting_t'));
+
+        return view('dashboard.admin.settings.settings');
+
     }
 
 

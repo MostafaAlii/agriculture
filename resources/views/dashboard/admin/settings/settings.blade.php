@@ -1,9 +1,16 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
-
+@section('pageTitle')
+    {{ trans('Admin/setting.settingPageTitle') }}
+@endsection
 @section('content')
+<<<<<<< HEAD:resources/views/dashboard/admin/settings.blade.php
     @include('dashboard\common\_partials.messages')
+=======
+    @include('dashboard.common._partials.messages')
+>>>>>>> 74ac38a5c6678b746c1c5b48d318c4d81b42aa7d:resources/views/dashboard/admin/settings/settings.blade.php
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
@@ -11,9 +18,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{trans('Admin\setting.dashboard')}}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{trans('Admin\setting.dashboard')}}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">{{trans('Admin\setting.settings')}}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('settings') }}">{{trans('Admin\setting.settings')}}</a>
                             </li>
 
                         </ol>
@@ -207,8 +214,8 @@
             <!-- // Basic form layout section end -->
         </div>
     </div>
-    </div>
-    <!-- END: Content-->
+</div>
+<!-- END: Content-->
 
 @endsection
 @section('js')
@@ -235,5 +242,6 @@
 
         };
     </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection

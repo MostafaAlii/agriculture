@@ -47,12 +47,12 @@ class RedirectIfAuthenticated
             }
          if (auth('web')->check()) {
                 // return redirect(RouteServiceProvider::FRONT);
-                return redirect()->route('front');
+                return redirect()->route('home.farmer');
             }
          if (auth('vendor')->check()) {
                 // return redirect(RouteServiceProvider::FRONT);
                 // return redirect()->route('home.user');
-                return redirect()->route('front');
+                return redirect()->route('home.user');
             }
 
         return $next($request);

@@ -1,5 +1,4 @@
-@extends('front.layouts.master')
-{{-- @extends('front.layoutsShop.master3') --}}
+{{-- @extends('front.layouts.master')
 @section('title', 'home Page ')
 @section('css')
 
@@ -642,5 +641,5 @@
 @endsection
 @push('js')
 
-@endpush
+@endpush --}}
 

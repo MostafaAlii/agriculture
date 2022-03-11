@@ -2,14 +2,14 @@
 <html class="no-js" lang="en">
 
 	<head>
-        @include('front.layouts.headcss')
+        @include('front.layouts.include.headcss')
 	</head>
 
 	<body class="woocommerce-page catalog-page">
 		<div id="app">
 			<!-- start header -->
 
-             @include('front.layoutsShop.header2')
+             @include('front.layouts.include.header2')
 			<!-- end header -->
 
 			<!-- start hero -->
@@ -76,8 +76,8 @@
 						w.lazyLoadOptions = o;
 					}(window, document));
 				</script>
-                {{-- {{ $slot }} --}}
-				@yield('content')
+                {{ $slot }}
+				{{-- @yield('content') --}}
 			</main>
 			<!-- end main -->
 
@@ -195,6 +195,6 @@
 			<!-- end footer -->
 		</div>
 
-        @include('front.layouts.footerjs')
+        @include('front.layouts.include.footerjs')
 	</body>
 </html>

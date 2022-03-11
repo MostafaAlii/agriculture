@@ -8,6 +8,6 @@ class Shop extends Component
 {
     public function render()
     {
-        return view('livewire.front.shop')->layout('front.layoutsShop.master2');
+        return view('livewire.front.shop')->layout('front.layouts.master2');
     }
 }

@@ -1,9 +1,7 @@
-
-
-
 <?php
-
 return [
+    'page_title_in_sidebar' =>  'الاعدادات العامة',
+    'settingPageTitle'=>  'الاعدادات العامة',
     'dashboard' => 'اللوحة الرئيسية',
     'setting_info' => 'معلومات الإعدادات',
     'settings' => 'الإعدادات',
@@ -21,6 +19,7 @@ return [
     'site_icon'=>'رمز الموقع',
     'facebook'=>'فيس بوك',
     'twitter'=>'تويتر',
+<<<<<<< HEAD
     'inestergrame'=>'انستغرام',
     'status'=>'حالة الموقع',
 
@@ -39,4 +38,7 @@ return [
     'message_maintenance.required'=>'رسالة الصيانة مطلوبة',
 
 
+=======
+    'inestergrame'=>'انستغرام'
+>>>>>>> 74ac38a5c6678b746c1c5b48d318c4d81b42aa7d
 ];
