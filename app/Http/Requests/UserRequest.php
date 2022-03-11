@@ -10,11 +10,11 @@ class UserRequest extends FormRequest {
     {
         $rules = [
 
-            'firstname'    =>'required|min:3|max:100',
-            'lastname'     =>'required|min:3|max:100',
-            'phone'        => 'required|min:11|numeric',
+            'firstname'    =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'lastname'     =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'phone'        => 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:users',
             'email'        => 'required|email|unique:users',
-            'password'     => 'required|confirmed',
+            'password'     => 'required|confirmed|min:3|max:10',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -22,6 +22,7 @@ class UserRequest extends FormRequest {
             $user = $this->route()->parameter('user');
 
             $rules['email'] = 'required|email|unique:users,id,' . $user->id;
+            $rules['phone'] = 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:users,id,' . $user->id;
             $rules['password'] = '';
 
         }//end of if
@@ -32,7 +33,9 @@ class UserRequest extends FormRequest {
 
     public function messages() {
         return [
-          
+            'firstname.required' => trans('validation.Admin.required'),
+            'lasttname.required' => trans('validation.Admin.required'),
+            'email.unique' => trans('validation.unique'),
 
         ];
     }

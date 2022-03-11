@@ -42,26 +42,36 @@ class UserController extends Controller {
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             User::create($requestData);
-            session()->flash('add');
+            // session()->flash('add');
             return redirect()->route('users.index');
          } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
          }
     }// end of store
 
-    public function show($id) {
-        //
-    }
+    public function edit(User $user)
+    {
+        return view('dashboard.admin.users.edit', compact('user'));
 
-    public function edit($id) {
-        //
-    }
+    }// end of edit
 
-    public function update(Request $request, $id) {
-        //
-    }
+    public function update(UserRequest $request, User $user)
+    {
+        try{
+            $user->update($request->validated());
 
-    public function destroy($id) {
-        //
-    }
+            // session()->flash('success', __('site.updated_successfully'));
+            return redirect()->route('users.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }// end of update
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('users.index');
+
+    }// end of destroy
 }
