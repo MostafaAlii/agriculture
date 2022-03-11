@@ -42,7 +42,8 @@ class UserController extends Controller {
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             User::create($requestData);
-            session()->flash('Add', __('Admin/site.added_successfully'));
+            // session()->flash('Add', __('Admin/site.added_successfully'));
+            toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('users.index');
          } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -61,6 +62,7 @@ class UserController extends Controller {
             $user->update($request->validated());
 
             session()->flash('Edit', __('Admin/site.updated_successfully'));
+            toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('users.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -70,7 +72,8 @@ class UserController extends Controller {
     public function destroy(User $user)
     {
         $user->delete();
-        session()->flash('Delete', __('Admin/site.deleted_successfully'));
+        // session()->flash('Delete', __('Admin/site.deleted_successfully'));
+        toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('users.index');
 
     }// end of destroy

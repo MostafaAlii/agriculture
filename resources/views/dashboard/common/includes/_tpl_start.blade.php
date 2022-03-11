@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
     <!-- END: Page CSS-->
-
+    @toastr_css
     <!-- BEGIN: Custom CSS-->
     <!-- END: Custom CSS-->
     @yield('css')
