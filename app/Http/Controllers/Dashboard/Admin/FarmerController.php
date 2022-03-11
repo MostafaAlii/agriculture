@@ -43,6 +43,7 @@ class FarmerController extends Controller {
             $requestData['password'] = bcrypt($request->password);
             Farmer::create($requestData);
             // session()->flash('add');
+            session()->flash('Add', __('site.added_successfully'));
             return redirect()->route('farmers.index');
          } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -60,7 +61,7 @@ class FarmerController extends Controller {
         try{
             $farmer->update($request->validated());
 
-            // session()->flash('success', __('site.updated_successfully'));
+            session()->flash('Edit', __('site.updated_successfully'));
             return redirect()->route('farmers.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -70,7 +71,7 @@ class FarmerController extends Controller {
     public function destroy(Farmer $farmer)
     {
         $farmer->delete();
-        session()->flash('success', __('site.deleted_successfully'));
+        session()->flash('Delete', __('site.deleted_successfully'));
         return redirect()->route('farmers.index');
 
     }// end of destroy

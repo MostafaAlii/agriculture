@@ -15,6 +15,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/admin/images/ico/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/fonts/material-icons/material-icons.css') }}">
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     @if(app()->getLocale()=='ar')
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
@@ -61,8 +63,10 @@
         <!-- BEGIN: Page CSS-->
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
     @endif
+    {{--noty--}}
+        <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}">
 
-
+    {{--noty--}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
     <!-- END: Page CSS-->
