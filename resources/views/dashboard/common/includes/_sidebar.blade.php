@@ -33,11 +33,12 @@
                                 </li>
                                 <li>
                                     <a class="menu-item" href="{{ route('farmers.index') }}">
-                                        <i class="material-icons">face</i>
+                                        <i class="material-icons">person_outline</i>
                                         <span data-i18n="{{ __('Admin/site.farmer') }}">{{ __('Admin/site.farmer') }}</span></a>
                                 </li>
                                 <li>
-                                    <a class="menu-item" href="{{ route('users.index') }}"> <i class="icon-user"></i>
+                                    <a class="menu-item" href="{{ route('users.index') }}">
+                                        <i class="material-icons">code</i>
                                         <span data-i18n="{{ __('Admin/site.users') }}">{{ __('Admin/site.users') }}</span></a>
                                 </li>
                             </ul>
@@ -72,7 +73,7 @@
                     </ul>
                 </li>
                 <!-- End Department Dropdown Menu -->
-                {{-- <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title" data-i18n="Templates">Templates</span></a>
+                <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title" data-i18n="Templates">Templates</span></a>
                     <ul class="menu-content">
                         <li><a class="menu-item" href="#"><i class="material-icons"></i><span data-i18n="Vertical">Vertical</span></a>
                             <ul class="menu-content">
@@ -1006,7 +1007,7 @@
                 <li class=" nav-item"><a href="https://pixinvent.ticksy.com/" target="_blank"><i class="material-icons">local_offer</i><span class="menu-title" data-i18n="Raise Support">Raise Support</span></a>
                 </li>
                 <li class=" nav-item"><a href="https://pixinvent.com/modern-admin-clean-bootstrap-4-dashboard-html-template/documentation" target="_blank"><i class="material-icons">format_size</i><span class="menu-title" data-i18n="Documentation">Documentation</span></a>
-                </li> --}}
+                </li>
             </ul>
         </div>
     </div>
