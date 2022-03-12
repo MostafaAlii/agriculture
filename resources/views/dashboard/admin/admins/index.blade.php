@@ -98,6 +98,12 @@
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
         order: [[6, 'desc']],
+        // "language": {
+        //         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Arabic.json"
+        //     }
+            "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
     });
 </script>
 @endsection

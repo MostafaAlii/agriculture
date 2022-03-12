@@ -95,6 +95,9 @@
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
         order: [[5, 'desc']],
+        "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
     });
 </script>
 @endsection

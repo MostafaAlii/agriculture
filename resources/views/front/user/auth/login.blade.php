@@ -195,7 +195,7 @@
                             <div class="d-table mt-8">
                                 <div class="d-table-cell align-middle">
                                     <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                                        role="button">Login in</button>
+                                        role="button">{{ trans('Admin/site.login') }}</button>
                                 </div>
 
                                 {{-- <div class="d-table-cell align-middle">
