@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\farmerInterface;
-use App\Http\Requests\FarmerRequest;
+use App\Http\Requests\Dashboard\FarmerRequest;
 use App\Models\Farmer;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;

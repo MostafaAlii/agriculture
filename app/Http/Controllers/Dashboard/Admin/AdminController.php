@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\AdminInterface;
-use App\Http\Requests\AdminRequest;
-use App\Models\Admin;
+use App\Http\Requests\Dashboard\AdminRequest;
+//use App\Models\Admin;
 use Illuminate\Http\Request;
 class AdminController extends Controller {
 

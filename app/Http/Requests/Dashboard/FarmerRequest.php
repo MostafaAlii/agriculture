@@ -1,7 +1,7 @@
 <?php
-namespace App\Http\Requests;
+namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-class UserRequest extends FormRequest {
+class FarmerRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -10,19 +10,19 @@ class UserRequest extends FormRequest {
     {
         $rules = [
 
-            'firstname'    =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'     =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'phone'        => 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:users',
-            'email'        => 'required|email|unique:users',
+            'firstname'    =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'lastname'     =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
+            'email'        => 'required|email|unique:farmers',
             'password'     => 'required|confirmed|min:3|max:10',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $user = $this->route()->parameter('user');
+            $farmer = $this->route()->parameter('farmer');
 
-            $rules['email'] = 'required|email|unique:users,id,' . $user->id;
-            $rules['phone'] = 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:users,id,' . $user->id;
+            $rules['email'] = 'required|email|unique:farmers,id,' . $farmer->id;
+            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . $farmer->id;
             $rules['password'] = '';
 
         }//end of if
@@ -33,6 +33,7 @@ class UserRequest extends FormRequest {
 
     public function messages() {
         return [
+
             'firstname.required'   => trans('Adminv\alidation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
             'email.required'       => trans('Admin\validation.required'),

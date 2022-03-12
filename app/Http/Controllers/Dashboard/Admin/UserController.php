@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\UserInterface;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\Dashboard\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;

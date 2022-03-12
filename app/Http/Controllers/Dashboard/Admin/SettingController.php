@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Traits\UploadT;
 
-use App\Http\Requests\SettingRequest;
+use App\Http\Requests\Dashboard\SettingRequest;
 use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
