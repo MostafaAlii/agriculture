@@ -25,6 +25,7 @@ class AdminRequest extends FormRequest {
 
             $rules['email'] = 'required|email|unique:admins,id,' . $admin;
             $rules['phone'] = 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:admins,id,' . $admin;
+            $rules['type'] = 'required|in:admin,employee';
             $rules['password'] = '';
 
         }//end of if
@@ -40,6 +41,7 @@ class AdminRequest extends FormRequest {
             'email.required'       => trans('Admin\validation.required'),
             'phone.required'       => trans('Admin\validation.required'),
             'type.required'        => trans('Admin\validation.required'),
+            'type.in'              => trans('Admin\validation.in'),
 
             'firstname.min'        => trans('Admin\validation.min'),
             'lastname.min'         => trans('Admin\validation.min'),

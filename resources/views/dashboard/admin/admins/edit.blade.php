@@ -76,7 +76,7 @@
                                             <div class="col-md-6">
                                                 <fieldset class="form-group">
                                                     <select class="custom-select" id="customSelect" name="type">
-                                                        <option selected>{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
+                                                        <option value="{{ $admin->type }}" selected >{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
                                                         <option value="admin">{{ __('Admin/site.admins') }}</option>
                                                         <option value="employee">{{ __('Admin/site.employee') }}</option>
                                                     </select>
