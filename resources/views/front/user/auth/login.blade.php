@@ -64,14 +64,14 @@
                             @csrf
                             <div class="input-wrp">
                                 <input id="login" class="textfield" type="login" name="login"
-                                    required autofocus placeholder=" email address or phone number" />
+                                    required autofocus placeholder=" {{ trans('Admin/site.loginby') }}" />
                             </div>
                             @error('login')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                             <div class="input-wrp">
                                 <input class="textfield" type="password" name="password" id="password" required
-                                    autocomplete="current-password" placeholder="Password" />
+                                    autocomplete="current-password" placeholder="{{ trans('Admin/site.password') }}" />
                             </div>
                             @error('password')
                             <span class="text-danger">{{$message}}</span>
@@ -161,7 +161,7 @@
                             @csrf
                             <div class="input-wrp">
                                 <input id="login" class="textfield" type="login" name="login"
-                                    required autofocus placeholder=" email address or phone number" />
+                                    required autofocus placeholder=" {{ trans('Admin/site.loginby') }}" />
                                 @error('login')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -169,7 +169,7 @@
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" name="password" id="password" required
-                                    autocomplete="current-password" placeholder="Password" />
+                                    autocomplete="current-password" placeholder="{{ trans('Admin/site.password') }}" />
                                     @error('password')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror

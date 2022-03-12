@@ -21,7 +21,7 @@
                             <form class="form-horizontal"  novalidate method="POST" action="{{ route('admin.login.post') }}" >
                                 @csrf
                                 <fieldset class="form-group position-relative has-icon-left">
-                                    <input  class="form-control" id="login" placeholder="{{ trans('Admin/login.email') }}"
+                                    <input  class="form-control" id="login" placeholder="{{ trans('Admin/site.loginby') }}"
                                     type="login" name="login"  required autofocus >
                                     <div class="form-control-position">
                                         <i class="la la-user"></i>
@@ -31,7 +31,7 @@
                                      @enderror
                                 </fieldset>
                                 <fieldset class="form-group position-relative has-icon-left">
-                                    <input class="form-control" id="user-password" placeholder="{{ trans('Admin/login.password') }}"
+                                    <input class="form-control" id="user-password" placeholder="{{ trans('Admin/site.password') }}"
                                     type="password"
                                     name="password"
                                     required autocomplete="current-password">

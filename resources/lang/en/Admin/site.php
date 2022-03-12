@@ -67,4 +67,5 @@ return [
 
     'select'=>'Open this select menu',
     'employee'=>'Employee',
+    'loginby'=>'Enter phone number or email address',
 ];
