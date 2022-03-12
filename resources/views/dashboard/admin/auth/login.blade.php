@@ -21,12 +21,12 @@
                             <form class="form-horizontal"  novalidate method="POST" action="{{ route('admin.login.post') }}" >
                                 @csrf
                                 <fieldset class="form-group position-relative has-icon-left">
-                                    <input  class="form-control" id="user-name" placeholder="{{ trans('Admin/login.email') }}"
-                                    type="email" name="email" :value="old('email')" required autofocus >
+                                    <input  class="form-control" id="login" placeholder="{{ trans('Admin/login.email') }}"
+                                    type="login" name="login"  required autofocus >
                                     <div class="form-control-position">
                                         <i class="la la-user"></i>
                                     </div>
-                                    @error('email')
+                                    @error('login')
                                         <span class="text-danger">{{$message}}</span>
                                      @enderror
                                 </fieldset>

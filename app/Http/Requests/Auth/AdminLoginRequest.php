@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Requests\Auth;
+
+use App\Models\Admin;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -16,20 +19,31 @@ class AdminLoginRequest extends FormRequest {
         return [
             //'email' => ['required', 'string', 'email'],
             //'password' => ['required', 'string'],
-            'email' => 'required', 'string', 'email', 'max:255', 'unique:admins',
+            // 'email' => 'required', 'string', 'email', 'max:255', 'unique:admins',
             'password' => 'required|string|min:6',
         ];
     }
 
     public function authenticate() {
         $this->ensureIsNotRateLimited();
-        if (auth('admin')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        // if (auth('admin')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        //     RateLimiter::hit($this->throttleKey());
 
+        //     throw ValidationException::withMessages([
+        //         'email' => trans('auth.failed'),
+        //     ]);
+        // }
+        $admin = Admin::where('email',$this->login)
+               ->orwhere('phone',$this->login)
+               ->first();
+        if(!$admin || !Hash::check($this->password,$admin->password))
+        {
+            RateLimiter::hit($this->throttleKey());
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'login' => trans('Admin/auth.failed'),
             ]);
         }
+        auth('admin')->login($admin,$this->boolean('remember'));
         RateLimiter::clear($this->throttleKey());
     }
 

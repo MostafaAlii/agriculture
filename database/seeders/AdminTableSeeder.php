@@ -8,11 +8,12 @@ class AdminTableSeeder extends Seeder {
     public function run() {
         DB::table('admins')->delete();
         $admin = Admin::create([
-            'firstname'          =>  'Mostafa',
+            'firstname'         =>  'Mostafa',
             'lastname'          =>  'Ali',
-            'email'         =>  'admin@app.com',
-            'password'      =>  bcrypt('123123'),
-            'remember_token' => Str::random(10),
+            'email'             =>  'admin@app.com',
+            'phone'             =>  '01015558628',
+            'password'          =>  bcrypt('123123'),
+            'remember_token'    => Str::random(10),
         ]);
     }
 }

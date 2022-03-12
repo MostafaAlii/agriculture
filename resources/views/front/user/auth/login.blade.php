@@ -63,10 +63,10 @@
                         <form class="auth-form" name="form-login" method="POST" action="{{ route('User.login') }}">
                             @csrf
                             <div class="input-wrp">
-                                <input id="email" class="textfield" type="email" name="email" :value="old('email')"
-                                    required autofocus placeholder=" email address *" />
+                                <input id="login" class="textfield" type="login" name="login"
+                                    required autofocus placeholder=" email address or phone number" />
                             </div>
-                            @error('email')
+                            @error('login')
                             <span class="text-danger">{{$message}}</span>
                             @enderror
                             <div class="input-wrp">
@@ -160,13 +160,19 @@
                             action="{{ route('farmer.login.post') }}">
                             @csrf
                             <div class="input-wrp">
-                                <input id="email" class="textfield" type="email" name="email" :value="old('email')"
-                                    required autofocus placeholder=" email address *" />
+                                <input id="login" class="textfield" type="login" name="login"
+                                    required autofocus placeholder=" email address or phone number" />
+                                @error('login')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" name="password" id="password" required
                                     autocomplete="current-password" placeholder="Password" />
+                                    @error('password')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                             </div>
 
                             <div class="row align-items-center justify-content-between">
@@ -200,7 +206,7 @@
 
                     </div>
 
-                    {{-- <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2">
+                    <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2">
                     <h2>Sign <span>Up</span></h2>
 
                     <!-- start form -->
@@ -232,7 +238,7 @@
                         </div>
                     </form>
                     <!-- end form -->
-                </div> --}}
+                </div>
                 </div>
             </div>
         </div>
