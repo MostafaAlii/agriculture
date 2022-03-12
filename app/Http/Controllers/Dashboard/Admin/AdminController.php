@@ -32,21 +32,27 @@ class AdminController extends Controller {
         return $this->Data->store($request);
     }// end of store
 
-    public function edit(Admin $admin)
+    // public function edit(Admin $admin)
+    // {
+    //     dd($admin->id);
+    //     return $this->Data->edit($admin);
+
+    // }// end of edit
+    public function edit($id)
     {
-        dd($admin->id);
-        return $this->Data->edit($admin);
+        // dd($id);
+        return $this->Data->edit($id);
 
     }// end of edit
 
-    public function update(AdminRequest $request, Admin $admin)
+    public function update(AdminRequest $request,$id)
     {
-        return $this->Data->update($request,$admin);
+        return $this->Data->update($request,$id);
     }// end of update
 
-    public function destroy(Admin $admin)
+    public function destroy($id)
     {
-        return $this->Data->destroy($admin);
+        return $this->Data->destroy($id);
 
     }// end of destroy
 }

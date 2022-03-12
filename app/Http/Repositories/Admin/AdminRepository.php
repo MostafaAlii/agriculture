@@ -43,13 +43,16 @@ class AdminRepository implements AdminInterface{
          }
     }
 
-    public function edit($admin) {
+    public function edit($id) {
+        $admin=Admin::findorfail($id);
 
         return view('dashboard.admin.admins.edit', compact('admin'));
     }
 
-    public function update( $request,$admin) {
+    public function update( $request,$id) {
         try{
+            $admin=Admin::findorfail($id);
+              // dd($id);
             $admin->update($request->validated());
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');
@@ -58,7 +61,8 @@ class AdminRepository implements AdminInterface{
         }
     }
 
-    public function destroy($admin) {
+    public function destroy($id) {
+        $admin=Admin::findorfail($id);
         $admin->delete();
         toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('Admins.index');

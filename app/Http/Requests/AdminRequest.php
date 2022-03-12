@@ -19,10 +19,10 @@ class AdminRequest extends FormRequest {
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $admin = $this->route()->parameter('admin');
+            $admin = $this->route()->parameter('id');
 
-            $rules['email'] = 'required|email|unique:admins,id,' . $admin->id;
-            $rules['phone'] = 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:admins,id,' . $admin->id;
+            $rules['email'] = 'required|email|unique:admins,id,' . $admin;
+            $rules['phone'] = 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:admins,id,' . $admin;
             $rules['password'] = '';
 
         }//end of if

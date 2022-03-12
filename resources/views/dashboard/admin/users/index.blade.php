@@ -95,7 +95,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[4, 'desc']],
+        order: [[5, 'desc']],
     });
 </script>
 @endsection
