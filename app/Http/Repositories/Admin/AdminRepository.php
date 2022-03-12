@@ -52,8 +52,9 @@ class AdminRepository implements AdminInterface{
     public function update( $request,$id) {
         try{
             $admin=Admin::findorfail($id);
-              // dd($id);
-            $admin->update($request->validated());
+            $requestData = $request->validated();
+            $requestData['type'] = $request->type;
+            $admin->update($requestData);
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');
         } catch (\Exception $e) {

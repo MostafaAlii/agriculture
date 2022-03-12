@@ -73,6 +73,15 @@
                                                 <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
                                                 <input type="tel" id="eventRegInput5" class="form-control" name="phone"  value="{{ old('phone',$admin->phone) }}" required>
                                             </div>
+                                            <div class="col-md-6">
+                                                <fieldset class="form-group">
+                                                    <select class="custom-select" id="customSelect" name="type">
+                                                        <option selected>{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
+                                                        <option value="admin">{{ __('Admin/site.admins') }}</option>
+                                                        <option value="employee">{{ __('Admin/site.employee') }}</option>
+                                                    </select>
+                                                </fieldset>
+                                             </div>
                                         </div>
 
                                         <div class="form-actions center">
