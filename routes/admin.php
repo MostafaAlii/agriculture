@@ -36,28 +36,10 @@ Route::group(
             /********************************* Start Admins Dashboard Routes ************************************/
             Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
             /********************************* End Admins Pages Routes ************************************/
-
-            /********************************* Start settings Routes ************************************/
-            Route::get('Settings', [SettingController::class, 'index'])->name('settings');
-            Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
-            /********************************* End settings Pages Routes ************************************/
-
             /********************************* Start Admin & Employee Routes ************************************/
             Route::resource('Admins', AdminController::class)->except(['show']);
+            Route::get('/Admins/data', [AdminController::class,'data'])->name('admins.data');
             /********************************* End Admin & Employee Routes ************************************/
-
-
-    /********************************* Start settings Routes ************************************/
-    Route::get('settings', [SettingController::class,'setting'])->name('settings');
-    Route::post('settings/store', [SettingController::class,'save_setting'])->name('settings.store');
-    /********************************* End settings Pages Routes ************************************/
-
-
-
-            /********************************* Department Routes ************************************/
-            Route::resource('Departments', DepartmentController::class)->except(['show']);
-            /********************************* End Department Routes ************************************/
-
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);
             Route::get('/farmers/data', [FarmerController::class,'data'])->name('farmers.data');
@@ -66,6 +48,17 @@ Route::group(
             Route::resource('users', UserController::class)->except(['show']);
             Route::get('/users/data', [UserController::class,'data'])->name('users.data');
             /********************************* end User or vendor Routes ************************************/
+            /********************************* Start settings Routes ************************************/
+            Route::get('Settings', [SettingController::class, 'index'])->name('settings');
+            Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
+            /********************************* End settings Pages Routes ************************************/
+            /********************************* Start settings Routes ************************************/
+            Route::get('settings', [SettingController::class,'setting'])->name('settings');
+            Route::post('settings/store', [SettingController::class,'save_setting'])->name('settings.store');
+            /*************************** End settings Pages Routes ************************************/
+            /********************************* Department Routes ************************************/
+            Route::resource('Departments', DepartmentController::class)->except(['show']);
+            /********************************* End Department Routes ************************************/
 
         });
 

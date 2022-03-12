@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder {
             UserSeeder::class,
             SettingSeeder::class,
         ]);
+        \App\Models\Admin::factory(30)->create();
         \App\Models\User::factory(30)->create();
         \App\Models\Farmer::factory(30)->create();
     }

@@ -9,8 +9,8 @@ class User extends Authenticatable {
     use HasFactory, Notifiable;
     protected $table = "users";
     protected $guarded = [];
-    // public $translatedAttributes = ['fistname','lastname'];
     public $timestamps = true;
+    
     protected $hidden = [
         'password',
         'remember_token',

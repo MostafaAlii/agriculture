@@ -33,12 +33,23 @@ class FarmerRequest extends FormRequest {
 
     public function messages() {
         return [
-            
-            'firstname.required' => trans('Adminv\alidation.Admin.required'),
-            'firstname.min' => __('Admin\validation.Admin.required'),
-            'lasttname.required' => trans('Admin\validation.Admin.required'),
-            'lasttname.min' => trans('Admin\validation.Admin.required'),
-            'email.unique' => trans('Admin\validation.unique'),
+
+            'firstname.required'   => trans('Adminv\alidation.required'),
+            'lastname.required'    => trans('Admin\validation.required'),
+            'email.required'       => trans('Admin\validation.unique'),
+            'phone.required'       => trans('Admin\validation.unique'),
+
+            'firstname.min'        => trans('Admin\validation.min'),
+            'lastname.min'         => trans('Admin\validation.min'),
+            'phone.min'            => trans('Admin\validation.min'),
+
+            'firstname.regex'      => trans('Admin\validation.regex'),
+            'lastname.regex'       => trans('Admin\validation.regex'),
+            'phone.regex'          => trans('Admin\validation.regex'),
+
+            'email.email'          => trans('Admin\validation.email'),
+            'email.unique'         => trans('Admin\validation.unique'),
+            'phone.unique'         => trans('Admin\validation.unique'),
 
         ];
     }
