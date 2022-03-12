@@ -15,6 +15,8 @@ class AdminRequest extends FormRequest {
             'phone'        => 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:admins',
             'email'        => 'required|email|unique:admins',
             'password'     => 'required|confirmed|min:3|max:10',
+            'type'         => 'required|in:admin,employee',
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -35,8 +37,9 @@ class AdminRequest extends FormRequest {
         return [
             'firstname.required'   => trans('Adminv\alidation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
-            'email.required'       => trans('Admin\validation.unique'),
-            'phone.required'       => trans('Admin\validation.unique'),
+            'email.required'       => trans('Admin\validation.required'),
+            'phone.required'       => trans('Admin\validation.required'),
+            'type.required'        => trans('Admin\validation.required'),
 
             'firstname.min'        => trans('Admin\validation.min'),
             'lastname.min'         => trans('Admin\validation.min'),

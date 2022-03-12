@@ -36,8 +36,8 @@ class FarmerRequest extends FormRequest {
 
             'firstname.required'   => trans('Adminv\alidation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
-            'email.required'       => trans('Admin\validation.unique'),
-            'phone.required'       => trans('Admin\validation.unique'),
+            'email.required'       => trans('Admin\validation.required'),
+            'phone.required'       => trans('Admin\validation.required'),
 
             'firstname.min'        => trans('Admin\validation.min'),
             'lastname.min'         => trans('Admin\validation.min'),
