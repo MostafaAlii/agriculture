@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\UserAuthenticatedSessionController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\RegisteredFarmerController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -32,7 +33,10 @@ Route::middleware('guest')->group(function () {
     Route::post('User/login', [UserAuthenticatedSessionController::class, 'store'])->name('User.login');
     // Route::get('/user-register', [RegisteredUserController::class, 'create'])->name('user.register');
     Route::post('/user-register', [RegisteredUserController::class, 'store'])->name('user.register.post');
-   // end route for user login ****************************
+    // end route for user login ****************************
+    // route for register farmer *********************************************************************************
+    Route::post('/farmer-register', [RegisteredFarmerController::class, 'store'])->name('farmer.register.post');
+    // end route for register farmer *********************************************************************************
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');

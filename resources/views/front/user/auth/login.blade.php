@@ -1,6 +1,6 @@
 {{-- @extends('front.layouts.master') --}}
 @extends('front.layouts.master4')
-@section('title', 'User login page ')
+@section('title', 'login page ')
 @section('css')
     <style>
         .panel {
@@ -33,12 +33,12 @@
             <div class="raw">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <h2><label for="">Select your Type</label></h2>
+                        <h2><label for="">{{ trans('Admin/site.yourtype') }}</label></h2>
                         <select name="" id="sectionselect" class="custom-btn custom-btn--medium custom-btn--style-2">
-                            <option class="custom-btn custom-btn--style-2" value="" selected disabled>--- Select Type---
+                            <option class="custom-btn custom-btn--style-2" value="" selected disabled>--- {{ trans('Admin/site.select') }}---
                             </option>
-                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="user">Vendor</option>
-                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="farmer">Farmer</option>
+                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="user">{{ trans('Admin/site.user') }}</option>
+                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="farmer">{{ trans('Admin/site.farmer') }}</option>
                         </select>
                     </div>
                 </div>
@@ -48,8 +48,8 @@
             <div class="panel" id="user">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-                        <h2>Sign <span>in as </span>vendor</h2>
-                        {{-- @include('dashboard.common._partials.messages') --}}
+                        <h2>{{ trans('Admin/site.signvendor') }}</h2>
+                        @include('dashboard.common._partials.messages')
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -59,7 +59,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <!-- start form -->
+                        <!-- start user login form -->
                         <form class="auth-form" name="form-login" method="POST" action="{{ route('User.login') }}">
                             @csrf
                             <div class="input-wrp">
@@ -93,7 +93,7 @@
                             <div class="d-table mt-8">
                                 <div class="d-table-cell align-middle">
                                     <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                                        role="button">Login in</button>
+                                        role="button">{{ trans('Admin/site.login') }}</button>
                                 </div>
 
                                 {{-- <div class="d-table-cell align-middle">
@@ -101,42 +101,45 @@
                             </div> --}}
                             </div>
                         </form>
-                        <!-- end form -->
+                        <!-- end user login form -->
 
                         <div class="spacer py-6 d-md-none"></div>
 
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2">
-                        <h2>Become <span>A Vendor</span></h2>
+                        <h2>{{ trans('Admin/site.newvendor') }}</h2>
                         {{-- @include('dashboard.common._partials.messages') --}}
                         <!-- start form -->
                         <form class="auth-form" action="{{ route('user.register.post') }}" method="post">
                             @csrf
                             <div class="input-wrp">
-                                <input class="textfield" type="text" placeholder="First name *" name="firstname" />
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" />
                             </div>
                             <div class="input-wrp">
-                                <input class="textfield" type="text" placeholder="Last name *" name="lastname" />
-                            </div>
-
-                            <div class="input-wrp">
-                                <input class="textfield" type="email" placeholder="Email *" name="email" />
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" />
                             </div>
 
                             <div class="input-wrp">
-                                <input class="textfield" type="password" placeholder="Password" name="password" />
+                                <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" />
+                            </div>
+                            <div class="input-wrp">
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" />
                             </div>
 
                             <div class="input-wrp">
-                                <input class="textfield" type="password" placeholder="Confirm password"
+                                <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" />
+                            </div>
+
+                            <div class="input-wrp">
+                                <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password_confirmation') }}"
                                     name="password_confirmation" />
                             </div>
 
                             <div class="d-table mt-8">
                                 <div class="d-table-cell align-middle">
                                     <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                                        role="button">Register Now</button>
+                                        role="button">{{ trans('Admin/site.register') }}</button>
                                 </div>
 
                                 {{-- <div class="d-table-cell align-middle">
@@ -153,7 +156,7 @@
             <div class="panel" id="farmer">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-                        <h2>Sign <span>in as farmer</span></h2>
+                        <h2>{{ trans('Admin/site.signfarmer') }}</h2>
 
                         <!-- start form -->
                         <form class="auth-form" name="form-login" method="POST"
@@ -207,34 +210,42 @@
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2">
-                    <h2>Sign <span>Up</span></h2>
+                    <h2>{{ trans('Admin/site.newfarmer') }}</h2>
 
                     <!-- start form -->
-                    <form class="auth-form" action="#">
-                        <div class="input-wrp">
-                            <input class="textfield" type="text" placeholder="Full name *" />
-                        </div>
+                    <form class="auth-form" action="{{ route('farmer.register.post') }}" method="post">
+                        @csrf
+                            <div class="input-wrp">
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" />
+                            </div>
+                            <div class="input-wrp">
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" />
+                            </div>
 
-                        <div class="input-wrp">
-                            <input class="textfield" type="text" placeholder="Email *" />
-                        </div>
+                            <div class="input-wrp">
+                                <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" />
+                            </div>
+                            <div class="input-wrp">
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" />
+                            </div>
 
-                        <div class="input-wrp">
-                            <input class="textfield" type="text" placeholder="Password" />
-                        </div>
+                            <div class="input-wrp">
+                                <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" />
+                            </div>
 
-                        <div class="input-wrp">
-                            <input class="textfield" type="text" placeholder="Confirm password" />
-                        </div>
+                            <div class="input-wrp">
+                                <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password_confirmation') }}"
+                                    name="password_confirmation" />
+                            </div>
 
                         <div class="d-table mt-8">
                             <div class="d-table-cell align-middle">
-                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">Sign up</button>
+                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">{{ trans('Admin/site.register') }}</button>
                             </div>
 
-                            <div class="d-table-cell align-middle">
+                            {{-- <div class="d-table-cell align-middle">
                                 <a class="link-to" href="#">Sign in</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </form>
                     <!-- end form -->
@@ -284,60 +295,4 @@
         });
     </script>
 @endpush
-{{-- <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('farmer.login.post') }}">
-
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout> --}}
