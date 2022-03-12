@@ -23,7 +23,7 @@ class AdminRequest extends FormRequest {
 
             $admin = $this->route()->parameter('id');
 
-            $rules['email'] = 'required|email|unique:farmers,id,' . $admin->id;
+            $rules['email'] = 'required|email|unique:admins,id,' . $admin->id;
             $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins,id,' . $admin->id;
             $rules['type'] = 'required|in:admin,employee';
             $rules['password'] = '';
