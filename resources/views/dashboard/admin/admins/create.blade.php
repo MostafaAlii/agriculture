@@ -95,7 +95,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <fieldset class="form-group">
-                                                        <select class="custom-select" id="customSelect">
+                                                        <select class="custom-select" id="customSelect" name="type">
                                                             <option selected>Open this select menu</option>
                                                             <option value="admin">Admin</option>
                                                             <option value="employee">Employee</option>

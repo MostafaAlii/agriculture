@@ -34,6 +34,7 @@ class AdminRepository implements AdminInterface{
         try{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
+            $requestData['type'] = $request->type;
             Admin::create($requestData);
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Admins.index');
