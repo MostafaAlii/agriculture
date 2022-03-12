@@ -68,8 +68,6 @@
                                                         <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastnamear') }}" name="lastname" value="{{ old('lastname') }}" required>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
@@ -80,6 +78,9 @@
                                                         <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone') }}" required>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row">
+
                                                 <div class="col-md-6">
                                                     {{--password--}}
                                                     <div class="form-group">
@@ -92,6 +93,15 @@
                                                         <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <fieldset class="form-group">
+                                                        <select class="custom-select" id="customSelect">
+                                                            <option selected>Open this select menu</option>
+                                                            <option value="admin">Admin</option>
+                                                            <option value="employee">Employee</option>
+                                                        </select>
+                                                    </fieldset>
+                                                 </div>
                                             </div>
 
                                         <div class="form-actions center">

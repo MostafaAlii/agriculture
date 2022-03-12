@@ -38,7 +38,7 @@
             <!-- Basic form layout section start -->
             <section id="basic-form-layouts">
                 <div class="row justify-content-md-center">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newfarmer') }}</h4>
@@ -58,33 +58,45 @@
                                         @csrf
                                         @method('post')
                                         <div class="form-body">
-                                            <div class="form-group">
-                                                <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="eventRegInput1">{{ __('Admin/site.lastname') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput1">{{ __('Admin/site.lastname') }}<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
-                                                <input type="email" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/site.email') }}" name="email" value="{{ old('email') }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
-                                                <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone') }}" required>
-                                            </div>
-                                             {{--password--}}
-                                            <div class="form-group">
-                                                <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
-                                                <input type="password" name="password" class="form-control" value="{{ old('password') }}" required>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
+                                                        <input type="email" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/site.email') }}" name="email" value="{{ old('email') }}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
+                                                        <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone') }}" required>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                      {{--password--}}
+                                                      <div class="form-group">
+                                                        <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="password" class="form-control" value="{{ old('password') }}" required>
+                                                    </div>
+
+                                                    {{--password_confirmation--}}
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            {{--password_confirmation--}}
-                                            <div class="form-group">
-                                                <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
-                                                <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
-                                            </div>
                                         </div>
 
                                         <div class="form-actions center">

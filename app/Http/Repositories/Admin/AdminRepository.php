@@ -12,11 +12,15 @@ class AdminRepository implements AdminInterface{
         return view('dashboard.admin.admins.index');
     }
     public function data() {
-        $admins = Admin::limit(1)->get();
+        $admins = Admin::select();
         // dd($admins->id);
         return DataTables::of($admins)
             ->editColumn('created_at', function (Admin $admin) {
                 return $admin->created_at->format('Y-m-d');
+            })
+            ->addColumn('type', function (Admin $admin) {
+                return view('dashboard.admin.admins.data_table.types', compact('admin'));
+                // return "$admin->type";
             })
             ->addColumn('actions', 'dashboard.admin.admins.data_table.actions')
             ->rawColumns([ 'actions'])
