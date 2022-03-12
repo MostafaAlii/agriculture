@@ -34,7 +34,7 @@ class FarmerRequest extends FormRequest {
     public function messages() {
         return [
 
-            'firstname.required'   => trans('Adminv\alidation.required'),
+            'firstname.required'   => trans('Admin\validation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
             'email.required'       => trans('Admin\validation.required'),
             'phone.required'       => trans('Admin\validation.required'),

@@ -23,8 +23,8 @@ class AdminRequest extends FormRequest {
 
             $admin = $this->route()->parameter('id');
 
-            $rules['email'] = 'required|email|unique:admins,id,' . $admin->id;
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins,id,' . $admin->id;
+            $rules['email'] = 'required|email|unique:admins,id,' . $admin;
+            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins,id,' . $admin;
             $rules['type'] = 'required|in:admin,employee';
             $rules['password'] = '';
 
@@ -36,7 +36,7 @@ class AdminRequest extends FormRequest {
 
     public function messages() {
         return [
-            'firstname.required'   => trans('Adminv\validation.required'),
+            'firstname.required'   => trans('Admin\validation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
             'email.required'       => trans('Admin\validation.required'),
             'phone.required'       => trans('Admin\validation.required'),
