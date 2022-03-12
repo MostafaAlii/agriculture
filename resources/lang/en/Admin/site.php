@@ -33,8 +33,8 @@ return [
     'show_all' => 'Show all ...',
 
     'save'=>'Save',
-    'firstnamear' => 'First Name by arabic',
-    'lastnamear' => 'Last Name by arabic',
+    'firstname' => 'First Name by arabic',
+    'lastname' => 'Last Name by arabic',
     'firstnameen' => 'First Name by english',
     'lastnameen' => 'Last Name by english',
     'email' => 'E-mail',
@@ -57,5 +57,14 @@ return [
     'newuser'=>'New User',
     'newfarmer'=>'New Farmer',
     'farmer'=>'Farmers',
-    'warning' => 'Are you sure to delete ?'
+    'warning' => 'Are you sure to delete ?',
+
+    'phone'=>'Phone',
+    'address'=>'Address',
+    'admins' => 'Admin',
+    'type'=>'Type',
+    'newadmin'=>'New Admin',
+
+    'select'=>'Open this select menu',
+    'employee'=>'Employee',
 ];

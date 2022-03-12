@@ -16,7 +16,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Admins.index') }}">{{ __('Admin/site.users') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Admins.index') }}">{{ __('Admin/site.admins') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
@@ -60,12 +60,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/site.firstnamear') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.firstnamear') }}" name="firstname" value="{{ old('firstname') }}" required>
+                                                        <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/site.lastnamear') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastnamear') }}" name="lastname" value="{{ old('lastname') }}" required>
+                                                        <label for="eventRegInput1">{{ __('Admin/site.lastname') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -96,9 +96,9 @@
                                                 <div class="col-md-6">
                                                     <fieldset class="form-group">
                                                         <select class="custom-select" id="customSelect" name="type">
-                                                            <option selected>Open this select menu</option>
-                                                            <option value="admin">Admin</option>
-                                                            <option value="employee">Employee</option>
+                                                            <option selected>{{ __('Admin/site.select') }}</option>
+                                                            <option value="admin">{{ __('Admin/site.admins') }}</option>
+                                                            <option value="employee">{{ __('Admin/site.employee') }}</option>
                                                         </select>
                                                     </fieldset>
                                                  </div>
@@ -106,7 +106,7 @@
 
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Save
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
                                             </button>
                                         </div>
                                     </form>
