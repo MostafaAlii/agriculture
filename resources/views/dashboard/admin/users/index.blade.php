@@ -49,6 +49,7 @@
                                         <table class="table table-striped table-bordered zero-configuration" id="users-table">
                                             <thead>
                                                 <tr>
+                                                    <th>{{ __('Admin/site.image') }}</th>
                                                     <th>{{ __('Admin/site.firstname') }}</th>
                                                     <th>{{ __('Admin/site.lastname') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
@@ -83,10 +84,14 @@
         // dom: "tiplr",
         serverSide: true,
         processing: true,
+        "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
         ajax: {
             url: '{{ route('users.data') }}',
         },
         columns: [
+            {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'firstname', name: 'firstname'},
             {data: 'lastname', name: 'lastname'},
             {data: 'email', name: 'email'},
@@ -95,10 +100,8 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[5, 'desc']],
-        "language": {
-                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },
+        order: [[6, 'desc']],
+
     });
 </script>
 @endsection

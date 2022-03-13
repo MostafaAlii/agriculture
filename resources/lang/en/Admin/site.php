@@ -75,5 +75,6 @@ return [
     'newfarmer'=>'New Farmer',
     'newvendor'=>'New Vendor',
     'yourtype'=>'Select Your Type',
-    
+    'image'=>'Image',
+
 ];

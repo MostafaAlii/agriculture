@@ -26,6 +26,19 @@
     @toastr_js
     @toastr_render
     {{-- <script src="{{ asset('assets/admin/noty/noty.min.js') }}"></script> --}}
+    {{-- image preview --}}
+    <script>
+        $(".img").change(function(){
+            if(this.files && this.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $(".img-preview").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
+    {{-- end image preview --}}
     @yield('js')
 
 </body>

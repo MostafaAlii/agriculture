@@ -3,10 +3,12 @@ namespace  App\Http\Repositories\Admin;
 use App\Models\User;
 use App\Http\Interfaces\Admin\UserInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use App\Traits\UploadT;
 
 class UserRepository implements UserInterface{
-
+    use UploadT;
     public function index() {
         return view('dashboard.admin.users.index');
     }
@@ -17,6 +19,10 @@ class UserRepository implements UserInterface{
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at->format('Y-m-d');
             })
+            ->addColumn('image', 'dashboard.admin.users.data_table.actions')
+            ->addColumn('image', function (User $user) {
+                return view('dashboard.admin.users.data_table.image', compact('user'));
+            })
             ->addColumn('actions', 'dashboard.admin.users.data_table.actions')
             ->rawColumns([ 'actions'])
             ->toJson();
@@ -26,14 +32,18 @@ class UserRepository implements UserInterface{
         return view('dashboard.admin.users.create');
     }
     public function store($request) {
+        DB::beginTransaction();
         try{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             User::create($requestData);
-            // session()->flash('Add', __('Admin/site.added_successfully'));
+            $user = User::latest()->first();
+            $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
+            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('users.index');
          } catch (\Exception $e) {
+             DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
          }
     }

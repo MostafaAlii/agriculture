@@ -69,5 +69,6 @@ return [
     'signfarmer'=>'تسجيل البائع او الفلاح',
     'newfarmer'=>'بائع او فلاح جديد',
     'newvendor'=>'تاجر جديد',
-    'yourtype'=>'اختار النوع'
+    'yourtype'=>'اختار النوع',
+    'image'=>'صوره'
 ];
