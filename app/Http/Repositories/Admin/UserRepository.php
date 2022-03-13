@@ -58,32 +58,23 @@ class UserRepository implements UserInterface{
 
     public function update( $request,$user) {
         try{
-            // if($request->image){
-                // if($request->image != 'default.jpg'){
-                    // Storage::disk('upload_image')->delete('/users/' . $user->image->filename);
-                // }
-                // $image=Image::where('imageable_id',$user->id)->first();
-                // $image->save(public_path('upload_image' . $request->image ));
-                // Image::make($request->image)->resize(300, null, function ($constraint) {
-                //     $constraint->aspectRatio();
-                // })->save(public_path('uploads/user-img/' . $request->image->hashName() ));
-                // $input['image'] = $request->image->hashName();
-            // }
+            DB::beginTransaction();
             $user->update($request->validated());
+            if($request->image){
+                $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+            }
+            $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
+            DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('users.index');
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     public function destroy($user) {
         try{
-            // Storage::disk('upload_image')->delete('/Dashboard/img' . $user->image->filename);
-            // Image::where('imageable_id',$user->id)->delete();
-            // if($user->image != 'avatar.jpg'){
-                // Storage::disk('upload_image')->delete('/users/' . $user->image->filename);
-        //    }
             $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
             $user->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
