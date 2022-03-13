@@ -9,7 +9,7 @@ class CreateAdminsTable extends Migration {
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email')->unique();
-            $table->string('phone')->nullable();
+            $table->string('phone')->unique();
             $table->string('address')->nullable();
             $table->enum('type',['admin','employee'])->default('admin');
             $table->timestamp('email_verified_at')->nullable();
