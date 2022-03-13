@@ -10,6 +10,12 @@ class Admin extends Authenticatable {
     protected $guarded = [];
     public $timestamps = true;
 
+        // rel
+        public function image()
+        {
+            return $this->morphOne(Image::class, 'imageable');
+        }
+
     protected $hidden = [
         'password',
         'remember_token',

@@ -53,27 +53,9 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('farmers.update', $farmer->id) }}">
+                                    <form class="form" method="post" action="{{ route('farmers.update', $farmer->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
-                                        {{-- <div class="form-body">
-                                            <div class="form-group">
-                                                <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control"  name="firstname" value="{{ old('firstname',$farmer->firstname) }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput1">{{ __('Admin/site.lastname') }}<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control"  name="lastname" value="{{ old('lastname',$farmer->lastname) }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
-                                                <input type="email" id="eventRegInput4" class="form-control" name="email" value="{{ old('email',$farmer->email) }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
-                                                <input type="tel" id="eventRegInput5" class="form-control" name="phone"  value="{{ old('phone',$farmer->phone) }}" required>
-                                            </div>
-                                        </div> --}}
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -98,6 +80,17 @@
                                                         <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone',$farmer->phone) }}" required>
                                                     </div>
 
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
+                                                        <input class="form-control img" name="image"  type="file" accept="image/*">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <img src="{{ asset('Dashboard/img/farmers/'. $farmer->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
                                                 </div>
                                             </div>
 
