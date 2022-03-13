@@ -27,7 +27,7 @@
                             </div>
                             <div class="modal-body">
                                 <h5>{{ __('Admin/site.warning') }}</h5>
-
+                            {{-- <input type="text" name="id" value="{{ $id }}"> --}}
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
