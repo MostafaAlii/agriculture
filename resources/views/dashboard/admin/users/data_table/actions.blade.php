@@ -30,8 +30,8 @@
                             {{-- <input type="text" name="id" value="{{ $id }}"> --}}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-outline-primary">Save changes</button>
+                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
+                                <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.save') }}</button>
                             </div>
                         </div>
                     </div>

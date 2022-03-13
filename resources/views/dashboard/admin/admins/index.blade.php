@@ -49,6 +49,7 @@
                                         <table class="table table-striped table-bordered zero-configuration" id="admins-table">
                                             <thead>
                                                 <tr>
+                                                    <th>{{ __('Admin/site.image') }}</th>
                                                     <th>{{ __('Admin/site.firstname') }}</th>
                                                     <th>{{ __('Admin/site.lastname') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
@@ -84,10 +85,14 @@
         // dom: "tiplr",
         serverSide: true,
         processing: true,
+        "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
         ajax: {
             url: '{{ route('admins.data') }}',
         },
         columns: [
+            {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'firstname', name: 'firstname'},
             {data: 'lastname', name: 'lastname'},
             {data: 'email', name: 'email'},
@@ -97,13 +102,11 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[6, 'desc']],
+        order: [[7, 'desc']],
         // "language": {
         //         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Arabic.json"
         //     }
-            "language": {
-                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },
+
     });
 </script>
 @endsection

@@ -5,9 +5,11 @@ use App\Http\Interfaces\Admin\AdminInterface;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Traits\UploadT;
+use Illuminate\Support\Facades\DB;
 
 class AdminRepository implements AdminInterface{
-
+    use UploadT;
     public function index() {
         return view('dashboard.admin.admins.index');
     }
@@ -22,6 +24,9 @@ class AdminRepository implements AdminInterface{
                 return view('dashboard.admin.admins.data_table.types', compact('admin'));
                 // return "$admin->type";
             })
+            ->addColumn('image', function (Admin $admin) {
+                return view('dashboard.admin.admins.data_table.image', compact('admin'));
+            })
             ->addColumn('actions', 'dashboard.admin.admins.data_table.actions')
             ->rawColumns([ 'actions'])
             ->toJson();
@@ -31,14 +36,19 @@ class AdminRepository implements AdminInterface{
         return view('dashboard.admin.admins.create');
     }
     public function store($request) {
+        DB::beginTransaction();
         try{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             $requestData['type'] = $request->type;
             Admin::create($requestData);
+            $admin = Admin::latest()->first();
+            $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
+            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Admins.index');
          } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
          }
     }
@@ -51,21 +61,35 @@ class AdminRepository implements AdminInterface{
 
     public function update( $request,$id) {
         try{
+            DB::beginTransaction();
             $admin=Admin::findorfail($id);
             $requestData = $request->validated();
             $requestData['type'] = $request->type;
             $admin->update($requestData);
+
+            if($request->image){
+                $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
+            }
+            $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
+
+            DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     public function destroy($id) {
+        try{
         $admin=Admin::findorfail($id);
+        $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
         $admin->delete();
         toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('Admins.index');
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+     }
     }
 }
