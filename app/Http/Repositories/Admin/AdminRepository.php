@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class AdminRepository implements AdminInterface{
@@ -54,7 +55,8 @@ class AdminRepository implements AdminInterface{
     }
 
     public function edit($id) {
-        $admin=Admin::findorfail($id);
+        $adminID = Crypt::decrypt($id);
+        $admin=Admin::findorfail($adminID);
 
         return view('dashboard.admin.admins.edit', compact('admin'));
     }
@@ -62,7 +64,8 @@ class AdminRepository implements AdminInterface{
     public function update( $request,$id) {
         try{
             DB::beginTransaction();
-            $admin=Admin::findorfail($id);
+            $adminID = Crypt::decrypt($id);
+            $admin=Admin::findorfail($adminID);
             $requestData = $request->validated();
             $requestData['type'] = $request->type;
             $admin->update($requestData);
@@ -83,13 +86,14 @@ class AdminRepository implements AdminInterface{
 
     public function destroy($id) {
         try{
-        $admin=Admin::findorfail($id);
-        $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
-        $admin->delete();
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('Admins.index');
-    } catch (\Exception $e) {
-        return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-     }
+            $adminID = Crypt::decrypt($id);
+            $admin=Admin::findorfail($adminID);
+            $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
+            $admin->delete();
+            toastr()->error(__('Admin/site.deleted_successfully'));
+            return redirect()->route('Admins.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

@@ -1,12 +1,12 @@
 
-    <a href="{{ route('Admins.edit', $id) }}" class="btn btn-success btn-sm">
+    <a href="{{ route('Admins.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/site.edit') }}
     </a>
 
 
 
-    <form action="{{ route('Admins.destroy', $id) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+    <form action="{{ route('Admins.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
         @method('delete')
         <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#flipInY">
