@@ -19,7 +19,7 @@ class UserRepository implements UserInterface{
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at->format('Y-m-d');
             })
-            ->addColumn('image', 'dashboard.admin.users.data_table.actions')
+            // ->addColumn('image', 'dashboard.admin.users.data_table.actions')
             ->addColumn('image', function (User $user) {
                 return view('dashboard.admin.users.data_table.image', compact('user'));
             })
