@@ -57,6 +57,7 @@ class AdminRepository implements AdminInterface{
 
     public function edit($id) {
         $adminID = Crypt::decrypt($id);
+        // dd($adminID);
         $admin=Admin::findorfail($adminID);
 
         return view('dashboard.admin.admins.edit', compact('admin'));
@@ -88,6 +89,7 @@ class AdminRepository implements AdminInterface{
     public function destroy($id) {
         try{
             $adminID = Crypt::decrypt($id);
+            //  dd($adminID);
             $admin=Admin::findorfail($adminID);
             $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
             $admin->delete();
