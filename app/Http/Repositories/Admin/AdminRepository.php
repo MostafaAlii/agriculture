@@ -15,7 +15,7 @@ class AdminRepository implements AdminInterface{
         return view('dashboard.admin.admins.index');
     }
     public function data() {
-        $admins = Admin::get()->except(auth()->user()->id);
+        $admins = Admin::orderBy('id','DESC')->get()->except(auth()->user()->id);
         // dd($admins->id);
         return DataTables::of($admins)
             ->addColumn('record_select', 'dashboard.admin.admins.data_table.record_select')
