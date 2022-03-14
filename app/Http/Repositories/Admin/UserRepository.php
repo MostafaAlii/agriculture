@@ -92,12 +92,17 @@ class UserRepository implements UserInterface{
         //     $this->delete($user);
         // }//end of for each
         // dd($request->delete_select_id);
-        $delete_select_id = explode(",",$request->delete_select_id);
-        foreach($delete_select_id as $users_ids){
-           $user = User::findorfail($users_ids);
-           if($user->image){
-            $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
-           }
+        if($request->delete_select_id){
+                $delete_select_id = explode(",",$request->delete_select_id);
+                foreach($delete_select_id as $users_ids){
+                $user = User::findorfail($users_ids);
+                if($user->image){
+                    $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+                }
+                }
+        }else{
+            toastr()->error(__('Admin/site.no_data_found'));
+            return redirect()->route('users.index');
         }
         User::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));

@@ -81,13 +81,18 @@ class FarmerRepository implements FarmerInterface{
 
     public function bulkDelete($request)
     {
-        // dd($request->delete_select_id);
-        $delete_select_id = explode(",",$request->delete_select_id);
-        foreach($delete_select_id as $farmers_ids){
-           $farmer = Farmer::findorfail($farmers_ids);
-           if($farmer->image){
-            $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
-           }
+        if($request->delete_select_id){
+            // dd($request->delete_select_id);
+            $delete_select_id = explode(",",$request->delete_select_id);
+            foreach($delete_select_id as $farmers_ids){
+            $farmer = Farmer::findorfail($farmers_ids);
+            if($farmer->image){
+                $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+            }
+            }
+        }else{
+            toastr()->error(__('Admin/site.no_data_found'));
+            return redirect()->route('farmers.index');
         }
         Farmer::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));

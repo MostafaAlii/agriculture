@@ -47,7 +47,7 @@
                                     <a href="{{ route('Admins.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/site.create') }}</a>
                                     <button type="button" class="btn btn-warning mb-3"
                                         id="btn_delete_all" data-toggle="modal"
-                                        data-target="#bulkdelete">
+                                        data-target="#bulkdelete" >
                                         <i class="fa fa-trash"></i>
                                         {{ __('Admin/site.bulkdelete') }}
                                     </button>

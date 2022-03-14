@@ -100,12 +100,18 @@ class AdminRepository implements AdminInterface{
     public function bulkDelete($request)
     {
         // dd($request->delete_select_id);
-        $delete_select_id = explode(",",$request->delete_select_id);
-        foreach($delete_select_id as $admins_ids){
-           $admin = Admin::findorfail($admins_ids);
-           if($admin->image){
-            $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
-           }
+        if($request->delete_select_id){
+
+            $delete_select_id = explode(",",$request->delete_select_id);
+            foreach($delete_select_id as $admins_ids){
+               $admin = Admin::findorfail($admins_ids);
+               if($admin->image){
+                $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
+               }
+            }
+        }else{
+            toastr()->error(__('Admin/site.no_data_found'));
+            return redirect()->route('Admins.index');
         }
         Admin::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
