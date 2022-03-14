@@ -97,8 +97,7 @@ class AdminRepository implements AdminInterface{
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function bulkDelete($request)
-    {
+    public function bulkDelete($request) {
         // dd($request->delete_select_id);
         if($request->delete_select_id){
 

@@ -33,31 +33,19 @@ class UserController extends Controller {
         return $this->Data->store($request);
     }// end of store
 
-    public function edit(User $user)
-    {
-        return $this->Data->edit($user);
+    public function edit($id) {
+        return $this->Data->edit($id);
+    }
 
-    }// end of edit
-
-    public function update(UserRequest $request, User $user)
-    {
-        return $this->Data->update($request,$user);
+    public function update(UserRequest $request,$id) {
+        return $this->Data->update($request,$id);
     }// end of update
 
-    public function destroy(User $user)
-    {
-        return $this->Data->destroy($user);
-
+    public function destroy($id) {
+        return $this->Data->destroy($id);
     }// end of destroy
-    public function bulkDelete(Request $request)
-    {
+
+    public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
-        //  return "hello";
-
     }// end of destroy
-    // public function delete(User $user)
-    // {
-    //     return $this->Data->delete($user);
-
-    // }// end of destroy
 }

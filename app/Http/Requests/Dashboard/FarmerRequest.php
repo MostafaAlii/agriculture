@@ -19,10 +19,10 @@ class FarmerRequest extends FormRequest {
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $farmer = $this->route()->parameter('farmer');
+            $farmer = $this->route()->parameter('id');
 
-            $rules['email'] = 'required|email|unique:farmers,id,' . $farmer->id;
-            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . $farmer->id;
+            $rules['email'] = 'required|email|unique:farmers,id,' . $farmer;
+            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . $farmer;
             $rules['password'] = '';
 
         }//end of if

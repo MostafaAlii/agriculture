@@ -17,41 +17,31 @@ class FarmerController extends Controller {
         return $this->Data->index();
     }
 
-    public function data()
-    {
+    public function data() {
         return $this->Data->data();
-
     }// end of data
 
     public function create() {
         return $this->Data->create();
     }
 
-    public function store(FarmerRequest $request)
-    {
+    public function store(FarmerRequest $request) {
         return $this->Data->store($request);
     }// end of store
 
-    public function edit(Farmer $farmer)
-    {
-        return $this->Data->edit($farmer);
-
+    public function edit($id) {
+        return $this->Data->edit($id);
     }// end of edit
 
-    public function update(FarmerRequest $request, Farmer $farmer)
-    {
-        return $this->Data->update($request,$farmer);
+    public function update(FarmerRequest $request,$id) {
+        return $this->Data->update($request,$id);
     }// end of update
 
-    public function destroy(Farmer $farmer)
-    {
-
-        return $this->Data->destroy($farmer);
+    public function destroy($id) {
+        return $this->Data->destroy($id);
     }// end of destroy
-    public function bulkDelete(Request $request)
-    {
-        return $this->Data->bulkDelete($request);
-        //  return "hello";
 
+    public function bulkDelete(Request $request) {
+        return $this->Data->bulkDelete($request);
     }// end of destroy
 }

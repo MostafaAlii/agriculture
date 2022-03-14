@@ -63,7 +63,6 @@
                                                     <th>{{ __('Admin/site.lastname') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phone') }}</th>
-                                                    <th>{{ __('Admin/site.address') }}</th>
                                                     <th>{{ __('Admin/site.type') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>

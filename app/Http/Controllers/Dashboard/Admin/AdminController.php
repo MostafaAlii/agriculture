@@ -27,32 +27,24 @@ class AdminController extends Controller {
         return $this->Data->create();
     }
 
-    public function store(AdminRequest $request)
-    {
+    public function store(AdminRequest $request) {
         return $this->Data->store($request);
     }// end of store
 
-    public function edit($id)
-    {
+    public function edit($id) {
         // dd($id);
         return $this->Data->edit($id);
-
     }// end of edit
 
-    public function update(AdminRequest $request,$id)
-    {
+    public function update(AdminRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 
-    public function destroy($id)
-    {
+    public function destroy($id) {
         return $this->Data->destroy($id);
-
     }// end of destroy
-    public function bulkDelete(Request $request)
-    {
+    
+    public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
-        //  return "hello";
-
     }// end of destroy
 }

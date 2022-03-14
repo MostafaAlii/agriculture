@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
 class UserRepository implements UserInterface{
@@ -14,9 +15,9 @@ class UserRepository implements UserInterface{
     public function index() {
         return view('dashboard.admin.users.index');
     }
+
     public function data() {
         $users = User::select();
-
         return DataTables::of($users)
             ->addColumn('record_select', 'dashboard.admin.users.data_table.record_select')
             ->editColumn('created_at', function (User $user) {
@@ -33,6 +34,7 @@ class UserRepository implements UserInterface{
     public function create() {
         return view('dashboard.admin.users.create');
     }
+
     public function store($request) {
         DB::beginTransaction();
         try{
@@ -50,14 +52,19 @@ class UserRepository implements UserInterface{
          }
     }
 
-    public function edit($user) {
+    public function edit($id) {
+        $userID = Crypt::decrypt($id);
+        $user=User::findorfail($userID);
         return view('dashboard.admin.users.edit', compact('user'));
     }
 
-    public function update( $request,$user) {
+    public function update($request,$id) {
         try{
             DB::beginTransaction();
-            $user->update($request->validated());
+            $userID = Crypt::decrypt($id);
+            $user=User::findorfail($userID);
+            $requestData = $request->validated();
+            $user->update($requestData);
             if($request->image){
                 $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
             }
@@ -71,8 +78,10 @@ class UserRepository implements UserInterface{
         }
     }
 
-    public function destroy($user) {
+    public function destroy($id) {
         try{
+            $userID = Crypt::decrypt($id);
+            $user=User::findorfail($userID);
             $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
             $user->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
