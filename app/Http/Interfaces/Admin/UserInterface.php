@@ -8,4 +8,6 @@ interface UserInterface {
     public function edit($user);
     public function update($request,$user);
     public function destroy($user);
+    public function bulkDelete($ids);
+    public function delete($user);
 }

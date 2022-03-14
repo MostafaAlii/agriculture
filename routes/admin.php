@@ -39,6 +39,7 @@ Route::group(
             /********************************* Start Admin & Employee Routes ************************************/
             Route::resource('Admins', AdminController::class)->except(['show']);
             Route::get('/Admins/data', [AdminController::class,'data'])->name('admins.data');
+
             /********************************* End Admin & Employee Routes ************************************/
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);
@@ -47,6 +48,7 @@ Route::group(
             /********************************* Start User or vendor Routes ************************************/
             Route::resource('users', UserController::class)->except(['show']);
             Route::get('/users/data', [UserController::class,'data'])->name('users.data');
+            Route::delete('/users/bulk_delete/{test}', [UserController::class.'bulkDelete'])->name('users.bulk_delete');
             /********************************* end User or vendor Routes ************************************/
             /********************************* Start settings Routes ************************************/
             Route::get('Settings', [SettingController::class, 'index'])->name('settings');

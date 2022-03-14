@@ -49,4 +49,14 @@ class UserController extends Controller {
         return $this->Data->destroy($user);
 
     }// end of destroy
+    public function bulkDelete(Request $request)
+    {
+        return $this->Data->bulkDelete($request);
+
+    }// end of destroy
+    public function delete(User $user)
+    {
+        return $this->Data->delete($user);
+
+    }// end of destroy
 }

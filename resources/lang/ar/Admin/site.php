@@ -70,5 +70,6 @@ return [
     'newfarmer'=>'بائع او فلاح جديد',
     'newvendor'=>'تاجر جديد',
     'yourtype'=>'اختار النوع',
-    'image'=>'صوره'
+    'image'=>'صوره',
+    'bulkdelete'=>'حذف الكل',
 ];

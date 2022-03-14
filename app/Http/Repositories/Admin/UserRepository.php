@@ -18,17 +18,15 @@ class UserRepository implements UserInterface{
         $users = User::select();
 
         return DataTables::of($users)
+            ->addColumn('record_select', 'dashboard.admin.users.data_table.record_select')
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at->format('Y-m-d');
             })
             ->addColumn('image', function (User $user) {
                 return view('dashboard.admin.users.data_table.image', compact('user'));
             })
-            // ->addColumn('actions', function (User $user) {
-            //     return view('dashboard.admin.users.data_table.actions', compact('user'));
-            // })
             ->addColumn('actions', 'dashboard.admin.users.data_table.actions')
-            ->rawColumns([ 'actions'])
+            ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
 
@@ -83,4 +81,25 @@ class UserRepository implements UserInterface{
            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
+
+    public function bulkDelete($request)
+    {
+        // return "hello";
+        // foreach (json_decode(request()->record_ids) as $recordId) {
+
+        //     $user = User::FindOrFail($recordId);
+        //     $this->delete($user);
+        // }//end of for each
+        dd($request->delete_select_id);
+        toastr()->error(__('Admin/site.deleted_successfully'));
+        return response(__('site.deleted_successfully'));
+
+    }// end of bulkDelete
+
+    public function delete($user)
+    {
+        $user->delete();
+
+    }// end of delete
 }

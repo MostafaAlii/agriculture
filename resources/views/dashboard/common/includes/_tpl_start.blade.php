@@ -66,7 +66,8 @@
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
     @endif
     {{--noty--}}
-        {{-- <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}"> --}}
+        <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}">
+        <script src="{{ asset('assets/admin/noty/noty.min.js') }}"></script>
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/animate/animate.css')}}">
     {{--noty--}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">
