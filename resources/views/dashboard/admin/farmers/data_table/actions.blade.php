@@ -24,6 +24,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
+                                <input type="text" value="{{ $id }}">
                             </div>
                             <div class="modal-body">
                                 <h5>{{ __('Admin/site.warning') }}</h5>

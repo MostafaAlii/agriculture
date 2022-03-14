@@ -22,6 +22,9 @@ class FarmerRepository implements FarmerInterface{
             ->addColumn('image', function (Farmer $farmer) {
                 return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
             })
+            // ->addColumn('actions', function (Farmer $id) {
+            //     return view('dashboard.admin.farmers.data_table.actions', compact('id'));
+            // })
             ->addColumn('actions', 'dashboard.admin.farmers.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
@@ -70,6 +73,7 @@ class FarmerRepository implements FarmerInterface{
 
     public function destroy($farmer) {
         try{
+            dd($farmer->id);
         $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
         $farmer->delete();
         toastr()->error(__('Admin/site.deleted_successfully'));

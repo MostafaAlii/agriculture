@@ -57,6 +57,7 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
+                                                    <th>id</th>
                                                     <th>{{ __('Admin/site.image') }}</th>
                                                     <th>{{ __('Admin/site.firstname') }}</th>
                                                     <th>{{ __('Admin/site.lastname') }}</th>
@@ -99,6 +100,7 @@
             url: '{{ route('farmers.data') }}',
         },
         columns: [
+            {data: 'id', name: 'id'},
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'firstname', name: 'firstname'},
