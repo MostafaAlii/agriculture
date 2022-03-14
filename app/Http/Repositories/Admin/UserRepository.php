@@ -91,9 +91,18 @@ class UserRepository implements UserInterface{
         //     $user = User::FindOrFail($recordId);
         //     $this->delete($user);
         // }//end of for each
-        dd($request->delete_select_id);
+        // dd($request->delete_select_id);
+        $delete_select_id = explode(",",$request->delete_select_id);
+        foreach($delete_select_id as $users_ids){
+           $user = User::findorfail($users_ids);
+           if($user->image){
+            $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+           }
+        }
+        User::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
-        return response(__('site.deleted_successfully'));
+        return redirect()->route('users.index');
+        // return response(__('site.deleted_successfully'));
 
     }// end of bulkDelete
 

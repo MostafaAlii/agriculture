@@ -49,7 +49,7 @@
                                             id="btn_delete_all" data-toggle="modal"
                                             data-target="#bulkdelete">
                                             <i class="fa fa-trash"></i>
-                                            {{ __('Admin/site.delete') }}
+                                            {{ __('Admin/site.bulkdelete') }}
                                     </button>
 
                                     {{-- <form method="post" action="{{ route('users.bulk_delete') }}" >
