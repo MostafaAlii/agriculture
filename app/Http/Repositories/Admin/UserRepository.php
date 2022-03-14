@@ -106,9 +106,9 @@ class UserRepository implements UserInterface{
 
     }// end of bulkDelete
 
-    public function delete($user)
-    {
-        $user->delete();
+    // public function delete($user)
+    // {
+    //     $user->delete();
 
-    }// end of delete
+    // }// end of delete
 }

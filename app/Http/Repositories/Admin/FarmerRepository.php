@@ -15,6 +15,7 @@ class FarmerRepository implements FarmerInterface{
         $farmers = Farmer::select();
 
         return DataTables::of($farmers)
+            ->addColumn('record_select', 'dashboard.admin.farmers.data_table.record_select')
             ->editColumn('created_at', function (Farmer $farmer) {
                 return $farmer->created_at->format('Y-m-d');
             })
@@ -22,7 +23,7 @@ class FarmerRepository implements FarmerInterface{
                 return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
             })
             ->addColumn('actions', 'dashboard.admin.farmers.data_table.actions')
-            ->rawColumns([ 'actions'])
+            ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
 
@@ -77,4 +78,20 @@ class FarmerRepository implements FarmerInterface{
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
+    public function bulkDelete($request)
+    {
+        // dd($request->delete_select_id);
+        $delete_select_id = explode(",",$request->delete_select_id);
+        foreach($delete_select_id as $farmers_ids){
+           $farmer = Farmer::findorfail($farmers_ids);
+           if($farmer->image){
+            $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+           }
+        }
+        Farmer::destroy( $delete_select_id );
+        toastr()->error(__('Admin/site.deleted_successfully'));
+        return redirect()->route('farmers.index');
+
+    }// end of bulkDelete
 }

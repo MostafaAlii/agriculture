@@ -18,6 +18,7 @@ class AdminRepository implements AdminInterface{
         $admins = Admin::select();
         // dd($admins->id);
         return DataTables::of($admins)
+            ->addColumn('record_select', 'dashboard.admin.admins.data_table.record_select')
             ->editColumn('created_at', function (Admin $admin) {
                 return $admin->created_at->format('Y-m-d');
             })
@@ -29,7 +30,7 @@ class AdminRepository implements AdminInterface{
                 return view('dashboard.admin.admins.data_table.image', compact('admin'));
             })
             ->addColumn('actions', 'dashboard.admin.admins.data_table.actions')
-            ->rawColumns([ 'actions'])
+            ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
 
@@ -96,4 +97,19 @@ class AdminRepository implements AdminInterface{
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+    public function bulkDelete($request)
+    {
+        // dd($request->delete_select_id);
+        $delete_select_id = explode(",",$request->delete_select_id);
+        foreach($delete_select_id as $admins_ids){
+           $admin = Admin::findorfail($admins_ids);
+           if($admin->image){
+            $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
+           }
+        }
+        Admin::destroy( $delete_select_id );
+        toastr()->error(__('Admin/site.deleted_successfully'));
+        return redirect()->route('Admins.index');
+
+    }// end of bulkDelete
 }

@@ -48,4 +48,10 @@ class FarmerController extends Controller {
 
         return $this->Data->destroy($farmer);
     }// end of destroy
+    public function bulkDelete(Request $request)
+    {
+        return $this->Data->bulkDelete($request);
+        //  return "hello";
+
+    }// end of destroy
 }

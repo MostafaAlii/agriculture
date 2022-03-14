@@ -51,7 +51,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title" id="myModalLabel62">   {{ __('Admin/site.bulkdelete') }}</h4>
-                                <input type="text" id="delete_select_id" name="delete_select_id" value="">
+                                <input type="hidden" id="delete_select_id" name="delete_select_id" value="">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

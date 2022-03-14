@@ -55,9 +55,9 @@ class UserController extends Controller {
         //  return "hello";
 
     }// end of destroy
-    public function delete(User $user)
-    {
-        return $this->Data->delete($user);
+    // public function delete(User $user)
+    // {
+    //     return $this->Data->delete($user);
 
-    }// end of destroy
+    // }// end of destroy
 }

@@ -44,10 +44,19 @@
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
                                     <a href="{{ route('farmers.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/site.create') }}</a>
+                                    <button type="button" class="btn btn-warning mb-3"
+                                        id="btn_delete_all" data-toggle="modal"
+                                        data-target="#bulkdelete">
+                                        <i class="fa fa-trash"></i>
+                                        {{ __('Admin/site.bulkdelete') }}
+                                    </button>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="farmer-table">
                                             <thead>
                                                 <tr>
+                                                    <th>
+                                                        <input type="checkbox" name="select_all" id="select-all">
+                                                    </th>
                                                     <th>{{ __('Admin/site.image') }}</th>
                                                     <th>{{ __('Admin/site.firstname') }}</th>
                                                     <th>{{ __('Admin/site.lastname') }}</th>
@@ -90,6 +99,7 @@
             url: '{{ route('farmers.data') }}',
         },
         columns: [
+            {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'firstname', name: 'firstname'},
             {data: 'lastname', name: 'lastname'},
@@ -99,7 +109,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[6, 'desc']],
+        order: [[7, 'desc']],
 
     });
 </script>

@@ -39,11 +39,12 @@ Route::group(
             /********************************* Start Admin & Employee Routes ************************************/
             Route::resource('Admins', AdminController::class)->except(['show']);
             Route::get('/Admins/data', [AdminController::class,'data'])->name('admins.data');
-
+            Route::delete('/admins/bulk_delete/{ids}', [AdminController::class,'bulkDelete'])->name('admins.bulk_delete');
             /********************************* End Admin & Employee Routes ************************************/
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);
             Route::get('/farmers/data', [FarmerController::class,'data'])->name('farmers.data');
+            Route::delete('/farmers/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('farmers.bulk_delete');
             /********************************* end Farmer routes ************************************/
             /********************************* Start User or vendor Routes ************************************/
             Route::resource('users', UserController::class)->except(['show']);
