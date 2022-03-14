@@ -53,7 +53,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('users.update', encrypt($user->id)) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">

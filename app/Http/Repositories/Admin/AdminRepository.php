@@ -16,6 +16,7 @@ class AdminRepository implements AdminInterface{
     }
     public function data() {
         $admins = Admin::orderBy('id','DESC')->get()->except(auth()->user()->id);
+        // $admins = Admin::select();
         // dd($admins->id);
         return DataTables::of($admins)
             ->addColumn('record_select', 'dashboard.admin.admins.data_table.record_select')
@@ -24,7 +25,6 @@ class AdminRepository implements AdminInterface{
             })
             ->addColumn('type', function (Admin $admin) {
                 return view('dashboard.admin.admins.data_table.types', compact('admin'));
-                // return "$admin->type";
             })
             ->addColumn('image', function (Admin $admin) {
                 return view('dashboard.admin.admins.data_table.image', compact('admin'));
@@ -97,11 +97,8 @@ class AdminRepository implements AdminInterface{
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-    public function bulkDelete($request)
-    {
-        // dd($request->delete_select_id);
+    public function bulkDelete($request) {
         if($request->delete_select_id){
-
             $delete_select_id = explode(",",$request->delete_select_id);
             foreach($delete_select_id as $admins_ids){
                $admin = Admin::findorfail($admins_ids);

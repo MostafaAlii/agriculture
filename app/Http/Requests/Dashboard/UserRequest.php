@@ -20,10 +20,10 @@ class UserRequest extends FormRequest {
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $user = $this->route()->parameter('user');
+            $user = $this->route()->parameter('id');
 
-            $rules['email'] = 'required|email|unique:users,id,' . $user->id;
-            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . $user->id;
+            $rules['email'] = 'required|email|unique:users,id,' . $user;
+            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . $user;
             $rules['password'] = '';
 
         }//end of if

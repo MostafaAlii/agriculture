@@ -5,12 +5,14 @@ use App\Http\Interfaces\Admin\FarmerInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Crypt;
 use App\Traits\UploadT;
 class FarmerRepository implements FarmerInterface{
     use UploadT;
     public function index() {
         return view('dashboard.admin.farmers.index');
     }
+
     public function data() {
         $farmers = Farmer::select();
 
@@ -22,9 +24,6 @@ class FarmerRepository implements FarmerInterface{
             ->addColumn('image', function (Farmer $farmer) {
                 return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
             })
-            // ->addColumn('actions', function (Farmer $id) {
-            //     return view('dashboard.admin.farmers.data_table.actions', compact('id'));
-            // })
             ->addColumn('actions', 'dashboard.admin.farmers.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
@@ -33,6 +32,7 @@ class FarmerRepository implements FarmerInterface{
     public function create() {
         return view('dashboard.admin.farmers.create');
     }
+
     public function store($request) {
         try{
             DB::beginTransaction();
@@ -50,14 +50,19 @@ class FarmerRepository implements FarmerInterface{
          }
     }
 
-    public function edit($farmer) {
+    public function edit($id) {
+        $farmerID = Crypt::decrypt($id);
+        $farmer=Farmer::findorfail($farmerID);
         return view('dashboard.admin.farmers.edit', compact('farmer'));
     }
 
-    public function update( $request,$farmer) {
+    public function update($request,$id) {
         try{
             DB::beginTransaction();
-            $farmer->update($request->validated());
+            $farmerID = Crypt::decrypt($id);
+            $farmer=Farmer::findorfail($farmerID);
+            $requestData = $request->validated();
+            $farmer->update($requestData);
             if($request->image){
                 $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
             }
@@ -71,20 +76,20 @@ class FarmerRepository implements FarmerInterface{
         }
     }
 
-    public function destroy($farmer) {
+    public function destroy($id) {
         try{
-            dd($farmer->id);
-        $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
-        $farmer->delete();
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('farmers.index');
+            $farmerID = Crypt::decrypt($id);
+            $farmer=Farmer::findorfail($farmerID);
+            $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+            $farmer->delete();
+            toastr()->error(__('Admin/site.deleted_successfully'));
+            return redirect()->route('farmers.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    public function bulkDelete($request)
-    {
+    public function bulkDelete($request) {
         if($request->delete_select_id){
             // dd($request->delete_select_id);
             $delete_select_id = explode(",",$request->delete_select_id);

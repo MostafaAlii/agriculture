@@ -63,7 +63,6 @@
                                                     <th>{{ __('Admin/site.lastname') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phone') }}</th>
-                                                    <th>{{ __('Admin/site.address') }}</th>
                                                     <th>{{ __('Admin/site.type') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -107,7 +106,6 @@
             {data: 'lastname', name: 'lastname'},
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
-            {data: 'address', name: 'address'},
             {data: 'type', name: 'type',width: '10%'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
