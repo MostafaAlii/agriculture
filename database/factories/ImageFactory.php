@@ -16,11 +16,7 @@ class ImageFactory extends Factory
     {
         $imageable = $this->imageable();
         return [
-            // 'filename' => $this->faker->name(),
-            // 'filename' => $this->faker->image('images'),
-            // 'filename' => $this->faker->randomElement(['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','avatar.jpg']),
             'filename' => $this->faker->randomElement(['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg','9.jpg','10.jpg','avatar.jpg']),
-            // 'imageable_id' => $this->faker->numberBetween(0,20),
             'imageable_id' => $imageable::factory(),
             'imageable_type' => $imageable,
 
