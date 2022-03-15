@@ -13,7 +13,7 @@ class AdminRepository implements AdminInterface{
         return view('dashboard.admin.admins.index');
     }
     public function data() {
-        $admins = Admin::orderBy('id','DESC')->get()->except(auth()->user()->id);
+        $admins = Admin::get()->except(auth()->user()->id);
         // $admins = Admin::select();
         // dd($admins->id);
         return DataTables::of($admins)

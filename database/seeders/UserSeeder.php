@@ -17,14 +17,15 @@ class UserSeeder extends Seeder
             'email' => 'ahmedragabyasin2020@gmail.com',
             'password' => bcrypt('258258258'),
             'phone'=>'01021493036',
-            'address'=>'egypt',
             'remember_token' => Str::random(10),
         ]);
-        // User::create([
-        //     'name' => 'wolf',
-        //     'email' => 'wolf@gmail.com',
-        //     'password' => Hash::make('258258258'),
-        //     'remember_token' => Str::random(10),
-        // ]);
+        User::create([
+            'firstname' => 'xxx',
+            'lastname' => 'xxx',
+            'email' => 'xxx@gmail.com',
+            'password' => bcrypt('258258258'),
+            'phone'=>'01021493037',
+            'remember_token' => Str::random(10),
+        ]);
     }
 }

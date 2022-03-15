@@ -77,5 +77,5 @@ return [
     'yourtype'=>'Select Your Type',
     'image'=>'Image',
     'bulkdelete'=>'Bulk Delete',
-
+    'profile'=>'profile',
 ];

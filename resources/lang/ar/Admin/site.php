@@ -72,4 +72,5 @@ return [
     'yourtype'=>'اختار النوع',
     'image'=>'صوره',
     'bulkdelete'=>'حذف الكل',
+    'profile'=>'الملف الشخصى',
 ];

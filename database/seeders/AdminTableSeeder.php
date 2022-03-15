@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 class AdminTableSeeder extends Seeder {
     public function run() {
         DB::table('admins')->delete();
-        $admin = Admin::create([
+        Admin::create([
             'firstname'         =>  'Mostafa',
             'lastname'          =>  'Ali',
             'email'             =>  'admin@app.com',
@@ -15,5 +15,14 @@ class AdminTableSeeder extends Seeder {
             'password'          =>  bcrypt('123123'),
             'remember_token'    => Str::random(10),
         ]);
+        Admin::create([
+            'firstname'         =>  'yyy',
+            'lastname'          =>  'yyy',
+            'email'             =>  'yyy@app.com',
+            'phone'             =>  '01015588628',
+            'password'          =>  bcrypt('123123'),
+            'remember_token'    => Str::random(10),
+        ]);
+
     }
 }

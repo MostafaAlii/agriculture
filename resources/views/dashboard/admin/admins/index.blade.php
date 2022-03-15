@@ -108,6 +108,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
+        order: [[7, 'desc']],
     });
 </script>
 @endsection

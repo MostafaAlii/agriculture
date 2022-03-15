@@ -128,7 +128,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[7, 'desc']],
+        order: [[6, 'desc']],
         // drawCallback: function (settings) {
         //         $('.record__select').prop('checked', false);
         //         $('#record__select-all').prop('checked', false);

@@ -10,23 +10,20 @@ class FarmerTableSeeder extends Seeder {
     public function run() {
         DB::table('users')->delete();
         Farmer::create([
-            'Firstname'          =>  'MostafaF',
-            'lastname'      => 'Ali',
-            'email'         =>  'farmer@app.com',
-            'password'      =>  bcrypt('123123'),
-            'phone'=>'00201021555555',
-            'address'=>'alex',
-            'remember_token' => Str::random(10),
+            'Firstname'       =>  'MostafaF',
+            'lastname'        => 'Ali',
+            'email'           =>  'farmer@app.com',
+            'password'        =>  bcrypt('123123'),
+            'phone'           =>'01021555555',
+            'remember_token'  => Str::random(10),
         ]);
         Farmer::create([
-            'firstname' => 'ahmed',
-            'lastname' => 'wolf',
-            'email' => 'ahmed@gmail.com',
-            'password' => bcrypt('258258258'),
-            'phone'=>'00201021493036',
-            'address'=>'egypt',
+            'firstname'      => 'zzz',
+            'lastname'       => 'zzz',
+            'email'          => 'zzz@gmail.com',
+            'password'       => bcrypt('258258258'),
+            'phone'          =>'11021493036',
             'remember_token' => Str::random(10),
         ]);
-
     }
 }
