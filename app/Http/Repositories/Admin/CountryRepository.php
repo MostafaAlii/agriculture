@@ -20,7 +20,7 @@ class CountryRepository implements CountryInterface{
         return DataTables::of($countries)
             ->addColumn('record_select', 'dashboard.admin.countries.data_table.record_select')
             ->editColumn('created_at', function (Country $country) {
-                return $country->created_at->diffForHumans();
+                return $country->created_at->format('Y-m-d');
             })
             ->addColumn('image', function (Country $country) {
                 return view('dashboard.admin.countries.data_table.image', compact('country'));
@@ -38,7 +38,7 @@ class CountryRepository implements CountryInterface{
             })->save(public_path('Dashboard/img/countryFlags/' . $request->country_logo->hashName()));
             $dataRequest['country_logo'] = $request->country_logo->hashName();
         }
-        Country::create($dataRequest); 
+        Country::create($dataRequest);
         toastr()->success(__('Admin/site.added_successfully'));
         return redirect()->route('Countries.index');
     }

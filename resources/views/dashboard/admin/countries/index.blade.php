@@ -76,7 +76,7 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ trans('Admin/countries.country_flag') }}</th>
+                                                    {{-- <th>{{ trans('Admin/countries.country_flag') }}</th> --}}
                                                     <th>{{ __('Admin/countries.country_name') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -123,7 +123,7 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
+            // {data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
             {data: 'name', name: 'name'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

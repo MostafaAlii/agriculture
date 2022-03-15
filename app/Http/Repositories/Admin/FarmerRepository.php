@@ -18,6 +18,7 @@ class FarmerRepository implements FarmerInterface{
 
         return DataTables::of($farmers)
             ->addColumn('record_select', 'dashboard.admin.farmers.data_table.record_select')
+            ->addIndexColumn()
             ->editColumn('created_at', function (Farmer $farmer) {
                 return $farmer->created_at->format('Y-m-d');
             })

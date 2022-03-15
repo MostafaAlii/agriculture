@@ -18,6 +18,7 @@ class AdminRepository implements AdminInterface{
         // dd($admins->id);
         return DataTables::of($admins)
             ->addColumn('record_select', 'dashboard.admin.admins.data_table.record_select')
+            ->addIndexColumn()
             ->editColumn('created_at', function (Admin $admin) {
                 return $admin->created_at->format('Y-m-d');
             })
@@ -28,6 +29,11 @@ class AdminRepository implements AdminInterface{
                 return view('dashboard.admin.admins.data_table.image', compact('admin'));
             })
             ->addColumn('actions', 'dashboard.admin.admins.data_table.actions')
+            // test for ralation in yagra
+                // ->addColumn('example', function (Admin $admin) {
+                //     return $admin->profile != null ? $admin->profile->address:null;
+                // })
+            // test for ralation in yagra
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }

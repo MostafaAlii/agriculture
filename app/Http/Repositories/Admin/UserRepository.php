@@ -20,6 +20,7 @@ class UserRepository implements UserInterface{
         $users = User::select();
         return DataTables::of($users)
             ->addColumn('record_select', 'dashboard.admin.users.data_table.record_select')
+            ->addIndexColumn()
             ->editColumn('created_at', function (User $user) {
                 return $user->created_at->format('Y-m-d');
             })
