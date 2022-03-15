@@ -1,4 +1,9 @@
 <?php
 return [
     'success_update'                   =>                      'تم تحديث البيانات بنجاح',
+    'created_by'                        =>                          'مضافة بواسطة',
+    'updated_by'                        =>                          'محدثة بواسطة',
+    'created_since'                     =>                          'مضافة منذ',
+    'save'                              =>                          'حفظ',
+    'cancel'                            =>                          'الغاء',
 ];

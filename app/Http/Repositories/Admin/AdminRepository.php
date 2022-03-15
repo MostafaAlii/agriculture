@@ -1,6 +1,5 @@
 <?php
 namespace  App\Http\Repositories\Admin;
-
 use App\Http\Interfaces\Admin\AdminInterface;
 use App\Models\Admin;
 use Illuminate\Http\Request;
@@ -8,7 +7,6 @@ use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
-
 class AdminRepository implements AdminInterface{
     use UploadT;
     public function index() {

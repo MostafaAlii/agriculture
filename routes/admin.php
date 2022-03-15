@@ -1,13 +1,14 @@
 <?php
-use App\Http\Controllers\Dashboard\Admin\AdminController;
-use App\Http\Controllers\Dashboard\Admin\UserController;
-use App\Http\Controllers\Dashboard\Admin\FarmerController;
-use App\Http\Controllers\Dashboard\Admin\DashboardController;
-use App\Http\Controllers\Dashboard\Admin\SettingController;
-use App\Http\Controllers\front;
 use App\Http\Livewire;
+use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\Admin\UserController;
+use App\Http\Controllers\Dashboard\Admin\AdminController;
+use App\Http\Controllers\Dashboard\Admin\FarmerController;
+use App\Http\Controllers\Dashboard\Admin\SettingController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Dashboard\Admin\DashboardController;
+use App\Http\Controllers\Dashboard\Admin\CountryController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 /*
 |--------------------------------------------------------------------------
@@ -55,10 +56,10 @@ Route::group(
             Route::get('Settings', [SettingController::class, 'index'])->name('settings');
             Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
             /********************************* End settings Pages Routes ************************************/
-            /********************************* Start settings Routes ************************************/
-            Route::get('settings', [SettingController::class,'setting'])->name('settings');
-            Route::post('settings/store', [SettingController::class,'save_setting'])->name('settings.store');
-            /*************************** End settings Pages Routes ************************************/
+            /********************************* Countries Routes ************************************/
+            Route::resource('Countries', CountryController::class)->except(['show']);
+            Route::get('/Countries/data', [CountryController::class,'data'])->name('countries.data');
+            /********************************* End Countries Routes ************************************/
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);
             /********************************* End Department Routes ************************************/
