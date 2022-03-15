@@ -6,9 +6,7 @@ class CreateCountriesTable extends Migration {
     public function up() {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('country_logo')->nullable();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->string('country_logo')->default('default_flag.jpg');
             $table->timestamps();
         });
     }

@@ -23,19 +23,15 @@ class CountryController extends Controller
         return $this->Data->store($request);
     }
 
-    public function show($id) {
-        //
-    }
-
     public function edit($id) {
-        //
-    }
+        return $this->Data->edit($id);
+    }// end of edit
 
-    public function update(Request $request, $id) {
-        //
-    }
+    public function update(CountryRequest $request,$id) {
+        return $this->Data->update($request,$id);
+    }// end of update
 
     public function destroy($id) {
-        //
-    }
+        return $this->Data->destroy($id);
+    }// end of destroy
 }
