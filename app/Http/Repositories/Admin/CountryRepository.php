@@ -16,7 +16,7 @@ class CountryRepository implements CountryInterface{
     }
 
     public function data() {
-        $countries = Country::select();
+        $countries = Country::with('provinces')->select();
         return DataTables::of($countries)
             ->addColumn('record_select', 'dashboard.admin.countries.data_table.record_select')
             ->editColumn('created_at', function (Country $country) {

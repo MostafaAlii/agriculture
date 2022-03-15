@@ -1,7 +1,8 @@
 <?php
 return [
-    'country_title_in_sidebar'                  =>                  'المديرين و المشرفين',
+    'country_title_in_sidebar'                  =>                  'الدول و المحافظات',
     'countryPageTitle'                          =>                  'الدول',
+    'country_proviences_count'                  =>                  'المحافظات التابعة',
     'add_new_country'                           =>                  'اضافة دولة جديدة',
     'country_flag'                              =>                  'علم الدولة',
     'country_name'                              =>                  'اسم الدولة',
