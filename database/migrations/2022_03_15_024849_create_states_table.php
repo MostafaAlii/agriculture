@@ -7,8 +7,6 @@ class CreateStatesTable extends Migration {
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
             $table->foreignId('area_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

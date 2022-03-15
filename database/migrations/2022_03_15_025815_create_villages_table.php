@@ -7,8 +7,6 @@ class CreateVillagesTable extends Migration {
     {
         Schema::create('villages', function (Blueprint $table) {
             $table->id();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
             $table->foreignId('state_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

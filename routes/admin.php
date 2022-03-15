@@ -59,6 +59,7 @@ Route::group(
             /********************************* Countries Routes ************************************/
             Route::resource('Countries', CountryController::class)->except(['show']);
             Route::get('/Countries/data', [CountryController::class,'data'])->name('countries.data');
+            Route::delete('/Countries/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('countries.bulk_delete');
             /********************************* End Countries Routes ************************************/
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);

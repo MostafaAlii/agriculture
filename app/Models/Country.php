@@ -9,9 +9,15 @@ class Country extends Model {
     protected $table = "countries";
     protected $guarded = [];
     protected $with = ['translations'];
+    protected $appends = ['country_flag_path'];
     public $translatedAttributes = ['name'];
     public $timestamps = true;
 
+    // Country Flag Image Appends ::
+    public function getCountryFlagPathAttribute() {
+        return  asset('Dashboard/img/countryFlags/' . $this->country_logo);
+    }
+    // Country Has Many Proviences ::
     public function provinces(): HasMany {
         return $this->hasMany(Province::class);
     }

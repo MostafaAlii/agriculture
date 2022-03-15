@@ -1,8 +1,9 @@
+    <a href="{{ route('Countries.edit', encrypt($id)) }}" class="btn btn-primary btn-sm">
+        {{ __('Admin/site.edit') }}
+    </a>
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
-        <i class="fa fa-trash"></i>
         {{ __('Admin/site.delete') }}
     </button>
-
 
     <form action="{{ route('Countries.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
@@ -36,7 +37,7 @@
         </div>
     </form>
       {{-- modal bulk delete --}}
-      <form action="{{ route('farmers.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+      <form action="{{ route('countries.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
         @method('delete')
         <div class="col-lg-4 col-md-6 col-sm-12">

@@ -9,12 +9,16 @@
             </button>
         </div>
         
-            <form action="{{ route('Countries.store') }}" method="post" autocomplete="off">
+            <form action="{{ route('Countries.store') }}" method="post" autocomplete="off" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/countries.enter_country_name') }}</label>
                         <input type="text" name="name" class="form-control" placeholder="{{ trans('Admin/countries.enter_country_name_placeholder') }}" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{ trans('Admin/countries.country_flag') }}</label>
+                        <input type="file" name="country_logo" class="form-control" />
                     </div>
                 </div>
 
