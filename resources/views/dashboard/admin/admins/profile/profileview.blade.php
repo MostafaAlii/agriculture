@@ -179,27 +179,27 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.country'):</td>
-                                            <td>{{ $admin->birthdate }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>@lang('Admin/site.state'):</td>
-                                            <td>{{ $admin->birthdate }}</td>
+                                            <td>{{ $admin->country->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.province'):</td>
-                                            <td>{{ $admin->birthdate }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>@lang('Admin/site.village'):</td>
-                                            <td>{{ $admin->birthdate }}</td>
+                                            <td>{{ $admin->province->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.area'):</td>
-                                            <td>{{ $admin->birthdate }}</td>
+                                            <td>{{ $admin->area->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@lang('Admin/site.state'):</td>
+                                            <td>{{ $admin->state->name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@lang('Admin/site.village'):</td>
+                                            <td>{{ $admin->village->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.department'):</td>
-                                            <td>{{ $admin->birthdate }}</td>
+                                            <td>{{ $admin->department->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.address1'):</td>
