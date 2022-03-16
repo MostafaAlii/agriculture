@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder {
             AreaSeeder::class,
             StateSeeder::class,
             VillageSeeder::class,
-            // VillageSeeder::class,
             FarmerTableSeeder::class,
             AdminTableSeeder::class,
             UserSeeder::class,
