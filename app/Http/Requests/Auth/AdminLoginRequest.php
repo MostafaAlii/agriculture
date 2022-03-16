@@ -20,6 +20,7 @@ class AdminLoginRequest extends FormRequest {
             //'email' => ['required', 'string', 'email'],
             //'password' => ['required', 'string'],
             // 'email' => 'required', 'string', 'email', 'max:255', 'unique:admins',
+
             'password' => 'required|string|min:6',
         ];
     }
@@ -32,6 +33,15 @@ class AdminLoginRequest extends FormRequest {
         //     throw ValidationException::withMessages([
         //         'email' => trans('auth.failed'),
         //     ]);
+        // }
+        // $admin1 = Admin::where('email',$this->login) ->first();
+        // $admin2 = Admin::where('phone',$this->login) ->first();
+        // if($admin1){
+
+        // }elseif($admin2){
+
+        // }else{
+
         // }
         $admin = Admin::where('email',$this->login)
                ->orwhere('phone',$this->login)

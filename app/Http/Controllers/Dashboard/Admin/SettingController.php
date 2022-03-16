@@ -72,7 +72,7 @@ class SettingController extends Controller
             $setting->update();
 
             DB::commit();
-            session()->flash('add');
+            toastr()->success(__('Admin/general.success_update'));
             return redirect()->route('settings');
 
         } catch (\Exception $e) {

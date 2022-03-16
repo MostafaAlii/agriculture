@@ -168,6 +168,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -234,6 +235,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
          'Up'       => App\Http\Controllers\Upload::class,
+         'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

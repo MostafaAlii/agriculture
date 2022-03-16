@@ -10,7 +10,16 @@ class User extends Authenticatable {
     protected $table = "users";
     protected $guarded = [];
     public $timestamps = true;
-    
+    // rel
+       public function image()
+   {
+       return $this->morphOne(Image::class, 'imageable');
+   }
+//    public function profile(){
+//     return $this->hasOne(Profile::class, 'user_id');
+//    }
+// // attr
+
     protected $hidden = [
         'password',
         'remember_token',

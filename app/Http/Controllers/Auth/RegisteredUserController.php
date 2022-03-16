@@ -34,23 +34,25 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required','confirmed'],
+            'firstname'    => ['required', 'string', 'max:255'],
+            'lastname'     => ['required', 'string', 'max:255'],
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
+            'email'        => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'     => ['required','confirmed'],
         ]);
         // dd($request->all());
 
         $user = User::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'firstname'    => $request->firstname,
+            'lastname'     => $request->lastname,
+            'phone'        => $request->phone,
+            'email'        => $request->email,
+            'password'     => bcrypt($request->password),
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        auth('vendor')->login($user);
 
         // return redirect(RouteServiceProvider::FRONT);
         return redirect()->route('front');

@@ -2,11 +2,8 @@
 namespace {{ namespace }};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Translatable;
 class {{ class }} extends Model {
-    use HasFactory,Translatable;
+    use HasFactory;
     protected $table = "";
-    protected $guarded = [];
-    public $translatedAttributes = [];
     public $timestamps = true;
 }

@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Admin;
 
+namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\CountryInterface;
-use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\CountryRequest;
-
-
+use Illuminate\Http\Request;
 class CountryController extends Controller
 {
     protected $Data;
@@ -19,40 +17,23 @@ class CountryController extends Controller
         return $this->Data->index();
     }
 
-    public function data()
-    {
+    public function data() {
         return $this->Data->data();
-
     }// end of data
 
-    public function create() {
-        return $this->Data->create();
-
-    }
-
-    public function store( CountryRequest $request) {
+    public function store(CountryRequest $request) {
         return $this->Data->store($request);
     }
 
-    public function show($id) {
-        //
-    }
-
-    public function edit($id)
-    {
-
+    public function edit($id) {
         return $this->Data->edit($id);
-
     }// end of edit
 
-    public function update(CountryRequest $request,$id)
-    {
+    public function update(CountryRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 
-    public function destroy($id)
-    {
+    public function destroy($id) {
         return $this->Data->destroy($id);
-
     }// end of destroy
 }

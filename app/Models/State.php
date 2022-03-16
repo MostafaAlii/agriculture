@@ -1,23 +1,25 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-// 1. To specify package’s class you are using
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Astrotomic\Translatable\Translatable;
-
-class State extends Model implements TranslatableContract
-{
-    use Translatable,HasFactory; // 2. To add translation methods
-
-    // 3. To define which attributes needs to be translated
-    public $translatedAttributes = ['name'];
+use Illuminate\Database\Eloquent\Model;
+class State extends Model {
+    use HasFactory,Translatable;
+    protected $table = "states";
     protected $guarded = [];
+    protected $with = ['translations'];
+    public $translatedAttributes = ['name'];
+    public $timestamps = true;
 
-    public  function area(){
-        return $this->belongsTo(Area::class ,'area_id');
+    // States Has Many Village ::
+    public function villages(): HasMany {
+        return $this->hasMany(Village::class);
     }
 
-
+    // State Has One Area
+    public function area(): BelongsTo {
+        return $this->belongsTo(Area::class);
+    }
 }

@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('user.userpage') }}
+    {{ trans('Admin/admins.farmerPageTitle') }}
 @endsection
 @section('content')
 @include('dashboard.common._partials.messages')
@@ -43,16 +43,26 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('farmers.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/site.create') }}</a>
+                                    <a href="{{ route('farmers.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
+                                    <button type="button" class="btn btn-warning mb-3"
+                                        id="btn_delete_all" data-toggle="modal"
+                                        data-target="#bulkdelete">
+                                        <i class="fa fa-trash"></i>
+                                        {{ __('Admin/site.bulkdelete') }}
+                                    </button>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="farmer-table">
                                             <thead>
                                                 <tr>
+                                                    <th>
+                                                        <input type="checkbox" name="select_all" id="select-all">
+                                                    </th>
+                                                    <th>#</th>
+                                                    <th>{{ __('Admin/site.image') }}</th>
                                                     <th>{{ __('Admin/site.firstname') }}</th>
                                                     <th>{{ __('Admin/site.lastname') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phone') }}</th>
-                                                    <th>{{ __('Admin/site.address') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -82,19 +92,25 @@
         // dom: "tiplr",
         serverSide: true,
         processing: true,
+        "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
         ajax: {
             url: '{{ route('farmers.data') }}',
         },
         columns: [
+            {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+            {data: 'DT_RowIndex', name: '', orderable: false, searchable: false},
+            {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'firstname', name: 'firstname'},
             {data: 'lastname', name: 'lastname'},
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
-            {data: 'address', name: 'address'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[5, 'desc']],
+        order: [[7, 'desc']],
+
     });
 </script>
 @endsection

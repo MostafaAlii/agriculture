@@ -53,7 +53,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('users.update', $user->id) }}">
+                                    <form class="form" method="post" action="{{ route('users.update', encrypt($user->id)) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">
@@ -72,6 +72,17 @@
                                             <div class="form-group">
                                                 <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
                                                 <input type="tel" id="eventRegInput5" class="form-control" name="phone"  value="{{ old('phone',$user->phone) }}" required>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
+                                                        <input class="form-control img" name="image"  type="file" accept="image/*">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <img src="{{ asset('Dashboard/img/users/'. $user->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                </div>
                                             </div>
                                         </div>
 

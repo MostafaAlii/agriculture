@@ -9,6 +9,11 @@ class Farmer extends Authenticatable {
     protected $table = "farmers";
     protected $guarded = [];
     public $timestamps = true;
+        // rel
+        public function image()
+        {
+            return $this->morphOne(Image::class, 'imageable');
+        }
 
     protected $hidden = [
         'password',

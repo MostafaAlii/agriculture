@@ -8,4 +8,6 @@ interface AdminInterface {
     public function edit($admin);
     public function update($request,$admin);
     public function destroy($admin);
+    public function bulkDelete($ids);
+    public function showProfile($id);
 }

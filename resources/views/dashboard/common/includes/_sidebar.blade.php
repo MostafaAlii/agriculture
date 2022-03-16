@@ -55,6 +55,34 @@
                     </ul>
                 </li>
                 <!-- End Dashboard Dropdown Menu -->
+                <!-- Start Countries Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">flag</i>
+                        <span class="menu-title" data-i18n="Countries">
+                            {{ trans('Admin/countries.country_title_in_sidebar') }}
+                        </span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start Countries -->
+                        <li>
+                            <a class="menu-item" href="{{route('Countries.index')}}">
+                                <i class="material-icons">flag</i>
+                                <span data-i18n="Countries">{{ trans('Admin/countries.countryPageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Countries -->
+                        <!-- Start Proviences -->
+                        <li>
+                            <a class="menu-item" href="{{-- route('Proviences.index') --}}">
+                                <i class="material-icons">flag</i>
+                                <span data-i18n="Proviences">{{ trans('Admin/proviences.proviencePageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Proviences -->
+                    </ul>
+                </li>
+                <!-- End Countries Dropdown Menu -->
                 <!-- Start Department Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">

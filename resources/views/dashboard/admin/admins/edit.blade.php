@@ -53,7 +53,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('Admins.update', $admin->id) }}">
+                                    <form class="form" method="post" action="{{ route('Admins.update', encrypt($admin->id)) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">
@@ -82,6 +82,17 @@
                                                     </select>
                                                 </fieldset>
                                              </div>
+                                             <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
+                                                        <input class="form-control img" name="image"  type="file" accept="image/*">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="form-actions center">

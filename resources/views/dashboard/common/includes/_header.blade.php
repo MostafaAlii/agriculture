@@ -216,7 +216,16 @@
                             <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all messages</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">{{ Auth::user()->name }}</span><span class="avatar avatar-online"><img src="{{ asset('assets/admin/images/portrait/small/avatar-s-19.png') }}" alt="avatar"><i></i></span></a>
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">
+                            {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span><span class="avatar avatar-online">
+                                <img src="{{ asset('assets/admin/images/portrait/small/avatar-s-19.png') }}" alt="avatar"><i></i></span>
+                        </a>
+                            {{-- @if (Auth::user()->image->filename)
+                            <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"alt="avatar">
+                        @else
+                            <img src="{{ asset('Dashboard/img/images/avatar.jpg') }}"alt="avatar">
+                        @endif --}}
                         <div class="dropdown-menu dropdown-menu-right">
                             {{-- route to go website ******************************************** --}}
                             <a class="dropdown-item" href="{{ route('home.admin') }}" target="_blank">
@@ -224,22 +233,23 @@
                                  {{ trans('Admin/dashboard.website') }}
                             </a>
                             {{-- route to go website ******************************************** --}}
-                            <a class="dropdown-item" href="user-profile.html">
+                            <a class="dropdown-item" href="{{ route('admin.profile', encrypt(Auth::user('admin')->id)) }}">
                                 <i class="material-icons">person_outline</i>
-                                 Edit Profile
+                                @lang('Admin/site.profile')
                             </a>
-                            <a class="dropdown-item" href="app-kanban.html">
+                            {{-- <a class="dropdown-item" href="app-kanban.html">
                                 <i class="material-icons">playlist_add_check</i>
                                 Todo
                             </a>
                             <a class="dropdown-item" href="user-cards.html">
                                 <i class="material-icons">content_paste</i>
                                 Task
-                            </a>
+                            </a> --}}
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ route('logout.admin') }}"
                             onclick="event.preventDefault(); document.getElementById('log-out').submit();"
                             ><i class="material-icons">power_settings_new</i>
-                                Logout</a>
+                            @lang('Admin/site.logout')
+                            </a>
                         </div>
                     </li>
                     <form id="log-out" action="{{ route('logout.admin') }}" method="POST">

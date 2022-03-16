@@ -6,11 +6,7 @@
     {{ trans('Admin/setting.settingPageTitle') }}
 @endsection
 @section('content')
-<<<<<<< HEAD:resources/views/dashboard/admin/settings.blade.php
     @include('dashboard\common\_partials.messages')
-=======
-    @include('dashboard.common._partials.messages')
->>>>>>> 74ac38a5c6678b746c1c5b48d318c4d81b42aa7d:resources/views/dashboard/admin/settings/settings.blade.php
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
@@ -120,7 +116,7 @@
                                                         <label for="projectinput4"> {{trans('Admin\setting.inestergrame')}}</label>
                                                         <input type="text" id="projectinput4" class="form-control"
                                                                placeholder="{{trans('Admin\setting.inestergrame')}}"
-                                                               name="inestegram"value="{{$setting->inestergrame}}">
+                                                               name="inestegram"value="{{$setting->inestegram}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">

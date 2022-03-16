@@ -1,11 +1,11 @@
 <?php
-namespace  App\Http\Interfaces\Admin;
+
+namespace App\Http\Interfaces\Admin;
 interface CountryInterface {
     public function index();
     public function data();
-    public function create();
     public function store($request);
-    public function edit($id);
-    public function update($request,$id);
-    public function destroy($id);
+    public function edit($country);
+    public function update($request,$country);
+    public function destroy($country);
 }

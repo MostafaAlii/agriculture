@@ -5,20 +5,28 @@
 @section('pageTitle')
     {{ trans('Admin/setting.settingPageTitle') }}
 @endsection
+
+
 @section('content')
     @include('dashboard.common._partials.messages')
+    <!-- Start Content Wrapper -->
     <div class="content-wrapper">
+        <!-- Start Breadcrumbs -->
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\setting.dashboard')}}</h3>
+                <h3 class="content-header-title">
+                    <i class="material-icons">flag</i>
+                    {{ trans('Admin/countries.countryPageTitle') }}
+                </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/country.home') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('countries.index') }}">{{ __('Admin/country.country') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Countries.index') }}">{{ trans('Admin/countries.countryPageTitle') }}</a>
                             </li>
-                            <li class="breadcrumb-item active">{{ __('Admin/country.edit') }}
+                            <li class="breadcrumb-item"><a href="#" style="text-decoration: none; color: black;">
+                                {{ trans('Admin/countries.countryPageTitle_edit') }} / {{ $country->name }}</a>
                             </li>
                         </ol>
                     </div>
@@ -33,6 +41,10 @@
                 </div>
             </div>
         </div>
+
+        <!-- End Breadcrumbs -->
+        <!-- Start Content Body -->
+
         <div class="content-body">
             <!-- Basic form layout section start -->
             <section id="basic-form-layouts">
@@ -40,7 +52,11 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
+
                                 <h4 class="card-title" id="basic-layout-card-center">{{__('Admin/newcountry')}}</h4>
+
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newadmin') }}</h4>
+
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -53,39 +69,66 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('countries.update', $country->id) }}">
+
+                                    {{--<form class="form" method="post" action="{{ route('countries.update', $country->id) }}">--}}
+                                        {{--@csrf--}}
+                                        {{--@method('put')--}}
+
+                                        {{--<div class="form-body">--}}
+                                            {{--<div class="row">--}}
+                                                {{--<div class="col-md-6">--}}
+                                                    {{--<div class="form-group">--}}
+                                                        {{--<label for="eventRegInput1">{{ __('Admin/country.name') }}<span class="text-danger">*</span></label>--}}
+                                                        {{--<input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/country.name') }}" name="name" value="{{ $country->name }}" required>--}}
+
+                                                    {{--</div>--}}
+                                                    {{--<div class="form-group">--}}
+                                                        {{--<label for="eventRegInput1">{{ __('Admin/country.code') }}<span class="text-danger">*</span></label>--}}
+                                                        {{--<input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/country.code') }}" name="code" value="{{ $country->code }}" required>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="row">--}}
+                                                {{--<div class="col-md-6">--}}
+                                                    {{--<div class="form-group">--}}
+                                                        {{--<label for="eventRegInput4">{{ __('Admin/country.mob') }}<span class="text-danger">*</span></label>--}}
+                                                        {{--<input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/country.mob') }}" name="mob" value="{{ $country->mob }}" required>--}}
+                                                    {{--</div>--}}
+
+
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="form-actions center">--}}
+                                            {{--<button type="submit" class="btn btn-primary">--}}
+                                                {{--<i class="la la-check-square-o"></i> {{ __('Admin/country.save') }}--}}
+
+                                    <form class="form" method="post" action="{{ route('Countries.update', encrypt($country->id)) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
-
                                         <div class="form-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/country.name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/country.name') }}" name="name" value="{{ $country->name }}" required>
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/country.code') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/country.code') }}" name="code" value="{{ $country->code }}" required>
-                                                    </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="eventRegInput1">{{ __('Admin/countries.country_name') }}<span class="text-danger">*</span></label>
+                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ old('name',$country->name) }}" required>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/country.mob') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/country.mob') }}" name="mob" value="{{ $country->mob }}" required>
+                                                        <label>{{ __('Admin/countries.country_flag') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
+                                                        <input class="form-control img" name="country_logo"  type="file" accept="image/*">
                                                     </div>
-
-
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <img src="{{ $country->country_flag_path }}" class="img-thumbnail img-preview" width="100" alt="">
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/country.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
                                             </button>
                                         </div>
                                     </form>
@@ -96,7 +139,7 @@
                 </div>
             </section>
             <!-- // Basic form layout section end -->
-        </div>
+        {{--</div>--}}
     </div>
 </div>
 <!-- END: Content-->
@@ -119,4 +162,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
-

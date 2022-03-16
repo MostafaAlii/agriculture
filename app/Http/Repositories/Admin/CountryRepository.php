@@ -4,78 +4,75 @@ use App\Models\Country;
 use App\Http\Interfaces\Admin\CountryInterface;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Support\Facades\Crypt;
 use App\Traits\UploadT;
 
-
-class CountryRepository implements CountryInterface{
-
+class CountryRepository implements CountryInterface
+{
     use UploadT;
-    public function index() {
-        return view('dashboard.admin.countries.index');
-    }
-    public function data() {
-        $countries = Country::query();
 
+    public function data() {
+        $countries = Country::with('provinces')->select();
         return DataTables::of($countries)
+            ->addColumn('record_select', 'dashboard.admin.countries.data_table.record_select')
             ->editColumn('created_at', function (Country $country) {
                 return $country->created_at->format('Y-m-d');
             })
+            ->addColumn('image', function (Country $country) {
+                return view('dashboard.admin.countries.data_table.image', compact('country'));
+            })
             ->addColumn('actions', 'dashboard.admin.countries.data_table.actions')
-            ->rawColumns([ 'actions'])
+            ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
 
-    public function create() {
-
-     return view('dashboard\admin\countries.create');
-    }
-
-
     public function store($request) {
-         DB::beginTransaction();
-        try{
-            $requestData = $request->validated();
-
-
-            $country = Country::create($requestData);
-            $country->name = $request->name;
-            $country->save();
-
-            DB::commit();
-
-            toastr()->success(__('Admin/country.added_successfully'));
-            return redirect()->route('countries.index');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        $dataRequest = $request->except(['country_logo']);
+        if($request->country_logo) {
+            Image::make($request->country_logo)->resize(150, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('Dashboard/img/countryFlags/' . $request->country_logo->hashName()));
+            $dataRequest['country_logo'] = $request->country_logo->hashName();
         }
+        Country::create($dataRequest);
+        toastr()->success(__('Admin/site.added_successfully'));
+        return redirect()->route('Countries.index');
     }
 
     public function edit($id) {
-          $id_country  = Crypt::decrypt($id);
-        $country = Country::findorfail($id_country);
+        $countryID = Crypt::decrypt($id);
+        $country=Country::findorfail($countryID);
         return view('dashboard.admin.countries.edit', compact('country'));
     }
 
-        public function update( $request,$id) {
-            try{
-                $country=Country::findorfail($id);
-                $requestData = $request->validated();
-                $requestData['name'] = $request->name;
-                $country->update($requestData);
-                toastr()->success( __('Admin/site.updated_successfully'));
-                return redirect()->route('countries.index');
-            } catch (\Exception $e) {
-                return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+    public function update($request,$id) {
+        $countryID = Crypt::decrypt($id);
+        $country=Country::findorfail($countryID);
+        $dataRequest = $request->except(['country_logo']);
+        if($request->country_logo) {
+            if($country->country_logo != 'default_flag.jpg') {
+                Storage::disk('public_uploads')->delete('/countryFlags/' . $country->country_logo);
             }
+            Image::make($request->country_logo)->resize(150, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('Dashboard/img/countryFlags/' . $request->country_logo->hashName()));
+            $dataRequest['country_logo'] = $request->country_logo->hashName();
         }
-
+        $country->update($dataRequest);
+        toastr()->success(__('Admin/site.edit_successfully'));
+        return redirect()->route('Countries.index');
+    }
 
     public function destroy($id) {
-        $country=Country::findorfail($id);
+        $countryID = Crypt::decrypt($id);
+            $country=Country::findorfail($countryID);
+        if($country->country_logo != 'default_flag.jpg') {
+            Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
+        }
         $country->delete();
-        toastr()->error(__('Admin/country.deleted_successfully'));
-        return redirect()->route('countries.index');
+        toastr()->success(__('Admin/site.deleted_successfully'));
+        return redirect()->route('Countries.index');
     }
 }
