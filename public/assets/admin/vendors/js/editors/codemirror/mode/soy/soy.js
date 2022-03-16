@@ -41,7 +41,7 @@
       var oldString = stream.string;
       var match = untilRegExp.exec(oldString.substr(stream.pos));
       if (match) {
-        // We don't use backUp because it backs up just the position, not the state.
+        // We don't use backUp because it backs up just the position, not the states.
         // This uses an undocumented API.
         stream.string = oldString.substr(0, stream.pos + match.index);
       }

@@ -1345,7 +1345,7 @@ var Quill = function () {
       var focus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
       if (focus) this.focus();
-      this.update(); // Make sure we access getRange with editor in consistent state
+      this.update(); // Make sure we access getRange with editor in consistent states
       return this.selection.getRange()[0];
     }
   }, {

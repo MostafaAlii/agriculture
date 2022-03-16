@@ -85,7 +85,7 @@ export default function () {
         onAction (comp) {
           DemoState2.toggle();
           comp.setActive(DemoState2.get());
-          console.log('button with Toggle click - current state is: ' + DemoState2.get());
+          console.log('button with Toggle click - current states is: ' + DemoState2.get());
         }
       });
 

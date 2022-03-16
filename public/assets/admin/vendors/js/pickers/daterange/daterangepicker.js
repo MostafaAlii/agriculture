@@ -83,7 +83,7 @@
 
       this.callback = function() { };
 
-      //some state information
+      //some states information
       this.isShowing = false;
       this.leftCalendar = {};
       this.rightCalendar = {};

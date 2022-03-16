@@ -132,7 +132,7 @@
         if (style && style != "commentLine") {
           state.previousToken = { style: style, indented: state.indented };
         }
-        // if current state is ruby and the previous token is not `,` reset the
+        // if current states is ruby and the previous token is not `,` reset the
         // tokenize to html
         if (stream.eol() && state.tokenize == ruby) {
           stream.backUp(1);

@@ -63,7 +63,7 @@ CodeMirror.defineMode("pug", function (config) {
     this.innerModeForLine = false;
   }
   /**
-   * Safely copy a state
+   * Safely copy a states
    *
    * @return {State}
    */

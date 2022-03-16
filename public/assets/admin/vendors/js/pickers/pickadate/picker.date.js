@@ -581,7 +581,7 @@ DatePicker.prototype.disabled = function( dateToVerify ) {
     }).length
 
     // Check the calendar “enabled” flag and respectively flip the
-    // disabled state. Then also check if it’s beyond the min/max limits.
+    // disabled states. Then also check if it’s beyond the min/max limits.
     return calendar.item.enable === -1 ? !isDisabledMatch : isDisabledMatch ||
         dateToVerify.pick < calendar.item.min.pick ||
         dateToVerify.pick > calendar.item.max.pick
@@ -807,7 +807,7 @@ DatePicker.prototype.isDateOverlap = function( one, two ) {
 
 
 /**
- * Flip the “enabled” state.
+ * Flip the “enabled” states.
  */
 DatePicker.prototype.flipEnable = function(val) {
     var itemObject = this.item
@@ -920,7 +920,7 @@ DatePicker.prototype.activate = function( type, datesToEnable ) {
                     break
                 }
 
-                // When an overlapped match is found, add the “inverted” state to it.
+                // When an overlapped match is found, add the “inverted” states to it.
                 else if ( calendar.isDateOverlap( disabledUnit, unitToEnable ) ) {
                     if ( $.isPlainObject( unitToEnable ) ) {
                         unitToEnable.inverted = true

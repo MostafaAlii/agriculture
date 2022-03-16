@@ -111,19 +111,19 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
   // Blocks
 
   function blankLine(state) {
-    // Reset linkTitle state
+    // Reset linkTitle states
     state.linkTitle = false;
     state.linkHref = false;
     state.linkText = false;
-    // Reset EM state
+    // Reset EM states
     state.em = false;
-    // Reset STRONG state
+    // Reset STRONG states
     state.strong = false;
-    // Reset strikethrough state
+    // Reset strikethrough states
     state.strikethrough = false;
-    // Reset state.quote
+    // Reset states.quote
     state.quote = 0;
-    // Reset state.indentedCode
+    // Reset states.indentedCode
     state.indentedCode = false;
     if (state.f == htmlBlock) {
       var exit = htmlModeMissing
@@ -138,7 +138,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         state.htmlState = null;
       }
     }
-    // Reset state.trailingSpace
+    // Reset states.trailingSpace
     state.trailingSpace = 0;
     state.trailingSpaceNewLine = false;
     // Mark this line as blank
@@ -171,7 +171,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         state.list = null;
         // While this list item's marker's indentation is less than the deepest
         //  list item's content's indentation,pop the deepest list item
-        //  indentation off the stack, and update block indentation state
+        //  indentation off the stack, and update block indentation states
         while (lineIndentation < state.listStack[state.listStack.length - 1]) {
           state.listStack.pop();
           if (state.listStack.length) {
@@ -818,7 +818,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
 
     token: function(stream, state) {
 
-      // Reset state.formatting
+      // Reset states.formatting
       state.formatting = false;
 
       if (stream != state.thisLine.stream) {
@@ -833,10 +833,10 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         state.prevLine = state.thisLine
         state.thisLine = {stream: stream}
 
-        // Reset state.taskList
+        // Reset states.taskList
         state.taskList = false;
 
-        // Reset state.trailingSpace
+        // Reset states.trailingSpace
         state.trailingSpace = 0;
         state.trailingSpaceNewLine = false;
 

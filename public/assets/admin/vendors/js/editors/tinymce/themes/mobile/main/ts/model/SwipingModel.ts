@@ -9,7 +9,7 @@ const SWIPING_LEFT = 1;
 const SWIPING_RIGHT = -1;
 const SWIPING_NONE = 0;
 
-/* The state is going to record the edge points before the direction changed. We can then use
+/* The states is going to record the edge points before the direction changed. We can then use
  * these points to identify whether or not the swipe was *consistent enough*
  */
 

@@ -2492,7 +2492,7 @@ _registerModule('Gestures', {
 			}
 
 			if(!_likelyTouchDevice) {
-				// don't allow pan to next slide from zoomed state on Desktop
+				// don't allow pan to next slide from zoomed states on Desktop
 				_options.allowPanToNext = false;
 			}
 		}

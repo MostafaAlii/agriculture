@@ -160,7 +160,7 @@ $(document).ready(function () {
         return v + "Reset @ " + moment().format() + " \n";
       }).scrollToBottom();
 
-    //Apply classes for default state
+    //Apply classes for default states
     if ($(".elStatus").idleTimer("isIdle")) {
       $(".elStatus").removeClass("alert-success").addClass("alert-warning");
     } else {
@@ -199,7 +199,7 @@ $(document).ready(function () {
     timerSyncId: "element-timer-demo"
   });
 
-  //For demo purposes, show initial state
+  //For demo purposes, show initial states
   if ($(".elStatus").idleTimer("isIdle")) {
     $(".elStatus").val(function (i, v) {
       return v + "Initial Idle @ " + moment().format() + " \n";
@@ -278,7 +278,7 @@ $(document).ready(function () {
       })
       .scrollToBottom();
 
-    //Apply classes for default state
+    //Apply classes for default states
     if ($(document).idleTimer("isIdle")) {
       $('.docStatus').removeClass("alert-success").addClass("alert-warning");
     } else {
@@ -297,7 +297,7 @@ $(document).ready(function () {
     timerSyncId: "document-timer-demo"
   });
 
-  //For demo purposes, style based on initial state
+  //For demo purposes, style based on initial states
   if ($(document).idleTimer("isIdle")) {
     $(".docStatus")
       .val(function (i, v) {

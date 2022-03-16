@@ -103,15 +103,15 @@
                 </li>
                 <li class=" navigation-header"><span data-i18n="Admin Panels">Admin Panels</span><i class="material-icons nav-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Admin Panels">more_horiz</i>
                 </li>
-                <li class=" nav-item"><a href="../material-ecommerce-menu-template" target="_blank"><i class="material-icons">add_shopping_cart</i><span class="menu-title" data-i18n="eCommerce">eCommerce</span></a>
+                <li class=" nav-item"><a href="{{route('countries.index')}}" target="_blank"><i class="material-icons">{{__('Admin\country.country')}}</i><span class="menu-title" data-i18n="eCommerce">eCommerce</span></a>
                 </li>
-                <li class=" nav-item"><a href="../material-travel-menu-template" target="_blank"><i class="material-icons">call_merge</i><span class="menu-title" data-i18n="Travel &amp; Booking">Travel &amp; Booking</span></a>
+                <li class=" nav-item"><a href="{{route('provinces.index')}}"  target="_blank"><i class="material-icons">{{__('Admin\province.province')}}</i><span class="menu-title" data-i18n="Travel &amp; Booking">Travel &amp; Booking</span></a>
                 </li>
-                <li class=" nav-item"><a href="../material-hospital-menu-template" target="_blank"><i class="material-icons">add_circle_outline</i><span class="menu-title" data-i18n="Hospital">Hospital</span></a>
+                <li class=" nav-item"><a href="{{route('areas.index')}}"  target="_blank"><i class="material-icons">{{__('Admin\area.Area')}}</i><span class="menu-title" data-i18n="Hospital">Hospital</span></a>
                 </li>
-                <li class=" nav-item"><a href="../material-crypto-menu-template" target="_blank"><i class="material-icons">attach_money</i><span class="menu-title" data-i18n="Crypto">Crypto</span></a>
+                <li class=" nav-item"><a href="{{route('states.index')}}"  target="_blank"><i class="material-icons">{{__('Admin\state.state')}}</i><span class="menu-title" data-i18n="Crypto">Crypto</span></a>
                 </li>
-                <li class=" nav-item"><a href="../material-support-menu-template" target="_blank"><i class="material-icons">label_outline</i><span class="menu-title" data-i18n="Support Ticket">Support Ticket</span></a>
+                <li class=" nav-item"><a href="{{route('village.index')}}" target="_blank"><i class="material-icons">{{__('Admin\village.village')}}</i><span class="menu-title" data-i18n="Support Ticket">Support Ticket</span></a>
                 </li>
                 <li class=" nav-item"><a href="../material-bank-menu-template" target="_blank"><i class="material-icons">account_balance</i><span class="menu-title" data-i18n="Bank">Bank</span></a>
                 </li>

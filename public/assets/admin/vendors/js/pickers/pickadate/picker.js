@@ -42,7 +42,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
         IS_DEFAULT_THEME = false,
 
 
-        // The state of the picker.
+        // The states of the picker.
         STATE = {
             id: ELEMENT.id || 'P' + Math.abs( ~~(Math.random() * new Date()) ),
             handlingOpen: false,
@@ -91,7 +91,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 STATE.type = ELEMENT.type
 
 
-                // Confirm focus state, convert into text input to remove UA stylings,
+                // Confirm focus states, convert into text input to remove UA stylings,
                 // and set as readonly to prevent keyboard popup.
                 ELEMENT.autofocus = ELEMENT == getActiveElement()
                 ELEMENT.readOnly = !SETTINGS.editable
@@ -211,7 +211,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                     $ELEMENT.off( '.' + STATE.id )
                 }, 0)
 
-                // Restore the element state
+                // Restore the element states
                 ELEMENT.type = STATE.type
                 ELEMENT.readOnly = false
 
@@ -238,7 +238,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 $ELEMENT.addClass( CLASSES.active )
 
                 // * A Firefox bug, when `html` has `overflow:hidden`, results in
-                //   killing transitions :(. So add the “opened” state on the next tick.
+                //   killing transitions :(. So add the “opened” states on the next tick.
                 //   Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=625289
                 setTimeout( function() {
 
@@ -375,7 +375,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 $ELEMENT.removeClass( CLASSES.active )
 
                 // * A Firefox bug, when `html` has `overflow:hidden`, results in
-                //   killing transitions :(. So remove the “opened” state on the next tick.
+                //   killing transitions :(. So remove the “opened” states on the next tick.
                 //   Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=625289
                 setTimeout( function() {
 
@@ -470,7 +470,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 // Make sure there’s something to get.
                 thing = thing || 'value'
 
-                // If a picker state exists, return that.
+                // If a picker states exists, return that.
                 if ( STATE[ thing ] != null ) {
                     return STATE[ thing ]
                 }
@@ -710,7 +710,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
                 },
 
                 // When something within the holder is focused, stop from bubbling
-                // to the doc and remove the “focused” state from the root.
+                // to the doc and remove the “focused” states from the root.
                 focusin: function( event ) {
                     P.$root.removeClass( CLASSES.focused )
                     event.stopPropagation()

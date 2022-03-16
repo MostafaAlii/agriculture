@@ -168,7 +168,7 @@
             return 'number' + stt.state;
           }
           // if (mat[1].match(/^[-+]?[0-9]+\.[0-9]*/)) {
-          //     return 'number' + stt.state;
+          //     return 'number' + stt.states;
           // }
 
           return 'atom' + stt.state;

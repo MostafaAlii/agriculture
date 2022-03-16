@@ -1,7 +1,7 @@
 <?php
-namespace App\Http\Requests;
+namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-class AdminRequest extends FormRequest {
+class FarmerRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -10,22 +10,19 @@ class AdminRequest extends FormRequest {
     {
         $rules = [
 
-            'firstname'    =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'     =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'phone'        => 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:admins',
-            'email'        => 'required|email|unique:admins',
+            'firstname'    =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'lastname'     =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
+            'email'        => 'required|email|unique:farmers',
             'password'     => 'required|confirmed|min:3|max:10',
-            'type'         => 'required|in:admin,employee',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $admin = $this->route()->parameter('id');
+            $farmer = $this->route()->parameter('farmer');
 
-            $rules['email'] = 'required|email|unique:admins,id,' . $admin;
-            $rules['phone'] = 'required|min:11|numeric|regex:/(0)[0-9]{9}/|unique:admins,id,' . $admin;
-            $rules['type'] = 'required|in:admin,employee';
+            $rules['email'] = 'required|email|unique:farmers,id,' . $farmer->id;
+            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . $farmer->id;
             $rules['password'] = '';
 
         }//end of if
@@ -36,12 +33,11 @@ class AdminRequest extends FormRequest {
 
     public function messages() {
         return [
+
             'firstname.required'   => trans('Adminv\alidation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
             'email.required'       => trans('Admin\validation.required'),
             'phone.required'       => trans('Admin\validation.required'),
-            'type.required'        => trans('Admin\validation.required'),
-            'type.in'              => trans('Admin\validation.in'),
 
             'firstname.min'        => trans('Admin\validation.min'),
             'lastname.min'         => trans('Admin\validation.min'),
@@ -54,6 +50,7 @@ class AdminRequest extends FormRequest {
             'email.email'          => trans('Admin\validation.email'),
             'email.unique'         => trans('Admin\validation.unique'),
             'phone.unique'         => trans('Admin\validation.unique'),
+
         ];
     }
 }

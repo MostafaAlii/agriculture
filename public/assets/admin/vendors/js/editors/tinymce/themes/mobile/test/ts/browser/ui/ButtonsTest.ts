@@ -97,7 +97,7 @@ UnitTest.asynctest('Browser Test: ui.ButtonsTest', function (success, failure) {
   /*
    * Beta has toggling, so check:
    *  - when the user clicks on the button, execCommand is fired
-   *  - when the format change is broadcast, the toggled state changes
+   *  - when the format change is broadcast, the toggled states changes
    */
   const sTestBeta = GeneralSteps.sequence([
     tEditor.sAssertEq('before beta, store is empty', [ ]),
@@ -121,7 +121,7 @@ UnitTest.asynctest('Browser Test: ui.ButtonsTest', function (success, failure) {
   /*
    * Gamma has toggling, and a custom action, so check:
    *  - when the user clicks on the button, the custom action is fired
-   *  - when the format change is broadcast, the toggled state changes
+   *  - when the format change is broadcast, the toggled states changes
    */
   const sTestGamma = GeneralSteps.sequence([
     tEditor.sAssertEq('before gamma, store is empty', [ ]),

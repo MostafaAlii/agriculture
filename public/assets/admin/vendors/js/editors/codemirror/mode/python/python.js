@@ -198,7 +198,7 @@
           // starting brace, if not eaten below
           return "punctuation";
         } else if (stream.match('}')) {
-          // return to regular inside string state
+          // return to regular inside string states
           state.tokenize = tokenString
           return "punctuation";
         } else {

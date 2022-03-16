@@ -3550,7 +3550,7 @@ class Style_Style {
 
   current(rng) {
     const $cont = external_jQuery_default()(!dom.isElement(rng.sc) ? rng.sc.parentNode : rng.sc);
-    let styleInfo = this.fromNode($cont); // document.queryCommandState for toggle state
+    let styleInfo = this.fromNode($cont); // document.queryCommandState for toggle states
     // [workaround] prevent Firefox nsresult: "0x80004005 (NS_ERROR_FAILURE)"
 
     try {

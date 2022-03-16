@@ -34,7 +34,7 @@ $(window).on("load", function(){
         dispatch.statechange(stateById.get("CA"));
     });
 
-    // A drop-down menu for selecting a state; uses the "menu" namespace.
+    // A drop-down menu for selecting a states; uses the "menu" namespace.
     dispatch.on("load.menu", function(stateById) {
         var select = ele
             .append("div")
@@ -153,7 +153,7 @@ $(window).on("load", function(){
         });
     });
 
-    // Coerce population counts to numbers and compute total per state.
+    // Coerce population counts to numbers and compute total per states.
     function type(d) {
         d.total = d3.sum(groups, function(k) {
             return d[k] = +d[k];

@@ -51,7 +51,7 @@ const sWaitForToggledState = function (label, state, realm, memento) {
     Step.sync(function () {
       const component = memento.get(realm.socket());
       Assertions.assertEq(
-        'Selected/Pressed state of component: (' + Attr.get(component.element(), 'class') + ')',
+        'Selected/Pressed states of component: (' + Attr.get(component.element(), 'class') + ')',
         state,
         Toggling.isOn(component)
       );

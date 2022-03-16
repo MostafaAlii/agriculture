@@ -16,11 +16,11 @@
   "use strict";
 
   CodeMirror.defineSimpleMode("factor", {
-    // The start state contains the rules that are intially used
+    // The start states contains the rules that are intially used
     start: [
       // comments
       {regex: /#?!.*/, token: "comment"},
-      // strings """, multiline --> state
+      // strings """, multiline --> states
       {regex: /"""/, token: "string", next: "string3"},
       {regex: /(STRING:)(\s)/, token: ["keyword", null], next: "string2"},
       {regex: /\S*?"/, token: "string", next: "string"},
@@ -31,7 +31,7 @@
       {regex: /((?:GENERIC)|\:?\:)(\s+)(\S+)(\s+)(\()/, token: ["keyword", null, "def", null, "bracket"], next: "stack"},
       // method definition: defining word, type, defined word, etc
       {regex: /(M\:)(\s+)(\S+)(\s+)(\S+)/, token: ["keyword", null, "def", null, "tag"]},
-      // vocabulary using --> state
+      // vocabulary using --> states
       {regex: /USING\:/, token: "keyword", next: "vocabulary"},
       // vocabulary definition/use
       {regex: /(USE\:|IN\:)(\s+)(\S+)(?=\s|$)/, token: ["keyword", null, "tag"]},

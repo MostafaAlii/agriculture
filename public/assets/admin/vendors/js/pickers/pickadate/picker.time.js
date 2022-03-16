@@ -707,7 +707,7 @@ TimePicker.prototype.isTimeOverlap = function( one, two ) {
 
 
 /**
- * Flip the “enabled” state.
+ * Flip the “enabled” states.
  */
 TimePicker.prototype.flipEnable = function(val) {
     var itemObject = this.item
@@ -820,7 +820,7 @@ TimePicker.prototype.activate = function( type, timesToEnable ) {
                     break
                 }
 
-                // When an overlapped match is found, add the “inverted” state to it.
+                // When an overlapped match is found, add the “inverted” states to it.
                 else if ( clock.isTimeOverlap( disabledUnit, unitToEnable ) ) {
                     if ( $.isPlainObject( unitToEnable ) ) {
                         unitToEnable.inverted = true

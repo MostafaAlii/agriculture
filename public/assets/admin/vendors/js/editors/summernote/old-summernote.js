@@ -2863,7 +2863,7 @@ var Style = /** @class */ (function () {
     Style.prototype.current = function (rng) {
         var $cont = $$1(!dom.isElement(rng.sc) ? rng.sc.parentNode : rng.sc);
         var styleInfo = this.fromNode($cont);
-        // document.queryCommandState for toggle state
+        // document.queryCommandState for toggle states
         // [workaround] prevent Firefox nsresult: "0x80004005 (NS_ERROR_FAILURE)"
         try {
             styleInfo = $$1.extend(styleInfo, {

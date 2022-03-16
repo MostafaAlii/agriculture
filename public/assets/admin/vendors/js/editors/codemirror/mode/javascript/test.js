@@ -19,7 +19,7 @@
 
   MT("destructure_trailing_comma",
     "[keyword let] {[def a], [def b],} [operator =] [variable foo];",
-    "[keyword let] [def c];"); // Parser still in good state?
+    "[keyword let] [def c];"); // Parser still in good states?
 
   MT("class_body",
      "[keyword class] [def Foo] {",

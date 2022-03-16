@@ -1,6 +1,6 @@
 const mockFeatureState = () => {
   // Why we need this mock?
-  // Alloy toggle is stateless, it needs somthing to tell it what state it should be
+  // Alloy toggle is stateless, it needs somthing to tell it what states it should be
 
   let demoState = false;
 

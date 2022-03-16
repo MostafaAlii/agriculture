@@ -135,7 +135,7 @@ const sketch = function (rawSpec) {
 
           AddEventsBehaviour.config(formAdhocEvents, [
             AlloyEvents.runOnAttached(function (dialog, simulatedEvent) {
-              // Reset state to first screen.
+              // Reset states to first screen.
               resetState();
               const dotitems = memDots.get(dialog);
               Highlighting.highlightFirst(dotitems);

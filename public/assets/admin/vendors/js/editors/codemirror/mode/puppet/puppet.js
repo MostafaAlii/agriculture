@@ -38,7 +38,7 @@ CodeMirror.defineMode("puppet", function () {
     'nagios_servicedependency nagios_serviceescalation nagios_serviceextinfo ' +
     'nagios_servicegroup nagios_timeperiod name notify outiface package proto reject ' +
     'resources router schedule scheduled_task selboolean selmodule service source ' +
-    'sport ssh_authorized_key sshkey stage state table tidy todest toports tosource ' +
+    'sport ssh_authorized_key sshkey stage states table tidy todest toports tosource ' +
     'user vlan yumrepo zfs zone zpool');
 
   // After finding a start of a string ('|") this function attempts to find the end;
@@ -136,7 +136,7 @@ CodeMirror.defineMode("puppet", function () {
       if (word == 'include') {
         state.inInclude = true;
       }
-      // Returns their value as state in the prior define methods
+      // Returns their value as states in the prior define methods
       return words[word];
     }
     // Is there a match on a reference?

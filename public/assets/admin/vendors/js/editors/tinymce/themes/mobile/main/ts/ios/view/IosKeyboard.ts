@@ -31,7 +31,7 @@ import ResumeEditing from '../focus/ResumeEditing';
  * sends the input back to the content, and then subsequent keystrokes appear in the content. Although
  * this means that their first keystroke is lost, it is a reasonable way of ensuring that they don't
  * get stuck in some weird input somewhere. The goal of the stubborn keyboard is to view this as a
- * fallback ... we want to prevent it getting to this state wherever possible. However, there are just
+ * fallback ... we want to prevent it getting to this states wherever possible. However, there are just
  * some situations where we really don't know what typing on the keyboard should do (e.g. a dropdown is open).
  * Note, when we transfer the focus back to the content, we also close any menus that are still visible.
  *
