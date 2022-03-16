@@ -68,7 +68,7 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.lastname') }}</label>
-                                                        <input type="text" class="form-control" placeholder="Username" value="{{ old('lastname',Auth::user()->lastname) }}"
+                                                        <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->lastname) }}"
                                                         name="lastname" required data-validation-required-message="This lastname field is required">
                                                     </div>
                                                 </div>
@@ -201,7 +201,7 @@
                                     <!-- users edit Info form start -->
                                     <form novalidate>
                                         <div class="row">
-                                            <div class="col-12 col-sm-6">
+                                            {{-- <div class="col-12 col-sm-6">
                                                 <h5 class="mb-1"><i class="ft-link mr-25"></i>Social Links</h5>
                                                 <div class="form-group">
                                                     <label>Twitter</label>
@@ -223,17 +223,19 @@
                                                     <label>Instagram</label>
                                                     <input class="form-control" type="text" value="https://www.instagram.com/">
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-12 col-sm-6 mt-1 mt-sm-0">
-                                                <h5 class="mb-1"><i class="ft-user mr-25"></i>Personal Info</h5>
+                                                <h5 class="mb-1"><i class="ft-user mr-25"></i>{{ __('Admin/site.personalinfo') }}</h5>
                                                 <div class="form-group">
                                                     <div class="controls position-relative">
-                                                        <label>Birth date</label>
-                                                        <input type="text" class="form-control birthdate-picker" required placeholder="Birth date" data-validation-required-message="This birthdate field is required">
+                                                        <label>{{ __('Admin/site.birthday') }}</label>
+                                                        <input type="date" class="form-control birthdate-picker" required placeholder="Birth date"
+                                                        value="{{ Auth::user()->birthdate }}"
+                                                        data-validation-required-message="This birthdate field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Country</label>
+                                                    <label>{{ __('Admin/site.country') }}</label>
                                                     <select class="form-control" id="accountSelect">
                                                         <option>USA</option>
                                                         <option>India</option>
@@ -241,31 +243,61 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Languages</label>
-                                                    <select class="form-control" id="users-language-select2" multiple="multiple">
-                                                        <option value="English" selected>English</option>
-                                                        <option value="Spanish">Spanish</option>
-                                                        <option value="French">French</option>
-                                                        <option value="Russian">Russian</option>
-                                                        <option value="German">German</option>
-                                                        <option value="Arabic" selected>Arabic</option>
-                                                        <option value="Sanskrit">Sanskrit</option>
+                                                    <label>{{ __('Admin/site.state') }}</label>
+                                                    <select class="form-control" id="accountSelect">
+                                                        <option>USA</option>
+                                                        <option>India</option>
+                                                        <option>Canada</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="controls">
-                                                        <label>Phone</label>
-                                                        <input type="text" class="form-control" required placeholder="Phone number" value="(+656) 254 2568" data-validation-required-message="This phone number field is required">
-                                                    </div>
+                                                    <label>{{ __('Admin/site.province') }}</label>
+                                                    <select class="form-control" id="accountSelect">
+                                                        <option>USA</option>
+                                                        <option>India</option>
+                                                        <option>Canada</option>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="controls">
-                                                        <label>Address</label>
-                                                        <input type="text" class="form-control" placeholder="Address" data-validation-required-message="This Address field is required">
-                                                    </div>
+                                                    <label>{{ __('Admin/site.village') }}</label>
+                                                    <select class="form-control" id="accountSelect">
+                                                        <option>USA</option>
+                                                        <option>India</option>
+                                                        <option>Canada</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.area') }}</label>
+                                                    <select class="form-control" id="accountSelect">
+                                                        <option>USA</option>
+                                                        <option>India</option>
+                                                        <option>Canada</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-12 col-sm-6 mt-1 mt-sm-0">
+                                                <h5 class="mb-1"><i class="ft-user mr-25"></i></h5>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.address1') }}</label>
+                                                    <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->address1) }}"
+                                                    name="address1" required data-validation-required-message="This lastname field is required">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.address2') }}</label>
+                                                    <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->address2) }}"
+                                                    name="address2" required data-validation-required-message="This lastname field is required">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.department') }}</label>
+                                                    <select class="form-control" id="accountSelect">
+                                                        <option>USA</option>
+                                                        <option>India</option>
+                                                        <option>Canada</option>
+                                                    </select>
+                                                </div>
+                                                
+                                            </div>
+                                            {{-- <div class="col-12">
                                                 <div class="form-group">
                                                     <label>Website</label>
                                                     <input type="text" class="form-control" placeholder="Website address">
@@ -297,7 +329,7 @@
                                                         <option value="Avatar">Avatar</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>

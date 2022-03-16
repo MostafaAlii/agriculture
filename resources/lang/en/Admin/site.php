@@ -80,7 +80,7 @@ return [
     'profile'=>'profile',
     'profiledit'=>'profile edit',
     'personalinfo'=>'Personal Information',
-    'birthday'=>'Birthday',
+    'birthday'=>'Birthdate',
     'address1'=>'Primary Address',
     'address2'=>'Secondery Address',
     'area'=>'Area',
