@@ -43,6 +43,9 @@ Route::group(
             Route::get('/Admins/data', [AdminController::class,'data'])->name('admins.data');
             Route::delete('/admins/bulk_delete/{ids}', [AdminController::class,'bulkDelete'])->name('admins.bulk_delete');
             Route::get('/admin/profile/{id}', [AdminController::class,'showProfile'])->name('admin.profile');
+            Route::resource('profile', ProfileController::class)->except(['show']); // route for dashboard profile Auth admin
+            Route::put('/admin/profileupdate/{id}', [ProfileController::class,'updateAccount'])->name('admin.updateAccount');
+            // Route::put('/admin/profileupdateinfo/{id}', [ProfileController::class,'updateInformation'])->name('admin.updateInformation');
             /********************************* End Admin & Employee Routes ************************************/
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);
@@ -68,9 +71,7 @@ Route::group(
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);
             /********************************* End Department Routes ************************************/
-            // route for dashboard profile
-            // Route::resource('profile', ProfileController::class)->except(['show']);
-            // route for dashboard profile
+
         });
 
     });
