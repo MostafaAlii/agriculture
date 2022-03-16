@@ -179,27 +179,27 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.country'):</td>
-                                            <td>{{ Auth::user()->birthdate }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>@lang('Admin/site.state'):</td>
-                                            <td>{{ Auth::user()->birthdate }}</td>
+                                            <td>{{ Auth::user()->country->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.province'):</td>
-                                            <td>{{ Auth::user()->birthdate }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>@lang('Admin/site.village'):</td>
-                                            <td>{{ Auth::user()->birthdate }}</td>
+                                            <td>{{ Auth::user()->province->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.area'):</td>
-                                            <td>{{ Auth::user()->birthdate }}</td>
+                                            <td>{{ Auth::user()->area->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@lang('Admin/site.state'):</td>
+                                            <td>{{ Auth::user()->state->name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@lang('Admin/site.village'):</td>
+                                            <td>{{ Auth::user()->village->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.department'):</td>
-                                            <td>{{ Auth::user()->birthdate }}</td>
+                                            <td>{{ Auth::user()->department->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.address1'):</td>
