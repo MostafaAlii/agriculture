@@ -121,9 +121,10 @@ class UserRepository implements UserInterface{
 
     }// end of bulkDelete
 
-    // public function delete($user)
-    // {
-    //     $user->delete();
-
-    // }// end of delete
+    public function showProfile($id){
+        $userID = Crypt::decrypt($id);
+        // dd( $userID);
+        $user=User::findorfail($userID);
+        return view('dashboard.admin.users.profile.profileview', compact('user'));
+    }
 }

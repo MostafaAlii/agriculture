@@ -1,4 +1,7 @@
-
+    <a href="{{ route('user.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
+        <i class="fa fa-show"></i>
+        {{ __('Admin/site.show') }}
+    </a>
     <a href="{{ route('users.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/site.edit') }}

@@ -39,8 +39,12 @@ class AdminController extends Controller {
     public function destroy($id) {
         return $this->Data->destroy($id);
     }// end of destroy
-    
+
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
+    public function showProfile($id) {
+        // dd($id);
+        return $this->Data->showProfile($id);
+    }// end of showprofile
 }

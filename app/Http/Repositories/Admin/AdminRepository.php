@@ -121,4 +121,13 @@ class AdminRepository implements AdminInterface{
         return redirect()->route('Admins.index');
 
     }// end of bulkDelete
+
+    public function showProfile($id){
+        $adminID = Crypt::decrypt($id);
+        // dd($adminID);
+        // dd($id);
+        $admin=Admin::findorfail($adminID);
+
+        return view('dashboard.admin.admins.profile.profileview', compact('admin'));
+    }
 }

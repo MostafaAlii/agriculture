@@ -1,8 +1,12 @@
 
 @if($admin->image)
-<img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}" style="width: 100px; height: 100px;" alt="">
+<a href="{{ route('admin.profile', encrypt($admin->id)) }}">
+    <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}" style="width: 100px; height: 100px;" alt="">
+</a>
 
 @else
-<img src="{{ asset('Dashboard/img/images/avatar.jpg') }}" style="width: 100px;" alt="">
+<a href="{{ route('admin.profile', encrypt($admin->id)) }}">
+    <img src="{{ asset('Dashboard/img/images/avatar.jpg') }}" style="width: 100px;" alt="">
+</a>
 
 @endif

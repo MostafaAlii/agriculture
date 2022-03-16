@@ -9,4 +9,5 @@ interface AdminInterface {
     public function update($request,$admin);
     public function destroy($admin);
     public function bulkDelete($ids);
+    public function showProfile($id);
 }

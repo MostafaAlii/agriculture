@@ -15,6 +15,10 @@ class Admin extends Authenticatable {
         {
             return $this->morphOne(Image::class, 'imageable');
         }
+        // public function profile(){
+        //     return $this->hasOne(Profile::class, 'admin_id');
+        //    }
+        // attr
 
     protected $hidden = [
         'password',

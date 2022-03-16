@@ -9,4 +9,5 @@ interface farmerInterface {
     public function update($request,$farmer);
     public function destroy($farmer);
     public function bulkDelete($ids);
+    public function showProfile($id);
 }

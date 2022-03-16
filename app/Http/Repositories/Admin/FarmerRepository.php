@@ -109,4 +109,9 @@ class FarmerRepository implements FarmerInterface{
         return redirect()->route('farmers.index');
 
     }// end of bulkDelete
+    public function showProfile($id){
+        $farmerID = Crypt::decrypt($id);
+        $farmer=Farmer::findorfail($farmerID);
+        return view('dashboard.admin.farmers.profile.profileview', compact('farmer'));
+    }
 }

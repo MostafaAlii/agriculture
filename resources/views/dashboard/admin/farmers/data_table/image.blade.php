@@ -1,8 +1,12 @@
 
 @if($farmer->image)
-<img src="{{ asset('Dashboard/img/farmers/'. $farmer->image->filename) }}" style="width: 100px;" alt="">
+<a href="{{ route('farmer.profile', encrypt($farmer->id)) }}">
+    <img src="{{ asset('Dashboard/img/farmers/'. $farmer->image->filename) }}" style="width: 100px;" alt="">
+</a>
 
 @else
-<img src="{{ asset('Dashboard/img/images/avatar.jpg') }}" style="width: 100px;" alt="">
+<a href="{{ route('farmer.profile', encrypt($farmer->id)) }}">
+    <img src="{{ asset('Dashboard/img/images/avatar.jpg') }}" style="width: 100px;" alt="">
+</a>
 
 @endif

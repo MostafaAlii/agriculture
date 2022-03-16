@@ -9,5 +9,5 @@ interface UserInterface {
     public function update($request,$user);
     public function destroy($user);
     public function bulkDelete($ids);
-    // public function delete($user);
+    public function showProfile($id);
 }

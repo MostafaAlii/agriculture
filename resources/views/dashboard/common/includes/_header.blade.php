@@ -233,7 +233,7 @@
                                  {{ trans('Admin/dashboard.website') }}
                             </a>
                             {{-- route to go website ******************************************** --}}
-                            <a class="dropdown-item" href="user-profile.html">
+                            <a class="dropdown-item" href="{{ route('admin.profile', encrypt(Auth::user('admin')->id)) }}">
                                 <i class="material-icons">person_outline</i>
                                 @lang('Admin/site.profile')
                             </a>
