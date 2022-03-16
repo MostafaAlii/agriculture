@@ -30,13 +30,13 @@ class AdminFactory extends Factory
 
             'address1'         => $this->faker->streetAddress,
             'address2'         => $this->faker->streetAddress,
-            'country_id'    => $this->faker->numberBetween(1, Country::count()),
-            // 'area_id'       => $this->faker->numberBetween(1, Area::count()),
-            // 'province_id'   => $this->faker->numberBetween(1, Province::count()),
-            // 'state_id'      => $this->faker->numberBetween(1, State::count()),
-            // 'village_id'    => $this->faker->numberBetween(1, Village::count()),
-            // 'department_id'  => $this->faker->numberBetween(1, Department::count()),
-            'birthdate'     => $this->faker->date,
+            'country_id'       => $this->faker->numberBetween(1, Country::count()),
+            'province_id'      => $this->faker->numberBetween(1, Province::count()),
+            'area_id'          => $this->faker->numberBetween(1, Area::count()),
+            'state_id'         => $this->faker->numberBetween(1, State::count()),
+            'village_id'       => $this->faker->numberBetween(1, Village::count()),
+            'department_id'    => $this->faker->numberBetween(1, Department::count()),
+            'birthdate'        => $this->faker->date,
 
             'remember_token' => Str::random(10),
         ];
