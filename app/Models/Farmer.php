@@ -14,6 +14,30 @@ class Farmer extends Authenticatable {
         {
             return $this->morphOne(Image::class, 'imageable');
         }
+        public function country()
+        {
+            return $this->belongsTo(Country::class, 'country_id');
+        }
+        public function province()
+        {
+            return $this->belongsTo(Province::class, 'province_id');
+        }
+        public function area()
+        {
+            return $this->belongsTo(Area::class, 'area_id');
+        }
+        public function state()
+        {
+            return $this->belongsTo(State::class, 'state_id');
+        }
+        public function village()
+        {
+            return $this->belongsTo(Village::class, 'village_id');
+        }
+        public function department()
+        {
+            return $this->belongsTo(Department::class, 'department_id');
+        }
 
     protected $hidden = [
         'password',

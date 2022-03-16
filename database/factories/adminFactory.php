@@ -30,18 +30,19 @@ class AdminFactory extends Factory
 
             'address1'         => $this->faker->streetAddress,
             'address2'         => $this->faker->streetAddress,
-            // 'area_id'       => $this->faker->numberBetween(1, Area::count()),
-            // 'province_id'   => $this->faker->numberBetween(1, Province::count()),
-            // 'country_id'    => $this->faker->numberBetween(1, Country::count()),
-            // 'state_id'      => $this->faker->numberBetween(1, State::count()),
-            // 'village_id'    => $this->faker->numberBetween(1, Village::count()),
-            // 'department_id'  => $this->faker->numberBetween(1, Department::count()),
-            'birthdate'     => $this->faker->date,
+            'country_id'       => $this->faker->numberBetween(1, Country::count()),
+            'province_id'      => $this->faker->numberBetween(1, Province::count()),
+            'area_id'          => $this->faker->numberBetween(1, Area::count()),
+            'state_id'         => $this->faker->numberBetween(1, State::count()),
+            'village_id'       => $this->faker->numberBetween(1, Village::count()),
+            'department_id'    => $this->faker->numberBetween(1, Department::count()),
+            'birthdate'        => $this->faker->date,
 
             'remember_token' => Str::random(10),
         ];
     }
 
+    // 'country_id'    => Country::all()->random()->id,
     /**
      * Indicate that the model's email address should be unverified.
      *

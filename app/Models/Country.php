@@ -13,6 +13,7 @@ class Country extends Model {
     use HasFactory,Translatable;
     protected $table = "countries";
     protected $guarded = [];
+    // protected $fillable = ['country_logo','name'];
     protected $with = ['translations'];
     protected $appends = ['country_flag_path'];
     public $translatedAttributes = ['name'];

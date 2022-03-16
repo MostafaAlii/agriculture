@@ -205,7 +205,9 @@
                                     </div>
                                 </a><a href="javascript:void(0)">
                                     <div class="media">
-                                        <div class="media-left"><span class="avatar avatar-sm avatar-away rounded-circle"><img src="{{ asset('assets/admin/images/portrait/small/avatar-s-6.png') }}" alt="avatar"><i></i></span></div>
+                                        {{-- <div class="media-left"><span class="avatar avatar-sm avatar-away rounded-circle">
+                                            <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
+                                            alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"><i></i></span></div> --}}
                                         <div class="media-body">
                                             <h6 class="media-heading">Eric Alsobrook</h6>
                                             <p class="notification-text font-small-3 text-muted">We have project party this saturday.</p><small>
@@ -219,7 +221,8 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">
                             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span><span class="avatar avatar-online">
-                                <img src="{{ asset('assets/admin/images/portrait/small/avatar-s-19.png') }}" alt="avatar"><i></i></span>
+                                <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
+                                alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"><i></i></span>
                         </a>
                             {{-- @if (Auth::user()->image->filename)
                             <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"alt="avatar">
@@ -233,7 +236,8 @@
                                  {{ trans('Admin/dashboard.website') }}
                             </a>
                             {{-- route to go website ******************************************** --}}
-                            <a class="dropdown-item" href="{{ route('admin.profile', encrypt(Auth::user('admin')->id)) }}">
+                            {{-- <a class="dropdown-item" href="{{ route('admin.profile', encrypt(Auth::user('admin')->id)) }}"> --}}
+                            <a class="dropdown-item" href="{{ route('profile.index') }}" >
                                 <i class="material-icons">person_outline</i>
                                 @lang('Admin/site.profile')
                             </a>

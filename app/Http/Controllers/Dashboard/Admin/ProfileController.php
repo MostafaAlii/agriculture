@@ -1,9 +1,15 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\AdminRequest;
+use App\Http\Requests\Dashboard\ProfileAccountRequest;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Traits\UploadT;
 class ProfileController extends Controller {
-
+    use UploadT;
     // protected $Data;
     // public function __construct(AdminInterface $Data) {
     //     $this->Data = $Data;
@@ -13,26 +19,39 @@ class ProfileController extends Controller {
         return view('dashboard.admin.profile.profileview');
     }
 
-    // public function data() {
-    //     return $this->Data->data();
-    // }// end of data
+    public function edit($id) {
+        $adminID = Crypt::decrypt($id);
+        // dd($adminID);
+        $admin=Admin::findorfail($adminID);
+     return view('dashboard.admin.profile.profiledit',compact('admin'));
+    }// end of edit
 
-    // public function create() {
-    //     return $this->Data->create();
-    // }
+    public function updateAccount(ProfileAccountRequest $request,$id) {
+        // return $this->Data->update($request,$id);
+        try{
+            DB::beginTransaction();
+            $adminID = Crypt::decrypt($id);
+            $admin=Admin::findorfail($adminID);
+            $requestData = $request->validated();
+            // $requestData['type'] = $request->type;
+            $admin->update($requestData);
 
-    // public function store(AdminRequest $request) {
-    //     return $this->Data->store($request);
-    // }// end of store
+            if($request->image){
+                $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
+            }
+            $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
 
-    // public function edit($id) {
-    //     // dd($id);
-    //     return $this->Data->edit($id);
-    // }// end of edit
-
-    // public function update(AdminRequest $request,$id) {
-    //     return $this->Data->update($request,$id);
-    // }// end of update
+            DB::commit();
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('profile.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }// end of update
+    public function updateInformation(Request $request,$id) {
+        // return $this->Data->update($request,$id);
+    }// end of update
 
     // public function destroy($id) {
     //     return $this->Data->destroy($id);

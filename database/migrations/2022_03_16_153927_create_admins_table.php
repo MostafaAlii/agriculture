@@ -15,12 +15,12 @@ class CreateAdminsTable extends Migration {
             $table->string('password');
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            // $table->foreignId('area_id')->constrained()->onDelete('cascade')->default(1)->nullable();
-            // $table->foreignId('province_id')->constrained()->onDelete('cascade')->nullable()->default(1);
-            // $table->foreignId('country_id')->constrained()->onDelete('cascade')->nullable()->default(1);
-            // $table->foreignId('state_id')->constrained()->onDelete('cascade')->nullable()->default(1);
-            // $table->foreignId('village_id')->constrained()->onDelete('cascade')->nullable()->default(1);
-            // $table->foreignId('department_id')->constrained()->onDelete('cascade')->nullable()->default(1);
+            $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            $table->foreignId('province_id')->constrained()->onDelete('cascade');
+            $table->foreignId('area_id')->constrained()->onDelete('cascade');
+            $table->foreignId('state_id')->constrained()->onDelete('cascade');
+            $table->foreignId('village_id')->constrained()->onDelete('cascade');
+            $table->foreignId('department_id')->constrained()->onDelete('cascade');
             $table->date('birthdate')->nullable();
 
             $table->rememberToken();
