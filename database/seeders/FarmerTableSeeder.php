@@ -32,5 +32,6 @@ class FarmerTableSeeder extends Seeder {
             'birthdate'         =>  Carbon::create('2000', '01', '01'),
             'remember_token' => Str::random(10),
         ]);
+       
     }
 }

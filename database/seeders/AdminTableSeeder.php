@@ -17,6 +17,7 @@ class AdminTableSeeder extends Seeder {
             'address1'          =>  'cairo',
             'address2'          =>  'alex',
             'birthdate'         =>  Carbon::create('2000', '01', '01'),
+            'country_id'        => 1,
             'remember_token'    => Str::random(10),
         ]);
         Admin::create([
@@ -28,6 +29,7 @@ class AdminTableSeeder extends Seeder {
             'address1'          =>  'cairo',
             'address2'          =>  'alex',
             'birthdate'         =>  Carbon::create('2000', '01', '01'),
+            'country_id'        => 2,
             'remember_token'    => Str::random(10),
         ]);
 

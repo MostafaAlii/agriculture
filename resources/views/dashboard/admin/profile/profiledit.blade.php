@@ -237,9 +237,9 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.country') }}</label>
                                                     <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
+                                                        @foreach (\App\Models\Country::get() as $country)
+                                                         <option>{{ $country->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -280,12 +280,12 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address1') }}</label>
                                                     <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->address1) }}"
-                                                    name="address1" required data-validation-required-message="This lastname field is required">
+                                                    name="address1" required data-validation-required-message="This address1 field is required">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address2') }}</label>
                                                     <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->address2) }}"
-                                                    name="address2" required data-validation-required-message="This lastname field is required">
+                                                    name="address2" required data-validation-required-message="This address2 field is required">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
@@ -295,7 +295,7 @@
                                                         <option>Canada</option>
                                                     </select>
                                                 </div>
-                                                
+
                                             </div>
                                             {{-- <div class="col-12">
                                                 <div class="form-group">
