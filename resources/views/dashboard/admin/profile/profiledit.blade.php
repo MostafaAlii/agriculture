@@ -236,42 +236,35 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.country') }}</label>
-                                                    <select class="form-control" id="accountSelect">
+                                                    <select class="form-control" id="accountSelect" name="country_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @foreach (\App\Models\Country::get() as $country)
-                                                         <option>{{ $country->name }}</option>
+                                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>{{ __('Admin/site.state') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>{{ __('Admin/site.village') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
+                                                    <select class="form-control" id="accountSelect" name="province_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
+                                                    <select class="form-control" id="accountSelect" name="area_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.state') }}</label>
+                                                    <select class="form-control" id="accountSelect" name="state_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.village') }}</label>
+                                                    <select class="form-control" id="accountSelect" name="village_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -289,10 +282,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
+                                                    <select class="form-control" id="accountSelect" name="department_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                        @foreach (\App\Models\Department::get() as $department)
+                                                         <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
 
@@ -353,6 +347,31 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+     $(document).ready(function() {
+            $('select[name="country_id"]').on('change', function() {
+                    var country_id = $(this).val();
+                    if (country_id) {
+                        $.ajax({
+                            url: "{{ URL::to('/admin/province') }}/" + country_id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="province_id"]').empty();
+                                $('select[name="province_id"]').append( '<option selected disabled>--select--</option>');
 
+                                $.each(data, function(key, value) {
+                                    $('select[name="province_id"]').append(
+                                        '<option value="' + key + '">' + value +'</option>'
+                                    );
+                                });
+                            },
+                        });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+</script>
 
 @endsection

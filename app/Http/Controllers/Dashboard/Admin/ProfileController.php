@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\AdminRequest;
 use App\Http\Requests\Dashboard\ProfileAccountRequest;
 use App\Models\Admin;
+use App\Models\Province;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,7 +53,11 @@ class ProfileController extends Controller {
     public function updateInformation(Request $request,$id) {
         // return $this->Data->update($request,$id);
     }// end of update
-
+    public function getProvince($country_id)
+    {
+        $provinces = Province::where('country_id', $country_id)->pluck('name','id');
+        return $provinces;
+    }
     // public function destroy($id) {
     //     return $this->Data->destroy($id);
     // }// end of destroy

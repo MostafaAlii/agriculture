@@ -46,6 +46,7 @@ Route::group(
             Route::resource('profile', ProfileController::class)->except(['show']); // route for dashboard profile Auth admin
             Route::put('/admin/profileupdate/{id}', [ProfileController::class,'updateAccount'])->name('admin.updateAccount');
             // Route::put('/admin/profileupdateinfo/{id}', [ProfileController::class,'updateInformation'])->name('admin.updateInformation');
+            Route::get('/admin/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get province
             /********************************* End Admin & Employee Routes ************************************/
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);

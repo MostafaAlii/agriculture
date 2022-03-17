@@ -8,8 +8,24 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 class CountrySeeder extends Seeder {
     public function run() {
+        $count =5;
+        $country_names = [
+            "العراق",
+            "مصر",
+            "السعوديه",
+            "سوريا",
+            "فلسطين",
+        ];
         DB::table('countries')->delete();
-        Country::factory(5)->create();
+
+        for ($i = 0; $i < $count ; $i++) {
+        Country::create([
+            'country_logo'  =>'1.jpg',
+            'name'          =>$country_names[$i],
+
+        ]);
+        }
+        // Country::factory(5)->create();
 
 
     }
