@@ -14,9 +14,9 @@ class ProfileAccountRequest extends FormRequest {
             'lastname'     =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins',
             'email'        => 'required|email|unique:admins',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // 'password'     => 'required|confirmed|min:3|max:10',
             // 'type'         => 'required|in:admin,employee',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

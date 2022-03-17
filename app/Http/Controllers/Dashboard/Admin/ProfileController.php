@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\AdminRequest;
 use App\Http\Requests\Dashboard\ProfileAccountRequest;
+use App\Http\Requests\Dashboard\ProfileInformationRequest;
 use App\Models\Admin;
 use App\Models\Country;
 use App\Models\Province;
@@ -52,8 +53,18 @@ class ProfileController extends Controller {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }// end of update
-    public function updateInformation(Request $request,$id) {
-        // return $this->Data->update($request,$id);
+    public function updateInformation(ProfileInformationRequest $request,$id) {
+        try{
+            $adminID = Crypt::decrypt($id);
+            $admin=Admin::findorfail($adminID);
+            $requestData = $request->validated();
+            $admin->update($requestData);
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('profile.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+
     }// end of update
     public function getProvince($country_id)
     {

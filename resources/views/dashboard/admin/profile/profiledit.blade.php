@@ -199,31 +199,10 @@
                                 </div>
                                 <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
                                     <!-- users edit Info form start -->
-                                    <form novalidate>
+                                    <form novalidate action="{{ route('admin.updateInformation', encrypt(Auth::user()->id)) }}"  method="post">
+                                        @csrf
+                                        @method('put')
                                         <div class="row">
-                                            {{-- <div class="col-12 col-sm-6">
-                                                <h5 class="mb-1"><i class="ft-link mr-25"></i>Social Links</h5>
-                                                <div class="form-group">
-                                                    <label>Twitter</label>
-                                                    <input class="form-control" type="text" value="https://www.twitter.com/">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Facebook</label>
-                                                    <input class="form-control" type="text" value="https://www.facebook.com/">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Google+</label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>LinkedIn</label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Instagram</label>
-                                                    <input class="form-control" type="text" value="https://www.instagram.com/">
-                                                </div>
-                                            </div> --}}
                                             <div class="col-12 col-sm-6 mt-1 mt-sm-0">
                                                 <h5 class="mb-1"><i class="ft-user mr-25"></i>{{ __('Admin/site.personalinfo') }}</h5>
                                                 <div class="form-group">
@@ -352,7 +331,7 @@
         //  استعلام بالاجاكس لجلب محافظات البلد ajax for provinces data of country ===============================
             $('select[name="country_id"]').on('change', function() {
                     var country_id = $(this).val();
-                    console.log(country_id);
+                    // console.log(country_id);
                     if (country_id) {
                         $.ajax({
                             url: "{{ URL::to('dashboard_admin/admin/province') }}/" + country_id,
@@ -364,8 +343,8 @@
 
                                 $.each(data, function(key, value) {
                                     // console.log(data);
-                                    console.log(key);
-                                    console.log(value);
+                                    // console.log(key);
+                                    // console.log(value);
                                     $('select[name="province_id"]').append(
                                         '<option value="' + key + '">' + value +'</option>'
                                     );
@@ -383,7 +362,7 @@
         //  ajax for area data of province =====================================================================
             $('select[name="province_id"]').on('change', function() {
                     var province_id = $(this).val();
-                    console.log(province_id);
+                    // console.log(province_id);
                     if (province_id) {
                         $.ajax({
                             url: "{{ URL::to('dashboard_admin/admin/area') }}/" + province_id,
@@ -395,8 +374,8 @@
 
                                 $.each(data, function(key, value) {
                                     // console.log(data);
-                                    console.log(key);
-                                    console.log(value);
+                                    // console.log(key);
+                                    // console.log(value);
                                     $('select[name="area_id"]').append(
                                         '<option value="' + key + '">' + value +'</option>'
                                     );
