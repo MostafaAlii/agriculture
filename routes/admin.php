@@ -43,9 +43,11 @@ Route::group(
             Route::get('/Admins/data', [AdminController::class,'data'])->name('admins.data');
             Route::delete('/admins/bulk_delete/{ids}', [AdminController::class,'bulkDelete'])->name('admins.bulk_delete');
             Route::get('/admin/profile/{id}', [AdminController::class,'showProfile'])->name('admin.profile');
+
+            // route for auth profile Authadmin *******************************************************************
             Route::resource('profile', ProfileController::class)->except(['show']); // route for dashboard profile Auth admin
-            Route::put('/admin/profileupdate/{id}', [ProfileController::class,'updateAccount'])->name('admin.updateAccount'); // update auth form account
-            Route::put('/admin/profileupdateinfo/{id}', [ProfileController::class,'updateInformation'])->name('admin.updateInformation'); //update auth form information
+            Route::put('/profile/profileupdate/{id}', [ProfileController::class,'updateAccount'])->name('profile.updateAccount'); // update auth form account
+            Route::put('/profile/profileupdateinfo/{id}', [ProfileController::class,'updateInformation'])->name('profile.updateInformation'); //update auth form information
             // ajax routes ***********************************
             Route::get('/admin/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get country provinces
             Route::get('/admin/area/{province_id}', [ProfileController::class, 'getArea']);// route ajax for get province areas

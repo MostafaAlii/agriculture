@@ -56,7 +56,8 @@ class UserRepository implements UserInterface{
     public function edit($id) {
         $userID = Crypt::decrypt($id);
         $user=User::findorfail($userID);
-        return view('dashboard.admin.users.edit', compact('user'));
+        // return view('dashboard.admin.users.edit', compact('user'));
+        return view('dashboard.admin.users.profile.profiledit', compact('user'));
     }
 
     public function update($request,$id) {

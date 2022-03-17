@@ -36,13 +36,13 @@
 
                                     <!-- users edit media object ends -->
                                     <!-- users edit account form start -->
-                                    <form novalidate action="{{ route('profile.updateAccount', encrypt(Auth::user()->id)) }}"  enctype="multipart/form-data" method="post">
+                                    <form novalidate action="{{ route('admin.updateAccount', encrypt($user->id)) }}"  enctype="multipart/form-data" method="post">
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
                                             <a class="mr-2" href="#">
-                                                <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
-                                                alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
+                                                <img src="{{ asset('Dashboard/img/admins/'. $user->image->filename) }}"
+                                                alt="{{ asset('Dashboard/img/admins/'. $user->image->filename) }}"
                                                 class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                             </a>
                                             <div class="media-body">
@@ -61,28 +61,28 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.firstname') }}</label>
-                                                        <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',Auth::user()->firstname) }}"
+                                                        <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',$user->firstname) }}"
                                                         name="firstname" required data-validation-required-message="This firstname field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.lastname') }}</label>
-                                                        <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->lastname) }}"
+                                                        <input type="text" class="form-control"  value="{{ old('lastname',$user->lastname) }}"
                                                         name="lastname" required data-validation-required-message="This lastname field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.phone') }}</label>
-                                                        <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$admin->phone) }}"
+                                                        <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$user->phone) }}"
                                                         required data-validation-required-message="This phone field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.email') }}</label>
-                                                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',Auth::user()->email) }}"
+                                                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',$user->email) }}"
                                                         required data-validation-required-message="This email field is required">
                                                     </div>
                                                 </div>
@@ -199,7 +199,7 @@
                                 </div>
                                 <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
                                     <!-- users edit Info form start -->
-                                    <form novalidate action="{{ route('profile.updateInformation', encrypt(Auth::user()->id)) }}"  method="post">
+                                    <form novalidate action="{{ route('admin.updateInformation', encrypt($user->id)) }}"  method="post">
                                         @csrf
                                         @method('put')
                                         <div class="row">
@@ -209,7 +209,7 @@
                                                     <div class="controls position-relative">
                                                         <label>{{ __('Admin/site.birthday') }}</label>
                                                         <input type="date" class="form-control birthdate-picker" required placeholder="Birth date"
-                                                        value="{{ Auth::user()->birthdate }}"
+                                                        value="{{ $user->birthdate }}"
                                                         data-validation-required-message="This birthdate field is required">
                                                     </div>
                                                 </div>
@@ -251,12 +251,12 @@
                                                 <h5 class="mb-1"><i class="ft-user mr-25"></i></h5>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address1') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->address1) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('lastname',$user->address1) }}"
                                                     name="address1" required data-validation-required-message="This address1 field is required">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address2') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->address2) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('lastname',$user->address2) }}"
                                                     name="address2" required data-validation-required-message="This address2 field is required">
                                                 </div>
                                                 <div class="form-group">

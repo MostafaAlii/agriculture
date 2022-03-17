@@ -54,7 +54,8 @@ class FarmerRepository implements FarmerInterface{
     public function edit($id) {
         $farmerID = Crypt::decrypt($id);
         $farmer=Farmer::findorfail($farmerID);
-        return view('dashboard.admin.farmers.edit', compact('farmer'));
+        // return view('dashboard.admin.farmers.edit', compact('farmer'));
+        return view('dashboard.admin.farmers.profile.profiledit', compact('farmer'));
     }
 
     public function update($request,$id) {

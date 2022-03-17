@@ -64,7 +64,8 @@ class AdminRepository implements AdminInterface{
         // dd($adminID);
         $admin=Admin::findorfail($adminID);
 
-        return view('dashboard.admin.admins.edit', compact('admin'));
+        // return view('dashboard.admin.admins.edit', compact('admin'));
+        return view('dashboard.admin.admins.profile.profiledit', compact('admin'));
     }
 
     public function update( $request,$id) {

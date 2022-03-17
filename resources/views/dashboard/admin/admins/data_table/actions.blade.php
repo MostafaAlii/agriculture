@@ -2,12 +2,12 @@
 
     <a href="{{ route('admin.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-show"></i>
-        {{ __('Admin/site.show') }}
+        {{ __('Admin/site.showedit') }}
     </a>
-    <a href="{{ route('Admins.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
+    {{-- <a href="{{ route('Admins.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/site.edit') }}
-    </a>
+    </a> --}}
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
         <i class="fa fa-trash"></i>
         {{ __('Admin/site.delete') }}
