@@ -36,6 +36,7 @@ class AdminController extends Controller {
         return $this->Data->update($request,$id);
     }// end of update
 
+
     public function destroy($id) {
         return $this->Data->destroy($id);
     }// end of destroy
@@ -47,4 +48,12 @@ class AdminController extends Controller {
         // dd($id);
         return $this->Data->showProfile($id);
     }// end of showprofile
+
+
+    public function updateAccount(AdminRequest $request,$id) {
+        return $this->Data->updateAccount($request,$id);
+    }// end of update
+    public function updateInformation(AdminRequest $request,$id) {
+        return $this->Data->updateInformation($request,$id);
+    }// end of update
 }

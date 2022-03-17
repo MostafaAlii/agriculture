@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-class UserRequest extends FormRequest {
+class FarmerProfileAccountRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -10,20 +10,21 @@ class UserRequest extends FormRequest {
     {
         $rules = [
 
-            'firstname'    =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
-            'lastname'     =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
-            'email'        => 'required|email|unique:users',
-            'password'     => 'required|confirmed|min:3|max:10',
+            'firstname'    => 'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'lastname'     => 'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
+            'email'        => 'required|email|unique:farmers',
+            // 'password'     => 'required|confirmed|min:3|max:10',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
-            $user = $this->route()->parameter('id');
+            $farmer = $this->route()->parameter('id');
 
-            $rules['email'] = 'required|email|unique:users,id,' . $user;
-            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . $user;
-            $rules['password'] = '';
+            $rules['email'] = 'required|email|unique:farmers,id,' . $farmer;
+            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . $farmer;
+            // $rules['type'] = 'required|in:admin,employee';
+            // $rules['password'] = '';
 
         }//end of if
 
@@ -35,8 +36,10 @@ class UserRequest extends FormRequest {
         return [
             'firstname.required'   => trans('Admin\validation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
-            'email.required'       => trans('Admin\validation.required'),
+            // 'email.required'       => trans('Admin\validation.required'),
             'phone.required'       => trans('Admin\validation.required'),
+            // 'type.required'        => trans('Admin\validation.required'),
+            // 'type.in'              => trans('Admin\validation.in'),
 
             'firstname.min'        => trans('Admin\validation.min'),
             'lastname.min'         => trans('Admin\validation.min'),
@@ -49,7 +52,6 @@ class UserRequest extends FormRequest {
             'email.email'          => trans('Admin\validation.email'),
             'email.unique'         => trans('Admin\validation.unique'),
             'phone.unique'         => trans('Admin\validation.unique'),
-
         ];
     }
 }

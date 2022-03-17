@@ -128,4 +128,38 @@ class UserRepository implements UserInterface{
         $user=User::findorfail($userID);
         return view('dashboard.admin.users.profile.profileview', compact('user'));
     }
+
+
+    public function updateAccount($request,$id) {
+        try{
+            DB::beginTransaction();
+            $userID = Crypt::decrypt($id);
+            $user=User::findorfail($userID);
+            $requestData = $request->validated();
+            $user->update($requestData);
+            if($request->image){
+                $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+            }
+            $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
+            DB::commit();
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('users.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }// end of update
+    public function updateInformation($request,$id) {
+        try{
+            $userID = Crypt::decrypt($id);
+            $user=User::findorfail($userID);
+            $requestData = $request->validated();
+            $user->update($requestData);
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('users.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+
+    }// end of update
 }

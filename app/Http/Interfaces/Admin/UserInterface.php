@@ -10,4 +10,6 @@ interface UserInterface {
     public function destroy($user);
     public function bulkDelete($ids);
     public function showProfile($id);
+    public function updateAccount($request,$admin);
+    public function updateInformation($request,$admin);
 }

@@ -15,12 +15,12 @@ class CreateAdminsTable extends Migration {
             $table->string('password');
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
-            $table->foreignId('province_id')->constrained()->onDelete('cascade');
-            $table->foreignId('area_id')->constrained()->onDelete('cascade');
-            $table->foreignId('state_id')->constrained()->onDelete('cascade');
-            $table->foreignId('village_id')->constrained()->onDelete('cascade');
-            $table->foreignId('department_id')->constrained()->onDelete('cascade');
+            $table->foreignId('country_id')->constrained()->onDelete('restrict');
+            $table->foreignId('province_id')->constrained()->onDelete('restrict');
+            $table->foreignId('area_id')->constrained()->onDelete('restrict');
+            $table->foreignId('state_id')->constrained()->onDelete('restrict');
+            $table->foreignId('village_id')->constrained()->onDelete('restrict');
+            $table->foreignId('department_id')->constrained()->onDelete('restrict');
             $table->date('birthdate')->nullable();
 
             $table->rememberToken();

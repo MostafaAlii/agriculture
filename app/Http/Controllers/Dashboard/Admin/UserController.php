@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\UserInterface;
+use App\Http\Requests\Dashboard\UserProfileAccountRequest;
+use App\Http\Requests\Dashboard\UserProfileInformationRequest;
 use App\Http\Requests\Dashboard\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -52,4 +54,11 @@ class UserController extends Controller {
         // dd($id);
         return $this->Data->showProfile($id);
     }// end of showprofile
+
+    public function updateAccount(UserProfileAccountRequest  $request,$id) {
+        return $this->Data->updateAccount($request,$id);
+    }// end of update
+    public function updateInformation(UserProfileInformationRequest  $request,$id) {
+        return $this->Data->updateInformation($request,$id);
+    }// end of update
 }
