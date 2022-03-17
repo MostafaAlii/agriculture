@@ -55,7 +55,7 @@ class CountryRepository implements CountryInterface{
         $dataRequest = $request->except(['country_logo']);
         if($request->country_logo) {
             if($country->country_logo != 'default_flag.jpg') {
-                Storage::disk('public_uploads')->delete('/countryFlags/' . $country->country_logo);
+                Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
             }
             Image::make($request->country_logo)->resize(150, 150, function ($constraint) {
                 $constraint->aspectRatio();
