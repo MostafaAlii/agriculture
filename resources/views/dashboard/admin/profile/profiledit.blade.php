@@ -349,11 +349,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
      $(document).ready(function() {
+        //  استعلام بالاجاكس لجلب محافظات البلد ajax for provinces data of country ===============================
             $('select[name="country_id"]').on('change', function() {
                     var country_id = $(this).val();
+                    console.log(country_id);
                     if (country_id) {
                         $.ajax({
-                            url: "{{ URL::to('/admin/province') }}/" + country_id,
+                            url: "{{ URL::to('dashboard_admin/admin/province') }}/" + country_id,
                             type: "GET",
                             dataType: "json",
                             success: function(data) {
@@ -361,7 +363,41 @@
                                 $('select[name="province_id"]').append( '<option selected disabled>--select--</option>');
 
                                 $.each(data, function(key, value) {
+                                    // console.log(data);
+                                    console.log(key);
+                                    console.log(value);
                                     $('select[name="province_id"]').append(
+                                        '<option value="' + key + '">' + value +'</option>'
+                                    );
+                                });
+                            },
+                        });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+</script>
+<script>
+     $(document).ready(function() {
+        //  ajax for area data of province =====================================================================
+            $('select[name="province_id"]').on('change', function() {
+                    var province_id = $(this).val();
+                    console.log(province_id);
+                    if (province_id) {
+                        $.ajax({
+                            url: "{{ URL::to('dashboard_admin/admin/area') }}/" + province_id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="area_id"]').empty();
+                                $('select[name="area_id"]').append( '<option selected disabled>--select--</option>');
+
+                                $.each(data, function(key, value) {
+                                    // console.log(data);
+                                    console.log(key);
+                                    console.log(value);
+                                    $('select[name="area_id"]').append(
                                         '<option value="' + key + '">' + value +'</option>'
                                     );
                                 });

@@ -47,6 +47,7 @@ Route::group(
             Route::put('/admin/profileupdate/{id}', [ProfileController::class,'updateAccount'])->name('admin.updateAccount');
             // Route::put('/admin/profileupdateinfo/{id}', [ProfileController::class,'updateInformation'])->name('admin.updateInformation');
             Route::get('/admin/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get province
+            Route::get('/admin/area/{province_id}', [ProfileController::class, 'getArea']);// route ajax for get province
             /********************************* End Admin & Employee Routes ************************************/
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);
