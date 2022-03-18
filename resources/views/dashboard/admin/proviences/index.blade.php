@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/countries.countryPageTitle') }}
+    {{ trans('Admin/proviences.proviencePageTitle') }}
 @endsection
 
 @section('content')
@@ -70,15 +70,14 @@
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->
-                                        <table class="table table-striped table-bordered zero-configuration" id="countries-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="proviences-table">
                                             <thead>
                                                 <tr>
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ trans('Admin/countries.country_flag') }}</th>
-                                                    <th>{{ __('Admin/countries.country_name') }}</th>
-                                                    <th>{{ __('Admin/countries.country_related_proviency') }}</th>
+                                                    <th>{{ __('Admin/proviences.provience_name') }}</th>
+                                                    <th>{{ __('Admin/proviences.provience_name') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -97,7 +96,7 @@
                     <!-- End col-12 -->
                 </div>
                 <!-- End row -->
-                @include('dashboard.admin.countries.btn.add')
+                {{--  @include('dashboard.admin.proviences.btn.add') --}}
             </section>
             <!-- End Zero configuration table -->
         </div>
@@ -112,7 +111,7 @@
 
 <!-- Datatable Fire -->
 <script>
-    let countriesTable = $('#countries-table').DataTable({
+    let proviencesTable = $('#proviences-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -120,13 +119,12 @@
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
         ajax: {
-            url: '{{ route('countries.data') }}',
+            url: '{{ route('proviences.data') }}',
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-             {data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
             {data: 'name', name: 'name'},
-            {data: 'provinces', name: 'provinces.name'},
+            {data: 'country', name: 'country.name'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

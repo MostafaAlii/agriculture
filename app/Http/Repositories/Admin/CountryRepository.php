@@ -19,11 +19,14 @@ class CountryRepository implements CountryInterface{
     }
 
     public function data() {
-        $countries = Country::with('provinces')->select();
+        $countries = Country::with('provinces');
         return DataTables::of($countries)
+        ->addColumn('provinces', function (Country $country) {
+            return view('dashboard.admin.countries.btn.related', compact('country'));
+        })
             ->addColumn('record_select', 'dashboard.admin.countries.data_table.record_select')
             ->editColumn('created_at', function (Country $country) {
-                return $country->created_at->format('Y-m-d');
+                return $country->created_at->diffforhumans();
             })
             ->addColumn('image', function (Country $country) {
                 return view('dashboard.admin.countries.data_table.image', compact('country'));
