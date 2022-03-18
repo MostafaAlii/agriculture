@@ -15,14 +15,14 @@
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">
                     <i class="material-icons">flag</i>
-                    {{ trans('Admin/countries.countryPageTitle') }}
+                    {{ trans('Admin/proviences.proviencePageTitle') }}
                 </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Countries.index') }}">{{ trans('Admin/countries.countryPageTitle') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Proviences.index') }}">{{ trans('Admin/proviences.proviencePageTitle') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -42,7 +42,7 @@
                         <div class="card">
                             <!-- Start Card Header -->
                             <div class="card-header">
-                                <h4 class="card-title">{{ trans('Admin/countries.countryPageTitle') }}</h4>
+                                <h4 class="card-title">{{ trans('Admin/proviences.proviencePageTitle') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -60,7 +60,7 @@
                                 <div class="card-body card-dashboard">
                                     <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
                                         <i class="material-icons">add_box</i>
-                                        {{ trans('Admin/countries.add_new_country') }}
+                                        {{ trans('Admin/proviences.add_new_provience') }}
                                    </button>
                                     <button type="button" class="btn btn-warning btn-md mb-3"
                                         id="btn_delete_all" data-toggle="modal"
@@ -77,7 +77,8 @@
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/proviences.provience_name') }}</th>
-                                                    <th>{{ __('Admin/proviences.provience_name') }}</th>
+                                                    <th>{{ __('Admin/proviences.country_name') }}</th>
+                                                    <th>{{ __('Admin/proviences.area_name') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -96,7 +97,7 @@
                     <!-- End col-12 -->
                 </div>
                 <!-- End row -->
-                {{--  @include('dashboard.admin.proviences.btn.add') --}}
+                {{--@include('dashboard.admin.proviences.btn.add')--}}
             </section>
             <!-- End Zero configuration table -->
         </div>
@@ -108,7 +109,6 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 <!-- Datatable Fire -->
 <script>
     let proviencesTable = $('#proviences-table').DataTable({
@@ -125,10 +125,10 @@
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'name', name: 'name'},
             {data: 'country', name: 'country.name'},
+            {data: 'areas', name: 'areas.name'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
     });
 </script>
-
 @endsection

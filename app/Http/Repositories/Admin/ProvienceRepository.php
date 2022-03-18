@@ -13,10 +13,13 @@ class ProvienceRepository implements ProvienceInterface {
     }
 
     public function data() {
-        $proviences = Province::with('country');
+        $proviences = Province::with(['country','areas']);
         return DataTables::of($proviences)
             ->addColumn('country', function (Province $provience) {
                 return $provience->country->name;
+            })
+            ->addColumn('areas', function (Province $provience) {
+                return view('dashboard.admin.proviences.btn.related', compact('provience'));
             })
             ->addColumn('record_select', 'dashboard.admin.proviences.data_table.record_select')
             ->editColumn('created_at', function (Province $provience) {
