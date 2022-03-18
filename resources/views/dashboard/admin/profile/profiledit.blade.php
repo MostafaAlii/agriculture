@@ -287,7 +287,8 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
                                                     <select class="form-control" id="accountSelect" name="department_id">
-                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        <option value="{{ Auth::user()->department_id }}"  >{{ Auth::user()->department->name }}</option>
                                                         @foreach (\App\Models\Department::get() as $department)
                                                          <option value="{{ $department->id }}">{{ $department->name }}</option>
                                                         @endforeach
