@@ -22,7 +22,7 @@
             'depart_id'=>$child->id,//pramiry key of department we edit on it 
             'parent_id'=>$parent_id //parent_id of another department
         ];
-        // <!-- @if($child->id!=$depart_id) -->
+        // <!-- @if($child->id!=$parent_id) -->
 
 ?>
        @if($child->id!=$depart_id)
