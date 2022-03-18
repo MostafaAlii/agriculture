@@ -19,8 +19,6 @@ class departmentFactory extends Factory
          //  province
             return [
                 'name'  => $this->faker->randomElement(['القسم الزراعى','القسم الحيوانى','قسم الالبان']),
-
-
             ];
 
 

@@ -86,6 +86,8 @@ Route::group(
             /********************************* End Countries Routes ************************************/
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);
+            Route::get('/Departments/data', [DepartmentController::class,'data'])->name('departments.data');
+            Route::delete('/Departments/bulk_delete/{ids}', [DepartmentController::class,'bulkDelete'])->name('departments.bulk_delete');
             /********************************* End Department Routes ************************************/
 
         });
