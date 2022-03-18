@@ -123,9 +123,9 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name'},
-            {data: 'country', name: 'country.name'},
-            {data: 'areas', name: 'areas.name'},
+            {data: 'name', name: 'name', searchable: false, sortable: false},
+            {data: 'country', name: 'country.name', searchable: false, sortable: false},
+            {data: 'areas', name: 'areas.name', searchable: false, sortable: false},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
