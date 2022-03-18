@@ -150,6 +150,10 @@
                                             <td>@lang('Admin/site.phone'):</td>
                                             <td>{{ $admin->phone }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>@lang('Admin/site.type'):</td>
+                                            <td>{{ $admin->type =='admin'?__('Admin/site.admins') : __('Admin/site.employee')}}</td>
+                                        </tr>
 
                                     </tbody>
                                 </table>

@@ -86,6 +86,29 @@
                                                         required data-validation-required-message="This email field is required">
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label>{{ __('Admin/site.type') }}</label>
+                                                        <select class="custom-select" id="customSelect" name="type">
+                                                            <option value="{{ Auth::user()->type }}" disabled selected >{{Auth::user()->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
+                                                            <option value="admin">{{ __('Admin/site.admins') }}</option>
+                                                            <option value="employee">{{ __('Admin/site.employee') }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    {{--password--}}
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="password" class="form-control" value="{{ old('password',Auth::user()->password) }}" required>
+                                                    </div>
+                                                    {{--password_confirmation--}}
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
+                                                    </div>
+                                                </div>
                                             </div>
                                             {{-- <div class="col-12 col-sm-6">
                                                 <div class="form-group">

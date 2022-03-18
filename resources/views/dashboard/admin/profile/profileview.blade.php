@@ -138,10 +138,6 @@
                                             <td>@lang('Admin/site.name'):</td>
                                             <td class="users-view-username">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</td>
                                         </tr>
-                                        {{-- <tr>
-                                            <td>Name:</td>
-                                            <td class="users-view-name">Dean Stanley</td>
-                                        </tr> --}}
                                         <tr>
                                             <td>@lang('Admin/site.email'):</td>
                                             <td class="users-view-email">{{ Auth::user()->email }}</td>
@@ -149,6 +145,10 @@
                                         <tr>
                                             <td>@lang('Admin/site.phone'):</td>
                                             <td>{{ Auth::user()->phone }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@lang('Admin/site.type'):</td>
+                                            <td>{{ Auth::user()->type =='admin'?__('Admin/site.admins') : __('Admin/site.employee')}}</td>
                                         </tr>
 
                                     </tbody>
