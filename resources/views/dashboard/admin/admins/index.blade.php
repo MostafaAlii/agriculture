@@ -92,6 +92,7 @@
         // dom: "tiplr",
         serverSide: true,
         processing: true,
+        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
