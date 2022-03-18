@@ -36,9 +36,9 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-5 px-0 d-flex justify-content-end align-items-center px-1 mb-2">
-                        <a href="#" class="btn btn-sm mr-25 border"><i class="ft-message-square font-small-3"></i></a>
-                        {{-- <a href="#" class="btn btn-sm mr-25 border">Profile</a> --}}
                         <a href="{{ route('profile.edit',encrypt(Auth::user()->id)) }}" class="btn btn-sm btn-primary"> @lang('Admin/site.edit')</a>
+                        {{-- <a href="#" class="btn btn-sm mr-25 border"><i class="ft-message-square font-small-3"></i></a> --}}
+                        <a href="{{ route('admin.dashboard') }}" class="btn btn-sm mr-25 border"> @lang('Admin/site.back')</a>
                     </div>
                 </div>
                 <!-- users view media object ends -->

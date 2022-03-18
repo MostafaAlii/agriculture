@@ -85,5 +85,6 @@ return [
     'village'=>'اسم القريه',
     'department'=>'اسم القسم التابع له',
     'information' => 'المعلومات الاخرى',
-    'showedit'=>'عرض و تعديل'
+    'showedit'=>'عرض و تعديل',
+    'back'=>'رجوع',
 ];
