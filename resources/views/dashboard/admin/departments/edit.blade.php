@@ -76,8 +76,8 @@
                                                                         // 'depart_id'=>$depart->id,
                                                                         // 'parent_id'=>$main->parent_id
                                                                         
-                                                                        'depart_id'=>$main->id,//pramiry key of department we edit on it 
-                                                                        'parent_id'=>$depart->parent_id //parent_id of another department
+                                                                        'depart_id'=>$main->id,//pramiry key of supplier we edit on it 
+                                                                        'parent_id'=>$depart->parent_id //parent_id of another supplier
                                                                         
                                                                     ];
                                                                      ?>
