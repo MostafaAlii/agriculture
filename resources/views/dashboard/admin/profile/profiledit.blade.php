@@ -218,20 +218,22 @@
                                                     <select class="form-control" id="accountSelect" name="country_id">
                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @foreach (\App\Models\Country::get() as $country)
-                                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                         <option value="{{ Auth::user()->country_id }}" {{Auth::user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
                                                     <select class="form-control" id="accountSelect" name="province_id">
-                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        <option value="{{ Auth::user()->province_id }}"  >{{ Auth::user()->province->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
                                                     <select class="form-control" id="accountSelect" name="area_id">
-                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        <option value="{{ Auth::user()->area_id }}"  >{{ Auth::user()->area->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">

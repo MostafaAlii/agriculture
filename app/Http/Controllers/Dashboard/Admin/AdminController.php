@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\AdminInterface;
+use App\Http\Requests\Dashboard\adminProfileAccountRequest;
+use App\Http\Requests\Dashboard\adminProfileInformationRequest;
 use App\Http\Requests\Dashboard\AdminRequest;
 use Illuminate\Http\Request;
 class AdminController extends Controller {
@@ -50,10 +52,10 @@ class AdminController extends Controller {
     }// end of showprofile
 
 
-    public function updateAccount(AdminRequest $request,$id) {
+    public function updateAccount(adminProfileAccountRequest $request,$id) {
         return $this->Data->updateAccount($request,$id);
     }// end of update
-    public function updateInformation(AdminRequest $request,$id) {
+    public function updateInformation(adminProfileInformationRequest $request,$id) {
         return $this->Data->updateInformation($request,$id);
     }// end of update
 }

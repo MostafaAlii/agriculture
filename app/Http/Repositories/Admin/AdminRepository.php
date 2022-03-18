@@ -148,7 +148,7 @@ class AdminRepository implements AdminInterface{
 
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
-            return redirect()->route('profile.index');
+            return redirect()->route('Admins.index');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -161,7 +161,7 @@ class AdminRepository implements AdminInterface{
             $requestData = $request->validated();
             $admin->update($requestData);
             toastr()->success( __('Admin/site.updated_successfully'));
-            return redirect()->route('profile.index');
+            return redirect()->route('Admins.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
