@@ -171,7 +171,7 @@
                             }
                         }]
                     }'>
-                    <!-- start item -->
+                    <!-- start item  12 product here to show-->
                     <div class="__item">
                         <figure class="__image">
                             <img width="188" src="{{ asset('frontassets/img/goods_img/1.jpg') }}" alt="demo" />
