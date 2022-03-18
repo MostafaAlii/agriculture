@@ -8,6 +8,7 @@ return [
     'country_name'                              =>                  'اسم الدولة',
     'enter_country_name'                        =>                  'ادخل اسم الدولة',
     'enter_country_name_placeholder'            =>                  'اكتب اسم الدولة',
+    'country_related_proviency'                 =>                  'المحافظات المرتبطة',
     // Validation ::
     'countries_name_required'                   =>                  'اسم الدولة مطلوب',
     'countries_name_string'                     =>                  'اسم الدولة يجب ان يكون نص',

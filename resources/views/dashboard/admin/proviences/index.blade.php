@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/countries.countryPageTitle') }}
+    {{ trans('Admin/proviences.proviencePageTitle') }}
 @endsection
 
 @section('content')
@@ -15,14 +15,14 @@
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">
                     <i class="material-icons">flag</i>
-                    {{ trans('Admin/countries.countryPageTitle') }}
+                    {{ trans('Admin/proviences.proviencePageTitle') }}
                 </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Countries.index') }}">{{ trans('Admin/countries.countryPageTitle') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Proviences.index') }}">{{ trans('Admin/proviences.proviencePageTitle') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -42,7 +42,7 @@
                         <div class="card">
                             <!-- Start Card Header -->
                             <div class="card-header">
-                                <h4 class="card-title">{{ trans('Admin/countries.countryPageTitle') }}</h4>
+                                <h4 class="card-title">{{ trans('Admin/proviences.proviencePageTitle') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -60,7 +60,7 @@
                                 <div class="card-body card-dashboard">
                                     <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
                                         <i class="material-icons">add_box</i>
-                                        {{ trans('Admin/countries.add_new_country') }}
+                                        {{ trans('Admin/proviences.add_new_provience') }}
                                    </button>
                                     <button type="button" class="btn btn-warning btn-md mb-3"
                                         id="btn_delete_all" data-toggle="modal"
@@ -70,15 +70,15 @@
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->
-                                        <table class="table table-striped table-bordered zero-configuration" id="countries-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="proviences-table">
                                             <thead>
                                                 <tr>
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ trans('Admin/countries.country_flag') }}</th>
-                                                    <th>{{ __('Admin/countries.country_name') }}</th>
-                                                    <th>{{ __('Admin/countries.country_related_proviency') }}</th>
+                                                    <th>{{ __('Admin/proviences.provience_name') }}</th>
+                                                    <th>{{ __('Admin/proviences.country_name') }}</th>
+                                                    <th>{{ __('Admin/proviences.area_name') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -97,7 +97,7 @@
                     <!-- End col-12 -->
                 </div>
                 <!-- End row -->
-                @include('dashboard.admin.countries.btn.add')
+                {{--@include('dashboard.admin.proviences.btn.add')--}}
             </section>
             <!-- End Zero configuration table -->
         </div>
@@ -109,10 +109,9 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 <!-- Datatable Fire -->
 <script>
-    let countriesTable = $('#countries-table').DataTable({
+    let proviencesTable = $('#proviences-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -120,17 +119,16 @@
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
         ajax: {
-            url: '{{ route('countries.data') }}',
+            url: '{{ route('proviences.data') }}',
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-             {data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
             {data: 'name', name: 'name'},
-            {data: 'provinces', name: 'provinces.name'},
+            {data: 'country', name: 'country.name'},
+            {data: 'areas', name: 'areas.name'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
     });
 </script>
-
 @endsection

@@ -23,8 +23,6 @@ class adminProfileAccountRequest extends FormRequest {
 
             $rules['email'] = 'required|email|unique:admins,id,' . $admin;
             $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins,id,' . $admin;
-            // $rules['type'] = 'required|in:admin,employee';
-            // $rules['password'] = '';
             $rules['type'] = '';
         }//end of if
 

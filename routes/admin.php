@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
+use App\Http\Controllers\Dashboard\Admin\ProvienceController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +77,12 @@ Route::group(
             /********************************* Countries Routes ************************************/
             Route::resource('Countries', CountryController::class)->except(['show']);
             Route::get('/Countries/data', [CountryController::class,'data'])->name('countries.data');
-            Route::delete('/Countries/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('countries.bulk_delete');
+            Route::delete('/Countries/bulk_delete/{ids}', [CountryController::class,'bulkDelete'])->name('countries.bulk_delete');
+            /********************************* End Countries Routes ************************************/
+            /********************************* Proviences Routes ************************************/
+            Route::resource('Proviences', ProvienceController::class)->except(['show']);
+            Route::get('/Proviences/data', [ProvienceController::class,'data'])->name('proviences.data');
+            //Route::delete('/Proviences/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('proviences.bulk_delete');
             /********************************* End Countries Routes ************************************/
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);

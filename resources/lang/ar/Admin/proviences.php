@@ -10,4 +10,6 @@ return [
     'provience_name_required'                   =>                  'اسم المحافظة مطلوب',
     'provience_name_string'                     =>                  'اسم المحافظة يجب ان يكون نص',
     'proviencePageTitle_edit'                     =>                  'تعديل بيانات المحافظة',
+    'country_name'                                  =>                  'الدولة التابعة',
+    'area_name'                                     =>                  'المناطق التابعة',
 ];
