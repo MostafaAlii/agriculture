@@ -22,11 +22,11 @@
             'depart_id'=>$child->id,//pramiry key of department we edit on it 
             'parent_id'=>$parent_id //parent_id of another department
         ];
+        // <!-- @if($child->id!=$depart_id) -->
+
 ?>
        @if($child->id!=$depart_id)
             <option style="color: {{$color}};" value="{{ $child->id }}" <?php echo $select_or_no;?>> <?php echo $extra;?> {{ $child->name }}</option>
-       
-        
             @if(count($child->childs))
                 @include('dashboard.admin.departments.mangeChild',$new)
             @endif
