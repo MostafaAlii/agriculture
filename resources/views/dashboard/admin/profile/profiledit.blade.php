@@ -90,7 +90,7 @@
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.type') }}</label>
                                                         <select class="custom-select" id="customSelect" name="type">
-                                                            <option value="{{ Auth::user()->type }}" disabled selected >{{Auth::user()->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
+                                                            <option value="{{ old('type',Auth::user()->type) }}" disabled selected >{{Auth::user()->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
                                                             <option value="admin">{{ __('Admin/site.admins') }}</option>
                                                             <option value="employee">{{ __('Admin/site.employee') }}</option>
                                                         </select>
