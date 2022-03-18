@@ -20,7 +20,7 @@ class CountrySeeder extends Seeder {
 
         for ($i = 0; $i < $count ; $i++) {
         Country::create([
-            'country_logo'  =>'1.jpg',
+            'country_logo'  =>'default_flag.jpg',
             'name'          =>$country_names[$i],
 
         ]);

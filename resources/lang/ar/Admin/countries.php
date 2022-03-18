@@ -12,4 +12,5 @@ return [
     'countries_name_required'                   =>                  'اسم الدولة مطلوب',
     'countries_name_string'                     =>                  'اسم الدولة يجب ان يكون نص',
     'countryPageTitle_edit'                     =>                  'تعديل بيانات الدولة',
+    'cant_delete'                               =>                  'يوجد حقول مرتبطة بهذه الدولة فلا يجب حذفها',
 ];
