@@ -20,4 +20,5 @@ return [
     'depart_add_done'=>'تم اضافه الاداره بنجاح',
     'depart_edit_done'=>'تم تعديل الاداره بنجاح',
     'depart_delete_done'=>'تم حذف الاداره بنجاح',
+    'depart_cant_delete'=>'لا يمكن حذف هذه الاداره لارتباطها بجداول اخرى',
 ];

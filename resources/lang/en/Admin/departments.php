@@ -20,5 +20,6 @@ return [
     'depart_add_done'=>'Department added sucessfully',
     'depart_edit_done'=>'Department updated sucessfully',
     'depart_delete_done'=>'Department deleted sucessfully',
+    'depart_cant_delete'=>'Can\'t delete this department because it related with another tables',
 
 ];
