@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProvienceInterface;
+use App\Http\Requests\Dashboard\ProviencyRequest;
 use Illuminate\Http\Request;
 class ProvienceController extends Controller
 {
@@ -18,12 +19,8 @@ class ProvienceController extends Controller
         return $this->Data->data();
     }// end of data
 
-    public function create() {
-        //
-    }
-
-    public function store(Request $request) {
-        //
+    public function store(ProviencyRequest $request) {
+        return $this->Data->store($request);
     }
 
     public function show($id) {

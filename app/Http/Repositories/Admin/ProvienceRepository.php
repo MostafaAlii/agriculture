@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Repositories\Admin;
+use App\Models\Country;
 use App\Models\Province;
-use App\Models\Area;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Interfaces\Admin\ProvienceInterface;
 class ProvienceRepository implements ProvienceInterface {
     public function index() {
-        return view('dashboard.admin.proviences.index');
+        $countries = Country::get();
+        return view('dashboard.admin.proviences.index', compact('countries'));
     }
 
     public function data() {
@@ -28,5 +29,14 @@ class ProvienceRepository implements ProvienceInterface {
             ->addColumn('actions', 'dashboard.admin.proviences.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
+    }
+
+    public function store($request) {
+        Province::create([
+            'name'  => $request->input('name'),
+            'country_id'    =>  $request->country_id,
+        ]);
+        toastr()->success(__('Admin/site.added_successfully'));
+        return redirect()->route('Proviences.index');
     }
 }

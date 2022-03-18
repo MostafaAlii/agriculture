@@ -97,7 +97,7 @@
                     <!-- End col-12 -->
                 </div>
                 <!-- End row -->
-                {{--@include('dashboard.admin.proviences.btn.add')--}}
+                @include('dashboard.admin.proviences.btn.add')
             </section>
             <!-- End Zero configuration table -->
         </div>
