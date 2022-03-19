@@ -18,14 +18,16 @@
                         </nav>
 
                         <div class="top-bar__contacts">
-                            <span>523 Sylvan Ave, 5th Floor Mountain View, CA 940 USA</span>
-                            <span><a href="#">+1 (234) 56789</a>,&nbsp;&nbsp;<a href="#">+1 987 654 3210</a></span>
-                            <span><a href="mailto:support@agrocompany.com">support@agrocompany.com</a></span>
+                            <span>{{ \App\Models\setting::first()->address }}</span>
+                            {{-- <span>523 Sylvan Ave, 5th Floor Mountain View, CA 940 USA</span> --}}
+                            <span><a href="#">{{  \App\Models\setting::first()->primary_phone }}</a>,&nbsp;&nbsp;
+                                  <a href="#">{{  \App\Models\setting::first()->secondery_phone }}</a></span>
+                            <span><a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a></span>
 
                             <div class="social-btns">
-                                <a class="fontello-twitter" href="#"></a>
-                                <a class="fontello-facebook" href="#"></a>
-                                <a class="fontello-linkedin-squared" href="#"></a>
+                                <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
+                                <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
+                                <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
                             </div>
                         </div>
                     </div>
