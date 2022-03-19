@@ -87,7 +87,15 @@
                                 <span data-i18n="Areas">{{ trans('Admin/areas.areaPageTitle') }}</span>
                             </a>
                         </li>
-                        <!-- End Proviences -->
+                        <!-- End Areas -->
+                        <!-- Start States -->
+                        <li>
+                            <a class="menu-item" href="{{ route('States.index') }}">
+                                <i class="material-icons">flag</i>
+                                <span data-i18n="Areas">{{ trans('Admin/states.statePageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End States -->
                     </ul>
                 </li>
                 <!-- End Countries Dropdown Menu -->

@@ -1,15 +1,13 @@
 <?php
-
 namespace App\Http\Controllers\Dashboard\Admin;
-
 use App\Http\Controllers\Controller;
-use App\Http\Interfaces\Admin\AreaInterface;
+use App\Http\Interfaces\Admin\StateInterface;
+use App\Http\Requests\Dashboard\StateRequest;
 use Illuminate\Http\Request;
-
-class AreaController extends Controller
+class StateController extends Controller
 {
     protected $Data;
-    public function __construct(AreaInterface $Data) {
+    public function __construct(StateInterface $Data) {
         $this->Data = $Data;
     }
 
@@ -21,7 +19,7 @@ class AreaController extends Controller
         return $this->Data->data();
     }
 
-    public function store(Request $request) {
+    public function store(StateRequest $request) {
         return $this->Data->store($request);
     }
 

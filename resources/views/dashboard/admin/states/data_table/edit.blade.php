@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/areas.areaPageTitle') }}
+    {{ trans('Admin/states.statePageTitle') }}
 @endsection
 
 @section('content')
@@ -15,17 +15,17 @@
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">
                     <i class="material-icons">flag</i>
-                    {{ trans('Admin/areas.areaPageTitle') }}
+                    {{ trans('Admin/states.statePageTitle') }}
                 </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ trans('Admin/areas.areaPageTitle') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ trans('Admin/states.statePageTitle') }}</a>
                             </li>
                             <li class="breadcrumb-item"><a href="#" style="text-decoration: none; color: black;">
-                                {{ trans('Admin/areas.areaPageTitle_edit') }} / {{ $area->name }}</a>
+                                {{ trans('Admin/states.statePageTitle_edit') }} / {{ $state->name }}</a>
                             </li>
                         </ol>
                     </div>
@@ -48,7 +48,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ trans('Admin/areas.areaPageTitle_edit') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/states.statePageTitle_edit') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -61,7 +61,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('Areas.update', encrypt($area->id)) }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('States.update', encrypt($state->id)) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">
@@ -69,10 +69,10 @@
                                                 <div class="form-group">
                                                     <label>
                                                         <i class="material-icons">mode_edit</i>
-                                                        {{ trans('Admin/areas.area_name') }}
+                                                        {{ trans('Admin/states.state_name') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ old('name',$area->name) }}" required>
+                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ old('name',$state->name) }}" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -80,23 +80,23 @@
                                             <div class="col-lg-6">
                                                 <label for="projectinput2">
                                                     <i class="material-icons">flag</i>
-                                                    {{ trans('Admin/areas.choose_provience_name') }}
+                                                    {{ trans('Admin/states.choose_area_name') }}
                                                 </label>
-                                                <select name="province_id" class="select2 form-control">
-                                                    <optgroup label="{{ trans('Admin/areas.choose_provience_name') }}">
-                                                        @if($proviences && $proviences-> count() > 0) 
-                                                        <option value="{{$area->province->id }}" {{$area->province->id == $area->provience_id ? 'selected' : '' }}>
-                                                            {{$area->province->name}}
+                                                <select name="area_id" class="select2 form-control">
+                                                    <optgroup label="{{ trans('Admin/states.choose_area_name') }}">
+                                                        @if($areas && $areas-> count() > 0) 
+                                                        <option value="{{$state->area->id }}" {{$state->area->id == $state->area_id ? 'selected' : '' }}>
+                                                            {{$state->area->name}}
                                                         </option>
-                                                            @foreach($proviences as $provience)
-                                                                <option value="{{$provience->id }}" >
-                                                                    {{$provience->name}}
+                                                            @foreach($areas as $area)
+                                                                <option value="{{$area->id }}" >
+                                                                    {{$area->name}}
                                                                 </option>
                                                             @endforeach
                                                       @endif
                                                     </optgroup>
                                                 </select>
-                                                @error('provience_id')
+                                                @error('area_id')
                                                 <span class="text-danger"> {{$message}}</span>
                                                 @enderror
                                             </div>

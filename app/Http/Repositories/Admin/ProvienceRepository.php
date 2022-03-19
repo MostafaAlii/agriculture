@@ -70,7 +70,7 @@ class ProvienceRepository implements ProvienceInterface {
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('Proviences.index');
         } else {
-            toastr()->error(__('Admin/countries.cant_delete'));
+            toastr()->error(__('Admin/proviences.cant_delete'));
             return redirect()->route('Proviences.index');
         }
     }

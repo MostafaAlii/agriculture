@@ -68,7 +68,7 @@ class AreaRepository implements AreaInterface {
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('Areas.index');
         } else {
-            toastr()->error(__('Admin/countries.cant_delete'));
+            toastr()->error(__('Admin/areas.cant_delete'));
             return redirect()->route('Areas.index');
         }
     }

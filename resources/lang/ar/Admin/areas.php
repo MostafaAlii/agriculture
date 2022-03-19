@@ -11,7 +11,8 @@ return [
     // Validation ::
     'area_name_required'                   =>                  'اسم المحافظة مطلوب',
     'area_name_string'                     =>                  'اسم المحافظة يجب ان يكون نص',
-    'areaPageTitle_edit'                     =>                  'تعديل بيانات المحافظة',
+    'areaPageTitle_edit'                     =>                  'تعديل بيانات المنطقة',
     'provience_name'                                  =>                  'المحافظة التابعة',
-    'state_name'                                     =>                  'الولايات التابعة',
+    'state_name'                                     =>                  'الناحية التابعة',
+    'cant_delete'                             =>                  'عفوا يوجد نواحى مرتبطة بهذه المنطقة يجب حذفها اولا',
 ];
