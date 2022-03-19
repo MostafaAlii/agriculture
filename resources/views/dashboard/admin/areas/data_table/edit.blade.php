@@ -68,7 +68,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>
-                                                        <i class="material-icons">mode_edit</i> 
+                                                        <i class="material-icons">mode_edit</i>
                                                         {{ trans('Admin/areas.area_name') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
@@ -84,13 +84,16 @@
                                                 </label>
                                                 <select name="province_id" class="select2 form-control">
                                                     <optgroup label="{{ trans('Admin/areas.choose_provience_name') }}">
-                                                        @if($proviences && $proviences-> count() > 0)
+                                                        @if($proviences && $proviences-> count() > 0) 
+                                                        <option value="{{$area->province->id }}" {{$area->province->id == $area->provience_id ? 'selected' : '' }}>
+                                                            {{$area->province->name}}
+                                                        </option>
                                                             @foreach($proviences as $provience)
-                                                                <option value="{{$provience->id }}" {{$provience->id == $area->provience_id ? 'selected' : '' }}>
+                                                                <option value="{{$provience->id }}" >
                                                                     {{$provience->name}}
                                                                 </option>
                                                             @endforeach
-                                                        @endif
+                                                      @endif
                                                     </optgroup>
                                                 </select>
                                                 @error('provience_id')
