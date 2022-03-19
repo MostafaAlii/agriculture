@@ -1,9 +1,6 @@
 <?php
 namespace App\Http\Repositories\Admin;
 use App\Models\Area;
-use App\Models\User;
-use App\Models\Admin;
-use App\Models\Farmer;
 use App\Models\Country;
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -66,13 +63,9 @@ class ProvienceRepository implements ProvienceInterface {
     public function destroy($id) {
         $data = [];
         $provinceID = Crypt::decrypt($id);
-        $data['admin'] = Admin::where('province_id', $provinceID)->pluck('province_id');
-        $data['farmer'] = Farmer::where('province_id', $provinceID)->pluck('province_id');
-        $data['user'] = User::where('province_id', $provinceID)->pluck('province_id');
         $data['area'] = Area::where('province_id', $provinceID)->pluck('province_id'); 
-        if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0 && $data['area']->count() == 0) {
+        if($data['area']->count() == 0) {
             $province=Province::findorfail($provinceID);
-            
             $province->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('Proviences.index');

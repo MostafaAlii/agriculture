@@ -2,9 +2,7 @@
 namespace  App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\CountryInterface;
 use App\Models\Country;
-use App\Models\Admin;
-use App\Models\Farmer;
-use App\Models\User;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Intervention\Image\Facades\Image;
@@ -76,10 +74,8 @@ class CountryRepository implements CountryInterface{
     public function destroy($id) {
         $data = [];
         $countryID = Crypt::decrypt($id);
-        $data['admin'] = Admin::where('country_id', $countryID)->pluck('country_id');
-        $data['farmer'] = Farmer::where('country_id', $countryID)->pluck('country_id');
-        $data['user'] = User::where('country_id', $countryID)->pluck('country_id'); 
-        if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0) {
+        $data['province'] = Province::where('country_id', $countryID)->pluck('country_id'); 
+        if($data['province']->count() == 0) {
             $country=Country::findorfail($countryID);
             if($country->country_logo != 'default_flag.jpg') {
                 Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
