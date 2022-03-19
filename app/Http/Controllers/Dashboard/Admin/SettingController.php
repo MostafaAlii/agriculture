@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class SettingController extends Controller
 {
     use UploadT;
-    public function setting()
+    public function index()
     {
 
         $setting = Setting::orderBy('id','desc')->first();
