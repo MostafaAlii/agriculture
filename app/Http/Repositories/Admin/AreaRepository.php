@@ -18,6 +18,9 @@ class AreaRepository implements AreaInterface{
             ->editColumn('created_at', function (Area $area) {
                 return $area->created_at->format('Y-m-d');
             })
+            ->addColumn('province', function (Area $area) {
+                return $area->province->name;
+            })
             ->addColumn('actions', 'dashboard.admin.areas.data_table.actions')
             ->rawColumns([ 'actions'])
             ->toJson();
@@ -35,8 +38,6 @@ class AreaRepository implements AreaInterface{
         DB::beginTransaction();
         try{
             $requestData = $request->validated();
-
-
 
             $area = Area::create($requestData);
             $area->name = $request->name;
@@ -60,7 +61,8 @@ class AreaRepository implements AreaInterface{
 
     public function update( $request,$id) {
         try{
-            $area=Area::findorfail($id);
+            $id_area  = Crypt::decrypt($id);
+            $area=Area::findorfail($id_area);
             $requestData = $request->validated();
             $requestData['name'] = $request->name;
             $area->update($requestData);
@@ -73,7 +75,8 @@ class AreaRepository implements AreaInterface{
 
 
     public function destroy($id) {
-        $area=Area::findorfail($id);
+        $id_area  = Crypt::decrypt($id);
+        $area=Area::findorfail($id_area);
         $area->delete();
         toastr()->error(__('Admin/province.deleted_successfully'));
         return redirect()->route('areas.index');

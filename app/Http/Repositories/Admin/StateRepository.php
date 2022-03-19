@@ -19,6 +19,9 @@ class StateRepository implements StateInterface{
             ->editColumn('created_at', function (State $state) {
                 return $state->created_at->format('Y-m-d');
             })
+            ->addColumn('area', function (State $state) {
+                return $state->area->name;
+            })
             ->addColumn('actions', 'dashboard.admin.state.data_table.actions')
             ->rawColumns([ 'actions'])
             ->toJson();

@@ -9,22 +9,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 
-class Country extends Model {
+class Country extends Model implements TranslatableContract{
     use HasFactory,Translatable;
     protected $table = "countries";
     protected $guarded = [];
-    // protected $fillable = ['country_logo','name'];
-    protected $with = ['translations'];
-    protected $appends = ['country_flag_path'];
+
     public $translatedAttributes = ['name'];
     public $timestamps = true;
 
-    // Country Flag Image Appends ::
-    public function getCountryFlagPathAttribute() {
-        return  asset('Dashboard/img/countryFlags/' . $this->country_logo);
-    }
-    // Country Has Many Proviences ::
-    public function provinces(): HasMany {
+
+    public function provinces(){
         return $this->hasMany(Province::class);
     }
+//    public function image()
+//    {
+//        return $this->morphOne(Image::class, 'imageable');
+//    }
 }

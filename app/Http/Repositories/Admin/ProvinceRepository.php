@@ -15,11 +15,16 @@ class ProvinceRepository implements ProvinceInterface{
         $provinces = Province::query();
 
         return DataTables::of($provinces)
+
             ->editColumn('created_at', function (Province $province) {
                 return $province->created_at->format('Y-m-d');
             })
+
+            ->addColumn('country', function (Province $province) {
+                return $province->country->name;
+            })
             ->addColumn('actions', 'dashboard.admin.province.data_table.actions')
-            ->rawColumns([ 'actions'])
+            ->rawColumns([ 'country_name','actions'])
             ->toJson();
     }
 
@@ -35,9 +40,6 @@ class ProvinceRepository implements ProvinceInterface{
         DB::beginTransaction();
         try{
             $requestData = $request->validated();
-
-
-
             $province = Province::create($requestData);
             $province->name = $request->name;
             $province->save();
@@ -60,7 +62,9 @@ class ProvinceRepository implements ProvinceInterface{
 
     public function update( $request,$id) {
         try{
-            $province=Province::findorfail($id);
+            $provinceID = Crypt::decrypt($id);
+            $province=Province::findorfail($provinceID);
+
             $requestData = $request->validated();
             $requestData['name'] = $request->name;
             $province->update($requestData);
@@ -73,7 +77,8 @@ class ProvinceRepository implements ProvinceInterface{
 
 
     public function destroy($id) {
-        $province=Province::findorfail($id);
+        $provinceID = Crypt::decrypt($id);
+        $province=Province::findorfail($provinceID);
         $province->delete();
         toastr()->error(__('Admin/province.deleted_successfully'));
         return redirect()->route('provinces.index');

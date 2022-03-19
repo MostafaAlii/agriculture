@@ -7,7 +7,6 @@ use App\Http\Interfaces\Admin\UserInterface;
 use App\Http\Interfaces\Admin\farmerInterface;
 use App\Http\Interfaces\Admin\CountryInterface;
 use App\Http\Interfaces\Admin\DepartmentInterface;
-use App\Http\Interfaces\Admin\CountryInterface;
 use App\Http\Interfaces\Admin\ProvinceInterface;
 use App\Http\Interfaces\Admin\AreaInterface;
 use App\Http\Interfaces\Admin\StateInterface;
@@ -28,7 +27,6 @@ use App\Http\Repositories\Admin\VillageRepository;
 use App\Http\Repositories\Admin\AdminRepository;
 use App\Http\Repositories\Admin\UserRepository;
 use App\Http\Repositories\Admin\FarmerRepository;
-use App\Http\Repositories\Admin\CountryRepository;
 use App\Http\Repositories\Admin\DepartmentRepository;
 use Illuminate\Support\ServiceProvider;
 

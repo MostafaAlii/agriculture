@@ -1,31 +1,25 @@
 <?php
-<<<<<<< HEAD
+
 use App\Http\Controllers\Dashboard\Admin\AdminController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
 use App\Http\Controllers\Dashboard\Admin\VillageController;
 use App\Http\Controllers\Dashboard\Admin\StateController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
-=======
+
 use App\Http\Livewire;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
->>>>>>> ecd3de33bb7bc165efc778b35c269c8fcd330ad3
+
 use App\Http\Controllers\Dashboard\Admin\UserController;
-use App\Http\Controllers\Dashboard\Admin\AdminController;
 use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\Dashboard\Admin\ProvinceController;
 
-use App\Http\Controllers\front;
-use App\Http\Livewire;
-use Illuminate\Support\Facades\Route;
-=======
+
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
->>>>>>> ecd3de33bb7bc165efc778b35c269c8fcd330ad3
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
-use App\Http\Controllers\Dashboard\Admin\CountryController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 /*
 |--------------------------------------------------------------------------
@@ -79,11 +73,15 @@ Route::group(
             /********************************* Start country  Routes ************************************/
             Route::resource('countries', CountryController::class)->except(['show']);
             Route::get('/countries/data', [CountryController::class,'data'])->name('countries.data');
+            Route::delete('/countries/bulk_delete/{ids}', [CountryController::class,'bulkDelete'])->name('countries.bulk_delete');
+
             /********************************* end country  Routes ************************************/
 
             /********************************* Start provinces  Routes ************************************/
             Route::resource('provinces', ProvinceController::class)->except(['show']);
             Route::get('/provinces/data', [ProvinceController::class,'data'])->name('provinces.data');
+            Route::delete('/provinces/bulk_delete/{ids}', [ProvinceController::class,'bulkDelete'])->name('provinces.bulk_delete');
+
             /********************************* end province  Routes ************************************/
 
             /********************************* Start areas  Routes ************************************/

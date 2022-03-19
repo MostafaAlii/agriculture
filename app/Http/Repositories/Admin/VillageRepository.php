@@ -18,6 +18,9 @@ class VillageRepository implements VillageInterface{
             ->editColumn('created_at', function (Village $village) {
                 return $village->created_at->format('Y-m-d');
             })
+            ->addColumn('state', function (Village $village) {
+                return $village->state->name;
+            })
             ->addColumn('actions', 'dashboard.admin.village.data_table.actions')
             ->rawColumns([ 'actions'])
             ->toJson();

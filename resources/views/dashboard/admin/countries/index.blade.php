@@ -1,12 +1,10 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('user.userpage') }}
+    {{ trans('Admin/countries.countryPageTitle') }}
 @endsection
-@section('content')
-
 
 @section('content')
     @include('dashboard.common._partials.messages')
@@ -31,7 +29,6 @@
                 </div>
             </div>
         </div>
-
         <!-- End Breadcrumbs -->
         <!-- Start Content Body -->
         <div class="content-body">
@@ -56,35 +53,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="card-content collapse show">
-                                <div class="card-body card-dashboard">
-                                    <a href="{{ route('countries.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/country.create') }}</a>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration" id="country_table">
-                                            <thead>
-                                                <tr>
-                                                    <th>{{ __('Admin/country.name') }}</th>
-                                                    <th>{{ __('Admin/country.mob') }}</th>
-                                                    <th>{{ __('Admin/country.code') }}</th>
-                                                    <th>{{ __('Admin/country.created_at') }}</th>
-                                                    <th>{{ __('Admin/country.action') }}</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!--/ Zero configuration table -->
-
-        </div>
-    </div>
-<!-- END: Content-->
-@endsection
-=======
                             <!-- End Card Header -->
                             <!-- Start Card Content -->
                             <div class="card-content collapse show">
@@ -93,10 +61,10 @@
                                     <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
                                         <i class="material-icons">add_box</i>
                                         {{ trans('Admin/countries.add_new_country') }}
-                                   </button>
+                                    </button>
                                     <button type="button" class="btn btn-warning btn-md mb-3"
-                                        id="btn_delete_all" data-toggle="modal"
-                                        data-target="#bulkdelete" >
+                                            id="btn_delete_all" data-toggle="modal"
+                                            data-target="#bulkdelete" >
                                         {{ __('Admin/site.bulkdelete') }}
                                     </button>
                                     <!-- Start Table Responsive -->
@@ -104,15 +72,15 @@
                                         <!-- Start Table -->
                                         <table class="table table-striped table-bordered zero-configuration" id="countries-table">
                                             <thead>
-                                                <tr>
-                                                    <th>
-                                                        <input type="checkbox" name="select_all" id="select-all">
-                                                    </th>
-                                                    {{-- <th>{{ trans('Admin/countries.country_flag') }}</th> --}}
-                                                    <th>{{ __('Admin/countries.country_name') }}</th>
-                                                    <th>{{ __('Admin/general.created_since') }}</th>
-                                                    <th>{{ __('Admin/site.action') }}</th>
-                                                </tr>
+                                            <tr>
+                                                <th>
+                                                    <input type="checkbox" name="select_all" id="select-all">
+                                                </th>
+                                                <th>{{ trans('Admin/countries.country_flag') }}</th>
+                                                <th>{{ __('Admin/countries.country_name') }}</th>
+                                                <th>{{ __('Admin/general.created_since') }}</th>
+                                                <th>{{ __('Admin/site.action') }}</th>
+                                            </tr>
                                             </thead>
                                         </table>
                                         <!-- End Table -->
@@ -138,32 +106,29 @@
 @endsection
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-
-<!-- Datatable Fire -->
-<script>
-    let countriesTable = $('#countries-table').DataTable({
-        // dom: "tiplr",
-        serverSide: true,
-        processing: true,
-        "language": {
+    <!-- Datatable Fire -->
+    <script>
+        let countriesTable = $('#countries-table').DataTable({
+            // dom: "tiplr",
+            serverSide: true,
+            processing: true,
+            "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
-        ajax: {
-            url: '{{ route('countries.data') }}',
-        },
-        columns: [
-
-            {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            // {data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
-            {data: 'name', name: 'name'},
-            {data: 'created_at', name: 'created_at', searchable: false},
-            {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
-        ],
-    });
-</script>
+            ajax: {
+                url: '{{ route('countries.data') }}',
+            },
+            columns: [
+                {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+                {data: 'country_logo', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
+                {data: 'name', name: 'name'},
+                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+            ],
+        });
+    </script>
 
 @endsection

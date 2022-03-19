@@ -14,11 +14,11 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/province.home') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/areas.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('areas.index') }}">{{ __('Admin/area.area') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('areas.index') }}">{{ __('Admin/areas.areas') }}</a>
                             </li>
-                            <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
+                            <li class="breadcrumb-item active">{{ __('Admin/areas.add') }}
                             </li>
 
                         </ol>
@@ -41,7 +41,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/area.newarea') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/areas.newarea') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -61,14 +61,14 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/area.name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/area.name') }}" name="name" value="{{ old('name') }}" required>
+                                                        <label for="eventRegInput1">{{ __('Admin/area.a_name') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/areas.a_name') }}" name="name" value="{{ old('name') }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="eventRegInput1">{{ __('Admin/area.province_id') }}<span class="text-danger">*</span></label>
 
                                                             <select class="form-control" id="exampleFormControlSelect1" name="province_id">
-                                                                <option value="#" selected>choose province</option>
+                                                                <option value="#" selected>{{__('Admin\areas.choose_province')}}</option>
                                                                 @foreach(App\Models\Province::all() as $province)
                                                                 <option value="{{$province->id}}">{{$province->name}}</option>
                                                                @endforeach
@@ -79,12 +79,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/site.location_x') }}<span class="text-danger">*</span></label>
-                                                        <input type="number" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/province.location_x') }}" name="location_x" value="{{ old('location_x') }}" required>
+                                                        <label for="eventRegInput4">{{ __('Admin/areas.location_x') }}<span class="text-danger">*</span></label>
+                                                        <input type="number" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/areas.location_x') }}" name="location_x" value="{{ old('location_x') }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput5">{{ __('Admin/province.location_y') }}<span class="text-danger">*</span></label>
-                                                        <input type="number" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/province.location_y') }}" value="{{ old('location_y') }}" required>
+                                                        <label for="eventRegInput5">{{ __('Admin/areas.location_y') }}<span class="text-danger">*</span></label>
+                                                        <input type="number" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/areas.location_y') }}" value="{{ old('location_y') }}" required>
                                                     </div>
 
                                                 </div>
@@ -95,7 +95,7 @@
 
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/areas.save') }}
                                             </button>
                                         </div>
                                     </form>

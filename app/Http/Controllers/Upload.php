@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DebugBar\Storage;
+use Illuminate\Support\Facades\Storage;
 use App\Models\File;
+
 
 class Upload extends Controller
 {

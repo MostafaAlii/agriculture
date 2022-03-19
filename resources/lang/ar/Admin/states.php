@@ -1,0 +1,43 @@
+<?php
+return [
+
+
+    'cancel'=>'إلغاء الأمر',
+    'delete'=>'حذف',
+    'home'=>'الصفحة الرئيسية',
+    'states'=>'النواحي',
+    'newstate'=>'ناحية جديد',
+    's_name'=>'اسم الناحية',
+    'area_id'=>'اسم القضاء',
+    'location_x'=>'الاحداثي x',
+    'location_y'=>'الإحداثي y',
+    'no_data_found' => 'عفوا لا يوجد بيانات',
+    'added_successfully' => 'تم تسجيل الطلب بنجاح',
+    'updated_successfully' => 'تم التحديث  بنجاح',
+    'deleted_successfully' => 'تم الحذف بنجاح',
+    'confirm_delete' => 'تم تأكيد الحذف',
+    'add'=>'إضافة',
+    'edit'=>'تحرير',
+    'update'=>'تعديل',
+    'choose_area'=>'إختر القضاء',
+    'editstate'=>'تحرير بيانات الناحية',
+    'created_at'=>'أنشئ منذ',
+    'action'=>'العمليات',
+    'create'=>'إضافة',
+    'warning'=>'هل أنت متأكد من عملية الحذف',
+    ''=>'',
+    ''=>'',
+    ''=>'',
+    ''=>'',
+
+    'provience_title_in_sidebar'                  =>                  'المحافظات',
+    'proviencePageTitle'                          =>                  'المحافظات',
+    'add_new_provience'                           =>                  'اضافة المحافظة جديدة',
+    'provience_name'                              =>                  'اسم المحافظة',
+    'enter_provience_name'                        =>                  'ادخل اسم المحافظة',
+    'enter_provience_name_placeholder'            =>                  'اكتب اسم المحافظة',
+    // Validation ::
+    'provience_name_required'                   =>                  'اسم الناحية مطلوب',
+    'provience_name_string'                     =>                  'اسم الناحية يجب ان يكون نص',
+    'proviencePageTitle_edit'                     =>                  'تعديل بيانات الناحية',
+];

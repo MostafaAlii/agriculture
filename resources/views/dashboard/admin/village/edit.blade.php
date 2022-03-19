@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/setting.settingPageTitle') }}
+    {{ trans('villages.villagePageTitle') }}
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
@@ -14,11 +14,11 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/village.home') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/villages.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('villages.index') }}">{{ __('Admin/village.village') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('villages.index') }}">{{ __('Admin/villages.villages') }}</a>
                             </li>
-                            <li class="breadcrumb-item active">{{ __('Admin/village.edit') }}
+                            <li class="breadcrumb-item active">{{ __('Admin/villages.edit') }}
                             </li>
                         </ol>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{__('Admin\village.newvillage')}}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{__('Admin\villages.newvillage')}}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('villages.update', $village->id) }}">
+                                    <form class="form" method="post" action="{{ route('villages.update', encrypt($village->id) )}}">
                                         @csrf
                                         @method('put')
 
@@ -61,11 +61,11 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/state.name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/village.name') }}" name="name" value="{{ $village->name }}" required>
+                                                        <label for="eventRegInput1">{{ __('Admin/villages.v_name') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/villages.v_name') }}" name="name" value="{{ $village->name }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/site.country_id') }}<span class="text-danger">*</span></label>
+                                                        <label for="eventRegInput1">{{ __('Admin/villages.state_id') }}<span class="text-danger">*</span></label>
                                                         <select class="form-control" id="exampleFormControlSelect1" name="state_id">
                                                             <option value="{{$village->state->id}}" selected>{{$village->state->name}}</option>
                                                             @foreach(App\Models\State::all() as $state)
@@ -79,12 +79,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/village.location_x') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/village.location_x') }}" name="location_x" value="{{ old('location_x',$village->location_x) }}" required>
+                                                        <label for="eventRegInput4">{{ __('Admin/villages.location_x') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/villages.location_x') }}" name="location_x" value="{{ old('location_x',$village->location_x) }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput5">{{ __('Admin/village.location_y') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/village.location_y') }}" value="{{ old('location_y',$village->location_y) }}" required>
+                                                        <label for="eventRegInput5">{{ __('Admin/villages.location_y') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/villages.location_y') }}" value="{{ old('location_y',$village->location_y) }}" required>
                                                     </div>
 
                                                 </div>
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/village.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/villages.update') }}
                                             </button>
                                         </div>
                                     </form>

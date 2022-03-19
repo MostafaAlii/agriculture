@@ -3,6 +3,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 class Area extends Model {

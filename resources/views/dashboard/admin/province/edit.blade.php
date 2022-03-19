@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/setting.settingPageTitle') }}
+    {{ trans('provinces.provincePageTitle') }}
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
@@ -14,11 +14,11 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/province.home') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/provinces.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('provinces.index') }}">{{ __('Admin/province.province') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('provinces.index') }}">{{ __('Admin/provinces.provinces') }}</a>
                             </li>
-                            <li class="breadcrumb-item active">{{ __('Admin/province.edit') }}
+                            <li class="breadcrumb-item active">{{ __('Admin/provinces.edit') }}
                             </li>
                         </ol>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{__('Admin\province.newprovince')}}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{__('Admin\provinces.editprovince')}}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('provinces.update', $province->id) }}">
+                                    <form class="form" method="post" action="{{ route('provinces.update',  encrypt($province->id)) }}">
                                         @csrf
                                         @method('put')
 
@@ -61,11 +61,11 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/province.name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/province.name') }}" name="name" value="{{ $province->name }}" required>
+                                                        <label for="eventRegInput1">{{ __('Admin/provinces.p_name') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/provinces.p_name') }}" name="name" value="{{ $province->name }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/site.country_id') }}<span class="text-danger">*</span></label>
+                                                        <label for="eventRegInput1">{{ __('Admin/provinces.country_id') }}<span class="text-danger">*</span></label>
                                                         <select class="form-control" id="exampleFormControlSelect1" name="country_id">
                                                             <option value="{{$province->country->id}}" selected>{{ $province->country->name }}</option>
                                                             @foreach(App\Models\Country::all() as $country)
@@ -78,12 +78,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/province.location_x') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/province.location_x') }}" name="location_x" value="{{ $province->location_x }}" required>
+                                                        <label for="eventRegInput4">{{ __('Admin/provinces.location_x') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/provinces.location_x') }}" name="location_x" value="{{ $province->location_x }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput5">{{ __('Admin/province.location_y') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/province.location_y') }}" value="{{ $province->location_y }}" required>
+                                                        <label for="eventRegInput5">{{ __('Admin/provinces.location_y') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/provinces.location_y') }}" value="{{ $province->location_y }}" required>
                                                     </div>
 
                                                 </div>
@@ -92,7 +92,7 @@
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/province.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/provinces.update') }}
                                             </button>
                                         </div>
                                     </form>

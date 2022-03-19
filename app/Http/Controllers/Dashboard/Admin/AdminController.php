@@ -3,10 +3,7 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\AdminInterface;
 use App\Http\Requests\Dashboard\AdminRequest;
-<<<<<<< HEAD
 
-=======
->>>>>>> ecd3de33bb7bc165efc778b35c269c8fcd330ad3
 use Illuminate\Http\Request;
 class AdminController extends Controller {
 
@@ -31,14 +28,9 @@ class AdminController extends Controller {
         return $this->Data->store($request);
     }// end of store
 
-<<<<<<< HEAD
-    public function edit($id)
-    {
 
-=======
     public function edit($id) {
         // dd($id);
->>>>>>> ecd3de33bb7bc165efc778b35c269c8fcd330ad3
         return $this->Data->edit($id);
     }// end of edit
 

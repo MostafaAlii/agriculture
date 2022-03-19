@@ -3,20 +3,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('user.userpage') }}
+    {{ trans('states.statePageTitle') }}
 @endsection
 @section('content')
 @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/province.province') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/states.states') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/state.home') }}</a>
+                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/states.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/state.state') }}</a>
+                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/states.states') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -43,17 +43,17 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('states.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/state.create') }}</a>
+                                    <a href="{{ route('states.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/states.create') }}</a>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="state-table">
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Admin/province.name') }}</th>
-                                                    <th>{{ __('Admin/province.area_id') }}</th>
-                                                    <th>{{ __('Admin/province.location_x') }}</th>
-                                                    <th>{{ __('Admin/province.location_y') }}</th>
-                                                    <th>{{ __('Admin/province.created_at') }}</th>
-                                                    <th>{{ __('Admin/province.action') }}</th>
+                                                    <th>{{ __('Admin/states.s_name') }}</th>
+                                                    <th>{{ __('Admin/states.area_id') }}</th>
+                                                    <th>{{ __('Admin/states.location_x') }}</th>
+                                                    <th>{{ __('Admin/states.location_y') }}</th>
+                                                    <th>{{ __('Admin/states.created_at') }}</th>
+                                                    <th>{{ __('Admin/states.action') }}</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -80,12 +80,15 @@
     let provinceTable = $('#state-table').DataTable({
         serverSide: true,
         processing: true,
+        "language": {
+            "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
         ajax: {
             url: '{{ route('states.data') }}',
         },
         columns: [
             {data: 'name', name: 'name'},
-            {data: 'area_id', name: 'area_id'},
+            {data: 'area', name: 'area.name'},
             {data: 'location_x', name: 'location_x'},
             {data: 'location_y', name: 'location_y'},
             {data: 'created_at', name: 'created_at', searchable: false},

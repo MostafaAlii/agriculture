@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/setting.settingPageTitle') }}
+    {{ trans('provinces.provincePageTitle') }}
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
@@ -14,9 +14,9 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/province.home') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/provinces.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('provinces.index') }}">{{ __('Admin/province.province') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('provinces.index') }}">{{ __('Admin/provinces.provinces') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
@@ -41,7 +41,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/province.newprovince') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/provinces.newprovince') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -61,14 +61,14 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/province.name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/province.name') }}" name="name" value="{{ old('name') }}" required>
+                                                        <label for="eventRegInput1">{{ trans('Admin/provinces.p_name') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/provinces.p_name') }}" name="name" value="{{ old('name') }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/province.country_id') }}<span class="text-danger">*</span></label>
+                                                        <label for="eventRegInput1">{{ __('Admin/provinces.country_id') }}<span class="text-danger">*</span></label>
 
                                                             <select class="form-control" id="exampleFormControlSelect1" name="country_id">
-                                                                <option value="#" selected>choose country</option>
+                                                                <option value="#" selected>{{ __('Admin/provinces.choose_country') }}</option>
                                                                 @foreach(App\Models\Country::all() as $country)
                                                                 <option value="{{$country->id}}">{{$country->name}}</option>
                                                                @endforeach
@@ -79,12 +79,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/site.location_x') }}<span class="text-danger">*</span></label>
-                                                        <input type="number" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/province.location_x') }}" name="location_x" value="{{ old('location_x') }}" required>
+                                                        <label for="eventRegInput4">{{ __('Admin/provinces.location_x') }}<span class="text-danger">*</span></label>
+                                                        <input type="number" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/provinces.location_x') }}" name="location_x" value="{{ old('location_x') }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput5">{{ __('Admin/province.location_y') }}<span class="text-danger">*</span></label>
-                                                        <input type="number" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/province.location_y') }}" value="{{ old('location_y') }}" required>
+                                                        <label for="eventRegInput5">{{ __('Admin/provinces.location_y') }}<span class="text-danger">*</span></label>
+                                                        <input type="number" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/provinces.location_y') }}" value="{{ old('location_y') }}" required>
                                                     </div>
 
                                                 </div>
@@ -95,7 +95,7 @@
 
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/provinces.add') }}
                                             </button>
                                         </div>
                                     </form>

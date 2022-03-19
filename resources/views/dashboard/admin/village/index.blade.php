@@ -3,20 +3,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('user.userpage') }}
+    {{ trans('villages.villagePageTitle') }}
 @endsection
 @section('content')
 @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/village.village') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/villages.villages') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/village.home') }}</a>
+                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/villages.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/village.village') }}</a>
+                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/villages.villages') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -30,7 +30,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">{{ __('Admin/village.village') }}</h4>
+                                <h4 class="card-title">{{ __('Admin/villages.villages') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -43,17 +43,17 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('villages.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/village.create') }}</a>
+                                    <a href="{{ route('villages.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/villages.create') }}</a>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="village-table">
                                             <thead>
                                                 <tr>
-                                                    <th>{{ __('Admin/village.name') }}</th>
-                                                    <th>{{ __('Admin/village.state_id') }}</th>
-                                                    <th>{{ __('Admin/village.location_x') }}</th>
-                                                    <th>{{ __('Admin/village.location_y') }}</th>
-                                                    <th>{{ __('Admin/village.created_at') }}</th>
-                                                    <th>{{ __('Admin/village.action') }}</th>
+                                                    <th>{{ __('Admin/villages.v_name') }}</th>
+                                                    <th>{{ __('Admin/villages.state_id') }}</th>
+                                                    <th>{{ __('Admin/villages.location_x') }}</th>
+                                                    <th>{{ __('Admin/villages.location_y') }}</th>
+                                                    <th>{{ __('Admin/villages.created_at') }}</th>
+                                                    <th>{{ __('Admin/villages.action') }}</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -79,12 +79,15 @@
     let villageTable = $('#village-table').DataTable({
         serverSide: true,
         processing: true,
+        "language": {
+            "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
         ajax: {
             url: '{{ route('villages.data') }}',
         },
         columns: [
             {data: 'name', name: 'name'},
-            {data: 'state_id', name: 'state_id'},
+            {data: 'state', name: 'state.name'},
             {data: 'location_x', name: 'location_x'},
             {data: 'location_y', name: 'location_y'},
             {data: 'created_at', name: 'created_at', searchable: false},

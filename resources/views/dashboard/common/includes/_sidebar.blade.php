@@ -2,7 +2,7 @@
     <div class="main-menu material-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true">
         <div class="user-profile">
             <div class="user-info text-center pt-1 pb-1">
-                <img class="user-img img-fluid rounded-circle" src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}" />
+                {{--<img class="user-img img-fluid rounded-circle" src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}" />--}}
                 <div class="name-wrapper d-block dropdown">
                     <a class="white dropdown-toggle ml-2" id="user-account" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-name">Charlie Adams</span></a>
                     <div class="text-light">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</div>
@@ -139,7 +139,7 @@
                 </li>
                 <li class=" nav-item"><a href="{{route('states.index')}}"  target="_blank"><i class="material-icons">{{__('Admin\state.state')}}</i><span class="menu-title" data-i18n="Crypto">Crypto</span></a>
                 </li>
-                <li class=" nav-item"><a href="{{route('village.index')}}" target="_blank"><i class="material-icons">{{__('Admin\village.village')}}</i><span class="menu-title" data-i18n="Support Ticket">Support Ticket</span></a>
+                <li class=" nav-item"><a href="{{route('villages.index')}}" target="_blank"><i class="material-icons">{{__('Admin\village.village')}}</i><span class="menu-title" data-i18n="Support Ticket">Support Ticket</span></a>
                 </li>
                 <li class=" nav-item"><a href="../material-bank-menu-template" target="_blank"><i class="material-icons">account_balance</i><span class="menu-title" data-i18n="Bank">Bank</span></a>
                 </li>

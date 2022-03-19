@@ -14,11 +14,11 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/province.home') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/areas.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('areas.index') }}">{{ __('Admin/area.area') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('areas.index') }}">{{ __('Admin/areas.areas') }}</a>
                             </li>
-                            <li class="breadcrumb-item active">{{ __('Admin/area.edit') }}
+                            <li class="breadcrumb-item active">{{ __('Admin/areas.edit') }}
                             </li>
                         </ol>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{__('Admin\area.newarea')}}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{__('Admin\areas.newarea')}}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('areas.update', $area->id) }}">
+                                    <form class="form" method="post" action="{{ route('areas.update', encrypt($area->id)) }}">
                                         @csrf
                                         @method('put')
 
@@ -61,11 +61,11 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/area.name') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/area.name') }}" name="name" value="{{ $area->name }}" required>
+                                                        <label for="eventRegInput1">{{ __('Admin/areas.a_name') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/areas.a_name') }}" name="name" value="{{ $area->name }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/site.province_id') }}<span class="text-danger">*</span></label>
+                                                        <label for="eventRegInput1">{{ __('Admin/areas.province_id') }}<span class="text-danger">*</span></label>
 
                                                             <select class="form-control" id="exampleFormControlSelect1" name="province_id">
                                                                 <option value="{{$area->province->id}}" selected>{{ $area->province->name }}</option>
@@ -79,12 +79,12 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/area.location_x') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/area.location_x') }}" name="location_x" value="{{ $area->location_x }}" required>
+                                                        <label for="eventRegInput4">{{ __('Admin/areas.location_x') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/areas.location_x') }}" name="location_x" value="{{ $area->location_x }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput5">{{ __('Admin/area.location_y') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/area.location_y') }}" value="{{ $area->location_y}}" required>
+                                                        <label for="eventRegInput5">{{ __('Admin/areas.location_y') }}<span class="text-danger">*</span></label>
+                                                        <input type="text" id="eventRegInput5" class="form-control" name="location_y" placeholder="{{ __('Admin/areas.location_y') }}" value="{{ $area->location_y}}" required>
                                                     </div>
 
                                                 </div>
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/province.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/areas.update') }}
                                             </button>
                                         </div>
                                     </form>
