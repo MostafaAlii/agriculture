@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder {
         \App\Models\Admin::factory(30)->create();
         \App\Models\Farmer::factory(30)->create();
         \App\Models\User::factory(30)->create();
-        \App\Models\Section::factory(6)->create();
          // images
          for ($i = 1; $i <= $count ; $i++) {
             Image::insert([

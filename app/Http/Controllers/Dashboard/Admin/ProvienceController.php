@@ -22,20 +22,15 @@ class ProvienceController extends Controller
     public function store(ProviencyRequest $request) {
         return $this->Data->store($request);
     }
-
-    public function show($id) {
-        //
-    }
-
     public function edit($id) {
-        //
+        return $this->Data->edit($id);
     }
 
-    public function update(Request $request, $id) {
-        //
-    }
+    public function update(ProviencyRequest $request,$id) {
+        return $this->Data->update($request,$id);
+    }// end of update
 
     public function destroy($id) {
-        //
-    }
+        return $this->Data->destroy($id);
+    }// end of destroy
 }

@@ -10,20 +10,9 @@ class ProviencyRequest extends FormRequest {
     {
         $rules = [
 
-            'name'    =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'name'    =>'required|min:3|string',
             'country_id'        => 'required_with:name|int',
         ];
-
-        if (in_array($this->method(), ['PUT', 'PATCH'])) {
-
-            /*$farmer = $this->route()->parameter('id');
-
-            $rules['email'] = 'required|email|unique:farmers,id,' . $farmer;
-            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . $farmer;
-            $rules['password'] = '';*/
-
-        }//end of if
-
         return $rules;
 
     }//end of rules

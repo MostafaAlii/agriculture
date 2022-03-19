@@ -29,10 +29,6 @@ class DepartmentController extends Controller
         //return $request;
     }
 
-    public function show($id) {
-        //
-    }
-
     public function edit($id) {
         return $this->Data->edit($id);
     }
