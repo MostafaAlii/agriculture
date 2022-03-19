@@ -28,7 +28,7 @@ class SettingController extends Controller
 
 
 
-    public function save_setting(SettingRequest $request)
+    public function store(SettingRequest $request)
     {
         $validated = $request->validated();
 //
