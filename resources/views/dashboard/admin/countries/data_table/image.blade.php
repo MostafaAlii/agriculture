@@ -1,2 +1,6 @@
-<img class="rounded-circle border border-4 border-dark" style="width: 55%; height:55%;" src="{{ $country->country_flag_path }}"  alt="{{ $country->name }}">
 
+@if($country->country_logo)
+    <img style="width:65px; height:65px;border-radius: 5px;" class="rounded-circle" src="{{ $country->country_flag_path }}" alt="{{ $country->name }}" />
+@else
+    <img style="width:65px; height:65px;border-radius: 5px;" class="rounded-circle" src="{{Url::asset('Dashboard/img/countryFlags/default_flag.jpg')}}" alt="" />
+@endif

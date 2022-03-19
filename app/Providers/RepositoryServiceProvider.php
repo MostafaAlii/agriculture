@@ -7,6 +7,7 @@ use App\Http\Interfaces\Admin\UserInterface;
 use App\Http\Interfaces\Admin\farmerInterface;
 use App\Http\Interfaces\Admin\CountryInterface;
 use App\Http\Interfaces\Admin\DepartmentInterface;
+<<<<<<< HEAD
 use App\Http\Interfaces\Admin\ProvinceInterface;
 use App\Http\Interfaces\Admin\AreaInterface;
 use App\Http\Interfaces\Admin\StateInterface;
@@ -23,11 +24,17 @@ use App\Http\Repositories\Admin\OrchardRepository;
 
 use App\Http\Repositories\Admin\VillageRepository;
 
+=======
+use App\Http\Interfaces\Admin\ProfileInterface;
+use App\Http\Interfaces\Admin\ProvienceInterface;
+>>>>>>> d794e18ddc263d92cf7f08e4591d8b7a198f0031
 
 use App\Http\Repositories\Admin\AdminRepository;
 use App\Http\Repositories\Admin\UserRepository;
 use App\Http\Repositories\Admin\FarmerRepository;
 use App\Http\Repositories\Admin\DepartmentRepository;
+use App\Http\Repositories\Admin\ProfileRepository;
+use App\Http\Repositories\Admin\ProvienceRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -44,7 +51,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserInterface::class, UserRepository::class);
         $this->app->bind(farmerInterface::class, FarmerRepository::class);
         $this->app->bind(CountryInterface::class, CountryRepository::class);
+        $this->app->bind(ProvienceInterface::class, ProvienceRepository::class);
         $this->app->bind(DepartmentInterface::class, DepartmentRepository::class);
+        $this->app->bind(ProfileInterface::class, ProfileRepository::class);
     }
 
     public function boot()

@@ -13,12 +13,12 @@ class CreateFarmersTable extends Migration {
             $table->string('phone')->unique();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
-            $table->foreignId('province_id')->constrained()->onDelete('cascade');
-            $table->foreignId('area_id')->constrained()->onDelete('cascade');
-            $table->foreignId('state_id')->constrained()->onDelete('cascade');
-            $table->foreignId('village_id')->constrained()->onDelete('cascade');
-            $table->foreignId('department_id')->constrained()->onDelete('cascade');
+            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('province_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('area_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('state_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('village_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             $table->date('birthdate')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

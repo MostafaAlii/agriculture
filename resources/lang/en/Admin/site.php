@@ -90,4 +90,6 @@ return [
     'village'=>'Village',
     'department'=>'Department',
     'information' => 'Information',
+    'showedit'=>'Show & Edit',
+    'back'=>'Back',
 ];

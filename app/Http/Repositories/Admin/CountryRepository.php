@@ -2,6 +2,14 @@
 namespace App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\CountryInterface;
 use App\Models\Country;
+<<<<<<< HEAD
+=======
+use App\Models\Admin;
+use App\Models\Farmer;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+>>>>>>> d794e18ddc263d92cf7f08e4591d8b7a198f0031
 use Intervention\Image\Facades\Image;
 
 use App\Models\Province;
@@ -16,13 +24,20 @@ class CountryRepository implements CountryInterface {
         return view('dashboard.admin.countries.index');
     }
     public function data() {
+<<<<<<< HEAD
         $countries = Country::query();
 
+=======
+        $countries = Country::with('provinces');
+>>>>>>> d794e18ddc263d92cf7f08e4591d8b7a198f0031
         return DataTables::of($countries)
+            ->addColumn('provinces', function (Country $country) {
+                return view('dashboard.admin.countries.btn.related', compact('country'));
+            })
             ->addColumn('record_select', 'dashboard.admin.countries.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (Country $country) {
-                return $country->created_at->format('Y-m-d');
+                return $country->created_at->diffforhumans();
             })
 
             ->addColumn('image', function (Country $country) {
@@ -74,6 +89,7 @@ class CountryRepository implements CountryInterface {
 
     }
 
+<<<<<<< HEAD
     public function update( $request,$id) {
 
             try{
@@ -98,6 +114,15 @@ class CountryRepository implements CountryInterface {
             } catch (\Exception $e) {
                 DB::rollBack();
                 return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+=======
+    public function update($request,$id) {
+        $countryID = Crypt::decrypt($id);
+        $country=Country::findorfail($countryID);
+        $dataRequest = $request->except(['country_logo']);
+        if($request->country_logo) {
+            if($country->country_logo != 'default_flag.jpg') {
+                Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
+>>>>>>> d794e18ddc263d92cf7f08e4591d8b7a198f0031
             }
 
 
@@ -105,6 +130,7 @@ class CountryRepository implements CountryInterface {
 
 
     public function destroy($id) {
+<<<<<<< HEAD
 
         try{
             $countryID = Crypt::decrypt($id);
@@ -119,6 +145,25 @@ class CountryRepository implements CountryInterface {
         }
 
 
+=======
+        $data = [];
+        $countryID = Crypt::decrypt($id);
+        $data['admin'] = Admin::where('country_id', $countryID)->pluck('country_id');
+        $data['farmer'] = Farmer::where('country_id', $countryID)->pluck('country_id');
+        $data['user'] = User::where('country_id', $countryID)->pluck('country_id'); 
+        if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0) {
+            $country=Country::findorfail($countryID);
+            if($country->country_logo != 'default_flag.jpg') {
+                Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
+            }
+            $country->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('Countries.index');
+        } else {
+            toastr()->error(__('Admin/countries.cant_delete'));
+            return redirect()->route('Countries.index');
+        }
+>>>>>>> d794e18ddc263d92cf7f08e4591d8b7a198f0031
     }
 
 

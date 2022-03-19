@@ -63,7 +63,8 @@ class AdminRepository implements AdminInterface{
         // dd($adminID);
         $admin=Admin::findorfail($adminID);
 
-        return view('dashboard.admin.admins.edit', compact('admin'));
+        // return view('dashboard.admin.admins.edit', compact('admin'));
+        return view('dashboard.admin.admins.profile.profiledit', compact('admin'));
     }
 
     public function update( $request,$id) {
@@ -129,4 +130,40 @@ class AdminRepository implements AdminInterface{
 
         return view('dashboard.admin.admins.profile.profileview', compact('admin'));
     }
+
+    public function updateAccount($request,$id) {
+        try{
+            DB::beginTransaction();
+            $adminID = Crypt::decrypt($id);
+            $admin=Admin::findorfail($adminID);
+            $requestData = $request->validated();
+            // $requestData['type'] = $request->type;
+            $admin->update($requestData);
+
+            if($request->image){
+                $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
+            }
+            $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
+
+            DB::commit();
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('Admins.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }// end of update
+    public function updateInformation($request,$id) {
+        try{
+            $adminID = Crypt::decrypt($id);
+            $admin=Admin::findorfail($adminID);
+            $requestData = $request->validated();
+            $admin->update($requestData);
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('Admins.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+
+    }// end of update
 }

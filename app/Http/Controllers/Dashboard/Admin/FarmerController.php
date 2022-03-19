@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\farmerInterface;
+use App\Http\Requests\Dashboard\FarmerProfileAccountRequest;
+use App\Http\Requests\Dashboard\FarmerProfileInformationRequest;
 use App\Http\Requests\Dashboard\FarmerRequest;
 use App\Models\Farmer;
 use Illuminate\Http\Request;
@@ -48,4 +50,11 @@ class FarmerController extends Controller {
         // dd($id);
         return $this->Data->showProfile($id);
     }// end of showprofile
+
+    public function updateAccount(FarmerProfileAccountRequest $request,$id) {
+        return $this->Data->updateAccount($request,$id);
+    }// end of update
+    public function updateInformation(FarmerProfileInformationRequest  $request,$id) {
+        return $this->Data->updateInformation($request,$id);
+    }// end of update
 }

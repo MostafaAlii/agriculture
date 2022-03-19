@@ -72,6 +72,7 @@
                                         <!-- Start Table -->
                                         <table class="table table-striped table-bordered zero-configuration" id="countries-table">
                                             <thead>
+<<<<<<< HEAD
                                             <tr>
                                                 <th>
                                                     <input type="checkbox" name="select_all" id="select-all">
@@ -81,6 +82,18 @@
                                                 <th>{{ __('Admin/general.created_since') }}</th>
                                                 <th>{{ __('Admin/site.action') }}</th>
                                             </tr>
+=======
+                                                <tr>
+                                                    <th>
+                                                        <input type="checkbox" name="select_all" id="select-all">
+                                                    </th>
+                                                    <th>{{ trans('Admin/countries.country_flag') }}</th>
+                                                    <th>{{ __('Admin/countries.country_name') }}</th>
+                                                    <th>{{ __('Admin/countries.country_related_proviency') }}</th>
+                                                    <th>{{ __('Admin/general.created_since') }}</th>
+                                                    <th>{{ __('Admin/site.action') }}</th>
+                                                </tr>
+>>>>>>> d794e18ddc263d92cf7f08e4591d8b7a198f0031
                                             </thead>
                                         </table>
                                         <!-- End Table -->
@@ -118,6 +131,7 @@
             "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
+
             ajax: {
                 url: '{{ route('countries.data') }}',
             },
@@ -130,5 +144,19 @@
             ],
         });
     </script>
+
+        {{--ajax: {--}}
+            {{--url: '{{ route('countries.data') }}',--}}
+        {{--},--}}
+        {{--columns: [--}}
+            {{--{data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},--}}
+             {{--{data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},--}}
+            {{--{data: 'name', name: 'name', searchable: false, sortable: false},--}}
+            {{--{data: 'provinces', name: 'provinces.name', searchable: false, sortable: false},--}}
+            {{--{data: 'created_at', name: 'created_at', searchable: false},--}}
+            {{--{data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},--}}
+        {{--],--}}
+    {{--});--}}
+{{--</script>--}}
 
 @endsection

@@ -74,7 +74,7 @@
                         <!-- End Countries -->
                         <!-- Start Proviences -->
                         <li>
-                            <a class="menu-item" href="{{-- route('Proviences.index') --}}">
+                            <a class="menu-item" href="{{ route('Proviences.index') }}">
                                 <i class="material-icons">flag</i>
                                 <span data-i18n="Proviences">{{ trans('Admin/proviences.proviencePageTitle') }}</span>
                             </a>

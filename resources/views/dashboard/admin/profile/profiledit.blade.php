@@ -36,7 +36,7 @@
 
                                     <!-- users edit media object ends -->
                                     <!-- users edit account form start -->
-                                    <form novalidate action="{{ route('admin.updateAccount', encrypt(Auth::user()->id)) }}"  enctype="multipart/form-data" method="post">
+                                    <form novalidate action="{{ route('profile.updateAccount', encrypt(Auth::user()->id)) }}"  enctype="multipart/form-data" method="post">
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
@@ -84,6 +84,29 @@
                                                         <label>{{ __('Admin/site.email') }}</label>
                                                         <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',Auth::user()->email) }}"
                                                         required data-validation-required-message="This email field is required">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label>{{ __('Admin/site.type') }}</label>
+                                                        <select class="custom-select" id="customSelect" name="type">
+                                                            <option value="{{ old('type',Auth::user()->type) }}" disabled selected >{{Auth::user()->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
+                                                            <option value="admin">{{ __('Admin/site.admins') }}</option>
+                                                            <option value="employee">{{ __('Admin/site.employee') }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    {{--password--}}
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="password" class="form-control" value="{{ old('password',Auth::user()->password) }}" required>
+                                                    </div>
+                                                    {{--password_confirmation--}}
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -199,31 +222,10 @@
                                 </div>
                                 <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
                                     <!-- users edit Info form start -->
-                                    <form novalidate>
+                                    <form novalidate action="{{ route('profile.updateInformation', encrypt(Auth::user()->id)) }}"  method="post">
+                                        @csrf
+                                        @method('put')
                                         <div class="row">
-                                            {{-- <div class="col-12 col-sm-6">
-                                                <h5 class="mb-1"><i class="ft-link mr-25"></i>Social Links</h5>
-                                                <div class="form-group">
-                                                    <label>Twitter</label>
-                                                    <input class="form-control" type="text" value="https://www.twitter.com/">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Facebook</label>
-                                                    <input class="form-control" type="text" value="https://www.facebook.com/">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Google+</label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>LinkedIn</label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Instagram</label>
-                                                    <input class="form-control" type="text" value="https://www.instagram.com/">
-                                                </div>
-                                            </div> --}}
                                             <div class="col-12 col-sm-6 mt-1 mt-sm-0">
                                                 <h5 class="mb-1"><i class="ft-user mr-25"></i>{{ __('Admin/site.personalinfo') }}</h5>
                                                 <div class="form-group">
@@ -236,42 +238,37 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.country') }}</label>
-                                                    <select class="form-control" id="accountSelect">
+                                                    <select class="form-control" id="accountSelect" name="country_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @foreach (\App\Models\Country::get() as $country)
-                                                         <option>{{ $country->name }}</option>
+                                                         <option value="{{ Auth::user()->country_id }}" {{Auth::user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>{{ __('Admin/site.state') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>{{ __('Admin/site.village') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
+                                                    <select class="form-control" id="accountSelect" name="province_id">
+                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        <option value="{{ Auth::user()->province_id }}"  >{{ Auth::user()->province->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
+                                                    <select class="form-control" id="accountSelect" name="area_id">
+                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        <option value="{{ Auth::user()->area_id }}"  >{{ Auth::user()->area->name }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.state') }}</label>
+                                                    <select class="form-control" id="accountSelect" name="state_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.village') }}</label>
+                                                    <select class="form-control" id="accountSelect" name="village_id">
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -289,10 +286,12 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>USA</option>
-                                                        <option>India</option>
-                                                        <option>Canada</option>
+                                                    <select class="form-control" id="accountSelect" name="department_id">
+                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        <option value="{{ Auth::user()->department_id }}"  >{{ Auth::user()->department->name }}</option>
+                                                        @foreach (\App\Models\Department::get() as $department)
+                                                         <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
 
@@ -353,6 +352,67 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+     $(document).ready(function() {
+        //  استعلام بالاجاكس لجلب محافظات البلد ajax for provinces data of country ===============================
+            $('select[name="country_id"]').on('change', function() {
+                    var country_id = $(this).val();
+                    // console.log(country_id);
+                    if (country_id) {
+                        $.ajax({
+                            url: "{{ URL::to('dashboard_admin/admin/province') }}/" + country_id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="province_id"]').empty();
+                                $('select[name="province_id"]').append( '<option selected disabled>--select--</option>');
 
+                                $.each(data, function(key, value) {
+                                    // console.log(data);
+                                    // console.log(key);
+                                    // console.log(value);
+                                    $('select[name="province_id"]').append(
+                                        '<option value="' + key + '">' + value +'</option>'
+                                    );
+                                });
+                            },
+                        });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+</script>
+<script>
+     $(document).ready(function() {
+        //  ajax for area data of province =====================================================================
+            $('select[name="province_id"]').on('change', function() {
+                    var province_id = $(this).val();
+                    // console.log(province_id);
+                    if (province_id) {
+                        $.ajax({
+                            url: "{{ URL::to('dashboard_admin/admin/area') }}/" + province_id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="area_id"]').empty();
+                                $('select[name="area_id"]').append( '<option selected disabled>--select--</option>');
+
+                                $.each(data, function(key, value) {
+                                    // console.log(data);
+                                    // console.log(key);
+                                    // console.log(value);
+                                    $('select[name="area_id"]').append(
+                                        '<option value="' + key + '">' + value +'</option>'
+                                    );
+                                });
+                            },
+                        });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+</script>
 
 @endsection

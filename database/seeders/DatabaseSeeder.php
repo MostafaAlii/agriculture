@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder {
     public function run() {
         $count = 32;
-        \App\Models\Department::factory(6)->create();
         $this->call([
             CountrySeeder::class,
             ProvinceSeeder::class,
             AreaSeeder::class,
             StateSeeder::class,
             VillageSeeder::class,
+            DepartmentSeeder::class,
             FarmerTableSeeder::class,
             AdminTableSeeder::class,
             UserSeeder::class,
