@@ -20,6 +20,7 @@ class RegisteredUserController extends Controller
     // }
     public function store(UserRegisterRequest $request)
     {
+        // dd($request->all());
         $requestData = $request->validated();
         $user = User::create([
             'firstname'    => $request->firstname,

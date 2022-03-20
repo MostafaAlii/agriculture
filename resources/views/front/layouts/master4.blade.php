@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
- 
+
 	<head>
 		@include('front.layouts.include.headcss')
 	</head>
@@ -98,7 +98,6 @@
                                             <p>
                                                 <span>{{ \App\Models\setting::first()->address }}</span>
                                             </p>
-
                                             <p>
                                                 {{  \App\Models\setting::first()->primary_phone }},
                                                 {{  \App\Models\setting::first()->secondery_phone }} <br>
