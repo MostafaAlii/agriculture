@@ -80,6 +80,14 @@
                             </a>
                         </li>
                         <!-- End Proviences -->
+                        <!-- Start Areas -->
+                        <li>
+                            <a class="menu-item" href="{{ route('Areas.index') }}">
+                                <i class="material-icons">flag</i>
+                                <span data-i18n="Areas">{{ trans('Admin/areas.areaPageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Proviences -->
                     </ul>
                 </li>
                 <!-- End Countries Dropdown Menu -->

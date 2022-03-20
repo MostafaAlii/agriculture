@@ -7,6 +7,7 @@ use App\Http\Interfaces\Admin\AreaInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\AreaRequest;
 
+
 class AreaController extends Controller
 {
     protected $Data;
@@ -17,23 +18,10 @@ class AreaController extends Controller
     public function index() {
         return $this->Data->index();
     }
-    public function data()
-    {
+
+
+    public function data() {
         return $this->Data->data();
-
-    }// end of data
-
-
-    public function create() {
-        return $this->Data->create();
-    }
-
-    public function store(AreaRequest $request) {
-        return $this->Data->store($request);
-    }
-
-    public function show($id) {
-        //
     }
 
     public function edit($id) {
@@ -41,14 +29,15 @@ class AreaController extends Controller
 
     }
 
-    public function update(AreaRequest $request,$id)
-    {
+    public function store(Request $request) {
+        return $this->Data->store($request);
+    }
+
+    public function update(Request $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 
-    public function destroy($id)
-    {
+    public function destroy($id) {
         return $this->Data->destroy($id);
-
     }// end of destroy
 }

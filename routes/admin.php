@@ -120,7 +120,12 @@ Route::group(
             Route::resource('Proviences', ProvienceController::class)->except(['show']);
             Route::get('/Proviences/data', [ProvienceController::class,'data'])->name('proviences.data');
             //Route::delete('/Proviences/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('proviences.bulk_delete');
-            /********************************* End Countries Routes ************************************/
+            /********************************* End Proviences Routes ************************************/
+            /********************************* Areas Routes ************************************/
+            Route::resource('Areas', AreaController::class)->except(['show']);
+            Route::get('/Areas/data', [AreaController::class,'data'])->name('areas.data');
+            //Route::delete('/Proviences/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('proviences.bulk_delete');
+            /********************************* End Areas Routes ************************************/
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);
             Route::get('/Departments/data', [DepartmentController::class,'data'])->name('departments.data');

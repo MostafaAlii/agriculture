@@ -29,7 +29,11 @@ return [
     'areaPageTitle'                          =>                  'القضاءات',
 
     // Validation ::
+
+    // Validation ::
     'area_name_required'                   =>                  'اسم القضاء مطلوب',
     'area_name_string'                     =>                  'اسم القضاء يجب ان يكون نص',
     'areaPageTitle_edit'                     =>                  'تعديل بيانات القضاء',
+    'provience_name'                                  =>                  'المحافظة التابعة',
+    'state_name'                                     =>                  'النواحي التابعة',
 ];
