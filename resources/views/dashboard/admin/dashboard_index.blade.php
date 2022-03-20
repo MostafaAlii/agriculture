@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
+
 @endsection
 @section('page-header')
 	<!-- breadcrumb -->
@@ -55,7 +56,7 @@
                                             <h6>{{ __('Admin/site.admin') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-basket-loaded info font-large-2 float-right"></i>
+                                            <i class="icon-home info font-large-2 float-right"></i>
                                         </div>
                                     </div>
                                     <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -75,7 +76,7 @@
                                             <h6>{{ __('Admin/site.onefarmer') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-pie-chart warning font-large-2 float-right"></i>
+                                            <i class="icon-users warning font-large-2 float-right"></i>
                                         </div>
                                     </div>
                                     <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -115,7 +116,7 @@
                                             <h6>{{ __('Admin/site.onedepartment') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-heart danger font-large-2 float-right"></i>
+                                            <i class="icon-graduation danger font-large-2 float-right"></i>
                                         </div>
                                     </div>
                                     <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
