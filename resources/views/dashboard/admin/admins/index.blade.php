@@ -62,6 +62,7 @@
                                                     <th>{{ __('Admin/site.image') }}</th>
                                                     <th>{{ __('Admin/site.firstname') }}</th>
                                                     <th>{{ __('Admin/site.lastname') }}</th>
+                                                    <th>{{ __('Admin/site.country') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phone') }}</th>
                                                     <th>{{ __('Admin/site.type') }}</th>
@@ -105,13 +106,14 @@
             {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'firstname', name: 'firstname'},
             {data: 'lastname', name: 'lastname'},
+            {data: 'country', name: 'country'},
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
             {data: 'type', name: 'type',width: '10%'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[8, 'desc']],
+        order: [[9, 'desc']],
     });
 </script>
 @endsection

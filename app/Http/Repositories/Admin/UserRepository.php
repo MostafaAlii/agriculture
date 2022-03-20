@@ -27,6 +27,9 @@ class UserRepository implements UserInterface{
             ->addColumn('image', function (User $user) {
                 return view('dashboard.admin.users.data_table.image', compact('user'));
             })
+            ->addColumn('country', function (User $user) {
+                return $user->country->name != null ? $user->country->name:null;
+            })
             ->addColumn('actions', 'dashboard.admin.users.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
