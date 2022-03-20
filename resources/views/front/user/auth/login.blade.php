@@ -49,8 +49,8 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                         <h2>{{ trans('Admin/site.signvendor') }}</h2>
-                        @include('dashboard.common._partials.messages')
-                        @if ($errors->any())
+                        {{-- @include('dashboard.common._partials.messages') --}}
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -58,7 +58,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
                         <!-- start user login form -->
                         <form class="auth-form" name="form-login" method="POST" action="{{ route('User.login') }}">
                             @csrf
@@ -115,25 +115,65 @@
                             @csrf
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" />
+                                @if ($errors->has('firstname'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('firstname') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" />
+                                @if ($errors->has('lastname'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('lastname') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" />
+                                @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('email') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" />
+                                @if ($errors->has('phone'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('phone') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" />
+                                @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password_confirmation') }}"
                                     name="password_confirmation" />
+                                    @if ($errors->has('password_confirmation'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                    @endif
+                            </div>
+                            <div class="input-wrp">
+                                <div class="{{$errors->has('g-recaptcha-response')? 'has-error' : ''}}">
+                                    {!! NoCaptcha::display(['data-theme' => 'dark']) !!}
+                                </div>
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                             <div class="d-table mt-8">
@@ -217,25 +257,65 @@
                         @csrf
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" />
+                                @if ($errors->has('firstname'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('firstname') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" />
+                                @if ($errors->has('lastname'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('lastname') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" />
+                                @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('email') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" />
+                                @if ($errors->has('phone'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('phone') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" />
+                                @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password_confirmation') }}"
                                     name="password_confirmation" />
+                                    @if ($errors->has('password_confirmation'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                    @endif
+                            </div>
+                            <div class="input-wrp">
+                                <div class="{{$errors->has('g-recaptcha-response')? 'has-error' : ''}}">
+                                    {!! NoCaptcha::display(['data-theme' => 'dark']) !!}
+                                </div>
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                         <div class="d-table mt-8">
