@@ -3,7 +3,6 @@ namespace App\Http\Repositories\Admin;
 use App\Models\Area;
 use App\Models\State;
 use App\Models\Village;
-use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Interfaces\Admin\StateInterface;
@@ -61,7 +60,6 @@ class StateRepository implements StateInterface {
     public function destroy($id) {
         $data = [];
         $stateID = Crypt::decrypt($id);
-        
         $data['village'] = Village::where('state_id', $stateID)->pluck('state_id'); 
         if($data['village']->count() == 0) {
             $state=State::findorfail($stateID);

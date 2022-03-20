@@ -37,7 +37,7 @@
         </div>
     </form>
       {{-- modal bulk delete --}}
-      <form action="{{ route('countries.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+      <form action="{{-- route('countries.bulk_delete','ids') --}}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
         @method('delete')
         <div class="col-lg-4 col-md-6 col-sm-12">

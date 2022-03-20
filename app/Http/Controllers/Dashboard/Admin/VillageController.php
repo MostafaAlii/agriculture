@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
-use App\Http\Interfaces\Admin\StateInterface;
-use App\Http\Requests\Dashboard\StateRequest;
+use App\Http\Interfaces\Admin\VillageInterface;
+use App\Http\Requests\Dashboard\VillageRequest;
 use Illuminate\Http\Request;
-class StateController extends Controller
+class VillageController extends Controller
 {
     protected $Data;
-    public function __construct(StateInterface $Data) {
+    public function __construct(VillageInterface $Data) {
         $this->Data = $Data;
     }
 
@@ -19,7 +19,7 @@ class StateController extends Controller
         return $this->Data->data();
     }
 
-    public function store(StateRequest $request) {
+    public function store(VillageRequest $request) {
         return $this->Data->store($request);
     }
 
@@ -27,11 +27,11 @@ class StateController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(StateRequest $request,$id) {
+    public function update(VillageRequest $request, $id) {
         return $this->Data->update($request,$id);
-    }// end of update
+    }
 
     public function destroy($id) {
         return $this->Data->destroy($id);
-    }// end of destroy
+    }
 }

@@ -92,10 +92,18 @@
                         <li>
                             <a class="menu-item" href="{{ route('States.index') }}">
                                 <i class="material-icons">flag</i>
-                                <span data-i18n="Areas">{{ trans('Admin/states.statePageTitle') }}</span>
+                                <span data-i18n="States">{{ trans('Admin/states.statePageTitle') }}</span>
                             </a>
                         </li>
                         <!-- End States -->
+                        <!-- Start Villages -->
+                        <li>
+                            <a class="menu-item" href="{{ route('Villages.index') }}">
+                                <i class="material-icons">flag</i>
+                                <span data-i18n="Villages">{{ trans('Admin/villages.villagePageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Villages -->
                     </ul>
                 </li>
                 <!-- End Countries Dropdown Menu -->
