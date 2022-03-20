@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProvienceInterface;
-use App\Http\Requests\Dashboard\ProviencyRequest;
+use App\Http\Requests\Dashboard\ProvienceRequest;
 use Illuminate\Http\Request;
 class ProvienceController extends Controller
 {
@@ -19,18 +19,23 @@ class ProvienceController extends Controller
         return $this->Data->data();
     }// end of data
 
-    public function store(ProviencyRequest $request) {
+    public function store(ProvienceRequest $request) {
         return $this->Data->store($request);
     }
     public function edit($id) {
         return $this->Data->edit($id);
     }
 
-    public function update(ProviencyRequest $request,$id) {
+    public function update(ProvienceRequest $request, $id) {
         return $this->Data->update($request,$id);
     }// end of update
 
     public function destroy($id) {
         return $this->Data->destroy($id);
+    }// end of destroy
+
+
+    public function bulkDelete(ProvienceRequest $request) {
+        return $this->Data->bulkDelete($request);
     }// end of destroy
 }

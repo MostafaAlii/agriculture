@@ -1,85 +1,92 @@
 <?php
 namespace App\Http\Repositories\Admin;
-use App\Models\Country;
+
 use App\Models\Area;
 use App\Models\State;
-use App\Http\Interfaces\Admin\StateInterface;
+use App\Models\Village;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
-class StateRepository implements StateInterface{
+use App\Http\Interfaces\Admin\StateInterface;
+class StateRepository implements StateInterface {
     public function index() {
-        return view('dashboard.admin.state.index');
+        $areas = Area::get();
+        return view('dashboard.admin.states.index', compact('areas'));
     }
 
     public function data() {
-        $states = State::query();
-
+        $states = State::with(['area','villages']);
         return DataTables::of($states)
-            ->editColumn('created_at', function (State $state) {
-                return $state->created_at->format('Y-m-d');
-            })
             ->addColumn('area', function (State $state) {
                 return $state->area->name;
             })
-            ->addColumn('actions', 'dashboard.admin.state.data_table.actions')
-            ->rawColumns([ 'actions'])
+            ->addColumn('villages', function (State $state) {
+                return view('dashboard.admin.states.btn.related', compact('state'));
+            })
+            ->addColumn('record_select', 'dashboard.admin.states.data_table.record_select')
+            ->editColumn('created_at', function (State $state) {
+                return $state->created_at->diffforhumans();
+            })
+            ->addColumn('actions', 'dashboard.admin.states.data_table.actions')
+            ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
 
-
-    public function create() {
-        $states = State::all();
-        return view('dashboard\admin\state.create');
-
-    }
-
     public function store($request) {
-
-        DB::beginTransaction();
-        try{
-            $requestData = $request->validated();
-
-
-
-            $state = State::create($requestData);
-            $state->name = $request->name;
-            $state->save();
-            DB::commit();
-
-            toastr()->success(__('Admin/province.added_successfully'));
-            return redirect()->route('states.index');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-
+        State::create([
+            'name'  => $request->input('name'),
+            'area_id'    =>  $request->area_id,
+        ]);
+        toastr()->success(__('Admin/site.added_successfully'));
+        return redirect()->route('States.index');
     }
+
     public function edit($id) {
-        $id_state  = Crypt::decrypt($id);
-        $state = State::findorfail($id_state)->first();
-        $areas = Area::all();
-        return view('dashboard.admin.state.edit', compact('areas','state'));
+        $stateID = Crypt::decrypt($id);
+        $state=State::findorfail($stateID);
+        $areas = Area::get();
+        return view('dashboard.admin.states.data_table.edit', compact('state', 'areas'));
     }
 
-    public function update( $request,$id) {
-        try{
-            $state=State::findorfail($id);
-            $requestData = $request->validated();
-            $requestData['name'] = $request->name;
-            $state->update($requestData);
-            toastr()->success( __('Admin/site.updated_successfully'));
-            return redirect()->route('states.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+    public function update($request,$id) {
+        $stateID = Crypt::decrypt($id);
+        $state=State::findorfail($stateID);
+        $state->update([
+            'name'  => $request->input('name'),
+            'area_id'    =>  $request->area_id,
+        ]);
+        toastr()->success(__('Admin/site.added_successfully'));
+        return redirect()->route('States.index');
     }
-
 
     public function destroy($id) {
-        $state=State::findorfail($id);
-        $state->delete();
-        toastr()->error(__('Admin/state.deleted_successfully'));
-        return redirect()->route('states.index');
+        $data = [];
+        $stateID = Crypt::decrypt($id);
+        $data['village'] = Village::where('state_id', $stateID)->pluck('state_id'); 
+        if($data['village']->count() == 0) {
+            $state=State::findorfail($stateID);
+            $state->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('States.index');
+        } else {
+            toastr()->error(__('Admin/states.cant_delete'));
+            return redirect()->route('States.index');
+        }
     }
+
+    public function bulkDelete($request) {
+        if($request->delete_select_id){
+            $delete_select_id = explode(",",$request->delete_select_id);
+            foreach($delete_select_id as $areas_ids){
+                $state = State::findorfail($areas_ids);
+                $state->delete();
+            }
+            toastr()->error(__('Admin/states.deleted_successfully'));
+            return redirect()->route('States.index');
+        }else{
+            toastr()->error(__('Admin/states.no_data_found'));
+            return redirect()->route('States.index');
+        }
+
+
+    }// end of bulkDelete
 }

@@ -9,23 +9,25 @@ class AreaRequest extends FormRequest {
     public function rules()
     {
 
-
         return [
-            'location_x' =>   'required|numeric',
-            'name' => 'required|string|regex:/^[A-Za-z]*$/i',// inter only character
-            'location_y' => 'required|numeric',
+
+            'name' => [
+                'required',
+                'regex:/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]+$/i'
+            ],
+            'location_x' =>  'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'province_id' => 'required',
+
+
         ];
-
-
-
-    }//end of rules
+    }
 
     public function messages() {
         return [
-            'name.required'   => trans('Adminv\validation.required'),
-            'location_x.required'    => trans('Admin\validation.required'),
-            'location_y.required'       => trans('Admin\validation.required'),
+            'name.required'   => trans('Admin\validation.required'),
+            'location_x.numeric'    => trans('Admin\validation.numeric'),
+            'location_y.numeric'       => trans('Admin\validation.numeric'),
             'province_id.required'       => trans('Admin\validation.required'),
 
         ];

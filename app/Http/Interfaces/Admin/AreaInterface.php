@@ -18,4 +18,6 @@ interface AreaInterface {
     public function edit($id);
     public function update($request,$area);
     public function destroy($area);
+    public function bulkDelete($ids);
+
 }

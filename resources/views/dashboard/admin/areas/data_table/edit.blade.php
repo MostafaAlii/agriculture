@@ -25,7 +25,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ trans('Admin/areas.areaPageTitle') }}</a>
                             </li>
                             <li class="breadcrumb-item"><a href="#" style="text-decoration: none; color: black;">
-                                {{ trans('Admin/proviences.proviencePageTitle_edit') }} / {{ $area->name }}</a>
+                                {{ trans('Admin/areas.areaPageTitle_edit') }} / {{ $area->name }}</a>
                             </li>
                         </ol>
                     </div>
@@ -48,7 +48,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newadmin') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ trans('Admin/areas.areaPageTitle_edit') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -68,7 +68,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>
-                                                        <i class="material-icons">mode_edit</i> 
+                                                        <i class="material-icons">mode_edit</i>
                                                         {{ trans('Admin/areas.area_name') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
@@ -84,13 +84,16 @@
                                                 </label>
                                                 <select name="province_id" class="select2 form-control">
                                                     <optgroup label="{{ trans('Admin/areas.choose_provience_name') }}">
-                                                        @if($proviences && $proviences-> count() > 0)
+                                                        @if($proviences && $proviences-> count() > 0) 
+                                                        <option value="{{$area->province->id }}" {{$area->province->id == $area->provience_id ? 'selected' : '' }}>
+                                                            {{$area->province->name}}
+                                                        </option>
                                                             @foreach($proviences as $provience)
-                                                                <option value="{{$provience->id }}" {{$provience->id == $area->provience_id ? 'selected' : '' }}>
+                                                                <option value="{{$provience->id }}" >
                                                                     {{$provience->name}}
                                                                 </option>
                                                             @endforeach
-                                                        @endif
+                                                      @endif
                                                     </optgroup>
                                                 </select>
                                                 @error('provience_id')
@@ -100,7 +103,7 @@
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/areas.update') }}
                                             </button>
                                         </div>
                                     </form>

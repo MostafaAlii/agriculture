@@ -1,6 +1,20 @@
 <?php
 return [
-
+    'area_title_in_sidebar'                  =>                  'Areas',
+    'areaPageTitle'                          =>                  'Areas',
+    'add_new_area'                           =>                  'Add New Area',
+    'area_name'                              =>                  ' Area Name',
+    'enter_area_name'                        =>                  'Enter Area Name',
+    'enter_area_name_placeholder'            =>                  'Write Area Name',
+    'choose_provience_name'                         =>                  'Choose Province',
+    'please_choose_province_name'                    =>                  'Please Choose the Related Province',
+    // Validation ::
+    'area_name_required'                   =>                  'Area name is required',
+    'area_name_string'                     =>                  ' Area name must be string',
+    'areaPageTitle_edit'                     =>                  'Updating Area Data',
+    'provience_name'                                  =>                  'Related Province',
+    'state_name'                                     =>                  'States Related',
+    'cant_delete'                             =>                  'Sorry ! There are States Related with Area Must be Deleted First',
 
     'cancel'=>'Cancel',
     'delete'=>'Delete',

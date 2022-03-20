@@ -69,7 +69,7 @@
 
                                                             <select class="form-control" id="exampleFormControlSelect1" name="province_id">
                                                                 <option value="{{$area->province->id}}" selected>{{ $area->province->name }}</option>
-                                                                @foreach(App\Models\Province::all() as $province)
+                                                                @foreach($proviences as $province)
                                                                     <option value="{{$province->id}}">{{$province->name}}</option>
                                                                 @endforeach
                                                             </select>

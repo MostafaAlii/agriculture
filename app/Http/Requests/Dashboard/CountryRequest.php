@@ -10,7 +10,11 @@ class CountryRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name' => 'required|string',
+            'name' => [
+            'required',
+            'regex:/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]+$/i'
+            ],
+
         ];
     }
 

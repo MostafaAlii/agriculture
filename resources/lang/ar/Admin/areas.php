@@ -1,5 +1,21 @@
 <?php
 return [
+    'choose_provience_name'                         =>                  'إختر المحافظة',
+'please_choose_province_name'=>'إختر المحافظة',
+    'area_title_in_sidebar'                  =>                  'القضاءات',
+    'areaPageTitle'                          =>                  'القضاءات',
+    'area_proviences_count'                  =>                  'المحافظات التابعة',
+    'add_new_area'                           =>                  'اضافة قضاء جديد',
+    'area_name'                              =>                  'اسم القضاء',
+    'enter_area_name'                        =>                  'ادخل اسم القضاء',
+    'enter_area_name_placeholder'            =>                  'اكتب اسم القضاء',
+    'area_related_state'                 =>                  'النواحي المرتبطة',
+    // Validation ::
+    'area_name_required'                   =>                  'اسم القضاء مطلوب',
+    'area_name_string'                     =>                  'اسم القضاء يجب ان يكون نص',
+    'areaPageTitle_edit'                     =>                  'تعديل بيانات القضاء',
+    'cant_delete'                               =>                  'عفوا يوجد نواحي مرتبطة بهذا القضاء يجب حذفها اولا',
+    'provience_name'=>'المحافظة التابعة',
 
 
     'cancel'=>'إلغاء الأمر',
@@ -28,7 +44,6 @@ return [
        'area_title_in_sidebar'                  =>                  'القضاءات',
     'areaPageTitle'                          =>                  'القضاءات',
 
-    // Validation ::
 
     // Validation ::
     'area_name_required'                   =>                  'اسم القضاء مطلوب',
@@ -36,4 +51,5 @@ return [
     'areaPageTitle_edit'                     =>                  'تعديل بيانات القضاء',
     'provience_name'                                  =>                  'المحافظة التابعة',
     'state_name'                                     =>                  'النواحي التابعة',
+
 ];

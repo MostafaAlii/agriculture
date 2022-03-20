@@ -1,7 +1,6 @@
 <?php
 return [
 
-
     'cancel'=>'إلغاء الأمر',
     'delete'=>'حذف',
     'home'=>'الصفحة الرئيسية',
@@ -25,19 +24,24 @@ return [
     'action'=>'العمليات',
     'create'=>'إضافة',
     'warning'=>'هل أنت متأكد من عملية الحذف',
-    ''=>'',
+    'statePageTitle_edit'=>'تعديل بيانات الناحية',
     ''=>'',
     ''=>'',
     ''=>'',
 
-    'provience_title_in_sidebar'                  =>                  'المحافظات',
-    'proviencePageTitle'                          =>                  'المحافظات',
-    'add_new_provience'                           =>                  'اضافة المحافظة جديدة',
-    'provience_name'                              =>                  'اسم المحافظة',
-    'enter_provience_name'                        =>                  'ادخل اسم المحافظة',
-    'enter_provience_name_placeholder'            =>                  'اكتب اسم المحافظة',
+    'state_title_in_sidebar'                  =>                  'النواحــى',
+    'statePageTitle'                          =>                  'النواحــى',
+    'add_new_state'                           =>                  'اضافة ناحية جديدة',
+    'state_name'                              =>                  'اسم الناحية',
+    'enter_state_name'                        =>                  'ادخل اسم الناحية',
+    'enter_state_name_placeholder'            =>                  'اكتب اسم الناحية',
+    'choose_area_name'                        =>                  'اختار المنطقة',
+    'please_area_country_name'                =>                  'من فضلك اختر المنطقة التابعة',
     // Validation ::
-    'provience_name_required'                   =>                  'اسم الناحية مطلوب',
-    'provience_name_string'                     =>                  'اسم الناحية يجب ان يكون نص',
-    'proviencePageTitle_edit'                     =>                  'تعديل بيانات الناحية',
+    'state_name_required'                     =>                  'اسم الناحية مطلوب',
+    'state_name_string'                       =>                  'اسم الناحية يجب ان يكون نص',
+    'statePageTitle_edit'                     =>                  'تعديل بيانات الناحية',
+    'area_name'                               =>                  'المنطقة التابعة',
+    'village_name'                            =>                  'القرى التابعة',
+    'cant_delete'                             =>                  'عفوا يوجد قرى مرتبطة بهذه الناحية يجب حذفها اولا',
 ];

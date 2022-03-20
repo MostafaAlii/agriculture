@@ -1,84 +1,90 @@
 <?php
 namespace App\Http\Repositories\Admin;
-use App\Models\Village;
+
+use App\Models\Admin;
 use App\Models\State;
-use App\Http\Interfaces\Admin\VillageInterface;
+use App\Models\Village;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
-class VillageRepository implements VillageInterface{
+use App\Http\Interfaces\Admin\VillageInterface;
+
+class VillageRepository implements VillageInterface {
     public function index() {
-        return view('dashboard.admin.village.index');
+        $states = State::get();
+        return view('dashboard.admin.villages.index', compact('states'));
     }
 
     public function data() {
-        $villages = Village::query();
-
+        $villages = Village::with('state');
         return DataTables::of($villages)
-            ->editColumn('created_at', function (Village $village) {
-                return $village->created_at->format('Y-m-d');
-            })
             ->addColumn('state', function (Village $village) {
                 return $village->state->name;
             })
-            ->addColumn('actions', 'dashboard.admin.village.data_table.actions')
-            ->rawColumns([ 'actions'])
+            ->addColumn('record_select', 'dashboard.admin.villages.data_table.record_select')
+            ->editColumn('created_at', function (Village $village) {
+                return $village->created_at->diffforhumans();
+            })
+            ->addColumn('actions', 'dashboard.admin.villages.data_table.actions')
+            ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
 
-
-    public function create() {
-        $states = State::all();
-        return view('dashboard\admin\village.create');
-
-    }
-
     public function store($request) {
-
-        DB::beginTransaction();
-        try{
-            $requestData = $request->validated();
-
-
-
-            $village = Village::create($requestData);
-            $village->name = $request->name;
-            $village->save();
-            DB::commit();
-
-            toastr()->success(__('Admin/province.added_successfully'));
-            return redirect()->route('villages.index');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-
+        Village::create([
+            'name'  => $request->input('name'),
+            'state_id'    =>  $request->state_id,
+        ]);
+        toastr()->success(__('Admin/site.added_successfully'));
+        return redirect()->route('Villages.index');
     }
+
     public function edit($id) {
-        $id_village  = Crypt::decrypt($id);
-        $village = Village::findorfail($id_village)->first();
-        $states = State::all();
-        return view('dashboard.admin.village.edit', compact('village','states'));
+        $villageID = Crypt::decrypt($id);
+        $village=Village::findorfail($villageID);
+        $states = State::get();
+        return view('dashboard.admin.villages.data_table.edit', compact('village', 'states'));
     }
 
-    public function update( $request,$id) {
-        try{
-            $village=Village::findorfail($id);
-            $requestData = $request->validated();
-            $requestData['name'] = $request->name;
-            $village->update($requestData);
-            toastr()->success( __('Admin/village.updated_successfully'));
-            return redirect()->route('villages.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+    public function update($request,$id) {
+        $villageID = Crypt::decrypt($id);
+        $village=Village::findorfail($villageID);
+        $village->update([
+            'name'  => $request->input('name'),
+            'state_id'    =>  $request->state_id,
+        ]);
+        toastr()->success(__('Admin/site.added_successfully'));
+        return redirect()->route('Villages.index');
     }
-
 
     public function destroy($id) {
-        $village=Village::findorfail($id);
-        $village->delete();
-        toastr()->error(__('Admin/village.deleted_successfully'));
-        return redirect()->route('villages.index');
+        $data = [];
+        $villageID = Crypt::decrypt($id);
+        $data['admin'] = Admin::where('village_id', $villageID)->pluck('village_id'); 
+        if($data['admin']->count() == 0) {
+            $village=Village::findorfail($villageID);
+            $village->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('Villages.index');
+        } else {
+            toastr()->error(__('Admin/villages.cant_delete'));
+            return redirect()->route('Villages.index');
+        }
     }
-}
+
+    public function bulkDelete($request)
+    {
+        if ($request->delete_select_id) {
+            $delete_select_id = explode(",", $request->delete_select_id);
+            foreach ($delete_select_id as $villages_ids) {
+                $village = Village::findorfail($villages_ids);
+                $village->delete();
+            }
+            toastr()->error(__('Admin/villages.deleted_successfully'));
+            return redirect()->route('Villages.index');
+        } else {
+            toastr()->error(__('Admin/villages.no_data_found'));
+            return redirect()->route('Villages.index');
+        }
+    }
+
+    }

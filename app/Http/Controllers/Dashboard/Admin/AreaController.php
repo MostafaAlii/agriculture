@@ -24,20 +24,25 @@ class AreaController extends Controller
         return $this->Data->data();
     }
 
-    public function edit($id) {
-        return $this->Data->edit($id);
 
-    }
-
-    public function store(Request $request) {
+    public function store(AreaRequest $request) {
         return $this->Data->store($request);
     }
 
-    public function update(Request $request,$id) {
+    public function edit($id) {
+        return $this->Data->edit($id);
+    }
+
+    public function update(AreaRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 
     public function destroy($id) {
         return $this->Data->destroy($id);
+    }// end of destroy
+
+
+    public function bulkDelete(AreaRequest $request) {
+        return $this->Data->bulkDelete($request);
     }// end of destroy
 }

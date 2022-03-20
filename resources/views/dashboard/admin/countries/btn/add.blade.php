@@ -23,8 +23,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">{{ trans('Admin/general.save') }}</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('Admin/general.cancel') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ trans('Admin/countries.save') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('Admin/countries.cancel') }}</button>
                 </div>
             </form>
         </div>

@@ -23,7 +23,7 @@
                                 {{ trans('Admin/areas.choose_provience_name') }}
                             </label>
                             <select name="province_id" class="select2 form-control">
-                                <optgroup label="{{ trans('Admin/areas.please_provience_country_name') }}">
+                                <optgroup label="{{ trans('Admin/areas.please_choose_province_name') }}">
                                     @if($provencies && $provencies -> count() > 0)
                                         @foreach($provencies as $provence)
                                             <option value="{{$provence->id }}">

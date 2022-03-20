@@ -35,7 +35,22 @@ return [
 
 
     // Validation ::
-    'provience_name_required'                   =>                  'village name is required',
-    'provience_name_string'                     =>                  'village name must be string',
-    'proviencePageTitle_edit'                     =>                  'update village data',
+    'village_name_required'                   =>                  'village name is required',
+    'village_name_string'                     =>                  'village name must be string',
+    'villagePageTitle_edit'                     =>                  'Updating Village Data',
+
+    // Validation ::
+
+    'village_title_in_sidebar'                  =>                  'Villages',
+    'villagePageTitle'                          =>                  'Villages',
+    'add_new_village'                           =>                  'Add New Village',
+    'village_name'                              =>                  'Village Name',
+    'enter_village_name'                        =>                  'Enter Village Name',
+    'enter_village_name_placeholder'            =>                  'Write Village Name',
+    'choose_state_name'                        =>                  ' Choose State',
+    'please_state_country_name'                =>                  'Choose Area ',
+    // Validation ::
+
+    'state_name'                               =>                  ' State Related',
+    'cant_delete'                             =>                  'Sorry ! There are States Related with Village Must be Deleted First',
 ];

@@ -30,7 +30,22 @@ return [
     // Validation ::
     'state_name_required'                   =>                  'state name is required',
     'state_name_string'                     =>                  'state name must be string',
-    'statePageTitle_edit'                     =>                  'update state data',
 
+
+    'state_title_in_sidebar'                  =>                  'Stateٍ',
+    'statePageTitle'                          =>                  'State',
+    'add_new_state'                           =>                 'Add New State',
+    'state_name'                              =>                  'State Name',
+    'enter_state_name'                        =>                  'Enter State Name',
+    'enter_state_name_placeholder'            =>                'Write Province Name',
+    'choose_area_name'                        =>                  'Choose Area',
+    'please_state_area_name'                =>                 'Please Choose the Related Area',
+    // Validation ::
+    'state_name_required'                     =>                  'State name is required',
+    'state_name_string'                       =>                  'State name must be string',
+    'statePageTitle_edit'                     =>                  'Updating State Data',
+    'area_name'                               =>                   'Related Area',
+    'village_name'                            =>                   'Villages Related',
+    'cant_delete'                             =>                 'Sorry ! There are Villages Related with Area Must be Deleted First',
 
 ];

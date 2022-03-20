@@ -6,25 +6,28 @@ class StateRequest extends FormRequest {
         return true;
     }
 
-    public function rules()
-    {
-
+    public function rules() {
         return [
-            'name' => 'required',
-            'location_x' => 'required',
-           'location_y' => 'required',
+
+            'name' => [
+                'required',
+                'regex:/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]+$/i'
+            ],
+            'location_x' =>  'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+           'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
            'area_id' => 'required',
+
+
         ];
-
-
-    }//end of rules
+    }
 
     public function messages() {
         return [
-            'name.required'   => trans('Adminv\validation.required'),
-            'location_x.required'    => trans('Admin\validation.required'),
-            'location_y.required'       => trans('Admin\validation.required'),
+            'name.required'   => trans('Admin\validation.required'),
+            'location_x.numeric'    => trans('Admin\validation.numeric'),
+            'location_y.numeric'       => trans('Admin\validation.numeric'),
              'area_id.required'       => trans('Admin\validation.required'),
+            'name.regex'   => trans('Admin\validation.regex_name'),
 
         ];
     }

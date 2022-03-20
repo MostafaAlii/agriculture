@@ -5,7 +5,8 @@
         <div class="row justify-content-between no-gutters">
 
             <a class="top-bar__logo site-logo" href="index_4.html">
-                <img class="img-fluid" src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />
+                {{--<img class="img-fluid" src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />--}}
+                <img class="img-fluid" src="{{ Storage::url(setting()->site_logo) }}" alt="demo" />
             </a>
 
             <a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--dark" href="javascript:void(0);"><span></span></a>
@@ -18,14 +19,16 @@
                         </nav>
 
                         <div class="top-bar__contacts">
-                            <span>523 Sylvan Ave, 5th Floor Mountain View, CA 940 USA</span>
-                            <span><a href="#">+1 (234) 56789</a>,&nbsp;&nbsp;<a href="#">+1 987 654 3210</a></span>
-                            <span><a href="mailto:support@agrocompany.com">support@agrocompany.com</a></span>
+                            <span>{{ \App\Models\setting::first()->address }}</span>
+                            {{-- <span>523 Sylvan Ave, 5th Floor Mountain View, CA 940 USA</span> --}}
+                            <span><a href="#">{{  \App\Models\setting::first()->primary_phone }}</a>,&nbsp;&nbsp;
+                                  <a href="#">{{  \App\Models\setting::first()->secondery_phone }}</a></span>
+                            <span><a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a></span>
 
                             <div class="social-btns">
-                                <a class="fontello-twitter" href="#"></a>
-                                <a class="fontello-facebook" href="#"></a>
-                                <a class="fontello-linkedin-squared" href="#"></a>
+                                <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
+                                <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
+                                <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
                             </div>
                         </div>
                     </div>

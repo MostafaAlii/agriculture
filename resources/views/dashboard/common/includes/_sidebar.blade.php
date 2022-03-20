@@ -87,7 +87,23 @@
                                 <span data-i18n="Areas">{{ trans('Admin/areas.areaPageTitle') }}</span>
                             </a>
                         </li>
-                        <!-- End Proviences -->
+                        <!-- End Areas -->
+                        <!-- Start States -->
+                        <li>
+                            <a class="menu-item" href="{{ route('States.index') }}">
+                                <i class="material-icons">flag</i>
+                                <span data-i18n="States">{{ trans('Admin/states.statePageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End States -->
+                        <!-- Start Villages -->
+                        <li>
+                            <a class="menu-item" href="{{ route('Villages.index') }}">
+                                <i class="material-icons">flag</i>
+                                <span data-i18n="Villages">{{ trans('Admin/villages.villagePageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Villages -->
                     </ul>
                 </li>
                 <!-- End Countries Dropdown Menu -->
@@ -139,16 +155,7 @@
                 </li>
                 <li class=" navigation-header"><span data-i18n="Admin Panels">Admin Panels</span><i class="material-icons nav-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Admin Panels">more_horiz</i>
                 </li>
-                <li class=" nav-item"><a href="{{route('countries.index')}}" target="_blank"><i class="material-icons">{{__('Admin\country.country')}}</i><span class="menu-title" data-i18n="eCommerce">eCommerce</span></a>
-                </li>
-                <li class=" nav-item"><a href="{{route('provinces.index')}}"  target="_blank"><i class="material-icons">{{__('Admin\province.province')}}</i><span class="menu-title" data-i18n="Travel &amp; Booking">Travel &amp; Booking</span></a>
-                </li>
-                <li class=" nav-item"><a href="{{route('areas.index')}}"  target="_blank"><i class="material-icons">{{__('Admin\area.Area')}}</i><span class="menu-title" data-i18n="Hospital">Hospital</span></a>
-                </li>
-                <li class=" nav-item"><a href="{{route('states.index')}}"  target="_blank"><i class="material-icons">{{__('Admin\state.state')}}</i><span class="menu-title" data-i18n="Crypto">Crypto</span></a>
-                </li>
-                <li class=" nav-item"><a href="{{route('villages.index')}}" target="_blank"><i class="material-icons">{{__('Admin\village.village')}}</i><span class="menu-title" data-i18n="Support Ticket">Support Ticket</span></a>
-                </li>
+
                 <li class=" nav-item"><a href="../material-bank-menu-template" target="_blank"><i class="material-icons">account_balance</i><span class="menu-title" data-i18n="Bank">Bank</span></a>
                 </li>
                 <li class=" navigation-header"><span data-i18n="Apps">Apps</span><i class="material-icons nav-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Apps">more_horiz</i>

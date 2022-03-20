@@ -48,7 +48,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newadmin') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/countries.newcountry') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/countries.update') }}
                                             </button>
                                         </div>
                                     </form>

@@ -146,7 +146,7 @@
 						<div class="col-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="footer__item">
 								<a class="site-logo" href="index.html">
-									<img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
+									<img class="img-fluid  lazy" src="{{Storage::url(setting()->logo)}}" data-src="img/site_logo.png" alt="demo" />
 								</a>
 							</div>
 						</div>
@@ -202,25 +202,23 @@
 							<div class="footer__item">
 								<h5 class="footer__item__title h6">Contacts</h5>
 
-								<address>
-									<p>
-										523 Sylvan Ave, 5th Floor Mountain View, CA 940 USA
-									</p>
+                                <address>
+                                    <p>
+                                        <span>{{ \App\Models\setting::first()->address }}</span>
+                                    </p>
 
-									<p>
-										+1 (234) 56789,  +1 987 654 3210
-									</p>
+                                    <p>
+                                        {{  \App\Models\setting::first()->primary_phone }},
+                                        {{  \App\Models\setting::first()->secondery_phone }} <br>
+                                        <a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>
+                                    </p>
+                                </address>
 
-									<p>
-										<a href="mailto:support@agrocompany.com">support@agrocompany.com</a>
-									</p>
-								</address>
-
-								<div class="social-btns">
-									<a href="#"><i class="fontello-twitter"></i></a>
-									<a href="#"><i class="fontello-facebook"></i></a>
-									<a href="#"><i class="fontello-linkedin-squared"></i></a>
-								</div>
+                                <div class="social-btns">
+                                    <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
+                                    <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
+                                    <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
+                                </div>
 							</div>
 						</div>
 					</div>

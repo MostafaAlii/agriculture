@@ -10,11 +10,12 @@ use App\Traits\UploadT;
 
 use App\Http\Requests\Dashboard\SettingRequest;
 use Illuminate\Support\Facades\Storage;
+use Up;
 
 class SettingController extends Controller
 {
     use UploadT;
-    public function setting()
+    public function index()
     {
 
         $setting = Setting::orderBy('id','desc')->first();
@@ -28,13 +29,13 @@ class SettingController extends Controller
 
 
 
-    public function save_setting(SettingRequest $request)
+    public function store(SettingRequest $request)
     {
         $validated = $request->validated();
 //
         DB::beginTransaction();
         try {
-
+            $data=[];
             $setting = Setting::OrderBy('id','desc')->first();
             $setting->support_mail = $request->support_mail;
             $setting->primary_phone = $request->primary_phone;
@@ -54,8 +55,9 @@ class SettingController extends Controller
                 ]);
 
             }
+            $setting->site_logo =$data['site_logo'];
             if(request()->hasFile('site_icon')){
-                $data['site_logo'] = Up()->upload([
+                $data['site_icon'] = Up()->upload([
                     'new_name'=>'',
                     'path'=> 'settings',
                     'file'=>'site_icon',
@@ -64,7 +66,7 @@ class SettingController extends Controller
 
 
             }
-
+            $setting->site_icon =$data['site_icon'];
             $setting->update();
             $setting->site_name= $request->site_name;
             $setting->address= $request->address;

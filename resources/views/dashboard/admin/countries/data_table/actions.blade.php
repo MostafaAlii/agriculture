@@ -2,11 +2,11 @@
 
 <a href="{{ route('countries.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
     <i class="fa fa-edit"></i>
-    {{ __('Admin/site.edit') }}
+    {{ __('Admin/countries.edit') }}
 </a>
 <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
     <i class="fa fa-trash"></i>
-    {{ __('Admin/site.delete') }}
+    {{ __('Admin/countries.delete') }}
 </button>
 
 
@@ -22,19 +22,19 @@
                         @csrf
                         @method('delete')
                         <div class="modal-header" id="modal">
-                            <h4 class="modal-title" id="myModalLabel62">   {{ __('Admin/site.delete') }}</h4>
+                            <h4 class="modal-title" id="myModalLabel62">   {{ __('Admin/countries.delete') }}</h4>
                             <input type="hidden" value="{{ $id }}" id="id">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h5>{{ __('Admin/site.warning') }}</h5>
+                            <h5>{{ __('Admin/countries.warning') }}</h5>
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
-                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.save') }}</button>
+                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/countries.close') }}</button>
+                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/countries.delete') }}</button>
                         </div>
                     </form>
                 </div>
@@ -61,11 +61,11 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h5>{{ __('Admin/site.warning') }}</h5>
+                            <h5>{{ __('Admin/countries.warning') }}</h5>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
-                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.save') }}</button>
+                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/countries.cancel') }}</button>
+                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/countries.delete') }}</button>
                         </div>
                     </div>
                 </div>

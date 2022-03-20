@@ -78,9 +78,9 @@
                                                 </th>
                                                 <th>{{ trans('Admin/countries.country_flag') }}</th>
                                                 <th>{{ __('Admin/countries.country_name') }}</th>
-                                                <th>{{ __('Admin/countries.country_related_proviency') }}</th>
+                                                <th>{{ __('Admin/countries.country_related_provience') }}</th>
                                                 <th>{{ __('Admin/general.created_since') }}</th>
-                                                <th>{{ __('Admin/site.action') }}</th>
+                                                <th>{{ __('Admin/countries.action') }}</th>
                                             </tr>
                                             </thead>
                                         </table>
