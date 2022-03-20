@@ -61,6 +61,7 @@
                                                     <th>{{ __('Admin/site.image') }}</th>
                                                     <th>{{ __('Admin/site.firstname') }}</th>
                                                     <th>{{ __('Admin/site.lastname') }}</th>
+                                                    <th>{{ __('Admin/site.country') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phone') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
@@ -92,6 +93,7 @@
         // dom: "tiplr",
         serverSide: true,
         processing: true,
+        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
@@ -104,12 +106,13 @@
             {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'firstname', name: 'firstname'},
             {data: 'lastname', name: 'lastname'},
+            {data: 'country', name: 'country'},
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[7, 'desc']],
+        order: [[8, 'desc']],
 
     });
 </script>

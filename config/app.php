@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 
     /*
@@ -236,6 +237,7 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
          'Up'       => App\Http\Controllers\Upload::class,
          'Image' => Intervention\Image\Facades\Image::class,
+         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
     ],
 
 ];

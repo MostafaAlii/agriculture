@@ -14,6 +14,7 @@
 
     <!-- start section -->
     <section class="section">
+
         <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
             <img class="lazy" width="286" height="280" src="{{ asset('frontassets/img/blank.gif') }}"
                 data-src="{{ asset('img/decor-el_1.jpg') }}" alt="demo" />
@@ -34,11 +35,17 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <h2><label for="">{{ trans('Admin/site.yourtype') }}</label></h2>
-                        <select name="" id="sectionselect" class="custom-btn custom-btn--medium custom-btn--style-2">
+                        <select name="type" id="sectionselect" class="custom-btn custom-btn--medium custom-btn--style-2" value="{{ old('type') }}" data-val ="{{ old('type') }}">
                             <option class="custom-btn custom-btn--style-2" value="" selected disabled>--- {{ trans('Admin/site.select') }}---
                             </option>
-                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="user">{{ trans('Admin/site.user') }}</option>
-                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="farmer">{{ trans('Admin/site.farmer') }}</option>
+                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="user" @if(old('type')=='user')
+                                 selected
+                            @endif>{{ trans('Admin/site.user') }}</option>
+                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="farmer"
+                            @if(old('type')=='farmer')
+                            selected
+                       @endif
+                            >{{ trans('Admin/site.farmer') }}</option>
                         </select>
                     </div>
                 </div>
@@ -49,8 +56,8 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                         <h2>{{ trans('Admin/site.signvendor') }}</h2>
-                        @include('dashboard.common._partials.messages')
-                        @if ($errors->any())
+                        {{-- @include('dashboard.common._partials.messages') --}}
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -58,7 +65,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
                         <!-- start user login form -->
                         <form class="auth-form" name="form-login" method="POST" action="{{ route('User.login') }}">
                             @csrf
@@ -113,27 +120,68 @@
                         <!-- start form -->
                         <form class="auth-form" action="{{ route('user.register.post') }}" method="post">
                             @csrf
+                            <input type="hidden" name="type" value="user">
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" />
+                                @if ($errors->has('firstname'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('firstname') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" />
+                                @if ($errors->has('lastname'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('lastname') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" />
+                                @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('email') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" />
+                                @if ($errors->has('phone'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('phone') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" />
+                                @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password_confirmation') }}"
                                     name="password_confirmation" />
+                                    @if ($errors->has('password_confirmation'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                    @endif
+                            </div>
+                            <div class="input-wrp">
+                                <div class="{{$errors->has('g-recaptcha-response')? 'has-error' : ''}}">
+                                    {!! NoCaptcha::display(['data-theme' => 'dark']) !!}
+                                </div>
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                             <div class="d-table mt-8">
@@ -215,27 +263,68 @@
                     <!-- start form -->
                     <form class="auth-form" action="{{ route('farmer.register.post') }}" method="post">
                         @csrf
+                        <input type="hidden" name="type" value="farmer">
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" />
+                                    @if ($errors->has('firstname'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('firstname') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" />
+                                @if ($errors->has('lastname'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('lastname') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" />
+                                @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('email') }}</strong>
+                                </span>
+                                @endif
                             </div>
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" />
+                                @if ($errors->has('phone'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('phone') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" />
+                                @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('password') }}</strong>
+                                </span>
+                                @endif
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password_confirmation') }}"
                                     name="password_confirmation" />
+                                    @if ($errors->has('password_confirmation'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                    @endif
+                            </div>
+                            <div class="input-wrp">
+                                <div class="{{$errors->has('g-recaptcha-response')? 'has-error' : ''}}">
+                                    {!! NoCaptcha::display(['data-theme' => 'dark']) !!}
+                                </div>
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                         <div class="d-table mt-8">
@@ -293,6 +382,27 @@
                 myid === $(this).attr('id') ? $(this).show() : $(this).hide();
             });
         });
+        var type = $('#sectionselect').data('val');
+        $('.panel').each(function() {
+                type === $(this).attr('id') ? $(this).show() : $(this).hide();
+            });
+        // console.log(type);
+        // $('.panel').show();
+        // var myid = $(this).val();
+        //     console.log(myid);
+        //     $('.panel').each(function() {
+        //         myid === $(this).val ? $(this).show() : $(this).hide();
+        //     });
+
+    //     $(function() {
+    //    $("select").each(function (index, element) {
+    //             const val = $(this).data('value');
+    //             if(val !== '') {
+    //                 $(this).val(val);
+    //             }
+    //            });
+    //     });
+
     </script>
 @endpush
 

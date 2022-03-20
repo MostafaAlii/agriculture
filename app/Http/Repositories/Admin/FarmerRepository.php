@@ -25,6 +25,9 @@ class FarmerRepository implements FarmerInterface{
             ->addColumn('image', function (Farmer $farmer) {
                 return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
             })
+            ->addColumn('country', function (Farmer $farmer) {
+                return $farmer->country->name != null ? $farmer->country->name:null;
+            })
             ->addColumn('actions', 'dashboard.admin.farmers.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
             ->toJson();

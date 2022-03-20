@@ -27,6 +27,10 @@ class AdminRepository implements AdminInterface{
             ->addColumn('image', function (Admin $admin) {
                 return view('dashboard.admin.admins.data_table.image', compact('admin'));
             })
+             ->addColumn('country', function (Admin $admin) {
+                return $admin->country->name??null;
+                    // return $admin->country->name??null != null ? $admin->country->name:null;
+                })
             ->addColumn('actions', 'dashboard.admin.admins.data_table.actions')
             // test for ralation in yagra
                 // ->addColumn('example', function (Admin $admin) {
@@ -35,6 +39,7 @@ class AdminRepository implements AdminInterface{
             // test for ralation in yagra
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
+            
     }
 
     public function create() {

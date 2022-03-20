@@ -92,4 +92,9 @@ return [
     'information' => 'Information',
     'showedit'=>'Show & Edit',
     'back'=>'Back',
+
+    'admin'=>'Admin',
+    'onefarmer'=>'Farmer',
+    'oneuser'=>'Vendor',
+    'onedepartment'=>'Department',
 ];

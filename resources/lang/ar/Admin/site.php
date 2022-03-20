@@ -87,5 +87,9 @@ return [
     'information' => 'المعلومات الاخرى',
     'showedit'=>'عرض و تعديل',
     'back'=>'رجوع',
-    
+
+    'admin'=>'مدير',
+    'onefarmer'=>'فلاح',
+    'oneuser'=>'مستخدم',
+    'onedepartment'=>'قسم',
 ];
