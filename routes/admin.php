@@ -15,6 +15,7 @@ use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\StateController;
 use App\Http\Controllers\Dashboard\Admin\VillageController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
+use App\Http\Controllers\Dashboard\Admin\SliderController;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -106,6 +107,9 @@ Route::group(
             Route::resource('Departments', DepartmentController::class)->except(['show']);
             Route::get('/Departments/data', [DepartmentController::class,'data'])->name('departments.data');
             Route::delete('/Departments/bulk_delete/{ids}', [DepartmentController::class,'bulkDelete'])->name('departments.bulk_delete');
+            /********************************* End Department Routes ************************************/
+            /********************************* Department Routes ************************************/
+            Route::resource('Sliders', SliderController::class)->except(['show']);
             /********************************* End Department Routes ************************************/
 
         });

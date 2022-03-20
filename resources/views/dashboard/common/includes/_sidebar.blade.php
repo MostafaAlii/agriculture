@@ -46,15 +46,40 @@
                         <!-- End Admins & Moderators -->
                         <!-- Start Setting -->
                         <li>
-                            <a class="menu-item" href="{{route('settings')}}">
-                                <i class="material-icons">tune</i>
-                                <span data-i18n="eCommerce">{{ trans('Admin/setting.page_title_in_sidebar') }}</span>
-                            </a>
+                            
                         </li>
                         <!-- End Setting -->
                     </ul>
                 </li>
                 <!-- End Dashboard Dropdown Menu -->
+                <!-- Start Main Setting Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">tune</i>
+                        <span class="menu-title" data-i18n="settings">
+                            {{ trans('Admin/setting.page_title_in_sidebar') }}
+                        </span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start Settings -->
+                        <li>
+                            <a class="menu-item" href="{{route('settings')}}">
+                                <i class="material-icons">tune</i>
+                                <span data-i18n="settings">{{ trans('Admin/setting.page_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Settings -->
+                        <!-- Start Sliders -->
+                        <li>
+                            <a class="menu-item" href="{{ route('Sliders.index') }}">
+                                <i class="material-icons">photo_library</i>
+                                <span data-i18n="Sliders">{{ trans('Admin/sliders.sliderPageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Sliders -->
+                    </ul>
+                </li>
+                <!-- End Main Setting Dropdown Menu -->
                 <!-- Start Countries Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
