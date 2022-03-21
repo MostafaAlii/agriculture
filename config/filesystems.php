@@ -39,7 +39,7 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public'),
             'visibility' => 'public',
-            'url'=>url('storage'),
+            'url'=>'',
         ],
 
         'upload_image' => [

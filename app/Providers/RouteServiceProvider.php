@@ -37,7 +37,7 @@ class RouteServiceProvider extends ServiceProvider
      * @return void
      */
     public function map(){
-//        \Config::set('filesystems.disks.public.url',url('storage'));
+       \Config::set('filesystems.disks.public.url',url('storage'));
 
     }
     public function boot()
