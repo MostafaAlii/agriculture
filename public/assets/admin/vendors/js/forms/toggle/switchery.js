@@ -1122,7 +1122,7 @@ ClassList.prototype.removeMatching = function(re){
 };
 
 /**
- * Toggle class `name`, can force state via `force`.
+ * Toggle class `name`, can force states via `force`.
  *
  * For browsers that support classList, but do not support `force` yet,
  * the mistake will be detected and corrected.
@@ -1799,7 +1799,7 @@ Switchery.prototype.handleOnchange = function(state) {
 };
 
 /**
- * Handle the native input element state change.
+ * Handle the native input element states change.
  * A `change` event must be fired in order to detect the change.
  *
  * @api private

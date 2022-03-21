@@ -154,32 +154,30 @@
 
                                                         <label>{{trans('Admin\setting.site_icon')}}</label>
                                                         <label id="projectinput7" class="file center-block">
-                                                            {{--<input type="file" accept="image/*" name="site_icon" --}}
-                                                            {{--onchange="loadFile1(event)">--}}
+
                                                             <input type="file" accept="image/*" name="site_icon">
-                                                            <img src="{{Storage::url(setting()->site_icon)}}"
-                                                                 height="50 px" width="50 px" id="output1">
+
                                                             @if(!empty(setting()->site_icon))
 
                                                                 <img src="{{Storage::url(setting()->site_icon)}}"
-                                                                     height="50 px" width="50 px" id="output1">
+                                                                     height="50 px" width="50 px">
                                                             @endif
+
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>{{trans('Admin\setting.site_logo')}} </label>
-                                                        <label id="projectinput7" class="file center-block">
+                                                        <label id="projectinput7" class="file center-block"></label>
+                                                            <label id="projectinput7" class="file center-block">
+
                                                             <input type="file" accept="image/*" name="site_logo">
-                                                            {{--<input type="file" accept="image/*" name="site_logo"--}}
-                                                            {{--onchange="loadFile(event)">--}}
-                                                            <img src="{{Storage::url(setting()->site_logo)}}"
-                                                                 height="50 px" width="50 px" id="output1">
+
                                                             @if(!empty(setting()->site_logo))
 
-                                                                {{--<img src="{{Storage::url(setting()->site_logo)}}"--}}
-                                                                     {{--height="50 px" width="50 px" id="output1">--}}
+                                                                <img src="{{Storage::url(setting()->site_logo)}}"
+                                                                     height="50 px" width="50 px" id="output1">
                                                             @endif
                                                         </label>
                                                     </div>

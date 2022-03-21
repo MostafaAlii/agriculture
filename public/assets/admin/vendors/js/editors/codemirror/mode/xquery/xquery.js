@@ -240,7 +240,7 @@ CodeMirror.defineMode("xquery", function() {
   }
 
   // tokenizer for string literals
-  // optionally pass a tokenizer function to set state.tokenize back to when finished
+  // optionally pass a tokenizer function to set states.tokenize back to when finished
   function tokenString(quote, f) {
     return function(stream, state) {
       var ch;
@@ -390,7 +390,7 @@ CodeMirror.defineMode("xquery", function() {
   }
 
 
-  // functions to test the current context of the state
+  // functions to test the current context of the states
   function isInXmlBlock(state) { return isIn(state, "tag"); }
   function isInXmlAttributeBlock(state) { return isIn(state, "attribute"); }
   function isInXmlConstructor(state) { return isIn(state, "xmlconstructor"); }

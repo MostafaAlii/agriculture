@@ -1,21 +1,38 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-class CreateVillageTranslationsTable extends Migration {
-    public function up() {
+
+class CreateVillageTranslationsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
         Schema::create('village_translations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('locale');
+            $table->unsignedBigInteger('village_id');
             $table->unique(['village_id', 'locale']);
             $table->index(['name', 'locale']);
-            $table->foreignId('village_id')->constrained()->cascadeOnDelete();
+            $table->foreign('village_id')->references('id')->on('villages')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
 
-    public function down() {
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::dropIfExists('village_translations');
     }
 }

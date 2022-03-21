@@ -99,7 +99,7 @@ function CheckDirty() {
 function ResetDirty() {
 	// Get the editor instance that we want to interact with.
 	var editor = CKEDITOR.instances.editor1;
-	// Resets the "dirty state" of the editor (see CheckDirty())
+	// Resets the "dirty states" of the editor (see CheckDirty())
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-resetDirty
 	editor.resetDirty();
 	alert( 'The "IsDirty" status has been reset' );

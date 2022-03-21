@@ -84,8 +84,8 @@
                                                 </label>
                                                 <select name="area_id" class="select2 form-control">
                                                     <optgroup label="{{ trans('Admin/states.choose_area_name') }}">
-                                                        @if($areas && $areas-> count() > 0) 
-                                                        <option value="{{$state->area->id }}" {{$state->area->id == $state->area_id ? 'selected' : '' }}>
+
+                                                        <option value="{{$state->area->id }}" selected>
                                                             {{$state->area->name}}
                                                         </option>
                                                             @foreach($areas as $area)
@@ -93,7 +93,7 @@
                                                                     {{$area->name}}
                                                                 </option>
                                                             @endforeach
-                                                      @endif
+
                                                     </optgroup>
                                                 </select>
                                                 @error('area_id')
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/states.update') }}
                                             </button>
                                         </div>
                                     </form>

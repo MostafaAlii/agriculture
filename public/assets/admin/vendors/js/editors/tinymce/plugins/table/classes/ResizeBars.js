@@ -889,8 +889,8 @@ define("tinymce/tableplugin/ResizeBars", [
 		function mouseDownHandler(e) {
 			var target = e.target, body = editor.getBody();
 
-			// Since this code is working on global events we need to work on a global hoverTable state
-			// and make sure that the state is correct according to the events fired
+			// Since this code is working on global events we need to work on a global hoverTable states
+			// and make sure that the states is correct according to the events fired
 			if (!editor.$.contains(body, hoverTable) && hoverTable !== body) {
 				return;
 			}

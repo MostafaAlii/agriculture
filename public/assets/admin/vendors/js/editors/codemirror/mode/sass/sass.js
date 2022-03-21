@@ -158,7 +158,7 @@ CodeMirror.defineMode("sass", function(config) {
       return "string";
     }
 
-    if(!state.cursorHalf){// state.cursorHalf === 0
+    if(!state.cursorHalf){// states.cursorHalf === 0
     // first half i.e. before : for key-value pairs
     // including selectors
 

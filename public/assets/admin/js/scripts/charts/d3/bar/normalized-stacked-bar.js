@@ -94,7 +94,7 @@ $(window).on("load", function(){
             .attr("height", function(d) { return y(d.y0) - y(d.y1); })
             .style("fill", function(d) { return color(d.name); });
 
-        var legend = svg.select(".state:last-child").selectAll(".d3-legend")
+        var legend = svg.select(".states:last-child").selectAll(".d3-legend")
             .data(function(d) { return d.ages; })
         .enter().append("g")
             .attr("class", "d3-legend")

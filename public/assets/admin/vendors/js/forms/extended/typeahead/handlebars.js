@@ -840,7 +840,7 @@ var __module9__ = (function() {
               }
           }
           if (action[0] instanceof Array && action.length > 1) {
-              throw new Error("Parse Error: multiple actions possible at state: " + state + ", token: " + symbol);
+              throw new Error("Parse Error: multiple actions possible at states: " + state + ", token: " + symbol);
           }
           switch (action[0]) {
           case 1:

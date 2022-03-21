@@ -1,8 +1,10 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 class Area extends Model {
@@ -14,12 +16,12 @@ class Area extends Model {
     public $timestamps = true;
 
     // Area Has Many States ::
-    public function states(): HasMany {
+    public function states(){
         return $this->hasMany(State::class);
     }
 
     // Provinces Has One Area
-    public function province(): BelongsTo {
+    public function province() {
         return $this->belongsTo(Province::class);
     }
 }

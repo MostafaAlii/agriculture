@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\VillageInterface;
@@ -23,6 +24,7 @@ class VillageController extends Controller
         return $this->Data->store($request);
     }
 
+
     public function edit($id) {
         return $this->Data->edit($id);
     }
@@ -34,4 +36,8 @@ class VillageController extends Controller
     public function destroy($id) {
         return $this->Data->destroy($id);
     }
+
+    public function bulkDelete(VillageRequest $request) {
+        return $this->Data->bulkDelete($request);
+    }// end of destroy
 }

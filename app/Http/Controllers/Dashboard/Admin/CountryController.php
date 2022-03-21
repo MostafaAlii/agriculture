@@ -1,4 +1,6 @@
 <?php
+
+
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\CountryInterface;
@@ -19,6 +21,10 @@ class CountryController extends Controller
         return $this->Data->data();
     }// end of data
 
+    public function create() {
+        return $this->Data->create();
+    }
+
     public function store(CountryRequest $request) {
         return $this->Data->store($request);
     }
@@ -33,5 +39,9 @@ class CountryController extends Controller
 
     public function destroy($id) {
         return $this->Data->destroy($id);
+    }// end of destroy
+
+    public function bulkDelete(Request $request) {
+        return $this->Data->bulkDelete($request);
     }// end of destroy
 }

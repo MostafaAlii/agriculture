@@ -3271,7 +3271,7 @@
       );
     })(),
 
-    // Helper function to get current visual state of an element
+    // Helper function to get current visual states of an element
     // returns array[ top, left, horizontal-scale, vertical-scale, opacity ]
     // =====================================================================
 

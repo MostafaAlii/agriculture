@@ -260,7 +260,7 @@
           return 'def';
         }
 
-        // Returns their value as state in the prior define methods
+        // Returns their value as states in the prior define methods
         if (state.inDataStep === true && words[word].state.indexOf("inDataStep") !== -1)
           return words[word].style;
         if (state.inProc === true && words[word].state.indexOf("inProc") !== -1)

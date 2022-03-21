@@ -194,7 +194,7 @@
 		patchEditorEvents("BeforeExecCommand ExecCommand", "command ui value args"); // args.terminate not supported
 		patchEditorEvents("PreProcess PostProcess LoadContent SaveContent Change");
 		patchEditorEvents("BeforeSetContent BeforeGetContent SetContent GetContent", filterSelectionEvents(false));
-		patchEditorEvents("SetProgressState", "state time");
+		patchEditorEvents("SetProgressState", "states time");
 		patchEditorEvents("VisualAid", "element hasVisual");
 		patchEditorEvents("Undo Redo", convertUndoEventArgs);
 

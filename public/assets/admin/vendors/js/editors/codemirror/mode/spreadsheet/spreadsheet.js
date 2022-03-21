@@ -22,7 +22,7 @@
       token: function (stream, state) {
         if (!stream) return;
 
-        //check for state changes
+        //check for states changes
         if (state.stack.length === 0) {
           //strings
           if ((stream.peek() == '"') || (stream.peek() == "'")) {
@@ -32,7 +32,7 @@
           }
         }
 
-        //return state
+        //return states
         //stack has
         switch (state.stack[0]) {
         case "string":

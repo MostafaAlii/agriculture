@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nana
- * Date: 3/8/2022
- * Time: 6:57 AM
- */
+
 
 namespace App\Traits;
-
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -78,6 +72,12 @@ trait UploadT
     }
 
 
+    public function Delete_attachment($disk,$path,$id,$filename){
+
+        Storage::disk($disk)->delete($path);
+        image::where('id',$id)->where('filename',$filename)->delete();
+
+    }
 
 
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\StateInterface;
@@ -15,6 +16,7 @@ class StateController extends Controller
         return $this->Data->index();
     }
 
+
     public function data() {
         return $this->Data->data();
     }
@@ -22,6 +24,7 @@ class StateController extends Controller
     public function store(StateRequest $request) {
         return $this->Data->store($request);
     }
+
 
     public function edit($id) {
         return $this->Data->edit($id);
@@ -33,5 +36,9 @@ class StateController extends Controller
 
     public function destroy($id) {
         return $this->Data->destroy($id);
+    }// end of destroy
+
+    public function bulkDelete(StateRequest $request) {
+        return $this->Data->bulkDelete($request);
     }// end of destroy
 }

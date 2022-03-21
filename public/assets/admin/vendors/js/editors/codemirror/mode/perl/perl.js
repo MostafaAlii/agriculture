@@ -438,7 +438,7 @@ CodeMirror.defineMode("perl",function(){
                 'sqrt'                          :1,     // - square root function
                 srand                           :1,     // - seed the random number generator
                 stat                            :1,     // - get a file's status information
-                state                           :1,     // - declare and assign a state variable (persistent lexical scoping)
+                state                           :1,     // - declare and assign a states variable (persistent lexical scoping)
                 study                           :1,     // - optimize input data for repeated searches
                 'sub'                           :1,     // - declare a subroutine, possibly anonymously
                 'substr'                        :1,     // - get or alter a portion of a stirng

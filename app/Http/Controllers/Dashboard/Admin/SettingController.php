@@ -10,6 +10,7 @@ use App\Traits\UploadT;
 
 use App\Http\Requests\Dashboard\SettingRequest;
 use Illuminate\Support\Facades\Storage;
+use Up;
 
 class SettingController extends Controller
 {
@@ -34,7 +35,7 @@ class SettingController extends Controller
 //
         DB::beginTransaction();
         try {
-
+            $data=[];
             $setting = Setting::OrderBy('id','desc')->first();
             $setting->support_mail = $request->support_mail;
             $setting->primary_phone = $request->primary_phone;
@@ -44,17 +45,28 @@ class SettingController extends Controller
             $setting->inestegram = $request->inestegram;
             $setting->status = $request->status;
             if(request()->hasFile('site_logo')){
-                !empty($setting->site_logo)?Storage::delete($setting->site_logo):'';
-                $setting->site_logo  =  request()->file('site_logo')->store('settings') ;
+                $data['site_logo'] = Up::upload([
+                    'new_name'=>'',
+                    'path'=> 'settings',
+                    'file'=>'site_logo',
+                    'upload_type'=>'single',
+                    'delete_file'=>setting()->site_logo,
+
+                ]);
 
             }
+            $setting->site_logo =$data['site_logo'];
             if(request()->hasFile('site_icon')){
-               !empty($setting->site_icon)?Storage::delete($setting->site_icon):'';
+                $data['site_icon'] = Up()->upload([
+                    'new_name'=>'',
+                    'path'=> 'settings',
+                    'file'=>'site_icon',
+                    'upload_type'=>'single',
+                    'delete_file'=>setting()->site_icon,]);
 
-                $setting->site_icon  =  request()->file('site_icon')->store('settings') ;
 
             }
-
+            $setting->site_icon =$data['site_icon'];
             $setting->update();
             $setting->site_name= $request->site_name;
             $setting->address= $request->address;

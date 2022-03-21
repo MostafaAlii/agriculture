@@ -1,8 +1,8 @@
 <a href="{{ route('States.edit', encrypt($id)) }}" class="btn btn-primary btn-sm">
-    {{ __('Admin/site.edit') }}
+    {{ __('Admin/states.edit') }}
 </a>
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
-        {{ __('Admin/site.delete') }}
+        {{ __('Admin/states.delete') }}
     </button>
 
     <form action="{{ route('States.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
@@ -16,7 +16,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel62">   {{ __('Admin/site.delete') }}</h4>
+                                <h4 class="modal-title" id="myModalLabel62">   {{ __('Admin/states.delete') }}</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -27,8 +27,8 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
-                                <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.save') }}</button>
+                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/states.cancel') }}</button>
+                                <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/states.delete') }}</button>
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
         </div>
     </form>
       {{-- modal bulk delete --}}
-      <form action="{{-- route('countries.bulk_delete','ids') --}}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+      <form action="{{route('states.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
         @method('delete')
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -57,8 +57,8 @@
                                 <h5>{{ __('Admin/site.warning') }}</h5>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
-                                <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.save') }}</button>
+                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/states.cancel') }}</button>
+                                <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/states.delete') }}</button>
                             </div>
                         </div>
                     </div>

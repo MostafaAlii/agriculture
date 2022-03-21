@@ -467,7 +467,7 @@ patch(
     "ruleRegExps.push(adjustedregex);\n", 
     function(m) {
         return m + '\
-        if (state[i].next && RegExp(adjustedregex).test(""))\n\
+        if (states[i].next && RegExp(adjustedregex).test(""))\n\
             rule._qre = RegExp(adjustedregex, "g");\n\
         ';
     }
@@ -478,7 +478,7 @@ patch(
     /if \(match\[i \+ 1\] === undefined\)\s*continue;/, 
     "if (!match[i + 1]) {\n\
         if (value)continue;\n\
-        var qre = state[mapping[i]]._qre;\n\
+        var qre = states[mapping[i]]._qre;\n\
         if (!qre) continue;\n\
         qre.lastIndex = lastIndex;\n\
         if (!qre.exec(line) || qre.lastIndex != lastIndex)\n\

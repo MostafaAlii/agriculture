@@ -80,7 +80,7 @@
                                                     <th>{{ __('Admin/proviences.country_name') }}</th>
                                                     <th>{{ __('Admin/proviences.area_name') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
-                                                    <th>{{ __('Admin/site.action') }}</th>
+                                                    <th>{{ __('Admin/proviences.action') }}</th>
                                                 </tr>
                                             </thead>
                                         </table>

@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Repositories\Admin;
+
 use App\Http\Interfaces\Admin\AreaInterface;
 use App\Models\Province;
 use App\Models\Area;
@@ -72,4 +73,22 @@ class AreaRepository implements AreaInterface {
             return redirect()->route('Areas.index');
         }
     }
+
+
+    public function bulkDelete($request) {
+        if($request->delete_select_id){
+            $delete_select_id = explode(",",$request->delete_select_id);
+            foreach($delete_select_id as $areas_ids){
+                $area = Area::findorfail($areas_ids);
+                $area->delete();
+            }
+            toastr()->error(__('Admin/site.deleted_successfully'));
+            return redirect()->route('Areas.index');
+        }else{
+            toastr()->error(__('Admin/site.no_data_found'));
+            return redirect()->route('Areas.index');
+        }
+
+
+    }// end of bulkDelete
 }

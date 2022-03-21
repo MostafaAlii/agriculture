@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class AdminFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Define the model's default states.
      *
      * @return array
      */

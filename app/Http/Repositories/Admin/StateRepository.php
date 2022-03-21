@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Repositories\Admin;
+
 use App\Models\Area;
 use App\Models\State;
 use App\Models\Village;
@@ -71,4 +72,21 @@ class StateRepository implements StateInterface {
             return redirect()->route('States.index');
         }
     }
+
+    public function bulkDelete($request) {
+        if($request->delete_select_id){
+            $delete_select_id = explode(",",$request->delete_select_id);
+            foreach($delete_select_id as $areas_ids){
+                $state = State::findorfail($areas_ids);
+                $state->delete();
+            }
+            toastr()->error(__('Admin/states.deleted_successfully'));
+            return redirect()->route('States.index');
+        }else{
+            toastr()->error(__('Admin/states.no_data_found'));
+            return redirect()->route('States.index');
+        }
+
+
+    }// end of bulkDelete
 }

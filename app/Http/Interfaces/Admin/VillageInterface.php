@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Interfaces\Admin;
 interface VillageInterface {
     public function index();
@@ -7,4 +8,6 @@ interface VillageInterface {
     public function edit($id);
     public function update($request,$village);
     public function destroy($village);
+    public function bulkDelete($ids);
+
 }

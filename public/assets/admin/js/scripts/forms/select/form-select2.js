@@ -22,7 +22,7 @@
     $(".select2-placeholder").select2({
       dropdownAutoWidth: true,
       width: '100%',
-      placeholder: "Select a state",
+      placeholder: "Select a states",
       allowClear: true
     });
 

@@ -100,9 +100,9 @@ $(document).ready(function(){
 
 	function updateCounterStatus( $event_counter, new_count ) {
 		// first update the status visually...
-		if ( !$event_counter.hasClass( "ui-state-hover" ) ) {
-		$event_counter.addClass( "ui-state-hover" )
-			.siblings().removeClass( "ui-state-hover" );
+		if ( !$event_counter.hasClass( "ui-states-hover" ) ) {
+		$event_counter.addClass( "ui-states-hover" )
+			.siblings().removeClass( "ui-states-hover" );
 		}
 		// ...then update the numbers
 		$( "span.count", $event_counter ).text( new_count );
@@ -171,8 +171,8 @@ $(document).ready(function(){
     $( ".droppable-accept-ele" ).droppable({
 		accept: ".droppable-accept",
 		classes: {
-			"ui-droppable-active": "ui-state-active",
-			"ui-droppable-hover": "ui-state-hover"
+			"ui-droppable-active": "ui-states-active",
+			"ui-droppable-hover": "ui-states-hover"
 		},
 		drop: function( event, ui ) {
 			$( this )
@@ -197,8 +197,8 @@ $(document).ready(function(){
 
     $( ".revert-droppable-ele" ).droppable({
 		classes: {
-			"ui-droppable-active": "ui-state-active",
-			"ui-droppable-hover": "ui-state-hover"
+			"ui-droppable-active": "ui-states-active",
+			"ui-droppable-hover": "ui-states-hover"
 		},
 		drop: function( event, ui ) {
 			$( this )
@@ -216,7 +216,7 @@ $(document).ready(function(){
 
 	$( ".droppable-hover-feedback" ).droppable({
 		classes: {
-			"ui-droppable-hover": "ui-state-hover"
+			"ui-droppable-hover": "ui-states-hover"
 		},
 		drop: function( event, ui ) {
 		$( this )
@@ -229,7 +229,7 @@ $(document).ready(function(){
     $( ".droppable-active-feedback" ).droppable({
 		accept: ".draggable-feedback",
 		classes: {
-			"ui-droppable-active": "ui-state-default"
+			"ui-droppable-active": "ui-states-default"
 		},
 		drop: function( event, ui ) {
 		$( this )
@@ -295,13 +295,13 @@ $(document).ready(function(){
 
     // Drop Placeholder
     $( ".sortable-placeholder" ).sortable({
-      placeholder: "ui-state-highlight"
+      placeholder: "ui-states-highlight"
     });
     $( ".sortable-placeholder" ).disableSelection();
 
     // Sortable and disabled drop targets
     $( ".sortable-list1" ).sortable({
-      items: "li:not(.ui-state-disabled)"
+      items: "li:not(.ui-states-disabled)"
     });
 
     // Cancel sorting only

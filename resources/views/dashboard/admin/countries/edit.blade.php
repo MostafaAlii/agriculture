@@ -1,9 +1,9 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/countries.countryPageTitle') }}
+    {{ trans('countries.countryPageTitle') }}
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('Countries.index') }}">{{ trans('Admin/countries.countryPageTitle') }}</a>
                             </li>
                             <li class="breadcrumb-item"><a href="#" style="text-decoration: none; color: black;">
-                                {{ trans('Admin/countries.countryPageTitle_edit') }} / {{ $country->name }}</a>
+                                    {{ trans('Admin/countries.countryPageTitle_edit') }} / {{ $country->name }}</a>
                             </li>
                         </ol>
                     </div>
@@ -48,7 +48,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newadmin') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/countries.newcountry') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -68,7 +68,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label for="eventRegInput1">{{ __('Admin/countries.country_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ old('name',$country->name) }}" required>
+                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ $country->name}}" required>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -78,14 +78,20 @@
                                                         <input class="form-control img" name="country_logo"  type="file" accept="image/*">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <img src="{{ $country->country_flag_path }}" class="img-thumbnail img-preview" width="100" alt="">
-                                                </div>
+                                                @if(!empty($country->country_logo))
+                                                    <div class="col-lg-6">
+                                                        <img src="{{Storage::url($country->country_logo)}}" class="img-thumbnail img-preview" width="50px" height="50px" alt="">
+                                                    </div>
+                                                @else
+                                                    <div class="col-lg-6">
+                                                        <img  class="img-thumbnail img-preview" width="50px" height="50px" alt="" id="output">
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/countries.update') }}
                                             </button>
                                         </div>
                                     </form>
@@ -99,5 +105,5 @@
         </div>
         <!-- End Content Body -->
     </div>
-<!-- End Content Wrapper -->
+    <!-- End Content Wrapper -->
 @endsection

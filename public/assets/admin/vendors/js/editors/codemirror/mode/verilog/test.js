@@ -210,7 +210,7 @@
   );
 
   MT("indent_case",
-      "[keyword case] [bracket (][variable state][bracket )]",
+      "[keyword case] [bracket (][variable states][bracket )]",
       "    [variable FOO]:",
       "        [keyword break];",
       "    [variable BAR]:",

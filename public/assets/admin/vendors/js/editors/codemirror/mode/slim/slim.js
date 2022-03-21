@@ -563,8 +563,8 @@
         return {state: state, mode: mode};
       }
 
-      //indent: function(state) {
-      //  return state.indented;
+      //indent: function(states) {
+      //  return states.indented;
       //}
     };
     return mode;

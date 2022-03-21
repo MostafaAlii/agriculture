@@ -48,7 +48,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newadmin') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/proviences.newprovince') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -72,7 +72,7 @@
                                                         {{ trans('Admin/proviences.provience_name') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ old('name',$provience->name) }}" required>
+                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{$provience->name }}" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -84,9 +84,12 @@
                                                 </label>
                                                 <select name="country_id" class="select2 form-control">
                                                     <optgroup label="{{ trans('Admin/proviences.please_choose_country_name') }}">
+                                                        <option value="{{$provience->country->id }}" selected>
+                                                            {{$provience->country->name}}
+                                                        </option>
                                                         @if($countries && $countries-> count() > 0)
                                                             @foreach($countries as $country)
-                                                                <option value="{{$country->id }}" {{$country->id == $provience->country_id ? 'selected' : '' }}>
+                                                                <option value="{{$country->id }}" >
                                                                     {{$country->name}}
                                                                 </option>
                                                             @endforeach
@@ -100,7 +103,7 @@
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                <i class="la la-check-square-o"></i> {{ __('Admin/proviences.update') }}
                                             </button>
                                         </div>
                                     </form>

@@ -5,6 +5,7 @@ use App\Http\Interfaces\Admin\AdminInterface;
 use App\Http\Requests\Dashboard\adminProfileAccountRequest;
 use App\Http\Requests\Dashboard\adminProfileInformationRequest;
 use App\Http\Requests\Dashboard\AdminRequest;
+
 use Illuminate\Http\Request;
 class AdminController extends Controller {
 
@@ -28,6 +29,7 @@ class AdminController extends Controller {
     public function store(AdminRequest $request) {
         return $this->Data->store($request);
     }// end of store
+
 
     public function edit($id) {
         // dd($id);

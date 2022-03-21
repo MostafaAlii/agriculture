@@ -159,7 +159,7 @@ $(document).ready(function(){
                 })
                 .tooltip({
                     classes: {
-                        "ui-tooltip": "ui-state-highlight"
+                        "ui-tooltip": "ui-states-highlight"
                     }
                 });
 

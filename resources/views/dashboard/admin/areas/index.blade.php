@@ -3,6 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
+
     {{ trans('Admin/areas.areaPageTitle') }}
 @endsection
 
@@ -29,6 +30,7 @@
                 </div>
             </div>
         </div>
+
         <!-- End Breadcrumbs -->
         <!-- Start Content Body -->
         <div class="content-body">
@@ -53,6 +55,7 @@
                                     </ul>
                                 </div>
                             </div>
+
                             <!-- End Card Header -->
                             <!-- Start Card Content -->
                             <div class="card-content collapse show">
@@ -123,6 +126,7 @@
             url: '{{ route('areas.data') }}',
         },
         columns: [
+
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'name', name: 'name', searchable: false, sortable: false},
             {data: 'province', name: 'province.name', searchable: false, sortable: false},

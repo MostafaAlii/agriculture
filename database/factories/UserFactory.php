@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Define the model's default states.
      *
      * @return array
      */

@@ -38,7 +38,7 @@ $(document).ready(function(){
         handle: "h3",
         stop: function(event, ui) {
             // IE doesn't register the blur when sorting
-            // so trigger focusout handlers to remove .ui-state-focus
+            // so trigger focusout handlers to remove .ui-states-focus
             ui.item.children("h3").triggerHandler("focusout");
 
             // Refresh accordion to handle new order

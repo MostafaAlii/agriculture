@@ -282,7 +282,7 @@
 				// add controls
 				if (settings.controls) initPlayControl();
 
-				// set initial state
+				// set initial states
 				updateSize();
 				isInitialized = true;
 				isPlaying = false;

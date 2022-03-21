@@ -74,4 +74,23 @@ class ProvienceRepository implements ProvienceInterface {
             return redirect()->route('Proviences.index');
         }
     }
+
+
+
+    public function bulkDelete($request) {
+        if($request->delete_select_id){
+            $delete_select_id = explode(",",$request->delete_select_id);
+            foreach($delete_select_id as $areas_ids){
+                $provience = Province::findorfail($areas_ids);
+                $provience->delete();
+            }
+            toastr()->error(__('Admin/site.deleted_successfully'));
+            return redirect()->route('Proviences.index');
+        }else{
+            toastr()->error(__('Admin/site.no_data_found'));
+            return redirect()->route('Proviences.index');
+        }
+
+
+    }// end of bulkDelete
 }

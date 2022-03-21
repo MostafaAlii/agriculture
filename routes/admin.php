@@ -1,19 +1,26 @@
 <?php
+
+use App\Http\Controllers\Dashboard\Admin\AdminController;
+use App\Http\Controllers\Dashboard\Admin\CountryController;
+use App\Http\Controllers\Dashboard\Admin\VillageController;
+use App\Http\Controllers\Dashboard\Admin\StateController;
+use App\Http\Controllers\Dashboard\Admin\AreaController;
+
 use App\Http\Livewire;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Dashboard\Admin\UserController;
-use App\Http\Controllers\Dashboard\Admin\AdminController;
 use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
+
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
-use App\Http\Controllers\Dashboard\Admin\CountryController;
+
 use App\Http\Controllers\Dashboard\Admin\ProvienceController;
-use App\Http\Controllers\Dashboard\Admin\AreaController;
-use App\Http\Controllers\Dashboard\Admin\StateController;
-use App\Http\Controllers\Dashboard\Admin\VillageController;
+
+
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
 /*
@@ -74,6 +81,24 @@ Route::group(
             Route::put('/user/profileupdate/{id}', [UserController::class,'updateAccount'])->name('user.updateAccount'); // update user form account
             Route::put('/user/profileupdateinfo/{id}', [UserController::class,'updateInformation'])->name('user.updateInformation'); //update user form information
             /********************************* end User or vendor Routes ************************************/
+
+
+            /********************************* Areas Routes ************************************/
+            Route::resource('Areas', AreaController::class)->except(['show']);
+
+            Route::get('/Areas/data', [AreaController::class,'data'])->name('areas.data');
+            Route::delete('/Areas/bulk_delete/{ids}', [AreaController::class,'bulkDelete'])->name('areas.bulk_delete');
+            /********************************* End Areas Routes ************************************/
+
+
+            /********************************* Start states  Routes ************************************/
+
+            Route::resource('States', StateController::class)->except(['show']);
+            Route::get('/States/data', [StateController::class,'data'])->name('states.data');
+            Route::delete('/States/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('states.bulk_delete');
+            /********************************* end states  Routes ************************************/
+
+
             /********************************* Start settings Routes ************************************/
             Route::get('Settings', [SettingController::class, 'index'])->name('settings');
             Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
@@ -86,22 +111,18 @@ Route::group(
             /********************************* Proviences Routes ************************************/
             Route::resource('Proviences', ProvienceController::class)->except(['show']);
             Route::get('/Proviences/data', [ProvienceController::class,'data'])->name('proviences.data');
-            //Route::delete('/Proviences/bulk_delete/{ids}', [ProvienceController::class,'bulkDelete'])->name('proviences.bulk_delete');
+            Route::delete('/Proviences/bulk_delete/{ids}', [ProvienceController::class,'bulkDelete'])->name('proviences.bulk_delete');
             /********************************* End Proviences Routes ************************************/
-            /********************************* Areas Routes ************************************/
-            Route::resource('Areas', AreaController::class)->except(['show']);
-            Route::get('/Areas/data', [AreaController::class,'data'])->name('areas.data');
-            //Route::delete('/Areas/bulk_delete/{ids}', [AreaController::class,'bulkDelete'])->name('areas.bulk_delete');
-            /********************************* End Areas Routes ************************************/
+
             /********************************* States Routes ************************************/
             Route::resource('States', StateController::class)->except(['show']);
             Route::get('/States/data', [StateController::class,'data'])->name('states.data');
-            //Route::delete('/States/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('states.bulk_delete');
+            Route::delete('/States/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('states.bulk_delete');
             /********************************* End States Routes ************************************/
             /********************************* Villages Routes ************************************/
             Route::resource('Villages', VillageController::class)->except(['show']);
             Route::get('/Villages/data', [VillageController::class,'data'])->name('villages.data');
-            //Route::delete('/Villages/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('villages.bulk_delete');
+            Route::delete('/Villages/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('villages.bulk_delete');
             /********************************* End Villages Routes ************************************/
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);

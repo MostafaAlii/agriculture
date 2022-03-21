@@ -7,4 +7,6 @@ interface ProvienceInterface {
     public function edit($id);
     public function update($request,$provience);
     public function destroy($provience);
+    public function bulkDelete($ids);
+
 }

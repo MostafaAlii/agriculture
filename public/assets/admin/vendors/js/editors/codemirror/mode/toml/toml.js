@@ -22,16 +22,16 @@ CodeMirror.defineMode("toml", function () {
       };
     },
     token: function (stream, state) {
-      //check for state changes
+      //check for states changes
       if (!state.inString && ((stream.peek() == '"') || (stream.peek() == "'"))) {
         state.stringType = stream.peek();
         stream.next(); // Skip quote
-        state.inString = true; // Update state
+        state.inString = true; // Update states
       }
       if (stream.sol() && state.inArray === 0) {
         state.lhs = true;
       }
-      //return state
+      //return states
       if (state.inString) {
         while (state.inString && !stream.eol()) {
           if (stream.peek() === state.stringType) {

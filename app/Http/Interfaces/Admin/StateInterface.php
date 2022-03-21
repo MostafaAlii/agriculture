@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Interfaces\Admin;
 interface StateInterface {
     public function index();
@@ -7,4 +8,5 @@ interface StateInterface {
     public function edit($id);
     public function update($request,$state);
     public function destroy($state);
+    public function bulkDelete($ids);
 }

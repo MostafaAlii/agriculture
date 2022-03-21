@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\AreaInterface;
 use Illuminate\Http\Request;
+use App\Http\Requests\Dashboard\AreaRequest;
+
 
 class AreaController extends Controller
 {
@@ -17,11 +19,13 @@ class AreaController extends Controller
         return $this->Data->index();
     }
 
+
     public function data() {
         return $this->Data->data();
     }
 
-    public function store(Request $request) {
+
+    public function store(AreaRequest $request) {
         return $this->Data->store($request);
     }
 
@@ -29,11 +33,16 @@ class AreaController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(Request $request,$id) {
+    public function update(AreaRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 
     public function destroy($id) {
         return $this->Data->destroy($id);
+    }// end of destroy
+
+
+    public function bulkDelete(AreaRequest $request) {
+        return $this->Data->bulkDelete($request);
     }// end of destroy
 }

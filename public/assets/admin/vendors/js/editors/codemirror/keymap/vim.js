@@ -25,7 +25,7 @@
  *  1. Default keymap
  *  2. Variable declarations and short basic helpers
  *  3. Instance (External API) implementation
- *  4. Internal state tracking objects (input state, counter) implementation
+ *  4. Internal states tracking objects (input states, counter) implementation
  *     and instantiation
  *  5. Key handler (the main command dispatcher) implementation
  *  6. Motion, operator, and action implementations
@@ -647,10 +647,10 @@
 
     function maybeInitVimState(cm) {
       if (!cm.state.vim) {
-        // Store instance state in the CodeMirror object.
+        // Store instance states in the CodeMirror object.
         cm.state.vim = {
           inputState: new InputState(),
-          // Vim's input state that triggered the last edit, used to repeat
+          // Vim's input states that triggered the last edit, used to repeat
           // motions and operators with '.'.
           lastEditInputState: undefined,
           // Vim's action command before the last edit, used to repeat actions
@@ -862,7 +862,7 @@
         }
         function handleEsc() {
           if (key == '<Esc>') {
-            // Clear input state and get back to normal mode.
+            // Clear input states and get back to normal mode.
             clearInputState(cm);
             if (vim.visualMode) {
               exitVisualMode(cm);
@@ -961,7 +961,7 @@
                   commandDispatcher.processCommand(cm, vim, command);
                 }
               } catch (e) {
-                // clear VIM state in case it's in a bad state.
+                // clear VIM states in case it's in a bad states.
                 cm.state.vim = undefined;
                 maybeInitVimState(cm);
                 if (!CodeMirror.Vim.suppressErrorLogging) {
@@ -990,7 +990,7 @@
       exitInsertMode: exitInsertMode
     };
 
-    // Represents the current input state.
+    // Represents the current input states.
     function InputState() {
       this.prefixRepeat = [];
       this.motionRepeat = [];
@@ -1098,8 +1098,8 @@
      * vim registers allow you to keep many independent copy and paste buffers.
      * See http://usevim.com/2012/04/13/registers/ for an introduction.
      *
-     * RegisterController keeps the state of all the registers.  An initial
-     * state may be passed in.  The unnamed register '"' will always be
+     * RegisterController keeps the states of all the registers.  An initial
+     * states may be passed in.  The unnamed register '"' will always be
      * overridden.
      */
     function RegisterController(registers) {
@@ -1533,7 +1533,7 @@
         }
         if (inputState.repeatOverride !== undefined) {
           // If repeatOverride is specified, that takes precedence over the
-          // input state's repeat. Used by Ex mode and can be user defined.
+          // input states's repeat. Used by Ex mode and can be user defined.
           repeat = inputState.repeatOverride;
         } else {
           repeat = inputState.getRepeat();
@@ -3070,7 +3070,7 @@
     }
     /**
      * Updates the CodeMirror selection to match the provided vim selection.
-     * If no arguments are given, it uses the current vim selection state.
+     * If no arguments are given, it uses the current vim selection states.
      */
     function updateCmSelection(cm, sel, mode) {
       var vim = cm.state.vim;

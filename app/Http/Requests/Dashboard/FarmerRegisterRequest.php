@@ -29,11 +29,13 @@ class FarmerRegisterRequest extends FormRequest {
             'lastname.required'    => trans('Admin\validation.required'),
             'email.required'       => trans('Admin\validation.required'),
             'phone.required'       => trans('Admin\validation.required'),
+            'password.required'    => trans('Admin\validation.required'),
             'g-recaptcha-response.required' => trans('Admin\validation.required'),
 
             'firstname.min'        => trans('Admin\validation.min'),
             'lastname.min'         => trans('Admin\validation.min'),
             'phone.min'            => trans('Admin\validation.min'),
+            'password.min'         => trans('Admin\validation.min'),
 
             'firstname.regex'      => trans('Admin\validation.regex'),
             'lastname.regex'       => trans('Admin\validation.regex'),
@@ -42,6 +44,7 @@ class FarmerRegisterRequest extends FormRequest {
             'email.email'          => trans('Admin\validation.email'),
             'email.unique'         => trans('Admin\validation.unique'),
             'phone.unique'         => trans('Admin\validation.unique'),
+            'password.confirmed'   => trans('Admin\validation.confirmed'),
         ];
     }
 }

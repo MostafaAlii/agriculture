@@ -7,7 +7,7 @@
 // can override the style of text. Both modes get to parse all of the
 // text, but when both assign a non-null style to a piece of code, the
 // overlay wins, unless the combine argument was true and not overridden,
-// or state.overlay.combineTokens was true, in which case the styles are
+// or states.overlay.combineTokens was true, in which case the styles are
 // combined.
 
 (function(mod) {
@@ -58,7 +58,7 @@ CodeMirror.overlayMode = function(base, overlay, combine) {
       }
       stream.pos = Math.min(state.basePos, state.overlayPos);
 
-      // state.overlay.combineTokens always takes precedence over combine,
+      // states.overlay.combineTokens always takes precedence over combine,
       // unless set to null
       if (state.overlayCur == null) return state.baseCur;
       else if (state.baseCur != null &&

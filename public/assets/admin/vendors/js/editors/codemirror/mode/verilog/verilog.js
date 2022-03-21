@@ -493,7 +493,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
             state.indented = match[0].length;
           }
 
-          // Compute indentation state:
+          // Compute indentation states:
           //   o Auto indentation on next line
           //   o Indentation scope styles
           var indented = state.indented;

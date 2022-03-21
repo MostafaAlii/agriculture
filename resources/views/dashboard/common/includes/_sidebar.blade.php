@@ -2,7 +2,7 @@
     <div class="main-menu material-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true">
         <div class="user-profile">
             <div class="user-info text-center pt-1 pb-1">
-                <img class="user-img img-fluid rounded-circle" src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}" />
+                {{--<img class="user-img img-fluid rounded-circle" src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}" />--}}
                 <div class="name-wrapper d-block dropdown">
                     <a class="white dropdown-toggle ml-2" id="user-account" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-name">Charlie Adams</span></a>
                     <div class="text-light">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</div>
@@ -180,16 +180,7 @@
                 </li>
                 <li class=" navigation-header"><span data-i18n="Admin Panels">Admin Panels</span><i class="material-icons nav-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Admin Panels">more_horiz</i>
                 </li>
-                <li class=" nav-item"><a href="../material-ecommerce-menu-template" target="_blank"><i class="material-icons">add_shopping_cart</i><span class="menu-title" data-i18n="eCommerce">eCommerce</span></a>
-                </li>
-                <li class=" nav-item"><a href="../material-travel-menu-template" target="_blank"><i class="material-icons">call_merge</i><span class="menu-title" data-i18n="Travel &amp; Booking">Travel &amp; Booking</span></a>
-                </li>
-                <li class=" nav-item"><a href="../material-hospital-menu-template" target="_blank"><i class="material-icons">add_circle_outline</i><span class="menu-title" data-i18n="Hospital">Hospital</span></a>
-                </li>
-                <li class=" nav-item"><a href="../material-crypto-menu-template" target="_blank"><i class="material-icons">attach_money</i><span class="menu-title" data-i18n="Crypto">Crypto</span></a>
-                </li>
-                <li class=" nav-item"><a href="../material-support-menu-template" target="_blank"><i class="material-icons">label_outline</i><span class="menu-title" data-i18n="Support Ticket">Support Ticket</span></a>
-                </li>
+
                 <li class=" nav-item"><a href="../material-bank-menu-template" target="_blank"><i class="material-icons">account_balance</i><span class="menu-title" data-i18n="Bank">Bank</span></a>
                 </li>
                 <li class=" navigation-header"><span data-i18n="Apps">Apps</span><i class="material-icons nav-menu-icon" data-toggle="tooltip" data-placement="right" data-original-title="Apps">more_horiz</i>

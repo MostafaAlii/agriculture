@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Repositories\Admin;
+
 use App\Models\Admin;
 use App\Models\State;
 use App\Models\Village;
@@ -69,4 +70,21 @@ class VillageRepository implements VillageInterface {
             return redirect()->route('Villages.index');
         }
     }
-}
+
+    public function bulkDelete($request)
+    {
+        if ($request->delete_select_id) {
+            $delete_select_id = explode(",", $request->delete_select_id);
+            foreach ($delete_select_id as $villages_ids) {
+                $village = Village::findorfail($villages_ids);
+                $village->delete();
+            }
+            toastr()->error(__('Admin/villages.deleted_successfully'));
+            return redirect()->route('Villages.index');
+        } else {
+            toastr()->error(__('Admin/villages.no_data_found'));
+            return redirect()->route('Villages.index');
+        }
+    }
+
+    }

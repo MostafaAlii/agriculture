@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
     {{ trans('Admin/countries.countryPageTitle') }}
@@ -61,10 +61,10 @@
                                     <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
                                         <i class="material-icons">add_box</i>
                                         {{ trans('Admin/countries.add_new_country') }}
-                                   </button>
+                                    </button>
                                     <button type="button" class="btn btn-warning btn-md mb-3"
-                                        id="btn_delete_all" data-toggle="modal"
-                                        data-target="#bulkdelete" >
+                                            id="btn_delete_all" data-toggle="modal"
+                                            data-target="#bulkdelete" >
                                         {{ __('Admin/site.bulkdelete') }}
                                     </button>
                                     <!-- Start Table Responsive -->
@@ -72,16 +72,16 @@
                                         <!-- Start Table -->
                                         <table class="table table-striped table-bordered zero-configuration" id="countries-table">
                                             <thead>
-                                                <tr>
-                                                    <th>
-                                                        <input type="checkbox" name="select_all" id="select-all">
-                                                    </th>
-                                                    <th>{{ trans('Admin/countries.country_flag') }}</th>
-                                                    <th>{{ __('Admin/countries.country_name') }}</th>
-                                                    <th>{{ __('Admin/countries.country_related_proviency') }}</th>
-                                                    <th>{{ __('Admin/general.created_since') }}</th>
-                                                    <th>{{ __('Admin/site.action') }}</th>
-                                                </tr>
+                                            <tr>
+                                                <th>
+                                                    <input type="checkbox" name="select_all" id="select-all">
+                                                </th>
+                                                <th>{{ trans('Admin/countries.country_flag') }}</th>
+                                                <th>{{ __('Admin/countries.country_name') }}</th>
+                                                <th>{{ __('Admin/countries.country_related_provience') }}</th>
+                                                <th>{{ __('Admin/general.created_since') }}</th>
+                                                <th>{{ __('Admin/countries.action') }}</th>
+                                            </tr>
                                             </thead>
                                         </table>
                                         <!-- End Table -->
@@ -107,30 +107,30 @@
 @endsection
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- Datatable Fire -->
-<script>
-    let countriesTable = $('#countries-table').DataTable({
-        // dom: "tiplr",
-        serverSide: true,
-        processing: true,
-        "language": {
+    <!-- Datatable Fire -->
+    <script>
+        let countriesTable = $('#countries-table').DataTable({
+            // dom: "tiplr",
+            serverSide: true,
+            processing: true,
+            "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
-        ajax: {
-            url: '{{ route('countries.data') }}',
-        },
-        columns: [
-            {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-             {data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
-            {data: 'name', name: 'name', searchable: false, sortable: false},
-            {data: 'provinces', name: 'provinces.name', searchable: false, sortable: false},
-            {data: 'created_at', name: 'created_at', searchable: false},
-            {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
-        ],
-    });
-</script>
+            ajax: {
+                url: '{{ route('countries.data') }}',
+            },
+            columns: [
+                {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+                {data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
+                {data: 'name', name: 'name', searchable: false, sortable: false},
+                {data: 'provinces', name: 'provinces.name', searchable: false, sortable: false},
+                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+            ],
+        });
+    </script>
 
 @endsection

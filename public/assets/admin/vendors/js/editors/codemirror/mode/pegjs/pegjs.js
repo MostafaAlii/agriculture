@@ -33,17 +33,17 @@ CodeMirror.defineMode("pegjs", function (config) {
     token: function (stream, state) {
       if (stream)
 
-      //check for state changes
+      //check for states changes
       if (!state.inString && !state.inComment && ((stream.peek() == '"') || (stream.peek() == "'"))) {
         state.stringType = stream.peek();
         stream.next(); // Skip quote
-        state.inString = true; // Update state
+        state.inString = true; // Update states
       }
       if (!state.inString && !state.inComment && stream.match(/^\/\*/)) {
         state.inComment = true;
       }
 
-      //return state
+      //return states
       if (state.inString) {
         while (state.inString && !stream.eol()) {
           if (stream.peek() === state.stringType) {

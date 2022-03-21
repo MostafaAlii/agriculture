@@ -173,17 +173,17 @@
                 // jQueryUI Theme
                 "jqueryui": {
 
-                    "focus": "ui-state-focus",
+                    "focus": "ui-states-focus",
 
-                    "hover": "ui-state-hover",
+                    "hover": "ui-states-hover",
 
-                    "enabled": "ui-state-enabled",
+                    "enabled": "ui-states-enabled",
 
                     "disabled": "ui-state-disabled",
 
                     "arrow": "ui-icon ui-icon-triangle-1-s",
 
-                    "button": "ui-widget ui-state-default",
+                    "button": "ui-widget ui-states-default",
 
                     "list": "ui-widget ui-widget-content",
 
@@ -1415,7 +1415,7 @@
 
                         $(this).addClass(focusClass).attr("data-active", "");
 
-                        // Sets the dropdown list indropdownidual options back to the default state and sets the focus CSS class on the currently hovered option
+                        // Sets the dropdown list indropdownidual options back to the default states and sets the focus CSS class on the currently hovered option
                         self.listItems.not($(this)).removeClass(focusClass);
 
                         $(this).addClass(focusClass);
@@ -2262,10 +2262,10 @@ selectBoxIt._destroySelectBoxIt = function() {
             // Makes the dropdown list not focusable by removing the `tabindex` attribute
             self.dropdown.removeAttr("tabindex").
 
-            // Disables styling for enabled state
+            // Disables styling for enabled states
             removeClass(self.theme["enabled"]).
 
-            // Enabled styling for disabled state
+            // Enabled styling for disabled states
             addClass(self.theme["disabled"]);
 
             self._setOption("disabled", true);
@@ -2509,10 +2509,10 @@ selectBoxIt._destroySelectBoxIt = function() {
             // Make the dropdown list focusable
             self.dropdown.attr("tabindex", 0).
 
-            // Disable styling for disabled state
+            // Disable styling for disabled states
             removeClass(self.theme["disabled"]).
 
-            // Enables styling for enabled state
+            // Enables styling for enabled states
             addClass(self.theme["enabled"]);
 
             self._setOption("disabled", false);
