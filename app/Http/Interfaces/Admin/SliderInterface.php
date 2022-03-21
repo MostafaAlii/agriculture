@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Interfaces\Admin;
 interface SliderInterface {
-    public function index();
-    public function create();
+    public function addImages();
+    public function saveSliderImages($request);
+    public function saveSliderImagesDB($request);
 }

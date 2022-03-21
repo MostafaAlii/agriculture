@@ -23,6 +23,8 @@ use App\Http\Controllers\Dashboard\Admin\ProvienceController;
 
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
+use App\Http\Controllers\Dashboard\Admin\BlogController;
+use App\Http\Controllers\Dashboard\Admin\TagController;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -124,9 +126,22 @@ Route::group(
             Route::delete('/Departments/bulk_delete/{ids}', [DepartmentController::class,'bulkDelete'])->name('departments.bulk_delete');
             /********************************* End Department Routes ************************************/
             /********************************* Department Routes ************************************/
-            Route::resource('Sliders', SliderController::class)->except(['show']);
+            Route::group(['prefix' => 'Sliders'], function () {
+                Route::get('/', [SliderController::class, 'addImages'])->name('sliders.create');
+                Route::post('sliders', [SliderController::class, 'saveSliderImages'])->name('sliders.store');
+                Route::post('sliders/db', [SliderController::class, 'saveSliderImagesDB'])->name('sliders.store.db');
+            });
             /********************************* End Department Routes ************************************/
-
+            /********************************* Blog Routes ************************************/
+            Route::resource('blogs', BlogController::class)->except(['show']);
+            Route::get('/blogs/data', [BlogController::class,'data'])->name('blogs.data');
+            Route::delete('/blogs/bulk_delete/{ids}', [BlogController::class,'bulkDelete'])->name('blogs.bulk_delete');
+            /********************************* End Blog Routes ************************************/
+            /********************************* Tags Routes ************************************/
+            Route::resource('tags', TagController::class)->except(['show']);
+            Route::get('/tags/data', [TagController::class,'data'])->name('tags.data');
+            Route::delete('/tags/bulk_delete/{ids}', [TagController::class,'bulkDelete'])->name('tags.bulk_delete');
+            /********************************* End Tags Routes ************************************/
         });
 
     });

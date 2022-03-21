@@ -50,7 +50,7 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-        'slider' => [
+        'sliders' => [
             'driver' => 'local',
             'root' => public_path('Dashboard/img/sliders'),
             'url' => env('APP_URL').'/storage',

@@ -6,15 +6,15 @@ use App\Http\Interfaces\Admin\AdminInterface;
 use App\Http\Interfaces\Admin\UserInterface;
 use App\Http\Interfaces\Admin\farmerInterface;
 use App\Http\Interfaces\Admin\DepartmentInterface;
-
 use App\Http\Interfaces\Admin\ProfileInterface;
 use App\Http\Interfaces\Admin\ProvienceInterface;
 use App\Http\Interfaces\Admin\CountryInterface;
-
 use App\Http\Interfaces\Admin\AreaInterface;
 use App\Http\Interfaces\Admin\StateInterface;
 use App\Http\Interfaces\Admin\VillageInterface;
 use App\Http\Interfaces\Admin\SliderInterface;
+use App\Http\Interfaces\Admin\BlogInterface;
+use App\Http\Interfaces\Admin\TagInterface;
 
 use App\Http\Repositories\Admin\AreaRepository;
 use App\Http\Repositories\Admin\StateRepository;
@@ -22,15 +22,16 @@ use App\Http\Repositories\Admin\OrchardRepository;
 use App\Http\Repositories\Admin\ProvienceRepository;
 use App\Http\Repositories\Admin\CountryRepository;
 use App\Http\Repositories\Admin\VillageRepository;
-
 use App\Http\Repositories\Admin\AdminRepository;
 use App\Http\Repositories\Admin\UserRepository;
 use App\Http\Repositories\Admin\FarmerRepository;
 use App\Http\Repositories\Admin\DepartmentRepository;
 use App\Http\Repositories\Admin\ProfileRepository;
-
-
 use App\Http\Repositories\Admin\SliderRepository;
+use App\Http\Repositories\Admin\BlogRepository;
+use App\Http\Repositories\Admin\TagRepository;
+
+
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -54,6 +55,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(VillageInterface::class, VillageRepository::class);
         $this->app->bind(DepartmentInterface::class, DepartmentRepository::class);
         $this->app->bind(SliderInterface::class, SliderRepository::class);
+        $this->app->bind(BlogInterface::class, BlogRepository::class);
+        $this->app->bind(TagInterface::class, TagRepository::class);
     }
 
     public function boot()

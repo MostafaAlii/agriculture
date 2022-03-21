@@ -42,6 +42,6 @@ class AdminTableSeeder extends Seeder {
             'department_id'     => 2,
             'remember_token'    => Str::random(10),
         ]);
-
+        Admin::factory(30)->create();
     }
 }
