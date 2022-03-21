@@ -97,4 +97,11 @@ return [
     'onefarmer'=>'Farmer',
     'oneuser'=>'Vendor',
     'onedepartment'=>'Department',
+
+    'blog'=>'Blog',
+    'newblog'=>'New Blog',
+    'title'=>'Title',
+    'body'=>'Subject',
+
+    'tag'=>'tag',
 ];

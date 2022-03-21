@@ -93,8 +93,10 @@ return [
     'oneuser'=>'مستخدم',
     'onedepartment'=>'قسم',
 
-    'blog'=>'blog',
-    'tag'=>'tag',
+    'blog'=>'مدونه',
+    'newblog'=>'مدونه جديده',
     'title'=>'عنوان',
     'body'=>'الموضوع',
+
+    'tag'=>'tag',
 ];
