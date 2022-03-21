@@ -82,14 +82,8 @@ Route::group(
             Route::put('/user/profileupdateinfo/{id}', [UserController::class,'updateInformation'])->name('user.updateInformation'); //update user form information
             /********************************* end User or vendor Routes ************************************/
 
-            /********************************* Start country  Routes ************************************/
-            Route::resource('countries', CountryController::class)->except(['show']);
-//            Route::get('/countries/data', [CountryController::class,'data'])->name('countries.data');
-//            Route::delete('/countries/bulk_delete/{ids}', [CountryController::class,'bulkDelete'])->name('countries.bulk_delete');
 
-            /********************************* end country  Routes ************************************/
             /********************************* Areas Routes ************************************/
-            Route::resource('areas', AreaController::class)->except(['show']);
             Route::resource('Areas', AreaController::class)->except(['show']);
 
             Route::get('/Areas/data', [AreaController::class,'data'])->name('areas.data');
@@ -98,8 +92,7 @@ Route::group(
 
 
             /********************************* Start states  Routes ************************************/
-          //  Route::resource('states', StateController::class)->except(['show']);
-//            Route::get('/states/data', [StateController::class,'data'])->name('states.data');
+
             Route::resource('States', StateController::class)->except(['show']);
             Route::get('/States/data', [StateController::class,'data'])->name('states.data');
             Route::delete('/States/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('states.bulk_delete');
