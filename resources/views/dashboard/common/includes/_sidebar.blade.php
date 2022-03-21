@@ -149,8 +149,18 @@
                             </a>
                         </li>
                         <!-- End Department -->
-                        <!-- Start blog -->
-                        <li>
+                    </ul>
+                </li>
+                <!-- End Department Dropdown Menu -->
+                <!-- Start Department Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="icon-present " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                        <span class="menu-title" data-i18n="Departments">{{ trans('Admin/site.blogstags') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                          <!-- Start blog -->
+                          <li>
                             <a class="menu-item" href="{{route('blogs.index')}}">
                                 <i class="icon-globe " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
                                 <span data-i18n="{{ trans('Admin/site.blog') }}"> {{ trans('Admin/site.blog') }}</span>
@@ -165,25 +175,15 @@
                             </a>
                         </li>
                         <!-- End tag -->
+
                     </ul>
                 </li>
-                <!-- End Department Dropdown Menu -->
+                {{-- <!-- End Department Dropdown Menu -->
                 <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title" data-i18n="Templates">Templates</span></a>
                     <ul class="menu-content">
                         <li><a class="menu-item" href="#"><i class="material-icons"></i><span data-i18n="Vertical">Vertical</span></a>
                             <ul class="menu-content">
-                                <li><a class="menu-item" href="../material-vertical-menu-template"><i class="material-icons"></i><span data-i18n="Classic Menu">Classic Menu</span></a>
-                                </li>
-                                <li><a class="menu-item" href="../material-vertical-compact-menu-template"><i class="material-icons"></i><span data-i18n="Compact Menu">Compact Menu</span></a>
-                                </li>
-                                <li><a class="menu-item" href="../material-vertical-collapsed-menu-template"><i class="material-icons"></i><span data-i18n="Collapsed Menu">Collapsed Menu</span></a>
-                                </li>
-                                <li><a class="menu-item" href="../material-vertical-modern-menu-template"><i class="material-icons"></i><span>Modern Menu</span></a>
-                                </li>
-                                <li><a class="menu-item" href="../material-vertical-content-menu-template"><i class="material-icons"></i><span data-i18n="Content Menu">Content Menu</span></a>
-                                </li>
-                                <li><a class="menu-item" href="../material-vertical-overlay-menu-template"><i class="material-icons"></i><span data-i18n="Overlay Menu">Overlay Menu</span></a>
-                                </li>
+
                             </ul>
                         </li>
                         <li><a class="menu-item" href="#"><i class="material-icons"></i><span data-i18n="Horizontal">Horizontal</span></a>
@@ -1093,7 +1093,7 @@
                 <li class=" nav-item"><a href="https://pixinvent.ticksy.com/" target="_blank"><i class="material-icons">local_offer</i><span class="menu-title" data-i18n="Raise Support">Raise Support</span></a>
                 </li>
                 <li class=" nav-item"><a href="https://pixinvent.com/modern-admin-clean-bootstrap-4-dashboard-html-template/documentation" target="_blank"><i class="material-icons">format_size</i><span class="menu-title" data-i18n="Documentation">Documentation</span></a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

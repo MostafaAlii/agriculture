@@ -64,6 +64,7 @@
                                                     <th>{{ __('Admin/site.title') }}</th>
                                                     <th>{{ __('Admin/site.body') }}</th>
                                                     <th>{{ __('Admin/site.admin') }}</th>
+                                                    <th>{{ __('Admin/site.type') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -106,10 +107,11 @@
             {data: 'title', name: 'title', searchable: false, sortable: false, width: '10%'},
             {data: 'body', name: 'body', searchable: false, sortable: false},
             {data: 'admin', name: 'admin', searchable: false, sortable: false, width: '10%'},
+            {data: 'type', name: 'type', searchable: false, sortable: false, width: '10%'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[6, 'desc']],
+        order: [[7, 'desc']],
     });
 </script>
 @endsection
