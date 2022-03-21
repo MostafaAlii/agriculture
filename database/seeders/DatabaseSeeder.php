@@ -22,9 +22,10 @@ class DatabaseSeeder extends Seeder {
             AdminTableSeeder::class,
             UserSeeder::class,
             SettingSeeder::class,
+            BlogSeeder::class,
+            TagSeeder::class,
         ]);
 
-        \App\Models\Admin::factory(30)->create();
         \App\Models\Farmer::factory(30)->create();
         \App\Models\User::factory(30)->create();
          // images
@@ -35,7 +36,7 @@ class DatabaseSeeder extends Seeder {
                 'imageable_type' => 'App\Models\User'
             ]);
         }
-           // image3
+           // images
            for ($i = 1; $i <= $count ; $i++) {
             Image::insert([
                 'filename'     => rand(1,10) . ".jpg",
@@ -50,6 +51,14 @@ class DatabaseSeeder extends Seeder {
                     'filename'     => rand(1,10) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Admin'
+                ]);
+            }
+            // images for blog
+            for ($i = 1; $i <= $count ; $i++) {
+                Image::insert([
+                    'filename'     => rand(1,10) . ".jpg",
+                    'imageable_id' => $i,
+                    'imageable_type' => 'App\Models\Blog'
                 ]);
             }
 

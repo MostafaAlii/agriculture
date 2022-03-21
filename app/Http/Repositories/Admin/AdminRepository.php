@@ -39,7 +39,7 @@ class AdminRepository implements AdminInterface{
             // test for ralation in yagra
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
-            
+
     }
 
     public function create() {

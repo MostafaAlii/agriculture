@@ -92,4 +92,9 @@ return [
     'onefarmer'=>'فلاح',
     'oneuser'=>'مستخدم',
     'onedepartment'=>'قسم',
+
+    'blog'=>'blog',
+    'tag'=>'tag',
+    'title'=>'عنوان',
+    'body'=>'الموضوع',
 ];

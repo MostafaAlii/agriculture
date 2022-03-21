@@ -22,31 +22,33 @@
                         <!-- Start Admins & Moderators -->
                         <li>
                             <a class="menu-item" href="#">
-                                <i class="material-icons">face</i>
+                                <i class="icon-user" style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
                                 <span data-i18n="Vertical">{{trans('Admin\admins.admins')}}</span>
                             </a>
                             <ul class="menu-content">
                                 <li>
                                     <a class="menu-item" href="{{ route('Admins.index') }}">
-                                        <i class="material-icons">face</i>
+                                        <i class="icon-badge" style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
                                         <span data-i18n="{{trans('Admin\admins.admin')}}">{{trans('Admin\admins.admin')}}</span></a>
                                 </li>
                                 <li>
                                     <a class="menu-item" href="{{ route('farmers.index') }}">
-                                        <i class="material-icons">person_outline</i>
-                                        <span data-i18n="{{ __('Admin/site.farmer') }}">{{ __('Admin/site.farmer') }}</span></a>
+                                        <i class="icon-user-follow" style="color: red;color: red;padding: 3px;font-size: 18px;" ></i>
+                                        <span data-i18n="{{ __('Admin/site.farmer') }}">{{ __('Admin/site.farmer') }}</span>
+                                    </a>
                                 </li>
                                 <li>
                                     <a class="menu-item" href="{{ route('users.index') }}">
-                                        <i class="material-icons">code</i>
-                                        <span data-i18n="{{ __('Admin/site.users') }}">{{ __('Admin/site.users') }}</span></a>
+                                        <i class="icon-users" style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                                        <span data-i18n="{{ __('Admin/site.users') }}">{{ __('Admin/site.users') }}</span>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
                         <!-- End Admins & Moderators -->
                         <!-- Start Setting -->
                         <li>
-                            
+
                         </li>
                         <!-- End Setting -->
                     </ul>
@@ -142,11 +144,27 @@
                         <!-- Start Department -->
                         <li>
                             <a class="menu-item" href="{{route('Departments.index')}}">
-                                <i class="material-icons">account_balance</i>
-                                <span data-i18n="Departments">{{ trans('Admin/departments.departments_title_in_sidebar') }}</span>
+                                <i class="material-icons" style="color: red;color: red;padding: 3px;font-size: 18px;">account_balance</i>
+                                <span data-i18n="Departments"> {{ trans('Admin/departments.departments_title_in_sidebar') }}</span>
                             </a>
                         </li>
                         <!-- End Department -->
+                        <!-- Start blog -->
+                        <li>
+                            <a class="menu-item" href="{{route('blogs.index')}}">
+                                <i class="icon-globe " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                                <span data-i18n="{{ trans('Admin/site.blog') }}"> {{ trans('Admin/site.blog') }}</span>
+                            </a>
+                        </li>
+                        <!-- End blog -->
+                        <!-- Start tag -->
+                        <li>
+                            <a class="menu-item" href="{{route('Departments.index')}}">
+                                <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
+                                <span data-i18n="{{ trans('Admin/site.tag') }}"> {{ trans('Admin/site.tag') }}</span>
+                            </a>
+                        </li>
+                        <!-- End tag -->
                     </ul>
                 </li>
                 <!-- End Department Dropdown Menu -->
