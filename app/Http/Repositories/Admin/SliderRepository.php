@@ -5,4 +5,8 @@ class SliderRepository implements SliderInterface {
     public function index() {
         return view('dashboard.admin.sliders.index');
     }
+
+    public function create() {
+        return view('dashboard.admin.sliders.create');
+    }
 }

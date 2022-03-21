@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\SliderInterface;
+use App\Http\Requests\Dashboard\SliderRequest;
 use Illuminate\Http\Request;
 class SliderController extends Controller
 {
@@ -15,10 +16,10 @@ class SliderController extends Controller
     }
 
     public function create() {
-        //
+        return $this->Data->create();
     }
 
-    public function store(Request $request) {
+    public function store(SliderRequest $request) {
         //
     }
 

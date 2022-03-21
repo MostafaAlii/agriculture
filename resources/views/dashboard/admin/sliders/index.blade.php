@@ -58,10 +58,10 @@
                             <div class="card-content collapse show">
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                    <a href="{{ route('Sliders.create') }}" class="btn btn-primary btn-sm mb-3">
                                         <i class="material-icons">add_a_photo</i>
                                         {{ trans('Admin/sliders.add_new_slider') }}
-                                   </button>
+                                    </a>
                                     <button type="button" class="btn btn-warning btn-md mb-3"
                                         id="btn_delete_all" data-toggle="modal"
                                         data-target="#bulkdelete" >
