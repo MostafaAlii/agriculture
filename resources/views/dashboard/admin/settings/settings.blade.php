@@ -157,10 +157,14 @@
 
                                                             <input type="file" accept="image/*" name="site_icon">
 
-                                                            @if(!empty(setting()->site_icon))
+                                                            @if(!empty($setting->site_icon))
 
-                                                                <img src="{{Storage::url(setting()->site_icon)}}"
+                                                                <img src="{{Storage::url($setting->site_icon)}}"
                                                                      height="50 px" width="50 px">
+
+                                                                @else
+
+                                                                <img   height="50 px" width="50 px" id="output" >
                                                             @endif
 
                                                         </label>

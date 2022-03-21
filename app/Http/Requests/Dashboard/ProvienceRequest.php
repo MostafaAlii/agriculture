@@ -13,7 +13,8 @@ class ProvienceRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]+$/i'
+                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+
             ],
             'location_x' =>  'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
@@ -27,6 +28,7 @@ class ProvienceRequest extends FormRequest {
 
         return [
             'name.required'   => trans('Admin\validation.required'),
+            'name.regex'   => trans('Admin\validation.regex'),
             'location_x.numeric'    => trans('Admin\validation.numeric'),
             'location_y.numeric'       => trans('Admin\validation.numeric'),
             'country_id.required'       => trans('Admin\validation.required'),

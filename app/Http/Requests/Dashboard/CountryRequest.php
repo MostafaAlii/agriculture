@@ -12,7 +12,7 @@ class CountryRequest extends FormRequest {
         return [
             'name' => [
             'required',
-            'regex:/^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]+$/i'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
             ],
 
         ];
@@ -20,8 +20,8 @@ class CountryRequest extends FormRequest {
 
     public function messages() {
         return [
-            'name.required'   =>  trans('Admin/countries.countries_name_required'),
-            'name.string'     =>  trans('Admin/countries.countries_name_string'),
+            'name.required'   =>  trans('Admin/validation.required'),
+            'name.regex'     =>  trans('Admin/validation.regex'),
         ];
     }
 }
