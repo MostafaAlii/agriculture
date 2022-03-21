@@ -15,11 +15,13 @@ use Yajra\DataTables\DataTables;
 use Intervention\Image\Facades\Image;
 
 use App\Http\Interfaces\Admin\ProvinceInterface;
+use App\Traits\UploadT;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
 class CountryRepository implements CountryInterface {
+    use UploadT;
     public function index() {
         return view('dashboard.admin.countries.index');
     }
@@ -69,7 +71,7 @@ class CountryRepository implements CountryInterface {
             DB::commit();
 
             toastr()->success(__('Admin/country.added_successfully'));
-            return redirect()->route('countries.index');
+            return redirect()->route('Countries.index');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -105,7 +107,7 @@ class CountryRepository implements CountryInterface {
 
                 DB::commit();
                 toastr()->success( __('Admin/site.updated_successfully'));
-                return redirect()->route('countries.index');
+                return redirect()->route('Countries.index');
             } catch (\Exception $e) {
                 DB::rollBack();
                 return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -120,7 +122,7 @@ class CountryRepository implements CountryInterface {
 
         $data = [];
         $countryID = Crypt::decrypt($id);
-        $data['province'] = Province::where('country_id', $countryID)->pluck('country_id'); 
+        $data['province'] = Province::where('country_id', $countryID)->pluck('country_id');
         if($data['province']->count() == 0) {
             $country=Country::findorfail($countryID);
             if($country->country_logo != 'default_flag.jpg') {
@@ -151,7 +153,7 @@ class CountryRepository implements CountryInterface {
         }
         Country::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('countries.index');
+        return redirect()->route('Countries.index');
 
     }// end of bulkDelete
 

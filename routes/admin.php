@@ -86,10 +86,8 @@ Route::group(
 
             /********************************* Countries Routes ************************************/
             Route::resource('Countries', CountryController::class)->except(['show']);
-            Route::resource('countries', CountryController::class)->except(['show']);
-
-            Route::get('/Countries/data', [CountryController::class,'data'])->name('countries.data');
-            Route::delete('/Countries/bulk_delete/{ids}', [CountryController::class,'bulkDelete'])->name('countries.bulk_delete');
+            Route::get('/Countries/data', [CountryController::class,'data'])->name('Countries.data');
+            Route::delete('/Countries/bulk_delete/{ids}', [CountryController::class,'bulkDelete'])->name('Countries.bulk_delete');
             /********************************* End Countries Routes ************************************/
 
             /********************************* Areas Routes ************************************/

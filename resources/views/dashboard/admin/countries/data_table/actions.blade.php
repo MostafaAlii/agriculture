@@ -1,6 +1,6 @@
 
 
-<a href="{{ route('countries.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
+<a href="{{ route('Countries.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
     <i class="fa fa-edit"></i>
     {{ __('Admin/countries.edit') }}
 </a>
@@ -18,7 +18,7 @@
         <div class="modal animated flipInY text-left"  tabindex="-1" role="dialog" aria-hidden="true" id="delete{{ $id }}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="{{ route('countries.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+                    <form action="{{ route('Countries.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
                         @csrf
                         @method('delete')
                         <div class="modal-header" id="modal">
@@ -44,7 +44,7 @@
 </div>
 
 {{-- modal bulk delete --}}
-<form action="{{ route('countries.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+<form action="{{ route('Countries.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')
     <div class="col-lg-4 col-md-6 col-sm-12">

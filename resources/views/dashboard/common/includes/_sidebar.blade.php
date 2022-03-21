@@ -169,7 +169,7 @@
                         <!-- End blog -->
                         <!-- Start tag -->
                         <li>
-                            <a class="menu-item" href="{{route('Departments.index')}}">
+                            <a class="menu-item" href="{{route('tags.index')}}">
                                 <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
                                 <span data-i18n="{{ trans('Admin/site.tag') }}"> {{ trans('Admin/site.tag') }}</span>
                             </a>
