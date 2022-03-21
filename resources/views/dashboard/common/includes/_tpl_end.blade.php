@@ -16,7 +16,7 @@
         <!-- BEGIN: Page Vendor JS-->
         <script src="{{ asset('assets/admin/vendors/js/charts/chart.min.js') }}"></script>
         <script src="{{ asset('assets/admin/vendors/js/charts/apexcharts/apexcharts.min.js') }}"></script>
-        <!-- END: Page Vendor JS-->
+       <!-- END: Page Vendor JS-->
     <!-- BEGIN: Page JS-->
     {{-- <script src="{{ asset('assets/admin/js/scripts/pages/material-app.js') }}"></script> --}}
     <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-crypto.js') }}"></script>
@@ -24,6 +24,8 @@
     <script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js')}}"></script>
     {{-- <script src="{{ asset('assets/admin/js/index.js') }}"></script> --}}
+    <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}"></script>
+
     @toastr_js
     @toastr_render
     {{-- image preview --}}

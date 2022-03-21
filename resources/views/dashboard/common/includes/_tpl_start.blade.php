@@ -19,6 +19,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/weather-icons/climacons.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/fonts/simple-line-icons/style.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css')}}">
     @if(app()->getLocale()=='ar')
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
@@ -38,6 +39,7 @@
         <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/file-uploaders/dropzone.css')}}">
         <!-- END: Page CSS-->
         <!-- BEGIN: Page CSS-->
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
@@ -61,6 +63,7 @@
         <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/colors/palette-gradient.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/file-uploaders/dropzone.css')}}">
         <!-- END: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
         <!-- END: Theme CSS-->
@@ -68,9 +71,9 @@
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
     @endif
     {{--noty--}}
-        <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}">
-        <script src="{{ asset('assets/admin/noty/noty.min.js') }}"></script>
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/animate/animate.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}">
+    <script src="{{ asset('assets/admin/noty/noty.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/animate/animate.css')}}">
     {{--noty--}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
