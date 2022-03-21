@@ -71,7 +71,7 @@
                         <!-- End Settings -->
                         <!-- Start Sliders -->
                         <li>
-                            <a class="menu-item" href="{{ route('Sliders.index') }}">
+                            <a class="menu-item" href="{{ route('sliders.create') }}">
                                 <i class="material-icons">photo_library</i>
                                 <span data-i18n="Sliders">{{ trans('Admin/sliders.sliderPageTitle') }}</span>
                             </a>

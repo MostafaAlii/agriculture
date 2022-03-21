@@ -9,9 +9,15 @@ if(!function_exists('setting')){
 if(!function_exists('image_validate')){
     function image_validate($ext=null){
         if($ext ===null){
-            return 'image|mimes:png,jpg,jpeg,bmp,jif';
+            return 'image|mimes:png,jpg,jpeg';
         }else{
             return 'image|'.$ext;
         }
     }
+}
+
+function uploadImage($folder,$image){
+    $image->store('/', $folder);
+    $filename = $image->hashName();
+    return  $filename;
 }

@@ -11,28 +11,16 @@ class SliderController extends Controller
         $this->Data = $Data;
     }
 
-    public function index() {
-        return $this->Data->index();
+    public function addImages() {
+        return $this->Data->addImages();
     }
 
-    public function create() {
-        return $this->Data->create();
+    public function saveSliderImages(Request $request){
+        return $this->Data->saveSliderImages($request);
     }
 
-    public function store(SliderRequest $request) {
-        //
-    }
-
-    public function show($id) {
-        //
-    }
-
-    public function edit($id) {
-        //
-    }
-
-    public function update(Request $request, $id) {
-        //
+    public function saveSliderImagesDB(SliderRequest $request){
+        return $this->Data->saveSliderImagesDB($request);
     }
 
     public function destroy($id) {

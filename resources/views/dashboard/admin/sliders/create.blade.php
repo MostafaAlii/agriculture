@@ -22,9 +22,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Sliders.index') }}">{{ trans('Admin/sliders.sliderPageTitle') }}</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Sliders.create') }}">{{ trans('Admin/sliders.add_new_slider') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('sliders.create') }}">{{ trans('Admin/sliders.add_new_slider') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -56,7 +54,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('Sliders.store') }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('sliders.store.db') }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('post')
                                         <!-- Start Form Body -->
@@ -94,6 +92,9 @@
             <!-- // Basic form layout section end -->
         </div>
         <!-- End Content Body -->
+        <!-- Start Image Preview -->
+
+        <!-- End Image Preview -->
     </div>
     <!-- End Content Wrapper -->
 @endsection
@@ -102,30 +103,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    //Dropzone.autoDiscover = false;
     var uploadedDocumentMap = {}
-    Dropzone.options.dpzMultipleFiles = {
-        paramName: "dzfile", // The name that will be used to transfer the file
-        //autoProcessQueue: false,
-        maxFilesize: 5, // MB
-        clickable: true,
-        addRemoveLinks: true,
-        acceptedFiles: 'image/*',
-        dictFallbackMessage: " المتصفح الخاص بكم لا يدعم خاصيه تعدد الصوره والسحب والافلات ",
-        dictInvalidFileType: "لايمكنك رفع هذا النوع من الملفات ",
-        dictCancelUpload: "الغاء الرفع ",
-        dictCancelUploadConfirmation: " هل انت متاكد من الغاء رفع الملفات ؟ ",
-        dictRemoveFile: "حذف الصوره",
-        dictMaxFilesExceeded: "لا يمكنك رفع عدد اكثر من هذا ",
+   Dropzone.options.dpzMultipleFiles = {
+       paramName: "dzfile", // The name that will be used to transfer the file
+       //autoProcessQueue: false,
+       maxFilesize: 5, // MB
+       clickable: true,
+       addRemoveLinks: true,
+       acceptedFiles: '.jpeg,.jpg,.png',
+       dictFallbackMessage: " المتصفح الخاص بكم لا يدعم خاصيه تعدد الصوره والسحب والافلات ",
+       dictInvalidFileType: "لايمكنك رفع هذا النوع من الملفات ",
+       dictCancelUpload: "الغاء الرفع ",
+       dictCancelUploadConfirmation: " هل انت متاكد من الغاء رفع الملفات ؟ ",
+       dictRemoveFile: "حذف الصوره",
+       dictMaxFilesExceeded: "لا يمكنك رفع عدد اكثر من هضا ",
        headers: {
            'X-CSRF-TOKEN':
                "{{ csrf_token() }}"
        }
        ,
-       url: "{{ route('Sliders.store') }}", // Set the url
+       url: "{{ route('sliders.store') }}", // Set the url
        success:
            function (file, response) {
-               $('form').append('<input type="hidden" name="slider[]" value="' + response.name + '">')
+               $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
                uploadedDocumentMap[file.name] = response.name
            }
        ,
@@ -137,7 +137,7 @@
            } else {
                name = uploadedDocumentMap[file.name]
            }
-           $('form').find('input[name="slider[]"][value="' + name + '"]').remove()
+           $('form').find('input[name="document[]"][value="' + name + '"]').remove()
        }
        ,
        // previewsContainer: "#dpz-btn-select-files", // Define the container to display the previews
@@ -149,7 +149,7 @@
                var file = files[i]
                this.options.addedfile.call(this, file)
                file.previewElement.classList.add('dz-complete')
-               $('form').append('<input type="hidden" name="slider[]" value="' + file.file_name + '">')
+               $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
            }
            @endif
        }

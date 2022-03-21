@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHomeSlidersTable extends Migration
+class CreateBlogTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateHomeSlidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('home_sliders', function (Blueprint $table) {
+        Schema::create('blog_translations', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('subtitle');
-            $table->string('price');
-            $table->string('link');
-            $table->string('image');
-            $table->boolean('status');
+            $table->longText('body');
+            $table->string('locale');
+            $table->unique(['blog_id', 'locale']);
+            $table->index(['title', 'locale']);
+            $table->foreignId('blog_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateHomeSlidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home_sliders');
+        Schema::dropIfExists('blog_translations');
     }
 }

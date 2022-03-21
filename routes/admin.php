@@ -109,7 +109,11 @@ Route::group(
             Route::delete('/Departments/bulk_delete/{ids}', [DepartmentController::class,'bulkDelete'])->name('departments.bulk_delete');
             /********************************* End Department Routes ************************************/
             /********************************* Department Routes ************************************/
-            Route::resource('Sliders', SliderController::class)->except(['show']);
+            Route::group(['prefix' => 'Sliders'], function () {
+                Route::get('/', [SliderController::class, 'addImages'])->name('sliders.create');
+                Route::post('sliders', [SliderController::class, 'saveSliderImages'])->name('sliders.store');
+                Route::post('sliders/db', [SliderController::class, 'saveSliderImagesDB'])->name('sliders.store.db');
+            });
             /********************************* End Department Routes ************************************/
 
         });
