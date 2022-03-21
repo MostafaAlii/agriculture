@@ -104,4 +104,5 @@ return [
     'body'=>'Subject',
 
     'tag'=>'tag',
+    'blogstags'=>'Bloga & Tags',
 ];

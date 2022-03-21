@@ -31,6 +31,9 @@ class BlogRepository implements BlogInterface {
             ->addColumn('admin', function (Blog $blog) {
                 return $blog->admin->firstname??null;
             })
+            ->addColumn('type', function (Blog $blog) {
+                return $blog->admin->type??null;
+            })
             ->addColumn('actions', 'dashboard.admin.blogs.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
