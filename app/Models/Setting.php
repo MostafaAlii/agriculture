@@ -19,9 +19,16 @@ class Setting extends Model implements TranslatableContract
     // 3. To define which attributes needs to be translated
     public $translatedAttributes = ['site_name', 'address','message_maintenance'];
 
+    protected $appends = ['setting_icon_path','setting_logo_path'];
+    public $timestamps = true;
 
-//    public function image()
-//    {
-//        return $this->morphOne(Image::class, 'imageable');
-//    }
+    // Country Flag Image Appends ::
+    public function getSettingIconPathAttribute() {
+        return  asset('Dashboard/img/settingIcon/' . $this->site_icon);
+
+    }
+
+    public function getSettingLogoPathAttribute() {
+        return  asset('Dashboard/img/settingLogo/' . $this->site_logo);
+    }
 }

@@ -163,16 +163,18 @@
 
                                                             <input type="file" accept="image/*" name="site_icon">
 
-                                                            @if(!empty(setting()->site_icon))
+                                                            @if(!empty($setting->site_icon))
                                                                 <div class="col-lg-6">
-                                                                    <img src="{{Storage::url(setting()->site_icon)}}"
-                                                                         class="img-thumbnail img-preview" width="50px"
+                                                                    <img src="{{asset('Dashboard/img/settingIcon/$setting->site_icon')}}"
+
+
+                                                                    class="img-thumbnail img-preview" width="50px"
                                                                          height="50px" alt="">
                                                                 </div>
                                                             @else
                                                                 <div class="col-lg-6">
                                                                     <img class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="" id="output">
+                                                                         height="50px" alt="icon" id="output">
                                                                 </div>
                                                             @endif
 
@@ -190,9 +192,9 @@
 
                                                             @if(!empty(setting()->site_logo))
                                                                 <div class="col-lg-6">
-                                                                    <img src="{{Storage::url(setting()->site_logo)}}"
+                                                                    <img src="{{asset('Dashboard/img/settingLogo/$setting->site_logo')}}"
                                                                          class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="">
+                                                                         height="50px" alt="logo">
                                                                 </div>
                                                             @else
                                                                 <div class="col-lg-6">
