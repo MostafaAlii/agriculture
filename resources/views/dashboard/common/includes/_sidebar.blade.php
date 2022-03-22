@@ -155,7 +155,7 @@
                 <!-- Start Department Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="icon-present " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                        <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
                         <span class="menu-title" data-i18n="Departments">{{ trans('Admin/site.blogstags') }}</span>
                     </a>
                     <ul class="menu-content">
@@ -169,7 +169,7 @@
                         <!-- End blog -->
                         <!-- Start tag -->
                         <li>
-                            <a class="menu-item" href="{{route('tags.index')}}">
+                            <a class="menu-item" href="{{route('tags.data')}}">
                                 <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
                                 <span data-i18n="{{ trans('Admin/site.tag') }}"> {{ trans('Admin/site.tag') }}</span>
                             </a>

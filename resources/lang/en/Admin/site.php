@@ -105,4 +105,7 @@ return [
 
     'tag'=>'tag',
     'blogstags'=>'Blogs & Tags',
+    'active'=>'Active',
+    'unactive'=>'Unactive',
+    'status'=>'Status',
 ];
