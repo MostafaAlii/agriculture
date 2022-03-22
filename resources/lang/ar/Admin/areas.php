@@ -51,5 +51,6 @@ return [
     'areaPageTitle_edit'                     =>                  'تعديل بيانات القضاء',
     'provience_name'                                  =>                  'المحافظة التابعة',
     'state_name'                                     =>                  'النواحي التابعة',
+    'delete_related_states'=>'عفوا توجد النواحي مرتبطة بهذا القضاء عليك حذفها أولا'
 
 ];

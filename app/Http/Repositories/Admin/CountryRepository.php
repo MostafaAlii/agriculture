@@ -139,21 +139,37 @@ class CountryRepository implements CountryInterface {
 
 
     public function bulkDelete($request) {
-        if($request->delete_select_id){
-            $delete_select_id = explode(",",$request->delete_select_id);
-            foreach($delete_select_id as $countries_ids){
-                $country = Country::findorfail($countries_ids);
-                if($country->image){
-                    $this->deleteImage('upload_image','/admins/' . $country->image->filename,$country->id);
+        try {
+            DB::beginTransaction();
+            if ($request->delete_select_id) {
+                $delete_select_id = explode(",", $request->delete_select_id);
+                foreach ($delete_select_id as $countries_ids) {
+                    $countries_ids = Crypt::decrypt($countries_ids);
+                    $country = Country::findorfail($countries_ids);
+                    $provinces = $country->provinces->count();
+                    if ($provinces > 0) {
+                        toastr()->error(__('Admin/countries.delete_related_provinces'));
+                        return redirect()->route('Countries.index');
+                    }
+                    if ($country->country_logo) {
+                        Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
+                    }
+                    Country::destroy($countries_ids);
                 }
+                DB::commit();
+
+                toastr()->error(__('Admin/site.deleted_successfully'));
+                return redirect()->route('Countries.index');
+            } else {
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('Countries.index');
             }
-        }else{
-            toastr()->error(__('Admin/site.no_data_found'));
-            return redirect()->route('countries.index');
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+
         }
-        Country::destroy( $delete_select_id );
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('Countries.index');
+
 
     }// end of bulkDelete
 

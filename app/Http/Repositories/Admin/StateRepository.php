@@ -74,17 +74,35 @@ class StateRepository implements StateInterface {
     }
 
     public function bulkDelete($request) {
-        if($request->delete_select_id){
-            $delete_select_id = explode(",",$request->delete_select_id);
-            foreach($delete_select_id as $areas_ids){
-                $state = State::findorfail($areas_ids);
-                $state->delete();
+        try {
+            DB::beginTransaction();
+            if ($request->delete_select_id) {
+                $delete_select_id = explode(",", $request->delete_select_id);
+                foreach ($delete_select_id as $state_ids) {
+                    $state_ids = Crypt::decrypt($state_ids);
+                    $state = State::findorfail($state_ids);
+                    $villages = $state->villages->count();
+                    if ($villages > 0) {
+                        toastr()->error(__('Admin/site.delete_related_villages'));
+                        return redirect()->route('States.index');
+                    }
+
+                    State::destroy($state_ids);
+                }
+                DB::commit();
+
+                toastr()->error(__('Admin/site.deleted_successfully'));
+                return redirect()->route('States.index');
             }
-            toastr()->error(__('Admin/states.deleted_successfully'));
-            return redirect()->route('States.index');
-        }else{
-            toastr()->error(__('Admin/states.no_data_found'));
-            return redirect()->route('States.index');
+            else {
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('States.index');
+            }
+
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+
         }
 
 

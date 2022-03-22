@@ -53,4 +53,6 @@ return [
 
     'state_name'                               =>                  ' State Related',
     'cant_delete'                             =>                  'Sorry ! There are States Related with Village Must be Deleted First',
+    'delete_related_state'=>'sorry there are state related with this village should be deleted first'
+
 ];

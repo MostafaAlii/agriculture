@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use App\Http\Interfaces\Admin\SettingInterface;
 use App\Http\Interfaces\Admin\AdminInterface;
 use App\Http\Interfaces\Admin\UserInterface;
 use App\Http\Interfaces\Admin\farmerInterface;
@@ -16,6 +16,7 @@ use App\Http\Interfaces\Admin\SliderInterface;
 use App\Http\Interfaces\Admin\BlogInterface;
 use App\Http\Interfaces\Admin\TagInterface;
 
+use App\Http\Repositories\Admin\SettingRepository;
 use App\Http\Repositories\Admin\AreaRepository;
 use App\Http\Repositories\Admin\StateRepository;
 use App\Http\Repositories\Admin\OrchardRepository;
@@ -38,6 +39,8 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->bind(SettingInterface::class, SettingRepository::class);
+
         $this->app->bind(OrchardInterface::class, OrchardRepository::class);
         $this->app->bind(CountryInterface::class, CountryRepository::class);
         $this->app->bind(ProvinceInterface::class, ProvinceRepository::class);

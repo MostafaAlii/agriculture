@@ -58,4 +58,5 @@ return [
     'provience_name_required'                   =>                  'اسم المحافظة مطلوب',
     'provience_name_string'                     =>                  'اسم المحافظة يجب أن يكون نص',
     'proviencePageTitle_edit'                     =>                  'تحديث بيانات المحافظة',
+    'delete_related_areas'=>'عفوا توجد قضاءات مرتبطة بهذه المحافظة عليك حذفها أولا'
 ];

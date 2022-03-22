@@ -56,5 +56,5 @@ return [
       'country'=>'Countries',
     'warning' => 'Are you sure to delete ?',
 
-
+    'delete_related_provinces'=>'sorry there are provinces related with this country should be deleted first'
 ];

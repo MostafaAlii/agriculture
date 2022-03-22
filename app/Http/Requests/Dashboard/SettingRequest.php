@@ -23,17 +23,28 @@ class SettingRequest extends FormRequest
 
         return [
             'support_mail' => 'required|email',
-//
+
             'primary_phone' => 'required|numeric',
             'secondery_phone' => 'required|numeric',
             'facebook' => 'required|url',
             'twitter' => 'required|url',
             'inestegram' => 'required|url',
-            'site_name' => 'required|string',
-            'site_logo' => image_validate(),
-            'site_icon' => image_validate(),
-            'status' => 'required|boolean',
-            'message_maintenance' => 'required|string',
+            'site_name' => [
+                'required',
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+            ],
+
+
+//            'site_logo' => image_validate(),
+//            'site_icon' => image_validate(),
+            'message_maintenance' => [
+                'required',
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+            ],
+            'address' => [
+                'required',
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+            ],
         ];
 
 
@@ -42,17 +53,26 @@ class SettingRequest extends FormRequest
          public function messages()
     {
         return [
-            'email.required' => trans('Admin/setting.email_required'),
-            'primary_phone.required' => trans('Admin/setting.primary_phone_required'),
-            'secondery_phone.required' => trans('Admin/setting.secondery_phone_required'),
+            'email.required' => trans('Admin/validation.required'),
+            'email.email' => trans('Admin/validation.email'),
 
-            'facebook.required' => trans('Admin/setting.facebook_required'),
-            'twitter.required' => trans('Admin/setting.twitter_required'),
-            'inestegram.required' => trans('Admin/setting.inestegram_required'),
+            'primary_phone.required' => trans('Admin/validation.required'),
+            'secondery_phone.required' => trans('Admin/validation.required'),
 
-            'site_name.required' => trans('Admin/setting.site_name_required'),
-            'status.required' => trans('Admin/setting.status_required'),
-           'message_maintenance.required'=>trans('Admin/setting.message_maintenance_required'),
+            'facebook.required' => trans('Admin/validation.required'),
+            'twitter.required' => trans('Admin/validation.required'),
+            'inestegram.required' => trans('Admin/validation.required'),
+            'facebook.url' => trans('Admin/validation.url'),
+            'twitter.url' => trans('Admin/validation.url'),
+            'inestegram.url' => trans('Admin/validation.url'),
+
+
+            'site_name.required' => trans('Admin/validation.required'),
+            'site_name.regex' => trans('Admin/validation.required'),
+           'message_maintenance.required'=>trans('Admin/validation.required'),
+            'message_maintenance.regex'=>trans('Admin/validation.regex'),
+            'address.required'=>trans('Admin/validation.required'),
+            'address.regex'=>trans('Admin/validation.regex'),
         ];
     }
 

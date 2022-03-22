@@ -55,9 +55,9 @@
                                     <div class="card-text">
                                         <p></p>
                                     </div>
-                                    <form class="form" action="{{route('settings')}}" method="get"
+                                    <form class="form" action="{{route('settings.store')}}" method="post"
                                           enctype="multipart/form-data" autocomplete="off">
-                                        {{ csrf_field() }}
+                                    @csrf
                                         <div class="form-body">
                                             <h4 class="form-section"><i
                                                         class="ft-settings"></i> {{trans('Admin\setting.setting_info')}}
@@ -69,7 +69,7 @@
                                                         <input type="text" id="projectinput1" class="form-control"
                                                                placeholder="{{trans('Admin\setting.site_name')}}"
                                                                name="site_name"
-                                                               value="{{$setting_t->site_name}}">
+                                                               value="{{$setting->site_name}}">
                                                         <input type="hidden" id="projectinput1" class="form-control"
 
                                                                name="id"
@@ -133,22 +133,41 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            {{--<div class="row">--}}
+                                                {{--<div class="col col-md-12">--}}
+                                                    {{--<div class="form-group">--}}
+                                                        {{--<select name="status" class="form-control">--}}
+                                                            {{--<option value="{{$setting->status}} selected">{{$setting->status}}</option>--}}
+                                                            {{--<option value="#">select the status</option>--}}
+                                                            {{--<option value="open">open</option>--}}
+                                                            {{--<option value="close">close</option>--}}
+
+                                                        {{--</select>--}}
+
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+
                                             <div class="row">
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="companyName">{{trans('Admin\setting.address')}}</label>
-                                                        <input type="text" id="companyName" class="form-control"
+                                                        <textarea type="text" id="companyName" class="form-control"
                                                                placeholder="{{trans('Admin\setting.address')}}"
-                                                               name="address" value="{{$setting_t->address}}">
+                                                                  name="address">
+                                                            {{ old('address',$setting->address) }}
+                                                        </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput8">{{trans('Admin\setting.message_maintenance')}}</label>
-                                                        <textarea id="projectinput8" rows="5" class="form-control"
+                                                        <label for="companyName">{{trans('Admin\setting.message_maintenance')}}</label>
+                                                        <textarea id="companyName" class="form-control" type="text"
                                                                   name="message_maintenance"
-                                                                  value="{{$setting_t->message_maintenance}}"
-                                                                  placeholder="{{trans('Admin\setting.message_maintenance')}}"></textarea>
+                                                                  placeholder="{{trans('Admin\setting.message_maintenance')}}">
+                                                            {{ old('message_maintenance',$setting->message_maintenance) }}
+                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,21 +180,15 @@
                                                         <label>{{trans('Admin\setting.site_icon')}}</label>
                                                         <label id="projectinput7" class="file center-block">
 
-                                                            <input type="file" accept="image/*" name="site_icon">
+                                                            <input type="file" accept="image/*" name="site_icon" onchange="loadFile_1(event)">
 
                                                             @if(!empty($setting->site_icon))
-                                                                <div class="col-lg-6">
-                                                                    <img src="{{asset('Dashboard/img/settingIcon/$setting->site_icon')}}"
-
-
-                                                                    class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="">
-                                                                </div>
+                                                                    <img src="{{asset('Dashboard/img/settingIcon/'.$setting->site_icon)}}"
+                                                                        class="img-thumbnail img-preview" width="50px"
+                                                                         height="50px" alt="icon" id="output_1" >
                                                             @else
-                                                                <div class="col-lg-6">
                                                                     <img class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="icon" id="output">
-                                                                </div>
+                                                                         height="50px" alt="icon" >
                                                             @endif
 
                                                         </label>
@@ -187,20 +200,14 @@
                                                         <label id="projectinput7" class="file center-block"></label>
                                                         <label id="projectinput7" class="file center-block">
 
-                                                            <input type="file" accept="image/*" name="site_logo">
-
-
-                                                            @if(!empty(setting()->site_logo))
-                                                                <div class="col-lg-6">
-                                                                    <img src="{{asset('Dashboard/img/settingLogo/$setting->site_logo')}}"
+                                                            <input type="file" accept="image/*" name="site_logo"  onchange="loadFile(event)">
+                                                            @if(!empty($setting->site_logo))
+                                                                    <img src="{{asset('Dashboard/img/settingLogo/'.$setting->site_logo)}}"
                                                                          class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="logo">
-                                                                </div>
+                                                                         height="50px" alt="logo" id="output">
                                                             @else
-                                                                <div class="col-lg-6">
-                                                                    <img class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="" id="output">
-                                                                </div>
+                                                                    <img class="img-thumbnail img-preview" width="100px"
+                                                                         height="100px" alt="" >
                                                             @endif
                                                         </label>
                                                     </div>
@@ -250,8 +257,8 @@
 
     <script type="text/javascript">
 
-        var loadFile1 = function (event) {
-            var output = document.getElementById('output1');
+        var loadFile_1 = function (event) {
+            var output = document.getElementById('output_1');
             output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function () {
                 URL.revokeObjectURL(output.src)

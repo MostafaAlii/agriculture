@@ -78,17 +78,35 @@ class ProvienceRepository implements ProvienceInterface {
 
 
     public function bulkDelete($request) {
-        if($request->delete_select_id){
-            $delete_select_id = explode(",",$request->delete_select_id);
-            foreach($delete_select_id as $areas_ids){
-                $provience = Province::findorfail($areas_ids);
-                $provience->delete();
+        try {
+            DB::beginTransaction();
+            if ($request->delete_select_id) {
+                $delete_select_id = explode(",", $request->delete_select_id);
+                foreach ($delete_select_id as $province_ids) {
+                    $province_ids = Crypt::decrypt($province_ids);
+
+                    $province = Province::findorfail($province_ids);
+                    $areas = $province->areas->count();
+
+                    if ($areas > 0) {
+                        toastr()->error(__('Admin/site.delete_related_areas'));
+                        return redirect()->route('Proviences.index');
+                    }
+
+                    Province::destroy($province_ids);
+                }
+                DB::commit();
+
+                toastr()->error(__('Admin/site.deleted_successfully'));
+                return redirect()->route('Proviences.index');
+            } else {
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('Proviences.index');
             }
-            toastr()->error(__('Admin/site.deleted_successfully'));
-            return redirect()->route('Proviences.index');
-        }else{
-            toastr()->error(__('Admin/site.no_data_found'));
-            return redirect()->route('Proviences.index');
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+
         }
 
 

@@ -84,7 +84,10 @@
 						<div class="col-12 col-sm-auto">
 							<div class="footer__item">
 								<a class="site-logo" href="index.html">
-									<img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
+									{{--<img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />--}}
+
+									<img class="img-fluid  lazy" src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" data-src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
+
 								</a>
 							</div>
 						</div>

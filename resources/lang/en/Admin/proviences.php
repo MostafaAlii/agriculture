@@ -52,4 +52,6 @@ return [
     'provience_name_required'                   =>                  'province name is required',
     'provience_name_string'                     =>                  'province name must be string',
     'proviencePageTitle_edit'                     =>                  'updating province data',
+    'delete_related_areas'=>'sorry there are areas related with this province should be deleted first'
+
 ];

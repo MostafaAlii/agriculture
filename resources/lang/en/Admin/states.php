@@ -47,5 +47,7 @@ return [
     'area_name'                               =>                   'Related Area',
     'village_name'                            =>                   'Villages Related',
     'cant_delete'                             =>                 'Sorry ! There are Villages Related with Area Must be Deleted First',
+    'delete_related_villages'=>'sorry there are villages related with this state should be deleted first'
+
 
 ];

@@ -76,17 +76,33 @@ class AreaRepository implements AreaInterface {
 
 
     public function bulkDelete($request) {
-        if($request->delete_select_id){
-            $delete_select_id = explode(",",$request->delete_select_id);
-            foreach($delete_select_id as $areas_ids){
-                $area = Area::findorfail($areas_ids);
-                $area->delete();
+        try {
+            DB::beginTransaction();
+            if ($request->delete_select_id) {
+                $delete_select_id = explode(",", $request->delete_select_id);
+                foreach ($delete_select_id as $areas_ids) {
+                    $areas_ids = Crypt::decrypt($areas_ids);
+                    $area = Area::findorfail($areas_ids);
+                    $states = $area->states->count();
+                    if ($states > 0) {
+                        toastr()->error(__('Admin/site.delete_related_state'));
+                        return redirect()->route('Areas.index');
+                    }
+
+                    Area::destroy($areas_ids);
+                }
+                DB::commit();
+
+                toastr()->error(__('Admin/site.deleted_successfully'));
+                return redirect()->route('Areas.index');
+            } else {
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('Areas.index');
             }
-            toastr()->error(__('Admin/site.deleted_successfully'));
-            return redirect()->route('Areas.index');
-        }else{
-            toastr()->error(__('Admin/site.no_data_found'));
-            return redirect()->route('Areas.index');
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+
         }
 
 

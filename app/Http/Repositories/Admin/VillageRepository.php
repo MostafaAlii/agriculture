@@ -73,18 +73,40 @@ class VillageRepository implements VillageInterface {
 
     public function bulkDelete($request)
     {
-        if ($request->delete_select_id) {
-            $delete_select_id = explode(",", $request->delete_select_id);
-            foreach ($delete_select_id as $villages_ids) {
-                $village = Village::findorfail($villages_ids);
-                $village->delete();
-            }
-            toastr()->error(__('Admin/villages.deleted_successfully'));
-            return redirect()->route('Villages.index');
-        } else {
-            toastr()->error(__('Admin/villages.no_data_found'));
-            return redirect()->route('Villages.index');
-        }
-    }
 
+
+        try {
+            DB::beginTransaction();
+            if ($request->delete_select_id) {
+                $delete_select_id = explode(",", $request->delete_select_id);
+                foreach ($delete_select_id as $village_ids) {
+                    $village_ids = Crypt::decrypt($village_ids);
+
+                    $village = Village::findorfail($village_ids);
+                    $state = $village->state->count();
+                    if ($state > 0) {
+                        toastr()->error(__('Admin/site.delete_related_state'));
+                        return redirect()->route('Villages.index');
+                    }
+
+                    Village::destroy($village_ids);
+                }
+                DB::commit();
+
+                toastr()->error(__('Admin/site.deleted_successfully'));
+                return redirect()->route('Villages.index');
+            }
+            else {
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('Villages.index');
+            }
+
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+
+        }
+
+
+    }// end of bulkDelete
     }

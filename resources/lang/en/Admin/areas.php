@@ -51,4 +51,6 @@ return [
     'area_name_required'                   =>                  'area name is required',
     'area_name_string'                     =>                  'area name must be string',
     'areaPageTitle_edit'                     =>                  'updating area data',
+    'delete_related_states'=>'sorry there are states related with this area should be deleted first'
+
 ];

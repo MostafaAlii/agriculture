@@ -87,8 +87,10 @@
 					<div class="row">
 						<div class="col-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="footer__item">
-								<a class="site-logo" href="index.html">
-									{{--<img class="img-fluid  lazy" src="{{ Storage::url(setting()->site_logo)}}" data-src="{{ asset('frontassets/img/site_logo.png')}}" alt="demo" />--}}
+								<a class="site-logo" href="index.html"> "
+									{{--<img class="img-fluid  lazy" src="" data-src="{{ asset('frontassets/img/site_logo.png')}}" alt="demo" />--}}
+									<img class="img-fluid  lazy" src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" data-src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
+
 								</a>
 							</div>
 						</div>
