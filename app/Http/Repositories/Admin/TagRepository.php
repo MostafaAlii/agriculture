@@ -87,9 +87,9 @@ class TagRepository implements TagInterface {
     //                     // }
             $requestData = $request->validated();
             Tag::create($requestData);
-            return redirect()->route('tags.data');
             toastr()->success(__('Admin/site.added_successfully'));
-            return response()->json(toastr()->success(__('Admin/site.added_successfully')));
+            return redirect()->route('tags.data');
+            // return response()->json(toastr()->success(__('Admin/site.added_successfully')));
 
          } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -100,7 +100,7 @@ class TagRepository implements TagInterface {
             $tagID = Crypt::decrypt($id);
             $tag=Tag::findorfail($tagID);
             $requestData = $request->validated();
-            $requestData['status'] = $request->status;
+            // $requestData['status'] = $request->status;
             $tag->update($requestData);
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('tags.data');

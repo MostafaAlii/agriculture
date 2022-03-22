@@ -21,6 +21,7 @@
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>
+                    <input type="hidden" name="status" value="0">
                 </div>
 
                 <div class="modal-footer">
