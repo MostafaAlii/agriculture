@@ -1,40 +1,38 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
-use App\Http\Interfaces\Admin\DepartmentInterface;
-use App\Http\Requests\Dashboard\DepartmentRequest;
+use App\Http\Interfaces\Admin\TagInterface;
+use App\Http\Requests\Dashboard\TagRequest;
 use Illuminate\Http\Request;
 class TagController extends Controller
 {
     protected $Data;
-    public function __construct(DepartmentInterface $Data) {
+    public function __construct(TagInterface $Data) {
         $this->Data = $Data;
     }
 
-    public function index() {
-        return $this->Data->index();
+    public function data(Request $request) {
+        return $this->Data->data($request);
     }
-    public function data()
-    {
-        return $this->Data->data();
+    // public function data()
+    // {
+    //     return $this->Data->data();
 
-    }
-    public function create() {
-        return $this->Data->create();
-    }
+    // }
+    // public function create() {
+    //     return $this->Data->create();
+    // }
 
-    public function store(DepartmentRequest $request) {
-      // dd('ff');
+    public function store(TagRequest $request) {
         return $this->Data->store($request);
-        //return $request;
     }
 
-    public function edit($id) {
-        return $this->Data->edit($id);
-    }
+    // public function edit($id) {
+    //     return $this->Data->edit($id);
+    // }
 
-    public function update(DepartmentRequest $request) {
-        return $this->Data->update($request);
+    public function update(TagRequest $request ,$id) {
+        return $this->Data->update($request,$id);
     }
 
     public function destroy($id) {

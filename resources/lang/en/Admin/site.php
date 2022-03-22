@@ -104,5 +104,11 @@ return [
     'body'=>'Subject',
 
     'tag'=>'tag',
-    'blogstags'=>'Bloga & Tags',
+    'blogstags'=>'Blogs & Tags',
+    'active'=>'Active',
+    'unactive'=>'Unactive',
+    'status'=>'Status',
+    'addtag'=>"Add Tag",
+    'newtag'=>'New Tag',
+    'updatetag'=>'Update Tag',
 ];

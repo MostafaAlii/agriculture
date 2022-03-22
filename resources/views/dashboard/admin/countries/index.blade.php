@@ -120,7 +120,7 @@
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
             ajax: {
-                url: '{{ route('countries.data') }}',
+                url: '{{ route('Countries.data') }}',
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},

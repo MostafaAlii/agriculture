@@ -92,8 +92,6 @@ trait UploadT
             $photo = $request->file($inputname);
             $name = \Str::slug($request->input('title'));
             $filename = $name. '.' . $photo->getClientOriginalExtension();
-
-
             // insert Image
             $Image = new Image();
             $Image->filename = $filename;
