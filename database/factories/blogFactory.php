@@ -13,7 +13,7 @@ class blogFactory extends Factory
     public function definition()
     {
         return [
-            'title'     => $this->faker->name(),
+            'title'     => $this->faker->unique()->name(),
             'body'      => $this->faker->text(),
             'admin_id'  => $this->faker->numberBetween(1, Admin::count()),
 

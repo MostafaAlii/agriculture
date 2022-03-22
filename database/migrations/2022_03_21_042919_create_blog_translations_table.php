@@ -15,7 +15,7 @@ class CreateBlogTranslationsTable extends Migration
     {
         Schema::create('blog_translations', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->unique();
             $table->longText('body');
             $table->string('locale');
             $table->unique(['blog_id', 'locale']);
