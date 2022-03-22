@@ -53,11 +53,33 @@
                                     <div class="card-body">
                                         <div class="media d-flex">
                                             <div class="media-body text-left">
-                                                <h3 class="info">{{ \App\Models\Admin::count() }}</h3>
-                                                <h6>{{ __('Admin/site.admin') }}</h6>
+                                                <h3 class="info">{{ \App\Models\Admin::where('type','admin')->count() }}</h3>
+                                                <h6>{{ __('Admin/site.admins') }}</h6>
                                             </div>
                                             <div>
                                                 <i class="icon-home info font-large-2 float-right"></i>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <a href="{{ route('Admins.index') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="info">{{ \App\Models\Admin::where('type','employee')->count() }}</h3>
+                                                <h6>{{ __('Admin/site.employees') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="icon-emoticon-smile info font-large-2 float-right"></i>
                                             </div>
                                         </div>
                                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -76,7 +98,7 @@
                                     <div class="media d-flex">
                                         <div class="media-body text-left">
                                             <h3 class="warning">{{ \App\Models\Farmer::count() }}</h3>
-                                            <h6>{{ __('Admin/site.onefarmer') }}</h6>
+                                            <h6>{{ __('Admin/site.farmer') }}</h6>
                                         </div>
                                         <div>
                                             <i class="icon-users warning font-large-2 float-right"></i>
@@ -98,7 +120,7 @@
                                     <div class="media d-flex">
                                         <div class="media-body text-left">
                                             <h3 class="success">{{ \App\Models\User::count() }}</h3>
-                                            <h6>{{ __('Admin/site.oneuser') }}</h6>
+                                            <h6>{{ __('Admin/site.users') }}</h6>
                                         </div>
                                         <div>
                                             <i class="icon-user-follow success font-large-2 float-right"></i>
@@ -112,7 +134,122 @@
                         </div>
                         </a>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
+
+                </div>
+                <div class="row">
+                    <div class="col-xl-2 col-lg-6 col-12">
+                        <a href="{{ route('Countries.index') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="info">{{ \App\Models\Country::count() }}</h3>
+                                                <h6> {{ trans('Admin/countries.countryPageTitle') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="material-icons info font-large-2 float-right">flag</i>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-12">
+                        <a href="{{ route('Areas.index') }}">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="warning">{{ \App\Models\Area::count() }}</h3>
+                                            <h6>   {{ trans('Admin/areas.areaPageTitle') }}</h6>
+                                        </div>
+                                        <div>
+                                            <i class="material-icons warning font-large-2 float-right">flag</i>
+                                            {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-12">
+                        <a href="{{ route('Proviences.index') }}">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="success">{{ \App\Models\Province::count() }}</h3>
+                                            <h6>  {{ trans('Admin/proviences.proviencePageTitle') }}</h6>
+                                        </div>
+                                        <div>
+                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                            <i class="material-icons success font-large-2 float-right">flag</i>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-12">
+                        <a href="{{ route('States.index') }}">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="danger">{{ \App\Models\State::count() }}</h3>
+                                            <h6>   {{ trans('Admin/states.statePageTitle') }}</h6>
+                                        </div>
+                                        <div>
+                                            <i class="material-icons danger font-large-2 float-right">flag</i>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-12">
+                        <a href="{{ route('Villages.index') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="info">{{ \App\Models\Village::count() }}</h3>
+                                                <h6>  {{ trans('Admin/villages.villagePageTitle') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="material-icons info font-large-2 float-right">flag</i>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-12">
                         <a href="{{ route('Departments.index') }}">
                         <div class="card pull-up">
                             <div class="card-content">
@@ -136,120 +273,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('Countries.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="info">{{ \App\Models\Country::count() }}</h3>
-                                                <h6> {{ trans('Admin/countries.countryPageTitle') }}</h6>
-                                            </div>
-                                            <div>
-                                                <i class="material-icons info font-large-2 float-right">flag</i>
-                                            </div>
-                                        </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('Areas.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="warning">{{ \App\Models\Area::count() }}</h3>
-                                            <h6>   {{ trans('Admin/areas.areaPageTitle') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="material-icons warning font-large-2 float-right">flag</i>
-                                            {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('Proviences.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="success">{{ \App\Models\Province::count() }}</h3>
-                                            <h6>  {{ trans('Admin/proviences.proviencePageTitle') }}</h6>
-                                        </div>
-                                        <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
-                                            <i class="material-icons success font-large-2 float-right">flag</i>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('States.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="danger">{{ \App\Models\State::count() }}</h3>
-                                            <h6>   {{ trans('Admin/states.statePageTitle') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="material-icons danger font-large-2 float-right">flag</i>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('Villages.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="info">{{ \App\Models\Village::count() }}</h3>
-                                                <h6>  {{ trans('Admin/villages.villagePageTitle') }}</h6>
-                                            </div>
-                                            <div>
-                                                <i class="material-icons info font-large-2 float-right">flag</i>
-                                            </div>
-                                        </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('blogs.index') }}">
                         <div class="card pull-up">
@@ -281,7 +305,7 @@
                                     <div class="media d-flex">
                                         <div class="media-body text-left">
                                             <h3 class="success">{{ \App\Models\Tag::count() }}</h3>
-                                            <h6>  {{ trans('Admin/proviences.proviencePageTitle') }}</h6>
+                                            <h6>  {{ trans('Admin/site.tag') }}</h6>
                                         </div>
                                         <div>
                                             {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}

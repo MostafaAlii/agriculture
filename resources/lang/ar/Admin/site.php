@@ -106,4 +106,6 @@ return [
     'addtag'=>"اضف تاج",
     'newtag'=>'تاج جديد',
     'updatetag'=>'تعديل تاج',
+    'admins'=>'المدراء',
+    'employees'=>'الموظفين',
 ];
