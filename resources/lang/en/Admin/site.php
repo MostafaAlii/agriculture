@@ -108,4 +108,7 @@ return [
     'active'=>'Active',
     'unactive'=>'Unactive',
     'status'=>'Status',
+    'addtag'=>"Add Tag",
+    'newtag'=>'New Tag',
+    'updatetag'=>'Update Tag',
 ];

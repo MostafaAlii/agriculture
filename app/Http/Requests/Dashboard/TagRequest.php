@@ -13,6 +13,12 @@ class TagRequest extends FormRequest {
             'name'    =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
             'status'    =>'required',
         ];
+
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+
+            $tag= $this->route()->parameter('id');
+            $rules['status'] = '';
+        }//end of if
         return $rules;
     }
     public function messages() {

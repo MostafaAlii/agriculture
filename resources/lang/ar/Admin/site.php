@@ -103,4 +103,7 @@ return [
     'active'=>'فعال',
     'unactive'=>'غير فعال',
     'status'=>'الحاله',
+    'addtag'=>"اضف تاج",
+    'newtag'=>'تاج جديد',
+    'updatetag'=>'تعديل تاج',
 ];
