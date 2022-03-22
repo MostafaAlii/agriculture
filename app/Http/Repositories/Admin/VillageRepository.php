@@ -80,7 +80,7 @@ class VillageRepository implements VillageInterface {
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
                 foreach ($delete_select_id as $village_ids) {
-                    $village_ids = Crypt::decrypt($village_ids);
+//                    $village_ids = Crypt::decrypt($village_ids);
 
                     $village = Village::findorfail($village_ids);
                     $state = $village->state->count();

@@ -79,7 +79,7 @@ class StateRepository implements StateInterface {
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
                 foreach ($delete_select_id as $state_ids) {
-                    $state_ids = Crypt::decrypt($state_ids);
+//                    $state_ids = Crypt::decrypt($state_ids);
                     $state = State::findorfail($state_ids);
                     $villages = $state->villages->count();
                     if ($villages > 0) {

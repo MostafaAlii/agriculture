@@ -81,7 +81,7 @@ class AreaRepository implements AreaInterface {
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
                 foreach ($delete_select_id as $areas_ids) {
-                    $areas_ids = Crypt::decrypt($areas_ids);
+//                    $areas_ids = Crypt::decrypt($areas_ids);
                     $area = Area::findorfail($areas_ids);
                     $states = $area->states->count();
                     if ($states > 0) {

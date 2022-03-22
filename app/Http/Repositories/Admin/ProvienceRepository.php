@@ -83,7 +83,7 @@ class ProvienceRepository implements ProvienceInterface {
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
                 foreach ($delete_select_id as $province_ids) {
-                    $province_ids = Crypt::decrypt($province_ids);
+//                    $province_ids = Crypt::decrypt($province_ids);
 
                     $province = Province::findorfail($province_ids);
                     $areas = $province->areas->count();
