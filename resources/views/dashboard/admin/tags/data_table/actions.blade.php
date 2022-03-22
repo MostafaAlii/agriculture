@@ -96,7 +96,7 @@
                         </div>
                         <div class="form-group">
                             <label>{{ __('Admin/site.status') }}</label>
-                            <select class="custom-select" id="customSelect" name="status">
+                            <select class="custom-select" id="customSelect" name="status" value="{{ $tag->status }}">
                                 <option value="{{ $tag->status }}" disabled selected >{{$tag->status == 1 ?  __('Admin/site.active') : __('Admin/site.unactive')}}</option>
                                 <option value="1">{{ __('Admin/site.active') }}</option>
                                 <option value="0">{{ __('Admin/site.unactive') }}</option>
