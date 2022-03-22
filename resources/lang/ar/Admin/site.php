@@ -108,4 +108,5 @@ return [
     'updatetag'=>'تعديل تاج',
     'admins'=>'المدراء',
     'employees'=>'الموظفين',
+    'departments'=>'الاقسام',
 ];

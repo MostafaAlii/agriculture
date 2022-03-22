@@ -257,7 +257,7 @@
                                     <div class="media d-flex">
                                         <div class="media-body text-left">
                                             <h3 class="danger">{{ \App\Models\Department::count() }}</h3>
-                                            <h6>{{ __('Admin/site.onedepartment') }}</h6>
+                                            <h6>{{ __('Admin/site.departments') }}</h6>
                                         </div>
                                         <div>
                                             <i class="icon-graduation danger font-large-2 float-right"></i>
