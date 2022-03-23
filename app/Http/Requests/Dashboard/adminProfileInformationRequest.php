@@ -16,8 +16,8 @@ class adminProfileInformationRequest extends FormRequest {
             // 'state_id'        => 'required',
             // 'village_id'      => 'required',
             'department_id'   => 'required',
-            'address1'        => 'required|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
-            'address2'        => 'required|regex:/(^[-0-9A-Za-z.,\/ ]+$)/',
+            'address1'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'address2'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
 
         ];
 

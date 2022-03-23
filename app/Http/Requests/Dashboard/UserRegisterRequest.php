@@ -11,8 +11,8 @@ class UserRegisterRequest extends FormRequest {
     public function rules()
     {
         $rules = [
-            'firstname'    =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
-            'lastname'     =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'firstname'    =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'lastname'     =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
             'email'        => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'     => ['required','confirmed','min:6'],
