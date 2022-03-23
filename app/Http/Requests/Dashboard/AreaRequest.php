@@ -18,7 +18,7 @@ class AreaRequest extends FormRequest {
             ],
             'location_x' =>  'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
-            'province_id' => 'required',
+            'province_id' => 'required|exists:Province,id',
 
 
         ];

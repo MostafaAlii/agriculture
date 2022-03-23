@@ -1,5 +1,9 @@
 <?php
 return [
+    'open'=>'مفتوح',
+    'close'=>'مغلق',
+    'choose_status'=>'إختر حالة الموقع ',
+    'status'=>'حالة الموقع',
     'page_title_in_sidebar'                                 =>               'الاعدادات العامة',
     'settingPageTitle'                                      =>               'الاعدادات العامة',
     'dashboard'                                             =>               'اللوحة الرئيسية',

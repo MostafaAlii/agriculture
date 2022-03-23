@@ -134,20 +134,20 @@
                                                 </div>
                                             </div>
 
-                                            {{--<div class="row">--}}
-                                                {{--<div class="col col-md-12">--}}
-                                                    {{--<div class="form-group">--}}
-                                                        {{--<select name="status" class="form-control">--}}
-                                                            {{--<option value="{{$setting->status}} selected">{{$setting->status}}</option>--}}
-                                                            {{--<option value="#">select the status</option>--}}
-                                                            {{--<option value="open">open</option>--}}
-                                                            {{--<option value="close">close</option>--}}
+                                            <div class="row">
+                                                <div class="col col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="status">{{__('Admin\setting.status')}}</label>
+                                                        <select class="form-control" id="status" name="status" required="required">
 
-                                                        {{--</select>--}}
+                                                            <option value="" disabled selected>{{__('Admin\setting.choose_status')}}</option>
+                                                            <option value="open"{{($setting->status === 'open') ? 'selected' : '' }} >{{__('Admin\setting.open')}}</option>
+                                                            <option value="close" {{ ($setting->status === 'close'? 'selected' : '')}}>{{__('Admin\setting.close')}}</option>
+                                                        </select>
 
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="row">
                                                 <div class="col col-md-6">

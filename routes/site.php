@@ -6,12 +6,10 @@ use App\Http\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
-
-
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath','Maintenance']
 
     ], function(){
 
@@ -34,3 +32,11 @@ Route::group(
         require __DIR__.'/auth.php';
 
     });
+     route::get('maintenance',function (){
+    if(setting()->status =='open'){
+        return redirect('/');
+    }
+    return view('front.maintenance');
+});
+
+

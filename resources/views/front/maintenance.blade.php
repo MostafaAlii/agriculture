@@ -1,23 +1,32 @@
 @extends('front.layouts.master')
-@section('title', 'Maintenance  ')
+@section('title', 'home Page ')
 @section('css')
 
 @endsection
 @section('content')
+
+
     <!-- start section -->
-    <section class="section section--no-pb section--custom-01">
+    <section class="section section--review  lazy" data-src="{{ asset('frontassets/img/review_bg_1.png')}}">
         <div class="container">
-            <div class="section-heading">
-                <h2 class="__title">the site in a maintenance time </h2>
-                {{setting()->message_maintenance}}
+            <div class="section-heading section-heading--center" data-aos="fade">
+
+               صيانة
             </div>
 
 
         </div>
     </section>
+    <!-- end section -->
+
+
+
+
+
 
 
 @endsection
 @push('js')
 
 @endpush
+

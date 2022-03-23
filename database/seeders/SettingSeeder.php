@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder {
             'twitter' => 'https://www.google.com/',
             'primary_phone' => '01021493036',
             'secondery_phone' => '01021493030',
-            'status' => 'open',
+//            'status' => 'open',
             // 'site_logo' => ,
             // 'site_icon' => ,
         ]);

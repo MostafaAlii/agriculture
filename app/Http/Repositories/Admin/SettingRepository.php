@@ -31,6 +31,8 @@ class SettingRepository implements SettingInterface{
                 $setting->facebook = $dataRequest['facebook'];
                 $setting->twitter = $dataRequest['twitter'];
                 $setting->inestegram = $dataRequest['inestegram'];
+
+                $setting->status =  (isset($dataRequest['status']) ? $dataRequest['status'] : 'open');
                 if($request->site_logo) {
                     if($setting->site_logo != 'default_logo.jpg') {
                         Storage::disk('upload_image')->delete('/settingLogo/' . $setting->site_logo);

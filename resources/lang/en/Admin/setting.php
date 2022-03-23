@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'open'=>'Open',
+    'close'=>'Close',
+    'choose_status'=>'Choose Status',
+    'status'=>'Status',
     'dashboard' => 'Dashboard',
     'setting_info' => 'Setting Info',
     'settings' => 'Settings',
