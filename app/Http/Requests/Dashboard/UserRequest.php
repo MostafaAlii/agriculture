@@ -15,6 +15,7 @@ class UserRequest extends FormRequest {
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
             'email'        => 'required|email|unique:users',
             'password'     => 'required|confirmed|min:3|max:10',
+            "image"        => 'image|mimes:jpeg,png|max:4096',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -49,7 +50,8 @@ class UserRequest extends FormRequest {
             'email.email'          => trans('Admin\validation.email'),
             'email.unique'         => trans('Admin\validation.unique'),
             'phone.unique'         => trans('Admin\validation.unique'),
-
+            'image.image'          => trans('Admin\validation.image'),
+            'image.mimes'          => trans('Admin\validation.mimes'),
         ];
     }
 }

@@ -14,7 +14,7 @@ class FarmerProfileAccountRequest extends FormRequest {
             'lastname'     => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
             'email'        => 'required|email|unique:farmers',
-            // 'password'     => 'required|confirmed|min:3|max:10',
+            "image"        => 'image|mimes:jpeg,png|max:4096',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -36,11 +36,7 @@ class FarmerProfileAccountRequest extends FormRequest {
         return [
             'firstname.required'   => trans('Admin\validation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
-            // 'email.required'       => trans('Admin\validation.required'),
             'phone.required'       => trans('Admin\validation.required'),
-            // 'type.required'        => trans('Admin\validation.required'),
-            // 'type.in'              => trans('Admin\validation.in'),
-
             'firstname.min'        => trans('Admin\validation.min'),
             'lastname.min'         => trans('Admin\validation.min'),
             'phone.min'            => trans('Admin\validation.min'),
@@ -52,6 +48,8 @@ class FarmerProfileAccountRequest extends FormRequest {
             'email.email'          => trans('Admin\validation.email'),
             'email.unique'         => trans('Admin\validation.unique'),
             'phone.unique'         => trans('Admin\validation.unique'),
+            'image.image'          => trans('Admin\validation.image'),
+            'image.mimes'          => trans('Admin\validation.mimes'),
         ];
     }
 }
