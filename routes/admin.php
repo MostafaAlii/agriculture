@@ -63,9 +63,12 @@ Route::group(
             Route::resource('profile', ProfileController::class)->except(['show']); // route for dashboard profile Auth admin
             Route::put('/profile/profileupdate/{id}', [ProfileController::class,'updateAccount'])->name('profile.updateAccount'); // update auth form account
             Route::put('/profile/profileupdateinfo/{id}', [ProfileController::class,'updateInformation'])->name('profile.updateInformation'); //update auth form information
+
             // ajax routes ***********************************
             Route::get('/admin/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get country provinces
             Route::get('/admin/area/{province_id}', [ProfileController::class, 'getArea']);// route ajax for get province areas
+            Route::get('/admin/state/{area_id}', [ProfileController::class, 'getState']);// route ajax for get areas states
+            Route::get('/admin/village/{state_id}', [ProfileController::class, 'getVillage']);// route ajax for get state villages
             /********************************* End Admin & Employee Routes ************************************/
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);
@@ -140,6 +143,7 @@ Route::group(
             Route::get('/tags/data', [TagController::class,'data'])->name('tags.data');
             Route::delete('/tags/bulk_delete/{ids}', [TagController::class,'bulkDelete'])->name('tags.bulk_delete');
             /********************************* End Tags Routes ************************************/
+
         });
 
     });

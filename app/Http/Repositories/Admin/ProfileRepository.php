@@ -3,8 +3,10 @@ namespace  App\Http\Repositories\Admin;
 
 use App\Http\Interfaces\Admin\ProfileInterface;
 use App\Models\Admin;
+use App\Models\Area;
 use App\Models\Country;
 use App\Models\Province;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
@@ -69,6 +71,18 @@ class ProfileRepository implements ProfileInterface{
         $province = Province::where('id', $province_id)->first();
         $areas = $province->areas->pluck('name','id');
         return $areas;
+    }
+    public function getState($area_id)
+    {
+        $area = Area::where('id', $area_id)->first();
+        $states = $area->states->pluck('name','id');
+        return $states;
+    }
+    public function getVillage($state_id)
+    {
+        $state = State::where('id', $state_id)->first();
+        $villages = $state->villages->pluck('name','id');
+        return $villages;
     }
 
 }

@@ -225,7 +225,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.country') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="country_id">
+                                                    <select class="select2 form-control" id="country_id" name="country_id">
                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @foreach (\App\Models\Country::get() as $country)
                                                          <option value="{{ $country->id }}" {{$admin->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
@@ -234,27 +234,27 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="province_id">
+                                                    <select class="select2 form-control" id="province_id" name="province_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
                                                         <option value="{{ $admin->province_id }}"  >{{ $admin->province->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="area_id">
+                                                    <select class="select2 form-control" id="area_id" name="area_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
                                                         <option value="{{ $admin->area_id }}"  >{{ $admin->area->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.state') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="state_id">
+                                                    <select class="select2 form-control" id="state_id" name="state_id">
                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="village_id">
+                                                    <select class="select2 form-control" id="village_id" name="village_id">
                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     </select>
                                                 </div>
@@ -401,5 +401,66 @@
             });
         });
 </script>
+<script>
+    $(document).ready(function() {
+       //  ajax for get states data of area =====================================================================
+           $('select[name="area_id"]').on('change', function() {
+                   var area_id = $(this).val();
+                   // console.log(province_id);
+                   if (area_id) {
+                       $.ajax({
+                           url: "{{ URL::to('dashboard_admin/admin/state') }}/" + area_id,
+                           type: "GET",
+                           dataType: "json",
+                           success: function(data) {
+                               $('select[name="state_id"]').empty();
+                               $('select[name="state_id"]').append( '<option selected disabled>--select--</option>');
 
+                               $.each(data, function(key, value) {
+                                   // console.log(data);
+                                   // console.log(key);
+                                   // console.log(value);
+                                   $('select[name="state_id"]').append(
+                                       '<option value="' + key + '">' + value +'</option>'
+                                   );
+                               });
+                           },
+                       });
+               } else {
+                   console.log('AJAX load did not work');
+               }
+           });
+       });
+</script>
+<script>
+    $(document).ready(function() {
+       //  ajax for get villages data of state =====================================================================
+           $('select[name="state_id"]').on('change', function() {
+                   var state_id = $(this).val();
+                   // console.log(province_id);
+                   if (state_id) {
+                       $.ajax({
+                           url: "{{ URL::to('dashboard_admin/admin/village') }}/" + state_id,
+                           type: "GET",
+                           dataType: "json",
+                           success: function(data) {
+                               $('select[name="village_id"]').empty();
+                               $('select[name="village_id"]').append( '<option selected disabled>--select--</option>');
+
+                               $.each(data, function(key, value) {
+                                   // console.log(data);
+                                   // console.log(key);
+                                   // console.log(value);
+                                   $('select[name="village_id"]').append(
+                                       '<option value="' + key + '">' + value +'</option>'
+                                   );
+                               });
+                           },
+                       });
+               } else {
+                   console.log('AJAX load did not work');
+               }
+           });
+       });
+</script>
 @endsection

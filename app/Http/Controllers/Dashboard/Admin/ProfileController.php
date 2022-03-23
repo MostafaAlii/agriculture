@@ -42,5 +42,13 @@ class ProfileController extends Controller {
     {
         return $this->Data->getArea($province_id);
     }
+    public function getState($state_id)
+    {
+        return $this->Data->getState($state_id);
+    }
+    public function getVillage($village_id)
+    {
+        return $this->Data->getVillage($village_id);
+    }
 
 }

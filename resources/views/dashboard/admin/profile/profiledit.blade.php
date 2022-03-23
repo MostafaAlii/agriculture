@@ -238,40 +238,42 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.country') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="country_id">
-                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
-                                                        @foreach (\App\Models\Country::get() as $country)
-                                                         <option value="{{ Auth::user()->country_id }}" {{Auth::user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
-                                                        @endforeach
+                                                    <select class="select2 form-control" id="country_id" name="country_id">
+                                                            <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                            @foreach (\App\Models\Country::get() as $country)
+                                                             <option value="{{ $country->id }}" {{Auth::user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                                                            @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="province_id">
+                                                    <select class=" select2  form-control" id="province_id" name="province_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
                                                         <option value="{{ Auth::user()->province_id }}"  >{{ Auth::user()->province->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="area_id">
+                                                    <select class=" select2 form-control" id="area_id" name="area_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
                                                         <option value="{{ Auth::user()->area_id }}"  >{{ Auth::user()->area->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.state') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="state_id">
+                                                    <select class=" select2 form-control" id="state_id" name="state_id">
                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="village_id">
+                                                    <select class=" select2 form-control" id="village_id" name="village_id">
                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     </select>
                                                 </div>
                                             </div>
+
+
                                             <div class="col-12 col-sm-6 mt-1 mt-sm-0">
                                                 <h5 class="mb-1"><i class="ft-user mr-25"></i></h5>
                                                 <div class="form-group">
@@ -354,7 +356,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
      $(document).ready(function() {
-        //  استعلام بالاجاكس لجلب محافظات البلد ajax for provinces data of country ===============================
+        //  استعلام بالاجاكس لجلب محافظات البلد ajax for get provinces data of country ===============================
             $('select[name="country_id"]').on('change', function() {
                     var country_id = $(this).val();
                     // console.log(country_id);
@@ -385,7 +387,7 @@
 </script>
 <script>
      $(document).ready(function() {
-        //  ajax for area data of province =====================================================================
+        //  ajax for get areas data of province =====================================================================
             $('select[name="province_id"]').on('change', function() {
                     var province_id = $(this).val();
                     // console.log(province_id);
@@ -403,6 +405,68 @@
                                     // console.log(key);
                                     // console.log(value);
                                     $('select[name="area_id"]').append(
+                                        '<option value="' + key + '">' + value +'</option>'
+                                    );
+                                });
+                            },
+                        });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+</script>
+<script>
+     $(document).ready(function() {
+        //  ajax for get states data of area =====================================================================
+            $('select[name="area_id"]').on('change', function() {
+                    var area_id = $(this).val();
+                    // console.log(province_id);
+                    if (area_id) {
+                        $.ajax({
+                            url: "{{ URL::to('dashboard_admin/admin/state') }}/" + area_id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="state_id"]').empty();
+                                $('select[name="state_id"]').append( '<option selected disabled>--select--</option>');
+
+                                $.each(data, function(key, value) {
+                                    // console.log(data);
+                                    // console.log(key);
+                                    // console.log(value);
+                                    $('select[name="state_id"]').append(
+                                        '<option value="' + key + '">' + value +'</option>'
+                                    );
+                                });
+                            },
+                        });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+</script>
+<script>
+     $(document).ready(function() {
+        //  ajax for get villages data of state =====================================================================
+            $('select[name="state_id"]').on('change', function() {
+                    var state_id = $(this).val();
+                    // console.log(province_id);
+                    if (state_id) {
+                        $.ajax({
+                            url: "{{ URL::to('dashboard_admin/admin/village') }}/" + state_id,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                $('select[name="village_id"]').empty();
+                                $('select[name="village_id"]').append( '<option selected disabled>--select--</option>');
+
+                                $.each(data, function(key, value) {
+                                    // console.log(data);
+                                    // console.log(key);
+                                    // console.log(value);
+                                    $('select[name="village_id"]').append(
                                         '<option value="' + key + '">' + value +'</option>'
                                     );
                                 });
