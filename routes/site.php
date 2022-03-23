@@ -9,7 +9,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath','Maintenance']
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
 
     ], function(){
 
@@ -32,11 +32,11 @@ Route::group(
         require __DIR__.'/auth.php';
 
     });
-     route::get('maintenance',function (){
-    if(setting()->status =='open'){
-        return redirect('/');
-    }
-    return view('front.maintenance');
-});
+//     route::get('maintenance',function (){
+//    if(setting()->status =='open'){
+//        return redirect('/');
+//    }
+//    return view('front.maintenance');
+//});
 
 
