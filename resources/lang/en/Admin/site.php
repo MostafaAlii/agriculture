@@ -103,7 +103,7 @@ return [
     'title'=>'Title',
     'body'=>'Subject',
 
-    'tag'=>'tag',
+    'tag'=>'Tag',
     'blogstags'=>'Blogs & Tags',
     'active'=>'Active',
     'unactive'=>'Unactive',
@@ -111,4 +111,7 @@ return [
     'addtag'=>"Add Tag",
     'newtag'=>'New Tag',
     'updatetag'=>'Update Tag',
+    'admins'=>'Admins',
+    'employees'=>'Employees',
+    'departments'=>'Departments',
 ];

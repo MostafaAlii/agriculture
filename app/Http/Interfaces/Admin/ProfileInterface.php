@@ -7,4 +7,6 @@ interface ProfileInterface {
     public function updateInformation($request,$admin);
     public function getProvince($id);
     public function getArea($id);
+    public function getState($id);
+    public function getVillage($id);
 }

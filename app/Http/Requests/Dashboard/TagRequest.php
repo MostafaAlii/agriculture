@@ -10,7 +10,7 @@ class TagRequest extends FormRequest {
     {
         $rules = [
 
-            'name'    =>'required|min:3|string|regex:/^[A-Za-z]+$/i',
+            'name'    =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'status'    =>'required',
         ];
 

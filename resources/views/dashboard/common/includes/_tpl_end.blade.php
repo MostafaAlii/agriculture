@@ -23,7 +23,6 @@
     <!-- END: Page JS-->
     <script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js')}}"></script>
-    {{-- <script src="{{ asset('assets/admin/js/index.js') }}"></script> --}}
     <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}"></script>
 
     @toastr_js
