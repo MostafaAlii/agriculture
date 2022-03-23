@@ -11,7 +11,7 @@
             <div class="posts posts--style-1">
                 <div class="__inner">
                     <div class="row">
-                        @foreach($blogs as $blog)
+                        @foreach(App\Models\Blog::limit(6)->latest()->get() as $blog)
                             <!-- start item -->
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="__item __item--preview">
