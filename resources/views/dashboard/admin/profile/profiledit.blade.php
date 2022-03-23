@@ -262,13 +262,15 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.state') }}</label>
                                                     <select class=" select2 form-control" id="state_id" name="state_id">
-                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        <option value="{{ Auth::user()->state_id }}"  >{{ Auth::user()->state->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
                                                     <select class=" select2 form-control" id="village_id" name="village_id">
-                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        <option value="{{ Auth::user()->village_id }}"  >{{ Auth::user()->village->name }}</option>
                                                     </select>
                                                 </div>
                                             </div>
