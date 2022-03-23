@@ -16,7 +16,7 @@ class AdminRequest extends FormRequest {
             'email'        => 'required|email|unique:admins',
             'password'     => 'required|confirmed|min:3|max:10',
             'type'         => 'required|in:admin,employee',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image'        => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
