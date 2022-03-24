@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder {
             SettingSeeder::class,
             BlogSeeder::class,
             TagSeeder::class,
+            AttributeTableSeeder::class,
         ]);
 
         \App\Models\Farmer::factory(30)->create();
