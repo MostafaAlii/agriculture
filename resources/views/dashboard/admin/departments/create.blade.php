@@ -61,10 +61,17 @@
                                         @method('post')
                                         <div class="form-body">
                                             <div class="row">
+                                                
+                                                <!-- ----------------------------------------------------------------------- -->
+                                                <!-- ------------------full address select,options ----------------------- -->
+                                                @include('dashboard.admin.departments.select_full_address')
+                                                <!-- ----------------------------------------------------------------------- -->
+                                                
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="eventRegInput1">{{ __('Admin/departments.depart_select') }}<span class="text-danger">*</span></label>
-                                                         <select class="custom-select" id="customSelect" name="parent_id" required>
+                                                        <!-- custom-select select2 form-control -->
+                                                        <select class="custom-select" id="customSelect" name="parent_id" required>
                                                          <option value='0' selected>{{ __('Admin/departments.depart_main_type') }}</option>
                                                             @foreach($main_departments as $main)
                                                                      <?php
@@ -73,11 +80,12 @@
                                                                         'childs' => $main->childs,
                                                                         'color'=>'#209c41',
                                                                         'number'=>2,
-                                                                        'depart_id'=>$main->id,
+                                                                        'depart_id'=>'',
+                                                                       // 'depart_id'=>$main->id,
                                                                         'parent_id'=>'',
                                                                     ];
                                                                      ?>
-                                                                    <option style="color:{{$color}}"  value="{{$main->id}}">-{{$main->name}}</option>
+                                                                    <option style="color:<?php echo $color;?>"  value="{{$main->id}}">-{{$main->name}}</option>
                                                                     <!-- @if(count($main->childs)) -->
                                                                         @include('dashboard.admin.departments.mangeChild',$new)
                                                                     <!-- @endif -->
@@ -95,51 +103,31 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/departments.depart_country') }}<span class="text-danger">*</span></label>
-                                                        <select class="custom-select" id="customSelect" name="country_id" required >
-                                                             @foreach($country as $country)
-                                                                 <option value="{{$country->id}}">{{$country->name}}</option>
-                                                             @endforeach
-                                                         </select>
-                                                         @error('country_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/departments.depart_state') }}<span class="text-danger">*</span></label>
-                                                         <select class="custom-select" id="customSelect" name="state_id" required >
-                                                             @foreach($state as $s)
-                                                                 <option value="{{$s->id}}">{{$s->name}}</option>
-                                                             @endforeach
-                                                         </select>
-                                                        @error('state_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/departments.depart_desc') }}<span class="text-danger">*</span></label>
-                                                        <textarea id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_desc') }}" name="description" value="{{ old('description') }}"></textarea>
-                                                        @error('description')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/departments.depart_keyword') }}<span class="text-danger">*</span></label>
-                                                        <textarea id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_keyword') }}" name="keyword" value="{{ old('keyword') }}"></textarea>
-                                                        @error('keyword')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group">
                                                         <label for="eventRegInput4">{{ __('Admin/departments.depart_slug') }}<span class="text-danger">*</span></label>
                                                         <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_slug') }}" name="slug" value="{{ old('slug') }}" required>
                                                         @error('slug')
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                         @enderror
                                                     </div>
+                                                </div>
+                                                <!-- ----------------------------------------------------------------------- -->
+                                               
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="eventRegInput4">{{ __('Admin/departments.depart_desc') }}<span class="text-danger">*</span></label>
+                                                        <textarea id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_desc') }}" name="description">{{ old('description') }}</textarea>
+                                                        @error('description')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="eventRegInput4">{{ __('Admin/departments.depart_keyword') }}<span class="text-danger">*</span></label>
+                                                        <textarea id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_keyword') }}" name="keyword">{{ old('keyword') }}</textarea>
+                                                        @error('keyword')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                        @enderror
+                                                    </div>
+                                                    
                                                     
                                                 </div>
                                                 
@@ -166,6 +154,11 @@
 
 @endsection
 @section('js')
+
+
+<!-- add script for categories and changes on it -->
+<script src="{{ URL::asset('/js/full_address/select_script.js') }}"></script>
+
     <script type="text/javascript">
 
         var loadFile = function (event) {
@@ -191,5 +184,6 @@
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 @endsection
 

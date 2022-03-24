@@ -11,6 +11,9 @@ use App\Models\Department;
 use Yajra\DataTables\DataTables;
 
 use App\Http\Interfaces\Admin\DepartmentInterface;
+use App\Models\Area;
+use App\Models\Province;
+use App\Models\Village;
 
 class DepartmentRepository implements DepartmentInterface {
     
@@ -22,7 +25,6 @@ class DepartmentRepository implements DepartmentInterface {
     public function data() {
         //get all departments data
         $departments = Department::orderBy('id','DESC')->get();
-      // dd($departments);
 
         //use datatables (yajra) to handel this data
         return DataTables::of($departments)
@@ -32,8 +34,27 @@ class DepartmentRepository implements DepartmentInterface {
             ->addColumn('country_name', function (Department $departments) {
                 return $departments->department_country->name;
             })
+            ->addColumn('province_name', function (Department $departments) {
+                return $departments->department_province->name;
+            })
+            ->addColumn('area_name', function (Department $departments) {
+                return $departments->department_area->name;
+            })
             ->addColumn('state_name', function (Department $departments) {
-                return $departments->department_state->name;
+                if($departments->state_id == NULL){
+                    return '-';
+                }
+                else{
+                    return $departments->department_state->name;
+                }
+            })
+            ->addColumn('village_name', function (Department $departments) {
+                if($departments->village_id == NULL){
+                    return '-';
+                }
+                else{
+                    return $departments->department_village->name;
+                }
             })
             ->editColumn('created_at', function (Department $departments) {
                 return $departments->created_at->format('Y-m-d');
@@ -53,10 +74,16 @@ class DepartmentRepository implements DepartmentInterface {
     public function create()
     {
         //return only main departments
-        $main_departments = Department::where('parent_id',Null)->get();
-        $country =Country::all();
-        $state=State::all();
-        return view('dashboard.admin.departments.create', compact('main_departments','country','state'));
+        $data['main_departments']=Department::where('parent_id',Null)->get();
+        $data['country']=Country::all();
+        $data['province']=Province::all();
+        $data['area']=Area::all();
+        $data['state']=State::all();
+        $data['village']=Village::all();
+       
+
+       // return view('dashboard.admin.departments.create', compact('main_departments','country','state'));
+        return view('dashboard.admin.departments.create', $data);
     }
 //DepartmentRequest
     public function store($request) {
@@ -68,11 +95,16 @@ class DepartmentRepository implements DepartmentInterface {
             $validated = $request->validated();
            
             $depart=new Department;
-           
-            $depart->country_id=$request->country_id;
-            $depart->state_id=$request->state_id;
-            $depart->slug=$request->slug;
+
             ($request->parent_id!='0')?$depart->parent_id=$request->parent_id:'';
+
+            $depart->country_id=$request->country_id;
+            $depart->province_id=$request->province_id;
+            $depart->area_id=$request->area_id;
+            ($request->state_id)?$depart->state_id=$request->state_id:'';
+            ($request->village_id)?$depart->village_id=$request->village_id:'';
+            
+            $depart->slug=str_replace(' ', '_',$request->name);
             $depart->created_by=auth()->user()->name;//----------------------------------------------------------------------------
             
             $depart->save();
@@ -101,12 +133,16 @@ class DepartmentRepository implements DepartmentInterface {
     {
         //dd($id);
         $real_id= decrypt($id);
-        $depart = Department::findOrfail($real_id);
-        $main_departments = Department::where('parent_id',Null)->where('id','!=',$real_id)->get();
-
-        $country =Country::all();
-        $state =State::all();
-        return view('dashboard.admin.departments.edit', compact('depart','main_departments','country','state'));
+        
+        $data['depart']=Department::findOrfail($real_id);
+        $data['main_departments']=Department::where('parent_id',Null)->where('id','!=',$real_id)->get();
+        $data['country']=Country::all();
+        $data['province']=Province::all();
+        $data['area']=Area::all();
+        $data['state']=State::all();
+        $data['village']=Village::all();
+        
+        return view('dashboard.admin.departments.edit',$data);
     }
 
 
@@ -118,10 +154,15 @@ class DepartmentRepository implements DepartmentInterface {
             
              $depart= Department::findOrfail($request->id);
             
+             ($request->parent_id!='0')?$depart->parent_id=$request->parent_id:$depart->parent_id=Null;
+
              $depart->country_id=$request->country_id;
-             $depart->state_id=$request->state_id;
-             $depart->slug=$request->slug;
-             ($request->parent_id!='0')?$depart->parent_id=$request->parent_id:'';
+             $depart->province_id=$request->province_id;
+             $depart->area_id=$request->area_id;
+             ($request->state_id)?$depart->state_id=$request->state_id:$depart->state_id=Null;
+             ($request->village_id)?$depart->village_id=$request->village_id:$depart->village_id=NULL;
+             
+             $depart->slug=str_replace(' ', '_',$request->name);
              $depart->updated_by=auth()->user()->id;//----------------------------------------------------------------------------
              
              $depart->save();

@@ -8,18 +8,21 @@
             $extra.='-';
          }
 
+         if(isset($parent_id)){$parent_id=$parent_id;}else{$parent_id=0;}
+        if(isset($depart_id)){$depart_id=$depart_id;}else{$depart_id=0;}
+        
         //  $color = array("#4d28de", "#9d1d81", "#7a5114","#0c6a78");
-         
+        $colors=array("#4d28de","rgb(0 152 121)","#9d561c","rgb(128 47 143)","rgb(180 191 17)","rgb(207 29 86)","rgb(78 203 209)");
         $new= [
             'childs' => $child->childs,
-            'color'=>'#4d28de',
+            'color'=>$colors[$number],
             // 'color' =>$color[$number],
             'number'=>$number+1,
             
             // 'depart_id'=>$depart_id,
             // 'parent_id'=>$child->parent_id
 
-            'depart_id'=>$child->id,//pramiry key of department we edit on it 
+            'depart_id'=>$depart_id,//pramiry key of department we edit on it 
             'parent_id'=>$parent_id //parent_id of another department
         ];
         // <!-- @if($child->id!=$parent_id) -->

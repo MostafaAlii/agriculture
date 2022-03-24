@@ -1,43 +1,48 @@
 @extends('dashboard.layouts.dashboard')
-
 @section('css')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
-
 @section('pageTitle')
-    {{ trans('Admin/departments.departmentPageTitle') }}
+    {{ trans('Admin/attributes.attributes_title_in_sidebar') }}
 @endsection
 
 @section('content')
-
-<!--start Content Body -->
     @include('dashboard.common._partials.messages')
-
+    <!-- Start Content Wrapper -->
     <div class="content-wrapper">
+        <!-- Start Breadcrumbs -->
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ trans('Admin/departments.departmentPageTitle') }}</h3>
+                <h3 class="content-header-title">
+                    <i class="material-icons">playlist_add_check</i>
+                    {{ trans('Admin/attributes.attributes_title_in_sidebar') }}
+                </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">{{ trans('Admin/departments.departmentPageTitle') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Attributes.index') }}">{{ trans('Admin/attributes.attributes_title_in_sidebar') }}</a>
                             </li>
-
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- End Breadcrumbs -->
+        <!-- Start Content Body -->
         <div class="content-body">
-            <!-- Zero configuration table -->
+            <!-- Start Zero configuration table -->
             <section id="configuration">
+                <!-- Start row -->
                 <div class="row">
+                    <!-- Start col-12 -->
                     <div class="col-12">
+                        <!-- Start Card -->
                         <div class="card">
+                            <!-- Start Card Header -->
                             <div class="card-header">
-                                <h4 class="card-title">{{ trans('Admin/departments.departmentPageTitle') }}</h4>
+                                <h4 class="card-title">{{ trans('Admin/attributes.attributes_title_in_sidebar') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -48,60 +53,64 @@
                                     </ul>
                                 </div>
                             </div>
+                            <!-- End Card Header -->
+                            <!-- Start Card Content -->
                             <div class="card-content collapse show">
+                                <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('Departments.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/site.create') }}</a>
-
-                                    <button type="button" class="btn btn-warning mb-3"
+                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                        <i class="material-icons">add_box</i>
+                                        {{ trans('Admin/attributes.attributes_add_new') }}
+                                   </button>
+                                    <button type="button" class="btn btn-warning btn-md mb-3"
                                         id="btn_delete_all" data-toggle="modal"
                                         data-target="#bulkdelete" >
-                                        <i class="fa fa-trash"></i>
                                         {{ __('Admin/site.bulkdelete') }}
                                     </button>
-                                    
+                                    <!-- Start Table Responsive -->
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration" id="department-table">
+                                        <!-- Start Table -->
+                                        <table class="table table-striped table-bordered zero-configuration" id="attributes-table">
                                             <thead>
                                                 <tr>
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ __('Admin/departments.depart_name') }}</th>
-                                                    <th>{{ __('Admin/departments.depart_country') }}</th>
-                                                    <th>{{ __('Admin/departments.depart_province') }}</th>
-                                                    <th>{{ __('Admin/departments.depart_area') }}</th>
-                                                    <th>{{ __('Admin/departments.depart_state') }}</th>
-                                                    <th>{{ __('Admin/departments.depart_village') }}</th>
-                                                    <th>{{ __('Admin/departments.depart_type') }}</th>
-                                                    <th>{{ __('Admin/site.created_at') }}</th>
+                                                    <th>{{ __('Admin/attributes.attributes_name') }}</th>
+                                                    <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
                                             </thead>
                                         </table>
+                                        <!-- End Table -->
                                     </div>
+                                    <!-- End Table Responsive -->
                                 </div>
+                                <!-- End Content Body -->
                             </div>
+                            <!-- End Card Content -->
                         </div>
+                        <!-- End Card -->
                     </div>
+                    <!-- End col-12 -->
                 </div>
+                <!-- End row -->
+                @include('dashboard.admin.attributes.btn.add')
             </section>
-            <!--/ Zero configuration table -->
-
+            <!-- End Zero configuration table -->
         </div>
+        <!-- End Content Body -->
     </div>
-
-<!--End Content Body -->
+    <!-- End Content Wrapper -->
 @endsection
 
 @section('js')
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
+<!-- Datatable Fire -->
 <script>
-
-    let adminsTable = $('#department-table').DataTable({
+    let countriesTable = $('#attributes-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -109,23 +118,15 @@
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
         ajax: {
-            url: '{{ route("departments.data") }}',
+            url: "{{ route('Attributes.data') }}",
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name'},
-            {data: 'country_name', name: 'country_name'},
-            {data: 'province_name', name: 'province_name'},
-            {data: 'area_name', name: 'area_name'},
-            {data: 'state_name', name: 'state_name'},
-            {data: 'village_name', name: 'village_name'},
-            {data: 'type', name: 'type',width: '10%'},
+            {data: 'name', name: 'name', searchable: false, sortable: false},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-         order: [[8, 'desc']],
-       
-
     });
 </script>
+
 @endsection

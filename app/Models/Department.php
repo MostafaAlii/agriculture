@@ -25,8 +25,20 @@ class Department extends Model implements TranslatableContract{
         return $this->belongsTo('App\Models\Country','country_id') ;
     }
 
+    public function department_province() {
+        return $this->belongsTo('App\Models\Province','province_id') ;
+    }
+    
+    public function department_area() {
+        return $this->belongsTo('App\Models\Area','area_id') ;
+    }
+
     public function department_state() {
         return $this->belongsTo('App\Models\State','state_id') ;
+    }
+
+    public function department_village() {
+        return $this->belongsTo('App\Models\Village','village_id') ;
     }
         
     // public function childs() {
