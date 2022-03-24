@@ -5,6 +5,7 @@ use App\Models\Admin;
 use App\Models\State;
 use App\Models\Village;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Interfaces\Admin\VillageInterface;
 

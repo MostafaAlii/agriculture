@@ -1,30 +1,24 @@
 <?php
-
 use App\Http\Controllers\Dashboard\Admin\AdminController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
 use App\Http\Controllers\Dashboard\Admin\VillageController;
 use App\Http\Controllers\Dashboard\Admin\StateController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
-
 use App\Http\Livewire;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
-
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
-
 use App\Http\Controllers\Dashboard\Admin\ProvienceController;
-
-
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
 use App\Http\Controllers\Dashboard\Admin\TagController;
+use App\Http\Controllers\Dashboard\Admin\AttributeController;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -142,6 +136,11 @@ Route::group(
             Route::resource('tags', TagController::class)->except(['show']);
             Route::get('/tags/data', [TagController::class,'data'])->name('tags.data');
             Route::delete('/tags/bulk_delete/{ids}', [TagController::class,'bulkDelete'])->name('tags.bulk_delete');
+            /********************************* End Tags Routes ************************************/
+            /********************************* Tags Routes ************************************/
+            Route::resource('Attributes', AttributeController::class)->except(['show']);
+            Route::get('/Attributes/data', [AttributeController::class,'data'])->name('Attributes.data');
+            Route::delete('/Attributes/bulk_delete/{ids}', [AttributeController::class,'bulkDelete'])->name('attributes.bulk_delete');
             /********************************* End Tags Routes ************************************/
 
         });

@@ -11,9 +11,9 @@ class BlogRequest extends FormRequest {
         $rules = [
 
             'title'    =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|unique:blog_translations',
-            // 'title'    =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'body'     =>'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|min:5|max:100',
             'admin_id' => 'required',
+            "image"    => 'image|mimes:jpeg,png|max:4096',
         ];
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
             $blog = $this->route()->parameter('id');
@@ -32,7 +32,8 @@ class BlogRequest extends FormRequest {
             'body.max'         => trans('Admin\validation.max'),
             'title.regex'      => trans('Admin\validation.regex'),
             'body.regex'       => trans('Admin\validation.regex'),
-
+            'image.image'          => trans('Admin\validation.image'),
+            'image.mimes'          => trans('Admin\validation.mimes'),
 
         ];
     }

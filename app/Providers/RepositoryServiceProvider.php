@@ -15,6 +15,7 @@ use App\Http\Interfaces\Admin\VillageInterface;
 use App\Http\Interfaces\Admin\SliderInterface;
 use App\Http\Interfaces\Admin\BlogInterface;
 use App\Http\Interfaces\Admin\TagInterface;
+use App\Http\Interfaces\Admin\AttributeInterface;
 
 use App\Http\Repositories\Admin\SettingRepository;
 use App\Http\Repositories\Admin\AreaRepository;
@@ -31,7 +32,7 @@ use App\Http\Repositories\Admin\ProfileRepository;
 use App\Http\Repositories\Admin\SliderRepository;
 use App\Http\Repositories\Admin\BlogRepository;
 use App\Http\Repositories\Admin\TagRepository;
-
+use App\Http\Repositories\Admin\AttributeRepository;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -40,7 +41,6 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(SettingInterface::class, SettingRepository::class);
-
         $this->app->bind(OrchardInterface::class, OrchardRepository::class);
         $this->app->bind(CountryInterface::class, CountryRepository::class);
         $this->app->bind(ProvinceInterface::class, ProvinceRepository::class);
@@ -60,6 +60,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SliderInterface::class, SliderRepository::class);
         $this->app->bind(BlogInterface::class, BlogRepository::class);
         $this->app->bind(TagInterface::class, TagRepository::class);
+        $this->app->bind(AttributeInterface::class, AttributeRepository::class);
     }
 
     public function boot()

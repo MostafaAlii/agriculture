@@ -7,6 +7,7 @@ use App\Models\Area;
 use App\Models\State;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 class AreaRepository implements AreaInterface {
     public function index() {
