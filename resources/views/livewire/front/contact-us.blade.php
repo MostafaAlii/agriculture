@@ -126,7 +126,10 @@
     <div class="row no-gutters">
         <div class="col-md-6  map-container map-container--left">
             <!-- this is demo key "AIzaSyBXQROV5YMCERGIIuwxrmaZbBl_Wm4Dy5U" -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d407663.45171337907!2d43.516394316650484!3d37.036728793837455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40089f340fb54ddd%3A0xa62d864aff7c9d78!2z2K_Zh9mI2YMg2YXYrdin2YHYuNip2Iwg2KfZhNi52LHYp9mC!5e0!3m2!1sar!2seg!4v1646889287564!5m2!1sar!2seg" width="900" height="920" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d407663.45171337907!2d43.516394316650484!3d37.036728793837455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40089f340fb54ddd%3A0xa62d864aff7c9d78!2z2K_Zh9mI2YMg2YXYrdin2YHYuNip2Iwg2KfZhNi52LHYp9mC!5e0!3m2!1sar!2seg!4v1646889287564!5m2!1sar!2seg"
+            width="900" height="920" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
             {{-- <div class="g_map" data-api-key="AIzaSyBXQROV5YMCERGIIuwxrmaZbBl_Wm4Dy5U" data-longitude="44.958309" data-latitude="34.109925" data-marker="img/marker.png" style="min-height: 255px"></div> --}}
         </div>
     </div>

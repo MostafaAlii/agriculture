@@ -16,7 +16,7 @@ class AdminRequest extends FormRequest {
             'email'        => 'required|email|unique:admins',
             'password'     => 'required|confirmed|min:3|max:10',
             'type'         => 'required|in:admin,employee',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            "image"        => 'image|mimes:jpeg,png|max:4096',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -54,6 +54,9 @@ class AdminRequest extends FormRequest {
             'email.email'          => trans('Admin\validation.email'),
             'email.unique'         => trans('Admin\validation.unique'),
             'phone.unique'         => trans('Admin\validation.unique'),
+
+            'image.image'          => trans('Admin\validation.image'),
+            'image.mimes'          => trans('Admin\validation.mimes'),
         ];
     }
 }
