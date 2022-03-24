@@ -3,7 +3,11 @@
     @section('css')
 
     @endsection
-
+<style>
+    nav svg{
+        height:20px;
+    }
+</style>
     <!-- start section -->
     <section class="section">
         <div class="container">
@@ -11,7 +15,7 @@
             <div class="posts posts--style-1">
                 <div class="__inner">
                     <div class="row">
-                        @foreach(App\Models\Blog::limit(6)->latest()->get() as $blog)
+                        @foreach($blogs as $blog)
                             <!-- start item -->
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="__item __item--preview">
@@ -26,17 +30,18 @@
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="#">{{ $blog->title }}</a></p>
+                                        <p class="__category"><a href="#">{{ $blog->admin->firstname }}</a></p>
                                         <h3 class="__title h5"><a href="#">{{ $blog->title }}</a></h3>
-                                        <p>{{ $blog->body }}</p>
+                                        <p>{{ Str::limit($blog->body,50,) }}</p>
                                     </div>
                                     <span class="__date-post">
-                                        <strong>{{ $blog->created_at->diffforhumans() }}</p></strong>
+                                        <strong>{{ $blog->created_at->diffforhumans() }}</strong>
                                     </span>
                                 </div>
                             </div>
                             <!-- end item -->
                         @endforeach
+                        {{-- {{ $blogs->links() }} --}}
                         {{-- <!-- start item -->
                         <div class="col-12 col-sm-6 col-lg-4">
                             <div class="__item __item--preview">

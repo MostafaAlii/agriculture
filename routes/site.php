@@ -17,7 +17,7 @@ Route::group(
         route::get('/',Livewire\front\Home::class)->name('front');
         route::get('/shop',Livewire\front\shop::class)->name('shop');
         route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');
-        route::get('/blog',Livewire\front\Blog::class)->name('blog');
+        route::get('/blogs',Livewire\front\Blogs::class)->name('blog');
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');
 
 
