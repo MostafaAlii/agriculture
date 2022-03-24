@@ -5,8 +5,10 @@ use App\Models\Area;
 use App\Models\State;
 use App\Models\Village;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Interfaces\Admin\StateInterface;
+
 class StateRepository implements StateInterface {
     public function index() {
         $areas = Area::get();

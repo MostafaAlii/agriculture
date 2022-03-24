@@ -16,12 +16,12 @@ class Area extends Model {
     public $timestamps = true;
 
     // Area Has Many States ::
-    public function states(){
+    public function states(): HasMany{
         return $this->hasMany(State::class);
     }
 
     // Provinces Has One Area
-    public function province() {
+    public function province(): BelongsTo {
         return $this->belongsTo(Province::class);
     }
 }

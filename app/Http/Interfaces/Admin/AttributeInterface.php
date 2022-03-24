@@ -1,12 +1,10 @@
 <?php
 namespace App\Http\Interfaces\Admin;
-interface AreaInterface {
+interface AttributeInterface {
     public function index();
     public function data();
     public function store($request);
     public function edit($id);
-    public function update($request,$area);
-    public function destroy($area);
-    public function bulkDelete($ids);
-
+    public function update($request,$id);
+    public function destroy($id);
 }

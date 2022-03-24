@@ -178,6 +178,24 @@
 
                     </ul>
                 </li>
+                <!-- Start Attributes Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">playlist_add_check</i>
+                        <span class="menu-title" data-i18n="Attributes"> {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start Attributes -->
+                        <li>
+                            <a class="menu-item" href="{{route('Attributes.index')}}">
+                                <i class="material-icons">playlist_add_check</i>
+                                <span data-i18n="Attributes"> {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Attributes -->
+                    </ul>
+                </li>
+                <!-- End Attributes Dropdown Menu -->
                 {{-- <!-- End Department Dropdown Menu -->
                 <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title" data-i18n="Templates">Templates</span></a>
                     <ul class="menu-content">
