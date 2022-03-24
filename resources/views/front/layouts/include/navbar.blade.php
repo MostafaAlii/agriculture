@@ -2,8 +2,8 @@
     <li class="active has-submenu">
         <a href="javascript:void(0);">{{ __('website\home.home') }}</a>
         <ul class="submenu">
-            <li  class="active" > <a href="{{ route('front2') }}">{{ __('website\home.home')}}</a> </li>
-            <li                 > <a href="{{ route('front') }}"> {{ __('website\home.home2') }}</a> </li>
+            <li  class="active" > <a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
+            <li                 > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
         </ul>
     </li>
     {{--  start links in navebar *************************************************************************--}}
