@@ -4,6 +4,7 @@
 return [
     // nav bar **************************************
     'home'                 => ' Home',
+    'home2'                => ' Home2',
     'shop'                 => ' Shop',
     'blog'                 => 'Blog',
     'aboutus'              => ' About Us',

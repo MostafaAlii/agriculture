@@ -39,7 +39,7 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth:admin'],
 
     ], function () {
-        route::get('/home/admin', Livewire\front\Home::class)->name('home.admin');
+        route::get('/home/admin', Livewire\front\Home2::class)->name('home.admin');
         // route for admin to go to website
 
         Route::group(['prefix' => 'dashboard_admin'], function () {

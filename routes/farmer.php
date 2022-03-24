@@ -29,7 +29,7 @@ Route::group(
 
                 // Dashboard prifex in RouteServiceProvider
         Route::group(['prefix'=>'dashboard_farmer', 'middleware' =>'auth'], function() {
-            route::get('/home',Livewire\front\Home::class)->name('home.farmer');
+            route::get('/home',Livewire\front\Home2::class)->name('home.farmer');
             /********************************* Start Admins Dashboard Routes ************************************/
             // Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');
             route::get('/product',Livewire\front\Farmer\Product::class)->name('farmer.product');

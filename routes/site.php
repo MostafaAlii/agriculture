@@ -14,18 +14,19 @@ Route::group(
     ], function(){
 
         // front routes
-        route::get('/',Livewire\front\Home::class)->name('front');
-        route::get('/shop',Livewire\front\shop::class)->name('shop');
-        route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');
-        route::get('/blogs',Livewire\front\Blogs::class)->name('blog');
-        route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');
+        route::get('/',Livewire\front\Home2::class)->name('front');                    //home1
+        route::get('/home2',Livewire\front\Home::class)->name('front2');               //home2
+        route::get('/shop',Livewire\front\shop::class)->name('shop');                   //shop
+        route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');          // about us
+        route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                 // blog
+        route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');      // contact us
 
 
 
         Route::middleware(['auth:vendor'])->group(function () {
         /********************************* Start  front pages with login by user auth Routes ************************************/
         // route::get('/home',[front\HomeController::class,'index'])->name('home.user');
-        route::get('/home',Livewire\front\Home::class)->name('home.user');
+        route::get('/home',Livewire\front\Home2::class)->name('home.user');
         /********************************* End front pages with login by user auth Routes ************************************/
         route::get('/user/dashboard',Livewire\front\User\dashboard::class)->name('user.dash');
         });
