@@ -81,6 +81,8 @@
     @toastr_css
     <!-- BEGIN: Custom CSS-->
     <!-- END: Custom CSS-->
+    <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
+
     @yield('css')
 
 </head>

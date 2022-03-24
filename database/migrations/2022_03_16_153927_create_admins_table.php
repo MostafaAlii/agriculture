@@ -13,6 +13,11 @@ class CreateAdminsTable extends Migration {
             $table->enum('type',['admin','employee'])->default('admin');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->double('latitude','8,2')->nullable();
+            $table->double('longitude','8,2')->nullable();
+            $table->string('address')->nullable();
+
+
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
             $table->foreignId('country_id')->default('1')->constrained()->cascadeOnDelete();

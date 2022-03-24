@@ -51,6 +51,8 @@ class AdminRepository implements AdminInterface{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             $requestData['type'] = $request->type;
+            $requestData['latitude']=$request->latitude;
+            $requestData['longitude']= $request->longitude;
             Admin::create($requestData);
             $admin = Admin::latest()->first();
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');

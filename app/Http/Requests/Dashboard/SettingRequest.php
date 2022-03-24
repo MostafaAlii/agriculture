@@ -22,7 +22,7 @@ class SettingRequest extends FormRequest
 
 
         return [
-            'support_mail' => 'required|email',
+            'support_mail' => 'sometime|nullable|email',
 
             'primary_phone' => 'required|numeric',
             'secondery_phone' => 'required|numeric',
@@ -35,8 +35,8 @@ class SettingRequest extends FormRequest
             ],
 
 
-//            'site_logo' => image_validate(),
-//            'site_icon' => image_validate(),
+//              'site_logo'=>'required_without:id|mimes:png,jpg,jpeg',
+//             'site_icon'=>'required_without:id|mimes:png,jpg,jpeg',
             'message_maintenance' => [
                 'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
@@ -54,7 +54,9 @@ class SettingRequest extends FormRequest
          public function messages()
     {
         return [
-            'email.required' => trans('Admin/validation.required'),
+
+
+                'email.required' => trans('Admin/validation.required'),
             'email.email' => trans('Admin/validation.email'),
 
             'primary_phone.required' => trans('Admin/validation.required'),

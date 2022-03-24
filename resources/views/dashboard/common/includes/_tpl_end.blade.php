@@ -1,5 +1,6 @@
+     <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
 
-        <!-- BEGIN: Vendor JS-->
+<!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script>
     <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     {{-- <script src="{{ asset('assets/admin/vendors/js/material-vendors.min.js') }}"></script> --}}

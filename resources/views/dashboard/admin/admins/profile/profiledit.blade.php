@@ -97,107 +97,122 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-12 col-sm-6">
+
+                                            <div class="col-12 col-sm-6">
                                                 <div class="form-group">
-                                                    <label>Role</label>
-                                                    <select class="form-control">
-                                                        <option>User</option>
-                                                        <option>Staff</option>
-                                                    </select>
+                                                    <label>{{ __('Admin/site.address') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
+                                                    <input class="form-control img" name="address" value="{{$admin->address}}" type="text" />
+                                                    <input class="form-control " value="{{$admin->latitude}}" name="latitude"  type="hidden" id="latitude">
+                                                    <input class="form-control " value="{{$admin->longitude}}" name="longitude"  type="hidden" id="longitude">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Status</label>
-                                                    <select class="form-control">
-                                                        <option>Active</option>
-                                                        <option>Banned</option>
-                                                        <option>Close</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Company</label>
-                                                    <input type="text" class="form-control" placeholder="Company name">
-                                                </div>
+                                                <div id="map" style="height: 500px;width: 1000px;"></div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="table-responsive">
-                                                    <table class="table mt-1">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Module Permission</th>
-                                                                <th>Read</th>
-                                                                <th>Write</th>
-                                                                <th>Create</th>
-                                                                <th>Delete</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Users</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox1" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox1"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox2" class="custom-control-input"><label class="custom-control-label" for="users-checkbox2"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox3" class="custom-control-input"><label class="custom-control-label" for="users-checkbox3"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox4" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox4"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Articles</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox5" class="custom-control-input"><label class="custom-control-label" for="users-checkbox5"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox6" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox6"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox7" class="custom-control-input"><label class="custom-control-label" for="users-checkbox7"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox8" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox8"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Staff</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox9" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox9"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox10" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox10"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox11" class="custom-control-input"><label class="custom-control-label" for="users-checkbox11"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox12" class="custom-control-input"><label class="custom-control-label" for="users-checkbox12"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+
+
+
+
+
+                                                {{-- <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Role</label>
+                                                        <select class="form-control">
+                                                            <option>User</option>
+                                                            <option>Staff</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Status</label>
+                                                        <select class="form-control">
+                                                            <option>Active</option>
+                                                            <option>Banned</option>
+                                                            <option>Close</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Company</label>
+                                                        <input type="text" class="form-control" placeholder="Company name">
+                                                    </div>
                                                 </div>
-                                            </div> --}}
+                                                <div class="col-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table mt-1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Module Permission</th>
+                                                                    <th>Read</th>
+                                                                    <th>Write</th>
+                                                                    <th>Create</th>
+                                                                    <th>Delete</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Users</td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox1" class="custom-control-input" checked>
+                                                                            <label class="custom-control-label" for="users-checkbox1"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox2" class="custom-control-input"><label class="custom-control-label" for="users-checkbox2"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox3" class="custom-control-input"><label class="custom-control-label" for="users-checkbox3"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox4" class="custom-control-input" checked>
+                                                                            <label class="custom-control-label" for="users-checkbox4"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Articles</td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox5" class="custom-control-input"><label class="custom-control-label" for="users-checkbox5"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox6" class="custom-control-input" checked>
+                                                                            <label class="custom-control-label" for="users-checkbox6"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox7" class="custom-control-input"><label class="custom-control-label" for="users-checkbox7"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox8" class="custom-control-input" checked>
+                                                                            <label class="custom-control-label" for="users-checkbox8"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Staff</td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox9" class="custom-control-input" checked>
+                                                                            <label class="custom-control-label" for="users-checkbox9"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox10" class="custom-control-input" checked>
+                                                                            <label class="custom-control-label" for="users-checkbox10"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox11" class="custom-control-input"><label class="custom-control-label" for="users-checkbox11"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox12" class="custom-control-input"><label class="custom-control-label" for="users-checkbox12"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div> --}}
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>
@@ -341,6 +356,179 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+{{--start map edit code--}}
+<script>
+    $("#pac-input").focusin(function() {
+        $(this).val('');
+    });
+    // This example adds a search box to a map, using the Google Place Autocomplete
+    // feature. People can enter geographical searches. The search box will return a
+    // pick list containing a mix of places and predicted search terms.
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    function initAutocomplete() {
+        var pos = {lat : {{ $admin->latitude }} ,  lng :{{ $admin->longitude }} };
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: pos
+        });
+        infoWindow = new google.maps.InfoWindow;
+        geocoder = new google.maps.Geocoder();
+        marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            title: '{{ $admin->firstname }}'
+        });
+        infoWindow.setContent('{{ $admin->firstname }}');
+        infoWindow.open(map, marker);
+        // move pin and current location
+        infoWindow = new google.maps.InfoWindow;
+        geocoder = new google.maps.Geocoder();
+        var geocoder = new google.maps.Geocoder();
+        google.maps.event.addListener(map, 'click', function(event) {
+            SelectedLatLng = event.latLng;
+            geocoder.geocode({
+                'latLng': event.latLng
+            }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        deleteMarkers();
+                        addMarkerRunTime(event.latLng);
+                        SelectedLocation = results[0].formatted_address;
+                        console.log( results[0].formatted_address);
+                        splitLatLng(String(event.latLng));
+                        $("#pac-input").val(results[0].formatted_address);
+                    }
+                }
+            });
+        });
+        function geocodeLatLng(geocoder, map, infowindow,markerCurrent) {
+            var latlng = {lat: markerCurrent.position.lat(), lng: markerCurrent.position.lng()};
+            /* $('#branch-latLng').val("("+markerCurrent.position.lat() +","+markerCurrent.position.lng()+")");*/
+            $('#latitude').val(markerCurrent.position.lat());
+            $('#longitude').val(markerCurrent.position.lng());
+            geocoder.geocode({'location': latlng}, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        map.setZoom(8);
+                        var marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+                        markers.push(marker);
+                        infowindow.setContent(results[0].formatted_address);
+                        SelectedLocation = results[0].formatted_address;
+                        $("#pac-input").val(results[0].formatted_address);
+                        infowindow.open(map, marker);
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
+            SelectedLatLng =(markerCurrent.position.lat(),markerCurrent.position.lng());
+        }
+        function addMarkerRunTime(location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+            markers.push(marker);
+        }
+        function setMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
+        }
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        $("#pac-input").val("أبحث هنا ");
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+            searchBox.setBounds(map.getBounds());
+        });
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+            var places = searchBox.getPlaces();
+            if (places.length == 0) {
+                return;
+            }
+            // Clear out the old markers.
+            markers.forEach(function(marker) {
+                marker.setMap(null);
+            });
+            markers = [];
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                var icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(100, 100),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                };
+                // Create a marker for each place.
+                markers.push(new google.maps.Marker({
+                    map: map,
+                    icon: icon,
+                    title: place.name,
+                    position: place.geometry.location
+                }));
+                $('#latitude').val(place.geometry.location.lat());
+                $('#longitude').val(place.geometry.location.lng());
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
+    }
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+    function splitLatLng(latLng){
+        var newString = latLng.substring(0, latLng.length-1);
+        var newString2 = newString.substring(1);
+        var trainindIdArray = newString2.split(',');
+        var lat = trainindIdArray[0];
+        var Lng  = trainindIdArray[1];
+        $("#latitude").val(lat);
+        $("#longitude").val(Lng);
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKZAuxH9xTzD2DLY2nKSPKrgRi2_y0ejs&libraries=places&callback=initAutocomplete&language=ar&region=EG
+         async defer"></script>
+{{--end map edit code--}}
+
+
+
 <script>
      $(document).ready(function() {
         //  استعلام بالاجاكس لجلب محافظات البلد ajax for provinces data of country ===============================
