@@ -20,7 +20,6 @@ use App\Http\Interfaces\Admin\AttributeInterface;
 use App\Http\Repositories\Admin\SettingRepository;
 use App\Http\Repositories\Admin\AreaRepository;
 use App\Http\Repositories\Admin\StateRepository;
-use App\Http\Repositories\Admin\OrchardRepository;
 use App\Http\Repositories\Admin\ProvienceRepository;
 use App\Http\Repositories\Admin\CountryRepository;
 use App\Http\Repositories\Admin\VillageRepository;
@@ -41,7 +40,6 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(SettingInterface::class, SettingRepository::class);
-        $this->app->bind(OrchardInterface::class, OrchardRepository::class);
         $this->app->bind(CountryInterface::class, CountryRepository::class);
         $this->app->bind(ProvinceInterface::class, ProvinceRepository::class);
         $this->app->bind(AreaInterface::class, AreaRepository::class);

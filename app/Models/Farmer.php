@@ -2,6 +2,7 @@
 namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 class Farmer extends Authenticatable {
@@ -37,6 +38,9 @@ class Farmer extends Authenticatable {
         public function department()
         {
             return $this->belongsTo(Department::class, 'department_id');
+        }
+        public function products(): HasMany {
+            return $this->hasMany(Product::class);
         }
 
     protected $hidden = [

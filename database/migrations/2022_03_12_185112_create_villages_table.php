@@ -16,8 +16,6 @@ class CreateVillagesTable extends Migration
         Schema::create('villages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('state_id')->references('id')->on('states')->onDelete('cascade');
-            $table->double('location_x')->nullable();
-            $table->double('location_y')->nullable();
             $table->timestamps();
         });
     }

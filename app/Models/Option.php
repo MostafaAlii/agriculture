@@ -2,19 +2,21 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class Attribute extends Model {
+class Option extends Model {
     use HasFactory, Translatable;
-    protected $table = "attributes";
+    protected $table = "options";
     protected $guarded = [];
     protected $with = ['translations'];
     public $translatedAttributes = ['name'];
     public $timestamps = true;
 
-    // Attributes Has Many Options ::
-    public function options(): HasMany {
-        return $this->hasMany(Option::class);
+    public function attribute(): BelongsTo {
+        return $this->belongsTo(Attribute::class);
+    }
+
+    public function product(): BelongsTo {
+        return $this->belongsTo(Product::class);
     }
 }

@@ -12,8 +12,6 @@ class CreateStatesTable extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->foreignId('area_id')->references('id')->on('areas')->onDelete('cascade');
-            $table->double('location_x')->nullable();
-            $table->double('location_y')->nullable();
             $table->timestamps();
         });
     }
