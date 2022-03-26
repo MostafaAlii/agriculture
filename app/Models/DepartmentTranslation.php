@@ -2,12 +2,10 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Translatable;
 class DepartmentTranslation extends Model {
-    use HasFactory,Translatable;
+    use HasFactory;
     
     protected $table = "department_translations";
-    protected $guarded = [];
-    public $translatedAttributes=[];
+    protected $fillable = ['name','description','keyword', 'slug'];
     public $timestamps = false;
 }

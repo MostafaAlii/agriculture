@@ -14,7 +14,6 @@ class DepartmentRequest extends FormRequest {
             'state_id'       =>'required',/*|in:state*/
             'description'    =>'required',
             'keyword'        =>'required',
-            'slug'           =>'required|unique:departments,slug,'.$this->id,
         ];
     }
 
@@ -26,7 +25,6 @@ class DepartmentRequest extends FormRequest {
             'state_id.required'     => trans('Admin\validation.required'),
             'description.required'  => trans('Admin\validation.required'),
             'keyword.required'      => trans('Admin\validation.required'),
-            'slug.required'         => trans('Admin\validation.required'),
         ];
     }
 }

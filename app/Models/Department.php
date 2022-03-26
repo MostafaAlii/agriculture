@@ -13,7 +13,7 @@ class Department extends Model implements TranslatableContract{
     protected $guarded = [];
 
     protected $with=['translations'];
-    public $translatedAttributes=['name','description','keyword'];
+    public $translatedAttributes=['name','description','keyword', 'slug'];
 
     public $timestamps = true;
 

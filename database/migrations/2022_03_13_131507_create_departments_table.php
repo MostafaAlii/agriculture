@@ -23,7 +23,6 @@ class CreateDepartmentsTable extends Migration
             $table->unsignedBigInteger('parent_id')->unsigned()->nullable();
             $table->foreign('parent_id')->references('id')->on('departments')->onDelete('cascade');
             
-            $table->string('slug')->unique();
             
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

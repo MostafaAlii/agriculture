@@ -77,7 +77,7 @@
                                                                         'parent_id'=>'',
                                                                     ];
                                                                      ?>
-                                                                    <option style="color:{{$color}}"  value="{{$main->id}}">-{{$main->name}}</option>
+                                                                    <option style="color:<?php echo $color;?>"  value="{{$main->id}}">-{{$main->name}}</option>
                                                                     <!-- @if(count($main->childs)) -->
                                                                         @include('dashboard.admin.departments.mangeChild',$new)
                                                                     <!-- @endif -->
@@ -133,13 +133,7 @@
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                         @enderror
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/departments.depart_slug') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_slug') }}" name="slug" value="{{ old('slug') }}" required>
-                                                        @error('slug')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
-                                                    </div>
+                                                   
                                                     
                                                 </div>
                                                 

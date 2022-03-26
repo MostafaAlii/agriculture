@@ -71,13 +71,14 @@ class DepartmentRepository implements DepartmentInterface {
            
             $depart->country_id=$request->country_id;
             $depart->state_id=$request->state_id;
-            $depart->slug=$request->slug;
+            //$depart->slug=$request->slug;
             ($request->parent_id!='0')?$depart->parent_id=$request->parent_id:'';
             $depart->created_by=auth()->user()->name;//----------------------------------------------------------------------------
             
             $depart->save();
 
             $depart->name=$request->name;
+            $depart->slug=str_replace(' ', '_',$request->name);
             $depart->description=$request->description;
             $depart->keyword=$request->keyword;
 
