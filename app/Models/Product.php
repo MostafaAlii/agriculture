@@ -17,6 +17,8 @@ class Product extends Model {
     public $translatedAttributes=['name','description'];
     public $timestamps = true;
 
+    protected $hidden = ['pivot'];
+    
     protected $casts = [
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',

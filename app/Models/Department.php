@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
 class Department extends Model implements TranslatableContract{
@@ -19,6 +20,8 @@ class Department extends Model implements TranslatableContract{
 
     public $timestamps = true;
 
+    protected $hidden = ['pivot'];
+    
     public function childs() {
         return $this->hasMany('App\Models\Department','parent_id','id') ;
     }
@@ -44,10 +47,13 @@ class Department extends Model implements TranslatableContract{
     }
 
      // Product Has Many Department ::
-     public function depart_product(): HasMany {
-        return $this->hasMany(Product::class);
+    //  public function depart_product(): HasMany {
+    //     return $this->hasMany(Product::class);
+    // }
+
+    public function products(): BelongsToMany {
+        return $this->belongsToMany(Product::class, 'product_departments');
     }
-    
     // public function childs() {
     //     return $this->belongsTo(self::class,'parent_id') ;
     // }

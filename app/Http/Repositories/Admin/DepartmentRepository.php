@@ -74,7 +74,8 @@ class DepartmentRepository implements DepartmentInterface {
     }
 
     public function create()
-    {        
+    {
+       
         //return only main departments
         $data['main_departments']=Department::where('parent_id',Null)->get();
         $data['country']=Country::all();
@@ -198,10 +199,10 @@ class DepartmentRepository implements DepartmentInterface {
             $data['farmer'] = Farmer::where('department_id', $real_id)->pluck('department_id');
             $data['user'] = User::where('department_id', $real_id)->pluck('department_id'); 
 
-            
-            //  $data['product'] = Product::depart_product()->withTrashed()->where('department_id', $real_id)->pluck('department_id'); 
+            $d=Department::find($real_id);
+            $data['product']= $d->products();//->withTrashed()
 
-            if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0) {
+            if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0 && $data['product']->count() == 0) {
                 Department::findorfail($real_id)->delete();
                 toastr()->error(__('Admin/departments.depart_delete_done'));
                 return redirect()->route('Departments.index');
@@ -229,7 +230,10 @@ class DepartmentRepository implements DepartmentInterface {
                 $data['farmer'] = Farmer::where('department_id', $depart_ids)->pluck('department_id');
                 $data['user'] = User::where('department_id', $depart_ids)->pluck('department_id'); 
 
-                if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0) {
+                $d=Department::find($depart_ids);
+                $data['product']= $d->products();//->withTrashed()
+                
+                if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0 && $data['product']->count() == 0) {
                     Department::findOrfail($depart_ids)->delete();
                     $delete_or_no++;
                 }
