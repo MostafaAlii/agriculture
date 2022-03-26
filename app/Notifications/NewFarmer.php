@@ -37,7 +37,7 @@ class NewFarmer extends Notification
      */
     public function toMail($notifiable)
     {
-    $url = 'http://127.0.0.1:8000/dashboard_admin/farmer/profile/'.$this->farmer->id;
+    $url = 'http://127.0.0.1:8000/dashboard_farmer/product';
     return (new MailMessage)
                 ->subject('اضافة فلاح جديد')
                 ->line('اضافة فلاح جديد')

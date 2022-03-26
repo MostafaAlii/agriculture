@@ -37,7 +37,8 @@ class NewUser extends Notification
      */
     public function toMail($notifiable)
     {
-    $url = 'http://127.0.0.1:8000/dashboard_admin/user/profile/'.$this->user->id;
+    // $url = 'http://127.0.0.1:8000/dashboard_admin/user/profile/'.$this->user->id;
+    $url = 'http://127.0.0.1:8000/user/dashboard';
     return (new MailMessage)
                 ->subject('اضافة مستخدم جديد')
                 ->line('اضافه مستخدم جديد')
