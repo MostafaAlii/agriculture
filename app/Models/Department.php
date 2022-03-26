@@ -1,8 +1,10 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
 class Department extends Model implements TranslatableContract{
@@ -13,7 +15,7 @@ class Department extends Model implements TranslatableContract{
     protected $guarded = [];
 
     protected $with=['translations'];
-    public $translatedAttributes=['name','description','keyword', 'slug'];
+    public $translatedAttributes=['name','description','keyword','slug'];
 
     public $timestamps = true;
 
@@ -25,10 +27,27 @@ class Department extends Model implements TranslatableContract{
         return $this->belongsTo('App\Models\Country','country_id') ;
     }
 
+    public function department_province() {
+        return $this->belongsTo('App\Models\Province','province_id') ;
+    }
+    
+    public function department_area() {
+        return $this->belongsTo('App\Models\Area','area_id') ;
+    }
+
     public function department_state() {
         return $this->belongsTo('App\Models\State','state_id') ;
     }
-        
+
+    public function department_village() {
+        return $this->belongsTo('App\Models\Village','village_id') ;
+    }
+
+     // Product Has Many Department ::
+     public function depart_product(): HasMany {
+        return $this->hasMany(Product::class);
+    }
+    
     // public function childs() {
     //     return $this->belongsTo(self::class,'parent_id') ;
     // }

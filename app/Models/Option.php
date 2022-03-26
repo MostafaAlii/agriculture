@@ -12,6 +12,7 @@ class Option extends Model {
     public $translatedAttributes = ['name'];
     public $timestamps = true;
 
+
     public function attribute(): BelongsTo {
         return $this->belongsTo(Attribute::class);
     }

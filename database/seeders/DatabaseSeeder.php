@@ -5,6 +5,7 @@ use App\Models\Country;
 use App\Models\CountryTranslation;
 use Illuminate\Database\Seeder;
 use App\Models\Image;
+use App\Models\ProductDepartment;
 use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +26,8 @@ class DatabaseSeeder extends Seeder {
             BlogSeeder::class,
             TagSeeder::class,
             AttributeTableSeeder::class,
+            ProductTableSeeder::class,
+            OptionTableSeeder::class,
         ]);
 
         \App\Models\Farmer::factory(30)->create();

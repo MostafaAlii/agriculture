@@ -8,7 +8,7 @@ class AttributeTableSeeder extends Seeder {
     public function run() {
         Schema::disableForeignKeyConstraints();
         DB::table('attributes')->truncate();
-        Attribute::factory()->count(50)->create();
+        Attribute::factory()->count(3500)->create();
         Schema::enableForeignKeyConstraints();
     }
 }

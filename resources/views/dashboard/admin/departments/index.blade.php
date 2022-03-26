@@ -68,7 +68,10 @@
                                                     </th>
                                                     <th>{{ __('Admin/departments.depart_name') }}</th>
                                                     <th>{{ __('Admin/departments.depart_country') }}</th>
+                                                    <th>{{ __('Admin/departments.depart_province') }}</th>
+                                                    <th>{{ __('Admin/departments.depart_area') }}</th>
                                                     <th>{{ __('Admin/departments.depart_state') }}</th>
+                                                    <th>{{ __('Admin/departments.depart_village') }}</th>
                                                     <th>{{ __('Admin/departments.depart_type') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -112,12 +115,15 @@
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'name', name: 'name'},
             {data: 'country_name', name: 'country_name'},
+            {data: 'province_name', name: 'province_name'},
+            {data: 'area_name', name: 'area_name'},
             {data: 'state_name', name: 'state_name'},
+            {data: 'village_name', name: 'village_name'},
             {data: 'type', name: 'type',width: '10%'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-         order: [[5, 'desc']],
+         order: [[8, 'desc']],
        
 
     });

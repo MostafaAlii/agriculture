@@ -196,6 +196,26 @@
                     </ul>
                 </li>
                 <!-- End Attributes Dropdown Menu -->
+
+                <!-- Start options Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">credit_card</i>
+                        <span class="menu-title" data-i18n="Options"> {{ trans('Admin/options.options_title') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start options -->
+                        <li>
+                            <a class="menu-item" href="{{route('Options.index')}}">
+                                <i class="material-icons">credit_card</i>
+                                <span data-i18n="Options"> {{ trans('Admin/options.options_title') }}</span>
+                            </a>
+                        </li>
+                        <!-- End options -->
+                    </ul>
+                </li>
+                <!-- End options Dropdown Menu -->
+                
                 {{-- <!-- End Department Dropdown Menu -->
                 <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title" data-i18n="Templates">Templates</span></a>
                     <ul class="menu-content">

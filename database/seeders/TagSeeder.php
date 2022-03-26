@@ -8,6 +8,6 @@ class TagSeeder extends Seeder {
     public function run() {
 
         DB::table('tags')->delete();
-        Tag::factory(30)->create();
+        Tag::factory(3500)->create();
     }
 }

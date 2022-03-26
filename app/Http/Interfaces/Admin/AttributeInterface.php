@@ -7,4 +7,5 @@ interface AttributeInterface {
     public function edit($id);
     public function update($request,$id);
     public function destroy($id);
+    public function bulkDelete($request);
 }

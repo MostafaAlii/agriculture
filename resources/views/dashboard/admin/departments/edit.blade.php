@@ -21,7 +21,7 @@
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('Departments.index') }}">{{ trans('Admin/departments.departmentPageTitle') }}</a>
                             </li>
-                            <li class="breadcrumb-item active">{{ __('Admin/site.edit') }}
+                            <li class="breadcrumb-item active">{{ __('Admin/site.edit') }} / {{$depart->name}}
                             </li>
                         </ol>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/departments.depart_edit') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/departments.depart_edit') }} / {{$depart->name}}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -61,8 +61,12 @@
                                             @csrf
                                         <div class="form-body">
                                             <div class="row">
+                                                       <!-- ------------------full address select,options ----------------------- -->
+                                                       @include('dashboard.admin.departments.select_full_address')
+                                                <!-- ----------------------------------------------------------------------- -->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <br>
                                                         <label for="eventRegInput1">{{ __('Admin/departments.depart_select') }}<span class="text-danger">*</span></label>
                                                          <select class="custom-select" id="customSelect" name="parent_id" required>
                                                          <option value='0' <?php if($depart->parent_id == NULL){echo'selected';}?>>{{ __('Admin/departments.depart_main_type') }}</option>
@@ -98,28 +102,8 @@
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                         @enderror
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/departments.depart_country') }}<span class="text-danger">*</span></label>
-                                                        <select class="custom-select" id="customSelect" name="country_id" required >
-                                                             @foreach($country as $c)
-                                                                 <option value="{{$c->id}}" <?php if($c->id==$depart->country_id){echo'selected';}else{}?>>{{$c->name}}</option>
-                                                             @endforeach
-                                                         </select>
-                                                         @error('country_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/departments.depart_state') }}<span class="text-danger">*</span></label>
-                                                         <select class="custom-select" id="customSelect" name="state_id" required >
-                                                             @foreach($state as $s)
-                                                                 <option value="{{$s->id}}" <?php if($s->id==$depart->state_id){echo'selected';}else{}?>>{{$s->name}}</option>
-                                                             @endforeach
-                                                         </select>
-                                                        @error('state_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
-                                                    </div>
+                                                   
+                                                 
                                                 </div>
                                                 
                                                 <div class="col-md-6">
@@ -132,18 +116,19 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="eventRegInput4">{{ __('Admin/departments.depart_keyword') }}<span class="text-danger">*</span></label>
-                                                        <textarea id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_keyword') }}" name="keyword">{{ $depart->keyword }}</textarea>
+                                                        <textarea id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_keyword') }}" name="keyword">
+                                                            <?php
+                                                            $f_step=str_replace('<span class="badge bg-secondary">'," ",$depart->keyword) ;
+                                                            $s_step= str_replace('</span>'," ",$f_step) ;
+                                                            echo str_replace('<br/>',"\n\r",$s_step) ;
+                                                            ?>
+                                                          
+                                                        </textarea>
                                                         @error('keyword')
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                         @enderror
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput4">{{ __('Admin/departments.depart_slug') }}<span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/departments.depart_slug') }}" name="slug" value="{{ $depart->slug }}" required>
-                                                        @error('slug')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
-                                                    </div>
+                                                  
                                                     
                                                 </div>
                                                 <input type="hidden" name="id" value="{{$depart->id}}"/>
@@ -170,6 +155,10 @@
 
 @endsection
 @section('js')
+
+<!-- add script for categories and changes on it -->
+<!-- <script src="{{ URL::asset('/js/full_address/select_script.js') }}"></script> -->
+
     <script type="text/javascript">
 
         var loadFile = function (event) {
@@ -195,5 +184,191 @@
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- ------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------- -->
+<script>
+$(document).ready(function () {
+
+//---------------show all province of selected country------------------------//
+
+$('select[name="country_id"]').on('click', function () {
+
+   var country_id = $(this).val();
+   if(country_id==''){
+       $('#province_id').empty();
+     //  $('#province_id').append('<option disabled >-- اختر من القائمه --</option>');
+   }
+
+   $('#area_id').empty();
+   $('#state_id').empty();
+   $('#village_id').empty();
+   
+   $.ajax({
+       type: "GET",
+       
+       url: "{{ URL::to('dashboard_admin/fetch_provience')}}/" + country_id,
+       //url: "../../fetch_provience/" + country_id,
+       
+       dataType: "json",
+       success: function (data)
+       {
+          // alert(data);
+          $('#province_id').empty();
+           if(data!='')
+           { 
+               $.each(data, function (key, value) {
+                   //alert('<option value="' + key + '">' + value + '</option>');
+               $('#province_id').append('<option value="' + key + '">' + value + '</option>');
+               });
+           }
+           else
+           {
+               $('#province_id').append('<option disabled >'+ __('Admin/departments.no_province') +'</option>');
+           }
+           
+
+       },
+       error:function()
+       { /*alert("false");*/ }
+   });
+});
+
+//---------------show all area of selected provinece------------------------//
+
+$('select[name="province_id"]').on('click', function () {
+
+   var province_id = $(this).val();
+   if(province_id==''){
+       $('#area_id').empty();
+      // $('#area_id').append('<option value="" selected="true">-- اختر من القائمه --</option>');
+   }
+
+   $('#state_id').empty();
+   $('#village_id').empty();
+   
+   $.ajax({
+       type: "GET",
+       
+       url: "{{ URL::to('dashboard_admin/fetch_area')}}/" + province_id,
+    //    url: "../../fetch_area/" + province_id,
+       
+       dataType: "json",
+       success: function (data)
+       {
+          // alert(data);
+
+          $('#area_id').empty();
+          
+           if(data!='')
+           {          
+               $.each(data, function (key, value) {
+                   //alert('<option value="' + key + '">' + value + '</option>');
+               $('#area_id').append('<option value="' + key + '">' + value + '</option>');
+               });
+           }
+           else
+           {
+               $('#area_id').append('<option disabled> '+ __('Admin/departments.no_area') +'</option>');
+           }
+           
+
+       },
+       error:function()
+       { /*alert("false");*/ }
+   });
+});
+
+//---------------show all state of selected area------------------------//
+
+$('select[name="area_id"]').on('click', function () {
+
+   var area_id = $(this).val();
+   if(area_id==''){
+       $('#state_id').empty();
+      // $('#state_id').append('<option value="" selected="true">-- اختر من القائمه --</option>');
+   }
+
+   $('#village_id').empty();
+   $.ajax({
+       type: "GET",
+       
+       url: "{{ URL::to('dashboard_admin/fetch_state')}}/" + area_id,
+    //    url: "../../fetch_state/" + area_id,
+    
+       dataType: "json",
+       success: function (data)
+       {
+          // alert(data);
+          $('#state_id').empty(); 
+           if(data!='')
+           {          
+               $.each(data, function (key, value) {
+                   //alert('<option value="' + key + '">' + value + '</option>');
+               $('#state_id').append('<option value="' + key + '">' + value + '</option>');
+               });
+           }
+           else
+           {
+               $('#state_id').append('<option disabled> '+ __('Admin/departments.no_state') +'</option>');
+           }
+           
+
+       },
+       error:function()
+       { /*alert("false");*/ }
+   });
+});
+
+//---------------show all village of selected state------------------------//
+
+$('select[name="state_id"]').on('click', function () {
+
+   var state_id = $(this).val();
+   if(state_id==''){
+       $('#village_id').empty();
+      // $('#village_id').append('<option value="" selected="true">-- اختر من القائمه --</option>');
+   }
+
+   $.ajax({
+       type: "GET",
+
+       url: "{{ URL::to('dashboard_admin/fetch_village')}}/" + state_id,
+    //    url: "../../fetch_village/" + state_id,
+    
+       dataType: "json",
+       success: function (data)
+       {
+          // alert(data);
+          $('#village_id').empty(); 
+           if(data!='')
+           {            
+               $.each(data, function (key, value) {
+                   //alert('<option value="' + key + '">' + value + '</option>');
+               $('#village_id').append('<option value="' + key + '">' + value + '</option>');
+               });
+           }
+           else
+           {
+               $('#village_id').append('<option disabled> '+ __('Admin/departments.no_village') +'</option>');
+           }
+           
+
+       },
+       error:function()
+       { /*alert("false");*/ }
+   });
+});
+
+
+
+
+
+
+});
+</script>
+<!-- ------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------- -->
+
 @endsection
 

@@ -33,4 +33,9 @@ class AttributeController extends Controller {
     public function destroy($id) {
         return $this->Data->destroy($id);
     }// end of destroy
+
+    public function bulkDelete(Request $request)
+    {
+        return $this->Data->bulkDelete($request);
+    }
 }

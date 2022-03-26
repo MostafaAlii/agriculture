@@ -8,7 +8,7 @@ class AttributeRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name' =>'required|string|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|unique:attribute_translations,name,' . $this->id
+            'name' =>'required|string|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|unique:attribute_translations,name,' . $this->id
         ];
     }
 

@@ -1,9 +1,12 @@
 <?php
 namespace Database\Seeders;
 use App\Models\Admin;
+use App\Models\Area;
 use App\Models\Country;
 use App\Models\Department;
+use App\Models\Province;
 use App\Models\State;
+use App\Models\Village;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 class DepartmentSeeder extends Seeder {
@@ -35,7 +38,10 @@ class DepartmentSeeder extends Seeder {
                 'description'   => $department_descriptions[$i],
                 'keyword'       => $department_keywords[$i],
                 'country_id'    => Country::all()->random()->id,
+                'province_id'   => Province::all()->random()->id,
+                'area_id'       => Area::all()->random()->id,
                 'state_id'      => State::all()->random()->id,
+                'village_id'    => Village::all()->random()->id,
             ]);
         }
     }

@@ -31,7 +31,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
-                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.save') }}</button>
+                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.delete') }}</button>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
-                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.save') }}</button>
+                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.delete') }}</button>
                         </div>
                     </div>
                 </div>
