@@ -78,6 +78,7 @@
                                                     </th>
                                                     <th>{{ __('Admin/options.options_name') }}</th>
                                                     <th>{{ __('Admin/options.attribute') }}</th>
+                                                    <th>{{ __('Admin/options.price') }}</th>
                                                     <th>{{ __('Admin/options.product') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -126,9 +127,10 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name', searchable: false, sortable: false},
-            {data: 'attribute', name: 'attribute', searchable: false, sortable: false},
-            {data: 'product', name: 'product', searchable: false, sortable: false},
+            {data: 'name', name: 'name',sortable: false},
+            {data: 'attribute', name: 'attribute', sortable: false},
+            {data: 'price', name: 'price'},
+            {data: 'product', name: 'product',sortable: false},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

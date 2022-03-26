@@ -49,6 +49,7 @@ class OptionRepository implements OptionInterface{
             $options=new Option();
 
             $options->attribute_id=$request->attribute_id;
+            $options->price=$request->price;
             $options->product_id=$request->product_id;
             $options->save();
            
@@ -82,11 +83,12 @@ class OptionRepository implements OptionInterface{
 
         $options=Option::findOrfail($real_id);
         $options->attribute_id=$request->attribute_id;
-            $options->product_id=$request->product_id;
-            $options->save();
-           
-            $options->name=$request->name;
-            $options->save();
+        $options->price=$request->price;
+        $options->product_id=$request->product_id;
+        $options->save();
+        
+        $options->name=$request->name;
+        $options->save();
         
         toastr()->success(__('Admin/options.updated_done'));
         return redirect()->route('Options.index');

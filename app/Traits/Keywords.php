@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Traits;
-
 trait Keywords
 {
     public function handel_keyword($keyword) {
@@ -16,7 +13,5 @@ trait Keywords
        }
        // then convert array to string to be stored in db
        return implode($new_keys);
-
     }
-    
 }

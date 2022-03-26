@@ -20,6 +20,8 @@ return[
     'all_product'                    =>' المنتجات',
     'error_occure'                   =>' حدث مشكله اثناء الاضافه',
     'cant_delete'                    =>'لا يمكن الحذف',
-    
+    'options_price'                 =>'سعر القيمة',
+    'options_add_opt_price'         =>'ادخل سعر القيمة',
+    'price'                         =>'السعــر',
 ];
 ?>

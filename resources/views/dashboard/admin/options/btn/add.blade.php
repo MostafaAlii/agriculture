@@ -20,6 +20,14 @@
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>
+
+                    <div class="form-group">
+                        <label><i class="material-icons">attach_money</i> {{ trans('Admin/options.options_price') }}</label>
+                        <input type="number" name="price" class="form-control" placeholder="{{ trans('Admin/options.options_add_opt_price') }}" />
+                        @error('price')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
                     
                     <div class="form-group">
                         <label>{{ __('Admin/options.attribute') }}</label>
