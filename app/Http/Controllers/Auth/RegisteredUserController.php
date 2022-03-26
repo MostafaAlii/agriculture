@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Notification;
 
 class RegisteredUserController extends Controller
 {
@@ -29,7 +30,7 @@ class RegisteredUserController extends Controller
             'email'        => $request->email,
             'password'     => bcrypt($request->password),
         ]);
-
+        Notification::send($user, new \App\Notifications\NewUser($user));
         event(new Registered($user));
 
         auth('vendor')->login($user);

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-
+use Illuminate\Support\Facades\Notification;
 class RegisteredFarmerController extends Controller
 {
 
@@ -33,7 +33,7 @@ class RegisteredFarmerController extends Controller
             'email'        => $request->email,
             'password'     => bcrypt($request->password),
         ]);
-
+        Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
         event(new Registered($farmer));
 
         Auth::login($farmer);
