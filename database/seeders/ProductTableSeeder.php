@@ -1,14 +1,14 @@
 <?php
 namespace Database\Seeders;
-use App\Models\Attribute;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-class AttributeTableSeeder extends Seeder {
+class ProductTableSeeder extends Seeder {
     public function run() {
         Schema::disableForeignKeyConstraints();
-        DB::table('attributes')->truncate();
-        Attribute::factory()->count(3500)->create();
+        DB::table('products')->truncate();
+        Product::factory()->count(3500)->create();
         Schema::enableForeignKeyConstraints();
     }
 }

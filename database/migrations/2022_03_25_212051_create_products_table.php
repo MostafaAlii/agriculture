@@ -20,6 +20,11 @@ class CreateProductsTable extends Migration {
             $table->integer('viewed')->unsigned()->default(0);
             $table->boolean('status');
             $table->foreignId('farmer_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('province_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('area_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('state_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('village_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

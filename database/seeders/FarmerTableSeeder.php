@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 
 class FarmerTableSeeder extends Seeder {
     public function run() {
-        DB::table('users')->delete();
+        DB::table('farmers')->delete();
         Farmer::create([
             'Firstname'       =>  'MostafaF',
             'lastname'        => 'Ali',
