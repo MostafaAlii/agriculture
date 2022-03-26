@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use App\Traits\UploadT;
+use Illuminate\Support\Facades\Notification;
 class FarmerRepository implements FarmerInterface{
     use UploadT;
     public function index() {
@@ -45,6 +46,8 @@ class FarmerRepository implements FarmerInterface{
             Farmer::create($requestData);
             $farmer = Farmer::latest()->first();
             $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
+            
+            Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('farmers.index');

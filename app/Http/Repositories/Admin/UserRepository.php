@@ -9,6 +9,7 @@ use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
 
 class UserRepository implements UserInterface{
     use UploadT;
@@ -47,6 +48,7 @@ class UserRepository implements UserInterface{
             User::create($requestData);
             $user = User::latest()->first();
             $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
+            Notification::send($user, new \App\Notifications\NewUser($user));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('users.index');

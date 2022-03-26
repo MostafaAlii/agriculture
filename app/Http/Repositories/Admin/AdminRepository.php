@@ -7,6 +7,7 @@ use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 class AdminRepository implements AdminInterface{
     use UploadT;
     public function index() {
@@ -56,6 +57,10 @@ class AdminRepository implements AdminInterface{
             Admin::create($requestData);
             $admin = Admin::latest()->first();
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
+
+            // $admin = Admin::latest()->first();
+            Notification::send($admin, new \App\Notifications\NewAdmin($admin));
+            
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Admins.index');
