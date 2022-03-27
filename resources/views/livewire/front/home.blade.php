@@ -11,17 +11,16 @@
             <div class="promo-banners">
                 <div class="__inner">
                     <div class="row">
+                        @foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
                         <div class="col-12 col-md-6 col-lg-4">
+                            @if($blog->image->filename)
+                            <a class="__item" href="{{ route('blogdetails',$blog->id) }}"><img src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
+                                alt="demo" class="img-fluid " style="width:620px; height:210px" /></a>
+                            @else
                             <a class="__item" href="#"><img src="{{ asset('frontassets/img/promo-banners_img/1.jpg') }}" alt="demo" class="img-fluid w-100" /></a>
+                            @endif
                         </div>
-
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <a class="__item" href="#"><img src="{{ asset('frontassets/img/promo-banners_img/2.jpg') }}" alt="demo" class="img-fluid w-100" /></a>
-                        </div>
-
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <a class="__item" href="#"><img src="{{ asset('frontassets/img/promo-banners_img/3.jpg') }}" alt="demo" class="img-fluid w-100" /></a>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -1098,7 +1097,7 @@
     </section>
     <!-- end section -->
 
-    <!-- start section -->
+    <!-- start section blog-->
     <section class="section section--no-pt section--no-pb">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
@@ -1126,9 +1125,9 @@
                                     @endif
                                 </figure>
                                 <div class="__content">
-                                    <p class="__category"><a href="#">{{ $blog->admin->firstname }}</a></p>
+                                    <p class="__category"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->admin->firstname }}</a></p>
 
-                                    <h3 class="__title h5"><a href="blog_details.html">{{ $blog->title }}</a></h3>
+                                    <h3 class="__title h5"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->title }}</a></h3>
 
                                     <p>
                                         {{ Str::limit($blog->body,50,) }}
@@ -1143,58 +1142,6 @@
                             </div>
                         </div>
                         @endforeach
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        {{-- <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="200" data-aos-offset="0">
-                                <figure class="__image">
-                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/posts_img/2.jpg') }}" alt="demo" />
-                                </figure>
-
-                                <div class="__content">
-                                    <p class="__category"><a href="#">DIET/ORGANIC FOOD</a></p>
-
-                                    <h3 class="__title h5"><a href="blog_details.html">Health Benefits of a Raw Food</a></h3>
-
-                                    <p>
-                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                    </p>
-
-                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="blog_details.html">Read more</a>
-                                </div>
-
-                                <span class="__date-post">
-                                    <strong>03</strong>Nov
-                                </span>
-                            </div>
-                        </div> --}}
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        {{-- <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="300" data-aos-offset="0">
-                                <figure class="__image">
-                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/posts_img/3.jpg') }}" alt="demo" />
-                                </figure>
-
-                                <div class="__content">
-                                    <p class="__category"><a href="#">DIET/ORGANIC FOOD</a></p>
-
-                                    <h3 class="__title h5"><a href="blog_details.html">Superfoods you should be eating</a></h3>
-
-                                    <p>
-                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                    </p>
-
-                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="blog_details.html">Read more</a>
-                                </div>
-
-                                <span class="__date-post">
-                                    <strong>25</strong>oct
-                                </span>
-                            </div>
-                        </div> --}}
                         <!-- end item -->
                     </div>
                 </div>

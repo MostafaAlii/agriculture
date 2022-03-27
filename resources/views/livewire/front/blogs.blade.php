@@ -30,8 +30,8 @@
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="#">{{ $blog->admin->firstname }}</a></p>
-                                        <h3 class="__title h5"><a href="#">{{ $blog->title }}</a></h3>
+                                        <p class="__category"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->admin->firstname }}</a></p>
+                                        <h3 class="__title h5"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->title }}</a></h3>
                                         <p>{{ Str::limit($blog->body,50,) }}</p>
                                     </div>
                                     <span class="__date-post">
@@ -42,125 +42,7 @@
                             <!-- end item -->
                         @endforeach
                         {{-- {{ $blogs->links() }} --}}
-                        {{-- <!-- start item -->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="__item __item--preview">
-                                <figure class="__image">
-                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
-                                </figure>
 
-                                <div class="__content">
-                                    <p class="__category"><a href="#">DIET/ORGANIC FOOD</a></p>
-
-                                    <h3 class="__title h5"><a href="blog_details.html">Health Benefits of a Raw Food</a></h3>
-
-                                    <p>
-                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                    </p>
-                                </div>
-
-                                <span class="__date-post">
-                                    <strong>03</strong>Nov
-                                </span>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="__item __item--preview">
-                                <figure class="__image">
-                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
-                                </figure>
-
-                                <div class="__content">
-                                    <p class="__category"><a href="#">DIET/ORGANIC FOOD</a></p>
-
-                                    <h3 class="__title h5"><a href="blog_details.html">Superfoods you should be eating</a></h3>
-
-                                    <p>
-                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                    </p>
-                                </div>
-
-                                <span class="__date-post">
-                                    <strong>25</strong>Oct
-                                </span>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="__item __item--preview">
-                                <figure class="__image">
-                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
-                                </figure>
-
-                                <div class="__content">
-                                    <p class="__category"><a href="#">ORGANIC FOOD/TIPS & GUIDES</a></p>
-
-                                    <h3 class="__title h5"><a href="blog_details.html">Tips for Ripening your Fruit</a></h3>
-
-                                    <p>
-                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                    </p>
-                                </div>
-
-                                <span class="__date-post">
-                                    <strong>07</strong>Nov
-                                </span>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="__item __item--preview">
-                                <figure class="__image">
-                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
-                                </figure>
-
-                                <div class="__content">
-                                    <p class="__category"><a href="#">DIET/ORGANIC FOOD</a></p>
-
-                                    <h3 class="__title h5"><a href="blog_details.html">Health Benefits of a Raw Food</a></h3>
-
-                                    <p>
-                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                    </p>
-                                </div>
-
-                                <span class="__date-post">
-                                    <strong>03</strong>Nov
-                                </span>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="__item __item--preview">
-                                <figure class="__image">
-                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
-                                </figure>
-
-                                <div class="__content">
-                                    <p class="__category"><a href="#">DIET/ORGANIC FOOD</a></p>
-
-                                    <h3 class="__title h5"><a href="blog_details.html">Superfoods you should be eating</a></h3>
-
-                                    <p>
-                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                    </p>
-                                </div>
-
-                                <span class="__date-post">
-                                    <strong>25</strong>oct
-                                </span>
-                            </div>
-                        </div>
-                        <!-- end item --> --}}
                     </div>
                 </div>
             </div>

@@ -536,7 +536,7 @@
         </section>
         <!-- end section -->
 
-        <!-- start section -->
+        <!-- start section blog-->
         <section class="section section--no-pb">
             <div class="container">
                 <div class="section-heading section-heading--center" data-aos="fade">
@@ -547,7 +547,7 @@
                     <div class="__inner">
                         <div class="row">
                             <!-- start item -->
-                            @foreach (\App\Models\Blog::limit(3)->get() as $blog)
+                            @foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="100" data-aos-offset="0">
                                     <figure class="__image">
@@ -561,9 +561,9 @@
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="#">{{ $blog->admin->firstname }}</a></p>
+                                        <p class="__category"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->admin->firstname }}</a></p>
 
-                                        <h3 class="__title h5"><a href="blog_details.html">{{ $blog->title }}</a></h3>
+                                        <h3 class="__title h5"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->title }}</a></h3>
 
                                         <p>
                                             {{ Str::limit($blog->body,50,) }}

@@ -18,7 +18,8 @@ Route::group(
         route::get('/home2',Livewire\front\Home::class)->name('front2');               //home2
         route::get('/shop',Livewire\front\shop::class)->name('shop');                   //shop
         route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');          // about us
-        route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                 // blog
+        route::get('/blogs',Livewire\front\Blogs::class)->name('blog');               // blog
+        Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');      // contact us
 
 

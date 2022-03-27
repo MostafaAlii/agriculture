@@ -30,5 +30,7 @@ return [
     // endcontact us page translation *******************************************
    //section blog *********************************************************
    'readmore'                => 'Read More',
+   'blogdetails'             => 'Blog Details',
+
    //End section blog *********************************************************
 ];

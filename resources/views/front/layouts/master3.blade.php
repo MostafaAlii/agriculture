@@ -12,7 +12,8 @@
 			<!-- end header -->
 
 			<!-- start hero -->
-			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%" style="background-image: url({{ URL::asset('frontassets/img/intro_img/1.jpg') }});">
+			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
+            style="background-image: url({{ asset('Dashboard/img/images/100.jpg')}});">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-lg-7">
