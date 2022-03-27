@@ -22,7 +22,7 @@ class SettingRequest extends FormRequest
 
 
         return [
-            'support_mail' => 'sometime|nullable|email',
+            'support_mail' => 'sometimes|nullable|email',
 
             'primary_phone' => 'required|numeric',
             'secondery_phone' => 'required|numeric',
