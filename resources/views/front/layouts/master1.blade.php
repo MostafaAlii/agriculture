@@ -170,15 +170,15 @@
 								<nav id="footer__navigation" class="navigation">
 									<div class="row">
 										<div class="col-6 col-sm-4">
-											<h5 class="footer__item__title h6">Menu</h5>
+											<h5 class="footer__item__title h6">{{ __('website\home.menu')}}</h5>
 
 											<ul>
-												<li class="active"><a href="index.html">Home</a></li>
-												<li><a href="#">About</a></li>
-												<li><a href="#">Pages</a></li>
-												<li><a href="#">Gallery</a></li>
-												<li><a href="#">Blog</a></li>
-												<li><a href="#">Contacts</a></li>
+                                                <li  class="active" > <a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
+                                                <li                 > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
+                                                <li> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
+                                                <li> <a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a> </li>
+                                                <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
+                                                <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
 											</ul>
 										</div>
 
@@ -214,7 +214,7 @@
 
 						<div class="col-12 col-md col-lg-4">
 							<div class="footer__item">
-								<h5 class="footer__item__title h6">Contacts</h5>
+								<h5 class="footer__item__title h6">{{ __('website\home.contactus') }}</h5>
 
                                 <address>
                                     <p>

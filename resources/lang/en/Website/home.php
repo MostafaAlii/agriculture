@@ -9,6 +9,7 @@ return [
     'blog'                 => 'Blog',
     'aboutus'              => ' About Us',
     'contactus'            => 'Contact Us',
+    'menu'                 =>   ' Menu',
     'login'                => 'Login',
     'logout'               => 'Log Out',
     'dashboard'            => 'Dashboard',
