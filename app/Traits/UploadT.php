@@ -1,11 +1,9 @@
 <?php
-
-
 namespace App\Traits;
 use App\Models\Image;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 trait UploadT
 {
     public function verifyAndStoreImage(Request $request, $inputname , $foldername , $disk, $imageable_id, $imageable_type) {
@@ -19,7 +17,7 @@ trait UploadT
             }
 
             $photo = $request->file($inputname);
-            $name = \Str::slug($request->input('name'));
+            $name = Str::slug($request->input('name')) . time();
             $filename = $name. '.' . $photo->getClientOriginalExtension();
 
 
@@ -47,7 +45,7 @@ trait UploadT
             }
 
             $photo = $request->file($inputname);
-            $name = \Str::slug($request->input('firstname').$request->input('lastname'));
+            $name = Str::slug($request->input('firstname').$request->input('lastname'));
             $filename = $name. '.' . $photo->getClientOriginalExtension();
 
 

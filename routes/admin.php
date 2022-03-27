@@ -1,7 +1,6 @@
 <?php
 use App\Http\Livewire;
 use App\Http\Controllers\front;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\TagController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
@@ -21,6 +20,9 @@ use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use App\Http\Controllers\Dashboard\Admin\ProvienceController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 use App\Http\Controllers\Dashboard\Admin\FetchAddressController;
+use App\Http\Controllers\Dashboard\Admin\ProductController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -157,9 +159,13 @@ Route::group(
                 Route::resource('/Options', OptionController::class);
                 Route::get('/option_data', [OptionController::class,'data'])->name('option_data');
                 Route::delete('/Options/bulk_delete/{ids}', [OptionController::class,'bulkDelete'])->name('options.bulk_delete');
-
                 /********************************* End Options Routes ************************************/
 
+                /********************************* Start Products Routes ************************************/
+                Route::group(['prefix' => 'Products'], function () {
+                    Route::get('/',[ProductController::class, 'index']) -> name('products');
+                    Route::match(['get', 'post'], '/create',[ProductController::class, 'create'])->name('products.generalInformation');    
+                });
+                /********************************* End Products Routes ************************************/
         });
-
     });

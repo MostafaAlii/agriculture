@@ -25,7 +25,7 @@
     <script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js')}}"></script>
     <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}"></script>
-
+    <script src="{{asset('assets/admin/vendors/js/forms/toggle/switchery.min.js')}}" type="text/javascript"></script>
     @toastr_js
     @toastr_render
     {{-- image preview --}}

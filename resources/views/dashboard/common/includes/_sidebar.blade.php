@@ -175,9 +175,9 @@
                             </a>
                         </li>
                         <!-- End tag -->
-
                     </ul>
                 </li>
+
                 <!-- Start Attributes Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
@@ -197,6 +197,25 @@
                 </li>
                 <!-- End Attributes Dropdown Menu -->
 
+                <!-- Start Product Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">grain</i>
+                        <span class="menu-title" data-i18n=""> {{ trans('Admin/products.product_title_in_sidebar') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start Product -->
+                        <li>
+                            <a class="menu-item" href="{{ route('products') }}">
+                                <i class="material-icons">grain</i>
+                                <span data-i18n=""> {{ trans('Admin/products.product_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Product -->
+                    </ul>
+                </li>
+                <!-- End Product Dropdown Menu -->
+                
                 <!-- Start options Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">

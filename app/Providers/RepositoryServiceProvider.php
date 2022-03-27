@@ -17,6 +17,7 @@ use App\Http\Interfaces\Admin\BlogInterface;
 use App\Http\Interfaces\Admin\TagInterface;
 use App\Http\Interfaces\Admin\AttributeInterface;
 use App\Http\Interfaces\Admin\OptionInterface;
+use App\Http\Interfaces\Admin\ProductInterface;
 
 use App\Http\Repositories\Admin\SettingRepository;
 use App\Http\Repositories\Admin\AreaRepository;
@@ -34,6 +35,7 @@ use App\Http\Repositories\Admin\BlogRepository;
 use App\Http\Repositories\Admin\TagRepository;
 use App\Http\Repositories\Admin\AttributeRepository;
 use App\Http\Repositories\Admin\OptionRepository;
+use App\Http\Repositories\Admin\ProductRepository;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -62,6 +64,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(TagInterface::class, TagRepository::class);
         $this->app->bind(AttributeInterface::class, AttributeRepository::class);
         $this->app->bind(OptionInterface::class, OptionRepository::class);
+        $this->app->bind(ProductInterface::class, ProductRepository::class);
     }
 
     public function boot()
