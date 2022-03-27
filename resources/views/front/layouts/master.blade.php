@@ -317,15 +317,15 @@
 											slides = [
 												{
 													name: "img 1",
-													src: "{{ asset('frontassets/img/home_img/img_1.jpg')}}"
+													src: "{{ asset('Dashboard/img/images/100.jpg')}}"
 												},
 												{
 													name: "img 2",
-													src: "{{ asset('frontassets/img/home_img/img_2.jpg')}}"
+													src: "{{ asset('Dashboard/img/images/101.jpg')}}"
 												},
 												{
 													name: "img 3",
-													src: "{{ asset('frontassets/img/home_img/img_3.jpg')}}"
+													src: "{{ asset('Dashboard/img/images/102.jpg')}}"
 												}
 											],
 											slider_content = $('.start-screen__content__item'),

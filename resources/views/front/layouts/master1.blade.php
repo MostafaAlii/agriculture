@@ -22,25 +22,39 @@
 					"arrows": true,
 					"dots": false
 				}'>
-				<div class="start-screen__slide">
-					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_7.jpg') }});background-position: top 30% right 30%;"></div>
-					<div class="start-screen__content__item align-items-center">
-						<div class="container">
-							<div class="row">
-								<div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
-									<h2 class="__title"><span>Get the</span> Fresh Food <span>from our</span> Agro Market</h2>
 
-									<p>
-										<span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-1" href="#">Discover</a></span>
-										<span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-1" href="#">Discover</a></span>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="start-screen__slide">
+                @foreach (\App\Models\Slider::limit(3)->get() as $slider)
+                    <div class="start-screen__slide">
+                        <div class="start-screen__bg"
+                        style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});
+                        background-position: top 30% right 30%;"></div>
+                        <div class="start-screen__content__item align-items-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
+                                        <h3 class="__title" style="color:#fff;">
+                                            {{ $slider->title }}
+                                        </h3>
+                                        <h4 style="background-color:rgb(169, 202, 20)">{{ $slider->subtitle }}</h4>
+                                        <p>
+                                            <span class="d-none d-sm-block">
+                                                <a class="custom-btn custom-btn--big custom-btn--style-1" href="#">
+                                                    Discover
+                                                </a>
+                                            </span>
+                                            <span class="d-block d-sm-none" >
+                                                <a class="custom-btn custom-btn--small custom-btn--style-1" href="#" >
+                                                    Discover
+                                                </a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+				{{-- <div class="start-screen__slide">
 					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_8.jpg') }});background-position: top 30% left 70%;"></div>
 
 					<div class="start-screen__content__item align-items-center">
@@ -61,9 +75,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 
-				<div class="start-screen__slide">
+				{{-- <div class="start-screen__slide">
 					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_9.jpg') }});"></div>
 
 					<div class="start-screen__content__item align-items-center">
@@ -84,7 +98,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 			<!-- end start screen -->
 
