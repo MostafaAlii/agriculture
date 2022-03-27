@@ -73,7 +73,7 @@
                         <!-- End Settings -->
                         <!-- Start Sliders -->
                         <li>
-                            <a class="menu-item" href="{{ route('sliders.create') }}">
+                            <a class="menu-item" href="{{ route('sliders.index') }}">
                                 <i class="material-icons">photo_library</i>
                                 <span data-i18n="Sliders">{{ trans('Admin/sliders.sliderPageTitle') }}</span>
                             </a>
@@ -215,7 +215,7 @@
                     </ul>
                 </li>
                 <!-- End Product Dropdown Menu -->
-                
+
                 <!-- Start options Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
@@ -234,7 +234,7 @@
                     </ul>
                 </li>
                 <!-- End options Dropdown Menu -->
-                
+
                 {{-- <!-- End Department Dropdown Menu -->
                 <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title" data-i18n="Templates">Templates</span></a>
                     <ul class="menu-content">

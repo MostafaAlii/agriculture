@@ -114,4 +114,7 @@ return [
     'admins'=>'Admins',
     'employees'=>'Employees',
     'departments'=>'Departments',
+
+    'slider'=>'Slider',
+    'newslider'=>'New Slider',
 ];

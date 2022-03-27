@@ -124,13 +124,7 @@ Route::group(
             Route::get('/Departments/data', [DepartmentController::class,'data'])->name('departments.data');
             Route::delete('/Departments/bulk_delete/{ids}', [DepartmentController::class,'bulkDelete'])->name('departments.bulk_delete');
             /********************************* End Department Routes ************************************/
-            /********************************* Department Routes ************************************/
-            Route::group(['prefix' => 'Sliders'], function () {
-                Route::get('/', [SliderController::class, 'addImages'])->name('sliders.create');
-                Route::post('sliders', [SliderController::class, 'saveSliderImages'])->name('sliders.store');
-                Route::post('sliders/db', [SliderController::class, 'saveSliderImagesDB'])->name('sliders.store.db');
-            });
-            /********************************* End Department Routes ************************************/
+
             /********************************* Blog Routes ************************************/
             Route::resource('blogs', BlogController::class)->except(['show']);
             Route::get('/blogs/data', [BlogController::class,'data'])->name('blogs.data');
@@ -146,7 +140,7 @@ Route::group(
             Route::get('/Attributes/data', [AttributeController::class,'data'])->name('Attributes.data');
             Route::delete('/Attributes/bulk_delete/{ids}', [AttributeController::class,'bulkDelete'])->name('attributes.bulk_delete');
             /********************************* End Tags Routes ************************************/
-        
+
             /********************************* Address Routes ************************************/
                 //-------------------when change on any select-------------------
                 Route::GET('/fetch_provience/{country_id}',[FetchAddressController::class,'fetch_provience']);
@@ -164,8 +158,19 @@ Route::group(
                 /********************************* Start Products Routes ************************************/
                 Route::group(['prefix' => 'Products'], function () {
                     Route::get('/',[ProductController::class, 'index']) -> name('products');
-                    Route::match(['get', 'post'], '/create',[ProductController::class, 'create'])->name('products.generalInformation');    
+                    Route::match(['get', 'post'], '/create',[ProductController::class, 'create'])->name('products.generalInformation');
                 });
                 /********************************* End Products Routes ************************************/
+
+                     /********************************* Slider Routes ************************************/
+            // Route::group(['prefix' => 'Sliders'], function () {
+                // Route::get('/', [SliderController::class, 'addImages'])->name('sliders.create');
+                // Route::post('sliders', [SliderController::class, 'saveSliderImages'])->name('sliders.store');
+                // Route::post('sliders/db', [SliderController::class, 'saveSliderImagesDB'])->name('sliders.store.db');
+            // });
+            Route::resource('sliders', SliderController::class)->except(['show']);
+            Route::get('/sliders/data', [SliderController::class,'data'])->name('sliders.data');
+            Route::delete('/sliders/bulk_delete/{ids}', [SliderController::class,'bulkDelete'])->name('sliders.bulk_delete');
+            /********************************* End Slider Routes ************************************/
         });
     });
