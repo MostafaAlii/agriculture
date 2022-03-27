@@ -109,4 +109,7 @@ return [
     'admins'=>'المدراء',
     'employees'=>'الموظفين',
     'departments'=>'الاقسام',
+
+    'slider'=>'صور متحركه',
+    'newslider'=>'صوره متحركه جديده',
 ];
