@@ -1133,7 +1133,7 @@
                                         {{ Str::limit($blog->body,50,) }}
                                     </p>
 
-                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="blog_details.html">{{ __('website\home.readmore')}}</a>
+                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('blogdetails',$blog->id) }}">{{ __('website\home.readmore')}}</a>
                                 </div>
 
                                 <span class="__date-post">
