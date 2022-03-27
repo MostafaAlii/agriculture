@@ -23,7 +23,7 @@
 					"dots": false
 				}'>
 
-                @foreach (\App\Models\Slider::limit(3)->get() as $slider)
+                @foreach (\App\Models\Slider::get() as $slider)
                     <div class="start-screen__slide">
                         <div class="start-screen__bg"
                         style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});

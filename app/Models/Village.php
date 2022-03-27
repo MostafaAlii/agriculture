@@ -1,9 +1,11 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Village extends Model {
     use HasFactory,Translatable;
     protected $table = "villages";
@@ -14,5 +16,10 @@ class Village extends Model {
 
     public function state(): BelongsTo {
         return $this->belongsTo(State::class);
+    }
+
+    // Village Has Many Product ::
+    public function products(): HasMany {
+        return $this->hasMany(Product::class);
     }
 }
