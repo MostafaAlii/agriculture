@@ -28,5 +28,7 @@ return [
     'comment'             => 'Your Comment',
     'send'                => 'Send',
     // endcontact us page translation *******************************************
-
+   //section blog *********************************************************
+   'readmore'                => 'Read More',
+   //End section blog *********************************************************
 ];
