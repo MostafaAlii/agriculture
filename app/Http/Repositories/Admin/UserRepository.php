@@ -54,7 +54,8 @@ class UserRepository implements UserInterface{
             return redirect()->route('users.index');
          } catch (\Exception $e) {
              DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+             toastr()->error(__('Admin/site.sorry'));
+             return redirect()->back();
          }
     }
 
@@ -81,7 +82,8 @@ class UserRepository implements UserInterface{
             return redirect()->route('users.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 
@@ -94,20 +96,14 @@ class UserRepository implements UserInterface{
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('users.index');
         } catch (\Exception $e) {
-           return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 
 
     public function bulkDelete($request)
     {
-        // return "hello";
-        // foreach (json_decode(request()->record_ids) as $recordId) {
-
-        //     $user = User::FindOrFail($recordId);
-        //     $this->delete($user);
-        // }//end of for each
-        // dd($request->delete_select_id);
         if($request->delete_select_id){
                 $delete_select_id = explode(",",$request->delete_select_id);
                 foreach($delete_select_id as $users_ids){
@@ -123,7 +119,6 @@ class UserRepository implements UserInterface{
         User::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('users.index');
-        // return response(__('site.deleted_successfully'));
 
     }// end of bulkDelete
 
@@ -151,7 +146,8 @@ class UserRepository implements UserInterface{
             return redirect()->route('users.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }// end of update
     public function updateInformation($request,$id) {
@@ -163,7 +159,8 @@ class UserRepository implements UserInterface{
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('users.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
 
     }// end of update

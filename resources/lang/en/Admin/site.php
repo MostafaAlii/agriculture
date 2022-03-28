@@ -11,6 +11,7 @@ return [
     'delete' => 'Delete',
     'action' => 'Action',
     'search' => 'Search',
+    'sorry' => 'Sorry !! there is error check again',
     'no_data_found' => 'Sorry no data found',
     'added_successfully' => 'Record added successfully',
     'updated_successfully' => 'Record updated successfully',

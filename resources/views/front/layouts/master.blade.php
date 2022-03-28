@@ -314,20 +314,23 @@
 									jQuery(document).ready(function($){
 
 										var slider = $('#vegas-slider'),
-											slides = [
-												{
-													name: "img 1",
-													src: "{{ asset('frontassets/img/home_img/img_1.jpg')}}"
-												},
-												{
-													name: "img 2",
-													src: "{{ asset('frontassets/img/home_img/img_2.jpg')}}"
-												},
-												{
-													name: "img 3",
-													src: "{{ asset('frontassets/img/home_img/img_3.jpg')}}"
-												}
-											],
+                                            // for (var i = 0; i < 3; i++) {
+                                                slides = [
+
+                                                    {
+                                                        name: "img 1",
+                                                        src: "{{ asset('Dashboard/img/sliders/100.jpg')}}"
+                                                    },
+                                                    {
+                                                        name: "img 2",
+                                                        src: "{{ asset('Dashboard/img/images/101.jpg')}}"
+                                                    },
+                                                    {
+                                                        name: "img 3",
+                                                        src: "{{ asset('Dashboard/img/images/102.jpg')}}"
+                                                    }
+                                                ],
+                                                    // }
 											slider_content = $('.start-screen__content__item'),
 											dots, a, x;
 
@@ -396,29 +399,30 @@
 				</div>
 
 				<div id="start-screen__content-container" class="start-screen__content-container  text-white">
-					<div class="start-screen__content__item start-screen__content__item--1  align-items-center">
-						<div class="container">
-							<div class="row justify-content-center">
-								<div class="col-12 col-md-10 col-xl-8">
-									<div class="__name">AgRO</div>
+                    @foreach (\App\Models\Slider::limit(3)->get() as $slider)
+                        <div class="start-screen__content__item start-screen__content__item--1  align-items-center">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-md-10 col-xl-8">
+                                        <div class="__name">AgRO</div>
 
-									<h2 class="__title text-white">Farming company</h2>
+                                        <h2 class="__title text-white"> {{ $slider->title }}</h2>
 
-									<p class="text-center">
-										The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English
-									</p>
+                                        <p class="text-center">
+                                            {{ $slider->subtitle }}
+                                        </p>
 
-									<p class="text-center mt-5 mt-md-10">
-										<span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-3" href="#">Discover</a></span>
+                                        <p class="text-center mt-5 mt-md-10">
+                                            <span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-3" href="#">Discover</a></span>
 
-										<span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-3" href="#">Discover</a></span>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="start-screen__content__item start-screen__content__item--2  align-items-center">
+                                            <span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-3" href="#">Discover</a></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+					{{-- <div class="start-screen__content__item start-screen__content__item--2  align-items-center">
 						<div class="container">
 							<div class="row align-items-center">
 								<div class="col-12 col-md col-lg-9 col-xl-8">
@@ -446,9 +450,9 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 
-					<div class="start-screen__content__item start-screen__content__item--3  align-items-center">
+					{{-- <div class="start-screen__content__item start-screen__content__item--3  align-items-center">
 						<div class="container">
 							<div class="row justify-content-center">
 								<div class="col-12 col-md-auto col-xl-8">
@@ -464,7 +468,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 				</div>
 
 				<span class="scroll-discover"></span>
@@ -584,12 +588,12 @@
 							<div class="footer__item">
 								<nav id="footer__navigation" class="navigation  text-lg-right">
 									<ul>
-										<li class="active"><a href="index.html">Home</a></li>
-										<li><a href="#">About</a></li>
-										<li><a href="#">Pages</a></li>
-										<li><a href="#">Gallery</a></li>
-										<li><a href="#">Blog</a></li>
-										<li><a href="#">Contacts</a></li>
+                                        <li  class="active" > <a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
+                                        <li                 > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
+                                        <li> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
+                                        <li> <a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a> </li>
+                                        <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
+                                        <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
 									</ul>
 								</nav>
 							</div>

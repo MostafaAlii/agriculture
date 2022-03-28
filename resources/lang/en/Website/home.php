@@ -9,6 +9,7 @@ return [
     'blog'                 => 'Blog',
     'aboutus'              => ' About Us',
     'contactus'            => 'Contact Us',
+    'menu'                 =>   ' Menu',
     'login'                => 'Login',
     'logout'               => 'Log Out',
     'dashboard'            => 'Dashboard',
@@ -27,5 +28,9 @@ return [
     'comment'             => 'Your Comment',
     'send'                => 'Send',
     // endcontact us page translation *******************************************
+   //section blog *********************************************************
+   'readmore'                => 'Read More',
+   'blogdetails'             => 'Blog Details',
 
+   //End section blog *********************************************************
 ];

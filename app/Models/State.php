@@ -22,4 +22,9 @@ class State extends Model {
     public function area(): BelongsTo {
         return $this->belongsTo(Area::class);
     }
+
+    // State Has Many Product ::
+    public function products(): HasMany {
+        return $this->hasMany(Product::class);
+    }
 }

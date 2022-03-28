@@ -22,26 +22,50 @@
 					"arrows": true,
 					"dots": false
 				}'>
-				<div class="start-screen__slide">
-					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_7.jpg') }});background-position: top 30% right 30%;"></div>
-					<div class="start-screen__content__item align-items-center">
-						<div class="container">
-							<div class="row">
+{{--<<<<<<< HEAD--}}
+				{{--<div class="start-screen__slide">--}}
+					{{--<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_7.jpg') }});background-position: top 30% right 30%;"></div>--}}
+					{{--<div class="start-screen__content__item align-items-center">--}}
+						{{--<div class="container">--}}
+							{{--<div class="row">--}}
 
-								<div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
-									<h2 class="__title"><span>Get the</span> Fresh Food <span>from our</span> Agro Market</h2>
+								{{--<div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">--}}
+									{{--<h2 class="__title"><span>Get the</span> Fresh Food <span>from our</span> Agro Market</h2>--}}
+{{--=======--}}
+{{-->>>>>>> d7e15c694260b2399cf6b6f11487ff6abff867ea--}}
 
-									<p>
-										<span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-1" href="#">Discover</a></span>
-										<span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-1" href="#">Discover</a></span>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="start-screen__slide">
+                @foreach (\App\Models\Slider::get() as $slider)
+                    <div class="start-screen__slide">
+                        <div class="start-screen__bg"
+                        style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});
+                        background-position: top 30% right 30%;"></div>
+                        <div class="start-screen__content__item align-items-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
+                                        <h3 class="__title" style="color:#fff;">
+                                            {{ $slider->title }}
+                                        </h3>
+                                        <h4 style="background-color:rgb(169, 202, 20)">{{ $slider->subtitle }}</h4>
+                                        <p>
+                                            <span class="d-none d-sm-block">
+                                                <a class="custom-btn custom-btn--big custom-btn--style-1" href="#">
+                                                    Discover
+                                                </a>
+                                            </span>
+                                            <span class="d-block d-sm-none" >
+                                                <a class="custom-btn custom-btn--small custom-btn--style-1" href="#" >
+                                                    Discover
+                                                </a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+				{{-- <div class="start-screen__slide">
 					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_8.jpg') }});background-position: top 30% left 70%;"></div>
 
 					<div class="start-screen__content__item align-items-center">
@@ -62,9 +86,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 
-				<div class="start-screen__slide">
+				{{-- <div class="start-screen__slide">
 					<div class="start-screen__bg" style="background-image: url({{ URL::asset('frontassets/img/home_img/img_9.jpg') }});"></div>
 
 					<div class="start-screen__content__item align-items-center">
@@ -85,7 +109,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 			<!-- end start screen -->
 
@@ -158,15 +182,15 @@
 								<nav id="footer__navigation" class="navigation">
 									<div class="row">
 										<div class="col-6 col-sm-4">
-											<h5 class="footer__item__title h6">Menu</h5>
+											<h5 class="footer__item__title h6">{{ __('website\home.menu')}}</h5>
 
 											<ul>
-												<li class="active"><a href="index.html">Home</a></li>
-												<li><a href="#">About</a></li>
-												<li><a href="#">Pages</a></li>
-												<li><a href="#">Gallery</a></li>
-												<li><a href="#">Blog</a></li>
-												<li><a href="#">Contacts</a></li>
+                                                <li  class="active" > <a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
+                                                <li                 > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
+                                                <li> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
+                                                <li> <a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a> </li>
+                                                <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
+                                                <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
 											</ul>
 										</div>
 
@@ -202,7 +226,7 @@
 
 						<div class="col-12 col-md col-lg-4">
 							<div class="footer__item">
-								<h5 class="footer__item__title h6">Contacts</h5>
+								<h5 class="footer__item__title h6">{{ __('website\home.contactus') }}</h5>
 
                                 <address>
                                     <p>

@@ -11,6 +11,7 @@ return [
     'delete' => 'حذف',
     'action' => 'إختر',
     'search' => 'بحث',
+    'sorry' => 'عفوا هناك خطاء ما',
     'no_data_found' => 'عفوا لا يوجد بيانات',
     'added_successfully' => 'تم تسجيل الطلب بنجاح',
     'updated_successfully' => 'تم التحديث  بنجاح',

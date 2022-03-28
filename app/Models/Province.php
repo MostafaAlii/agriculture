@@ -24,4 +24,9 @@ class Province extends Model {
     public function country(): BelongsTo {
         return $this->belongsTo(Country::class);
     }
+
+    // Province Has Many Product ::
+    public function products(): HasMany {
+        return $this->hasMany(Product::class);
+    }
 }

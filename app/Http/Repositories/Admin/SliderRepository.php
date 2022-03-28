@@ -42,7 +42,8 @@ class SliderRepository implements SliderInterface {
             return redirect()->route('sliders.index');
          } catch (\Exception $e) {
              DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+             toastr()->error(__('Admin/site.sorry'));
+             return redirect()->back();
          }
     }
 
@@ -68,7 +69,8 @@ class SliderRepository implements SliderInterface {
             return redirect()->route('sliders.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 
@@ -81,7 +83,8 @@ class SliderRepository implements SliderInterface {
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('sliders.index');
         } catch (\Exception $e) {
-           return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 

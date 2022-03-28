@@ -46,14 +46,15 @@ class FarmerRepository implements FarmerInterface{
             Farmer::create($requestData);
             $farmer = Farmer::latest()->first();
             $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
-            
+
             Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('farmers.index');
          } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
          }
     }
 
@@ -80,7 +81,8 @@ class FarmerRepository implements FarmerInterface{
             return redirect()->route('farmers.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 
@@ -93,7 +95,8 @@ class FarmerRepository implements FarmerInterface{
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('farmers.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 
@@ -138,7 +141,8 @@ class FarmerRepository implements FarmerInterface{
             return redirect()->route('farmers.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }// end of update
     public function updateInformation($request,$id) {
@@ -150,7 +154,8 @@ class FarmerRepository implements FarmerInterface{
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('farmers.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
 
     }// end of update
