@@ -13,13 +13,14 @@
 
 			<!-- start hero -->
 			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
-            style="background-image: url({{ asset('Dashboard/img/images/100.jpg')}});">
+            {{ $slider = \App\Models\Slider::latest()->first() }}
+            style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-lg-7">
-							<h1 class="__title"><span>About</span> company</h1>
+							<h1 class="__title">{{ $slider->title }}</h1>
 							<p>
-								The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English
+                                 {{ $slider->subtitle }}
 							</p>
 						</div>
 					</div>

@@ -5,6 +5,7 @@
     @section('css')
 
     @endsection
+      {{-- ********************** Home 2 ****************************************** --}}
     <section class="section section--no-pt section--no-pb">
         <div class="container-fluid">
             <!-- start promo banners -->

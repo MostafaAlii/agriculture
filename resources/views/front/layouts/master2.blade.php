@@ -13,17 +13,18 @@
 			<!-- end header -->
 
 			<!-- start hero -->
+            {{ $slider = \App\Models\Slider::latest()->first() }}
 			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
-                 style="background-image: url( {{ URL::asset('frontassets/img/pic2.jpg') }});
+                 style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});
                         color: #333;">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-md-7">
-							<h1 class="__title"><span>Agro Shop</span> Catalog</h1>
+							<h1 class="__title">{{ $slider->title }}</h1>
 
 							<p>
-								The point of using is that it has a more-or-less normal distribution of letters, as opposed to using Content here content here making it look
-							</p>
+                                {{ $slider->subtitle }}
+                           </p>
 						</div>
 					</div>
 				</div>

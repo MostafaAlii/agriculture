@@ -3,6 +3,7 @@
     @section('css')
 
     @endsection
+    {{-- ********************** Home 1 ****************************************** --}}
         <!-- start section -->
         <section class="section">
             <div class="container">
