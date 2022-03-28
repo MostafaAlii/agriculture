@@ -79,6 +79,7 @@
 				</script>
 
 				{{-- @yield('content') --}}
+                {{ $slot }}
 			</main>
 			<!-- end main -->
 
