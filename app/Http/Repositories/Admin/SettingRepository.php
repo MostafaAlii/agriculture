@@ -8,6 +8,7 @@ use App\Traits\UploadT;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Up;
+use File;
 class SettingRepository implements SettingInterface{
     public function index() {
 
@@ -33,23 +34,31 @@ class SettingRepository implements SettingInterface{
                 $setting->inestegram = $dataRequest['inestegram'];
 
                 $setting->status =  (isset($dataRequest['status']) ? $dataRequest['status'] : 'open');
+
+
                 if($request->site_logo) {
-                    if($setting->site_logo != 'default_logo.jpg') {
-                        Storage::disk('upload_image')->delete('/settingLogo/' . $setting->site_logo);
+
+                    if(File::exists(public_path('Dashboard/img/settingLogo/' . $setting->site_logo)))
+                    {
+                        File::delete(public_path('Dashboard/img/settingLogo/' . $setting->site_logo));
                     }
                     Image::make($request->site_logo)->resize(70, 70, function ($constraint) {
                         $constraint->aspectRatio();
                     })->save(public_path('Dashboard/img/settingLogo/' . $request->site_logo->hashName()));
-                    $dataRequest['site_logo'] = $request->site_logo->hashName();
+
+                         $dataRequest['site_logo'] = $request->site_logo->hashName();
                 }
-                if($request->site_icon) {
-                    if($setting->site_icon != 'default_icon.jpg') {
-                        Storage::disk('upload_image')->delete('/settingIcon/' . $setting->site_icon);
+                    if($request->site_icon) {
+
+                    if(File::exists(public_path('Dashboard/img/settingIcon/' . $setting->site_icon)))
+                    {
+                        File::delete(public_path('Dashboard/img/settingIcon/' . $setting->site_icon));
                     }
                     Image::make($request->site_icon)->resize(70, 70, function ($constraint) {
                         $constraint->aspectRatio();
                     })->save(public_path('Dashboard/img/settingIcon/' . $request->site_icon->hashName()));
-                    $dataRequest['site_icon'] = $request->site_icon->hashName();
+
+                       $dataRequest['site_icon'] = $request->site_icon->hashName();
                 }
                 $setting->update($dataRequest);
 

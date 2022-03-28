@@ -76,7 +76,7 @@
 						w.lazyLoadOptions = o;
 					}(window, document));
 				</script>
-                {{ $slot }}
+
 				{{-- @yield('content') --}}
 			</main>
 			<!-- end main -->

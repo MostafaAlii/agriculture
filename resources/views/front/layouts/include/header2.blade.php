@@ -7,7 +7,7 @@
         <div class="row justify-content-between no-gutters">
 
             <a class="top-bar__logo site-logo" href="index_4.html">
-                <img class="img-fluid" src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />
+                <img class="img-fluid" src="{{URL::asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
             </a>
 
             <a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--dark" href="javascript:void(0);"><span></span></a>

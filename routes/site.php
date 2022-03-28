@@ -6,10 +6,13 @@ use App\Http\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath','checkStatus'
+
+        ]
 
     ], function(){
 
@@ -31,14 +34,21 @@ Route::group(
         route::get('/user/dashboard',Livewire\front\User\dashboard::class)->name('user.dash');
         });
 
-        require __DIR__.'/auth.php';
-
+    require __DIR__.'/auth.php';
     });
-//     route::get('maintenance',function (){
-//    if(setting()->status =='open'){
-//        return redirect('/');
-//    }
-//    return view('front.maintenance');
-//});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

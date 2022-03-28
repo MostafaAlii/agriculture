@@ -38,12 +38,12 @@ class SettingRequest extends FormRequest
 //              'site_logo'=>'required_without:id|mimes:png,jpg,jpeg',
 //             'site_icon'=>'required_without:id|mimes:png,jpg,jpeg',
             'message_maintenance' => [
-                'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'required','string'
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
             ],
             'address' => [
-                'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'required','string'
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
             ],
             'status'=>'required',
         ];

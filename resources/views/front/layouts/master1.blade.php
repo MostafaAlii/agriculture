@@ -27,6 +27,7 @@
 					<div class="start-screen__content__item align-items-center">
 						<div class="container">
 							<div class="row">
+
 								<div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
 									<h2 class="__title"><span>Get the</span> Fresh Food <span>from our</span> Agro Market</h2>
 
@@ -146,7 +147,8 @@
 						<div class="col-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="footer__item">
 								<a class="site-logo" href="index.html">
-									<img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
+									{{--<img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />--}}
+									<img class="img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" data-src="{{URL::asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
 								</a>
 							</div>
 						</div>

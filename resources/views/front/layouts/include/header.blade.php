@@ -6,7 +6,9 @@
         <div class="row align-items-center justify-content-between no-gutters">
 
             <a class="top-bar__logo site-logo" href="index.html">
-                <img class="img-fluid" src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />
+                <img class="img-fluid" src="{{URL::asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
+
+
             </a>
 
             <a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--light" href="javascript:void(0);"><span></span></a>
