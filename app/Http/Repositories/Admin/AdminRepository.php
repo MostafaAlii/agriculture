@@ -60,13 +60,14 @@ class AdminRepository implements AdminInterface{
 
             // $admin = Admin::latest()->first();
             Notification::send($admin, new \App\Notifications\NewAdmin($admin));
-            
+
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Admins.index');
          } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
          }
     }
 
@@ -98,7 +99,8 @@ class AdminRepository implements AdminInterface{
             return redirect()->route('Admins.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 
@@ -112,7 +114,8 @@ class AdminRepository implements AdminInterface{
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('Admins.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
     public function bulkDelete($request) {
@@ -162,7 +165,8 @@ class AdminRepository implements AdminInterface{
             return redirect()->route('Admins.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }// end of update
     public function updateInformation($request,$id) {
@@ -174,7 +178,8 @@ class AdminRepository implements AdminInterface{
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
 
     }// end of update

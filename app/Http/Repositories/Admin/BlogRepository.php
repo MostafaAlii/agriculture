@@ -56,7 +56,8 @@ class BlogRepository implements BlogInterface {
             return redirect()->route('blogs.index');
          } catch (\Exception $e) {
              DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+             toastr()->error(__('Admin/site.sorry'));
+             return redirect()->back();
          }
     }
 
@@ -83,7 +84,8 @@ class BlogRepository implements BlogInterface {
             return redirect()->route('blogs.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 
@@ -96,7 +98,8 @@ class BlogRepository implements BlogInterface {
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('blogs.index');
         } catch (\Exception $e) {
-           return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 

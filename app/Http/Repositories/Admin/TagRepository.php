@@ -42,49 +42,6 @@ class TagRepository implements TagInterface {
 
     public function store($request) {
         try{
-    //         $validator = Validator::make($request->all(),
-    //         ['name' => 'required|min:3|max:250|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/'],
-    //         [
-    //             'name.required'   => trans('Admin\validation.required'),
-    //             'name.min'        => trans('Admin\validation.min'),
-    //             'name.regex'      => trans('Admin\validation.regex'),
-    //         ]);
-    //         if ($validator->fails())
-    //         {
-    //             // return response()->json(['message'=>$validator->errors()->first()]);
-    //             $error = array('message' => $validator->errors()->first(), 'title' =>__('error'));
-    //                 return response()->json($error);
-    //          //    return response()->json(['error'=>'error']);
-    //         }
-    //         // $validator = Validator::make($request->validated());
-    //         // if ($validator->fails())
-    //         // {
-    //         //     // $message = array('message' => 'error', 'title' =>__('error'));
-    //         //     // return response()->json($message);
-    //         //     return response()->json(['status'=>$validator->errors()->first()]);
-    //         // }
-    //         // $requestData = $request->validated();
-    //         $tagId = $request->id;
-    //         $tag   =  Tag::updateOrCreate(
-    //                     [ 'id' => $tagId ],
-    //                     [ 'name' => $request->name, ]
-    //                    );
-    //                     // Toastr::message('message', 'level', 'title');
-    //                     // toastr()->success(__('Admin/site.added_successfully'));
-
-    //                     // return Response()->json($tag);
-    //                     // if($tag){
-
-    //                         $message = array('message' => 'Success!', 'title' =>__('Admin/site.added_successfully'));
-    //                         return response()->json($message);
-
-    //                     // }
-    //                     // else
-    //                     // {
-    //                     //     $error = array('message' => 'error', 'title' =>__('error'));
-    //                     //     return response()->json($error);
-    //                     //     return $validator->errors()->all();
-    //                     // }
             $requestData = $request->validated();
             Tag::create($requestData);
             toastr()->success(__('Admin/site.added_successfully'));
@@ -92,7 +49,8 @@ class TagRepository implements TagInterface {
             // return response()->json(toastr()->success(__('Admin/site.added_successfully')));
 
          } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
          }
     }
     public function update($request,$id) {
@@ -105,7 +63,8 @@ class TagRepository implements TagInterface {
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('tags.data');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
     public function destroy($id) {
@@ -116,7 +75,8 @@ class TagRepository implements TagInterface {
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('tags.data');
         } catch (\Exception $e) {
-           return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }
 

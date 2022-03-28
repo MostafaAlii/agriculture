@@ -44,7 +44,8 @@ class ProfileRepository implements ProfileInterface{
             return redirect()->route('profile.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }// end of update
     public function updateInformation($request,$id) {
@@ -56,7 +57,8 @@ class ProfileRepository implements ProfileInterface{
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('profile.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
         }
     }// end of update
 
