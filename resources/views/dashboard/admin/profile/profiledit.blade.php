@@ -99,14 +99,21 @@
 
                                                 <div class="col-md-6">
                                                     {{--password--}}
+                                                    {{-- <div class="form-group">
+                                                        <label>{{ __('Admin/site.oldpassword') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="old_password" class="form-control" value="" required>
+                                                    </div> --}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
-                                                        <input type="password" name="password" class="form-control" value="{{ old('password',Auth::user()->password) }}" required>
+                                                        <input type="password" name="password" class="form-control"
+                                                        value="" required>
+                                                        {{-- <input type="password" name="password" class="form-control" value="" required> --}}
                                                     </div>
                                                     {{--password_confirmation--}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
-                                                        <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
+                                                        <input type="password" name="password_confirmation" class="form-control"
+                                                        value="{{ old('password_confirmation') }}" required>
                                                     </div>
                                                 </div>
                                             </div>
