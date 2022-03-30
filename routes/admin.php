@@ -1,6 +1,8 @@
 <?php
 use App\Http\Livewire;
+use Illuminate\Http\Request;
 use App\Http\Controllers\front;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\TagController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
@@ -11,18 +13,17 @@ use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\OptionController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
+use App\Http\Controllers\Dashboard\Admin\ProductController;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
 use App\Http\Controllers\Dashboard\Admin\VillageController;
+use App\Http\Controllers\Dashboard\Admin\CategoryController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\AttributeController;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use App\Http\Controllers\Dashboard\Admin\ProvienceController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 use App\Http\Controllers\Dashboard\Admin\FetchAddressController;
-use App\Http\Controllers\Dashboard\Admin\ProductController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -178,5 +179,13 @@ Route::group(
             Route::get('/sliders/data', [SliderController::class,'data'])->name('sliders.data');
             Route::delete('/sliders/bulk_delete/{ids}', [SliderController::class,'bulkDelete'])->name('sliders.bulk_delete');
             /********************************* End Slider Routes ************************************/
+
+
+            /********************************* Category Routes ************************************/
+            Route::resource('Categories', CategoryController::class)->except(['show']);
+            Route::get('/Categories/data', [CategoryController::class,'data'])->name('categories.data');
+            Route::delete('/Categories/bulk_delete/{ids}', [CategoryController::class,'bulkDelete'])->name('categories.bulk_delete');
+            /********************************* End Category Routes ************************************/
+
         });
     });

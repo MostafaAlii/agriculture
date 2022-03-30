@@ -30,4 +30,9 @@ class Category extends Model implements TranslatableContract{
     public function products(): BelongsToMany {
         return $this->belongsToMany(Product::class, 'product_departments'); //product_categories
     }
+
+    public function Category_department()
+    {
+        return $this->belongsTo('App\Models\Department','department_id') ;
+    }
 }
