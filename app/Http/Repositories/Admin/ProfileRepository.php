@@ -32,9 +32,7 @@ class ProfileRepository implements ProfileInterface{
             $adminID = Crypt::decrypt($id);
             $admin=Admin::findorfail($adminID);
             $requestData = $request->validated();
-            $requestData['password'] = Auth::user()->password;
-            // $requestData['password'] = $request->password;
-            // $requestData->merge(['password' => bcrypt($request->password)]);
+            $requestData['password'] = bcrypt($request->password);
             $admin->update($requestData);
 
             if($request->image){
