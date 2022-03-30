@@ -19,7 +19,7 @@ class CreateCategoryTranslationsTable extends Migration
 
             $table->string('name');
             $table->string('slug')->unique();
-            $table->longText('keyword')->nullable();
+            $table->string('keyword')->nullable();
             $table->longText('description')->nullable();
             
             $table->index(['name', 'locale','keyword','slug']);

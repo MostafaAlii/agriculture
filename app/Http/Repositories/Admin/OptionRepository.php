@@ -8,6 +8,7 @@ use App\Http\Interfaces\Admin\OptionInterface;
 use App\Models\Product;
 
 class OptionRepository implements OptionInterface{
+
     
     public function index() {
      
@@ -17,7 +18,7 @@ class OptionRepository implements OptionInterface{
         
     }
     
-
+//------------------------------------------------------------------------------------------
       public function data() {
         //return 'dddd';
         $options = Option::get();
@@ -41,6 +42,8 @@ class OptionRepository implements OptionInterface{
             ->toJson();
 
       }
+
+//------------------------------------------------------------------------------------------
     public function store($request) {
       //dd($request->all());
         try{
@@ -60,12 +63,12 @@ class OptionRepository implements OptionInterface{
            return redirect()->back();
             
          } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-            // toastr()->error(__('Admin/options.error_occure'));
-            // return redirect()->back();
+            // return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
          }
      }
-
+//------------------------------------------------------------------------------------------
     public function edit($id) {
         
         $real_id = Crypt::decrypt($id);
@@ -77,22 +80,30 @@ class OptionRepository implements OptionInterface{
        // dd($products);
         return view('dashboard.admin.options.edit', compact('options','attributes','products'));
     }
-
+//------------------------------------------------------------------------------------------
     public function update($request,$id) {
-        $real_id = decrypt($id);
 
-        $options=Option::findOrfail($real_id);
-        $options->attribute_id=$request->attribute_id;
-        $options->price=$request->price;
-        $options->product_id=$request->product_id;
-        $options->save();
-        
-        $options->name=$request->name;
-        $options->save();
-        
-        toastr()->success(__('Admin/options.updated_done'));
-        return redirect()->route('Options.index');
+        try{
+            $validated = $request->validated();
+            $real_id = decrypt($id);
+
+            $options=Option::findOrfail($real_id);
+            $options->attribute_id=$request->attribute_id;
+            $options->price=$request->price;
+            $options->product_id=$request->product_id;
+            $options->save();
+            
+            $options->name=$request->name;
+            $options->save();
+            
+            toastr()->success(__('Admin/options.updated_done'));
+            return redirect()->route('Options.index');
+        } catch (\Exception $ex) {
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->route('Options.index');
+         }
     }
+//------------------------------------------------------------------------------------------
 
     public function destroy($id) {
         try{
@@ -102,11 +113,11 @@ class OptionRepository implements OptionInterface{
                 return redirect()->route('Options.index');
            
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+            return redirect()->back();            }
     }
 
-
+//------------------------------------------------------------------------------------------
     public function bulkDelete($request)
     {
         //dd($request->delete_select_id);

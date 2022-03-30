@@ -57,8 +57,12 @@ class Product extends Model {
         return $this->belongsTo(Area::class)->withDefault();
     }
 
-    public function departments(): BelongsToMany {
-        return $this->belongsToMany(Department::class, 'product_departments');
+    // public function departments(): BelongsToMany {
+    //     return $this->belongsToMany(Department::class, 'product_departments');
+    // }
+    
+    public function categories(): BelongsToMany {
+        return $this->belongsToMany(Category::class, 'product_categories');
     }
 
     public function tags(): BelongsToMany {

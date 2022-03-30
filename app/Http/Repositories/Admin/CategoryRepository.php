@@ -10,12 +10,15 @@ use App\Models\Category;
 use App\Traits\Keywords;
 
 class CategoryRepository implements CategoryInterface {
+    
     use Keywords;
+
     public function index() {
         $categories = Category::get();
         return view('dashboard.admin.categories.index', compact('categories'));
     }
 
+//------------------------------------------------------------------------------------------
     public function data() {
         //get all categories data
         $categories = Category::orderBy('id','DESC')->get();
@@ -43,6 +46,7 @@ class CategoryRepository implements CategoryInterface {
             ->toJson();
     }
 
+//------------------------------------------------------------------------------------------
     public function create()
     {
        
@@ -54,6 +58,8 @@ class CategoryRepository implements CategoryInterface {
        // return view('dashboard.admin.categories.create', compact('main_categories','country','state'));
         return view('dashboard.admin.categories.create', $data);
     }
+    
+//------------------------------------------------------------------------------------------
 //CategoryRequest
     public function store($request) {
         
@@ -86,16 +92,13 @@ class CategoryRepository implements CategoryInterface {
             return redirect()->route('Categories.index');
             
          } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            // return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
          }
-        
-               
-            
-         
-        
-         
     }
 
+//------------------------------------------------------------------------------------------
     public function edit($id)
     {
         //dd($id);
@@ -103,13 +106,13 @@ class CategoryRepository implements CategoryInterface {
         
         $data['cate']=Category::findOrfail($real_id);
         $data['main_categories']=Category::where('parent_id',Null)->where('id','!=',$real_id)->get();
-        $data['main_departments']=Department::where('parent_id',Null)->where('id','!=',$real_id)->get();
+        $data['main_departments']=Department::where('parent_id',Null)->get();
 
         
         return view('dashboard.admin.categories.edit',$data);
     }
 
-
+//------------------------------------------------------------------------------------------
     public function update($request) {
         // dd('inside repo'); 
           
@@ -117,13 +120,9 @@ class CategoryRepository implements CategoryInterface {
              $validated = $request->validated();
             
              $cate= Category::findOrfail($request->id);
-            
              ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:$cate->parent_id=Null;
-
              $cate->department_id=$request->department_id;
-             
              $cate->updated_by=auth()->user()->firstname;//----------------------------------------------------------------------------
-             
              $cate->save();
 
              $cate->name=$request->name;
@@ -139,12 +138,12 @@ class CategoryRepository implements CategoryInterface {
              return redirect()->route('Categories.index');
              
           } catch (\Exception $e) {
-             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-          }
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();          }
      }
  
 
-
+//------------------------------------------------------------------------------------------
      public function destroy($id) {
         try{
             $real_id = decrypt($id);
@@ -167,9 +166,11 @@ class CategoryRepository implements CategoryInterface {
             
             
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+            return redirect()->back();         }
     }
+
+    //----------------delete selected categories-----------------------
     public function bulkDelete($request)
     {         
         if($request->delete_select_id){
