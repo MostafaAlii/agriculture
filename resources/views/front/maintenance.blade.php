@@ -1,5 +1,5 @@
-@extends('front.layouts.master2')
-@section('title', 'about us ')
+@extends('front.layouts.master5')
+@section('title', 'maintance ')
 @section('css')
 
 @endsection
@@ -8,7 +8,8 @@
     <section class="section section--no-pb section--custom-01">
         <div class="container">
             <div class="section-heading">
-                <h2 class="__title">We are <span>Agriculture Farm</span></h2>
+                <h2 class="__title">الموقع فى الصيانه </h2>
+                <h2 class="__title">Coming Soon </h2>
             </div>
 
             <div class="row">
@@ -16,11 +17,11 @@
 
 
                     <p>
-                        Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography.crafting websites to developing apps, beautiful design to adventure cinematography.
+                       الموقع فى الصيانه
                     </p>
 
                     <p>
-                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">Get in Touch</a>
+                        {{-- <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">Get in Touch</a> --}}
                     </p>
                 </div>
             </div>
@@ -28,7 +29,7 @@
     </section>
     <!-- end section -->
     <!-- start section -->
-    <section class="section">
+    {{-- <section class="section">
         <div class="container">
             <!-- start counters -->
             <div class="counter">
@@ -60,7 +61,7 @@
             </div>
             <!-- end counters -->
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 
 
