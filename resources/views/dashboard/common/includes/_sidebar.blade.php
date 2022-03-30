@@ -152,6 +152,27 @@
                     </ul>
                 </li>
                 <!-- End Department Dropdown Menu -->
+
+                    <!-- Start Category Dropdown Menu -->
+                    <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">account_balance</i>
+                        <span class="menu-title" data-i18n="Categories">{{ trans('Admin/categories.categories_title_in_sidebar') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start Category -->
+                        <li>
+                            <a class="menu-item" href="{{route('Categories.index')}}">
+                                <i class="material-icons" style="color: red;color: red;padding: 3px;font-size: 18px;">account_balance</i>
+                                <span data-i18n="Categories"> {{ trans('Admin/categories.categories_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Category -->
+                    </ul>
+                </li>
+                <!-- End Category Dropdown Menu -->
+
+                
                 <!-- Start Department Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">

@@ -12,6 +12,7 @@ use Yajra\DataTables\DataTables;
 
 use App\Http\Interfaces\Admin\DepartmentInterface;
 use App\Models\Area;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Province;
 use App\Models\Village;
@@ -107,7 +108,7 @@ class DepartmentRepository implements DepartmentInterface {
             $depart->area_id=$request->area_id;
             ($request->state_id)?$depart->state_id=$request->state_id:'';
             ($request->village_id)?$depart->village_id=$request->village_id:'';
-            $depart->created_by=auth()->user()->name;//----------------------------------------------------------------------------
+            $depart->created_by=auth()->user()->firstname;//----------------------------------------------------------------------------
             
             $depart->save();
 
@@ -167,7 +168,7 @@ class DepartmentRepository implements DepartmentInterface {
              ($request->state_id)?$depart->state_id=$request->state_id:$depart->state_id=Null;
              ($request->village_id)?$depart->village_id=$request->village_id:$depart->village_id=NULL;
              
-             $depart->updated_by=auth()->user()->id;//----------------------------------------------------------------------------
+             $depart->updated_by=auth()->user()->firstname;//----------------------------------------------------------------------------
              
              $depart->save();
 
@@ -198,11 +199,20 @@ class DepartmentRepository implements DepartmentInterface {
             $data['admin'] = Admin::where('department_id', $real_id)->pluck('department_id');
             $data['farmer'] = Farmer::where('department_id', $real_id)->pluck('department_id');
             $data['user'] = User::where('department_id', $real_id)->pluck('department_id'); 
+            $data['category'] = Category::where('department_id', $real_id)->pluck('department_id'); 
 
-            $d=Department::find($real_id);
-            $data['product']= $d->products();//->withTrashed()
+            
+            //check if there are sub depart for this depart
+            $data['sub_depart']=Department::where('parent_id',$real_id);
+                            
+            if(
+                $data['admin']->count() == 0
+                && $data['farmer']->count() == 0
+                && $data['user']->count() == 0
+                && $data['category']->count() == 0
+                && $data['sub_depart']->count() == 0
+            ) {
 
-            if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0 && $data['product']->count() == 0) {
                 Department::findorfail($real_id)->delete();
                 toastr()->error(__('Admin/departments.depart_delete_done'));
                 return redirect()->route('Departments.index');
@@ -228,12 +238,20 @@ class DepartmentRepository implements DepartmentInterface {
                 
                 $data['admin'] = Admin::where('department_id', $depart_ids)->pluck('department_id');
                 $data['farmer'] = Farmer::where('department_id', $depart_ids)->pluck('department_id');
-                $data['user'] = User::where('department_id', $depart_ids)->pluck('department_id'); 
+                $data['user'] = User::where('department_id', $depart_ids)->pluck('department_id');
+                $data['category'] = Category::where('department_id', $depart_ids)->pluck('department_id'); 
 
-                $d=Department::find($depart_ids);
-                $data['product']= $d->products();//->withTrashed()
+                //check if there are sub depart for this depart
+                $data['sub_depart']=Department::where('parent_id',$depart_ids);
                 
-                if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0 && $data['product']->count() == 0) {
+                if(
+                    $data['admin']->count() == 0
+                    && $data['farmer']->count() == 0
+                    && $data['user']->count() == 0
+                    && $data['category']->count() == 0
+                    && $data['sub_depart']->count() == 0
+                ) {
+                    
                     Department::findOrfail($depart_ids)->delete();
                     $delete_or_no++;
                 }

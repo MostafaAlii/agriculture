@@ -51,9 +51,14 @@ class Department extends Model implements TranslatableContract{
     //     return $this->hasMany(Product::class);
     // }
 
-    public function products(): BelongsToMany {
-        return $this->belongsToMany(Product::class, 'product_departments');
-    }
+
+    
+    // public function products(): BelongsToMany {
+    //     return $this->belongsToMany(Product::class, 'product_departments');
+    // }
+
+
+    
     // public function childs() {
     //     return $this->belongsTo(self::class,'parent_id') ;
     // }

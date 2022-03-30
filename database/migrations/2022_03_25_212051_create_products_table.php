@@ -26,6 +26,8 @@ class CreateProductsTable extends Migration {
             $table->foreignId('area_id')->constrained()->cascadeOnDelete();
             $table->foreignId('state_id')->constrained()->cascadeOnDelete();
             $table->foreignId('village_id')->constrained()->cascadeOnDelete();
+
+            $table->longText('address');
             $table->softDeletes();
             $table->timestamps();
         });
