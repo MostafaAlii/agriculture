@@ -69,7 +69,7 @@ class CategoryRepository implements CategoryInterface {
             ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:'';
 
             $cate->department_id=$request->department_id;
-            $cate->created_by=auth()->user()->name;//----------------------------------------------------------------------------
+            $cate->created_by=auth()->user()->firstname;//----------------------------------------------------------------------------
             
             $cate->save();
 
@@ -122,7 +122,7 @@ class CategoryRepository implements CategoryInterface {
 
              $cate->department_id=$request->department_id;
              
-             $cate->updated_by=auth()->user()->id;//----------------------------------------------------------------------------
+             $cate->updated_by=auth()->user()->firstname;//----------------------------------------------------------------------------
              
              $cate->save();
 
@@ -148,14 +148,18 @@ class CategoryRepository implements CategoryInterface {
      public function destroy($id) {
         try{
             $real_id = decrypt($id);
-            
-            $d=Category::find($real_id);
-            $data['product']= $d->products();//->withTrashed()
 
-            if($data['product']->count() == 0  ) {
+            //check category products
+            $d=Category::find($real_id);
+            $data['product']= $d->products();
+
+            //check if there are sub cate for this cate
+            $data['sub_cate']=Category::where('parent_id',$real_id);
+
+            if($data['product']->count() == 0  && $data['sub_cate']->count() == 0 ) {
                 Category::findorfail($real_id)->delete();
                 toastr()->error(__('Admin/categories.depart_delete_done'));
-                return redirect()->route('categories.index');
+                return redirect()->route('Categories.index');
             }else{
                 toastr()->error(__('Admin/categories.depart_cant_delete'));
                 return redirect()->route('Categories.index');
@@ -170,16 +174,17 @@ class CategoryRepository implements CategoryInterface {
     {         
         if($request->delete_select_id){
             $all_ids = explode(',',$request->delete_select_id);
-            // Category::whereIn('id',$all_ids)->delete();
-
-            // dd($all_ids);
             $delete_or_no=0;
             foreach($all_ids as $cate_ids){
   
+                 //check category products
                 $d=Category::find($cate_ids);
                 $data['product']= $d->products();//->withTrashed()
+
+                //check if there are sub cate for this cate
+                $data['sub_cate']=Category::where('parent_id',$cate_ids);
                 
-                if($data['product']->count() == 0) {
+                if($data['product']->count() == 0 && $data['sub_cate']->count() == 0) {
                     Category::findOrfail($cate_ids)->delete();
                     $delete_or_no++;
                 }
@@ -187,10 +192,10 @@ class CategoryRepository implements CategoryInterface {
             
             if($delete_or_no==0){
                 toastr()->error(__('Admin/categories.depart_cant_delete'));
-                return redirect()->route('categories.index');
+                return redirect()->route('Categories.index');
             }else{
                 toastr()->error(__('Admin/categories.depart_delete_done'));
-                return redirect()->route('categories.index');
+                return redirect()->route('Categories.index');
             }
         }else{
             toastr()->error(__('Admin/site.no_data_found'));

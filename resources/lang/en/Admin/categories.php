@@ -1,7 +1,7 @@
 <?php
 return [
     'departmentPageTitle'           =>'Categories',
-    'Categories_title_in_sidebar'   =>'Categories',
+    'categories_title_in_sidebar'   =>'Categories',
     'depart_name'                   =>'Name',
     'depart_desc'                   =>'Description',
     'depart_keyword'                =>'Keywords',
