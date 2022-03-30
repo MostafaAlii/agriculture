@@ -28,7 +28,7 @@ class ProductFactory extends Factory {
             'description'                   =>      $this->faker->paragraph,
             'status'                        =>      $this->faker->boolean(),
             
-            'address'                       =>      '',
+            //'address'                       =>      '',
         ];
     }
 }

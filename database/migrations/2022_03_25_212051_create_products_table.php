@@ -19,15 +19,13 @@ class CreateProductsTable extends Migration {
             $table->boolean('in_stock')->default(0);
             $table->integer('viewed')->unsigned()->default(0);
             $table->boolean('status');
-
             $table->foreignId('farmer_id')->constrained()->cascadeOnDelete();
             $table->foreignId('country_id')->constrained()->cascadeOnDelete();
             $table->foreignId('province_id')->constrained()->cascadeOnDelete();
             $table->foreignId('area_id')->constrained()->cascadeOnDelete();
             $table->foreignId('state_id')->constrained()->cascadeOnDelete();
             $table->foreignId('village_id')->constrained()->cascadeOnDelete();
-
-            $table->longText('address');
+            $table->longText('address')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
