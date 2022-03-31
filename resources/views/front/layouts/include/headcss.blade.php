@@ -23,8 +23,8 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/owl.carousel.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/flexslider.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/color-01.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         {{-- bootstrap 4 ************************ --}}
     {{-- font cairo --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
