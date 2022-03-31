@@ -119,4 +119,5 @@ return [
     'welcome'=>'مرحبا',
     'products'=>'المنتجات',
     'featproducts'=>'منتجات مميزه',
+    'newproducts'=>'احدث المنتجات',
 ];

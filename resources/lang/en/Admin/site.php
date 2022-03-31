@@ -125,5 +125,6 @@ return [
     'welcome'=>'Welcome',
     'products'=>'Products',
     'featproducts'=>'Featured products',
+    'newproducts'=>'Latest Products',
 
 ];
