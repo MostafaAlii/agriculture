@@ -308,8 +308,10 @@
                                             <div class="__item">
                                                 <figure class="__image">
                                                     @if($product->image->filename)
-                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                        <a href="{{ route('product_details',$product->id) }}">
+                                                            <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                                        </a>
                                                     @else
                                                         <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                         data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />

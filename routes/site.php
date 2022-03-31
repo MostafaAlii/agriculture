@@ -19,7 +19,8 @@ Route::group(
         // front routes
         route::get('/',Livewire\front\Home2::class)->name('front');                    //home1
         route::get('/home2',Livewire\front\Home::class)->name('front2');               //home2
-        route::get('/shop',Livewire\front\shop::class)->name('shop');                   //shop
+        route::get('/shop',Livewire\front\shop::class)->name('shop');                   //all products
+        route::get('/shop/{product_id}',Livewire\front\ProductDetails::class)->name('product_details'); //product-details
         route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');          // about us
         route::get('/blogs',Livewire\front\Blogs::class)->name('blog');               // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
