@@ -50,7 +50,7 @@
                                         </div>
 
                                         <div class="product-price">
-                                            <span class="product-price__item product-price__item--new">3,35 $</span>
+                                            <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                         </div>
 
                                         <div class="rating">
@@ -62,12 +62,9 @@
                                         </div>
 
                                         <p>
-                                            The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
+                                            {{ $product->description }}
                                         </p>
 
-                                        <p>
-                                            Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish
-                                        </p>
 
                                         <form class="__add-to-cart" action="#">
                                             <div class="quantity-counter js-quantity-counter">
@@ -94,12 +91,9 @@
                                         <div class="tab-content">
                                             <div class="tab-content__item is-visible">
                                                 <p>
-                                                    The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. Susp endisse ultricies nisi vel quam suscipit
+                                                    {{ $product->description }}
                                                 </p>
 
-                                                <p>
-                                                    Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.
-                                                </p>
 
                                                 <div class="description-table" style="max-width: 370px;">
                                                     <table>

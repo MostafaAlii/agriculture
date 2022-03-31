@@ -1,11 +1,39 @@
 <div>
 @section('title', __('website\home.shop'))
 @section('css')
-
+{{-- <style>
+    .pl-4, .px-4{
+    padding-left:1.5rem !important;
+}
+    .pb-2, .py-2{
+    padding-bottom:.5rem !important;
+}
+    .pt-2, .py-2{
+    padding-top:.5rem !important;
+}
+.bg-white{
+    background-color: #fff !important;
+}
+.border{
+    border: 1px solid #dee2e6 !important;
+}
+nav svg {
+    height: 20px;
+}
+svg{
+    overflow: hidden;
+    vertical-align: middle;
+}
+.wrap-pagination-info{
+    margin-top: 46px;
+    border-top:1px solid #e6e6e6;
+    padding-top: 10px;
+}
+</style> --}}
 @endsection
     <!-- start section -->
     <section class="section">
-        {{-- <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
+        <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
             <img class="lazy" width="286" height="280" src="img/blank.gif" data-src="img/decor-el_1.jpg" alt="demo"/>
         </div>
 
@@ -23,7 +51,7 @@
 
         <div class="decor-el decor-el--5" data-jarallax-element="-70" data-speed="0.2">
             <img class="lazy" width="248" height="309" src="img/blank.gif" data-src="img/decor-el_5.jpg" alt="demo"/>
-        </div> --}}
+        </div>
 
         <div class="container">
 
@@ -302,7 +330,7 @@
                         <div class="goods goods--style-1">
                             <div class="__inner">
                                 <div class="row">
-                                    @foreach (\App\Models\Product::latest()->limit(12)->get() as $product)
+                                    @foreach ($products as $product)
                                     <!-- start item -->
                                         <div class="col-12 col-sm-6 col-lg-4">
                                             <div class="__item">
@@ -319,12 +347,12 @@
                                                 </figure>
 
                                                 <div class="__content">
-                                                    <h4 class="h6 __title"><a href="single_product.html">{{ $product->name }}</a></h4>
+                                                    <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
-                                                    <div class="__category"><a href="#">Fruits</a></div>
+                                                    {{-- <div class="__category"><a href="#">{{ $product->categories }}</a></div> --}}
 
                                                     <div class="product-price">
-                                                        <span class="product-price__item product-price__item--new">3,80 $</span>
+                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                                     </div>
 
                                                     <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
@@ -607,13 +635,17 @@
 
                         <!-- start pagination -->
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
+                            {{-- <ul class="pagination justify-content-center">
                                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                                 <li class="page-item active"><a class="page-link" href="#">2</a></li>
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item"><a class="page-link" href="#">4</a></li>
                                 <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
-                            </ul>
+                            </ul> --}}
+
+                            @if (count($products))
+                            {{ $products->links('page-links') }}
+                            @endif
                         </nav>
                         <!-- end pagination -->
                     </div>

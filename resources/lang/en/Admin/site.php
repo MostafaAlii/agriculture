@@ -118,4 +118,9 @@ return [
 
     'slider'=>'Slider',
     'newslider'=>'New Slider',
+
+
+    "prev" => "Prev",
+    "next" => "Next",
+    'products'=>'Products',
 ];

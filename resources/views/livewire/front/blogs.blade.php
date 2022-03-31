@@ -35,13 +35,17 @@
                                         <p>{{ Str::limit($blog->body,50,) }}</p>
                                     </div>
                                     <span class="__date-post">
-                                        <strong>{{ $blog->created_at->diffforhumans() }}</strong>
+                                        {{-- <strong>{{ $blog->created_at->diffforhumans() }}</strong> --}}
+                                        {{ $blog->created_at->diffforhumans() }}
                                     </span>
                                 </div>
                             </div>
                             <!-- end item -->
                         @endforeach
                         {{-- {{ $blogs->links() }} --}}
+                        @if (count($blogs))
+                        {{ $blogs->links('page-links') }}
+                        @endif
 
                     </div>
                 </div>
@@ -52,7 +56,7 @@
     <!-- end section -->
 
     <!-- start section -->
-    <section class="section section--no-pt">
+    {{-- <section class="section section--no-pt">
         <div class="container">
             <ul class="page-nav">
                 <li class="page-nav__item">
@@ -63,7 +67,7 @@
                 </li>
             </ul>
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 
     <!-- start section -->

@@ -126,7 +126,7 @@
 
         <div class="container">
             <div class="section-heading section-heading--left" data-aos="fade">
-                <h2 class="__title">Featured <span>Products</span></h2>
+                <h2 class="__title">{{ __('Admin/site.products') }}</h2>
             </div>
 
             <!-- start goods -->
@@ -172,268 +172,36 @@
                         }]
                     }'>
                     <!-- start item  12 product here to show-->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="188" src="{{ asset('frontassets/img/goods_img/1.jpg') }}" alt="demo" />
-                        </figure>
+                    @foreach (\App\Models\Product::latest()->limit(12)->get() as $product)
+                        <div class="__item">
+                            <figure class="__image">
+                                @if($product->image->filename)
+                                <a href="{{ route('product_details',$product->id) }}">
+                                    <img width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                </a>
+                                @else
+                                <a href="{{ route('product_details',$product->id) }}">
+                                    <img width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                </a>
+                                @endif
+                            </figure>
 
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Oranges</a></h4>
+                            <div class="__content">
+                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
-                            <div class="__category"><a href="#">Fruits</a></div>
+                                <div class="__category"><a href="#">Fruits</a></div>
 
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">3,80 $</span>
+                                <div class="product-price">
+                                    <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                </div>
+
+                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
                             </div>
 
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
+                            <span class="product-label product-label--sale">Sale</span>
                         </div>
-
-                        <span class="product-label product-label--sale">Sale</span>
-                    </div>
                     <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="180" src="{{ asset('frontassets/img/goods_img/2.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Brocoli</a></h4>
-
-                            <div class="__category"><a href="#">Vegetables</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">3,35 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--new">New</span>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="160" src="{{ asset('frontassets/img/goods_img/3.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Red Apple</a></h4>
-
-                            <div class="__category"><a href="#">Fruits</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">0,99 $</span>
-                                <span class="product-price__item product-price__item--old">2200$</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--hot">hot</span>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="190" src="{{ asset('frontassets/img/goods_img/4.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Strawberry</a></h4>
-
-                            <div class="__category"><a href="#">Fruits</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">2,10 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--sale">Sale</span>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="180" src="{{ asset('frontassets/img/goods_img/5.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Fresh Banana</a></h4>
-
-                            <div class="__category"><a href="#">Vegetables</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">10,99 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--new">New</span>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="180" src="{{ asset('frontassets/img/goods_img/6.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Big Pumpkin</a></h4>
-
-                            <div class="__category"><a href="#">Fruits</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">8,15 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--hot">hot</span>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="250" src="{{ asset('frontassets/img/goods_img/7.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Organic Tomato</a></h4>
-
-                            <div class="__category"><a href="#">Vegetables</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--old">6,68 $</span>
-                                <span class="product-price__item product-price__item--new">6,12 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="236" src="{{ asset('frontassets/img/goods_img/8.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Organic Peach</a></h4>
-
-                            <div class="__category"><a href="#">Vegetables</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--old">6,68 $</span>
-                                <span class="product-price__item product-price__item--new">6,12 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="188" src="{{ asset('frontassets/img/goods_img/1.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Oranges</a></h4>
-
-                            <div class="__category"><a href="#">Fruits</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">3,80 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--sale">Sale</span>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="180" src="{{ asset('frontassets/img/goods_img/2.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Brocoli</a></h4>
-
-                            <div class="__category"><a href="#">Vegetables</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">3,35 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--new">New</span>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="160" src="{{ asset('frontassets/img/goods_img/3.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Red Apple</a></h4>
-
-                            <div class="__category"><a href="#">Fruits</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">0,99 $</span>
-                                <span class="product-price__item product-price__item--old">2200$</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--hot">hot</span>
-                    </div>
-                    <!-- end item -->
-
-                    <!-- start item -->
-                    <div class="__item">
-                        <figure class="__image">
-                            <img width="190" src="{{ asset('frontassets/img/goods_img/4.jpg') }}" alt="demo" />
-                        </figure>
-
-                        <div class="__content">
-                            <h4 class="h6 __title"><a href="single_product.html">Strawberry</a></h4>
-
-                            <div class="__category"><a href="#">Fruits</a></div>
-
-                            <div class="product-price">
-                                <span class="product-price__item product-price__item--new">2,10 $</span>
-                            </div>
-
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                        </div>
-
-                        <span class="product-label product-label--sale">Sale</span>
-                    </div>
-                    <!-- end item -->
+                    @endforeach
                 </div>
             </div>
             <!-- end goods -->
