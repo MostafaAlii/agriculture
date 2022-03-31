@@ -25,8 +25,8 @@
                                             data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             alt="demo" />
                                         @else
-                                           <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                           data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
+                                           <img class="lazy" src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}"
+                                           data-src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}" alt="demo" />
                                         @endif
                                     </figure>
                                     <div class="__content">

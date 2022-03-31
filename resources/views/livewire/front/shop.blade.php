@@ -5,7 +5,7 @@
 @endsection
     <!-- start section -->
     <section class="section">
-        <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
+        {{-- <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
             <img class="lazy" width="286" height="280" src="img/blank.gif" data-src="img/decor-el_1.jpg" alt="demo"/>
         </div>
 
@@ -23,7 +23,7 @@
 
         <div class="decor-el decor-el--5" data-jarallax-element="-70" data-speed="0.2">
             <img class="lazy" width="248" height="309" src="img/blank.gif" data-src="img/decor-el_5.jpg" alt="demo"/>
-        </div>
+        </div> --}}
 
         <div class="container">
 
@@ -49,33 +49,15 @@
 
                                 <!-- start widget -->
                                 <div class="widget widget--categories">
-                                    <h4 class="h6 widget-title">CAtegories</h4>
+                                    <h4 class="h6 widget-title">{{ __('Admin/categories.departmentPageTitle') }}</h4>
 
                                     <ul class="list">
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Apples</a>
-                                            <span>(3)</span>
-                                        </li>
-
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Oranges</a>
-                                            <span>(5)</span>
-                                        </li>
-
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Strawbery</a>
-                                            <span>(2)</span>
-                                        </li>
-
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Banana</a>
-                                            <span>(8)</span>
-                                        </li>
-
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Pumpkin </a>
-                                            <span>(5)</span>
-                                        </li>
+                                        @foreach (\App\Models\Category::get() as $cat)
+                                            <li class="list__item">
+                                                <a class="list__item__link" href="#">{{ $cat->name }}</a>
+                                                <span>(3)</span>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- end widget -->
@@ -320,31 +302,38 @@
                         <div class="goods goods--style-1">
                             <div class="__inner">
                                 <div class="row">
+                                    @foreach (\App\Models\Product::latest()->limit(12)->get() as $product)
                                     <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="188" src="img/blank.gif" data-src="img/goods_img/1.jpg" alt="demo" />
-                                            </figure>
+                                        <div class="col-12 col-sm-6 col-lg-4">
+                                            <div class="__item">
+                                                <figure class="__image">
+                                                    @if($product->image->filename)
+                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                        data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                                    @else
+                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                    @endif
+                                                </figure>
 
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Oranges</a></h4>
+                                                <div class="__content">
+                                                    <h4 class="h6 __title"><a href="single_product.html">{{ $product->name }}</a></h4>
 
-                                                <div class="__category"><a href="#">Fruits</a></div>
+                                                    <div class="__category"><a href="#">Fruits</a></div>
 
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">3,80 $</span>
+                                                    <div class="product-price">
+                                                        <span class="product-price__item product-price__item--new">3,80 $</span>
+                                                    </div>
+
+                                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
                                                 </div>
 
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
+                                                <span class="product-label product-label--sale">Sale</span>
                                             </div>
-
-                                            <span class="product-label product-label--sale">Sale</span>
                                         </div>
-                                    </div>
                                     <!-- end item -->
-
-                                    <!-- start item -->
+                                    @endforeach
+                                    {{-- <!-- start item -->
                                     <div class="col-12 col-sm-6 col-lg-4">
                                         <div class="__item">
                                             <figure class="__image">
@@ -606,7 +595,7 @@
                                             <span class="product-label product-label--sale">Sale</span>
                                         </div>
                                     </div>
-                                    <!-- end item -->
+                                    <!-- end item --> --}}
                                 </div>
                             </div>
                         </div>
