@@ -31,6 +31,9 @@ return [
    //section blog *********************************************************
    'readmore'                => 'Read More',
    'blogdetails'             => 'Blog Details',
+   'productdetails'             => 'Product Details',
+   'cart'                   => 'Cart',
+   'checkout'             => 'Checkout',
 
    //End section blog *********************************************************
 ];

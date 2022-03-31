@@ -195,7 +195,9 @@
                                     <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                 </div>
 
-                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
+                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})" >
+                                    <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                             </div>
 
                             <span class="product-label product-label--sale">Sale</span>
@@ -440,7 +442,9 @@
                                                     {{-- <span class="product-price__item product-price__item--old">8.11 $</span> --}}
                                                 </div>
 
-                                                <a class="custom-btn custom-btn--small custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                <a class="custom-btn custom-btn--small custom-btn--style-1" href="#"
+                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -492,11 +496,13 @@
                                     </div>
 
                                     <div class="product-price">
-                                        <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
-                                        {{-- <span class="product-price__item product-price__item--new">6,12 $</span> --}}
+                                        {{-- <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span> --}}
+                                        <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                     </div>
 
-                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
+                                    wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                        <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                                 </div>
 
                                 <span class="product-label product-label--sale">-20%</span>

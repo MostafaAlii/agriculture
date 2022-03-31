@@ -116,7 +116,7 @@ class ProductRepository implements ProductInterface {
         $data['product']        =       Product::findOrfail($real_id);
         $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
         $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
-        $data['categories']    =       Category::select('id')->without('created_at', 'updated_at')->get();
+        $data['categories']     =       Category::select('id')->without('created_at', 'updated_at')->get();
         return view('dashboard.admin.products.edit', $data);
     }
 

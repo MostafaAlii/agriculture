@@ -1,24 +1,28 @@
 <div>
+    @section('title', __('website\home.productdetails'))
+    @section('css')
+
+    @endsection
     	<!-- start section -->
         <section class="section">
             <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
-                <img class="lazy" width="286" height="280" src="img/blank.gif" data-src="img/decor-el_1.jpg" alt="demo"/>
+                <img class="lazy" width="286" height="280" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_1.jpg') }}" alt="demo"/>
             </div>
 
             <div class="decor-el decor-el--2" data-jarallax-element="-70" data-speed="0.2">
-                <img class="lazy" width="99" height="88" src="img/blank.gif" data-src="img/decor-el_2.jpg" alt="demo"/>
+                <img class="lazy" width="99" height="88" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_2.jpg') }}" alt="demo"/>
             </div>
 
             <div class="decor-el decor-el--3" data-jarallax-element="-70" data-speed="0.2">
-                <img class="lazy" width="115" height="117" src="img/blank.gif" data-src="img/decor-el_3.jpg" alt="demo"/>
+                <img class="lazy" width="115" height="117" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_3.jpg') }}" alt="demo"/>
             </div>
 
             <div class="decor-el decor-el--4" data-jarallax-element="-70" data-speed="0.2">
-                <img class="lazy" width="84" height="76" src="img/blank.gif" data-src="img/decor-el_4.jpg" alt="demo"/>
+                <img class="lazy" width="84" height="76" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_4.jpg') }}" alt="demo"/>
             </div>
 
             <div class="decor-el decor-el--5" data-jarallax-element="-70" data-speed="0.2">
-                <img class="lazy" width="248" height="309" src="img/blank.gif" data-src="img/decor-el_5.jpg" alt="demo"/>
+                <img class="lazy" width="248" height="309" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_5.jpg') }}" alt="demo"/>
             </div>
 
             <div class="container">
@@ -68,12 +72,29 @@
 
                                         <form class="__add-to-cart" action="#">
                                             <div class="quantity-counter js-quantity-counter">
-                                                <span class="__btn __btn--minus"></span>
-                                                <input class="__q-input" type="text" value="1" />
-                                                <span class="__btn __btn--plus"></span>
+                                                <span class="__btn __btn--minus"  wire:click.prevent='decreaseQty' ></span>
+                                                <input class="__q-input"
+                                                type="text"
+                                                name="product-quatity"
+                                                min="1"
+                                                {{-- max="{{ $item->model->qty }}" --}}
+                                                {{-- value="{{ $item->qty }}" --}}
+                                                value="1"
+                                                onkeydown="return false"
+                                                wire:model='qty' />
+                                                <span class="__btn __btn--plus" wire:click.prevent='increaseQty' ></span>
                                             </div>
 
-                                            <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button"><i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</button>
+
+
+
+
+                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                            type="submit" role="button"
+                                            wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                            <i class="fontello-shopping-bag"></i>
+                                                {{ __('Admin/site.addtocart') }}
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
@@ -575,61 +596,6 @@
                                         </div>
                                     </li>
                                     @endforeach
-                                    {{-- <li>
-                                        <div class="row no-gutters">
-                                            <div class="col-auto __image-wrap">
-                                                <figure class="__image">
-                                                    <a href="single_product.html">
-                                                        <img class="lazy" src="img/blank.gif" data-src="img/goods_img/8.jpg" alt="demo" />
-                                                    </a>
-                                                </figure>
-                                            </div>
-
-                                            <div class="col">
-                                                <h4 class="h6 __title"><a href="single_product.html">Awesome Peach </a></h4>
-
-                                                <div class="rating">
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item"><i class="fontello-star"></i></span>
-                                                </div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">10.99 $</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li> --}}
-{{--
-                                    <li>
-                                        <div class="row no-gutters">
-                                            <div class="col-auto __image-wrap">
-                                                <figure class="__image">
-                                                    <a href="single_product.html">
-                                                        <img class="lazy" src="img/blank.gif" data-src="img/goods_img/2.jpg" alt="demo" />
-                                                    </a>
-                                                </figure>
-                                            </div>
-
-                                            <div class="col">
-                                                <h4 class="h6 __title"><a href="single_product.html">Awesome Brocoli</a></h4>
-
-                                                <div class="rating">
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item"><i class="fontello-star"></i></span>
-                                                </div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">5.99 $</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li> --}}
                                 </ul>
                             </div>
                             <!-- end widget -->

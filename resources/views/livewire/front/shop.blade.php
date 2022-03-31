@@ -324,7 +324,12 @@ svg{
                                                         <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                                     </div>
 
-                                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                    <a class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                        href="#"
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})" >
+                                                        <i class="fontello-shopping-bag"></i>
+                                                        {{ __('Admin/site.addtocart') }}
+                                                    </a>
                                                 </div>
 
                                                 <span class="product-label product-label--sale">Sale</span>

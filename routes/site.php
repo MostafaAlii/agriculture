@@ -21,10 +21,12 @@ Route::group(
         route::get('/home2',Livewire\front\Home::class)->name('front2');               //home2
         route::get('/shop',Livewire\front\shop::class)->name('shop');                   //all products
         route::get('/shop/{product_id}',Livewire\front\ProductDetails::class)->name('product_details'); //product-details
-        route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');          // about us
-        route::get('/blogs',Livewire\front\Blogs::class)->name('blog');               // blog
+        route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');                   // about us
+        route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                         // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
-        route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');      // contact us
+        route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');             // contact us
+        Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');                  //cart
+        Route::get('/checkout',Livewire\front\Checkout::class)->name('checkout');             //checkout
 
 
 

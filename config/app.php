@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
     ],
 
     /*
@@ -238,6 +239,7 @@ return [
          'Up'       => App\Http\Controllers\Upload::class,
          'Image' => Intervention\Image\Facades\Image::class,
          'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
+         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];
