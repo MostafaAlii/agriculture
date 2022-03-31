@@ -17,12 +17,12 @@
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('frontassets/img/apple-touch-icon-114x114.png') }}">
 
     {{-- bootstrap 4 ************************ --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/animate.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/font-awesome.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/owl.carousel.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/flexslider.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/color-01.css') }}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/animate.css') }}"> --}}
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/font-awesome.min.css') }}"> --}}
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/bootstrap.min.css') }}"> --}}
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/owl.carousel.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/flexslider.css') }}"> --}}
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/color-01.css') }}"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         {{-- bootstrap 4 ************************ --}}
@@ -32,7 +32,7 @@
 
           <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
           <!-- END: Page CSS-->
-          <style> body {font-family: 'Cairo', sans-serif;} </style>
+          <style> body {font-family: 'Cairo', sans-serif !important;} </style>
     {{-- font cairo --}}
 
     <!-- Critical styles

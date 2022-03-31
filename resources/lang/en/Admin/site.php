@@ -123,4 +123,6 @@ return [
     "prev" => "Prev",
     "next" => "Next",
     'products'=>'Products',
+    'welcome'=>'Welcome',
+
 ];

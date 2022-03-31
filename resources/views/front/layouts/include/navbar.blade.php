@@ -26,7 +26,7 @@
             </ul>
         </li> --}}
 
-        <li class="has-submenu">
+        {{-- <li class="has-submenu">
             <a href="javascript:void(0);">test</a>
 
             <ul class="submenu">
@@ -36,7 +36,7 @@
                 <li><a href="checkout.html">Checkout</a></li>
                 <li><a href="sign_in.html">Sign In/Up</a></li>
             </ul>
-        </li>
+        </li> --}}
     {{-- function to check if not auth  *****************(guest)************(guest)*************************** --}}
             @check_guard
             <li class="li-btn">
@@ -50,7 +50,7 @@
     {{-- links for farmer الفلاح****************************************************--}}
     @if(Auth::guard('web')->user())
         <li class="menu-item menu-item-has-children parent" >
-            <a title="My Account" href="#">My Account {{ Auth::user()->firstname }} {{ Auth::user()->lasttname }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
                     <a title="Dashboard" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
@@ -78,7 +78,7 @@
     {{-- links for vendor or user  التاجر*******************************************--}}
     @if(Auth::guard('vendor')->user())
         <li class="menu-item menu-item-has-children parent" >
-            <a title="My Account" href="#">My Account {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
                     <a title="Dashboard" href="{{ route('user.dash') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
@@ -106,7 +106,7 @@
     {{-- links for admin الادمنز والاداره************************************************--}}
     @if(Auth::guard('admin')->user())
         <li class="menu-item menu-item-has-children parent" >
-            <a title="My Account" href="#">Welcom Mr : {{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
                     <a title="Dashboard" href="{{ route('admin.dashboard') }}"target="_blank">{{ trans('Website/home.dashboard') }}</a>
