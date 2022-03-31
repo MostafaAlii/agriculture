@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\Blog;
 use App\Models\Country;
 use App\Models\CountryTranslation;
 use Illuminate\Database\Seeder;
@@ -8,6 +9,7 @@ use App\Models\Image;
 use App\Models\Product;
 use App\Models\ProductDepartment;
 use App\Models\Profile;
+use App\Models\Slider;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder {
@@ -61,17 +63,17 @@ class DatabaseSeeder extends Seeder {
                 ]);
             }
             // images for blog
-            for ($i = 1; $i <= $count ; $i++) {
+            for ($i = 1; $i <= Blog::count() ; $i++) {
                 Image::insert([
-                    'filename'     => rand(1,10) . ".jpg",
+                    'filename'     => 'blog-article-'.rand(1,5) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Blog'
                 ]);
             }
             // images for slider
-            for ($i = 1; $i <= 3 ; $i++) {
+            for ($i = 1; $i <= Slider::count() ; $i++) {
                 Image::insert([
-                    'filename'     => rand(100,103) . ".jpg",
+                    'filename'     => rand(100,106) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Slider'
                 ]);

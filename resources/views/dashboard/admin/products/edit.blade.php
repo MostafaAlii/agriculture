@@ -123,7 +123,7 @@
                                                         <select name="departments[]" class="select2 form-control" multiple>
                                                             <optgroup label="{{ trans('Admin\products.product_department_select_placeholder') }}">
                                                                 @if($departments && $departments->count() > 0)
-                                                                    @foreach($departments as $department) 
+                                                                    @foreach($departments as $department)
                                                                         <option value="{{$department->id}}" <?php if(in_array($department->id,$selected_department)){echo'selected';}?>>{{$department->name}}</option>
                                                                     @endforeach
                                                                 @endif
@@ -335,9 +335,9 @@
                                                 </div>
                                             </div>
                                             <!-- End Product Description -->
-                                            
 
-                                            
+
+
                                             <div class="form-actions center">
                                                 <button type="submit" class="btn btn-primary">
                                                     <input type="hidden" value="{{$product->id}}" name="id"/>
@@ -413,20 +413,20 @@ $('select[name="country_id"]').on('change', function () {
    $('#area_id').empty();
    $('#state_id').empty();
    $('#village_id').empty();
-   
+
    $.ajax({
        type: "GET",
-       
+
        url: "{{ URL::to('dashboard_admin/fetch_provience')}}/" + country_id,
        //url: "../../fetch_provience/" + country_id,
-       
+
        dataType: "json",
        success: function (data)
        {
           // alert(data);
           $('#province_id').empty();
            if(data!='')
-           { 
+           {
                $.each(data, function (key, value) {
                    //alert('<option value="' + key + '">' + value + '</option>');
                $('#province_id').append('<option value="' + key + '">' + value + '</option>');
@@ -436,7 +436,7 @@ $('select[name="country_id"]').on('change', function () {
            {
                $('#province_id').append('<option disabled >'+ __('Admin/departments.no_province') +'</option>');
            }
-           
+
 
        },
        error:function()
@@ -456,22 +456,22 @@ $('select[name="province_id"]').on('change', function () {
 
    $('#state_id').empty();
    $('#village_id').empty();
-   
+
    $.ajax({
        type: "GET",
-       
+
        url: "{{ URL::to('dashboard_admin/fetch_area')}}/" + province_id,
     //    url: "../../fetch_area/" + province_id,
-       
+
        dataType: "json",
        success: function (data)
        {
           // alert(data);
 
           $('#area_id').empty();
-          
+
            if(data!='')
-           {          
+           {
                $.each(data, function (key, value) {
                    //alert('<option value="' + key + '">' + value + '</option>');
                $('#area_id').append('<option value="' + key + '">' + value + '</option>');
@@ -481,7 +481,7 @@ $('select[name="province_id"]').on('change', function () {
            {
                $('#area_id').append('<option disabled> '+ __('Admin/departments.no_area') +'</option>');
            }
-           
+
 
        },
        error:function()
@@ -502,17 +502,17 @@ $('select[name="area_id"]').on('change', function () {
    $('#village_id').empty();
    $.ajax({
        type: "GET",
-       
+
        url: "{{ URL::to('dashboard_admin/fetch_state')}}/" + area_id,
     //    url: "../../fetch_state/" + area_id,
-    
+
        dataType: "json",
        success: function (data)
        {
           // alert(data);
-          $('#state_id').empty(); 
+          $('#state_id').empty();
            if(data!='')
-           {          
+           {
                $.each(data, function (key, value) {
                    //alert('<option value="' + key + '">' + value + '</option>');
                $('#state_id').append('<option value="' + key + '">' + value + '</option>');
@@ -522,7 +522,7 @@ $('select[name="area_id"]').on('change', function () {
            {
                $('#state_id').append('<option disabled> '+ __('Admin/departments.no_state') +'</option>');
            }
-           
+
 
        },
        error:function()
@@ -545,14 +545,14 @@ $('select[name="state_id"]').on('change', function () {
 
        url: "{{ URL::to('dashboard_admin/fetch_village')}}/" + state_id,
     //    url: "../../fetch_village/" + state_id,
-    
+
        dataType: "json",
        success: function (data)
        {
           // alert(data);
-          $('#village_id').empty(); 
+          $('#village_id').empty();
            if(data!='')
-           {            
+           {
                $.each(data, function (key, value) {
                    //alert('<option value="' + key + '">' + value + '</option>');
                $('#village_id').append('<option value="' + key + '">' + value + '</option>');
@@ -562,7 +562,7 @@ $('select[name="state_id"]').on('change', function () {
            {
                $('#village_id').append('<option disabled> '+ __('Admin/departments.no_village') +'</option>');
            }
-           
+
 
        },
        error:function()
