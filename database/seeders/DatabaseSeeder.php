@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder {
          // images
          for ($i = 1; $i <= $count ; $i++) {
             Image::insert([
-                'filename'     => rand(1,10) . ".jpg",
+                'filename'     => rand(1,6) . ".jpg",
                 'imageable_id' => $i,
                 'imageable_type' => 'App\Models\User'
             ]);
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder {
            // images
            for ($i = 1; $i <= $count ; $i++) {
             Image::insert([
-                'filename'     => rand(1,10) . ".jpg",
+                'filename'     => rand(1,6) . ".jpg",
                 'imageable_id' => $i,
                 'imageable_type' => 'App\Models\Farmer'
             ]);
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder {
             // images
             for ($i = 1; $i <= $count ; $i++) {
                 Image::insert([
-                    'filename'     => rand(1,10) . ".jpg",
+                    'filename'     => rand(1,6) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Admin'
                 ]);
