@@ -538,18 +538,26 @@
                                 <h4 class="h6 widget-title">Featured products</h4>
 
                                 <ul>
+                                    @foreach ($featuredProducts as $product)
                                     <li>
                                         <div class="row no-gutters">
                                             <div class="col-auto __image-wrap">
                                                 <figure class="__image">
-                                                    <a href="single_product.html">
-                                                        <img class="lazy" src="img/blank.gif" data-src="img/goods_img/5.jpg" alt="demo" />
+                                                    <a href="{{ route('product_details',$product->id) }}">
+                                                        @if($product->image->filename)
+                                                            <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                            data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                                        @else
+                                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                        @endif
+
                                                     </a>
                                                 </figure>
                                             </div>
 
                                             <div class="col">
-                                                <h4 class="h6 __title"><a href="single_product.html">Big Banana</a></h4>
+                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
                                                 <div class="rating">
                                                     <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
@@ -560,14 +568,14 @@
                                                 </div>
 
                                                 <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">2.99 $</span>
-                                                    <span class="product-price__item product-price__item--old">4.11 $</span>
+                                                    <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                                    {{-- <span class="product-price__item product-price__item--old">4.11 $</span> --}}
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-
-                                    <li>
+                                    @endforeach
+                                    {{-- <li>
                                         <div class="row no-gutters">
                                             <div class="col-auto __image-wrap">
                                                 <figure class="__image">
@@ -593,8 +601,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
-
+                                    </li> --}}
+{{--
                                     <li>
                                         <div class="row no-gutters">
                                             <div class="col-auto __image-wrap">
@@ -621,7 +629,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                             <!-- end widget -->

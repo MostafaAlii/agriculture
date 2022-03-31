@@ -18,6 +18,7 @@ class Shop extends Component
     }
     public function render()
     {
+        $featuredProducts = Product::inRandomOrder()->limit(3)->get();
         if($this->sorting=='date'){
             $products = Product::orderByDesc('created_at')->paginate($this->pagesize);
           }elseif($this->sorting=='price'){
@@ -27,7 +28,7 @@ class Shop extends Component
           }else{
               $products = Product::paginate($this->pagesize);
           }
-        return view('livewire.front.shop',compact('products'))
+        return view('livewire.front.shop',compact('products','featuredProducts'))
         ->layout('front.layouts.master2');
     }
 }

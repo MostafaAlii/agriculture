@@ -14,7 +14,8 @@ class ProductDetails extends Component
     public function render()
     {
         $product = Product::findorfail($this->product_id);
-        return view('livewire.front.product-details',compact('product'))
+        $featuredProducts = Product::inRandomOrder()->limit(3)->get();
+        return view('livewire.front.product-details',compact('product','featuredProducts'))
                    ->layout('front.layouts.master2');
     }
 }
