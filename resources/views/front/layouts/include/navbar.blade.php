@@ -13,11 +13,9 @@
     <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
     <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
     <li class="li-cart">
-        <a href="{{ route('product.cart') }}">
-            <i class="fontello-shopping-bag"></i>
-            <span class="total">0</span></a>
-        </li>
-        <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
+        @livewire('front.cart-count-component')
+    </li>
+    <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
         {{--  start links in navebar *************************************************************************--}}
         {{-- <li class="has-submenu">
             <a href="javascript:void(0);">Pages</a>
