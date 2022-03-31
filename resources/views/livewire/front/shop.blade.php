@@ -310,16 +310,33 @@ svg{
 
                             <div class="col-auto">
                                 <!-- start ordering -->
-                                <form class="ordering" action="#">
+                                {{-- <form class="ordering" action="#"> --}}
                                     <div class="input-wrp">
-                                        <select class="textfield wide js-select">
-                                            <option value="1">Default Sorting</option>
-                                            <option value="2">Price. low to high</option>
-                                            <option value="3">Price. high to low</option>
-                                            <option value="3">Sort by latest</option>
+                                        <select name="orderby" class="textfield wide js-select" wire:model='sorting'>
+                                            <option value="default" selected="selected">Default sorting</option>
+                                            <option value="date">Sort by newness</option>
+                                            <option value="price">Sort by price: low to high</option>
+                                            <option value="price-desc">Sort by price: high to low</option>
                                         </select>
                                     </div>
-                                </form>
+                                {{-- </form> --}}
+                                <!-- end ordering -->
+                            </div>
+                            <div class="col-auto">
+                                <!-- start ordering -->
+                                {{-- <form class="ordering" action="#"> --}}
+                                    <div class="input-wrp">
+                                        <select name="post-per-page" class="textfield wide js-select" wire:model='pagesize' >
+                                            <option value="12" selected="selected">12 per page</option>
+                                            <option value="16">16 per page</option>
+                                            <option value="18">18 per page</option>
+                                            <option value="21">21 per page</option>
+                                            <option value="24">24 per page</option>
+                                            <option value="30">30 per page</option>
+                                            <option value="32">32 per page</option>
+                                        </select>
+                                    </div>
+                                {{-- </form> --}}
                                 <!-- end ordering -->
                             </div>
                         </div>
