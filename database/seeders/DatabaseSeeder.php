@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder {
             // images for product
             for ($i = 1; $i <= Product::count() ; $i++) {
                 Image::insert([
-                    'filename'     => rand(1,10) . ".jpg",
+                    'filename'     => rand(1,67) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Product'
                 ]);
