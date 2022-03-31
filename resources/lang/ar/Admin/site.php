@@ -120,4 +120,5 @@ return [
     'products'=>'المنتجات',
     'featproducts'=>'منتجات مميزه',
     'newproducts'=>'احدث المنتجات',
+    'addtocart'=>'اضف الى القائمه',
 ];

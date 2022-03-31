@@ -126,5 +126,7 @@ return [
     'products'=>'Products',
     'featproducts'=>'Featured products',
     'newproducts'=>'Latest Products',
+    'addtocart'=>'Add To Cart',
+
 
 ];
