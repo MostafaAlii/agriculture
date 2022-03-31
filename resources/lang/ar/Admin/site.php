@@ -116,6 +116,7 @@ return [
 
     "prev" => "السابق",
     "next" => "التالي",
-    'products'=>'المنتجات',
     'welcome'=>'مرحبا',
+    'products'=>'المنتجات',
+    'featproducts'=>'منتجات مميزه',
 ];

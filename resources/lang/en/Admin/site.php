@@ -122,7 +122,8 @@ return [
 
     "prev" => "Prev",
     "next" => "Next",
-    'products'=>'Products',
     'welcome'=>'Welcome',
+    'products'=>'Products',
+    'featproducts'=>'Featured products',
 
 ];

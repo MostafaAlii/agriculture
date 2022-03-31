@@ -200,7 +200,7 @@ svg{
 
                                 <!-- start widget -->
                                 <div class="widget widget--products">
-                                    <h4 class="h6 widget-title">Featured products</h4>
+                                    <h4 class="h6 widget-title">{{ __('Admin/site.featproducts') }}</h4>
 
                                     <ul>
                                         @foreach ($featuredProducts as $product)
