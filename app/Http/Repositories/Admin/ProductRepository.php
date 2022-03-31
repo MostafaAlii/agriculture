@@ -18,9 +18,9 @@ class ProductRepository implements ProductInterface {
         return view('dashboard.admin.products.index');
     }
 
-    /*public function data() {
+    public function data() {
         //get all Products data
-        $products = Product::withoutTrashed()->orderBy('id','DESC')->get();
+        $products = Product::withoutTrashed()->get();
 
         //use datatables (yajra) to handel this data
         return DataTables::of($products)
@@ -30,22 +30,25 @@ class ProductRepository implements ProductInterface {
             ->addColumn('farmer_name', function (Product $products) {
                 return $products->farmer->firstname.' '.$products->farmer->lastname;
             })
-            ->addColumn('depart_name', function (Product $products) {
-                $all= $products->departments->whereNull('parent_id');
-                $x='';
-                foreach($all as $a){
-                    $x.=$a->name.' ';
-                }
-                return $x;
+            ->editColumn('status', function (Product $product) {
+                return view('dashboard.admin.products.data_table.status', compact('product'));
             })
-            ->addColumn('category_name', function (Product $products) {
-                $all= $products->departments->whereNotNull('parent_id');
-                $x='';
-                foreach($all as $a){
-                    $x.=$a->name.' ';
-                }
-                return $x;
-            })
+            // ->addColumn('depart_name', function (Product $products) {
+            //     $all= $products->departments->whereNull('parent_id');
+            //     $x='';
+            //     foreach($all as $a){
+            //         $x.=$a->name.' ';
+            //     }
+            //     return $x;
+            // })
+            // ->addColumn('category_name', function (Product $products) {
+            //     $all= $products->departments->whereNotNull('parent_id');
+            //     $x='';
+            //     foreach($all as $a){
+            //         $x.=$a->name.' ';
+            //     }
+            //     return $x;
+            // })
             ->editColumn('created_at', function (Product $products) {
                 return $products->created_at->diffforhumans();
             })
@@ -57,7 +60,7 @@ class ProductRepository implements ProductInterface {
             })
             ->rawColumns(['record_select','actions'])
             ->toJson();
-    }*/
+    }
 
 
     public function generalInformation() {
@@ -76,7 +79,7 @@ class ProductRepository implements ProductInterface {
                     $request->request->add(['status' => 0]);
                 else
                     $request->request->add(['status' => 1]);
-                
+
                 $product = Product::create([
                     'farmer_id' => $request->farmer_id,
                     'price' => $request->price,
@@ -97,7 +100,7 @@ class ProductRepository implements ProductInterface {
                 $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
                 DB::commit();
                 toastr()->success(__('Admin/products.product_store_successfully'));
-                return redirect()->route('products');   
+                return redirect()->route('products');
             } catch(\Exception $ex){
                 DB::rollBack();
                 toastr()->error(__('Admin/general.wrong'));
@@ -108,7 +111,7 @@ class ProductRepository implements ProductInterface {
 
 
     public function edit($id) {
-        $real_id= decrypt($id); 
+        $real_id= decrypt($id);
         $data = [];
         $data['product']        =       Product::findOrfail($real_id);
         $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
@@ -125,8 +128,8 @@ class ProductRepository implements ProductInterface {
                     $request->request->add(['status' => 0]);
                 else
                     $request->request->add(['status' => 1]);
-                
-                $product = Product::findOrfail($request->id);                  
+
+                $product = Product::findOrfail($request->id);
                 $product->farmer_id     = $request->farmer_id;
                 $product->price         = $request->price;
                 $product->status    = $request->status;
@@ -144,16 +147,16 @@ class ProductRepository implements ProductInterface {
                 $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
                 DB::commit();
                 toastr()->success(__('Admin/products.product_updated_successfully'));
-                return redirect()->route('products');   
+                return redirect()->route('products');
             } catch(\Exception $ex){
                 DB::rollBack();
                 toastr()->error(__('Admin/general.wrong'));
                 return redirect()->route('products');
             }
     }
-    
+
     public function destroy($id) {
-        
+
         try{
             $real_id = decrypt($id);
             Product::where('id',$real_id)->delete(); //soft_delete
@@ -165,7 +168,7 @@ class ProductRepository implements ProductInterface {
            return redirect()->route('products');
         }
     }
-    
+
     public function bulkDelete($request)
     {
         try{
@@ -174,7 +177,7 @@ class ProductRepository implements ProductInterface {
                 Product::whereIn('id',$all_ids)->delete(); //soft_delete
                 toastr()->error(__('Admin/products.delete_done'));
                 return redirect()->route('products');
-            
+
             }else{
                 toastr()->error(__('Admin/site.no_data_found'));
                 return redirect()->route('products');

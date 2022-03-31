@@ -14,9 +14,9 @@ class ProductController extends Controller {
         return $this->Data->index();
     }
 
-    /*public function data() {
+    public function data() {
         return $this->Data->data();
-    }*/
+    }
 
     public function create() {
         return $this->Data->generalInformation();
@@ -33,7 +33,7 @@ class ProductController extends Controller {
     public function update(GeneralRequest $request) {
         return $this->Data->update($request);
     }
-    
+
     public function destroy($id){
         return $this->Data->destroy($id);
     }

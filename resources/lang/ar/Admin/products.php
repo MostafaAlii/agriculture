@@ -19,13 +19,15 @@ return [
     'product_status'                             =>                  'حالــة المنتج',
     'product_main_price'                         =>                  'السعر الاساسى للمنتج',
     'product_main_price_placeholder'             =>                  'ادخل السعر الاساسى للمنتج',
-    
+
     'product_main_image'                         =>                  'صوره المنتج',
     'product_farmer'                             =>                  ' اسم المزارع',
-    'product_category'                           =>                  ' القسم', 
-    'delete_done'                                =>                  ' تم الحذف بنجاح', 
-    'delete_not_allowed'                         =>                  ' حدث مشكله اثناء الحذف ..حاول مره اخرى', 
+    'product_category'                           =>                  ' القسم',
+    'delete_done'                                =>                  ' تم الحذف بنجاح',
+    'delete_not_allowed'                         =>                  ' حدث مشكله اثناء الحذف ..حاول مره اخرى',
     'edit_product'                               =>                   'تعديل المنتج',
     'product_updated_successfully'               =>                  'تم تعديل المنتج بنجاح',
+    'active'                                     =>                  'مفعل',
+    'unactive'                                   =>                  'غير مفعل',
 
 ];

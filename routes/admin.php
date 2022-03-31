@@ -168,10 +168,10 @@ Route::group(
                     Route::get('/products_data', [ProductController::class,'data'])->name('products_data');
                     Route::get('create',[ProductController::class, 'create'])->name('products.generalInformation');
                     Route::post('create',[ProductController::class, 'generalInformationStore'])->name('products.generalInformation.store');
-                    /*Route::get('/product_edit/{id}', [ProductController::class,'edit'])->name('product_edit');
+                    Route::get('/product_edit/{id}', [ProductController::class,'edit'])->name('product_edit');
                     Route::post('/product_update', [ProductController::class,'update'])->name('product_update');
                     Route::delete('/product_delete/{id}', [ProductController::class,'destroy'])->name('product_delete');
-                    Route::delete('/products/bulk_delete/{ids}', [ProductController::class,'bulkDelete'])->name('products.bulk_delete');*/
+                    Route::delete('/products/bulk_delete/{ids}', [ProductController::class,'bulkDelete'])->name('products.bulk_delete');
 
                 });
                 /********************************* End Products Routes ************************************/

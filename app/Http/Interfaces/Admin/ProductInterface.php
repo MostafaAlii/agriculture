@@ -4,7 +4,7 @@ interface ProductInterface {
     public function index();
     public function generalInformation();
     public function generalInformationStore($request);
-    //public function data();
+    public function data();
     public function edit($id);
     public function update($request);
     public function destroy($id);

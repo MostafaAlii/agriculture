@@ -5,6 +5,7 @@ use App\Models\Country;
 use App\Models\CountryTranslation;
 use Illuminate\Database\Seeder;
 use App\Models\Image;
+use App\Models\Product;
 use App\Models\ProductDepartment;
 use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
@@ -73,6 +74,14 @@ class DatabaseSeeder extends Seeder {
                     'filename'     => rand(100,103) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Slider'
+                ]);
+            }
+            // images for product
+            for ($i = 1; $i <= Product::count() ; $i++) {
+                Image::insert([
+                    'filename'     => rand(1,10) . ".jpg",
+                    'imageable_id' => $i,
+                    'imageable_type' => 'App\Models\Product'
                 ]);
             }
     }
