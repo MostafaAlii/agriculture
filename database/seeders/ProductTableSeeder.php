@@ -8,7 +8,6 @@ class ProductTableSeeder extends Seeder {
     public function run() {
         Schema::disableForeignKeyConstraints();
         DB::table('products')->truncate();
-        // Product::factory()->count(3500)->create();
         Product::factory()->count(500)->create();
         Schema::enableForeignKeyConstraints();
     }

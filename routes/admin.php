@@ -126,6 +126,12 @@ Route::group(
             Route::delete('/Departments/bulk_delete/{ids}', [DepartmentController::class,'bulkDelete'])->name('departments.bulk_delete');
             /********************************* End Department Routes ************************************/
 
+            /********************************* Category Routes ************************************/
+            Route::resource('Categories', CategoryController::class)->except(['show']);
+            Route::get('/Categories/data', [CategoryController::class,'data'])->name('categories.data');
+            Route::delete('/Categories/bulk_delete/{ids}', [CategoryController::class,'bulkDelete'])->name('categories.bulk_delete');
+            /********************************* End Category Routes ************************************/
+
             /********************************* Blog Routes ************************************/
             Route::resource('blogs', BlogController::class)->except(['show']);
             Route::get('/blogs/data', [BlogController::class,'data'])->name('blogs.data');
@@ -160,32 +166,20 @@ Route::group(
                 Route::group(['prefix' => 'Products'], function () {
                     Route::get('/',[ProductController::class, 'index']) -> name('products');
                     Route::get('/products_data', [ProductController::class,'data'])->name('products_data');
-                    Route::match(['get', 'post'], '/create',[ProductController::class, 'create'])->name('products.generalInformation');
-                    Route::get('/product_edit/{id}', [ProductController::class,'edit'])->name('product_edit');
+                    Route::get('create',[ProductController::class, 'create'])->name('products.generalInformation');
+                    Route::post('create',[ProductController::class, 'generalInformationStore'])->name('products.generalInformation.store');
+                    /*Route::get('/product_edit/{id}', [ProductController::class,'edit'])->name('product_edit');
                     Route::post('/product_update', [ProductController::class,'update'])->name('product_update');
                     Route::delete('/product_delete/{id}', [ProductController::class,'destroy'])->name('product_delete');
-                    Route::delete('/products/bulk_delete/{ids}', [ProductController::class,'bulkDelete'])->name('products.bulk_delete');
+                    Route::delete('/products/bulk_delete/{ids}', [ProductController::class,'bulkDelete'])->name('products.bulk_delete');*/
 
                 });
                 /********************************* End Products Routes ************************************/
 
-                     /********************************* Slider Routes ************************************/
-            // Route::group(['prefix' => 'Sliders'], function () {
-                // Route::get('/', [SliderController::class, 'addImages'])->name('sliders.create');
-                // Route::post('sliders', [SliderController::class, 'saveSliderImages'])->name('sliders.store');
-                // Route::post('sliders/db', [SliderController::class, 'saveSliderImagesDB'])->name('sliders.store.db');
-            // });
-            Route::resource('sliders', SliderController::class)->except(['show']);
-            Route::get('/sliders/data', [SliderController::class,'data'])->name('sliders.data');
-            Route::delete('/sliders/bulk_delete/{ids}', [SliderController::class,'bulkDelete'])->name('sliders.bulk_delete');
-            /********************************* End Slider Routes ************************************/
-
-
-            /********************************* Category Routes ************************************/
-            Route::resource('Categories', CategoryController::class)->except(['show']);
-            Route::get('/Categories/data', [CategoryController::class,'data'])->name('categories.data');
-            Route::delete('/Categories/bulk_delete/{ids}', [CategoryController::class,'bulkDelete'])->name('categories.bulk_delete');
-            /********************************* End Category Routes ************************************/
-
+                /********************************* Slider Routes ************************************/
+                Route::resource('sliders', SliderController::class)->except(['show']);
+                Route::get('/sliders/data', [SliderController::class,'data'])->name('sliders.data');
+                Route::delete('/sliders/bulk_delete/{ids}', [SliderController::class,'bulkDelete'])->name('sliders.bulk_delete');
+                /********************************* End Slider Routes ************************************/
         });
     });

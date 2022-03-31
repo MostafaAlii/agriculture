@@ -17,9 +17,4 @@ class Village extends Model {
     public function state(): BelongsTo {
         return $this->belongsTo(State::class);
     }
-
-    // Village Has Many Product ::
-    public function products(): HasMany {
-        return $this->hasMany(Product::class);
-    }
 }

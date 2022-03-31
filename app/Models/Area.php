@@ -24,9 +24,4 @@ class Area extends Model {
     public function province(): BelongsTo {
         return $this->belongsTo(Province::class);
     }
-
-    // Area Has Many Product ::
-    public function products(): HasMany {
-        return $this->hasMany(Product::class);
-    }
 }

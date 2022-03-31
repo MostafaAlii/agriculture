@@ -1,14 +1,9 @@
 <?php
 namespace App\Http\Repositories\Admin;
 use App\Models\Product;
-use App\Models\Country;
 use App\Models\Farmer;
-use App\Models\Province;
-use App\Models\Area;
-use App\Models\State;
-use App\Models\Village;
 use App\Http\Interfaces\Admin\ProductInterface;
-use App\Models\Department;
+use App\Models\Category;
 use App\Models\Tag;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
@@ -23,7 +18,7 @@ class ProductRepository implements ProductInterface {
         return view('dashboard.admin.products.index');
     }
 
-    public function data() {
+    /*public function data() {
         //get all Products data
         $products = Product::withoutTrashed()->orderBy('id','DESC')->get();
 
@@ -62,13 +57,20 @@ class ProductRepository implements ProductInterface {
             })
             ->rawColumns(['record_select','actions'])
             ->toJson();
+    }*/
+
+
+    public function generalInformation() {
+        $data = [];
+        $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
+        $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
+        $data['categories']    =       Category::select('id')->without('created_at', 'updated_at')->get();
+        return view('dashboard.admin.products.generalInformation.create', $data);
     }
 
-    
-    public function generalInformation($request) {
-        $method = $request->method();
-        if($request->isMethod('POST')){
-            DB::beginTransaction();
+    public function generalInformationStore($request) {
+        DB::beginTransaction();
+            //return $request;
             try{
                 if (!$request->has('status'))
                     $request->request->add(['status' => 0]);
@@ -77,21 +79,19 @@ class ProductRepository implements ProductInterface {
                 
                 $product = Product::create([
                     'farmer_id' => $request->farmer_id,
-                    'country_id' => $request->country_id,
-                    'province_id' => $request->province_id,
-                    'area_id' => $request->area_id,
-                    'state_id' => $request->state_id,
-                    'village_id' => $request->village_id,
                     'price' => $request->price,
                     'status' => $request->status,
+                    'product_location' => $request->product_location,
                 ]);
                 $product->save();
                 // Save Translation ::
                 $product->name = $request->name;
+                $product->slug=str_replace(' ', '_',$request->name);
                 $product->description = $request->description;
                 $product->save();
-                // Attach Department ::
-                $product->departments()->attach($request->departments);
+                // Attach Category ::
+                $product->categories()->attach($request->categories);
+                // Attach Tag ::
                 $product->tags()->attach($request->tags);
                 // Save Product Main Photo ::
                 $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
@@ -103,42 +103,18 @@ class ProductRepository implements ProductInterface {
                 toastr()->error(__('Admin/general.wrong'));
                 return redirect()->route('products');
             }
-        }
-        
-        if($request->isMethod('GET')) {
-            $data = [];
-            $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
-            $data['countries']      =       Country::select('id')->without('created_at', 'updated_at')->get();
-            $data['provinces']      =       Province::select('id')->without('created_at', 'updated_at')->get();
-            $data['areas']          =       Area::select('id')->without('created_at', 'updated_at')->get();
-            $data['states']         =       State::select('id')->without('created_at', 'updated_at')->get();
-            $data['villages']       =       Village::select('id')->without('created_at', 'updated_at')->get();
-            $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
-            $data['departments']    =       Department::select('id')->without('created_at', 'updated_at')->get();
-            
-            return view('dashboard.admin.products.generalInformation.create', $data);
-        }
     }
 
 
-    public function edit($id)
-    {
-        //dd($id);
-         $real_id= decrypt($id); 
-        
-            $data = [];
-            $data['product']        =       Product::findOrfail($real_id);
-            $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
-            $data['countries']      =       Country::select('id')->without('created_at', 'updated_at')->get();
-            $data['provinces']      =       Province::select('id')->without('created_at', 'updated_at')->get();
-            $data['areas']          =       Area::select('id')->without('created_at', 'updated_at')->get();
-            $data['states']         =       State::select('id')->without('created_at', 'updated_at')->get();
-            $data['villages']       =       Village::select('id')->without('created_at', 'updated_at')->get();
-            $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
-            $data['departments']    =       Department::select('id')->without('created_at', 'updated_at')->get();
- 
+
+    public function edit($id) {
+        $real_id= decrypt($id); 
+        $data = [];
+        $data['product']        =       Product::findOrfail($real_id);
+        $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
+        $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
+        $data['categories']    =       Category::select('id')->without('created_at', 'updated_at')->get();
         return view('dashboard.admin.products.edit', $data);
-       
     }
 
 
@@ -150,42 +126,27 @@ class ProductRepository implements ProductInterface {
                 else
                     $request->request->add(['status' => 1]);
                 
-                $product = Product::findOrfail($request->id);
-                  
-                    $product->farmer_id     = $request->farmer_id;
-                    $product->country_id    = $request->country_id;
-                    $product->province_id   = $request->province_id;
-                    $product->area_id       = $request->area_id;
-                    $product->state_id      = $request->state_id;
-                    $product->village_id    = $request->village_id;
-                    $product->price         = $request->price;
-                    $product->status    = $request->status;
-                
+                $product = Product::findOrfail($request->id);                  
+                $product->farmer_id     = $request->farmer_id;
+                $product->price         = $request->price;
+                $product->status    = $request->status;
+                $product->product_location = $request->product_location;
                 $product->save();
-                
                 // Save Translation ::
                 $product->name = $request->name;
+                $product->slug=str_replace(' ', '_',$request->name);
                 $product->description = $request->description;
                 $product->save();
-                
-                // sync Department ::
-                $product->departments()->sync($request->departments);
+                // sync Categories ::
+                $product->categories()->sync($request->categories);
                 $product->tags()->sync($request->tags);
-                
                 // Save Product Main Photo ::
                 $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
-
                 DB::commit();
-
                 toastr()->success(__('Admin/products.product_updated_successfully'));
                 return redirect()->route('products');   
-
             } catch(\Exception $ex){
-
                 DB::rollBack();
-
-                return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
-
                 toastr()->error(__('Admin/general.wrong'));
                 return redirect()->route('products');
             }
@@ -195,14 +156,11 @@ class ProductRepository implements ProductInterface {
         
         try{
             $real_id = decrypt($id);
-           
             Product::where('id',$real_id)->delete(); //soft_delete
 
             toastr()->error(__('Admin/products.delete_done'));
             return redirect()->route('products');
-           
         } catch (\Exception $e) {
-           // return redirect()->back()->withErrors(['error' => $e->getMessage()]);
            toastr()->error(__('Admin/products.delete_not_allowed'));
            return redirect()->route('products');
         }
@@ -214,8 +172,6 @@ class ProductRepository implements ProductInterface {
             if($request->delete_select_id){
                 $all_ids = explode(',',$request->delete_select_id);
                 Product::whereIn('id',$all_ids)->delete(); //soft_delete
-                
-                
                 toastr()->error(__('Admin/products.delete_done'));
                 return redirect()->route('products');
             
@@ -224,7 +180,6 @@ class ProductRepository implements ProductInterface {
                 return redirect()->route('products');
             }
         }catch (\Exception $e) {
-            //return redirect()->back()->withErrors(['error' => $e->getMessage()]);
             toastr()->error(__('Admin/products.delete_not_allowed'));
             return redirect()->route('products');
         }
