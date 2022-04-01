@@ -236,10 +236,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-         'Up'       => App\Http\Controllers\Upload::class,
-         'Image' => Intervention\Image\Facades\Image::class,
-         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
-         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Up'       => App\Http\Controllers\Upload::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
-
+    'Currency' => 'USD',
 ];

@@ -34,6 +34,10 @@ class ProductController extends Controller {
         return $this->Data->update($request);
     }
 
+    public function additionalPrice($id) {
+        return $this->Data->additionalPrice($id);
+    }
+
     public function destroy($id){
         return $this->Data->destroy($id);
     }

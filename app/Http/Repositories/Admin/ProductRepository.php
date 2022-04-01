@@ -21,7 +21,6 @@ class ProductRepository implements ProductInterface {
     public function data() {
         //get all Products data
         $products = Product::withoutTrashed()->get();
-
         //use datatables (yajra) to handel this data
         return DataTables::of($products)
             ->addColumn('record_select',function (Product $products) {
@@ -36,6 +35,9 @@ class ProductRepository implements ProductInterface {
              ->addColumn('category_name', function (Product $product) {
                 return view('dashboard.admin.products.data_table.related_category', compact('product'));
              })
+             ->editColumn('price', function (Product $product) {
+                return view('dashboard.admin.products.data_table.price_formated', compact('product'));
+            })
             ->editColumn('created_at', function (Product $products) {
                 return $products->created_at->diffforhumans();
             })
@@ -48,7 +50,6 @@ class ProductRepository implements ProductInterface {
             ->rawColumns(['record_select','actions'])
             ->toJson();
     }
-
 
     public function generalInformation() {
         $data = [];
@@ -95,10 +96,8 @@ class ProductRepository implements ProductInterface {
             }
     }
 
-
-
     public function edit($id) {
-        $real_id= decrypt($id);
+        $real_id= Crypt::decrypt($id);
         $data = [];
         $data['product']        =       Product::findOrfail($real_id);
         $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
@@ -106,7 +105,6 @@ class ProductRepository implements ProductInterface {
         $data['categories']     =       Category::select('id')->without('created_at', 'updated_at')->get();
         return view('dashboard.admin.products.edit', $data);
     }
-
 
     public function update($request) {
         DB::beginTransaction();
@@ -149,9 +147,8 @@ class ProductRepository implements ProductInterface {
     }
 
     public function destroy($id) {
-
         try{
-            $real_id = decrypt($id);
+            $real_id= Crypt::decrypt($id);
             Product::where('id',$real_id)->delete(); //soft_delete
 
             toastr()->error(__('Admin/products.delete_done'));
@@ -180,4 +177,11 @@ class ProductRepository implements ProductInterface {
             return redirect()->route('products');
         }
     }// end of bulkDelete
+
+    public function additionalPrice($id) {
+        $real_id= Crypt::decrypt($id);
+        $data = [];
+        $data['product']        =       Product::findOrfail($real_id);
+        return view('dashboard.admin.products.prices.additionalPrice', $data);
+    }
 }

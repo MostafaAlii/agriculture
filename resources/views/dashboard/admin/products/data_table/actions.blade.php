@@ -6,6 +6,9 @@
         <a href="{{ route('product_edit', encrypt($products->id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
             {{ __('Admin/site.edit') }}
         </a>
+        <a href="{{ route('products.prices', encrypt($products->id)) }}" class="dropdown-item btn btn-outline-warning btn-md">
+            {{ __('Admin/products.prices_managment') }}
+        </a>
         <a href="{{ route('product_edit', encrypt($products->id)) }}" class="dropdown-item btn btn-outline-success btn-md">
             {{ __('Admin/products.stock') }}
         </a>
@@ -31,7 +34,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <input type="hidden" value="{{ $products->id }}">
+                            <input type="hidden" name="page_id" value="1" />
                         </div>
                         <div class="modal-body">
                             <h5>{{ __('Admin/site.warning') }}</h5>

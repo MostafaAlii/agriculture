@@ -1,6 +1,5 @@
 <?php
 namespace App\Providers;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -12,8 +11,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register() {
         Schema::defaultStringLength(191);
     }
 
@@ -22,8 +20,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot() {
         Blade::if('check_guard',function(){
             if(Auth::guard('vendor')->check()){
                return false;

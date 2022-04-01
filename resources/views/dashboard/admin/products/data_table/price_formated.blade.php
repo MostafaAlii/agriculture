@@ -1,0 +1,1 @@
+<strong>{{ $product->price . ' '}} <span class="text-danger">{{  config('app.Currency') }}</span></strong>
