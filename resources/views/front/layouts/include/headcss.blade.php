@@ -65,5 +65,5 @@
         _html.classList.add( isTouch ? "touch" : "no-touch");
     </script>
     <script type="text/javascript" src="{{ asset('frontassets/js/device.min.js') }}"></script>
-    @livewireStyles
     @yield('css')
+    @livewireStyles
