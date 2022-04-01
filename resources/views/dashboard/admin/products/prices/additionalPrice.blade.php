@@ -54,7 +54,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('products.prices.store') }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('products.prices.store') }}">
                                         @csrf
                                         @method('post')
                                         <div class="form-body">
@@ -62,6 +62,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <input type="hidden" name="product_id" value="{{ encrypt($product->id) }}" />
                                                         <label for="projectinput1">
                                                             {{ trans('Admin\products.product_price_select') }}
                                                         </label>

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProductInterface;
 use App\Http\Requests\Dashboard\Product\GeneralRequest;
+use App\Http\Requests\Dashboard\Product\ProductPriceRequest;
 use Illuminate\Http\Request;
 class ProductController extends Controller {
     protected $Data;
@@ -36,6 +37,10 @@ class ProductController extends Controller {
 
     public function additionalPrice($id) {
         return $this->Data->additionalPrice($id);
+    }
+
+    public function additionalPriceStore(ProductPriceRequest $request) {
+        return $this->Data->additionalPriceStore($request);
     }
 
     public function destroy($id){

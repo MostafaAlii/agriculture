@@ -30,6 +30,7 @@ return [
     'product_price_select_placeholder'           =>                  'اختر نوع السعــر',
     'product_end_date_offer'                     =>                  'تاريخ نهاية العــرض',
     'product_start_date_offer'                   =>                  'تاريخ بداية العــرض',
+    'product_add_special_price_successfully'     =>                  'تم اضافة العرض للمنتج بنجاح',
 
     'product_main_image'                         =>                  'صوره المنتج',
     'product_farmer'                             =>                  ' اسم المزارع',
