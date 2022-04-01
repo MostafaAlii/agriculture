@@ -34,6 +34,7 @@ return [
    'productdetails'             => 'Product Details',
    'cart'                   => 'Cart',
    'checkout'             => 'Checkout',
+   'price'             => 'Price',
 
    //End section blog *********************************************************
 ];

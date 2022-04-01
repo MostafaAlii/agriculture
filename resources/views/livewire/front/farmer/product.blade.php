@@ -5,8 +5,6 @@
                 <h2>
                     Hello from farmer product cat
                 </h2>
-                <h3>  هنا ان شاء الله هاتكون منتجات الفلاح وعرضهاcrud</h3>
-                <h3>  محتاجين فرونت هنا ونبى</h3>
                <h1> <a href="#" class="btn btn-primary"> <i class="fa fa-plus"></i>Add New Product</a></h1>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -17,41 +15,54 @@
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">product name</th>
-                                <th scope="col">price</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">{{ __('Admin/products.product_main_image') }}</th>
+                                <th scope="col">{{ __('Admin/products.product_name') }}</th>
+                                <th scope="col">{{ __('Admin/products.product_category') }}</th>
+                                <th scope="col">{{ __('website/home.price') }}</th>
+                                <th scope="col">{{ __('Admin/products.product_status') }}</th>
+                                <th scope="col">{{ __('Admin/general.created_since') }}</th>
+                                <th scope="col">{{ __('Admin/site.action') }}</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>
-                                    <a href="" class="btn btn-success "><i class="fa fa-edit"></i> Edit</a>
-                                    <a href="" class="btn btn-warning "><i class="fa fa-trash"></i>Delete</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>
-                                    <a href="" class="btn btn-success "><i class="fa fa-edit"></i> Edit</a>
-                                    <a href="" class="btn btn-warning "><i class="fa fa-trash"></i>Delete</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>
-                                    <a href="" class="btn btn-success "><i class="fa fa-edit"></i> Edit</a>
-                                    <a href="" class="btn btn-warning "><i class="fa fa-trash"></i>Delete</a>
-                                </td>
-                              </tr>
+                                @foreach ($products as $index=>$product )
+                                    <tr>
+                                        <th scope="row">{{ $index+1 }}</th>
+                                        <td>
+                                            @if($product->image->filename)
+                                            <a href="{{ route('product_details',$product->id) }}">
+                                                <img class="lazy" width="100"
+                                                     data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                            </a>
+                                        @else
+                                            <img class="lazy" width="100" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                        @endif
+                                        </td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>
+                                            @foreach ($product->categories as $category)
+                                                <div class="text-primary text-bold">
+                                                    <span>{{$category->name}}</span>
+                                                </div>
+                                            @endforeach
+                                        </td>
+                                        <td>{{ number_format($product->price, 2) }} $</td>
+                                        <td class="font-weight-bold badge badge-pill badge-{{ $product->status == 1 ? 'success' : 'danger'  }}">
+                                            {{ $product->status == 1 ? __('Admin/products.active') : __('Admin/products.unactive') }}
+                                         </td>
+                                        <td>{{ $product->created_at->diffforhumans() }} </td>
+                                        <td>
+                                            <a href="" class="btn btn-success "><i class="fa fa-edit"></i> Edit</a>
+                                            <a href="" class="btn btn-warning "><i class="fa fa-trash"></i>Delete</a>
+                                        </td>
+                                    </tr>
+                              @endforeach
                             </tbody>
-                          </table>
+                        </table>
+                        @if (count($products))
+                        {{ $products->links('page-links') }}
+                        @endif
                     </div>
                 </div>
             </div>

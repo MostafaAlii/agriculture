@@ -15,6 +15,10 @@
     <li class="li-cart">
         @livewire('front.cart-count-component')
     </li>
+    <li class="li-cart">
+        <i class="fontello-profile"></i>
+    </li>
+
     <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
         {{--  start links in navebar *************************************************************************--}}
         {{-- <li class="has-submenu">
