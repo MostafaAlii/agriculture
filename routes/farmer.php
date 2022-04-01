@@ -33,6 +33,7 @@ Route::group(
             /********************************* Start Admins Dashboard Routes ************************************/
             // Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');
             route::get('/product',Livewire\front\Farmer\ProductComponent::class)->name('farmer.product');
+            route::get('/product/add',Livewire\front\Farmer\FarmerAddProductComponent::class)->name('farmer.addproduct');
             /********************************* End Admins Pages Routes ************************************/
         });
         require __DIR__.'/auth.php';

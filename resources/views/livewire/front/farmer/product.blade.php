@@ -1,8 +1,12 @@
 <div>
+    @section('title', __('website\home.farmerproduct'))
+@section('css')
+
+@endsection
     <div class="container" style="padding: 30px 0;">
         <div class="row">
             <div class="col-md-12">
-               <h1> <a href="#" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/products.add_new_product') }}</a></h1>
+               <h1> <a href="{{ route('farmer.addproduct') }}" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/products.add_new_product') }}</a></h1>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h5>All
