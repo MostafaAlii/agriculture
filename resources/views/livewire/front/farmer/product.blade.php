@@ -2,7 +2,7 @@
     <div class="container" style="padding: 30px 0;">
         <div class="row">
             <div class="col-md-12">
-               <h1> <a href="#" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> Add New Product</a></h1>
+               <h1> <a href="#" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/products.add_new_product') }}</a></h1>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h5>All
@@ -56,14 +56,14 @@
                                          </td>
                                         <td>{{ $product->created_at->diffforhumans() }} </td>
                                         <td>
-                                            <a href="" class="btn btn-success btn-lg"><i class="fa fa-edit"></i> Edit</a>
-                                            <a href="" class="btn btn-warning btn-lg"><i class="fa fa-trash"></i>Delete</a>
+                                            <a href="" class="btn btn-success btn-lg"><i class="fa fa-edit"></i> {{ __('Admin/site.edit') }}</a>
+                                            <a href="" class="btn btn-warning btn-lg"><i class="fa fa-trash"></i>{{ __('Admin/site.delete') }}</a>
                                         </td>
                                     </tr>
                               @endforeach
 
                               @else
-                                 <h3 style="color: #e71d1d;">(There is no product to Show , please add new products !)</h3>
+                                 <h3 style="color: #e71d1d;"> ({{ __('Website/home.smsnoproduct') }})</h3>
                               @endif
                             </tbody>
                         </table>
