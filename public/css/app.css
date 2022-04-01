@@ -676,23 +676,23 @@ select {
 .float-left {
   float: left;
 }
-.m-auto {
-  margin: auto;
-}
 .m-0 {
   margin: 0px;
+}
+.m-auto {
+  margin: auto;
 }
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
 }
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
+}
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 .my-6 {
   margin-top: 1.5rem;
@@ -708,6 +708,9 @@ select {
 .-ml-px {
   margin-left: -1px;
 }
+.mt-4 {
+  margin-top: 1rem;
+}
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -719,9 +722,6 @@ select {
 }
 .ml-2 {
   margin-left: 0.5rem;
-}
-.mt-4 {
-  margin-top: 1rem;
 }
 .ml-4 {
   margin-left: 1rem;
@@ -1053,13 +1053,13 @@ select {
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 .px-0 {
   padding-left: 0px;

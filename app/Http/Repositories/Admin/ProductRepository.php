@@ -27,33 +27,20 @@ class ProductRepository implements ProductInterface {
             ->addColumn('record_select',function (Product $products) {
                 return view('dashboard.admin.products.data_table.record_select', compact('products'));
             })
-            ->addColumn('farmer_name', function (Product $products) {
-                return $products->farmer->firstname.' '.$products->farmer->lastname;
+            ->addColumn('farmer_name', function (Product $product) {
+                return $product->farmer->firstname.' '.$product->farmer->lastname;
             })
             ->editColumn('status', function (Product $product) {
                 return view('dashboard.admin.products.data_table.status', compact('product'));
             })
-            // ->addColumn('depart_name', function (Product $products) {
-            //     $all= $products->departments->whereNull('parent_id');
-            //     $x='';
-            //     foreach($all as $a){
-            //         $x.=$a->name.' ';
-            //     }
-            //     return $x;
-            // })
-            // ->addColumn('category_name', function (Product $products) {
-            //     $all= $products->departments->whereNotNull('parent_id');
-            //     $x='';
-            //     foreach($all as $a){
-            //         $x.=$a->name.' ';
-            //     }
-            //     return $x;
-            // })
+             ->addColumn('category_name', function (Product $product) {
+                return view('dashboard.admin.products.data_table.related_category', compact('product'));
+             })
             ->editColumn('created_at', function (Product $products) {
                 return $products->created_at->diffforhumans();
             })
-            ->addColumn('image', function (Product $products) {
-                return view('dashboard.admin.products.data_table.image', compact('products'));
+            ->addColumn('image', function (Product $product) {
+                return view('dashboard.admin.products.data_table.image', compact('product'));
             })
             ->addColumn('actions',function (Product $products) {
                 return view('dashboard.admin.products.data_table.actions', compact('products'));
@@ -144,7 +131,13 @@ class ProductRepository implements ProductInterface {
                 $product->categories()->sync($request->categories);
                 $product->tags()->sync($request->tags);
                 // Save Product Main Photo ::
-                $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
+                if($request->has('photo')) {
+                    if($product->image) {
+                        $old_photo = $product->image->filename;
+                        $this->Delete_attachment('upload_image', 'products/', $request->id, $old_photo);
+                    }
+                    $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
+                }
                 DB::commit();
                 toastr()->success(__('Admin/products.product_updated_successfully'));
                 return redirect()->route('products');

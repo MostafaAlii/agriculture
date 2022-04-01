@@ -259,7 +259,8 @@
                                 <i class="material-icons">content_paste</i>
                                 Task
                             </a> --}}
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ route('logout.admin') }}"
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('logout.admin') }}"
                             onclick="event.preventDefault(); document.getElementById('log-out').submit();"
                             ><i class="material-icons">power_settings_new</i>
                             @lang('Admin/site.logout')

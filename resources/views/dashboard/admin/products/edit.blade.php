@@ -111,25 +111,25 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_department_select') }} <span class="text-danger">*</span>
+                                                            {{ trans('Admin\products.product_category_select') }} <span class="text-danger">*</span>
                                                         </label>
 
                                                         <?php
                                                         $selected_department=array();
-                                                        foreach ($product->departments as $department_select){
+                                                        foreach ($product->categories as $department_select){
                                                              array_push($selected_department,$department_select->id);
                                                         }
                                                         ?>
-                                                        <select name="departments[]" class="select2 form-control" multiple>
-                                                            <optgroup label="{{ trans('Admin\products.product_department_select_placeholder') }}">
-                                                                @if($departments && $departments->count() > 0)
-                                                                    @foreach($departments as $department)
-                                                                        <option value="{{$department->id}}" <?php if(in_array($department->id,$selected_department)){echo'selected';}?>>{{$department->name}}</option>
+                                                        <select name="categories[]" class="select2 form-control" multiple>
+                                                            <optgroup label="{{ trans('Admin\products.product_category_select_placeholder') }}">
+                                                                @if($categories && $categories->count() > 0)
+                                                                    @foreach($categories as $category)
+                                                                        <option value="{{$category->id}}" <?php if(in_array($category->id,$selected_department)){echo'selected';}?>>{{$category->name}}</option>
                                                                     @endforeach
                                                                 @endif
                                                             </optgroup>
                                                         </select>
-                                                        @error('departments.0')
+                                                        @error('categories.0')
                                                         <span class="text-danger"> {{$message}}</span>
                                                         @enderror
                                                     </div>
@@ -137,121 +137,6 @@
                                                 <!-- End Department Select -->
                                             </div>
                                             <!-- End Product Name -->
-
-                                            <!-- Start Country Dropdown List -->
-                                            <div class="row" >
-                                                <!-- Start Country -->
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_country_select') }}
-                                                        </label>
-                                                        <select name="country_id" id="country_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_country_select_placeholder') }}">
-                                                                @if($countries && $countries->count() > 0)
-                                                                    @foreach($countries as $country)
-                                                                        <option value="{{$country->id }}" <?php if($country->id==$product->country_id){echo'selected';}?>>{{$country->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('country_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End Country -->
-                                            </div>
-                                            <!-- End Country Dropdown List -->
-
-                                            <!-- Start Provience and Other Dropdown List -->
-                                            <div class="row" >
-                                                <!-- Start Provience -->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_provience_select') }}
-                                                        </label>
-                                                        <select name="province_id" id="province_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_provience_select_placeholder') }}">
-                                                                @if($provinces && $provinces->count() > 0)
-                                                                    @foreach($provinces as $provincy)
-                                                                        <option value="{{$provincy->id }}" <?php if($provincy->id==$product->provincy_id){echo'selected';}?>>{{$provincy->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('province_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End Provience -->
-                                                <!-- Start Area -->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_area_select') }}
-                                                        </label>
-                                                        <select name="area_id" id="area_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_area_select_placeholder') }}">
-                                                                @if($areas && $areas->count() > 0)
-                                                                    @foreach($areas as $area)
-                                                                        <option  value="{{$area->id }}" <?php if($area->id==$product->area_id){echo'selected';}?>>{{$area->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('area_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End Area -->
-                                                <!-- Start State -->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_state_select') }}
-                                                        </label>
-                                                        <select name="state_id" id="state_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_state_select_placeholder') }}">
-                                                                @if($states && $states->count() > 0)
-                                                                    @foreach($states as $state)
-                                                                        <option value="{{$state->id }}" <?php if($state->id==$product->state_id){echo'selected';}?>>{{$state->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('state_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End State -->
-                                                <!-- Start Village -->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_village_select') }}
-                                                        </label>
-                                                        <select name="village_id" id="village_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_village_select_placeholder') }}">
-                                                                @if($villages && $villages->count() > 0)
-                                                                    @foreach($villages as $village)
-                                                                        <option value="{{$village->id }}" <?php if($village->id==$product->village_id){echo'selected';}?>>{{$village->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('village_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End State -->
-                                            </div>
-                                            <!-- End Provience and Other Dropdown List -->
 
                                             <!-- Start Tags Multi Select -->
                                             <div class="row">

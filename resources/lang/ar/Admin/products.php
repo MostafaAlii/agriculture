@@ -29,5 +29,5 @@ return [
     'product_updated_successfully'               =>                  'تم تعديل المنتج بنجاح',
     'active'                                     =>                  'مفعل',
     'unactive'                                   =>                  'غير مفعل',
-
+    'stock'                                      =>                  'المخزون',
 ];

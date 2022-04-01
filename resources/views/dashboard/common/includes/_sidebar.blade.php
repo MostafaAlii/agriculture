@@ -7,7 +7,7 @@
                 <div class="user-info text-center pt-1 pb-1">
                     @if(Auth::user()->image->filename)
                     <a class="mr-2" href="{{ route('profile.index') }}">
-                        <img class="user-img img-fluid rounded-circle"
+                        <img class="user-img img-fluid rounded-circle" style="width:50%; height:50%;border-radius: 15%;" class="rounded-circle"
                         src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}" />
                     </a>
                     @else
@@ -16,10 +16,20 @@
                         src="{{ asset('Dashboard/img/admins/avatar.jpg') }}" />
                     </a>
                     @endif
-                    <div class="name-wrapper d-block dropdown">
-                        <a class="white dropdown-toggle ml-2" id="user-account" href="{{ route('profile.index') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-name">Charlie Adams</span></a>
-                        <div class="text-light">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</div>
-                        <div class="dropdown-menu arrow" aria-labelledby="dropdownMenuLink"><a class="dropdown-item"><i class="material-icons align-middle mr-1">person</i><span class="align-middle">Profile</span></a><a class="dropdown-item"><i class="material-icons align-middle mr-1">message</i><span class="align-middle">Messages</span></a><a class="dropdown-item"><i class="material-icons align-middle mr-1">attach_money</i><span class="align-middle">Balance</span></a><a class="dropdown-item"><i class="material-icons align-middle mr-1">settings</i><span class="align-middle">Settings</span></a><a class="dropdown-item"><i class="material-icons align-middle mr-1">power_settings_new</i><span class="align-middle">Log Out</span></a></div>
+                    <div class="name-wrapper d-block dropdown text-center">
+                        <a class="white dropdown-toggle ml-2" id="user-account" href="{{ route('profile.index') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-name">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span></a>
+                        <div class="text-light text-center">{{Auth::user()->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</div>
+                        <div class="dropdown-menu arrow" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ route('profile.index') }}">
+                                <i class="material-icons align-middle mr-1">person</i>
+                                <span class="align-middle">{{ trans('Admin/site.profile') }}</span>
+                            </a>
+                            <a class="dropdown-item" href="{{ route('logout.admin') }}"
+                                onclick="event.preventDefault(); document.getElementById('log-out').submit();">
+                            <i class="material-icons">power_settings_new</i>
+                            @lang('Admin/site.logout')
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
