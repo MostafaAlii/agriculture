@@ -64,17 +64,8 @@ svg{
 
                             <div class="goods-filter__inner">
                                 <!-- start widget -->
-                                <div class="widget widget--search">
-                                    <form class="form--horizontal" action="#" method="get">
-                                        <div class="input-wrp">
-                                            <input class="textfield" name="s" type="text" placeholder="Search" />
-                                        </div>
-
-                                        <button class="custom-btn custom-btn--tiny custom-btn--style-1" type="submit" role="button">Find</button>
-                                    </form>
-                                </div>
+                                   @livewire('front.header-search-component')
                                 <!-- end widget -->
-
                                 <!-- start widget -->
                                 <div class="widget widget--categories">
                                     <h4 class="h6 widget-title">{{ __('Admin/categories.departmentPageTitle') }}</h4>

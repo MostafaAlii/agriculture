@@ -27,6 +27,7 @@ Route::group(
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');             // contact us
         Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');                  //cart
         Route::get('/checkout',Livewire\front\Checkout::class)->name('checkout');             //checkout
+        Route::get('/search',Livewire\front\SearchComponent::class)->name('product.search');  //search
 
 
 
