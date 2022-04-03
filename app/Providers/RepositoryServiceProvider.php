@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use App\Http\Interfaces\Admin\AdminDepartmentInterface;
 use App\Http\Interfaces\Admin\SettingInterface;
 use App\Http\Interfaces\Admin\AdminInterface;
 use App\Http\Interfaces\Admin\UserInterface;
@@ -18,7 +19,14 @@ use App\Http\Interfaces\Admin\TagInterface;
 use App\Http\Interfaces\Admin\AttributeInterface;
 use App\Http\Interfaces\Admin\OptionInterface;
 use App\Http\Interfaces\Admin\ProductInterface;
+use App\Http\Interfaces\Admin\TreeInterface;
+use App\Http\Interfaces\Admin\TreeTypeInterface;
+use App\Http\Interfaces\Admin\LandCategoryInterface;
+use App\Http\Interfaces\Admin\OrchardInterface;
 
+use App\Http\Repositories\Admin\OrchardRepository;
+
+use App\Http\Repositories\Admin\AdminDepartmentRepository;
 use App\Http\Repositories\Admin\SettingRepository;
 use App\Http\Repositories\Admin\AreaRepository;
 use App\Http\Repositories\Admin\StateRepository;
@@ -36,6 +44,10 @@ use App\Http\Repositories\Admin\TagRepository;
 use App\Http\Repositories\Admin\AttributeRepository;
 use App\Http\Repositories\Admin\OptionRepository;
 use App\Http\Repositories\Admin\ProductRepository;
+use App\Http\Repositories\Admin\TreeRepository;
+use App\Http\Repositories\Admin\TreeTypeRepository;
+use App\Http\Repositories\Admin\LandCategoryRepository;
+
 
 use Illuminate\Support\ServiceProvider;
 
@@ -43,6 +55,12 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->bind(OrchardInterface::class, OrchardRepository::class);
+
+        $this->app->bind(TreeInterface::class, TreeRepository::class);
+        $this->app->bind(TreeTypeInterface::class, TreeTypeRepository::class);
+        $this->app->bind(LandCategoryInterface::class, LandCategoryRepository::class);
+        $this->app->bind(AdminDepartmentInterface::class, AdminDepartmentRepository::class);
         $this->app->bind(SettingInterface::class, SettingRepository::class);
         $this->app->bind(CountryInterface::class, CountryRepository::class);
         $this->app->bind(ProvinceInterface::class, ProvinceRepository::class);

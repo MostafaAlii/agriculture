@@ -1,6 +1,7 @@
 <?php
 use App\Http\Livewire;
 use App\Http\Controllers\front;
+use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
 use App\Http\Controllers\Dashboard\Admin\TagController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
@@ -21,6 +22,12 @@ use App\Http\Controllers\Dashboard\Admin\ProvienceController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 use App\Http\Controllers\Dashboard\Admin\FetchAddressController;
 use App\Http\Controllers\Dashboard\Admin\ProductController;
+use App\Http\Controllers\Dashboard\Admin\TreeController;
+use App\Http\Controllers\Dashboard\Admin\TreeTypeController;
+use App\Http\Controllers\Dashboard\Admin\LandCategoryController;
+use App\Http\Controllers\Dashboard\Admin\OrchardController;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -118,6 +125,43 @@ Route::group(
             Route::get('Settings', [SettingController::class, 'index'])->name('settings');
             Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
             /********************************* End settings Pages Routes ************************************/
+
+            /*******admin departments route********/
+            Route::resource('AdminDepartments', AdminDepartmentController::class)->except(['show']);
+            /*********end admin departments route ********/
+
+            /*******admin departments route********/
+            Route::resource('Orchards', OrchardController::class)->except(['show']);
+            Route::get('/Orchards/data', [OrchardController::class,'data'])->name('orchards.data');
+            Route::get('/Orchards/admin/{village_id}', [OrchardController::class, 'getAdmin']);// route ajax for get village admins
+            Route::get('/Orchards/farmer/{village_id}', [OrchardController::class, 'getFarmer']);// route ajax for get village farmers
+            Route::get('/Orchards/farmerInf/{farmer_id}', [OrchardController::class, 'getFarmerInf']);// route ajax for get village farmers
+
+
+            /*********end admin departments route ********/
+
+            /*******Tree  route********/
+            Route::resource('Trees', TreeController::class)->except(['show']);
+            Route::get('/Trees/data', [TreeController::class,'data'])->name('trees.data');
+            Route::delete('/Trees/bulk_delete/{ids}', [TreeController::class,'bulkDelete'])->name('trees.bulk_delete');
+
+            /*********end Tree  route ********/
+
+            /*******Tree Type  route********/
+            Route::resource('TreeTypes', TreeTypeController::class)->except(['show']);
+            Route::get('/TreeTypes/data', [TreeTypeController::class,'data'])->name('treeTypes.data');
+            Route::delete('/TreeTypes/bulk_delete/{ids}', [TreeTypeController::class,'bulkDelete'])->name('treeTypes.bulk_delete');
+
+
+            /*********end Tree Type  route ********/
+
+            /*******land category Type  route********/
+            Route::resource('LandCategories', LandCategoryController::class)->except(['show']);
+            Route::get('/LandCategories/data', [LandCategoryController::class,'data'])->name('landCategories.data');
+            Route::delete('/LandCategories/bulk_delete/{ids}', [LandCategoryController::class,'bulkDelete'])->name('landCategories.bulk_delete');
+
+            /*********end Tree Type  route ********/
+
 
             /********************************* Department Routes ************************************/
             Route::resource('Departments', DepartmentController::class)->except(['show']);

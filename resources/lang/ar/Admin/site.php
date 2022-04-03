@@ -113,4 +113,16 @@ return [
 
     'slider'=>'صور متحركه',
     'newslider'=>'صوره متحركه جديده',
+
+
+
+    //////Departments-part
+    'neworchard'=>'بستان جديد',
+    'orchards'=>'البساتين',
+    'land_category'=>'أصناف الأراضي',
+    'trees'=>'الأشجار',
+    'treeType'=>'أنواع  الأشجار',
+    'admin_departments'=>'التقسيمات الإدارية',
+    'administaration_part'=>'الجزء الإداري',
+    'add_admin_departments'=>'إضافة قسم إداري جديد'
 ];

@@ -118,4 +118,15 @@ return [
 
     'slider'=>'Slider',
     'newslider'=>'New Slider',
+
+    //////Departments-part
+    'neworchard'=>'New Orchard',
+    'orchards'=>'Orchards',
+    'land_category'=>'Land Category',
+    'trees'=>'Trees',
+    'treeType'=>'Tree Types',
+    'admin_departments'=>'Admin Departments',
+    'administaration_part'=>'Administration Part',
+    'add_admin_departments'=>'Add Admin Department',
+    ''=>'',
 ];
