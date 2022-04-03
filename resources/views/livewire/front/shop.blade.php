@@ -300,8 +300,11 @@
                                                         {{ __('Admin/site.addtocart') }}
                                                     </a>
                                                 </div>
-
-                                                <span class="product-label product-label--sale">Sale</span>
+                                                @if($product->special_price >0)
+                                                <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
+                                                @else
+                                                <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     <!-- end item -->

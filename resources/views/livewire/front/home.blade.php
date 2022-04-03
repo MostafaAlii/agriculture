@@ -126,7 +126,7 @@
 
         <div class="container">
             <div class="section-heading section-heading--left" data-aos="fade">
-                <h2 class="__title">{{ __('Admin/site.products') }}</h2>
+                <h2 class="__title">{{ __('Admin/site.newproducts') }}</h2>
             </div>
 
             <!-- start goods -->
@@ -172,7 +172,7 @@
                         }]
                     }'>
                     <!-- start item  12 product here to show-->
-                    @foreach (\App\Models\Product::latest()->limit(12)->get() as $product)
+                    @foreach ($newProducts as $product)
                         <div class="__item">
                             <figure class="__image">
                                 @if($product->image->filename)
@@ -200,7 +200,7 @@
                                     <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                             </div>
 
-                            <span class="product-label product-label--sale">Sale</span>
+                            <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
                         </div>
                     <!-- end item -->
                     @endforeach
@@ -396,7 +396,7 @@
     <section class="section section--no-pt">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
-                <h2 class="__title">{{ __('Admin/site.newproducts') }}</h2>
+                <h2 class="__title">{{ __('Admin/site.popproducts') }}</h2>
 
                 {{-- <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p> --}}
             </div>
@@ -406,7 +406,7 @@
                 <div class="__inner">
                     <div class="row justify-content-sm-center">
                         <!-- start item -->
-                        @foreach ($newProducts as $product)
+                        @foreach ($popProducts as $product)
                             <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
                                 <div class="__item">
                                     <div class="row">
@@ -449,7 +449,9 @@
                                         </div>
                                     </div>
 
-                                    <span class="product-label product-label--sale">-20%</span>
+                                    {{-- <span class="product-label product-label--sale">-20%</span> --}}
+                                    {{-- <span class="product-label product-label--sale">Sale</span> --}}
+                                    <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
                                 </div>
                             </div>
                         @endforeach
@@ -460,13 +462,17 @@
             <!-- end goods -->
 
             <div class="spacer py-6 py-md-10"></div>
+            <div class="section-heading section-heading--center" data-aos="fade">
+                <h2 class="__title">{{ __('Admin/site.saleproducts') }}</h2>
 
+                {{-- <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p> --}}
+            </div>
             <!-- start goods -->
             <div class="goods goods--style-3">
                 <div class="__inner">
                     <div class="row">
                         <!-- start item -->
-                        @foreach ($featuredProducts as $product)
+                        @foreach ($saleProducts as $product)
                         <div class="col-12 col-sm-6 col-lg-3">
                             <div class="__item">
                                 <figure class="__image">
@@ -496,16 +502,15 @@
                                     </div>
 
                                     <div class="product-price">
-                                        {{-- <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span> --}}
-                                        <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                        <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
+                                        <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
                                     </div>
 
                                     <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                     wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
                                         <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                                 </div>
-
-                                <span class="product-label product-label--sale">-20%</span>
+                                <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
                             </div>
                         </div>
                         @endforeach

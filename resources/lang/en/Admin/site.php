@@ -126,7 +126,11 @@ return [
     'products'=>'Products',
     'featproducts'=>'Featured products',
     'newproducts'=>'Latest Products',
+    'saleproducts'=>'Product On Sale',
+    'popproducts'=>'Most Popular',
     'addtocart'=>'Add To Cart',
+    'sale'=>'Sale',
+    'new'=>'New',
 
 
 ];

@@ -120,5 +120,9 @@ return [
     'products'=>'المنتجات',
     'featproducts'=>'منتجات مميزه',
     'newproducts'=>'احدث المنتجات',
+    'saleproducts'=>'احدث العروض',
+    'popproducts'=>'الاكثر انتشارا',
     'addtocart'=>'اضف الى القائمه',
+    'sale'=>'عرض',
+    'new'=>'جديد',
 ];

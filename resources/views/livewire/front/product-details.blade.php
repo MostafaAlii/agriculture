@@ -40,7 +40,11 @@
                                         @else
                                         <img width="330" src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                         @endif
-                                        <span class="product-label product-label--new">New</span>
+                                        @if($product->special_price >0)
+                                        <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
+                                        @else
+                                        <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -52,10 +56,17 @@
                                             Category:
                                             <span>Vegetables</span>
                                         </div>
+                                        @if($product->special_price >0)
+                                            <div class="product-price">
+                                                <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
+                                                <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                            </div>
+                                        @else
+                                            <div class="product-price">
+                                                <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                            </div>
+                                        @endif
 
-                                        <div class="product-price">
-                                            <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
-                                        </div>
 
                                         <div class="rating">
                                             <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
