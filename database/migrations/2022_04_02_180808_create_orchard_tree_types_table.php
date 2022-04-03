@@ -15,8 +15,8 @@ class CreateOrchardTreeTypesTable extends Migration
     {
         Schema::create('orchard_tree_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tree_type_id')->references('id')->on('tree_types')->onDelete('cascad');
-            $table->foreignId('orchard_id')->references('id')->on('orchards')->onDelete('cascad');
+            $table->foreignId('tree_type_id')->references('id')->on('tree_types')->onDelete('cascade');
+            $table->foreignId('orchard_id')->references('id')->on('orchards')->onDelete('cascade');
             $table->timestamps();
         });
     }

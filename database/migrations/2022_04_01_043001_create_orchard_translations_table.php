@@ -15,7 +15,7 @@ class CreateOrchardTranslationsTable extends Migration
     {
         Schema::create('orchard_translations', function (Blueprint $table) {
             $table->id();
-            $table->integer('supported_side',['governmental','private','international_organizations'])->default('governmental');
+            $table->enum('supported_side',['governmental','private','international_organizations'])->default('governmental');
             $table->string('locale');
             $table->unsignedBigInteger('orchard_id');
             $table->unique(['orchard_id', 'locale']);

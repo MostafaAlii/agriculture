@@ -17,6 +17,10 @@
                         </h5>
                     </div>
                     <div class="panel-body">
+                        {{-- @isset()
+
+                        @endisset --}}
+                        @if ($products->count() >0)
                         <table class="table table-striped">
                             <thead>
                               <tr>
@@ -31,7 +35,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                                @if ($products->count() >0)
+
 
                                 @foreach ($products as $index=>$product )
                                     <tr>
@@ -67,11 +71,11 @@
                                     </tr>
                               @endforeach
 
-                              @else
-                                 <h3 style="color: #e71d1d;"> ({{ __('Website/home.smsnoproduct') }})</h3>
-                              @endif
                             </tbody>
                         </table>
+                        @else
+                           <h3 style="color: #e71d1d;"> ({{ __('Website/home.smsnoproduct') }})</h3>
+                        @endif
                         @if (count($products))
                         {{ $products->links('page-links') }}
                         @endif
