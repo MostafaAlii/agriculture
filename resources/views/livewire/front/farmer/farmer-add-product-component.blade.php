@@ -1,5 +1,4 @@
-<div>
-    @section('title', __('website\home.farmeraddproduct'))
+@section('title', __('website\home.farmeraddproduct'))
 @section('css')
 {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/weather-icons/climacons.min.css')}}"> --}}
@@ -12,214 +11,7 @@
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap-extended.css') }}"> --}}
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/components.css') }}"> --}}
 @endsection
-{{-- <div class="app-content content">
-
-    <div class="content-wrapper">
-
-        <div class="content-body">
-            <!-- Basic form layout section start -->
-            <section id="basic-form-layouts">
-                <div class="row justify-content-md-center">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/products.add_new_product') }}</h4>
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-                                        <form class="form" method="post" action="{{ route('products.generalInformation.store') }}" enctype="multipart/form-data">
-                                            @csrf
-                                            @method('post')
-                                            <div class="form-body">
-                                                <!-- Start Main Product Photo -->
-                                                <div class="row">
-                                                    <div class="col-md-10">
-                                                        <div class="form-group">
-                                                            <label>{{ trans('Admin/products.product_main_photo') }} <span class="text-danger">*</span></label>
-                                                            <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                                                <input type="file" accept="image/*" name="photo" onchange="loadFile(event)" />
-                                                                <img style="" class="rounded-circle"  width="85px" height="85px" id="output" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Main Product Photo -->
-                                                <!-- Start Product Name -->
-                                                <div class="row">
-                                                    <!-- Start Product Name -->
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="eventRegInput1">{{ __('Admin/products.product_name') }} <span class="text-danger">*</span></label>
-                                                            <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/products.product_name_placeholder') }}" name="name" value="{{ old('name') }}" required>
-                                                            @error('name')
-                                                                <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Product Name -->
-
-                                                    <!-- Start Farmer Select List -->
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1">
-                                                                {{ trans('Admin\products.product_farmer_select') }} <span class="text-danger">*</span>
-                                                            </label>
-                                                            <select name="farmer_id" class="select2 form-control">
-                                                                <optgroup label="{{ trans('Admin\products.product_farmer_select_placeholder') }}">
-                                                                    @if($farmers && $farmers->count() > 0)
-                                                                        @foreach($farmers as $farmer)
-                                                                            <option
-                                                                                value="{{$farmer->id }}">{{$farmer->firstname . ' ' . $farmer->lastname}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </optgroup>
-                                                            </select>
-                                                            @error('farmer_id')
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Farmer Select List -->
-                                                    <!-- Start Categories Select -->
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1">
-                                                                {{ trans('Admin\products.product_category_select') }} <span class="text-danger">*</span>
-                                                            </label>
-                                                            <select name="categories[]" class="select2 form-control" multiple>
-                                                                <optgroup label="{{ trans('Admin\products.product_category_select_placeholder') }}">
-                                                                    @if($categories && $categories->count() > 0)
-                                                                        @foreach($categories as $category)
-                                                                            <option
-                                                                                value="{{$category->id}}">{{$category->name}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </optgroup>
-                                                            </select>
-                                                            @error('categories.0')
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Categories Select -->
-                                                </div>
-                                                <!-- End Product Name -->
-
-                                                <!-- Start Tags Multi Select -->
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1">
-                                                                {{ trans('Admin\products.product_tags_select') }}
-                                                            </label>
-                                                            <select name="tags[]" class="select2 form-control" multiple>
-                                                                <optgroup label="{{ trans('Admin\products.product_tags_select_placeholder') }}">
-                                                                    @if($tags && $tags->count() > 0)
-                                                                        @foreach($tags as $tag)
-                                                                            <option
-                                                                                value="{{$tag->id}}">{{$tag->name}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </optgroup>
-                                                            </select>
-                                                            @error('tags.0')
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1">
-                                                                {{ trans('Admin\products.product_main_price') }}
-                                                            </label>
-                                                            <input type="number" name="price" class="form-control" placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}" />
-                                                            @error('price')
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Tags Multi Select -->
-
-                                                <!-- Start Product Status -->
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox" value="1"
-                                                                name="status"
-                                                                id="switcheryColor4"
-                                                                class="js-switch" data-color="success"
-                                                                checked/>
-                                                            <label for="switcheryColor4"
-                                                                class="card-title ml-1">{{ trans('Admin\products.product_status') }}</label>
-
-                                                            @error("status")
-                                                            <span class="text-danger">{{$message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Product Status -->
-                                                <hr>
-
-                                                <!-- Start Product Description -->
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1">
-                                                                {{ trans('Admin\products.product_description') }}
-                                                            </label>
-                                                            <textarea name="description" class="form-control" id="description" placeholder="{{ trans('Admin\products.product_description_placeholder') }}">
-                                                                {{old('description')}}
-                                                            </textarea>
-
-                                                            @error("description")
-                                                            <span class="text-danger">{{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Product Description -->
-
-                                                <!-- Start Product Location -->
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> العنوان  </label>
-                                                            <input type="text" id="pac-input"
-                                                                class="form-control"
-                                                                placeholder="  " name="product_location">
-
-                                                            @error("product_location")
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Product Location -->
-
-                                                <div id="map" class="col-md-12" style="height:450px"></div>
-                                                <hr>
-                                                <div class="form-actions center">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- // Basic form layout section end -->
-        </div>
-    </div>
-
-</div> --}}
+<div>
 	<!-- start section -->
     <section class="section">
         <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
@@ -490,6 +282,7 @@
         </div>
     </section>
     <!-- end section -->
+</div>
 @push('js')
 {{-- <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script> --}}
@@ -731,4 +524,4 @@
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initAutocomplete&language=ar
      async defer"></script>
 @endpush
-</div>
+

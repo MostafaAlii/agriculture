@@ -20,9 +20,9 @@ integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRk
 
 {{-- bootstrap 4 ************************ --}}
 
-{{-- <script>window.jQuery || document.write('<script src="frontassets/js/jquery-2.2.4.min.js"></script>')</script> --}}
+<script>window.jQuery || document.write('<script src="frontassets/js/jquery-2.2.4.min.js"></script>')</script>
 
-<script type="text/javascript" src="{{ asset('frontassets/js/jquery-2.2.4.min.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ asset('frontassets/js/jquery-2.2.4.min.js') }}"></script> --}}
 <script type="text/javascript" src="{{ asset('frontassets/js/main.min.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"

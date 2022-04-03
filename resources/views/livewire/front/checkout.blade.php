@@ -1,8 +1,8 @@
-<div>
-    @section('title', __('website\home.checkout'))
-    @section('css')
+@section('title', __('website\home.checkout'))
+@section('css')
 
-    @endsection
+@endsection
+<div>
     <!-- start section -->
     <section class="section">
         <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">

@@ -1,8 +1,8 @@
-<div>
-    @section('title', __('website\home.farmerproduct'))
+@section('title', __('website\home.farmerproduct'))
 @section('css')
 
 @endsection
+<div>
     <div class="container" style="padding: 30px 0;">
         <div class="row">
             <div class="col-md-12">

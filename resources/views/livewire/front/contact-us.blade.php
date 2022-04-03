@@ -1,8 +1,8 @@
-<div>
 @section('title', __('website\home.contactus'))
 @section('css')
 
 @endsection
+<div>
    <!-- start section -->
    <section class="section">
     <div class="container">
@@ -136,7 +136,7 @@
 </section>
 <!-- end section -->
 
+</div>
 @push('js')
 
 @endpush
-</div>
