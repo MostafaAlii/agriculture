@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Front;
 
 use App\Models\Product;
+use App\Models\Tag;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
@@ -29,7 +30,8 @@ class Shop extends Component
 
     public function render()
     {
-        $featuredProducts = Product::inRandomOrder()->limit(3)->get();
+        $tags=Tag::get();
+        $newProducts = Product::latest()->limit(3)->get();
         if($this->sorting=='date'){
             $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
             ->orderByDesc('created_at')->paginate($this->pagesize);
@@ -43,7 +45,7 @@ class Shop extends Component
               $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
               ->paginate($this->pagesize);
           }
-        return view('livewire.front.shop',compact('products','featuredProducts'))
+        return view('livewire.front.shop',compact('products','newProducts','tags'))
         ->layout('front.layouts.master2');
     }
 }

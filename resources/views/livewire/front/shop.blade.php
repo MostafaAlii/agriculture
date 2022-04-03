@@ -91,7 +91,7 @@
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget widget--additional">
+                                {{-- <div class="widget widget--additional">
                                     <h4 class="h6 widget-title">Additional</h4>
 
                                     <ul>
@@ -135,7 +135,7 @@
                                             </label>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
 
                                 <!-- start widget -->
@@ -143,18 +143,15 @@
                                     <h4 class="h6 widget-title">Popular Tags</h4>
 
                                     <ul>
-                                        <li><a href="#">Art</a></li>
-                                        <li><a href="#">design</a></li>
-                                        <li><a href="#">concept</a></li>
-                                        <li><a href="#">Media</a></li>
-                                        <li><a href="#">Photography</a></li>
-                                        <li><a href="#">UI</a></li>
+                                        @foreach ($tags as $tag)
+                                            <li><a href="#">{{$tag->name}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget">
+                                {{-- <div class="widget">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col">
                                             <button class="custom-btn custom-btn--medium custom-btn--style-1" role="button">Show Products</button>
@@ -164,7 +161,7 @@
                                             <a class="clear-filter" href="#">Clear all</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
 
                                 <!-- start widget -->
@@ -172,7 +169,7 @@
                                     <h4 class="h6 widget-title">{{ __('Admin/site.featproducts') }}</h4>
 
                                     <ul>
-                                        @foreach ($featuredProducts as $product)
+                                        @foreach ($newProducts as $product)
                                         <li>
                                             <div class="row no-gutters">
                                                 <div class="col-auto __image-wrap">
@@ -200,10 +197,16 @@
                                                         <span class="rating__item"><i class="fontello-star"></i></span>
                                                     </div>
 
-                                                    <div class="product-price">
-                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
-                                                        {{-- <span class="product-price__item product-price__item--old">4.11 $</span> --}}
-                                                    </div>
+                                                    @if($product->special_price >0)
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                                        </div>
+                                                    @else
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </li>
@@ -287,7 +290,13 @@
                                                 <div class="__content">
                                                     <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
-                                                    {{-- <div class="__category"><a href="#">{{ $product->categories }}</a></div> --}}
+                                                    <div class="__category"><a href="#">
+                                                        @foreach ($product->categories as $category)
+                                                            <div class="text-primary text-bold">
+                                                            <span>{{$category->name}}</span>
+                                                            </div>
+                                                            @endforeach
+                                                        </a></div>
 
                                                     @if($product->special_price >0)
                                                         <div class="product-price">

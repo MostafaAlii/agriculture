@@ -437,10 +437,16 @@
                                                     <span class="rating__item"><i class="fontello-star"></i></span>
                                                 </div>
 
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
-                                                    {{-- <span class="product-price__item product-price__item--old">8.11 $</span> --}}
-                                                </div>
+                                                @if($product->special_price >0)
+                                                    <div class="product-price">
+                                                        <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
+                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                                    </div>
+                                                @else
+                                                    <div class="product-price">
+                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                                    </div>
+                                                @endif
 
                                                 <a class="custom-btn custom-btn--small custom-btn--style-1" href="#"
                                                 wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
@@ -451,7 +457,11 @@
 
                                     {{-- <span class="product-label product-label--sale">-20%</span> --}}
                                     {{-- <span class="product-label product-label--sale">Sale</span> --}}
+                                    @if($product->special_price >0)
+                                    <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
+                                    @else
                                     <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
