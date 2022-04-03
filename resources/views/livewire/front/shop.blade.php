@@ -289,9 +289,16 @@
 
                                                     {{-- <div class="__category"><a href="#">{{ $product->categories }}</a></div> --}}
 
-                                                    <div class="product-price">
-                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
-                                                    </div>
+                                                    @if($product->special_price >0)
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                                        </div>
+                                                    @else
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                                        </div>
+                                                    @endif
 
                                                     <a class="custom-btn custom-btn--medium custom-btn--style-1"
                                                         href="#"
