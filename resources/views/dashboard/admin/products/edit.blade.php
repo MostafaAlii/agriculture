@@ -111,25 +111,25 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_department_select') }} <span class="text-danger">*</span>
+                                                            {{ trans('Admin\products.product_category_select') }} <span class="text-danger">*</span>
                                                         </label>
 
                                                         <?php
                                                         $selected_department=array();
-                                                        foreach ($product->departments as $department_select){
+                                                        foreach ($product->categories as $department_select){
                                                              array_push($selected_department,$department_select->id);
                                                         }
                                                         ?>
-                                                        <select name="departments[]" class="select2 form-control" multiple>
-                                                            <optgroup label="{{ trans('Admin\products.product_department_select_placeholder') }}">
-                                                                @if($departments && $departments->count() > 0)
-                                                                    @foreach($departments as $department) 
-                                                                        <option value="{{$department->id}}" <?php if(in_array($department->id,$selected_department)){echo'selected';}?>>{{$department->name}}</option>
+                                                        <select name="categories[]" class="select2 form-control" multiple>
+                                                            <optgroup label="{{ trans('Admin\products.product_category_select_placeholder') }}">
+                                                                @if($categories && $categories->count() > 0)
+                                                                    @foreach($categories as $category)
+                                                                        <option value="{{$category->id}}" <?php if(in_array($category->id,$selected_department)){echo'selected';}?>>{{$category->name}}</option>
                                                                     @endforeach
                                                                 @endif
                                                             </optgroup>
                                                         </select>
-                                                        @error('departments.0')
+                                                        @error('categories.0')
                                                         <span class="text-danger"> {{$message}}</span>
                                                         @enderror
                                                     </div>
@@ -137,121 +137,6 @@
                                                 <!-- End Department Select -->
                                             </div>
                                             <!-- End Product Name -->
-
-                                            <!-- Start Country Dropdown List -->
-                                            <div class="row" >
-                                                <!-- Start Country -->
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_country_select') }}
-                                                        </label>
-                                                        <select name="country_id" id="country_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_country_select_placeholder') }}">
-                                                                @if($countries && $countries->count() > 0)
-                                                                    @foreach($countries as $country)
-                                                                        <option value="{{$country->id }}" <?php if($country->id==$product->country_id){echo'selected';}?>>{{$country->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('country_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End Country -->
-                                            </div>
-                                            <!-- End Country Dropdown List -->
-
-                                            <!-- Start Provience and Other Dropdown List -->
-                                            <div class="row" >
-                                                <!-- Start Provience -->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_provience_select') }}
-                                                        </label>
-                                                        <select name="province_id" id="province_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_provience_select_placeholder') }}">
-                                                                @if($provinces && $provinces->count() > 0)
-                                                                    @foreach($provinces as $provincy)
-                                                                        <option value="{{$provincy->id }}" <?php if($provincy->id==$product->provincy_id){echo'selected';}?>>{{$provincy->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('province_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End Provience -->
-                                                <!-- Start Area -->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_area_select') }}
-                                                        </label>
-                                                        <select name="area_id" id="area_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_area_select_placeholder') }}">
-                                                                @if($areas && $areas->count() > 0)
-                                                                    @foreach($areas as $area)
-                                                                        <option  value="{{$area->id }}" <?php if($area->id==$product->area_id){echo'selected';}?>>{{$area->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('area_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End Area -->
-                                                <!-- Start State -->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_state_select') }}
-                                                        </label>
-                                                        <select name="state_id" id="state_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_state_select_placeholder') }}">
-                                                                @if($states && $states->count() > 0)
-                                                                    @foreach($states as $state)
-                                                                        <option value="{{$state->id }}" <?php if($state->id==$product->state_id){echo'selected';}?>>{{$state->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('state_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End State -->
-                                                <!-- Start Village -->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_village_select') }}
-                                                        </label>
-                                                        <select name="village_id" id="village_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_village_select_placeholder') }}">
-                                                                @if($villages && $villages->count() > 0)
-                                                                    @foreach($villages as $village)
-                                                                        <option value="{{$village->id }}" <?php if($village->id==$product->village_id){echo'selected';}?>>{{$village->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('village_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <!-- End State -->
-                                            </div>
-                                            <!-- End Provience and Other Dropdown List -->
 
                                             <!-- Start Tags Multi Select -->
                                             <div class="row">
@@ -335,9 +220,9 @@
                                                 </div>
                                             </div>
                                             <!-- End Product Description -->
-                                            
 
-                                            
+
+
                                             <div class="form-actions center">
                                                 <button type="submit" class="btn btn-primary">
                                                     <input type="hidden" value="{{$product->id}}" name="id"/>
@@ -413,20 +298,20 @@ $('select[name="country_id"]').on('change', function () {
    $('#area_id').empty();
    $('#state_id').empty();
    $('#village_id').empty();
-   
+
    $.ajax({
        type: "GET",
-       
+
        url: "{{ URL::to('dashboard_admin/fetch_provience')}}/" + country_id,
        //url: "../../fetch_provience/" + country_id,
-       
+
        dataType: "json",
        success: function (data)
        {
           // alert(data);
           $('#province_id').empty();
            if(data!='')
-           { 
+           {
                $.each(data, function (key, value) {
                    //alert('<option value="' + key + '">' + value + '</option>');
                $('#province_id').append('<option value="' + key + '">' + value + '</option>');
@@ -436,7 +321,7 @@ $('select[name="country_id"]').on('change', function () {
            {
                $('#province_id').append('<option disabled >'+ __('Admin/departments.no_province') +'</option>');
            }
-           
+
 
        },
        error:function()
@@ -456,22 +341,22 @@ $('select[name="province_id"]').on('change', function () {
 
    $('#state_id').empty();
    $('#village_id').empty();
-   
+
    $.ajax({
        type: "GET",
-       
+
        url: "{{ URL::to('dashboard_admin/fetch_area')}}/" + province_id,
     //    url: "../../fetch_area/" + province_id,
-       
+
        dataType: "json",
        success: function (data)
        {
           // alert(data);
 
           $('#area_id').empty();
-          
+
            if(data!='')
-           {          
+           {
                $.each(data, function (key, value) {
                    //alert('<option value="' + key + '">' + value + '</option>');
                $('#area_id').append('<option value="' + key + '">' + value + '</option>');
@@ -481,7 +366,7 @@ $('select[name="province_id"]').on('change', function () {
            {
                $('#area_id').append('<option disabled> '+ __('Admin/departments.no_area') +'</option>');
            }
-           
+
 
        },
        error:function()
@@ -502,17 +387,17 @@ $('select[name="area_id"]').on('change', function () {
    $('#village_id').empty();
    $.ajax({
        type: "GET",
-       
+
        url: "{{ URL::to('dashboard_admin/fetch_state')}}/" + area_id,
     //    url: "../../fetch_state/" + area_id,
-    
+
        dataType: "json",
        success: function (data)
        {
           // alert(data);
-          $('#state_id').empty(); 
+          $('#state_id').empty();
            if(data!='')
-           {          
+           {
                $.each(data, function (key, value) {
                    //alert('<option value="' + key + '">' + value + '</option>');
                $('#state_id').append('<option value="' + key + '">' + value + '</option>');
@@ -522,7 +407,7 @@ $('select[name="area_id"]').on('change', function () {
            {
                $('#state_id').append('<option disabled> '+ __('Admin/departments.no_state') +'</option>');
            }
-           
+
 
        },
        error:function()
@@ -545,14 +430,14 @@ $('select[name="state_id"]').on('change', function () {
 
        url: "{{ URL::to('dashboard_admin/fetch_village')}}/" + state_id,
     //    url: "../../fetch_village/" + state_id,
-    
+
        dataType: "json",
        success: function (data)
        {
           // alert(data);
-          $('#village_id').empty(); 
+          $('#village_id').empty();
            if(data!='')
-           {            
+           {
                $.each(data, function (key, value) {
                    //alert('<option value="' + key + '">' + value + '</option>');
                $('#village_id').append('<option value="' + key + '">' + value + '</option>');
@@ -562,7 +447,7 @@ $('select[name="state_id"]').on('change', function () {
            {
                $('#village_id').append('<option disabled> '+ __('Admin/departments.no_village') +'</option>');
            }
-           
+
 
        },
        error:function()

@@ -78,7 +78,6 @@
 					}(window, document));
 				</script>
 
-				{{-- @yield('content') --}}
                 {{ $slot }}
 			</main>
 			<!-- end main -->

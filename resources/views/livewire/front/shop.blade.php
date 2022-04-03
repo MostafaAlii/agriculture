@@ -1,8 +1,8 @@
-<div>
 @section('title', __('website\home.shop'))
 @section('css')
 
 @endsection
+<div>
     <!-- start section -->
     <section class="section">
         <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
@@ -36,83 +36,62 @@
 
                             <div class="goods-filter__inner">
                                 <!-- start widget -->
-                                <div class="widget widget--search">
-                                    <form class="form--horizontal" action="#" method="get">
-                                        <div class="input-wrp">
-                                            <input class="textfield" name="s" type="text" placeholder="Search" />
-                                        </div>
-
-                                        <button class="custom-btn custom-btn--tiny custom-btn--style-1" type="submit" role="button">Find</button>
-                                    </form>
-                                </div>
+                                   @livewire('front.header-search-component')
                                 <!-- end widget -->
-
                                 <!-- start widget -->
                                 <div class="widget widget--categories">
-                                    <h4 class="h6 widget-title">CAtegories</h4>
+                                    <h4 class="h6 widget-title">{{ __('Admin/categories.departmentPageTitle') }}</h4>
 
                                     <ul class="list">
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Apples</a>
-                                            <span>(3)</span>
-                                        </li>
-
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Oranges</a>
-                                            <span>(5)</span>
-                                        </li>
-
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Strawbery</a>
-                                            <span>(2)</span>
-                                        </li>
-
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Banana</a>
-                                            <span>(8)</span>
-                                        </li>
-
-                                        <li class="list__item">
-                                            <a class="list__item__link" href="#">Pumpkin </a>
-                                            <span>(5)</span>
-                                        </li>
+                                        @foreach (\App\Models\Category::get() as $cat)
+                                            <li class="list__item">
+                                                <a class="list__item__link" href="#">{{ $cat->name }}</a>
+                                                <span>(3)</span>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- end widget -->
 
                                 <!-- start widget -->
                                 <div class="widget widget--price">
-                                    <h4 class="h6 widget-title">Price</h4>
+                                    <h4 class="h6 widget-title">
+                                        Price
+                                        {{-- <span class="text-base" style=""> --}}
+                                                ${{ $min_price }} - ${{ $max_price }}
+                                             {{-- </span> --}}
+                                    </h4>
+                                    <div style="padding:10px 5px 40px 5px;">
+                                        <div id="slider" wire:ignore>
+                                            {{-- <input type="text" class="js-range-slider" name="my_range" value=""
+                                                data-type="double"
+                                                data-min="0"
+                                                data-max="500"
+                                                data-from="48"
+                                                data-to="365"
+                                                data-grid="false"
+                                                data-skin="round"
+                                                data-prefix="$"
+                                                data-hide-from-to="true"
+                                                data-hide-min-max="true"
+                                            />
 
-                                    <div>
-                                        <input type="text" class="js-range-slider" name="my_range" value=""
-                                            data-type="double"
-                                            data-min="0"
-                                            data-max="500"
-                                            data-from="48"
-                                            data-to="365"
-                                            data-grid="false"
-                                            data-skin="round"
-                                            data-prefix="$"
-                                            data-hide-from-to="true"
-                                            data-hide-min-max="true"
-                                        />
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input class="range-slider-min-value" type="text" value="48" name="min-value" readonly="readonly">
+                                                </div>
 
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <input class="range-slider-min-value" type="text" value="48" name="min-value" readonly="readonly">
-                                            </div>
-
-                                            <div class="col-6">
-                                                <input class="range-slider-max-value" type="text" value="365" name="max-value" readonly="readonly">
-                                            </div>
+                                                <div class="col-6">
+                                                    <input class="range-slider-max-value" type="text" value="365" name="max-value" readonly="readonly">
+                                                </div>
+                                            </div> --}}
                                         </div>
-                                    </div>
+                                   </div>
                                 </div>
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget widget--additional">
+                                {{-- <div class="widget widget--additional">
                                     <h4 class="h6 widget-title">Additional</h4>
 
                                     <ul>
@@ -156,7 +135,7 @@
                                             </label>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
 
                                 <!-- start widget -->
@@ -164,18 +143,15 @@
                                     <h4 class="h6 widget-title">Popular Tags</h4>
 
                                     <ul>
-                                        <li><a href="#">Art</a></li>
-                                        <li><a href="#">design</a></li>
-                                        <li><a href="#">concept</a></li>
-                                        <li><a href="#">Media</a></li>
-                                        <li><a href="#">Photography</a></li>
-                                        <li><a href="#">UI</a></li>
+                                        @foreach ($tags as $tag)
+                                            <li><a href="#">{{$tag->name}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget">
+                                {{-- <div class="widget">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col">
                                             <button class="custom-btn custom-btn--medium custom-btn--style-1" role="button">Show Products</button>
@@ -185,26 +161,33 @@
                                             <a class="clear-filter" href="#">Clear all</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
 
                                 <!-- start widget -->
                                 <div class="widget widget--products">
-                                    <h4 class="h6 widget-title">Featured products</h4>
+                                    <h4 class="h6 widget-title">{{ __('Admin/site.featproducts') }}</h4>
 
                                     <ul>
+                                        @foreach ($newProducts as $product)
                                         <li>
                                             <div class="row no-gutters">
                                                 <div class="col-auto __image-wrap">
                                                     <figure class="__image">
-                                                        <a href="single_product.html">
-                                                            <img class="lazy" src="img/blank.gif" data-src="img/goods_img/5.jpg" alt="demo" />
+                                                        <a href="{{ route('product_details',$product->id) }}">
+                                                            @if($product->image->filename)
+                                                            <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                            data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                                        @else
+                                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                        @endif
                                                         </a>
                                                     </figure>
                                                 </div>
 
                                                 <div class="col">
-                                                    <h4 class="h6 __title"><a href="single_product.html">Big Banana</a></h4>
+                                                    <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
                                                     <div class="rating">
                                                         <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
@@ -214,69 +197,20 @@
                                                         <span class="rating__item"><i class="fontello-star"></i></span>
                                                     </div>
 
-                                                    <div class="product-price">
-                                                        <span class="product-price__item product-price__item--new">2.99 $</span>
-                                                        <span class="product-price__item product-price__item--old">4.11 $</span>
-                                                    </div>
+                                                    @if($product->special_price >0)
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                                        </div>
+                                                    @else
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </li>
-
-                                        <li>
-                                            <div class="row no-gutters">
-                                                <div class="col-auto __image-wrap">
-                                                    <figure class="__image">
-                                                        <a href="single_product.html">
-                                                            <img class="lazy" src="img/blank.gif" data-src="img/goods_img/8.jpg" alt="demo" />
-                                                        </a>
-                                                    </figure>
-                                                </div>
-
-                                                <div class="col">
-                                                    <h4 class="h6 __title"><a href="single_product.html">Awesome Peach </a></h4>
-
-                                                    <div class="rating">
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item"><i class="fontello-star"></i></span>
-                                                    </div>
-
-                                                    <div class="product-price">
-                                                        <span class="product-price__item product-price__item--new">10.99 $</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="row no-gutters">
-                                                <div class="col-auto __image-wrap">
-                                                    <figure class="__image">
-                                                        <a href="single_product.html">
-                                                            <img class="lazy" src="img/blank.gif" data-src="img/goods_img/2.jpg" alt="demo" />
-                                                        </a>
-                                                    </figure>
-                                                </div>
-
-                                                <div class="col">
-                                                    <h4 class="h6 __title"><a href="single_product.html">Awesome Brocoli</a></h4>
-
-                                                    <div class="rating">
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item"><i class="fontello-star"></i></span>
-                                                    </div>
-
-                                                    <div class="product-price">
-                                                        <span class="product-price__item product-price__item--new">5.99 $</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- end widget -->
@@ -300,16 +234,33 @@
 
                             <div class="col-auto">
                                 <!-- start ordering -->
-                                <form class="ordering" action="#">
+                                {{-- <form class="ordering" action="#"> --}}
                                     <div class="input-wrp">
-                                        <select class="textfield wide js-select">
-                                            <option value="1">Default Sorting</option>
-                                            <option value="2">Price. low to high</option>
-                                            <option value="3">Price. high to low</option>
-                                            <option value="3">Sort by latest</option>
+                                        <select name="orderby" class="textfield wide js-select" wire:model='sorting'>
+                                            <option value="default" selected="selected">Default sorting</option>
+                                            <option value="date">Sort by newness</option>
+                                            <option value="price">Sort by price: low to high</option>
+                                            <option value="price-desc">Sort by price: high to low</option>
                                         </select>
                                     </div>
-                                </form>
+                                {{-- </form> --}}
+                                <!-- end ordering -->
+                            </div>
+                            <div class="col-auto">
+                                <!-- start ordering -->
+                                {{-- <form class="ordering" action="#"> --}}
+                                    <div class="input-wrp">
+                                        <select name="post-per-page" class="textfield wide js-select" wire:model='pagesize' >
+                                            <option value="12" selected="selected">12 per page</option>
+                                            <option value="16">16 per page</option>
+                                            <option value="18">18 per page</option>
+                                            <option value="21">21 per page</option>
+                                            <option value="24">24 per page</option>
+                                            <option value="30">30 per page</option>
+                                            <option value="32">32 per page</option>
+                                        </select>
+                                    </div>
+                                {{-- </form> --}}
                                 <!-- end ordering -->
                             </div>
                         </div>
@@ -320,293 +271,60 @@
                         <div class="goods goods--style-1">
                             <div class="__inner">
                                 <div class="row">
+                                    @foreach ($products as $product)
                                     <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="188" src="img/blank.gif" data-src="img/goods_img/1.jpg" alt="demo" />
-                                            </figure>
+                                        <div class="col-12 col-sm-6 col-lg-4">
+                                            <div class="__item">
+                                                <figure class="__image">
+                                                    @if($product->image->filename)
+                                                        <a href="{{ route('product_details',$product->id) }}">
+                                                            <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                        data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                                        </a>
+                                                    @else
+                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                    @endif
+                                                </figure>
 
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Oranges</a></h4>
+                                                <div class="__content">
+                                                    <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
-                                                <div class="__category"><a href="#">Fruits</a></div>
+                                                    <div class="__category"><a href="#">
+                                                        @foreach ($product->categories as $category)
+                                                            <div class="text-primary text-bold">
+                                                            <span>{{$category->name}}</span>
+                                                            </div>
+                                                            @endforeach
+                                                        </a></div>
 
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">3,80 $</span>
+                                                    @if($product->special_price >0)
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                                        </div>
+                                                    @else
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                                        </div>
+                                                    @endif
+
+                                                    <a class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                        href="#"
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})" >
+                                                        <i class="fontello-shopping-bag"></i>
+                                                        {{ __('Admin/site.addtocart') }}
+                                                    </a>
                                                 </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--sale">Sale</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="180" src="img/blank.gif" data-src="img/goods_img/2.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Brocoli</a></h4>
-
-                                                <div class="__category"><a href="#">Vegetables</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">3,35 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--new">New</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="160" src="img/blank.gif" data-src="img/goods_img/3.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Red Apple</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">0,99 $</span>
-                                                    <span class="product-price__item product-price__item--old">2200$</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--hot">hot</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="190" src="img/blank.gif" data-src="img/goods_img/4.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Strawberry</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">2,10 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--sale">Sale</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="180" src="img/blank.gif" data-src="img/goods_img/5.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Fresh Banana</a></h4>
-
-                                                <div class="__category"><a href="#">Vegetables</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">10,99 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--new">New</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="180" src="img/blank.gif" data-src="img/goods_img/6.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Big Pumpkin</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">8,15 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--hot">hot</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="250" src="img/blank.gif" data-src="img/goods_img/7.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Organic Tomato</a></h4>
-
-                                                <div class="__category"><a href="#">Vegetables</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--old">6,68 $</span>
-                                                    <span class="product-price__item product-price__item--new">6,12 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
+                                                @if($product->special_price >0)
+                                                <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
+                                                @else
+                                                <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
+                                                @endif
                                             </div>
                                         </div>
-                                    </div>
                                     <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="236" src="img/blank.gif" data-src="img/goods_img/8.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Organic Peach</a></h4>
-
-                                                <div class="__category"><a href="#">Vegetables</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--old">6,68 $</span>
-                                                    <span class="product-price__item product-price__item--new">6,12 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="188" src="img/blank.gif" data-src="img/goods_img/1.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Oranges</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">3,80 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--sale">Sale</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="180" src="img/blank.gif" data-src="img/goods_img/2.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Brocoli</a></h4>
-
-                                                <div class="__category"><a href="#">Vegetables</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">3,35 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--new">New</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="160" src="img/blank.gif" data-src="img/goods_img/3.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Red Apple</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">0,99 $</span>
-                                                    <span class="product-price__item product-price__item--old">2200$</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--hot">hot</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="190" src="img/blank.gif" data-src="img/goods_img/4.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="single_product.html">Strawberry</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">2,10 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--sale">Sale</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -616,13 +334,17 @@
 
                         <!-- start pagination -->
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
+                            {{-- <ul class="pagination justify-content-center">
                                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                                 <li class="page-item active"><a class="page-link" href="#">2</a></li>
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item"><a class="page-link" href="#">4</a></li>
                                 <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
-                            </ul>
+                            </ul> --}}
+
+                            @if (count($products))
+                            {{ $products->links('page-links') }}
+                            @endif
                         </nav>
                         <!-- end pagination -->
                     </div>
@@ -658,3 +380,25 @@
     </section>
     <!-- end section -->
 </div>
+@push('js')
+    <script>
+        var slider=document.getElementById('slider');
+        noUiSlider.create(slider,{
+            start :[1,10000],
+            connect:true,
+            range :{
+                'min':1,
+                'max':10000
+            },
+            pips:{
+                mode:'steps',
+                stepped:true,
+                density:4
+            }
+        });
+        slider.noUiSlider.on('update',function(value){
+            @this.set('min_price',value[0]);
+            @this.set('max_price',value[1]);
+        });
+    </script>
+@endpush

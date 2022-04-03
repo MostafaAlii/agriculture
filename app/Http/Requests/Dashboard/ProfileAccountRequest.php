@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
+// use App\Rules\CheckOldPassword;
 class ProfileAccountRequest extends FormRequest {
     public function authorize() {
         return true;
@@ -14,6 +15,7 @@ class ProfileAccountRequest extends FormRequest {
             'lastname'     => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins',
             'email'        => 'required|email|unique:admins',
+            // 'old_password' => 'required',
             'password'     => 'required|confirmed|min:3|max:10',
             'type'         => 'required|in:admin,employee',
             // "image"        => 'image|mimes:jpeg,png|max:4096',

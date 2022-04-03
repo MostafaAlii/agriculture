@@ -8,7 +8,7 @@ class OptionRequest extends FormRequest {
 
     public function rules() {
         return [
-           // regex انه يقبل حروف عربى انجليزى بس ميقبلش ارقام او رموز
+           // regex انه يقبل حروف عربى انجليزى و ارقام او رموز
             'name' =>'required|string|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|unique:option_translations,name,' . $this->id,
             'price' =>  'required|numeric|min:0|digits_between:1,12',
         ];

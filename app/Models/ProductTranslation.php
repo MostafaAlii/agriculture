@@ -4,6 +4,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 class ProductTranslation extends Model {
     protected $table = "product_translations";
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'slug'];
     public $timestamps = false;
 }

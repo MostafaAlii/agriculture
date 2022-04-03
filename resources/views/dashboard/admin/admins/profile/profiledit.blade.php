@@ -40,11 +40,19 @@
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
-                                            <a class="mr-2" href="#">
-                                                <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
-                                                alt="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
-                                                class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                            </a>
+                                            @if(Auth::user()->image->filename)
+                                                <a class="mr-2" href="#">
+                                                        <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
+                                                        alt="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
+                                                        class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                                </a>
+                                            @else
+                                                <a class="mr-2" href="#">
+                                                    <img src="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                                                    alt="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                                </a>
+                                            @endif
                                             <div class="media-body">
                                                 <h4 class="media-heading"> @lang('Admin/site.image')</h4>
                                                 <div class="col-12 px-0 d-flex">

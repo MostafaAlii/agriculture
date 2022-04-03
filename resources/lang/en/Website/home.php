@@ -31,6 +31,10 @@ return [
    //section blog *********************************************************
    'readmore'                => 'Read More',
    'blogdetails'             => 'Blog Details',
-
+   'productdetails'             => 'Product Details',
+   'cart'                   => 'Cart',
+   'checkout'             => 'Checkout',
+   'price'             => 'Price',
+   'smsnoproduct'        => 'There is no product to Show , please add new products !',
    //End section blog *********************************************************
 ];

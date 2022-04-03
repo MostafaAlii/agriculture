@@ -13,6 +13,12 @@ return[
     'delete_done'                       =>'Delete Done Successfully',
     'name_min'                          =>'Name must be more than 3 character',
     'cant_delete'                       =>'can\'t delete this attribute because it related with options',
+    
+    'add_wrong'                         =>'Problem occure while adding .. please try again',
+    'edit_wrong'                        =>'Problem occure while updating .. please try again',
+    'delete_wrong'                      =>'Problem occure while deleting .. please try again',
+    
+    'Nodata'                            =>'Sorry,No attribute found..',
 
     ];
 ?>

@@ -19,11 +19,19 @@
                 <div class="row">
                     <div class="col-12 col-sm-7">
                         <div class="media mb-2">
-                            <a class="mr-1" href="#">
-                                <img src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
-                                alt="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
-                                class="users-avatar-shadow rounded-circle" height="64" width="64">
-                            </a>
+                            @if($farmer->image->filename)
+                                <a class="mr-2" href="#">
+                                    <img src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
+                                    alt="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
+                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                </a>
+                            @else
+                                <a class="mr-2" href="#">
+                                    <img src="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
+                                    alt="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
+                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                </a>
+                            @endif
                             <div class="media-body pt-25">
                                 <h4 class="media-heading">
                                     <span class="users-view-name">{{ $farmer->firstname }} {{ $farmer->lastname }}</span>

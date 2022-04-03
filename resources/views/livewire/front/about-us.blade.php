@@ -1,8 +1,8 @@
-<div>
 @section('title', __('website\home.aboutus'))
 @section('css')
 
 @endsection
+<div>
    	<!-- start section -->
        <section class="section section--no-pb section--custom-01">
         <div class="container">

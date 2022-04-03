@@ -129,4 +129,18 @@ return [
     'administaration_part'=>'Administration Part',
     'add_admin_departments'=>'Add Admin Department',
     ''=>'',
+
+    "prev" => "Prev",
+    "next" => "Next",
+    'welcome'=>'Welcome',
+    'products'=>'Products',
+    'featproducts'=>'Featured products',
+    'newproducts'=>'Latest Products',
+    'saleproducts'=>'Product On Sale',
+    'popproducts'=>'Most Popular',
+    'addtocart'=>'Add To Cart',
+    'sale'=>'Sale',
+    'new'=>'New',
+
+
 ];

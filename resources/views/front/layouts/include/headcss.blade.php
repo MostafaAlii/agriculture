@@ -17,15 +17,22 @@
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('frontassets/img/apple-touch-icon-114x114.png') }}">
 
     {{-- bootstrap 4 ************************ --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/animate.css') }}"> --}}
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/font-awesome.min.css') }}"> --}}
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/bootstrap.min.css') }}"> --}}
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/owl.carousel.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/flexslider.css') }}"> --}}
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/color-01.css') }}"> --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         {{-- bootstrap 4 ************************ --}}
     {{-- font cairo --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-       
+
           <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
           <!-- END: Page CSS-->
-          <style> body {font-family: 'Cairo', sans-serif;} </style>
+          <style> body {font-family: 'Cairo', sans-serif !important;} </style>
     {{-- font cairo --}}
 
     <!-- Critical styles
@@ -57,6 +64,8 @@
         _html.className = _html.className.replace("no-js","js");
         _html.classList.add( isTouch ? "touch" : "no-touch");
     </script>
+    {{-- filter price --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.css" integrity="sha512-qveKnGrvOChbSzAdtSs8p69eoLegyh+1hwOMbmpCViIwj7rn4oJjdmMvWOuyQlTOZgTlZA0N2PXA7iA8/2TUYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="text/javascript" src="{{ asset('frontassets/js/device.min.js') }}"></script>
-    @livewireStyles
     @yield('css')
+    @livewireStyles

@@ -2,7 +2,8 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProductInterface;
-use App\Http\Requests\Dashboard\ProductRequest;
+use App\Http\Requests\Dashboard\Product\GeneralRequest;
+use App\Http\Requests\Dashboard\Product\ProductPriceRequest;
 use Illuminate\Http\Request;
 class ProductController extends Controller {
     protected $Data;
@@ -18,18 +19,30 @@ class ProductController extends Controller {
         return $this->Data->data();
     }
 
-    public function create(ProductRequest $request) {
-        return $this->Data->generalInformation($request);
+    public function create() {
+        return $this->Data->generalInformation();
+    }
+
+    public function generalInformationStore(GeneralRequest $request) {
+        return $this->Data->generalInformationStore($request);
     }
 
     public function edit($id) {
         return $this->Data->edit($id);
     }
 
-    public function update(ProductRequest $request) {
+    public function update(GeneralRequest $request) {
         return $this->Data->update($request);
     }
-    
+
+    public function additionalPrice($id) {
+        return $this->Data->additionalPrice($id);
+    }
+
+    public function additionalPriceStore(ProductPriceRequest $request) {
+        return $this->Data->additionalPriceStore($request);
+    }
+
     public function destroy($id){
         return $this->Data->destroy($id);
     }

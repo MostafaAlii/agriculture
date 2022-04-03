@@ -224,8 +224,14 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">
                             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span><span class="avatar avatar-online">
-                                {{--<img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"--}}
-                                {{--alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}">--}}
+                                @if(Auth::user()->image->filename)
+                                    <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
+                                    alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}">
+                                @else
+                                    <img src="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                                    alt="{{ asset('Dashboard/img/admins/avatar.jpg') }}">
+                                @endif
+
                                 <i></i></span>
                         </a>
                             {{-- @if (Auth::user()->image->filename)
@@ -253,7 +259,8 @@
                                 <i class="material-icons">content_paste</i>
                                 Task
                             </a> --}}
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ route('logout.admin') }}"
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('logout.admin') }}"
                             onclick="event.preventDefault(); document.getElementById('log-out').submit();"
                             ><i class="material-icons">power_settings_new</i>
                             @lang('Admin/site.logout')

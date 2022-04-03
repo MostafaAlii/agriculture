@@ -1,13 +1,8 @@
-<div>
-    @section('title', __('website\home.blog'))
-    @section('css')
+@section('title', __('website\home.blog'))
+@section('css')
 
-    @endsection
-<style>
-    nav svg{
-        height:20px;
-    }
-</style>
+@endsection
+<div>
     <!-- start section -->
     <section class="section">
         <div class="container">
@@ -25,8 +20,8 @@
                                             data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             alt="demo" />
                                         @else
-                                           <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                           data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
+                                           <img class="lazy" src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}"
+                                           data-src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}" alt="demo" />
                                         @endif
                                     </figure>
                                     <div class="__content">
@@ -35,13 +30,17 @@
                                         <p>{{ Str::limit($blog->body,50,) }}</p>
                                     </div>
                                     <span class="__date-post">
-                                        <strong>{{ $blog->created_at->diffforhumans() }}</strong>
+                                        {{-- <strong>{{ $blog->created_at->diffforhumans() }}</strong> --}}
+                                        {{ $blog->created_at->diffforhumans() }}
                                     </span>
                                 </div>
                             </div>
                             <!-- end item -->
                         @endforeach
                         {{-- {{ $blogs->links() }} --}}
+                        @if (count($blogs))
+                        {{ $blogs->links('page-links') }}
+                        @endif
 
                     </div>
                 </div>
@@ -52,7 +51,7 @@
     <!-- end section -->
 
     <!-- start section -->
-    <section class="section section--no-pt">
+    {{-- <section class="section section--no-pt">
         <div class="container">
             <ul class="page-nav">
                 <li class="page-nav__item">
@@ -63,7 +62,7 @@
                 </li>
             </ul>
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 
     <!-- start section -->

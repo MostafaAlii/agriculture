@@ -40,11 +40,20 @@
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
-                                            <a class="mr-2" href="#">
-                                                <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
-                                                alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
-                                                class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                            </a>
+                                            @if(Auth::user()->image->filename)
+                                                <a class="mr-2" href="#">
+                                                        <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
+                                                        alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
+                                                        class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                                </a>
+                                            @else
+                                                <a class="mr-2" href="#">
+                                                    <img src="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                                                    alt="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                                </a>
+                                            @endif
+
                                             <div class="media-body">
                                                 <h4 class="media-heading"> @lang('Admin/site.image')</h4>
                                                 <div class="col-12 px-0 d-flex">
@@ -99,14 +108,21 @@
 
                                                 <div class="col-md-6">
                                                     {{--password--}}
+                                                    {{-- <div class="form-group">
+                                                        <label>{{ __('Admin/site.oldpassword') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="old_password" class="form-control" value="" required>
+                                                    </div> --}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
-                                                        <input type="password" name="password" class="form-control" value="{{ old('password',Auth::user()->password) }}" required>
+                                                        <input type="password" name="password" class="form-control"
+                                                        value="" required>
+                                                        {{-- <input type="password" name="password" class="form-control" value="" required> --}}
                                                     </div>
                                                     {{--password_confirmation--}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
-                                                        <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
+                                                        <input type="password" name="password_confirmation" class="form-control"
+                                                        value="{{ old('password_confirmation') }}" required>
                                                     </div>
                                                 </div>
                                             </div>

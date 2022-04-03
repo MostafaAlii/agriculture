@@ -124,5 +124,16 @@ return [
     'treeType'=>'أنواع  الأشجار',
     'admin_departments'=>'التقسيمات الإدارية',
     'administaration_part'=>'الجزء الإداري',
-    'add_admin_departments'=>'إضافة قسم إداري جديد'
+    'add_admin_departments'=>'إضافة قسم إداري جديد',
+    "prev" => "السابق",
+    "next" => "التالي",
+    'welcome'=>'مرحبا',
+    'products'=>'المنتجات',
+    'featproducts'=>'منتجات مميزه',
+    'newproducts'=>'احدث المنتجات',
+    'saleproducts'=>'احدث العروض',
+    'popproducts'=>'الاكثر انتشارا',
+    'addtocart'=>'اضف الى القائمه',
+    'sale'=>'عرض',
+    'new'=>'جديد',
 ];

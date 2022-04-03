@@ -1,12 +1,15 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\Blog;
 use App\Models\Country;
 use App\Models\CountryTranslation;
 use Illuminate\Database\Seeder;
 use App\Models\Image;
+use App\Models\Product;
 use App\Models\ProductDepartment;
 use App\Models\Profile;
+use App\Models\Slider;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder {
@@ -22,6 +25,7 @@ class DatabaseSeeder extends Seeder {
             FarmerTableSeeder::class,
             AdminTableSeeder::class,
             UserSeeder::class,
+            CategorySeeder::class,
             SettingSeeder::class,
             BlogSeeder::class,
             TagSeeder::class,
@@ -36,7 +40,7 @@ class DatabaseSeeder extends Seeder {
          // images
          for ($i = 1; $i <= $count ; $i++) {
             Image::insert([
-                'filename'     => rand(1,10) . ".jpg",
+                'filename'     => rand(1,6) . ".jpg",
                 'imageable_id' => $i,
                 'imageable_type' => 'App\Models\User'
             ]);
@@ -44,7 +48,7 @@ class DatabaseSeeder extends Seeder {
            // images
            for ($i = 1; $i <= $count ; $i++) {
             Image::insert([
-                'filename'     => rand(1,10) . ".jpg",
+                'filename'     => rand(1,6) . ".jpg",
                 'imageable_id' => $i,
                 'imageable_type' => 'App\Models\Farmer'
             ]);
@@ -53,61 +57,34 @@ class DatabaseSeeder extends Seeder {
             // images
             for ($i = 1; $i <= $count ; $i++) {
                 Image::insert([
-                    'filename'     => rand(1,10) . ".jpg",
+                    'filename'     => rand(1,6) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Admin'
                 ]);
             }
             // images for blog
-            for ($i = 1; $i <= $count ; $i++) {
+            for ($i = 1; $i <= Blog::count() ; $i++) {
                 Image::insert([
-                    'filename'     => rand(1,10) . ".jpg",
+                    'filename'     => 'blog-article-'.rand(1,5) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Blog'
                 ]);
             }
             // images for slider
-            for ($i = 1; $i <= 3 ; $i++) {
+            for ($i = 1; $i <= Slider::count() ; $i++) {
                 Image::insert([
-                    'filename'     => rand(100,103) . ".jpg",
+                    'filename'     => rand(100,107) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Slider'
                 ]);
             }
-
-            //  country
-            // $country_names = [
-            //     "Eygpt",
-            //     "Usa",
-            //     "Germany",
-            //     "Canada",
-            //     "Iraq",
-
-            // ];
-            // for ($i = 1; $i <= 5 ; $i++) {
-            //     Country::insert([
-            //         'country_logo'     => $i . ".jpg",
-            //         'name' => $country_names[$i],
-            //     ]);
-            // }
-
-            // country --->province --->area -->state-->village
-            // DB::table('contries')->truncate();
-            // DB::table('provinces')->truncate();
-            // DB::table('areas')->truncate();
-            // DB::table('states')->truncate();
-            // DB::table('villages')->truncate();
-
-
-
-            // for ($i = 1; $i <  5 ; $i++) {
-            //     DB::table('Country_translations')->insert(
-            //         [
-            //           'name' => $country_names[$i],
-            //           'locale' => 'en',
-            //           'country_id'=>$i,
-            //         ]
-            //     );
-            // }
+            // images for product
+            for ($i = 1; $i <= Product::count() ; $i++) {
+                Image::insert([
+                    'filename'     => rand(1,67) . ".jpg",
+                    'imageable_id' => $i,
+                    'imageable_type' => 'App\Models\Product'
+                ]);
+            }
     }
 }

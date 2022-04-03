@@ -23,6 +23,7 @@ use App\Http\Interfaces\Admin\TreeInterface;
 use App\Http\Interfaces\Admin\TreeTypeInterface;
 use App\Http\Interfaces\Admin\LandCategoryInterface;
 use App\Http\Interfaces\Admin\OrchardInterface;
+use App\Http\Interfaces\Admin\CategoryInterface;
 
 use App\Http\Repositories\Admin\OrchardRepository;
 
@@ -48,6 +49,7 @@ use App\Http\Repositories\Admin\TreeRepository;
 use App\Http\Repositories\Admin\TreeTypeRepository;
 use App\Http\Repositories\Admin\LandCategoryRepository;
 
+use App\Http\Repositories\Admin\CategoryRepository;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -83,6 +85,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AttributeInterface::class, AttributeRepository::class);
         $this->app->bind(OptionInterface::class, OptionRepository::class);
         $this->app->bind(ProductInterface::class, ProductRepository::class);
+        $this->app->bind(CategoryInterface::class, CategoryRepository::class);
     }
 
     public function boot()

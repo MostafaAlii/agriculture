@@ -6,10 +6,11 @@ use App\Http\Interfaces\Admin\AttributeInterface;
 use App\Models\Option;
 use Illuminate\Support\Facades\Crypt;
 class AttributeRepository implements AttributeInterface {
+    
     public function index() {
         return view('dashboard.admin.attributes.index');
     }
-
+//------------------------------------------------------------------------------------------
     public function data() {
         $attr = Attribute::select();
         return DataTables::of($attr)
@@ -21,7 +22,7 @@ class AttributeRepository implements AttributeInterface {
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
-
+//------------------------------------------------------------------------------------------
     public function store($request) {
       
         try{
@@ -32,33 +33,39 @@ class AttributeRepository implements AttributeInterface {
             toastr()->success(__('Admin/attributes.added_done'));
             return redirect()->route('Attributes.index');   
          } catch (\Exception $ex) {
-            toastr()->success(__('Admin/attributes.wrong'));
+            toastr()->success(__('Admin/attributes.add_wrong'));
             return redirect()->route('Attributes.index');
          }
     }
-
+//------------------------------------------------------------------------------------------
     public function edit($id) {
         $real_id = Crypt::decrypt($id);
         $attributes = Attribute::orderBy('id', 'DESC')->find($real_id);
         if (!$attributes)
-            return redirect()->route('admin.maincategories')->with(['error' => __('Admin/attributes.wrong')]);
+            return redirect()->route('admin.maincategories')->with(['error' => __('Admin/attributes.Nodata')]);
         return view('dashboard.admin.attributes.edit', compact('attributes'));
         /*$real_id = Crypt::decrypt($id);
         $attributes=Attribute::findOrfail($real_id);
         return view('dashboard.admin.attributes.edit', compact('attributes'));*/
     }
-
+//------------------------------------------------------------------------------------------
     public function update($request,$id) {
-        $real_id = Crypt::decrypt($id);
+        try{
+            $validated = $request->validated();
+            $real_id = Crypt::decrypt($id);
 
-        $attr=Attribute::findOrfail($real_id);
-        $attr->name=$request->name;
-        $attr->save();
-        
-        toastr()->success(__('Admin/attributes.updated_done'));
-        return redirect()->route('Attributes.index');
+            $attr=Attribute::findOrfail($real_id);
+            $attr->name=$request->name;
+            $attr->save();
+            
+            toastr()->success(__('Admin/attributes.updated_done'));
+            return redirect()->route('Attributes.index');
+        } catch (\Exception $ex) {
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->route('Attributes.index');
+         }
     }
-
+//------------------------------------------------------------------------------------------
     public function destroy($id) {
         try{
             $real_id = decrypt($id);
@@ -74,10 +81,12 @@ class AttributeRepository implements AttributeInterface {
                 return redirect()->route('Attributes.index');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+            return redirect()->route('Attributes.index');
         }
     }
-
+    
+//------------------------------------------------------------------------------------------
     public function bulkDelete($request)
     {
        // dd($request->delete_select_id);

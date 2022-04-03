@@ -10,6 +10,7 @@ use App\Models\State;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 class ProfileRepository implements ProfileInterface{
@@ -31,7 +32,7 @@ class ProfileRepository implements ProfileInterface{
             $adminID = Crypt::decrypt($id);
             $admin=Admin::findorfail($adminID);
             $requestData = $request->validated();
-            // $requestData['type'] = $request->type;
+            $requestData['password'] = bcrypt($request->password);
             $admin->update($requestData);
 
             if($request->image){

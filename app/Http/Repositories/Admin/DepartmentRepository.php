@@ -12,18 +12,20 @@ use Yajra\DataTables\DataTables;
 
 use App\Http\Interfaces\Admin\DepartmentInterface;
 use App\Models\Area;
-use App\Models\Product;
+use App\Models\Category;
 use App\Models\Province;
 use App\Models\Village;
 
 use App\Traits\Keywords;
 class DepartmentRepository implements DepartmentInterface {
+
     use Keywords;
+    
     public function index() {
         $departments = Department::get();
         return view('dashboard.admin.departments.index', compact('departments'));
     }
-
+//------------------------------------------------------------------------------------------
     public function data() {
         //get all departments data
         $departments = Department::orderBy('id','DESC')->get();
@@ -73,6 +75,7 @@ class DepartmentRepository implements DepartmentInterface {
             ->toJson();
     }
 
+//------------------------------------------------------------------------------------------
     public function create()
     {
        
@@ -88,26 +91,22 @@ class DepartmentRepository implements DepartmentInterface {
        // return view('dashboard.admin.departments.create', compact('main_departments','country','state'));
         return view('dashboard.admin.departments.create', $data);
     }
+//------------------------------------------------------------------------------------------
 //DepartmentRequest
     public function store($request) {
-        
-       // dd('inside repo');
-       //dd($request);
-     
+      
             
         try{
             $validated = $request->validated();
            
             $depart=new Department;
-
             ($request->parent_id!='0')?$depart->parent_id=$request->parent_id:'';
-
             $depart->country_id=$request->country_id;
             $depart->province_id=$request->province_id;
             $depart->area_id=$request->area_id;
             ($request->state_id)?$depart->state_id=$request->state_id:'';
             ($request->village_id)?$depart->village_id=$request->village_id:'';
-            $depart->created_by=auth()->user()->name;//----------------------------------------------------------------------------
+            $depart->created_by=auth()->user()->firstname;//----------------------------------------------------------------------------
             
             $depart->save();
 
@@ -124,16 +123,13 @@ class DepartmentRepository implements DepartmentInterface {
             return redirect()->route('Departments.index');
             
          } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-         }
-        
-               
-            
-         
-        
-         
+            toastr()->success(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
+        }
+      
     }
-
+    
+//------------------------------------------------------------------------------------------
     public function edit($id)
     {
         //dd($id);
@@ -150,7 +146,7 @@ class DepartmentRepository implements DepartmentInterface {
         return view('dashboard.admin.departments.edit',$data);
     }
 
-
+//------------------------------------------------------------------------------------------
     public function update($request) {
         // dd('inside repo'); 
           
@@ -167,7 +163,7 @@ class DepartmentRepository implements DepartmentInterface {
              ($request->state_id)?$depart->state_id=$request->state_id:$depart->state_id=Null;
              ($request->village_id)?$depart->village_id=$request->village_id:$depart->village_id=NULL;
              
-             $depart->updated_by=auth()->user()->id;//----------------------------------------------------------------------------
+             $depart->updated_by=auth()->user()->firstname;//----------------------------------------------------------------------------
              
              $depart->save();
 
@@ -184,12 +180,12 @@ class DepartmentRepository implements DepartmentInterface {
              return redirect()->route('Departments.index');
              
           } catch (\Exception $e) {
-             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-          }
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();           }
      }
  
 
-
+//------------------------------------------------------------------------------------------
      public function destroy($id) {
         try{
             $real_id = decrypt($id);
@@ -198,11 +194,20 @@ class DepartmentRepository implements DepartmentInterface {
             $data['admin'] = Admin::where('department_id', $real_id)->pluck('department_id');
             $data['farmer'] = Farmer::where('department_id', $real_id)->pluck('department_id');
             $data['user'] = User::where('department_id', $real_id)->pluck('department_id'); 
+            $data['category'] = Category::where('department_id', $real_id)->pluck('department_id'); 
 
-            $d=Department::find($real_id);
-            $data['product']= $d->products();//->withTrashed()
+            
+            //check if there are sub depart for this depart
+            $data['sub_depart']=Department::where('parent_id',$real_id);
+                            
+            if(
+                $data['admin']->count() == 0
+                && $data['farmer']->count() == 0
+                && $data['user']->count() == 0
+                && $data['category']->count() == 0
+                && $data['sub_depart']->count() == 0
+            ) {
 
-            if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0 && $data['product']->count() == 0) {
                 Department::findorfail($real_id)->delete();
                 toastr()->error(__('Admin/departments.depart_delete_done'));
                 return redirect()->route('Departments.index');
@@ -213,9 +218,11 @@ class DepartmentRepository implements DepartmentInterface {
             
             
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+            toastr()->success(__('Admin/attributes.delelte_wrong'));
+            return redirect()->back();         }
     }
+
+    //----------------delete selected department-----------------------
     public function bulkDelete($request)
     {         
         if($request->delete_select_id){
@@ -228,12 +235,20 @@ class DepartmentRepository implements DepartmentInterface {
                 
                 $data['admin'] = Admin::where('department_id', $depart_ids)->pluck('department_id');
                 $data['farmer'] = Farmer::where('department_id', $depart_ids)->pluck('department_id');
-                $data['user'] = User::where('department_id', $depart_ids)->pluck('department_id'); 
+                $data['user'] = User::where('department_id', $depart_ids)->pluck('department_id');
+                $data['category'] = Category::where('department_id', $depart_ids)->pluck('department_id'); 
 
-                $d=Department::find($depart_ids);
-                $data['product']= $d->products();//->withTrashed()
+                //check if there are sub depart for this depart
+                $data['sub_depart']=Department::where('parent_id',$depart_ids);
                 
-                if($data['admin']->count() == 0  && $data['farmer']->count() == 0 && $data['user']->count() == 0 && $data['product']->count() == 0) {
+                if(
+                    $data['admin']->count() == 0
+                    && $data['farmer']->count() == 0
+                    && $data['user']->count() == 0
+                    && $data['category']->count() == 0
+                    && $data['sub_depart']->count() == 0
+                ) {
+                    
                     Department::findOrfail($depart_ids)->delete();
                     $delete_or_no++;
                 }

@@ -14,11 +14,11 @@ class Product extends Model {
     protected $guarded = [];
     protected $with=['translations'];
     protected $slugAttribute = ['name'];
-    public $translatedAttributes=['name','description'];
+    public $translatedAttributes=['name','description', 'slug'];
     public $timestamps = true;
 
     protected $hidden = ['pivot'];
-    
+
     protected $casts = [
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',
@@ -37,28 +37,8 @@ class Product extends Model {
         return $this->belongsTo(Farmer::class)->withDefault();
     }
 
-    public function country(): BelongsTo {
-        return $this->belongsTo(Country::class)->withDefault();
-    }
-
-    public function province(): BelongsTo {
-        return $this->belongsTo(Province::class)->withDefault();
-    }
-
-    public function state(): BelongsTo {
-        return $this->belongsTo(State::class)->withDefault();
-    }
-
-    public function village(): BelongsTo {
-        return $this->belongsTo(Village::class)->withDefault();
-    }
-
-    public function area(): BelongsTo {
-        return $this->belongsTo(Area::class)->withDefault();
-    }
-
-    public function departments(): BelongsToMany {
-        return $this->belongsToMany(Department::class, 'product_departments');
+    public function categories(): BelongsToMany {
+        return $this->belongsToMany(Category::class, 'product_categories');
     }
 
     public function tags(): BelongsToMany {
@@ -69,7 +49,7 @@ class Product extends Model {
     public function options(): HasMany {
         return $this->hasMany(Option::class);
     }
-    
+
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
     }
