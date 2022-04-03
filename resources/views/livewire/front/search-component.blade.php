@@ -1,35 +1,7 @@
 <div>
     @section('title', __('website\home.shop'))
     @section('css')
-    {{-- <style>
-        .pl-4, .px-4{
-        padding-left:1.5rem !important;
-    }
-        .pb-2, .py-2{
-        padding-bottom:.5rem !important;
-    }
-        .pt-2, .py-2{
-        padding-top:.5rem !important;
-    }
-    .bg-white{
-        background-color: #fff !important;
-    }
-    .border{
-        border: 1px solid #dee2e6 !important;
-    }
-    nav svg {
-        height: 20px;
-    }
-    svg{
-        overflow: hidden;
-        vertical-align: middle;
-    }
-    .wrap-pagination-info{
-        margin-top: 46px;
-        border-top:1px solid #e6e6e6;
-        padding-top: 10px;
-    }
-    </style> --}}
+
     @endsection
         <!-- start section -->
         <section class="section">
@@ -83,32 +55,17 @@
 
                                     <!-- start widget -->
                                     <div class="widget widget--price">
-                                        <h4 class="h6 widget-title">Price</h4>
+                                        <h4 class="h6 widget-title">
+                                            Price
+                                            {{-- <span class="text-base" style=""> --}}
+                                                    ${{ $min_price }} - ${{ $max_price }}
+                                                 {{-- </span> --}}
+                                        </h4>
+                                        <div style="padding:10px 5px 40px 5px;">
+                                            <div id="slider" wire:ignore>
 
-                                        <div>
-                                            <input type="text" class="js-range-slider" name="my_range" value=""
-                                                data-type="double"
-                                                data-min="0"
-                                                data-max="500"
-                                                data-from="48"
-                                                data-to="365"
-                                                data-grid="false"
-                                                data-skin="round"
-                                                data-prefix="$"
-                                                data-hide-from-to="true"
-                                                data-hide-min-max="true"
-                                            />
-
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <input class="range-slider-min-value" type="text" value="48" name="min-value" readonly="readonly">
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <input class="range-slider-max-value" type="text" value="365" name="max-value" readonly="readonly">
-                                                </div>
                                             </div>
-                                        </div>
+                                       </div>
                                     </div>
                                     <!-- end widget -->
 
@@ -646,4 +603,25 @@
         </section>
         <!-- end section -->
     </div>
-
+    @push('js')
+    <script>
+        var slider=document.getElementById('slider');
+        noUiSlider.create(slider,{
+            start :[1,10000],
+            connect:true,
+            range :{
+                'min':1,
+                'max':10000
+            },
+            pips:{
+                mode:'steps',
+                stepped:true,
+                density:4
+            }
+        });
+        slider.noUiSlider.on('update',function(value){
+            @this.set('min_price',value[0]);
+            @this.set('max_price',value[1]);
+        });
+    </script>
+@endpush
