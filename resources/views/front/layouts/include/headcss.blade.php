@@ -15,7 +15,8 @@
     <link rel="apple-touch-icon" href="{{ asset('frontassets/img/apple-touch-icon.png') }}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('frontassets/img/apple-touch-icon-72x72.png') }}">
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('frontassets/img/apple-touch-icon-114x114.png') }}">
-
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css/font-awesome.min.css') }}"> --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {{-- bootstrap 4 ************************ --}}
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/animate.css') }}"> --}}
 	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('frontassets/css2/font-awesome.min.css') }}"> --}}

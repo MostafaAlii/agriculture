@@ -27,6 +27,19 @@ class Shop extends Component
         session()->flash('success_message','Item addded in cart');
         return redirect()->route('product.cart');
     }
+    public function addToWishlist($product_id,$product_name,$product_price){
+        Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
+        $this->emitTo('front.wishlist-count-component','refreshComponent');
+    }
+    public function removeWishlist($product_id){
+        foreach(Cart::instance('wishlist')->content() as $item){
+          if($item->id == $product_id){
+             Cart::instance('wishlist')->remove($item->rowId);
+             $this->emitTo('front.wishlist-count-component','refreshComponent');
+             return;
+          }
+        }
+     }
 
     public function render()
     {

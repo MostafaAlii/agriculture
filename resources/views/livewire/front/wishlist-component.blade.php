@@ -1,4 +1,4 @@
-@section('title', __('website\home.shop'))
+@section('title', __('website\home.wishlist'))
 @section('css')
 <style>
     .product-wish{
@@ -57,10 +57,10 @@
 
                             <div class="goods-filter__inner">
                                 <!-- start widget -->
-                                   @livewire('front.header-search-component')
+                                   {{-- @livewire('front.header-search-component') --}}
                                 <!-- end widget -->
                                 <!-- start widget -->
-                                <div class="widget widget--categories">
+                                {{-- <div class="widget widget--categories">
                                     <h4 class="h6 widget-title">{{ __('Admin/categories.departmentPageTitle') }}</h4>
 
                                     <ul class="list">
@@ -71,44 +71,11 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget widget--price">
-                                    <h4 class="h6 widget-title">
-                                        Price
-                                        {{-- <span class="text-base" style=""> --}}
-                                                ${{ $min_price }} - ${{ $max_price }}
-                                             {{-- </span> --}}
-                                    </h4>
-                                    <div style="padding:10px 5px 40px 5px;">
-                                        <div id="slider" wire:ignore>
-                                            {{-- <input type="text" class="js-range-slider" name="my_range" value=""
-                                                data-type="double"
-                                                data-min="0"
-                                                data-max="500"
-                                                data-from="48"
-                                                data-to="365"
-                                                data-grid="false"
-                                                data-skin="round"
-                                                data-prefix="$"
-                                                data-hide-from-to="true"
-                                                data-hide-min-max="true"
-                                            />
 
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <input class="range-slider-min-value" type="text" value="48" name="min-value" readonly="readonly">
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <input class="range-slider-max-value" type="text" value="365" name="max-value" readonly="readonly">
-                                                </div>
-                                            </div> --}}
-                                        </div>
-                                   </div>
-                                </div>
                                 <!-- end widget -->
 
                                 <!-- start widget -->
@@ -160,7 +127,7 @@
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget widget--tags">
+                                {{-- <div class="widget widget--tags">
                                     <h4 class="h6 widget-title">Popular Tags</h4>
 
                                     <ul>
@@ -168,7 +135,7 @@
                                             <li><a href="#">{{$tag->name}}</a></li>
                                         @endforeach
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
 
                                 <!-- start widget -->
@@ -186,7 +153,7 @@
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget widget--products">
+                                {{-- <div class="widget widget--products">
                                     <h4 class="h6 widget-title">{{ __('Admin/site.featproducts') }}</h4>
 
                                     <ul>
@@ -233,7 +200,7 @@
                                         </li>
                                         @endforeach
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
 
                                 <!-- start widget -->
@@ -248,121 +215,81 @@
                     <div class="col-12 col-md-8 col-lg-9">
                         <div class="spacer py-6 d-md-none"></div>
 
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-auto">
-                                <span class="goods-filter-btn-open js-toggle-filter"><i class="fontello-filter"></i>Filter</span>
-                            </div>
 
-                            <div class="col-auto">
-                                <!-- start ordering -->
-                                {{-- <form class="ordering" action="#"> --}}
-                                    <div class="input-wrp">
-                                        <select name="orderby" class="textfield wide js-select" wire:model='sorting'>
-                                            <option value="default" selected="selected">Default sorting</option>
-                                            <option value="date">Sort by newness</option>
-                                            <option value="price">Sort by price: low to high</option>
-                                            <option value="price-desc">Sort by price: high to low</option>
-                                        </select>
-                                    </div>
-                                {{-- </form> --}}
-                                <!-- end ordering -->
-                            </div>
-                            <div class="col-auto">
-                                <!-- start ordering -->
-                                {{-- <form class="ordering" action="#"> --}}
-                                    <div class="input-wrp">
-                                        <select name="post-per-page" class="textfield wide js-select" wire:model='pagesize' >
-                                            <option value="12" selected="selected">12 per page</option>
-                                            <option value="16">16 per page</option>
-                                            <option value="18">18 per page</option>
-                                            <option value="21">21 per page</option>
-                                            <option value="24">24 per page</option>
-                                            <option value="30">30 per page</option>
-                                            <option value="32">32 per page</option>
-                                        </select>
-                                    </div>
-                                {{-- </form> --}}
-                                <!-- end ordering -->
-                            </div>
-                        </div>
 
                         <div class="spacer py-3"></div>
 
                         <!-- start goods -->
                         <div class="goods goods--style-1">
                             <div class="__inner">
-                                <div class="row" >
-                                    @php
-                                       $witems = Cart::instance('wishlist')->content()->pluck('id');
-                                    @endphp
-                                    @foreach ($products as $product)
-                                    <!-- start item -->
-                                        <div class="col-12 col-sm-6 col-lg-4" >
-                                            <div class="__item">
-                                                <figure class="__image" >
-                                                    @if($product->image->filename)
-                                                        <a href="{{ route('product_details',$product->id) }}">
-                                                            <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
-                                                        data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
-                                                        </a>
-                                                    @else
-                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
-                                                    @endif
-                                                </figure>
+                                <div class="row">
+                                    @if (Cart::instance('wishlist')->content()->count() > 0)
+                                                @foreach (Cart::instance('wishlist')->content() as $product)
+                                                <!-- start item -->
+                                                    <div class="col-12 col-sm-6 col-lg-4">
+                                                        <div class="__item">
+                                                            <figure class="__image">
+                                                                @if($product->model->image->filename)
+                                                                    <a href="{{ route('product_details',$product->model->id) }}">
+                                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
+                                                                    data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
+                                                                    </a>
+                                                                @else
+                                                                    <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                    data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                                @endif
+                                                            </figure>
 
-                                                <div class="__content">
-                                                    <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                            <div class="__content">
+                                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->model->id) }}">{{ $product->model->name }}</a></h4>
 
-                                                    <div class="__category"><a href="#">
-                                                        @foreach ($product->categories as $category)
-                                                            <div class="text-primary text-bold">
-                                                            <span>{{$category->name}}</span>
-                                                            </div>
-                                                            @endforeach
-                                                        </a></div>
+                                                                <div class="__category"><a href="#">
+                                                                    @foreach ($product->model->categories as $category)
+                                                                        <div class="text-primary text-bold">
+                                                                        <span>{{$category->name}}</span>
+                                                                        </div>
+                                                                        @endforeach
+                                                                    </a></div>
 
-                                                    @if($product->special_price >0)
-                                                        <div class="product-price">
-                                                            <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
-                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
-                                                        </div>
-                                                    @else
-                                                        <div class="product-price">
-                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
-                                                        </div>
-                                                    @endif
+                                                                @if($product->model->special_price >0)
+                                                                    <div class="product-price">
+                                                                        <span class="product-price__item product-price__item--old">{{ number_format($product->model->price, 2) }} $</span>
+                                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->model->special_price, 2) }} $</span>
+                                                                    </div>
+                                                                @else
+                                                                    <div class="product-price">
+                                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->model->price, 2) }} $</span>
+                                                                    </div>
+                                                                @endif
 
-                                                    <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                        href="#"
-                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})" >
-                                                        <i class="fontello-shopping-bag"></i>
-                                                        {{ __('Admin/site.addtocart') }}
-                                                    </a>
-                                    {{-- wishlist route ******************* ***************************************--}}
-                                                        <div class="product-wish">
-                                                            @if($witems->contains($product->id))
-                                                                <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
-                                                                  <i class="fa fa-heart fill-heart"></i>
+                                                                <a class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                                    href="#"
+                                                                    wire:click.prevent="moveProductFromWishlistToCart('{{ $product->rowId }}')" >
+                                                                    <i class="fontello-shopping-bag"></i>
+                                                                    {{ __('Admin/site.addtocart') }}
                                                                 </a>
+                                                {{-- wishlist route ******************* ***************************************--}}
+                                        
+                                                                    <div class="product-wish">
+                                                                        <a href="#" wire:click.prevent=" removeWishlist({{ $product->model->id }}) ">
+                                                                            <i class="fa fa-heart fill-heart"></i>
+                                                                        </a>
+                                                                    </div>
+                                                {{-- wishlist route ******************* ***************************************--}}
+                                                            </div>
+                                                            @if($product->model->special_price >0)
+                                                            <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
                                                             @else
-                                                              <a href="#"
-                                                                 wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name }}',{{ $product->price }}) ">
-                                                                 <i class="fa fa-heart"></i>
-                                                              </a>
+                                                            <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
                                                             @endif
                                                         </div>
-                                    {{-- wishlist route ******************* ***************************************--}}
-                                                </div>
-                                                @if($product->special_price >0)
-                                                <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
-                                                @else
-                                                <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    <!-- end item -->
-                                    @endforeach
+                                                    </div>
+                                                <!-- end item -->
+                                                @endforeach
+
+                                            @else
+                                               <h4> No items in wishlist </h4>
+                                            @endif
                                 </div>
                             </div>
                         </div>
@@ -380,9 +307,9 @@
                                 <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
                             </ul> --}}
 
-                            @if (count($products))
+                            {{-- @if (count($products))
                             {{ $products->links('page-links') }}
-                            @endif
+                            @endif --}}
                         </nav>
                         <!-- end pagination -->
                     </div>
