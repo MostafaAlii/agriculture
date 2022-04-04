@@ -7,6 +7,8 @@ use App\Models\Tag;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
+use Illuminate\Support\Facades\Auth;
+
 class Shop extends Component
 {
     use WithPagination;
@@ -45,6 +47,7 @@ class Shop extends Component
     {
         $tags=Tag::get();
         $newProducts = Product::latest()->limit(3)->get();
+
         if($this->sorting=='date'){
             $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
             ->orderByDesc('created_at')->paginate($this->pagesize);
@@ -57,6 +60,10 @@ class Shop extends Component
           }else{
               $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
               ->paginate($this->pagesize);
+          }
+          if(Auth::guard('vendor')->check()){
+            Cart::instance('cart')->store(Auth::guard('vendor')->user()->email);
+            Cart::instance('wishlist')->store(Auth::guard('vendor')->user()->email);
           }
         return view('livewire.front.shop',compact('products','newProducts','tags'))
         ->layout('front.layouts.master2');
