@@ -11,9 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 class ProductRepository implements ProductInterface {
-
     use UploadT;
-
     public function index() {
         return view('dashboard.admin.products.index');
     }
@@ -167,6 +165,28 @@ class ProductRepository implements ProductInterface {
         }
     }
 
+    public function additionalStock($id) {
+        $real_id= Crypt::decrypt($id);
+        $data = [];
+        $data['product']        =       Product::findOrfail($real_id);
+        return view('dashboard.admin.products.stocks.create', $data);
+    }
+
+    public function additionalStockStore($request) {
+        //return $request;
+        try {
+            $real_id= Crypt::decrypt($request->product_id);
+            Product::whereId($real_id)->update($request->only([
+                'sku', 'manage_stock', 'qty', 'in_stock'
+            ]));
+            toastr()->success(__('Admin/products.product_update_product_stock_qty_successfully'));
+            return redirect()->route('products');
+        } catch(\Exception $ex){
+            toastr()->error(__('Admin/general.wrong'));
+            return redirect()->route('products');
+        }
+    }
+
     public function destroy($id) {
         try{
             $real_id= Crypt::decrypt($id);
@@ -186,7 +206,6 @@ class ProductRepository implements ProductInterface {
                 Product::whereIn('id',$all_ids)->delete(); //soft_delete
                 toastr()->error(__('Admin/products.delete_done'));
                 return redirect()->route('products');
-
             }else{
                 toastr()->error(__('Admin/site.no_data_found'));
                 return redirect()->route('products');

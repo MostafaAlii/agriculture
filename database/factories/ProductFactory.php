@@ -17,7 +17,7 @@ class ProductFactory extends Factory {
             'slug'                          =>      $this->faker->unique()->name,
             'description'                   =>      $this->faker->paragraph,
             'status'                        =>      $this->faker->boolean(),
-            'product_location'              =>      $this->faker->boolean(),
+            'product_location'              =>      $this->faker->address(),
         ];
     }
 }
