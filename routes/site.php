@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\front;
 use App\Http\Livewire;
+use App\Http\Controllers\front;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\front\CommentsController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -22,8 +23,16 @@ Route::group(
         route::get('/shop',Livewire\front\shop::class)->name('shop');                   //all products
         route::get('/shop/{product_id}',Livewire\front\ProductDetails::class)->name('product_details'); //product-details
         route::get('/aboutUs',Livewire\front\AboutUs::class)->name('aboutUs');                   // about us
+
         route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                         // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
+
+        //------------------------------------------ start blogs comments----------------------------------------
+        Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store']);//add &replay
+        Route::delete('/comments/{comment}', [CommentsController::class, 'destroy']); // url: /comments/1
+        //------------------------------------------ end blogs comments----------------------------------------
+       
+        
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');             // contact us
         Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');        //cart
         Route::get('/wishlist',Livewire\front\WishlistComponent::class)->name('product.wishlist'); //wishlist
