@@ -10,7 +10,7 @@ class ProductStockRequest extends FormRequest {
         return [
             'sku'                           =>          'sometimes|nullable|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
             'manage_stock'                  =>          'required|in:1,0',
-            'qty'                           =>          'required_if:manage_stock,==,yes|min:1|numeric',
+            'qty'                           =>          'required_if:manage_stock,==,1|min:1|numeric',
             'in_stock'                      =>          'required|in:0,1',
         ];
     }
