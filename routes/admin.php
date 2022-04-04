@@ -213,6 +213,8 @@ Route::group(
                     Route::post('create',[ProductController::class, 'generalInformationStore'])->name('products.generalInformation.store');
                     Route::get('price/{id}',[ProductController::class, 'additionalPrice'])->name('products.prices');
                     Route::post('price',[ProductController::class, 'additionalPriceStore'])->name('products.prices.store');
+                    Route::get('stock/{id}',[ProductController::class, 'additionalStock'])->name('products.stock');
+                    Route::post('stock',[ProductController::class, 'additionalStockStore'])->name('products.stock.store');
                     Route::get('/product_edit/{id}', [ProductController::class,'edit'])->name('product_edit');
                     Route::post('/product_update', [ProductController::class,'update'])->name('product_update');
                     Route::delete('/product_delete/{id}', [ProductController::class,'destroy'])->name('product_delete');

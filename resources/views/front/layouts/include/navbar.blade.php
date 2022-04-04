@@ -16,7 +16,7 @@
         @livewire('front.cart-count-component')
     </li>
     <li class="li-cart">
-        <i class="fontello-profile"></i>
+        @livewire('front.wishlist-count-component')
     </li>
 
     <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
