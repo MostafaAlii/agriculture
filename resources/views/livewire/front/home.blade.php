@@ -470,65 +470,66 @@
                 </div>
             </div>
             <!-- end goods -->
+            @if ($saleProducts->count() >0)
+                <div class="spacer py-6 py-md-10"></div>
+                <div class="section-heading section-heading--center" data-aos="fade">
+                    <h2 class="__title">{{ __('Admin/site.saleproducts') }}</h2>
 
-            <div class="spacer py-6 py-md-10"></div>
-            <div class="section-heading section-heading--center" data-aos="fade">
-                <h2 class="__title">{{ __('Admin/site.saleproducts') }}</h2>
+                    {{-- <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p> --}}
+                </div>
+                <!-- start goods -->
+                <div class="goods goods--style-3">
+                    <div class="__inner">
+                        <div class="row">
+                            <!-- start item -->
+                            @foreach ($saleProducts as $product)
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <div class="__item">
+                                    <figure class="__image">
+                                        <a href="{{ route('product_details',$product->id) }}">
+                                            @if($product->image->filename)
+                                                <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                            @else
+                                                <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                            @endif
 
-                {{-- <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p> --}}
-            </div>
-            <!-- start goods -->
-            <div class="goods goods--style-3">
-                <div class="__inner">
-                    <div class="row">
-                        <!-- start item -->
-                        @foreach ($saleProducts as $product)
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="__item">
-                                <figure class="__image">
-                                    <a href="{{ route('product_details',$product->id) }}">
-                                        @if($product->image->filename)
-                                            <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
-                                            data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
-                                        @else
-                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
-                                        @endif
+                                        </a>
+                                    </figure>
 
-                                    </a>
-                                </figure>
+                                    <div class="__content">
+                                        <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
-                                <div class="__content">
-                                    <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                        <div class="__category"><a href="#">Fruits</a></div>
 
-                                    <div class="__category"><a href="#">Fruits</a></div>
+                                        <div class="rating">
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                            <span class="rating__item"><i class="fontello-star"></i></span>
+                                        </div>
 
-                                    <div class="rating">
-                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                        <span class="rating__item"><i class="fontello-star"></i></span>
+                                        <div class="product-price">
+                                            <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
+                                            <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                        </div>
+
+                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
+                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                            <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                                     </div>
-
-                                    <div class="product-price">
-                                        <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
-                                        <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
-                                    </div>
-
-                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
-                                    wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
-                                        <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                    <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
                                 </div>
-                                <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
                             </div>
+                            @endforeach
+                            <!-- end item -->
                         </div>
-                        @endforeach
-                        <!-- end item -->
                     </div>
                 </div>
-            </div>
-            <!-- end goods -->
+                <!-- end goods -->
+            @endif
         </div>
     </section>
     <!-- end section -->

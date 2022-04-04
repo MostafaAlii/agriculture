@@ -250,6 +250,7 @@
                             <div class="goods goods--style-1">
                                 <div class="__inner">
                                     <div class="row">
+                                        @if ($products->count() >0)
                                         @foreach ($products as $product)
                                         <!-- start item -->
                                             <div class="col-12 col-sm-6 col-lg-4">
@@ -305,7 +306,9 @@
                                             </div>
                                         <!-- end item -->
                                         @endforeach
-
+                                        @else
+                                            <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
