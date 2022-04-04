@@ -1,13 +1,8 @@
-<div>
-    @section('title', __('website\home.blog'))
-    @section('css')
+@section('title', __('website\home.blog'))
+@section('css')
 
-    @endsection
-<style>
-    nav svg{
-        height:20px;
-    }
-</style>
+@endsection
+<div>
     <!-- start section -->
     <section class="section">
         <div class="container">

@@ -21,7 +21,6 @@ class ProductRepository implements ProductInterface {
     public function data() {
         //get all Products data
         $products = Product::withoutTrashed()->get();
-
         //use datatables (yajra) to handel this data
         return DataTables::of($products)
             ->addColumn('record_select',function (Product $products) {
@@ -36,19 +35,21 @@ class ProductRepository implements ProductInterface {
              ->addColumn('category_name', function (Product $product) {
                 return view('dashboard.admin.products.data_table.related_category', compact('product'));
              })
-            ->editColumn('created_at', function (Product $products) {
-                return $products->created_at->diffforhumans();
+             ->editColumn('price', function (Product $product) {
+                return view('dashboard.admin.products.data_table.price_formated', compact('product'));
+            })
+            ->editColumn('created_at', function (Product $product) {
+                return $product->created_at->diffforhumans();
             })
             ->addColumn('image', function (Product $product) {
                 return view('dashboard.admin.products.data_table.image', compact('product'));
             })
-            ->addColumn('actions',function (Product $products) {
-                return view('dashboard.admin.products.data_table.actions', compact('products'));
+            ->addColumn('actions',function (Product $product) {
+                return view('dashboard.admin.products.data_table.actions', compact('product'));
             })
             ->rawColumns(['record_select','actions'])
             ->toJson();
     }
-
 
     public function generalInformation() {
         $data = [];
@@ -95,10 +96,8 @@ class ProductRepository implements ProductInterface {
             }
     }
 
-
-
     public function edit($id) {
-        $real_id= decrypt($id);
+        $real_id= Crypt::decrypt($id);
         $data = [];
         $data['product']        =       Product::findOrfail($real_id);
         $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
@@ -106,7 +105,6 @@ class ProductRepository implements ProductInterface {
         $data['categories']     =       Category::select('id')->without('created_at', 'updated_at')->get();
         return view('dashboard.admin.products.edit', $data);
     }
-
 
     public function update($request) {
         DB::beginTransaction();
@@ -148,12 +146,31 @@ class ProductRepository implements ProductInterface {
             }
     }
 
+    public function additionalPrice($id) {
+        $real_id= Crypt::decrypt($id);
+        $data = [];
+        $data['product']        =       Product::findOrfail($real_id);
+        return view('dashboard.admin.products.prices.additionalPrice', $data);
+    }
+
+    public function additionalPriceStore($request) {
+        try {
+            $real_id= Crypt::decrypt($request->product_id);
+            Product::whereId($real_id)->update($request->only([
+                'special_price_type', 'special_price', 'special_price_start', 'special_price_end'
+            ]));
+            toastr()->success(__('Admin/products.product_add_special_price_successfully'));
+            return redirect()->route('products');
+        } catch(\Exception $ex){
+            toastr()->error(__('Admin/general.wrong'));
+            return redirect()->route('products');
+        }
+    }
+
     public function destroy($id) {
-
         try{
-            $real_id = decrypt($id);
+            $real_id= Crypt::decrypt($id);
             Product::where('id',$real_id)->delete(); //soft_delete
-
             toastr()->error(__('Admin/products.delete_done'));
             return redirect()->route('products');
         } catch (\Exception $e) {
@@ -162,8 +179,7 @@ class ProductRepository implements ProductInterface {
         }
     }
 
-    public function bulkDelete($request)
-    {
+    public function bulkDelete($request){
         try{
             if($request->delete_select_id){
                 $all_ids = explode(',',$request->delete_select_id);
@@ -179,5 +195,5 @@ class ProductRepository implements ProductInterface {
             toastr()->error(__('Admin/products.delete_not_allowed'));
             return redirect()->route('products');
         }
-    }// end of bulkDelete
+    }
 }

@@ -119,6 +119,16 @@ return [
     'slider'=>'Slider',
     'newslider'=>'New Slider',
 
+    //////Departments-part
+    'neworchard'=>'New Orchard',
+    'orchards'=>'Orchards',
+    'land_category'=>'Land Category',
+    'trees'=>'Trees',
+    'treeType'=>'Tree Types',
+    'admin_departments'=>'Admin Departments',
+    'administaration_part'=>'Administration Part',
+    'add_admin_departments'=>'Add Admin Department',
+    ''=>'',
 
     "prev" => "Prev",
     "next" => "Next",
@@ -126,7 +136,11 @@ return [
     'products'=>'Products',
     'featproducts'=>'Featured products',
     'newproducts'=>'Latest Products',
+    'saleproducts'=>'Product On Sale',
+    'popproducts'=>'Most Popular',
     'addtocart'=>'Add To Cart',
+    'sale'=>'Sale',
+    'new'=>'New',
 
 
 ];

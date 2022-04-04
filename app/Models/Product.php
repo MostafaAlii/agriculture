@@ -18,7 +18,7 @@ class Product extends Model {
     public $timestamps = true;
 
     protected $hidden = ['pivot'];
-    
+
     protected $casts = [
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',
@@ -36,7 +36,7 @@ class Product extends Model {
     public function farmer(): BelongsTo {
         return $this->belongsTo(Farmer::class)->withDefault();
     }
-    
+
     public function categories(): BelongsToMany {
         return $this->belongsToMany(Category::class, 'product_categories');
     }
@@ -49,7 +49,7 @@ class Product extends Model {
     public function options(): HasMany {
         return $this->hasMany(Option::class);
     }
-    
+
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
     }

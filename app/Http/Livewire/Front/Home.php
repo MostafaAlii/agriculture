@@ -15,9 +15,10 @@ class Home extends Component
 
     public function render()
     {
-        $newProducts = Product::latest()->limit(6)->get();
-        $featuredProducts = Product::inRandomOrder()->limit(4)->get();
-        return view('livewire.front.home',compact('newProducts','featuredProducts'))
+        $newProducts = Product::latest()->limit(12)->get();
+        $popProducts = Product::inRandomOrder()->get()->take(6);
+        $saleProducts = Product::where('special_price','>',0)->latest()->get()->take(4);
+        return view('livewire.front.home',compact('popProducts','saleProducts','newProducts'))
         ->layout('front.layouts.master1');
     }
 }

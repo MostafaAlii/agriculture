@@ -1,4 +1,5 @@
      <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
+     <script src="{{ asset('assets/admin/js/jquery.repeater.js')}}"></script>
 
 <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script>
@@ -26,7 +27,11 @@
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js')}}"></script>
     <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}"></script>
     <script src="{{asset('assets/admin/vendors/js/forms/toggle/switchery.min.js')}}" type="text/javascript"></script>
-    @toastr_js
+     <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>
+     <script src="{{asset('assets/admin/jstree/jstree.wholerow.js')}}" type="text/javascript"></script>
+     <script src="{{asset('assets/admin/jstree/jstree.checkbox.js')}}" type="text/javascript"></script>
+
+     @toastr_js
     @toastr_render
     {{-- image preview --}}
     <script>

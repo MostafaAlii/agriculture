@@ -64,6 +64,8 @@
         _html.className = _html.className.replace("no-js","js");
         _html.classList.add( isTouch ? "touch" : "no-touch");
     </script>
+    {{-- filter price --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.css" integrity="sha512-qveKnGrvOChbSzAdtSs8p69eoLegyh+1hwOMbmpCViIwj7rn4oJjdmMvWOuyQlTOZgTlZA0N2PXA7iA8/2TUYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="text/javascript" src="{{ asset('frontassets/js/device.min.js') }}"></script>
-    @livewireStyles
     @yield('css')
+    @livewireStyles

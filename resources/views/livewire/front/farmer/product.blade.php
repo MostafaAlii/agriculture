@@ -1,8 +1,13 @@
+@section('title', __('website\home.farmerproduct'))
+@section('css')
+
+@endsection
 <div>
     <div class="container" style="padding: 30px 0;">
         <div class="row">
             <div class="col-md-12">
-               <h1> <a href="#" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/products.add_new_product') }}</a></h1>
+               <h1> <a href="{{ route('farmer.addproduct') }}" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/products.add_new_product') }}</a></h1>
+               @include('dashboard.common._partials.messages')
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h5>All
@@ -12,6 +17,10 @@
                         </h5>
                     </div>
                     <div class="panel-body">
+                        {{-- @isset()
+
+                        @endisset --}}
+                        @if ($products->count() >0)
                         <table class="table table-striped">
                             <thead>
                               <tr>
@@ -26,7 +35,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                                @if ($products->count() >0)
+
 
                                 @foreach ($products as $index=>$product )
                                     <tr>
@@ -62,11 +71,11 @@
                                     </tr>
                               @endforeach
 
-                              @else
-                                 <h3 style="color: #e71d1d;"> ({{ __('Website/home.smsnoproduct') }})</h3>
-                              @endif
                             </tbody>
                         </table>
+                        @else
+                           <h3 style="color: #e71d1d;"> ({{ __('Website/home.smsnoproduct') }})</h3>
+                        @endif
                         @if (count($products))
                         {{ $products->links('page-links') }}
                         @endif

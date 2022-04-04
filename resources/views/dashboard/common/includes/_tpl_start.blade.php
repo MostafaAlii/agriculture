@@ -78,6 +78,8 @@
     {{--noty--}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/jstree/themes/default/style.css') }}">
+
     <!-- END: Page CSS-->
     @toastr_css
     <!-- BEGIN: Custom CSS-->

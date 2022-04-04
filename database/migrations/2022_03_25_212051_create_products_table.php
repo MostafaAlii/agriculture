@@ -6,9 +6,9 @@ class CreateProductsTable extends Migration {
     public function up() {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->decimal('price', 18, 4)->unsigned();
-            $table->decimal('special_price', 18, 4)->unsigned()->nullable();
-            $table->string('special_price_type')->nullable();
+            $table->unsignedFloat('price')->nullable();
+            $table->unsignedFloat('special_price')->nullable();
+            $table->enum('special_price_type',['fixed','precent'])->default('fixed');
             $table->date('special_price_start')->nullable();
             $table->date('special_price_end')->nullable();
             $table->decimal('selling_price', 18, 4)->unsigned()->nullable();

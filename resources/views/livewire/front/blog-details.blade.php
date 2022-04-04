@@ -1,8 +1,8 @@
-<div>
-    @section('title', __('website\home.blogdetails'))
-    @section('css')
+@section('title', __('website\home.blogdetails'))
+@section('css')
 
-    @endsection
+@endsection
+<div>
     	<!-- start section -->
         <section class="section">
             <div class="container">

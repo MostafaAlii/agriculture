@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Front;
 
 use App\Models\Product;
+use App\Models\Tag;
 use Livewire\Component;
 use Cart;
 
@@ -28,9 +29,11 @@ class ProductDetails extends Component
     }
     public function render()
     {
+        $tags=Tag::get();
         $product = Product::findorfail($this->product_id);
-        $featuredProducts = Product::inRandomOrder()->limit(3)->get();
-        return view('livewire.front.product-details',compact('product','featuredProducts'))
+        $newProducts = Product::latest()->limit(3)->get();
+        $popProducts = Product::inRandomOrder()->get()->take(6);
+        return view('livewire.front.product-details',compact('product','newProducts','tags','popProducts'))
                    ->layout('front.layouts.master2');
     }
 }
