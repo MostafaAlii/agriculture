@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Front;
 
 use App\Models\Product;
+use App\Models\Tag;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
@@ -34,7 +35,8 @@ class SearchComponent extends Component
 
     public function render()
     {
-        $featuredProducts = Product::inRandomOrder()->limit(3)->get();
+        $tags=Tag::get();
+        $newProducts = Product::inRandomOrder()->limit(3)->get();
 
         if($this->sorting=='date'){
             $products =Product::whereHas('translations', function ($query) {
@@ -57,7 +59,7 @@ class SearchComponent extends Component
             })->whereBetween('price',[$this->min_price,$this->max_price])
               ->paginate($this->pagesize);
         }
-        return view('livewire.front.search-component',compact('products','featuredProducts'))
+        return view('livewire.front.search-component',compact('products','newProducts','tags'))
         ->layout('front.layouts.master2');
     }
 

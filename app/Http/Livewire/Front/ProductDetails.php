@@ -32,7 +32,7 @@ class ProductDetails extends Component
         $tags=Tag::get();
         $product = Product::findorfail($this->product_id);
         $newProducts = Product::latest()->limit(3)->get();
-        $popProducts = Product::inRandomOrder()->get()->take(6);
+        $popProducts = Product::inRandomOrder()->get()->take(3);
         return view('livewire.front.product-details',compact('product','newProducts','tags','popProducts'))
                    ->layout('front.layouts.master2');
     }
