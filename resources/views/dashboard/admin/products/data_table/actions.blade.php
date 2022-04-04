@@ -9,7 +9,7 @@
         <a href="{{ route('products.prices', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-warning btn-md">
             {{ __('Admin/products.prices_managment') }}
         </a>
-        <a href="{{ route('product_edit', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-success btn-md">
+        <a href="{{ route('products.stock', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-success btn-md">
             {{ __('Admin/products.stock') }}
         </a>
         <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $product->id }}">
