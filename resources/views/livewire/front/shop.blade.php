@@ -335,7 +335,7 @@
 
                                                     <a class="custom-btn custom-btn--medium custom-btn--style-1"
                                                         href="#"
-                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})" >
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }})" >
                                                         <i class="fontello-shopping-bag"></i>
                                                         {{ __('Admin/site.addtocart') }}
                                                     </a>

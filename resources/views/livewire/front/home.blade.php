@@ -196,7 +196,7 @@
                                 </div>
 
                                 <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
-                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})" >
+                                wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }})" >
                                     <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                             </div>
 
@@ -449,7 +449,7 @@
                                                 @endif
 
                                                 <a class="custom-btn custom-btn--small custom-btn--style-1" href="#"
-                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }})">
                                                 <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                                             </div>
                                         </div>
@@ -517,7 +517,7 @@
                                         </div>
 
                                         <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
-                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }})">
                                             <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                                     </div>
                                     <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
