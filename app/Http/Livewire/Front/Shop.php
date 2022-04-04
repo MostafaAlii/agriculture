@@ -63,6 +63,7 @@ class Shop extends Component
           }
           if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->store(Auth::guard('vendor')->user()->email);
+            Cart::instance('wishlist')->store(Auth::guard('vendor')->user()->email);
           }
         return view('livewire.front.shop',compact('products','newProducts','tags'))
         ->layout('front.layouts.master2');

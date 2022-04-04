@@ -11,6 +11,7 @@ class Home2 extends Component
     {
         if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->restore(Auth::guard('vendor')->user()->email);
+            Cart::instance('wishlist')->restore(Auth::guard('vendor')->user()->email);
           }
         return view('livewire.front.home2')->layout('front.layouts.master');
     }

@@ -22,6 +22,7 @@ class Home extends Component
         $saleProducts = Product::where('special_price','>',0)->latest()->get()->take(4);
         if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->restore(Auth::guard('vendor')->user()->email);
+            Cart::instance('wishlist')->restore(Auth::guard('vendor')->user()->email);
           }
         return view('livewire.front.home',compact('popProducts','saleProducts','newProducts'))
         ->layout('front.layouts.master1');
