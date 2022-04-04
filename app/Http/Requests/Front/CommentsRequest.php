@@ -14,20 +14,24 @@ class CommentsRequest extends FormRequest
     public function rules()
     {
         return [
-            'author' => ['required', 'string', 'max:255'],
-            'text'   => ['required', 'string', 'max:1000'],
+            // 'name' => ['required', 'string', 'max:255'],
+            // 'email' => ['required', 'email'],
+            'comment'   => ['required', 'string', 'max:1000'],
         ];
     }
 
     public function messages() {
         return [
-            'author.required'       => trans('Admin\validation.required'),            
-            'author.max'            => trans('Admin\validation.max'),
-            'author.string'         =>  trans('Admin/validation.string'),
+            // 'name.required'       => trans('Admin\validation.required'),            
+            // 'name.max'            => trans('Admin\validation.max'),
+            // 'name.string'         =>  trans('Admin/validation.string'),
+
+            // 'email.required'       => trans('Admin\validation.required'),
+            // 'email.email'       => trans('Admin\validation.email'),
             
-            'text.required'         => trans('Admin\validation.required'),            
-            'text.max'              => trans('Admin\validation.max'),
-            'text.string'           =>  trans('Admin/validation.string'),
+            'comment.required'         => trans('Admin\validation.required'),            
+            'comment.max'              => trans('Admin\validation.max'),
+            'comment.string'           =>  trans('Admin/validation.string'),
 
         ];
     }

@@ -28,8 +28,14 @@ class Blog extends Model {
         return $this->belongsTo(Admin::class);
     }
 
-    public function comments(): HasMany
+
+    public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'commentable');
     }
+    
+    // public function comments(): HasMany
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
 }

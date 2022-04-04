@@ -12,6 +12,13 @@ class Comment extends Model
     protected $guarded = [];
     public $timestamps = true;
 
+
+    
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
+    
     public function childs() {
         return $this->hasMany('App\Models\Comment','parent_id','id') ;
     }

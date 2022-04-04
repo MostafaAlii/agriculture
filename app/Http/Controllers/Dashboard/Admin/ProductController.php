@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProductInterface;
 use App\Http\Requests\Dashboard\Product\GeneralRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\Dashboard\Product\ProductPriceRequest;
+use App\Http\Requests\Dashboard\Product\ProductStockRequest;
 class ProductController extends Controller {
     protected $Data;
     public function __construct(ProductInterface $Data) {
@@ -32,6 +34,22 @@ class ProductController extends Controller {
 
     public function update(GeneralRequest $request) {
         return $this->Data->update($request);
+    }
+
+    public function additionalPrice($id) {
+        return $this->Data->additionalPrice($id);
+    }
+
+    public function additionalPriceStore(ProductPriceRequest $request) {
+        return $this->Data->additionalPriceStore($request);
+    }
+
+    public function additionalStock($id) {
+        return $this->Data->additionalStock($id);
+    }
+
+    public function additionalStockStore(ProductStockRequest $request) {
+        return $this->Data->additionalStockStore($request);
     }
 
     public function destroy($id){

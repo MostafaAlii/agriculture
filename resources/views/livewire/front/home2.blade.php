@@ -1,9 +1,9 @@
-<div>
-    @section('title', __('website\home.home'))
-    @section('css')
+@section('title', __('website\home.home'))
+@section('css')
 
-    @endsection
-    {{-- ********************** Home 1 ****************************************** --}}
+@endsection
+<div>
+{{-- ********************** Home 1 ****************************************** --}}
         <!-- start section -->
         <section class="section">
             <div class="container">

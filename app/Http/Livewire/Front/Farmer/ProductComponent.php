@@ -11,7 +11,7 @@ class ProductComponent extends Component
     public function render()
     {
         // $products = Product::paginate(5);
-        $products = Product::where( 'farmer_id',auth()->user()->id)->paginate(5);
+        $products = Product::where( 'farmer_id',auth()->user()->id)->orderByDesc('id')->paginate(5);
         return view('livewire.front.farmer.product',compact('products'))
         ->layout('front.layouts.master2');
     }

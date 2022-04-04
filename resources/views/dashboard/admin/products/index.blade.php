@@ -80,8 +80,8 @@
                                                     <th>{{ __('Admin/products.product_name') }}</th>
                                                     <th>{{ __('Admin/products.product_farmer') }}</th>
                                                     <th>{{ __('Admin/products.product_status') }}</th>
-                                                    {{-- <th>{{ __('Admin/products.product_depart') }}</th> --}}
                                                      <th>{{ __('Admin/products.product_category') }}</th>
+                                                     <th>{{ __('Admin/products.product_price') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -116,7 +116,7 @@
 
 <script>
 
-    let usersTable = $('#products-table').DataTable({
+    let productsTable = $('#products-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -133,8 +133,8 @@
             {data: 'name', name: 'name'},
             {data: 'farmer_name', name: 'farmer_name'},
             {data: 'status', name: 'status'},
-            // {data: 'depart_name', name: 'depart_name'},
             {data: 'category_name', name: 'category_name'},
+            {data: 'price', name: 'price', searchable: false, sortable: false},
             {data: 'created_at', name: 'created_at', searchable: false, sortable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '18%'},
         ],

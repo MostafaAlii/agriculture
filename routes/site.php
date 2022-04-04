@@ -27,16 +27,17 @@ Route::group(
         route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                         // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
 
-        Route::group(['middleware' => 'auth'], function () {
         //------------------------------------------ start blogs comments----------------------------------------
         Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store']);//add &replay
         Route::delete('/comments/{comment}', [CommentsController::class, 'destroy']); // url: /comments/1
         //------------------------------------------ end blogs comments----------------------------------------
-        });
+       
         
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');             // contact us
-        Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');                  //cart
+        Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');        //cart
+        Route::get('/wishlist',Livewire\front\WishlistComponent::class)->name('product.wishlist'); //wishlist
         Route::get('/checkout',Livewire\front\Checkout::class)->name('checkout');             //checkout
+        Route::get('/search',Livewire\front\SearchComponent::class)->name('product.search');  //search
 
 
 

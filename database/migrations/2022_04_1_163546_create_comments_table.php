@@ -19,9 +19,15 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
 
-            $table->foreignId('blog_id')->constrained('blogs')->onDelete('cascade');
-            $table->string('author');
-            $table->text('text');
+            $table->Integer('commentable_id');
+            $table->string('commentable_type');
+
+            $table->string('name');
+            $table->string('email');
+            $table->string('image');
+            
+            $table->text('comment');
+            
             $table->timestamps();
         });
     }
