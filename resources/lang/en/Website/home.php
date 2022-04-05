@@ -14,6 +14,7 @@ return [
     'logout'               => 'Log Out',
     'dashboard'            => 'Dashboard',
     'my_order'             => 'My Order',
+    'my_profile'           => 'My Profile',
     'change_password'      => 'Change Password',
     // nav bar **************************************
 

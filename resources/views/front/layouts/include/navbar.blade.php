@@ -60,7 +60,7 @@
                     <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">{{ trans('Website/home.my_order') }}</a>
+                    <a title="{{ trans('Website/home.my_profile') }}" href="{{ route('farmer.ownprofile') }}">{{ trans('Website/home.my_profile') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="{{ trans('Website/home.change_password') }}" href="{{ route('farmer.changepass') }}">{{ trans('Website/home.change_password') }}</a>
@@ -88,7 +88,7 @@
                     <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('user.dash') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">{{ trans('Website/home.my_order') }}</a>
+                    <a title="{{ trans('Website/home.my_profile') }}" href="{{ route('user.ownprofile') }}">{{ trans('Website/home.my_profile') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="{{ trans('Website/home.change_password') }}" href="{{ route('user.changepass') }}">{{ trans('Website/home.change_password') }}</a>

@@ -16,7 +16,7 @@ Route::group(
         ]
 
     ], function(){
-       
+
 
         // front routes
         route::get('/',Livewire\front\Home2::class)->name('front');                    //home1
@@ -44,11 +44,11 @@ Route::group(
 
         Route::middleware(['auth:vendor'])->group(function () {
         /********************************* Start  front pages with login by user auth Routes ************************************/
-        // route::get('/home',[front\HomeController::class,'index'])->name('home.user');
         route::get('/home',Livewire\front\Home2::class)->name('home.user');
         /********************************* End front pages with login by user auth Routes ************************************/
-        route::get('/user/dashboard',Livewire\front\User\dashboard::class)->name('user.dash');
-        route::get('/user/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass');
+        route::get('/user/dashboard',Livewire\front\User\dashboard::class)->name('user.dash');          //user dash
+        route::get('/user/ownprofile',Livewire\front\User\UserProfile::class)->name('user.ownprofile'); //user profile
+        route::get('/user/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass'); //user change password
         });
 
     require __DIR__.'/auth.php';
