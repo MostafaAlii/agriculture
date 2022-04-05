@@ -19,7 +19,9 @@ class Home extends Component
     {
         $newProducts = Product::latest()->limit(12)->get();
         $popProducts = Product::inRandomOrder()->get()->take(6);
-        $saleProducts = Product::where('special_price','>',0)->latest()->get()->take(4);
+        $saleProducts = Product::where('special_price','>',0)
+                                 ->where('in_stock','1')
+                                 ->latest()->get()->take(4);
         if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->restore(Auth::guard('vendor')->user()->email);
             Cart::instance('wishlist')->restore(Auth::guard('vendor')->user()->email);

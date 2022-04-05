@@ -8,13 +8,14 @@
                    name="search"
                    type="text"
                    value="{{ $search }}"
-                   placeholder="Search" />
+                   placeholder="{{ __('Admin/site.search') }}"
+                   autocomplete="off"/>
         </div>
 
         <button class="custom-btn custom-btn--tiny custom-btn--style-1"
                  type="submit"
                  role="button">
-                 Find
+                 {{ __('Admin/site.find') }}
         </button>
     </form>
 </div>
