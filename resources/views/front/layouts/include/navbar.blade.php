@@ -61,13 +61,13 @@
             <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="Order" href="#">{{ trans('Website/home.my_order') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">{{ trans('Website/home.change_password') }}</a>
+                    <a title="{{ trans('Website/home.change_password') }}" href="{{ route('farmer.changepass') }}">{{ trans('Website/home.change_password') }}</a>
                 </li>
 
                 <li class="menu-item" >
@@ -89,13 +89,13 @@
             <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('user.dash') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('user.dash') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="Order" href="#">{{ trans('Website/home.my_order') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">{{ trans('Website/home.change_password') }}</a>
+                    <a title="{{ trans('Website/home.change_password') }}" href="{{ route('user.changepass') }}">{{ trans('Website/home.change_password') }}</a>
                 </li>
 
                 <li class="menu-item" >
@@ -117,7 +117,7 @@
             <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('admin.dashboard') }}"target="_blank">{{ trans('Website/home.dashboard') }}</a>
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('admin.dashboard') }}"target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="Logout" href="{{ route('logout.admin') }}"

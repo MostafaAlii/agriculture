@@ -31,8 +31,8 @@ Route::group(
         Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store']);//add &replay
         Route::delete('/comments/{comment}', [CommentsController::class, 'destroy']); // url: /comments/1
         //------------------------------------------ end blogs comments----------------------------------------
-       
-        
+
+
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');             // contact us
         Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');        //cart
         Route::get('/wishlist',Livewire\front\WishlistComponent::class)->name('product.wishlist'); //wishlist
@@ -47,6 +47,7 @@ Route::group(
         route::get('/home',Livewire\front\Home2::class)->name('home.user');
         /********************************* End front pages with login by user auth Routes ************************************/
         route::get('/user/dashboard',Livewire\front\User\dashboard::class)->name('user.dash');
+        route::get('/user/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass');
         });
 
     require __DIR__.'/auth.php';

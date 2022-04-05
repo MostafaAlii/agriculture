@@ -37,4 +37,12 @@ return [
    'price'             => 'Price',
    'smsnoproduct'        => 'There is no product to Show , please add new products !',
    //End section blog *********************************************************
+   'curpassword'=>'Current Password',
+   'newpassword'=>'New Password',
+   'confirmpassword'=>'Confirm Password',
+   'changepass'=>'Change Password',
+   'smschangepass'=>'Password has been updated successfully',
+   'smspassnotmatch'=>'Password does not match',
+   'changeuser'=>'Vendor Change Password',
+   'changefarmer'=>'Farmer Change Password',
 ];
