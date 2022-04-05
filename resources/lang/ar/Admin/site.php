@@ -67,7 +67,7 @@ return [
     'register'=>'سجل الان',
 
     'signvendor'=>'تسجيل التاجر',
-    'signfarmer'=>'تسجيل البائع او الفلاح',
+    'signfarmer'=>'تسجيل البائع',
     'newfarmer'=>'بائع او فلاح جديد',
     'newvendor'=>'تاجر جديد',
     'yourtype'=>'اختار النوع',

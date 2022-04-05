@@ -16,6 +16,7 @@ Route::group(
         ]
 
     ], function(){
+       
 
         // front routes
         route::get('/',Livewire\front\Home2::class)->name('front');                    //home1

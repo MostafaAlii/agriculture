@@ -21,19 +21,15 @@
 
     <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
         {{--  start links in navebar *************************************************************************--}}
-        {{-- <li class="has-submenu">
-            <a href="javascript:void(0);">Pages</a>
-            <ul class="submenu">
-                <li><a href="services.html">Services</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="products_details.html">Product Details</a></li>
-                <li><a href="gallery_1.html">Gallery 1</a></li>
-                <li><a href="gallery_2.html">Gallery 2</a></li>
-                <li><a href="typography.html">Typography</a></li>
-                <li><a href="404.html">404 page</a></li>
-            </ul>
-        </li> --}}
-
+        @check_guard
+            <li class="has-submenu">
+                <a href="javascript:void(0);">{{ __('website\home.login') }}</a>
+                <ul class="submenu">
+                    <li><a href="{{ route('user.login2') }}">{{ trans('Admin/site.signvendor') }}</a></li>
+                    <li><a href="{{ route('farmer.login') }}">{{ trans('Admin/site.signfarmer') }}</a></li>
+                </ul>
+            </li>
+        @endcheck_guard
         {{-- <li class="has-submenu">
             <a href="javascript:void(0);">test</a>
 
@@ -46,14 +42,14 @@
             </ul>
         </li> --}}
     {{-- function to check if not auth  *****************(guest)************(guest)*************************** --}}
-            @check_guard
+            {{-- @check_guard
             <li class="li-btn">
                     <a class="custom-btn custom-btn--medium custom-btn--style-1" title="Login"
                     href="{{ route('user.login') }}">
                     {{ __('website\home.login') }}
                     </a>
                 </li>
-            @endcheck_guard
+            @endcheck_guard --}}
     {{-- End function to check if not auth  ******************(guest)************(guest)************************--}}
     {{-- links for farmer الفلاح****************************************************--}}
     @if(Auth::guard('web')->user())
