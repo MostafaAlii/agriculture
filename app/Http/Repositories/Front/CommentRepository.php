@@ -8,9 +8,9 @@ use App\Http\Interfaces\Front\CommentInterface;
 
 class CommentRepository implements CommentInterface{
 
-    
+
     public function store($blog,$request): RedirectResponse {
-     
+
         try{
             $data = $request->validated();
 
@@ -22,18 +22,24 @@ class CommentRepository implements CommentInterface{
             //     'email'         => $data['email'],
             //     'image'         => '',
             //     'comment'       => $data['comment'],
-                
+
             // ]);
-            
-         
+
+
             if(Auth::guard('vendor')->user()){
                 $name=Auth::guard('vendor')->user()->firstname;
                 $email=Auth::guard('vendor')->user()->email;
                 $image=Auth::guard('vendor')->user()->image->filename;
-            }else{
+            }
+            if(Auth::guard('web')->user()){
                 $name=Auth::guard('web')->user()->firstname;
                 $email=Auth::guard('web')->user()->email;
                 $image=Auth::guard('web')->user()->image->filename;
+            }
+            if(Auth::guard('admin')->user()){
+                $name=Auth::guard('admin')->user()->firstname;
+                $email=Auth::guard('admin')->user()->email;
+                $image=Auth::guard('admin')->user()->image->filename;
             }
 
             // dd($name.'   ,   '.$email);
@@ -47,10 +53,10 @@ class CommentRepository implements CommentInterface{
             $comment->image             = $image;
             $comment->comment           = $data['comment'];
             $comment->save();
-    
-            
+
+
             return redirect()->back()->with(['success'=>__('website\comments.add_done')]);
- 
+
          } catch (\Exception $ex) {
             return redirect()->back()->with(['error'=>__('website\comments.error')]);
          }
