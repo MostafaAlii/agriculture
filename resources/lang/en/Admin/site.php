@@ -141,6 +141,12 @@ return [
     'addtocart'=>'Add To Cart',
     'sale'=>'Sale',
     'new'=>'New',
-
-
+    'search'=>'search for product',
+    'find'=>'Find',
+    'keywords'=>'Key Words',
+    'tags'=>'Product Tags',
+    'stock'=>'In Stock',
+    'outstock'=>'Out Of Stock',
+    'addwish'=>'Add To Wishlist',
+    'removewish'=>'Remove From Wishlist',
 ];

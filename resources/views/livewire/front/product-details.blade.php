@@ -1,6 +1,27 @@
 @section('title', __('website\home.productdetails'))
 @section('css')
-
+<style>
+    .product-wish{
+        position: absolute;
+        top:3%;
+        left: 0;
+        z-index:99;
+        right:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
 @endsection
 <div>
     	<!-- start section -->
@@ -24,7 +45,9 @@
             <div class="decor-el decor-el--5" data-jarallax-element="-70" data-speed="0.2">
                 <img class="lazy" width="248" height="309" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_5.jpg') }}" alt="demo"/>
             </div>
-
+            @php
+            $witems = Cart::instance('wishlist')->content()->pluck('id');
+            @endphp
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-8 col-lg-9">
@@ -52,13 +75,13 @@
                                     <div class="content-container">
                                         <h3 class="__name">{{ $product->name }}</h3>
 
-                                        <div class="__categories">
+                                        {{-- <div class="__categories">
                                             @foreach ($product->categories as $category)
                                                 <div class="text-primary text-bold">
                                                     <span>{{$category->name}}</span>
                                                 </div>
                                             @endforeach
-                                        </div>
+                                        </div> --}}
                                         @if($product->special_price >0)
                                             <div class="product-price">
                                                 <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
@@ -82,6 +105,13 @@
                                         <p>
                                             {{ $product->description }}
                                         </p>
+                                        <div class="stock-info in-stock">
+                                            <p class="availability">{{ __("Admin/site.status") }} :
+                                                <b class="text {{ $product->in_stock ==1 ?'text-success':'text-danger' }}">
+                                                    {{ $product->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
+                                                </b>
+                                            </p>
+                                        </div>
                                         {{-- <div class="widget widget--tags">
                                             <h4 class="h6 widget-title">Popular Tags</h4>
 
@@ -106,17 +136,29 @@
                                                 wire:model='qty' />
                                                 <span class="__btn __btn--plus" wire:click.prevent='increaseQty' ></span>
                                             </div>
-
-
-
-
-
                                             <button class="custom-btn custom-btn--medium custom-btn--style-1"
                                             type="submit" role="button"
                                             wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
                                             <i class="fontello-shopping-bag"></i>
                                                 {{ __('Admin/site.addtocart') }}
                                             </button>
+
+                                            @if($witems->contains($product->id))
+                                                <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                type="submit" role="button"
+                                                wire:click.prevent=" removeWishlist({{ $product->id }})">
+                                                <i class="fa fa-heart fill-heart"></i>
+                                                    {{ __('Admin/site.removewish') }}
+                                                </button>
+                                            @else
+                                                <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                type="submit" role="button"
+                                                wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                    <i class="fa fa-heart"></i>
+                                                    {{ __('Admin/site.addwish') }}
+                                                </button>
+                                            @endif
+
                                         </form>
                                     </div>
                                 </div>
@@ -377,13 +419,7 @@
                                             <div class="__content">
                                                 <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
-                                                <div class="__category"><a href="#">
-                                                    @foreach ($product->categories as $category)
-                                                        <div class="text-primary text-bold">
-                                                        <span>{{$category->name}}</span>
-                                                        </div>
-                                                        @endforeach
-                                                    </a></div>
+
 
                                                 <div class="rating">
                                                     <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
@@ -392,7 +428,13 @@
                                                     <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
                                                     <span class="rating__item"><i class="fontello-star"></i></span>
                                                 </div>
-
+                                                <div class="stock-info in-stock">
+                                                    <p class="availability">{{ __("Admin/site.status") }} :
+                                                        <b class="text {{ $product->in_stock ==1 ?'text-success':'text-danger' }}">
+                                                            {{ $product->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
+                                                        </b>
+                                                    </p>
+                                                </div>
                                                 @if($product->special_price >0)
                                                     <div class="product-price">
                                                         <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
@@ -403,7 +445,20 @@
                                                         <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                                     </div>
                                                 @endif
-
+                                    {{-- wishlist route ******************* ***************************************--}}
+                                    <div class="product-wish">
+                                        @if($witems->contains($product->id))
+                                            <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
+                                              <i class="fa fa-heart fill-heart"></i>
+                                            </a>
+                                        @else
+                                          <a href="#"
+                                             wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                             <i class="fa fa-heart"></i>
+                                          </a>
+                                        @endif
+                                    </div>
+                {{-- wishlist route ******************* ***************************************--}}
                                                 <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                                 wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
                                                     <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
@@ -493,7 +548,7 @@
                                 <h4 class="h6 widget-title">{{ __('Admin/categories.departmentPageTitle') }}</h4>
 
                                 <ul class="list">
-                                    @foreach (\App\Models\Category::get() as $cat)
+                                    @foreach ($product->categories as $cat)
                                     <li class="list__item">
                                         <a class="list__item__link" href="#">{{ $cat->name }}</a>
                                         <span>(3)</span>
@@ -585,10 +640,10 @@
 
                             <!-- start widget -->
                             <div class="widget widget--tags">
-                                <h4 class="h6 widget-title">Popular Tags</h4>
+                                <h4 class="h6 widget-title">{{ __('Admin/site.tags') }}</h4>
 
                                 <ul>
-                                    @foreach ($tags as $tag)
+                                    @foreach ($product->tags as $tag)
                                         <li><a href="#">{{$tag->name}}</a></li>
                                     @endforeach
                                 </ul>

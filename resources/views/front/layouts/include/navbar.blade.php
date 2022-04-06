@@ -21,19 +21,15 @@
 
     <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
         {{--  start links in navebar *************************************************************************--}}
-        {{-- <li class="has-submenu">
-            <a href="javascript:void(0);">Pages</a>
-            <ul class="submenu">
-                <li><a href="services.html">Services</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="products_details.html">Product Details</a></li>
-                <li><a href="gallery_1.html">Gallery 1</a></li>
-                <li><a href="gallery_2.html">Gallery 2</a></li>
-                <li><a href="typography.html">Typography</a></li>
-                <li><a href="404.html">404 page</a></li>
-            </ul>
-        </li> --}}
-
+        @check_guard
+            <li class="has-submenu">
+                <a href="javascript:void(0);">{{ __('website\home.login') }}</a>
+                <ul class="submenu">
+                    <li><a href="{{ route('user.login2') }}">{{ trans('Admin/site.signvendor') }}</a></li>
+                    <li><a href="{{ route('farmer.login') }}">{{ trans('Admin/site.signfarmer') }}</a></li>
+                </ul>
+            </li>
+        @endcheck_guard
         {{-- <li class="has-submenu">
             <a href="javascript:void(0);">test</a>
 
@@ -46,14 +42,14 @@
             </ul>
         </li> --}}
     {{-- function to check if not auth  *****************(guest)************(guest)*************************** --}}
-            @check_guard
+            {{-- @check_guard
             <li class="li-btn">
                     <a class="custom-btn custom-btn--medium custom-btn--style-1" title="Login"
                     href="{{ route('user.login') }}">
                     {{ __('website\home.login') }}
                     </a>
                 </li>
-            @endcheck_guard
+            @endcheck_guard --}}
     {{-- End function to check if not auth  ******************(guest)************(guest)************************--}}
     {{-- links for farmer الفلاح****************************************************--}}
     @if(Auth::guard('web')->user())
@@ -61,13 +57,13 @@
             <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">{{ trans('Website/home.my_order') }}</a>
+                    <a title="{{ trans('Website/home.my_profile') }}" href="{{ route('farmer.ownprofile') }}">{{ trans('Website/home.my_profile') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">{{ trans('Website/home.change_password') }}</a>
+                    <a title="{{ trans('Website/home.change_password') }}" href="{{ route('farmer.changepass') }}">{{ trans('Website/home.change_password') }}</a>
                 </li>
 
                 <li class="menu-item" >
@@ -89,13 +85,13 @@
             <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('user.dash') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('user.dash') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">{{ trans('Website/home.my_order') }}</a>
+                    <a title="{{ trans('Website/home.my_profile') }}" href="{{ route('user.ownprofile') }}">{{ trans('Website/home.my_profile') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="Order" href="#">{{ trans('Website/home.change_password') }}</a>
+                    <a title="{{ trans('Website/home.change_password') }}" href="{{ route('user.changepass') }}">{{ trans('Website/home.change_password') }}</a>
                 </li>
 
                 <li class="menu-item" >
@@ -117,7 +113,7 @@
             <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="Dashboard" href="{{ route('admin.dashboard') }}"target="_blank">{{ trans('Website/home.dashboard') }}</a>
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('admin.dashboard') }}"target="_blank">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="Logout" href="{{ route('logout.admin') }}"

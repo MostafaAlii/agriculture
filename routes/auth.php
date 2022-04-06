@@ -14,27 +14,22 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+    route::view('userlogin','front.user.auth.userlogin')->name('user.login2');
+    route::view('farmerlogin','front.user.auth.farmerlogin')->name('farmer.login');
     // routes for admin login  ***********************************************************************************
-    // Route::group(
-    //     [
-    //         'prefix' => LaravelLocalization::setLocale(),
-    //         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-
-    //     ], function(){
-            Route::get('agro', [AdminController::class, 'create'])->name('admin.login');
-            Route::post('Admin/login', [AdminController::class, 'store'])->name('admin.login.post');
-        // });
+    Route::get('agro', [AdminController::class, 'create'])->name('admin.login');
+    Route::post('Admin/login', [AdminController::class, 'store'])->name('admin.login.post');
     // end routes for admin login ********************************************************************************
 
-    Route::post('Farmer/login', [AuthenticatedSessionController::class, 'store'])->name('farmer.login.post');
 
     // route for user login *****************************
     Route::get('User/login', [UserAuthenticatedSessionController::class, 'create'])->name('user.login');
+
     Route::post('User/login', [UserAuthenticatedSessionController::class, 'store'])->name('User.login');
-    // Route::get('/user-register', [RegisteredUserController::class, 'create'])->name('user.register');
     Route::post('/user-register', [RegisteredUserController::class, 'store'])->name('user.register.post');
     // end route for user login ****************************
     // route for register farmer *********************************************************************************
+    Route::post('Farmer/login', [AuthenticatedSessionController::class, 'store'])->name('farmer.login.post');
     Route::post('/farmer-register', [RegisteredFarmerController::class, 'store'])->name('farmer.register.post');
     // end route for register farmer *********************************************************************************
 

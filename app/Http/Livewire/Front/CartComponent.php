@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Front;
 use Livewire\Component;
 
 use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CartComponent extends Component
 {
@@ -31,6 +32,9 @@ class CartComponent extends Component
     }
     public function render()
     {
+        if(Auth::guard('vendor')->check()){
+            Cart::instance('cart')->store(Auth::guard('vendor')->user()->email);
+          }
         return view('livewire.front.cartComponent')
         ->layout('front.layouts.master2');
     }

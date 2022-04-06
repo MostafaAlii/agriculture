@@ -1,9 +1,11 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Blog extends Model {
     use HasFactory, Translatable;
     const PUBLIC_VISIBIILTY = 1;
@@ -25,4 +27,15 @@ class Blog extends Model {
     public function admin(): BelongsTo {
         return $this->belongsTo(Admin::class);
     }
+
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+    
+    // public function comments(): HasMany
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
 }

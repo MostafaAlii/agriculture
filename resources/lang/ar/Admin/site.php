@@ -67,7 +67,7 @@ return [
     'register'=>'سجل الان',
 
     'signvendor'=>'تسجيل التاجر',
-    'signfarmer'=>'تسجيل البائع او الفلاح',
+    'signfarmer'=>'تسجيل البائع',
     'newfarmer'=>'بائع او فلاح جديد',
     'newvendor'=>'تاجر جديد',
     'yourtype'=>'اختار النوع',
@@ -116,7 +116,7 @@ return [
 
 
 
-    //////Departments-part
+    //Departments-part
     'neworchard'=>'بستان جديد',
     'orchards'=>'البساتين',
     'land_category'=>'أصناف الأراضي',
@@ -136,4 +136,12 @@ return [
     'addtocart'=>'اضف الى القائمه',
     'sale'=>'عرض',
     'new'=>'جديد',
+    'search'=>'ابحث عن المنتج',
+    'find'=>'ابحث',
+    'keywords'=>'الكلمات المفتاحيه',
+    'tags'=>'علامات المنتج',
+    'stock'=>'متاح',
+    'outstock'=>'غير متاح',
+    'addwish'=>'اضف للمفضله',
+    'removewish'=>'مسح من المفضله',
 ];

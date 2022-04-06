@@ -35,6 +35,8 @@ Route::group(
             route::get('/product',Livewire\front\Farmer\ProductComponent::class)->name('farmer.product');
             route::get('/product/add',Livewire\front\Farmer\FarmerAddProductComponent::class)->name('farmer.addproduct');
             /********************************* End Admins Pages Routes ************************************/
+            route::get('/farmer/ownprofile',Livewire\front\Farmer\FarmerProfile::class)->name('farmer.ownprofile'); //farmer profile
+            route::get('/farmer/changepassword',Livewire\front\Farmer\FarmerChangePassword::class)->name('farmer.changepass'); // farmer cahnge password
         });
         require __DIR__.'/auth.php';
 

@@ -14,6 +14,7 @@ return [
     'logout'               => 'Log Out',
     'dashboard'            => 'Dashboard',
     'my_order'             => 'My Order',
+    'my_profile'           => 'My Profile',
     'change_password'      => 'Change Password',
     // nav bar **************************************
 
@@ -37,4 +38,12 @@ return [
    'price'             => 'Price',
    'smsnoproduct'        => 'There is no product to Show , please add new products !',
    //End section blog *********************************************************
+   'curpassword'=>'Current Password',
+   'newpassword'=>'New Password',
+   'confirmpassword'=>'Confirm Password',
+   'changepass'=>'Change Password',
+   'smschangepass'=>'Password has been updated successfully',
+   'smspassnotmatch'=>'Password does not match',
+   'changeuser'=>'Vendor Change Password',
+   'changefarmer'=>'Farmer Change Password',
 ];

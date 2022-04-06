@@ -161,12 +161,12 @@
 
                                 <!-- start widget -->
                                 <div class="widget widget--tags">
-                                    <h4 class="h6 widget-title">Popular Tags</h4>
+                                    <h4 class="h6 widget-title">{{ __('Admin/site.keywords') }}</h4>
 
                                     <ul>
-                                        @foreach ($tags as $tag)
+                                        {{-- @foreach ($tags as $tag)
                                             <li><a href="#">{{$tag->name}}</a></li>
-                                        @endforeach
+                                        @endforeach --}}
                                     </ul>
                                 </div>
                                 <!-- end widget -->
@@ -314,14 +314,21 @@
                                                 <div class="__content">
                                                     <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
 
-                                                    <div class="__category"><a href="#">
+                                                    {{-- <div class="__category"><a href="#">
                                                         @foreach ($product->categories as $category)
                                                             <div class="text-primary text-bold">
                                                             <span>{{$category->name}}</span>
                                                             </div>
                                                             @endforeach
-                                                        </a></div>
-
+                                                        </a>
+                                                    </div> --}}
+                                                    <div class="stock-info in-stock">
+                                                        <p class="availability">
+                                                            <b class="text {{ $product->in_stock ==1 ?'text-success':'text-danger' }}">
+                                                                {{ $product->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
+                                                            </b>
+                                                        </p>
+                                                    </div>
                                                     @if($product->special_price >0)
                                                         <div class="product-price">
                                                             <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
@@ -335,7 +342,7 @@
 
                                                     <a class="custom-btn custom-btn--medium custom-btn--style-1"
                                                         href="#"
-                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})" >
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }})" >
                                                         <i class="fontello-shopping-bag"></i>
                                                         {{ __('Admin/site.addtocart') }}
                                                     </a>
@@ -347,7 +354,7 @@
                                                                 </a>
                                                             @else
                                                               <a href="#"
-                                                                 wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name }}',{{ $product->price }}) ">
+                                                                 wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
                                                                  <i class="fa fa-heart"></i>
                                                               </a>
                                                             @endif

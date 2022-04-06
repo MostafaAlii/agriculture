@@ -27,7 +27,7 @@
 
                                         <p>{{ $blog->body }}</p>
 
-                                        <p>
+                                        <!-- <p>
                                             Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite. Let’s do something real-special together.Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography.
                                         </p>
 
@@ -43,7 +43,7 @@
 
                                         <p>
                                             Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite. Let’s do something real-special together. Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography.
-                                        </p>
+                                        </p>-->
                                     </div>
                                 </div>
                                 <!-- end item -->
@@ -51,298 +51,10 @@
                             <!-- end posts -->
                         </div>
 
-                        <!-- start posts feedback -->
-                        <div class="posts-feedback">
-                            <h6>4 Comments</h6>
+                        <!-- ###################################################################3 -->
+                            @include('livewire.front.comments')
+                        <!-- ###################################################################3 -->
 
-                            <ul class="comments-list">
-                                <li class="comment">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <div class="d-none d-lg-block">
-
-                                                    <div class="comment__author-img">
-                                                        <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                    </div>
-
-                                                </div>
-                                            </td>
-
-                                            <td width="100%">
-                                                <time class="comment__date-post">April 12, 2017</time>
-
-                                                <div class="d-flex align-items-center mb-3 mb-lg-0">
-                                                    <div class="d-block d-lg-none">
-
-                                                        <div class="comment__author-img">
-                                                            <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                        </div>
-
-                                                    </div>
-
-                                                    <span class="comment__author-name">Terens Smith</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <p>
-                                                    Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite.
-                                                </p>
-
-                                                <div class="text-right">
-                                                    <a class="comment__reply custom-btn custom-btn--tiny custom-btn--style-1" href="#">REPLY</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <ul>
-                                        <li class="comment">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-none d-lg-block">
-
-                                                            <div class="comment__author-img">
-                                                                <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-
-                                                    <td width="100%">
-                                                        <time class="comment__date-post">April 12, 2017</time>
-
-                                                        <div class="d-flex align-items-center mb-3 mb-lg-0">
-                                                            <div class="d-block d-lg-none">
-
-                                                                <div class="comment__author-img">
-                                                                    <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                                </div>
-
-                                                            </div>
-
-                                                            <span class="comment__author-name">Terens Smith</span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td></td>
-                                                    <td>
-                                                        <p>
-                                                            Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite.
-                                                        </p>
-
-                                                        <div class="text-right">
-                                                            <a class="comment__reply custom-btn custom-btn--tiny custom-btn--style-1" href="#">REPLY</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <ul>
-                                                <li class="comment">
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-none d-lg-block">
-
-                                                                    <div class="comment__author-img">
-                                                                        <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                                    </div>
-
-                                                                </div>
-                                                            </td>
-
-                                                            <td width="100%">
-                                                                <time class="comment__date-post">April 12, 2017</time>
-
-                                                                <div class="d-flex align-items-center mb-3 mb-lg-0">
-                                                                    <div class="d-block d-lg-none">
-
-                                                                        <div class="comment__author-img">
-                                                                            <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <span class="comment__author-name">Terens Smith</span>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td></td>
-                                                            <td>
-                                                                <p>
-                                                                    Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite.
-                                                                </p>
-
-                                                                <div class="text-right">
-                                                                    <a class="comment__reply custom-btn custom-btn--tiny custom-btn--style-1" href="#">REPLY</a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="comment">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-none d-lg-block">
-
-                                                            <div class="comment__author-img">
-                                                                <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-
-                                                    <td width="100%">
-                                                        <time class="comment__date-post">April 12, 2017</time>
-
-                                                        <div class="d-flex align-items-center mb-3 mb-lg-0">
-                                                            <div class="d-block d-lg-none">
-
-                                                                <div class="comment__author-img">
-                                                                    <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                                </div>
-
-                                                            </div>
-
-                                                            <span class="comment__author-name">Terens Smith</span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td></td>
-                                                    <td>
-                                                        <p>
-                                                            Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite.
-                                                        </p>
-
-                                                        <div class="text-right">
-                                                            <a class="comment__reply custom-btn custom-btn--tiny custom-btn--style-1" href="#">REPLY</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="comment">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <div class="d-none d-lg-block">
-
-                                                    <div class="comment__author-img">
-                                                        <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                    </div>
-
-                                                </div>
-                                            </td>
-
-                                            <td width="100%">
-                                                <time class="comment__date-post">April 12, 2017</time>
-
-                                                <div class="d-flex align-items-center mb-3 mb-lg-0">
-                                                    <div class="d-block d-lg-none">
-
-                                                        <div class="comment__author-img">
-                                                            <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                        </div>
-
-                                                    </div>
-
-                                                    <span class="comment__author-name">Terens Smith</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <p>
-                                                    Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite.
-                                                </p>
-
-                                                <div class="text-right">
-                                                    <a class="comment__reply custom-btn custom-btn--tiny custom-btn--style-1" href="#">REPLY</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                            </ul>
-
-                            <div class="mt-6 mt-lg-10 mb-lg-4">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-12 col-md-auto mb-6">
-                                        <div class="post-author">
-                                            <div class="d-table">
-                                                <div class="d-table-cell align-middle">
-                                                    <div class="post-author__img">
-                                                        <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="d-table-cell align-middle">
-                                                    <span>Posted by</span>
-                                                    <span class="post-author__name">Terens Smith</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-md-auto mb-6">
-                                        <div class="share-btns">
-                                            <ul>
-                                                <li><a class="fb" href="#"><i class="fontello-facebook"></i>facebook</a></li>
-                                                <li><a class="tw" href="#"><i class="fontello-twitter"></i>twitter</a></li>
-                                                <li><a class="ggl" href="#"><i class="fontello-gplus"></i>google plus</a></li>
-                                                <li><a class="pt" href="#"><i class="fontello-pinterest-circled"></i>pinterest</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h6>Leave a Reply</h6>
-
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="input-wrp">
-                                            <input class="textfield" type="text" value="" placeholder="Name" />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-6">
-                                        <div class="input-wrp">
-                                            <input class="textfield" type="text" value="" placeholder="E-mail" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="input-wrp">
-                                    <textarea class="textfield" placeholder="Comments"></textarea>
-                                </div>
-
-                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">post comment</button>
-                            </form>
-                        </div>
-                        <!-- end posts feedback -->
                     </div>
 
                     <div class="col-12 my-6 d-md-none"></div>
@@ -534,3 +246,11 @@
         <!-- end section -->
 
 </div>
+@section('js')
+<script>
+     function show_form(comment_id){
+        alert(comment_id);
+    }
+</script>
+
+@endsection
