@@ -7,7 +7,7 @@ use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\CommentsRequest;
 use App\Http\Interfaces\Front\CommentInterface;
-
+use App\Models\Product;
 
 class CommentsController extends Controller
 {
@@ -15,9 +15,15 @@ class CommentsController extends Controller
     public function __construct(CommentInterface $Data) {
         $this->Data = $Data;
     }
-    public function store(Blog $blog, CommentsRequest $request)
+    
+    public function store_blog(Blog $blog, CommentsRequest $request)
     {
-        return $this->Data->store($blog,$request);
+        return $this->Data->store_blog($blog,$request);
+    }
+    
+    public function store_product(Product $product, CommentsRequest $request)
+    {
+        return $this->Data->store_product($product,$request);
     }
 
     public function destroy(Comment $comment)

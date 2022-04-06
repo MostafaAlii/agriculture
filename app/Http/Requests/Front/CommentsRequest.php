@@ -16,7 +16,7 @@ class CommentsRequest extends FormRequest
         return [
             // 'name' => ['required', 'string', 'max:255'],
             // 'email' => ['required', 'email'],
-            'comment'   => ['required', 'string', 'max:1000'],
+            'comment'   => ['required', 'string', 'max:1000','regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/uu'],
         ];
     }
 
@@ -24,14 +24,15 @@ class CommentsRequest extends FormRequest
         return [
             // 'name.required'       => trans('Admin\validation.required'),            
             // 'name.max'            => trans('Admin\validation.max'),
-            // 'name.string'         =>  trans('Admin/validation.string'),
+            // 'name.string'         =>  trans('Admin\validation.string'),
 
             // 'email.required'       => trans('Admin\validation.required'),
             // 'email.email'       => trans('Admin\validation.email'),
             
             'comment.required'         => trans('Admin\validation.required'),            
             'comment.max'              => trans('Admin\validation.max'),
-            'comment.string'           =>  trans('Admin/validation.string'),
+            'comment.string'           =>  trans('Admin\validation.string'),
+            'comment.regex'            =>  trans('Admin\validation.regex'),
 
         ];
     }

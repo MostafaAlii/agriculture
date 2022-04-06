@@ -47,7 +47,10 @@ class ProductDetails extends Component
         $product = Product::findorfail($this->product_id);
         $newProducts = Product::latest()->limit(3)->get();
         $popProducts = Product::inRandomOrder()->get()->take(3);
-        return view('livewire.front.product-details',compact('product','newProducts','popProducts'))
+
+        $comments = $product->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);
+
+        return view('livewire.front.product-details',compact('product','newProducts','popProducts','comments'))
                    ->layout('front.layouts.master2');
     }
 }

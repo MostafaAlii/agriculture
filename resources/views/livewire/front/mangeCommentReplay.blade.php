@@ -3,7 +3,7 @@
     $new = [
         'childs' => $child->childs,
         'padding' => $padding + 20,
-        'blod_id' => $blog->id,
+        'type_id' => $type_id,
     ];
     ?>
     <tr>
@@ -100,7 +100,7 @@
             <center>
                 <div id="replay_{{ $child->id }}" style="display:none">
                     <form class="auth-form" name="form-login" method="POST"
-                        action="/blogs/{{ $blog_id }}/comments">
+                        action="/{{$type}}/{{ $type_id }}/comments">
                         @csrf
 
                         <div class="input-wrp">
