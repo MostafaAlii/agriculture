@@ -3,8 +3,24 @@ body{
     font-family: 'Cairo', sans-serif;
 }
 body.compensate-for-scrollbar {
-  overflow: hidden
+  overflow: hidden;
 }
+
+.dropdown-menu.show a {
+  color: black !important;
+  margin: 3px 0;
+  text-align: end;
+}
+.top-bar--style-2 .top-bar__navigation a:not(.custom-btn)::after {
+    margin-top:20px;
+}
+.site-logo {
+  display: flex;
+  vertical-align: middle;
+  align-content: center;
+  align-items: center;
+}
+
 .fancybox-active {
   height: auto
 }

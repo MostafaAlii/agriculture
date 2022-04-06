@@ -35,11 +35,12 @@
 			<main role="main">
 				<!-- Common styles
 				================================================== -->
-                {{-- @if(app()->getLocale()=='ar') --}}
-                {{-- <link rel="stylesheet" href="{{ asset('frontassets/css/style-ar.min.css') }}" type="text/css"> --}}
-                {{-- @else --}}
-                <link rel="stylesheet" href="{{ asset('frontassets/css/style.min.css') }}" type="text/css">
-                {{-- @endif --}}
+                @if(app()->getLocale()=='ar')
+                <link rel="stylesheet" href="{{ asset('frontassets/css/style-ar.css') }}" type="text/css">
+                @else
+                {{-- <link rel="stylesheet" href="{{ asset('frontassets/css/style.min.css') }}" type="text/css"> --}}
+                <link rel="stylesheet" href="{{ asset('frontassets/css/style.css') }}" type="text/css">
+                @endif
 
 				<!-- Load lazyLoad scripts
 				================================================== -->
