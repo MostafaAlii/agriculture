@@ -61,7 +61,7 @@
                                                             <img class="lazy" src="img/blank.gif" data-src="img/goods_img/5.jpg" alt="demo" />
                                                         </a>
                                                         @if($item->model->image->filename)
-                                                            <a href="{{ route('product_details',$item->model->id) }}">
+                                                            <a href="{{ route('product_details',encrypt($item->model->id)) }}">
                                                                 <img class="lazy"  src="{{ asset('Dashboard/img/products/'. $item->model->image->filename) }}"
                                                                 data-src="{{ asset('Dashboard/img/products/'. $item->model->image->filename) }}" alt="demo" />
                                                             </a>
@@ -73,7 +73,7 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="{{ route('product_details',$item->model->id) }}" class="__name">{{ $item->model->name }}</a>
+                                                    <a href="{{ route('product_details',encrypt($item->model->id)) }}" class="__name">{{ $item->model->name }}</a>
                                                 </td>
 
                                                 <td>

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Front;
 use App\Models\Product;
 use App\Models\Tag;
 use Livewire\Component;
+use Illuminate\Support\Facades\Crypt;
 use Cart;
 
 class ProductDetails extends Component
@@ -12,7 +13,7 @@ class ProductDetails extends Component
     public $product_id;
     public $qty=1;
     public function mount($product_id){
-        $this->product_id = $product_id;
+        $this->product_id = Crypt::decrypt($product_id);
     }
     public function store($product_id,$product_name,$product_price){
         Cart::instance('cart')->add($product_id,$product_name,$this->qty,$product_price)->associate('App\Models\Product');

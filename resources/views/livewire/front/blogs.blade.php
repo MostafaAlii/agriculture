@@ -25,8 +25,8 @@
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->admin->firstname }}</a></p>
-                                        <h3 class="__title h5"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->title }}</a></h3>
+                                        <p class="__category"><a href="{{ route('blogdetails',encrypt($blog->id) ) }}">{{ $blog->admin->firstname }}</a></p>
+                                        <h3 class="__title h5"><a href="{{ route('blogdetails',encrypt($blog->id) ) }}">{{ $blog->title }}</a></h3>
                                         <p>{{ Str::limit($blog->body,50,) }}</p>
                                     </div>
                                     <span class="__date-post">

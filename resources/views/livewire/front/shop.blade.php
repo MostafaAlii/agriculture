@@ -195,7 +195,7 @@
                                             <div class="row no-gutters">
                                                 <div class="col-auto __image-wrap">
                                                     <figure class="__image">
-                                                        <a href="{{ route('product_details',$product->id) }}">
+                                                        <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                             @if($product->image->filename)
                                                             <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
@@ -208,7 +208,7 @@
                                                 </div>
 
                                                 <div class="col">
-                                                    <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                    <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                                     <div class="rating">
                                                         <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
@@ -301,7 +301,7 @@
                                             <div class="__item">
                                                 <figure class="__image" >
                                                     @if($product->image->filename)
-                                                        <a href="{{ route('product_details',$product->id) }}">
+                                                        <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                             <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                         </a>
@@ -312,7 +312,7 @@
                                                 </figure>
 
                                                 <div class="__content">
-                                                    <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                    <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                                     {{-- <div class="__category"><a href="#">
                                                         @foreach ($product->categories as $category)

@@ -15,7 +15,7 @@
                         @foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
                         <div class="col-12 col-md-6 col-lg-4">
                             @if($blog->image->filename)
-                            <a class="__item" href="{{ route('blogdetails',$blog->id) }}"><img src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
+                            <a class="__item" href="{{ route('blogdetails',encrypt($blog->id)) }}"><img src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                 alt="demo" class="img-fluid " style="width:620px; height:210px" /></a>
                             @else
                             <a class="__item" href="#"><img src="{{ asset('frontassets/img/promo-banners_img/1.jpg') }}" alt="demo" class="img-fluid w-100" /></a>
@@ -176,18 +176,18 @@
                         <div class="__item">
                             <figure class="__image">
                                 @if($product->image->filename)
-                                <a href="{{ route('product_details',$product->id) }}">
+                                <a href="{{ route('product_details',encrypt($product->id)) }}">
                                     <img width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                 </a>
                                 @else
-                                <a href="{{ route('product_details',$product->id) }}">
+                                <a href="{{ route('product_details',encrypt($product->id)) }}">
                                     <img width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                 </a>
                                 @endif
                             </figure>
 
                             <div class="__content">
-                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                 <div class="stock-info in-stock">
                                     <p class="availability">
@@ -418,7 +418,7 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <figure class="__image">
-                                                <a href="{{ route('product_details',$product->id) }}">
+                                                <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                     @if($product->image->filename)
                                                         <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
@@ -433,7 +433,7 @@
 
                                         <div class="col-12 col-md-6">
                                             <div class="__content">
-                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                                 <div class="rating">
                                                     <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
@@ -498,7 +498,7 @@
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="__item">
                                     <figure class="__image">
-                                        <a href="{{ route('product_details',$product->id) }}">
+                                        <a href="{{ route('product_details',encrypt($product->id)) }}">
                                             @if($product->image->filename)
                                                 <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                 data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
@@ -511,7 +511,7 @@
                                     </figure>
 
                                     <div class="__content">
-                                        <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                        <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                         <div class="__category"><a href="#">Fruits</a></div>
 
@@ -696,9 +696,9 @@
                                     @endif
                                 </figure>
                                 <div class="__content">
-                                    <p class="__category"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->admin->firstname }}</a></p>
+                                    <p class="__category"><a href="{{ route('blogdetails',encrypt($blog->id)) }}">{{ $blog->admin->firstname }}</a></p>
 
-                                    <h3 class="__title h5"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->title }}</a></h3>
+                                    <h3 class="__title h5"><a href="{{ route('blogdetails',encrypt($blog->id)) }}">{{ $blog->title }}</a></h3>
 
                                     <p>
                                         {{ Str::limit($blog->body,50,) }}

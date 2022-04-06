@@ -230,7 +230,7 @@
                                                         <div class="__item">
                                                             <figure class="__image">
                                                                 @if($product->model->image->filename)
-                                                                    <a href="{{ route('product_details',$product->model->id) }}">
+                                                                    <a href="{{ route('product_details',encrypt($product->model->id)) }}">
                                                                         <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
                                                                     data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
                                                                     </a>
@@ -241,7 +241,7 @@
                                                             </figure>
 
                                                             <div class="__content">
-                                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->model->id) }}">{{ $product->model->name }}</a></h4>
+                                                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->model->id)) }}">{{ $product->model->name }}</a></h4>
 
                                                                 <div class="__category"><a href="#">
                                                                     @foreach ($product->model->categories as $category)
@@ -269,7 +269,7 @@
                                                                     {{ __('Admin/site.addtocart') }}
                                                                 </a>
                                                 {{-- wishlist route ******************* ***************************************--}}
-                                        
+
                                                                     <div class="product-wish">
                                                                         <a href="#" wire:click.prevent=" removeWishlist({{ $product->model->id }}) ">
                                                                             <i class="fa fa-heart fill-heart"></i>
@@ -307,8 +307,8 @@
                                 <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
                             </ul> --}}
 
-                            {{-- @if (count($products))
-                            {{ $products->links('page-links') }}
+                            {{-- @if (count($item))
+                            {{ $item->links('page-links') }}
                             @endif --}}
                         </nav>
                         <!-- end pagination -->

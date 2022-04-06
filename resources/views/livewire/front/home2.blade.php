@@ -562,15 +562,15 @@
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->admin->firstname }}</a></p>
+                                        <p class="__category"><a href="{{ route('blogdetails',encrypt($blog->id)) }}">{{ $blog->admin->firstname }}</a></p>
 
-                                        <h3 class="__title h5"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->title }}</a></h3>
+                                        <h3 class="__title h5"><a href="{{ route('blogdetails',encrypt($blog->id)) }}">{{ $blog->title }}</a></h3>
 
                                         <p>
                                             {{ Str::limit($blog->body,50,) }}
                                         </p>
 
-                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('blogdetails',$blog->id) }}">{{ __('website\home.readmore')}}</a>
+                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('blogdetails',encrypt($blog->id)) }}">{{ __('website\home.readmore')}}</a>
                                     </div>
 
                                     <span class="__date-post">

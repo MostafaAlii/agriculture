@@ -4,8 +4,10 @@ namespace App\Http\Livewire\Front;
 
 use Livewire\Component;
 use Cart;
+use Livewire\WithPagination;
 class WishlistComponent extends Component
 {
+    use WithPagination;
     public function removeWishlist($product_id){
         foreach(Cart::instance('wishlist')->content() as $item){
           if($item->id == $product_id){
@@ -25,6 +27,7 @@ class WishlistComponent extends Component
      }
     public function render()
     {
+        // $products = Cart::instance('wishlist')->content()->paginate(9);
         return view('livewire.front.wishlist-component')->layout('front.layouts.master2');
     }
 }
