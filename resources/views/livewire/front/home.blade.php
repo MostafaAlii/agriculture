@@ -1,9 +1,30 @@
 
-    <!-- start section -->
-    @section('title', __('website\home.home'))
-    @section('css')
-
-    @endsection
+<!-- start section -->
+@section('title', __('website\home.home'))
+@section('css')
+<style>
+    .product-wish{
+        position: absolute;
+        top:3%;
+        left: 0;
+        z-index:99;
+        right:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@endsection
 <div>
       {{-- ********************** Home 2 ****************************************** --}}
     <section class="section section--no-pt section--no-pb">
@@ -172,6 +193,9 @@
                         }]
                     }'>
                     <!-- start item  12 product here to show-->
+                    @php
+                       $witems = Cart::instance('wishlist')->content()->pluck('id');
+                    @endphp
                     @foreach ($newProducts as $product)
                         <div class="__item">
                             <figure class="__image">
@@ -204,6 +228,20 @@
                                 <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                 wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }})" >
                                     <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                     {{-- wishlist route ******************* ***************************************--}}
+                                     <div class="product-wish">
+                                        @if($witems->contains($product->id))
+                                            <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
+                                              <i class="fa fa-heart fill-heart"></i>
+                                            </a>
+                                        @else
+                                          <a href="#"
+                                             wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                             <i class="fa fa-heart"></i>
+                                          </a>
+                                        @endif
+                                    </div>
+                {{-- wishlist route ******************* ***************************************--}}
                             </div>
 
                             <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
@@ -494,6 +532,9 @@
                     <div class="__inner">
                         <div class="row">
                             <!-- start item -->
+                            @php
+                            $witems = Cart::instance('wishlist')->content()->pluck('id');
+                         @endphp
                             @foreach ($saleProducts as $product)
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="__item">
@@ -537,6 +578,20 @@
                                         <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }})">
                                             <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                        {{-- wishlist route ******************* ***************************************--}}
+                                     <div class="product-wish">
+                                        @if($witems->contains($product->id))
+                                            <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
+                                              <i class="fa fa-heart fill-heart"></i>
+                                            </a>
+                                        @else
+                                          <a href="#"
+                                             wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                             <i class="fa fa-heart"></i>
+                                          </a>
+                                        @endif
+                                    </div>
+                {{-- wishlist route ******************* ***************************************--}}
                                     </div>
                                     <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
                                 </div>
