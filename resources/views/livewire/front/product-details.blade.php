@@ -123,51 +123,53 @@
                                         </div> --}}
 
                                         @if (Auth::guard('vendor')->user() )
-                                        <form class="__add-to-cart" action="#">
-                                            <div class="quantity-counter js-quantity-counter">
-                                                <span class="__btn __btn--minus"  wire:click.prevent='decreaseQty' ></span>
-                                                <input class="__q-input"
-                                                type="text"
-                                                name="product-quatity"
-                                                min="1"
-                                                {{-- max="{{ $item->model->qty }}" --}}
-                                                {{-- value="{{ $item->qty }}" --}}
-                                                value="1"
-                                                onkeydown="return false"
-                                                wire:model='qty' />
-                                                <span class="__btn __btn--plus" wire:click.prevent='increaseQty' ></span>
-                                            </div>
+                                            @if($product->in_stock ==1)
+                                                <form class="__add-to-cart" action="#">
+                                                    <div class="quantity-counter js-quantity-counter">
+                                                        <span class="__btn __btn--minus"  wire:click.prevent='decreaseQty' ></span>
+                                                        <input class="__q-input"
+                                                        type="text"
+                                                        name="product-quatity"
+                                                        min="1"
+                                                        {{-- max="{{ $item->model->qty }}" --}}
+                                                        {{-- value="{{ $item->qty }}" --}}
+                                                        value="1"
+                                                        onkeydown="return false"
+                                                        wire:model='qty' />
+                                                        <span class="__btn __btn--plus" wire:click.prevent='increaseQty' ></span>
+                                                    </div>
 
-                                                <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                type="submit" role="button"
-                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
-                                                <i class="fontello-shopping-bag"></i>
-                                                    {{ __('Admin/site.addtocart') }}
-                                                </button>
+                                                        <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                        type="submit" role="button"
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                        <i class="fontello-shopping-bag"></i>
+                                                            {{ __('Admin/site.addtocart') }}
+                                                        </button>
 
-                                                @if($witems->contains($product->id))
-                                                    <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                    type="submit" role="button"
-                                                    wire:click.prevent=" removeWishlist({{ $product->id }})">
-                                                    <i class="fa fa-heart fill-heart"></i>
-                                                        {{ __('Admin/site.removewish') }}
-                                                    </button>
-                                                @else
-                                                    <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                    type="submit" role="button"
-                                                    wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
-                                                        <i class="fa fa-heart"></i>
-                                                        {{ __('Admin/site.addwish') }}
-                                                    </button>
-                                                @endif
-                                        </form>
-                                            @elseif(Auth::guard('web')->user())
-                                            {{-- <a href="#" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.vendor')</a> --}}
-                                            @elseif(Auth::guard('admin')->user())
-                                            {{-- <a href="#" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.vendor')</a> --}}
-                                            @else
-                                            <a href="{{ route('user.login2') }}" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.login')</a>
+                                                        @if($witems->contains($product->id))
+                                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                            type="submit" role="button"
+                                                            wire:click.prevent=" removeWishlist({{ $product->id }})">
+                                                            <i class="fa fa-heart fill-heart"></i>
+                                                                {{ __('Admin/site.removewish') }}
+                                                            </button>
+                                                        @else
+                                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                            type="submit" role="button"
+                                                            wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                                <i class="fa fa-heart"></i>
+                                                                {{ __('Admin/site.addwish') }}
+                                                            </button>
+                                                        @endif
+                                                </form>
                                             @endif
+                                         @elseif(Auth::guard('web')->user())
+                                            {{-- <a href="#" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.vendor')</a> --}}
+                                        @elseif(Auth::guard('admin')->user())
+                                            {{-- <a href="#" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.vendor')</a> --}}
+                                        @else
+                                            <a href="{{ route('user.login2') }}" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.login')</a>
+                                        @endif
                                     </div>
                                 </div>
 
