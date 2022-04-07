@@ -16,11 +16,11 @@
                                 <div class="__item __item--preview">
                                     <figure class="__image">
                                         @if($blog->image->filename)
-                                            <img class="lazy" src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
+                                            <img  src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             alt="demo" />
                                         @else
-                                           <img class="lazy" src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}"
+                                           <img  src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}"
                                            data-src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}" alt="demo" />
                                         @endif
                                     </figure>

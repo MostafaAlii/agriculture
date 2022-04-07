@@ -231,11 +231,11 @@
                                                             <figure class="__image">
                                                                 @if($product->model->image->filename)
                                                                     <a href="{{ route('product_details',encrypt($product->model->id)) }}">
-                                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
+                                                                        <img  width="188" src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
                                                                     data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
                                                                     </a>
                                                                 @else
-                                                                    <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                    <img  width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                                     data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                                 @endif
                                                             </figure>

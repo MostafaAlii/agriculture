@@ -1,6 +1,27 @@
 @section('title', __('website\home.shop'))
 @section('css')
-
+<style>
+    .product-wish{
+        position: absolute;
+        top:3%;
+        left: 0;
+        z-index:99;
+        right:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
 @endsection
 <div>
         <!-- start section -->
@@ -153,12 +174,12 @@
                                                 <div class="row no-gutters">
                                                     <div class="col-auto __image-wrap">
                                                         <figure class="__image">
-                                                            <a href="{{ route('product_details',$product->id) }}">
+                                                            <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                             @if($product->image->filename)
-                                                                <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                                <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                                 data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                             @else
-                                                                <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                                 data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                             @endif
                                                             </a>
@@ -166,7 +187,7 @@
                                                     </div>
 
                                                     <div class="col">
-                                                        <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                        <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                                         <div class="rating">
                                                             <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
@@ -250,6 +271,9 @@
                             <div class="goods goods--style-1">
                                 <div class="__inner">
                                     <div class="row">
+                                        @php
+                                        $witems = Cart::instance('wishlist')->content()->pluck('id');
+                                     @endphp
                                         @if ($products->count() >0)
                                         @foreach ($products as $product)
                                         <!-- start item -->
@@ -257,18 +281,18 @@
                                                 <div class="__item">
                                                     <figure class="__image">
                                                         @if($product->image->filename)
-                                                            <a href="{{ route('product_details',$product->id) }}">
-                                                                <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                            <a href="{{ route('product_details',encrypt($product->id)) }}">
+                                                                <img  width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                             </a>
                                                         @else
-                                                            <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                            <img  width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                             data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                         @endif
                                                     </figure>
 
                                                     <div class="__content">
-                                                        <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                        <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                                         <div class="__category"><a href="#">
                                                             @foreach ($product->categories as $category)
@@ -295,6 +319,20 @@
                                                             <i class="fontello-shopping-bag"></i>
                                                             {{ __('Admin/site.addtocart') }}
                                                         </a>
+                                                           {{-- wishlist route ******************* ***************************************--}}
+                                                           <div class="product-wish">
+                                                            @if($witems->contains($product->id))
+                                                                <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
+                                                                  <i class="fa fa-heart fill-heart"></i>
+                                                                </a>
+                                                            @else
+                                                              <a href="#"
+                                                                 wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                                 <i class="fa fa-heart"></i>
+                                                              </a>
+                                                            @endif
+                                                        </div>
+                                    {{-- wishlist route ******************* ***************************************--}}
                                                     </div>
 
                                                     @if($product->special_price >0)

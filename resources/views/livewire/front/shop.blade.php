@@ -197,10 +197,10 @@
                                                     <figure class="__image">
                                                         <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                             @if($product->image->filename)
-                                                            <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                            <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                         @else
-                                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                            <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                             data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                         @endif
                                                         </a>
@@ -302,11 +302,11 @@
                                                 <figure class="__image" >
                                                     @if($product->image->filename)
                                                         <a href="{{ route('product_details',encrypt($product->id)) }}">
-                                                            <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                            <img  width="188" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                         </a>
                                                     @else
-                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                        <img  width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                         data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                     @endif
                                                 </figure>

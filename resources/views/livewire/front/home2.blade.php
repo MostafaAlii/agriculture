@@ -553,11 +553,11 @@
                                 <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="100" data-aos-offset="0">
                                     <figure class="__image">
                                         @if($blog->image->filename)
-                                            <img class="lazy" src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
+                                            <img  src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             alt="demo" />
                                         @else
-                                           <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}"
+                                           <img  src="{{ asset('frontassets/img/blank.gif') }}"
                                            data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
                                         @endif
                                     </figure>

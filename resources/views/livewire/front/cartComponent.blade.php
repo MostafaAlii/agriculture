@@ -58,7 +58,7 @@
                                                 <td>
                                                     <figure class="__image">
                                                         <a href="#">
-                                                            <img class="lazy" src="img/blank.gif" data-src="img/goods_img/5.jpg" alt="demo" />
+                                                            <img  src="img/blank.gif" data-src="img/goods_img/5.jpg" alt="demo" />
                                                         </a>
                                                         @if($item->model->image->filename)
                                                             <a href="{{ route('product_details',encrypt($item->model->id)) }}">
@@ -66,7 +66,7 @@
                                                                 data-src="{{ asset('Dashboard/img/products/'. $item->model->image->filename) }}" alt="demo" />
                                                             </a>
                                                     @else
-                                                            <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                            <img  width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                             data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                     @endif
                                                     </figure>

@@ -42,12 +42,12 @@
                                         <th scope="row">{{ $index+1 }}</th>
                                         <td>
                                             @if($product->image->filename)
-                                                <a href="{{ route('product_details',$product->id) }}">
-                                                    <img class="lazy" width="100"
+                                                <a href="{{ route('product_details',encrypt($product->id)) }}">
+                                                    <img  width="100"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                 </a>
                                             @else
-                                                <img class="lazy" width="100" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                <img  width="100" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                 data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                             @endif
                                         </td>

@@ -406,10 +406,10 @@
                                             <figure class="__image">
                                                 <a href="{{ route('product_details',$product->id) }}">
                                                     @if($product->image->filename)
-                                                        <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                        <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                     @else
-                                                        <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                        <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                         data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                     @endif
 
@@ -472,54 +472,7 @@
                                     </div>
                                     <!-- end item -->
                                     @endforeach
-                                    {{-- <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="160" src="img/blank.gif" data-src="img/goods_img/3.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="#">Red Apple</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">0,99 $</span>
-                                                    <span class="product-price__item product-price__item--old">2200$</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--hot">hot</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="190" src="img/blank.gif" data-src="img/goods_img/4.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="#">Strawberry</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">2,10 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
-                                            </div>
-
-                                            <span class="product-label product-label--sale">Sale</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item --> --}}
+                                 
                                 </div>
                             </div>
                         </div>
@@ -676,10 +629,10 @@
                                                 <figure class="__image">
                                                     <a href="{{ route('product_details',$product->id) }}">
                                                         @if($product->image->filename)
-                                                            <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                            <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                         @else
-                                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                            <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                             data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                         @endif
 
