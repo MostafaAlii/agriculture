@@ -288,7 +288,7 @@
                                                 @endforeach
 
                                             @else
-                                               <h4> No items in wishlist </h4>
+                                            <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
                                             @endif
                                 </div>
                             </div>
