@@ -271,7 +271,7 @@
                                         class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
                                         $</span>
                                 </div>
-                                @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
+                                @if (Auth::guard('vendor')->user() )
                                     <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                         <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
@@ -599,7 +599,7 @@
                                                             $</span>
                                                     </div>
                                                 @endif
-                                                @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
+                                                @if (Auth::guard('vendor')->user() )
                                                     <a class="custom-btn custom-btn--small custom-btn--style-1" href="#"
                                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                         <i
@@ -696,7 +696,7 @@
                                                     class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
                                                     $</span>
                                             </div>
-                                            @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
+                                            @if (Auth::guard('vendor')->user() )
                                                 <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                                     wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                     <i

@@ -354,7 +354,7 @@
                                                                     $</span>
                                                             </div>
                                                         @endif
-                                                        @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
+                                                        @if (Auth::guard('vendor')->user() )
                                                             <a class="custom-btn custom-btn--medium custom-btn--style-1"
                                                                 href="#"
                                                                 wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">

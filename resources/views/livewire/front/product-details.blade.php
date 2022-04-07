@@ -122,7 +122,7 @@
                                             </ul>
                                         </div> --}}
 
-                                        @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
+                                        @if (Auth::guard('vendor')->user() )
                                         <form class="__add-to-cart" action="#">
                                             <div class="quantity-counter js-quantity-counter">
                                                 <span class="__btn __btn--minus"  wire:click.prevent='decreaseQty' ></span>
@@ -160,9 +160,12 @@
                                                         {{ __('Admin/site.addwish') }}
                                                     </button>
                                                 @endif
-                                            </form>
+                                        </form>
+                                            @elseif(Auth::guard('web')->user())
+                                            {{-- <a href="#" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.vendor')</a> --}}
+                                            @elseif(Auth::guard('admin')->user())
+                                            {{-- <a href="#" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.vendor')</a> --}}
                                             @else
-
                                             <a href="{{ route('user.login2') }}" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.login')</a>
                                             @endif
                                     </div>
@@ -450,7 +453,7 @@
                                                         <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                                     </div>
                                                 @endif
-                                                @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
+                                                @if (Auth::guard('vendor')->user() )
                                                         {{-- wishlist route ******************* ***************************************--}}
                                                         <div class="product-wish">
                                                             @if($witems->contains($product->id))
