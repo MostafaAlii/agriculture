@@ -34,9 +34,7 @@
             <div class="row">
 
                 <div class="col-12">
-                <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                         wire:click.prevent="destroyAll()" >{{ __('Admin/site.bulk_delete') }}
-                </button>
+
                     <!-- start cart -->
                     <div class="cart">
                         <form class="cart__form" action="#">
@@ -61,7 +59,9 @@
                                             </div>
                                         @endif
                                         @if (Cart::instance('cart')->count() > 0)
-
+                                        <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                    wire:click.prevent="destroyAll()" >{{ __('Admin/site.bulk_delete') }}
+                                        </button>
                                             @foreach (Cart::instance('cart')->content() as $item)
                                                 <tr>
                                                     <td>
