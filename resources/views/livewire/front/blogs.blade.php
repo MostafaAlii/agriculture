@@ -5,6 +5,7 @@
 <div>
     <!-- start section -->
     <section class="section">
+        
         <div class="container">
             <!-- start posts -->
             <div class="posts posts--style-1">

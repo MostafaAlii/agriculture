@@ -404,7 +404,7 @@
                                     <div class="col-12 col-sm-6 col-lg-4">
                                         <div class="__item">
                                             <figure class="__image">
-                                                <a href="{{ route('product_details',$product->id) }}">
+                                                <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                     @if($product->image->filename)
                                                         <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
@@ -417,7 +417,7 @@
                                             </figure>
 
                                             <div class="__content">
-                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
 
 
@@ -472,7 +472,7 @@
                                     </div>
                                     <!-- end item -->
                                     @endforeach
-                                 
+
                                 </div>
                             </div>
                         </div>
@@ -627,7 +627,7 @@
                                         <div class="row no-gutters">
                                             <div class="col-auto __image-wrap">
                                                 <figure class="__image">
-                                                    <a href="{{ route('product_details',$product->id) }}">
+                                                    <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                         @if($product->image->filename)
                                                             <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
@@ -641,7 +641,7 @@
                                             </div>
 
                                             <div class="col">
-                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                                 <div class="rating">
                                                     <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
