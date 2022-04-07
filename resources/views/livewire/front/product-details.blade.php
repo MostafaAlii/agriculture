@@ -166,15 +166,19 @@
                                 <div class="col-12">
                                     <div class="spacer py-5 py-md-9"></div>
 
+                                        <input type="hidden" id="show_comment_or_no" value="<?php echo Session::get('div_active');?>">
+
                                     <!-- start tab -->
                                     <div class="tab-container">
                                         <nav class="tab-nav">
-                                            <a href="#">Description</a>
-                                            <a href="#">{{ __('website\comments.comments') }}</a>
+                                            <a href="#" id="myDIV">Description</a>
+                                            <!-- <a href="#" <?php /*if(Session::get('div_active')=='allow'){echo'class="active"';}*/?>>{{ __('website\comments.comments') }}</a> -->
+                                            <a href="#" >{{ __('website\comments.comments') }}</a>
                                         </nav>
+                                       
 
                                         <div class="tab-content">
-                                            <div class="tab-content__item is-visible">
+                                            <div id="myDIV2" class="tab-content__item">
                                                 <p>
                                                     {{ $product->description }}
                                                 </p>
@@ -208,7 +212,8 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-content__item">
+                                            <!-- <div class="tab-content__item <?php /*if(Session::get('div_active')=='allow'){echo'is-visible';}*/?> "> -->
+                                            <div class="tab-content__item ">
                                              <!-- ###################################################################3 -->
                                                 <?php
                                                     $type='products';
@@ -586,3 +591,20 @@
         </section>
         <!-- end section -->
 </div>
+<script>
+    // this for show comments tab after adding and hide description tab
+    
+    let c=document.getElementById('show_comment_or_no').value;
+
+    let element = document.getElementById("myDIV").classList;
+   // alert(element);
+    //element.classList.remove("active");
+
+    let element2 = document.getElementById("myDIV2");
+    //alert(element2);
+   // element2.classList.remove("is-visible");
+    element2.removeAttribute("visibility");
+    //alert(c);
+    //alert(element.classList);
+  
+</script>

@@ -16,33 +16,35 @@
 <hr>
 
 @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
-    <center>
-       
-        <h3> {{ __('website\comments.leave_comment') }}</h3>
+   
+       <center> <h3> {{ __('website\comments.leave_comment') }}</h3></center>
         
         <form class="auth-form" name="form-login" method="POST" action="/{{$type}}/{{ $type_id }}/comments">
             @csrf
+            <div class="row">
+                <div class="col-9">
+                    <div class="input-wrp">
+                        <textarea name="comment" class="textfield" cols="30" rows="5"
+                            placeholder="{{ __('website\comments.write_comment') }}"
+                            required>{{ old('comment') }}</textarea>
+                    </div>
+                    @error('comment')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
 
-            <div class="input-wrp">
-                <textarea name="comment" class="textfield" cols="30" rows="5"
-                    placeholder="{{ __('website\comments.write_comment') }}"
-                    required>{{ old('comment') }}</textarea>
-
-            </div>
-            @error('comment')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-
-            <input type="hidden" name="from" value="add">
-
-            <div class="d-table mt-8">
-                <div class="d-table-cell align-middle">
-                    <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                        role="button">{{ __('website\comments.publish') }}</button>
+                    <input type="hidden" name="from" value="add">
+                </div>
+                <div class="col-3">
+                    <div class="d-table mt-8">
+                        <div class="d-table-cell align-middle">
+                            <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
+                                role="button">{{ __('website\comments.publish') }}</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
-    </center>
+           
     <hr>
 @else
     <div class="alert alert-danger">
@@ -70,7 +72,7 @@
                 }
                 ?>
 
-               <img class="user-img img-fluid rounded-circle" style="width:50px; height:50px;border-radius: 15%;" src="{{$src}}" />
+                <img class="user-img img-fluid rounded-circle" style="width:50px; height:50px;border-radius: 15%;" src="{{$src}}" />
 
                     <br>
                     <time class="comment__date-post">{{ $comment->created_at->format('Y-m-d') }}</time>
@@ -78,7 +80,10 @@
                     <span class="comment__author-name">{{ $comment->name }}</span>
                     <span class="comment__author-name">{{ $comment->email }}</span>
                     <p>{{ $comment->comment }}</p>
-
+                </td>
+                <td>
+                    <br>
+                    <br>
                     @if (Auth::guard('vendor')->user())
                         <div class="text-right">
                             <!-- || (Auth::guard('vendor')->user()->email != $comment->email ) -->
@@ -294,23 +299,29 @@
                             <form class="auth-form" name="form-login" method="POST"
                                 action="/{{$type}}/{{ $type_id }}/comments">
                                 @csrf
-                                <div class="input-wrp">
-                                    <textarea name="comment" class="textfield" cols="30" rows="5"
-                                        placeholder="{{ __('website\comments.write_comment') }}"
-                                        required>{{ old('comment') }}</textarea>
 
-                                </div>
-                                @error('comment')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <div class="row">
+                                    <div class="col-9">
+                                        <div class="input-wrp">
+                                            <textarea name="comment" class="textfield" cols="30" rows="5"
+                                                placeholder="{{ __('website\comments.write_comment') }}"
+                                                required>{{ old('comment') }}</textarea>
 
-                                <input type="hidden" name="from" value="replay">
-                                <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                        </div>
+                                        @error('comment')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
 
-                                <div class="d-table mt-8">
-                                    <div class="d-table-cell align-middle">
-                                        <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                                            role="button">{{ __('website\comments.publish') }}</button>
+                                        <input type="hidden" name="from" value="replay">
+                                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="d-table mt-8">
+                                            <div class="d-table-cell align-middle">
+                                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
+                                                    role="button">{{ __('website\comments.publish') }}</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </form>

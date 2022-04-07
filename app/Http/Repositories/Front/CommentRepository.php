@@ -41,10 +41,15 @@ class CommentRepository implements CommentInterface{
             $comment->save();
 
 
-            return redirect()->back()->with(['success'=>__('website\comments.add_done')]);
+            return redirect()->back()->with(
+                [
+                    'success'       => trans('Website/comments.add_done'),
+                    'div_active'    => 'allow',
+                ]
+            );
 
          } catch (\Exception $ex) {
-            return redirect()->back()->with(['error'=>__('website\comments.error')]);
+            return redirect()->back()->withErrors(['error'=> __('Website/comments.error')]);
          }
     }
 
@@ -55,7 +60,12 @@ class CommentRepository implements CommentInterface{
 
     public function destroy($comment): RedirectResponse
     {
-        $comment->delete();
-        return back();
+        try{
+            $comment->delete();
+            return redirect()->back()->withErrors(['error'=> __('Website/comments.delete_done')]);
+            return back();
+        }catch (\Exception $ex) {
+            return redirect()->back()->withErrors(['error'=> __('Website/comments.delete_error')]);
+         }
     }
 }
