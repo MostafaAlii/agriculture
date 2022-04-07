@@ -122,6 +122,7 @@
                                             </ul>
                                         </div> --}}
 
+                                        @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
                                         <form class="__add-to-cart" action="#">
                                             <div class="quantity-counter js-quantity-counter">
                                                 <span class="__btn __btn--minus"  wire:click.prevent='decreaseQty' ></span>
@@ -136,30 +137,34 @@
                                                 wire:model='qty' />
                                                 <span class="__btn __btn--plus" wire:click.prevent='increaseQty' ></span>
                                             </div>
-                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                            type="submit" role="button"
-                                            wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
-                                            <i class="fontello-shopping-bag"></i>
-                                                {{ __('Admin/site.addtocart') }}
-                                            </button>
 
-                                            @if($witems->contains($product->id))
                                                 <button class="custom-btn custom-btn--medium custom-btn--style-1"
                                                 type="submit" role="button"
-                                                wire:click.prevent=" removeWishlist({{ $product->id }})">
-                                                <i class="fa fa-heart fill-heart"></i>
-                                                    {{ __('Admin/site.removewish') }}
+                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                <i class="fontello-shopping-bag"></i>
+                                                    {{ __('Admin/site.addtocart') }}
                                                 </button>
+
+                                                @if($witems->contains($product->id))
+                                                    <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                    type="submit" role="button"
+                                                    wire:click.prevent=" removeWishlist({{ $product->id }})">
+                                                    <i class="fa fa-heart fill-heart"></i>
+                                                        {{ __('Admin/site.removewish') }}
+                                                    </button>
+                                                @else
+                                                    <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                    type="submit" role="button"
+                                                    wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                        <i class="fa fa-heart"></i>
+                                                        {{ __('Admin/site.addwish') }}
+                                                    </button>
+                                                @endif
+                                            </form>
                                             @else
-                                                <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                type="submit" role="button"
-                                                wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
-                                                    <i class="fa fa-heart"></i>
-                                                    {{ __('Admin/site.addwish') }}
-                                                </button>
-                                            @endif
 
-                                        </form>
+                                            <a href="{{ route('user.login2') }}" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.login')</a>
+                                            @endif
                                     </div>
                                 </div>
 
@@ -445,23 +450,25 @@
                                                         <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                                     </div>
                                                 @endif
-                                    {{-- wishlist route ******************* ***************************************--}}
-                                    <div class="product-wish">
-                                        @if($witems->contains($product->id))
-                                            <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
-                                              <i class="fa fa-heart fill-heart"></i>
-                                            </a>
-                                        @else
-                                          <a href="#"
-                                             wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
-                                             <i class="fa fa-heart"></i>
-                                          </a>
-                                        @endif
-                                    </div>
-                {{-- wishlist route ******************* ***************************************--}}
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
-                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
-                                                    <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
+                                                        {{-- wishlist route ******************* ***************************************--}}
+                                                        <div class="product-wish">
+                                                            @if($witems->contains($product->id))
+                                                                <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
+                                                                <i class="fa fa-heart fill-heart"></i>
+                                                                </a>
+                                                            @else
+                                                            <a href="#"
+                                                                wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                                <i class="fa fa-heart"></i>
+                                                            </a>
+                                                            @endif
+                                                        </div>
+                                                        {{-- wishlist route ******************* ***************************************--}}
+                                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                            <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                @endif
                                             </div>
                                             @if($product->special_price >0)
                                                <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>

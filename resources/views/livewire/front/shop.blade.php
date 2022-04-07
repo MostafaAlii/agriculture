@@ -384,28 +384,29 @@
                                                                     $</span>
                                                             </div>
                                                         @endif
-
-                                                        <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                            href="#"
-                                                            wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
-                                                            <i class="fontello-shopping-bag"></i>
-                                                            {{ __('Admin/site.addtocart') }}
-                                                        </a>
-                                                        {{-- wishlist route ******************* *************************************** --}}
-                                                        <div class="product-wish">
-                                                            @if ($witems->contains($product->id))
-                                                                <a href="#"
-                                                                    wire:click.prevent=" removeWishlist({{ $product->id }}) ">
-                                                                    <i class="fa fa-heart fill-heart"></i>
-                                                                </a>
-                                                            @else
-                                                                <a href="#"
-                                                                    wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }}) ">
-                                                                    <i class="fa fa-heart"></i>
-                                                                </a>
-                                                            @endif
-                                                        </div>
-                                                        {{-- wishlist route ******************* *************************************** --}}
+                                                        @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
+                                                            <a class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                                href="#"
+                                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
+                                                                <i class="fontello-shopping-bag"></i>
+                                                                {{ __('Admin/site.addtocart') }}
+                                                            </a>
+                                                            {{-- wishlist route ******************* *************************************** --}}
+                                                            <div class="product-wish">
+                                                                @if ($witems->contains($product->id))
+                                                                    <a href="#"
+                                                                        wire:click.prevent=" removeWishlist({{ $product->id }}) ">
+                                                                        <i class="fa fa-heart fill-heart"></i>
+                                                                    </a>
+                                                                @else
+                                                                    <a href="#"
+                                                                        wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }}) ">
+                                                                        <i class="fa fa-heart"></i>
+                                                                    </a>
+                                                                @endif
+                                                            </div>
+                                                            {{-- wishlist route ******************* *************************************** --}}
+                                                        @endif
                                                     </div>
                                                     @if ($product->special_price > 0)
                                                         <span
