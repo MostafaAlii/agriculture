@@ -32,8 +32,11 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12">
 
+                <div class="col-12">
+                <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                         wire:click.prevent="destroyAll()" >{{ __('Admin/site.bulk_delete') }}
+                </button>
                     <!-- start cart -->
                     <div class="cart">
                         <form class="cart__form" action="#">
@@ -46,6 +49,7 @@
                                             <td width="15%">Price</td>
                                             <td width="20%">Quantity</td>
                                             <td width="15%">Total</td>
+                                            <td width="5%">Delete</td>
                                             <td width="5%">&nbsp;</td>
                                         </tr>
                                     </thead>
@@ -100,8 +104,15 @@
                                                                 onkeydown="return false" />
                                                             <span class="__btn __btn--plus"
                                                                 wire:click.prevent="increaseQuntity('{{ $item->rowId }}')"></span>
+
+
+                                                            <a href="#"
+                                                                class="__name" style="color: #e71d1d;"
+                                                                wire:click.prevent='SaveForLater("{{ $item->rowId }}")'>{{ __('Admin/site.savelater') }}
+                                                            </a>
                                                         </div>
                                                     </td>
+
 
                                                     <td>
                                                         <span
@@ -119,6 +130,9 @@
                                             @endforeach
                                         @else
                                         <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
+                                       <h3> <a class="__name" href="{{ route('shop') }}" class="btn btn-success">{{ __('website\home.shop') }}</a>
+                                        <i class="fa fa-car"></i>
+                                       </h3>
                                         @endif
                                     </tbody>
                                 </table>
@@ -182,6 +196,94 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <h2>{{ __('Admin/site.savelater') }}</h2>
+                            <div class="spacer py-2"></div>
+
+                            <!-- start goods -->
+                            <div class="goods goods--style-1">
+                                <h3 class="title-box"
+                                style="border-bottom: 1px solid; padding: 13px 18px; background-color: #ff2832; color: #fefefe; text-transform: uppercase; font-size: 14px; line-height: 14px;">
+                                {{ __('Admin/site.itemsave') }}
+                                <strong style="font-size: 20px">{{ Cart::instance('saveforlater')->count() }}</strong>
+                                {{ __('Admin/site.inbox') }}
+                               </h3>
+                                @if(Session::has('s_success_message'))
+                                    <div class="alert alert-success">
+                                        <strong>Success </strong> {{ Session::get('s_success_message') }}
+                                    </div>
+                                @endif
+                                <div class="__inner">
+                                    <div class="row">
+                                        @if(Cart::instance('saveforlater')->count() > 0)
+                                            @foreach (Cart::instance('saveforlater')->content() as $product)
+                                            <!-- start item -->
+                                                <div class="col-12 col-sm-6 col-lg-3">
+                                                    <div class="__item">
+                                                        <figure class="__image">
+                                                            <a href="{{ route('product_details',encrypt($product->model->id)) }}">
+                                                                @if($product->model->image->filename)
+                                                                    <img  src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
+                                                                    data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
+                                                                @else
+                                                                    <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                    data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                                @endif
+
+                                                            </a>
+                                                        </figure>
+
+                                                        <div class="__content">
+                                                            <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->model->id)) }}">{{ $product->model->name }}</a></h4>
+                                                            <div class="rating">
+                                                                <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                                                <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                                                <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                                                <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                                                <span class="rating__item"><i class="fontello-star"></i></span>
+                                                            </div>
+                                                            <div class="stock-info in-stock">
+                                                                <p class="availability">{{ __("Admin/site.status") }} :
+                                                                    <b class="text {{ $product->model->in_stock ==1 ?'text-success':'text-danger' }}">
+                                                                        {{ $product->model->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
+                                                                    </b>
+                                                                </p>
+                                                            </div>
+                                                            @if($product->model->special_price >0)
+                                                                <div class="product-price">
+                                                                    <span class="product-price__item product-price__item--old">{{ number_format($product->model->price, 2) }} $</span>
+                                                                    <span class="product-price__item product-price__item--new">{{ number_format($product->model->special_price, 2) }} $</span>
+                                                                </div>
+                                                            @else
+                                                                <div class="product-price">
+                                                                    <span class="product-price__item product-price__item--new">{{ number_format($product->model->price, 2) }} $</span>
+                                                                </div>
+                                                            @endif
+                                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                            wire:click.prevent=' moveProductFromSaveForLaterToCart("{{ $product->rowId }}")' > {{ __('Admin/site.addtocart') }}
+                                                            </button>
+                                                            <a class="__remove" href="#" aria-label="Remove this item"
+                                                            wire:click.prevent="DeleteFromSaveForLater('{{ $product->rowId }}')"
+                                                            style="color: #e71d1d; font-size: 20px; padding: 10px;">
+                                                            <i class="fontello-cancel"></i>
+                                                            </a>
+                                                        </div>
+                                                        @if($product->model->special_price >0)
+                                                        <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
+                                                        @else
+                                                        <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            <!-- end item -->
+                                            @endforeach
+                                        @else
+                                          <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end goods -->
                         </form>
                     </div>
                     <!-- start cart -->

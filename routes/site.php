@@ -47,6 +47,13 @@ Route::group(
             route::get('/user/ownprofile',Livewire\front\User\UserProfile::class)->name('user.ownprofile'); //user profile
             route::get('/user/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass'); //user change password
 
+            // Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');               //cart
+            // Route::get('/wishlist',Livewire\front\WishlistComponent::class)->name('product.wishlist');   //wishlist
+            // Route::get('/checkout',Livewire\front\Checkout::class)->name('checkout');                    //checkout
+        });
+
+        Route::middleware(['auth:vendor','auth'])->group(function () {
+
             Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');               //cart
             Route::get('/wishlist',Livewire\front\WishlistComponent::class)->name('product.wishlist');   //wishlist
             Route::get('/checkout',Livewire\front\Checkout::class)->name('checkout');                    //checkout
