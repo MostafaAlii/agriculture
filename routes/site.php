@@ -28,10 +28,11 @@ Route::group(
         route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                         // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
 
-        //------------------------------------------ start blogs comments----------------------------------------
-        Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store']);//add &replay
+        //------------------------------------------ start blogs & products comments----------------------------------------
+        Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store_blog']);//add &replay (blog)
+        Route::post('/products/{product}/comments', [CommentsController::class, 'store_product']);//add &replay (product)
         Route::delete('/comments/{comment}', [CommentsController::class, 'destroy']); // url: /comments/1
-        //------------------------------------------ end blogs comments----------------------------------------
+        //------------------------------------------ end blogs & products comments----------------------------------------
 
 
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');             // contact us

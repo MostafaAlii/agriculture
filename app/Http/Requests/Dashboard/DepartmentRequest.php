@@ -33,7 +33,7 @@ class DepartmentRequest extends FormRequest {
         return [
             'name.required'         => trans('Admin\validation.required'),            
             'name.regex'            => trans('Admin\validation.regex'),
-            'name.unique'           =>  trans('Admin/validation.unique'),
+            'name.unique'           =>  trans('Admin\validation.unique'),
             'parent_id.required'    => trans('Admin\validation.required'),
 
             'country_id.required'   => trans('Admin\validation.required'),

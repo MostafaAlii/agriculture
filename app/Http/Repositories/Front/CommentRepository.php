@@ -9,22 +9,10 @@ use App\Http\Interfaces\Front\CommentInterface;
 class CommentRepository implements CommentInterface{
 
 
-    public function store($blog,$request): RedirectResponse {
+    public function store_blog($blog,$request,$commentable_type='App\Models\Blog'): RedirectResponse {
 
         try{
             $data = $request->validated();
-
-            // ($request->from=='replay')?$parent_id=$request->comment_id:$parent_id='';
-            // $blog->comments()->create([
-
-            //     'parent_id'     => $parent_id,
-            //     'name'          => $data['name'],
-            //     'email'         => $data['email'],
-            //     'image'         => '',
-            //     'comment'       => $data['comment'],
-
-            // ]);
-
 
             if(Auth::guard('vendor')->user()){
                 $name=Auth::guard('vendor')->user()->firstname;
@@ -42,12 +30,10 @@ class CommentRepository implements CommentInterface{
                 $image=Auth::guard('admin')->user()->image->filename;
             }
 
-            // dd($name.'   ,   '.$email);
-
             $comment = new Comment();
             ($request->from=='replay')?$comment->parent_id=$request->comment_id:'';
             $comment->commentable_id    = $blog->id;
-            $comment->commentable_type  = 'App\Models\Blog';
+            $comment->commentable_type  = $commentable_type;
             $comment->name              = $name;
             $comment->email             = $email;
             $comment->image             = $image;
@@ -55,16 +41,31 @@ class CommentRepository implements CommentInterface{
             $comment->save();
 
 
-            return redirect()->back()->with(['success'=>__('website\comments.add_done')]);
+            return redirect()->back()->with(
+                [
+                    'success'       => trans('Website/comments.add_done'),
+                    'div_active'    => 'allow',
+                ]
+            );
 
          } catch (\Exception $ex) {
-            return redirect()->back()->with(['error'=>__('website\comments.error')]);
+            return redirect()->back()->withErrors(['error'=> __('Website/comments.error')]);
          }
+    }
+
+
+    public function store_product($product,$request): RedirectResponse {
+        return $this->store_blog($product,$request,'App\Models\Product');
     }
 
     public function destroy($comment): RedirectResponse
     {
-        $comment->delete();
-        return back();
+        try{
+            $comment->delete();
+            return redirect()->back()->withErrors(['error'=> __('Website/comments.delete_done')]);
+            return back();
+        }catch (\Exception $ex) {
+            return redirect()->back()->withErrors(['error'=> __('Website/comments.delete_error')]);
+         }
     }
 }
