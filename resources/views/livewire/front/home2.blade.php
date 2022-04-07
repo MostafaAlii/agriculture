@@ -553,24 +553,24 @@
                                 <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="100" data-aos-offset="0">
                                     <figure class="__image">
                                         @if($blog->image->filename)
-                                            <img class="lazy" src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
+                                            <img  src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             alt="demo" />
                                         @else
-                                           <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}"
+                                           <img  src="{{ asset('frontassets/img/blank.gif') }}"
                                            data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->admin->firstname }}</a></p>
+                                        <p class="__category"><a href="{{ route('blogdetails',encrypt($blog->id)) }}">{{ $blog->admin->firstname }}</a></p>
 
-                                        <h3 class="__title h5"><a href="{{ route('blogdetails',$blog->id) }}">{{ $blog->title }}</a></h3>
+                                        <h3 class="__title h5"><a href="{{ route('blogdetails',encrypt($blog->id)) }}">{{ $blog->title }}</a></h3>
 
                                         <p>
                                             {{ Str::limit($blog->body,50,) }}
                                         </p>
 
-                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('blogdetails',$blog->id) }}">{{ __('website\home.readmore')}}</a>
+                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('blogdetails',encrypt($blog->id)) }}">{{ __('website\home.readmore')}}</a>
                                     </div>
 
                                     <span class="__date-post">

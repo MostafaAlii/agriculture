@@ -27,23 +27,23 @@
     <!-- start section -->
     <section class="section">
         <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
-            <img class="lazy" width="286" height="280" src="img/blank.gif" data-src="img/decor-el_1.jpg" alt="demo"/>
+            <img class="lazy" width="286" height="280" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_1.jpg') }}" alt="demo"/>
         </div>
 
         <div class="decor-el decor-el--2" data-jarallax-element="-70" data-speed="0.2">
-            <img class="lazy" width="99" height="88" src="img/blank.gif" data-src="img/decor-el_2.jpg" alt="demo"/>
+            <img class="lazy" width="99" height="88" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_2.jpg') }}" alt="demo"/>
         </div>
 
         <div class="decor-el decor-el--3" data-jarallax-element="-70" data-speed="0.2">
-            <img class="lazy" width="115" height="117" src="img/blank.gif" data-src="img/decor-el_3.jpg" alt="demo"/>
+            <img class="lazy" width="115" height="117" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_3.jpg') }}" alt="demo"/>
         </div>
 
         <div class="decor-el decor-el--4" data-jarallax-element="-70" data-speed="0.2">
-            <img class="lazy" width="84" height="76" src="img/blank.gif" data-src="img/decor-el_4.jpg" alt="demo"/>
+            <img class="lazy" width="84" height="76" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_4.jpg') }}" alt="demo"/>
         </div>
 
         <div class="decor-el decor-el--5" data-jarallax-element="-70" data-speed="0.2">
-            <img class="lazy" width="248" height="309" src="img/blank.gif" data-src="img/decor-el_5.jpg" alt="demo"/>
+            <img class="lazy" width="248" height="309" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_5.jpg') }}" alt="demo"/>
         </div>
 
         <div class="container">
@@ -230,18 +230,18 @@
                                                         <div class="__item">
                                                             <figure class="__image">
                                                                 @if($product->model->image->filename)
-                                                                    <a href="{{ route('product_details',$product->model->id) }}">
-                                                                        <img class="lazy" width="188" src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
+                                                                    <a href="{{ route('product_details',encrypt($product->model->id)) }}">
+                                                                        <img  width="188" src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
                                                                     data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
                                                                     </a>
                                                                 @else
-                                                                    <img class="lazy" width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                    <img  width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                                     data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                                 @endif
                                                             </figure>
 
                                                             <div class="__content">
-                                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->model->id) }}">{{ $product->model->name }}</a></h4>
+                                                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->model->id)) }}">{{ $product->model->name }}</a></h4>
 
                                                                 <div class="__category"><a href="#">
                                                                     @foreach ($product->model->categories as $category)
@@ -269,7 +269,7 @@
                                                                     {{ __('Admin/site.addtocart') }}
                                                                 </a>
                                                 {{-- wishlist route ******************* ***************************************--}}
-                                        
+
                                                                     <div class="product-wish">
                                                                         <a href="#" wire:click.prevent=" removeWishlist({{ $product->model->id }}) ">
                                                                             <i class="fa fa-heart fill-heart"></i>
@@ -288,7 +288,7 @@
                                                 @endforeach
 
                                             @else
-                                               <h4> No items in wishlist </h4>
+                                            <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
                                             @endif
                                 </div>
                             </div>
@@ -307,8 +307,8 @@
                                 <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
                             </ul> --}}
 
-                            {{-- @if (count($products))
-                            {{ $products->links('page-links') }}
+                            {{-- @if (count($item))
+                            {{ $item->links('page-links') }}
                             @endif --}}
                         </nav>
                         <!-- end pagination -->

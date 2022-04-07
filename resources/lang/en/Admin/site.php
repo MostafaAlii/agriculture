@@ -149,4 +149,7 @@ return [
     'outstock'=>'Out Of Stock',
     'addwish'=>'Add To Wishlist',
     'removewish'=>'Remove From Wishlist',
+    'savelater'=>'Save For Later',
+    'itemsave'=>'There is ',
+    'inbox'=>'Products In Save For Later',
 ];

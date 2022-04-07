@@ -13,7 +13,7 @@
                             <div class="posts">
                                 <!-- start item -->
                                 <div class="__item">
-                                    <img class="lazy" width="100%" src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
+                                    <img  width="100%" src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                     data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}" alt="demo" />
 
                                     <div class="__content">

@@ -12,14 +12,24 @@
     <li> <a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a> </li>
     <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
     <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
+    @if (Auth::guard('vendor')->user())
+        <li class="li-cart">
+            @livewire('front.cart-count-component')
+        </li>
+        <li class="li-cart">
+            @livewire('front.wishlist-count-component')
+        </li>
+        <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
+    {{-- @elseif (Auth::guard('web')->user())
     <li class="li-cart">
         @livewire('front.cart-count-component')
     </li>
     <li class="li-cart">
         @livewire('front.wishlist-count-component')
     </li>
+    <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li> --}}
 
-    <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
+    @endif
         {{--  start links in navebar *************************************************************************--}}
         @check_guard
             <li class="has-submenu">

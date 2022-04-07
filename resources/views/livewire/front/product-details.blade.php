@@ -122,44 +122,54 @@
                                             </ul>
                                         </div> --}}
 
-                                        <form class="__add-to-cart" action="#">
-                                            <div class="quantity-counter js-quantity-counter">
-                                                <span class="__btn __btn--minus"  wire:click.prevent='decreaseQty' ></span>
-                                                <input class="__q-input"
-                                                type="text"
-                                                name="product-quatity"
-                                                min="1"
-                                                {{-- max="{{ $item->model->qty }}" --}}
-                                                {{-- value="{{ $item->qty }}" --}}
-                                                value="1"
-                                                onkeydown="return false"
-                                                wire:model='qty' />
-                                                <span class="__btn __btn--plus" wire:click.prevent='increaseQty' ></span>
-                                            </div>
-                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                            type="submit" role="button"
-                                            wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
-                                            <i class="fontello-shopping-bag"></i>
-                                                {{ __('Admin/site.addtocart') }}
-                                            </button>
+                                        @if (Auth::guard('vendor')->user() )
+                                            @if($product->in_stock ==1)
+                                                <form class="__add-to-cart" action="#">
+                                                    <div class="quantity-counter js-quantity-counter">
+                                                        <span class="__btn __btn--minus"  wire:click.prevent='decreaseQty' ></span>
+                                                        <input class="__q-input"
+                                                        type="text"
+                                                        name="product-quatity"
+                                                        min="1"
+                                                        {{-- max="{{ $item->model->qty }}" --}}
+                                                        {{-- value="{{ $item->qty }}" --}}
+                                                        value="1"
+                                                        onkeydown="return false"
+                                                        wire:model='qty' />
+                                                        <span class="__btn __btn--plus" wire:click.prevent='increaseQty' ></span>
+                                                    </div>
 
-                                            @if($witems->contains($product->id))
-                                                <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                type="submit" role="button"
-                                                wire:click.prevent=" removeWishlist({{ $product->id }})">
-                                                <i class="fa fa-heart fill-heart"></i>
-                                                    {{ __('Admin/site.removewish') }}
-                                                </button>
-                                            @else
-                                                <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                type="submit" role="button"
-                                                wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
-                                                    <i class="fa fa-heart"></i>
-                                                    {{ __('Admin/site.addwish') }}
-                                                </button>
+                                                        <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                        type="submit" role="button"
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                        <i class="fontello-shopping-bag"></i>
+                                                            {{ __('Admin/site.addtocart') }}
+                                                        </button>
+
+                                                        @if($witems->contains($product->id))
+                                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                            type="submit" role="button"
+                                                            wire:click.prevent=" removeWishlist({{ $product->id }})">
+                                                            <i class="fa fa-heart fill-heart"></i>
+                                                                {{ __('Admin/site.removewish') }}
+                                                            </button>
+                                                        @else
+                                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                            type="submit" role="button"
+                                                            wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                                <i class="fa fa-heart"></i>
+                                                                {{ __('Admin/site.addwish') }}
+                                                            </button>
+                                                        @endif
+                                                </form>
                                             @endif
-
-                                        </form>
+                                         @elseif(Auth::guard('web')->user())
+                                            {{-- <a href="#" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.vendor')</a> --}}
+                                        @elseif(Auth::guard('admin')->user())
+                                            {{-- <a href="#" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.vendor')</a> --}}
+                                        @else
+                                            <a href="{{ route('user.login2') }}" class="custom-btn custom-btn--medium custom-btn--style-2" style="margin-top:20px ">@lang('Website/home.login')</a>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -404,12 +414,12 @@
                                     <div class="col-12 col-sm-6 col-lg-4">
                                         <div class="__item">
                                             <figure class="__image">
-                                                <a href="{{ route('product_details',$product->id) }}">
+                                                <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                     @if($product->image->filename)
-                                                        <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                        <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                     @else
-                                                        <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                        <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                         data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                     @endif
 
@@ -417,7 +427,7 @@
                                             </figure>
 
                                             <div class="__content">
-                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
 
 
@@ -445,23 +455,25 @@
                                                         <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
                                                     </div>
                                                 @endif
-                                    {{-- wishlist route ******************* ***************************************--}}
-                                    <div class="product-wish">
-                                        @if($witems->contains($product->id))
-                                            <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
-                                              <i class="fa fa-heart fill-heart"></i>
-                                            </a>
-                                        @else
-                                          <a href="#"
-                                             wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
-                                             <i class="fa fa-heart"></i>
-                                          </a>
-                                        @endif
-                                    </div>
-                {{-- wishlist route ******************* ***************************************--}}
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
-                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
-                                                    <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                @if (Auth::guard('vendor')->user() )
+                                                        {{-- wishlist route ******************* ***************************************--}}
+                                                        <div class="product-wish">
+                                                            @if($witems->contains($product->id))
+                                                                <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
+                                                                <i class="fa fa-heart fill-heart"></i>
+                                                                </a>
+                                                            @else
+                                                            <a href="#"
+                                                                wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                                <i class="fa fa-heart"></i>
+                                                            </a>
+                                                            @endif
+                                                        </div>
+                                                        {{-- wishlist route ******************* ***************************************--}}
+                                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                            <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                @endif
                                             </div>
                                             @if($product->special_price >0)
                                                <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
@@ -472,54 +484,7 @@
                                     </div>
                                     <!-- end item -->
                                     @endforeach
-                                    {{-- <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="160" src="img/blank.gif" data-src="img/goods_img/3.jpg" alt="demo" />
-                                            </figure>
 
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="#">Red Apple</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">0,99 $</span>
-                                                    <span class="product-price__item product-price__item--old">2200$</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>Add to cart</a>
-                                            </div>
-
-                                            <span class="product-label product-label--hot">hot</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item -->
-
-                                    <!-- start item -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="__item">
-                                            <figure class="__image">
-                                                <img class="lazy" width="190" src="img/blank.gif" data-src="img/goods_img/4.jpg" alt="demo" />
-                                            </figure>
-
-                                            <div class="__content">
-                                                <h4 class="h6 __title"><a href="#">Strawberry</a></h4>
-
-                                                <div class="__category"><a href="#">Fruits</a></div>
-
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">2,10 $</span>
-                                                </div>
-
-                                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"><i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
-                                            </div>
-
-                                            <span class="product-label product-label--sale">Sale</span>
-                                        </div>
-                                    </div>
-                                    <!-- end item --> --}}
                                 </div>
                             </div>
                         </div>
@@ -674,12 +639,12 @@
                                         <div class="row no-gutters">
                                             <div class="col-auto __image-wrap">
                                                 <figure class="__image">
-                                                    <a href="{{ route('product_details',$product->id) }}">
+                                                    <a href="{{ route('product_details',encrypt($product->id)) }}">
                                                         @if($product->image->filename)
-                                                            <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                            <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                         @else
-                                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                            <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                             data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                         @endif
 
@@ -688,7 +653,7 @@
                                             </div>
 
                                             <div class="col">
-                                                <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
+                                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
                                                 <div class="rating">
                                                     <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
