@@ -17,8 +17,8 @@ class BlogDetails extends Component
     {
         $blog = Blog::findorfail($this->blog_id);
          //$blog = Blog::findorfail($this->blog_id)->withCount('comments')->dd();
-         $comments = $blog->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(6);
-        // in blog_detail blade ---->>>>>>  {{ $comments->links() }}
+         $comments = $blog->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);
+        // in blog_detail blade ---->>>>>>  {{ $comments->links() }} 
         //dd($comments->count());
         return view('livewire.front.blog-details',compact('blog','comments'))->layout('front.layouts.master3');
     }

@@ -176,15 +176,19 @@
                                 <div class="col-12">
                                     <div class="spacer py-5 py-md-9"></div>
 
+                                        <input type="hidden" id="show_comment_or_no" value="<?php echo Session::get('div_active');?>">
+
                                     <!-- start tab -->
                                     <div class="tab-container">
                                         <nav class="tab-nav">
-                                            <a href="#">Description</a>
-                                            <a href="#">Reviews</a>
+                                            <a href="#" id="myDIV">Description</a>
+                                            <!-- <a href="#" <?php /*if(Session::get('div_active')=='allow'){echo'class="active"';}*/?>>{{ __('website\comments.comments') }}</a> -->
+                                            <a href="#" >{{ __('website\comments.comments') }}</a>
                                         </nav>
+                                       
 
                                         <div class="tab-content">
-                                            <div class="tab-content__item is-visible">
+                                            <div id="myDIV2" class="tab-content__item">
                                                 <p>
                                                     {{ $product->description }}
                                                 </p>
@@ -218,180 +222,21 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-content__item">
-                                                <!-- start comments list -->
-                                                <ul class="comments-list">
-                                                    <li class="comment">
-                                                        <table>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="d-none d-lg-block">
-
-                                                                        <div class="comment__author-img">
-                                                                            <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                                        </div>
-
-                                                                    </div>
-                                                                </td>
-
-                                                                <td width="100%">
-                                                                    <time class="comment__date-post">April 12, 2017</time>
-
-                                                                    <div class="d-flex align-items-center mb-3 mb-lg-0">
-                                                                        <div class="d-block d-lg-none">
-
-                                                                            <div class="comment__author-img">
-                                                                                <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <span class="comment__author-name">Jason Smith</span>
-
-                                                                        <div class="rating  d-none d-sm-block">
-                                                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                            <span class="rating__item"><i class="fontello-star"></i></span>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="rating  mb-2 d-sm-none">
-                                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                        <span class="rating__item"><i class="fontello-star"></i></span>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td></td>
-                                                                <td>
-                                                                    <p>
-                                                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. Susp endisse ultricies nisi vel quam suscipit
-                                                                    </p>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </li>
-
-                                                    <li class="comment">
-                                                        <table>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="d-none d-lg-block">
-
-                                                                        <div class="comment__author-img">
-                                                                            <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                                        </div>
-
-                                                                    </div>
-                                                                </td>
-
-                                                                <td width="100%">
-                                                                    <time class="comment__date-post">April 12, 2017</time>
-
-                                                                    <div class="d-flex align-items-center mb-3 mb-lg-0">
-                                                                        <div class="d-block d-lg-none">
-
-                                                                            <div class="comment__author-img">
-                                                                                <img class="img-fluid lazy" width="70" src="img/blank.gif" data-src="img/avatar.jpg" alt="demo" />
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <span class="comment__author-name">Sam Peters</span>
-
-                                                                        <div class="rating  d-none d-sm-block">
-                                                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                            <span class="rating__item"><i class="fontello-star"></i></span>
-                                                                            <span class="rating__item"><i class="fontello-star"></i></span>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="rating  mb-2 d-sm-none">
-                                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                        <span class="rating__item"><i class="fontello-star"></i></span>
-                                                                        <span class="rating__item"><i class="fontello-star"></i></span>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td></td>
-                                                                <td>
-                                                                    <p>
-                                                                        The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. Susp endisse ultricies nisi vel quam suscipit. Molly Miller nurseryfish Rasbora, pearleye. Lefteye flounder, whale shark angler telescopefish remora mora pelican gulper lake whitefish whale shark
-                                                                    </p>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </li>
-                                                </ul>
-                                                <!-- end comments list -->
-
-                                                <!-- start add review -->
-                                                <div class="__add-review">
-                                                    <h5>Leave a Reply</h5>
-
-                                                    <form action="#">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-6">
-                                                                <div class="input-wrp">
-                                                                    <input class="textfield" type="text" value="" placeholder="Name *" />
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-12 col-md-6">
-                                                                <div class="input-wrp">
-                                                                    <input class="textfield" type="text" value="" placeholder="Email *" inputmode="email" x-inputmode="email" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="input-wrp">
-                                                            <textarea class="textfield" placeholder="Your review *"></textarea>
-                                                        </div>
-
-                                                        <div class="spacer py-md-5"></div>
-
-                                                        <div class="row align-items-sm-center justify-content-sm-between">
-                                                            <div class="col-12 col-sm-auto">
-                                                                <fieldset class="rating">
-                                                                    <span class="__note">Please rate:</span>
-
-                                                                    <input type="radio" id="star5" name="rating" value="5" />
-                                                                    <label class="rating__item" for="star5" title="Awesome - 5 stars"><i class="fontello-star"></i></label>
-
-                                                                    <input type="radio" id="star4" name="rating" value="4" />
-                                                                    <label class="rating__item" for="star4" title="Pretty good - 4 stars"><i class="fontello-star"></i></label>
-
-                                                                    <input type="radio" id="star3" name="rating" value="3" />
-                                                                    <label class="rating__item" for="star3" title="Meh - 3 stars"><i class="fontello-star"></i></label>
-
-                                                                    <input type="radio" id="star2" name="rating" value="2" />
-                                                                    <label class="rating__item" for="star2" title="Kinda bad - 2 stars"><i class="fontello-star"></i></label>
-
-                                                                    <input type="radio" id="star1" name="rating" value="1" />
-                                                                    <label class="rating__item" for="star1" title="Sucks big time - 1 star"><i class="fontello-star"></i></label>
-                                                                </fieldset>
-                                                            </div>
-
-                                                            <div class="col-12 col-sm-auto">
-                                                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">post comment</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- end add review -->
+                                            <!-- <div class="tab-content__item <?php /*if(Session::get('div_active')=='allow'){echo'is-visible';}*/?> "> -->
+                                            <div class="tab-content__item ">
+                                             <!-- ###################################################################3 -->
+                                                <?php
+                                                    $type='products';
+                                                    $type_id=$product->id;
+                                                ?>
+                                                @include('livewire.front.comments')
+                                            <!-- ###################################################################3 -->
                                             </div>
+                                            
+                                           
+
+
+                                            
                                         </div>
                                     </div>
                                     <!-- end tab -->
@@ -711,3 +556,20 @@
         </section>
         <!-- end section -->
 </div>
+<script>
+    // this for show comments tab after adding and hide description tab
+    
+    let c=document.getElementById('show_comment_or_no').value;
+
+    let element = document.getElementById("myDIV").classList;
+   // alert(element);
+    //element.classList.remove("active");
+
+    let element2 = document.getElementById("myDIV2");
+    //alert(element2);
+   // element2.classList.remove("is-visible");
+    element2.removeAttribute("visibility");
+    //alert(c);
+    //alert(element.classList);
+  
+</script>

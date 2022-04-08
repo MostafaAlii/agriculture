@@ -3,7 +3,7 @@
     $new = [
         'childs' => $child->childs,
         'padding' => $padding + 20,
-        'blod_id' => $blog->id,
+        'type_id' => $type_id,
     ];
     ?>
     <tr>
@@ -100,26 +100,30 @@
             <center>
                 <div id="replay_{{ $child->id }}" style="display:none">
                     <form class="auth-form" name="form-login" method="POST"
-                        action="/blogs/{{ $blog_id }}/comments">
+                        action="/{{$type}}/{{ $type_id }}/comments">
                         @csrf
 
-                        <div class="input-wrp">
-                            <textarea name="comment" class="textfield" cols="30" rows="5"
-                                placeholder="{{ __('website\comments.write_comment') }}"
-                                required>{{ old('comment') }}</textarea>
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="input-wrp">
+                                    <textarea name="comment" class="textfield" cols="30" rows="5"
+                                        placeholder="{{ __('website\comments.write_comment') }}"
+                                        required>{{ old('comment') }}</textarea>
+                                </div>
+                                @error('comment')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
 
-                        </div>
-                        @error('comment')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-
-                        <input type="hidden" name="from" value="replay">
-                        <input type="hidden" name="comment_id" value="{{ $child->id }}">
-
-                        <div class="d-table mt-8">
-                            <div class="d-table-cell align-middle">
-                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                                    role="button">{{ __('website\comments.publish') }}</button>
+                                <input type="hidden" name="from" value="replay">
+                                <input type="hidden" name="comment_id" value="{{ $child->id }}">
+                            </div>
+                            <div class="col-3">
+                                <div class="d-table mt-8">
+                                    <div class="d-table-cell align-middle">
+                                        <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
+                                            role="button">{{ __('website\comments.publish') }}</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

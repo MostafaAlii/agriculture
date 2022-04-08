@@ -34,7 +34,6 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <input type="hidden" name="page_id" value="1" />
                         </div>
                         <div class="modal-body">
                             <h5>{{ __('Admin/site.warning') }}</h5>

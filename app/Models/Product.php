@@ -23,13 +23,14 @@ class Product extends Model {
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',
         'status' => 'boolean',
+        'deleted_at' => 'datetime:Y/m/d',
     ];
 
     protected $dates = [
         'special_price_start',
         'special_price_end',
-        //'start_date',
-        //'end_date',
+        'start_date',
+        'end_date',
         'deleted_at',
     ];
 
@@ -52,5 +53,17 @@ class Product extends Model {
 
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function comments() {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function scopeProductWithOutTrashed($query) {
+        return $query->whereNull('deleted_at')->get();
+    }
+
+    public function scopeProductTrashed($query) {
+        return $query->onlyTrashed()->get();
     }
 }

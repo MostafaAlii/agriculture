@@ -56,4 +56,11 @@ return [
     'product_in_stock'                           =>                 'متوفر بالمخزن',
     'product_out_ofStock'                        =>                 'غير متوفر',
     'product_update_product_stock_qty_successfully'=>               'تم اضافة بيانات المنتج للمخزن بنجاح',
+    'trashed_product'                             =>                'المحذوفــات',
+    'restore'                                     =>                'استرجــاع',
+    'trashed_product_details'                     =>                'المنتجات المحذوفة',
+    'product_deleted_at'                          =>                'وقت الحــذف',
+    'product_restore_successfully'                =>                'تم استرجاع المنتج بنجاح',
+    'restore_msg'                                 =>                'هل تود الاسترجاع ؟',
+    'product_restore_title'                       =>                'استرجاع المنتــج',
 ];

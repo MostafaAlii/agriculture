@@ -1,15 +1,17 @@
 <?php
 namespace App\Http\Repositories\Admin;
-use App\Models\Product;
-use App\Models\Farmer;
-use App\Http\Interfaces\Admin\ProductInterface;
-use App\Models\Category;
 use App\Models\Tag;
-use Yajra\DataTables\DataTables;
+use App\Models\Farmer;
+use App\Models\Product;
 use App\Traits\UploadT;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Crypt;
+use App\Http\Interfaces\Admin\ProductInterface;
+
 class ProductRepository implements ProductInterface {
     use UploadT;
     public function index() {
@@ -17,8 +19,7 @@ class ProductRepository implements ProductInterface {
     }
 
     public function data() {
-        //get all Products data
-        $products = Product::withoutTrashed()->get();
+        $products = Product::productWithOutTrashed();
         //use datatables (yajra) to handel this data
         return DataTables::of($products)
             ->addColumn('record_select',function (Product $products) {
@@ -44,6 +45,38 @@ class ProductRepository implements ProductInterface {
             })
             ->addColumn('actions',function (Product $product) {
                 return view('dashboard.admin.products.data_table.actions', compact('product'));
+            })
+            ->rawColumns(['record_select','actions'])
+            ->toJson();
+    }
+
+    public function trashed_data() {
+        $products = Product::productTrashed();
+        //use datatables (yajra) to handel this data
+        return DataTables::of($products)
+            ->addColumn('record_select',function (Product $products) {
+                return view('dashboard.admin.products.data_table.record_select', compact('products'));
+            })
+            ->addColumn('farmer_name', function (Product $product) {
+                return $product->farmer->firstname.' '.$product->farmer->lastname;
+            })
+            ->editColumn('status', function (Product $product) {
+                return view('dashboard.admin.products.data_table.status', compact('product'));
+            })
+             ->addColumn('category_name', function (Product $product) {
+                return view('dashboard.admin.products.data_table.related_category', compact('product'));
+             })
+             ->editColumn('price', function (Product $product) {
+                return view('dashboard.admin.products.data_table.price_formated', compact('product'));
+            })
+            /*->editColumn('deleted_at', function (Product $product) {
+                return $product->deleted_at->'datetime:Y-m-d;
+            })*/
+            ->addColumn('image', function (Product $product) {
+                return view('dashboard.admin.products.data_table.image', compact('product'));
+            })
+            ->addColumn('actions',function (Product $product) {
+                return view('dashboard.admin.products.data_table.trashed_actions', compact('product'));
             })
             ->rawColumns(['record_select','actions'])
             ->toJson();
@@ -187,6 +220,22 @@ class ProductRepository implements ProductInterface {
         }
     }
 
+    public function restore() {
+        return view('dashboard.admin.products.restore');
+    }
+
+    public function updateRestore($request, $id) {
+        try {
+            $real_id= Crypt::decrypt($request->id);
+            Product::withTrashed()->whereId($real_id)->restore();
+            toastr()->success(__('Admin/products.product_restore_successfully'));
+            return redirect()->route('products');
+        } catch(\Exception $ex){
+            toastr()->error(__('Admin/general.wrong'));
+            return redirect()->route('products.trashed');
+        }
+    }
+
     public function destroy($id) {
         try{
             $real_id= Crypt::decrypt($id);
@@ -199,11 +248,23 @@ class ProductRepository implements ProductInterface {
         }
     }
 
+    public function forceDestroy($id) {
+        try{
+            $real_id= Crypt::decrypt($id);
+            Product::where('id',$real_id)->forceDelete(); //force_delete
+            toastr()->error(__('Admin/products.delete_done'));
+            return redirect()->route('products.trashed');
+        } catch (\Exception $e) {
+           toastr()->error(__('Admin/products.delete_not_allowed'));
+           return redirect()->route('products.trashed');
+        }
+    }
+
     public function bulkDelete($request){
         try{
             if($request->delete_select_id){
                 $all_ids = explode(',',$request->delete_select_id);
-                Product::whereIn('id',$all_ids)->delete(); //soft_delete
+                Product::whereIn('id',$all_ids)->forceDelete(); //soft_delete
                 toastr()->error(__('Admin/products.delete_done'));
                 return redirect()->route('products');
             }else{
