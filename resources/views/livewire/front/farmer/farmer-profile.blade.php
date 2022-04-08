@@ -20,6 +20,14 @@
         </div>
 
         <div class="container">
+            @if (session()->has('message'))
+            <div class="alert alert-success" role="alert">
+                <strong style="padding-right: 35px;">{{ session()->get('message') }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                     <h2>@lang('website\home.my_profile')</h2>
