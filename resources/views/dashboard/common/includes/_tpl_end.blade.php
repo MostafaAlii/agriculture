@@ -1,5 +1,7 @@
-     <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
-     <script src="{{ asset('assets/admin/js/jquery.repeater.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="{{ asset('assets/admin/js/myFun/myFunction.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/jquery.repeater.js')}}"></script>
 
 <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script>
@@ -15,10 +17,10 @@
     <!-- BEGIN: Page JS-->
     <script src="{{ asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js')}}"></script>
     <!-- END: Page JS-->
-        <!-- BEGIN: Page Vendor JS-->
-        <script src="{{ asset('assets/admin/vendors/js/charts/chart.min.js') }}"></script>
-        <script src="{{ asset('assets/admin/vendors/js/charts/apexcharts/apexcharts.min.js') }}"></script>
-       <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('assets/admin/vendors/js/charts/chart.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/vendors/js/charts/apexcharts/apexcharts.min.js') }}"></script>
+    <!-- END: Page Vendor JS-->
     <!-- BEGIN: Page JS-->
     {{-- <script src="{{ asset('assets/admin/js/scripts/pages/material-app.js') }}"></script> --}}
     <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-crypto.js') }}"></script>
@@ -27,10 +29,9 @@
     <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js')}}"></script>
     <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}"></script>
     <script src="{{asset('assets/admin/vendors/js/forms/toggle/switchery.min.js')}}" type="text/javascript"></script>
-     <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>
-     <script src="{{asset('assets/admin/jstree/jstree.wholerow.js')}}" type="text/javascript"></script>
-     <script src="{{asset('assets/admin/jstree/jstree.checkbox.js')}}" type="text/javascript"></script>
-
+    <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/admin/jstree/jstree.wholerow.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/admin/jstree/jstree.checkbox.js')}}" type="text/javascript"></script>
      @toastr_js
     @toastr_render
     {{-- image preview --}}
@@ -150,8 +151,6 @@
         });
     </script>
       {{-- test bulk delete 2 --}}
-
-
     @yield('js')
     {{-- @stack('js') --}}
 

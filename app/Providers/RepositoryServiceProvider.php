@@ -29,6 +29,7 @@ use App\Http\Repositories\Admin\TagRepository;
 
 
 use App\Http\Interfaces\Admin\ProductInterface;
+use App\Http\Interfaces\Admin\ProductCouponInterface;
 
 use App\Http\Interfaces\Admin\VillageInterface;
 
@@ -59,6 +60,7 @@ use App\Http\Repositories\Admin\SliderRepository;
 
 use App\Http\Repositories\Admin\CountryRepository;
 use App\Http\Repositories\Admin\ProductRepository;
+use App\Http\Repositories\Admin\ProductCouponRepository;
 
 use App\Http\Repositories\Admin\ProfileRepository;
 use App\Http\Repositories\Admin\VillageRepository;
@@ -78,7 +80,6 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(OrchardInterface::class, OrchardRepository::class);
-
         $this->app->bind(TreeInterface::class, TreeRepository::class);
         $this->app->bind(TreeTypeInterface::class, TreeTypeRepository::class);
         $this->app->bind(LandCategoryInterface::class, LandCategoryRepository::class);
@@ -105,6 +106,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AttributeInterface::class, AttributeRepository::class);
         $this->app->bind(OptionInterface::class, OptionRepository::class);
         $this->app->bind(ProductInterface::class, ProductRepository::class);
+        $this->app->bind(ProductCouponInterface::class, ProductCouponRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
 
 

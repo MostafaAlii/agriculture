@@ -15,6 +15,7 @@ use App\Http\Controllers\Dashboard\Admin\OptionController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
 use App\Http\Controllers\Dashboard\Admin\ProductController;
+use App\Http\Controllers\Dashboard\Admin\ProductCouponController;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
 use App\Http\Controllers\Dashboard\Admin\VillageController;
@@ -223,9 +224,14 @@ Route::group(
                     Route::delete('/product_delete/{id}', [ProductController::class,'destroy'])->name('product_delete');
                     Route::delete('/product_destroy/{id}', [ProductController::class,'forceDestroy'])->name('product_force_delete');
                     Route::delete('/products/bulk_delete/{ids}', [ProductController::class,'bulkDelete'])->name('products.bulk_delete');
-
                 });
                 /********************************* End Products Routes ************************************/
+
+                /********************************* Start Coupon Routes ************************************/
+                //Route::group(['prefix' => 'ProductCoupon'], function () {
+                    Route::resource('ProductCoupons', ProductCouponController::class)->except(['show']);
+                //});
+                /********************************* End Coupon Routes ************************************/
 
                 /********************************* Slider Routes ************************************/
                 Route::resource('sliders', SliderController::class)->except(['show']);

@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Events\Dashboard\MyEvent;
+use App\Http\Controllers\Controller;
 class DashboardController extends Controller {
     public function index() {
-        // return view('dashboard.layouts.dashboard');
-        // return view('dashboard');
+        event(new MyEvent('agricultre project', auth()->user()->firstname . ' ' . auth()->user()->lastname));
         return view('dashboard.admin.dashboard_index');
     }
 }

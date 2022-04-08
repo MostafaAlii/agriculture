@@ -315,13 +315,34 @@
                         <li>
                             <a class="menu-item" href="{{ route('products') }}">
                                 <i class="material-icons">grain</i>
-                                <span data-i18n=""> {{ trans('Admin/products.product_title_in_sidebar') }}</span>
+                                <span data-i18n="products"> {{ trans('Admin/products.product_title_in_sidebar') }}</span>
                             </a>
                         </li>
                         <!-- End Product -->
                     </ul>
                 </li>
                 <!-- End Product Dropdown Menu -->
+
+                <!-- Start ProductCoupons Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">fiber_new</i>
+                        <span class="menu-title" data-i18n="ProductCoupons">
+                            {{ trans('Admin/coupons.coupon_title_in_sidebar') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start ProductCoupons -->
+                        <li>
+                            <a class="menu-item" href="{{ route('ProductCoupons.index') }}">
+                                <i class="material-icons">fiber_new</i>
+                                <span data-i18n="ProductCoupons">
+                                    {{ trans('Admin/coupons.coupon_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End ProductCoupons -->
+                    </ul>
+                </li>
+                <!-- End ProductCoupons Dropdown Menu -->
 
                 <!-- Start options Dropdown Menu -->
                 <li class=" nav-item">
