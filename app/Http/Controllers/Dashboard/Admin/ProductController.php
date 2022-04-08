@@ -20,6 +20,10 @@ class ProductController extends Controller {
         return $this->Data->data();
     }
 
+    public function trashed_data() {
+        return $this->Data->trashed_data();
+    }
+
     public function create() {
         return $this->Data->generalInformation();
     }
@@ -52,8 +56,19 @@ class ProductController extends Controller {
         return $this->Data->additionalStockStore($request);
     }
 
-    public function destroy($id){
+    public function restore() {
+        return $this->Data->restore();
+    }
+
+    public function updateRestore(Request $request, $id) {
+        return $this->Data->updateRestore($request, $id);
+    }
+
+    public function destroy( $id){
         return $this->Data->destroy($id);
+    }
+    public function forceDestroy( $id){
+        return $this->Data->forceDestroy($id);
     }
     public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
