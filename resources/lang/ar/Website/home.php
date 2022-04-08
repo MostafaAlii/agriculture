@@ -45,4 +45,6 @@ return [
    'smspassnotmatch'=>'كلمه المرور غير متطابقه',
    'changeuser'=>'تغيير كلمه المرور للعملاء',
    'changefarmer'=>'تغيير كلمه المرور للمزارعين',
+   'editprofile'=> 'تعديل الملف الشخصى',
+   'profileupdatesms'=> 'تم تعديل البروفيل بنجاح',
 ];
