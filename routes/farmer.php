@@ -3,7 +3,7 @@ use App\Http\Controllers\Dashboard\Farmer\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use App\Http\Controllers\Dashboard\Admin\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Farmer Routes
@@ -36,9 +36,15 @@ Route::group(
             route::get('/product/add',Livewire\front\Farmer\FarmerAddProductComponent::class)->name('farmer.addproduct');
             /********************************* End Admins Pages Routes ************************************/
             route::get('/farmer/ownprofile',Livewire\front\Farmer\FarmerProfile::class)->name('farmer.ownprofile'); //farmer profile
+            route::get('/farmer/ownprofile/edit',Livewire\front\Farmer\FarmerEditProfileComponent::class)->name('farmer.editownprofile'); //user Edit profile
             route::get('/farmer/changepassword',Livewire\front\Farmer\FarmerChangePassword::class)->name('farmer.changepass'); // farmer cahnge password
 
-           
+            // ajax routes ***********************************
+            Route::get('/farmer/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get country provinces
+            Route::get('/farmer/area/{province_id}', [ProfileController::class, 'getArea']);// route ajax for get province areas
+            Route::get('/farmer/state/{area_id}', [ProfileController::class, 'getState']);// route ajax for get areas states
+            Route::get('/farmer/village/{state_id}', [ProfileController::class, 'getVillage']);// route ajax for get state villages
+            /********************************* End Admin & Employee Routes ************************************/
         });
         require __DIR__.'/auth.php';
 

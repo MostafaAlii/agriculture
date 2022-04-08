@@ -27,14 +27,14 @@
                     <!-- start form -->
                     @if($farmer->image->filename)
                         <a class="mr-2" href="#">
-                                <img src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
-                                alt="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
+                                <img src="{{ asset('Dashboard/img/farmers/'. $farmer->image->filename) }}"
+                                alt="{{ asset('Dashboard/img/farmers/'. $farmer->image->filename) }}"
                                 class="users-avatar-shadow rounded-circle img-preview"  width="100%">
                         </a>
                     @else
                         <a class="mr-2" href="#">
-                            <img src="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
-                            alt="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                            <img src="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
+                            alt="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
                             class="users-avatar-shadow rounded-circle img-preview"  width="100%">
                         </a>
                     @endif
@@ -60,6 +60,10 @@
                     <p><b>@lang('Admin/site.village') : </b> {{ $farmer->village->name }}</p>
                     <p><b>@lang('Admin/site.department') : </b> {{ $farmer->department->name }}</p>
                     <!-- end form -->
+                    <a href="{{ route('farmer.editownprofile') }}"
+                    class="custom-btn custom-btn--medium custom-btn--style-1"
+                    >{{ __('Admin/site.edit') }}
+                    </a>
                 </div>
             </div>
         </div>
