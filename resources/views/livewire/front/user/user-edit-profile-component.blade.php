@@ -78,7 +78,7 @@
                                 <div class="col-12 col-md-7 col-lg-6 col-xl-5">
                                     <p><b>@lang('Admin/site.country')  : </b>
                                         <div class="input-wrp">
-                                            <select class="textfield wide js-select2" id="country_id" name="country_id" wire:model='country_id'>
+                                            <select class="textfield wide js-select" id="country_id" name="country_id" wire:model='country_id'>
                                                 <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                 @foreach (\App\Models\Country::get() as $country)
                                                 <option value="{{ $country->id }}" {{$country_id == $country->id ? 'selected':'' }}>
@@ -92,8 +92,13 @@
                                         @enderror</p>
                                     <p><b>@lang('Admin/site.province')  : </b>
                                         <div class="input-wrp">
-                                            <select class="textfield wide js-select2" id="province_id" name="province_id" wire:model='province_id'>
-                                                    <option value="{{ $province_id }}"  > {{ $province_name }}</option>
+                                            <select class="textfield wide js-select" id="province_id" name="province_id" wire:model='province_id'>
+                                                    <option value="{{ $province_id }}"  > {{ $province_name }} </option>
+                                                    @foreach ($provinces as $province)
+                                                    <option value="{{ $province->id }}" {{$province_id == $province->id ? 'selected':'' }}>
+                                                        {{ $province->name }}
+                                                    </option>
+                                                    @endforeach
                                             </select>
                                         </div>
                                         @error('province_id')
@@ -101,8 +106,13 @@
                                         @enderror</p>
                                     <p><b>@lang('Admin/site.area')  : </b>
                                         <div class="input-wrp">
-                                            <select class="textfield wide js-select2" id="area_id" name="area_id" wire:model='area_id'>
+                                            <select class="textfield wide js-select" id="area_id" name="area_id" wire:model='area_id'>
                                                     <option value="{{ $area_id }}"  >{{ $area_name }}</option>
+                                                    @foreach ($areas as $area)
+                                                    <option value="{{ $area->id }}" {{$area_id == $area->id ? 'selected':'' }}>
+                                                        {{ $area->name }}
+                                                    </option>
+                                                    @endforeach
                                             </select>
                                         </div>
                                         @error('area_id')
@@ -110,8 +120,13 @@
                                         @enderror</p>
                                     <p><b>@lang('Admin/site.state')  : </b>
                                         <div class="input-wrp">
-                                            <select class="textfield wide js-select2" id="state_id" name="state_id" wire:model='state_id'>
+                                            <select class="textfield wide js-select" id="state_id" name="state_id" wire:model='state_id'>
                                                     <option value="{{ $state_id }}"  >{{ $state_name }}</option>
+                                                    @foreach ($states as $state)
+                                                    <option value="{{ $state->id }}" {{$state_id == $state->id ? 'selected':'' }}>
+                                                        {{ $state->name }}
+                                                    </option>
+                                                    @endforeach
                                             </select>
                                         </div>
                                         @error('state_id')
@@ -119,8 +134,13 @@
                                         @enderror</p>
                                     <p><b>@lang('Admin/site.village')  : </b>
                                         <div class="input-wrp">
-                                            <select class="textfield wide js-select2" id="village_id" name="village_id" wire:model='village_id'>
+                                            <select class="textfield wide js-select" id="village_id" name="village_id" wire:model='village_id'>
                                                     <option value="{{ $village_id }}"  >{{ $village_name }}</option>
+                                                    @foreach ($villages as $village)
+                                                    <option value="{{ $village->id }}" {{$village_id == $village->id ? 'selected':'' }}>
+                                                        {{ $village->name }}
+                                                    </option>
+                                                    @endforeach
                                             </select>
                                         </div>
                                         @error('village_id')
@@ -128,7 +148,7 @@
                                         @enderror</p>
                                     <p><b>@lang('Admin/site.department')  : </b>
                                         <div class="input-wrp">
-                                            <select class="textfield wide js-select2" id="department_id" name="department_id" wire:model='department_id'>
+                                            <select class=" textfield wide js-select" id="department_id" name="department_id" wire:model='department_id'>
                                                 @foreach (\App\Models\Department::get() as $department)
                                                 <option value="{{ $department->id }}" {{$department_id == $department->id ? 'selected':'' }}>{{ $department->name }}</option>
                                             @endforeach

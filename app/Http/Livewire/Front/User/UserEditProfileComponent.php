@@ -2,8 +2,12 @@
 
 namespace App\Http\Livewire\Front\User;
 
+use App\Models\Area;
 use App\Models\Image;
+use App\Models\Province;
+use App\Models\State;
 use App\Models\User;
+use App\Models\Village;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -77,6 +81,21 @@ class UserEditProfileComponent extends Component
 
     public function updateProfile()
     {
+        $this->validate([
+            'firstname'       => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'lastname'        => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'phone'           => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id,
+            'email'           => 'required|email|unique:users,id,' . Auth::guard('vendor')->user()->id,
+            // 'birthdate'       => 'date_format:Y-M-D|before:today',
+            'country_id'      => 'required',
+            'province_id'     => 'required',
+            'area_id'         => 'required',
+            'state_id'        => 'required',
+            'village_id'      => 'required',
+            'department_id'   => 'required',
+            'address1'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'address2'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+           ]);
         $user = User::findOrFail(Auth::guard('vendor')->user()->id);
         $user->firstname        = $this->firstname;
         $user->lastname         = $this->lastname;
@@ -115,6 +134,14 @@ class UserEditProfileComponent extends Component
     }
     public function render()
     {
-        return view('livewire.front.user.user-edit-profile-component')->layout('front.layouts.master2');
+
+        // return view('livewire.front.user.user-edit-profile-component')->layout('front.layouts.master2');
+        return view('livewire.front.user.user-edit-profile-component',[
+            'provinces' => Province::where('country_id',$this->country_id)->get(),
+            'areas'     => Area::where('province_id',$this->province_id)->get(),
+            'states'    => State::where('area_id',$this->area_id)->get(),
+            'villages'  => Village::where('state_id',$this->state_id)->get(),
+            // 'provinces' => Province::get(),
+        ])->layout('front.layouts.master2');
     }
 }
