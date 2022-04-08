@@ -62,7 +62,9 @@
                                         @csrf
                                         @method('post')
                                         <div class="form-body">
+
                                             <div class="row">
+
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="eventRegInput1">{{ __('Admin/site.title') }}<span
@@ -71,19 +73,32 @@
                                                             placeholder="{{ __('Admin/site.title') }}"
                                                             name="title" value="{{ old('title') }}" required>
                                                     </div>
+
                                                     <div class="form-group">
                                                         <label for="{{ __('Admin/site.body') }}">{{ __('Admin/site.body') }}<span
-                                                               class="text-danger">*</span>
+                                                            class="text-danger">*</span>
                                                         </label>
                                                         <textarea name="body" rows="5"
-                                                                  placeholder="{{ __('Admin/site.body') }}"
-                                                                  class="form-control" required>
-
+                                                                placeholder="{{ __('Admin/site.body') }}"
+                                                                class="form-control" required>
+                                                                {{ old('body') }}
                                                         </textarea>
                                                     </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
+                                                                <input class="form-control img" name="image"  type="file" accept="image/*" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <img src="{{ asset('assets/admin/images/avatar.jpg') }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </div>
-                                            </div>
-                                            <div class="row">
+
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="eventRegInput4">{{ __('Admin/site.admin') }}<span
@@ -91,9 +106,9 @@
                                                         </label>
                                                         <select name="admin_id" class="select2 form-control">
                                                             <optgroup label="{{ __('Admin/site.select') }}">
-                                                                @if(\App\Models\Admin::count() > 0)
-                                                                    @foreach(\App\Models\Admin::get() as $admin)
-                                                                        <option value="{{$admin->id }}">
+                                                                @if($admins->count() > 0)
+                                                                    @foreach($admins as $admin)
+                                                                        <option value="{{$admin->id }}" {{(old('admin_id')==$admin->id)?'selected':''}}>
                                                                             {{$admin->firstname}} {{$admin->lastname}}
                                                                         </option>
                                                                     @endforeach
@@ -101,24 +116,59 @@
                                                             </optgroup>
                                                         </select>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
+
+                                                     <!-- Start Categories Select -->
+                                                     <div class="form-group">
+                                                            <label for="projectinput1">
+                                                                {{ trans('Admin\products.product_category_select') }} <span class="text-danger">*</span>
+                                                            </label>
+                                                            <select name="categories[]" class="select2 form-control" multiple>
+                                                                <optgroup label="{{ trans('Admin\products.product_category_select_placeholder') }}">
+                                                                    @if($categories && $categories->count() > 0)
+                                                                        @foreach($categories as $category)
+                                                                            <option
+                                                                                value="{{$category->id}}" {{ (collect(old('categories'))->contains($category->id)) ? 'selected':'' }}>{{$category->name}}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </optgroup>
+                                                            </select>
+                                                            @error('categories.0')
+                                                            <span class="text-danger"> {{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                   
+                                                    <!-- End Categories Select -->
+
+
                                                     <div class="form-group">
-                                                        <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                                        <input class="form-control img" name="image"  type="file" accept="image/*" required>
+                                                        <label for="projectinput1">
+                                                            {{ trans('Admin\products.product_tags_select') }}
+                                                        </label>
+                                                        <select name="tags[]" class="select2 form-control" multiple>
+                                                            <optgroup label="{{ trans('Admin\products.product_tags_select_placeholder') }}">
+                                                                @if($tags && $tags->count() > 0)
+                                                                    @foreach($tags as $tag)
+                                                                        <option
+                                                                            value="{{$tag->id}}" {{ (collect(old('tags'))->contains($tag->id)) ? 'selected':'' }}>{{$tag->name}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </optgroup>
+                                                        </select>
+                                                        @error('tags.0')
+                                                        <span class="text-danger"> {{$message}}</span>
+                                                        @enderror
                                                     </div>
+                                                    
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <img src="{{ asset('assets/admin/images/avatar.jpg') }}" class="img-thumbnail img-preview" width="100" alt="">
-                                                </div>
+
                                             </div>
+                                           
                                             <div class="form-actions center">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
                                                 </button>
                                             </div>
+                                            
                                         </div>
                                     </form>
                                 </div>

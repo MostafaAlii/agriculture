@@ -64,6 +64,7 @@
                                                     <th>{{ __('Admin/site.title') }}</th>
                                                     <th>{{ __('Admin/site.body') }}</th>
                                                     <th>{{ __('Admin/site.admin') }}</th>
+                                                    <th>{{ __('Admin/products.product_category') }}</th>
                                                     <th>{{ __('Admin/site.type') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -98,7 +99,7 @@
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
         ajax: {
-            url: '{{ route('blogs.data') }}',
+            url: '{{ route("blogs.data") }}',
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
@@ -107,6 +108,7 @@
             {data: 'title', name: 'title', searchable: false, sortable: false, width: '10%'},
             {data: 'body', name: 'body', searchable: false, sortable: false},
             {data: 'admin', name: 'admin', searchable: false, sortable: false, width: '10%'},
+            {data: 'category_name', name: 'category_name'},
             {data: 'type', name: 'type', searchable: false, sortable: false, width: '10%'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
