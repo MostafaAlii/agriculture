@@ -62,7 +62,11 @@
                                         <i class="material-icons">add_box</i>
                                         {{ __('Admin/products.add_new_product') }}
                                     </a>
-                                    <button type="button" class="btn btn-warning btn-md mb-3"
+                                    <a href="{{-- route('products.product_trashed') --}}" class="btn btn-warning btn-sm mb-3">
+                                        <i class="material-icons">delete_sweep</i>
+                                        {{ __('Admin/products.trashed_product') }}
+                                    </a>
+                                    <button type="button" class="btn btn-danger btn-md mb-3"
                                         id="btn_delete_all" data-toggle="modal"
                                         data-target="#bulkdelete" >
                                         {{ __('Admin/site.bulkdelete') }}
