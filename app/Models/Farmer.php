@@ -42,6 +42,10 @@ class Farmer extends Authenticatable {
         public function products(): HasMany {
             return $this->hasMany(Product::class);
         }
+        // Farmer Has Many Coupons ::
+        public function coupons(): HasMany {
+            return $this->hasMany(ProductCoupon::class);
+        }
 
     protected $hidden = [
         'password',

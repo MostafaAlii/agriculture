@@ -16,6 +16,7 @@ class CreateProductCouponsTable extends Migration {
             $table->dateTime('expire_date')->nullable();
             $table->unsignedDecimal('greater_than')->nullable();
             $table->boolean('status')->default(false);
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

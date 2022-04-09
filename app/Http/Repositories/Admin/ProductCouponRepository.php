@@ -6,7 +6,9 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Http\Interfaces\Admin\ProductCouponInterface;
 class ProductCouponRepository implements ProductCouponInterface {
     public function index() {
-        return view('dashboard.admin.coupons.index');
+        $data = [];
+        return $data['coupons'] = ProductCoupon::couponsWithUser();
+        return view('dashboard.admin.coupons.index', $data);
     }
 
     public function data() {

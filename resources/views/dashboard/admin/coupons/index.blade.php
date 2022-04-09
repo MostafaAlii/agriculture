@@ -8,7 +8,104 @@
 
 @section('content')
     @include('dashboard.common._partials.messages')
-
+    <!-- Start Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Start Breadcrumbs -->
+        <div class="content-header row">
+            <div class="content-header-left col-md-6 col-12 mb-2">
+                <h3 class="content-header-title">
+                    <i class="material-icons">grain</i>
+                    {{ trans('Admin/coupons.coupon_title_in_sidebar') }}
+                </h3>
+                <div class="row breadcrumbs-top">
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ trans('Admin/products.product_title_in_sidebar') }}</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Breadcrumbs -->
+        <!-- Start Content Body -->
+        <div class="content-body">
+            <!-- Start Zero configuration table -->
+            <section id="configuration">
+                <!-- Start row -->
+                <div class="row">
+                    <!-- Start col-12 -->
+                    <div class="col-12">
+                        <!-- Start Card -->
+                        <div class="card">
+                            <!-- Start Card Header -->
+                            <div class="card-header">
+                                <h4 class="card-title">{{ trans('Admin/coupons.coupon_title_in_sidebar') }}</h4>
+                                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                        <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Card Header -->
+                            <!-- Start Card Content -->
+                            <div class="card-content collapse show">
+                                <!-- Start Content Body -->
+                                <div class="card-body card-dashboard">
+                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                        <i class="material-icons">add_box</i>
+                                        {{ __('Admin/coupons.add_new_coupon') }}
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-md mb-3"
+                                        id="btn_delete_all" data-toggle="modal"
+                                        data-target="#bulkdelete" >
+                                        {{ __('Admin/site.bulkdelete') }}
+                                    </button>
+                                    <!-- Start Table Responsive -->
+                                    <div class="table-responsive">
+                                        <!-- Start Table -->
+                                        <table class="table table-striped table-bordered zero-configuration" id="products-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <input type="checkbox" name="select_all" id="select-all">
+                                                    </th>
+                                                    <th>{{ __('Admin/coupons.code') }}</th>
+                                                    <th>{{ __('Admin/coupons.username') }}</th>
+                                                    <th>{{ __('Admin/coupons.value') }}</th>
+                                                     <th>{{ __('Admin/coupons.use_time') }}</th>
+                                                     <th>{{ __('Admin/coupons.greater_than') }}</th>
+                                                    <th>{{ __('Admin/general.created_since') }}</th>
+                                                    <th>{{ __('Admin/site.action') }}</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                        <!-- End Table -->
+                                    </div>
+                                    <!-- End Table Responsive -->
+                                </div>
+                                <!-- End Content Body -->
+                            </div>
+                            <!-- End Card Content -->
+                        </div>
+                        <!-- End Card -->
+                    </div>
+                    <!-- End col-12 -->
+                </div>
+                <!-- End row -->
+                @include('dashboard.admin.coupons.btn.add')
+            </section>
+            <!-- End Zero configuration table -->
+        </div>
+        <!-- End Content Body -->
+    </div>
+    <!-- End Content Wrapper -->
 @endsection
 
 @section('js')
