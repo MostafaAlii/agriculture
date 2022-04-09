@@ -59,4 +59,5 @@ return [
    'Proceedtocheckout'=>'Proceed to checkout',
    'subtotal'=>'Subtotal',
    'tax'=>'Tax',
+   'addcode'=>'Coupon Code',
 ];

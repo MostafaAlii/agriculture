@@ -53,9 +53,10 @@ return [
    'quantity'=>'الكميه',
    'total'=>'الاجمالى',
    'delete'=>'مسح',
-   'applycoupon'=>'اضف كوبون',
+   'applycoupon'=>'قسيمه شراء',
    'cart'=>'السله',
    'Proceedtocheckout'=>'اطلب الان',
    'subtotal'=>'الصافى',
    'tax'=>'الضريبه',
+   'addcode'=>'اضف كود',
 ];

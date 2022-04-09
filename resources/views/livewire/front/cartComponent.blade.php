@@ -149,7 +149,7 @@
 
                                     <div class="cart__coupon form--horizontal">
                                         <div class="input-wrp">
-                                            <input class="textfield" type="text" placeholder="Coupon code" />
+                                            <input class="textfield" type="text" placeholder="{{ __('Website/home.addcode') }}" />
                                         </div>
 
                                         <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
@@ -188,7 +188,7 @@
 
                                                 <tr>
                                                     <td>{{ __('Website/home.tax') }}</td>
-                                                    <td>Flat rate: ${{ Cart::instance('cart')->tax() }}</td>
+                                                    <td> ${{ Cart::instance('cart')->tax() }}</td>
                                                 </tr>
 
                                                 <tr>
