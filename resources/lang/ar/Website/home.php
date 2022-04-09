@@ -57,5 +57,5 @@ return [
    'cart'=>'السله',
    'Proceedtocheckout'=>'اطلب الان',
    'subtotal'=>'الصافى',
-   'shipping'=>'مصاريف الشحن',
+   'tax'=>'الضريبه',
 ];

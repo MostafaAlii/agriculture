@@ -187,7 +187,7 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td>{{ __('Website/home.shipping') }}</td>
+                                                    <td>{{ __('Website/home.tax') }}</td>
                                                     <td>Flat rate: ${{ Cart::instance('cart')->tax() }}</td>
                                                 </tr>
 

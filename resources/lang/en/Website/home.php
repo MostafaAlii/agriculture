@@ -58,5 +58,5 @@ return [
    'cart'=>'Cart',
    'Proceedtocheckout'=>'Proceed to checkout',
    'subtotal'=>'Subtotal',
-   'shipping'=>'Shipping',
+   'tax'=>'Tax',
 ];
