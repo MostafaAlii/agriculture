@@ -62,8 +62,9 @@
                                             </div>
                                         @endif
                                         @if (Cart::instance('cart')->count() > 0)
-                                        <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                        <button class="custom-btn custom-btn--medium custom-btn--style-2"
                                                     wire:click.prevent="destroyAll()" >{{ __('Admin/site.bulk_delete') }}
+                                                    <i class="fontello-cancel" style="color: #e71d1d"></i>
                                         </button>
                                             @foreach (Cart::instance('cart')->content() as $item)
                                                 <tr>
