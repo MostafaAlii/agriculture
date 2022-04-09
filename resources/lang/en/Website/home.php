@@ -48,4 +48,15 @@ return [
    'changefarmer'=>'Farmer Change Password',
    'editprofile'=>'Update Profile',
    'profileupdatesms'=>'Profile updated Successfully !',
+// cart page *************************************************************
+   'addedproduct'=>'Added Product',
+   'price'=>'Price',
+   'quantity'=>'Quantity',
+   'total'=>'Total',
+   'delete'=>'Delete',
+   'applycoupon'=>'Apply Coupon',
+   'cart'=>'Cart',
+   'Proceedtocheckout'=>'Proceed to checkout',
+   'subtotal'=>'Subtotal',
+   'shipping'=>'Shipping',
 ];

@@ -47,4 +47,15 @@ return [
    'changefarmer'=>'تغيير كلمه المرور للمزارعين',
    'editprofile'=> 'تعديل الملف الشخصى',
    'profileupdatesms'=> 'تم تعديل البروفيل بنجاح',
+   // cart page *************************************************************
+   'addedproduct'=>'المنتجات المضافه',
+   'price'=>'السعر',
+   'quantity'=>'الكميه',
+   'total'=>'الاجمالى',
+   'delete'=>'مسح',
+   'applycoupon'=>'اضف كوبون',
+   'cart'=>'السله',
+   'Proceedtocheckout'=>'اطلب الان',
+   'subtotal'=>'الصافى',
+   'shipping'=>'مصاريف الشحن',
 ];

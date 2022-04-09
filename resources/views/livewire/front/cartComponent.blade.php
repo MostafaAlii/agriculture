@@ -46,11 +46,11 @@
                                     <thead>
                                         <tr>
                                             <td width="10%">&nbsp;</td>
-                                            <td width="35%">added products</td>
-                                            <td width="15%">Price</td>
-                                            <td width="20%">Quantity</td>
-                                            <td width="15%">Total</td>
-                                            <td width="5%">Delete</td>
+                                            <td width="35%">{{ __('Website/home.addedproduct') }}</td>
+                                            <td width="15%">{{ __('Website/home.price') }}</td>
+                                            <td width="20%">{{ __('Website/home.quantity') }}</td>
+                                            <td width="15%">{{ __('Website/home.total') }}</td>
+                                            <td width="5%">{{ __('Website/home.delete') }}</td>
                                             <td width="5%">&nbsp;</td>
                                         </tr>
                                     </thead>
@@ -153,7 +153,7 @@
                                         </div>
 
                                         <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                                            role="button">Apply Coupon</button>
+                                            role="button">{{ __('Website/home.applycoupon') }}</button>
                                     </div>
 
                                 </div>
@@ -166,7 +166,7 @@
                                             <thead>
                                                 <tr>
                                                     <td colspan="2">
-                                                        <h3>CART <span>TOTALS</span></h3>
+                                                        <h3>{{ __('Website/home.cart') }} <span>{{ __('Website/home.total') }}</span></h3>
                                                     </td>
                                                 </tr>
                                             </thead>
@@ -175,24 +175,24 @@
                                                 <tr>
                                                     <td colspan="2">
                                                         <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                            href="#">Proceed to checkout</a>
+                                                            href="#">{{ __('Website/home.Proceedtocheckout') }}</a>
                                                     </td>
                                                 </tr>
                                             </tfoot>
 
                                             <tbody>
                                                 <tr>
-                                                    <td>Subtotal:</td>
+                                                    <td>{{ __('Website/home.subtotal') }}:</td>
                                                     <td>${{ Cart::instance('cart')->subtotal() }}</td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td>Shipping</td>
+                                                    <td>{{ __('Website/home.shipping') }}</td>
                                                     <td>Flat rate: ${{ Cart::instance('cart')->tax() }}</td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td>Total</td>
+                                                    <td>{{ __('Website/home.total') }}</td>
                                                     <td>${{ Cart::instance('cart')->total() }}</td>
                                                 </tr>
                                             </tbody>
