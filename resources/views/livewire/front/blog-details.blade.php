@@ -7,7 +7,7 @@
         <section class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-md-8 col-lg-9">
+                    <div class="col-12 col-md-8 col-lg-9" id="blog_data">
                         <div class="content-container">
                             <!-- start posts -->
                             <div class="posts">
@@ -27,23 +27,6 @@
 
                                         <p>{{ $blog->body }}</p>
 
-                                        <!-- <p>
-                                            Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite. Let’s do something real-special together.Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography.
-                                        </p>
-
-                                        <blockquote class="blockquot">
-                                            <p>
-                                                <i>This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives,</i>
-                                            </p>
-                                        </blockquote>
-
-                                        <p>
-                                            We believe in helping brands create through strategy, story-telling, digital products, and integrated experiences on web, mobile, and in the world. And you're here, friends, because you also believe.
-                                        </p>
-
-                                        <p>
-                                            Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite. Let’s do something real-special together. Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography.
-                                        </p>-->
                                     </div>
                                 </div>
                                 <!-- end item -->
@@ -66,44 +49,6 @@
                     <div class="col-12 col-md-4 col-lg-3">
                         <aside class="sidebar">
                             <!-- start widget -->
-                            <div class="widget widget--text">
-                                <h4 class="h6 widget-title">About</h4>
-
-                                <p>
-                                    We believe in helping brands create through strategy, story-telling, digital products, and integrated experiences on web, mobile, and in the world.
-                                </p>
-                            </div>
-                            <!-- end widget -->
-
-                            <!-- start widget -->
-                            <div class="widget widget--categories">
-                                <h4 class="h6 widget-title">CAtegories</h4>
-
-                                <ul class="list">
-                                    <li class="list__item">
-                                        <a class="list__item__link" href="#">Strategy</a>
-                                        <span>(3)</span>
-                                    </li>
-
-                                    <li class="list__item">
-                                        <a class="list__item__link" href="#">Technology</a>
-                                        <span>(5)</span>
-                                    </li>
-
-                                    <li class="list__item">
-                                        <a class="list__item__link" href="#">Creative</a>
-                                        <span>(2)</span>
-                                    </li>
-
-                                    <li class="list__item">
-                                        <a class="list__item__link" href="#">Content</a>
-                                        <span>(8)</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- end widget -->
-
-                            <!-- start widget -->
                             <div class="widget widget--search">
                                 <form class="form--horizontal" action="#" method="get">
                                     <div class="input-wrp">
@@ -116,34 +61,28 @@
                             <!-- end widget -->
 
                             <!-- start widget -->
-                            <div class="widget widget--posts">
-                                <h4 class="h6 widget-title">Features Posts</h4>
-
-                                <div>
-                                    <article>
-                                        <a class="link" href="#">
-                                            <img class="lazy" width="100" height="75" src="img/blank.gif" data-src="img/posts_img/1s.jpg" alt="demo" />
-                                        </a>
-
-                                        <div>
-                                            This has led us to assemble a multi
-
-                                            <span class="date-post">April 12, 2017</span>
-                                        </div>
-                                    </article>
-
-                                    <article>
-                                        <a class="link" href="#">
-                                            <img class="lazy" width="100" height="75" src="img/blank.gif" data-src="img/posts_img/2s.jpg" alt="demo" />
-                                        </a>
-
-                                        <div>
-                                            Our team has a passion for making things with
-
-                                            <span class="date-post">April 12, 2017</span>
-                                        </div>
-                                    </article>
-                                </div>
+                            <div class="widget widget--categories">
+                                <h4 class="h6 widget-title">CAtegories</h4>
+                                <ul class="list" id="blog_cates">
+                                   @foreach($blog->categories as $cate)
+                                        @if($cate->parent_id==Null)
+                                            <li class="list__item" id="{{$cate->id}}">
+                                                <a class="list__item__link" href="#">{{$cate->name}}</a>
+                                                <span>(3)</span>
+                                            </li>
+                                            @if(count($cate->childs)>0)
+                                                <?php
+                                                $new = [
+                                                    'childs' => $cate->childs,
+                                                    'padding' => 20,
+                                                ];
+                                                ?>
+                                                @include('livewire.front.categoryChilds', $new)
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                   
+                                </ul>
                             </div>
                             <!-- end widget -->
 
@@ -151,13 +90,10 @@
                             <div class="widget widget--tags">
                                 <h4 class="h6 widget-title">Popular Tags</h4>
 
-                                <ul>
-                                    <li><a href="#">Art</a></li>
-                                    <li><a href="#">design</a></li>
-                                    <li><a href="#">concept</a></li>
-                                    <li><a href="#">Media</a></li>
-                                    <li><a href="#">Photography</a></li>
-                                    <li><a href="#">UI</a></li>
+                                <ul id="all_tags">
+                                    @foreach($blog->tags as $tag)
+                                    <li id="{{$tag->id}}"><a href="">{{$tag->name}}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <!-- end widget -->
@@ -251,10 +187,4 @@
 
 </div>
 @section('js')
-<script>
-     function show_form(comment_id){
-        alert(comment_id);
-    }
-</script>
-
 @endsection

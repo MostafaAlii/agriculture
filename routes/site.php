@@ -4,6 +4,7 @@ use App\Http\Livewire;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\front\CommentsController;
+use App\Http\Controllers\front\SearchBlogController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -27,6 +28,9 @@ Route::group(
 
         route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                         // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
+
+        //--------------------------------search with tag-------------------------------------------------------
+        Route::get('/blogs.tag/{blog_id}',[SearchBlogController::class,'tag_search'])->name('blogs.tag'); // blog details
 
         //------------------------------------------ start blogs & products comments----------------------------------------
         Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store_blog']);//add &replay (blog)
