@@ -20,6 +20,9 @@
         </div>
 
         <div class="container">
+            <a href="{{ route('user.ownprofile') }}" class="custom-btn custom-btn--medium custom-btn--style-1" role="button">
+                @lang('Admin/site.back')
+            </a>
             <div class="row">
                 <div class="col-12">
                     <div class="checkout">
@@ -168,7 +171,9 @@
                                         @enderror</p>
                                     <!-- end form -->
                                 </div>
-                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">@lang('Admin/site.edit')</button>
+                                <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">
+                                    @lang('Admin/site.edit')
+                                </button>
                             </div>
                         </form>
                     </div>

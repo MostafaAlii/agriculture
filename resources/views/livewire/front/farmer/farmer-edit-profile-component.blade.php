@@ -20,6 +20,9 @@
         </div>
 
         <div class="container">
+            <a href="{{ route('farmer.ownprofile') }}" class="custom-btn custom-btn--medium custom-btn--style-1" role="button">
+                @lang('Admin/site.back')
+            </a>
             <div class="row">
                 <div class="col-12">
                     <div class="checkout">

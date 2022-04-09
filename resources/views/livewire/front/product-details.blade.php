@@ -185,7 +185,7 @@
                                             <!-- <a href="#" <?php /*if(Session::get('div_active')=='allow'){echo'class="active"';}*/?>>{{ __('website\comments.comments') }}</a> -->
                                             <a href="#" >{{ __('website\comments.comments') }}</a>
                                         </nav>
-                                       
+
 
                                         <div class="tab-content">
                                             <div id="myDIV2" class="tab-content__item">
@@ -232,11 +232,11 @@
                                                 @include('livewire.front.comments')
                                             <!-- ###################################################################3 -->
                                             </div>
-                                            
-                                           
 
 
-                                            
+
+
+
                                         </div>
                                     </div>
                                     <!-- end tab -->
@@ -301,6 +301,7 @@
                                                     </div>
                                                 @endif
                                                 @if (Auth::guard('vendor')->user() )
+                                                @if($product->in_stock ==1)
                                                         {{-- wishlist route ******************* ***************************************--}}
                                                         <div class="product-wish">
                                                             @if($witems->contains($product->id))
@@ -318,6 +319,7 @@
                                                         <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
                                                             <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                @endif
                                                 @endif
                                             </div>
                                             @if($product->special_price >0)
@@ -558,7 +560,7 @@
 </div>
 <script>
     // this for show comments tab after adding and hide description tab
-    
+
     let c=document.getElementById('show_comment_or_no').value;
 
     let element = document.getElementById("myDIV").classList;
@@ -571,5 +573,5 @@
     element2.removeAttribute("visibility");
     //alert(c);
     //alert(element.classList);
-  
+
 </script>

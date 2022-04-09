@@ -272,6 +272,7 @@
                                         $</span>
                                 </div>
                                 @if (Auth::guard('vendor')->user() )
+                                @if($product->in_stock ==1)
                                     <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                         <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
@@ -289,6 +290,7 @@
                                         @endif
                                     </div>
                                     {{-- wishlist route ******************* *************************************** --}}
+                                @endif
                                 @endif
                             </div>
 
@@ -600,11 +602,13 @@
                                                     </div>
                                                 @endif
                                                 @if (Auth::guard('vendor')->user() )
+                                                @if($product->in_stock ==1)
                                                     <a class="custom-btn custom-btn--small custom-btn--style-1" href="#"
                                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                         <i
                                                             class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}
                                                     </a>
+                                                @endif
                                                 @endif
                                             </div>
                                         </div>
@@ -697,6 +701,7 @@
                                                     $</span>
                                             </div>
                                             @if (Auth::guard('vendor')->user() )
+                                            @if($product->in_stock ==1)
                                                 <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                                     wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                     <i
@@ -716,6 +721,7 @@
                                                     @endif
                                                 </div>
                                                 {{-- wishlist route ******************* *************************************** --}}
+                                            @endif
                                             @endif
                                         </div>
                                         <span
