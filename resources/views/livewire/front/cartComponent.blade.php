@@ -31,6 +31,9 @@
         </div>
 
         <div class="container">
+            <a href="{{ route('shop') }}" class="custom-btn custom-btn--medium custom-btn--style-1" role="button">
+                @lang('Admin/site.back')
+            </a>
             <div class="row">
 
                 <div class="col-12">
