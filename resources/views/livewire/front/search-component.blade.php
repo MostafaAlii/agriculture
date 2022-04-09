@@ -330,14 +330,21 @@
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                         </h4>
 
-                                                        <div class="__category"><a href="#">
+                                                        {{-- <div class="__category"><a href="#">
                                                                 @foreach ($product->categories as $category)
                                                                     <div class="text-primary text-bold">
                                                                         <span>{{ $category->name }}</span>
                                                                     </div>
                                                                 @endforeach
-                                                            </a></div>
-
+                                                            </a></div> --}}
+                                                            <div class="stock-info in-stock">
+                                                                <p class="availability">
+                                                                    <b
+                                                                        class="text {{ $product->in_stock == 1 ? 'text-success' : 'text-danger' }}">
+                                                                        {{ $product->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                                    </b>
+                                                                </p>
+                                                            </div>
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
                                                                 <span
@@ -355,6 +362,7 @@
                                                             </div>
                                                         @endif
                                                         @if (Auth::guard('vendor')->user() )
+                                                        @if($product->in_stock ==1)
                                                             <a class="custom-btn custom-btn--medium custom-btn--style-1"
                                                                 href="#"
                                                                 wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
@@ -376,6 +384,7 @@
                                                                 @endif
                                                             </div>
                                                             {{-- wishlist route ******************* *************************************** --}}
+                                                        @endif
                                                         @endif
                                                     </div>
 
