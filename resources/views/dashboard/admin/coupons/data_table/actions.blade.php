@@ -1,12 +1,12 @@
 <div class="btn-group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{ __('Admin/site.action') }}
-        </button>
+    </button>
         <div class="dropdown-menu dropmenu-menu-right">
-            <a href="{{ route('product_edit', encrypt($coupon->id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
+           <a href="{{ route('ProductCoupons.edit',encrypt($id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
                 {{ __('Admin/site.edit') }}
             </a>
-            <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $coupon->id }}">
+            <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $id }}">
                 {{ __('Admin/site.delete') }}
             </a>
             <div class="dropdown-divider"></div>
@@ -14,13 +14,13 @@
     </div>
     
     {{-- modal delete --}}
-    <form action="{{ route('product_delete', encrypt($coupon->id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+    <form action="{{ route('ProductCoupons.destroy',encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
         @method('delete')
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                 <!-- Modal -->
-                <div class="modal animated flipInY text-left" id="delete{{ $coupon->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal animated flipInY text-left" id="delete{{ $id }}" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -46,7 +46,7 @@
     {{-- End modal delete --}}
     
     {{-- modal bulk delete --}}
-    <form action="{{ route('products.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+    <form action="{{ route('Coupons.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
         @method('delete')
         <div class="col-lg-4 col-md-6 col-sm-12">

@@ -228,9 +228,9 @@ Route::group(
                 /********************************* End Products Routes ************************************/
 
                 /********************************* Start Coupon Routes ************************************/
-                //Route::group(['prefix' => 'ProductCoupon'], function () {
-                    Route::resource('ProductCoupons', ProductCouponController::class)->except(['show']);
-                //});
+                Route::resource('ProductCoupons', ProductCouponController::class)->except(['show']);
+                Route::get('ProductCoupons/data', [ProductCouponController::class,'data'])->name('Coupons.data');
+                Route::delete('ProductCoupons/bulk_delete/{ids}', [ProductCouponController::class,'bulkDelete'])->name('Coupons.bulk_delete');
                 /********************************* End Coupon Routes ************************************/
 
                 /********************************* Slider Routes ************************************/

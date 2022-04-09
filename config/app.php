@@ -241,6 +241,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'ProductCoupon' => App\Models\ProductCoupon::class,
     ],
     'Currency' => 'USD',
 ];

@@ -57,6 +57,7 @@
                                     <form class="form" method="post" action="{{ route('product_update') }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('post')
+                                        <!-- Start Form Body -->
                                         <div class="form-body">
                                             <!-- Start Main Product Photo -->
                                             <div class="row">
@@ -230,6 +231,7 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        <!-- End Form Body -->
                                     </form>
 
                                 </div>

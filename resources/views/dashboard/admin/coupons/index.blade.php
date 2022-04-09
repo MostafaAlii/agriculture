@@ -1,6 +1,11 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+    .picker__select--month, .picker__select--year {
+        padding: 0 !important;
+    }
+</style>
 @endsection
 @section('pageTitle')
     {{ trans('Admin/coupons.coupon_title_in_sidebar') }}
@@ -14,7 +19,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">
-                    <i class="material-icons">grain</i>
+                    <i class="material-icons">fiber_new</i>
                     {{ trans('Admin/coupons.coupon_title_in_sidebar') }}
                 </h3>
                 <div class="row breadcrumbs-top">
@@ -22,7 +27,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ trans('Admin/products.product_title_in_sidebar') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('ProductCoupons.index') }}">{{ trans('Admin/coupons.coupon_title_in_sidebar') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -70,17 +75,17 @@
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->
-                                        <table class="table table-striped table-bordered zero-configuration" id="products-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="couponsTable">
                                             <thead>
                                                 <tr>
-                                                    <th>
-                                                        <input type="checkbox" name="select_all" id="select-all">
-                                                    </th>
+                                                    <th><input type="checkbox"name="select_all"id="select-all"></th>
                                                     <th>{{ __('Admin/coupons.code') }}</th>
                                                     <th>{{ __('Admin/coupons.username') }}</th>
                                                     <th>{{ __('Admin/coupons.value') }}</th>
-                                                     <th>{{ __('Admin/coupons.use_time') }}</th>
-                                                     <th>{{ __('Admin/coupons.greater_than') }}</th>
+                                                    <th>{{ __('Admin/coupons.status') }}</th>
+                                                    <th>{{ __('Admin/coupons.use_time') }}</th>
+                                                    <th>{{ __('Admin/coupons.greater_than') }}</th>
+                                                    <th>{{ __('Admin/coupons.validated_date') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -111,6 +116,32 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="{{ asset('assets/admin/js/myFun/pickadate/picker.js')}}"></script>
+<script src="{{ asset('assets/admin/js/myFun/pickadate/picker.date.js')}}"></script>
 <!-- Datatable Fire -->
+<script>
+    let couponsTable = $('#couponsTable').DataTable({
+        // dom: "tiplr",
+        serverSide: true,
+        processing: true,
+        "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
+        ajax: {
+            url: '{{ route('Coupons.data') }}',
+        },
+        columns: [
+            {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+            {data: 'code', name: 'code'},
+            {data: 'username', name: 'username'},
+            {data: 'value', name: 'value'},
+            {data: 'status', name: 'status'},
+            {data: 'used_times', name: 'used_times'},
+            {data: 'greater_than', name: 'greater_than'},
+            {data: 'start_date', name: 'start_date'},
+            {data: 'created_at', name: 'created_at', searchable: false, sortable: false},
+            {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '15%'},
+        ],
+    });
+</script>
 @endsection

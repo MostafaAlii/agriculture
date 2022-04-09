@@ -21,6 +21,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/fonts/simple-line-icons/style.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/forms/toggle/bootstrap-switch.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/classic.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/classic.date.css')}}">
     @if(app()->getLocale()=='ar')
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
@@ -41,6 +43,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/file-uploaders/dropzone.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/rtl.css')}}">
         <!-- END: Page CSS-->
         <!-- BEGIN: Page CSS-->
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
