@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Interfaces\Front;
 interface SearchInterface {
-    public function tag_search($tag_id);
+    public function search($id,$type);
+    public function search2($text);
 }

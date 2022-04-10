@@ -7,9 +7,9 @@
     if(app()->getLocale()=='en')
     {$pad='padding-left:'.$padding;}else{$pad='padding-right:'.$padding;}
     ?>
-        <li class="list__item" id="{{$child->id}}" style="<?php echo $pad; ?>px">
-            <a class="list__item__link" href="#">{{$child->name}}</a>
-            <span>(2)</span>
+        <li class="list__item" id="{{$child->id}}" onclick="javascript:search_result(this.id,'Category')" style="<?php echo $pad; ?>px">
+            <a class="list__item__link" >{{$child->name}}</a>
+            <span>({{count($child->blogs)}})</span>
         </li>
     @if (count($child->childs))
         @include('livewire.front.categoryChilds', $new)

@@ -50,25 +50,26 @@
                         <aside class="sidebar">
                             <!-- start widget -->
                             <div class="widget widget--search">
-                                <form class="form--horizontal" action="#" method="get">
+                                <form class="form--horizontal" action="" method="get">
                                     <div class="input-wrp">
-                                        <input class="textfield" name="s" type="text" placeholder="Search" />
+                                        <input class="textfield" type="text" placeholder="{{ __('website\search.search_text') }}" name="search" id="search" required/>
+                                        <input type="hidden" id="alert_txt" value="{{__('website\search.enter_txt')}}">
                                     </div>
 
-                                    <button class="custom-btn custom-btn--tiny custom-btn--style-1" type="submit" role="button">Find</button>
+                                    <button class="custom-btn custom-btn--tiny custom-btn--style-1" type="button" role="button"  onclick="javascript:input_search_result()">{{ __('website\search.search') }}</button>
                                 </form>
                             </div>
                             <!-- end widget -->
 
                             <!-- start widget -->
                             <div class="widget widget--categories">
-                                <h4 class="h6 widget-title">CAtegories</h4>
+                                <h4 class="h6 widget-title">{{ __('website\search.Categories') }}</h4>
                                 <ul class="list" id="blog_cates">
                                    @foreach($blog->categories as $cate)
                                         @if($cate->parent_id==Null)
-                                            <li class="list__item" id="{{$cate->id}}">
-                                                <a class="list__item__link" href="#">{{$cate->name}}</a>
-                                                <span>(3)</span>
+                                            <li class="list__item" id="{{$cate->id}}" onclick="javascript:search_result(this.id,'Category')" >
+                                                <a class="list__item__link" >{{$cate->name}}</a>
+                                                <span>({{count($cate->blogs)}})</span>
                                             </li>
                                             @if(count($cate->childs)>0)
                                                 <?php
@@ -88,11 +89,11 @@
 
                             <!-- start widget -->
                             <div class="widget widget--tags">
-                                <h4 class="h6 widget-title">Popular Tags</h4>
+                                <h4 class="h6 widget-title">{{ __('website\search.Tags') }}</h4>
 
                                 <ul id="all_tags">
                                     @foreach($blog->tags as $tag)
-                                    <li id="{{$tag->id}}"><a href="">{{$tag->name}}</a></li>
+                                    <li id="{{$tag->id}}" onclick="javascript:search_result(this.id,'Tag')"><a>{{$tag->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

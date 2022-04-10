@@ -4,7 +4,7 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Front\SearchInterface;
-
+// use App\Http\Requests\Front\SearchRequest;
 class SearchBlogController extends Controller
 {
     protected $Data;
@@ -12,8 +12,13 @@ class SearchBlogController extends Controller
         $this->Data = $Data;
     }
       
-    public function tag_search($tag_id)
+    public function search($id,$type)
     {
-        return $this->Data->tag_search($tag_id);
+        return $this->Data->search($id,$type);
+    }
+    
+    public function search2($text)
+    {
+        return $this->Data->search2($text);
     }
 }

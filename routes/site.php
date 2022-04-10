@@ -30,7 +30,8 @@ Route::group(
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
 
         //--------------------------------search with tag-------------------------------------------------------
-        Route::get('/blogs.tag/{blog_id}',[SearchBlogController::class,'tag_search'])->name('blogs.tag'); // blog details
+        Route::get('/blogs.search/{blog_id}/{type}',[SearchBlogController::class,'search'])->name('blogs.search'); // blog details
+        Route::get('/blogs.search2/{text}',[SearchBlogController::class,'search2'])->name('blogs.search2'); // blog details
 
         //------------------------------------------ start blogs & products comments----------------------------------------
         Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store_blog']);//add &replay (blog)
