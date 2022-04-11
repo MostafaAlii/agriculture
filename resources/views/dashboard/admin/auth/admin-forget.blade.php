@@ -35,7 +35,7 @@
                                     </button>
                                 </div>
                             @endif
-                            <form class="form-horizontal" novalidate method="POST"
+                            <form class="form-horizontal" novalidate method="POST" autocomplete="off"
                                 action="{{ route('admin.password.email') }}">
                                 @csrf
                                 <fieldset class="form-group position-relative has-icon-left">

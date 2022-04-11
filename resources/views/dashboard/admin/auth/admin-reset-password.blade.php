@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form-horizontal" novalidate method="POST"
+                            <form class="form-horizontal" novalidate method="POST" autocomplete="off"
                                 action="{{ route('admin.password.update') }}">
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $request->route('token') }}">

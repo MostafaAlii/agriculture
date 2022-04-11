@@ -12,7 +12,7 @@
     </button>
 
 
-    <form action="{{ route('users.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+    <form action="{{ route('users.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;" autocomplete="off">
         @csrf
         @method('delete')
 
@@ -44,7 +44,7 @@
     </form>
 
       {{-- modal bulk delete --}}
-      <form action="{{ route('users.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+      <form action="{{ route('users.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;" autocomplete="off">
         @csrf
         @method('delete')
         <div class="col-lg-4 col-md-6 col-sm-12">

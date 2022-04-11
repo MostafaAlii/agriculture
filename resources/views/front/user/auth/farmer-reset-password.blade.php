@@ -54,7 +54,7 @@
                         </div>
                         @endif
                         <!-- start user login form -->
-                        <form class="auth-form" name="form-login" method="POST" action="{{ route('farmer.password.update') }}">
+                        <form class="auth-form" name="form-login" method="POST" action="{{ route('farmer.password.update') }}" autocomplete="off">
                             @csrf
                             <!-- Password Reset Token -->
                             <input type="hidden" name="token" value="{{ $request->route('token') }}">

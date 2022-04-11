@@ -76,13 +76,13 @@
                         </div>
                         @endif
                         <!-- start user login form -->
-                        <form class="auth-form" name="form-login" method="POST" action="{{ route('password.email') }}">
+                        <form class="auth-form" name="form-login" method="POST" action="{{ route('password.email') }}" autocomplete="off">
                             @csrf
                             <div class="input-wrp">
                                 <input id="login" class="textfield" type="login" name="email" :value="old('email')"
                                     required autofocus placeholder=" {{ trans('Admin/site.email') }}" />
                             </div>
-                          
+
                             @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong class="text-danger">{{ $errors->first('email') }}</strong>

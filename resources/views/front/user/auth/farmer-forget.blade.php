@@ -76,7 +76,7 @@
                         </div>
                         @endif
                         <!-- start user login form -->
-                        <form class="auth-form" name="form-login" method="POST" action="{{ route('farmer.password.email') }}">
+                        <form class="auth-form" name="form-login" method="POST" action="{{ route('farmer.password.email') }}" autocomplete="off">
                             @csrf
                             <div class="input-wrp">
                                 <input id="login" class="textfield" type="login" name="email" :value="old('email')"

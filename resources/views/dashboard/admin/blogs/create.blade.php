@@ -58,7 +58,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('blogs.store') }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('blogs.store') }}" enctype="multipart/form-data" autocomplete="off">
                                         @csrf
                                         @method('post')
                                         <div class="form-body">
@@ -96,7 +96,7 @@
                                                             <img src="{{ asset('assets/admin/images/avatar.jpg') }}" class="img-thumbnail img-preview" width="100" alt="">
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -136,7 +136,7 @@
                                                             <span class="text-danger"> {{$message}}</span>
                                                             @enderror
                                                         </div>
-                                                   
+
                                                     <!-- End Categories Select -->
 
 
@@ -158,17 +158,17 @@
                                                         <span class="text-danger"> {{$message}}</span>
                                                         @enderror
                                                     </div>
-                                                    
+
                                                 </div>
 
                                             </div>
-                                           
+
                                             <div class="form-actions center">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
                                                 </button>
                                             </div>
-                                            
+
                                         </div>
                                     </form>
                                 </div>

@@ -54,7 +54,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('farmers.store') }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('farmers.store') }}" enctype="multipart/form-data" autocomplete="off">
                                         @csrf
                                         @method('post')
                                         <div class="form-body">
