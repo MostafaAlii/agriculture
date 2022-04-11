@@ -33,8 +33,6 @@ use App\Http\Interfaces\Admin\ProductCouponInterface;
 
 use App\Http\Interfaces\Admin\VillageInterface;
 
-use App\Http\Interfaces\Front\CommentInterface;
-
 use App\Http\Interfaces\Admin\TreeInterface;
 use App\Http\Interfaces\Admin\TreeTypeInterface;
 use App\Http\Interfaces\Admin\LandCategoryInterface;
@@ -64,7 +62,6 @@ use App\Http\Repositories\Admin\ProductCouponRepository;
 
 use App\Http\Repositories\Admin\ProfileRepository;
 use App\Http\Repositories\Admin\VillageRepository;
-use App\Http\Repositories\Front\CommentRepository;
 use App\Http\Repositories\Admin\TreeRepository;
 use App\Http\Repositories\Admin\TreeTypeRepository;
 use App\Http\Repositories\Admin\LandCategoryRepository;
@@ -74,6 +71,11 @@ use App\Http\Repositories\Admin\CategoryRepository;
 use App\Http\Repositories\Admin\AttributeRepository;
 use App\Http\Repositories\Admin\ProvienceRepository;
 use App\Http\Repositories\Admin\DepartmentRepository;
+// Front Uses
+use App\Http\Interfaces\Front\CommentInterface;
+use App\Http\Repositories\Front\CommentRepository;
+use App\Http\Interfaces\Front\RatingInterface;
+use App\Http\Repositories\Front\RatingRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -108,10 +110,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(ProductCouponInterface::class, ProductCouponRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
-
-
+        // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
-        
+        $this->app->bind(RatingInterface::class, RatingRepository::class);
     }
 
     public function boot()

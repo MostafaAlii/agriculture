@@ -29,7 +29,6 @@ class Blog extends Model {
         return $this->belongsTo(Admin::class);
     }
 
-
     public function categories(): BelongsToMany {
         return $this->belongsToMany(Category::class, 'blog_categories');
     }
@@ -42,9 +41,4 @@ class Blog extends Model {
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-    
-    // public function comments(): HasMany
-    // {
-    //     return $this->hasMany(Comment::class);
-    // }
 }
