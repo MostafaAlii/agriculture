@@ -21,7 +21,7 @@ return [
     'product_main_price_placeholder'             =>                  'ادخل السعر الاساسى للمنتج',
     'product_price'                              =>                  'السعــر',
     'prices_managment'                           =>                  'الاسعــار',
-    'product_price_select'                      =>                   'نــوع السعــر',
+    'product_price_select'                       =>                   'نــوع السعــر',
     'fixed'                                      =>                  'ثابــت',
     'precent'                                    =>                  'نسبة مئــوية',
     'product_private_price'                      =>                  'السعر داخل العــرض',
@@ -42,6 +42,7 @@ return [
     'active'                                     =>                  'مفعل',
     'unactive'                                   =>                  'غير مفعل',
     'stock'                                      =>                  'المخزون',
+
     'stock_managment'                            =>                  'ادارة المخزن',
     'product_sku'                                =>                  'كـود المنتج',
     'product_sku_placeholder'                    =>                  'اكتب كود المنتج',
@@ -95,8 +96,9 @@ return [
     'manage_stock_required'             =>'يجب تحديد حاله تتبع المنتج',
     'in_stock_required'                 =>' يجب تحديد حاله المنتج بالمخزن',
 
-    'code_required'                      =>'تاكد من ادخال كود قسيمه الخصم',
+    'code_required'                     =>'تاكد من ادخال كود قسيمه الخصم',
     'code_unique'                       =>'هذا الكود مُضاف بالفعل .. قم بادخال كود اخر ',
     'code_regex'                        =>'كود المنتج لا يجب ان يحتوى على رموز',
+    'type_required'                     =>'تاكد من اختيار نوع القسيمه'
     
 ];

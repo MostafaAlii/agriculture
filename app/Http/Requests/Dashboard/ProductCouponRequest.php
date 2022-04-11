@@ -46,9 +46,31 @@ class ProductCouponRequest extends FormRequest {
 
     public function messages() {
         return [
-            'code.required'         =>  trans('Admin/products.code_required'),
-            'code.unique'           =>  trans('Admin/products.code_unique'),
-            'code.regex'            =>  trans('Admin/products.code_regex'),
+            'code.required'             =>  trans('Admin/products.code_required'),
+            'code.unique'               =>  trans('Admin/products.code_unique'),
+            'code.regex'                =>  trans('Admin/products.code_regex'),
+
+            'type.required'             =>  trans('Admin/products.type_required'),
+            'type.in'                   =>  trans('Admin/validation.in'),
+            
+            'value.required'            =>  trans('Admin/validation.required'),
+            'value.numeric'             =>  trans('Admin/validation.numeric'),
+            'use_times.required'        =>  trans('Admin/validation.required'),
+            'use_times.numeric'         =>  trans('Admin/validation.numeric'),
+
+             'start_date.date_format'   =>  trans('Admin/validation.date_format'),
+            'start_date.after_or_equal' =>  trans('Admin/validation.after_or_equal'),
+
+            'expire_date.required_with' =>  trans('Admin/validation.required_with'),
+            'expire_date.date'          =>  trans('Admin/validation.date'),
+            'expire_date.date_format'   =>  trans('Admin/validation.date_format'),
+            'expire_date.after'         =>  trans('Admin/validation.after'),
+            
+            'greater_than.numeric'      =>  trans('Admin/validation.numeric'),
+            'status.required'           =>  trans('Admin/validation.required'),
+            'status.in'                 =>  trans('Admin/validation.in'),
+            'user_id.required'          =>  trans('Admin/validation.required'),
+            'user_id.exists'            =>  trans('Admin/validation.exists'),
         ];
     }
 }
