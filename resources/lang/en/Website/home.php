@@ -60,4 +60,15 @@ return [
    'subtotal'=>'Subtotal',
    'tax'=>'Tax',
    'addcode'=>'Coupon Code',
+
+   //    user login page
+   'lostpassword'=>'Lost your password?',
+   'rememberme'=>'Remember me',
+   'ResetPassword'=>'Reset Password',
+   'smsforget'=>'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',
+   'emaillink'=>'Email Password Reset Link',
+   'forgetpassword'=>'Forget Password Email',
+   'smsreset'=>'You can reset password from bellow link',
+   'resetpass'=>'Reset Password',
+   'sendresetsms'=>'A reset link has been sent to your email address',
 ];

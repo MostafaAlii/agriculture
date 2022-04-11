@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Farmer;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 
-class NewPasswordController extends Controller
+class FarmerNewPasswordController extends Controller
 {
     /**
      * Display the password reset view.
@@ -23,7 +24,7 @@ class NewPasswordController extends Controller
     public function create(Request $request)
     {
         // return view('auth.reset-password', ['request' => $request]);
-        return view('front.user.auth.user-reset-password', ['request' => $request]);
+        return view('front.user.auth.farmer-reset-password', ['request' => $request]);
 
     }
 
@@ -70,7 +71,7 @@ class NewPasswordController extends Controller
     public function submitResetPasswordForm(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:users',
+            'email' => 'required|email|exists:farmers',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required'
         ]);
@@ -86,12 +87,12 @@ class NewPasswordController extends Controller
             return back()->withInput()->with('error', 'Invalid token!');
         }
 
-        $user = User::where('email', $request->email)
+        $farmer = Farmer::where('email', $request->email)
                     ->update(['password' => Hash::make($request->password)]);
 
         DB::table('password_resets')->where(['email'=> $request->email])->delete();
 
-        return redirect()->route('user.login2')->with('status', trans('Your password has been changed!'));
+        return redirect()->route('farmer.login')->with('status', trans('Your password has been changed!'));
         // return redirect()->back()->with('status', trans('Your password has been changed!'));
     }
 }

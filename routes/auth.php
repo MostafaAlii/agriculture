@@ -9,22 +9,23 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\FarmerNewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\FarmerPasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    route::view('userlogin','front.user.auth.userlogin')->name('user.login2');
-    route::view('farmerlogin','front.user.auth.farmerlogin')->name('farmer.login');
+    route::view('userlogin','front.user.auth.userlogin')->name('user.login2');       // user login
+    route::view('farmerlogin','front.user.auth.farmerlogin')->name('farmer.login');  // farmer login
     // routes for admin login  ***********************************************************************************
-    Route::get('agro', [AdminController::class, 'create'])->name('admin.login');
+    Route::get('agro', [AdminController::class, 'create'])->name('admin.login');    // admin login
     Route::post('Admin/login', [AdminController::class, 'store'])->name('admin.login.post');
     // end routes for admin login ********************************************************************************
 
 
     // route for user login *****************************
     Route::get('User/login', [UserAuthenticatedSessionController::class, 'create'])->name('user.login');
-
     Route::post('User/login', [UserAuthenticatedSessionController::class, 'store'])->name('User.login');
     Route::post('/user-register', [RegisteredUserController::class, 'store'])->name('user.register.post');
     // end route for user login ****************************
@@ -33,17 +34,32 @@ Route::middleware('guest')->group(function () {
     Route::post('/farmer-register', [RegisteredFarmerController::class, 'store'])->name('farmer.register.post');
     // end route for register farmer *********************************************************************************
 
+    // user forget password ********************************************************************
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
-                ->name('password.request');
+    ->name('password.request');
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-                ->name('password.email');
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'submitForgetPasswordForm'])
+    ->name('password.email');
 
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-                ->name('password.reset');
+    ->name('password.reset');
 
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
-                ->name('password.update');
+    Route::post('reset-password', [NewPasswordController::class, 'submitResetPasswordForm'])
+    ->name('password.update');
+    // user forget password ********************************************************************
+    // farmer forget password ********************************************************************
+    Route::get('farmer-forgot-password', [FarmerPasswordResetLinkController::class, 'create'])
+    ->name('farmer.password.request');
+
+    Route::post('farmer-forgot-password', [FarmerPasswordResetLinkController::class, 'submitForgetPasswordForm'])
+    ->name('farmer.password.email');
+
+    Route::get('farmer-reset-password/{token}', [FarmerNewPasswordController::class, 'create'])
+    ->name('farmer.password.reset');
+
+    Route::post('farmer-reset-password', [FarmerNewPasswordController::class, 'submitResetPasswordForm'])
+    ->name('farmer.password.update');
+    // farmer forget password ********************************************************************
 
 
 });
