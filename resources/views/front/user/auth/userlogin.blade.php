@@ -30,42 +30,9 @@
 
 
         <div class="container">
-            {{-- <div class="raw">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <h2><label for="">{{ trans('Admin/site.yourtype') }}</label></h2>
-                        <select name="type" id="sectionselect" class="custom-btn custom-btn--medium custom-btn--style-2" value="{{ old('type') }}" data-val ="{{ old('type') }}">
-                            <option class="custom-btn custom-btn--style-2" value="" selected disabled>--- {{ trans('Admin/site.select') }}---
-                            </option>
-                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="user" @if(old('type')=='user')
-                                 selected
-                            @endif>{{ trans('Admin/site.user') }}</option>
-                            <option class="custom-btn custom-btn--medium custom-btn--style-2" value="farmer"
-                            @if(old('type')=='farmer')
-                            selected
-                       @endif
-                            >{{ trans('Admin/site.farmer') }}</option>
-                        </select>
-                    </div>
-                </div>
-            </div> --}}
-
-            {{-- form user --}}
-            {{-- <div class="panel" id="user"> --}}
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                         <h2>{{ trans('Admin/site.signvendor') }}</h2>
-                        {{-- @include('dashboard.common._partials.messages') --}}
-                        {{-- @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif --}}
-                        <!-- start user login form -->
                         <form class="auth-form" name="form-login" method="POST" action="{{ route('User.login') }}" autocomplete="off">
                             @csrf
                             <div class="input-wrp">

@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form-horizontal" novalidate method="POST"
+                            <form class="form-horizontal" novalidate method="POST" autocomplete="off"
                                 action="{{ route('admin.login.post') }}">
                                 @csrf
                                 <fieldset class="form-group position-relative has-icon-left">

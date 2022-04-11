@@ -36,7 +36,7 @@
 
                                     <!-- users edit media object ends -->
                                     <!-- users edit account form start -->
-                                    <form novalidate action="{{ route('farmer.updateAccount', encrypt($farmer->id)) }}"  enctype="multipart/form-data" method="post">
+                                    <form novalidate action="{{ route('farmer.updateAccount', encrypt($farmer->id)) }}"  enctype="multipart/form-data" method="post" autocomplete="off">
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
@@ -209,7 +209,7 @@
                                 </div>
                                 <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
                                     <!-- users edit Info form start -->
-                                    <form novalidate action="{{ route('farmer.updateInformation', encrypt($farmer->id)) }}"  method="post">
+                                    <form novalidate action="{{ route('farmer.updateInformation', encrypt($farmer->id)) }}"  method="post" autocomplete="off">
                                         @csrf
                                         @method('put')
                                         <div class="row">

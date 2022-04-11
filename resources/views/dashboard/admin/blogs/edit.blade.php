@@ -53,7 +53,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('blogs.update', encrypt($blog->id)) }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('blogs.update', encrypt($blog->id)) }}" enctype="multipart/form-data" autocomplete="off">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">
@@ -90,7 +90,7 @@
                                                     <img src="{{ asset('Dashboard/img/blogs/'. $blog->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
 
                                             <div class="col-md-6">
@@ -122,7 +122,7 @@
                                                             array_push($selected_category,$cates_select->id);
                                                         }
                                                         ?>
-                                                    
+
                                                         <select name="categories[]" class="select2 form-control" multiple>
                                                             <optgroup label="{{ trans('Admin\products.product_category_select_placeholder') }}">
                                                                 @if($categories && $categories->count() > 0)
@@ -137,7 +137,7 @@
                                                         <span class="text-danger"> {{$message}}</span>
                                                         @enderror
                                                     </div>
-                                            
+
                                                 <!-- End Categories Select -->
 
 
@@ -164,7 +164,7 @@
                                                     <span class="text-danger"> {{$message}}</span>
                                                     @enderror
                                                 </div>
-                                                
+
                                             </div>
 
                                             </div>
