@@ -46,7 +46,9 @@ class ProductCouponRequest extends FormRequest {
 
     public function messages() {
         return [
-
+            'code.required'         =>  trans('Admin/products.code_required'),
+            'code.unique'           =>  trans('Admin/products.code_unique'),
+            'code.regex'            =>  trans('Admin/products.code_regex'),
         ];
     }
 }

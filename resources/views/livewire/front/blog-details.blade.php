@@ -61,6 +61,7 @@
                             </div>
                             <!-- end widget -->
 
+                            @if(count($blog->categories)>0)
                             <!-- start widget -->
                             <div class="widget widget--categories">
                                 <h4 class="h6 widget-title">{{ __('website\search.Categories') }}</h4>
@@ -86,19 +87,21 @@
                                 </ul>
                             </div>
                             <!-- end widget -->
-
+                            @endif
+                            
+                            @if(count($blog->tags)>0)
                             <!-- start widget -->
                             <div class="widget widget--tags">
                                 <h4 class="h6 widget-title">{{ __('website\search.Tags') }}</h4>
 
                                 <ul id="all_tags">
                                     @foreach($blog->tags as $tag)
-                                    <li id="{{$tag->id}}" onclick="javascript:search_result(this.id,'Tag')"><a>{{$tag->name}}</a></li>
+                                    <li id="{{$tag->id}}" onclick="javascript:search_result(this.id,'Tag')"><a style="color:#36df33">{{$tag->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
                             <!-- end widget -->
-
+                            @endif
                             <!-- start widget -->
                             <div class="widget widget--banner">
                                 <a href="#"><img class="img-fluid  lazy" src="img/blank.gif" data-src="img/widget_banner.jpg" alt="demo" /></a>

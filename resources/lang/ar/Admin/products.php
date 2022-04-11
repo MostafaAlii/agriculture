@@ -9,8 +9,8 @@ return [
     'product_name_placeholder'                   =>                  'ادخل اسم المنتــج',
     'product_farmer_select'                      =>                  'اختــر المــزارع',
     'product_farmer_select_placeholder'          =>                  'من فضلك اختــر مزارع !!',
-    'product_category_select'                  =>                  'اختــر القســم',
-    'product_category_select_placeholder'      =>                  'من فضلك اختــر القســم !!',
+    'product_category_select'                    =>                  'اختــر القســم',
+    'product_category_select_placeholder'        =>                  'من فضلك اختــر القســم !!',
     'product_tags_select'                        =>                  'اختــر العلامات',
     'product_tags_select_placeholder'            =>                  'من فضلك اختــر علامة او اكثر !!',
     'product_store_successfully'                 =>                  'تم اضافة المنتج بنجاح',
@@ -63,4 +63,40 @@ return [
     'product_restore_successfully'                =>                'تم استرجاع المنتج بنجاح',
     'restore_msg'                                 =>                'هل تود الاسترجاع ؟',
     'product_restore_title'                       =>                'استرجاع المنتــج',
+
+
+
+
+    'name_required'                     =>'تاكد من ادخال اسم المنتج',
+    'name_string'                       =>'اسم المنتج يجب ان يكون نص',
+    'name_max'                          =>'اسم المنتج لا يجب ان يتعدى ال 100 حرف',
+    'name_unique'                       =>'اسم المنتج مُضاف بالفعل .. قم بادخال اسم اخر ',
+    'name_regex'                        =>'اسم المنتج لا يجب ان يحتوى على رموز',
+    'desc_regex'                        =>'وصف المنتج لا يجب ان يحتوى على رموز',
+    'category_required'                 =>'تاكد من اختيار قسم ',
+    'tag_required'                      =>'تاكد من اختيار تاج للمنتج ',
+    'price_required'                    =>'تاكد من ادخال سعر المنتج ',
+    'price_numeric'                     =>'سعر المنتج يجب ان يكون رقم',
+    'price_min'                         =>'يجب الا يقل سعر المنتج ع 1',
+    'price_digits_between'              =>'يجب الا يتراوح سعر المنتج ما بين رقم ال ى 12 رقم',
+    'photo_image'                       =>'تاكد من اختيار صوره صحيحه واقصى حجم لها 4096 ',
+    
+    'special_price_type'                =>'تاكد من اختيار نوع السعر',
+    
+    'special_price_start'               =>'تاكد من ادخال تاريخ بدايه العرض',
+    'special_price_start_date'          =>'تاكد من ادخال تاريخ صحيح لبدايه العرض',
+
+    'special_price_end'                 =>'تاكد من ادخال تاريخ نهايه العرض',
+    'special_price_end_date'            =>'تاكد من ادخال تاريخ صحيح لنهايه العرض',
+    'special_price_end_after'           =>'تاكد  من ان تاريخ نهايه العرض بعد تاريخ بدايه العرض ',
+    
+    'sku_unique'                        =>'كود المنتج مُضاف بالفعل .. قم بادخال كود اخر',
+    'sku_regex'                         =>'كود المنتج لا يجب ان يحتوى على رموز',
+    'manage_stock_required'             =>'يجب تحديد حاله تتبع المنتج',
+    'in_stock_required'                 =>' يجب تحديد حاله المنتج بالمخزن',
+
+    'code_required'                      =>'تاكد من ادخال كود قسيمه الخصم',
+    'code_unique'                       =>'هذا الكود مُضاف بالفعل .. قم بادخال كود اخر ',
+    'code_regex'                        =>'كود المنتج لا يجب ان يحتوى على رموز',
+    
 ];
