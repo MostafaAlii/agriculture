@@ -4,8 +4,11 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model {
@@ -51,7 +54,7 @@ class Product extends Model {
         return $this->hasMany(Option::class);
     }
 
-    public function image() {
+    public function image(): MorphOne {
         return $this->morphOne(Image::class, 'imageable');
     }
 
@@ -66,4 +69,11 @@ class Product extends Model {
     public function scopeProductTrashed($query) {
         return $query->onlyTrashed()->get();
     }
+
+    /*************************************************************************************** */
+    // Vendor Rating Product
+    public function ratings(): MorphToMany {
+        return $this->morphToMany(User::class, 'rateable', 'ratings')->withPivot('rating');
+   }
+/*************************************************************************************** */
 }

@@ -66,6 +66,7 @@ return [
     'restore_msg'                                 =>                'Would you like to get back?',
     'product_restore_title'                       =>                'Product recovery',
 
+    'rating_choose'                               =>                'Rate Product',
 
 
     'name_required'                     =>'Make sure you enter the product name',

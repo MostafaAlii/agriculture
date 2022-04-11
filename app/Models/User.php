@@ -1,49 +1,56 @@
 <?php
 namespace App\Models;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Astrotomic\Translatable\Translatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable {
     use HasFactory, Notifiable;
     protected $table = "users";
     protected $guarded = [];
     public $timestamps = true;
     // rel
-       public function image()
-   {
+    public function image(): MorphOne {
        return $this->morphOne(Image::class, 'imageable');
    }
-   public function country()
-   {
-       return $this->belongsTo(Country::class, 'country_id');
-   }
-   public function province()
-   {
-       return $this->belongsTo(Province::class, 'province_id');
-   }
-   public function area()
-   {
-       return $this->belongsTo(Area::class, 'area_id');
-   }
-   public function state()
-   {
-       return $this->belongsTo(State::class, 'state_id');
-   }
-   public function village()
-   {
-       return $this->belongsTo(Village::class, 'village_id');
-   }
-   public function department()
-   {
-       return $this->belongsTo(Department::class, 'department_id');
-   }
-//    public function profile(){
-//     return $this->hasOne(Profile::class, 'user_id');
-//    }
-// // attr
 
+   public function country(): BelongsTo {
+       return $this->belongsTo(Country::class)->withDefault();
+   }
+
+   public function province(): BelongsTo {
+       return $this->belongsTo(Province::class)->withDefault();
+   }
+
+   public function area(): BelongsTo {
+       return $this->belongsTo(Area::class)->withDefault();
+   }
+
+   public function state(): BelongsTo {
+       return $this->belongsTo(State::class)->withDefault();
+   }
+
+   public function village(): BelongsTo {
+       return $this->belongsTo(Village::class)->withDefault();
+   }
+
+   public function department(): BelongsTo {
+       return $this->belongsTo(Department::class)->withDefault();
+   }
+   /*************************************************************************************** */
+   // Get Vendor Rataing Doing For Product التقييمات الى عملها اليوزر
+   public function ratedProducts(): MorphToMany {
+        return $this->morphedByMany(Product::class, 'rateable', 'ratings');
+    }
+
+   // Get Vendor Rataing Doing For Other Farmer التقييمات الى عملها اليوزر
+   public function ratedFarmers(): MorphToMany {
+       return $this->morphedByMany(Farmer::class, 'rateable', 'ratings');
+   }
+   /*************************************************************************************** */
     protected $hidden = [
         'password',
         'remember_token',

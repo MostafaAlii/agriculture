@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#FCDB5A" />
     <meta name="msapplication-navbutton-color" content="#FCDB5A" />
     <meta name="apple-mobile-web-app-status-bar-style" content="#FCDB5A" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicons
     ================================================== -->
     <link rel="shortcut icon" href="{{ asset('frontassets/img/favicon.ico') }}">

@@ -1,5 +1,25 @@
 <?php
 
+//////////// Admin Auth date  Helper Function ////
+if (! function_exists('admin')) {
+	function admin(){
+		return auth()->guard('admin');
+	}
+}
+
+if (! function_exists('vendor')) {
+	function vendor(){
+		return auth()->guard('vendor');
+	}
+}
+
+if (! function_exists('farmer')) {
+	function farmer(){
+		return auth()->guard('web');
+	}
+}
+//////////// Admin Auth date  Helper Function /////
+
 if(!function_exists('load_dep')){
     function load_dep($select =null,$dep_hide=null){
         $admin_departments =  App\Models\AdminDepartment::selectRaw('name as text')
@@ -40,17 +60,18 @@ if(!function_exists('load_dep')){
     }
 }
 
-
 if(!function_exists('setting')){
     function setting(){
         return App\Models\Setting::orderBy('id','desc')->first();
     }
 }
+
 if(!function_exists('treeTypes')){
     function treeTypes(){
         return App\Models\TreeType::get();
     }
 }
+
 if(!function_exists('land_category')){
     function land_category($id){
         return App\Models\LandCategory::where('id',$id)->first();

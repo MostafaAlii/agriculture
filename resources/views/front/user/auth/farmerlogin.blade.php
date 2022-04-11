@@ -1,6 +1,6 @@
 {{-- @extends('front.layouts.master') --}}
 @extends('front.layouts.master5')
-@section('title', 'login page ')
+@section('title', __('website\home.login'))
 @section('css')
     <style>
         .panel {
@@ -60,12 +60,12 @@
                                     <label class="checkfield align-bottom">
                                         <input type="checkbox" checked="">
                                         <i></i>
-                                        Remember me
+                                        {{ __('Website/home.rememberme') }}
                                     </label>
                                 </div>
 
                                 <div class="col-auto">
-                                    <a class="link-forgot" href="#">Lost your password?</a>
+                                    <a class="link-forgot" href="{{ route('farmer.password.request') }}">{{ __('Website/home.lostpassword') }}</a>
                                 </div>
                             </div>
 

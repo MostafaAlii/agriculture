@@ -7,7 +7,7 @@ use App\Http\Controllers\front\CommentsController;
 use App\Http\Controllers\front\SearchBlogController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
-
+use App\Http\Controllers\front\RatingsController;
 
 Route::group(
     [
@@ -59,6 +59,10 @@ Route::group(
             Route::get('/checkout',Livewire\front\Checkout::class)->name('checkout');                    //checkout
 
 
+            /************************* Start Product & Farmer Rating ******************************/
+            Route::post('/user/ratings/product', [RatingsController::class, 'storeProductRating'])->name('storeProductRating');
+            Route::post('/user/ratings/farmer', [RatingsController::class, 'storeFarmerRating'])->name('storeFarmerRating');
+            /************************* End Product & Farmer Rating ******************************/
 
             // ajax routes ***********************************
             Route::get('/user/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get country provinces

@@ -79,7 +79,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="" method="delete" id="form_delete_department">
+                                            <form action="" method="delete" id="form_delete_department" autocomplete="off">
                                                 @csrf
                                                 @method('delete')
                                                 <div class="modal-body">

@@ -43,6 +43,13 @@ integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amn
 @stack('js')
 
 <script src="{{ URL::asset('/js/search.js') }}"></script>
-
+<script src="{{ URL::asset('/js/myFun.js') }}"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 @livewireScripts
 
