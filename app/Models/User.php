@@ -46,14 +46,9 @@ class User extends Authenticatable {
         return $this->morphedByMany(Product::class, 'rateable', 'ratings');
     }
 
-   // Get Vendor Rataing Doing For Other Users التقييمات الى عملها اليوزر
-   public function ratedUsers(): MorphToMany {
-       return $this->morphedByMany(User::class, 'rateable', 'ratings');
-   }
-   /*************************************************************************************** */
-   // Get Vendor Have Rating التقيمات التى حصل عليها عضو اخر قيم هذا العضو
-   public function ratings(): MorphToMany {
-        return $this->morphToMany(User::class, 'rateable', 'ratings');
+   // Get Vendor Rataing Doing For Other Farmer التقييمات الى عملها اليوزر
+   public function ratedFarmers(): MorphToMany {
+       return $this->morphedByMany(Farmer::class, 'rateable', 'ratings');
    }
    /*************************************************************************************** */
     protected $hidden = [

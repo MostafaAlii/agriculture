@@ -4,10 +4,11 @@ namespace App\Http\Controllers\front;
 
 use App\Models\Blog;
 use App\Models\Comment;
+
+use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\CommentsRequest;
 use App\Http\Interfaces\Front\CommentInterface;
-use App\Models\Product;
 
 class CommentsController extends Controller
 {
@@ -16,6 +17,7 @@ class CommentsController extends Controller
         $this->Data = $Data;
     }
     
+     
     public function store_blog(Blog $blog, CommentsRequest $request)
     {
         return $this->Data->store_blog($blog,$request);
@@ -30,4 +32,6 @@ class CommentsController extends Controller
     {
         return $this->Data->destroy($comment);
     }
+
+    
 }

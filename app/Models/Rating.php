@@ -7,4 +7,5 @@ class Rating extends Model {
     protected $table = "ratings";
     public $timestamps = true;
     const MIN_STARS_RATE = 1;
+    const MAX_STARS_RATE = 5;
 }

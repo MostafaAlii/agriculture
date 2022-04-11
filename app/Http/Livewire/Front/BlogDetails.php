@@ -15,11 +15,10 @@ class BlogDetails extends Component
     }
     public function render()
     {
-        $blog = Blog::findorfail($this->blog_id);
+        $data['blog'] = Blog::findorfail($this->blog_id);
          //$blog = Blog::findorfail($this->blog_id)->withCount('comments')->dd();
-         $comments = $blog->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);
-        // in blog_detail blade ---->>>>>>  {{ $comments->links() }} 
-        //dd($comments->count());
-        return view('livewire.front.blog-details',compact('blog','comments'))->layout('front.layouts.master3');
+        $data['comments'] = $data['blog']->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);
+       
+        return view('livewire.front.blog-details',$data)->layout('front.layouts.master3');
     }
 }

@@ -63,4 +63,5 @@ return [
     'product_restore_successfully'                =>                'تم استرجاع المنتج بنجاح',
     'restore_msg'                                 =>                'هل تود الاسترجاع ؟',
     'product_restore_title'                       =>                'استرجاع المنتــج',
+    'rating_choose'                               =>                'تقييم المنتج',
 ];

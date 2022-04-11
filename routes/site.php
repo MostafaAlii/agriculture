@@ -4,9 +4,10 @@ use App\Http\Livewire;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\front\CommentsController;
+use App\Http\Controllers\front\SearchBlogController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
-
+use App\Http\Controllers\front\RatingsController;
 
 Route::group(
     [
@@ -27,6 +28,10 @@ Route::group(
 
         route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                         // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
+
+        //--------------------------------search with tag-------------------------------------------------------
+        Route::get('/blogs.search/{blog_id}/{type}',[SearchBlogController::class,'search'])->name('blogs.search'); // blog details
+        Route::get('/blogs.search2/{text}',[SearchBlogController::class,'search2'])->name('blogs.search2'); // blog details
 
         //------------------------------------------ start blogs & products comments----------------------------------------
         Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store_blog']);//add &replay (blog)
@@ -54,6 +59,10 @@ Route::group(
             Route::get('/checkout',Livewire\front\Checkout::class)->name('checkout');                    //checkout
 
 
+            /************************* Start Product & Farmer Rating ******************************/
+            Route::post('/user/ratings/product', [RatingsController::class, 'storeProductRating'])->name('storeProductRating');
+            Route::post('/user/ratings/farmer', [RatingsController::class, 'storeFarmerRating'])->name('storeFarmerRating');
+            /************************* End Product & Farmer Rating ******************************/
 
             // ajax routes ***********************************
             Route::get('/user/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get country provinces

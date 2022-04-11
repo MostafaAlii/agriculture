@@ -93,14 +93,19 @@
                                             </div>
                                         @endif
 
-
-                                        <div class="rating">
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                            <span class="rating__item"><i class="fontello-star"></i></span>
-                                        </div>
+                                        <!-- Start Rating -->
+                                        <!--<div class="rating">
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>-->
+                                            <div class="form-group">
+                                                <label for="product_rating">{{ trans('Admin/products.rating_choose') }}</label>
+                                                <select class="form-control"data-toggle="product_rating" id="product_rating" data-id="{{ $product->id }}">
+                                                    @for($i = 1; $i <= 5; $i++)
+                                                        <option>{{ $i }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                        <!--</div>-->
+                                        <!-- End Rating -->
 
                                         <p>
                                             {{ $product->description }}

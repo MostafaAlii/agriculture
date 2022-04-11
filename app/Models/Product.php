@@ -73,7 +73,7 @@ class Product extends Model {
     /*************************************************************************************** */
     // Vendor Rating Product
     public function ratings(): MorphToMany {
-        return $this->morphToMany(User::class, 'rateable', 'ratings');
+        return $this->morphToMany(User::class, 'rateable', 'ratings')->withPivot('rating');
    }
 /*************************************************************************************** */
 }

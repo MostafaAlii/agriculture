@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
         User::create([
             'firstname' => 'xxx',
             'lastname' => 'xxx',
-            'email' => 'xxx@gmail.com',
+            'email' => 'ahmedragab1000aaa@gmail.com',
             'password' => bcrypt('258258258'),
             'phone'=>'01021493037',
             'address1'          =>  'cairo',

@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Notification;
 use Mail;
-class PasswordResetLinkController extends Controller
+class FarmerPasswordResetLinkController extends Controller
 {
 
     public function create()
     {
         // return view('auth.forgot-password');
-        return view('front.user.auth.user-forget');
+        return view('front.user.auth.farmer-forget');
     }
 
 
@@ -107,12 +107,12 @@ class PasswordResetLinkController extends Controller
     public function submitForgetPasswordForm(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:users',
+            'email' => 'required|email|exists:farmers',
         ]);
-        $user = DB::table('users')->where('email', '=', $request->email)
+        $farmer = DB::table('farmers')->where('email', '=', $request->email)
         ->first();
         //Check if the user exists
-        if ($user == null) {
+        if ($farmer == null) {
             return redirect()->back()->withErrors(['email' => trans('User does not exist')]);
         }
         $token = Str::random(64);
@@ -121,7 +121,7 @@ class PasswordResetLinkController extends Controller
             'token' => $token,
             'created_at' => Carbon::now()
           ]);
-        Mail::send('front.user.auth.forgetPassword', ['token' => $token], function($message) use($request){
+        Mail::send('front.user.auth.farmerforgetPassword', ['token' => $token], function($message) use($request){
             $message->to($request->email);
             $message->subject('Reset Password');
         });
