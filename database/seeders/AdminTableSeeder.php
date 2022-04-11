@@ -28,7 +28,7 @@ class AdminTableSeeder extends Seeder {
         Admin::create([
             'firstname'         =>  'yyy',
             'lastname'          =>  'yyy',
-            'email'             =>  'yyy@app.com',
+            'email'             =>  'ahmedragabyasin2020@gmail.com',
             'phone'             =>  '01015588628',
             'password'          =>  bcrypt('123123'),
             'address1'          =>  'cairo',

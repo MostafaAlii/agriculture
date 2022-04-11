@@ -10,8 +10,10 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\FarmerNewPasswordController;
+use App\Http\Controllers\Auth\AdminNewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\FarmerPasswordResetLinkController;
+use App\Http\Controllers\Auth\AdminPasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +62,19 @@ Route::middleware('guest')->group(function () {
     Route::post('farmer-reset-password', [FarmerNewPasswordController::class, 'submitResetPasswordForm'])
     ->name('farmer.password.update');
     // farmer forget password ********************************************************************
+    //Admin forget password ********************************************************************
+    Route::get('admin-forgot-password', [AdminPasswordResetLinkController::class, 'create'])
+    ->name('admin.password.request');
+
+    Route::post('admin-forgot-password', [AdminPasswordResetLinkController::class, 'submitForgetPasswordForm'])
+    ->name('admin.password.email');
+
+    Route::get('admin-reset-password/{token}', [AdminNewPasswordController::class, 'create'])
+    ->name('admin.password.reset');
+
+    Route::post('admin-reset-password', [AdminNewPasswordController::class, 'submitResetPasswordForm'])
+    ->name('admin.password.update');
+    // Admin forget password ********************************************************************
 
 
 });
