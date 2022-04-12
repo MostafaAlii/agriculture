@@ -15,50 +15,52 @@ use Livewire\WithFileUploads;
 class FarmerAddProductComponent extends Component
 {
     use WithFileUploads;
-    public $image;
+
+    public $newimage;
     public $product_name;
     public $slug;
-    public $categories=[];
-    public $tags=[];
+    public $cat=[];
+    public $tag=[];
     public $price;
     public $status=0;
     public $desc;
-    public $location;
+    // public $location;
+
+
     public function generateslug(){
         $this->slug = Str::slug($this->product_name,'-');
      }
      public function mount(){
-        $this->categories = Category::select('id')->get();
-        $this->tags       =  Tag::select('id')->get();;
+        $this->slug           = Str::slug($this->product_name,'-');
+        $this->categories     = Category::select('id')->get();
+        $this->tags           = Tag::select('id')->get();
     }
     // real time validation----------------------------------------------------------------------------
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName, [
-            'image'          =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'newimage'          =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'product_name'   =>'required|min:3',
-            // 'slug'           =>'required|unique:products,slug',
-            'categories'     =>'required',
+            'categories'       =>'required',
             'tags'           =>'required',
             'price'          =>'required|numeric|min:2',
             'desc'           =>'required|min:10',
-            'location'       =>'required|min:10',
+            // 'location'       =>'required|min:10',
         ]);
     }
     // end real time validation-
 
     public function store(){
-        // DB::beginTransaction();
-        // try{
+        DB::beginTransaction();
+        try{
         $validateData = $this->validate([
-            'image'          =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'newimage'          =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'product_name'   =>'required|min:3',
-            // 'slug'           =>'required|unique:products,slug',
             'categories'     =>'required',
             'tags'           =>'required',
             'price'          =>'required|numeric|min:2',
             'desc'           =>'required|min:10',
-            'location'       =>'required|min:10',
+            // 'location'       =>'required|min:10',
           ]);
         $product = new Product();
         $product->name           = $this->product_name;
@@ -67,37 +69,35 @@ class FarmerAddProductComponent extends Component
         $product->price          = $this->price;
         $product->description    = $this->desc;
         $product->status         = $this->status;
-        $product->product_location = $this->location;
-        $product->save();
-        $product->categories()->attach($this->categories);
-        $product->tags()->attach($this->tags);
+        // $product->product_location = $this->location;
         $product->save();
 
-        $image = $this->image->extension();
-        $name  = $this->slug;
-        $filename = $name. '.' . $image;
-        $Image = new Image();
-        $Image->filename = $filename;
-        $Image->imageable_id = $product->id;
-        $Image->imageable_type = 'App\Models\Product';
-        $Image->save();
-        $this->image->storeAs('products',$filename,'upload_image');
-
-        // DB::commit();
-        session()->flash('Add','Product added successfully');
+        $product->categories()->attach($this->cat);
+        $product->tags()->attach($this->tag);
+        $product->save();
+        if($this->newimage){
+            $image = $this->newimage->extension();
+            $name  = $this->slug;
+            $filename = $name. '.' . $image;
+            $Image = new Image();
+            $Image->filename = $filename;
+            $Image->imageable_id = $product->id;
+            $Image->imageable_type = 'App\Models\Product';
+            $Image->save();
+            $this->newimage->storeAs('products',$filename,'upload_image');
+        }
+        DB::commit();
+        session()->flash('Add',__('Admin/products.product_store_successfully'));
         return redirect()->route('farmer.product');
-    // } catch (\Exception $e) {
-    //     DB::rollBack();
-    //     session()->flash('error',__('Admin/site.sorry'));
-    //     return redirect()->back();
-    //  }
+    } catch (\Exception $e) {
+        DB::rollBack();
+        session()->flash('error',__('Admin/site.sorry'));
+        return redirect()->back();
+     }
     }
     public function render()
     {
-        $data = [];
-        // $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
-        $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
-        $data['categories']     =       Category::select('id')->without('created_at', 'updated_at')->get();
-        return view('livewire.front.farmer.farmer-add-product-component',$data)->layout('front.layouts.master2');
+
+        return view('livewire.front.farmer.farmer-add-product-component')->layout('front.layouts.master2');
     }
 }

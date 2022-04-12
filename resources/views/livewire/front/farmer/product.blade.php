@@ -28,6 +28,7 @@
                                 <th scope="col">{{ __('Admin/products.product_main_image') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_name') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_category') }}</th>
+                                <th scope="col">{{ __('Admin/products.product_tag') }}</th>
                                 <th scope="col">{{ __('website/home.price') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_status') }}</th>
                                 <th scope="col">{{ __('Admin/general.created_since') }}</th>
@@ -41,9 +42,9 @@
                                     <tr>
                                         <th scope="row">{{ $index+1 }}</th>
                                         <td>
-                                            @if($product->image->filename)
+                                            @if($product->image)
                                                 <a href="{{ route('product_details',encrypt($product->id)) }}">
-                                                    <img  width="100"
+                                                    <img  width="100" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                 </a>
                                             @else
@@ -56,6 +57,13 @@
                                             @foreach ($product->categories as $category)
                                                 <div class="text-primary text-bold">
                                                     <span>{{$category->name}}</span>
+                                                </div>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($product->tags as $tag)
+                                                <div class="text-primary text-bold">
+                                                    <span>{{$tag->name}}</span>
                                                 </div>
                                             @endforeach
                                         </td>

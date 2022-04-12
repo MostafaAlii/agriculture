@@ -6,10 +6,12 @@
 {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/forms/toggle/bootstrap-switch.min.css')}}"> --}}
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css')}}"> --}}
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css')}}"> --}}
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap.css')}}"> --}}
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap-extended.css') }}"> --}}
 {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/components.css') }}"> --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
+
+
 @endsection
 <div>
 	<!-- start section -->
@@ -37,38 +39,45 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-
                     <!-- start checkout -->
                     <div class="checkout">
-                        <h2>Add <span>Product</span></h2>
-                        <h1> <a href="{{ route('farmer.product') }}" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('back') }}</a></h1>
+                        <h2>{{ __('Admin/products.add_new_product') }}</h2>
+                        <h1> <a href="{{ route('farmer.product') }}" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/site.back') }}</a></h1>
                         <div class="spacer py-3"></div>
 
-                        <form class="checkout__form" method="post" wire:submit.prevent="store"
-                         enctype="multipart/form-data">
+                        <form class="checkout__form" method="post"  wire:submit.prevent="store" enctype="multipart/form-data" >
                             <div class="row justify-content-xl-between">
                                 <div class="col-12 col-md-5 col-lg-6">
-                                    <div><h6>Product Information</h6></div>
+                                    {{-- <div><h6>Product Information</h6></div> --}}
 
                                     <div class="row">
                                         <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <input type="file" accept="image/*" name="image" class="img"   wire:model='image'/>
-                                            </div>
 
                                             <div class="input-wrp">
-                                                <img
-                                                src="{{ asset('assets/admin/images/avatar.jpg') }}"
-                                                style="" class="rounded-circle img-preview"  width="85px" height="85px" id="output" />
-                                                @error('image')
+                                                @if($newimage)
+                                                    <img
+                                                    src="{{ $newimage->temporaryUrl() }}"
+                                                    alt="{{ $newimage->temporaryUrl() }}"
+                                                    class=" img-preview users-avatar-shadow rounded-circle "  width="85px" height="85px" id="output" />
+                                                    @error('newimage')
                                                     <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                                    @enderror
+                                                @else
+                                                    <a class="mr-2" href="#">
+                                                        <img src="{{ asset('Dashboard/img/products/default.jpg') }}"
+                                                        alt="{{ asset('Dashboard/img/products/default.jpg') }}"
+                                                        class="users-avatar-shadow rounded-circle img-preview"  width="50%">
+                                                    </a>
+                                                @endif
+                                            </div>
+                                            <div class="input-wrp">
+                                                <input type="file" accept="image/*" name="image" class="textfield"   wire:model='newimage'/>
                                             </div>
 
                                         </div>
                                         <div class="col-12 ">
                                             <div class="input-wrp">
-                                                <label for="eventRegInput1">{{ __('Admin/products.product_name') }} <span class="text-danger">*</span></label>
+                                                <label >{{ __('Admin/products.product_name') }} <span class="text-danger">*</span></label>
                                                 <input class="textfield"
                                                 placeholder="{{ __('Admin/products.product_name_placeholder') }} *"
                                                 name="product_name"
@@ -83,7 +92,7 @@
                                         </div>
                                         <div class="col-12 ">
                                             <div class="input-wrp">
-                                                <label for="eventRegInput1">{{ __('Admin/products.product_name') }} <span class="text-danger">*</span></label>
+                                                <label >{{ __('Admin/products.product_name') }} <span class="text-danger">*</span></label>
                                                 <input class="textfield"
                                                 placeholder="{{ __('Admin/products.product_name_placeholder') }} *"
                                                 name="slug"
@@ -94,68 +103,48 @@
                                                 @enderror
                                             </div>
                                         </div>
-
-                                        {{-- <div class="col-12 ">
-                                            <div class="input-wrp">
-                                                <label for="projectinput1">
-                                                    {{ trans('Admin\products.product_farmer_select') }} <span class="text-danger">*</span>
-                                                </label>
-                                                <select name="farmer_id" class="select2 textfield wide js-select" wire:model='farmer_id'>
-                                                    <optgroup label="{{ trans('Admin\products.product_farmer_select_placeholder') }}">
-                                                        @if($farmers && $farmers->count() > 0)
-                                                            @foreach($farmers as $farmer)
-                                                                <option
-                                                                    value="{{$farmer->id }}">{{$farmer->firstname . ' ' . $farmer->lastname}}
-                                                                </option>
-                                                            @endforeach
-                                                        @endif
-                                                    </optgroup>
-                                                </select>
-                                                @error('farmer_id')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div> --}}
-
                                         <div class="col-12">
                                             <div class="input-wrp">
-                                                <label for="projectinput1">
+                                                <label >
                                                     {{ trans('Admin\products.product_category_select') }} <span class="text-danger">*</span>
                                                 </label>
-                                                <select name="categories[]" class="select2 textfield wide js-select" multiple wire:model='categories'>
-                                                    <optgroup label="{{ trans('Admin\products.product_category_select_placeholder') }}">
-                                                        @if($categories && $categories->count() > 0)
-                                                            @foreach($categories as $category)
-                                                                <option value="{{$category->id}}">
-                                                                    {{$category->name}}
-                                                                </option>
-                                                            @endforeach
-                                                        @endif
-                                                    </optgroup>
-                                                </select>
-                                                @error('categories')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                                <div wire:ignore>
+                                                    <select class="select2 textfield wide js-select" id="category-dropdown" multiple wire:model='cat'  style="width: 38.75em;">
+                                                            @if($categories && $categories->count() > 0)
+                                                            <option value="" disabled="disabled">-- {{ trans('Admin\products.product_category_select_placeholder') }} --</option>
+                                                                @foreach($categories as $category)
+                                                                    <option value="{{$category->id}}">
+                                                                        {{$category->name}}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
+                                                    </select>
+                                                    @error('cat')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="input-wrp">
-                                                <label for="projectinput1">
+                                                <label >
                                                     {{ trans('Admin\products.product_tags_select') }}
                                                 </label>
-                                                <select name="tags[]" class="select2 textfield wide js-select" multiple wire:model='tags'>
-                                                    <optgroup label="{{ trans('Admin\products.product_tags_select_placeholder') }}">
-                                                        @if($tags && $tags->count() > 0)
-                                                            @foreach($tags as $tag)
-                                                                <option
-                                                                    value="{{$tag->id}}">{{$tag->name}}</option>
-                                                            @endforeach
-                                                        @endif
-                                                    </optgroup>
-                                                </select>
-                                                @error('tags')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
+                                                <div wire:ignore>
+                                                    <select  class="select2 textfield wide js-select" id="tags" multiple wire:model='tag' style="width: 38.75em;">
+                                                            @if($tags && $tags->count() > 0)
+                                                            <option value="" disabled="disabled">-- {{ trans('Admin\products.product_tags_select_placeholder') }} --</option>
+                                                                @foreach($tags as $tag)
+                                                                    <option value="{{$tag->id}}">
+                                                                        {{$tag->name}}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
+                                                    </select>
+                                                    @error('tag')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
 
@@ -173,24 +162,13 @@
                                                 @enderror
                                             </div>
                                         </div>
-
-                                        {{-- <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-
-                                                <input type="hidden" value="0"
-                                                            name="status"
-                                                            id="switcheryColor4"
-                                                            class="checkfield" data-color="success"
-                                                            checked/>
-                                            </div>
-                                        </div> --}}
                                         <div class="col-12">
                                             <div class="input-wrp">
                                                 <label for="projectinput1">
                                                     {{ trans('Admin\products.product_description') }}
                                                 </label>
                                                 <textarea name="desc" class="textfield" wire:model='desc'
-                                                 placeholder="{{ trans('Admin\products.product_description_placeholder') }}">
+                                                placeholder="{{ trans('Admin\products.product_description_placeholder') }}">
 
                                                 </textarea>
                                                 @error('desc')
@@ -198,7 +176,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-12 ">
+                                        {{-- <div class="col-12 ">
                                             <div class="input-wrp">
                                                 <label for="projectinput1"> العنوان  </label>
 
@@ -210,14 +188,11 @@
                                                     @enderror
                                             </div>
                                         </div>
-                                        <div id="map" class="col-12" style="height:450px"></div>
+                                        <div id="map" class="col-12" style="height:450px"></div> --}}
                                         <hr>
                                     </div>
-
                                     <div class="spacer py-6"></div>
-
                                     {{-- <div><h6>Adress</h6></div>
-
                                     <div class="row">
                                         <div class="col-12 col-sm-6 col-md-12 col-lg-6">
                                             <div class="input-wrp">
@@ -263,20 +238,15 @@
                                             </div>
                                         </div>
                                     </div> --}}
-
                                     <button class="custom-btn custom-btn--medium custom-btn--style-1"
                                             type="submit" role="button">{{ __('Admin/site.save') }}
                                     </button>
-
                                     <div class="spacer py-6 d-md-none"></div>
                                 </div>
                             </div>
                         </form>
-
-
                     </div>
                     <!-- end checkout -->
-
                 </div>
             </div>
         </div>
@@ -288,17 +258,17 @@
 {{-- <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"></script> --}}
 <script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js')}}"></script>
+<script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>
 {{-- <script src="{{ asset('assets/admin/js/core/app-menu.js') }}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/js/core/app.js') }}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js')}}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/vendors/js/charts/chart.min.js') }}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/vendors/js/charts/apexcharts/apexcharts.min.js') }}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-crypto.js') }}"></script> --}}
-<script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>
 {{-- <script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js')}}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/vendors/js/extensions/dropzone.min.js') }}"></script> --}}
 {{-- <script src="{{asset('assets/admin/vendors/js/forms/toggle/switchery.min.js')}}" type="text/javascript"></script> --}}
-<script>
+{{-- <script>
     $(".img").change(function(){
         if(this.files && this.files[0]){
             var reader = new FileReader();
@@ -522,6 +492,27 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initAutocomplete&language=ar
-     async defer"></script>
+     async defer"></script> --}}
+
+     <script>
+        $(document).ready(function () {
+            $('#category-dropdown').select2();
+            $('#category-dropdown').on('change', function (e) {
+                let data = $(this).val();
+                 @this.set('cat', data);
+            });
+        });
+    </script>
+
+     <script>
+        $(document).ready(function () {
+            $('#tags').select2();
+            $('#tags').on('change', function (e) {
+                let data = $(this).val();
+                 @this.set('tag', data);
+            });
+        });
+    </script>
+
 @endpush
 
