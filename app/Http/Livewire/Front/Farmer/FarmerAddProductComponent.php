@@ -39,10 +39,10 @@ class FarmerAddProductComponent extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName, [
-            'newimage'          =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'newimage'       =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'product_name'   =>'required|min:3',
-            'categories'       =>'required',
-            'tags'           =>'required',
+            'cat'     =>'required',
+            'tag'           =>'required',
             'price'          =>'required|numeric|min:2',
             'desc'           =>'required|min:10',
             // 'location'       =>'required|min:10',
@@ -54,10 +54,10 @@ class FarmerAddProductComponent extends Component
         DB::beginTransaction();
         try{
         $validateData = $this->validate([
-            'newimage'          =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'newimage'       =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'product_name'   =>'required|min:3',
-            'categories'     =>'required',
-            'tags'           =>'required',
+            'cat'     =>'required',
+            'tag'           =>'required',
             'price'          =>'required|numeric|min:2',
             'desc'           =>'required|min:10',
             // 'location'       =>'required|min:10',

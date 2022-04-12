@@ -10,10 +10,10 @@
                @include('dashboard.common._partials.messages')
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5>All
+                        <h5>
                             <span style="font-weight: bold;color: #33ab4e;">
                               {{ Auth::user()->firstname .' ' . Auth::user()->lastname }}
-                            </span> Product
+                            </span> {{ __('Admin/site.product') }}
                         </h5>
                     </div>
                     <div class="panel-body">
@@ -28,7 +28,7 @@
                                 <th scope="col">{{ __('Admin/products.product_main_image') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_name') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_category') }}</th>
-                                <th scope="col">{{ __('Admin/products.product_tag') }}</th>
+                                <th scope="col">{{ __('Admin/site.tag') }}</th>
                                 <th scope="col">{{ __('website/home.price') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_status') }}</th>
                                 <th scope="col">{{ __('Admin/general.created_since') }}</th>

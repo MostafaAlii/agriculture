@@ -45,7 +45,7 @@
                         <h1> <a href="{{ route('farmer.product') }}" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/site.back') }}</a></h1>
                         <div class="spacer py-3"></div>
 
-                        <form class="checkout__form" method="post"  wire:submit.prevent="store" enctype="multipart/form-data" >
+                        <form class="checkout__form" method="post"  wire:submit.prevent="store" enctype="multipart/form-data" autocomplete="off">
                             <div class="row justify-content-xl-between">
                                 <div class="col-12 col-md-5 col-lg-6">
                                     {{-- <div><h6>Product Information</h6></div> --}}
