@@ -1,6 +1,6 @@
 @section('title', __('website\home.editprofile'))
 @section('css')
-
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
 @endsection
 <div>
     <!-- start section -->
@@ -79,7 +79,8 @@
                                 </div>
 
                                 <div class="col-12 col-md-7 col-lg-6 col-xl-5">
-                                    <p><b>@lang('Admin/site.country')  : </b>
+                                    <p>
+                                        <b>@lang('Admin/site.country')  : </b>
                                         <div class="input-wrp">
                                             <select class="textfield wide js-select" id="country_id" name="country_id" wire:model='country_id'>
                                                 <option disabled selected>{{ __('Admin/site.select') }}</option>
@@ -92,7 +93,8 @@
                                         </div>
                                         @error('country_id')
                                         <span class="text-danger">{{ $message }}</span>
-                                        @enderror</p>
+                                        @enderror
+                                    </p>
                                     <p><b>@lang('Admin/site.province')  : </b>
                                         <div class="input-wrp">
                                             <select class="textfield wide js-select" id="province_id" name="province_id" wire:model='province_id'>
@@ -206,6 +208,8 @@
     <!-- end section -->
 </div>
 @push('js')
+<script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js')}}"></script>
+<script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>
 <script>
     $(document).ready(function() {
        //  استعلام بالاجاكس لجلب محافظات البلد ajax for provinces data of country ===============================
@@ -223,8 +227,8 @@
 
                                $.each(data, function(key, value) {
                                    console.log(data);
-                                   // console.log(key);
-                                   // console.log(value);
+                                   console.log(key);
+                                   console.log(value);
                                    $('select[name="province_id"]').append(
                                        '<option value="' + key + '">' + value +'</option>'
                                    );

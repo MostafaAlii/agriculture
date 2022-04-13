@@ -1,6 +1,6 @@
 @section('title', __('website\home.editprofile'))
 @section('css')
-
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
 @endsection
 <div>
     <!-- start section -->
@@ -79,9 +79,11 @@
                                 </div>
 
                                 <div class="col-12 col-md-7 col-lg-6 col-xl-5">
-                                    <p><b>@lang('Admin/site.country')  : </b>
+                                    <p>
+                                        <b>@lang('Admin/site.country')  : </b>
                                         <div class="input-wrp">
-                                            <select class="textfield wide js-select" id="country_id" name="country_id" wire:model='country_id'>
+                                            {{-- <div wire:ignore> --}}
+                                            <select class=" textfield wide js-select" id="country_id" name="country_id" wire:model='country_id'>
                                                 <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                 @foreach (\App\Models\Country::get() as $country)
                                                 <option value="{{ $country->id }}" {{$country_id == $country->id ? 'selected':'' }}>
@@ -89,12 +91,15 @@
                                                 </option>
                                                 @endforeach
                                             </select>
+                                        {{-- </div> --}}
                                         </div>
                                         @error('country_id')
                                         <span class="text-danger">{{ $message }}</span>
-                                        @enderror</p>
+                                        @enderror
+                                    </p>
                                     <p><b>@lang('Admin/site.province')  : </b>
                                         <div class="input-wrp">
+                                            {{-- <div wire:ignore> --}}
                                             <select class="textfield wide js-select" id="province_id" name="province_id" wire:model='province_id'>
                                                     <option value="{{ $province_id }}"  > {{ $province_name }} </option>
                                                     @foreach ($provinces as $province)
@@ -103,6 +108,7 @@
                                                     </option>
                                                     @endforeach
                                             </select>
+                                        {{-- </div> --}}
                                         </div>
                                         @error('province_id')
                                         <span class="text-danger">{{ $message }}</span>
@@ -151,7 +157,7 @@
                                         @enderror</p>
                                     <p><b>@lang('Admin/site.department')  : </b>
                                         <div class="input-wrp">
-                                            <select class=" textfield wide js-select" id="department_id" name="department_id" wire:model='department_id'>
+                                            <select class="textfield wide js-select" id="department_id" name="department_id" wire:model='department_id'>
                                                 @foreach (\App\Models\Department::get() as $department)
                                                 <option value="{{ $department->id }}" {{$department_id == $department->id ? 'selected':'' }}>{{ $department->name }}</option>
                                             @endforeach
@@ -204,6 +210,8 @@
     <!-- end section -->
 </div>
 @push('js')
+<script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js')}}"></script>
+<script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>
 <script>
     $(document).ready(function() {
        //  استعلام بالاجاكس لجلب محافظات البلد ajax for provinces data of country ===============================
@@ -212,7 +220,7 @@
                    console.log(country_id);
                    if (country_id) {
                        $.ajax({
-                           url: "{{ URL::to('user/province') }}/" + country_id,
+                           url: "{{ URL::to('farmer/province') }}/" + country_id,
                            type: "GET",
                            dataType: "json",
                            success: function(data) {
@@ -221,8 +229,8 @@
 
                                $.each(data, function(key, value) {
                                    console.log(data);
-                                   // console.log(key);
-                                   // console.log(value);
+                                   console.log(key);
+                                   console.log(value);
                                    $('select[name="province_id"]').append(
                                        '<option value="' + key + '">' + value +'</option>'
                                    );
@@ -243,7 +251,7 @@
                    // console.log(province_id);
                    if (province_id) {
                        $.ajax({
-                           url: "{{ URL::to('user/area') }}/" + province_id,
+                           url: "{{ URL::to('farmer/area') }}/" + province_id,
                            type: "GET",
                            dataType: "json",
                            success: function(data) {
@@ -274,7 +282,7 @@
                   // console.log(province_id);
                   if (area_id) {
                       $.ajax({
-                          url: "{{ URL::to('user/state') }}/" + area_id,
+                          url: "{{ URL::to('farmer/state') }}/" + area_id,
                           type: "GET",
                           dataType: "json",
                           success: function(data) {
@@ -305,7 +313,7 @@
                   // console.log(province_id);
                   if (state_id) {
                       $.ajax({
-                          url: "{{ URL::to('user/village') }}/" + state_id,
+                          url: "{{ URL::to('farmer/village') }}/" + state_id,
                           type: "GET",
                           dataType: "json",
                           success: function(data) {
