@@ -32,8 +32,10 @@ Route::group(
             route::get('/home',Livewire\front\Home2::class)->name('home.farmer');
             /********************************* Start Admins Dashboard Routes ************************************/
             // Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');
-            route::get('/product',Livewire\front\Farmer\ProductComponent::class)->name('farmer.product');
-            route::get('/product/add',Livewire\front\Farmer\FarmerAddProductComponent::class)->name('farmer.addproduct');
+            route::get('/product',Livewire\front\Farmer\ProductComponent::class)->name('farmer.product'); //farmer product index
+            route::get('/product/add',Livewire\front\Farmer\FarmerAddProductComponent::class)->name('farmer.addproduct'); //farmer add product
+            route::get('/product/edit/{product_id}',Livewire\front\Farmer\FarmerEditProductComponent::class)->name('farmer.editproduct'); //farmer edit product
+
             /********************************* End Admins Pages Routes ************************************/
             route::get('/farmer/ownprofile',Livewire\front\Farmer\FarmerProfile::class)->name('farmer.ownprofile'); //farmer profile
             route::get('/farmer/ownprofile/edit',Livewire\front\Farmer\FarmerEditProfileComponent::class)->name('farmer.editownprofile'); //user Edit profile
