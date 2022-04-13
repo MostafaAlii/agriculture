@@ -71,7 +71,7 @@
                                                 @endif
                                             </div>
                                             <div class="input-wrp">
-                                                <input type="file" accept="image/*" name="image" class="textfield"   wire:model='newimage'/>
+                                                <input type="file" accept="image/*" name="image" class="textfield"   wire:model='newimage' required/>
                                             </div>
 
                                         </div>
@@ -84,7 +84,7 @@
                                                 wire:model='product_name'
                                                 wire:keyup='generateslug'
                                                 value="{{ old('product_name') }}"
-                                                type="text" />
+                                                type="text" required />
                                                 @error('product_name')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -97,7 +97,7 @@
                                                 placeholder="{{ __('Admin/products.product_name_placeholder') }} *"
                                                 name="slug"
                                                 wire:model='slug'
-                                                type="text" />
+                                                type="text" required/>
                                                 @error('slug')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -109,7 +109,7 @@
                                                     {{ trans('Admin\products.product_category_select') }} <span class="text-danger">*</span>
                                                 </label>
                                                 <div wire:ignore>
-                                                    <select class="select2 textfield wide js-select" id="category-dropdown" multiple wire:model='cat'  style="width: 38.75em;">
+                                                    <select class="select2 textfield wide js-select" id="category-dropdown" multiple wire:model='cat'  style="width: 38.75em;" required>
                                                             @if($categories && $categories->count() > 0)
                                                             <option value="" disabled="disabled">-- {{ trans('Admin\products.product_category_select_placeholder') }} --</option>
                                                                 @foreach($categories as $category)
@@ -128,10 +128,10 @@
                                         <div class="col-12">
                                             <div class="input-wrp">
                                                 <label >
-                                                    {{ trans('Admin\products.product_tags_select') }}
+                                                    {{ trans('Admin\products.product_tags_select') }} <span class="text-danger">*</span>
                                                 </label>
                                                 <div wire:ignore>
-                                                    <select  class="select2 textfield wide js-select" id="tags" multiple wire:model='tag' style="width: 38.75em;">
+                                                    <select  class="select2 textfield wide js-select" id="tags" multiple wire:model='tag' style="width: 38.75em;" required>
                                                             @if($tags && $tags->count() > 0)
                                                             <option value="" disabled="disabled">-- {{ trans('Admin\products.product_tags_select_placeholder') }} --</option>
                                                                 @foreach($tags as $tag)
@@ -151,12 +151,12 @@
                                         <div class="col-12 col-sm-6 col-md-12 col-lg-6">
                                             <div class="input-wrp">
                                                 <label for="projectinput1">
-                                                    {{ trans('Admin\products.product_main_price') }}
+                                                    {{ trans('Admin\products.product_main_price') }} <span class="text-danger">*</span>
                                                 </label>
                                                 <input type="number" name="price"
                                                 class="textfield"
-                                                placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}"
-                                                wire:model='price' />
+                                                placeholder="{{ trans('Admin/products.product_main_price_placeholder') }} *"
+                                                wire:model='price' required />
                                                 @error('price')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -168,7 +168,7 @@
                                                     {{ trans('Admin\products.product_description') }}
                                                 </label>
                                                 <textarea name="desc" class="textfield" wire:model='desc'
-                                                placeholder="{{ trans('Admin\products.product_description_placeholder') }}">
+                                                placeholder="{{ trans('Admin\products.product_description_placeholder') }}" >
 
                                                 </textarea>
                                                 @error('desc')
