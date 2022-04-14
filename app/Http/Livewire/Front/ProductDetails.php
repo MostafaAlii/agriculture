@@ -46,8 +46,8 @@ class ProductDetails extends Component
     {
         // $tags=Tag::get();
         $product = Product::findorfail($this->product_id);
-        $newProducts = Product::latest()->limit(3)->get();
-        $popProducts = Product::inRandomOrder()->get()->take(3);
+        $newProducts = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(3)->get();
+        $popProducts = Product::where('in_stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(3);
 
         //retreive product comments
         $comments = $product->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);

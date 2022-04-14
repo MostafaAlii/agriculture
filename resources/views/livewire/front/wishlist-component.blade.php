@@ -243,14 +243,29 @@
                                                             <div class="__content">
                                                                 <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->model->id)) }}">{{ $product->model->name }}</a></h4>
 
-                                                                <div class="__category"><a href="#">
+                                                                {{-- <div class="__category"><a href="#">
                                                                     @foreach ($product->model->categories as $category)
                                                                         <div class="text-primary text-bold">
                                                                         <span>{{$category->name}}</span>
                                                                         </div>
                                                                         @endforeach
-                                                                    </a></div>
-
+                                                                    </a></div> --}}
+                                                                    <div class="stock-info in-stock">
+                                                                        <p class="availability">
+                                                                            <b
+                                                                                class="text {{ $product->model->in_stock == 1 ? 'text-success' : 'text-danger' }}">
+                                                                                {{ $product->model->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                                            </b>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="stock-info in-stock">
+                                                                        <p class="availability">
+                                                                            <b
+                                                                                class="text text-success ">
+                                                                                @lang('Admin/site.qty') ({{ $product->model->qty  }})
+                                                                            </b>
+                                                                        </p>
+                                                                    </div>
                                                                 @if($product->model->special_price >0)
                                                                     <div class="product-price">
                                                                         <span class="product-price__item product-price__item--old">{{ number_format($product->model->price, 2) }} $</span>

@@ -117,6 +117,14 @@
                                                 </b>
                                             </p>
                                         </div>
+                                        <div class="stock-info in-stock">
+                                            <p class="availability">
+                                                <b
+                                                    class="text text-success ">
+                                                    @lang('Admin/site.qty') ({{ $product->qty  }})
+                                                </b>
+                                            </p>
+                                        </div>
                                         {{-- <div class="widget widget--tags">
                                             <h4 class="h6 widget-title">Popular Tags</h4>
 

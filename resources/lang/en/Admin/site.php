@@ -153,4 +153,6 @@ return [
     'itemsave'=>'There is ',
     'inbox'=>'Products In Save For Later',
     'product'=>'Products',
+    'farmername'=>'Farmer Name',
+    'qty'=>'Quantity',
 ];

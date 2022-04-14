@@ -265,12 +265,20 @@
                                         </b>
                                     </p>
                                 </div>
-
+                                <div class="stock-info in-stock">
+                                    <p class="availability">
+                                        <b
+                                            class="text text-success ">
+                                            @lang('Admin/site.qty') ({{ $product->qty  }})
+                                        </b>
+                                    </p>
+                                </div>
                                 <div class="product-price">
                                     <span
                                         class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
                                         $</span>
                                 </div>
+
                                 @if (Auth::guard('vendor')->user() )
                                 @if($product->in_stock ==1)
                                     <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
@@ -585,6 +593,14 @@
                                                         </b>
                                                     </p>
                                                 </div>
+                                                <div class="stock-info in-stock">
+                                                    <p class="availability">
+                                                        <b
+                                                            class="text text-success ">
+                                                            @lang('Admin/site.qty') ({{ $product->qty  }})
+                                                        </b>
+                                                    </p>
+                                                </div>
                                                 @if ($product->special_price > 0)
                                                     <div class="product-price">
                                                         <span
@@ -689,6 +705,14 @@
                                                     <b
                                                         class="text {{ $product->in_stock == 1 ? 'text-success' : 'text-danger' }}">
                                                         {{ $product->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="stock-info in-stock">
+                                                <p class="availability">
+                                                    <b
+                                                        class="text text-success ">
+                                                        @lang('Admin/site.qty') ({{ $product->qty  }})
                                                     </b>
                                                 </p>
                                             </div>

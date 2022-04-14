@@ -48,6 +48,7 @@
                                             <td width="10%">&nbsp;</td>
                                             <td width="35%">{{ __('Website/home.addedproduct') }}</td>
                                             <td width="15%">{{ __('Website/home.price') }}</td>
+                                            <td width="15%">{{ __('Admin/site.farmername') }}</td>
                                             <td width="20%">{{ __('Website/home.quantity') }}</td>
                                             <td width="15%">{{ __('Website/home.total') }}</td>
                                             <td width="5%">{{ __('Website/home.delete') }}</td>
@@ -96,6 +97,12 @@
                                                         <span
                                                             class="__price">{{ number_format($item->model->price, 2) }}
                                                             $</span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span
+                                                            class="__name">{{$item->model->farmer->firstname }} {{$item->model->farmer->lastname }}
+                                                        </span>
                                                     </td>
 
                                                     <td>

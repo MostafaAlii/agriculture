@@ -345,6 +345,14 @@
                                                                     </b>
                                                                 </p>
                                                             </div>
+                                                            <div class="stock-info in-stock">
+                                                                <p class="availability">
+                                                                    <b
+                                                                        class="text text-success ">
+                                                                        @lang('Admin/site.qty') ({{ $product->qty  }})
+                                                                    </b>
+                                                                </p>
+                                                            </div>
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
                                                                 <span

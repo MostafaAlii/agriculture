@@ -46,20 +46,20 @@ class Shop extends Component
     public function render()
     {
         $tags=Tag::get();
-        $newProducts = Product::latest()->limit(3)->get();
+        $newProducts = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(3)->get();
 
         if($this->sorting=='date'){
             $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
-            ->orderByDesc('created_at')->paginate($this->pagesize);
+            ->where('in_stock',1)->where('qty','>',0)->orderByDesc('created_at')->paginate($this->pagesize);
           }elseif($this->sorting=='price'){
               $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
-              ->orderBy('price')->paginate($this->pagesize);
+              ->where('in_stock',1)->where('qty','>',0)->orderBy('price')->paginate($this->pagesize);
           }elseif($this->sorting=='price-desc'){
               $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
-              ->orderByDesc('price')->paginate($this->pagesize);
+              ->where('in_stock',1)->where('qty','>',0)->orderByDesc('price')->paginate($this->pagesize);
           }else{
               $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
-              ->paginate($this->pagesize);
+              ->where('in_stock',1)->where('qty','>',0)->paginate($this->pagesize);
           }
           if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->store(Auth::guard('vendor')->user()->email);
