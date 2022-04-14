@@ -111,7 +111,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            
+
                                             <p>
                                                 <b>
                                                     @lang('Admin\products.product_category_select') <span
@@ -167,7 +167,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                                        <div class="col-12 ">
                                             <div class="input-wrp">
                                                 <label for="projectinput1">
                                                     {{ trans('Admin\products.product_main_price') }} <span
@@ -181,6 +181,30 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                                            <p class="row-in-form fill-wife">
+                                                <label class="checkbox-field">
+                                                    <input name="qty" id="qty" value="1" type="checkbox" wire:model='is_qty'>
+                                                    <span>@lang('Admin/site.qty')</span>
+                                                </label>
+                                            </p>
+                                        </div>
+                                        @if($is_qty)
+                                            <div class="col-12 ">
+                                                <div class="input-wrp">
+                                                    <label for="projectinput1">
+                                                        {{ trans('Admin\products.product_enterqty') }} <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="number" name="qty" class="textfield"
+                                                        placeholder="{{ trans('Admin/products.product_enterqty') }} *"
+                                                        wire:model='qty' required />
+                                                    @error('qty')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        @endif
                                         <div class="col-12">
                                             <div class="input-wrp">
                                                 <label for="projectinput1">

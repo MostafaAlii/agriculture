@@ -8,7 +8,6 @@ class ProductFactory extends Factory {
     public function definition() {
         return [
             'farmer_id'                     =>      Farmer::all()->random()->id,
-            
             'price'                         =>      $this->faker->numberBetween($min = 1500, $max = 6000),
             'manage_stock'                  =>      $this->faker->boolean(),
             'in_stock'                      =>      $this->faker->boolean(),
@@ -18,6 +17,7 @@ class ProductFactory extends Factory {
             'description'                   =>      $this->faker->paragraph,
             'status'                        =>      $this->faker->boolean(),
             'product_location'              =>      $this->faker->address(),
+            'qty'                           =>      $this->faker->numberBetween(100,200),
         ];
     }
 }
