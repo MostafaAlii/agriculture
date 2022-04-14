@@ -1,5 +1,29 @@
 @section('title', __('website\home.wishlist'))
 @section('css')
+@if(app()->getLocale()=='ar')
+<style>
+    .product-wish{
+        position: absolute;
+        bottom :3%;
+        z-index:99;
+        left:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@else
+
 <style>
     .product-wish{
         position: absolute;
@@ -22,6 +46,7 @@
         color: #ff7007 !important;
     }
 </style>
+@endif
 @endsection
 <div>
     <!-- start section -->

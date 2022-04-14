@@ -110,8 +110,9 @@
                                                             <span class="__btn __btn--minus"
                                                                 wire:click.prevent="decreaseQuntity('{{ $item->rowId }}')"></span>
                                                             <input class="__q-input" type="text"
-                                                                name="product-quatity" min="1" {{-- max="{{ $item->model->qty }}" --}}
-                                                                {{-- value="{{ $item->qty }}" --}} value="{{ $item->qty }}"
+                                                                name="product-quatity" min="1"
+                                                                max="{{ $item->model->qty }}"
+                                                                value="{{ $item->qty }}"
                                                                 onkeydown="return false" />
                                                             <span class="__btn __btn--plus"
                                                                 wire:click.prevent="increaseQuntity('{{ $item->rowId }}')"></span>

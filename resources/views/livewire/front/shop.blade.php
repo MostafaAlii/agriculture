@@ -1,31 +1,52 @@
 @section('title', __('website\home.shop'))
 @section('css')
-    <style>
-        .product-wish {
-            position: absolute;
-            top: 3%;
-            left: 0;
-            z-index: 99;
-            right: 30px;
-            text-align: right;
-            padding-top: 0;
-        }
+@if(app()->getLocale()=='ar')
+<style>
+    .product-wish{
+        position: absolute;
+        bottom :3%;
+        z-index:99;
+        left:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@else
 
-        .product-wish .fa {
-            /* color:red; */
-            font-size: 30px;
-        }
-
-        .product-wish .fa:hover {
-            color: #ff7007;
-            font-size: 30px;
-        }
-
-        .fill-heart {
-            color: #ff7007 !important;
-        }
-
-    </style>
+<style>
+    .product-wish{
+        position: absolute;
+        top:3%;
+        left: 0;
+        z-index:99;
+        right:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@endif
 @endsection
 <div>
     <!-- start section -->

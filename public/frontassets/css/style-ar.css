@@ -5640,11 +5640,14 @@ img {
 .page-nav__link .ico {
     color: #ccc
 }
-
+.noUi-txt-dir-rtl.noUi-horizontal .noUi-handle {
+    left: auto !important;
+    right: auto;
+  }
 .product-label {
     position: absolute;
     top: 5px;
-    left: 5px;
+    right: 5px;
     min-width: 60px;
     padding: 9px 15px;
     line-height: 1;
