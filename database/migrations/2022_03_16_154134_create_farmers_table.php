@@ -13,6 +13,8 @@ class CreateFarmersTable extends Migration {
             $table->string('phone')->unique();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
+            $table->unsignedBigInteger('view')->default(0);
+            $table->unsignedBigInteger('sales')->default(0);
             $table->foreignId('country_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('province_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('area_id')->default('1')->constrained()->cascadeOnDelete();

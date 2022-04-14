@@ -6,7 +6,10 @@
     <div class="container" style="padding: 30px 0;">
         <div class="row">
             <div class="col-md-12">
-               <h1> <a href="{{ route('farmer.addproduct') }}" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/products.add_new_product') }}</a></h1>
+               <h1>
+                <a href="{{-- route('farmer.addPaymentMethod') --}}" class="btn btn-success btn-lg"> <i class="fa fa-plus"></i> {{ __('Website/farmers.add_farmerPaymentMethod') }}</a>
+                   <a href="{{ route('farmer.addproduct') }}" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> {{ __('Admin/products.add_new_product') }}</a>
+                </h1>
                @include('dashboard.common._partials.messages')
                 <div class="panel panel-default">
                     <div class="panel-heading">

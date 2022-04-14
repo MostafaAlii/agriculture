@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder {
             VillageSeeder::class,
             DepartmentSeeder::class,
             FarmerTableSeeder::class,
+            PaymentMethodSeeder::class,
             AdminTableSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,

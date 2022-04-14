@@ -145,18 +145,7 @@
                             <div class="py-5"></div>
 
                             <div class="row justify-content-md-between">
-                                <div class="col-12 col-md-6">
-
-                                    <div class="cart__coupon form--horizontal">
-                                        <div class="input-wrp">
-                                            <input class="textfield" type="text" placeholder="{{ __('Website/home.addcode') }}" />
-                                        </div>
-
-                                        <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                                            role="button">{{ __('Website/home.applycoupon') }}</button>
-                                    </div>
-
-                                </div>
+                                
 
                                 <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                                     <div class="spacer py-5 d-md-none"></div>
@@ -175,7 +164,7 @@
                                                 <tr>
                                                     <td colspan="2">
                                                         <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                            href="#">{{ __('Website/home.Proceedtocheckout') }}</a>
+                                                            href="{{ route('checkout') }}">{{ __('Website/home.Proceedtocheckout') }}</a>
                                                     </td>
                                                 </tr>
                                             </tfoot>

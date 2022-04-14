@@ -3,6 +3,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,6 +41,9 @@ class Farmer extends Authenticatable {
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+    public function payment():HasOne {
+        return $this->hasOne(PaymentMethod::class, 'farmer_id', 'id')->withDefault(['name' =>'this farmer not have a payment method']);
     }
     public function products(): HasMany {
         return $this->hasMany(Product::class);
