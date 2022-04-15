@@ -21,7 +21,6 @@ class Checkout extends Component {
     public $payment_method_id = 0;
     public $payment_method_code;
     public function mount(){
-        $this->payment_method_id = session()->has('saved_payment_method_id') ? session()->get('saved_payment_method_id') : '';
         $this->cart_subtotal = getCalcDiscountNumbers()->get('subtotal');
         $this->cart_tax = getCalcDiscountNumbers()->get('tax');
         $this->cart_total = getCalcDiscountNumbers()->get('total');
@@ -32,6 +31,7 @@ class Checkout extends Component {
         $this->user_firstname = auth()->user()->firstname;
         $this->user_lastname = auth()->user()->lastname;
         $this->payment_methods = PaymentMethod::whereStatus(true)->get();
+        $this->payment_method_id = session()->has('saved_payment_method_id') ? session()->get('saved_payment_method_id') : '';
     }
     public function applyDiscount() {
         if(getCalcDiscountNumbers()->get('subtotal') > 0) {
@@ -65,12 +65,13 @@ class Checkout extends Component {
         $this->emit('updateCart');
         $this->alert('success', 'Coupon is removed');
     }
-    public function render() {
-        return view('livewire.front.checkout')->layout('front.layouts.master2');
-    }
 
     public function updatePaymentMethod(){
         $payment_method = PaymentMethod::whereId($this->payment_method_id)->first();
-        //$this->payment_method_code = $payment_method->code;
+        $this->payment_method_code = $payment_method->code;
+    }
+
+    public function render() {
+        return view('livewire.front.checkout')->layout('front.layouts.master2');
     }
 }

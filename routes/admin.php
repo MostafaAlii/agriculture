@@ -30,6 +30,7 @@ use App\Http\Controllers\Dashboard\Admin\TreeController;
 use App\Http\Controllers\Dashboard\Admin\TreeTypeController;
 use App\Http\Controllers\Dashboard\Admin\LandCategoryController;
 use App\Http\Controllers\Dashboard\Admin\OrchardController;
+use App\Http\Controllers\Dashboard\Admin\PaymentMethodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -238,5 +239,10 @@ Route::group(
                 Route::get('/sliders/data', [SliderController::class,'data'])->name('sliders.data');
                 Route::delete('/sliders/bulk_delete/{ids}', [SliderController::class,'bulkDelete'])->name('sliders.bulk_delete');
                 /********************************* End Slider Routes ************************************/
+
+                /********************************* Start Payment Method **********************************/
+                Route::resource('Payments', PaymentMethodController::class)->except(['show']);
+                Route::get('/data', [PaymentMethodController::class,'data'])->name('payments.data');
+                /********************************* End Payment Method **********************************/
         });
     });

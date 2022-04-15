@@ -13,10 +13,10 @@
                @include('dashboard.common._partials.messages')
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h5>All
+                        <h5>
                             <span style="font-weight: bold;color: #33ab4e;">
                               {{ Auth::user()->firstname .' ' . Auth::user()->lastname }}
-                            </span> Product
+                            </span> {{ __('Admin/site.product') }}
                         </h5>
                     </div>
                     <div class="panel-body">
@@ -31,6 +31,7 @@
                                 <th scope="col">{{ __('Admin/products.product_main_image') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_name') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_category') }}</th>
+                                <th scope="col">{{ __('Admin/site.tag') }}</th>
                                 <th scope="col">{{ __('website/home.price') }}</th>
                                 <th scope="col">{{ __('Admin/products.product_status') }}</th>
                                 <th scope="col">{{ __('Admin/general.created_since') }}</th>
@@ -44,9 +45,9 @@
                                     <tr>
                                         <th scope="row">{{ $index+1 }}</th>
                                         <td>
-                                            @if($product->image->filename)
+                                            @if($product->image)
                                                 <a href="{{ route('product_details',encrypt($product->id)) }}">
-                                                    <img  width="100"
+                                                    <img  width="100" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                 </a>
                                             @else
@@ -62,14 +63,24 @@
                                                 </div>
                                             @endforeach
                                         </td>
+                                        <td>
+                                            @foreach ($product->tags as $tag)
+                                                <div class="text-primary text-bold">
+                                                    <span>{{$tag->name}}</span>
+                                                </div>
+                                            @endforeach
+                                        </td>
                                         <td>{{ number_format($product->price, 2) }} $</td>
                                         <td class="font-weight-bold badge badge-pill badge-{{ $product->status == 1 ? 'success' : 'danger'  }}">
                                             {{ $product->status == 1 ? __('Admin/products.active') : __('Admin/products.unactive') }}
                                          </td>
                                         <td>{{ $product->created_at->diffforhumans() }} </td>
                                         <td>
-                                            <a href="" class="btn btn-success btn-lg"><i class="fa fa-edit"></i> {{ __('Admin/site.edit') }}</a>
-                                            <a href="" class="btn btn-warning btn-lg"><i class="fa fa-trash"></i>{{ __('Admin/site.delete') }}</a>
+                                            <a href="{{ route('farmer.editproduct',['product_id' =>$product->id]) }}" class="btn btn-success btn-lg"><i class="fa fa-edit"></i> {{ __('Admin/site.edit') }}</a>
+                                            <a href="" class="btn btn-danger btn-lg" title="Delete" wire:click.prevent="delete({{ $product->id }})"
+                                                onclick="confirm('{{ __('Are you sure to delete this product') }}') || event.stopImmediatePropagation() ">
+                                                <i class="fa fa-trash"></i>{{ __('Admin/site.delete') }}
+                                            </a>
                                         </td>
                                     </tr>
                               @endforeach

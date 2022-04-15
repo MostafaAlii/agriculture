@@ -42,9 +42,6 @@ class Farmer extends Authenticatable {
     {
         return $this->belongsTo(Department::class, 'department_id');
     }
-    public function payment():HasOne {
-        return $this->hasOne(PaymentMethod::class, 'farmer_id', 'id')->withDefault(['name' =>'this farmer not have a payment method']);
-    }
     public function products(): HasMany {
         return $this->hasMany(Product::class);
     }

@@ -152,4 +152,5 @@ return [
     'savelater'=>'Save For Later',
     'itemsave'=>'There is ',
     'inbox'=>'Products In Save For Later',
+    'product'=>'Products',
 ];

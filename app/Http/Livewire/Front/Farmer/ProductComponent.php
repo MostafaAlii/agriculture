@@ -2,12 +2,28 @@
 
 namespace App\Http\Livewire\Front\Farmer;
 
+use App\Models\Image;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 class ProductComponent extends Component
 {
     use WithPagination;
+    public function delete($id){
+        $product = Product::where('id',$id)->first();
+        if($product->image->filename){
+            $this->deleteImage('upload_image','/products/' . $product->image->filename,$product->id);
+        }
+        Product::destroy($id);
+        session()->flash('Delete',__('Admin/products.delete_done'));
+        return redirect()->route('farmer.product');
+     }
+     public function deleteImage($disk,$path,$id)
+     {
+         Storage::disk($disk)->delete($path);
+         Image::where('imageable_id',$id)->delete();
+     }
     public function render()
     {
         // $products = Product::paginate(5);

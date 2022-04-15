@@ -8,4 +8,12 @@ class PaymentMethod extends Model {
     protected $table = "payment_methods";
     protected $guarded = [];
     public $timestamps = true;
+
+    public function status() {
+        return $this->status ? 'Active' : 'Inactive';
+    }
+
+    public function sandbox() {
+        return $this->sandbox ? 'Sandbox' : 'Live';
+    }
 }

@@ -70,6 +70,9 @@ Route::group(
             Route::get('/user/state/{area_id}', [ProfileController::class, 'getState']);// route ajax for get areas states
             Route::get('/user/village/{state_id}', [ProfileController::class, 'getVillage']);// route ajax for get state villages
             /********************************* End Admin & Employee Routes ************************************/
+            /*Route::group(['middleware' => 'check_cart'], function () {
+                Route::get('/checkout', [PaymentController::class, 'checkout'])->name('frontend.checkout');
+            });*/
         });
 
 

@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/options.options') }}
+    {{ trans('Admin/payments.payments') }}
 @endsection
 
 @section('content')
@@ -14,15 +14,15 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">
-                    <i class="material-icons">playlist_add_check</i>
-                    {{ trans('Admin/options.options') }}
+                    <i class="material-icons">payment</i>
+                    {{ trans('Admin/payments.payments') }}
                 </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Options.index') }}">{{ trans('Admin/options.options') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Payments.index') }}">{{ trans('Admin/payments.payments') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -42,7 +42,7 @@
                         <div class="card">
                             <!-- Start Card Header -->
                             <div class="card-header">
-                                <h4 class="card-title">{{ trans('Admin/options.options') }}</h4>
+                                <h4 class="card-title">{{ trans('Admin/payments.payments') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -58,10 +58,10 @@
                             <div class="card-content collapse show">
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                   <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
                                         <i class="material-icons">add_box</i>
-                                        {{ trans('Admin/options.options_add_new') }}
-                                   </button>
+                                        {{ trans('Admin/payments.add_new_payment') }}
+                                    </button>
                                     <button type="button" class="btn btn-warning btn-md mb-3"
                                         id="btn_delete_all" data-toggle="modal"
                                         data-target="#bulkdelete" >
@@ -70,16 +70,16 @@
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->
-                                        <table class="table table-striped table-bordered zero-configuration" id="options-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="payments-table">
                                             <thead>
                                                 <tr>
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ __('Admin/options.options_name') }}</th>
-                                                    <th>{{ __('Admin/options.attribute') }}</th>
-                                                    <th>{{ __('Admin/options.price') }}</th>
-                                                    <th>{{ __('Admin/options.product') }}</th>
+                                                    <th>{{ __('Admin/payments.enter_payment_name') }}</th>
+                                                    <th>{{ __('Admin/payments.enter_payment_code') }}</th>
+                                                    <th>{{ __('Admin/payments.sandbox') }}</th>
+                                                    <th>{{ __('Admin/payments.status') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -98,7 +98,7 @@
                     <!-- End col-12 -->
                 </div>
                 <!-- End row -->
-                @include('dashboard.admin.options.btn.add')
+                @include('dashboard.admin.payments.btn.add')
             </section>
             <!-- End Zero configuration table -->
         </div>
@@ -114,7 +114,7 @@
 <!-- Datatable Fire -->
 <script>
    
-    let countriesTable = $('#options-table').DataTable({
+    let paymentTable = $('#payments-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -123,18 +123,18 @@
             },
         ajax: {
 
-           url: "{{ route('option_data')}}",
+           url: "{{ route('payments.data')}}",
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name',sortable: false},
-            {data: 'attribute', name: 'attribute', sortable: false},
-            {data: 'price', name: 'price'},
-            {data: 'product', name: 'product',sortable: false},
+            {data: 'name', name: 'name'},
+            {data: 'code', name: 'code'},
+            {data: 'sandbox', name: 'sandbox'},
+            {data: 'status', name: 'status'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[4, 'desc']],
+        //order: [[4, 'desc']],
     });
 </script>
 
