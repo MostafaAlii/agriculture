@@ -1,10 +1,10 @@
 <?php
-
 use App\Http\Livewire;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\front\FarmerAllDataController;
 use App\Http\Controllers\front\RatingsController;
+use App\Http\Controllers\front\PaymentMethodController;
 use App\Http\Controllers\front\CommentsController;
 use App\Http\Controllers\front\SearchController;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
@@ -78,9 +78,10 @@ Route::group(
             Route::get('/user/state/{area_id}', [ProfileController::class, 'getState']);// route ajax for get areas states
             Route::get('/user/village/{state_id}', [ProfileController::class, 'getVillage']);// route ajax for get state villages
             /********************************* End Admin & Employee Routes ************************************/
-            /*Route::group(['middleware' => 'check_cart'], function () {
-                Route::get('/checkout', [PaymentController::class, 'checkout'])->name('frontend.checkout');
-            });*/
+            
+            /************************* Start Checkout & PaymentMethod ******************************/
+            Route::post('/checkout/payment', [PaymentMethodController::class, 'checkout'])->name('checkout.paypal');
+            /************************* End Checkout & PaymentMethod ******************************/
         });
 
 

@@ -3,7 +3,7 @@
 
 @endsection
 <div>
-    {{-- dd($payment_methods) --}}
+    {{-- dd($payment_method_id) --}}
     <!-- start section -->
     <section class="section">
         <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
@@ -75,6 +75,7 @@
                                     <br>
                                     <!-- Start Payment Methods -->
                                     <h5 class="text-uppercase mb-4">{{ trans('Website/checkout.payment_way') }}</h5>
+                                    <!-- Start Payment Method Row -->
                                     <div class="row">
                                         <div class="col-6 form-group">
                                             @forelse($payment_methods as $payment_method)
@@ -96,24 +97,34 @@
                                             @endforelse
                                         </div>
                                     </div>
-                                    @if ($payment_method_id != 0)
-                                        <form action="{{ route('checkoutssssnt') }}" method="post">
-                                            @method('POST')
-                                            @csrf
-                                            <input type="text" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
-                                            <button type="submit" name="submit" class="btn btn-dark btn-sm btn-block">
-                                                Continue to checkout with PayPal
-                                            </button>
-                                        </form>
-                                    {{--  @else
-                                        <form action="{{-- route('checkout.payment') }}" method="post">
-                                            @csrf
-                                            <input type="text" name="payment_method_id" value="{{ old('payment_method_id', 1) }}" class="form-control">
-                                            <button type="submit" name="submit" class="btn btn-dark btn-sm btn-block">
-                                                Continue to checkout with MasterCard
-                                            </button>
-                                        </form>--}}
-                                    @endif
+                                    <!-- End Payment Method Row -->
+                                    <!-- Start Payment Method Route -->
+                                    
+                                        @if ($payment_method_id != 0)
+                                            <div wire:ignore>
+                                            @if (\Str::lower($payment_method_code) == 'ppex')
+                                                <form action="{{ route('checkout.paypal') }}" method="post">
+                                                    @method('POST')
+                                                    @csrf
+                                                    <input type="text" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
+                                                    <button type="submit" name="submit" class="btn btn-dark btn-lg btn-block">
+                                                        {{ trans('Website/checkout.continue_payment_with_paypal') }}
+                                                    </button>
+                                                </form>
+                                            @endif
+                                            @if (\Str::lower($payment_method_code) == 'master')
+                                                <form action="{{-- route('checkout.payment.masterCard') --}}" method="post">
+                                                    @method('POST')
+                                                    @csrf
+                                                    <input type="text" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
+                                                    <button type="submit" name="submit" class="btn btn-dark btn-lg btn-block">
+                                                        {{ trans('Website/checkout.continue_payment_with_mastercard') }}
+                                                    </button>
+                                                </form>
+                                            @endif
+                                            </div>
+                                        @endif
+                                    <!-- End Payment Method Route -->
                                     <!-- End Payment Methods -->
                                     <!-- Start CouponCode -->
                                     {{--  <div class="spacer py-6"></div>
