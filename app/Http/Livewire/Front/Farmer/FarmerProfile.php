@@ -10,7 +10,13 @@ class FarmerProfile extends Component
 {
     public function render()
     {
-        $farmer = Farmer::find(Auth::guard('web')->user()->id);
-        return view('livewire.front.farmer.farmer-profile',compact('farmer'))->layout('front.layouts.master2');
+        $data['farmer'] = Farmer::find(Auth::guard('web')->user()->id);
+        $farmerSum =  $data['farmer']->ratings->sum(function($item){ // $item isrelated to the guardTable (User or Other)
+            return $item->pivot->rating;
+        });
+        if($data['farmer']->ratings->count()){
+            $data['avg'] = 10*($farmerSum /  $data['farmer']->ratings->count());
+        }else{ $data['avg']=0;}
+        return view('livewire.front.farmer.farmer-profile',$data)->layout('front.layouts.master2');
     }
 }

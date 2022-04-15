@@ -36,7 +36,6 @@
                                 <!-- end item -->
                             @endforeach
                         @endif
-
                     </div>
                 </div>
             </div>

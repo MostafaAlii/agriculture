@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\CommentsRequest;
 use App\Http\Interfaces\Front\CommentInterface;
+use App\Models\Farmer;
 
 class CommentsController extends Controller
 {
@@ -26,6 +27,11 @@ class CommentsController extends Controller
     public function store_product(Product $product, CommentsRequest $request)
     {
         return $this->Data->store_product($product,$request);
+    }
+    
+    public function store_farmer(Farmer $farmer, CommentsRequest $request)
+    {
+        return $this->Data->store_farmer($farmer,$request);
     }
 
     public function destroy(Comment $comment)

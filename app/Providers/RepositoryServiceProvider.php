@@ -23,9 +23,6 @@ use App\Http\Repositories\Admin\OptionRepository;
 use App\Http\Interfaces\Admin\SliderInterface;
 use App\Http\Repositories\Admin\SliderRepository;
 
-use App\Http\Interfaces\Front\SearchInterface;
-use App\Http\Repositories\Front\SearchRepository;
-
 use App\Http\Interfaces\Admin\OrchardInterface;
 use App\Http\Repositories\Admin\OrchardRepository;
 
@@ -49,9 +46,6 @@ use App\Http\Repositories\Admin\TreeTypeRepository;
 
 use App\Http\Interfaces\Admin\AdminDepartmentInterface;
 use App\Http\Repositories\Admin\AdminDepartmentRepository;
-
-use App\Http\Interfaces\Front\CommentInterface;
-use App\Http\Repositories\Front\CommentRepository;
 
 use App\Http\Interfaces\Admin\AdminInterface;
 use App\Http\Repositories\Admin\AdminRepository;
@@ -80,9 +74,19 @@ use App\Http\Repositories\Admin\LandCategoryRepository;
 use App\Http\Interfaces\Admin\ProductCouponInterface;
 use App\Http\Repositories\Admin\ProductCouponRepository;
 
-// Front Uses
+// ------------------------Front Uses-------------------------------
+
+use App\Http\Interfaces\Front\CommentInterface;
+use App\Http\Repositories\Front\CommentRepository;
+
+use App\Http\Interfaces\Front\SearchInterface;
+use App\Http\Repositories\Front\SearchRepository;
+
 use App\Http\Interfaces\Front\RatingInterface;
 use App\Http\Repositories\Front\RatingRepository;
+
+use App\Http\Interfaces\Front\FarmerAllDataInterface;
+use App\Http\Repositories\Front\FarmerAllDataRepository;
 
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -117,6 +121,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(RatingInterface::class, RatingRepository::class);
         $this->app->bind(SearchInterface::class, SearchRepository::class);
+        $this->app->bind(FarmerAllDataInterface::class, FarmerAllDataRepository::class);
     }
 
     public function boot()

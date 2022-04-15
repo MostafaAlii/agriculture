@@ -54,6 +54,12 @@ class Farmer extends Authenticatable {
         return $this->morphToMany(User::class, 'rateable', 'ratings')->withPivot('rating');
     }
 
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+    
     protected $hidden = [
         'password',
         'remember_token',

@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\Product;
+use auth;
+use Cart;
 use App\Models\Tag;
+use App\Models\Rating;
+use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Facades\Crypt;
-use Cart;
+use PhpOffice\PhpSpreadsheet\Calculation\Financial\Securities\Rates;
 
 class ProductDetails extends Component
 {
@@ -52,7 +55,19 @@ class ProductDetails extends Component
         //retreive product comments
         $comments = $product->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);
 
-        return view('livewire.front.product-details',compact('product','newProducts','popProducts','comments'))
+       // dd(auth()->user()->id);
+        //$product->ratings->where('user_id',auth()->user()->id);
+
+        //product total rate
+        if($product->ratings->count()){
+            $productSum = $product->ratings->sum(function($item){ // $item is related to the guardTable (User or Other)
+                return $item->pivot->rating;
+            });
+            $avg = 10*($productSum / $product->ratings->count());
+        }else{
+            $avg=0;
+        }
+        return view('livewire.front.product-details',compact('product','newProducts','popProducts','comments','avg'))
                    ->layout('front.layouts.master2');
     }
 }

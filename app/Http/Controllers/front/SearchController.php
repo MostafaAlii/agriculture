@@ -5,7 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Front\SearchInterface;
 // use App\Http\Requests\Front\SearchRequest;
-class SearchBlogController extends Controller
+class SearchController extends Controller
 {
     protected $Data;
     public function __construct(SearchInterface $Data) {
@@ -15,6 +15,11 @@ class SearchBlogController extends Controller
     public function search($id,$type)
     {
         return $this->Data->search($id,$type);
+    }
+      
+    public function search_product($id,$type)
+    {
+        return $this->Data->search_product($id,$type);
     }
     
     public function search2($text)

@@ -2,6 +2,27 @@
 @section('css')
 
 @endsection
+<style>
+    .score {
+  display: inline-block;
+  font-family: Wingdings;
+  font-size: 30px;
+  color: #ccc;
+  position: relative;
+}
+.score::before,
+.score span::before{
+  content: "\2605\2605\2605\2605\2605";
+  display: block;
+}
+.score span {
+  color: gold;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+</style>
 <div>
     <!-- start section -->
 
@@ -47,6 +68,7 @@
                         </a>
                     @endif
                     <!-- end form -->
+                    <center> <span class="score" id="rate_msg" ><span style="width: {{$avg}}%"></span></span></center>
 
                     <div class="spacer py-6 d-md-none"></div>
 

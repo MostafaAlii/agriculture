@@ -9,19 +9,22 @@ function createRequest(){
 }
 //////////////////////////////////////////////////////////////////////////
 
-function doAction(){				
+function searchAction(){				
 	if (this.readyState == 4 && this.status == 200) {				
-		document.getElementById("blog_data").innerHTML = this.responseText;		
+		document.getElementById("search_data").innerHTML = this.responseText;		
   	   
 	}							
 }
 //////////////////////////////////////////////////////////////////////////
 
-function search_result(id,type){
+function search_result(page,id,type){
+	// alert(page);
+	// alert(id);
+	// alert(type);
 	var xhhttp;
 	xhhttp= createRequest();
-	xhhttp.onreadystatechange = doAction;	
-	xhhttp.open("GET","../blogs.search/" + id + "/" + type, true); 
+	xhhttp.onreadystatechange = searchAction;	
+	xhhttp.open("GET","../"+page+".search/" + id + "/" + type, true); 
 	xhhttp.send();
 }
 //////////////////////////////////////////////////////////////////////////
@@ -35,7 +38,7 @@ function input_search_result(){
     }else{
         var xhhttp;
         xhhttp= createRequest();
-        xhhttp.onreadystatechange = doAction;	
+        xhhttp.onreadystatechange = searchAction;	
         xhhttp.open("GET","../blogs.search2/" + text , true); 
         xhhttp.send();
     }
