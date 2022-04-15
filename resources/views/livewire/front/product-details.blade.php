@@ -170,13 +170,6 @@ label.star:before {
                                     <div class="content-container">
                                         <h3 class="__name">{{ $product->name }}</h3>
 
-                                        {{-- <div class="__categories">
-                                            @foreach ($product->categories as $category)
-                                                <div class="text-primary text-bold">
-                                                    <span>{{$category->name}}</span>
-                                                </div>
-                                            @endforeach
-                                        </div> --}}
                                         @if($product->special_price >0)
                                             <div class="product-price">
                                                 <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
