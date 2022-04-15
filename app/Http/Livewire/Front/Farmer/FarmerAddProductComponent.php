@@ -16,7 +16,7 @@ use Livewire\WithFileUploads;
 class FarmerAddProductComponent extends Component
 {
     use WithFileUploads;
-
+    public $is_qty;
     public $newimage;
     public $product_name;
     public $slug;
@@ -26,7 +26,7 @@ class FarmerAddProductComponent extends Component
     public $status=0;
     public $desc;
     // public $location;
-
+    public $qty;
 
     public function generateslug(){
         $this->slug = Str::slug($this->product_name,'-');
@@ -48,6 +48,11 @@ class FarmerAddProductComponent extends Component
             'desc'           =>'required|min:10',
             // 'location'       =>'required|min:10',
         ]);
+        if($this->is_qty){
+            $this->validateOnly($propertyName, [
+                'qty'   =>'required|numeric|min:1',
+               ]);
+        }
     }
     // end real time validation-
 
@@ -57,39 +62,49 @@ class FarmerAddProductComponent extends Component
         $validateData = $this->validate([
             'newimage'       =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'product_name'   =>'required|min:3',
-            'cat'     =>'required',
-            'tag'           =>'required',
+            'cat'            =>'required',
+            'tag'            =>'required',
             'price'          =>'required|numeric|min:2',
             'desc'           =>'required|min:10',
+
             // 'location'       =>'required|min:10',
           ]);
-        $product = new Product();
-        $product->name           = $this->product_name;
-        $product->slug           = $this->slug;
-        $product->farmer_id      = Auth::user()->id;
-        $product->price          = $this->price;
-        $product->description    = $this->desc;
-        $product->status         = $this->status;
-        // $product->product_location = $this->location;
-        $product->save();
+        if($this->is_qty ){
+        $this->validate([
+            'qty' =>'required|numeric|min:1',
 
-        $product->categories()->attach($this->cat);
-        $product->tags()->attach($this->tag);
-        $product->save();
-        if($this->newimage){
-            $image = $this->newimage->extension();
-            $name  = $this->slug;
-            $filename = $name. '.' . $image;
-            $Image = new Image();
-            $Image->filename = $filename;
-            $Image->imageable_id = $product->id;
-            $Image->imageable_type = 'App\Models\Product';
-            $Image->save();
-            $this->newimage->storeAs('products',$filename,'upload_image');
+            ]);
+            $product = new Product();
+            $product->name           = $this->product_name;
+            $product->slug           = $this->slug;
+            $product->farmer_id      = Auth::user()->id;
+            $product->price          = $this->price;
+            $product->description    = $this->desc;
+            $product->status         = $this->status;
+            $product->is_qty         = $this->is_qty ? 1:0;
+            $product->qty            = $this->qty;
+            // $product->product_location = $this->location;
+            $product->save();
+
+            $product->categories()->attach($this->cat);
+            $product->tags()->attach($this->tag);
+            $product->save();
+            if($this->newimage){
+                $image = $this->newimage->extension();
+                $name  = $this->slug;
+                $filename = $name. '.' . $image;
+                $Image = new Image();
+                $Image->filename = $filename;
+                $Image->imageable_id = $product->id;
+                $Image->imageable_type = 'App\Models\Product';
+                $Image->save();
+                $this->newimage->storeAs('products',$filename,'upload_image');
+            }
+
+            DB::commit();
+            session()->flash('Add',__('Admin/products.product_store_successfully'));
+            return redirect()->route('farmer.product');
         }
-        DB::commit();
-        session()->flash('Add',__('Admin/products.product_store_successfully'));
-        return redirect()->route('farmer.product');
     } catch (\Exception $e) {
         DB::rollBack();
         session()->flash('error',__('Admin/site.sorry'));

@@ -1,31 +1,52 @@
 @section('title', __('website\home.shop'))
 @section('css')
-    <style>
-        .product-wish {
-            position: absolute;
-            top: 3%;
-            left: 0;
-            z-index: 99;
-            right: 30px;
-            text-align: right;
-            padding-top: 0;
-        }
+@if(app()->getLocale()=='ar')
+<style>
+    .product-wish{
+        position: absolute;
+        bottom :3%;
+        z-index:99;
+        left:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@else
 
-        .product-wish .fa {
-            /* color:red; */
-            font-size: 30px;
-        }
-
-        .product-wish .fa:hover {
-            color: #ff7007;
-            font-size: 30px;
-        }
-
-        .fill-heart {
-            color: #ff7007 !important;
-        }
-
-    </style>
+<style>
+    .product-wish{
+        position: absolute;
+        top:3%;
+        left: 0;
+        z-index:99;
+        right:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@endif
 @endsection
 <div>
     <!-- start section -->
@@ -200,62 +221,62 @@
 
                                     <ul>
                                         @foreach ($newProducts as $product)
-                                            <li>
-                                                <div class="row no-gutters">
-                                                    <div class="col-auto __image-wrap">
-                                                        <figure class="__image">
-                                                            <a
-                                                                href="{{ route('product_details', encrypt($product->id)) }}">
-                                                                @if ($product->image->filename)
-                                                                    <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                        data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                        alt="demo" />
-                                                                @else
-                                                                    <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                        alt="demo" />
-                                                                @endif
-                                                            </a>
-                                                        </figure>
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <h4 class="h6 __title"><a
-                                                                href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
-                                                        </h4>
-
-                                                        <div class="rating">
-                                                            <span class="rating__item rating__item--active"><i
-                                                                    class="fontello-star"></i></span>
-                                                            <span class="rating__item rating__item--active"><i
-                                                                    class="fontello-star"></i></span>
-                                                            <span class="rating__item rating__item--active"><i
-                                                                    class="fontello-star"></i></span>
-                                                            <span class="rating__item rating__item--active"><i
-                                                                    class="fontello-star"></i></span>
-                                                            <span class="rating__item"><i
-                                                                    class="fontello-star"></i></span>
+                                                <li>
+                                                    <div class="row no-gutters">
+                                                        <div class="col-auto __image-wrap">
+                                                            <figure class="__image">
+                                                                <a
+                                                                    href="{{ route('product_details', encrypt($product->id)) }}">
+                                                                    @if ($product->image->filename)
+                                                                        <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
+                                                                            data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
+                                                                            alt="demo" />
+                                                                    @else
+                                                                        <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                            alt="demo" />
+                                                                    @endif
+                                                                </a>
+                                                            </figure>
                                                         </div>
 
-                                                        @if ($product->special_price > 0)
-                                                            <div class="product-price">
-                                                                <span
-                                                                    class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                                    $</span>
-                                                                <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                                    $</span>
+                                                        <div class="col">
+                                                            <h4 class="h6 __title"><a
+                                                                    href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
+                                                            </h4>
+
+                                                            <div class="rating">
+                                                                <span class="rating__item rating__item--active"><i
+                                                                        class="fontello-star"></i></span>
+                                                                <span class="rating__item rating__item--active"><i
+                                                                        class="fontello-star"></i></span>
+                                                                <span class="rating__item rating__item--active"><i
+                                                                        class="fontello-star"></i></span>
+                                                                <span class="rating__item rating__item--active"><i
+                                                                        class="fontello-star"></i></span>
+                                                                <span class="rating__item"><i
+                                                                        class="fontello-star"></i></span>
                                                             </div>
-                                                        @else
-                                                            <div class="product-price">
-                                                                <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
-                                                                    $</span>
-                                                            </div>
-                                                        @endif
+
+                                                            @if ($product->special_price > 0)
+                                                                <div class="product-price">
+                                                                    <span
+                                                                        class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
+                                                                        $</span>
+                                                                    <span
+                                                                        class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
+                                                                        $</span>
+                                                                </div>
+                                                            @else
+                                                                <div class="product-price">
+                                                                    <span
+                                                                        class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
+                                                                        $</span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
+                                                </li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -365,6 +386,14 @@
                                                                 <b
                                                                     class="text {{ $product->in_stock == 1 ? 'text-success' : 'text-danger' }}">
                                                                     {{ $product->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                                </b>
+                                                            </p>
+                                                        </div>
+                                                        <div class="stock-info in-stock">
+                                                            <p class="availability">
+                                                                <b
+                                                                    class="text text-success ">
+                                                                    @lang('Admin/site.qty') ({{ $product->qty  }})
                                                                 </b>
                                                             </p>
                                                         </div>

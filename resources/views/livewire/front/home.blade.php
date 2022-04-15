@@ -1,32 +1,53 @@
 <!-- start section -->
 @section('title', __('website\home.home'))
 @section('css')
-    <style>
-        .product-wish {
-            position: absolute;
-            top: 3%;
-            left: 0;
-            z-index: 99;
-            right: 30px;
-            text-align: right;
-            padding-top: 0;
-        }
+@if(app()->getLocale()=='ar')
+<style>
+    .product-wish{
+        position: absolute;
+        bottom :3%;
+        z-index:99;
+        left:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@else
 
-        .product-wish .fa {
-            /* color:red; */
-            font-size: 30px;
-        }
-
-        .product-wish .fa:hover {
-            color: #ff7007;
-            font-size: 30px;
-        }
-
-        .fill-heart {
-            color: #ff7007 !important;
-        }
-
-    </style>
+<style>
+    .product-wish{
+        position: absolute;
+        top:3%;
+        left: 0;
+        z-index:99;
+        right:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@endif
 @endsection
 <div>
     {{-- ********************** Home 2 ****************************************** --}}
@@ -265,12 +286,20 @@
                                         </b>
                                     </p>
                                 </div>
-
+                                <div class="stock-info in-stock">
+                                    <p class="availability">
+                                        <b
+                                            class="text text-success ">
+                                            @lang('Admin/site.qty') ({{ $product->qty  }})
+                                        </b>
+                                    </p>
+                                </div>
                                 <div class="product-price">
                                     <span
                                         class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
                                         $</span>
                                 </div>
+
                                 @if (Auth::guard('vendor')->user() )
                                 @if($product->in_stock ==1)
                                     <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
@@ -585,6 +614,14 @@
                                                         </b>
                                                     </p>
                                                 </div>
+                                                <div class="stock-info in-stock">
+                                                    <p class="availability">
+                                                        <b
+                                                            class="text text-success ">
+                                                            @lang('Admin/site.qty') ({{ $product->qty  }})
+                                                        </b>
+                                                    </p>
+                                                </div>
                                                 @if ($product->special_price > 0)
                                                     <div class="product-price">
                                                         <span
@@ -689,6 +726,14 @@
                                                     <b
                                                         class="text {{ $product->in_stock == 1 ? 'text-success' : 'text-danger' }}">
                                                         {{ $product->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                    </b>
+                                                </p>
+                                            </div>
+                                            <div class="stock-info in-stock">
+                                                <p class="availability">
+                                                    <b
+                                                        class="text text-success ">
+                                                        @lang('Admin/site.qty') ({{ $product->qty  }})
                                                     </b>
                                                 </p>
                                             </div>

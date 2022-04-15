@@ -82,16 +82,16 @@ return [
     'price_min'                         =>'The price of the product should not be less than 1',
     'price_digits_between'              =>'The price of the product should not range from 12 numbers',
     'photo_image'                       =>'Make sure to choose the correct picture and the maximum size is 4096 ',
-    
+
     'special_price_type'                =>'Make sure you choose the price type',
-    
+
     'special_price_start'               =>'Make sure you enter the start date of the offer',
     'special_price_start_date'          =>'Make sure you enter a correct date for the beginning of the offer',
 
     'special_price_end'                 =>'Make sure you enter the end date of the offer ',
     'special_price_end_date'            =>'Make sure you enter a correct end date',
     'special_price_end_after'           =>'Make sure that the end date after the start date of the offer ',
-    
+
     'sku_unique'                        =>'The product code is already added. Enter another code',
     'sku_regex'                         =>'The product code doesn\'t have to contain codes.',
     'manage_stock_required'             =>'You must determine the status of product tracking',
@@ -100,5 +100,6 @@ return [
     'code_required'                     =>'Make sure you enter the discount voucher code',
     'code_unique'                       =>'This code is already added. Enter another code ',
     'code_regex'                        =>'The product code doesn\'t have to contain codes.',
-    'type_required'                     =>'Make sure you choose the type of cruelty'
+    'type_required'                     =>'Make sure you choose the type of cruelty',
+    'product_enterqty'                     =>'Enter Product Quantity',
 ];
