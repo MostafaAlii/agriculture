@@ -1,6 +1,5 @@
 @extends('front.layouts.master7')
 @section('title', __('website\home.farmer_datail'))
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <style>
 /* -------------------------------------------------- */
@@ -122,7 +121,7 @@ label.star:before {
                      <!-- --------------------------------------------------- -->
                      @if (Auth::guard('vendor')->user() )
                         <h4>{{ __('Website/comments.rate_now') }}</h4>
-                        <form action="">
+                        <form action="" style="margin-right: 50%;">
                             <input class="star star-5" id="star-5" type="radio" name="star" onclick="javascript:add_rate(5,'farmer');"/>
                             <label class="star star-5" for="star-5"></label>
                             <input class="star star-4" id="star-4" type="radio" name="star" onclick="javascript:add_rate(4,'farmer');"/>
@@ -134,6 +133,8 @@ label.star:before {
                             <input class="star star-1" id="star-1" type="radio" name="star" onclick="javascript:add_rate(1,'farmer');"/>
                             <label class="star star-1" for="star-1"></label>
                         </form>
+                        <br>
+                        <br>
                     @endif
                         <!-- --------------------------------------------------- -->
                     <!-- ###################################################################3 -->
