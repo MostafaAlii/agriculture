@@ -77,4 +77,17 @@ class Product extends Model {
         return $this->morphToMany(User::class, 'rateable', 'ratings')->withPivot('rating');
    }
 /*************************************************************************************** */
+    // rating for each product
+    public function scopeProductRate(){
+        //product total rate
+        if($this->ratings->count()){
+            $productSum = $this->ratings->sum(function($item){ // $item is related to the guardTable (User or Other)
+                return $item->pivot->rating;
+            });
+            $avg = 10*($productSum / $this->ratings->count());
+        }else{
+            $avg=0;
+        }
+        return $avg;
+    }
 }

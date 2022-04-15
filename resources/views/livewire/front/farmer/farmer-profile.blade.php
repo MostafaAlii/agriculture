@@ -68,7 +68,7 @@
                         </a>
                     @endif
                     <!-- end form -->
-                    <center> <span class="score" id="rate_msg" ><span style="width: {{$avg}}%"></span></span></center>
+                    <center> <span class="score" id="rate_msg" ><span style="width: <?php echo $farmer->farmerRate();?>%"></span></span></center>
 
                     <div class="spacer py-6 d-md-none"></div>
 
