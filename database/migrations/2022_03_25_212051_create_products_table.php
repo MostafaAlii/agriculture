@@ -14,12 +14,13 @@ class CreateProductsTable extends Migration {
             $table->decimal('selling_price', 18, 4)->unsigned()->nullable();
             $table->string('sku')->nullable();
             $table->boolean('manage_stock')->nullable();
-            $table->integer('qty')->nullable();
             $table->boolean('in_stock')->default(0);
             $table->integer('viewed')->unsigned()->default(0);
             $table->boolean('status');
             $table->foreignId('farmer_id')->constrained()->cascadeOnDelete();
             $table->longText('product_location')->nullable();
+            $table->integer('qty')->nullable();
+            $table->boolean('is_qty')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

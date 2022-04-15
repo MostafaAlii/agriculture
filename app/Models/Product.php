@@ -29,6 +29,7 @@ class Product extends Model {
         'deleted_at' => 'datetime:Y/m/d',
     ];
 
+
     protected $dates = [
         'special_price_start',
         'special_price_end',

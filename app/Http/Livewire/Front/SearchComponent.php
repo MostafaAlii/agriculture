@@ -48,27 +48,27 @@ class SearchComponent extends Component
     public function render()
     {
         $tags=Tag::get();
-        $newProducts = Product::inRandomOrder()->limit(3)->get();
+        $newProducts = Product::where('in_stock',1)->where('qty','>',0)->inRandomOrder()->limit(3)->get();
 
         if($this->sorting=='date'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })->whereBetween('price',[$this->min_price,$this->max_price])
+            })->whereBetween('price',[$this->min_price,$this->max_price])->where('in_stock',1)->where('qty','>',0)
               ->orderByDesc('created_at')->paginate($this->pagesize);
         }elseif($this->sorting=='price'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })->whereBetween('price',[$this->min_price,$this->max_price])
+            })->whereBetween('price',[$this->min_price,$this->max_price])->where('in_stock',1)->where('qty','>',0)
               ->orderBy('price')->paginate($this->pagesize);
         }elseif($this->sorting=='price-desc'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })->whereBetween('price',[$this->min_price,$this->max_price])
+            })->whereBetween('price',[$this->min_price,$this->max_price])->where('in_stock',1)->where('qty','>',0)
               ->orderByDesc('price')->paginate($this->pagesize);
         }else{
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })->whereBetween('price',[$this->min_price,$this->max_price])
+            })->whereBetween('price',[$this->min_price,$this->max_price])->where('in_stock',1)->where('qty','>',0)
               ->paginate($this->pagesize);
         }
         return view('livewire.front.search-component',compact('products','newProducts','tags'))

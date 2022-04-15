@@ -170,6 +170,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
         /*
          * Application Service Providers...
          */

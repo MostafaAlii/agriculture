@@ -1,6 +1,29 @@
 @section('title', __('website\home.productdetails'))
 @section('css')
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+@if(app()->getLocale()=='ar')
+<style>
+    .product-wish{
+        position: absolute;
+        bottom :3%;
+        z-index:99;
+        left:30px;
+        text-align: right;
+        padding-top:0;
+    }
+    .product-wish .fa {
+        /* color:red; */
+        font-size: 30px;
+    }
+    .product-wish .fa:hover {
+        color:#ff7007;
+        font-size: 30px;
+    }
+    .fill-heart{
+        color: #ff7007 !important;
+    }
+</style>
+@else
 
 <style>
     .product-wish{
@@ -73,6 +96,8 @@ label.star:before {
   overflow: hidden;
 }
 </style>
+@endif
+
 @endsection
 <div>
     	<!-- start section -->
@@ -196,7 +221,23 @@ label.star:before {
                                                 </b>
                                             </p>
                                         </div>
-                                       
+                                        <div class="stock-info in-stock">
+                                            <p class="availability">
+                                                <b
+                                                    class="text text-success ">
+                                                    @lang('Admin/site.qty') ({{ $product->qty  }})
+                                                </b>
+                                            </p>
+                                        </div>
+                                        {{-- <div class="widget widget--tags">
+                                            <h4 class="h6 widget-title">Popular Tags</h4>
+
+                                            <ul>
+                                                @foreach ($product->tags as $tag)
+                                                    <li><a href="#">{{$tag->name}}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </div> --}}
 
                                         @if (Auth::guard('vendor')->user() )
                                             @if($product->in_stock ==1)
@@ -207,8 +248,7 @@ label.star:before {
                                                         type="text"
                                                         name="product-quatity"
                                                         min="1"
-                                                        {{-- max="{{ $item->model->qty }}" --}}
-                                                        {{-- value="{{ $item->qty }}" --}}
+                                                        max="{{ $product->qty }}"
                                                         value="1"
                                                         onkeydown="return false"
                                                         wire:model='qty' />

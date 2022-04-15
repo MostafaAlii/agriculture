@@ -137,25 +137,5 @@
         order: [[4, 'desc']],
     });
 </script>
-<script>
-    // function handel_type(type){
-    //     if(type==2){
-    //         //show product select and hide department select
-    //         document.getElementById('product_div').style.display="block";
-    //         document.getElementById('depart_div').style.display="none";
-            
-            
-    //         document.getElementById('depart_id').required= false;
-    //         document.getElementById('product_id').required= true;
-    //     }else{
-    //         //hide product select and show department select
-    //         document.getElementById('depart_div').style.display="block";
-    //         document.getElementById('product_div').style.display="none";
-            
-    //         document.getElementById('depart_id').required= true;
-    //         document.getElementById('product_id').required= false;
-    //     }
-    // }
-</script>
 
 @endsection

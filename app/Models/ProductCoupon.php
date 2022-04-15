@@ -38,4 +38,34 @@ class ProductCoupon extends Model {
     public function scopeCouponsWithUser($query) {
         return $query->with('user:id,firstname,lastname')->get();
     }
+
+    public function discount($total) {
+        if (!$this->checkDate() || !$this->checkUsedTimes()){
+            return 0;
+        }
+        return $this->checkGreaterThan($total) ? $this->doCalcProcess($total) : 0;
+    }
+
+    protected function checkDate() {
+        return $this->expire_date != '' ? (Carbon::now()->between($this->start_date, $this->expire_date, true)) ? true : false : true;
+    }
+
+    protected function checkUsedTimes() {
+        return $this->use_times != '' ? ( $this->use_times > $this->used_times ) ? true : false : true;
+    }
+
+    protected function checkGreaterThan($total) {
+        return $this->greater_than != '' ? ($this->greater_than >= $total) ? true : false : true;
+    }
+
+    protected function doCalcProcess($total) {
+        switch ($this->type) {
+            case 'fixed':
+                return $this->value;
+            case 'percentage':
+                return ($this->value / 100) * $total;
+            default:
+                return 0;
+        }
+    }
 }

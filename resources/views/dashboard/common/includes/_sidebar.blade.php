@@ -115,6 +115,14 @@
                             </a>
                         </li>
                         <!-- End Sliders -->
+                        <!-- Start Payments -->
+                        <li>
+                            <a class="menu-item" href="{{ route('Payments.index') }}">
+                                <i class="material-icons">payment</i>
+                                <span data-i18n="Sliders">{{ trans('Admin/payments.paymentPageTitle') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Payments -->
                     </ul>
                 </li>
                 <!-- End Main Setting Dropdown Menu -->

@@ -1,5 +1,5 @@
 <?php
-
+use Gloudemans\Shoppingcart\Facades\Cart;
 //////////// Admin Auth date  Helper Function ////
 if (! function_exists('admin')) {
 	function admin(){
@@ -104,4 +104,28 @@ function uploadImage($folder,$image){
     $image->store('/', $folder);
     $filename = $image->hashName();
     return  $filename;
+}
+//////////// Discount Coupon  Helper Function /////
+if(!function_exists('getCalcDiscountNumbers')){
+    function getCalcDiscountNumbers() {
+        $subtotal = Cart::instance('cart')->subtotal();
+        $discount = session()->has('coupon') ? session()->get('coupon')['discount'] : 0.00;
+        $subtotal_after_discount = $subtotal - $discount;
+        $tax = config('cart.tax') / 100;
+        $taxSymbol = config('cart.tax') . '%';
+        $productTaxesInCart = round($subtotal_after_discount * $tax, 2);
+        $newSubTotal = $subtotal + $productTaxesInCart;
+        $shipping = session()->has('shipping') ? session()->get('shipping')['cost'] : 0.00;
+        $total = ($newSubTotal + $shipping) > 0 ? round($newSubTotal + $shipping, 2) : 0.00;
+        return collect([
+            'subtotal' => $subtotal,
+            'tax' => $tax,
+            'taxSymbol' => $taxSymbol,
+            'productTaxesInCart' => (float)$productTaxesInCart,
+            'newSubTotal' => (float)$newSubTotal,
+            'discount' => (float)$discount,
+            'shipping' => (float)$shipping,
+            'total' => (float)$total,
+        ]);
+    }
 }
