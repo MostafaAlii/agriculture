@@ -16,6 +16,7 @@ return [
     'my_order'             => 'My Order',
     'my_profile'           => 'My Profile',
     'change_password'      => 'Change Password',
+    'farmer'               =>  'Farmer',
     // nav bar **************************************
 
     // contact us page translation *******************************************

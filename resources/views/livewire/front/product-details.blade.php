@@ -1,5 +1,6 @@
 @section('title', __('website\home.productdetails'))
 @section('css')
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 @if(app()->getLocale()=='ar')
 <style>
     .product-wish{
@@ -45,6 +46,55 @@
     .fill-heart{
         color: #ff7007 !important;
     }
+
+/* -------------------------------------------------- */
+div.stars {
+  width: 270px;
+  display: inline-block;
+}
+input.star { display: none; }
+label.star {
+  float: right;
+  padding: 10px;
+  font-size: 20px;
+  color: #444;
+  transition: all .2s;
+}
+input.star:checked ~ label.star:before {
+  content: '\f005';
+  color: #FD4;
+  transition: all .25s;
+}
+input.star-5:checked ~ label.star:before {
+  color: #FE7;
+  text-shadow: 0 0 20px #952;
+}
+input.star-1:checked ~ label.star:before { color: #F62; }
+label.star:hover { transform: rotate(-15deg) scale(1.3); }
+label.star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+/* --------------------------------- */
+.score {
+  display: inline-block;
+  font-family: Wingdings;
+  font-size: 30px;
+  color: #ccc;
+  position: relative;
+}
+.score::before,
+.score span::before{
+  content: "\2605\2605\2605\2605\2605";
+  display: block;
+}
+.score span {
+  color: gold;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
 </style>
 @endif
 
@@ -76,7 +126,7 @@
             @endphp
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-md-8 col-lg-9">
+                    <div class="col-12 col-md-8 col-lg-9" id="search_data">
 
                         <!-- start product single -->
                         <div class="product-single">
@@ -95,19 +145,31 @@
                                         <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
                                         @endif
                                     </div>
+                                    <br>
+                                     <!-- --------------------------------------------------- -->
+                                    @if (Auth::guard('vendor')->user() )
+                                        <h4>{{ __('Website/comments.rate_now') }}</h4>
+                                        <form action="">
+                                            <input class="star star-5" id="star-5" type="radio" name="star" onclick="javascript:add_rate(5,'product');"/>
+                                            <label class="star star-5" for="star-5"></label>
+                                            <input class="star star-4" id="star-4" type="radio" name="star" onclick="javascript:add_rate(4,'product');"/>
+                                            <label class="star star-4" for="star-4"></label>
+                                            <input class="star star-3" id="star-3" type="radio" name="star" onclick="javascript:add_rate(3,'product');"/>
+                                            <label class="star star-3" for="star-3"></label>
+                                            <input class="star star-2" id="star-2" type="radio" name="star" onclick="javascript:add_rate(2,'product');"/>
+                                            <label class="star star-2" for="star-2"></label>
+                                            <input class="star star-1" id="star-1" type="radio" name="star" onclick="javascript:add_rate(1,'product');"/>
+                                            <label class="star star-1" for="star-1"></label>
+                                        </form>
+                                    @endif
+                                        <!-- --------------------------------------------------- -->
+
                                 </div>
 
                                 <div class="col-12 col-lg-5">
                                     <div class="content-container">
                                         <h3 class="__name">{{ $product->name }}</h3>
 
-                                        {{-- <div class="__categories">
-                                            @foreach ($product->categories as $category)
-                                                <div class="text-primary text-bold">
-                                                    <span>{{$category->name}}</span>
-                                                </div>
-                                            @endforeach
-                                        </div> --}}
                                         @if($product->special_price >0)
                                             <div class="product-price">
                                                 <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
@@ -119,18 +181,27 @@
                                             </div>
                                         @endif
 
+
+                                        <input type="hidden" id="product_id" value="{{$product->id}}">
+                                         <span class="score" id="rate_msg"><span style="width: <?php echo $avg;?>%"></span></span>
+
+                                        <!-- <div class="stars"> -->
+                                                
                                         <!-- Start Rating -->
-                                        <!--<div class="rating">
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>-->
+                                        <!-- <div class="rating">
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
+                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
                                             <div class="form-group">
                                                 <label for="product_rating">{{ trans('Admin/products.rating_choose') }}</label>
-                                                <select class="form-control"data-toggle="product_rating" id="product_rating" data-id="{{ $product->id }}">
+                                                <select class="form-control"data-toggle="product_rating" id="product_rating" data-id="{{ $product->id }}" >
                                                     @for($i = 1; $i <= 5; $i++)
-                                                        <option>{{ $i }}</option>
+                                                        <option value="{{$i}}">{{ $i }}</option>
                                                     @endfor
                                                 </select>
                                             </div>
-                                        <!--</div>-->
+                                        </div> -->
                                         <!-- End Rating -->
 
                                         <p>
@@ -314,6 +385,7 @@
 
 
 
+                                              
                                                 <div class="rating">
                                                     <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
                                                     <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
@@ -393,112 +465,50 @@
                             </div> --}}
                             <!-- end widget -->
 
+                            
+                            @if(count($product->categories)>0)
                             <!-- start widget -->
                             <div class="widget widget--categories">
-                                <h4 class="h6 widget-title">{{ __('Admin/categories.departmentPageTitle') }}</h4>
-
-                                <ul class="list">
-                                    @foreach ($product->categories as $cat)
-                                    <li class="list__item">
-                                        <a class="list__item__link" href="#">{{ $cat->name }}</a>
-                                        <span>(3)</span>
-                                    </li>
-                                @endforeach
-
+                                <h4 class="h6 widget-title">{{ __('website\search.Categories') }}</h4>
+                                <ul class="list" id="blog_cates">
+                                   @foreach($product->categories as $cate)
+                                        @if($cate->parent_id==Null)
+                                            <li class="list__item" id="{{$cate->id}}" onclick="javascript:search_result('products',this.id,'Category')" >
+                                                <a class="list__item__link" >{{$cate->name}}</a>
+                                                <span>({{count($cate->products)}})</span>
+                                            </li>
+                                            @if(count($cate->childs)>0)
+                                                <?php
+                                                $new = [
+                                                    'page_name'=>'products',
+                                                    'childs' => $cate->childs,
+                                                    'padding' => 20,
+                                                ];
+                                                ?>
+                                                @include('livewire.front.categoryChilds', $new)
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                   
                                 </ul>
                             </div>
                             <!-- end widget -->
+                            @endif
 
-                            <!-- start widget -->
-                            {{-- <div class="widget widget--price">
-                                <h4 class="h6 widget-title">Price</h4>
-
-                                <div>
-                                    <input type="text" class="js-range-slider" name="my_range" value=""
-                                        data-type="double"
-                                        data-min="0"
-                                        data-max="500"
-                                        data-from="48"
-                                        data-to="365"
-                                        data-grid="false"
-                                        data-skin="round"
-                                        data-prefix="$"
-                                        data-hide-from-to="true"
-                                        data-hide-min-max="true"
-                                    />
-
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <input class="range-slider-min-value" type="text" value="48" name="min-value" readonly="readonly">
-                                        </div>
-
-                                        <div class="col-6">
-                                            <input class="range-slider-max-value" type="text" value="365" name="max-value" readonly="readonly">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                            <!-- end widget -->
-
-                            <!-- start widget -->
-                            {{-- <div class="widget widget--additional">
-                                <h4 class="h6 widget-title">Additional</h4>
-
-                                <ul>
-                                    <li>
-                                        <label class="checkfield">
-                                            <input type="checkbox" checked/>
-                                            <i></i>
-                                            Organic
-                                        </label>
-                                    </li>
-
-                                    <li>
-                                        <label class="checkfield">
-                                            <input type="checkbox" />
-                                            <i></i>
-                                            Fresh
-                                        </label>
-                                    </li>
-
-                                    <li>
-                                        <label class="checkfield">
-                                            <input type="checkbox" />
-                                            <i></i>
-                                            Sales
-                                        </label>
-                                    </li>
-
-                                    <li>
-                                        <label class="checkfield">
-                                            <input type="checkbox" />
-                                            <i></i>
-                                            Discount
-                                        </label>
-                                    </li>
-
-                                    <li>
-                                        <label class="checkfield">
-                                            <input type="checkbox" />
-                                            <i></i>
-                                            Expired
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div> --}}
-                            <!-- end widget -->
-
+                            @if(count($product->tags)>0)
                             <!-- start widget -->
                             <div class="widget widget--tags">
-                                <h4 class="h6 widget-title">{{ __('Admin/site.tags') }}</h4>
+                                <h4 class="h6 widget-title">{{ __('website\search.Tags') }}</h4>
 
-                                <ul>
-                                    @foreach ($product->tags as $tag)
-                                        <li><a href="#">{{$tag->name}}</a></li>
+                                <ul id="all_tags">
+                                    @foreach($product->tags as $tag)
+                                    <li id="{{$tag->id}}" onclick="javascript:search_result('products',this.id,'Tag')"><a style="color:#36df33">{{$tag->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
                             <!-- end widget -->
+                            @endif
+                            
 
                             <!-- start widget -->
                             {{-- <div class="widget">

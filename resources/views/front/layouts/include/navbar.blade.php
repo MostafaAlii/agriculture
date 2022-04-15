@@ -10,6 +10,7 @@
 
     <li> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
     <li> <a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a> </li>
+    <li> <a href="{{ route('farmer') }}">{{ __('website\home.farmer') }}</a> </li>
     <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
     <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
     @if (Auth::guard('vendor')->user())

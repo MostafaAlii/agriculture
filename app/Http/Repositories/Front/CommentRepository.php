@@ -47,6 +47,10 @@ class CommentRepository implements CommentInterface{
         return $this->store_blog($product,$request,'App\Models\Product');
     }
 
+    public function store_farmer($farmer,$request): RedirectResponse {
+        return $this->store_blog($farmer,$request,'App\Models\Farmer');
+    }
+
     public function destroy($comment): RedirectResponse {
         try{
             $comment->delete();

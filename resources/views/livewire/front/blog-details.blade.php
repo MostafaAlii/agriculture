@@ -7,7 +7,7 @@
     <section class="section">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-8 col-lg-9" id="blog_data">
+                <div class="col-12 col-md-8 col-lg-9" id="search_data">
                     <div class="content-container">
                         <!-- start posts -->
                         <div class="posts">
@@ -68,13 +68,14 @@
                                 <ul class="list" id="blog_cates">
                                    @foreach($blog->categories as $cate)
                                         @if($cate->parent_id==Null)
-                                            <li class="list__item" id="{{$cate->id}}" onclick="javascript:search_result(this.id,'Category')" >
+                                            <li class="list__item" id="{{$cate->id}}" onclick="javascript:search_result('blogs',this.id,'Category')" >
                                                 <a class="list__item__link" >{{$cate->name}}</a>
                                                 <span>({{count($cate->blogs)}})</span>
                                             </li>
                                             @if(count($cate->childs)>0)
                                                 <?php
                                                 $new = [
+                                                    'page_name'=>'blogs',
                                                     'childs' => $cate->childs,
                                                     'padding' => 20,
                                                 ];
@@ -96,7 +97,7 @@
 
                                 <ul id="all_tags">
                                     @foreach($blog->tags as $tag)
-                                    <li id="{{$tag->id}}" onclick="javascript:search_result(this.id,'Tag')"><a style="color:#36df33">{{$tag->name}}</a></li>
+                                    <li id="{{$tag->id}}" onclick="javascript:search_result('blogs',this.id,'Tag')"><a style="color:#36df33">{{$tag->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

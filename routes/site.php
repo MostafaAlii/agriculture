@@ -2,13 +2,14 @@
 use App\Http\Livewire;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\front\CommentsController;
-use App\Http\Controllers\front\SearchBlogController;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use App\Http\Controllers\Dashboard\Admin\ProfileController;
+use App\Http\Controllers\front\FarmerAllDataController;
 use App\Http\Controllers\front\RatingsController;
-use App\Http\Controllers\front\PaymentController;
 use App\Http\Controllers\front\PaymentMethodController;
+use App\Http\Controllers\front\CommentsController;
+use App\Http\Controllers\front\SearchController;
+use App\Http\Controllers\Dashboard\Admin\ProfileController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -30,12 +31,18 @@ Route::group(
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
 
         //--------------------------------search with tag-------------------------------------------------------
-        Route::get('/blogs.search/{blog_id}/{type}',[SearchBlogController::class,'search'])->name('blogs.search'); // blog details
-        Route::get('/blogs.search2/{text}',[SearchBlogController::class,'search2'])->name('blogs.search2'); // blog details
+        Route::get('/blogs.search/{blog_id}/{type}',[SearchController::class,'search'])->name('blogs.search'); // blog details
+        Route::get('/blogs.search2/{text}',[SearchController::class,'search2'])->name('blogs.search2'); // blog details
+        Route::get('/products.search/{product_id}/{type}',[SearchController::class,'search_product'])->name('products.search'); // blog details
+
+        //----------------------------------farmer---------------------------------------------------------------
+        Route::get('/farmer',[FarmerAllDataController::class,'get_farmer'])->name('farmer'); // all farmer
+        route::get('/farmer/{id}',[FarmerAllDataController::class,'farmer_detail'])->name('farmer_detail'); //farmer detail
 
         //------------------------------------------ start blogs & products comments----------------------------------------
         Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store_blog']);//add &replay (blog)
         Route::post('/products/{product}/comments', [CommentsController::class, 'store_product']);//add &replay (product)
+        Route::post('/farmers/{farmer}/comments', [CommentsController::class, 'store_farmer']);//add &replay (farmer)
         Route::delete('/comments/{comment}', [CommentsController::class, 'destroy']); // url: /comments/1
         //------------------------------------------ end blogs & products comments----------------------------------------
 
@@ -58,10 +65,11 @@ Route::group(
             Route::get('/wishlist',Livewire\front\WishlistComponent::class)->name('product.wishlist');   //wishlist
             Route::get('/checkout',Livewire\front\Checkout::class)->name('checkout');                    //checkout
 
+           // Route::GET('/product_ratings/{id}',[RatingsController::class,'storeProductRating']);
 
             /************************* Start Product & Farmer Rating ******************************/
-            Route::post('/user/ratings/product', [RatingsController::class, 'storeProductRating'])->name('storeProductRating');
-            Route::post('/user/ratings/farmer', [RatingsController::class, 'storeFarmerRating'])->name('storeFarmerRating');
+            Route::get('/user/ratings/product/{id}/{rate}', [RatingsController::class, 'storeProductRating'])->name('storeProductRating');
+            Route::get('/user/ratings/farmer/{id}/{rate}', [RatingsController::class, 'storeFarmerRating'])->name('storeFarmerRating');
             /************************* End Product & Farmer Rating ******************************/
 
             // ajax routes ***********************************

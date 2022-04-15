@@ -89,20 +89,36 @@
                                 <!-- start widget -->
                                 @livewire('front.header-search-component')
                                 <!-- end widget -->
+                            
+                                @if(count(\App\Models\Category::get())>0)
                                 <!-- start widget -->
                                 <div class="widget widget--categories">
-                                    <h4 class="h6 widget-title">{{ __('Admin/categories.departmentPageTitle') }}</h4>
-
-                                    <ul class="list">
-                                        @foreach (\App\Models\Category::get() as $cat)
-                                            <li class="list__item">
-                                                <a class="list__item__link" href="#">{{ $cat->name }}</a>
-                                                <span>(3)</span>
-                                            </li>
+                                    <h4 class="h6 widget-title">{{ __('website\search.Categories') }}</h4>
+                                    <ul class="list" id="blog_cates">
+                                    @foreach(\App\Models\Category::get() as $cate)
+                                            @if($cate->parent_id==Null)
+                                                <li class="list__item" id="{{$cate->id}}" onclick="javascript:search_result('products',this.id,'Category')" >
+                                                    <a class="list__item__link" >{{$cate->name}}</a>
+                                                    <span>({{count($cate->products)}})</span>
+                                                </li>
+                                                @if(count($cate->childs)>0)
+                                                    <?php
+                                                    $new = [
+                                                        'page_name'=>'products',
+                                                        'childs' => $cate->childs,
+                                                        'padding' => 20,
+                                                    ];
+                                                    ?>
+                                                    @include('livewire.front.categoryChilds', $new)
+                                                @endif
+                                            @endif
                                         @endforeach
+                                    
                                     </ul>
                                 </div>
                                 <!-- end widget -->
+                                @endif
+                            
 
                                 <!-- start widget -->
                                 <div class="widget widget--price">
@@ -140,66 +156,22 @@
                                     </div>
                                 </div>
                                 <!-- end widget -->
+                                
 
-                                <!-- start widget -->
-                                {{-- <div class="widget widget--additional">
-                                    <h4 class="h6 widget-title">Additional</h4>
+                            @if(count(\App\Models\Tag::get())>0)
+                            <!-- start widget -->
+                            <div class="widget widget--tags">
+                                <h4 class="h6 widget-title">{{ __('Admin/site.keywords') }}</h4>
 
-                                    <ul>
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" checked/>
-                                                <i></i>
-                                                Organic
-                                            </label>
-                                        </li>
-
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" />
-                                                <i></i>
-                                                Fresh
-                                            </label>
-                                        </li>
-
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" />
-                                                <i></i>
-                                                Sales
-                                            </label>
-                                        </li>
-
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" />
-                                                <i></i>
-                                                Discount
-                                            </label>
-                                        </li>
-
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" />
-                                                <i></i>
-                                                Expired
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div> --}}
-                                <!-- end widget -->
-
-                                <!-- start widget -->
-                                <div class="widget widget--tags">
-                                    <h4 class="h6 widget-title">{{ __('Admin/site.keywords') }}</h4>
-
-                                    <ul>
-                                        {{-- @foreach ($tags as $tag)
-                                            <li><a href="#">{{$tag->name}}</a></li>
-                                        @endforeach --}}
-                                    </ul>
-                                </div>
-                                <!-- end widget -->
+                                <ul id="all_tags">
+                                    @foreach(\App\Models\Tag::get() as $tag)
+                                    <li id="{{$tag->id}}" onclick="javascript:search_result('products',this.id,'Tag')"><a style="color:#36df33">{{$tag->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <!-- end widget -->
+                            @endif
+                            
 
                                 <!-- start widget -->
                                 {{-- <div class="widget">
@@ -292,7 +264,7 @@
                         </aside>
                     </div>
 
-                    <div class="col-12 col-md-8 col-lg-9">
+                    <div class="col-12 col-md-8 col-lg-9" id="search_data">
                         <div class="spacer py-6 d-md-none"></div>
 
                         <div class="row align-items-center justify-content-between">
