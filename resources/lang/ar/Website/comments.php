@@ -20,4 +20,8 @@ return [
     'delete_error'         =>   ' حدث خطا اثناء حذف التعليق',
 
     'rate_now'             =>   'للتقييم ',
+    'description'          =>   'الوصف ',
+    'attribute'            =>   'الخصائص/السمات',
+    'option'               =>   'القيم',
+    'price'                =>   'السعر',
 ];

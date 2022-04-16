@@ -18,4 +18,8 @@ return [
     'delete_done'          =>   'Delete done successfully',
     'delete_error'         =>   'Something went wrong while deleting comment ',
     'rate_now'             =>   'Rate Now ',
+    'description'          =>   'Description ',
+    'attribute'            =>   'Attribute',
+    'option'               =>   'Option',
+    'price'                =>   'Price',
 ];

@@ -54,7 +54,21 @@ class Farmer extends Authenticatable {
     public function ratings(): MorphToMany {
         return $this->morphToMany(User::class, 'rateable', 'ratings')->withPivot('rating');
     }
-
+    /*************************************************************************************** */
+    // rating for each farmer
+    public function scopeFarmerRate(){
+        //product total rate
+        if($this->ratings->count()){
+            $farmerSum = $this->ratings->sum(function($item){ // $item is related to the guardTable (User or Other)
+                return $item->pivot->rating;
+            });
+            $avg = 10*($farmerSum / $this->ratings->count());
+        }else{
+            $avg=0;
+        }
+        return $avg;
+    }
+    /*************************************************************************************** */
 
     public function comments()
     {
