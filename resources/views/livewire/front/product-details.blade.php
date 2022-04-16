@@ -22,6 +22,9 @@
     .fill-heart{
         color: #ff7007 !important;
     }
+
+
+    
 </style>
 @else
 
@@ -47,6 +50,10 @@
         color: #ff7007 !important;
     }
 
+</style>
+@endif
+
+<style>
 /* -------------------------------------------------- */
 div.stars {
   width: 270px;
@@ -96,8 +103,6 @@ label.star:before {
   overflow: hidden;
 }
 </style>
-@endif
-
 @endsection
 <div>
     	<!-- start section -->
@@ -183,16 +188,12 @@ label.star:before {
 
 
                                         <input type="hidden" id="product_id" value="{{$product->id}}">
-                                         <span class="score" id="rate_msg"><span style="width: <?php echo $avg;?>%"></span></span>
+                                         <span class="score" id="rate_msg"><span style="width: <?php echo $product->productRate();?>%"></span></span>
 
                                         <!-- <div class="stars"> -->
                                                 
                                         <!-- Start Rating -->
                                         <!-- <div class="rating">
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                            <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
                                             <div class="form-group">
                                                 <label for="product_rating">{{ trans('Admin/products.rating_choose') }}</label>
                                                 <select class="form-control"data-toggle="product_rating" id="product_rating" data-id="{{ $product->id }}" >
@@ -222,15 +223,7 @@ label.star:before {
                                                 </b>
                                             </p>
                                         </div>
-                                        {{-- <div class="widget widget--tags">
-                                            <h4 class="h6 widget-title">Popular Tags</h4>
-
-                                            <ul>
-                                                @foreach ($product->tags as $tag)
-                                                    <li><a href="#">{{$tag->name}}</a></li>
-                                                @endforeach
-                                            </ul>
-                                        </div> --}}
+         
 
                                         @if (Auth::guard('vendor')->user() )
                                             @if($product->in_stock ==1)
@@ -290,7 +283,7 @@ label.star:before {
                                     <!-- start tab -->
                                     <div class="tab-container">
                                         <nav class="tab-nav">
-                                            <a href="#" id="myDIV">Description</a>
+                                            <a href="#" id="myDIV">{{ __('website\comments.description') }}</a>
                                             <!-- <a href="#" <?php /*if(Session::get('div_active')=='allow'){echo'class="active"';}*/?>>{{ __('website\comments.comments') }}</a> -->
                                             <a href="#" >{{ __('website\comments.comments') }}</a>
                                         </nav>
@@ -300,32 +293,24 @@ label.star:before {
                                             <div id="myDIV2" class="tab-content__item">
                                                 <p>
                                                     {{ $product->description }}
+                                                   
                                                 </p>
-
 
                                                 <div class="description-table" style="max-width: 370px;">
                                                     <table>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>Weight</td>
-                                                                <td>1 kg</td>
+                                                           <tr>
+                                                                <th>{{ __('website\comments.attribute') }}</th>
+                                                                <th>{{ __('website\comments.option') }}</th>
+                                                                <th>{{ __('website\comments.price') }}</th>
                                                             </tr>
-                                                            <tr>
-                                                                <td>Country of Origin</td>
-                                                                <td>Agro Farm</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Quality</td>
-                                                                <td>Organic</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Сheck</td>
-                                                                <td>Healthy</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Min Weight</td>
-                                                                <td>250 Kg</td>
-                                                            </tr>
+                                                            @foreach($options1 as $opt)
+                                                                <tr>
+                                                                    <td>{{$opt->attribute->name}}</td>
+                                                                    <td>{{$opt->name}} </td>
+                                                                    <td>{{$opt->price}}</td>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -383,16 +368,8 @@ label.star:before {
                                             <div class="__content">
                                                 <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
+                                                <span class="score"><span style="width:<?php echo $product->productRate();?>%"></span></span>
 
-
-                                              
-                                                <div class="rating">
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item"><i class="fontello-star"></i></span>
-                                                </div>
                                                 <div class="stock-info in-stock">
                                                     <p class="availability">{{ __("Admin/site.status") }} :
                                                         <b class="text {{ $product->in_stock ==1 ?'text-success':'text-danger' }}">
@@ -550,13 +527,8 @@ label.star:before {
                                             <div class="col">
                                                 <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
 
-                                                <div class="rating">
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                    <span class="rating__item"><i class="fontello-star"></i></span>
-                                                </div>
+                                                <span class="score"><span style="width:<?php echo $product->productRate();?>%"></span></span>
+
 
                                                 @if($product->special_price >0)
                                                 <div class="product-price">

@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Front;
 use auth;
 use Cart;
 use App\Models\Tag;
+use App\Models\Option;
 use App\Models\Rating;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Attribute;
 use Illuminate\Support\Facades\Crypt;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\Securities\Rates;
 
@@ -48,26 +50,18 @@ class ProductDetails extends Component
     public function render()
     {
         // $tags=Tag::get();
-        $product = Product::findorfail($this->product_id);
-        $newProducts = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(3)->get();
-        $popProducts = Product::where('in_stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(3);
+        $data['product'] = Product::findorfail($this->product_id);
+        $data['newProducts'] = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(3)->get();
+        $data['popProducts'] = Product::where('in_stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(3);
 
+        $data['options0']=$data['product']->options()->pluck('id');
+        $data['options1']=Option::whereIn('id',$data['options0'])->get();
+        
         //retreive product comments
-        $comments = $product->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);
+        $data['comments'] = $data['product']->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);
 
-       // dd(auth()->user()->id);
-        //$product->ratings->where('user_id',auth()->user()->id);
-
-        //product total rate
-        if($product->ratings->count()){
-            $productSum = $product->ratings->sum(function($item){ // $item is related to the guardTable (User or Other)
-                return $item->pivot->rating;
-            });
-            $avg = 10*($productSum / $product->ratings->count());
-        }else{
-            $avg=0;
-        }
-        return view('livewire.front.product-details',compact('product','newProducts','popProducts','comments','avg'))
-                   ->layout('front.layouts.master2');
+        $data['avg']=$data['product']->ProductRate();
+       
+        return view('livewire.front.product-details',$data)->layout('front.layouts.master2');
     }
 }

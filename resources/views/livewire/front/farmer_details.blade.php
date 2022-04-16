@@ -81,7 +81,7 @@ label.star:before {
                                     class="users-avatar-shadow rounded-circle img-preview"  width="30%">
                                  </a>
                              @endif
-                             <center> <span class="score" id="rate_msg" ><span style="width: <?php echo $avg;?>%"></span></span></center>
+                             <center> <span class="score" id="rate_msg" ><span style="width: <?php echo $farmers->farmerRate();?>%"></span></span></center>
 
                                 <div class="__content">
                                     <div class="mb-6 mb-md-8">

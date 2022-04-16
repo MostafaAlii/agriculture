@@ -1,5 +1,7 @@
 @section('title', __('website\home.shop'))
 @section('css')
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
 @if(app()->getLocale()=='ar')
 <style>
     .product-wish{
@@ -21,6 +23,10 @@
     .fill-heart{
         color: #ff7007 !important;
     }
+
+    
+   
+</style>
 </style>
 @else
 
@@ -47,6 +53,27 @@
     }
 </style>
 @endif
+<style>
+     /* --------------------------------- */
+.score {
+  display: inline-block;
+  font-family: Wingdings;
+  font-size: 23px;
+  color: #ccc;
+  position: relative;
+}
+.score::before,
+.score span::before{
+  content: "\2605\2605\2605\2605\2605";
+  display: block;
+}
+.score span {
+  color: gold;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+</style>
 @endsection
 <div>
     <!-- start section -->
@@ -216,8 +243,10 @@
                                                             <h4 class="h6 __title"><a
                                                                     href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                             </h4>
-
-                                                            <div class="rating">
+                                                            
+                                                            <span class="score"><span style="width:<?php echo $product->productRate();?>%"></span></span>
+                                                            
+                                                            <!-- <div class="rating">
                                                                 <span class="rating__item rating__item--active"><i
                                                                         class="fontello-star"></i></span>
                                                                 <span class="rating__item rating__item--active"><i
@@ -228,7 +257,7 @@
                                                                         class="fontello-star"></i></span>
                                                                 <span class="rating__item"><i
                                                                         class="fontello-star"></i></span>
-                                                            </div>
+                                                            </div> -->
 
                                                             @if ($product->special_price > 0)
                                                                 <div class="product-price">
