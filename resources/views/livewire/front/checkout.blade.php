@@ -29,7 +29,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-
                     <!-- start checkout -->
                     <div class="checkout">
                         <h2>{{ trans('Website/checkout.details') }} <span>{{ trans('Website/checkout.belling') }}</span></h2>
@@ -71,6 +70,7 @@
                                             </div>
                                         </div>
                                     </div>
+                        </form>
                                     <div class="spacer py-6 d-md-none"></div>
                                     <br>
                                     <!-- Start Payment Methods -->
@@ -99,63 +99,60 @@
                                     </div>
                                     <!-- End Payment Method Row -->
                                     <!-- Start Payment Method Route -->
-                                    
-                                        @if ($payment_method_id != 0)
-                                            <div wire:ignore>
-                                            @if (\Str::lower($payment_method_code) == 'ppex')
-                                                <form action="{{ route('checkout.paypal') }}" method="post">
-                                                    @method('POST')
-                                                    @csrf
-                                                    <input type="text" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
-                                                    <button type="submit" name="submit" class="btn btn-dark btn-lg btn-block">
-                                                        {{ trans('Website/checkout.continue_payment_with_paypal') }}
-                                                    </button>
-                                                </form>
-                                            @endif
-                                            @if (\Str::lower($payment_method_code) == 'master')
-                                                <form action="{{-- route('checkout.payment.masterCard') --}}" method="post">
-                                                    @method('POST')
-                                                    @csrf
-                                                    <input type="text" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
-                                                    <button type="submit" name="submit" class="btn btn-dark btn-lg btn-block">
-                                                        {{ trans('Website/checkout.continue_payment_with_mastercard') }}
-                                                    </button>
-                                                </form>
-                                            @endif
-                                            </div>
+                                    @if ($payment_method_id != 0)
+                                        @if (\Str::lower($payment_method_code) == 'ppex')
+                                            <form action="{{ route('checkout.paypal') }}" method="post">
+                                                @method('POST')
+                                                @csrf
+                                                <input type="hidden" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
+                                                <button type="submit" name="submit" class="btn btn-dark btn-lg btn-block">
+                                                    {{ trans('Website/checkout.continue_payment_with_paypal') }}
+                                                </button>
+                                            </form>
                                         @endif
+                                        @if (\Str::lower($payment_method_code) == 'master')
+                                            <form action="{{-- route('checkout.payment.masterCard') --}}" method="post">
+                                                @method('POST')
+                                                @csrf
+                                                <input type="hidden" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
+                                                <button type="submit" name="submit" class="btn btn-dark btn-lg btn-block">
+                                                    {{ trans('Website/checkout.continue_payment_with_mastercard') }}
+                                                </button>
+                                            </form>
+                                        @endif
+                                    @endif
                                     <!-- End Payment Method Route -->
                                     <!-- End Payment Methods -->
-                                    <!-- Start CouponCode -->
-                                    {{--  <div class="spacer py-6"></div>
-                                    <div class="checkout-info">
-                                        <lablel class="checkbox-field">
-                                            <input wire:model="haveCouponCode" value="haveCouponCode" class="frm-input" id="have-code" type="checkbox">
-                                            <span>{{ trans('Website/home.haveVoucherCode') }}</span>
-                                        </lablel>
-                                        @if($haveCouponCode == 'haveCouponCode')
-                                            <!-- Start Coupon Form -->
-                                            <form wire:submit.prevent="applyDiscount()">
-                                                @if (!session()->has('coupon'))
-                                                    <p class="row-in-form">
-                                                        <input class="textfield" placeholder="{{ __('Website/home.vocherCodePlaceholder') }}" type="text" wire:model="coupon_code" />
-                                                    </p>
-                                                @endif
-                                                @if(session()->has('coupon'))
-                                                    <button class="custom-btn custom-btn--medium custom-btn--style-2" type="button" wire:click.prevent="removeCoupon()" role="button">
-                                                        {{ __('Website/home.removeCoupon') }}
-                                                    </button>
-                                                @else
-                                                    <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"role="button">
-                                                        {{ __('Website/home.applycoupon') }}
-                                                    </button>
-                                                @endif
-                                                
-                                            </form>
-                                            <!-- End Coupon Form -->
-                                        @endif
-                                    </div>--}}
-                                    <!-- End CouponCode -->
+                                        <!-- Start CouponCode -->
+                                        {{--  <div class="spacer py-6"></div>
+                                        <div class="checkout-info">
+                                            <lablel class="checkbox-field">
+                                                <input wire:model="haveCouponCode" value="haveCouponCode" class="frm-input" id="have-code" type="checkbox">
+                                                <span>{{ trans('Website/home.haveVoucherCode') }}</span>
+                                            </lablel>
+                                            @if($haveCouponCode == 'haveCouponCode')
+                                                <!-- Start Coupon Form -->
+                                                <form wire:submit.prevent="applyDiscount()">
+                                                    @if (!session()->has('coupon'))
+                                                        <p class="row-in-form">
+                                                            <input class="textfield" placeholder="{{ __('Website/home.vocherCodePlaceholder') }}" type="text" wire:model="coupon_code" />
+                                                        </p>
+                                                    @endif
+                                                    @if(session()->has('coupon'))
+                                                        <button class="custom-btn custom-btn--medium custom-btn--style-2" type="button" wire:click.prevent="removeCoupon()" role="button">
+                                                            {{ __('Website/home.removeCoupon') }}
+                                                        </button>
+                                                    @else
+                                                        <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"role="button">
+                                                            {{ __('Website/home.applycoupon') }}
+                                                        </button>
+                                                    @endif
+                                                    
+                                                </form>
+                                                <!-- End Coupon Form -->
+                                            @endif
+                                        </div>--}}
+                                        <!-- End CouponCode -->
                                 </div>
                                 <!-- End Billing Address & Personal Info -->
                                 <!-- Start Product & Recieved -->
@@ -308,7 +305,6 @@
                                 </div>
                                 <!-- End Product & Recieved -->
                             </div>
-                        </form>
                     </div>
                     <!-- end checkout -->
 
