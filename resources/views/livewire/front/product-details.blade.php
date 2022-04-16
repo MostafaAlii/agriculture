@@ -296,9 +296,11 @@ label.star:before {
                                                    
                                                 </p>
 
+                                                @if(count($options1)>0)
                                                 <div class="description-table" style="max-width: 370px;">
                                                     <table>
                                                         <tbody>
+                                                       
                                                            <tr>
                                                                 <th>{{ __('website\comments.attribute') }}</th>
                                                                 <th>{{ __('website\comments.option') }}</th>
@@ -311,9 +313,11 @@ label.star:before {
                                                                     <td>{{$opt->price}}</td>
                                                                 </tr>
                                                             @endforeach
+                                                            
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                                @endif
                                             </div>
 
                                             <!-- <div class="tab-content__item <?php /*if(Session::get('div_active')=='allow'){echo'is-visible';}*/?> "> -->
