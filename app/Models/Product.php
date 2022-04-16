@@ -50,6 +50,10 @@ class Product extends Model {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
 
+    public function orders(): BelongsToMany {
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
+    }
+
     // Product Has Many Options ::
     public function options(): HasMany {
         return $this->hasMany(Option::class);

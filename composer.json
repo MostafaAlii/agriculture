@@ -19,6 +19,7 @@
         "mcamara/laravel-localization": "^1.7",
         "paytabscom/laravel_paytabs": "^1.1",
         "pusher/pusher-php-server": "^7.0",
+        "realrashid/sweet-alert": "^5.0",
         "yajra/laravel-datatables": "1.5",
         "yajra/laravel-datatables-oracle": "~9.0",
         "yoeunes/toastr": "^1.2"

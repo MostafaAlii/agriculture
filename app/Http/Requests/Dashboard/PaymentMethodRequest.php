@@ -24,7 +24,8 @@ class PaymentMethodRequest extends FormRequest {
                     'sandbox_secret' => 'nullable',
                     'sandbox' => 'nullable',
                     'status' => 'required',
-
+                    'sandbox_client_id' =>  'nullable',
+                    'sandbox_client_secret'     =>      'nullable'
                 ];
             }
             case 'PUT':

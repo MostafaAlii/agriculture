@@ -91,6 +91,8 @@ use App\Http\Repositories\Front\FarmerAllDataRepository;
 use App\Http\Interfaces\Admin\PaymentMethodInterface;
 use App\Http\Repositories\Admin\PaymentMethodRepository;
 
+use App\Http\Interfaces\Front\PaymentInterface;
+use App\Http\Repositories\Front\PaymentRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -126,6 +128,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SearchInterface::class, SearchRepository::class);
         $this->app->bind(FarmerAllDataInterface::class, FarmerAllDataRepository::class);
         $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
+        $this->app->bind(PaymentInterface::class, PaymentRepository::class);
     }
 
     public function boot()

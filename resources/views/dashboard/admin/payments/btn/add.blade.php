@@ -90,14 +90,14 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="client_id">Client ID</label>
-                                <input type="text" name="client_id" value="{{ old('client_id') }}" class="form-control">
+                                <input type="text" name="sandbox_client_id" value="{{ old('client_id') }}" class="form-control">
                                 @error('client_id')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="client_secret">Client secret</label>
-                                <input type="text" name="client_secret" value="{{ old('client_secret') }}" class="form-control">
+                                <input type="text" name="sandbox_client_secret" value="{{ old('client_secret') }}" class="form-control">
                                 @error('client_secret')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>

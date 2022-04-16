@@ -80,7 +80,10 @@ Route::group(
             /********************************* End Admin & Employee Routes ************************************/
             
             /************************* Start Checkout & PaymentMethod ******************************/
-            Route::post('/checkout/payment', [PaymentMethodController::class, 'checkout'])->name('checkout.paypal');
+            Route::post('/checkout/payment', [PaymentMethodController::class, 'checkout_now'])->name('checkout.paypal');
+            Route::get('/checkout/{order_id}/cancelled', [PaymentMethodController::class, 'cancelled'])->name('checkout.paypal.cancel');
+            Route::get('/checkout/{order_id}/completed', [PaymentMethodController::class, 'completed'])->name('checkout.paypal.complete');
+            Route::get('/checkout/webhook/{order?}/{env?}', [PaymentMethodController::class, 'webhook'])->name('checkout.paypal.webhook.ipn');
             /************************* End Checkout & PaymentMethod ******************************/
         });
 
