@@ -18,4 +18,5 @@ return [
     'cash_on_delivery'                      =>                      'Cash On Delivery',
     'credit_card'                           =>                      'Via Credit Card',
     'secondry_address'                      =>                      'Type another secondry shipping address to leave it blank',
+    'shipping_to_another_address'           =>                      'Shipping To Another Client !',
 ];

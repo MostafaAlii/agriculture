@@ -46,17 +46,17 @@ class Checkout extends Component {
         ]);
         if($this->ship_to_different) {
             $this->validateOnly($fields,[
-                'shipping_firstname'             =>           'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
-                'shipping_lastname'              =>           'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+                'shipping_firstname'             =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_lastname'              =>           'required|string|regex:/^[A-Za-z-أ-ي]+$/u',
                 'shipping_email'                 =>           'required|email',
                 'shipping_mobile'                =>           'required|numeric|min:10',
-                'shipping_country'               =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:country_translations,name',
-                'shipping_proviency'             =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:province_translations,name',
-                'shipping_area'                  =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:area_translations,name',
-                'shipping_state'                 =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:state_translations,name',
-                'shipping_village'               =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:village_translations,name',
-                'shipping_address1'              =>           'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
-                'shipping_address2'              =>           'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+                'shipping_country'               =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_proviency'             =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_area'                  =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_state'                 =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_village'               =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_address1'              =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_address2'              =>           'sometimes|nullable|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             ]);
         }
     }
@@ -106,17 +106,17 @@ class Checkout extends Component {
         }
         if($this->ship_to_different) {
             $this->validate([
-                'shipping_firstname'             =>           'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
-                'shipping_lastname'              =>           'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+                'shipping_firstname'             =>           'required|string|regex:/^[A-Za-z-أ-ي]+$/u',
+                'shipping_lastname'              =>           'required|string|regex:/^[A-Za-z-أ-ي]+$/u',
                 'shipping_email'                 =>           'required|email',
                 'shipping_mobile'                =>           'required|numeric|min:10',
-                'shipping_country'               =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:country_translations,name',
-                'shipping_proviency'             =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:province_translations,name',
-                'shipping_area'                  =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:area_translations,name',
-                'shipping_state'                 =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:state_translations,name',
-                'shipping_village'               =>           'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|exists:village_translations,name',
-                'shipping_address1'              =>           'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
-                'shipping_address2'              =>           'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+                'shipping_country'               =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_proviency'             =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_area'                  =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_state'                 =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_village'               =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_address1'              =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_address2'              =>           'sometimes|nullable|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             ]);
             $shipping = new Shipping();
             $shipping->order_id = $order->id;
@@ -146,15 +146,15 @@ class Checkout extends Component {
         session()->forget('checkout');
         return redirect()->route('thankyou');
     }
-    /*public function verifyForCheckout() {
+    public function verifyForCheckout() {
         if(!Auth::check()) {
             return redirect()->route('user.login');
-        } else if ($this->thankyou) {
+        } elseif ($this->thankyou) {
             return redirect()->route('thankyou');
-        } else if (!session()->get('checkout')) {
+        } elseif (!session()->get('checkout')) {
             return redirect()->route('shop');
         }
-    }*/
+    }
     public function render() {
         //$this->verifyForCheckout();
         return view('livewire.front.checkout')->layout('front.layouts.master2');

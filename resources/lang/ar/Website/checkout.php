@@ -18,4 +18,5 @@ return [
     'cash_on_delivery'                      =>                      'الدفع عند الاستلام',
     'credit_card'                           =>                      'عبر بطاقة ائتمانية',
     'secondry_address'                      =>                      'اكتبة عنوان توصيل اخر اذا رغبت او اتركه فارغ',
+    'shipping_to_another_address'           =>                      'الشحن لعميل خارجى',
 ];

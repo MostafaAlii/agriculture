@@ -47,8 +47,8 @@
                             <h2>{{ trans('Website/checkout.details') }} <span>{{ trans('Website/checkout.belling') }}</span></h2>
                             <div class="spacer py-3"></div>
                             <!-- Start Billing Address Form -->
-                            <form wire:submit.prevent="placeOrder">
-                                <div class="wrap-address-billing" autocomplete="off">
+                            <form wire:submit.prevent="placeOrder" autocomplete="off">
+                                <div class="wrap-address-billing">
                                     <!-- Start row justify-content-xl-between -->
                                     <div class="row">
                                         <!-- Start col-12 -->
@@ -146,7 +146,7 @@
                                                     id="diffrent-add"
                                                     value="1" wire:model="ship_to_different">
                                                     <label for="diffrent-add" class="text-small">
-                                                        <b>Shipping To Other Address !</b>
+                                                        <b>{{ trans('Website/checkout.shipping_to_another_address') }}</b>
                                                     </label>
                                             </div>
                                         </div>
