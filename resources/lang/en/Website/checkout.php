@@ -1,0 +1,21 @@
+<?php
+return [
+    'belling'                               =>                      'Belling',
+    'details'                               =>                      'Information',
+    'personal_information'                  =>                      'Personal Information',
+    'client_firstname'                      =>                      'Client First Name',
+    'client_lastname'                       =>                      'Client Last Name',
+    'client_phone'                          =>                      'Client Phone Number',
+    'client_email'                          =>                      'Client Email Address',
+    'client_address'                        =>                      'Type Your Shipping Address',
+    'payment_way'                           =>                      'Payment Way',
+    'client_country'                        =>                      'Client Country',
+    'client_proviency'                      =>                      'Client Proviency',
+    'client_area'                           =>                      'Client Area',
+    'client_state'                          =>                      'Client State',
+    'client_village'                        =>                      'Client Village',
+    'place_order_now'                       =>                      'Place Order Now',
+    'cash_on_delivery'                      =>                      'Cash On Delivery',
+    'credit_card'                           =>                      'Via Credit Card',
+    'secondry_address'                      =>                      'Type another secondry shipping address to leave it blank',
+];

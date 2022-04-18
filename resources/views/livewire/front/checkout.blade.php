@@ -1,11 +1,19 @@
 @section('title', __('website\home.checkout'))
 @section('css')
-
+<style>
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea[type="textarea"] {
+        font-size: 16px; !important
+    }
+</style>
 @endsection
 <div>
-    {{-- dd($payment_method_id) --}}
+    {{-- dd($user_id) --}}
     <!-- start section -->
     <section class="section">
+        <!-- Start Flower Pic In Background -->
         <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
             <img class="lazy" width="286" height="280" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_1.jpg') }}" alt="demo"/>
         </div>
@@ -25,292 +33,277 @@
         <div class="decor-el decor-el--5" data-jarallax-element="-70" data-speed="0.2">
             <img class="lazy" width="248" height="309" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/decor-el_5.jpg') }}" alt="demo"/>
         </div>
-
+        <!-- End Flower Pic In Background -->
+        <!-- Start Container -->
         <div class="container">
+            <!-- Start Row -->
             <div class="row">
+                <!-- Start col-12 -->
                 <div class="col-12">
                     <!-- start checkout -->
                     <div class="checkout">
-                        <h2>{{ trans('Website/checkout.details') }} <span>{{ trans('Website/checkout.belling') }}</span></h2>
-                        <div class="spacer py-3"></div>
-                        <form class="checkout__form" action="#" autocomplete="off">
-                            <div class="row justify-content-xl-between">
-                                <!-- Start Billing Address & Personal Info -->
-                                <div class="col-12 col-md-5 col-lg-6">
-                                    <div><h5>{{ trans('Website/checkout.personal_information') }}</h5></div>
+                        <!-- Start Main Content Area -->
+                        <div class=" main-content-area">
+                            <h2>{{ trans('Website/checkout.details') }} <span>{{ trans('Website/checkout.belling') }}</span></h2>
+                            <div class="spacer py-3"></div>
+                            <!-- Start Billing Address Form -->
+                            <form wire:submit.prevent="placeOrder">
+                                <div class="wrap-address-billing" autocomplete="off">
+                                    <!-- Start row justify-content-xl-between -->
                                     <div class="row">
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <input class="textfield" value="{{ $user_firstname }}" placeholder="{{ trans('Website/checkout.client_firstname') }}" autocomplete="off" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <input class="textfield" value="{{ $user_lastname }}" placeholder="{{ trans('Website/checkout.client_lastname') }}" autocomplete="off" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <input class="textfield" value="{{ $user_phone }}" placeholder="{{ trans('Website/checkout.client_phone') }}" autocomplete="off" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <input class="textfield" value="{{ $user_email }}" placeholder="{{ trans('Website/checkout.client_email') }}" autocomplete="off" type="text" />
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="input-wrp">
-                                                <textarea class="textfield" placeholder="{{ trans('Website/checkout.client_address') }}" autocomplete="off" type="text">
-                                                    {{ $user_address }}
-                                                </textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                        </form>
-                                    <div class="spacer py-6 d-md-none"></div>
-                                    <br>
-                                    <!-- Start Payment Methods -->
-                                    <h5 class="text-uppercase mb-4">{{ trans('Website/checkout.payment_way') }}</h5>
-                                    <!-- Start Payment Method Row -->
-                                    <div class="row">
-                                        <div class="col-6 form-group">
-                                            @forelse($payment_methods as $payment_method)
-                                                <div class="custom-control custom-radio">
-                                                    <input
-                                                        type="radio"
-                                                        id="payment-method-{{ $payment_method->id }}"
-                                                        class="custom-control-input"
-                                                        wire:model="payment_method_id"
-                                                        wire:click="updatePaymentMethod()"
-                                                        {{ intval($payment_method_id)==$payment_method->id?'checked':'' }}
-                                                        value="{{ $payment_method->id }}">
-                                                        <label for="payment-method-{{ $payment_method->id }}" class="custom-control-label text-small">
-                                                            <b>{{ $payment_method->name }}</b>
-                                                        </label>
+                                        <!-- Start col-12 -->
+                                        <div class="col-md-12">
+                                            <!-- Start Billing Address -->
+                                            <h5>{{ trans('Website/checkout.personal_information') }}</h5>
+                                            <!-- End First Form Row -->
+                                            <div class="form-row">
+                                                <!-- Start FirstName -->
+                                                <div class="form-group text-lg col-12 col-sm-4 col-md-12 col-lg-4">
+                                                    <input class="form-control text-lg text-center" name="firstname" value="{{-- $user_firstname --}}" wire:model="user_firstname" placeholder="{{ trans('Website/checkout.client_firstname') }}" autocomplete="off" type="text" />
+                                                    @error('user_firstname') <span class="text-danger">{{ $message }}</span> @enderror
                                                 </div>
-                                            @empty
-                                                <p>{{ trans('Website/checkout.payment_method_notFound') }}</p>
-                                            @endforelse
+                                                <!-- End FirstName -->
+                                                <!-- Start LastName -->
+                                                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                    <input class="form-control text-center" name="lastname" value="{{-- $user_lastname --}}" wire:model="user_lastname" placeholder="{{ trans('Website/checkout.client_lastname') }}" autocomplete="off" type="text" />
+                                                    @error('user_lastname') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End LastName -->
+                                                <!-- Start Phone -->
+                                                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                    <input class="form-control text-lg text-center" name="mobile" value="{{-- $user_mobile --}}" wire:model="user_mobile" placeholder="{{ trans('Website/checkout.client_phone') }}" autocomplete="off" type="tel" />
+                                                    @error('user_mobile') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Phone -->
+                                            </div>
+                                            <!-- End First Form Row -->
+                                            <br>
+                                            <!-- Start Second Foem Row -->
+                                            <div class="form-row">
+                                                <!-- Start Email -->
+                                                <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                                                    <input class="form-control text-center" name="email" value="{{-- $user_email --}}" wire:model="user_email" placeholder="{{ trans('Website/checkout.client_email') }}" autocomplete="off" type="email" />
+                                                    @error('user_email') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Email -->
+                                            </div>
+                                            <!-- End Second Foem Row -->
+                                            <br>
+                                            <!-- Start Third Form Row -->
+                                            <div class="form-row">
+                                                <!-- Start Country -->
+                                                <div class="col-12 col-sm-3 col-md-12 col-lg-3">
+                                                    <input class="form-control text-center" name="country" value="{{-- $user_country --}}" wire:model="user_country" placeholder="{{ trans('Website/checkout.client_country') }}" autocomplete="off" type="text" />
+                                                    @error('user_country') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Country -->
+                                                <!-- Start Proviency -->
+                                                <div class="col-12 col-sm-3 col-md-12 col-lg-3">
+                                                    <input class="form-control text-center" name="province" value="{{-- $user_proviency --}}" wire:model="user_proviency" placeholder="{{ trans('Website/checkout.client_proviency') }}" autocomplete="off" type="text" />
+                                                    @error('user_proviency') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Proviency -->
+                                                <!-- Start Area -->
+                                                <div class="col-12 col-sm-3 col-md-12 col-lg-3">
+                                                    <input class="form-control text-center" name="area" value="{{-- $user_area --}}" wire:model="user_area" placeholder="{{ trans('Website/checkout.client_area') }}" autocomplete="off" type="text" />
+                                                    @error('user_area') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Area -->
+                                                <!-- Start State -->
+                                                <div class="col-12 col-sm-3 col-md-12 col-lg-3">
+                                                    <input class="form-control text-center" name="state" value="{{-- $user_state --}}" wire:model="user_state" placeholder="{{ trans('Website/checkout.client_state') }}" autocomplete="off" type="text" />
+                                                    @error('user_state') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End State -->
+                                            </div>
+                                            <!-- End Third Form Row -->
+                                            <br>
+                                            <!-- Start Fourth Row -->
+                                            <div class="form-row">
+                                                <!-- Start Village -->
+                                                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                    <input class="form-control text-center" name="village" value="{{-- $user_village --}}" wire:model="user_village" placeholder="{{ trans('Website/checkout.client_village') }}" autocomplete="off" type="text" />
+                                                    @error('user_village') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Village -->
+                                                <!-- Start Address -->
+                                                <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                                                    <input class="form-control text-center" name="address1" value="{{-- $user_address --}}" wire:model="user_address1" placeholder="{{ trans('Website/checkout.client_address') }}" autocomplete="off" type="text" />
+                                                    @error('user_address1') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Address -->
+                                            </div>
+                                            <!-- End Fourth Row -->
+                                            <hr><br>
+                                            <!-- End Billing Address -->
                                         </div>
-                                    </div>
-                                    <!-- End Payment Method Row -->
-                                    <!-- Start Payment Method Route -->
-                                    @if ($payment_method_id != 0)
-                                        @if (\Str::lower($payment_method_code) == 'ppex')
-                                            <form action="{{ route('checkout.paypal') }}" method="post">
-                                                @method('POST')
-                                                @csrf
-                                                <input type="hidden" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
-                                                <button type="submit" name="submit" class="btn btn-dark btn-lg btn-block">
-                                                    {{ trans('Website/checkout.continue_payment_with_paypal') }}
-                                                </button>
-                                            </form>
+                                        <!-- End col-12 -->
+                                        <div class="col-md-12 form-group">
+                                            <div class="custom-control custom-radio">
+                                                <input
+                                                    type="checkbox"
+                                                    name="diffrent-add"
+                                                    id="diffrent-add"
+                                                    value="1" wire:model="ship_to_different">
+                                                    <label for="diffrent-add" class="text-small">
+                                                        <b>Shipping To Other Address !</b>
+                                                    </label>
+                                            </div>
+                                        </div>
+                                        @if($ship_to_different)
+                                            <!-- Start col-12 Shipping Address -->
+                                            <div class="col-md-12">
+                                                <!-- Start Shipping Address -->
+                                                <h5>{{ trans('Website/checkout.personal_information') }}</h5>
+                                                <!-- End First Form Row -->
+                                                <div class="form-row">
+                                                    <!-- Start FirstName -->
+                                                    <div class="form-group text-lg col-12 col-sm-4 col-md-12 col-lg-4">
+                                                        <input name="firstname" class="form-control text-lg text-center" wire:model="shipping_firstname" value="" placeholder="{{ trans('Website/checkout.client_firstname') }}" autocomplete="off" type="text" />
+                                                        @error('shipping_firstname') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End FirstName -->
+                                                    <!-- Start LastName -->
+                                                    <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                        <input name="lastname" class="form-control text-center" value="" wire:model="shipping_lastname" placeholder="{{ trans('Website/checkout.client_lastname') }}" autocomplete="off" type="text" />
+                                                        @error('shipping_lastname') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End LastName -->
+                                                    <!-- Start Phone -->
+                                                    <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                        <input name="mobile" class="form-control text-lg text-center" value="" wire:model="shipping_mobile" placeholder="{{ trans('Website/checkout.client_phone') }}" autocomplete="off" type="tel" />
+                                                        @error('shipping_mobile') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End Phone -->
+                                                </div>
+                                                <!-- End First Form Row -->
+                                                <br>
+                                                <!-- Start Second Foem Row -->
+                                                <div class="form-row">
+                                                    <!-- Start Email -->
+                                                    <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                                                        <input name="email" class="form-control text-center" value="" wire:model="shipping_email" placeholder="{{ trans('Website/checkout.client_email') }}" autocomplete="off" type="email" />
+                                                        @error('shipping_email') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End Email -->
+                                                </div>
+                                                <!-- End Second Foem Row -->
+                                                <br>
+                                                <!-- Start Third Form Row -->
+                                                <div class="form-row">
+                                                    <!-- Start Country -->
+                                                    <div class="col-12 col-sm-3 col-md-12 col-lg-3">
+                                                        <input name="country" class="form-control text-center" value="" wire:model="shipping_country" placeholder="{{ trans('Website/checkout.client_country') }}" autocomplete="off" type="text" />
+                                                        @error('shipping_country') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End Country -->
+                                                    <!-- Start Proviency -->
+                                                    <div class="col-12 col-sm-3 col-md-12 col-lg-3">
+                                                        <input name="province" class="form-control text-center" value="" wire:model="shipping_proviency" placeholder="{{ trans('Website/checkout.client_proviency') }}" autocomplete="off" type="text" />
+                                                        @error('shipping_proviency') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End Proviency -->
+                                                    <!-- Start Area -->
+                                                    <div class="col-12 col-sm-3 col-md-12 col-lg-3">
+                                                        <input name="area" class="form-control text-center" value="" wire:model="shipping_area" placeholder="{{ trans('Website/checkout.client_area') }}" autocomplete="off" type="text" />
+                                                        @error('shipping_area') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End Area -->
+                                                    <!-- Start State -->
+                                                    <div class="col-12 col-sm-3 col-md-12 col-lg-3">
+                                                        <input name="state" class="form-control text-center" value="" wire:model="shipping_state" placeholder="{{ trans('Website/checkout.client_state') }}" autocomplete="off" type="text" />
+                                                        @error('shipping_state') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End State -->
+                                                </div>
+                                                <!-- End Third Form Row -->
+                                                <br>
+                                                <!-- Start Fourth Row -->
+                                                <div class="form-row">
+                                                    <!-- Start Village -->
+                                                    <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                        <input name="village" class="form-control text-center" value="" wire:model="shipping_village" placeholder="{{ trans('Website/checkout.client_village') }}" autocomplete="off" type="text" />
+                                                        @error('shipping_village') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End Village -->
+                                                    <!-- Start Address -->
+                                                    <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+                                                        <input name="address1" class="form-control text-center" value="" wire:model="shipping_address1" placeholder="{{ trans('Website/checkout.client_address') }}" autocomplete="off" type="text" />
+                                                        @error('shipping_address1') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End Address -->
+                                                </div>
+                                                <!-- End Fourth Row -->
+                                                <br>
+                                                <!-- Start Fifth Row -->
+                                                <div class="form-row">
+                                                    <!-- Start Address -->
+                                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <textarea rows="6" class="form-control text-center" name="address2" value="{{-- $user_address --}}" wire:model="shipping_address2" placeholder="{{ trans('Website/checkout.secondry_address') }}" autocomplete="off" type="textarea"></textarea>
+                                                        @error('shipping_address2') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    </div>
+                                                    <!-- End Address -->
+                                                </div>
+                                                <!-- End Fifth Row -->
+                                                <hr><br>
+                                                <!-- End Billing Address -->
+                                            </div>
+                                            <!-- End col-12 Shipping Address -->
                                         @endif
-                                        @if (\Str::lower($payment_method_code) == 'master')
-                                            <form action="{{-- route('checkout.payment.masterCard') --}}" method="post">
-                                                @method('POST')
-                                                @csrf
-                                                <input type="hidden" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
-                                                <button type="submit" name="submit" class="btn btn-dark btn-lg btn-block">
-                                                    {{ trans('Website/checkout.continue_payment_with_mastercard') }}
-                                                </button>
-                                            </form>
-                                        @endif
-                                    @endif
-                                    <!-- End Payment Method Route -->
-                                    <!-- End Payment Methods -->
-                                        <!-- Start CouponCode -->
-                                        {{--  <div class="spacer py-6"></div>
-                                        <div class="checkout-info">
-                                            <lablel class="checkbox-field">
-                                                <input wire:model="haveCouponCode" value="haveCouponCode" class="frm-input" id="have-code" type="checkbox">
-                                                <span>{{ trans('Website/home.haveVoucherCode') }}</span>
-                                            </lablel>
-                                            @if($haveCouponCode == 'haveCouponCode')
-                                                <!-- Start Coupon Form -->
-                                                <form wire:submit.prevent="applyDiscount()">
-                                                    @if (!session()->has('coupon'))
-                                                        <p class="row-in-form">
-                                                            <input class="textfield" placeholder="{{ __('Website/home.vocherCodePlaceholder') }}" type="text" wire:model="coupon_code" />
-                                                        </p>
-                                                    @endif
-                                                    @if(session()->has('coupon'))
-                                                        <button class="custom-btn custom-btn--medium custom-btn--style-2" type="button" wire:click.prevent="removeCoupon()" role="button">
-                                                            {{ __('Website/home.removeCoupon') }}
-                                                        </button>
-                                                    @else
-                                                        <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"role="button">
-                                                            {{ __('Website/home.applycoupon') }}
-                                                        </button>
-                                                    @endif
-                                                    
-                                                </form>
-                                                <!-- End Coupon Form -->
-                                            @endif
-                                        </div>--}}
-                                        <!-- End CouponCode -->
-                                </div>
-                                <!-- End Billing Address & Personal Info -->
-                                <!-- Start Product & Recieved -->
-                                <div class="col-12 col-md-7 col-lg-6 col-xl-5">
-                                    {{--  <div><h6>Your products</h6></div>
-                                    <!-- Start Your Product Summary -->
-                                    <div class="checkout__table">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td width="65%">
-                                                        <div class="d-table">
-                                                            <div class="d-table-cell align-middle">
-                                                                <figure class="__image">
-                                                                    <a href="#">
-                                                                        <img class="lazy" src="img/blank.gif" data-src="img/goods_img/5.jpg" alt="demo" />
-                                                                    </a>
-                                                                </figure>
-                                                            </div>
-
-                                                            <div class="d-table-cell align-middle">
-                                                                <a href="#" class="__name">Big Banana</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <span class="__amount">x1</span>
-                                                    </td>
-
-                                                    <td width="1%">
-                                                        <span class="__total">2.99 $</span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td width="65%">
-                                                        <div class="d-table">
-                                                            <div class="d-table-cell align-middle">
-                                                                <figure class="__image">
-                                                                    <a href="#">
-                                                                        <img class="lazy" src="img/blank.gif" data-src="img/goods_img/8.jpg" alt="demo" />
-                                                                    </a>
-                                                                </figure>
-                                                            </div>
-
-                                                            <div class="d-table-cell align-middle">
-                                                                <a href="#" class="__name">Freash Peach</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <span class="__amount">x1</span>
-                                                    </td>
-
-                                                    <td width="1%">
-                                                        <span class="__total">2.99 $</span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td width="65%">
-                                                        <div class="d-table">
-                                                            <div class="d-table-cell align-middle">
-                                                                <figure class="__image">
-                                                                    <a href="#">
-                                                                        <img class="lazy" src="img/blank.gif" data-src="img/goods_img/2.jpg" alt="demo" />
-                                                                    </a>
-                                                                </figure>
-                                                            </div>
-
-                                                            <div class="d-table-cell align-middle">
-                                                                <a href="#" class="__name">Awesome Brocoli</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <span class="__amount">x1</span>
-                                                    </td>
-
-                                                    <td width="1%">
-                                                        <span class="__total">2.99 $</span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>--}}
-                                    <!-- End Your Product Summary -->
-                                    <!-- Start Your Order Recieved -->
-                                    <div class="checkout__total">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <td colspan="2"><h3>YOUR <span>ORDER</span></h3></td>
-                                                </tr>
-                                            </thead>
-
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="2" class="__note">
-                                                        <p class="__ttl">Direct bank transfer</p>
-
-                                                        <p>
-                                                            Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                                                        </p>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
-
-                                                        <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">Place Order</button>
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-
-                                            <tbody>
-                                                <tr>
-                                                    <td>Subtotal:</td>
-                                                    <td>{{ $cart_subtotal }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Shipping</td>
-                                                    <td>Flat rate: $3.00 <br>Shipping to Ukraine.</td>
-                                                </tr>
-                                                @if(session()->has('coupon'))
-                                                    <li class="border-bottom my-2"></li>
-                                                    <li class="d-flex align-items-center justify-content-between">
-                                                        <strong class="small font-weight-bold">Discount <small>({{ session()->get('coupon')['code'] }})</small></strong>
-                                                        <span class="text-muted small">- ${{ $cart_discount }}</span>
-                                                    </li>
-                                                @endif
-                                                <tr>
-                                                    <td>Tax</td>
-                                                    <td>{{ $cart_tax }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>Total</td>
-                                                    <td>{{ $cart_total }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
-                                    <!-- End Your Order Recieved -->
+                                    <!-- End row justify-content-xl-between -->
                                 </div>
-                                <!-- End Product & Recieved -->
-                            </div>
+                                <!-- End Billing Address Form -->
+                                <!-- Start Summary Checkout -->
+                                <div class="summary summary-checkout">
+                                    <div class="summary-item payment-method">
+                                        <h4 class="title-box">{{ trans('Website/checkout.payment_way') }}</h4>
+                                        <!-- Choose Payment Method -->
+                                        <div class="choose-payment-methods">
+                                            <div class="row checkRow">
+                                                <div class="col-3 form-group">
+                                                        <div class="custom-control custom-radio">
+                                                            <input
+                                                                type="radio"
+                                                                id="payment-method-bank"
+                                                                value="cod" wire:model="paymentmode">
+                                                                <label for="payment-method-bank" class="text-small">
+                                                                    <b>{{ trans('Website/checkout.cash_on_delivery') }}</b>
+                                                                </label>
+                                                            <input
+                                                                type="radio"
+                                                                id="payment-method-bank"
+                                                                value="card" wire:model="paymentmode">
+                                                                <label for="payment-method-bank" class="text-small">
+                                                                    <b>{{ trans('Website/checkout.credit_card') }}</b>
+                                                                </label>
+                                                                @error('paymentmode') <span class="text-danger">{{ $message }}</span> @enderror
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Choose Payment Method -->
+                                        @if(Session::has('checkout'))
+                                            <h6 class="title-box">Total :<p style="" class="text-primary">${{ Session::get('checkout')['total'] }}</p></h6>
+                                        @endif
+                                    </div>
+                                </div>
+                                <!-- End Summary Checkout -->
+                                <!-- Start Submit Button -->
+                                <button type="submit" class="btn btn-dark btn-lg btn-block">{{ trans('Website/checkout.place_order_now') }}</button>
+                                <!-- End Submit Button -->
+                            </form>
+                            <!-- End Form -->
+                        </div>
+                        <!-- End Main Content Area -->
                     </div>
                     <!-- end checkout -->
-
                 </div>
+                <!-- End col-12 -->
             </div>
+            <!-- End Row -->
         </div>
+        <!-- End Container -->
     </section>
     <!-- end section -->
 
@@ -320,16 +313,16 @@
             <!-- start banner simple -->
             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
                 <div class="d-none d-lg-block">
-                    <img class="img-logo img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
+                    <img class="img-logo img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />
                 </div>
 
                 <div class="row no-gutters">
                     <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_3.jpg" alt="demo" /></a>
+                        <a href="#"><img class="img-fluid w-100  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/banner_bg_3.jpg') }}" alt="demo" /></a>
                     </div>
 
                     <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_4.jpg" alt="demo" /></a>
+                        <a href="#"><img class="img-fluid w-100  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/banner_bg_4.jpg') }}" alt="demo" /></a>
                     </div>
                 </div>
             </div>

@@ -6,11 +6,17 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 class CartComponent extends Component {
   public $cart_subtotal, $cart_tax, $cart_total, $cartCount;
+  public $haveCouponCode;
+  public $couponCode;
+  public $discount;
+  public $subtotalAfterDiscount;
+  public $taxAfterDiscount;
+  public $totalAfterDiscount;
   public function mount(){
         $this->cart_subtotal = Cart::instance('cart')->subtotal();
         $this->cart_tax = Cart::instance('cart')->tax();
         $this->cart_total = Cart::instance('cart')->total();
-        $this->cartCount = Cart::instance('default')->count();
+        $this->cartCount = Cart::instance('cart')->count();
   }
   public function increaseQuntity($rowID) {
     $product = Cart::instance('cart')->get($rowID);
@@ -91,18 +97,39 @@ class CartComponent extends Component {
       $this->cartCount = Cart::instance('default')->count();
       $this->wishlistCount = Cart::instance('wishlist')->count();
   }
+/******************************************************************************************* */
+  public function checkout() {
+    if(Auth::guard('vendor')->check()){
+        return redirect()->route('checkout');
+    } else {
+      return redirect()->route('front');
+    }
+  }
 
+  public function setAmountForCheckout()
+  {
+    if(session()->has('coupon')) {
+      session()->put('checkout',[
+        'discount' => $this->discount,
+        'subtotal' => $this->subtotalAfterDiscount,
+        'tax' => $this->taxAfterDiscount,
+        'total' => $this->totalAfterDiscount
+      ]);
+    } else {
+      session()->put('checkout',[
+        'discount' => 0,
+        'subtotal' => Cart::instance('cart')->subtotal(),
+        'tax' => Cart::instance('cart')->tax(),
+        'total' => Cart::instance('cart')->total()
+      ]);
+    }
+  }
+/********************************************************************************************* */
   public function render() {
       if(Auth::guard('vendor')->check()){
           Cart::instance('cart')->store(Auth::guard('vendor')->user()->email);
-        }
-        if(session()->has('coupon')) {
-          if(Cart::instance('cart')->subtotal() < session()->has('coupon')['greater_than']) {
-            session()->forget('coupon');
-          } else {
-            $this->calculateDiscounts();
-          }
-        }
+      }
+      $this->setAmountForCheckout();
       return view('livewire.front.cartComponent')->layout('front.layouts.master2');
   }
 }

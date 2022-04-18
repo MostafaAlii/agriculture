@@ -41,6 +41,9 @@ class User extends Authenticatable {
     public function department(): BelongsTo {
        return $this->belongsTo(Department::class)->withDefault();
     }
+    public function orders(): HasMany {
+      return $this->hasMany(Order::class);
+  }
    /*************************************************************************************** */
     // Get Vendor Rataing Doing For Product التقييمات الى عملها اليوزر
     public function ratedProducts(): MorphToMany {
@@ -52,9 +55,6 @@ class User extends Authenticatable {
        return $this->morphedByMany(Farmer::class, 'rateable', 'ratings');
    }
    /*************************************************************************************** */
-    public function orders(): HasMany {
-        return $this->hasMany(Order::class);
-    }
     protected $hidden = [
         'password',
         'remember_token',

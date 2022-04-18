@@ -8,6 +8,7 @@ use App\Http\Controllers\front\PaymentMethodController;
 use App\Http\Controllers\front\CommentsController;
 use App\Http\Controllers\front\SearchController;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
+use App\Http\Livewire\Front\User\ThankYouComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
@@ -80,10 +81,11 @@ Route::group(
             /********************************* End Admin & Employee Routes ************************************/
             
             /************************* Start Checkout & PaymentMethod ******************************/
-            Route::post('/checkout/payment', [PaymentMethodController::class, 'checkout_now'])->name('checkout.paypal');
+            Route::get('/thank-you', ThankYouComponent::class)->name('thankyou');
+            /*Route::post('/checkout/payment', [PaymentMethodController::class, 'checkout_now'])->name('checkout.paypal');
             Route::get('/checkout/{order_id}/cancelled', [PaymentMethodController::class, 'cancelled'])->name('checkout.paypal.cancel');
             Route::get('/checkout/{order_id}/completed', [PaymentMethodController::class, 'completed'])->name('checkout.paypal.complete');
-            Route::get('/checkout/webhook/{order?}/{env?}', [PaymentMethodController::class, 'webhook'])->name('checkout.paypal.webhook.ipn');
+            Route::get('/checkout/webhook/{order?}/{env?}', [PaymentMethodController::class, 'webhook'])->name('checkout.paypal.webhook.ipn');*/
             /************************* End Checkout & PaymentMethod ******************************/
         });
 
