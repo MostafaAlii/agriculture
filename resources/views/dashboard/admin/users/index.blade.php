@@ -85,6 +85,7 @@
                                                     <th>{{ __('Admin/site.country') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phone') }}</th>
+                                                    <th>{{ __('Admin/site.ordercount') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -130,6 +131,7 @@
             {data: 'country', name: 'country'},
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
+            {data: 'ordercount', name: 'ordercount', searchable: false, sortable: false},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

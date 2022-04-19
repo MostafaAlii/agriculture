@@ -150,5 +150,6 @@ return [
     'product'=>'منتجات ',
     'farmername'=>'اسم المزارع',
     'qty'=>'الكميه',
-
+    'productcount'=>'عدد المنتجات',
+    'ordercount'=>'عددالطلبات',
 ];

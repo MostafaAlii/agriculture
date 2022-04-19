@@ -155,4 +155,6 @@ return [
     'product'=>'Products',
     'farmername'=>'Farmer Name',
     'qty'=>'Quantity',
+    'productcount'=>'Product Count',
+    'ordercount'=>'Orders Count',
 ];
