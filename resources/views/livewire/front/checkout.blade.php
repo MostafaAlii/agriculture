@@ -4,6 +4,7 @@
     input[type="text"],
     input[type="tel"],
     input[type="email"],
+    input[type="password"],
     textarea[type="textarea"] {
         font-size: 16px; !important
     }
@@ -78,7 +79,7 @@
                                             </div>
                                             <!-- End First Form Row -->
                                             <br>
-                                            <!-- Start Second Foem Row -->
+                                            <!-- Start Second Form Row -->
                                             <div class="form-row">
                                                 <!-- Start Email -->
                                                 <div class="col-12 col-sm-6 col-md-12 col-lg-6">
@@ -87,7 +88,7 @@
                                                 </div>
                                                 <!-- End Email -->
                                             </div>
-                                            <!-- End Second Foem Row -->
+                                            <!-- End Second Form Row -->
                                             <br>
                                             <!-- Start Third Form Row -->
                                             <div class="form-row">
@@ -283,12 +284,52 @@
                                             </div>
                                         </div>
                                         <!-- End Choose Payment Method -->
-                                        @if(Session::has('checkout'))
-                                            <h6 class="title-box">Total :<p style="" class="text-primary">${{ Session::get('checkout')['total'] }}</p></h6>
-                                        @endif
                                     </div>
                                 </div>
                                 <!-- End Summary Checkout -->
+                                <!-- Start Payment Card Info -->
+                                <div class="row">
+                                    @if($paymentmode == 'card')
+                                        @if(Session::has('paytabs_error'))
+                                            <div class="aler alert-danger" role="alert">{{ Session::get('paytabs_error') }}</div>
+                                        @endif
+                                        <div class="col-md-12">
+                                            <div class="form-row">
+                                                <!-- Start Card Number -->
+                                                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                    <input class="form-control text-center" name="card-no" wire:model="card_no" placeholder="{{ trans('Website/checkout.card_number_placeholder') }}" autocomplete="off" type="text" />
+                                                    @error('card_no') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Card Number -->
+                                                <!-- Start Expiry Month -->
+                                                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                    <input class="form-control text-center" name="exp-month" wire:model="exp_month" placeholder="{{ trans('Website/checkout.expiry_month') }}" autocomplete="off" type="text" />
+                                                    @error('exp_month') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Expiry Month -->
+                                            </div>
+                                            <br>
+                                            <div class="form-row">
+                                                <!-- Start Expiry Year -->
+                                                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                    <input class="form-control text-center" name="exp-year" wire:model="exp_year" placeholder="{{ trans('Website/checkout.expiry_year') }}" autocomplete="off" type="text" />
+                                                    @error('exp_year') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End Expiry Year -->
+                                                <!-- Start CVC -->
+                                                <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+                                                    <input class="form-control text-center" name="cvc" wire:model="cvc" placeholder="{{ trans('Website/checkout.cvc') }}" autocomplete="off" type="password" />
+                                                    @error('cvc') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <!-- End CVC  -->
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                <!-- End Payment Card Info -->
+                                @if(Session::has('checkout'))
+                                    <h6 class="title-box">Total :<p style="" class="text-primary">${{ Session::get('checkout')['total'] }}</p></h6>
+                                @endif
                                 <!-- Start Submit Button -->
                                 <button type="submit" class="btn btn-dark btn-lg btn-block">{{ trans('Website/checkout.place_order_now') }}</button>
                                 <!-- End Submit Button -->

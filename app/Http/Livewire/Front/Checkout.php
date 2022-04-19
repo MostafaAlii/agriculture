@@ -8,6 +8,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Paytabscom\Laravel_paytabs\Facades\paypage as paypage;
 class Checkout extends Component { 
     public $cart_subtotal, $cart_tax, $cart_total, $cart_discount;
     public $user_id, $user_address1, $user_address2, $user_email, $user_firstname,$user_lastname, $user_mobile;
@@ -16,6 +17,7 @@ class Checkout extends Component {
     public $shipping_address1, $shipping_address2, $shipping_email, $shipping_firstname,$shipping_lastname, $shipping_mobile;
     public $shipping_country, $shipping_proviency, $shipping_area, $shipping_state, $shipping_village;
     public $paymentmode, $thankyou;
+    public $card_no, $exp_month, $exp_year, $cvc;
     public function mount(){
         $this->user_address1 = auth()->user()->address1;
         $this->user_email = auth()->user()->email;
@@ -28,21 +30,22 @@ class Checkout extends Component {
         $this->user_area = auth()->user()->area->name;
         $this->user_state = auth()->user()->state->name;
         $this->user_village = auth()->user()->village->name;
+        $this->total = session()->get('checkout')['total'];
     }
 
     public function updated($fields) {
         $this->validateOnly($fields,[
-            'user_firstname'             =>           'required',
-            'user_lastname'              =>           'required',
-            'user_email'                 =>           'required|email',
-            'user_mobile'                =>           'required|numeric|required|numeric|min:10',
-            'user_country'               =>           'required',
-            'user_proviency'             =>           'required',
-            'user_area'                  =>           'required',
-            'user_state'                 =>           'required',
-            'user_village'               =>           'required',
-            'user_address1'              =>           'required',
-            'paymentmode'                =>           'required',
+            'user_firstname'                     =>           'required',
+            'user_lastname'                      =>           'required',
+            'user_email'                         =>           'required|email',
+            'user_mobile'                        =>           'required|numeric|required|numeric|min:10',
+            'user_country'                       =>           'required',
+            'user_proviency'                     =>           'required',
+            'user_area'                          =>           'required',
+            'user_state'                         =>           'required',
+            'user_village'                       =>           'required',
+            'user_address1'                      =>           'required',
+            'paymentmode'                        =>           'required',
         ]);
         if($this->ship_to_different) {
             $this->validateOnly($fields,[
@@ -59,22 +62,38 @@ class Checkout extends Component {
                 'shipping_address2'              =>           'sometimes|nullable|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             ]);
         }
+        if($this->paymentmode == Transaction::CARD) {
+            $this->validateOnly($fields,[
+                'card_no'                       =>                      'required|numeric',
+                'exp_month'                     =>                      'numeric|between:1,12',
+                'exp_year'                      =>                      'numeric',
+                'cvc'                           =>                      'required|numeric',
+            ]);
+        }
     }
 
     public function placeOrder() {
         $this->validate([
-            'user_firstname'             =>           'required',
-            'user_lastname'              =>           'required',
-            'user_email'                 =>           'required|email',
-            'user_mobile'                =>           'required|numeric|required|numeric|min:10',
-            'user_country'               =>           'required',
-            'user_proviency'             =>           'required',
-            'user_area'                  =>           'required',
-            'user_state'                 =>           'required',
-            'user_village'               =>           'required',
-            'user_address1'              =>           'required',
-            'paymentmode'                =>           'required',
+            'user_firstname'                    =>                     'required',
+            'user_lastname'                     =>                     'required',
+            'user_email'                        =>                     'required|email',
+            'user_mobile'                       =>                     'required|numeric|required|numeric|min:10',
+            'user_country'                      =>                     'required',
+            'user_proviency'                    =>                     'required',
+            'user_area'                         =>                     'required',
+            'user_state'                        =>                     'required',
+            'user_village'                      =>                     'required',
+            'user_address1'                     =>                     'required',
+            'paymentmode'                       =>                     'required',
         ]);
+        if($this->paymentmode == Transaction::CARD) {
+            $this->validate([
+                'card_no'                       =>                      'required|numeric',
+                'exp_month'                     =>                      'numeric|between:1,12',
+                'exp_year'                      =>                      'numeric',
+                'cvc'                           =>                      'required|numeric',
+            ]);
+        }
         $order =  new Order();
         $order->referance_id = 'ORD-' . Str::random(8);
         $order->user_id = Auth::guard('vendor')->user()->id;
@@ -134,13 +153,58 @@ class Checkout extends Component {
             $shipping->save();
         }
         if($this->paymentmode == Transaction::COD) {
-            $transaction = new Transaction();
-            $transaction->user_id = Auth::guard('vendor')->user()->id;
-            $transaction->order_id = $order->id;
-            $transaction->mode = Transaction::COD;
-            $transaction->status = Transaction::PENDING;
-            $transaction->save();
+            $this->makeTransaction($order->id, Transaction::PENDING);
+            $this->resetCard();
         }
+        elseif($this->paymentmode == Transaction::CARD) {
+            try {
+                $paytabs= paypage::sendPaymentCode('all') 
+                ->sendTransaction('Auth') 
+                ->sendCart($this->card_no,$this->cvc,'CARD Description') 
+                ->sendCustomerDetails(
+                    $this->user_firstname . ' _ ' . $this->user_lastname,
+                    $this->user_email,
+                    $this->user_mobile,
+                    $this->user_address1,
+                    $this->user_proviency . ' _ ' .$this->user_area,
+                    $this->user_state. ' _ ' .$this->user_village,
+                    $this->user_country,
+                    null,
+                    null) 
+                ->sendShippingDetails(
+                    $this->user_firstname . ' ' . $this->user_lastname,
+                    $this->user_email,
+                    $this->user_mobile,
+                    $this->user_address1. ' ' .$this->user_address2,
+                    $this->user_proviency . ' _ ' .$this->user_area,
+                    $this->user_state. ' _ ' .$this->user_village,
+                    $this->user_country,
+                    null, // for ZipCode
+                    null, // for IP
+                );
+                //if($paytabs == 'succeeded') {
+                    $this->makeTransaction($order->id,'approved');
+                    $this->resetCard();
+                /*} else {
+                    session()->flash('paytabs_error','Error in Transaction!');
+                    $this->thankyou = 0;
+                }*/
+                //dd ($paytabs);
+            } catch(\Exception $ex){
+                session()->flash('paytabs_error',$ex->getMessage());
+                $this->thankyou = 0;
+            }
+        }
+    }
+    public function makeTransaction($order_id, $status) {
+        $transaction = new Transaction();
+        $transaction->user_id = Auth::guard('vendor')->user()->id;
+        $transaction->order_id = $order_id;
+        $transaction->mode = $this->paymentmode;
+        $transaction->status = $status;
+        $transaction->save();
+    }
+    public function resetCard() {
         $this->thankyou = Transaction::THANK_YOU;
         Cart::instance('cart')->destroy();
         session()->forget('checkout');

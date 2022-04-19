@@ -243,6 +243,7 @@ return [
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'ProductCoupon' => App\Models\ProductCoupon::class,
+        'Paytabscom'    => Paytabscom\Laravel_paytabs\Facades\paypage::class,
     ],
     'Currency' => 'USD',
 ];

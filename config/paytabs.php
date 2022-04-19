@@ -58,4 +58,8 @@ return [
 
     'region' => env('paytabs_region', null),
 
+    // My Custom ::
+    'site_url'  =>  env('APP_URL', 'http://localhost:8000'), // as a Callback URL
+    'return_url'=> env('APP_URL', 'http://localhost:8000') . "/paytabs_response",
+
 ];
