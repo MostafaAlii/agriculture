@@ -380,7 +380,7 @@
                     <ul class="menu-content">
                         <!-- Start Orders -->
                         <li>
-                            <a class="menu-item" href="{{-- route('Options.index') --}}">
+                            <a class="menu-item" href="{{ route('Orders.index') }}">
                                 <i class="material-icons">add_shopping_cart</i>
                                 <span data-i18n="Options"> {{ trans('Admin/orders.order_title_in_sidebar') }}</span>
                             </a>

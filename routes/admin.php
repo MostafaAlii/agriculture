@@ -2,35 +2,36 @@
 use App\Http\Livewire;
 use Illuminate\Http\Request;
 use App\Http\Controllers\front;
-use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\TagController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
+use App\Http\Controllers\Dashboard\Admin\TreeController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\Admin\AdminController;
 use App\Http\Controllers\Dashboard\Admin\StateController;
 use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\OptionController;
+use App\Http\Controllers\Dashboard\Admin\OrdersController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
+use App\Http\Controllers\Dashboard\Admin\OrchardController;
 use App\Http\Controllers\Dashboard\Admin\ProductController;
-use App\Http\Controllers\Dashboard\Admin\ProductCouponController;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
 use App\Http\Controllers\Dashboard\Admin\VillageController;
 use App\Http\Controllers\Dashboard\Admin\CategoryController;
+use App\Http\Controllers\Dashboard\Admin\TreeTypeController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\AttributeController;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use App\Http\Controllers\Dashboard\Admin\ProvienceController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 use App\Http\Controllers\Dashboard\Admin\FetchAddressController;
-use App\Http\Controllers\Dashboard\Admin\TreeController;
-use App\Http\Controllers\Dashboard\Admin\TreeTypeController;
 use App\Http\Controllers\Dashboard\Admin\LandCategoryController;
-use App\Http\Controllers\Dashboard\Admin\OrchardController;
 use App\Http\Controllers\Dashboard\Admin\PaymentMethodController;
+use App\Http\Controllers\Dashboard\Admin\ProductCouponController;
+use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -244,5 +245,10 @@ Route::group(
                 Route::resource('Payments', PaymentMethodController::class)->except(['show']);
                 Route::get('/data', [PaymentMethodController::class,'data'])->name('payments.data');
                 /********************************* End Payment Method **********************************/
+
+                /********************************* Start Orders **********************************/
+                Route::resource('Orders', OrdersController::class)->except(['destory', 'create', 'store']);
+                Route::get('/data', [OrdersController::class,'data'])->name('orders.data');
+                /********************************* End Orders **********************************/
         });
     });
