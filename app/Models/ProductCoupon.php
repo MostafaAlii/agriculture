@@ -46,7 +46,7 @@ class ProductCoupon extends Model {
         return $this->checkGreaterThan($total) ? $this->doCalcProcess($total) : 0;
     }
 
-    protected function checkDate() {
+    /*protected function checkDate() {
         return $this->expire_date != '' ? (Carbon::now()->between($this->start_date, $this->expire_date, true)) ? true : false : true;
     }
 
@@ -56,7 +56,7 @@ class ProductCoupon extends Model {
 
     protected function checkGreaterThan($total) {
         return $this->greater_than != '' ? ($this->greater_than >= $total) ? true : false : true;
-    }
+    }*/
 
     protected function doCalcProcess($total) {
         switch ($this->type) {

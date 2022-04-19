@@ -19,4 +19,8 @@ return [
     'credit_card'                           =>                      'عبر بطاقة ائتمانية',
     'secondry_address'                      =>                      'اكتبة عنوان توصيل اخر اذا رغبت او اتركه فارغ',
     'shipping_to_another_address'           =>                      'الشحن لعميل خارجى',
+    'card_number_placeholder'               =>                      'اكتب رقم البطاقة',
+    'expiry_month'                          =>                      'انتهاء الصلاحية / شهر',
+    'expiry_year'                           =>                      'انتهاء الصلاحية / سنة',
+    'cvc'                                   =>                      'الرقم السرى للبطاقة / CVC',
 ];
