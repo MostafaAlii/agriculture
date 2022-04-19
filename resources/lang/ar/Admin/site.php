@@ -52,7 +52,7 @@ return [
     'edit_profile' => 'تعديل الملف الشخصي',
     'newuser'=>'مستخدم جديد',
     'newfarmer'=>'بائع جديد',
-    'farmer'=>'الفلاحين',
+    'farmer'=>'المزارعين',
     'warning' => 'هل تريد الحذف ؟',
 
     'phone'=>'الهاتف',
@@ -68,7 +68,7 @@ return [
 
     'signvendor'=>'تسجيل التاجر',
     'signfarmer'=>'تسجيل البائع',
-    'newfarmer'=>'بائع او فلاح جديد',
+    'newfarmer'=>'بائع او مزارع جديد',
     'newvendor'=>'تاجر جديد',
     'yourtype'=>'اختار النوع',
     'image'=>'صوره',
@@ -90,7 +90,7 @@ return [
     'back'=>'رجوع',
 
     'admin'=>'مدير',
-    'onefarmer'=>'فلاح',
+    'onefarmer'=>'مزارع',
     'oneuser'=>'مستخدم',
     'onedepartment'=>'قسم',
 
@@ -152,4 +152,5 @@ return [
     'qty'=>'الكميه',
     'productcount'=>'عدد المنتجات',
     'ordercount'=>'عددالطلبات',
+    'farmerproducts'=>'منتجات المزارع',
 ];

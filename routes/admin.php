@@ -84,6 +84,7 @@ Route::group(
             Route::get('/farmer/profile/{id}', [FarmerController::class,'showProfile'])->name('farmer.profile');
             Route::put('/farmer/profileupdate/{id}', [FarmerController::class,'updateAccount'])->name('farmer.updateAccount'); // update farmer form account
             Route::put('/farmer/profileupdateinfo/{id}', [FarmerController::class,'updateInformation'])->name('farmer.updateInformation'); //update farmer form information
+            Route::get('/farmer/product/{id}', [FarmerController::class,'getProduct'])->name('farmer.product.data');
             /********************************* end Farmer routes ************************************/
             /********************************* Start User or vendor Routes ************************************/
             Route::resource('users', UserController::class)->except(['show']);
