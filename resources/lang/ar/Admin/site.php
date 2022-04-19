@@ -153,4 +153,5 @@ return [
     'productcount'=>'عدد المنتجات',
     'ordercount'=>'عددالطلبات',
     'farmerproducts'=>'منتجات المزارع',
+    'farmerproductdetails'=>'تفاصيل المنتج',
 ];

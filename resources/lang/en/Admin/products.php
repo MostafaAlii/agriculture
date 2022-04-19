@@ -101,5 +101,7 @@ return [
     'code_unique'                       =>'This code is already added. Enter another code ',
     'code_regex'                        =>'The product code doesn\'t have to contain codes.',
     'type_required'                     =>'Make sure you choose the type of cruelty',
-    'product_enterqty'                     =>'Enter Product Quantity',
+    'product_enterqty'                  =>'Enter Product Quantity',
+    'product_price_original'            =>'Original Price',
+    'product_price_sale'                =>'Sale Price',
 ];

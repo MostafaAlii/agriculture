@@ -39,7 +39,7 @@
                             <div class="card">
                                 <div class="text-center">
                                     <div class="card-body">
-                                        <a href="">
+                                        <a href="{{ route('farmer.product.detailspage',encrypt($product->id)) }}">
                                             @if ($product->image->filename)
                                                 <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                     class="rounded-circle  height-150" alt="Card image" />
@@ -55,18 +55,14 @@
                                     <div class="text-center">
                                         @if ($product->special_price > 0)
                                             <div class="product-price">
+                                                <h1 class="pricing-card-title"><b><s>{{ number_format($product->price, 2) }} $</s></b></h1>
                                                 <h1
-                                                class="pricing-card-title">{{ number_format($product->price, 2) }}
-                                                    $</h1>
-                                                <h1
-                                                class="pricing-card-title">{{ number_format($product->special_price, 2) }}
-                                                    $</h1>
+                                                class="pricing-card-title">{{ number_format($product->special_price, 2) }} $</h1>
                                             </div>
                                         @else
                                             <div class="product-price">
                                                 <h1
-                                                class="pricing-card-title">{{ number_format($product->price, 2) }}
-                                                    $</h1>
+                                                class="pricing-card-title">{{ number_format($product->price, 2) }} $</h1>
                                             </div>
                                         @endif
                                     </div>

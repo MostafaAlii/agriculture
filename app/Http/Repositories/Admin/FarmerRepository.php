@@ -2,6 +2,7 @@
 namespace  App\Http\Repositories\Admin;
 use App\Models\Farmer;
 use App\Http\Interfaces\Admin\FarmerInterface;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -169,6 +170,12 @@ class FarmerRepository implements FarmerInterface{
         $farmerID = Crypt::decrypt($id);
         $farmer = Farmer::findorfail( $farmerID);
          return view('dashboard.admin.farmers.farmer_product',compact('farmer'));
+    }
+    public function getProductDetails($id){
+        // return 'helloooooooooo';
+        $productID = Crypt::decrypt($id);
+        $product   = Product::findorfail( $productID);
+         return view('dashboard.admin.farmers.farmer_product_details',compact('product'));
     }
 
 }
