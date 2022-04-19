@@ -12,4 +12,6 @@ interface farmerInterface {
     public function showProfile($id);
     public function updateAccount($request,$admin);
     public function updateInformation($request,$admin);
+    public function getProduct($id);
+    public function getProductDetails($id);
 }

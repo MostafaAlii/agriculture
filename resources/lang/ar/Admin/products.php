@@ -101,6 +101,8 @@ return [
     'code_unique'                       =>'هذا الكود مُضاف بالفعل .. قم بادخال كود اخر ',
     'code_regex'                        =>'كود المنتج لا يجب ان يحتوى على رموز',
     'type_required'                     =>'تاكد من اختيار نوع القسيمه',
-    'product_enterqty'                     =>'ادخل كميه المنتج',
+    'product_enterqty'                  =>'ادخل كميه المنتج',
+    'product_price_original'            =>'السعر الاساسى',
+    'product_price_sale'                =>'السعر بعد الخصم',
 
 ];

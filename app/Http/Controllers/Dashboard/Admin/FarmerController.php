@@ -57,4 +57,11 @@ class FarmerController extends Controller {
     public function updateInformation(FarmerProfileInformationRequest  $request,$id) {
         return $this->Data->updateInformation($request,$id);
     }// end of update
+
+    public function getProduct($id){
+        return $this->Data->getProduct($id);
+    }// end of getProduct
+    public function getProductDetails($id){
+        return $this->Data->getProductDetails($id);
+    }// end of getProduct
 }

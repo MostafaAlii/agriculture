@@ -2,6 +2,7 @@
 namespace  App\Http\Repositories\Admin;
 use App\Models\Farmer;
 use App\Http\Interfaces\Admin\FarmerInterface;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -30,7 +31,7 @@ class FarmerRepository implements FarmerInterface{
                 return $farmer->country->name != null ? $farmer->country->name:null;
             })
             ->addColumn('productcount', function (Farmer $farmer) {
-                
+
                 return view('dashboard.admin.farmers.data_table.related', compact('farmer'));
             })
             ->addColumn('actions', 'dashboard.admin.farmers.data_table.actions')
@@ -163,4 +164,18 @@ class FarmerRepository implements FarmerInterface{
         }
 
     }// end of update
+
+
+    public function getProduct($id){
+        $farmerID = Crypt::decrypt($id);
+        $farmer = Farmer::findorfail( $farmerID);
+         return view('dashboard.admin.farmers.farmer_product',compact('farmer'));
+    }
+    public function getProductDetails($id){
+        // return 'helloooooooooo';
+        $productID = Crypt::decrypt($id);
+        $product   = Product::findorfail( $productID);
+         return view('dashboard.admin.farmers.farmer_product_details',compact('product'));
+    }
+
 }
