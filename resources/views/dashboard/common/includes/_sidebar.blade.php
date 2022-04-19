@@ -369,6 +369,26 @@
                         <!-- End options -->
                     </ul>
                 </li>
+                <!-- End options Dropdown Menu -->
+
+                <!-- Start Orders Dropdown Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">add_shopping_cart</i>
+                        <span class="menu-title" data-i18n="Options"> {{ trans('Admin/orders.orders') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start Orders -->
+                        <li>
+                            <a class="menu-item" href="{{-- route('Options.index') --}}">
+                                <i class="material-icons">add_shopping_cart</i>
+                                <span data-i18n="Options"> {{ trans('Admin/orders.order_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Orders -->
+                    </ul>
+                </li>
+                <!-- End Orders Dropdown Menu -->
             </ul>
         </div>
     </div>
