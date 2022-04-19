@@ -29,6 +29,10 @@ class FarmerRepository implements FarmerInterface{
             ->addColumn('country', function (Farmer $farmer) {
                 return $farmer->country->name != null ? $farmer->country->name:null;
             })
+            ->addColumn('productcount', function (Farmer $farmer) {
+                
+                return view('dashboard.admin.farmers.data_table.related', compact('farmer'));
+            })
             ->addColumn('actions', 'dashboard.admin.farmers.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
             ->toJson();

@@ -25,10 +25,10 @@
             </a>
             <div class="row">
                 <div class="col-12">
-                    <div class="checkout">
+                    <div class="checkout" >
                         <h2>@lang('website\home.editprofile')</h2>
                         {{-- <div class="spacer py-3"></div> --}}
-                        <form action="" class="checkout__form" wire:submit.prevent="updateProfile" autocomplete="off">
+                        <form action="" class="checkout__form" wire:submit.prevent="updateProfile" autocomplete="off" >
                             <div class="row justify-content-xl-between">
                                 <div class="col-12 col-md-5 col-lg-6">
                                     <!-- start form -->
