@@ -70,7 +70,6 @@
                                                     <th>{{ __('Admin/orders.order_vendor_name') }}</th>
                                                     <th>{{ __('Admin/orders.order_vendor_email') }}</th>
                                                     <th>{{ __('Admin/orders.order_vendor_phone') }}</th>
-                                                    <th>{{ __('Admin/orders.order_currency') }}</th>
                                                     <th>{{ __('Admin/orders.order_status') }}</th>
                                                     <th>{{ __('Admin/orders.order_date') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -122,10 +121,9 @@
             {data: 'name', name: 'name',sortable: false},
             {data: 'email', name: 'email',sortable: false},
             {data: 'mobile', name: 'mobile',sortable: false},
-            {data: 'currency', name: 'currency', sortable: false},
             {data: 'status', name: 'status'},
             {data: 'created_at', name: 'created_at', searchable: false},
-            {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+            {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '22%'},
         ],
         //order: [[4, 'desc']],
     });

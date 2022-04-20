@@ -22,7 +22,7 @@
     <script src="{{ asset('assets/admin/vendors/js/charts/apexcharts/apexcharts.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
     <!-- BEGIN: Page JS-->
-    {{-- <script src="{{ asset('assets/admin/js/scripts/pages/material-app.js') }}"></script> --}}
+     <script src="{{ asset('assets/admin/js/scripts/pages/material-app.js') }}"></script>
     <script src="{{ asset('assets/admin/js/scripts/pages/dashboard-crypto.js') }}"></script>
     <!-- END: Page JS-->
     <script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js')}}"></script>

@@ -47,6 +47,7 @@
         <!-- END: Page CSS-->
         <!-- BEGIN: Page CSS-->
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
 
     @else
@@ -82,6 +83,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/jstree/themes/default/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/pages/user-feed.css') }}">
 
     <!-- END: Page CSS-->
     @toastr_css

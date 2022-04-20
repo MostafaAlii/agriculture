@@ -249,8 +249,9 @@ Route::group(
                 /********************************* End Payment Method **********************************/
 
                 /********************************* Start Orders **********************************/
-                Route::resource('Orders', OrdersController::class)->except(['destory', 'create', 'store']);
+                Route::resource('Orders', OrdersController::class)->except(['destory', 'create', 'store', 'show']);
                 Route::get('/data', [OrdersController::class,'data'])->name('orders.data');
+                Route::get('Orders/showOrder/{id}', [OrdersController::class,'showOrder'])->name('order.show');
                 /********************************* End Orders **********************************/
         });
     });

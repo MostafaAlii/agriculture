@@ -32,7 +32,7 @@ class ProductCoupon extends Model {
         return $this->start_date != ' ' ? $this->start_date->format('Y-m-d') . ' _ ' . $this->expire_date->format('Y-m-d') : '-';
     }
     public  function getStatus(){
-        return $this->status == self::DISACTIVE ?  trans('Admin\coupons.not_active') : trans('Admin\coupons.active');
+        return $this->status == self::DISACTIVE ?  trans('Admin/coupons.not_active') : trans('Admin/coupons.active');
      }
 
     public function scopeCouponsWithUser($query) {

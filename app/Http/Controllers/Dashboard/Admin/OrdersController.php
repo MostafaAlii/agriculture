@@ -20,8 +20,8 @@ class OrdersController extends Controller {
         return $this->Data->data();
     }
 
-    public function show($id) {
-        //
+    public function showOrder($id) {
+        return $this->Data->showOrder($id);
     }
 
     public function update(Request $request, $id) {
