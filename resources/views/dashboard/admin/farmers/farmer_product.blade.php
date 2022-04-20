@@ -75,7 +75,7 @@
                     <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
                 @endif
             </section>
-            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+            {{-- <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
                 <ul class="pagination">
                     <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous"><a href="#"
                             aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">
@@ -104,11 +104,11 @@
                             aria-controls="DataTables_Table_0" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
 
 
                 {{ $far->links() }}
-           
+
         </div>
     </div>
     <!-- END: Content-->
