@@ -33,13 +33,13 @@
                         {{ $farmer->firstname . $farmer->lastname }}</h4>
                     <h1 style="color: #e71d1d">{{ $farmer->products->count() }} {{ __('Admin/site.product') }}</h1>
                 </div>
-                @if ($farmer->products->count() >0)
-                    @foreach ($farmer->products as $product)
+                @if ($farmer->products->count() > 0)
+                    @foreach ($far as $product)
                         <div class="col-xl-3 col-md-6 col-12">
                             <div class="card">
                                 <div class="text-center">
                                     <div class="card-body">
-                                        <a href="{{ route('farmer.product.detailspage',encrypt($product->id)) }}">
+                                        <a href="{{ route('farmer.product.detailspage', encrypt($product->id)) }}">
                                             @if ($product->image->filename)
                                                 <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                     class="rounded-circle  height-150" alt="Card image" />
@@ -55,14 +55,15 @@
                                     <div class="text-center">
                                         @if ($product->special_price > 0)
                                             <div class="product-price">
-                                                <h1 class="pricing-card-title"><b><s>{{ number_format($product->price, 2) }} $</s></b></h1>
-                                                <h1
-                                                class="pricing-card-title">{{ number_format($product->special_price, 2) }} $</h1>
+                                                <h1 class="pricing-card-title">
+                                                    <b><s>{{ number_format($product->price, 2) }} $</s></b></h1>
+                                                <h1 class="pricing-card-title">
+                                                    {{ number_format($product->special_price, 2) }} $</h1>
                                             </div>
                                         @else
                                             <div class="product-price">
-                                                <h1
-                                                class="pricing-card-title">{{ number_format($product->price, 2) }} $</h1>
+                                                <h1 class="pricing-card-title">{{ number_format($product->price, 2) }} $
+                                                </h1>
                                             </div>
                                         @endif
                                     </div>
@@ -74,6 +75,40 @@
                     <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
                 @endif
             </section>
+            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                <ul class="pagination">
+                    <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous"><a href="#"
+                            aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">
+                            Previous</a></li>
+                    <li class="paginate_button page-item active">
+                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0"
+                            class="page-link">1</a>
+                    </li>
+                    <li class="paginate_button page-item ">
+                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0"
+                            class="page-link">2</a>
+                    </li>
+                    <li class="paginate_button page-item ">
+                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0"
+                            class="page-link">3</a>
+                    </li>
+                    <li class="paginate_button page-item ">
+                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="4" tabindex="0"
+                            class="page-link">4</a>
+                    </li>
+                    <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="5"
+                            tabindex="0" class="page-link">5</a></li>
+                    <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="6"
+                            tabindex="0" class="page-link">6</a></li>
+                    <li class="paginate_button page-item next" id="DataTables_Table_0_next"><a href="#"
+                            aria-controls="DataTables_Table_0" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                    </li>
+                </ul>
+            </div>
+
+
+                {{ $far->links() }}
+           
         </div>
     </div>
     <!-- END: Content-->
