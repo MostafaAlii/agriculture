@@ -65,7 +65,11 @@ Route::group(
 
             route::get('/user/ownprofile/edit',[UserEditProfile::class,'editProfile'])->name('user.editownprofile'); //user Edit profile
             route::put('/user/ownprofile/update',[UserEditProfile::class,'update'])->name('user.ownprofile.update'); //user update profile
-
+            // ajax routes ***********************************
+            Route::get('/user/province/{country_id}', [UserEditProfile::class, 'getProvince']);// route ajax for get country provinces
+            Route::get('/user/area/{province_id}', [UserEditProfile::class, 'getArea']);// route ajax for get province areas
+            Route::get('/user/state/{area_id}', [UserEditProfile::class, 'getState']);// route ajax for get areas states
+            Route::get('/user/village/{state_id}', [UserEditProfile::class, 'getVillage']);// route ajax for get state villages
 
             route::get('/user/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass'); //user change password
 
@@ -80,11 +84,7 @@ Route::group(
             Route::get('/user/ratings/farmer/{id}/{rate}', [RatingsController::class, 'storeFarmerRating'])->name('storeFarmerRating');
             /************************* End Product & Farmer Rating ******************************/
 
-            // ajax routes ***********************************
-            Route::get('/user/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get country provinces
-            Route::get('/user/area/{province_id}', [ProfileController::class, 'getArea']);// route ajax for get province areas
-            Route::get('/user/state/{area_id}', [ProfileController::class, 'getState']);// route ajax for get areas states
-            Route::get('/user/village/{state_id}', [ProfileController::class, 'getVillage']);// route ajax for get state villages
+
             /********************************* End Admin & Employee Routes ************************************/
 
             /************************* Start Checkout & PaymentMethod ******************************/
