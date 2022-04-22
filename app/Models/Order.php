@@ -31,4 +31,13 @@ class Order extends Model {
     public function transaction(): HasOne {
         return $this->hasOne(Transaction::class);
     }
+
+    public function getStatus() {
+        switch ($this->status) {
+            case 'ordered': $result = '<label class="badge badge-primary">'.  trans('Admin/orders.ordered')  .'</label>'; break;
+            case 'delivered': $result = '<label class="badge badge-success">'. trans('Admin/orders.deliverd') .'</label>'; break;
+            case 'canceled': $result = '<label class="badge badge-danger">'. trans('Admin/orders.canceled') .'</label>'; break;
+        }
+        return $result;
+    }
 }

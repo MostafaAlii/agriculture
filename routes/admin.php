@@ -252,6 +252,7 @@ Route::group(
                 Route::resource('Orders', OrdersController::class)->except(['destory', 'create', 'store', 'show']);
                 Route::get('/data', [OrdersController::class,'data'])->name('orders.data');
                 Route::get('Orders/showOrder/{id}', [OrdersController::class,'showOrder'])->name('order.show');
+                Route::get('Orders/printOrder/{id}', [OrdersController::class,'printOrder'])->name('order.print');
                 /********************************* End Orders **********************************/
         });
     });
