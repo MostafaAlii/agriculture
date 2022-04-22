@@ -104,5 +104,6 @@ return [
     'product_enterqty'                  =>'ادخل كميه المنتج',
     'product_price_original'            =>'السعر الاساسى',
     'product_price_sale'                =>'السعر بعد الخصم',
+    'farmereditproduct'                 =>'صفحه تعديل المنتج',
 
 ];

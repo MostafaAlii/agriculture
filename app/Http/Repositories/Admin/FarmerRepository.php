@@ -169,7 +169,8 @@ class FarmerRepository implements FarmerInterface{
     public function getProduct($id){
         $farmerID = Crypt::decrypt($id);
         $farmer = Farmer::findorfail( $farmerID);
-         return view('dashboard.admin.farmers.farmer_product',compact('farmer'));
+        $far = $farmer->products()->paginate(8);
+         return view('dashboard.admin.farmers.farmer_product',compact('farmer','far'));
     }
     public function getProductDetails($id){
         // return 'helloooooooooo';
