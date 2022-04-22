@@ -74,6 +74,9 @@ use App\Http\Repositories\Admin\LandCategoryRepository;
 use App\Http\Interfaces\Admin\ProductCouponInterface;
 use App\Http\Repositories\Admin\ProductCouponRepository;
 
+use App\Http\Interfaces\Admin\OrderInterface;
+use App\Http\Repositories\Admin\OrderRepository;
+
 // ------------------------Front Uses-------------------------------
 
 use App\Http\Interfaces\Front\CommentInterface;
@@ -122,6 +125,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(ProductCouponInterface::class, ProductCouponRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
+        $this->app->bind(OrderInterface::class, OrderRepository::class);
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(RatingInterface::class, RatingRepository::class);
