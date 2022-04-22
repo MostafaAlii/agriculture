@@ -12,17 +12,3 @@
             <div class="dropdown-divider"></div>
         </div>
 </div>
-<div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ __('Admin/orders.order_status') }}
-    </button>
-    <div class="dropdown-menu dropmenu-menu-left">
-        <a href="#" class="dropdown-item btn btn-outline-secondary btn-md">
-            {{ __('Admin/orders.order_delivered') }}
-        </a>
-        <a href="#" class="dropdown-item btn btn-outline-danger btn-md">
-            {{ __('Admin/orders.order_canceled') }}
-        </a>
-        <div class="dropdown-divider"></div>
-    </div>
-</div>

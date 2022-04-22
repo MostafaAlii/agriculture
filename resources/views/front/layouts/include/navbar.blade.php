@@ -96,7 +96,7 @@
             <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('user.dash') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('vendor.dashboard') }}">{{ trans('Website/home.dashboard') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="{{ trans('Website/home.my_profile') }}" href="{{ route('user.ownprofile') }}">{{ trans('Website/home.my_profile') }}</a>
