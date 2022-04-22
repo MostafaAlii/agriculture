@@ -10,6 +10,7 @@ use App\Http\Controllers\front\SearchController;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Livewire\Front\User\ThankYouComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\front\user\UserEditProfile;
 
 Route::group(
     [
@@ -59,7 +60,13 @@ Route::group(
             /********************************* End front pages with login by user auth Routes ************************************/
             route::get('/user/dashboard',Livewire\front\User\dashboard::class)->name('user.dash');          //user dash
             route::get('/user/ownprofile',Livewire\front\User\UserProfile::class)->name('user.ownprofile'); //user profile
-            route::get('/user/ownprofile/edit',Livewire\front\User\UserEditProfileComponent::class)->name('user.editownprofile'); //user Edit profile
+            // route::get('/user/ownprofile/edit',Livewire\front\User\UserEditProfileComponent::class)->name('user.editownprofile'); //user Edit profile
+
+
+            route::get('/user/ownprofile/edit',[UserEditProfile::class,'editProfile'])->name('user.editownprofile'); //user Edit profile
+            route::put('/user/ownprofile/update',[UserEditProfile::class,'update'])->name('user.ownprofile.update'); //user update profile
+
+
             route::get('/user/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass'); //user change password
 
             Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');               //cart
@@ -79,7 +86,7 @@ Route::group(
             Route::get('/user/state/{area_id}', [ProfileController::class, 'getState']);// route ajax for get areas states
             Route::get('/user/village/{state_id}', [ProfileController::class, 'getVillage']);// route ajax for get state villages
             /********************************* End Admin & Employee Routes ************************************/
-            
+
             /************************* Start Checkout & PaymentMethod ******************************/
             Route::get('/thank-you', ThankYouComponent::class)->name('thankyou');
             /*Route::post('/checkout/payment', [PaymentMethodController::class, 'checkout_now'])->name('checkout.paypal');

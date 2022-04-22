@@ -34,23 +34,23 @@
                         <div class="checkout">
                             <h2>@lang('website\home.editprofile')</h2>
                             {{-- <div class="spacer py-3"></div> --}}
-                            <form action="{{ route('farmer.ownprofile.update') }}" class="checkout__form" autocomplete="off" enctype="multipart/form-data"
+                            <form action="{{ route('user.ownprofile.update') }}" class="checkout__form" autocomplete="off" enctype="multipart/form-data"
                                 method="post">
                                 @csrf
                                 @method('put')
                                 <div class="row justify-content-xl-between">
                                     <div class="col-12 col-md-5 col-lg-6">
                                         <!-- start form -->
-                                        @if (Auth::user()->image->filename)
+                                        @if (Auth::guard('vendor')->user()->image->filename)
                                             <a class="mr-2" href="#">
-                                                <img src="{{ asset('Dashboard/img/farmers/' . Auth::user()->image->filename) }}"
-                                                    alt="{{ asset('Dashboard/img/farmers/' . Auth::user()->image->filename) }}"
+                                                <img src="{{ asset('Dashboard/img/users/' . Auth::guard('vendor')->user()->image->filename) }}"
+                                                    alt="{{ asset('Dashboard/img/users/' . Auth::guard('vendor')->user()->image->filename) }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" width="50%">
                                             </a>
                                         @else
                                             <a class="mr-2" href="#">
-                                                <img src="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
-                                                    alt="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
+                                                <img src="{{ asset('Dashboard/img/users/avatar.jpg') }}"
+                                                    alt="{{ asset('Dashboard/img/users/avatar.jpg') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" width="50%">
                                             </a>
                                         @endif
@@ -60,33 +60,33 @@
 
                                         <p><b>@lang('Admin/site.firstname'): </b>
                                             <input type="text" class="textfield" name="firstname"
-                                                value="{{ Auth::user()->firstname }}">
+                                                value="{{ Auth::guard('vendor')->user()->firstname }}">
                                             @error('firstname')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </p>
 
                                         <p><b>@lang('Admin/site.lastname') : </b> <input type="text" class="textfield"
-                                                name="lastname" value="{{ Auth::user()->lastname }}">
+                                                name="lastname" value="{{ Auth::guard('vendor')->user()->lastname }}">
                                             @error('lastname')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </p>
-                                        <p><b>@lang('Admin/site.email') : </b>{{ Auth::user()->email }} </p>
+                                        <p><b>@lang('Admin/site.email') : </b>{{ Auth::guard('vendor')->user()->email }} </p>
                                         <p><b>@lang('Admin/site.phone') : </b> <input type="text" class="textfield"
-                                                name="phone" value="{{ Auth::user()->phone }}">
+                                                name="phone" value="{{ Auth::guard('vendor')->user()->phone }}">
                                             @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </p>
                                         <p><b>@lang('Admin/site.address1') : </b> <input type="text" class="textfield"
-                                                name="address1" value="{{ Auth::user()->address1 }}">
+                                                name="address1" value="{{ Auth::guard('vendor')->user()->address1 }}">
                                             @error('address1')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </p>
                                         <p><b>@lang('Admin/site.address2') : </b> <input type="text" class="textfield"
-                                                name="address2" value="{{ Auth::user()->address2 }}">
+                                                name="address2" value="{{ Auth::guard('vendor')->user()->address2 }}">
                                             @error('address2')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -101,7 +101,7 @@
                                                 <select class=" textfield wide js-select select2" id="country_id" name="country_id" >
                                                     <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     @foreach (\App\Models\Country::get() as $country)
-                                                     <option value="{{ $country->id }}" {{Auth::user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                                                     <option value="{{ $country->id }}" {{Auth::guard('vendor')->user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -113,7 +113,7 @@
                                             <b>@lang('Admin/site.province') : </b>
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="province_id" name="province_id">
-                                                    <option value="{{ Auth::user()->province_id }}"  >{{ Auth::user()->province->name }}</option>
+                                                    <option value="{{ Auth::guard('vendor')->user()->province_id }}"  >{{ Auth::guard('vendor')->user()->province->name }}</option>
                                                 </select>
                                             </div>
                                             @error('province_id')
@@ -124,7 +124,7 @@
                                                 <b>@lang('Admin/site.area') : </b>
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="area_id" name="area_id">
-                                                    <option value="{{ Auth::user()->area_id }}"  >{{ Auth::user()->area->name }}</option>
+                                                    <option value="{{ Auth::guard('vendor')->user()->area_id }}"  >{{ Auth::guard('vendor')->user()->area->name }}</option>
 
                                                 </select>
                                             </div>
@@ -136,7 +136,7 @@
                                                 <b>@lang('Admin/site.state') : </b>
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="state_id" name="state_id">
-                                                    <option value="{{ Auth::user()->state_id }}"  >{{ Auth::user()->state->name }}</option>
+                                                    <option value="{{ Auth::guard('vendor')->user()->state_id }}"  >{{ Auth::guard('vendor')->user()->state->name }}</option>
 
                                                 </select>
                                             </div>
@@ -149,7 +149,7 @@
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="village_id"
                                                     name="village_id">
-                                                    <option value="{{ Auth::user()->village_id }}"  >{{ Auth::user()->village->name }}</option>
+                                                    <option value="{{ Auth::guard('vendor')->user()->village_id }}"  >{{ Auth::guard('vendor')->user()->village->name }}</option>
 
                                                 </select>
                                             </div>
@@ -162,7 +162,7 @@
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="department_id"
                                                     name="department_id">
-                                                    <option value="{{ Auth::user()->department_id }}"  >{{ Auth::user()->department->name }}</option>
+                                                    <option value="{{ Auth::guard('vendor')->user()->department_id }}"  >{{ Auth::guard('vendor')->user()->department->name }}</option>
                                                     @foreach (\App\Models\Department::get() as $department)
                                                     <option value="{{ $department->id }}">{{ $department->name }}</option>
                                                    @endforeach
@@ -176,7 +176,7 @@
                                                 <b>@lang('Admin/site.birthday') : </b>
                                             <div class="input-wrp">
                                                 <input type="date" class="textfield birthdate-picker" required
-                                                    placeholder="Birth date" value="{{ Auth::user()->birthdate }}"
+                                                    placeholder="Birth date" value="{{ Auth::guard('vendor')->user()->birthdate }}"
                                                     data-validation-required-message="This birthdate field is required">
                                             </div>
                                             @error('birthdate')
@@ -244,7 +244,7 @@
                     //    console.log(country_id);
                        if (country_id) {
                            $.ajax({
-                               url: "{{ URL::to('dashboard_farmer/farmer/getprovince') }}/" + country_id,
+                               url: "{{ URL::to('user/province') }}/" + country_id,
                                type: "GET",
                                dataType: "json",
                                success: function(data) {
@@ -278,7 +278,7 @@
                        // console.log(province_id);
                        if (province_id) {
                            $.ajax({
-                               url: "{{ URL::to('dashboard_farmer/farmer/area') }}/" + province_id,
+                               url: "{{ URL::to('user/area') }}/" + province_id,
                                type: "GET",
                                dataType: "json",
                                success: function(data) {
@@ -309,7 +309,7 @@
                       // console.log(province_id);
                       if (area_id) {
                           $.ajax({
-                              url: "{{ URL::to('dashboard_farmer/farmer/state') }}/" + area_id,
+                              url: "{{ URL::to('user/state') }}/" + area_id,
                               type: "GET",
                               dataType: "json",
                               success: function(data) {
@@ -340,7 +340,7 @@
                       // console.log(province_id);
                       if (state_id) {
                           $.ajax({
-                              url: "{{ URL::to('dashboard_farmer/farmer/village') }}/" + state_id,
+                              url: "{{ URL::to('user/village') }}/" + state_id,
                               type: "GET",
                               dataType: "json",
                               success: function(data) {

@@ -3,7 +3,7 @@ namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class FarmerProfileRequest extends FormRequest {
+class userProfileRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -14,7 +14,7 @@ class FarmerProfileRequest extends FormRequest {
 
             'firstname'    => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'lastname'     => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
             // 'email'        => 'required|email|unique:farmers',
             'birthdate'       => 'before:today',
             'country_id'      => 'required',
@@ -33,7 +33,7 @@ class FarmerProfileRequest extends FormRequest {
             // $farmer = $this->route()->parameter('id');
 
             // $rules['email'] = 'required|email|unique:admins,id,' . $admin;
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . Auth::user()->id;
+            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id;
         }//end of if
 
         return $rules;
