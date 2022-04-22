@@ -68,7 +68,7 @@
             <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
-                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Website/home.dashboard') }}</a>
+                    <a title="{{ trans('Admin/site.products') }}" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Admin/site.products') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="{{ trans('Website/home.my_profile') }}" href="{{ route('farmer.ownprofile') }}">{{ trans('Website/home.my_profile') }}</a>
@@ -78,7 +78,7 @@
                 </li>
 
                 <li class="menu-item" >
-                    <a title="Logout" href="{{ route('logout') }}"
+                    <a title="{{ trans('Website/home.logout') }}" href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('log-out-farmer').submit();">
                     {{ trans('Website/home.logout') }}
                     </a>

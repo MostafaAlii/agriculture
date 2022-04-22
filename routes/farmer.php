@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
+use App\Http\Controllers\front\farmer\EditProduct;
 /*
 |--------------------------------------------------------------------------
 | Farmer Routes
@@ -34,7 +35,10 @@ Route::group(
             // Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');
             route::get('/product',Livewire\front\Farmer\ProductComponent::class)->name('farmer.product'); //farmer product index
             route::get('/product/add',Livewire\front\Farmer\FarmerAddProductComponent::class)->name('farmer.addproduct'); //farmer add product
-            route::get('/product/edit/{product_id}',Livewire\front\Farmer\FarmerEditProductComponent::class)->name('farmer.editproduct'); //farmer edit product
+            // route::get('/product/edit/{product_id}',Livewire\front\Farmer\FarmerEditProductComponent::class)->name('farmer.editproduct'); //farmer edit product
+            route::get('/product/edit/{product_id}',[EditProduct::class,'edit'])->name('farmer.editproduct'); //farmer edit product
+            route::put('/product/update',[EditProduct::class,'update'])->name('farmer.updateproduct'); //farmer edit product
+
 
             /********************************* End Admins Pages Routes ************************************/
             route::get('/farmer/ownprofile',Livewire\front\Farmer\FarmerProfile::class)->name('farmer.ownprofile'); //farmer profile

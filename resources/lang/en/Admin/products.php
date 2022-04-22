@@ -104,4 +104,5 @@ return [
     'product_enterqty'                  =>'Enter Product Quantity',
     'product_price_original'            =>'Original Price',
     'product_price_sale'                =>'Sale Price',
+    'farmereditproduct'                 =>'Farmer Edit Product',
 ];

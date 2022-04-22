@@ -1,17 +1,6 @@
-@section('title', __('website\home.farmeraddproduct'))
+@section('title', __('Admin/site.farmeraddproduct'))
 @section('css')
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/weather-icons/climacons.min.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/fonts/simple-line-icons/style.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/forms/toggle/bootstrap-switch.min.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap-extended.css') }}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/components.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css') }}">
-
-
 @endsection
 <div>
     <!-- start section -->
