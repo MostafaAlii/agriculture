@@ -40,4 +40,24 @@ class Order extends Model {
         }
         return $result;
     }
+
+    public function getStatusForExport() {
+        switch ($this->status) {
+            case 'ordered': $result = trans('Admin/orders.ordered') ; break;
+            case 'delivered': $result = trans('Admin/orders.deliverd') ; break;
+            case 'canceled': $result = trans('Admin/orders.canceled') ; break;
+        }
+        return $result;
+    }
+
+    public function scopeSearch($query, $term) {
+        $term = "%$term%";
+        $query->where(function ($query) use ($term) {
+            $query->where('referance_id', 'like', $term)
+            ->orWhere('subtotal', 'like', $term)
+            ->orWhere('total', 'like', $term)
+            ->orWhere('discount', 'like', $term)
+            ->orWhere('delivered_date', 'like', $term);
+        });
+    }
 }

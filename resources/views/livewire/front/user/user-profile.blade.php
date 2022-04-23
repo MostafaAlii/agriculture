@@ -20,6 +20,7 @@
         </div>
 
         <div class="container">
+            @include('dashboard.common._partials.messages')
             @if (session()->has('message'))
             <div class="alert alert-success" role="alert">
                 <strong style="padding-right: 35px;">{{ session()->get('message') }}</strong>
@@ -35,9 +36,9 @@
                     <!-- start form -->
                     @if($user->image->filename)
                         <a class="mr-2" href="#">
-                                <img src="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
-                                alt="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
-                                class="users-avatar-shadow rounded-circle img-preview"  width="100%">
+                            <img src="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
+                            alt="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
+                            class="users-avatar-shadow rounded-circle img-preview"  width="100%">
                         </a>
                     @else
                         <a class="mr-2" href="#">

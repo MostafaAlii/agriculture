@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Controllers\front\vendor\VendorController;
 use App\Http\Livewire\Front\User\ThankYouComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\front\user\UserEditProfile;
 
 Route::group(
     [
@@ -66,7 +67,17 @@ Route::group(
                 route::get('/ownprofile/edit',Livewire\front\User\UserEditProfileComponent::class)->name('user.editownprofile'); //user Edit profile
                 route::get('/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass');
             });
-             //user change password
+            // route::get('/user/ownprofile/edit',Livewire\front\User\UserEditProfileComponent::class)->name('user.editownprofile'); //user Edit profile
+
+            route::get('/user/ownprofile/edit',[UserEditProfile::class,'editProfile'])->name('user.editownprofile'); //user Edit profile
+            route::put('/user/ownprofile/update',[UserEditProfile::class,'update'])->name('user.ownprofile.update'); //user update profile
+            // ajax routes ***********************************
+            Route::get('/user/province/{country_id}', [UserEditProfile::class, 'getProvince']);// route ajax for get country provinces
+            Route::get('/user/area/{province_id}', [UserEditProfile::class, 'getArea']);// route ajax for get province areas
+            Route::get('/user/state/{area_id}', [UserEditProfile::class, 'getState']);// route ajax for get areas states
+            Route::get('/user/village/{state_id}', [UserEditProfile::class, 'getVillage']);// route ajax for get state villages
+
+            route::get('/user/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass'); //user change password
 
             Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');               //cart
             Route::get('/wishlist',Livewire\front\WishlistComponent::class)->name('product.wishlist');   //wishlist
@@ -79,13 +90,9 @@ Route::group(
             Route::get('/user/ratings/farmer/{id}/{rate}', [RatingsController::class, 'storeFarmerRating'])->name('storeFarmerRating');
             /************************* End Product & Farmer Rating ******************************/
 
-            // ajax routes ***********************************
-            Route::get('/user/province/{country_id}', [ProfileController::class, 'getProvince']);// route ajax for get country provinces
-            Route::get('/user/area/{province_id}', [ProfileController::class, 'getArea']);// route ajax for get province areas
-            Route::get('/user/state/{area_id}', [ProfileController::class, 'getState']);// route ajax for get areas states
-            Route::get('/user/village/{state_id}', [ProfileController::class, 'getVillage']);// route ajax for get state villages
+
             /********************************* End Admin & Employee Routes ************************************/
-            
+
             /************************* Start Checkout & PaymentMethod ******************************/
             Route::get('/thank-you', ThankYouComponent::class)->name('thankyou');
             /*Route::post('/checkout/payment', [PaymentMethodController::class, 'checkout_now'])->name('checkout.paypal');

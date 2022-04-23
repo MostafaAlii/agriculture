@@ -31,8 +31,8 @@
                                     <div class="col-lg-8 shadow p-3 mb-5 bg-white rounded" style="min-height:35%;width: 65%;float:right !important;">
                                         <div class="container shadow p-3 mb-5 bg-white rounded">
                                             <h4>
-                                                <i class="fa fa-tachometer" aria-hidden="true"> </i>  
-                                                {{ trans('Website/vendor/dashboard.dashboardPageTitle') }} :
+                                                <i class="fa fa-line-chart" aria-hidden="true"> </i> 
+                                                {{ trans('Website/vendor/dashboard.dashboardInSidebar') }} :
                                             </h4>
                                         </div>
                                     </div>
