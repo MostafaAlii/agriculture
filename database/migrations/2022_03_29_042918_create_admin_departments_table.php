@@ -11,8 +11,11 @@ class CreateAdminDepartmentsTable extends Migration
     {
         Schema::create('admin_departments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image')->nullable();
+            $table->string('dep_name_ar');
+            $table->string('dep_name_en');
+
+            $table->string('desc')->nullable();
+            $table->string('keys')->nullable();
             $table->foreignId('parent')->nullable()->references('id')->on('admin_departments')->onDelete('cascade');
             $table->timestamps();
         });

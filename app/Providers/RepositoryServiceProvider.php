@@ -77,6 +77,9 @@ use App\Http\Repositories\Admin\ProductCouponRepository;
 use App\Http\Interfaces\Admin\OrderInterface;
 use App\Http\Repositories\Admin\OrderRepository;
 
+use App\Http\Interfaces\Admin\ProtectedHouseInterface;
+use App\Http\Repositories\Admin\ProtectedHouseRepository;
+
 // ------------------------Front Uses-------------------------------
 
 use App\Http\Interfaces\Front\CommentInterface;
@@ -97,9 +100,77 @@ use App\Http\Repositories\Admin\PaymentMethodRepository;
 use App\Http\Interfaces\Front\PaymentInterface;
 use App\Http\Repositories\Front\PaymentRepository;
 
+use App\Http\Interfaces\Admin\AgriServiceInterface;
+use App\Http\Repositories\Admin\AgriServiceRepository;
+
+use App\Http\Interfaces\Admin\WaterServiceInterface;
+use App\Http\Repositories\Admin\WaterServiceRepository;
+
+use App\Http\Interfaces\Admin\AgriToolServiceInterface;
+use App\Http\Repositories\Admin\AgriToolServiceRepository;
+
+use App\Http\Interfaces\Admin\FarmerServiceInterface;
+use App\Http\Repositories\Admin\FarmerServiceRepository;
+
+
+use App\Http\Interfaces\Admin\CropInterface;
+use App\Http\Repositories\Admin\CropRepository;
+
+use App\Http\Interfaces\Admin\FarmerCropInterface;
+use App\Http\Repositories\Admin\FarmerCropRepository;
+
+use App\Http\Interfaces\Admin\PrecipitationInterface;
+use App\Http\Repositories\Admin\PrecipitationRepository;
+
+use App\Http\Interfaces\Admin\LandAreaInterface;
+use App\Http\Repositories\Admin\LandAreaRepository;
+
+use App\Http\Interfaces\Admin\CawProjectInterface;
+use App\Http\Repositories\Admin\CawProjectRepository;
+
+use App\Http\Interfaces\Admin\ChickenProjectInterface;
+use App\Http\Repositories\Admin\ChickenProjectRepository;
+
+use App\Http\Interfaces\Admin\BeeDisasterInterface;
+use App\Http\Repositories\Admin\BeeDisasterRepository;
+
+use App\Http\Interfaces\Admin\CourseBeeInterface;
+use App\Http\Repositories\Admin\CourseBeeRepository;
+
+use App\Http\Interfaces\Admin\BeekeeperInterface;
+use App\Http\Repositories\Admin\BeekeeperRepository;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register() {
+
+        $this->app->bind(BeeDisasterInterface::class, BeeDisasterRepository::class);
+
+        $this->app->bind(CourseBeeInterface::class, CourseBeeRepository::class);
+
+        $this->app->bind(BeekeeperInterface::class, BeekeeperRepository::class);
+
+        $this->app->bind(CawProjectInterface::class, CawProjectRepository::class);
+
+        $this->app->bind(ChickenProjectInterface::class, ChickenProjectRepository::class);
+
+        $this->app->bind(PrecipitationInterface::class, PrecipitationRepository::class);
+
+        $this->app->bind(LandAreaInterface::class, LandAreaRepository::class);
+
+        $this->app->bind(FarmerCropInterface::class, FarmerCropRepository::class);
+
+        $this->app->bind(CropInterface::class, CropRepository::class);
+
+        $this->app->bind(FarmerServiceInterface::class, FarmerServiceRepository::class);
+
+        $this->app->bind(AgriServiceInterface::class, AgriServiceRepository::class);
+
+        $this->app->bind(WaterServiceInterface::class, WaterServiceRepository::class);
+
+        $this->app->bind(AgriToolServiceInterface::class, AgriToolServiceRepository::class);
+
+        $this->app->bind(ProtectedHouseInterface::class, ProtectedHouseRepository::class);
         $this->app->bind(OrchardInterface::class, OrchardRepository::class);
         $this->app->bind(TreeInterface::class, TreeRepository::class);
         $this->app->bind(TreeTypeInterface::class, TreeTypeRepository::class);

@@ -75,6 +75,8 @@
         <!-- BEGIN: Page CSS-->
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
     @endif
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/select2-bootstrap4.min.css') }}">
+
     {{--noty--}}
     <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}">
     <script src="{{ asset('assets/admin/noty/noty.min.js') }}"></script>

@@ -221,49 +221,219 @@
                         <!-- End Category -->
                     </ul>
                 </li>
-                <!-- End Category Dropdown Menu -->
-                <li class=" nav-item"><a href="#"><i class="material-icons">tv</i><span class="menu-title"
-                            data-i18n="Templates">{{ __('Admin\site.administaration_part') }}</span></a>
+                <!-- Start Admin Department Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">list</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\site.admin_departments') }}</span>
+                    </a>
                     <ul class="menu-content">
-                        <ul>
-                            <li>
-                                <a class="menu-item" href="{{ route('AdminDepartments.index') }}"><i
-                                        class="material-icons"></i><span
+                        <li>
+                            <a class="menu-item" href="{{ route('AdminDepartments.index') }}"> <i class="material-icons">list</i><span
                                         data-i18n="Vertical">{{ __('Admin\site.admin_departments') }}</span></a>
 
-                            </li>
-                            <li>
-                                <a class="menu-item" href="{{ route('AdminDepartments.create') }}"><i
-                                        class="material-icons"></i><span
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('AdminDepartments.create') }}"> <i class="material-icons">add</i><span
                                         data-i18n="Vertical">{{ __('Admin\site.add_admin_departments') }}</span></a>
-
-                            </li>
-                        </ul>
-
-                        <li><a class="menu-item" href="{{ route('TreeTypes.index') }}"><i
-                                    class="material-icons"></i><span
-                                    data-i18n="Vertical">{{ __('Admin\site.treeType') }}</span></a>
-
-                        </li>
-                        <li><a class="menu-item" href="{{ route('Trees.index') }}"><i
-                                    class="material-icons"></i><span
-                                    data-i18n="Vertical">{{ __('Admin\site.trees') }}</span></a>
-
-                        </li>
-                        <li><a class="menu-item" href="{{ route('LandCategories.index') }}"><i
-                                    class="material-icons"></i><span
-                                    data-i18n="Vertical">{{ __('Admin\site.land_category') }}</span></a>
-
-                        </li>
-                        <li><a class="menu-item" href="{{ route('Orchards.index') }}"><i
-                                    class="material-icons"></i><span
-                                    data-i18n="Horizontal">{{ __('Admin\site.orchards') }}</span></a>
-
-
 
                         </li>
                     </ul>
                 </li>
+                <!-- Start Admin Department Menu -->
+
+                {{--start orchard--}}
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">adjust</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\orchards.orchards_settings') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li><a class="menu-item" href="{{ route('LandCategories.index') }}"><i
+                                        class="material-icons"></i><span
+                                        data-i18n="Vertical">{{ __('Admin\site.land_category') }}</span></a>
+
+                        </li>
+                        <li><a class="menu-item" href="{{ route('TreeTypes.index') }}"><i
+                                        class="material-icons"></i><span
+                                        data-i18n="Vertical">{{ __('Admin\site.treeType') }}</span></a>
+
+                        </li>
+                        <li><a class="menu-item" href="{{ route('Trees.index') }}"><i
+                                        class="material-icons"></i><span
+                                        data-i18n="Vertical">{{ __('Admin\site.trees') }}</span></a>
+
+                        </li>
+                        <li><a class="menu-item" href="{{ route('orchards.index') }}"><i
+                                        class="material-icons"></i><span
+                                        data-i18n="Horizontal">{{ __('Admin\site.orchards') }}</span></a>
+
+                        </li>
+                    </ul>
+                </li>
+                {{--end orchard--}}
+
+                <!-- start protected house Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">library_books</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\p_houses.protectedHousePageTitle') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('ProtectedHouse.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\p_houses.protectedHousePageTitle') }}</span></a>
+
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- end protected house Menu -->
+                <!-- start Agriculture Services house Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">list</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\services.farmer_agriculture_services_setting') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('AgricultureServices.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\services.agricultureServicePageTitle') }}</span></a>
+
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('AgricultureToolServices.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\services.agricultureToolServicePageTitle') }}</span></a>
+
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('WaterServices.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\services.waterServicePageTitle') }}</span></a>
+
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('FarmerServices.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\services.farmerServicePageTitle') }}</span></a>
+
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- end Agriculture Services house Menu -->
+                <!-- start precipitation  Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">library_books</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\precipitations.precipitationsPageTitle') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('Precipitations.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\precipitations.precipitationsPageTitle') }}</span></a>
+
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- end precipitation  Menu -->
+                <!-- start Land Area  Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">library_books</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\land_areas.landAreaPageTitle') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('LandAreas.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\land_areas.landAreaPageTitle') }}</span></a>
+
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- end Land Area  Menu -->
+                <!-- start Land Area  Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">library_books</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\crops.farmerCropsPageTitle_and_setting') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('FarmerCrops.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\crops.farmerCropsPageTitle') }}</span></a>
+
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('Crops.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\crops.cropPageTitle') }}</span></a>
+
+                        </li>
+
+
+                    </ul>
+                </li>
+                <!-- end Land Area  Menu -->
+
+                <!-- start Animals Chicken Projecta Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">library_books</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\animals.animals_chiken_fish_PageTitle') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('Animals.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\animals.animalsPageTitle') }}</span></a>
+
+                        </li>
+
+                        <li>
+                            <a class="menu-item" href="{{ route('Animals.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\animals.chickens_project') }}</span></a>
+
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- end Animals   Menu -->
+
+                <!-- start beekeepers & settings Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">library_books</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\bees.beekeepers_and_settings') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('BeeKeepers.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\bees.beekeeperPageTitle') }}</span></a>
+
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('BeeDisasters.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\bees.beesDisasterPageTitle') }}</span></a>
+
+                        </li>
+
+                        <li>
+                            <a class="menu-item" href="{{ route('CourseBees.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\bees.courseBeesPageTitle') }}</span></a>
+
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- end beekeepers & settings   Menu -->
                 <!-- Start Department Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">

@@ -1,0 +1,13 @@
+<?php
+namespace  App\Http\Interfaces\Admin;
+interface FarmerCropInterface {
+    public function data();
+    public function index();
+    public function create();
+    public function edit($id);
+
+
+    public function store($request);
+    public function update($request,$id);
+//    public function destroy($request);
+}

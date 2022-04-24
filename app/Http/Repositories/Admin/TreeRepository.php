@@ -24,6 +24,9 @@ class TreeRepository implements TreeInterface {
             ->addColumn('trees', function (Tree $tree) {
                 return view('dashboard.admin.trees.btn.related', compact('tree'));
             })
+            ->addColumn('treeType', function (Tree $tree) {
+                return $tree->tree_type->tree_type;
+            })
             ->addColumn('record_select', 'dashboard.admin.trees.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (Tree $tree) {

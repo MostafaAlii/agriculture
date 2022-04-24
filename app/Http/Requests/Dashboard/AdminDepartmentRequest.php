@@ -18,31 +18,33 @@ class AdminDepartmentRequest extends FormRequest
 
 
         return [
-//           'parent_id' => 'sometimes|nullable|numeric',
-            'parent' => 'sometimes|nullable|exists:admin_departments,id',
+            'parent' => 'sometimes|nullable|exists:admin_departments,id|numeric',
 
             'keys' => 'sometimes|nullable|string',
             'desc' => 'sometimes|nullable|string',
-            'name' => [
+            'dep_name_ar' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
-                        ],
-            'image'=>'sometimes|nullable|image|mimes:png,jpg,jpeg',
+                'string'
+            ],
+            'dep_name_en' => [
+                'required',
+                'string'
+            ],
 
         ];
 
 
     }
 
-         public function messages()
+    public function messages()
     {
         return [
-            'image.required' => trans('Admin/validation.required'),
+            'dep_name_ar.required' => trans('Admin/validation.required'),
+            'dep_name_en.required' => trans('Admin/validation.required'),
 
-                'name.required' => trans('Admin/validation.required'),
-            'keys.required' => trans('Admin/validation.required'),
-
-            'desc.required' => trans('Admin/validation.required'),
+//            'keys.required' => trans('Admin/validation.required'),
+//
+//            'desc.required' => trans('Admin/validation.required'),
 
         ];
     }

@@ -22,7 +22,7 @@ if (! function_exists('farmer')) {
 
 if(!function_exists('load_dep')){
     function load_dep($select =null,$dep_hide=null){
-        $admin_departments =  App\Models\AdminDepartment::selectRaw('name as text')
+        $admin_departments =  App\Models\AdminDepartment::selectRaw('dep_name_'.app()->getLocale() .' as text')
             ->selectRaw('id as id')
             ->selectRaw('parent as parent')->get(['text','parent','id']);
 
@@ -32,27 +32,27 @@ if(!function_exists('load_dep')){
             $list_arr['icon']='';
             $list_arr['li_attr'] = '';
             $list_arr['a_attr']  = '';
-            $list_arr['children']= [];
-            if($select!==null && $select==$admin_department->id)
+            $list_arr['children']=[];
+            if($select !== null && $select == $admin_department->id)
             {
-
                 $list_arr['state']   = [
-                    'opened'=>true,
+                'opened'=>true,
                     'selected'=>true,
                     'disabled'=>false,
                 ];
             }
-            if($dep_hide!==null &&  $dep_hide=$admin_department->id)
+            if($dep_hide !== null and  $dep_hide == $admin_department->id)
             {
 
                 $list_arr['state']   = [
                     'opened'=>false,
                     'selected'=>false,
                     'disabled'=>true,
+                    'hidden'=>true,
                 ];
             }
             $list_arr['id']=$admin_department->id;
-            $list_arr['parent']=$admin_department->parent!==null?$admin_department->parent:"#";
+            $list_arr['parent']=$admin_department->parent>0?$admin_department->parent:"#";
             $list_arr['text']=$admin_department->text;
             array_push($dep_arr,$list_arr);
         }

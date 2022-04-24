@@ -13,8 +13,10 @@ return [
     'edit'=>'Edit',
     'delete'=>'Delete',
 
-    ''=>'',
-    ''=>'',
+    'dep_name_ar'=>'Department Name Arabic',
+
+    'dep_name_en'=>'Department Name English',
+
 
 
 ];

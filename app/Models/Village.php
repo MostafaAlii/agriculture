@@ -17,4 +17,11 @@ class Village extends Model {
     public function state(): BelongsTo {
         return $this->belongsTo(State::class);
     }
+
+    public function farmers(){
+        return $this->hasMany(Farmer::class);
+    }
+    public function admins(): HasMany {
+        return $this->hasMany(Admin::class);
+    }
 }

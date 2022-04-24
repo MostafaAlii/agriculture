@@ -1,4 +1,7 @@
-    <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
+
+<script src="{{ asset('assets/admin/js/jquery-ui-1.13.1/jquery-ui.min.js')}}"></script>
+
+
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="{{ asset('assets/admin/js/myFun/myFunction.js')}}"></script>
     <script src="{{ asset('assets/admin/js/jquery.repeater.js')}}"></script>

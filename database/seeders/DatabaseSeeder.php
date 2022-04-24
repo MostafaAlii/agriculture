@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder {
             OptionTableSeeder::class,
             ProductCouponSeeder::class,
             SliderSeeder::class,
+            UnitSeeder::class,
+            supportedSideSeeder::class,
         ]);
 
         \App\Models\Farmer::factory(30)->create();

@@ -30,10 +30,12 @@ class AdminDepartmentController extends Controller
 
 
     public function update(AdminDepartmentRequest $request, $id) {
-        //
+        return $this->Data->update($request,$id);
     }
 
-    public function destroy($id) {
-        //
+    public function destroy( $id) {
+        return $this->Data->destroy($id);
+
     }
+
 }

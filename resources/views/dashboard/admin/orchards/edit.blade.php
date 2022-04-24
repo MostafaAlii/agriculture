@@ -1,24 +1,26 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/setting.settingPageTitle') }}
+    {{ trans('Admin/land_areas.landAreaPageTitle') }}
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\setting.dashboard')}}</h3>
+                <h3 class="content-header-title">{{trans('Admin\orchards.dashboard')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Admins.index') }}">{{ __('Admin/site.admins') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('orchards.index') }}">{{ __('Admin/orchards.orchards') }}</a>
                             </li>
-                            <li class="breadcrumb-item active">{{ __('Admin/site.edit') }}
+                            <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
                         </ol>
                     </div>
@@ -37,10 +39,10 @@
             <!-- Basic form layout section start -->
             <section id="basic-form-layouts">
                 <div class="row justify-content-md-center">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newadmin') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.neworchard') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -53,65 +55,165 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('Admins.update', encrypt($admin->id)) }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('orchards.update',($orchard->id)) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">
-                                            <div class="form-group">
-                                                <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control"  name="firstname" value="{{ old('firstname',$admin->firstname) }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput1">{{ __('Admin/site.lastname') }}<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control"  name="lastname" value="{{ old('lastname',$admin->lastname) }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
-                                                <input type="email" id="eventRegInput4" class="form-control"  name="email" value="{{ old('email',$admin->email) }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
-                                                <input type="tel" id="eventRegInput5" class="form-control" name="phone"  value="{{ old('phone',$admin->phone) }}" required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <fieldset class="form-group">
-                                                    <select class="custom-select" id="customSelect" name="type">
-                                                        <option value="{{ $admin->type }}" selected >{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
-                                                        <option value="admin">{{ __('Admin/site.admins') }}</option>
-                                                        <option value="employee">{{ __('Admin/site.employee') }}</option>
-                                                    </select>
-                                                </fieldset>
-                                             </div>
-                                             <div class="row">
-                                                <div class="col-lg-6">
+
+                                            <div class="row mt-2">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
-                                                        <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                                        <input class="form-control img" name="image"  type="file" accept="image/*">
+                                                        <label for="area_id">{{ __('Admin/orchards.area') }}</label>
+                                                        <select name="area_id" id="area_id" class="form-control" required>
+                                                            <option value="">{{ __('Admin/site.select') }}</option>
+                                                            </option>
+                                                            <option value="{{$orchard->area_id }}" selected>{{ $orchard->area->name }}</option>
+                                                            @foreach ($areas as $area)
+                                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                            @endforeach
+                                                        </select>
+
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                <div class="col col-md-4">
+
+                                                    <div class="form-group">
+                                                        <label for="state_id">{{ __('Admin/orchards.state') }}</label>
+                                                        <select class="select2 form-control" name="state_id" id="state_id">
+                                                            <option value="{{$orchard->state_id}}" selected>{{$orchard->state->name}}</option>
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="village_id">{{ __('Admin/orchards.village') }}</label>
+                                                        <select class="select2 form-control" name="village_id" id="village_id">
+                                                            <option value="{{$orchard->village_id}}" selected>{{$orchard->village->name}}</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>{{ __('Admin/site.address') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                            <input class="form-control img" name="address" value="{{$admin->address}}" type="text" />
-                                            <input class="form-control " value="{{$admin->latitude}}" name="latitude"  type="hidden" id="latitude">
-                                            <input class="form-control " value="{{$admin->longitude}}" name="longitude"  type="hidden" id="longitude">
-                                        </div>
+                                            <div class="row mt-2">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="farmer_id">{{ __('Admin/orchards.farmer') }}</label>
+                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                            <option value="{{$orchard->farmer_id}}" selected>{{$orchard->farmer->firstname}}</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label  for="admin_id">{{ __('Admin/orchards.farmer_phone') }}</label>
+                                                        <input name="phone" value="{{$orchard->phone}}" id="farmer_phone"typ="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label  for="admin_id">{{ __('Admin/orchards.farmer_email') }}</label>
+                                                        <input name="email"  value="{{$orchard->email}}" id="farmer_email"typ="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div  class="form-group">
+                                                        <label for="id_h5_multi">{{ __('Admin/orchards.trees') }}</label>
+
+                                                        <select name="trees[]"class="select2 form-control"name="trees[]" multiple="multiple" id="id_h5_multi">
+                                                            @foreach($orchard->trees as $tree)
+                                                                <option value="{{$tree->id}}"selected>{{$tree->name}}</option>
+                                                            @endforeach
+                                                            @foreach($trees as $tree)
+                                                                <option value="{{$tree->id}}" >{{ $tree->name}}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
+                                                        <select class="select2 custom-select form-control" id="customSelect" name="land_category_id" >
+                                                            <option value=" {{$orchard->land_category_id }}">{{ $orchard->landCategory->category_name }}</option>
+                                                            @foreach($land_categories as $land_category)
+                                                                <option value="{{$land_category->id}} ">{{ $land_category->category_name }}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <div  class="form-group mb-3">
+                                                        <label class="">{{__('Admin\orchards.departments')}}</label>
+                                                        <hr>
+                                                        <div id="jstree"></div>
+                                                        <input name="admin_department_id" type="hidden" value="{{$orchard->admin_department_id}}" class="admin_department_id">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/orchards.orchard_area') }}</label>
+                                                        <input name="orchard_area" value="{{$orchard->orchard_area}}"  class="form-control"type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/orchards.unit') }}</label>
+                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                            <option value="{{$orchard->unit_id}}">{{$orchard->unit->Name}}</option>
+
+                                                            @foreach($units as $unit)
+                                                                <option value ="{{$unit->id}}">{{ $unit->Name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/orchards.tree_count_per_orchard') }}</label>
+                                                        <input name="tree_count_per_orchard" value="{{$orchard->tree_count_per_orchard}}"  class="form-control"type="text">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="customSelect1">{{ __('Admin/orchards.supported_side') }}</label>
+                                                        <select class="custom-select form-control" id="customSelect1" name="supported_side_id" >
+                                                            <option selected disabled>--select--</option>
+                                                            @foreach($supported_sides as $supported_side)
+                                                                <option value="{{$supported_side->id}}"{{$orchard->supported_side_id==$supported_side->id?'selected':''}}>{{ $supported_side->Name }}</option>
+                                                            @endforeach
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+                                            <div class="form-actions center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/orchards.update') }}
+                                                </button>
                                             </div>
                                         </div>
-                                        <div id="map" style="height: 500px;width: 1000px;"></div>
-
-                                        <div class="form-actions center">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
-                                            </button>
-                                        </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
@@ -121,204 +223,184 @@
             <!-- // Basic form layout section end -->
         </div>
     </div>
-</div>
-<!-- END: Content-->
+    </div>
+    <!-- END: Content-->
 
 @endsection
 @section('js')
-{{--start map edit code--}}
+
+
     <script>
-        $("#pac-input").focusin(function() {
-            $(this).val('');
-        });
-        // This example adds a search box to a map, using the Google Place Autocomplete
-        // feature. People can enter geographical searches. The search box will return a
-        // pick list containing a mix of places and predicted search terms.
-        // This example requires the Places library. Include the libraries=places
-        // parameter when you first load the API. For example:
-        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-        function initAutocomplete() {
-            var pos = {lat  {{ $admin->latitude }} ,  lng {{ $admin->longitude }} };
-            map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: pos
-            });
-            infoWindow = new google.maps.InfoWindow;
-            geocoder = new google.maps.Geocoder();
-            marker = new google.maps.Marker({
-                position: pos,
-                map: map,
-                title: '{{ $admin->firstname }}'
-            });
-            infoWindow.setContent('{{ $admin->firstname }}');
-            infoWindow.open(map, marker);
-            // move pin and current location
-            infoWindow = new google.maps.InfoWindow;
-            geocoder = new google.maps.Geocoder();
-            var geocoder = new google.maps.Geocoder();
-            google.maps.event.addListener(map, 'click', function(event) {
-                SelectedLatLng = event.latLng;
-                geocoder.geocode({
-                    'latLng': event.latLng
-                }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            deleteMarkers();
-                            addMarkerRunTime(event.latLng);
-                            SelectedLocation = results[0].formatted_address;
-                            console.log( results[0].formatted_address);
-                            splitLatLng(String(event.latLng));
-                            $("#pac-input").val(results[0].formatted_address);
-                        }
-                    }
-                });
-            });
-            function geocodeLatLng(geocoder, map, infowindow,markerCurrent) {
-                var latlng = {lat: markerCurrent.position.lat(), lng: markerCurrent.position.lng()};
-                /* $('#branch-latLng').val("("+markerCurrent.position.lat() +","+markerCurrent.position.lng()+")");*/
-                $('#latitude').val(markerCurrent.position.lat());
-                $('#longitude').val(markerCurrent.position.lng());
-                geocoder.geocode({'location': latlng}, function(results, status) {
-                    if (status === 'OK') {
-                        if (results[0]) {
-                            map.setZoom(8);
-                            var marker = new google.maps.Marker({
-                                position: latlng,
-                                map: map
+        $(document).ready(function() {
+            //  ajax for get states data of area =====================================================================
+            $('select[name="area_id"]').on('change', function() {
+                var area_id = $(this).val();
+                // console.log(province_id);
+                if (area_id) {
+                    $.ajax({
+                        url: "{{ URL::to('dashboard_admin/admin/state') }}/" + area_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="state_id"]').empty();
+                            $('select[name="state_id"]').append( '<option selected disabled>--select--</option>');
+
+                            $.each(data, function(key, value) {
+
+                                $('select[name="state_id"]').append(
+                                    '<option value="' + key + '">' + value +'</option>'
+                                );
                             });
-                            markers.push(marker);
-                            infowindow.setContent(results[0].formatted_address);
-                            SelectedLocation = results[0].formatted_address;
-                            $("#pac-input").val(results[0].formatted_address);
-                            infowindow.open(map, marker);
-                        } else {
-                            window.alert('No results found');
+                        },
+                    });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            //  ajax for get villages data of area =====================================================================
+            $('select[name="state_id"]').on('change', function() {
+                var state_id = $(this).val();
+                console.log(state_id);
+                if (area_id) {
+                    $.ajax({
+                        url: "{{ URL::to('dashboard_admin/admin/village') }}/" + state_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="village_id"]').empty();
+                            $('select[name="village_id"]').append( '<option selected disabled>--select--</option>');
+
+                            $.each(data, function(key, value) {
+
+                                $('select[name="village_id"]').append(
+                                    '<option value="' + key + '">' + value +'</option>'
+                                );
+                            });
+                        },
+                    });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            //  استعلام بالاجاكس لجلب محافظات البلد ajax for provinces data of country ===============================
+            $('select[name="village_id"]').on('change', function() {
+                var village_id = $(this).val();
+                // console.log(village_id);
+                if (village_id) {
+                    $.ajax({
+                        url: "{{ URL::to('dashboard_admin/orchards/farmer') }}/" + village_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="farmer_id"]').empty();
+                            $('select[name="farmer_id"]').append( '<option selected disabled>--select--</option>');
+
+                            $.each(data, function(key, value) {
+                                // console.log(data);
+                                // console.log(key);
+                                // console.log(value);
+                                $('select[name="farmer_id"]').append(
+                                    '<option value="' + key + '">' + value +'</option>'
+                                );
+                            });
+                        },
+                    });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        $('select[name="farmer_id"]').on('change', function() {
+
+            var farmer_id = $(this).val();
+            if(farmer_id){
+                $.ajax({
+
+                    url: "{{ URL::to('dashboard_admin/orchards/farmerInf') }}/" + farmer_id,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data === undefined) {
+                            alert('empty');
+                            return;
                         }
-                    } else {
-                        window.alert('Geocoder failed due to: ' + status);
+                        $('#farmer_phone').val(data.phone);
+                        $('#farmer_email').val(response.email);
+                        $('#farmer_address').val(response.address1);
                     }
+
+
                 });
-                SelectedLatLng =(markerCurrent.position.lat(),markerCurrent.position.lng());
+            }else {
+                console.log('AJAX load did not work');
             }
-            function addMarkerRunTime(location) {
-                var marker = new google.maps.Marker({
-                    position: location,
-                    map: map
-                });
-                markers.push(marker);
-            }
-            function setMapOnAll(map) {
-                for (var i = 0; i < markers.length; i++) {
-                    markers[i].setMap(map);
-                }
-            }
-            function clearMarkers() {
-                setMapOnAll(null);
-            }
-            function deleteMarkers() {
-                clearMarkers();
-                markers = [];
-            }
-            // Create the search box and link it to the UI element.
-            var input = document.getElementById('pac-input');
-            $("#pac-input").val("أبحث هنا ");
-            var searchBox = new google.maps.places.SearchBox(input);
-            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
-            // Bias the SearchBox results towards current map's viewport.
-            map.addListener('bounds_changed', function() {
-                searchBox.setBounds(map.getBounds());
+
+        });
+
+    </script>
+
+    {{--departments--}}
+
+    <script  type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#jstree').jstree({
+                "core" : {
+                    'data' :   {!! load_dep($orchard->admin_department_id) !!},
+                    "themes" : {
+                        "variant" : "large"
+                    }
+                },
+                "checkbox" : {
+                    "keep_selected_style" : false
+                },
+                "plugins" : [ "wholerow",  ]
             });
-            var markers = [];
-            // Listen for the event fired when the user selects a prediction and retrieve
-            // more details for that place.
-            searchBox.addListener('places_changed', function() {
-                var places = searchBox.getPlaces();
-                if (places.length == 0) {
-                    return;
+        });
+
+
+        $('#jstree')
+        // listen for event
+            .on('changed.jstree', function (e, data) {
+                var i, j,r = [];
+                var name=[];
+                for(i=0,j=data.selected.length;i<j;i++){
+                    r.push(data.instance.get_node(data.selected[i]).id);
+
                 }
-                // Clear out the old markers.
-                markers.forEach(function(marker) {
-                    marker.setMap(null);
-                });
-                markers = [];
-                // For each place, get the icon, name and location.
-                var bounds = new google.maps.LatLngBounds();
-                places.forEach(function(place) {
-                    if (!place.geometry) {
-                        console.log("Returned place contains no geometry");
-                        return;
-                    }
-                    var icon = {
-                        url: place.icon,
-                        size: new google.maps.Size(100, 100),
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(25, 25)
-                    };
-                    // Create a marker for each place.
-                    markers.push(new google.maps.Marker({
-                        map: map,
-                        icon: icon,
-                        title: place.name,
-                        position: place.geometry.location
-                    }));
-                    $('#latitude').val(place.geometry.location.lat());
-                    $('#longitude').val(place.geometry.location.lng());
-                    if (place.geometry.viewport) {
-                        // Only geocodes have viewport.
-                        bounds.union(place.geometry.viewport);
-                    } else {
-                        bounds.extend(place.geometry.location);
-                    }
-                });
-                map.fitBounds(bounds);
+                $('.admin_department_id').val(r.join(', '));
+
+
+
             });
-        }
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                'Error: Your browser doesn\'t support geolocation.');
-            infoWindow.open(map);
-        }
-        function splitLatLng(latLng){
-            var newString = latLng.substring(0, latLng.length-1);
-            var newString2 = newString.substring(1);
-            var trainindIdArray = newString2.split(',');
-            var lat = trainindIdArray[0];
-            var Lng  = trainindIdArray[1];
-            $("#latitude").val(lat);
-            $("#longitude").val(Lng);
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKZAuxH9xTzD2DLY2nKSPKrgRi2_y0ejs&libraries=places&callback=initAutocomplete&language=ar&region=EG
-         async defer"></script>
-    {{--end map edit code--}}
-
-    <script type="text/javascript">
-
-        var loadFile = function (event) {
-            var img = document.getElementById('output');
-            img.src = URL.createObjectURL(event.target.files[0]);
-            output.img = function () {
-                URL.revokeObjectURL(img.src)
-            }
-
-        };
     </script>
 
-    <script type="text/javascript">
+    <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>
+    <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>
 
-        var loadFile1 = function (event) {
-            var output = document.getElementById('output1');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function () {
-                URL.revokeObjectURL(output.src)
-            }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
 
-        };
+        $('select').select2({
+            theme: 'bootstrap4',
+        });
+
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 @endsection
 
