@@ -78,7 +78,8 @@
                                          </td>
                                         <td>{{ $product->created_at->diffforhumans() }} </td>
                                         <td>
-                                            <a href="{{ route('farmer.editproduct',['product_id' =>$product->id]) }}" class="btn btn-success btn-lg"><i class="fa fa-edit"></i> {{ __('Admin/site.edit') }}</a>
+                                            {{-- <a href="{{ route('farmer.editproduct',['product_id' =>$product->id]) }}" class="btn btn-success btn-lg"><i class="fa fa-edit"></i> {{ __('Admin/site.edit') }}</a> --}}
+                                            <a href="{{ route('farmer.editproduct',encrypt($product->id)) }}" class="btn btn-success btn-lg"><i class="fa fa-edit"></i> {{ __('Admin/site.edit') }}</a>
                                             <a href="" class="btn btn-danger btn-lg" title="Delete" wire:click.prevent="delete({{ $product->id }})"
                                                 onclick="confirm('{{ __('Are you sure to delete this product') }}') || event.stopImmediatePropagation() ">
                                                 <i class="fa fa-trash"></i>{{ __('Admin/site.delete') }}

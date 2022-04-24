@@ -171,6 +171,7 @@ return [
         Yajra\DataTables\ButtonsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -245,6 +246,7 @@ return [
         'ProductCoupon' => App\Models\ProductCoupon::class,
         'Order'         => App\Models\Order::class,
         'Paytabscom'    => Paytabscom\Laravel_paytabs\Facades\paypage::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
     'Currency' => 'USD',
 ];

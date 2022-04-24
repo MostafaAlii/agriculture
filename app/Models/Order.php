@@ -31,4 +31,33 @@ class Order extends Model {
     public function transaction(): HasOne {
         return $this->hasOne(Transaction::class);
     }
+
+    public function getStatus() {
+        switch ($this->status) {
+            case 'ordered': $result = '<label class="badge badge-primary">'.  trans('Admin/orders.ordered')  .'</label>'; break;
+            case 'delivered': $result = '<label class="badge badge-success">'. trans('Admin/orders.deliverd') .'</label>'; break;
+            case 'canceled': $result = '<label class="badge badge-danger">'. trans('Admin/orders.canceled') .'</label>'; break;
+        }
+        return $result;
+    }
+
+    public function getStatusForExport() {
+        switch ($this->status) {
+            case 'ordered': $result = trans('Admin/orders.ordered') ; break;
+            case 'delivered': $result = trans('Admin/orders.deliverd') ; break;
+            case 'canceled': $result = trans('Admin/orders.canceled') ; break;
+        }
+        return $result;
+    }
+
+    public function scopeSearch($query, $term) {
+        $term = "%$term%";
+        $query->where(function ($query) use ($term) {
+            $query->where('referance_id', 'like', $term)
+            ->orWhere('subtotal', 'like', $term)
+            ->orWhere('total', 'like', $term)
+            ->orWhere('discount', 'like', $term)
+            ->orWhere('delivered_date', 'like', $term);
+        });
+    }
 }

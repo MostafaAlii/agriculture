@@ -42,7 +42,8 @@
                                         <div class="media mb-2">
                                             @if($farmer->image->filename)
                                                 <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
+                                                    <img
+                                                    src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
                                                     alt="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>

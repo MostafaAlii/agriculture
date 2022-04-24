@@ -1,5 +1,7 @@
 <?php
 use Gloudemans\Shoppingcart\Facades\Cart;
+
+define('PAGINATION_COUNT', 1);
 //////////// Admin Auth date  Helper Function ////
 if (! function_exists('admin')) {
 	function admin(){

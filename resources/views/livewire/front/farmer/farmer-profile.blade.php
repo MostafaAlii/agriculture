@@ -41,6 +41,7 @@
         </div>
 
         <div class="container">
+            @include('dashboard.common._partials.messages')
             @if (session()->has('message'))
             <div class="alert alert-success" role="alert">
                 <strong style="padding-right: 35px;">{{ session()->get('message') }}</strong>
@@ -90,7 +91,7 @@
                     <p><b>@lang('Admin/site.village') : </b> {{ $farmer->village->name }}</p>
                     <p><b>@lang('Admin/site.department') : </b> {{ $farmer->department->name }}</p>
                     <!-- end form -->
-                    <a href="{{ route('farmer.editownprofile') }}"
+                    <a href="{{ route('farmer.ownprofile.edit') }}"
                     class="custom-btn custom-btn--medium custom-btn--style-1"
                     >{{ __('Admin/site.edit') }}
                     </a>

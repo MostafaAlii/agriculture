@@ -24,7 +24,10 @@ class OrdersController extends Controller {
         return $this->Data->showOrder($id);
     }
 
-    public function update(Request $request, $id) {
-        //
+    public function printOrder($id) {
+        return $this->Data->printOrder($id);
+    }
+    public function update(Request $request, $id){
+        return $this->Data->update($request, $id);
     }
 }
