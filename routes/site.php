@@ -57,10 +57,12 @@ Route::group(
             /********************************* Start  front pages with login by user auth Routes ************************************/
             route::get('/home',Livewire\front\Home2::class)->name('home.user');
             /********************************* End front pages with login by user auth Routes ************************************/
-            route::get('/user/dashboard',Livewire\front\User\dashboard::class)->name('user.dash');          //user dash
-            route::get('/user/ownprofile',Livewire\front\User\UserProfile::class)->name('user.ownprofile'); //user profile
-            route::get('/user/ownprofile/edit',Livewire\front\User\UserEditProfileComponent::class)->name('user.editownprofile'); //user Edit profile
-            route::get('/user/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass'); //user change password
+            route::get('/user/dashboard',Livewire\front\User\dashboard::class)->name('user.dash');
+            //user dash
+            route::get('/ownprofile',Livewire\front\User\UserProfile::class)->name('user.ownprofile'); //user profile
+            route::get('/ownprofile/edit',Livewire\front\User\UserEditProfileComponent::class)->name('user.editownprofile'); //user Edit profile
+            route::get('/changepassword',Livewire\front\User\UserChangePassword::class)->name('user.changepass');
+
 
             Route::get('/cart',Livewire\front\CartComponent::class)->name('product.cart');               //cart
             Route::get('/wishlist',Livewire\front\WishlistComponent::class)->name('product.wishlist');   //wishlist

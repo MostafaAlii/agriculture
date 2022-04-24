@@ -139,10 +139,13 @@ use App\Http\Repositories\Admin\CourseBeeRepository;
 
 use App\Http\Interfaces\Admin\BeekeeperInterface;
 use App\Http\Repositories\Admin\BeekeeperRepository;
+use App\Http\Interfaces\Admin\WholeSaleProductInterface;
+use App\Http\Repositories\Admin\WholeSaleProductRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register() {
+        $this->app->bind(WholeSaleProductInterface::class, WholeSaleProductRepository::class);
 
         $this->app->bind(BeeDisasterInterface::class, BeeDisasterRepository::class);
 

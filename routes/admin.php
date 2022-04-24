@@ -46,6 +46,8 @@ use App\Http\Controllers\Dashboard\Admin\ChickenProjectController;
 use App\Http\Controllers\Dashboard\Admin\BeeKeepersController;
 use App\Http\Controllers\Dashboard\Admin\BeeDisastersController;
 use App\Http\Controllers\Dashboard\Admin\CourseBeeController;
+use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
+
 
 
 /*
@@ -279,6 +281,12 @@ Route::group(
             Route::delete('/BeeKeepers/bulk_delete/{ids}', [BeeKeepersController::class,'bulkDelete'])->name('beekeepers.bulk_delete');
 
             /*********end  Beekeeper  route ********/
+            /******* whole sale product  route********/
+            Route::resource('WholeSaleProducts', WholeSaleProductController::class)->except(['show']);
+            Route::get('/WholeSaleProducts/data', [WholeSaleProductController::class,'data'])->name('whole_sale_products.data');
+            Route::delete('/WholeSaleProducts/bulk_delete/{ids}', [WholeSaleProductController::class,'bulkDelete'])->name('whole_sale_products.bulk_delete');
+
+            /*********end  whole sale product  route ********/
 
 
             /********************************* Department Routes ************************************/
