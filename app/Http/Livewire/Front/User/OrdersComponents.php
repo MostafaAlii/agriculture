@@ -1,11 +1,15 @@
 <?php
 namespace App\Http\Livewire\Front\User;
 use Carbon\Carbon;
+use App\Models\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 use App\Exports\Client\OrderExport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Excel as ExcelXlsx;
+
 class OrdersComponents extends Component {
     //use WithPagination;
     public $paginate = 10;
@@ -13,6 +17,9 @@ class OrdersComponents extends Component {
     public $selectPage = false;
     public $selectedStatus = null;
     public $checked = [];
+    public $showOrder = false;
+    public $order;
+    //////////////////////////////
     public function mount() {
         $this->user = auth()->user();
         $this->username = $this->user->firstname . '-' . $this->user->lastname;
@@ -20,12 +27,6 @@ class OrdersComponents extends Component {
     public function render() {
         return view('livewire.front.user.orders-components', [
             'orders'    =>  $this->user->orders()
-            ->with(['orderItems' => function ($query) {
-                $query->select('id','order_id','quantity');
-            }])
-            ->with(['orderItems.product' => function ($query) {
-                $query->select('id')->with('translations');
-            }])
             ->when($this->selectedStatus, function ($query){
                 $query->where('status', $this->selectedStatus);
             })
@@ -37,4 +38,17 @@ class OrdersComponents extends Component {
     public function exportSelected() {
         return Excel::download(new OrderExport($this->checked), $this->username . '_ORD-' . date('Y-m-d') . '.xlsx', ExcelXlsx::XLSX);
     }
+
+    public function displayOrder($id) {
+        $this->order = Order::with(['orderItems'])->find($id);
+        $this->showOrder = true;
+    }
+    public function cancelOrder($id) {
+    $order = Order::find($id);
+	$order->status = "canceled";
+	$order->canceled_date = DB::raw('CURRENT_DATE');
+	$order->save();
+	session()->flash('order_message','Order has been canceled!');
+    }
+
 }
