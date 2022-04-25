@@ -331,7 +331,9 @@
                                     <h6 class="title-box">Total :<p style="" class="text-primary">${{ Session::get('checkout')['total'] }}</p></h6>
                                 @endif
                                 <!-- Start Submit Button -->
-                                <button type="submit" class="btn btn-dark btn-lg btn-block">{{ trans('Website/checkout.place_order_now') }}</button>
+                                @if (Cart::instance('cart')->total() > 0 )
+                                   <button type="submit" class="btn btn-dark btn-lg btn-block">{{ trans('Website/checkout.place_order_now') }}</button>
+                                @endif
                                 <!-- End Submit Button -->
                             </form>
                             <!-- End Form -->
