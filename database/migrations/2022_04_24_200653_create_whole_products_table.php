@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWholeSaleProductsTable extends Migration
+class CreateWholeProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWholeSaleProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('whole_sale_products', function (Blueprint $table) {
+        Schema::create('whole_products', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateWholeSaleProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('whole_sale_products');
+        Schema::dropIfExists('whole_products');
     }
 }

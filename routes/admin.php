@@ -47,6 +47,8 @@ use App\Http\Controllers\Dashboard\Admin\BeeKeepersController;
 use App\Http\Controllers\Dashboard\Admin\BeeDisastersController;
 use App\Http\Controllers\Dashboard\Admin\CourseBeeController;
 use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
+use App\Http\Controllers\Dashboard\Admin\IncomeProductController;
+use App\Http\Controllers\Dashboard\Admin\OutcomeProductController;
 
 
 
@@ -287,6 +289,18 @@ Route::group(
             Route::delete('/WholeSaleProducts/bulk_delete/{ids}', [WholeSaleProductController::class,'bulkDelete'])->name('whole_sale_products.bulk_delete');
 
             /*********end  whole sale product  route ********/
+
+            /********************************* outcome products Routes ************************************/
+            Route::resource('OutcomeProducts', OutcomeProductController::class)->except(['show']);
+            Route::get('/OutcomeProducts/data', [OutcomeProductController::class,'data'])->name('outcome_products.data');
+            Route::delete('/OutcomeProducts/bulk_delete/{ids}', [OutcomeProductController::class,'bulkDelete'])->name('outcome_products.bulk_delete');
+            /********************************* End outcome products Routes ************************************/
+
+            /********************************* outcome products Routes ************************************/
+            Route::resource('IncomeProducts', IncomeProductController::class)->except(['show']);
+            Route::get('/IncomeProducts/data', [IncomeProductController::class,'data'])->name('income_products.data');
+            Route::delete('/IncomeProducts/bulk_delete/{ids}', [IncomeProductController::class,'bulkDelete'])->name('income_products.bulk_delete');
+            /********************************* End outcome products Routes ************************************/
 
 
             /********************************* Department Routes ************************************/

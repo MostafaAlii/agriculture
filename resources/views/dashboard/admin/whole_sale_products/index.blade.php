@@ -22,7 +22,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Crops.index') }}">{{ trans('Admin\whole_sale_products.WholeSaleProductPageTitle') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('WholeSaleProducts.index') }}">{{ trans('Admin\whole_sale_products.WholeSaleProductPageTitle') }}</a>
                             </li>
                         </ol>
                     </div>

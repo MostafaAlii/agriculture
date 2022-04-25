@@ -18,7 +18,8 @@
              id="delete{{ $id }}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="{{ route('WholeSaleProduct.destroy', encrypt($id)) }}" class="my-1 my-xl-0"
+                    <form action="{{ route('WholeSaleProducts.destroy', ($id)) }}" class="my-1 my-xl-0"
+                    <form action="{{ route('WholeSaleProducts.destroy', ($id)) }}" class="my-1 my-xl-0"
                           method="post" style="display: inline-block;">
                         @csrf
                         @method('delete')
@@ -66,14 +67,14 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('WholeSaleProducts.update', encrypt($id)) }}" class="my-1 my-xl-0" method="post"
+                    <form action="{{ route('WholeSaleProducts.update', ($id)) }}" class="my-1 my-xl-0" method="post"
                           style="display: inline-block;">
                         @csrf
                         @method('patch')
                         <input type="hidden" value="{{ $id }}" name="id">
 
                         @php
-                            $crop = \App\Models\WholeSaleProduct::findorfail($id)->first();
+                            $whole_product = \App\Models\WholeProduct::findorfail($id)->first();
                         @endphp
 
                         <div class="modal-body">
@@ -81,7 +82,7 @@
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin\whole_sale_products.enter_whole_sale_product_name') }}
                                 </label>
                                 <input type="text" name="name" class="form-control"
-                                       value="{{$crop->name}}"
+                                       value="{{$whole_product->name}}"
                                        placeholder="{{ trans('Admin/whole_sale_products.enter_whole_sale_product_name_placeholder') }}"/>
                                 @error('name')
                                 <span class="text-danger"> {{$message}}</span>

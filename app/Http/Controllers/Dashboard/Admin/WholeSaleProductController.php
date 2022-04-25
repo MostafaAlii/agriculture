@@ -37,7 +37,7 @@ class WholeSaleProductController extends Controller
     }
 
     public function bulkDelete(Request $request){
-        return $this->Data->destroy($request);
+        return $this->Data->bulkDelete($request);
 
 
     }

@@ -434,6 +434,35 @@
                     </ul>
                 </li>
                 <!-- end beekeepers & settings   Menu -->
+
+                <!-- start WholeSale & settings Menu -->
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">library_books</i>
+                        <span class="menu-title"
+                              data-i18n="Categories">{{ __('Admin\income_products.wholeSale_and_product') }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('WholeSaleProducts.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\income_products.WholeProduct') }}</span></a>
+
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('IncomeProducts.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\income_products.income_productPageTitle') }}</span></a>
+
+                        </li>
+
+                        <li>
+                            <a class="menu-item" href="{{ route('OutcomeProducts.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\outcome_products.outcome_productPageTitle') }}</span></a>
+
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- end WholeSale & settings   Menu -->
                 <!-- Start Department Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">

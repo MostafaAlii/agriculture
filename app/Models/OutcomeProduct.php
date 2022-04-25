@@ -2,9 +2,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-class WholeSale extends Model {
+class OutcomeProduct extends Model {
     use HasFactory;
-    protected $table = "bee_keepers";
+    protected $table = "outcome_products";
     protected $guarded=[];
     public $timestamps = true;
 
@@ -17,19 +17,23 @@ class WholeSale extends Model {
         return $this->belongsTo(Country::class,'country_id');
     }
     public function province(){
-        return $this->belongsTo(Province::class,'area_id');
+        return $this->belongsTo(Province::class,'province_id');
     }
 
     public function area(){
         return $this->belongsTo(Area::class,'area_id');
+    }
+    public function currency(){
+        return $this->belongsTo(Currency::class,'currency_id');
     }
 
 
     public function adminDepartment(){
         return $this->belongsTo(AdminDepartment::class,'admin_department_id');
     }
-    public function whole_sale_products(){
-        return $this->belongsTo(WholeSaleProduct::class,'whole_sale_product_id');
+    public function whole_product(){
+        return $this->belongsTo(WholeProduct::class,'whole_product_id');
     }
+
 
 }

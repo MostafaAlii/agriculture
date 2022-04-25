@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         $count = 32;
         $this->call([
+            CurrencySeeder::class,
             CountrySeeder::class,
             ProvinceSeeder::class,
             AreaSeeder::class,
