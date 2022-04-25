@@ -76,7 +76,9 @@
                 <li class="menu-item" >
                     <a title="{{ trans('Website/home.change_password') }}" href="{{ route('farmer.changepass') }}">{{ trans('Website/home.change_password') }}</a>
                 </li>
-
+                <li class="menu-item" >
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('chat') }}" target="_blank">لاجراء محادثه</a>
+                </li>
                 <li class="menu-item" >
                     <a title="{{ trans('Website/home.logout') }}" href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('log-out-farmer').submit();">
@@ -104,7 +106,9 @@
                 <li class="menu-item" >
                     <a title="{{ trans('Website/home.change_password') }}" href="{{ route('user.changepass') }}">{{ trans('Website/home.change_password') }}</a>
                 </li>
-
+                <li class="menu-item" >
+                    <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('chat') }}" target="_blank">لاجراء محادثه</a>
+                </li>
                 <li class="menu-item" >
                     <a title="Logout" href="{{ route('logout.user') }}"
                     onclick="event.preventDefault(); document.getElementById('log-out').submit();">

@@ -53,6 +53,8 @@ Route::group(
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');             // contact us
         Route::get('/search',Livewire\front\SearchComponent::class)->name('product.search');  //search
 
+        route::get('/chat',Livewire\Front\ChatClass::class)->name('chat'); //chat
+        route::get('/single_chat/{id}/{guard}',[Livewire\Front\ChatClass::class,'show_single_chat'])->name('single_chat'); //chat
 
 
         Route::middleware(['auth:vendor'])->group(function () {

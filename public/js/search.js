@@ -18,9 +18,6 @@ function searchAction(){
 //////////////////////////////////////////////////////////////////////////
 
 function search_result(page,id,type){
-	// alert(page);
-	// alert(id);
-	// alert(type);
 	var xhhttp;
 	xhhttp= createRequest();
 	xhhttp.onreadystatechange = searchAction;	
@@ -44,32 +41,27 @@ function input_search_result(){
     }
 }
 
-// $('#all_tags li').on('click', function () {
+//-----------------------chat parts------------------------------------------
+//-----------------------chat parts------------------------------------------
+//-----------------------chat parts------------------------------------------
 
-//     var tag_id = this.id;
-//     alert(tag_id);
-//     $.ajax({
+//////////////////////////////////////////////////////////////////////////
 
-//         type: "GET",
-//         //url: "{{ URL::to('blogs.tag/')}}/" + tag_id,
-//         url: "../blogs.tag/" + tag_id,
-        
-//         dataType: "json",
-//         success: function (data)
-//         {
-//             if(data!='')
-//             { 
-//                  $('#blog_data').append(data);
-//                  alert('data');
-//             }else{
-//                 alert('no data');
-//             }
-//             $.each(data, function (key) {
-//                alert(key);
-//             });
-//         },
-//         error:function()
-//         { alert("false"); }
-//     });
-//  });
-   
+function chatAction(){
+	if (this.readyState == 4 && this.status == 200) {				
+		document.getElementById("chat").innerHTML = this.responseText;		
+	}
+}
+//////////////////////////////////////////////////////////////////////////
+function start_converstion(value,type){
+	document.getElementById('guard_id').value=value;
+	// document.getElementById('guard_id2').value=value;
+	// document.getElementById("disabled").disabled = false;
+	//alert(value+' , '+type);
+	var xhhttp;
+        xhhttp= createRequest();
+        xhhttp.onreadystatechange = chatAction;	
+        xhhttp.open("GET","../single_chat/"+value+"/"+type , true); 
+        xhhttp.send();
+}
+
