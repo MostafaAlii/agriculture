@@ -153,7 +153,7 @@ class Checkout extends Component {
             $shipping->village = $this->shipping_village;
             $shipping->save();
         }
-        Notification::send(Auth::guard('vendor')->user(), new \App\Notifications\NewOrder(Auth::guard('vendor')->user()));
+
 
 
         if($this->paymentmode == Transaction::COD) {
@@ -194,6 +194,8 @@ class Checkout extends Component {
                     $this->thankyou = 0;
                 }*/
                 //dd ($paytabs);
+                Notification::send(Auth::guard('vendor')->user(), new \App\Notifications\NewOrder(Auth::guard('vendor')->user()));
+                
             } catch(\Exception $ex){
                 session()->flash('paytabs_error',$ex->getMessage());
                 $this->thankyou = 0;
