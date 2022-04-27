@@ -9,7 +9,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Paytabscom\Laravel_paytabs\Facades\paypage as paypage;
-class Checkout extends Component { 
+use Illuminate\Support\Facades\Notification;
+class Checkout extends Component {
     public $cart_subtotal, $cart_tax, $cart_total, $cart_discount;
     public $user_id, $user_address1, $user_address2, $user_email, $user_firstname,$user_lastname, $user_mobile;
     public $user_country, $user_proviency, $user_area, $user_state, $user_village;
@@ -152,15 +153,18 @@ class Checkout extends Component {
             $shipping->village = $this->shipping_village;
             $shipping->save();
         }
+
+
+
         if($this->paymentmode == Transaction::COD) {
             $this->makeTransaction($order->id, Transaction::PENDING);
             $this->resetCard();
         }
         elseif($this->paymentmode == Transaction::CARD) {
             try {
-                $paytabs= paypage::sendPaymentCode('all') 
-                ->sendTransaction('Auth') 
-                ->sendCart($this->card_no,$this->cvc,'CARD Description') 
+                $paytabs= paypage::sendPaymentCode('all')
+                ->sendTransaction('Auth')
+                ->sendCart($this->card_no,$this->cvc,'CARD Description')
                 ->sendCustomerDetails(
                     $this->user_firstname . ' _ ' . $this->user_lastname,
                     $this->user_email,
@@ -170,7 +174,7 @@ class Checkout extends Component {
                     $this->user_state. ' _ ' .$this->user_village,
                     $this->user_country,
                     null,
-                    null) 
+                    null)
                 ->sendShippingDetails(
                     $this->user_firstname . ' ' . $this->user_lastname,
                     $this->user_email,
@@ -190,6 +194,8 @@ class Checkout extends Component {
                     $this->thankyou = 0;
                 }*/
                 //dd ($paytabs);
+                Notification::send(Auth::guard('vendor')->user(), new \App\Notifications\NewOrder(Auth::guard('vendor')->user()));
+                
             } catch(\Exception $ex){
                 session()->flash('paytabs_error',$ex->getMessage());
                 $this->thankyou = 0;

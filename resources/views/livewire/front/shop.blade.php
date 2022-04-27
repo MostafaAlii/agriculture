@@ -24,8 +24,8 @@
         color: #ff7007 !important;
     }
 
-    
-   
+
+
 </style>
 </style>
 @else
@@ -116,36 +116,9 @@
                                 <!-- start widget -->
                                 @livewire('front.header-search-component')
                                 <!-- end widget -->
-                            
-                                @if(count(\App\Models\Category::get())>0)
-                                <!-- start widget -->
-                                <div class="widget widget--categories">
-                                    <h4 class="h6 widget-title">{{ __('website\search.Categories') }}</h4>
-                                    <ul class="list" id="blog_cates">
-                                    @foreach(\App\Models\Category::get() as $cate)
-                                            @if($cate->parent_id==Null)
-                                                <li class="list__item" id="{{$cate->id}}" onclick="javascript:search_result('products',this.id,'Category')" >
-                                                    <a class="list__item__link" >{{$cate->name}}</a>
-                                                    <span>({{count($cate->products)}})</span>
-                                                </li>
-                                                @if(count($cate->childs)>0)
-                                                    <?php
-                                                    $new = [
-                                                        'page_name'=>'products',
-                                                        'childs' => $cate->childs,
-                                                        'padding' => 20,
-                                                    ];
-                                                    ?>
-                                                    @include('livewire.front.categoryChilds', $new)
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    
-                                    </ul>
-                                </div>
-                                <!-- end widget -->
-                                @endif
-                            
+                                @livewire('front.category-component')
+                             
+
 
                                 <!-- start widget -->
                                 <div class="widget widget--price">
@@ -183,7 +156,7 @@
                                     </div>
                                 </div>
                                 <!-- end widget -->
-                                
+
 
                             @if(count(\App\Models\Tag::get())>0)
                             <!-- start widget -->
@@ -198,7 +171,7 @@
                             </div>
                             <!-- end widget -->
                             @endif
-                            
+
 
                                 <!-- start widget -->
                                 {{-- <div class="widget">
@@ -243,9 +216,9 @@
                                                             <h4 class="h6 __title"><a
                                                                     href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                             </h4>
-                                                            
+
                                                             <span class="score"><span style="width:<?php echo $product->productRate();?>%"></span></span>
-                                                            
+
                                                             <!-- <div class="rating">
                                                                 <span class="rating__item rating__item--active"><i
                                                                         class="fontello-star"></i></span>

@@ -153,7 +153,7 @@
                             <div class="py-5"></div>
 
                             <div class="row justify-content-md-between">
-                                
+
 
                                 <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                                     <div class="spacer py-5 d-md-none"></div>
@@ -167,16 +167,16 @@
                                                     </td>
                                                 </tr>
                                             </thead>
-
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                            href="{{ route('checkout') }}">{{ __('Website/home.Proceedtocheckout') }}</a>
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-
+                                            @if (Cart::instance('cart')->total() > 0 )
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <a class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                                href="{{ route('checkout') }}">{{ __('Website/home.Proceedtocheckout') }}</a>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            @endif
                                             <tbody>
                                                 <tr>
                                                     <td>{{ __('Website/home.subtotal') }}:</td>

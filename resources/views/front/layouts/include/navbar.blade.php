@@ -20,16 +20,9 @@
         <li class="li-cart">
             @livewire('front.wishlist-count-component')
         </li>
-        <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
-    {{-- @elseif (Auth::guard('web')->user())
-    <li class="li-cart">
-        @livewire('front.cart-count-component')
-    </li>
-    <li class="li-cart">
-        @livewire('front.wishlist-count-component')
-    </li>
-    <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li> --}}
-
+        @if (Cart::instance('cart')->total() > 0 )
+          <li> <a href="{{ route('checkout') }}">{{ __('website\home.checkout') }}</a> </li>
+        @endif
     @endif
         {{--  start links in navebar *************************************************************************--}}
         @check_guard
