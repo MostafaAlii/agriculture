@@ -9,6 +9,9 @@
 <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script>
     <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"></script>
+<script src="{{ asset('vendor/datatable/buttons.server-side.js')}}"></script>
+<script src="{{ asset('assets/admin/js/dataTables.buttons.min.js')}}"></script>
+
     {{-- <script src="{{ asset('assets/admin/vendors/js/material-vendors.min.js') }}"></script> --}}
     <!-- END: Page Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js')}}"></script>

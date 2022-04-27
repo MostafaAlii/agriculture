@@ -41,7 +41,8 @@ class OrchardRepository implements OrchardInterface
 
     public function data()
     {
-        $orchards = Orchard::with('farmer', 'village', 'adminDepartment','supported_side');
+        $orchards = Orchard::with('farmer', 'village', 'adminDepartment','supported_side','trees')
+            ->selectRaw('distinct orchards.*')->get();
 
         return DataTables::of($orchards)
             ->addColumn('record_select', 'dashboard.admin.orchards.data_table.record_select')
@@ -57,6 +58,9 @@ class OrchardRepository implements OrchardInterface
             })
             ->addColumn('landCategory', function (Orchard $chard) {
                 return $chard->landCategory->category_name;
+            })
+            ->addColumn('name', function ($orchards) {
+                return implode(', ', $orchards->trees->pluck('name')->toArray());
             })
             ->addColumn('adminDepartment', function (Orchard $chard) {
                 return $chard->adminDepartment->dep_name_ar;

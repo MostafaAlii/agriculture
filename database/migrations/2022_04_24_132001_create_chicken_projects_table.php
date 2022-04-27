@@ -27,7 +27,7 @@ class CreateChickenProjectsTable extends Migration
             $table->enum('food_source',['local','imported']);
             $table->enum('suse_source',['local','imported']);
             $table->enum('marketing_side',['private','govermental']);
-            $table->double('cost','8,2');
+            $table->double('cost','15,2');
             $table->string('phone');
             $table->string('email');
             $table->timestamps();

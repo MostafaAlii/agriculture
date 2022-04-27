@@ -34,6 +34,15 @@ class UnitSeeder extends Seeder
                 'en'=> 'donom',
                 'ar'=> 'دونم'
             ],
+            [
+                'en'=> 'm2',
+                'ar'=> 'متر مربع'
+            ],
+            [
+                'en'=> ' mm',
+                'ar'=> 'ميلي متر'
+            ],
+
 
         ];
         foreach($units as $u){

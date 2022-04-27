@@ -24,7 +24,7 @@ class CreateOrchardsTable extends Migration
             $table->foreignId('land_category_id')->references('id')->on('land_categories')->onDelete('cascade');
             $table->foreignId('supported_side_id')->references('id')->on('supported_sides');
             $table->foreignId('unit_id')->references('id')->on('units');
-            $table->decimal('orchard_area');
+            $table->double('orchard_area');
             $table->string('phone');
             $table->string('email');
             $table->integer('tree_count_per_orchard');

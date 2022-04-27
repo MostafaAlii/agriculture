@@ -26,8 +26,8 @@
                     <select name="category_type" class="select2 form-control">
                         <optgroup >
                             <option value="" disabled selected>{{__('Admin\lands.choose_category_type')}}</option>
-                            <option value="0">{{__('Admin\lands.agricultural')}}</option>
-                            <option value="1">{{__('Admin\lands.non_agricultural')}}</option>
+                            <option value="زراعي">{{__('Admin\lands.agricultural')}}</option>
+                            <option value="غير زراعي">{{__('Admin\lands.non_agricultural')}}</option>
 
 
                         </optgroup>

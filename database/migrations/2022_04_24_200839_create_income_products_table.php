@@ -23,8 +23,9 @@ class CreateIncomeProductsTable extends Migration
             $table->foreignId('unit_id')->references('id')->on('units');
 
             $table->foreignId('whole_product_id')->references('id')->on('whole_products')->onDelete('cascade');
-            $table->string('income_product_amount');
-            $table->decimal('income_product_price');
+            $table->double('income_product_amount','15','2');
+            $table->double('income_product_price','15','2');
+            $table->foreignId('currency_id')->references('id')->on('currencies');
 
             $table->date('income_product_date');
 

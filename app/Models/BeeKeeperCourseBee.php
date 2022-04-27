@@ -4,6 +4,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 class BeeKeeperCourseBee extends Model {
     use HasFactory;
-    protected $table = "";
-    public $timestamps = true;
+    protected $table = "bee_keeper_course_bee";
+    public $timestamps = false;
 }

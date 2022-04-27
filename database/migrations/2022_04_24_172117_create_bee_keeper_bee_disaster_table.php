@@ -17,6 +17,7 @@ class CreateBeeKeeperBeeDisasterTable extends Migration
             $table->id();
             $table->foreignId('bee_keeper_id')->references('id')->on('bee_keepers')->onDelete('cascade');
             $table->foreignId('bee_disaster_id')->references('id')->on('bee_disasters')->onDelete('cascade');
+            $table->timestamps();
 
         });
     }

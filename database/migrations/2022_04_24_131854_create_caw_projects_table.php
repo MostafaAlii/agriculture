@@ -26,7 +26,7 @@ class CreateCawProjectsTable extends Migration
             $table->integer('animal_count')->nullable();
             $table->enum('food_source',['local','outer']);
             $table->enum('marketing_side',['private','govermental']);
-            $table->double('cost','8,2');
+            $table->double('cost','15,2')->default(1);
             $table->enum('type',['caw','ship','fish']);
             $table->string('phone');
             $table->string('email');

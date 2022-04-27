@@ -116,9 +116,35 @@
 <!-- Datatable Fire -->
 <script>
     let areasTable = $('#areas-table').DataTable({
-        // dom: "tiplr",
         serverSide: true,
         processing: true,
+
+        dom: 'Bfrtip',
+        order: [[0, 'desc']],
+
+    buttons: [
+        {
+            extend: 'print',
+            className: 'btn btn-primary ml-1',
+            'text':'print'
+        },
+        {
+            extend: 'csv',
+            className: 'btn btn-info ml-1',
+            'text':'export csv'
+        },
+        {
+            extend: 'excel',
+            className: 'btn btn-success ml-1',
+            'text':'export excel'
+        },
+
+    ],
+
+
+
+
+
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },

@@ -12,6 +12,7 @@ class CreateLandCategoryTranslationsTable extends Migration
         Schema::create('land_category_translations', function (Blueprint $table) {
             $table->id();
             $table->string('category_name');
+            $table->enum('category_type',['زراعي','غير زراعي']);
             $table->string('locale');
             $table->unsignedBigInteger('land_category_id');
             $table->unique(['land_category_id', 'locale']);

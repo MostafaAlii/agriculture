@@ -23,8 +23,8 @@ class CreateOutcomeProductsTable extends Migration
             $table->foreignId('unit_id')->references('id')->on('units');
 
             $table->foreignId('whole_product_id')->references('id')->on('whole_products')->onDelete('cascade');
-            $table->string('outcome_product_amount');
-            $table->decimal('outcome_product_price');
+            $table->double('outcome_product_amount','15','2');
+            $table->double('outcome_product_price','15','2');
             $table->foreignId('currency_id')->references('id')->on('currencies');
 
             $table->date('outcome_product_date');

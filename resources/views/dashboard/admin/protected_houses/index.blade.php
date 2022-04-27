@@ -59,8 +59,11 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
+                                                    <th>{{ __('Admin/site.area') }}</th>
+                                                    <th>{{ __('Admin/site.state') }}</th>
+                                                    <th>{{ __('Admin/p_houses.village') }}</th>
+                                                    <th>{{ __('Admin/site.Department') }}</th>
                                                     <th>{{ __('Admin/site.farmer') }}</th>
-                                                    <th>{{ __('Admin/site.village') }}</th>
                                                     <th>{{ __('Admin/p_houses.status') }}</th>
                                                     <th>{{ __('Admin/p_houses.average_product_annual') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
@@ -100,8 +103,13 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+            {data: 'area', name: 'area',searchable: true, sortable: true},
+            {data: 'state', name: 'state',searchable: true, sortable: true},
+            {data: 'village', name: 'village',searchable: true, sortable: true},
+            {data: 'adminDepartment', name: 'adminDepartment',searchable: true, sortable: true},
+
+
             {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
-            {data: 'village', name: 'village.name',searchable: true, sortable: true},
             {data: 'status', name: 'status',searchable: true, sortable: true},
             {data: 'average_product_annual', name: 'average_product_annual',searchable: true, sortable: true},
 

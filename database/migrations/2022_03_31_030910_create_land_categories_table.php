@@ -11,7 +11,6 @@ class CreateLandCategoriesTable extends Migration
     {
         Schema::create('land_categories', function (Blueprint $table) {
             $table->id();
-            $table->boolean('category_type')->default('0');
             $table->timestamps();
         });
     }

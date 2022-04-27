@@ -19,7 +19,7 @@ class CreatePrecipitationsTable extends Migration
             $table->foreignId('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->foreignId('admin_department_id')->references('id')->on('admin_departments')->onDelete('cascade');
             $table->foreignId('admin_id')->references('id')->on('admins');
-            $table->decimal('precipitation_rate');
+            $table->double('precipitation_rate',15, 2);
             $table->date('date');
             $table->foreignId('unit_id')->references('id')->on('units');
 

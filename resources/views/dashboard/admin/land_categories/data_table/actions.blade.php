@@ -100,8 +100,8 @@
                                     <optgroup >
 
 
-                                        <option value="0"{{($land_category->category_type === '0') ? 'selected' : '' }} >{{__('Admin\lands.agricultural')}}</option>
-                                        <option value="1" {{ ($land_category->category_type === '1'? 'selected' : '')}}>{{__('Admin\lands.non_agricultural')}}</option>
+                                        <option value="agricultural"{{($land_category->category_type == 'زراعي') ? 'selected' : '' }} >{{__('Admin\lands.agricultural')}}</option>
+                                        <option value="non agricultural" {{ ($land_category->category_type == 'غير زراعي'? 'selected' : '')}}>{{__('Admin\lands.non_agricultural')}}</option>
 
                                     </optgroup>
                                 </select>

@@ -17,7 +17,7 @@ class CreateCropFarmerCropsTable extends Migration
             $table->id();
             $table->foreignId('farmer_crop_id')->references('id')->on('farmer_crops')->onDelete('cascade');
             $table->foreignId('crop_id')->references('id')->on('crops')->onDelete('cascade');
-            $table->string('area');
+            $table->double('area','15','2');
         });
     }
 

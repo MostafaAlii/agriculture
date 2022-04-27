@@ -27,7 +27,8 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
     public function data()
     {
-        $farmers_s = FarmerService::with('farmer', 'village', 'area','state','adminDepartment','agri_services','agrit_services','water_services')
+        $farmers_s = FarmerService::with('farmer', 'village', 'area','state','adminDepartment',
+            'agri_services','agrit_services','water_services')
 
             ->selectRaw('distinct farmer_services.*')->get();
 
@@ -53,10 +54,10 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
 
 
-            ->addColumn('name', function ($farmers_s) {
+            ->addColumn('name_a', function ($farmers_s) {
                 return implode(', ', $farmers_s->agri_services->pluck('name')->toArray());
             })
-            ->rawColumns(['name'])
+            ->rawColumns(['name_a'])
             ->addColumn('name_t', function ($farmers_s) {
                 return implode(', ', $farmers_s->agrit_services->pluck('name')->toArray());
             })

@@ -23,7 +23,7 @@ class CreateLandAreasTable extends Migration
             $table->foreignId('admin_department_id')->references('id')->on('admin_departments')->onDelete('cascade');
             $table->foreignId('land_category_id')->references('id')->on('land_categories')->onDelete('cascade');
             $table->foreignId('admin_id')->references('id')->on('admins');
-            $table->decimal('L_area');
+            $table->double('L_area',15,2);
 
             $table->foreignId('unit_id')->references('id')->on('units');
 

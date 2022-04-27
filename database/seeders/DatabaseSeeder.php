@@ -38,6 +38,38 @@ class DatabaseSeeder extends Seeder {
             SliderSeeder::class,
             UnitSeeder::class,
             supportedSideSeeder::class,
+            TreeTypeSeeder::class,
+            TreeSeeder::class,
+            LandCategorySeeder::class,
+            AdminDepartmentSeeder::class,
+            OrchardSeeder::class,
+            OrchardTreeSeeder::class,
+            ProtectedHouseSeeder::class,
+            AgriSeeder::class,
+            AgriToolSeeder::class,
+            WaterSeeder::class,
+            FarmerServicesSeeder::class,
+            FarmerServiceAgriSeeder::class,
+            FarmerServiceAgriTSeeder::class,
+            FarmerServiceWaterSeeder::class,
+            PrecipitationSeeder::class,
+            LandAreaSeeder::class,
+            CawProjectSeeder::class,
+            ChickenProjectSeeder::class,
+            CourseBeeSeeder::class,
+            BeeDisasterSeeder::class,
+            BeeKeeperSeeder::class,
+            BeeKeeperCourseBeeSeeder::class,
+            BeeKeeperBeeDisasterSeeder::class,
+            WholeProductSeeder::class,
+            OutcomeProductSeeder::class,
+            IncomeProductSeeder::class,
+            CropSeeder::class,
+            FarmerCropSeeder::class,
+            CropFarmerCropSeeder::class,
+
+
+
         ]);
 
         \App\Models\Farmer::factory(30)->create();

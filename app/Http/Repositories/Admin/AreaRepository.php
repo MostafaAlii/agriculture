@@ -29,6 +29,7 @@ class AreaRepository implements AreaInterface {
                 return $area->created_at->diffforhumans();
             })
             ->addColumn('actions', 'dashboard.admin.areas.data_table.actions')
+
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }

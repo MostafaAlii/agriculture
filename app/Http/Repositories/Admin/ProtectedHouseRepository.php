@@ -34,7 +34,7 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
 
     public function data()
     {
-        $protectedHouse = ProtectedHouse::with('farmer', 'village', 'adminDepartment');
+        $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area','state','adminDepartment');
 
         return DataTables::of($protectedHouse)
             ->addColumn('record_select', 'dashboard.admin.protected_houses.data_table.record_select')
@@ -47,6 +47,15 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
             })
             ->addColumn('village', function (ProtectedHouse $protected) {
                 return $protected->village->name;
+            })
+            ->addColumn('area', function (ProtectedHouse $protected) {
+                return $protected->area->name;
+            })
+            ->addColumn('state', function (ProtectedHouse $protected) {
+                return $protected->state->name;
+            })
+            ->addColumn('adminDepartment', function (ProtectedHouse $protected) {
+                return $protected->adminDepartment->dep_name_ar;
             })
 
 
@@ -85,8 +94,14 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
             $protected_house->state_id = $requestData['state_id'];
             $protected_house->village_id = $requestData['village_id'];
             $protected_house->admin_department_id = $requestData['admin_department_id'];
-            $protected_house->average_product_annual = $requestData['average_product_annual'];
             $protected_house->status = $requestData['status'];
+            if($requestData['status'] =="active"){
+                $protected_house->average_product_annual = $requestData['average_product_annual'];
+
+            }else{
+                $protected_house->average_product_annual = 0;
+
+            }
             $protected_house->unit_id = $requestData['unit_id'];
             $protected_house->supported_side_id = $requestData['supported_side_id'];
             $protected_house->phone = $requestData['phone'];
@@ -137,7 +152,13 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
             $protected_house->state_id = $requestData['state_id'];
             $protected_house->village_id = $requestData['village_id'];
             $protected_house->admin_department_id = $requestData['admin_department_id'];
-            $protected_house->average_product_annual = $requestData['average_product_annual'];
+            if($requestData['status'] =="active"){
+                $protected_house->average_product_annual = $requestData['average_product_annual'];
+
+            }else{
+                $protected_house->average_product_annual = 0;
+
+            }
             $protected_house->status = $requestData['status'];
             $protected_house->unit_id = $requestData['unit_id'];
             $protected_house->supported_side_id = $requestData['supported_side_id'];

@@ -15,8 +15,9 @@ class CreateBeeKeeperCourseBeeTable extends Migration
     {
         Schema::create('bee_keeper_course_bee', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bee_keeper_id')->references('id')->on('bee_keepers')->onDelete('cascade');
-            $table->foreignId('course_bee_id')->references('id')->on('course_bees')->onDelete('cascade');
+            $table->foreignId('bee_keeper_id')->references('id')->on('bee_keepers');
+            $table->foreignId('course_bee_id')->references('id')->on('course_bees');
+            $table->timestamps();
 
         });
     }

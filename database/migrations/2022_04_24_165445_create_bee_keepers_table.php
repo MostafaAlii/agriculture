@@ -24,8 +24,8 @@ class CreateBeeKeepersTable extends Migration
             $table->integer('old_beehive_count');
             $table->integer('new_beehive_count');
             $table->integer('died_beehive_count');
-            $table->decimal('annual_old_product_beehive');
-            $table->decimal('annual_new_product_beehive');
+            $table->double('annual_old_product_beehive',[15,2]);
+            $table->double('annual_new_product_beehive',[15,2]);
             $table->foreignId('unit_id')->references('id')->on('units');
             $table->foreignId('supported_side_id')->references('id')->on('supported_sides');
             $table->string('phone');

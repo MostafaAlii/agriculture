@@ -7,9 +7,9 @@ use Astrotomic\Translatable\Translatable;
 class LandCategory extends Model {
     use HasFactory,Translatable;
     protected $table = "land_categories";
-    protected $fillable = ['category_type'];
+    protected $fillable = [];
     protected $with = ['translations'];
-    public $translatedAttributes = ['category_name'];
+    public $translatedAttributes = ['category_name','category_type'];
 
     public $timestamps = true;
 }

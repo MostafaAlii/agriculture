@@ -66,6 +66,7 @@
 
                                                 <th>{{ __('Admin/orchards.orchard_area') }}</th>
                                                 <th>{{ __('Admin/orchards.tree_count_per_orchard') }}</th>
+                                                <th>{{ __('Admin/orchards.trees') }}</th>
                                                 <th>{{ __('Admin/orchards.supported_side') }}</th>
 
                                                 <th>{{ __('Admin/site.created_at') }}</th>
@@ -112,6 +113,7 @@
 
                 {data: 'orchard_area', name: 'orchard_area',searchable: true, sortable: true},
                 {data: 'tree_count_per_orchard', name: 'tree_count_per_orchard',searchable: true, sortable: true},
+                {data: 'name', name: 'name',searchable: true, sortable: true},
                 {data: 'supported_side', name: 'supported_side',searchable: true, sortable: true},
 
                 {data: 'created_at', name: 'created_at', searchable: false},
