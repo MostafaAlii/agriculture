@@ -25,8 +25,9 @@ class OrdersComponents extends Component {
         $this->username = $this->user->firstname . '-' . $this->user->lastname;
     }
     public function render() {
+        $orders = Order::where('user_id', $this->user->id);
         return view('livewire.front.user.orders-components', [
-            'orders'    =>  $this->user->orders()
+            'orders'    =>  $orders
             ->when($this->selectedStatus, function ($query){
                 $query->where('status', $this->selectedStatus);
             })
@@ -43,12 +44,16 @@ class OrdersComponents extends Component {
         $this->order = Order::with(['orderItems'])->find($id);
         $this->showOrder = true;
     }
+
     public function cancelOrder($id) {
-    $order = Order::find($id);
-	$order->status = "canceled";
-	$order->canceled_date = DB::raw('CURRENT_DATE');
-	$order->save();
-	session()->flash('order_message','Order has been canceled!');
+        $order = Order::find($id);
+	    $order->status = "canceled";
+	    $order->canceled_date = Carbon::now()->format('Y-m-d');
+        /*DB::table('products')
+            ->whereId($order->orderItems->product_id)
+            ->decrementQty($order->orderItems->quantity);*/
+	    $order->save();
+	    session()->flash('order_message','Order has been canceled!');
     }
 
 }

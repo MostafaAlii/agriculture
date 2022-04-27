@@ -6,10 +6,12 @@ use App\Models\Shipping;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Paytabscom\Laravel_paytabs\Facades\paypage as paypage;
 use Illuminate\Support\Facades\Notification;
+use Paytabscom\Laravel_paytabs\Facades\paypage as paypage;
+
 class Checkout extends Component {
     public $cart_subtotal, $cart_tax, $cart_total, $cart_discount;
     public $user_id, $user_address1, $user_address2, $user_email, $user_firstname,$user_lastname, $user_mobile;
@@ -119,11 +121,15 @@ class Checkout extends Component {
         foreach(Cart::instance('cart')->content() as $item) {
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
-                $orderItem->order_id = $order->id;
-                $orderItem->price = $item->price;
-                $orderItem->quantity = $item->qty;
-                $orderItem->save();
+            $orderItem->order_id = $order->id;
+            $orderItem->price = $item->price;
+            $orderItem->quantity = $item->qty;
+            DB::table('products')
+            ->whereId($orderItem->product_id)
+            ->decrement('qty', $orderItem->quantity);
+            $orderItem->save();
         }
+        
         if($this->ship_to_different) {
             $this->validate([
                 'shipping_firstname'             =>           'required|string|regex:/^[A-Za-z-أ-ي]+$/u',

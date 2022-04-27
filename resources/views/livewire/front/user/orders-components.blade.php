@@ -1,4 +1,4 @@
-<div x-data="{ showOrder: @entangle('showOrder') }">
+<div>
     <!-- Start d-flex justify-content-between -->
     <div class="d-flex justify-content-between align-content-center mb-2">
         <!-- Start d-flex -->
@@ -84,9 +84,9 @@
                         <td>{!! $order->getStatus() !!}</td>
                         <td>{{ $order->created_at->format('d-m-Y') }}</td>
                         <td class="text-right">
-                            <button type="button" wire:click="displayOrder('{{ $order->id }}')" x-on:click="showOrder = true" class="btn btn-success btn-sm">
+                            <a href="{{ route('vendor.orderDetais', ['order_id'=>encrypt($order->id)]) }}" class="btn btn-success btn-sm">
                                 <i class="fa fa-eye"> </i> 
-                            </button>
+                            </a>
                             @if($order->status == Order::ORDERED)
                                 <button class="btn btn-danger btn-sm" type="button" wire:click="cancelOrder('{{ $order->id }}')">
                                     <i class="fontello-cancel"> </i>
@@ -104,104 +104,6 @@
                 </tbody>
             </table>
         </div>
-            <!-- Start Order Details -->
-            <div x-show="showOrder" x-on:click.away="showOrder = false" class="border rounded shadow p-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h5>Order Details</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table">
-                                    <th>Order Ref</th>
-                                    <td>{{ $order->referance_id }}</td>
-                                    <th>Order Date</th>
-                                    <td>{{ $order->created_at->format('d-m-Y') }}</td>
-                                    <th>Order Status</th>
-                                    <td>{!! $order->getStatus() !!}</td>
-                                    @if($order->status == Order::DELIVERED)
-                                        <th>Delivered Date</th>
-                                        <td>{{ $order->delivered_date }}</td>
-                                    @elseif($order->status == Order::CANCELED)
-                                        <th>Canceled Date</th>
-                                        <td>{{ $order->canceled_date }}</td>
-                                    @endif
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="table-responsive mb-4">
-                    <table class="table">
-                        <thead class="bg-light">
-                            <tr>
-                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">Product</strong></th>
-                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">Price</strong></th>
-                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">Quantity</strong></th>
-                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">Total</strong></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($order->orderItems as $item)
-                                <tr>
-                                    <td>
-                                        @if($item->product->image->filename)
-                                            <img src="{{ asset('Dashboard/img/products/'. $item->product->image->filename) }}" style="width: 75px;" alt="">
-                                        @else
-                                            <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}" style="width: 75px;" alt="">
-                                        @endif
-                                        <a href="{{ route('product_details', encrypt($item->product->id)) }}">
-                                            {{ $item->product->name }}
-                                        </a>
-                                        
-                                    </td>
-                                    <td>{{ $order->currency() . ' ' . number_format($item->price, 2) }}</td>
-                                    <td>{{ $item->quantity }}</td>
-                                    <td>{{ $order->currency() . ' ' . number_format($item->product->price * $item->quantity, 2) }}</td>
-                                </tr>
-                            @endforeach
-                            <tr>
-                                <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
-                                <td>{{ $order->currency() . ' ' . number_format($order->subtotal, 2) }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-right"><strong>Discount</strong></td>
-                                <td>{{ $order->currency() . ' ' . number_format($order->discount, 2) }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-right"><strong>Tax</strong></td>
-                                <td>{{ $order->currency() . ' ' . number_format($order->tax, 2) }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" class="text-right"><strong>Amount</strong></td>
-                                <td>{{ $order->currency() . ' ' . number_format($order->total, 2) }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <h2 class="h5 text-uppercase">Transactions</h2>
-                <div class="table-responsive mb-4">
-                    <table class="table bg-light">
-                        <tbody>
-                            <tr>
-                                <th>Transaction Mode</th>
-                                <td>{!! $order->transaction->getTransaction() !!}</td>
-                            </tr>
-                            <tr>
-                                <th>Transaction Date</th>
-                                <td>{{$order->transaction->created_at->format('d-m-Y')}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <!-- End Order Details -->
     </div>
     <!-- Start Pagination -->
     <div class="row mt-4">

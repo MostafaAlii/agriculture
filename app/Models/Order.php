@@ -11,6 +11,10 @@ class Order extends Model {
     protected $guarded = [];
     public $timestamps = true;
     const ORDERED = 'ordered', DELIVERED = 'delivered', CANCELED = 'canceled', CURRENCY = 'USD';
+    protected $casts = [
+        'delivered_date' => 'datetime:Y/m/d',
+        'canceled_date' => 'datetime:Y/m/d',
+    ];
 
     public function currency(): string {
         return $this->currency == 'USD' ? '$' : $this->currency;
