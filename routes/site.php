@@ -2,16 +2,17 @@
 use App\Http\Livewire;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\front\FarmerAllDataController;
-use App\Http\Controllers\front\RatingsController;
-use App\Http\Controllers\front\PaymentMethodController;
-use App\Http\Controllers\front\CommentsController;
 use App\Http\Controllers\front\SearchController;
-use App\Http\Controllers\Dashboard\Admin\ProfileController;
-use App\Http\Controllers\front\vendor\VendorController;
+use App\Http\Controllers\front\RatingsController;
+use App\Http\Controllers\front\CommentsController;
 use App\Http\Livewire\Front\User\ThankYouComponent;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\front\user\UserEditProfile;
+use App\Http\Controllers\front\FarmerAllDataController;
+use App\Http\Controllers\front\PaymentMethodController;
+use App\Http\Controllers\front\vendor\VendorController;
+use App\Http\Controllers\Dashboard\Admin\ProfileController;
+use App\Http\Livewire\Front\User\UserOrderDetailsComponent;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
     [
@@ -63,6 +64,7 @@ Route::group(
             Route::group(['prefix' => 'user'], function () {
                 route::get('/',[VendorController::class, 'index'])->name('vendor.dashboard');
                 Route::get('/myOrders',[VendorController::class, 'orders'])->name('vendor.orders');
+                Route::get('/myOrders/Details/{order_id}',UserOrderDetailsComponent::class)->name('vendor.orderDetais');
                 /************************************************************************************************** */
                 route::get('/ownprofile',Livewire\front\User\UserProfile::class)->name('user.ownprofile'); //user profile
                 route::get('/ownprofile/edit',Livewire\front\User\UserEditProfileComponent::class)->name('user.editownprofile'); //user Edit profile

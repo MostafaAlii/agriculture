@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Livewire\Front;
+
+use App\Models\OrderItem;
 use Livewire\Component;
 use App\Models\ProductCoupon;
 use Gloudemans\Shoppingcart\Facades\Cart;
