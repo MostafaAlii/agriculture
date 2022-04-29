@@ -1,16 +1,25 @@
 
-<script src="{{ asset('assets/admin/js/jquery-ui-1.13.1/jquery-ui.min.js')}}"></script>
+<script src="{{ asset('assets/admin/js/jquery-ui-1.13.1/jquery-ui.js')}}"></script>
+{{--<script src="{{ asset('assets/admin/js/jquery.multi-select.js')}}"></script>--}}
 
 
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script src="{{ asset('assets/admin/js/myFun/myFunction.js')}}"></script>
     <script src="{{ asset('assets/admin/js/jquery.repeater.js')}}"></script>
 
+<script src="{{ asset('assets/admin/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('assets/admin/vendors/js/tables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('assets/admin/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('assets/admin/js/dataTables.buttons.min.js')}}"></script>
+
+
+<script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script>
 <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script>
     <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"></script>
-<script src="{{ asset('vendor/datatable/buttons.server-side.js')}}"></script>
-<script src="{{ asset('assets/admin/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ asset('vendor/datatable/buttons.server-side.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/bootstrap-multiselect.min.js')}}"></script>
 
     {{-- <script src="{{ asset('assets/admin/vendors/js/material-vendors.min.js') }}"></script> --}}
     <!-- END: Page Vendor JS-->
@@ -38,6 +47,7 @@
     <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/admin/jstree/jstree.wholerow.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/admin/jstree/jstree.checkbox.js')}}" type="text/javascript"></script>
+
      @toastr_js
     @toastr_render
     {{-- image preview --}}

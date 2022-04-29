@@ -224,7 +224,8 @@
                 <!-- Start Admin Department Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">list</i>
+                        <i class="icon-list info float-left"></i>
+
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\site.admin_departments') }}</span>
                     </a>
@@ -246,13 +247,13 @@
                 {{--start orchard--}}
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">adjust</i>
+                        <i class="fas fa-tree  success"></i>
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\orchards.orchards_settings') }}</span>
                     </a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="{{ route('LandCategories.index') }}"><i
-                                        class="material-icons"></i><span
+                        <li><a class="menu-item" href="{{ route('LandCategories.index') }}">
+                                                             <span
                                         data-i18n="Vertical">{{ __('Admin\site.land_category') }}</span></a>
 
                         </li>
@@ -278,7 +279,7 @@
                 <!-- start protected house Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="fas fa-warehouse " style="color:deeppink;"></i>
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\p_houses.protectedHousePageTitle') }}</span>
                     </a>
@@ -295,7 +296,7 @@
                 <!-- start Agriculture Services house Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">list</i>
+                        <i class="fas fa-tractor" style="color:yellow;"></i>
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\services.farmer_agriculture_services_setting') }}</span>
                     </a>
@@ -327,7 +328,7 @@
                 <!-- start precipitation  Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="fas fa-cloud-showers-heavy" style="color:grey"></i>                                                {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\precipitations.precipitationsPageTitle') }}</span>
                     </a>
@@ -344,7 +345,7 @@
                 <!-- start Land Area  Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="fas fa-adjust" style="color: bisque"></i>
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\land_areas.landAreaPageTitle') }}</span>
                     </a>
@@ -361,7 +362,7 @@
                 <!-- start Land Area  Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="fas fa-crop-simple " style="color:green;"></i>
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\crops.farmerCropsPageTitle_and_setting') }}</span>
                     </a>
@@ -385,7 +386,7 @@
                 <!-- start Animals Chicken Projecta Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="fas fa-fish" style="color:yellow;"></i>
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\animals.animals_chiken_fish_PageTitle') }}</span>
                     </a>
@@ -409,7 +410,7 @@
                 <!-- start beekeepers & settings Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="fab fa-forumbee" style="color:yellow"></i>
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\bees.beekeepers_and_settings') }}</span>
                     </a>
@@ -438,7 +439,10 @@
                 <!-- start WholeSale & settings Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">library_books</i>
+                        <i class="fas fa-plane-arrival" style="color:blue;"></i>-
+                        <i class="fas fa-plane-departure" style="color:blue;"></i>
+
+
                         <span class="menu-title"
                               data-i18n="Categories">{{ __('Admin\income_products.wholeSale_and_product') }}</span>
                     </a>

@@ -3,6 +3,7 @@ return [
     'orchards_and_settings'=>'البساتين و إعداداتها',
     'treeType'=>'أنواع الأشجار',
     'trees'=>'الأشجار',
+    'orchards'=>'البساتين',
 
     'action' =>'العمليات',
     'farmer_inf' =>'معلومات الفلاح',

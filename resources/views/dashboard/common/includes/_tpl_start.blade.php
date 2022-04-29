@@ -23,7 +23,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/file-uploaders/dropzone.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/classic.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/classic.date.css')}}">
-    @if(app()->getLocale()=='ar')
+
+@if(app()->getLocale()=='ar')
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
@@ -55,7 +56,9 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
-        <!-- END: Vendor CSS-->
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
+
+            <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material.css') }}"> --}}
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap.css')}}">
@@ -76,6 +79,15 @@
         {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
     @endif
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/select2-bootstrap4.min.css') }}">
+    <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/multiple-select.min.js')}}"></script>
+    {{--<script src="{{ asset('assets/admin/js/jquery-ui-1.13.1/jquery-ui.js')}}"></script>--}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/multiple-select.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/all.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/fontawesome.min,') }}">
+
+    <script src="{{ asset('assets/admin/js/all.min.js') }}"></script>
+
 
     {{--noty--}}
     <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}">
@@ -86,12 +98,17 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/jstree/themes/default/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/pages/user-feed.css') }}">
-
     <!-- END: Page CSS-->
     @toastr_css
     <!-- BEGIN: Custom CSS-->
-    <!-- END: Custom CSS-->
-    <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/multiple-select.css') }}">
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--}}
+
+
+
+
 
     @yield('css')
 

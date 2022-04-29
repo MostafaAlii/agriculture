@@ -15,7 +15,7 @@ return [
     'provience_name'                                  =>                  'Related Province',
     'state_name'                                     =>                  'States Related',
     'cant_delete'                             =>                  'Sorry ! There are States Related with Area Must be Deleted First',
-
+    'choose_columns'=>'Choose Columns u want Display',
     'cancel'=>'Cancel',
     'delete'=>'Delete',
     'home'=>' Main Home',
