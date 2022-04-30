@@ -182,15 +182,17 @@
 
 						<div class="col-12 col-lg-6">
 							<div class="footer__item">
-								<form class="form--horizontal no-gutters" action="#">
+                                <form class="form--horizontal no-gutters" method="post"  id="ajaxform">
+                                    @csrf
+                                    @method('post')
 									<div class="col-sm-6">
 										<div class="input-wrp">
-											<input class="textfield" name="s" type="text" placeholder="Your E-mail" />
+											<input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }}" />
 										</div>
 									</div>
 
 									<div class="col-sm-6">
-										<button class="custom-btn custom-btn--medium custom-btn--style-3 wide" type="submit" role="button">subscribe</button>
+										<button class="custom-btn custom-btn--medium custom-btn--style-3 wide save-data" type="submit" role="button">{{ __('Website/home.sub') }}</button>
 									</div>
 								</form>
 							</div>

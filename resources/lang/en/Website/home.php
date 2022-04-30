@@ -72,4 +72,5 @@ return [
    'smsreset'=>'You can reset password from bellow link',
    'resetpass'=>'Reset Password',
    'sendresetsms'=>'A reset link has been sent to your email address',
+   'sub'=>'Subscribe',
 ];

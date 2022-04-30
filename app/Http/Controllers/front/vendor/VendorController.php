@@ -3,6 +3,7 @@ namespace App\Http\Controllers\front\vendor;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Data;
 
 class VendorController extends Controller {
     public function index() {
@@ -12,4 +13,5 @@ class VendorController extends Controller {
     public function orders() {
         return view('front.client.myOrders');
     }
+ 
 }
