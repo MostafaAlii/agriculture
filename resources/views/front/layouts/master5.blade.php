@@ -183,7 +183,7 @@
 
 						<div class="col-12 col-lg-6">
 							<div class="footer__item">
-                                <form class="form--horizontal no-gutters" method="post"  id="ajaxform">
+                                <form class="form--horizontal no-gutters" method="post"  id="ajaxform" autocomplete="off">
                                     @csrf
                                     @method('post')
 									<div class="col-sm-6">

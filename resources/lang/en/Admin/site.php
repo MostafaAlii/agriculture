@@ -160,4 +160,6 @@ return [
     'farmerproducts'=>'Farmer Products',
     'farmerproductdetails'=>'Product Details',
     'sub'=>'Subscribtion',
+    'emails_success'=>'Emails have been send successfully',
+    'sendmails'=>'Send Emails',
 ];
