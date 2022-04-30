@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\TagController;
+use App\Http\Controllers\Dashboard\Admin\SubscribeController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
 use App\Http\Controllers\Dashboard\Admin\TreeController;
@@ -79,6 +80,9 @@ Route::group(
             /********************************* Start Admins Dashboard Routes ************************************/
             Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
             /********************************* End Admins Pages Routes ************************************/
+            Route::get('/subscribe', [SubscribeController::class,'data'])->name('subscribe');
+            Route::delete('/subscribe.destroy/{id}', [SubscribeController::class,'destroy'])->name('subscribe.destroy');
+            Route::delete('/subscribe/bulk_delete/{ids}', [SubscribeController::class,'bulkDelete'])->name('subscribe.bulk_delete');
             /********************************* Start Admin & Employee Routes ************************************/
             Route::resource('Admins', AdminController::class)->except(['show']);
             Route::get('/Admins/data', [AdminController::class,'data'])->name('admins.data');
@@ -389,5 +393,7 @@ Route::group(
                 Route::get('Orders/showOrder/{id}', [OrdersController::class,'showOrder'])->name('order.show');
                 Route::get('Orders/printOrder/{id}', [OrdersController::class,'printOrder'])->name('order.print');
                 /********************************* End Orders **********************************/
+
+
         });
     });

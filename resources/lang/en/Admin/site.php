@@ -159,4 +159,5 @@ return [
     'ordercount'=>'Orders Count',
     'farmerproducts'=>'Farmer Products',
     'farmerproductdetails'=>'Product Details',
+    'sub'=>'Subscribtion',
 ];
