@@ -50,11 +50,11 @@
                                     {{-- <a href="{{ route('subs.create') }}" class="btn btn-primary btn-sm mb-3">
                                         <i class="material-icons">add_box</i> {{ __('Admin/site.create') }}
                                     </a> --}}
-                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal"
+                                    {{-- <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal"
                                         data-target="#addsub">
                                         <i class="material-icons">add_box</i>
                                         {{ __('Admin/site.create') }}
-                                    </button>
+                                    </button> --}}
                                     <button type="button" class="btn btn-warning mb-3" id="btn_delete_all"
                                         data-toggle="modal" data-target="#bulkdelete">
                                         <i class="fa fa-trash"></i>

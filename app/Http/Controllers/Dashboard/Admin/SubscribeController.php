@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class SubscribeController extends Controller
 {
-    // public function index()
-    // {
-    //    return 'hello';
-
-    // }
     public function data(Request $request) {
         if(request()->ajax()) {
             return datatables()->of(Data::select('*'))
@@ -23,10 +18,6 @@ class SubscribeController extends Controller
             ->editColumn('created_at', function (Data $data) {
                 return $data->created_at->format('Y-m-d');
             })
-
-            // ->addColumn('actions', function (Data $data) {
-            //     return view('dashboard.admin.Datas.data_table.actions', compact('Data'));
-            // })
             ->addColumn('actions', 'dashboard.admin.Dates.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
