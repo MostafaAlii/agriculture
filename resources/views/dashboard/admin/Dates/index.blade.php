@@ -47,14 +47,9 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    {{-- <a href="{{ route('subs.create') }}" class="btn btn-primary btn-sm mb-3">
-                                        <i class="material-icons">add_box</i> {{ __('Admin/site.create') }}
-                                    </a> --}}
-                                    {{-- <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal"
-                                        data-target="#addsub">
-                                        <i class="material-icons">add_box</i>
-                                        {{ __('Admin/site.create') }}
-                                    </button> --}}
+                                    <a href="{{ route('subscribe.sendmails') }}" class="btn btn-primary btn-sm mb-3">
+                                        <i class="material-icons">add_box</i> {{ __('Admin/site.sendmails') }}
+                                    </a>
                                     <button type="button" class="btn btn-warning mb-3" id="btn_delete_all"
                                         data-toggle="modal" data-target="#bulkdelete">
                                         <i class="fa fa-trash"></i>
@@ -82,8 +77,6 @@
                     </div>
                 </div>
             </section>
-            {{-- @include('dashboard.admin.subs.btn.add') --}}
-            {{-- @include('dashboard.admin.subs.btn.update') --}}
         </div>
     </div>
     <!-- END: Content-->

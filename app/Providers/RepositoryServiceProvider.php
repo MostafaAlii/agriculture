@@ -149,6 +149,9 @@ use App\Http\Repositories\Admin\OutcomeProductRepository;
 use App\Http\Interfaces\Admin\IncomeProductInterface;
 use App\Http\Repositories\Admin\IncomeProductRepository;
 
+use App\Http\Interfaces\Admin\SubscribeInterface;
+use App\Http\Repositories\Admin\SubscribeRepository;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register() {
@@ -211,6 +214,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductCouponInterface::class, ProductCouponRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
+        
+        $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(RatingInterface::class, RatingRepository::class);
@@ -218,6 +223,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FarmerAllDataInterface::class, FarmerAllDataRepository::class);
         $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
         $this->app->bind(PaymentInterface::class, PaymentRepository::class);
+
     }
 
     public function boot()
