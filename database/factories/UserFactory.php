@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 use App\Models\Area;
+use App\Models\AdminDepartment;
+
 use App\Models\Country;
 use App\Models\Department;
 use App\Models\Province;
@@ -34,6 +36,8 @@ class UserFactory extends Factory
             'state_id'      => $this->faker->numberBetween(1, State::count()),
             'village_id'    => $this->faker->numberBetween(1, Village::count()),
             'department_id'  => $this->faker->numberBetween(1, Department::count()),
+            'admin_department_id'    => $this->faker->numberBetween(1, AdminDepartment::count()),
+
             'birthdate'     => $this->faker->date,
             'remember_token' => Str::random(10),
         ];

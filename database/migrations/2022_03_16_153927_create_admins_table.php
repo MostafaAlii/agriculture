@@ -22,6 +22,9 @@ class CreateAdminsTable extends Migration {
             $table->foreignId('state_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('village_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('department_id')->default('1')->constrained()->cascadeOnDelete();
+            $table->foreignId('admin_department_id')->constrained()->cascadeOnDelete();
+
+
             $table->date('birthdate')->nullable();
 
             $table->rememberToken();

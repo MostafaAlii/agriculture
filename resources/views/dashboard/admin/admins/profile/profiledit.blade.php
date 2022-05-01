@@ -306,41 +306,17 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/admin.admin_department') }}</label>
+                                                    <label class="">{{__('Admin\admin.admin_departments')}}</label>
+                                                    <hr>
+                                                    <div id="jstree"></div>
+                                                    <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
+
+                                                </div>
 
                                             </div>
-                                            {{-- <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Website</label>
-                                                    <input type="text" class="form-control" placeholder="Website address">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Favourite Music</label>
-                                                    <select class="form-control" id="users-music-select2" multiple="multiple">
-                                                        <option value="Rock">Rock</option>
-                                                        <option value="Jazz" selected>Jazz</option>
-                                                        <option value="Disco">Disco</option>
-                                                        <option value="Pop">Pop</option>
-                                                        <option value="Techno">Techno</option>
-                                                        <option value="Folk" selected>Folk</option>
-                                                        <option value="Hip hop">Hip hop</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Favourite movies</label>
-                                                    <select class="form-control" id="users-movies-select2" multiple="multiple">
-                                                        <option value="The Dark Knight" selected>The Dark Knight
-                                                        </option>
-                                                        <option value="Harry Potter" selected>Harry Potter</option>
-                                                        <option value="Airplane!">Airplane!</option>
-                                                        <option value="Perl Harbour">Perl Harbour</option>
-                                                        <option value="Spider Man">Spider Man</option>
-                                                        <option value="Iron Man" selected>Iron Man</option>
-                                                        <option value="Avatar">Avatar</option>
-                                                    </select>
-                                                </div>
-                                            </div> --}}
+
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>
@@ -660,5 +636,39 @@
                }
            });
        });
+</script>
+<script  type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#jstree').jstree({
+            "core" : {
+                'data' :   {!! load_dep(old('admin_department_id')) !!},
+                "themes" : {
+                    "variant" : "large"
+                }
+            },
+            "checkbox" : {
+                "keep_selected_style" : false
+            },
+            "plugins" : [ "wholerow",  ]
+        });
+    });
+
+
+    $('#jstree')
+    // listen for event
+        .on('changed.jstree', function (e, data) {
+            var i, j,r = [];
+            var name=[];
+            for(i=0,j=data.selected.length;i<j;i++){
+                r.push(data.instance.get_node(data.selected[i]).id);
+
+            }
+            $('.admin_department_id').val(r.join(', '));
+
+
+
+        });
 </script>
 @endsection

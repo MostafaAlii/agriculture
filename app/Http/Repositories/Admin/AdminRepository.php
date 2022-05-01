@@ -52,22 +52,23 @@ class AdminRepository implements AdminInterface{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             $requestData['type'] = $request->type;
-            $requestData['latitude']=$request->latitude;
-            $requestData['longitude']= $request->longitude;
+//            $requestData['latitude']=$request->latitude;
+//            $requestData['longitude']= $request->longitude;
             Admin::create($requestData);
             $admin = Admin::latest()->first();
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
 
             // $admin = Admin::latest()->first();
-            Notification::send($admin, new \App\Notifications\NewAdmin($admin));
+//         Notification::send($admin, new \App\Notifications\NewAdmin($admin));
 
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Admins.index');
          } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->error(__('Admin/site.sorry'));
-            return redirect()->back();
+//            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+//            return redirect()->back();
          }
     }
 

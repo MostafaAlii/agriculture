@@ -175,6 +175,8 @@
                 for(var i=0;i<selectedItem.length;i++){
                     var s = selectedItem[i];
                     my_table.column(s).visible(1);
+
+
                 }
                 $('#areas_table').css('width','100%');
                 },

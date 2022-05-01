@@ -16,6 +16,7 @@ class AdminRequest extends FormRequest {
             'email'        => 'required|email|unique:admins',
             'password'     => 'required|confirmed|min:3|max:10',
             'type'         => 'required|in:admin,employee',
+            'admin_department_id'=>'required',
             // "image"        => 'image|mimes:jpeg,png|max:4096',
         ];
 
@@ -36,6 +37,8 @@ class AdminRequest extends FormRequest {
 
     public function messages() {
         return [
+            'admin_department_id.required'   => trans('Admin\validation.required'),
+
             'firstname.required'   => trans('Admin\validation.required'),
             'lastname.required'    => trans('Admin\validation.required'),
             'email.required'       => trans('Admin\validation.required'),

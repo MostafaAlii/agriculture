@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Village extends Model {
     use HasFactory,Translatable;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
+
     protected $table = "villages";
     protected $guarded = [];
     protected $with = ['translations'];
@@ -16,6 +18,17 @@ class Village extends Model {
 
     public function state(): BelongsTo {
         return $this->belongsTo(State::class);
+    }
+
+
+    public function area() {
+        return $this->belongsToThrough(Area::class,State::class);
+    }
+    public function province() {
+        return $this->belongsToThrough(Province::class,[Area::class,State::class]);
+    }
+    public function country() {
+        return $this->belongsToThrough(Country::class,[Province::class,Area::class,State::class]);
     }
 
     public function farmers(){

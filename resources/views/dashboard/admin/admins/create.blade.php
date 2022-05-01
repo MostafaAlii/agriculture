@@ -58,7 +58,7 @@
                                         @method('post')
                                         <div class="form-body">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
                                                         <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required>
@@ -68,7 +68,7 @@
                                                         <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
                                                         <input type="email" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/site.email') }}" name="email" value="{{ old('email') }}" required>
@@ -78,10 +78,7 @@
                                                         <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone') }}" required>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     {{--password--}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
@@ -93,8 +90,24 @@
                                                         <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/admin.admin_department') }}</label>
+                                                    <label class="">{{__('Admin\admin.admin_departments')}}</label>
+                                                    <hr>
+                                                    <div id="jstree"></div>
+                                                    <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-md-4">
                                                     <fieldset class="form-group">
+                                                        <label>{{ __('Admin/site.user-type') }}<span class="text-danger">*</span></label>
+
                                                         <select class="custom-select" id="customSelect" name="type">
                                                             <option selected>{{ __('Admin/site.select') }}</option>
                                                             <option value="admin">{{ __('Admin/site.admins') }}</option>
@@ -102,15 +115,14 @@
                                                         </select>
                                                     </fieldset>
                                                  </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
+
+                                                <div class="col-lg-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
                                                         <input class="form-control img" name="image"  type="file" accept="image/*" required >
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     <img src="{{ asset('assets/admin/images/avatar.jpg') }}" class="img-thumbnail img-preview" width="100" alt="">
                                                 </div>
                                             </div>
@@ -159,6 +171,41 @@
             }
 
         };
+    </script>
+
+    <script  type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#jstree').jstree({
+                "core" : {
+                    'data' :   {!! load_dep(old('admin_department_id')) !!},
+                    "themes" : {
+                        "variant" : "large"
+                    }
+                },
+                "checkbox" : {
+                    "keep_selected_style" : false
+                },
+                "plugins" : [ "wholerow",  ]
+            });
+        });
+
+
+        $('#jstree')
+        // listen for event
+            .on('changed.jstree', function (e, data) {
+                var i, j,r = [];
+                var name=[];
+                for(i=0,j=data.selected.length;i<j;i++){
+                    r.push(data.instance.get_node(data.selected[i]).id);
+
+                }
+                $('.admin_department_id').val(r.join(', '));
+
+
+
+            });
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

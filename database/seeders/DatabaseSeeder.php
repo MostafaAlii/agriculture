@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder {
             DepartmentSeeder::class,
             FarmerTableSeeder::class,
             PaymentMethodSeeder::class,
+            AdminDepartmentSeeder::class,
+
             AdminTableSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
@@ -41,7 +43,6 @@ class DatabaseSeeder extends Seeder {
             TreeTypeSeeder::class,
             TreeSeeder::class,
             LandCategorySeeder::class,
-            AdminDepartmentSeeder::class,
             OrchardSeeder::class,
             OrchardTreeSeeder::class,
             ProtectedHouseSeeder::class,
