@@ -154,4 +154,7 @@ return [
     'ordercount'=>'عددالطلبات',
     'farmerproducts'=>'منتجات المزارع',
     'farmerproductdetails'=>'تفاصيل المنتج',
+    'sub'=>'الاشتراكات',
+    'emails_success'=>'تم ارسال الايميلات بنجاح',
+    'sendmails'=>'ارسال ايميلات',
 ];

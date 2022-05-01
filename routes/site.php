@@ -7,6 +7,7 @@ use App\Http\Controllers\front\RatingsController;
 use App\Http\Controllers\front\CommentsController;
 use App\Http\Livewire\Front\User\ThankYouComponent;
 use App\Http\Controllers\front\user\UserEditProfile;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\front\FarmerAllDataController;
 use App\Http\Controllers\front\PaymentMethodController;
 use App\Http\Controllers\front\vendor\VendorController;
@@ -33,7 +34,8 @@ Route::group(
 
         route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                         // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
-
+        
+        Route::post('/sendmails',[GuestController::class, 'sendmails'])->name('guest.sendmails'); // guest send mail ****************
         //--------------------------------search with tag-------------------------------------------------------
         Route::get('/blogs.search/{blog_id}/{type}',[SearchController::class,'search'])->name('blogs.search'); // blog details
         Route::get('/blogs.search2/{text}',[SearchController::class,'search2'])->name('blogs.search2'); // blog details

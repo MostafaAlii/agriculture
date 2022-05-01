@@ -20,10 +20,27 @@ integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRk
 
 {{-- bootstrap 4 ************************ --}}
 
-<script>window.jQuery || document.write('<script src="frontassets/js/jquery-2.2.4.min.js"></script>')</script>
+<script>
+     window.jQuery || document.write('<script src="frontassets/js/jquery-2.2.4.min.js"></script>')
+</script>
+     {{-- window.jQuery || document.write('<script src="`${asset('frontassets/js/jquery-2.2.4.min.js')}`"></script>') --}}
 
 {{-- <script type="text/javascript" src="{{ asset('frontassets/js/jquery-2.2.4.min.js') }}"></script> --}}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if(session('status'))
+    <script>
+          swal("{{ session('status') }}");
+    </script>
+@endif
+@if(session('error'))
+    <script>
+          swal("{{ session('error') }}");
+    </script>
+@endif
+
 <script type="text/javascript" src="{{ asset('frontassets/js/main.min.js') }}"></script>
+
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
@@ -44,11 +61,34 @@ integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amn
 
 <script src="{{ URL::asset('/js/search.js') }}"></script>
 <script src="{{ URL::asset('/js/myFun.js') }}"></script>
+
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+    $(document).ready(function() {
+        $(".save-data").click(function(e) {
+            e.preventDefault();
+            let email = $("input[name=email]").val();
+            console.log(email);
+            $.ajax({
+                method: "POST",
+                url: "/sendmails",
+                data: {
+                    email: email,
+                },
+                success: function(response) {
+                    swal(response.status);
+                    $("#ajaxform")[0].reset();
+                },
+                error: function(response) {
+                    swal(response.error);
+                }
+            });
+        });
     });
 </script>
 @livewireScripts

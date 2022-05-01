@@ -90,7 +90,7 @@
 			<!-- end main -->
 
 			<!-- start footer -->
-			<footer id="footer" class="footer--style-1">
+			{{-- <footer id="footer" class="footer--style-1">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-sm-auto">
@@ -135,12 +135,15 @@
 							<div class="footer__item">
 								<h5 class="h6">Get a newslatter</h5>
 
-								<form class="form--horizontal" action="#">
-									<div class="input-wrp">
-										<input class="textfield" name="s" type="text" placeholder="Your E-mail" />
-									</div>
-
-									<button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">subscribe</button>
+                                <form class="form--horizontal" method="post"  id="ajaxform">
+                                    @csrf
+                                    @method('post')
+                                    <div class="input-wrp">
+                                        <input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }}" />
+                                    </div>
+                                    <button class="custom-btn custom-btn--medium custom-btn--style-1 save-data" type="submit" role="button">
+                                        {{ __('Website/home.sub') }}
+                                    </button>
 								</form>
 							</div>
 						</div>
@@ -169,7 +172,7 @@
 						</div>
 					</div>
 				</div>
-			</footer>
+			</footer> --}}
 			<!-- end footer -->
 		</div>
 

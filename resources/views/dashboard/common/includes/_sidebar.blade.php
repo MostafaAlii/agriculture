@@ -591,6 +591,15 @@
                         <!-- End Orders -->
                     </ul>
                 </li>
+                <li class=" nav-item">
+                        <li>
+                            <a class="menu-item" href="{{ route('subscribe') }}">
+                                <i class="fas fa-dragon"></i>
+                                <span data-i18n="Options"> {{ trans('Admin/site.sub') }}</span>
+                            </a>
+                        </li>
+                        <!-- End Orders -->
+                </li>
                 <!-- End Orders Dropdown Menu -->
             </ul>
         </div>
