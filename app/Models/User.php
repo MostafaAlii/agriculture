@@ -43,7 +43,11 @@ class User extends Authenticatable {
     }
     public function orders(): HasMany {
       return $this->hasMany(Order::class);
-  }
+   }
+
+   /*public function subscriptions(): HasMany {
+      return $this->hasMany(Subscription::class);
+   }*/
    /*************************************************************************************** */
     // Get Vendor Rataing Doing For Product التقييمات الى عملها اليوزر
     public function ratedProducts(): MorphToMany {
