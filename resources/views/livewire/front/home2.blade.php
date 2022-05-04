@@ -277,6 +277,7 @@
         </section>
         <!-- end section -->
 
+        @if(count($home_category)>0)
         <!-- start section -->
         <section class="section section--no-pt section--no-pb section--gutter">
             <div class="container-fluid px-md-0">
@@ -356,7 +357,7 @@
             </div>
         </section>
         <!-- end section -->
-        
+        @endif
 
         <!-- start section -->
         <section class="section section--review  lazy" data-src="{{ asset('frontassets/img/review_bg_1.png') }}">
