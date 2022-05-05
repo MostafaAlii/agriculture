@@ -80,6 +80,9 @@ use App\Http\Repositories\Admin\OrderRepository;
 use App\Http\Interfaces\Admin\ProtectedHouseInterface;
 use App\Http\Repositories\Admin\ProtectedHouseRepository;
 
+use App\Http\Interfaces\Admin\ContactInterface;
+use App\Http\Repositories\Admin\ContactRepository;
+
 // ------------------------Front Uses-------------------------------
 
 use App\Http\Interfaces\Front\CommentInterface;
@@ -223,6 +226,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FarmerAllDataInterface::class, FarmerAllDataRepository::class);
         $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
         $this->app->bind(PaymentInterface::class, PaymentRepository::class);
+        
+        $this->app->bind(ContactInterface::class, ContactRepository::class);
 
     }
 

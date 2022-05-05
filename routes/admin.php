@@ -4,9 +4,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\front;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\TagController;
-use App\Http\Controllers\Dashboard\Admin\SubscribeController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
+use App\Http\Controllers\Dashboard\Admin\CropController;
 use App\Http\Controllers\Dashboard\Admin\TreeController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\Admin\AdminController;
@@ -15,6 +15,7 @@ use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\OptionController;
 use App\Http\Controllers\Dashboard\Admin\OrdersController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
+use App\Http\Controllers\Dashboard\Admin\ContactController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
 use App\Http\Controllers\Dashboard\Admin\OrchardController;
 use App\Http\Controllers\Dashboard\Admin\ProductController;
@@ -22,34 +23,34 @@ use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Controllers\Dashboard\Admin\SettingController;
 use App\Http\Controllers\Dashboard\Admin\VillageController;
 use App\Http\Controllers\Dashboard\Admin\CategoryController;
+use App\Http\Controllers\Dashboard\Admin\LandAreaController;
 use App\Http\Controllers\Dashboard\Admin\TreeTypeController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\AttributeController;
+use App\Http\Controllers\Dashboard\Admin\CourseBeeController;
 use App\Http\Controllers\Dashboard\Admin\DashboardController;
 use App\Http\Controllers\Dashboard\Admin\ProvienceController;
+use App\Http\Controllers\Dashboard\Admin\SubscribeController;
+use App\Http\Controllers\Dashboard\Admin\BeeKeepersController;
+use App\Http\Controllers\Dashboard\Admin\CawProjectController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
+use App\Http\Controllers\Dashboard\Admin\FarmerCropController;
+use App\Http\Controllers\Dashboard\Admin\AgriServiceController;
+use App\Http\Controllers\Dashboard\Admin\BeeDisastersController;
 use App\Http\Controllers\Dashboard\Admin\FetchAddressController;
 use App\Http\Controllers\Dashboard\Admin\LandCategoryController;
-use App\Http\Controllers\Dashboard\Admin\PaymentMethodController;
-use App\Http\Controllers\Dashboard\Admin\ProductCouponController;
-use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
-use App\Http\Controllers\Dashboard\Admin\ProtectedHouseController;
-use App\Http\Controllers\Dashboard\Admin\AgriServiceController;
-use App\Http\Controllers\Dashboard\Admin\AgriToolServiceController;
 use App\Http\Controllers\Dashboard\Admin\WaterServiceController;
 use App\Http\Controllers\Dashboard\Admin\FarmerServiceController;
-use App\Http\Controllers\Dashboard\Admin\CropController;
-use App\Http\Controllers\Dashboard\Admin\FarmerCropController;
-use App\Http\Controllers\Dashboard\Admin\PrecipitationController;
-use App\Http\Controllers\Dashboard\Admin\LandAreaController;
-use App\Http\Controllers\Dashboard\Admin\CawProjectController;
-use App\Http\Controllers\Dashboard\Admin\ChickenProjectController;
-use App\Http\Controllers\Dashboard\Admin\BeeKeepersController;
-use App\Http\Controllers\Dashboard\Admin\BeeDisastersController;
-use App\Http\Controllers\Dashboard\Admin\CourseBeeController;
-use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
 use App\Http\Controllers\Dashboard\Admin\IncomeProductController;
+use App\Http\Controllers\Dashboard\Admin\PaymentMethodController;
+use App\Http\Controllers\Dashboard\Admin\PrecipitationController;
+use App\Http\Controllers\Dashboard\Admin\ProductCouponController;
+use App\Http\Controllers\Dashboard\Admin\ChickenProjectController;
 use App\Http\Controllers\Dashboard\Admin\OutcomeProductController;
+use App\Http\Controllers\Dashboard\Admin\ProtectedHouseController;
+use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
+use App\Http\Controllers\Dashboard\Admin\AgriToolServiceController;
+use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
 
 
 
@@ -394,7 +395,9 @@ Route::group(
                 Route::get('Orders/showOrder/{id}', [OrdersController::class,'showOrder'])->name('order.show');
                 Route::get('Orders/printOrder/{id}', [OrdersController::class,'printOrder'])->name('order.print');
                 /********************************* End Orders **********************************/
+                Route::get('contact_us', [ContactController::class,'show'])->name('contact_us');
 
+                
 
         });
     });

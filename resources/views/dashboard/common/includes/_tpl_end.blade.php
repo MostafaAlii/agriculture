@@ -48,6 +48,11 @@
     <script src="{{asset('assets/admin/jstree/jstree.wholerow.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/admin/jstree/jstree.checkbox.js')}}" type="text/javascript"></script>
 
+    <!-- this for contact us page -->
+    <script src="{{asset('assets/admin/vendors/js/editors/quill/quill.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/scripts/pages/app-email.js')}}"></script>
+
+    
      @toastr_js
     @toastr_render
     {{-- image preview --}}

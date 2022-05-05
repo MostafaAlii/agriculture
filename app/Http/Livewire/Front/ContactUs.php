@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Front;
 use App\Models\Contact;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Illuminate\Support\Facades\Mail;
 
 class ContactUs extends Component
 {
@@ -46,12 +47,49 @@ class ContactUs extends Component
             $contact->email = $this->email;
             $contact->comment = $this->comment;
             $contact->save();
-            session()->flash('message','Thanks your message has been sent successfully !');
-            // session()->flash('add');
-            $this->resetFields();
+           
 
+
+        //------------------------------------------------------------------
+        //     $data=[
+        //         'title' => 'Contact Mail -- تواصل معنا ',
+        //         'firstname' => $this->firstname,
+        //         'lastname' => $this->lastname,
+        //         'mail' => $this->email,
+        //         'phone' => $this->phone,
+        //         'content' => $this->comment,
+        //    ];
+
+         //  Mail::to($site)->send(new ConatctEmail($data));
+
+
+           Mail::send(
+            'livewire.front.emails.contact',
+            array(
+                'title' => 'Contact Mail -- تواصل معنا ',
+                'firstname' => $this->firstname,
+                'lastname' => $this->lastname,
+                'mail' => $this->email,
+                'phone' => $this->phone,
+                'content' => $this->comment,
+            ),
+            function ($message) {
+                $message->subject("Contact Mail -- تواصل معنا ");
+                $message->to(env('MAIL_FROM_ADDRESS','magdasaif3@gmail.com'));
+               // $message->to('eradunited@murabba.dev');
+                $message->from($this->email);
+
+            }
+        );
+
+        session()->flash('message','Thanks your message has been sent successfully !');
+        // session()->flash('add');
+        $this->resetFields();
+        
+        //------------------------------------------------------------------
         } catch (\Exception $e) {
             DB::rollBack();
+            dd($e->getMessage());
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }

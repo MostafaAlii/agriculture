@@ -162,4 +162,6 @@ return [
     'sub'=>'Subscribtion',
     'emails_success'=>'Emails have been send successfully',
     'sendmails'=>'Send Emails',
+
+    'contact' => 'Contact US',
 ];
