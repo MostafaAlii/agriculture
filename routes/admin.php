@@ -396,6 +396,9 @@ Route::group(
                 Route::get('Orders/printOrder/{id}', [OrdersController::class,'printOrder'])->name('order.print');
                 /********************************* End Orders **********************************/
                 Route::get('contact_us', [ContactController::class,'show'])->name('contact_us');
+                route::POST('/replayMail/{mail}',[ContactController::class,'replay'])->name('mail.replay');
+                route::POST('/sendMail',[ContactController::class,'send'])->name('mail.send');
+                route::POST('/deleteMail',[ContactController::class,'delete'])->name('mail.delete');
 
                 
 

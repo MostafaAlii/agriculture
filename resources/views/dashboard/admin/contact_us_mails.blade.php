@@ -36,75 +36,7 @@
                                 Compose
                             </button>
                         </div>
-                        <div class="sidebar-menu-list">
-                            <!-- sidebar menu  -->
-                            <div class="list-group list-group-messages">
-                                <a href="#" class="list-group-item active" id="inbox-menu">
-                                    <div class="d-inline mr-25">
-                                        <i class="ft-mail"></i>
-                                    </div>
-                                    Inbox
-                                    <span class="badge badge-success badge-pill badge-round float-right">5</span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="d-inline mr-25">
-                                        <i class="ft-play"></i>
-                                    </div>
-                                    Sent
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="d-inline mr-25">
-                                        <i class="ft-edit-1"></i>
-                                    </div> Draft
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="d-inline mr-25">
-                                        <i class="ft-star"></i>
-                                    </div>
-                                    Starred
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="d-inline mr-25">
-                                        <i class="ft-info"></i>
-                                    </div>
-                                    Spam
-                                    <span class="badge badge-warning badge-pill badge-round float-right">3</span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="d-inline mr-25">
-                                        <i class="ft-trash-2"></i>
-                                    </div>
-                                    Trash
-                                </a>
-                            </div>
-                            <!-- sidebar menu  end-->
-
-                            <!-- sidebar label start -->
-                            <label class="sidebar-label">Labels</label>
-                            <div class="list-group list-group-labels ">
-                                <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-                                    Product
-                                    <span class="bullet bullet-success bullet-sm"></span>
-                                </a>
-                                <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-                                    Work
-                                    <span class="bullet bullet-primary bullet-sm"></span>
-                                </a>
-                                <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-                                    Misc
-                                    <span class="bullet bullet-warning bullet-sm"></span>
-                                </a>
-                                <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-                                    Family
-                                    <span class="bullet bullet-danger bullet-sm"></span>
-                                </a>
-                                <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
-                                    Design
-                                    <span class="bullet bullet-info bullet-sm"></span>
-                                </a>
-                            </div>
-                            <!-- sidebar label end -->
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- User new mail right area -->
@@ -117,29 +49,27 @@
                             </button>
                         </div>
                         <!-- form start -->
-                        <form action="#" id="compose-form">
+                        <form action="{{ route('mail.send') }}" method="post" autocomplete="off" id="compose-form">
+                         @csrf
                             <div class="card-content">
                                 <div class="card-body pt-0">
                                     <div class="form-group pb-50">
                                         <label for="emailfrom">from</label>
-                                        <input type="text" id="emailfrom" class="form-control" placeholder="user@example.com" disabled>
+                                        <input type="text" id="emailfrom" class="form-control" placeholder="{{env('MAIL_FROM_ADDRESS')}}" disabled>
                                     </div>
                                     <div class="form-label-group mb-1">
-                                        <input type="email" id="emailTo" class="form-control" placeholder="To" required>
+                                        <input type="email" id="emailTo" class="form-control" placeholder="To" name="emailTo" required>
                                     </div>
                                     <div class="form-label-group mb-1">
-                                        <input type="text" id="emailSubject" class="form-control" placeholder="Subject">
+                                        <input type="text" id="emailSubject" class="form-control" placeholder="Subject" name="emailSubject" required>
                                     </div>
-                                    <div class="form-label-group mb-1">
-                                        <input type="text" id="emailCC" class="form-control" placeholder="CC">
-                                    </div>
-                                    <div class="form-label-group mb-1">
-                                        <input type="text" id="emailBCC" class="form-control" placeholder="BCC">
-                                    </div>
+                            
                                     <!-- Compose mail Quill editor -->
                                     <div class="snow-container border rounded p-50 ">
-                                        <div class="compose-editor mx-75"></div>
-                                        <div class="d-flex justify-content-end">
+                                    <textarea class="form-control" placeholder="type something ...." name="emailComment" required></textarea>
+
+                                        <!-- <div class="compose-editor mx-75"></div> -->
+                                        <!-- <div class="d-flex justify-content-end">
                                             <div class="compose-quill-toolbar pb-0">
                                                 <span class="ql-formats mr-0">
                                                     <button class="ql-bold"></button>
@@ -149,13 +79,7 @@
                                                     <button class="ql-image"></button>
                                                 </span>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="emailAttach">
-                                            <label class="custom-file-label" for="emailAttach">Attach file</label>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -202,9 +126,11 @@
                                         <!-- delete unread dropdown -->
                                         <ul class="list-inline m-0 d-flex">
                                             <li class="list-inline-item mail-delete">
-                                                <button type="button" class="btn btn-icon action-icon">
+                                                <button type="button" class="btn btn-icon action-icon" data-toggle="modal"
+                                                    data-target="#bulkdelete" id="btn_delete_all">
                                                     <i class="ft-trash-2"></i>
                                                 </button>
+
                                             </li>
                                             <!-- <li class="list-inline-item mail-unread">
                                                 <button type="button" class="btn btn-icon action-icon">
@@ -271,13 +197,8 @@
                                             </fieldset>
                                         </div>
                                         <!-- pagination and page count -->
-                                        <span class="d-none d-sm-block">1-10 of 653</span>
-                                        <button class="btn btn-icon email-pagination-prev d-none d-sm-block">
-                                            <i class="ft-chevron-left"></i>
-                                        </button>
-                                        <button class="btn btn-icon email-pagination-next d-none d-sm-block">
-                                            <i class="ft-chevron-right"></i>
-                                        </button>
+                                        <span class="d-none d-sm-block">{{$mails}}</span>
+                                       
                                     </div>
                                 </div>
                                 <!-- / action right -->
@@ -291,8 +212,8 @@
                                             <div class="user-action">
                                                 <div class="checkbox-con mr-25">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="checkboxsmall1">
-                                                        <label class="custom-control-label" for="checkboxsmall1"></label>
+                                                        <input type="checkbox" class="custom-control-input" id="checkboxsmall{{$msgs->id}}"  onclick="javascript:check('{{$msgs->id}}');" value="{{ $msgs->id }}">
+                                                        <label class="custom-control-label" for="checkboxsmall{{$msgs->id}}"></label>
                                                     </div>
                                                 </div>
                                                 <!-- <span class="favorite warning">
@@ -344,7 +265,7 @@
                         <!--/ Email list Area -->
                         @foreach($mails as $m)
                         <!-- Detailed Email View -->
-                        <div class="email-app-details" id="detail_{{$m->id}}">
+                        <div class="email-app-details" id="detail_{{$m->id}}" style="display:none;">
                             <!-- email detail view header -->
                             <div class="email-detail-header">
                                 <div class="email-header-left d-flex align-items-center mb-1">
@@ -421,25 +342,31 @@
                                         <div class="card shadow-none border rounded">
                                             <div class="card-body quill-wrapper">
                                                 <span>Reply to {{$m->email}}</span>
-                                                <input type="hidden" name="sender_mail" value="{{$m->email}}">
-                                                <div class="snow-container" id="detail-view-quill">
-                                                    <div class="detail-view-editor"></div>
-                                                    <div class="d-flex justify-content-end">
-                                                        <div class="detail-quill-toolbar">
-                                                            <span class="ql-formats mr-50">
-                                                                <button class="ql-bold"></button>
-                                                                <button class="ql-italic"></button>
-                                                                <button class="ql-underline"></button>
-                                                                <button class="ql-link"></button>
-                                                                <button class="ql-image"></button>
-                                                            </span>
+                                                <form action="{{ route('mail.replay',$m->id) }}" method="post" autocomplete="off">
+                                                @csrf
+                                                <!-- this will used to send mail back (replay) to sender -->
+                                                    <input type="hidden" name="sender_mail_{{$m->id}}" value="{{$m->email}}">
+                                                    <div class="snow-container" id="detail-view-quill">
+                                                        <br>
+                                                         <textarea id="eventRegInput4" class="form-control" placeholder="type something ...." name="comment_{{$m->id}}" required></textarea>
+                                                        <!-- <div class="detail-view-editor"></div> -->
+                                                        <div class="d-flex justify-content-end">
+                                                            <!-- <div class="detail-quill-toolbar">
+                                                                <span class="ql-formats mr-50">
+                                                                    <button class="ql-bold"></button>
+                                                                    <button class="ql-italic"></button>
+                                                                    <button class="ql-underline"></button>
+                                                                    <button class="ql-link"></button>
+                                                                    <button class="ql-image"></button>
+                                                                </span>
+                                                            </div> -->
+                                                            <button type="submit" class="btn btn-primary send-btn">
+                                                                <i class='ft-play mr-25'></i>
+                                                                <span class="d-none d-sm-inline"> Send</span>
+                                                            </button>
                                                         </div>
-                                                        <button class="btn btn-primary send-btn">
-                                                            <i class='ft-play mr-25'></i>
-                                                            <span class="d-none d-sm-inline"> Send</span>
-                                                        </button>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -447,8 +374,6 @@
                             </div>
                         </div>
                         <!--/ Detailed Email View -->
-
-                        
                         @endforeach
                     </div>
 
@@ -458,15 +383,82 @@
     </div>
     <!-- END: Content-->
 
+    <form action="{{ route('mail.delete') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+    @csrf
+    @method('POST')
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <!-- Modal -->
+            <div class="modal animated flipInY text-left" id="bulkdelete" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel62">  حذف الرسائل المُحدده</h4>
+                            <input type="hidden" id="delete_select_id" name="delete_select_id" value="">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>هل تريد بالفعل حذف هذه الرسائل المُحدده ؟</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
+                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.delete') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 
     <!-- BEGIN: Footer-->
-   @include('dashboard.common.includes._footer')
+    @include('dashboard.common.includes._footer')
    @include('dashboard.common.includes._mail_footer')
 <script>
     $("#list_id li").click(function(){
        // alert(this.id);
+        const boxes = document.getElementsByClassName('email-app-details');
+
+        for (const box of boxes) {
+        // 👇️ Remove element from DOM
+        box.style.display = 'none';
+        // 👇️ hide element (still takes up space on page)
+        // box.style.visibility = 'hidden';
+        }
+
         document.getElementById('detail_'+this.id).style.display='block';
     });
+
+    $(function() {
+        $("#btn_delete_all").click(function() {
+            var selected = new Array();
+            $("#list_id input[type=checkbox]:checked").each(function() {
+                selected.push(this.value);
+            });
+           // alert(selected);
+            if (selected.length > 0) {
+                // $('#delete_all').modal('show')
+                $('input[id="delete_select_id"]').val(selected);
+            }
+        });
+    });
+
+
+    function check(id){
+       // alert(id);
+        var selected = new Array();
+            $("#list_id input[type=checkbox]:checked").each(function() {
+                selected.push(this.value);
+            });
+           // alert(selected);
+            if (selected.length > 0) {
+                // $('#delete_all').modal('show')
+                $('input[id="delete_select_id"]').val(selected);
+            }
+    }
 </script>
     <!-- END: Footer-->
 

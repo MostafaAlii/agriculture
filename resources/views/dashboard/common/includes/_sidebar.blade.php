@@ -606,7 +606,7 @@
                 <li class=" nav-item">
                         <li>
                             <a class="menu-item" href="{{ route('contact_us') }}">
-                                <i class="fas fa-dragon"></i>
+                                <i class="material-icons"> mail_outline </i> 
                                 <span data-i18n="Options"> {{ trans('Admin/site.contact') }}</span>
                             </a>
                         </li>

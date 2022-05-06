@@ -106,7 +106,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <!-- LOGO -->
     <tr>
-        <td bgcolor="#54cc96" align="center">
+        <td bgcolor="#fcdb5a" align="center">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
                     <td align="center" valign="top" style="padding: 40px 10px 40px 10px;"> </td>
@@ -115,7 +115,7 @@
         </td>
     </tr>
     <tr>
-        <td bgcolor="#54cc96" align="center" style="padding: 0px 10px 0px 10px;">
+        <td bgcolor="#fcdb5a" align="center" style="padding: 0px 10px 0px 10px;">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
                     <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
@@ -131,10 +131,10 @@
                 <tr>
                     <td bgcolor="#ffffff" align="right" style="text-align: inherit;padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
 
-                        <p style="margin: 0;"><span style="font-size: 26px; font-weight: 400; margin: 2;color:#54cc96">Name : </span><span style="font-size: 26px; font-weight: 400; margin: 2;"><?php echo $firstname.' '.$lastname; ?></span> </p>
-                        <p style="margin: 0;"><span style="font-size: 26px; font-weight: 400; margin: 2;color:#54cc96">Email : </span><span style="font-size: 26px; font-weight: 400; margin: 2;"><?php echo $mail; ?></span> </p>
-                        <p style="margin: 0;"><span style="font-size: 26px; font-weight: 400; margin: 2;color:#54cc96">Phone : </span><span style="font-size: 26px; font-weight: 400; margin: 2;"><?php echo $phone; ?></span> </p>
-                        <p style="margin: 0;"><span style="font-size: 26px; font-weight: 400; margin: 2;color:#54cc96">Message : </span><span style="font-size: 26px; font-weight: 400; margin: 2;"><?php echo $content; ?></span> </p>
+                       @if(isset($firstname)) <p style="margin: 0;"><span style="font-size: 26px; font-weight: 400; margin: 2;color:#fcdb5a">Name : </span><span style="font-size: 26px; font-weight: 400; margin: 2;"><?php echo $firstname.' '.$lastname; ?></span> </p>@endif
+                       @if(isset($mail)) <p style="margin: 0;"><span style="font-size: 26px; font-weight: 400; margin: 2;color:#fcdb5a">Email : </span><span style="font-size: 26px; font-weight: 400; margin: 2;"><?php echo $mail; ?></span> </p>@endif
+                        @if(isset($phone))<p style="margin: 0;"><span style="font-size: 26px; font-weight: 400; margin: 2;color:#fcdb5a">Phone : </span><span style="font-size: 26px; font-weight: 400; margin: 2;"><?php echo $phone; ?></span> </p>@endif
+                        <p style="margin: 0;"><span style="font-size: 26px; font-weight: 400; margin: 2;color:#fcdb5a">Message : </span><span style="font-size: 26px; font-weight: 400; margin: 2;"><?php echo $content; ?></span> </p>
                         
                     </td>
                 </tr>
