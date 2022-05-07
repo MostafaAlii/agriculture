@@ -1,5 +1,11 @@
 <!DOCTYPE html>
+@if (App::getLocale() == 'en')
+<html class="loading" lang="en" data-textdirection="ltr">
+
+@else
 <html class="loading" lang="en" data-textdirection="rtl">
+@endif
+
 <!-- BEGIN: Head-->
 @include('dashboard.common.includes._mail_header')
 <!-- END: Head-->
@@ -33,7 +39,7 @@
                             <!-- compose button  -->
                             <button type="button" class="btn btn-danger btn-glow btn-block my-2 compose-btn">
                                 <i class="ft-plus"></i>
-                                Compose
+                                {{__('Admin\contact.send_new')}}
                             </button>
                         </div>
                         
@@ -43,7 +49,7 @@
                 <div class="compose-new-mail-sidebar">
                     <div class="card mb-0 shadow-none quill-wrapper p-0">
                         <div class="card-header">
-                            <h3 class="card-title" id="emailCompose">New Message</h3>
+                            <h3 class="card-title" id="emailCompose">{{__('Admin\contact.new')}}</h3>
                             <button type="button" class="close close-icon">
                                 <i class="ft-x"></i>
                             </button>
@@ -54,42 +60,29 @@
                             <div class="card-content">
                                 <div class="card-body pt-0">
                                     <div class="form-group pb-50">
-                                        <label for="emailfrom">from</label>
+                                        <label for="emailfrom">{{__('Admin\contact.from')}}</label>
                                         <input type="text" id="emailfrom" class="form-control" placeholder="{{env('MAIL_FROM_ADDRESS')}}" disabled>
                                     </div>
                                     <div class="form-label-group mb-1">
-                                        <input type="email" id="emailTo" class="form-control" placeholder="To" name="emailTo" required>
+                                        <input type="email" id="emailTo" class="form-control" placeholder="{{__('Admin\contact.to')}}" name="emailTo" required>
                                     </div>
                                     <div class="form-label-group mb-1">
-                                        <input type="text" id="emailSubject" class="form-control" placeholder="Subject" name="emailSubject" required>
+                                        <input type="text" id="emailSubject" class="form-control" placeholder="{{__('Admin\contact.subject')}}" name="emailSubject" required>
                                     </div>
                             
                                     <!-- Compose mail Quill editor -->
                                     <div class="snow-container border rounded p-50 ">
-                                    <textarea class="form-control" placeholder="type something ...." name="emailComment" required></textarea>
-
-                                        <!-- <div class="compose-editor mx-75"></div> -->
-                                        <!-- <div class="d-flex justify-content-end">
-                                            <div class="compose-quill-toolbar pb-0">
-                                                <span class="ql-formats mr-0">
-                                                    <button class="ql-bold"></button>
-                                                    <button class="ql-italic"></button>
-                                                    <button class="ql-underline"></button>
-                                                    <button class="ql-link"></button>
-                                                    <button class="ql-image"></button>
-                                                </span>
-                                            </div>
-                                        </div> -->
+                                    <textarea class="form-control" placeholder="{{__('Admin\contact.message')}}" name="emailComment" required></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer border-0 d-flex justify-content-end pt-0">
                                 <button type="reset" class="btn btn-secondary cancel-btn mr-1">
                                     <i class='ft-x mr-25'></i>
-                                    <span class="d-sm-inline d-none">Cancel</span>
+                                    <span class="d-sm-inline d-none">{{__('Admin\contact.cancel')}}</span>
                                 </button>
                                 <button type="submit" class="btn-send btn btn-danger btn-glow">
-                                    <i class='ft-play mr-25'></i> <span class="d-sm-inline d-none">Send</span>
+                                    <i class='ft-play mr-25'></i> <span class="d-sm-inline d-none">{{__('Admin\contact.send')}}</span>
                                 </button>
                             </div>
                         </form>
@@ -120,64 +113,18 @@
                                     <div class="action-left d-flex align-items-center">
                                         <!-- select All checkbox -->
                                         <div class="custom-control custom-checkbox selectAll mr-50">
-                                            <input type="checkbox" class="custom-control-input" id="checkboxsmall">
+                                            <input type="checkbox" class="custom-control-input" id="checkboxsmall" onclick="checkAll('box1',this)">
                                             <label class="custom-control-label" for="checkboxsmall"></label>
                                         </div>
                                         <!-- delete unread dropdown -->
                                         <ul class="list-inline m-0 d-flex">
                                             <li class="list-inline-item mail-delete">
                                                 <button type="button" class="btn btn-icon action-icon" data-toggle="modal"
-                                                    data-target="#bulkdelete" id="btn_delete_all">
+                                                    data-target="#bulkdelete" id="btn_delete_all"  disabled>
                                                     <i class="ft-trash-2"></i>
                                                 </button>
 
                                             </li>
-                                            <!-- <li class="list-inline-item mail-unread">
-                                                <button type="button" class="btn btn-icon action-icon">
-                                                    <i class="ft-mail"></i>
-                                                </button>
-                                            </li> -->
-                                            <!-- <li class="list-inline-item">
-                                                <div class="dropdown">
-                                                    <button type="button" class="dropdown-toggle btn btn-icon action-icon" id="folder" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="ft-folder mr-0"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="folder">
-                                                        <a class="dropdown-item" href="#"><i class="ft-edit"></i> Draft</a>
-                                                        <a class="dropdown-item" href="#"><i class="ft-info"></i>Spam</a>
-                                                        <a class="dropdown-item" href="#"><i class="ft-trash-2"></i>Trash</a>
-                                                    </div>
-                                                </div>
-                                            </li> -->
-                                            <!-- <li class="list-inline-item">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn btn-icon dropdown-toggle action-icon" id="tag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="ft-tag mr-0"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="tag">
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-success bullet-sm"></span>
-                                                            <span>Product</span>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-primary bullet-sm"></span>
-                                                            <span>Work</span>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-warning bullet-sm"></span>
-                                                            <span>Misc</span>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-danger bullet-sm"></span>
-                                                            <span>Family</span>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-info bullet-sm"></span>
-                                                            <span> Design</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li> -->
                                         </ul>
                                     </div>
                                     <!-- action left end here -->
@@ -190,7 +137,7 @@
                                                 <i class="ft-align-justify"></i>
                                             </div>
                                             <fieldset class="form-group position-relative has-icon-left m-0">
-                                                <input type="text" class="form-control" id="email-search" placeholder="Search email">
+                                                <input type="text" class="form-control" id="email-search" placeholder="{{__('Admin\contact.search')}}">
                                                 <div class="form-control-position">
                                                     <i class="ft-search"></i>
                                                 </div>
@@ -212,7 +159,7 @@
                                             <div class="user-action">
                                                 <div class="checkbox-con mr-25">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="checkboxsmall{{$msgs->id}}"  onclick="javascript:check('{{$msgs->id}}');" value="{{ $msgs->id }}">
+                                                        <input type="checkbox" class="custom-control-input box1" id="checkboxsmall{{$msgs->id}}"  onclick="javascript:check();" value="{{ $msgs->id }}">
                                                         <label class="custom-control-label" for="checkboxsmall{{$msgs->id}}"></label>
                                                     </div>
                                                 </div>
@@ -220,13 +167,20 @@
                                                     <i class="ft-star"></i>
                                                 </span> -->
                                             </div>
-                                            <i class="material-icons" style="padding-left: inherit;"> mail_outline </i> 
+                                            <?php
+                                            if (App::getLocale() == 'en'){
+                                            $ss='right';
+                                            }else{
+                                            $ss='left';
+                                            }
+                                            ?>
+                                            <i class="material-icons" style="padding-<?php echo $ss;?>: inherit;"> mail_outline </i> 
                                             
                                             <!-- ###################################################################### -->
                                             <div class="media-body">
                                                 <div class="user-details">
                                                     <div class="mail-items">
-                                                        <span class="list-group-item-text text-truncate">Contact From {{$msgs->firstname.' '.$msgs->lastname}}</span>
+                                                        <span class="list-group-item-text text-truncate">{{__('Admin\contact.message_from')}} {{$msgs->firstname.' '.$msgs->lastname}}</span>
                                                     </div>
                                                     <div class="mail-meta-item">
                                                         <span class="float-right">
@@ -256,7 +210,7 @@
                                     <!-- no result when nothing to show on list -->
                                     <div class="no-results">
                                         <i class="ft-info font-large-2"></i>
-                                        <h5>No Items Found</h5>
+                                        <h5>{{__('Admin\contact.no_mails')}}</h5>
                                     </div>
                                     @endif
                                 </div>
@@ -273,7 +227,7 @@
                                         <i class="ft-chevron-left font-medium-4 align-middle"></i>
                                     </span>
                                     <h5 class="email-detail-title font-weight-normal mb-0">
-                                    Contact From {{$m->firstname.' '.$m->lastname}}
+                                    {{__('Admin\contact.message_from')}} {{$m->firstname.' '.$m->lastname}}
                                     </h5>
                                 </div>
                                 <div class="email-header-right mb-1 ml-2 pl-1">
@@ -299,8 +253,8 @@
                                                         <div class="media-body mt-25">
                                                             <span class="text-primary">{{$m->firstname.' '.$m->lastname}}</span>
                                                             <span class="d-sm-inline d-none"> &lt;{{$m->email}}&gt;</span>
-                                                            <small class="text-muted d-block">to {{env('MAIL_FROM_ADDRESS')}}</small>
-                                                            <small class="text-muted d-block">phone: {{$m->phone}}</small>
+                                                            <small class="text-muted d-block">{{__('Admin\contact.to')}} {{env('MAIL_FROM_ADDRESS')}}</small>
+                                                            <small class="text-muted d-block">{{__('Admin\contact.phone')}}: {{$m->phone}}</small>
                                                         </div>
                                                     </div>
                                                     <div class="information d-sm-flex d-none align-items-center">
@@ -341,28 +295,20 @@
                                     <div class="col-12 px-0">
                                         <div class="card shadow-none border rounded">
                                             <div class="card-body quill-wrapper">
-                                                <span>Reply to {{$m->email}}</span>
+                                                <span>{{__('Admin\contact.replay')}} {{$m->email}}</span>
                                                 <form action="{{ route('mail.replay',$m->id) }}" method="post" autocomplete="off">
                                                 @csrf
                                                 <!-- this will used to send mail back (replay) to sender -->
                                                     <input type="hidden" name="sender_mail_{{$m->id}}" value="{{$m->email}}">
                                                     <div class="snow-container" id="detail-view-quill">
                                                         <br>
-                                                         <textarea id="eventRegInput4" class="form-control" placeholder="type something ...." name="comment_{{$m->id}}" required></textarea>
+                                                         <textarea id="eventRegInput4" class="form-control" placeholder="{{__('Admin\contact.message')}}" name="comment_{{$m->id}}" required></textarea>
                                                         <!-- <div class="detail-view-editor"></div> -->
                                                         <div class="d-flex justify-content-end">
-                                                            <!-- <div class="detail-quill-toolbar">
-                                                                <span class="ql-formats mr-50">
-                                                                    <button class="ql-bold"></button>
-                                                                    <button class="ql-italic"></button>
-                                                                    <button class="ql-underline"></button>
-                                                                    <button class="ql-link"></button>
-                                                                    <button class="ql-image"></button>
-                                                                </span>
-                                                            </div> -->
+                                                         
                                                             <button type="submit" class="btn btn-primary send-btn">
                                                                 <i class='ft-play mr-25'></i>
-                                                                <span class="d-none d-sm-inline"> Send</span>
+                                                                <span class="d-none d-sm-inline"> {{__('Admin\contact.send')}}</span>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -393,18 +339,18 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel62">  حذف الرسائل المُحدده</h4>
+                            <h4 class="modal-title" id="myModalLabel62">  {{__('Admin\contact.delete_title')}}</h4>
                             <input type="hidden" id="delete_select_id" name="delete_select_id" value="">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h5>هل تريد بالفعل حذف هذه الرسائل المُحدده ؟</h5>
+                            <h5>{{__('Admin\contact.delete_confirm')}}</h5>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>
-                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/site.delete') }}</button>
+                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/contact.cancel') }}</button>
+                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin/contact.delete') }}</button>
                         </div>
                     </div>
                 </div>
@@ -438,16 +384,32 @@
             $("#list_id input[type=checkbox]:checked").each(function() {
                 selected.push(this.value);
             });
-           // alert(selected);
+
             if (selected.length > 0) {
-                // $('#delete_all').modal('show')
                 $('input[id="delete_select_id"]').val(selected);
             }
         });
     });
 
+    function checkAll(name,elem){
+        var checkboxes = document.getElementsByClassName(name);
+        var leng = checkboxes.length;
+        
+        if(elem.checked){
+            for(var i=0 ; i < leng ; i++){
+                checkboxes[i].checked = true;
+                $('#btn_delete_all').prop('disabled', false);
+             }
+        }else{
+            for(var i=0 ; i < leng ; i++){
+                checkboxes[i].checked = false;
+                $('#btn_delete_all').prop('disabled', true);
+             }
+        }
+    }
 
-    function check(id){
+
+    function check(){
        // alert(id);
         var selected = new Array();
             $("#list_id input[type=checkbox]:checked").each(function() {
@@ -455,8 +417,10 @@
             });
            // alert(selected);
             if (selected.length > 0) {
-                // $('#delete_all').modal('show')
+                $('#btn_delete_all').prop('disabled', false);
                 $('input[id="delete_select_id"]').val(selected);
+            }else{
+                $('#btn_delete_all').prop('disabled', true);
             }
     }
 </script>
