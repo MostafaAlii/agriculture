@@ -277,6 +277,7 @@
         </section>
         <!-- end section -->
 
+        @if(count($home_category)>0)
         <!-- start section -->
         <section class="section section--no-pt section--no-pb section--gutter">
             <div class="container-fluid px-md-0">
@@ -290,14 +291,13 @@
                                     <div class="__intro-text">
                                         <div class="row">
                                             <div class="col-md-11">
+                                                @if(app()->getLocale()=='en')
                                                 <h2>agro <span>products</span></h2>
-
+                                                @else
+                                                <h2><span>منتجاتـ</span> ـنا  </h2>
+                                                @endif
                                                 <p>
-                                                    Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                                                </p>
-
-                                                <p>
-                                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">all products</a>
+                                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('shop') }}">{{ __('website\home.all_products') }}</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -306,113 +306,50 @@
                             </div>
                             <!-- end item -->
 
+                        <?php
+                        $x=1;
+                        ?>
+                        @foreach($home_category as $cat)
+                            <?php
+                            if($x>7)continue;
+                            ?>
                             <!-- start item -->
+                            @if($x==1)
                             <div class="col-12 col-md-5 col-xl-3">
-                                <div class="__item">
-                                    <figure class="__image">
-                                        <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/product-preview_img/1.jpg') }}" alt="demo" />
-                                    </figure>
-
-                                    <div class="__content">
-                                        <h3 class="__title">fruits</h3>
-                                    </div>
-
-                                    <a class="__link" href="#"></a>
-                                </div>
-                            </div>
-                            <!-- end item -->
-
-                            <!-- start item -->
-                            <div class="col-12 col-md-4 col-xl-3">
-                                <div class="__item">
-                                    <figure class="__image">
-                                        <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/product-preview_img/2.jpg') }}" alt="demo" />
-                                    </figure>
-
-                                    <div class="__content">
-                                        <h3 class="__title">Vegatables</h3>
-                                    </div>
-
-                                    <a class="__link" href="#"></a>
-                                </div>
-                            </div>
-                            <!-- end item -->
-
-                            <!-- start item -->
-                            <div class="col-12 col-md-4 col-xl-3">
-                                <div class="__item">
-                                    <figure class="__image">
-                                        <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/product-preview_img/3.jpg') }}" alt="demo" />
-                                    </figure>
-
-                                    <div class="__content">
-                                        <h3 class="__title">livestock</h3>
-                                    </div>
-
-                                    <a class="__link" href="#"></a>
-                                </div>
-                            </div>
-                            <!-- end item -->
-
-                            <!-- start item -->
-                            <div class="col-12 col-md-4 col-xl-3">
-                                <div class="__item">
-                                    <figure class="__image">
-                                        <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/product-preview_img/4.jpg') }}" alt="demo" />
-                                    </figure>
-
-                                    <div class="__content">
-                                        <h3 class="__title">Sunflowers</h3>
-                                    </div>
-
-                                    <a class="__link" href="#"></a>
-                                </div>
-                            </div>
-                            <!-- end item -->
-
-                            <!-- start item -->
+                            @elseif($x==5)
                             <div class="col-12 col-xl-6">
-                                <div class="__item">
-                                    <div class="__content">
-                                        <h2 class="__title"><b>12</b>Type of <br>products</h2>
-                                    </div>
-
-                                    <a class="__link" href="#"></a>
-                                </div>
-                            </div>
-                            <!-- end item -->
-
-                            <!-- start item -->
+                            @elseif($x==6)
                             <div class="col-12 col-md-7 col-xl-6 offset-xl-3">
+                            @else
+                            <div class="col-12 col-md-4 col-xl-3">
+                            @endif
                                 <div class="__item">
-                                    <figure class="__image">
-                                        <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/product-preview_img/5.jpg') }}" alt="demo" />
-                                    </figure>
-
+                                    @if($x!=5)
+                                        <figure class="__image">
+                                        @if(!($cat->products)->isEmpty())
+                                            @foreach($cat->products->random(1) as $pp)
+                                            <img class="lazy" src="{{ asset('Dashboard/img/products/' .  $pp->image->filename) }}"
+                                                data-src="{{ asset('Dashboard/img/products/' . $pp->image->filename) }}"
+                                                alt="demo" />
+                                            @endforeach
+                                        @else
+                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                alt="demo" />
+                                        @endif
+                                        </figure>
+                                    @endif
                                     <div class="__content">
-                                        <h3 class="__title">Wheat</h3>
+                                        <h3 class="__title"> @if($x==5) <center><b>{{$category_count}}</b></center>{{ __('website\home.cat_count') }} @else{{$cat->name}}@endif</h3>
                                     </div>
 
-                                    <a class="__link" href="#"></a>
+                                    @if($x!=5)<a class="__link" href="{{route('pro_cat',encrypt($cat->id))}}"></a>@endif
                                 </div>
                             </div>
                             <!-- end item -->
+                            <?php $x++; ?>
+                        @endforeach
 
-                            <!-- start item -->
-                            <div class="col-12 col-md-5 col-xl-3">
-                                <div class="__item">
-                                    <figure class="__image">
-                                        <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/product-preview_img/6.jpg') }}"  alt="demo" />
-                                    </figure>
-
-                                    <div class="__content">
-                                        <h3 class="__title">Spices</h3>
-                                    </div>
-
-                                    <a class="__link" href="#"></a>
-                                </div>
-                            </div>
-                            <!-- end item -->
                         </div>
                     </div>
                 </div>
@@ -420,6 +357,7 @@
             </div>
         </section>
         <!-- end section -->
+        @endif
 
         <!-- start section -->
         <section class="section section--review  lazy" data-src="{{ asset('frontassets/img/review_bg_1.png') }}">

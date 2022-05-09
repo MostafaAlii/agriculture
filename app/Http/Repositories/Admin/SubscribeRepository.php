@@ -3,7 +3,7 @@ namespace  App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\SubscribeInterface;
 use App\Jobs\Sendmails;
 use App\Models\Admin;
-use App\Models\Data;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Notification;
 class SubscribeRepository implements SubscribeInterface{
     public function data($request) {
         if(request()->ajax()) {
-            return datatables()->of(Data::select('*'))
+            return datatables()->of(Subscription::select('*'))
             ->addColumn('record_select', 'dashboard.admin.Dates.data_table.record_select')
             ->addIndexColumn()
-            ->editColumn('created_at', function (Data $data) {
+            ->editColumn('created_at', function (Subscription $data) {
                 return $data->created_at->format('Y-m-d');
             })
             ->addColumn('actions', 'dashboard.admin.Dates.data_table.actions')
@@ -30,7 +30,7 @@ class SubscribeRepository implements SubscribeInterface{
         try{
             $dataID = Crypt::decrypt($id);
             //  dd($adminID);
-            $data=Data::findorfail($dataID);
+            $data=Subscription::findorfail($dataID);
             $data->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('subscribe');
@@ -58,20 +58,20 @@ class SubscribeRepository implements SubscribeInterface{
         if($request->delete_select_id){
             $delete_select_id = explode(",",$request->delete_select_id);
             foreach($delete_select_id as $datas_ids){
-               $admin = Data::findorfail($datas_ids);
+               $admin = Subscription::findorfail($datas_ids);
             }
         }else{
             toastr()->error(__('Admin/site.no_data_found'));
             return redirect()->route('subscribe');
         }
-        Data::destroy( $delete_select_id );
+        Subscription::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('subscribe');
 
     }// end of bulkDelete
     public function sendMails()
     {
-        $emails = Data::chunk(50,function($data){
+        $emails = Subscription::chunk(50,function($data){
              dispatch(new Sendmails($data));
         });
         toastr()->success(__('Admin/site.emails_success'));

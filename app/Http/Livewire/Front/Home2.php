@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Front;
 
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Cart;
+use Livewire\Component;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+
 class Home2 extends Component
 {
     public function render()
@@ -13,6 +15,10 @@ class Home2 extends Component
             Cart::instance('cart')->restore(Auth::guard('vendor')->user()->email);
             Cart::instance('wishlist')->restore(Auth::guard('vendor')->user()->email);
           }
-        return view('livewire.front.home2')->layout('front.layouts.master');
+
+          $data['home_category']=Category::whereNotNull('parent_id')->inRandomOrder()->get();
+          $data['category_count']=Category::childCategory()->count();
+          
+        return view('livewire.front.home2',$data)->layout('front.layouts.master');
     }
 }

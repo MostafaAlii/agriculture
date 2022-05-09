@@ -73,4 +73,7 @@ return [
    'resetpass'=>'Reset Password',
    'sendresetsms'=>'A reset link has been sent to your email address',
    'sub'=>'Subscribe',
+
+   'all_products' => 'All Products',
+   'cat_count' =>'Sub Categories',
 ];

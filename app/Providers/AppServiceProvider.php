@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot() {
+      //  Schema::defaultStringLength(191);
         Blade::if('check_guard',function(){
             if(Auth::guard('vendor')->check()){
                return false;

@@ -182,7 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
     ],
 
     /*

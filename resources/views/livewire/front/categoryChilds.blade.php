@@ -10,7 +10,7 @@
     ?>
         <li class="list__item" id="{{$child->id}}" onclick="javascript:search_result('{{$page_name}}',this.id,'Category')" style="<?php echo $pad; ?>px">
             <a class="list__item__link" >{{$child->name}}</a>
-            <span>({{count($child->blogs)}})</span>
+            <span>({{count($child->$page_name)}})</span>
         </li>
     @if (count($child->childs))
         @include('livewire.front.categoryChilds', $new)
