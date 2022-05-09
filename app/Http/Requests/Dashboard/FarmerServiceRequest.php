@@ -17,10 +17,6 @@ class FarmerServiceRequest extends FormRequest
         return [
             'farmer_id' => 'required|exists:farmers,id',
             'village_id' => 'required|exists:villages,id',
-            'area_id' => 'required|exists:areas,id',
-            'state_id' => 'required|exists:states,id',
-            'admin_department_id' => 'required',
-
             'phone'=>'required',
             'email'=>'required',
 
@@ -28,21 +24,21 @@ class FarmerServiceRequest extends FormRequest
                 'string',
             ],
             'agri_services'   => [
-                'required',
+                'sometimes:nullable',
                 'array',
             ],
-            'agrit_services.*' => [
+            'agri_t_services.*' => [
                 'string',
             ],
-            'agrit_services'   => [
-                'required',
+            'agri_t_services'   => [
+                'sometimes:nullable',
                 'array',
             ],
             'water_services.*' => [
-                'string',
+                'sometimes:nullable',
             ],
             'water_services'   => [
-                'required',
+                'sometimes:nullable',
                 'array',
             ],
 
@@ -59,16 +55,7 @@ class FarmerServiceRequest extends FormRequest
             'agrit_services.*.string'=>trans('Admin/validation.string'),
             'agrit_services.required'=>trans('Admin/validation.required'),
             'farmer_id.required' => trans('Admin/validation.required'),
-            'area_id.required' => trans('Admin/validation.required'),
-            'state_id.required' => trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
-
-
-            'admin_department_id.required' => trans('Admin/validation.required'),
-            'tree_count_per_orchard.required' => trans('Admin/validation.required'),
-            'orchard_area.required' => trans('Admin/validation.required'),
-            'supported_side_id.required' => trans('Admin/validation.required'),
-            'unit_id.required' => trans('Admin/validation.required'),
             'phone.required' => trans('Admin/validation.required'),
             'email.required' => trans('Admin/validation.required'),
 

@@ -1,6 +1,6 @@
 <?php
 return [
-
+    'admin'=>'الموظف المسؤول',
     'action' =>'العمليات',
     'admin_departments' =>'الهيكلية الإدارية التابعة',
     'area' =>'القضاء',
@@ -19,7 +19,17 @@ return [
     'precipitations'=>'الهطولات المطرية',
     'newprecipitation'=>'هطولات مطرية جديدة',
     'update'=>'تعديل',
-    'editprecipitation'=>'تحرير بيانات الهطول المطري'
+    'editprecipitation'=>'تحرير بيانات الهطول المطري',
+    'choose_period_date'=>'اختر الفترة الزمنية',
+    'start_date'=>'من',
+    'end_date'=>'إلى',
+    'submit'=>'ابحث',
+    'precipitation_database_in_zawita_station'=>'قاعدة بيانات توضح نسبة الأمطار في محطة زاويتة',
+    'precipitation_report'=>'تقرير نسبة الامطار السنوية',
+    'year'=>'السنة',
+    'month'=>'الشهر',
+    'day'=>'اليوم',
+
 
 
 

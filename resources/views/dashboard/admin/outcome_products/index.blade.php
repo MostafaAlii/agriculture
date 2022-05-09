@@ -13,13 +13,27 @@
                 <h3 class="content-header-title">{{ __('Admin/outcome_products.outcome_productPageTitle') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/outcome_products.outcome_productPageTitle') }}</a>
-                            </li>
+                        @if($admin->type == 'employee')
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('AdminDepartment.index') }}">{{ $admin_dep_name }}</a>
+                                </li>
 
-                        </ol>
+                                <li class="breadcrumb-item"><a href="{{route('OutcomeProducts.index')}}">{{ __('Admin/outcome_products.outcome_productPageTitle') }}</a>
+                                </li>
+                                </li>
+                            </ol>
+                        @else
+
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{route('OutcomeProducts.index')}}">{{ __('Admin/outcome_products.outcome_productPageTitle') }}</a>
+                                </li>
+
+                            </ol>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -59,11 +73,14 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
+                                                    <th>{{ __('Admin/outcome_products.admin') }}</th>
                                                     <th>{{ __('Admin/outcome_products.country') }}</th>
                                                     <th>{{ __('Admin/outcome_products.province') }}</th>
                                                     <th>{{ __('Admin/outcome_products.area') }}</th>
                                                     <th>{{ __('Admin/outcome_products.outcome_product_amount') }}</th>
                                                     <th>{{ __('Admin/outcome_products.outcome_product_price') }}</th>
+                                                    <th>{{ __('Admin/outcome_products.currency') }}</th>
+
                                                     <th>{{ __('Admin/outcome_products.outcome_product_date') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
@@ -102,6 +119,8 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+
             {data: 'country', name: 'country',searchable: true, sortable: true},
             {data: 'province', name: 'province',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
@@ -109,6 +128,8 @@
 
             {data: 'outcome_product_amount', name: 'outcome_product_amount',searchable: true, sortable: true},
             {data: 'outcome_product_price', name: 'outcome_product_price',searchable: true, sortable: true},
+            {data: 'currency', name: 'currency',searchable: true, sortable: true},
+
             {data: 'outcome_product_date', name: 'outcome_product_date',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},

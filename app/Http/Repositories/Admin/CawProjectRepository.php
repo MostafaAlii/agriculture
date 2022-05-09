@@ -20,59 +20,98 @@ class CawProjectRepository implements CawProjectInterface{
 
     public function index()
     {
-
-        return view('dashboard.admin.caw_projects.index');
-
-    }
-    public function data()
-    {
-        $cawProjects = CawProject::with('farmer', 'village', 'adminDepartment');
-
-        return DataTables::of($cawProjects)
-            ->addColumn('record_select', 'dashboard.admin.caw_projects.data_table.record_select')
-            ->addIndexColumn()
-            ->editColumn('created_at', function (CawProject $cawProject) {
-                return $cawProject ->created_at->diffforhumans();
-            })
-            ->addColumn('farmer', function (CawProject $cawProject) {
-                return $cawProject ->farmer->email;
-            })
-            ->addColumn('village', function (CawProject $cawProject) {
-                return $cawProject->village->name;
-            })
-
-            ->addColumn('actions', 'dashboard.admin.caw_projects.data_table.actions')
-            ->rawColumns(['record_select', 'actions'])
-            ->toJson();
-
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+        return view('dashboard.admin.caw_projects.index',
+            compact('admin','areaID','area_name','stateID','state_name'));
     }
 
-    public function create()
-    {
+
+    public function data()    {
+
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $cawProjects = CawProject::with('farmer', 'village', 'adminDepartment','admin','area','state','translations')
+                ->where('admin_id','==',$admin->id );
+
+          }
+          else {
+              $cawProjects = CawProject::with('farmer', 'village', 'admin','area','state');
+          }
+            return DataTables::of($cawProjects)
+                ->addColumn('record_select', 'dashboard.admin.caw_projects.data_table.record_select')
+                ->addIndexColumn()
+                ->editColumn('created_at', function (CawProject $cawProject) {
+                    return $cawProject->created_at->diffforhumans();
+                })
+
+                 ->editColumn('type', function (CawProject $cawProject) {
+                     return view('dashboard.admin.caw_projects.data_table.type', compact('cawProject'));
+                })
+                ->editColumn('marketing_side', function (CawProject $cawProject) {
+                    return view('dashboard.admin.caw_projects.data_table.marketing_side', compact('cawProject'));
+                })
+                ->editColumn('food_source', function (CawProject $cawProject) {
+                    return view('dashboard.admin.caw_projects.data_table.food_source', compact('cawProject'));
+                })
+
+                ->addColumn('farmer', function (CawProject $cawProject) {
+                    return $cawProject->farmer->email;
+                })
+                ->addColumn('admin', function (CawProject $cawProject) {
+                    return $cawProject->admin->firstname;
+                })
+                ->addColumn('area', function (CawProject $cawProject) {
+                    return $cawProject->area->name;
+                })
+                ->addColumn('state', function (CawProject $cawProject) {
+                    return $cawProject->state->name;
+                })
+                ->addColumn('village', function (CawProject $cawProject) {
+                    return $cawProject->village->name;
+                })
+                ->addColumn('actions', 'dashboard.admin.caw_projects.data_table.actions')
+                ->rawColumns(['record_select', 'actions'])
+                ->toJson();
+
+    }
+
+
+    public function create()    {
+
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
         $areas = Area::all();
         $states = State::all();
-        $villages = Village::all();
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
+        $villages = Village::where('state_id',$stateID)->get();
         return view('dashboard.admin.caw_projects.create',
-            compact('farmers', 'admins', 'admin_dpartments', 'areas', 'villages','states'));
+            compact('adminId', 'admin', 'areaID', 'area_name', 'villages','areas','states','state_name','stateID'));
     }
-    public function store($request)
 
-    {
+
+    public function store($request)    {
         DB::beginTransaction();
         try {
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $animal = new CawProject();
-            $animal->admin_id = Auth::user()->id;
+            $animal->admin_id = $admin->id;
             $animal->farmer_id = $requestData['farmer_id'];
-            $animal->area_id = $requestData['area_id'];
-            $animal->state_id = $requestData['state_id'];
             $animal->village_id = $requestData['village_id'];
-            $animal->admin_department_id = 1;
-
-
+            $animal->area_id = $areaID;
+            $animal->state_id = $stateID;
             $animal->project_name = $requestData['project_name'];
             $animal->hall_num = $requestData['hall_num'];
             $animal->animal_count = $requestData['animal_count'];
@@ -80,11 +119,8 @@ class CawProjectRepository implements CawProjectInterface{
             $animal->marketing_side = $requestData['marketing_side'];
             $animal->cost = $requestData['cost'];
             $animal->type = $requestData['type'];
-
             $animal->phone = $requestData['phone'];
             $animal->email = $requestData['email'];
-
-
             $animal->save($requestData);
 
             DB::commit();
@@ -100,18 +136,20 @@ class CawProjectRepository implements CawProjectInterface{
     }
     public function edit($id)
     {
-        $animalID = Crypt::decrypt($id);
-        $animal = CawProject::findorfail($animalID);
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
         $areas = Area::all();
         $states = State::all();
-        $villages = Village::all();
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
-
+        $villages = Village::where('state_id',$stateID)->get();
+        $animalID = Crypt::decrypt($id);
+        $animal = CawProject::findorfail($animalID);
 
         return view('dashboard.admin.caw_projects.edit',
-            compact('farmers', 'admin_dpartments', 'villages', 'states','areas','admins', 'animal'));
+            compact('area_name','areas','state_name','states','admin','villages', 'animal','stateID','state_name','areaID'));
     }
 
     public function update($request,$id)
@@ -119,16 +157,18 @@ class CawProjectRepository implements CawProjectInterface{
     {
         DB::beginTransaction();
         try {
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $animalID = Crypt::decrypt($id);
             $animal = CawProject::findorfail($animalID);
-            $animal->admin_id = Auth::user()->id;
+            $animal->admin_id = $admin->id;
             $animal->farmer_id = $requestData['farmer_id'];
-            $animal->area_id = $requestData['area_id'];
-            $animal->state_id = $requestData['state_id'];
             $animal->village_id = $requestData['village_id'];
-            $animal->admin_department_id = 1;
-
+            $animal->area_id = $areaID;
+            $animal->state_id = $stateID;
 
             $animal->project_name = $requestData['project_name'];
             $animal->hall_num = $requestData['hall_num'];
@@ -137,7 +177,6 @@ class CawProjectRepository implements CawProjectInterface{
             $animal->marketing_side = $requestData['marketing_side'];
             $animal->cost = $requestData['cost'];
             $animal->type = $requestData['type'];
-
             $animal->phone = $requestData['phone'];
             $animal->email = $requestData['email'];
 
@@ -197,5 +236,88 @@ class CawProjectRepository implements CawProjectInterface{
 
 
     }// end of bulkDelete
+
+    public function statistics(){
+            $statistics = CawProject::select( 'area_translations.name AS Area','state_translations.name AS State',
+                'farmers.firstname AS farmer_name','farmers.phone AS phone','village_translations.name AS village_name'
+
+             , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                ,   'caw_projects.type AS type'
+            )
+
+                ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                ->where('caw_projects.marketing_side','like','%private%')
+                ->whereIn('caw_projects.type',['Caw','Ship','تربية الأغنام','تربية الأبقار'])
+                ->GroupBy('Area','State','village_name','farmer_name','phone','type'
+                )
+                ->get();
+
+                 return view('dashboard.admin.caw_projects.statistics',compact('statistics'));
+    }
+    public function ship_statistics(){
+        $ship_statistics = CawProject::select( 'area_translations.name AS Area','state_translations.name AS State',
+            'farmers.firstname AS farmer_name','farmers.phone AS phone','village_translations.name AS village_name'
+//            , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+            ,   'caw_projects.project_name as project_name', 'caw_projects.hall_num as hall_num',
+            'caw_projects.animal_count as animal_count',
+//            'caw_projects.type as type' ,
+            'caw_projects.marketing_side as marketing_side','caw_projects.food_source as food_source'
+            )
+            ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+            ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+            ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+
+            ->where('caw_projects.marketing_side','like','%govermental%')
+            ->whereIn('caw_projects.type',['Ship','تربية الأغنام'])
+//            ->GroupBy('Area','State','village_name','farmer_name'  )
+           ->get();
+        return view('dashboard.admin.caw_projects.ship_statistics',compact('ship_statistics'));
+    }
+
+
+    public function caw_statistics(){
+        $caw_statistics = CawProject::select( 'area_translations.name AS Area','state_translations.name AS State',
+            'farmers.firstname AS farmer_name','farmers.phone AS phone','village_translations.name AS village_name'
+//            , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+            ,'caw_projects.project_name as project_name', 'caw_projects.hall_num as hall_num',
+            'caw_projects.animal_count as animal_count',
+//            'caw_projects.type as type' ,
+            'caw_projects.marketing_side as marketing_side', 'caw_projects.food_source as food_source')
+
+            ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+            ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+            ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+            ->whereIn('caw_projects.type',['Caw','تربية الأبقار'])
+            ->where('caw_projects.marketing_side','like','%govermental%')
+//            ->GroupBy('Area','State','village_name','farmer_name' )
+            ->get();
+        return view('dashboard.admin.caw_projects.caw_statistics',compact('caw_statistics'));
+    }
+
+    public function fish_statistics(){
+        $fish_statistics = CawProject::select( 'area_translations.name AS Area','state_translations.name AS State',
+            'farmers.firstname AS farmer_name','farmers.phone AS phone','village_translations.name AS village_name'
+            ,  'caw_projects.project_name as project_name', 'caw_projects.hall_num as hall_num',
+            'caw_projects.animal_count as animal_count',
+//            'caw_projects.type as type' ,
+            'caw_projects.marketing_side as marketing_side','caw_projects.food_source as food_source')
+
+            ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+            ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+            ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+            ->where('caw_projects.marketing_side','like','%govermental%')
+//            ->where('caw_projects.type','like','Fish')
+            ->whereIn('caw_projects.type',['Fish','زراعة السمك'])
+//            ->GroupBy('Area','State','village_name','farmer_name','phone' ,'type' )
+            ->get();
+
+        return view('dashboard.admin.caw_projects.fish_statistics',compact('fish_statistics'));
+    }
 
 }

@@ -18,7 +18,7 @@ class areaFactory extends Factory
     {
          //  province
             return [
-                'name'             => $this->faker->randomElement(['xxx','qqq','www','eee','fff','ggg','lll','ooo']),
+                'name'             => $this->faker->randomElement(['z','qqq','www','eee','fff','ggg','lll','ooo']),
                 'province_id'       => $this->faker->numberBetween(1, Province::count()),
 
             ];

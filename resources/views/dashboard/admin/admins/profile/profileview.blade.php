@@ -192,11 +192,21 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.country'):</td>
-                                            <td>{{ $admin->country->name }}</td>
+                                            @if(($admin->country_id == null))
+                                                <td></td>
+
+                                                @else
+                                                <td>{{ $admin->country->name }}</td>
+                                                @endif
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.province'):</td>
-                                            <td>{{ $admin->province->name }}</td>
+                                            @if(($admin->province_id==null))
+                                                <td></td>
+
+                                            @else
+                                                <td>{{ $admin->province->name }}</td>
+                                            @endif
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.area'):</td>
@@ -208,7 +218,11 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.village'):</td>
-                                            <td>{{ $admin->village->name }}</td>
+                                            @if(($admin->village_id ==null))
+                                            <td></td>
+                                            @else
+                                                <td>{{ $admin->village->name }}</td>
+                                            @endif
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.department'):</td>

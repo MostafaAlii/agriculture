@@ -17,6 +17,11 @@ class AdminRequest extends FormRequest {
             'password'     => 'required|confirmed|min:3|max:10',
             'type'         => 'required|in:admin,employee',
             'admin_department_id'=>'required',
+            'country_id'      => 'sometimes|nullable',
+            'province_id'     => 'sometimes|nullable',
+            'area_id'         => 'required',
+            'state_id'        => 'required',
+            'village_id'      => 'sometimes|nullable',
             // "image"        => 'image|mimes:jpeg,png|max:4096',
         ];
 

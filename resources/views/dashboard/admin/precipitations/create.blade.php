@@ -12,17 +12,22 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\orchards.dashboard')}}</h3>
+                <h3 class="content-header-title">{{trans('Admin\precipitations.precipitationsPageTitle')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('Precipitations.index') }}">{{ __('Admin/precipitations.precipitations') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
                         </ol>
+
                     </div>
                 </div>
             </div>
@@ -88,19 +93,7 @@
 
                                                     </div>
 
-
-                                                    <div class="row mb-3">
-                                                        <div class="col">
-                                                            <div  class="form-group mb-3">
-                                                                <label class="">{{__('Admin\precipitations.departments')}}</label>
-                                                                <hr>
-                                                                <div id="jstree"></div>
-                                                                <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                   <div class="row">
+                                                        <div class="row">
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/precipitations.precipitation_rate') }}</label>
@@ -185,43 +178,6 @@
     </script>
 
 
-
-{{--departments--}}
-
-    <script  type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep(old('admin_department_id')) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.parent_id').val(r.join(', '));
-
-
-
-            });
-    </script>
 
 <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>
 <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>

@@ -7,7 +7,6 @@ use App\Models\Area;
 use App\Models\State;
 use App\Models\Village;
 use App\Models\Unit;
-use App\Models\SupportedSide;
 
 use App\Models\Tree;
 use App\Models\AdminDepartment;
@@ -28,68 +27,87 @@ class OrchardRepository implements OrchardInterface
 
     public function index()
     {
-        $farmers = Farmer::all();
-        $admin_dpartments = AdminDepartment::all();
-        $land_category = LandCategory::all();
-        $units = Unit::all();
-
-        $supported_sides = SupportedSide::all();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
         return view('dashboard.admin.orchards.index',
-            compact('farmers', 'admin_dpartments', 'land_category', 'units', 'supported_sides'));
+            compact('admin','areaID','area_name','stateID','state_name'));
 
     }
 
     public function data()
     {
-        $orchards = Orchard::with('farmer', 'village', 'adminDepartment','supported_side','trees')
-            ->selectRaw('distinct orchards.*')->get();
+        $adminID = Auth::user()->id;
+        $admin=Admin::findorfail($adminID);
+        if($admin->type =='employee') {
+            $orchards = Orchard::with('admin', 'farmer', 'village', 'trees', 'landCategory', 'area', 'state')
+                ->where('admin_id', '==', $admin->id)
+                ->selectRaw('distinct orchards.*')->get();
+        }else {
+            $orchards = Orchard::with('admin', 'farmer', 'village', 'trees', 'landCategory', 'area', 'state')
+                ->selectRaw('distinct orchards.*')->get();
+        }
+            return DataTables::of($orchards)
+                ->addColumn('record_select', 'dashboard.admin.orchards.data_table.record_select')
+                ->addIndexColumn()
+                ->editColumn('created_at', function (Orchard $chard) {
+                    return $chard ->created_at->diffforhumans();
+                })
+                ->editColumn('supported_side', function (Orchard $chard) {
+                    return view('dashboard.admin.orchards.data_table.supported_side', compact('chard'));
+                })
+                ->addColumn('farmer', function (Orchard $chard) {
+                    return $chard ->farmer->email;
+                })
+                ->addColumn('admin', function (Orchard $chard) {
+                    return $chard ->admin->email;
+                })
+                ->addColumn('area', function (Orchard $chard) {
+                    return $chard->area->name;
+                })
+                ->addColumn('state', function (Orchard $chard) {
+                    return $chard->state->name;
+                })
+                ->addColumn('village', function (Orchard $chard) {
+                    return $chard->village->name;
+                })
+                ->addColumn('landCategory', function (Orchard $chard) {
+                    return $chard->landCategory->category_name;
+                })
+                ->addColumn('name', function ($orchards) {
+                    return implode(', ', $orchards->trees->pluck('name')->toArray());
+                })
 
-        return DataTables::of($orchards)
-            ->addColumn('record_select', 'dashboard.admin.orchards.data_table.record_select')
-            ->addIndexColumn()
-            ->editColumn('created_at', function (Orchard $chard) {
-                return $chard ->created_at->diffforhumans();
-            })
-            ->addColumn('farmer', function (Orchard $chard) {
-                return $chard ->farmer->email;
-            })
-            ->addColumn('village', function (Orchard $chard) {
-                return $chard->village->name;
-            })
-            ->addColumn('landCategory', function (Orchard $chard) {
-                return $chard->landCategory->category_name;
-            })
-            ->addColumn('name', function ($orchards) {
-                return implode(', ', $orchards->trees->pluck('name')->toArray());
-            })
-            ->addColumn('adminDepartment', function (Orchard $chard) {
-                return $chard->adminDepartment->dep_name_ar;
-            })
-        ->addColumn('supported_side', function (Orchard $chard) {
-            return $chard->supported_side->Name;
-        })
 
-            ->addColumn('actions', 'dashboard.admin.orchards.data_table.actions')
-            ->rawColumns(['record_select', 'actions'])
-            ->toJson();
 
-    }
+                ->addColumn('actions', 'dashboard.admin.orchards.data_table.actions')
+                ->rawColumns(['record_select', 'actions'])
+                ->toJson();
+
+        }
+
+
+
 
     public function create()
     {
-        $areas = Area::all();
-        $states = State::all();
-        $villages = Village::all();
-        $farmers = Farmer::all();
-        $admin_dpartments = AdminDepartment::all();
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+        $villages = Village::where('state_id',$stateID)->get();
         $land_categories = LandCategory::all();
         $trees = Tree::all();
         $units = Unit::all();
-        $supported_sides = SupportedSide::all();
 
         return view('dashboard.admin.orchards.create',
-            compact('farmers', 'admin_dpartments', 'supported_sides',
-                'land_categories', 'areas', 'trees', 'states', 'units'));
+            compact('admin','area_name','areaID','stateID',
+                'land_categories', 'state_name', 'trees', 'villages', 'units'));
     }
 
 
@@ -114,20 +132,23 @@ class OrchardRepository implements OrchardInterface
 
         DB::beginTransaction();
         try {
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $orchard = new OrChard();
-            $orchard->admin_id = Auth::user()->id;
+            $orchard->admin_id = $admin->id;
             $orchard->farmer_id =    $requestData['farmer_id'];
-            $orchard->area_id = $requestData['area_id'];
-            $orchard->state_id = $requestData['state_id'];
+            $orchard->area_id = $areaID;
+            $orchard->state_id = $stateID;
             $orchard->village_id = $requestData['village_id'];
-            $orchard->admin_department_id = $requestData['admin_department_id'];
+
             $orchard->land_category_id = $requestData['land_category_id'];
-            $orchard->admin_department_id = 1;
             $orchard->tree_count_per_orchard = $requestData['tree_count_per_orchard'];
             $orchard->orchard_area = $requestData['orchard_area'];
             $orchard->unit_id = $requestData['unit_id'];
-            $orchard->supported_side_id = $requestData['supported_side_id'];
+            $orchard->supported_side = $requestData['supported_side'];
             $orchard->phone =  $requestData['phone'];
             $orchard->email =  $requestData['email'];
 
@@ -148,21 +169,24 @@ class OrchardRepository implements OrchardInterface
     }
 
     public function edit($id)
-    {
-//      $orchardID = Crypt::decrypt($id);
-        $orchard = Orchard::findorfail($id);
-        $areas = Area::all();
-        $farmers = Farmer::all();
-        $admin_dpartments = AdminDepartment::all();
+    {   $orchard = Orchard::findorfail($id);
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+        $villages = Village::where('state_id',$stateID)->get();
         $land_categories = LandCategory::all();
         $trees = Tree::all();
-        $orchard = OrChard::findorfail($id);
         $units = Unit::all();
-        $supported_sides = SupportedSide::all();
+
+
+
 
 
         return view('dashboard.admin.orchards.edit',
-            compact('farmers', 'admin_dpartments', 'land_categories', 'supported_sides','areas','trees', 'units','orchard'));
+            compact('state_name', 'villages', 'land_categories','stateID','areaID','area_name','trees', 'units','orchard'));
     }
 
     public function update($request, $id)
@@ -172,18 +196,20 @@ class OrchardRepository implements OrchardInterface
 //            $orchardID = Crypt::decrypt($id);
             $requestData = $request->validated();
             $orchard = Orchard::findorfail($id);
-            $orchard->admin_id = Auth::user()->id;
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
+            $orchard->admin_id =$admin->id;
             $orchard->farmer_id =       $requestData['farmer_id'];
-            $orchard->area_id = $requestData['area_id'];
-            $orchard->state_id = $requestData['state_id'];
+            $orchard->area_id = $areaID;
+            $orchard->state_id = $stateID;
             $orchard->village_id = $requestData['village_id'];
-            $orchard->admin_department_id = $requestData['admin_department_id'];
             $orchard->land_category_id = $requestData['land_category_id'];
-            $orchard->admin_department_id = 1;
             $orchard->tree_count_per_orchard = $requestData['tree_count_per_orchard'];
             $orchard->orchard_area = $requestData['orchard_area'];
             $orchard->unit_id = $requestData['unit_id'];
-            $orchard->supported_side_id = $requestData['supported_side_id'];
+            $orchard->supported_side = $requestData['supported_side'];
             $orchard->phone =     $requestData['phone'];
             $orchard->email =   $requestData['email'];
 
@@ -253,6 +279,31 @@ class OrchardRepository implements OrchardInterface
 
 
     }// end of bulkDelete
+
+
+    public function statistics(){
+        $statistics = Orchard::select( 'area_translations.name AS Area','state_translations.name AS State',
+            'farmers.firstname AS farmer_name','village_translations.name AS village_name' ,
+
+            DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+            DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard'),
+            'tree_translations.name AS name',
+            'orchards.supported_side AS supported_side',
+            'land_category_translations.category_name AS category_name')
+            ->join('orchard_trees', 'orchards.id', '=', 'orchard_trees.orchard_id')
+            ->join('tree_translations', 'tree_translations.id', '=', 'orchard_trees.tree_id')
+//
+            ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+            ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+            ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+            ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+            ->where('land_category_translations.category_name','like','%سيحي%')
+            ->orWhere('land_category_translations.category_name','like','%ديمي%')
+            ->orWhere('land_category_translations.category_name','like','%قمريات%')
+            ->GroupBy('Area','State','village_name','farmer_name','supported_side','category_name','name')->get();
+
+        return view('dashboard.admin.orchards.statistics',compact('statistics'));}
 
 
 }

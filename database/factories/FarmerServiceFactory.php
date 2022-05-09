@@ -22,22 +22,21 @@ class FarmerServiceFactory extends Factory
 
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->numerify('###########'),
-
-            'area_id'       => $this->faker->numberBetween(1, Area::count()),
-            'state_id'      => $this->faker->numberBetween(1, State::count()),
             'village_id'    => $this->faker->numberBetween(1, Village::count()),
-            'admin_department_id'  => 20,
+            'area_id'    => $this->faker->numberBetween(1, Area::count()),
+            'state_id'    => $this->faker->numberBetween(1, State::count()),
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
             'farmer_id'      => $this->faker->numberBetween(1, Farmer::count()),
+            'agri_services_count'=> $this->faker->numberBetween([1, 10]),
+            'agri_t_services_count'=> $this->faker->numberBetween([1, 10]),
+
+            'water_services_count'=> $this->faker->numberBetween([1, 10]),
+
 
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
+
     public function unverified()
     {
         return $this->state(function (array $attributes) {

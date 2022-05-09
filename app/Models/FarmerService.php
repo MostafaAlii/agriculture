@@ -6,7 +6,7 @@ class FarmerService extends Model {
     use HasFactory;
     public $timestamps = true;
     protected $table = "farmer_services";
-    protected $fillable = ['farmer_id','admin_id','area_id','village_id','state_id','admin_department_id','phone','email'];
+    protected $fillable = ['farmer_id','admin_id','area_id','village_id','state_id','phone','email'];
 
 
 
@@ -16,18 +16,15 @@ class FarmerService extends Model {
     public function admin(){
         return $this->belongsTo(Admin::class,'admin_id');
     }
+
+    public function village(){
+        return $this->belongsTo(Village::class,'village_id');
+    }
     public function area(){
         return $this->belongsTo(Area::class,'area_id');
     }
     public function state(){
         return $this->belongsTo(State::class,'state_id');
-    }
-    public function village(){
-        return $this->belongsTo(Village::class,'village_id');
-    }
-
-    public function adminDepartment(){
-        return $this->belongsTo(AdminDepartment::class,'admin_department_id');
     }
 
     public function agri_services(){

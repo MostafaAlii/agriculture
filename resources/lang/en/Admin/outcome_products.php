@@ -14,10 +14,12 @@ return [
     'outcome_product_date'=>'Outcome Product date',
     'currency'=>'Currency',
     'whole_product'=>'Product',
-    ''=>'',
-    ''=>'',
-    ''=>'',
+    'admin'=>'Employee Responsibleُ',
+    'product_name'=>'Product Name',
+    'dep_name'=>'WholeSale',
 
+    'outcome_products_report'=>'Outcome Products Report',
+    'database_about_outcome_products'=>'Database About Outcome Products',
 
     'action' =>'Processes',
     'admin_departments' =>'Admin Departments Related',

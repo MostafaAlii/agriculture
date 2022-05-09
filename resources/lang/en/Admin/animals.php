@@ -1,6 +1,8 @@
 <?php
 return [
 
+    'phone'=>'',
+    ''=>'',
 
 
     'action' =>'Processes',
@@ -8,8 +10,11 @@ return [
     'farmer' =>'Farmer',
     'area' =>'Area',
     'state' =>'State',
+    'admin'=>'Employee',
+    'newchicken'=>'New Chicken Project',
 
     'village' =>'Village',
+    'select'=>'Select',
 
     'farmer_phone' =>'Farmer Phone',
 
@@ -25,8 +30,20 @@ return [
     'delete'=>'Delete',
     'close'=>' Close',
     'add'=>'Add',
+    'animals_private_supported'=>'Counting the number of sheep and cows that are not part of the government\'s projects',
+    'animals_private_supported_report'=>'Report on the number of sheep and cows that are not included in government support',
+    'database_about_animal_projects_that_are_included_in_government_projects'=>'Record information about animal projects that are included in government projects',
+    'ship_govermental_supported_report'=>'Report on the number of sheep and goats supported by the government',
+    'caw_govermental_supported'=>'Counting the number of cows and calves supported by the government',
+    'caw_govermental_supported_report'=>'Report on the number of cows and calves supported by the government',
+    'caw_govermental_supported'=>'Counting the number of cows and calves supported by the government',
+    'caw_govermental_supported_report'=>'Report on the number of cows and calves supported by the government',
+    'fish_govermental_supported'=>'Counting the number of fisheries subsidized by the government',
+    'caw_govermental_supported_report'=>'Report on the number of fish tanks subsidized by the government',
+    'ship_govermental_supported'=>'Counting the number of ship subsidized by the government',
 
-
+    'ship_govermental_supported_report'=>'Report on the number of chicken project supported by the government',
+    'caw_govermental_supported'=>'Counting the number of chicken project supported by the government',
 
     'animalsPageTitle'=>'Cows, Sٍheep, Goats and Fish projects',
     'animals_project'=>'Cows, Sٍheep, Goats and Fish projects',

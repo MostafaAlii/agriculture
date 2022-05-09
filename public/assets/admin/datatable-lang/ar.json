@@ -13,10 +13,13 @@
     "sPrevious": "السابق",
     "sNext": "التالي",
     "sLast": "الأخير"
+
+
   },
   "oAria": {
     "sSortAscending": ": تفعيل لترتيب العمود تصاعدياً",
-    "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
+    "sSortDescending": ": تفعيل لترتيب العمود تنازلياً",
+
   },
   "select": {
     "rows": {

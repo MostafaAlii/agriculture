@@ -42,6 +42,15 @@ class LandAreaController extends Controller
     public function bulkDelete(Request $request) {
         return  $this->Data->bulkDelete( $request);
     }
+    public function getStatisticaldata(){
+        return  $this->Data->getStatisticaldata();
+    }
+    public function statistic_land_area_detail() {
+        return  $this->Data->statistic_land_area_detail();
+    }
+    public function statistic_land_area_state() {
+        return  $this->Data->statistic_land_area_state();
+    }
 
 
 }

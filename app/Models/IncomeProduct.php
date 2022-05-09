@@ -12,6 +12,9 @@ class IncomeProduct extends Model {
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id');
     }
+    public function admin(){
+        return $this->belongsTo(Admin::class,'admin_id');
+    }
 
     public function country(){
         return $this->belongsTo(Country::class,'country_id');
@@ -27,9 +30,7 @@ class IncomeProduct extends Model {
         return $this->belongsTo(Currency::class,'currency_id');
     }
 
-    public function adminDepartment(){
-        return $this->belongsTo(AdminDepartment::class,'admin_department_id');
-    }
+
     public function whole_product(){
         return $this->belongsTo(WholeProduct::class,'whole_product_id');
     }

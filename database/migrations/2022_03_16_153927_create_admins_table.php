@@ -16,11 +16,11 @@ class CreateAdminsTable extends Migration {
             $table->string('address')->nullable();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            $table->foreignId('country_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('province_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('area_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('state_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('village_id')->default('1')->constrained()->cascadeOnDelete();
+            $table->foreignId('country_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('province_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('area_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('state_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('village_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('department_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('admin_department_id')->constrained()->cascadeOnDelete();
 

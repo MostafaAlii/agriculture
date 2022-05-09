@@ -39,7 +39,6 @@ class DatabaseSeeder extends Seeder {
             ProductCouponSeeder::class,
             SliderSeeder::class,
             UnitSeeder::class,
-            supportedSideSeeder::class,
             TreeTypeSeeder::class,
             TreeSeeder::class,
             LandCategorySeeder::class,

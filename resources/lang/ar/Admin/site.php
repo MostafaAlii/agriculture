@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'whole_sale_market'=>'العلوات',
+    'planet_protection_services'=>'النباتات المحمية و الخدمات',
+    'planning'=>'التخطيط',
+    'Horticulture'=>'البستنة',
+    'animal_wealth'=>'الثروة الحيوانية',
+    'reporting'=>'التقارير',
     'home' => 'الصفحة الرئيسية',
     'logout' => 'الخروج',
     'login' => 'تسجيل الدخول',

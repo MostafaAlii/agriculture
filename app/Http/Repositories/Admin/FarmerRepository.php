@@ -58,8 +58,9 @@ class FarmerRepository implements FarmerInterface{
             return redirect()->route('farmers.index');
          } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->error(__('Admin/site.sorry'));
-            return redirect()->back();
+//            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+//            return redirect()->back();
          }
     }
 

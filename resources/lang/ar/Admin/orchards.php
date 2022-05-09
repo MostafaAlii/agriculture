@@ -12,7 +12,16 @@ return [
     'area' =>'القضاء',
     'state' =>'الناحية',
 
+    'orchardsPageTitle'=>'البساتين',
     'village' =>'القرية',
+    'private'=>'خاص',
+    'international_organizations'=>'منظمات دولية',
+    'govermental'=>'حكومي',
+    'tree_name'=>'اسم الشجرة',
+    'category_name'=>'صنف البستان',
+    'Report_on_the_lands_planted_with_trees'=>'تقرير عن الأراضي المزروعة بالأشجار',
+    'Tree_Lands_Database'=>'قاعدة بيانات الأراضي المزروعة بالأشجار',
+    'admin'=>'الموظف المسؤول',
 
     'farmer_phone' =>'هاتف الفلاح',
     'farmer_email' =>'البريد الإلكتروني للفلاح',

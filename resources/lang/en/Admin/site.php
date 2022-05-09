@@ -5,6 +5,16 @@ return [
     'logout' => 'Logout',
     'login' => 'Login',
     'serial' => 'Serial',
+    'whole_sale_market'=>'WholeSale Market',
+    'planning'=>'Planning',
+    'animal_wealth'=>'Animal Wealth',
+    'reporting'=>'Reporting',
+
+    'planet_protection_services'=>'Plant Protection && Services',
+    'Horticulture'=>'Horticulture',
+    ''=>'',
+    ''=>'',
+    ''=>'',
 
     'add' => 'Add',
     'edit' => 'Edit',

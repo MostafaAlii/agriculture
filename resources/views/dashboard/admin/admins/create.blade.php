@@ -92,6 +92,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/admin.admin_department') }}</label>
                                                     <label class="">{{__('Admin\admin.admin_departments')}}</label>
@@ -99,6 +100,31 @@
                                                     <div id="jstree"></div>
                                                     <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
 
+                                                </div>
+                                                </div>
+                                                <div class="col col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="area_id">{{ __('Admin/orchards.area') }}</label>
+                                                        <select name="area_id" id="area_id" class="form-control" required>
+                                                            <option value="">{{ __('Admin/site.select') }}</option>
+                                                            </option>
+                                                            @foreach ($areas as $area)
+                                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col col-md-4">
+
+                                                    <div class="form-group">
+                                                        <label for="state_id">{{ __('Admin/orchards.state') }}</label>
+                                                        <select class=" form-control" name="state_id" id="state_id">
+                                                            <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                        </select>
+
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -171,6 +197,36 @@
             }
 
         };
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            //  ajax for get states data of area =====================================================================
+            $('select[name="area_id"]').on('change', function() {
+                var area_id = $(this).val();
+                // console.log(province_id);
+                if (area_id) {
+                    $.ajax({
+                        url: "{{ URL::to('dashboard_admin/admin/state') }}/" + area_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="state_id"]').empty();
+                            $('select[name="state_id"]').append( '<option selected disabled>--select--</option>');
+
+                            $.each(data, function(key, value) {
+
+                                $('select[name="state_id"]').append(
+                                    '<option value="' + key + '">' + value +'</option>'
+                                );
+                            });
+                        },
+                    });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+        });
     </script>
 
     <script  type="text/javascript">

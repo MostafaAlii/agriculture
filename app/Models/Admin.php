@@ -6,8 +6,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 class Admin extends Authenticatable {
+   use \Znck\Eloquent\Traits\BelongsToThrough;
     use HasFactory, Notifiable;
-    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $table = "admins";
     protected $guarded = [];
@@ -18,17 +18,17 @@ class Admin extends Authenticatable {
         return $this->morphOne(Image::class, 'imageable');
     }
 
-//    public function country() {
+//    public function country_1() {
 //        return $this->belongsToThrough(Country::class, [Province::class,Area::class,State::class,Village::class]);
 //    }
-//    public function province() {
+//    public function province_1() {
 //        return $this->belongsToThrough(Province::class, [Area::class,State::class,Village::class]);
 //    }
-//    public function area() {
+//    public function area_1() {
 //        return $this->belongsToThrough(Area::class, [State::class,Village::class]);
 //    }
 //
-//    public function state() {
+//    public function state_1() {
 //        return $this->belongsToThrough(State::class, Village::class);
 //    }
     public function country() {

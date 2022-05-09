@@ -1,12 +1,18 @@
 <?php
 return [
-
+    'database_about_farmer_services'=>'قاعدة بيانات حول الخدمات المقدمة للفلاح',
+    'farmer_services_report'=>'تقرير عن الخدمات المقدمة للفلاح',
+    'agri_service_count'=>'عدد الخدمات الزراعية',
+    'agri_t_service_count'=>'عدد الآلات الزراعية',
+    'email'=>'البريد الإلكتروني',
+    'water_service_count'=>'عدد الخدمات المائية',
     'add_new_agriculture_service'=>'إضافة خدمة زراعية جديدة',
     'enter_service_name'=>'أدخل اسم الخدمة الزراعية',
     'enter_service_name_placeholder'=>'أدخل اسم الخدمة الزراعية',
     'agricultureServicePageTitle'=>'الخدمات الزراعية',
     'service_name'=>'أدخل اسم الخدمة',
     'update'=>'تعديل',
+    'admin'=>'الموظف المسؤول',
     'add_new_agriculture_tool_service'=>'اضافة أداة خدمة زراعية جديدة',
     'agricultureToolServicePageTitle'=>'أدوات الخدمة الزراعية',
     'add_new_agriculture_tool_service'=>'إضافة أداة خدمة زراعية جديدة',

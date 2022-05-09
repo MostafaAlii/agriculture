@@ -258,8 +258,11 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
                                                     <select class="select2 form-control" id="province_id" name="province_id">
-                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        @if($admin->province_id == null)
+                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                        @else
                                                         <option value="{{ $admin->province_id }}"  >{{ $admin->province->name }}</option>
+                                                        @endif
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -279,8 +282,11 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
                                                     <select class="select2 form-control" id="village_id" name="village_id">
-                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+                                                        @if($admin->village_id ==null)
+                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                        @else
                                                         <option value="{{ $admin->village_id }}"  >{{ $admin->village->name }}</option>
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -307,11 +313,10 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>{{ __('Admin/admin.admin_department') }}</label>
-                                                    <label class="">{{__('Admin\admin.admin_departments')}}</label>
+                                                    <label>{{ __('Admin/admins.admin_department') }}</label>
                                                     <hr>
                                                     <div id="jstree"></div>
-                                                    <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
+                                                    <input name="admin_department_id" type="hidden" value="{{$admin->admin_department_id}}" class="admin_department_id">
 
                                                 </div>
 
@@ -643,7 +648,7 @@
 
         $('#jstree').jstree({
             "core" : {
-                'data' :   {!! load_dep(old('admin_department_id')) !!},
+                'data' :   {!! load_dep($admin->admin_department_id) !!},
                 "themes" : {
                     "variant" : "large"
                 }

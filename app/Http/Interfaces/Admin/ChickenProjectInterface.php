@@ -9,4 +9,6 @@ interface ChickenProjectInterface {
     public function update($request,$id);
     public function destroy($id);
     public function bulkDelete($request);
-}
+    public function chicken_project_statistics();
+
+    }

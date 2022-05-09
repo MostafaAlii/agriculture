@@ -8,12 +8,25 @@ class ProtectedHouse extends Model {
     protected $guarded=[];
     public $timestamps = true;
 
+    const SPATIAL = 'private', GOVERMENTAL = 'govermental', INTERNATIONAL_ORGANIZATION = 'international organizations',ACTIVE ='active',INACTIVE ='inactive';
+    public function getSupportedSide() {
+        switch ($this->supported_side) {
+            case 'private': $result =   trans('Admin/p_houses.private'); break;
+            case 'govermental': $result = trans('Admin/p_houses.govermental') ; break;
+            case 'international organizations': $result =  trans('Admin/p_houses.international_organizations') ; break;
+        }
+        return $result;
+    }
 
+    public function getStatus() {
+        switch ($this->status) {
+            case 'active': $result =   trans('Admin/p_houses.active'); break;
+            case 'inactive': $result = trans('Admin/p_houses.inactive') ; break;
+        }
+        return $result;
+    }
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id');
-    }
-    public function supported_side(){
-        return $this->belongsTo(SupportedSide::class,'supported_side_id');
     }
 
     public function farmer(){
@@ -32,8 +45,6 @@ class ProtectedHouse extends Model {
         return $this->belongsTo(Village::class,'village_id');
     }
 
-    public function adminDepartment(){
-        return $this->belongsTo(AdminDepartment::class,'admin_department_id');
-    }
+
 
 }

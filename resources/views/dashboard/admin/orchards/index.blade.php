@@ -3,23 +3,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/admins.orchardPageTitle') }}
+    {{ __('Admin/orchards.orchardsPageTitle') }}
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/orchards.orchards') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/orchards.orchardsPageTitle') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
+                        @if($admin->type == 'employee')
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('orchards.index') }}">{{ __('Admin/orchards.orchardsPageTitle') }}</a>
+                                </li>
+                                </li>
+                            </ol>
+                        @else
+
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/orchards.orchards') }}</a>
-                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('orchards.index') }}">{{ __('Admin/orchards.orchardsPageTitle') }}</a>
 
                         </ol>
+                            @endif
                     </div>
                 </div>
             </div>
@@ -59,11 +73,12 @@
                                                 <th>
                                                     <input type="checkbox" name="select_all" id="select-all">
                                                 </th>
-                                                <th>{{ __('Admin/site.farmer') }}</th>
-                                                <th>{{ __('Admin/site.village') }}</th>
+                                                <th>{{ __('Admin/orchards.admin') }}</th>
+                                                <th>{{ __('Admin/orchards.farmer') }}</th>
+                                                <th>{{ __('Admin/orchards.area') }}</th>
+                                                <th>{{ __('Admin/orchards.state') }}</th>
+                                                <th>{{ __('Admin/orchards.village') }}</th>
                                                 <th>{{ __('Admin/site.land_category') }}</th>
-                                                <th>{{ __('Admin/orchards.adminDepartment') }}</th>
-
                                                 <th>{{ __('Admin/orchards.orchard_area') }}</th>
                                                 <th>{{ __('Admin/orchards.tree_count_per_orchard') }}</th>
                                                 <th>{{ __('Admin/orchards.trees') }}</th>
@@ -97,6 +112,34 @@
             // dom: "tiplr",
             serverSide: true,
             processing: true,
+            dom: 'Bfrtip',
+
+            buttons: [
+                { text:'excel',
+                    extend: 'excel',
+                    orientation: 'landscape',
+                    pageSize: 'A3',
+                    exportOptions: {
+                        columns: [1, 2,3,4,5,6,7,8,9]
+                    },
+                    className: 'btn btn-primary ml-1',
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [1, 2,3,4,5,6,7,8,9]
+                    },
+                    autoPrint: true,
+                    orientation: 'landscape',
+                    className: 'btn btn-success ml-1',
+                    pageSize: 'A3',
+                    text:'print'
+                },
+
+
+
+            ],
             lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
             "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
@@ -106,11 +149,13 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+                {data: 'admin', name: 'admin.email',searchable: true, sortable: true},
                 {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+                {data: 'area', name: 'area',searchable: true, sortable: true},
+                {data: 'state', name: 'state',searchable: true, sortable: true},
                 {data: 'village', name: 'village.name',searchable: true, sortable: true},
-                {data: 'landCategory', name: 'landCategory',searchable: true, sortable: true},
-                {data: 'adminDepartment', name: 'adminDepartment',searchable: true, sortable: true},
 
+                {data: 'landCategory', name: 'landCategory',searchable: true, sortable: true},
                 {data: 'orchard_area', name: 'orchard_area',searchable: true, sortable: true},
                 {data: 'tree_count_per_orchard', name: 'tree_count_per_orchard',searchable: true, sortable: true},
                 {data: 'name', name: 'name',searchable: true, sortable: true},

@@ -12,17 +12,22 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\animals.dashboard')}}</h3>
+                <h3 class="content-header-title">{{trans('Admin\animals.animalsPageTitle')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('Animals.index') }}">{{ __('Admin/animals.animals_project') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.edit') }}
                             </li>
                         </ol>
+
                     </div>
                 </div>
             </div>
@@ -61,45 +66,21 @@
                                         <div class="form-body">
 
                                             <div class="row mt-2">
-                                                <div class="col col-md-4">
+                                                <div class="col col-md-6">
                                                     <div class="form-group">
-                                                        <label for="area_id">{{ __('Admin/animals.area') }}</label>
-                                                        <select name="area_id" id="area_id" class="form-control" required>
+                                                        <label for="area_id">{{ __('Admin/animals.village') }}</label>
+                                                        <select name="village_id" id="village_id" class="form-control" required>
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
-                                                            <option value="{{ $animal->area_id }}" selected>{{ $animal->area->name }}</option>
-                                                            @foreach ($areas as $area)
-                                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                            <option value="{{ $animal->village_id }}" selected>{{ $animal->village->name }}</option>
+                                                            @foreach ($villages as $village)
+                                                                <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                             @endforeach
                                                         </select>
 
                                                     </div>
                                                 </div>
-                                                <div class="col col-md-4">
-
-                                                    <div class="form-group">
-                                                        <label for="state_id">{{ __('Admin/animals.state') }}</label>
-                                                        <select class=" form-control" name="state_id" id="state_id">
-                                                            <option value="">{{ __('Admin/site.select') }}</option>
-                                                            <option value="{{$animal->state_id}}" selected>{{$animal->state->name}}</option>
-
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="village_id">{{ __('Admin/animals.village') }}</label>
-                                                        <select class=" form-control" name="village_id" id="village_id">
-                                                                <option value="{{$animal->village_id}}" selected>{{$animal->village->name}}</option>
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-
-                                                <div class="col">
+                                                <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/animals.farmer') }}</label>
                                                         <select class="select2 form-control" name="farmer_id" id="farmer_id">
@@ -108,6 +89,10 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row mt-2">
+
+
 
                                                 <div class="col">
                                                     <div class="form-group">
@@ -127,7 +112,7 @@
                                                         <label for="id_h5_multi">{{ __('Admin/animals.marketing_side') }}</label>
                                                         <select name="marketing_side"class="select2 form-control"id="id_h5_multi">
                                                             <option value="{{$animal->marketing_side}}" selected>{{$animal->marketing_side}}</option>
-                                                            <option value="">{{ __('Admin/site.select') }}</option>
+                                                            <option value="">--{{ __('Admin/animals.select') }}--</option>
                                                             <option value="private">{{ __('Admin/animals.private') }}</option>
                                                             <option value="govermental">{{ __('Admin/animals.govermental') }}</option>
 
@@ -140,7 +125,7 @@
                                                         <label for="id_h5_multi">{{ __('Admin/animals.food_source') }}</label>
                                                         <select name="food_source"class="select2 form-control"id="id_h5_multi">
                                                             <option value= "{{$animal->food_source}}" selected>{{$animal->food_source}}</option>
-                                                            <option value="">{{ __('Admin/site.select') }}</option>
+                                                            <option value="">--{{ __('Admin/animals.select') }}--</option>
                                                             <option value="local">{{ __('Admin/animals.local') }}</option>
                                                             <option value="outer">{{ __('Admin/animals.outer') }}</option>
 
@@ -157,17 +142,7 @@
 
                                             </div>
 
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <div  class="form-group mb-3">
-                                                        <label class="">{{__('Admin\animals.departments')}}</label>
-                                                        <hr>
-                                                        <div id="jstree"></div>
-                                                        <input name="admin_department_id" type="hidden" value="{{$animal->admin_department_id}}" class="admin_department_id">
 
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="form-group">
@@ -195,7 +170,7 @@
                                                         <label for="customSelect1">{{ __('Admin/animals.type') }}</label>
                                                         <select class="custom-select form-control" id="customSelect1" name="type" >
                                                             <option value="{{$animal->type}}" selected>{{$animal->type}}</option>
-                                                            <option  disabled>--select--</option>
+                                                            <option value="">--{{ __('Admin/animals.select') }}--</option>
 
                                                             <option value="ship">{{ __('Admin/animals.ship') }}</option>
                                                             <option value="caw">{{ __('Admin/animals.caw') }}</option>
@@ -356,43 +331,7 @@
 
     </script>
 
-    {{--departments--}}
 
-    <script  type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-
-                    'data' :   {!! load_dep($animal->admin_department_id) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
-
-
-
-            });
-    </script>
 
     <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>
     <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>

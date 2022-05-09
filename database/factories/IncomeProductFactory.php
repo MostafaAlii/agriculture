@@ -27,12 +27,12 @@ class IncomeProductFactory extends Factory
             'country_id'       => $this->faker->numberBetween(1, Country::count()),
             'Province_id'      => $this->faker->numberBetween(1, Province::count()),
             'area_id'    => $this->faker->numberBetween(1, Area::count()),
-            'admin_department_id'  => 4,
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
             'unit_id'      => $this->faker->randomElement([1, 2]),
             'whole_product_id'=>$this->faker->numberBetween(1, WholeProduct::count()),
             'currency_id'=>$this->faker->numberBetween(1, Currency::count()),
             'income_product_amount'=>$this->faker->numberBetween([100,200,300,400, 500]),
+            'admin_dep_name'=>$this->faker->randomElement(["داهوك", "زاخو",'عقرة','برداش']),
 
             'income_product_price'=>$this->faker->numberBetween([100,200,300,400, 500]),
             'income_product_date'=>$this->faker->date(),

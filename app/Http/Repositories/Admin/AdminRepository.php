@@ -2,6 +2,7 @@
 namespace  App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\AdminInterface;
 use App\Models\Admin;
+use App\Models\Area;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
@@ -44,7 +45,8 @@ class AdminRepository implements AdminInterface{
     }
 
     public function create() {
-        return view('dashboard.admin.admins.create');
+        $areas = Area::all();
+        return view('dashboard.admin.admins.create',compact('areas'));
     }
     public function store($request) {
         DB::beginTransaction();

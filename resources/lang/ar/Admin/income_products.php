@@ -13,12 +13,17 @@ return [
     'delete'=>'حذف',
     'close'=>'إلغاء الأمر',
     'save'=>'حفظ',
+'product_name'=>'اسم المنتج',
+    'dep_name'=>'العلوة',
+    'income_products_report'=>'تقرير بالمنتجات الواردة الى العلوة',
+    'database_about_income_products'=>'قاعدة بيانات المنتجات الواردة الى العلوة',
 
     'update'=>'تعديل',
+    'admin'=>'الموظف المسؤول',
 
 
     'new_income_product'=>'منتج جديد وارد',
-    'income_productPageTitle'=>'المنتجات الواردة من العلوة',
+    'income_productPageTitle'=>'المنتجات الواردة إلى العلوة',
 
     'edit_incomeProductPageTitle'=>'تحرير بيانات المنتجات الواردة الى العلوة',
 

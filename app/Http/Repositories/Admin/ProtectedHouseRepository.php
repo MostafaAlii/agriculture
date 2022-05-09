@@ -1,15 +1,9 @@
 <?php
 namespace  App\Http\Repositories\Admin;
 use App\Models\ProtectedHouse;
-use App\Models\Farmer;
 use App\Models\Admin;
-use App\Models\Area;
-use App\Models\State;
 use App\Models\Village;
 use App\Models\Unit;
-use App\Models\SupportedSide;
-
-use App\Models\AdminDepartment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -21,20 +15,30 @@ use App\Http\Interfaces\Admin\ProtectedHouseInterface;
 
 class ProtectedHouseRepository implements ProtectedHouseInterface{
     public function index() {
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
-        $units = Unit::all();
-        $supported_sides = SupportedSide::all();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
         return view('dashboard.admin.protected_houses.index',
-            compact( 'admin_dpartments', 'units', 'supported_sides','farmers','admins'));
+         compact('admin','areaID','area_name','stateID','state_name'));
+
 
 
     }
 
     public function data()
     {
-        $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area','state','adminDepartment');
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area', 'state', 'admin')
+            ->where('admin_id', '==', $admin->id);
+        }else{
+            $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area', 'state', 'admin');
+
+        }
 
         return DataTables::of($protectedHouse)
             ->addColumn('record_select', 'dashboard.admin.protected_houses.data_table.record_select')
@@ -42,8 +46,17 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
             ->editColumn('created_at', function (ProtectedHouse $protected) {
                 return $protected ->created_at->diffforhumans();
             })
+            ->editColumn('supported_side', function (ProtectedHouse $protected) {
+                return view('dashboard.admin.protected_houses.data_table.supported_side', compact('protected'));
+            })
+            ->editColumn('status', function (ProtectedHouse $protected) {
+                return view('dashboard.admin.protected_houses.data_table.status', compact('protected'));
+            })
             ->addColumn('farmer', function (ProtectedHouse $protected) {
-                return $protected ->farmer->firstname;
+                return $protected ->farmer->email;
+            })
+            ->addColumn('admin', function (ProtectedHouse $protected) {
+                return $protected ->admin->firstname;
             })
             ->addColumn('village', function (ProtectedHouse $protected) {
                 return $protected->village->name;
@@ -53,9 +66,6 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
             })
             ->addColumn('state', function (ProtectedHouse $protected) {
                 return $protected->state->name;
-            })
-            ->addColumn('adminDepartment', function (ProtectedHouse $protected) {
-                return $protected->adminDepartment->dep_name_ar;
             })
 
 
@@ -67,18 +77,20 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
 
     public function create()
     {
-        $areas = Area::all();
-        $states = State::all();
-        $villages = Village::all();
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $villages = Village::where('state_id',$stateID)->get();
+        $state_name = $admin->state->name;
         $units = Unit::all();
-        $supported_sides = SupportedSide::all();
+        $adminID = $admin->id;
+        $admin = Admin::findorfail($adminID);
+
 
         return view('dashboard.admin.protected_houses.create',
-            compact('farmers', 'admins', 'admin_dpartments', 'supported_sides',
-             'areas',  'states', 'units'));
+            compact( 'admin', 'stateID' ,'areaID'    , 'villages'   ,   'area_name','state_name','units'));
     }
 
     public function store($request)
@@ -86,24 +98,23 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
     {
         DB::beginTransaction();
         try {
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $protected_house = new ProtectedHouse();
-            $protected_house->admin_id = Auth::user()->id;
+            $protected_house->admin_id = $admin->id;
             $protected_house->farmer_id = $requestData['farmer_id'];
-            $protected_house->area_id = $requestData['area_id'];
-            $protected_house->state_id = $requestData['state_id'];
+            $protected_house->area_id = $areaID;
+            $protected_house->state_id = $stateID;
             $protected_house->village_id = $requestData['village_id'];
-            $protected_house->admin_department_id = $requestData['admin_department_id'];
             $protected_house->status = $requestData['status'];
-            if($requestData['status'] =="active"){
-                $protected_house->average_product_annual = $requestData['average_product_annual'];
-
-            }else{
-                $protected_house->average_product_annual = 0;
-
-            }
+            $protected_house->average_product_annual = $requestData['average_product_annual'];
             $protected_house->unit_id = $requestData['unit_id'];
-            $protected_house->supported_side_id = $requestData['supported_side_id'];
+            $protected_house->protected_house_count = $requestData['protected_house_count'];
+
+            $protected_house->supported_side = $requestData['supported_side'];
             $protected_house->phone = $requestData['phone'];
             $protected_house->email = $requestData['email'];
 
@@ -126,16 +137,17 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
     {
         $protectedID = Crypt::decrypt($id);
         $protected_house = ProtectedHouse::findorfail($protectedID);
-        $areas = Area::all();
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $area_name = $admin->area->name;
+        $state_name = $admin->state->name;
+        $stateID = $admin->state->id;
         $units = Unit::all();
-        $supported_sides = SupportedSide::all();
+        $villages = Village::where('state_id',$stateID)->get();
 
 
         return view('dashboard.admin.protected_houses.edit',
-            compact('farmers', 'admin_dpartments', 'supported_sides','areas', 'units','protected_house'));
+            compact('admin','area_name', 'state_name','villages','units','protected_house'));
     }
 
     public function update($request,$id) {
@@ -144,24 +156,23 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
         try {
             $requestData = $request->validated();
             $protectedID = Crypt::decrypt($id);
-
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
             $protected_house =  ProtectedHouse::findorfail($protectedID);
-            $protected_house->admin_id = Auth::user()->id;
+            $protected_house->admin_id = $admin->id;
             $protected_house->farmer_id = $requestData['farmer_id'];
-            $protected_house->area_id = $requestData['area_id'];
-            $protected_house->state_id = $requestData['state_id'];
+            $protected_house->area_id = $areaID;
+            $protected_house->state_id = $stateID;
             $protected_house->village_id = $requestData['village_id'];
-            $protected_house->admin_department_id = $requestData['admin_department_id'];
-            if($requestData['status'] =="active"){
                 $protected_house->average_product_annual = $requestData['average_product_annual'];
 
-            }else{
-                $protected_house->average_product_annual = 0;
+            $protected_house->protected_house_count = $requestData['protected_house_count'];
 
-            }
             $protected_house->status = $requestData['status'];
             $protected_house->unit_id = $requestData['unit_id'];
-            $protected_house->supported_side_id = $requestData['supported_side_id'];
+            $protected_house->supported_side = $requestData['supported_side'];
             $protected_house->phone = $requestData['phone'];
             $protected_house->email = $requestData['email'];
 
@@ -223,4 +234,69 @@ class ProtectedHouseRepository implements ProtectedHouseInterface{
 
     }// end of bulkDelete
 
+
+    public function protected_house_statistics(){
+        $statistics = ProtectedHouse::select( 'area_translations.name AS Area','state_translations.name AS State',
+            'farmers.firstname AS farmer_name','farmers.phone AS phone','village_translations.name AS village_name',
+            'protected_houses.supported_side AS supported_side',
+            'protected_houses.status AS status',
+            'protected_houses.count_protected_house AS count_protected_house',
+            'protected_houses.average_product_annual AS average_product_annual',
+            'unit_translations.Name AS unit_name')
+
+
+            ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+            ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+            ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+            ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+            ->get();
+
+        return view('dashboard.admin.protected_houses.protected_house_statistics',compact('statistics'));
+    }
+    public function protected_house_gov_statistics(){
+        $statistics = ProtectedHouse::select( 'area_translations.name AS Area','state_translations.name AS State',
+            'farmers.firstname AS farmer_name','farmers.phone AS phone','village_translations.name AS village_name',
+            'protected_houses.supported_side AS supported_side',
+            'protected_houses.status AS status'
+            , DB::raw('SUM(protected_houses.count_protected_house) As count_protected_house')
+            , DB::raw('SUM(protected_houses.average_product_annual) As average_product_annual'),
+
+            'unit_translations.Name AS unit_name')
+
+
+            ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+            ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+            ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+            ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+            ->where('protected_houses.supported_side','like','govermental')
+            ->GROUPBY('Area','State','village_name','status','farmer_name','phone','supported_side',
+                'status','count_protected_house','average_product_annual','unit_name')->get();
+
+        return view('dashboard.admin.protected_houses.protected_house_g_statistics',compact('statistics'));
+    }
+    public function protected_house_private_statistics(){
+        $statistics = ProtectedHouse::select( 'area_translations.name AS Area','state_translations.name AS State',
+            'farmers.firstname AS farmer_name','farmers.phone AS phone','village_translations.name AS village_name',
+            'protected_houses.supported_side AS supported_side',
+            'protected_houses.status AS status',
+            'protected_houses.count_protected_house AS count_protected_house',
+            'protected_houses.average_product_annual AS average_product_annual'
+            , DB::raw('SUM(protected_houses.count_protected_house) As count_protected_house')
+            , DB::raw('SUM(protected_houses.average_product_annual) As average_product_annual'),
+            'unit_translations.Name AS unit_name')
+
+
+            ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+            ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+            ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+            ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+            ->whereIn('protected_houses.supported_side',['private','International Organization'])
+            ->GROUPBY('Area','State','village_name','status','farmer_name','phone','supported_side',
+                'status','count_protected_house','average_product_annual','unit_name')->get();
+
+        return view('dashboard.admin.protected_houses.protected_house_P_statistics',compact('statistics'));
+    }
 }

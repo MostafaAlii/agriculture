@@ -8,45 +8,10 @@ use App\Models\Unit;
 
 class UnitSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
-        DB::table('units')->delete();
-        $units = [
+        Unit::factory(7)->create();
 
-            [
-                'en'=> 'kg',
-                'ar'=> 'كيلو غرام'
-            ],
-            [
-                'en'=> 'ton',
-                'ar'=> 'طن'
-            ],
-            [
-                'en'=> 'hictar',
-                'ar'=> 'هيكتار'
-            ],
-            [
-                'en'=> 'donom',
-                'ar'=> 'دونم'
-            ],
-            [
-                'en'=> 'm2',
-                'ar'=> 'متر مربع'
-            ],
-            [
-                'en'=> ' mm',
-                'ar'=> 'ميلي متر'
-            ],
-
-
-        ];
-        foreach($units as $u){
-            Unit::create(['Name'=>$u]);
-        }
     }
 }
