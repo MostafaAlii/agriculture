@@ -6,20 +6,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Controllers\front\farmer\EditProduct;
 use App\Http\Controllers\front\farmer\FarmerEditProfile;
-/*
-|--------------------------------------------------------------------------
-| Farmer Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
-
 
 
 Route::group(

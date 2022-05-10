@@ -66,6 +66,7 @@ return [
     'incorrect_old_password' => 'Incorrect old password',
 
     'newuser'=>'New User',
+    'newworker'=>'New Worker',
     'newfarmer'=>'New Farmer',
     'farmer'=>'Farmers',
     'warning' => 'Are you sure to delete ?',
@@ -83,6 +84,7 @@ return [
 
     'signvendor'=>'sign in as vendor',
     'signfarmer'=>'sign in as farmer',
+    'signworker'=>'sign in as Worker',
     'newfarmer'=>'New Farmer',
     'newvendor'=>'New Vendor',
     'yourtype'=>'Select Your Type',

@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\UserAuthenticatedSessionController;
+use App\Http\Controllers\Auth\WorkerAuthenticatedSessionController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisteredFarmerController;
+use App\Http\Controllers\Auth\RegisteredWorkerController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -20,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     route::view('userlogin','front.user.auth.userlogin')->name('user.login2');       // user login
     route::view('farmerlogin','front.user.auth.farmerlogin')->name('farmer.login');  // farmer login
+    route::view('workerlogin','front.user.auth.workerlogin')->name('worker.login');  // worker login
     // routes for admin login  ***********************************************************************************
     Route::get('agro', [AdminController::class, 'create'])->name('admin.login');    // admin login
     Route::post('Admin/login', [AdminController::class, 'store'])->name('admin.login.post');
@@ -35,6 +38,10 @@ Route::middleware('guest')->group(function () {
     Route::post('Farmer/login', [AuthenticatedSessionController::class, 'store'])->name('farmer.login.post');
     Route::post('/farmer-register', [RegisteredFarmerController::class, 'store'])->name('farmer.register.post');
     // end route for register farmer *********************************************************************************
+    // route for register worker *********************************************************************************
+    Route::post('worker/login', [WorkerAuthenticatedSessionController::class, 'store'])->name('worker.login.post');
+    Route::post('/worker-register', [RegisteredWorkerController::class, 'store'])->name('worker.register.post');
+    // end route for register worker *********************************************************************************
 
     // user forget password ********************************************************************
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
@@ -107,9 +114,10 @@ Route::middleware('auth')->group(function () {
 Route::post('logout/user', [UserAuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth:vendor')
     ->name('logout.user');
-
-
-
+// worker log out route *******************************************************************
+Route::post('logout/worker', [WorkerAuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth:worker')
+    ->name('logout.worker');
 //  admin log out route *************************************************************************
     Route::post('logout/admin', [AdminController::class, 'destroy'])
     ->middleware('auth:admin')

@@ -54,6 +54,9 @@ class RedirectIfAuthenticated
                 // return redirect()->route('home.user');
                 return redirect()->route('home.user');
             }
+         if (auth('worker')->check()) {
+                return redirect()->route('home.worker');
+            }
 
         return $next($request);
     }

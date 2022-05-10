@@ -57,6 +57,7 @@ return [
     'incorrect_old_password' => 'رقم سري قديم غير صحيح',
     'edit_profile' => 'تعديل الملف الشخصي',
     'newuser'=>'مستخدم جديد',
+    'newworker'=>'عامل جديد',
     'newfarmer'=>'بائع جديد',
     'farmer'=>'المزارعين',
     'warning' => 'هل تريد الحذف ؟',
@@ -74,6 +75,7 @@ return [
 
     'signvendor'=>'تسجيل التاجر',
     'signfarmer'=>'تسجيل البائع',
+    'signworker'=>'تسجيل العامل',
     'newfarmer'=>'بائع او مزارع جديد',
     'newvendor'=>'تاجر جديد',
     'yourtype'=>'اختار النوع',
