@@ -176,4 +176,9 @@ return [
     'sendmails'=>'Send Emails',
 
     'contact' => 'Contact US',
+
+      //for worker
+      'worker'=>'Worker',
+      'workers'=>'Workers',
+      'workersdash'=>'Workers data',
 ];

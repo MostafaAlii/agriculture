@@ -167,4 +167,10 @@ return [
     'sendmails'=>'ارسال ايميلات',
 
     'contact' => 'اتصل بنا',
+
+
+    //for worker
+    'worker'=>'عامل',
+    'workers'=>'العمال',
+    'workersdash'=>'بيانات العمال',
 ];

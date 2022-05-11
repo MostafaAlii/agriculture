@@ -57,6 +57,7 @@ class WorkerTableSeeder extends Seeder {
                 'birthdate'        => $faker->date,
                 'status'           =>true,
                 'remember_token'   => Str::random(10),
+                'created_at'       => Carbon::now(),
             ];
         }
         $chunks = array_chunk($workers, 100);

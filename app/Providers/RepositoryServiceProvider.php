@@ -50,6 +50,9 @@ use App\Http\Repositories\Admin\AdminDepartmentRepository;
 use App\Http\Interfaces\Admin\AdminInterface;
 use App\Http\Repositories\Admin\AdminRepository;
 
+use App\Http\Interfaces\Admin\WorkerInterface;
+use App\Http\Repositories\Admin\WorkerRepository;
+
 use App\Http\Interfaces\Admin\CategoryInterface;
 use App\Http\Repositories\Admin\CategoryRepository;
 
@@ -203,6 +206,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(StateInterface::class, StateRepository::class);
         $this->app->bind(VillageInterface::class, VillageRepository::class);
         $this->app->bind(AdminInterface::class, AdminRepository::class);
+        $this->app->bind(WorkerInterface::class, WorkerRepository::class);
         $this->app->bind(UserInterface::class, UserRepository::class);
         $this->app->bind(farmerInterface::class, FarmerRepository::class);
         $this->app->bind(ProfileInterface::class, ProfileRepository::class);
@@ -217,7 +221,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductCouponInterface::class, ProductCouponRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
-        
+
         $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
@@ -226,7 +230,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FarmerAllDataInterface::class, FarmerAllDataRepository::class);
         $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
         $this->app->bind(PaymentInterface::class, PaymentRepository::class);
-        
+
         $this->app->bind(ContactInterface::class, ContactRepository::class);
 
     }
