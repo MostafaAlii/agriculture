@@ -43,19 +43,17 @@ class RedirectIfAuthenticated
 
          if (auth('admin')->check()) {
                 return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
-                // return redirect()->route('front');
             }
          if (auth('web')->check()) {
                 // return redirect(RouteServiceProvider::FRONT);
                 return redirect()->route('home.farmer');
             }
+         if (auth('worker')->check()) {
+            return redirect()->route('home.worker');
+            }
          if (auth('vendor')->check()) {
                 // return redirect(RouteServiceProvider::FRONT);
-                // return redirect()->route('home.user');
-                return redirect()->route('home.user');
-            }
-         if (auth('worker')->check()) {
-                return redirect()->route('home.worker');
+                return redirect()->route('front');
             }
 
         return $next($request);

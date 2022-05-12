@@ -35,7 +35,7 @@ Route::group(
 
         route::get('/blogs',Livewire\front\Blogs::class)->name('blog');                         // blog
         Route::get('/blogs/{blog_id}',Livewire\front\BlogDetails::class)->name('blogdetails'); // blog details
-        
+
         Route::post('/sendmails',[GuestController::class, 'sendmails'])->name('guest.sendmails'); // guest send mail ****************
         //--------------------------------search with tag-------------------------------------------------------
         Route::get('/blogs.search/{blog_id}/{type}',[SearchController::class,'search'])->name('blogs.search'); // blog details
@@ -61,7 +61,7 @@ Route::group(
 
         Route::middleware(['auth:vendor'])->group(function () {
             /********************************* Start  front pages with login by user auth Routes ************************************/
-            route::get('/home',Livewire\front\Home2::class)->name('home.user');
+            route::get('/home',Livewire\front\Home2::class)->name('front');
             /********************************* End front pages with login by user auth Routes ************************************/
 
             Route::group(['prefix' => 'user'], function () {

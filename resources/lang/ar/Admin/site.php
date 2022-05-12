@@ -173,4 +173,5 @@ return [
     'worker'=>'عامل',
     'workers'=>'العمال',
     'workersdash'=>'بيانات العمال',
+    'newworker'=>'عامل جديد',
 ];

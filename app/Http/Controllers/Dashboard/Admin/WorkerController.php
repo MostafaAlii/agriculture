@@ -21,13 +21,13 @@ class WorkerController extends Controller {
         return $this->Data->data();
     }// end of data
 
-    // public function create() {
-    //     return $this->Data->create();
-    // }
+    public function create() {
+        return $this->Data->create();
+    }
 
-    // public function store(AdminRequest $request) {
-    //     return $this->Data->store($request);
-    // }// end of store
+    public function store(WorkerRequest $request) {
+        return $this->Data->store($request);
+    }// end of store
 
 
     // public function edit($id) {
@@ -40,9 +40,9 @@ class WorkerController extends Controller {
     // }// end of update
 
 
-    // public function destroy($id) {
-    //     return $this->Data->destroy($id);
-    // }// end of destroy
+    public function destroy($id) {
+        return $this->Data->destroy($id);
+    }// end of destroy
 
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);

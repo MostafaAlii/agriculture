@@ -181,4 +181,5 @@ return [
       'worker'=>'Worker',
       'workers'=>'Workers',
       'workersdash'=>'Workers data',
+      'newworker'=>'New Worker',
 ];

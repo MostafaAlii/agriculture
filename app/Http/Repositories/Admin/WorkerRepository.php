@@ -38,35 +38,29 @@ class WorkerRepository implements WorkerInterface{
             ->toJson();
     }
 
-    // public function create() {
-    //     $areas = Area::all();
-    //     return view('dashboard.admin.workers.create',compact('areas'));
-    // }
-//     public function store($request) {
-//         DB::beginTransaction();
-//         try{
-//             $requestData = $request->validated();
-//             $requestData['password'] = bcrypt($request->password);
-//             $requestData['type'] = $request->type;
-// //            $requestData['latitude']=$request->latitude;
-// //            $requestData['longitude']= $request->longitude;
-//             Admin::create($requestData);
-//             $admin = Admin::latest()->first();
-//             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
-
-//             // $admin = Admin::latest()->first();
-// //         Notification::send($admin, new \App\Notifications\NewAdmin($admin));
-
-//             DB::commit();
-//             toastr()->success(__('Admin/site.added_successfully'));
-//             return redirect()->route('Admins.index');
-//          } catch (\Exception $e) {
-//             DB::rollBack();
-// //            toastr()->error(__('Admin/site.sorry'));
-//             return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
-// //            return redirect()->back();
-//          }
-//     }
+    public function create() {
+        $areas = Area::all();
+        return view('dashboard.admin.workers.create',compact('areas'));
+    }
+    public function store($request) {
+        DB::beginTransaction();
+        try{
+            $requestData = $request->validated();
+            $requestData['password'] = bcrypt($request->password);
+            Worker::create($requestData);
+            $worker = Worker::latest()->first();
+            $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
+            Notification::send($worker, new \App\Notifications\NewWorker($worker));
+            DB::commit();
+            toastr()->success(__('Admin/site.added_successfully'));
+            return redirect()->route('workers.index');
+         } catch (\Exception $e) {
+            DB::rollBack();
+//            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+//            return redirect()->back();
+         }
+    }
 
     // public function edit($id) {
     //     $adminID = Crypt::decrypt($id);
@@ -101,20 +95,20 @@ class WorkerRepository implements WorkerInterface{
     //     }
     // }
 
-    // public function destroy($id) {
-    //     try{
-    //         $adminID = Crypt::decrypt($id);
-    //         //  dd($adminID);
-    //         $admin=Admin::findorfail($adminID);
-    //         $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
-    //         $admin->delete();
-    //         toastr()->error(__('Admin/site.deleted_successfully'));
-    //         return redirect()->route('Admins.index');
-    //     } catch (\Exception $e) {
-    //         toastr()->error(__('Admin/site.sorry'));
-    //         return redirect()->back();
-    //     }
-    // }
+    public function destroy($id) {
+        try{
+            $workerID = Crypt::decrypt($id);
+            //  dd($adminID);
+            $worker=Worker::findorfail($workerID);
+            $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
+            $worker->delete();
+            toastr()->error(__('Admin/site.deleted_successfully'));
+            return redirect()->route('workers.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
+        }
+    }
     public function bulkDelete($request) {
         if($request->delete_select_id){
             $delete_select_id = explode(",",$request->delete_select_id);

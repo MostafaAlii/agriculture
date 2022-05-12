@@ -16,10 +16,11 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Admins.index') }}">{{ __('Admin/site.admins') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('workers.index') }}">{{ __('Admin/site.worker') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
+
                         </ol>
                     </div>
                 </div>
@@ -40,7 +41,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newadmin') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newworker') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -53,12 +54,12 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('Admins.store') }}" enctype="multipart/form-data" autocomplete="off">
+                                    <form class="form" method="post" action="{{ route('workers.store') }}" enctype="multipart/form-data" autocomplete="off">
                                         @csrf
                                         @method('post')
                                         <div class="form-body">
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
                                                         <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required>
@@ -68,7 +69,9 @@
                                                         <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
                                                         <input type="email" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/site.email') }}" name="email" value="{{ old('email') }}" required>
@@ -77,13 +80,15 @@
                                                         <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
                                                         <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone') }}" required>
                                                     </div>
+
                                                 </div>
-                                                <div class="col-md-4">
-                                                    {{--password--}}
-                                                    <div class="form-group">
+                                                <div class="col-md-6">
+                                                      {{--password--}}
+                                                      <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
                                                         <input type="password" name="password" class="form-control" value="{{ old('password') }}" required>
                                                     </div>
+
                                                     {{--password_confirmation--}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
@@ -92,75 +97,25 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>{{ __('Admin/admin.admin_department') }}</label>
-                                                    <label class="">{{__('Admin\admin.admin_departments')}}</label>
-                                                    <hr>
-                                                    <div id="jstree"></div>
-                                                    <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
-
-                                                </div>
-                                                </div>
-                                                <div class="col col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="area_id">{{ __('Admin/orchards.area') }}</label>
-                                                        <select name="area_id" id="area_id" class="form-control" required>
-                                                            <option value="">{{ __('Admin/site.select') }}</option>
-                                                            </option>
-                                                            @foreach ($areas as $area)
-                                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
-                                                            @endforeach
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col col-md-4">
-
-                                                    <div class="form-group">
-                                                        <label for="state_id">{{ __('Admin/orchards.state') }}</label>
-                                                        <select class=" form-control" name="state_id" id="state_id">
-                                                            <option value="">{{ __('Admin/site.select') }}</option>
-
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="row">
-
-                                                <div class="col-md-4">
-                                                    <fieldset class="form-group">
-                                                        <label>{{ __('Admin/site.user-type') }}<span class="text-danger">*</span></label>
-
-                                                        <select class="custom-select" id="customSelect" name="type">
-                                                            <option selected>{{ __('Admin/site.select') }}</option>
-                                                            <option value="admin">{{ __('Admin/site.admins') }}</option>
-                                                            <option value="employee">{{ __('Admin/site.employee') }}</option>
-                                                        </select>
-                                                    </fieldset>
-                                                 </div>
-
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                                        <input class="form-control img" name="image"  type="file" accept="image/*" required >
+                                                        <input class="form-control img" name="image"  type="file" accept="image/*" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-6">
                                                     <img src="{{ asset('assets/admin/images/avatar.jpg') }}" class="img-thumbnail img-preview" width="100" alt="">
                                                 </div>
                                             </div>
 
-                                            <div class="form-actions center">
+                                        </div>
+
+                                        <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary">
                                                 <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
                                             </button>
                                         </div>
-                                        </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -197,71 +152,6 @@
             }
 
         };
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            //  ajax for get states data of area =====================================================================
-            $('select[name="area_id"]').on('change', function() {
-                var area_id = $(this).val();
-                // console.log(province_id);
-                if (area_id) {
-                    $.ajax({
-                        url: "{{ URL::to('dashboard_admin/admin/state') }}/" + area_id,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('select[name="state_id"]').empty();
-                            $('select[name="state_id"]').append( '<option selected disabled>--select--</option>');
-
-                            $.each(data, function(key, value) {
-
-                                $('select[name="state_id"]').append(
-                                    '<option value="' + key + '">' + value +'</option>'
-                                );
-                            });
-                        },
-                    });
-                } else {
-                    console.log('AJAX load did not work');
-                }
-            });
-        });
-    </script>
-
-    <script  type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep(old('admin_department_id')) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
-
-
-
-            });
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
