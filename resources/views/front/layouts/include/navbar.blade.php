@@ -104,7 +104,7 @@
                     <a title="{{ trans('Website/home.my_profile') }}" href="#">{{ trans('Website/home.my_profile') }}</a>
                 </li>
                 <li class="menu-item" >
-                    <a title="{{ trans('Website/home.change_password') }}" href="#">{{ trans('Website/home.change_password') }}</a>
+                    <a title="{{ trans('Website/home.change_password') }}" href="{{ route('worker.changepass') }}">{{ trans('Website/home.change_password') }}</a>
                 </li>
                 <li class="menu-item" >
                     <a title="Logout" href="{{ route('logout.worker') }}"

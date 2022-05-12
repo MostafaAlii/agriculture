@@ -17,6 +17,7 @@ Route::group(
     ], function(){
         Route::middleware(['auth:worker'])->group(function () {
             route::get('/home',Livewire\front\Home2::class)->name('home.worker');
+            route::get('/worker/changepassword',Livewire\front\Worker\WorkerChangePassword::class)->name('worker.changepass'); // worker change password
     });
     require __DIR__.'/auth.php';
 

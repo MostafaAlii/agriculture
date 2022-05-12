@@ -39,7 +39,7 @@ Route::group(
             Route::get('/farmer/state/{area_id}', [FarmerEditProfile::class, 'getState']);// route ajax for get areas states
             Route::get('/farmer/village/{state_id}', [FarmerEditProfile::class, 'getVillage']);// route ajax for get state villages
 
-            route::get('/farmer/changepassword',Livewire\front\Farmer\FarmerChangePassword::class)->name('farmer.changepass'); // farmer cahnge password
+            route::get('/farmer/changepassword',Livewire\front\Farmer\FarmerChangePassword::class)->name('farmer.changepass'); // farmer change password
 
 
             /********************************* End Admin & Employee Routes ************************************/
