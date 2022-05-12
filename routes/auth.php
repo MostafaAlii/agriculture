@@ -12,9 +12,11 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\FarmerNewPasswordController;
+use App\Http\Controllers\Auth\WorkerNewPasswordController;
 use App\Http\Controllers\Auth\AdminNewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\FarmerPasswordResetLinkController;
+use App\Http\Controllers\Auth\WorkerPasswordResetLinkController;
 use App\Http\Controllers\Auth\AdminPasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +71,19 @@ Route::middleware('guest')->group(function () {
     Route::post('farmer-reset-password', [FarmerNewPasswordController::class, 'submitResetPasswordForm'])
     ->name('farmer.password.update');
     // farmer forget password ********************************************************************
+    // worker forget password ********************************************************************
+    Route::get('worker-forgot-password', [WorkerPasswordResetLinkController::class, 'create'])
+    ->name('worker.password.request');
+
+    Route::post('worker-forgot-password', [WorkerPasswordResetLinkController::class, 'submitForgetPasswordForm'])
+    ->name('worker.password.email');
+
+    Route::get('worker-reset-password/{token}', [WorkerNewPasswordController::class, 'create'])
+    ->name('worker.password.reset');
+
+    Route::post('worker-reset-password', [WorkerNewPasswordController::class, 'submitResetPasswordForm'])
+    ->name('worker.password.update');
+    // worker forget password ********************************************************************
     //Admin forget password ********************************************************************
     Route::get('admin-forgot-password', [AdminPasswordResetLinkController::class, 'create'])
     ->name('admin.password.request');

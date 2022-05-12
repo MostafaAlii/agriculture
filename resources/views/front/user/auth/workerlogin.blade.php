@@ -65,7 +65,7 @@
                                 </div>
 
                                 <div class="col-auto">
-                                    <a class="link-forgot" href="{{ route('farmer.password.request') }}">{{ __('Website/home.lostpassword') }}</a>
+                                    <a class="link-forgot" href="{{ route('worker.password.request') }}">{{ __('Website/home.lostpassword') }}</a>
                                 </div>
                             </div>
 
