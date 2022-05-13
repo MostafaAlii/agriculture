@@ -95,6 +95,28 @@
                                                         <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-4">
+                                                    <fieldset class="form-group">
+                                                        <label>{{ __('Admin/site.salarytype') }}<span class="text-danger">*</span></label>
+
+                                                        <select class="custom-select" id="customSelect" name="salary">
+                                                            <option selected>{{ __('Admin/site.select') }}</option>
+                                                            <option value="perday">{{ __('Admin/site.perday') }}</option>
+                                                            <option value="perhour">{{ __('Admin/site.perhour') }}</option>
+                                                        </select>
+                                                    </fieldset>
+                                                 </div>
+                                                 <div class="col-md-4">
+                                                    <fieldset class="form-group">
+                                                        <label>{{ __('Admin/site.worktype') }}<span class="text-danger">*</span></label>
+
+                                                        <select class="custom-select" id="customSelect" name="work">
+                                                            <option selected>{{ __('Admin/site.select') }}</option>
+                                                            <option value="alone">{{ __('Admin/site.alone') }}</option>
+                                                            <option value="team">{{ __('Admin/site.team') }}</option>
+                                                        </select>
+                                                    </fieldset>
+                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">

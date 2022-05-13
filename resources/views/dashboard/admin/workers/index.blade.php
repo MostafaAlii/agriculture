@@ -66,6 +66,8 @@
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phone') }}</th>
                                                     <th>{{ __('Admin/site.status') }}</th>
+                                                    <th>{{ __('Admin/site.salarytype') }}</th>
+                                                    <th>{{ __('Admin/site.worktype') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -110,6 +112,8 @@
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
             {data: 'status', name: 'status',width: '10%'},
+            {data: 'salary', name: 'salary',width: '10%'},
+            {data: 'work', name: 'work',width: '10%'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

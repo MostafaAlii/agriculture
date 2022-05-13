@@ -182,4 +182,11 @@ return [
       'workers'=>'Workers',
       'workersdash'=>'Workers data',
       'newworker'=>'New Worker',
+      'salarytype'=>'Salary Type',
+      'perday'=>'Per Day',
+      'perhour'=>'Per Hour',
+      'worktype'=>'Work Type',
+      'alone'=>'Individually',
+      'team'=>'Teamwork',
+
 ];

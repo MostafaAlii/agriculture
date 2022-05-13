@@ -174,4 +174,10 @@ return [
     'workers'=>'العمال',
     'workersdash'=>'بيانات العمال',
     'newworker'=>'عامل جديد',
+    'salarytype'=>'نوع الاجره',
+    'perday'=>'يومى',
+    'perhour'=>'بالساعه',
+    'worktype'=>'نوع العمل',
+    'alone'=>'فردى',
+    'team'=>'جماعى',
 ];

@@ -22,8 +22,8 @@ class CreateWorkersTable extends Migration
             $table->string('phone')->unique();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            $table->unsignedBigInteger('view')->default(0);
-            $table->unsignedBigInteger('sales')->default(0);
+            // $table->unsignedBigInteger('view')->default(0);
+            // $table->unsignedBigInteger('sales')->default(0);
             $table->foreignId('country_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('province_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('area_id')->default('1')->constrained()->cascadeOnDelete();
@@ -32,6 +32,8 @@ class CreateWorkersTable extends Migration
             $table->foreignId('department_id')->default('1')->constrained()->cascadeOnDelete();
             $table->date('birthdate')->nullable();
             $table->boolean('status')->default(false);
+            $table->enum('salary',['perday','perhour'])->default('perday');
+            $table->enum('work',['alone','team'])->default('alone');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

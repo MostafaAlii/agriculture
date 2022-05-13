@@ -27,6 +27,12 @@ class WorkerRepository implements WorkerInterface{
             ->addColumn('status', function (Worker $worker) {
                 return view('dashboard.admin.workers.data_table.status', compact('worker'));
             })
+            ->addColumn('salary', function (Worker $worker) {
+                return view('dashboard.admin.workers.data_table.salary', compact('worker'));
+            })
+            ->addColumn('work', function (Worker $worker) {
+                return view('dashboard.admin.workers.data_table.work', compact('worker'));
+            })
             ->addColumn('image', function (Worker $worker) {
                 return view('dashboard.admin.workers.data_table.image', compact('worker'));
             })
@@ -39,8 +45,8 @@ class WorkerRepository implements WorkerInterface{
     }
 
     public function create() {
-        $areas = Area::all();
-        return view('dashboard.admin.workers.create',compact('areas'));
+        // $areas = Area::all();
+        return view('dashboard.admin.workers.create');
     }
     public function store($request) {
         DB::beginTransaction();

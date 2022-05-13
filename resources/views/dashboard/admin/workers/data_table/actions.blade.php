@@ -2,7 +2,7 @@
 
     <a href="{{ route('worker.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-show"></i>
-        {{ __('Admin/site.showedit') }}
+        {{ __('Admin/site.edit') }}
     </a>
     {{-- <a href="{{ route('Admins.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
         <i class="fa fa-edit"></i>

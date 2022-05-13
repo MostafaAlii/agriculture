@@ -54,8 +54,10 @@ class WorkerTableSeeder extends Seeder {
                 'state_id'         => $faker->numberBetween(1, State::count()),
                 'village_id'       => $faker->numberBetween(1, Village::count()),
                 'department_id'    => $faker->numberBetween(1, Department::count()),
+                'status'           => rand(0,1),
+                'salary'           => $faker->randomElement(['perhour', 'perday']),
+                'work'             => $faker->randomElement(['alone', 'team']),
                 'birthdate'        => $faker->date,
-                'status'           =>true,
                 'remember_token'   => Str::random(10),
                 'created_at'       => Carbon::now(),
             ];
