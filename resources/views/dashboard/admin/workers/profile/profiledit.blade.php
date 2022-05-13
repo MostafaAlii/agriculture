@@ -32,35 +32,29 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-                                    <!-- users edit media object start -->
-
-                                    <!-- users edit media object ends -->
-                                    <!-- users edit account form start -->
-                                    <form novalidate action="{{ route('admin.updateAccount', encrypt($admin->id)) }}"  enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form novalidate action="{{ route('worker.updateAccount', encrypt($worker->id)) }}"  enctype="multipart/form-data" method="post" autocomplete="off">
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
                                             @if(Auth::user()->image->filename)
                                                 <a class="mr-2" href="#">
-                                                        <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
-                                                        alt="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
+                                                        <img src="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
+                                                        alt="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
                                                         class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @else
                                                 <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
-                                                    alt="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                                                    <img src="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
+                                                    alt="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @endif
                                             <div class="media-body">
                                                 <h4 class="media-heading"> @lang('Admin/site.image')</h4>
                                                 <div class="col-12 px-0 d-flex">
-                                                    {{-- <input class="form-control img" name="image"  type="file" accept="image/*"> --}}
                                                     <a href="#" class="btn btn-sm btn-primary mr-25">
                                                         <input class="form-control img" name="image"  type="file" accept="image/*">
                                                     </a>
-                                                    {{-- <a href="#" class="btn btn-sm btn-secondary">Reset</a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -69,38 +63,38 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.firstname') }}</label>
-                                                        <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',$admin->firstname) }}"
+                                                        <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',$worker->firstname) }}"
                                                         name="firstname" required data-validation-required-message="This firstname field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.lastname') }}</label>
-                                                        <input type="text" class="form-control"  value="{{ old('lastname',$admin->lastname) }}"
+                                                        <input type="text" class="form-control"  value="{{ old('lastname',$worker->lastname) }}"
                                                         name="lastname" required data-validation-required-message="This lastname field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.phone') }}</label>
-                                                        <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$admin->phone) }}"
+                                                        <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$worker->phone) }}"
                                                         required data-validation-required-message="This phone field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.email') }}</label>
-                                                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',$admin->email) }}"
+                                                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',$worker->email) }}"
                                                         required data-validation-required-message="This email field is required">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
-                                                        <label>{{ __('Admin/site.type') }}</label>
-                                                        <select class="custom-select" id="customSelect" name="type">
-                                                            <option value="{{ $admin->type }}" disabled selected >{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
-                                                            <option value="admin">{{ __('Admin/site.admins') }}</option>
-                                                            <option value="employee">{{ __('Admin/site.employee') }}</option>
+                                                        <label>{{ __('Admin/site.status') }}</label>
+                                                        <select class="custom-select" id="customSelect" name="status" value="{{ $worker->status }}">
+                                                            <option value="{{ $worker->status }}" disabled selected >{{$worker->status == 1 ?  __('Admin/site.active') : __('Admin/site.unactive')}}</option>
+                                                            <option value= '1'>{{ __('Admin/site.active') }}</option>
+                                                            <option value= '0'>{{ __('Admin/site.unactive') }}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -108,131 +102,39 @@
 
                                             <div class="col-12 col-sm-6">
                                                 <div class="form-group">
-                                                    <label>{{ __('Admin/site.address') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                                    <input class="form-control img" name="address" value="{{$admin->address}}" type="text" />
-                                                    <input class="form-control " value="{{$admin->latitude}}" name="latitude"  type="hidden" id="latitude">
-                                                    <input class="form-control " value="{{$admin->longitude}}" name="longitude"  type="hidden" id="longitude">
+                                                    <div class="controls">
+                                                        <label>{{ __('Admin/site.worktype') }}</label>
+                                                        <select class="custom-select" id="customSelect" name="work" value="{{ $worker->work }}">
+                                                            <option value="{{ $worker->work }}" disabled selected >{{$worker->work == 'alone' ?  __('Admin/site.alone') : __('Admin/site.team')}}</option>
+                                                            <option value="alone">{{ __('Admin/site.alone') }}</option>
+                                                            <option value="team">{{ __('Admin/site.team') }}</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div id="map" style="height: 500px;width: 1000px;"></div>
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label>{{ __('Admin/site.salarytype') }}</label>
+                                                        <select class="custom-select salary" id="customSelect" name="salary">
+                                                            <option value="{{ $worker->salary }}" disabled selected >{{$worker->salary == 'perday' ?  __('Admin/site.perday') : __('Admin/site.perhour')}}</option>
+                                                            <option value="perday">{{ __('Admin/site.perday') }}</option>
+                                                            <option value="perhour">{{ __('Admin/site.perhour') }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group myInput">
+                                                </div>
+
                                             </div>
-
-
-
-
-
-                                                {{-- <div class="col-12 col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Role</label>
-                                                        <select class="form-control">
-                                                            <option>User</option>
-                                                            <option>Staff</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Status</label>
-                                                        <select class="form-control">
-                                                            <option>Active</option>
-                                                            <option>Banned</option>
-                                                            <option>Close</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Company</label>
-                                                        <input type="text" class="form-control" placeholder="Company name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="table-responsive">
-                                                        <table class="table mt-1">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Module Permission</th>
-                                                                    <th>Read</th>
-                                                                    <th>Write</th>
-                                                                    <th>Create</th>
-                                                                    <th>Delete</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Users</td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox1" class="custom-control-input" checked>
-                                                                            <label class="custom-control-label" for="users-checkbox1"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox2" class="custom-control-input"><label class="custom-control-label" for="users-checkbox2"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox3" class="custom-control-input"><label class="custom-control-label" for="users-checkbox3"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox4" class="custom-control-input" checked>
-                                                                            <label class="custom-control-label" for="users-checkbox4"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Articles</td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox5" class="custom-control-input"><label class="custom-control-label" for="users-checkbox5"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox6" class="custom-control-input" checked>
-                                                                            <label class="custom-control-label" for="users-checkbox6"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox7" class="custom-control-input"><label class="custom-control-label" for="users-checkbox7"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox8" class="custom-control-input" checked>
-                                                                            <label class="custom-control-label" for="users-checkbox8"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Staff</td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox9" class="custom-control-input" checked>
-                                                                            <label class="custom-control-label" for="users-checkbox9"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox10" class="custom-control-input" checked>
-                                                                            <label class="custom-control-label" for="users-checkbox10"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox11" class="custom-control-input"><label class="custom-control-label" for="users-checkbox11"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox12" class="custom-control-input"><label class="custom-control-label" for="users-checkbox12"></label>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div> --}}
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>
-                                                {{-- <button type="reset" class="btn btn-light">Cancel</button> --}}
                                             </div>
                                         </div>
                                     </form>
-                                    <!-- users edit account form ends -->
                                 </div>
                                 <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
                                     <!-- users edit Info form start -->
-                                    <form novalidate action="{{ route('admin.updateInformation', encrypt($admin->id)) }}"  method="post" autocomplete="off">
+                                    <form novalidate action="{{ route('worker.updateInformation', encrypt($worker->id)) }}"  method="post" autocomplete="off">
                                         @csrf
                                         @method('put')
                                         <div class="row">
@@ -242,7 +144,7 @@
                                                     <div class="controls position-relative">
                                                         <label>{{ __('Admin/site.birthday') }}</label>
                                                         <input type="date" class="form-control birthdate-picker" required placeholder="Birth date"
-                                                        value="{{ $admin->birthdate }}"
+                                                        value="{{ $worker->birthdate }}"
                                                         data-validation-required-message="This birthdate field is required">
                                                     </div>
                                                 </div>
@@ -251,17 +153,17 @@
                                                     <select class="select2 form-control" id="country_id" name="country_id">
                                                         <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @foreach (\App\Models\Country::get() as $country)
-                                                         <option value="{{ $country->id }}" {{$admin->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                                                         <option value="{{ $country->id }}" {{$worker->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
                                                     <select class="select2 form-control" id="province_id" name="province_id">
-                                                        @if($admin->province_id == null)
+                                                        @if($worker->province_id == null)
                                                          <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @else
-                                                        <option value="{{ $admin->province_id }}"  >{{ $admin->province->name }}</option>
+                                                        <option value="{{ $worker->province_id }}"  >{{ $worker->province->name }}</option>
                                                         @endif
                                                     </select>
                                                 </div>
@@ -269,23 +171,23 @@
                                                     <label>{{ __('Admin/site.area') }}</label>
                                                     <select class="select2 form-control" id="area_id" name="area_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $admin->area_id }}"  >{{ $admin->area->name }}</option>
+                                                        <option value="{{ $worker->area_id }}"  >{{ $worker->area->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.state') }}</label>
                                                     <select class="select2 form-control" id="state_id" name="state_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $admin->state_id }}"  >{{ $admin->state->name }}</option>
+                                                        <option value="{{ $worker->state_id }}"  >{{ $worker->state->name }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
                                                     <select class="select2 form-control" id="village_id" name="village_id">
-                                                        @if($admin->village_id ==null)
+                                                        @if($worker->village_id ==null)
                                                          <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @else
-                                                        <option value="{{ $admin->village_id }}"  >{{ $admin->village->name }}</option>
+                                                        <option value="{{ $worker->village_id }}"  >{{ $worker->village->name }}</option>
                                                         @endif
                                                     </select>
                                                 </div>
@@ -294,31 +196,25 @@
                                                 <h5 class="mb-1"><i class="ft-user mr-25"></i></h5>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address1') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',$admin->address1) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('lastname',$worker->address1) }}"
                                                     name="address1" required data-validation-required-message="This address1 field is required">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address2') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',$admin->address2) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('lastname',$worker->address2) }}"
                                                     name="address2" required data-validation-required-message="This address2 field is required">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
                                                     <select class="form-control" id="accountSelect" name="department_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $admin->department_id }}"  >{{ $admin->department->name }}</option>
+                                                        <option value="{{ $worker->department_id }}"  >{{ $worker->department->name }}</option>
                                                         @foreach (\App\Models\Department::get() as $department)
                                                          <option value="{{ $department->id }}">{{ $department->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>{{ __('Admin/admins.admin_department') }}</label>
-                                                    <hr>
-                                                    <div id="jstree"></div>
-                                                    <input name="admin_department_id" type="hidden" value="{{$admin->admin_department_id}}" class="admin_department_id">
-
-                                                </div>
+                                                
 
                                             </div>
 
@@ -345,7 +241,26 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script>
+    $(".salary").on('change',function(){
+        var select = $(".salary").val();
+             if(select =="perday"){
+                $('.myInput').empty()
+                $('.myInput').append(`<label for="eventRegInput5">{{ __('Admin/site.daily') }}<span class="text-danger">*</span></label>
+                                      <input type="text" id="eventRegInput5" class="form-control" name="daily_price" placeholder="{{ __('Admin/site.daily') }}"
+                                      value="{{ $worker->daily_price }}" required>`)
+             }
+            else if(select =="perhour"){
+                $('.myInput').empty()
+                $('.myInput').append(`<label for="eventRegInput5">{{ __('Admin/site.hourly') }}<span class="text-danger">*</span></label>
+                                      <input type="text" id="eventRegInput5" class="form-control" name="hourly_price" placeholder="{{ __('Admin/site.hourly') }}"
+                                      value="{{ $worker->hourly_price }}" required>`)
+             }
+             else{
+                $('.myInput').empty()
+             }
+    });
+</script>
 {{--start map edit code--}}
 <script>
     $("#pac-input").focusin(function() {
@@ -358,7 +273,7 @@
     // parameter when you first load the API. For example:
     // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
     function initAutocomplete() {
-        var pos = {lat : {{ $admin->latitude }} ,  lng :{{ $admin->longitude }} };
+        var pos = {lat : {{ $worker->latitude }} ,  lng :{{ $worker->longitude }} };
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: pos
@@ -368,9 +283,9 @@
         marker = new google.maps.Marker({
             position: pos,
             map: map,
-            title: '{{ $admin->firstname }}'
+            title: '{{ $worker->firstname }}'
         });
-        infoWindow.setContent('{{ $admin->firstname }}');
+        infoWindow.setContent('{{ $worker->firstname }}');
         infoWindow.open(map, marker);
         // move pin and current location
         infoWindow = new google.maps.InfoWindow;
@@ -648,7 +563,7 @@
 
         $('#jstree').jstree({
             "core" : {
-                'data' :   {!! load_dep($admin->admin_department_id) !!},
+                'data' :   {!! load_dep($worker->admin_department_id) !!},
                 "themes" : {
                     "variant" : "large"
                 }

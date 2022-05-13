@@ -97,26 +97,29 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <fieldset class="form-group">
-                                                        <label>{{ __('Admin/site.salarytype') }}<span class="text-danger">*</span></label>
-
-                                                        <select class="custom-select" id="customSelect" name="salary">
-                                                            <option selected>{{ __('Admin/site.select') }}</option>
-                                                            <option value="perday">{{ __('Admin/site.perday') }}</option>
-                                                            <option value="perhour">{{ __('Admin/site.perhour') }}</option>
-                                                        </select>
-                                                    </fieldset>
-                                                 </div>
-                                                 <div class="col-md-4">
-                                                    <fieldset class="form-group">
                                                         <label>{{ __('Admin/site.worktype') }}<span class="text-danger">*</span></label>
-
                                                         <select class="custom-select" id="customSelect" name="work">
                                                             <option selected>{{ __('Admin/site.select') }}</option>
                                                             <option value="alone">{{ __('Admin/site.alone') }}</option>
                                                             <option value="team">{{ __('Admin/site.team') }}</option>
                                                         </select>
                                                     </fieldset>
-                                                 </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-md-4">
+                                                        <fieldset class="form-group">
+
+                                                            <label>{{ __('Admin/site.salarytype') }}<span class="text-danger">*</span></label>
+                                                            <select class="custom-select salary" id="customSelect" name="salary">
+                                                                <option  selected disabled>{{ __('Admin/site.select') }}</option>
+                                                                <option value="perday">{{ __('Admin/site.perday') }}</option>
+                                                                <option value="perhour">{{ __('Admin/site.perhour') }}</option>
+                                                            </select>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="form-group myInput">
+                                                    </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
@@ -174,6 +177,23 @@
             }
 
         };
+
+        $(".salary").on('change',function(){
+        var select = $(".salary").val();
+             if(select =="perday"){
+                $('.myInput').empty()
+                $('.myInput').append(`<label for="eventRegInput5">{{ __('Admin/site.daily') }}<span class="text-danger">*</span></label>
+                                      <input type="text" id="eventRegInput5" class="form-control" name="daily_price" placeholder="{{ __('Admin/site.daily') }}" required>`)
+             }
+            else if(select =="perhour"){
+                $('.myInput').empty()
+                $('.myInput').append(`<label for="eventRegInput5">{{ __('Admin/site.hourly') }}<span class="text-danger">*</span></label>
+                                      <input type="text" id="eventRegInput5" class="form-control" name="hourly_price" placeholder="{{ __('Admin/site.hourly') }}" required>`)
+             }
+             else{
+                $('.myInput').empty()
+             }
+        });
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

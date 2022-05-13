@@ -30,10 +30,9 @@ class WorkerController extends Controller {
     }// end of store
 
 
-    // public function edit($id) {
-    //     // dd($id);
-    //     return $this->Data->edit($id);
-    // }// end of edit
+    public function edit($id) {
+        return $this->Data->edit($id);
+    }// end of edit
 
     // public function update(AdminRequest $request,$id) {
     //     return $this->Data->update($request,$id);
@@ -47,15 +46,14 @@ class WorkerController extends Controller {
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
-    // public function showProfile($id) {
-    //     // dd($id);
-    //     return $this->Data->showProfile($id);
-    // }// end of showprofile
+    public function showProfile($id) {
+        return $this->Data->showProfile($id);
+    }// end of showprofile
 
 
-    // public function updateAccount(adminProfileAccountRequest $request,$id) {
-    //     return $this->Data->updateAccount($request,$id);
-    // }// end of update
+    public function updateAccount(WorkerProfileAccountRequest $request,$id) {
+        return $this->Data->updateAccount($request,$id);
+    }// end of update
     // public function updateInformation(adminProfileInformationRequest $request,$id) {
     //     return $this->Data->updateInformation($request,$id);
     // }// end of update

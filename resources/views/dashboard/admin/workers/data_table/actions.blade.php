@@ -1,19 +1,15 @@
 
 
-    <a href="{{ route('worker.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
+
+    <a href="{{ route('worker.profile', encrypt($id)) }}" class="btn btn-info btn-sm" title=" {{ __('Admin/site.showedit') }}">
         <i class="fa fa-show"></i>
-        {{ __('Admin/site.edit') }}
+
     </a>
-    {{-- <a href="{{ route('Admins.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
-        <i class="fa fa-edit"></i>
-        {{ __('Admin/site.edit') }}
-    </a> --}}
-    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+
+    <a href="#" type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" title=" {{ __('Admin/site.delete') }}">
         <i class="fa fa-trash"></i>
-        {{ __('Admin/site.delete') }}
-    </button>
 
-
+    </a>
 
 
         <div class="col-lg-4 col-md-6 col-sm-12">

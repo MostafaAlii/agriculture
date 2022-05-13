@@ -5,11 +5,11 @@ interface WorkerInterface {
     public function data();
     public function create();
     public function store($request);
-    // public function edit($admin);
+    public function edit($worker);
     // public function update($request,$admin);
     public function destroy($worker);
     public function bulkDelete($ids);
-    // public function showProfile($id);
-    // public function updateAccount($request,$admin);
+    public function showProfile($id);
+    public function updateAccount($request,$worker);
     // public function updateInformation($request,$admin);
 }

@@ -34,6 +34,8 @@ class CreateWorkersTable extends Migration
             $table->boolean('status')->default(false);
             $table->enum('salary',['perday','perhour'])->default('perday');
             $table->enum('work',['alone','team'])->default('alone');
+            $table->unsignedFloat('daily_price',8,2)->nullable();
+            $table->unsignedFloat('hourly_price',8,2)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

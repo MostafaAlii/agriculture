@@ -36,6 +36,9 @@ class WorkerRepository implements WorkerInterface{
             ->addColumn('image', function (Worker $worker) {
                 return view('dashboard.admin.workers.data_table.image', compact('worker'));
             })
+            ->addColumn('dhprice', function (Worker $worker) {
+                return view('dashboard.admin.workers.data_table.dayandhourprice', compact('worker'));
+            })
              ->addColumn('country', function (Worker $worker) {
                 return $worker->country->name??null;
                 })
@@ -62,34 +65,31 @@ class WorkerRepository implements WorkerInterface{
             return redirect()->route('workers.index');
          } catch (\Exception $e) {
             DB::rollBack();
-//            toastr()->error(__('Admin/site.sorry'));
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
-//            return redirect()->back();
+           toastr()->error(__('Admin/site.sorry'));
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+           return redirect()->back();
          }
     }
 
-    // public function edit($id) {
-    //     $adminID = Crypt::decrypt($id);
-    //     // dd($adminID);
-    //     $admin=Admin::findorfail($adminID);
-
-    //     // return view('dashboard.admin.admins.edit', compact('admin'));
-    //     return view('dashboard.admin.admins.profile.profiledit', compact('admin'));
-    // }
+    public function edit($id) {
+        $workerID = Crypt::decrypt($id);
+        $worker=Worker::findorfail($workerID);
+        return view('dashboard.admin.workers.profile.profiledit', compact('worker'));
+    }
 
     // public function update( $request,$id) {
     //     try{
     //         DB::beginTransaction();
-    //         $adminID = Crypt::decrypt($id);
-    //         $admin=Admin::findorfail($adminID);
+    //         $workerID = Crypt::decrypt($id);
+    //         $worker=Admin::findorfail($workerID);
     //         $requestData = $request->validated();
     //         $requestData['type'] = $request->type;
-    //         $admin->update($requestData);
+    //         $worker->update($requestData);
 
     //         if($request->image){
-    //             $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
+    //             $this->deleteImage('upload_image','/admins/' . $worker->image->filename,$worker->id);
     //         }
-    //         $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
+    //         $this->addImage($request, 'image' , 'admins' , 'upload_image',$worker->id, 'App\Models\Admin');
 
     //         DB::commit();
     //         toastr()->success( __('Admin/site.updated_successfully'));
@@ -104,7 +104,7 @@ class WorkerRepository implements WorkerInterface{
     public function destroy($id) {
         try{
             $workerID = Crypt::decrypt($id);
-            //  dd($adminID);
+            //  dd($workerID);
             $worker=Worker::findorfail($workerID);
             $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
             $worker->delete();
@@ -134,44 +134,49 @@ class WorkerRepository implements WorkerInterface{
 
     }// end of bulkDelete
 
-    // public function showProfile($id){
-    //     $adminID = Crypt::decrypt($id);
-    //     // dd($adminID);
-    //     // dd($id);
-    //     $admin=Admin::findorfail($adminID);
+    public function showProfile($id){
+        $workerID = Crypt::decrypt($id);
+        $worker=Worker::findorfail($workerID);
+        return view('dashboard.admin.workers.profile.profileview', compact('worker'));
+    }
 
-    //     return view('dashboard.admin.admins.profile.profileview', compact('admin'));
-    // }
+    public function updateAccount($request,$id) {
+        try{
+            DB::beginTransaction();
+            $workerID = Crypt::decrypt($id);
+            $worker=Worker::findorfail($workerID);
+            $requestData = $request->validated();
+            // $requestData['status'] = $request->status;
+            if($request->daily_price ){
+                $requestData['hourly_price'] = null;
+            }
+            if($request->hourly_price ){
+                $requestData['daily_price'] = null;
+            }
+            $worker->update($requestData);
 
-    // public function updateAccount($request,$id) {
-    //     try{
-    //         DB::beginTransaction();
-    //         $adminID = Crypt::decrypt($id);
-    //         $admin=Admin::findorfail($adminID);
-    //         $requestData = $request->validated();
-    //         // $requestData['type'] = $request->type;
-    //         $admin->update($requestData);
+            if($request->image){
+                $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
+            }
+            $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
 
-    //         if($request->image){
-    //             $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
-    //         }
-    //         $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
+            DB::commit();
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('workers.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
+            //    return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+        }
+    }// end of update
 
-    //         DB::commit();
-    //         toastr()->success( __('Admin/site.updated_successfully'));
-    //         return redirect()->route('Admins.index');
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         toastr()->error(__('Admin/site.sorry'));
-    //         return redirect()->back();
-    //     }
-    // }// end of update
     // public function updateInformation($request,$id) {
     //     try{
-    //         $adminID = Crypt::decrypt($id);
-    //         $admin=Admin::findorfail($adminID);
+    //         $workerID = Crypt::decrypt($id);
+    //         $worker=Admin::findorfail($workerID);
     //         $requestData = $request->validated();
-    //         $admin->update($requestData);
+    //         $worker->update($requestData);
     //         toastr()->success( __('Admin/site.updated_successfully'));
     //         return redirect()->route('Admins.index');
     //     } catch (\Exception $e) {
