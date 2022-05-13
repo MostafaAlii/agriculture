@@ -54,7 +54,7 @@ class WorkerController extends Controller {
     public function updateAccount(WorkerProfileAccountRequest $request,$id) {
         return $this->Data->updateAccount($request,$id);
     }// end of update
-    // public function updateInformation(adminProfileInformationRequest $request,$id) {
-    //     return $this->Data->updateInformation($request,$id);
-    // }// end of update
+    public function updateInformation(WorkerProfileInformationRequest $request,$id) {
+        return $this->Data->updateInformation($request,$id);
+    }// end of update
 }

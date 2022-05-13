@@ -171,18 +171,18 @@ class WorkerRepository implements WorkerInterface{
         }
     }// end of update
 
-    // public function updateInformation($request,$id) {
-    //     try{
-    //         $workerID = Crypt::decrypt($id);
-    //         $worker=Admin::findorfail($workerID);
-    //         $requestData = $request->validated();
-    //         $worker->update($requestData);
-    //         toastr()->success( __('Admin/site.updated_successfully'));
-    //         return redirect()->route('Admins.index');
-    //     } catch (\Exception $e) {
-    //         toastr()->error(__('Admin/site.sorry'));
-    //         return redirect()->back();
-    //     }
+    public function updateInformation($request,$id) {
+        try{
+            $workerID = Crypt::decrypt($id);
+            $worker=Worker::findorfail($workerID);
+            $requestData = $request->validated();
+            $worker->update($requestData);
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('workers.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
+        }
 
-    // }// end of update
+    }// end of update
 }

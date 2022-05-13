@@ -11,5 +11,5 @@ interface WorkerInterface {
     public function bulkDelete($ids);
     public function showProfile($id);
     public function updateAccount($request,$worker);
-    // public function updateInformation($request,$admin);
+    public function updateInformation($request,$admin);
 }
