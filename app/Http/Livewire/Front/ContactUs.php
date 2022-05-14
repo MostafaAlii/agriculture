@@ -88,8 +88,8 @@ class ContactUs extends Component
         
         //------------------------------------------------------------------
         } catch (\Exception $e) {
-            DB::rollBack();
-            dd($e->getMessage());
+          //  DB::rollBack();
+           // dd($e->getMessage());
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }
