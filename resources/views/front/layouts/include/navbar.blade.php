@@ -7,7 +7,7 @@
             <li class="active"> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
             <li               > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
             <li               > <a href="{{ route('farmer') }}">{{ __('website\home.servfarmers') }}</a> </li>
-            <li               > <a href="{{ route('farmer') }}">{{ __('website\home.servworkers') }}</a> </li>
+            <li               > <a href="{{ route('worker') }}">{{ __('website\home.servworkers') }}</a> </li>
         </ul>
     </li>
     {{--  start links in navebar *************************************************************************--}}

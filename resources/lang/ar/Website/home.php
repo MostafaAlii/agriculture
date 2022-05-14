@@ -85,4 +85,8 @@ return [
 
      'all_products' => 'كل المنتجات',
      'cat_count' =>'قسم فرعى',
+
+      // worker pages
+   'worker_details' =>'بيانات العامل',
+   //    'worker_details' =>'Sub Categories',
 ];

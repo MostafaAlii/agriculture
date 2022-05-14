@@ -80,4 +80,9 @@ return [
 
    'all_products' => 'All Products',
    'cat_count' =>'Sub Categories',
+
+   // worker pages
+   'worker_details' =>'Worker Details',
+//    'worker_details' =>'Sub Categories',
+
 ];
