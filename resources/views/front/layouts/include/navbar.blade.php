@@ -31,30 +31,11 @@
                 <ul class="submenu">
                     <li><a href="{{ route('user.login2') }}">{{ trans('Admin/site.signvendor') }}</a></li>
                     <li><a href="{{ route('farmer.login') }}">{{ trans('Admin/site.signfarmer') }}</a></li>
+                    <li><a href="{{ route('worker.login') }}">{{ trans('Admin/site.signworker') }}</a></li>
                 </ul>
             </li>
         @endcheck_guard
-        {{-- <li class="has-submenu">
-            <a href="javascript:void(0);">test</a>
 
-            <ul class="submenu">
-                <li><a href="shop_catalog.html">Shop Catalog</a></li>
-                <li><a href="single_product.html">Single Product</a></li>
-                <li><a href="cart.html">Cart</a></li>
-                <li><a href="checkout.html">Checkout</a></li>
-                <li><a href="sign_in.html">Sign In/Up</a></li>
-            </ul>
-        </li> --}}
-    {{-- function to check if not auth  *****************(guest)************(guest)*************************** --}}
-            {{-- @check_guard
-            <li class="li-btn">
-                    <a class="custom-btn custom-btn--medium custom-btn--style-1" title="Login"
-                    href="{{ route('user.login') }}">
-                    {{ __('website\home.login') }}
-                    </a>
-                </li>
-            @endcheck_guard --}}
-    {{-- End function to check if not auth  ******************(guest)************(guest)************************--}}
     {{-- links for farmer الفلاح****************************************************--}}
     @if(Auth::guard('web')->user())
         <li class="menu-item menu-item-has-children parent" >
@@ -108,6 +89,32 @@
                     @csrf
                 </form>
 
+            </ul>
+        </li>
+    @endif
+    {{-- links for workers العمال *****************************************--}}
+    @if(Auth::guard('worker')->user())
+        <li class="menu-item menu-item-has-children parent" >
+            <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('worker')->user()->firstname }} {{ Auth::guard('worker')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <ul class="submenu curency" >
+                <li class="menu-item" >
+                    <a title="{{ trans('Website/home.dashboard') }}" href="#">{{ trans('Website/home.dashboard') }}</a>
+                </li>
+                <li class="menu-item" >
+                    <a title="{{ trans('Website/home.my_profile') }}" href="#">{{ trans('Website/home.my_profile') }}</a>
+                </li>
+                <li class="menu-item" >
+                    <a title="{{ trans('Website/home.change_password') }}" href="{{ route('worker.changepass') }}">{{ trans('Website/home.change_password') }}</a>
+                </li>
+                <li class="menu-item" >
+                    <a title="Logout" href="{{ route('logout.worker') }}"
+                    onclick="event.preventDefault(); document.getElementById('log-out').submit();">
+                    {{ trans('Website/home.logout') }}
+                    </a>
+                </li>
+                <form id="log-out" action="{{ route('logout.worker') }}" method="POST">
+                    @csrf
+                </form>
             </ul>
         </li>
     @endif

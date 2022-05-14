@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\Admin\CropController;
 use App\Http\Controllers\Dashboard\Admin\TreeController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\Admin\AdminController;
+use App\Http\Controllers\Dashboard\Admin\WorkerController;
 use App\Http\Controllers\Dashboard\Admin\StateController;
 use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\OptionController;
@@ -93,6 +94,14 @@ Route::group(
             Route::put('/admin/profileupdate/{id}', [AdminController::class,'updateAccount'])->name('admin.updateAccount'); // update admin form account
             Route::put('/admin/profileupdateinfo/{id}', [AdminController::class,'updateInformation'])->name('admin.updateInformation'); //update admin form information
             // route for auth profile Authadmin *******************************************************************
+            /********************************* Start Worker Routes ************************************/
+            Route::resource('workers', WorkerController::class)->except(['show']);
+            Route::get('/workers/data', [WorkerController::class,'data'])->name('workers.data');
+            Route::delete('/workers/bulk_delete/{ids}', [WorkerController::class,'bulkDelete'])->name('workers.bulk_delete');
+            Route::get('/worker/profile/{id}', [WorkerController::class,'showProfile'])->name('worker.profile');
+            Route::put('/worker/profileupdate/{id}', [WorkerController::class,'updateAccount'])->name('worker.updateAccount'); // update worker form account
+            Route::put('/worker/profileupdateinfo/{id}', [WorkerController::class,'updateInformation'])->name('worker.updateInformation'); //update worker form information
+            // end worker route*******************************************************************
             Route::resource('profile', ProfileController::class)->except(['show']); // route for dashboard profile Auth admin
             Route::put('/profile/profileupdate/{id}', [ProfileController::class,'updateAccount'])->name('profile.updateAccount'); // update auth form account
             Route::put('/profile/profileupdateinfo/{id}', [ProfileController::class,'updateInformation'])->name('profile.updateInformation'); //update auth form information
@@ -428,7 +437,7 @@ Route::group(
                 route::POST('/sendMail',[ContactController::class,'send'])->name('mail.send');
                 route::POST('/deleteMail',[ContactController::class,'delete'])->name('mail.delete');
 
-                
+
 
         });
     });

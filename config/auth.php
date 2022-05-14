@@ -47,6 +47,10 @@ return [
         'vendor' => [
             'driver' => 'session',
             'provider' => 'vendors',
+        ],
+        'worker' => [
+            'driver' => 'session',
+            'provider' => 'workers',
         ]
     ],
 
@@ -80,6 +84,10 @@ return [
         'vendors' => [ // Access To Website Only
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'workers' => [ // Access To Website Only
+            'driver' => 'eloquent',
+            'model' => App\Models\Worker::class,
         ]
     ],
 

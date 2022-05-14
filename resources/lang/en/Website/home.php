@@ -47,6 +47,7 @@ return [
    'smspassnotmatch'=>'Password does not match',
    'changeuser'=>'Vendor Change Password',
    'changefarmer'=>'Farmer Change Password',
+   'changeworker'=>'Worker Change Password',
    'editprofile'=>'Update Profile',
    'profileupdatesms'=>'Profile updated Successfully !',
 // cart page *************************************************************

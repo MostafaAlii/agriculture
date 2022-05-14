@@ -59,6 +59,7 @@ return [
     'incorrect_old_password' => 'رقم سري قديم غير صحيح',
     'edit_profile' => 'تعديل الملف الشخصي',
     'newuser'=>'مستخدم جديد',
+    'newworker'=>'عامل جديد',
     'newfarmer'=>'بائع جديد',
     'farmer'=>'المزارعين',
     'warning' => 'هل تريد الحذف ؟',
@@ -76,6 +77,7 @@ return [
 
     'signvendor'=>'تسجيل التاجر',
     'signfarmer'=>'تسجيل البائع',
+    'signworker'=>'تسجيل العامل',
     'newfarmer'=>'بائع او مزارع جديد',
     'newvendor'=>'تاجر جديد',
     'yourtype'=>'اختار النوع',
@@ -167,4 +169,20 @@ return [
     'sendmails'=>'ارسال ايميلات',
 
     'contact' => 'اتصل بنا',
+
+
+    //for worker
+    'worker'=>'عامل',
+    'workers'=>'العمال',
+    'workersdash'=>'بيانات العمال',
+    'newworker'=>'عامل جديد',
+    'salarytype'=>'نوع الاجره',
+    'perday'=>'يومى',
+    'perhour'=>'بالساعه',
+    'worktype'=>'نوع العمل',
+    'alone'=>'فردى',
+    'team'=>'جماعى',
+    'daily'=>'سعر اليوم',
+    'hourly'=>'سعر الساعه',
+    'dhprice'=>'سعر اليوم/الساعه',
 ];
