@@ -6,4 +6,5 @@ return [
     'adminPageTitle'                      =>                  'المديرين و المشرفين',
     'farmerPageTitle'                      =>                  'المزارعين',
     'vendorPageTitle'                      =>                  'التجار',
+    'admin_department'=>'القسم الإداري التابع له',
 ];

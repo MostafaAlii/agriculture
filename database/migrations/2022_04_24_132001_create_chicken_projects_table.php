@@ -18,7 +18,6 @@ class CreateChickenProjectsTable extends Migration
             $table->foreignId('farmer_id')->references('id')->on('farmers')->onDelete('cascade');
             $table->foreignId('area_id')->references('id')->on('areas')->onDelete('cascade');
             $table->foreignId('state_id')->references('id')->on('states')->onDelete('cascade');
-            $table->foreignId('admin_department_id')->references('id')->on('admin_departments')->onDelete('cascade');
             $table->foreignId('village_id')->references('id')->on('villages')->onDelete('cascade');
             $table->foreignId('admin_id')->references('id')->on('admins');
             $table->string('project_name');

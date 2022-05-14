@@ -19,10 +19,10 @@ class LandAreaFactory extends Factory
     {
         return [
 
-            'area_id'       => $this->faker->numberBetween(1, Area::count()),
-            'state_id'      => $this->faker->numberBetween(1, State::count()),
+
             'village_id'    => $this->faker->numberBetween(1, Village::count()),
-            'admin_department_id'  => 17,
+            'area_id'    => $this->faker->numberBetween(1, Area::count()),
+            'state_id'    => $this->faker->numberBetween(1, State::count()),
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
             'unit_id'      => $this->faker->randomElement([3, 4]),
             'L_area'=>$this->faker->numberBetween([1,2,3,4, 5]),

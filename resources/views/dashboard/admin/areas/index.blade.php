@@ -175,6 +175,8 @@
                 for(var i=0;i<selectedItem.length;i++){
                     var s = selectedItem[i];
                     my_table.column(s).visible(1);
+
+
                 }
                 $('#areas_table').css('width','100%');
                 },
@@ -201,23 +203,61 @@
 
         dom: 'Bfrtip',
         order: [[0, 'desc']],
+        // buttons: [
+        //     {
+        //         extend: 'copyHtml5',
+        //         exportOptions: {
+        //             columns: [ 1, ':visible' ]
+        //         }
+        //     },
+        //     {
+        //         extend: 'excelHtml5',
+        //         exportOptions: {
+        //             columns: ':visible'
+        //         }
+        //     },
+        //     {
+        //         extend: 'pdfHtml5',
+        //         exportOptions: {
+        //             columns: [ 1, 2, 4 ]
+        //         }
+        //     },
+        //     // 'colvis'
+        // ],
 
     buttons: [
         {
-            extend: 'print',
+            extend: 'pdfHtml5',
+            orientation: 'landscape',
+            pageSize: 'A4',
+            exportOptions: {
+                            columns: [ 1, 2, 3 ]
+                        },
+            // columns: ':visible',
             className: 'btn btn-primary ml-1',
-            'text':'print'
+
         },
+        'excel',
         {
-            extend: 'csv',
-            className: 'btn btn-info ml-1',
-            'text':'export csv'
+            extend: 'print',
+            exportOptions: {
+                columns: [ 1, 2, 3 ]
+            },
+            // columns: ':visible',
+            autoPrint: true,
+            orientation: 'landscape',
+            className: 'btn btn-success ml-1',
+            pageSize: 'A4',
         },
+'colvis',
+
+
         {
             extend: 'excel',
             className: 'btn btn-success ml-1',
             'text':'export excel'
         },
+
 
     ],
 

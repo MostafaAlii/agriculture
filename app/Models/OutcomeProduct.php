@@ -12,7 +12,9 @@ class OutcomeProduct extends Model {
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id');
     }
-
+    public function admin(){
+        return $this->belongsTo(Admin::class,'admin_id');
+    }
     public function country(){
         return $this->belongsTo(Country::class,'country_id');
     }

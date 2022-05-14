@@ -42,5 +42,8 @@ class OutcomeProductController extends Controller
         return $this->Data->bulkDelete($request);
     }// end of destroy
 
+    public function outcome_product_statistics(){
 
+    return $this->Data->outcome_product_statistics();
+      }
 }

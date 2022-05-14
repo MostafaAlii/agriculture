@@ -6,7 +6,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 class Admin extends Authenticatable {
+   use \Znck\Eloquent\Traits\BelongsToThrough;
     use HasFactory, Notifiable;
+
     protected $table = "admins";
     protected $guarded = [];
     public $timestamps = true;
@@ -16,6 +18,19 @@ class Admin extends Authenticatable {
         return $this->morphOne(Image::class, 'imageable');
     }
 
+//    public function country_1() {
+//        return $this->belongsToThrough(Country::class, [Province::class,Area::class,State::class,Village::class]);
+//    }
+//    public function province_1() {
+//        return $this->belongsToThrough(Province::class, [Area::class,State::class,Village::class]);
+//    }
+//    public function area_1() {
+//        return $this->belongsToThrough(Area::class, [State::class,Village::class]);
+//    }
+//
+//    public function state_1() {
+//        return $this->belongsToThrough(State::class, Village::class);
+//    }
     public function country() {
         return $this->belongsTo(Country::class, 'country_id');
     }
@@ -38,6 +53,9 @@ class Admin extends Authenticatable {
 
     public function department() {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+    public function adminDepartment() {
+        return $this->belongsTo(AdminDepartment::class, 'admin_department_id');
     }
 
     // Admin or Employee Has Many Blogs ::

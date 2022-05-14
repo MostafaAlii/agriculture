@@ -41,6 +41,8 @@ class IncomeProductController extends Controller
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
-
+public function income_product_statistics(){
+    return $this->Data->income_product_statistics();
+}
 
 }

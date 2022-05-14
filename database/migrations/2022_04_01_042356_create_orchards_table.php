@@ -18,11 +18,11 @@ class CreateOrchardsTable extends Migration
             $table->foreignId('farmer_id')->references('id')->on('farmers')->onDelete('cascade');
             $table->foreignId('area_id')->references('id')->on('areas')->onDelete('cascade');
             $table->foreignId('state_id')->references('id')->on('states')->onDelete('cascade');
-            $table->foreignId('admin_department_id')->references('id')->on('admin_departments')->onDelete('cascade');
             $table->foreignId('village_id')->references('id')->on('villages')->onDelete('cascade');
+
             $table->foreignId('admin_id')->references('id')->on('admins');
             $table->foreignId('land_category_id')->references('id')->on('land_categories')->onDelete('cascade');
-            $table->foreignId('supported_side_id')->references('id')->on('supported_sides');
+            $table->enum('supported_side',['private','govermental','international organizations']);
             $table->foreignId('unit_id')->references('id')->on('units');
             $table->double('orchard_area');
             $table->string('phone');

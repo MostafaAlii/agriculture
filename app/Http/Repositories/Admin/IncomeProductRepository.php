@@ -23,18 +23,33 @@ use Yajra\DataTables\DataTables;
 
 class IncomeProductRepository implements IncomeProductInterface {
     public function index() {
-        return view('dashboard.admin.income_products.index') ;
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $department_id = $admin->adminDepartment->id;
+        $adminDepartment = AdminDepartment::findorfail($department_id);
+        $dep_name = $adminDepartment->dep_name_ar;
+        return view('dashboard.admin.income_products.index',compact('admin','dep_name')) ;
     }
 
     public function data()
     {
-        $incomes = IncomeProduct::with('area','country','province','adminDepartment','whole_product');
+        $adminID = Auth::user()->id;
+        $admin=Admin::findorfail($adminID);
+        if($admin->type =='employee') {
+            $incomes = IncomeProduct::with('area', 'country', 'province', 'whole_product','admin')
+                ->where('admin_id', '==', $admin->id);
+        }else{
+            $incomes = IncomeProduct::with('area', 'country', 'province', 'whole_product','admin');
 
+        }
         return DataTables::of($incomes)
             ->addColumn('record_select', 'dashboard.admin.income_products.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (IncomeProduct $income) {
                 return $income ->created_at->diffforhumans();
+            })
+            ->editColumn('admin', function (IncomeProduct $income) {
+                return $income ->admin->firstname;
             })
             ->addColumn('country', function (IncomeProduct $income) {
                 return $income->country->name;
@@ -54,11 +69,12 @@ class IncomeProductRepository implements IncomeProductInterface {
                     return null;
                 }
             })
-            ->addColumn('adminDepartment', function (IncomeProduct $income) {
-                return $income->adminDepartment->dep_name_ar;
-            })
+
             ->addColumn('whole_product', function (IncomeProduct $income) {
                 return $income->whole_product->name;
+            })
+            ->addColumn('currency', function (IncomeProduct $income) {
+                return $income->currency->Name;
             })
 
 
@@ -70,19 +86,20 @@ class IncomeProductRepository implements IncomeProductInterface {
     }
 
     public function create() {
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $department_id = $admin->adminDepartment->id;
+        $admin_dep_name = $admin->adminDepartment->dep_name_ar;
         $areas = Area::all();
         $provinces = Province::all();
         $countries = Country::all();
-
         $whole_products = WholeProduct::all();
-        $admin_dpartments = AdminDepartment::all();
         $currencies = Currency::all();
-
         $units = Unit::all();
 
 
         return view('dashboard.admin.income_products.create',
-            compact( 'whole_products', 'areas', 'provinces', 'countries','admin_dpartments','units','currencies'));
+            compact( 'admin','whole_products', 'areas', 'provinces', 'countries','$admin_dep_name','units','currencies'));
     }
 
     public function store($request) {
@@ -107,8 +124,8 @@ class IncomeProductRepository implements IncomeProductInterface {
 
             $income_product->unit_id = $requestData['unit_id'];
             $income_product->currency_id = $requestData['currency_id'];
+            $income_product->admin_dep_name = $request->admin_dep_name;
 
-            $income_product->admin_department_id = $requestData['admin_department_id'];
             $income_product->income_product_amount = $requestData['income_product_amount'];
             $income_product->income_product_price = $requestData['income_product_price'];
             $income_product->income_product_date = $requestData['income_product_date'];
@@ -141,14 +158,16 @@ class IncomeProductRepository implements IncomeProductInterface {
         $whole_products = WholeProduct::all();
 
         $income_product  = IncomeProduct::findorfail($outID);
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $admin_dep_name = $admin->adminDepartment->dep_name_ar;
+
         $units = Unit::all();
         $currencies = Currency::all();
 
         return view('dashboard.admin.income_products.edit',
-            compact('admin_dpartments', 'areas', 'provinces','countries', 'units',
-                'income_product','whole_products','currencies'));
+            compact('admin_dep_name', 'areas', 'provinces','countries', 'units',
+                'income_product','whole_products','currencies','admin'));
     }
 
 
@@ -173,9 +192,9 @@ class IncomeProductRepository implements IncomeProductInterface {
 
             $income_product->country_id = $requestData['country_id'];
             $income_product->unit_id = $requestData['unit_id'];
-            $income_product->currency_id = $requestData['currency_id'];
 
-            $income_product->income_product_amount = $requestData['income_product_amount'];
+
+            $income_product->admin_dep_name = $request->admin_dep_name;
             $income_product->income_product_price = $requestData['income_product_price'];
             $income_product->income_product_date = $requestData['income_product_date'];
 
@@ -233,4 +252,20 @@ class IncomeProductRepository implements IncomeProductInterface {
 
 
     }// end of bulkDelete
+
+    public function income_product_statistics(){
+        $statistics = IncomeProduct::select('country_translations.name AS country','province_translations.name AS province',
+            'income_products.admin_dep_name AS admin_dep_name as dep_name','whole_product_translations.name as product_name',
+            'income_products.income_product_amount as income_product_amount',
+            'income_products.income_product_price as income_product_price','income_products.income_product_date as income_product_date')
+
+
+            ->join('country_translations', 'income_products.country_id', '=', 'country_translations.id')
+            ->join('province_translations', 'income_products.province_id', '=', 'province_translations.id')
+            ->join('whole_product_translations','income_products.whole_product_id','=','whole_product_translations.id')
+            ->get();
+
+        return view('dashboard.admin.income_products.income_products_statistics',compact('statistics'));
+
+    }
 }

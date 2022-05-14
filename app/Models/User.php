@@ -41,6 +41,9 @@ class User extends Authenticatable {
     public function department(): BelongsTo {
        return $this->belongsTo(Department::class)->withDefault();
     }
+    public function adminDepartment(): BelongsTo {
+        return $this->belongsTo(AdminDepartment::class)->withDefault();
+    }
     public function orders(): HasMany {
       return $this->hasMany(Order::class);
    }

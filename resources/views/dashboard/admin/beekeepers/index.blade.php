@@ -3,23 +3,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/admins.beekeeperPageTitle') }}
+    {{ trans('Admin/bees.beekeeperPageTitle') }}
 @endsection
 @section('content')
 @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/bees.beekeepers') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/bees.beekeeperPageTitle') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/bees.beekeepers') }}</a>
-                            </li>
+                        @if($admin->type == 'employee')
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('BeeKeeper.index') }}">{{ __('Admin/bees.beekeeperPageTitle') }}</a>
+                                </li>
+                                </li>
+                            </ol>
+                        @else
 
-                        </ol>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('BeeKeepers.index') }}">{{ __('Admin/bees.beekeeperPageTitle') }}</a>
+                                </li>
+
+                            </ol>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -60,12 +75,17 @@
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/bees.farmer') }}</th>
+                                                    <th>{{ __('Admin/bees.admin') }}</th>
+                                                    <th>{{ __('Admin/bees.area') }}</th>
+                                                    <th>{{ __('Admin/bees.state') }}</th>
                                                     <th>{{ __('Admin/bees.village') }}</th>
                                                     <th>{{ __('Admin/bees.old_beehive_count') }}</th>
                                                     <th>{{ __('Admin/bees.new_beehive_count') }}</th>
+                                                    <th>{{ __('Admin/bees.died_beehive_count') }}</th>
+
                                                     <th>{{ __('Admin/bees.annual_old_product_beehive') }}</th>
                                                     <th>{{ __('Admin/bees.annual_new_product_beehive') }}</th>
-                                                    <th>{{ __('Admin/bees.village') }}</th>
+                                                    <th>{{ __('Admin/bees.supported_side') }}</th>
 
                                                     <th>{{ __('Admin/bees.courses') }}</th>
                                                     <th>{{ __('Admin/bees.disasters') }}</th>
@@ -94,9 +114,11 @@
 
 <script>
     let adminsTable = $('#beekeeper-table').DataTable({
-        // dom: "tiplr",
+
         serverSide: true,
         processing: true,
+
+        dom: 'Bfrtip',
         lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
@@ -104,16 +126,47 @@
         ajax: {
             url: '{{ route('beekeepers.data') }}',
         },
+        buttons: [
+            {text:'excel',
+                extend: 'excel',
+                orientation: 'landscape',
+                pageSize: 'A3',
+                exportOptions: {
+                    columns: [ 1,3,4,5,6,7,8,9,10,11]
+                },
+                className: 'btn btn-primary ml-1',
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns:  [ 1,3,4,5,6,7,8,9,10,11]
+                },
+                // columns: ':visible',
+                autoPrint: true,
+                orientation: 'landscape',
+                className: 'btn btn-success ml-1',
+                pageSize: 'A3',
+                text:'print'
+            },
+
+        ],
+
 
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+            {data: 'area', name: 'area',searchable: true, sortable: true},
+            {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village.name',searchable: true, sortable: true},
             {data: 'old_beehive_count', name: 'old_beehive_count.name',searchable: true, sortable: true},
             {data: 'new_beehive_count', name: 'new_beehive_count.name',searchable: true, sortable: true},
+            {data: 'died_beehive_count', name: 'died_beehive_count.name',searchable: true, sortable: true},
+
             {data: 'annual_old_product_beehive', name: 'annual_old_product_beehive.name',searchable: true, sortable: true},
             {data: 'annual_new_product_beehive', name: 'annual_new_product_beehive.name',searchable: true, sortable: true},
-            {data: 'annual_old_product_beehive', name: 'annual_old_product_beehive.name',searchable: true, sortable: true},
+            {data: 'supported_side', name: 'supported_side',searchable: true, sortable: true},
             {data: 'c_name', name: 'c_name'},
             {data: 'd_name', name: 'd_name'},
             {data: 'created_at', name: 'created_at', searchable: false},

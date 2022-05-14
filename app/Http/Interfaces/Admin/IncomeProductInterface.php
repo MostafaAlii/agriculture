@@ -9,4 +9,6 @@ interface IncomeProductInterface {
     public function update($request,$id);
     public function destroy($id);
     public function bulkDelete($request) ;
-}
+    public function income_product_statistics();
+
+    }

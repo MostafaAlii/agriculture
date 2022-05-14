@@ -1,5 +1,11 @@
 <?php
 return [
+'database_about_farmer_services'=>'Database About Farmer Services',
+    'farmer_services_report'=>'Farmer Services Report',
+    'agri_service_count'=>'Agriculture Services_count',
+    'agri_t_service_count'=>'Agriculture Tool Services_count',
+    'water_service_count'=>'Water Service',
+    'email'=>'Email',
 
     'add_new_agriculture_service'=>'Add New Agriculture Service',
     'enter_service_name'=>'Enter Service Name',
@@ -8,13 +14,13 @@ return [
     'agricultureServicePageTitle'=>'Agriculture Services',
     'add_new_agriculture_service'=>'Add New Agriculture Service',
     'update'=>'Update',
+    'admin'=>'Employee Responsible',
     'add_new_agriculture_tool_service'=>'Add New Agriculture Tool Service',
     'agricultureToolServicePageTitle'=>'Agriculture Tool Service',
     'add_new_agriculture_tool_service'=>'Add New Agriculture Service Tool',
     'service_tool_name'=>'Service Tool Name',
     'enter_service_tool_name'=>'Enter Service Tool Name',
     'enter_service_tool_nane_placeholder'=>'Enter Service Tool Name',
-
     'enter_water_service_name'=>'Enter Water Service Name',
     'enter_water_service_name_placeholder'=>'Enter Water Service Name',
     'waterServicePageTitle'=>'Water Services',

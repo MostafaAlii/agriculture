@@ -24,7 +24,10 @@ class DatabaseSeeder extends Seeder {
             VillageSeeder::class,
             DepartmentSeeder::class,
             FarmerTableSeeder::class,
+            WorkerTableSeeder::class,
             PaymentMethodSeeder::class,
+            AdminDepartmentSeeder::class,
+
             AdminTableSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
@@ -37,11 +40,9 @@ class DatabaseSeeder extends Seeder {
             ProductCouponSeeder::class,
             SliderSeeder::class,
             UnitSeeder::class,
-            supportedSideSeeder::class,
             TreeTypeSeeder::class,
             TreeSeeder::class,
             LandCategorySeeder::class,
-            AdminDepartmentSeeder::class,
             OrchardSeeder::class,
             OrchardTreeSeeder::class,
             ProtectedHouseSeeder::class,
@@ -88,6 +89,7 @@ class DatabaseSeeder extends Seeder {
                 'imageable_type' => 'App\Models\Farmer'
             ]);
         }
+    
 
             // images
             for ($i = 1; $i <= $count ; $i++) {

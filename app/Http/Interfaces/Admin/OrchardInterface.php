@@ -8,4 +8,6 @@ interface OrchardInterface {
     public function update($request,$id);
     public function destroy($request);
     public function bulkDelete($request);
-}
+    public function statistics();
+
+    }

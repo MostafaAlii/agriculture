@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\Admin\CropController;
 use App\Http\Controllers\Dashboard\Admin\TreeController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\Admin\AdminController;
+use App\Http\Controllers\Dashboard\Admin\WorkerController;
 use App\Http\Controllers\Dashboard\Admin\StateController;
 use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\OptionController;
@@ -93,6 +94,14 @@ Route::group(
             Route::put('/admin/profileupdate/{id}', [AdminController::class,'updateAccount'])->name('admin.updateAccount'); // update admin form account
             Route::put('/admin/profileupdateinfo/{id}', [AdminController::class,'updateInformation'])->name('admin.updateInformation'); //update admin form information
             // route for auth profile Authadmin *******************************************************************
+            /********************************* Start Worker Routes ************************************/
+            Route::resource('workers', WorkerController::class)->except(['show']);
+            Route::get('/workers/data', [WorkerController::class,'data'])->name('workers.data');
+            Route::delete('/workers/bulk_delete/{ids}', [WorkerController::class,'bulkDelete'])->name('workers.bulk_delete');
+            Route::get('/worker/profile/{id}', [WorkerController::class,'showProfile'])->name('worker.profile');
+            Route::put('/worker/profileupdate/{id}', [WorkerController::class,'updateAccount'])->name('worker.updateAccount'); // update worker form account
+            Route::put('/worker/profileupdateinfo/{id}', [WorkerController::class,'updateInformation'])->name('worker.updateInformation'); //update worker form information
+            // end worker route*******************************************************************
             Route::resource('profile', ProfileController::class)->except(['show']); // route for dashboard profile Auth admin
             Route::put('/profile/profileupdate/{id}', [ProfileController::class,'updateAccount'])->name('profile.updateAccount'); // update auth form account
             Route::put('/profile/profileupdateinfo/{id}', [ProfileController::class,'updateInformation'])->name('profile.updateInformation'); //update auth form information
@@ -161,9 +170,11 @@ Route::group(
             /*********end admin departments route ********/
 
             /*******admin departments route********/
+
             Route::resource('orchards', OrchardController::class)->except(['show']);
             Route::get('/orchards/data', [OrchardController::class,'data'])->name('orchards.data');
             Route::delete('/orchards/bulk_delete/{ids}', [OrchardController::class,'bulkDelete'])->name('orchards.bulk_delete');
+            Route::get('/orchards/beekeeper_statistic/', [OrchardController::class,'statistics'])->name('orchards.statistics');
 
             Route::get('/orchards/admin/{village_id}', [OrchardController::class, 'getAdmin']);// route ajax for get village admins
             Route::get('/orchards/farmer/{village_id}', [OrchardController::class, 'getFarmer']);// route ajax for get village farmers
@@ -198,6 +209,7 @@ Route::group(
             Route::resource('Precipitations', PrecipitationController::class)->except(['show']);
             Route::get('/Precipitations/data', [PrecipitationController::class,'data'])->name('precipitation.data');
             Route::delete('/Precipitations/bulk_delete/{ids}', [PrecipitationController::class,'bulkDelete'])->name('precipitation.bulk_delete');
+            Route::get('/Precipitations/statistic/', [PrecipitationController::class,'statistics'])->name('precipitation.statistics');
 
             /***********end precipitation ****/
             /******start LandArea ********/
@@ -205,6 +217,9 @@ Route::group(
             Route::resource('LandAreas', LandAreaController::class)->except(['show']);
             Route::get('/LandAreas/data', [LandAreaController::class,'data'])->name('landAreas.data');
             Route::delete('/LandAreas/bulk_delete/{ids}', [LandAreaController::class,'bulkDelete'])->name('landAreas.bulk_delete');
+            Route::get('/LandAreas/statistic/', [LandAreaController::class,'getStatisticaldata'])->name('landAreas.getStatisticaldata');
+            Route::get('/LandAreas/statistic_detail/', [LandAreaController::class,'statistic_land_area_detail'])->name('land_area_details.statistic');
+            Route::get('/LandAreas/statistic_state/', [LandAreaController::class,'statistic_land_area_state'])->name('land_area_state.statistic');
 
             /***********end LandArea ****/
             /******start protected hoses********/
@@ -212,6 +227,9 @@ Route::group(
             Route::resource('ProtectedHouse', ProtectedHouseController::class)->except(['show']);
             Route::get('/ProtectedHouse/data', [ProtectedHouseController::class,'data'])->name('protectedHouse.data');
             Route::delete('/ProtectedHouse/bulk_delete/{ids}', [ProtectedHouseController::class,'bulkDelete'])->name('protectedHouse.bulk_delete');
+            Route::get('/ProtectedHouse/protected_house_statistic/', [ProtectedHouseController::class,'protected_house_statistics'])->name('protected_house.statistic');
+            Route::get('/ProtectedHouse/protected_house_g_statistic/', [ProtectedHouseController::class,'protected_house_gov_statistics'])->name('protected_house_g.statistic');
+            Route::get('/ProtectedHouse/protected_house_p_statistic/', [ProtectedHouseController::class,'protected_house_private_statistics'])->name('protected_house_p.statistic');
 
             /***********end protected hoses***/
             /******start agriculture service********/
@@ -240,6 +258,7 @@ Route::group(
             Route::resource('FarmerServices', FarmerServiceController::class)->except(['show']);
             Route::get('/FarmerServices/data', [FarmerServiceController::class,'data'])->name('farmer_service.data');
             Route::delete('/FarmerServices/bulk_delete/{ids}', [FarmerServiceController::class,'bulkDelete'])->name('farmer_service.bulk_delete');
+            Route::get('/FarmerServices/statistic/', [FarmerServiceController::class,'statistics'])->name('farmer_service.statistics');
 
             /***********end Farmer service****/
             /******start Crops ********/
@@ -261,6 +280,10 @@ Route::group(
             Route::resource('Animals', CawProjectController::class)->except(['show']);
             Route::get('/Animals/data', [CawProjectController::class,'data'])->name('animals.data');
             Route::delete('/Animals/bulk_delete/{ids}', [CawProjectController::class,'bulkDelete'])->name('animals.bulk_delete');
+            Route::get('/Animals/statistic/', [CawProjectController::class,'statistics'])->name('animals.statistics');
+            Route::get('/Animals/ship_statistic/', [CawProjectController::class,'ship_statistics'])->name('ship.statistics');
+            Route::get('/Animals/caw_statistic/', [CawProjectController::class,'caw_statistics'])->name('caw.statistics');
+            Route::get('/Animals/fish_statistic/', [CawProjectController::class,'fish_statistics'])->name('fish.statistics');
 
             /***********end animals ****/
             /******start chicken project ********/
@@ -268,6 +291,7 @@ Route::group(
             Route::resource('Chickens', ChickenProjectController::class)->except(['show']);
             Route::get('/Chickens/data', [ChickenProjectController::class,'data'])->name('chicken.data');
             Route::delete('/Chickens/bulk_delete/{ids}', [ChickenProjectController::class,'bulkDelete'])->name('chicken.bulk_delete');
+            Route::get('/Chickens/chicken_statistic/', [ChickenProjectController::class,'chicken_project_statistics'])->name('chicken.statistics');
 
             /***********end chicken project ****/
             /*******Course Bees  route********/
@@ -287,6 +311,9 @@ Route::group(
             Route::resource('BeeKeepers', BeeKeepersController::class)->except(['show']);
             Route::get('/BeeKeepers/data', [BeeKeepersController::class,'data'])->name('beekeepers.data');
             Route::delete('/BeeKeepers/bulk_delete/{ids}', [BeeKeepersController::class,'bulkDelete'])->name('beekeepers.bulk_delete');
+            Route::get('/BeeKeepers/statistic/', [BeeKeepersController::class,'statistics'])->name('beekeepers.statistics');
+            Route::get('/BeeKeepers/details_beekeeper_statistic/', [BeeKeepersController::class,'beekeeper_details_statistics'])->name('details_beekeeper.statistics');
+
 
             /*********end  Beekeeper  route ********/
             /******* whole sale product  route********/
@@ -299,13 +326,18 @@ Route::group(
             /********************************* outcome products Routes ************************************/
             Route::resource('OutcomeProducts', OutcomeProductController::class)->except(['show']);
             Route::get('/OutcomeProducts/data', [OutcomeProductController::class,'data'])->name('outcome_products.data');
+
             Route::delete('/OutcomeProducts/bulk_delete/{ids}', [OutcomeProductController::class,'bulkDelete'])->name('outcome_products.bulk_delete');
+            Route::get('/OutcomeProducts/statistic/', [OutcomeProductController::class,'outcome_product_statistics'])->name('outcome_product.statistics');
+
             /********************************* End outcome products Routes ************************************/
 
             /********************************* outcome products Routes ************************************/
             Route::resource('IncomeProducts', IncomeProductController::class)->except(['show']);
             Route::get('/IncomeProducts/data', [IncomeProductController::class,'data'])->name('income_products.data');
             Route::delete('/IncomeProducts/bulk_delete/{ids}', [IncomeProductController::class,'bulkDelete'])->name('income_products.bulk_delete');
+            Route::get('/IncomeProducts/statistic/', [IncomeProductController::class,'income_product_statistics'])->name('income_product.statistics');
+
             /********************************* End outcome products Routes ************************************/
 
 
@@ -400,7 +432,7 @@ Route::group(
                 route::POST('/sendMail',[ContactController::class,'send'])->name('mail.send');
                 route::POST('/deleteMail',[ContactController::class,'delete'])->name('mail.delete');
 
-                
+
 
         });
     });

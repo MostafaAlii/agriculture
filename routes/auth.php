@@ -2,17 +2,21 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\UserAuthenticatedSessionController;
+use App\Http\Controllers\Auth\WorkerAuthenticatedSessionController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisteredFarmerController;
+use App\Http\Controllers\Auth\RegisteredWorkerController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\FarmerNewPasswordController;
+use App\Http\Controllers\Auth\WorkerNewPasswordController;
 use App\Http\Controllers\Auth\AdminNewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\FarmerPasswordResetLinkController;
+use App\Http\Controllers\Auth\WorkerPasswordResetLinkController;
 use App\Http\Controllers\Auth\AdminPasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     route::view('userlogin','front.user.auth.userlogin')->name('user.login2');       // user login
     route::view('farmerlogin','front.user.auth.farmerlogin')->name('farmer.login');  // farmer login
+    route::view('workerlogin','front.user.auth.workerlogin')->name('worker.login');  // worker login
     // routes for admin login  ***********************************************************************************
     Route::get('agro', [AdminController::class, 'create'])->name('admin.login');    // admin login
     Route::post('Admin/login', [AdminController::class, 'store'])->name('admin.login.post');
@@ -35,6 +40,10 @@ Route::middleware('guest')->group(function () {
     Route::post('Farmer/login', [AuthenticatedSessionController::class, 'store'])->name('farmer.login.post');
     Route::post('/farmer-register', [RegisteredFarmerController::class, 'store'])->name('farmer.register.post');
     // end route for register farmer *********************************************************************************
+    // route for register worker *********************************************************************************
+    Route::post('worker/login', [WorkerAuthenticatedSessionController::class, 'store'])->name('worker.login.post');
+    Route::post('/worker-register', [RegisteredWorkerController::class, 'store'])->name('worker.register.post');
+    // end route for register worker *********************************************************************************
 
     // user forget password ********************************************************************
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
@@ -62,6 +71,19 @@ Route::middleware('guest')->group(function () {
     Route::post('farmer-reset-password', [FarmerNewPasswordController::class, 'submitResetPasswordForm'])
     ->name('farmer.password.update');
     // farmer forget password ********************************************************************
+    // worker forget password ********************************************************************
+    Route::get('worker-forgot-password', [WorkerPasswordResetLinkController::class, 'create'])
+    ->name('worker.password.request');
+
+    Route::post('worker-forgot-password', [WorkerPasswordResetLinkController::class, 'submitForgetPasswordForm'])
+    ->name('worker.password.email');
+
+    Route::get('worker-reset-password/{token}', [WorkerNewPasswordController::class, 'create'])
+    ->name('worker.password.reset');
+
+    Route::post('worker-reset-password', [WorkerNewPasswordController::class, 'submitResetPasswordForm'])
+    ->name('worker.password.update');
+    // worker forget password ********************************************************************
     //Admin forget password ********************************************************************
     Route::get('admin-forgot-password', [AdminPasswordResetLinkController::class, 'create'])
     ->name('admin.password.request');
@@ -107,9 +129,10 @@ Route::middleware('auth')->group(function () {
 Route::post('logout/user', [UserAuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth:vendor')
     ->name('logout.user');
-
-
-
+// worker log out route *******************************************************************
+Route::post('logout/worker', [WorkerAuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth:worker')
+    ->name('logout.worker');
 //  admin log out route *************************************************************************
     Route::post('logout/admin', [AdminController::class, 'destroy'])
     ->middleware('auth:admin')

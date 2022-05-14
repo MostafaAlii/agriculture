@@ -5,22 +5,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/land_areas.landAreaPageTitle') }}
+    {{ trans('Admin/orchards.orchardsPageTitle') }}
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\orchards.dashboard')}}</h3>
+                <h3 class="content-header-title">{{trans('Admin\orchards.orchardsPageTitle')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('orchards.index') }}">{{ __('Admin/orchards.orchards') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
                             </li>
-                            <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
+                            <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('orchards.index') }}">{{ __('Admin/orchards.orchardsPageTitle') }}</a>
+                            </li>
+                            <li class="breadcrumb-item active">{{ __('Admin/site.edit') }}
                             </li>
                         </ol>
                     </div>
@@ -63,41 +67,19 @@
                                             <div class="row mt-2">
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
-                                                        <label for="area_id">{{ __('Admin/orchards.area') }}</label>
-                                                        <select name="area_id" id="area_id" class="form-control" required>
+                                                        <label for="village_id">{{ __('Admin/orchards.village') }}</label>
+                                                        <select name="village_id" id="village_id" class="form-control" required>
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
-                                                            <option value="{{$orchard->area_id }}" selected>{{ $orchard->area->name }}</option>
-                                                            @foreach ($areas as $area)
-                                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                            <option value="{{$orchard->village_id }}" selected>{{ $orchard->village->name }}</option>
+                                                            @foreach ($villages as $village)
+                                                                <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                             @endforeach
                                                         </select>
 
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-4">
-
-                                                    <div class="form-group">
-                                                        <label for="state_id">{{ __('Admin/orchards.state') }}</label>
-                                                        <select class="select2 form-control" name="state_id" id="state_id">
-                                                            <option value="{{$orchard->state_id}}" selected>{{$orchard->state->name}}</option>
-
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="village_id">{{ __('Admin/orchards.village') }}</label>
-                                                        <select class="select2 form-control" name="village_id" id="village_id">
-                                                            <option value="{{$orchard->village_id}}" selected>{{$orchard->village->name}}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-
-                                                <div class="col">
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/orchards.farmer') }}</label>
                                                         <select class="select2 form-control" name="farmer_id" id="farmer_id">
@@ -106,6 +88,10 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row mt-2">
+
+
 
                                                 <div class="col">
                                                     <div class="form-group">
@@ -151,17 +137,17 @@
 
                                             </div>
 
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <div  class="form-group mb-3">
-                                                        <label class="">{{__('Admin\orchards.departments')}}</label>
-                                                        <hr>
-                                                        <div id="jstree"></div>
-                                                        <input name="admin_department_id" type="hidden" value="{{$orchard->admin_department_id}}" class="admin_department_id">
+                                            {{--<div class="row mb-3">--}}
+                                                {{--<div class="col">--}}
+                                                    {{--<div  class="form-group mb-3">--}}
+                                                        {{--<label class="">{{__('Admin\orchards.departments')}}</label>--}}
+                                                        {{--<hr>--}}
+                                                        {{--<div id="jstree"></div>--}}
+                                                        {{--<input name="admin_department_id" type="hidden" value="{{$orchard->admin_department_id}}" class="admin_department_id">--}}
 
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="form-group">
@@ -190,13 +176,12 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="customSelect1">{{ __('Admin/orchards.supported_side') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect1" name="supported_side_id" >
-                                                            <option selected disabled>--select--</option>
-                                                            @foreach($supported_sides as $supported_side)
-                                                                <option value="{{$supported_side->id}}"{{$orchard->supported_side_id==$supported_side->id?'selected':''}}>{{ $supported_side->Name }}</option>
-                                                            @endforeach
-
+                                                        <label for="supported_side_id">{{ __('Admin/orchards.supported_side') }}</label>
+                                                        {{--<option selected disabled>--select--</option>--}}
+                                                        <select class="select2 custom-select form-control" name="supported_side" id="supported_side_id">
+                                                        <option value="private" {{$orchard->supported_side=='private'?'selected':''}} >{{ __('Admin\orchards.private') }}</option>
+                                                        <option value="govermental" {{$orchard->supported_side=='govermental'?'selected':''}}>{{ __('Admin\orchards.govermental') }}</option>
+                                                        <option value="international organization" {{$orchard->supported_side=='international organization'?'selected':''}}>{{ __('Admin\orchards.international_organizations') }}</option>
                                                         </select>
 
                                                     </div>
@@ -354,40 +339,40 @@
 
     {{--departments--}}
 
-    <script  type="text/javascript">
+    {{--<script  type="text/javascript">--}}
 
-        $(document).ready(function () {
+        {{--$(document).ready(function () {--}}
 
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep($orchard->admin_department_id) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
+            {{--$('#jstree').jstree({--}}
+                {{--"core" : {--}}
+                    {{--'data' :   {!! load_dep($orchard->admin_department_id) !!},--}}
+                    {{--"themes" : {--}}
+                        {{--"variant" : "large"--}}
+                    {{--}--}}
+                {{--},--}}
+                {{--"checkbox" : {--}}
+                    {{--"keep_selected_style" : false--}}
+                {{--},--}}
+                {{--"plugins" : [ "wholerow",  ]--}}
+            {{--});--}}
+        {{--});--}}
 
 
+        {{--$('#jstree')--}}
+        {{--// listen for event--}}
+            {{--.on('changed.jstree', function (e, data) {--}}
+                {{--var i, j,r = [];--}}
+                {{--var name=[];--}}
+                {{--for(i=0,j=data.selected.length;i<j;i++){--}}
+                    {{--r.push(data.instance.get_node(data.selected[i]).id);--}}
 
-            });
-    </script>
+                {{--}--}}
+                {{--$('.admin_department_id').val(r.join(', '));--}}
+
+
+
+            {{--});--}}
+    {{--</script>--}}
 
     <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>
     <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>

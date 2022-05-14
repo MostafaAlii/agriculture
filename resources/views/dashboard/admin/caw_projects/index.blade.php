@@ -10,16 +10,33 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/animals.animals_project') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/animals.animalsPageTitle') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/animals.animals_project') }}</a>
-                            </li>
+                        @if($admin->type == 'employee')
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('Animals.index') }}">{{ __('Admin/animals.animals_project') }}</a>
+                                </li>
+                                </li>
+                            </ol>
+                        @else
 
-                        </ol>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('Animals.index') }}">{{ __('Admin/animals.animals_project') }}</a>
+                                </li>
+
+                            </ol>
+                        @endif
+
+
                     </div>
                 </div>
             </div>
@@ -59,13 +76,19 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
+
                                                     <th>{{ __('Admin/animals.farmer') }}</th>
+                                                    <th>{{ __('Admin/animals.admin') }}</th>
+                                                    <th>{{ __('Admin/animals.area') }}</th>
+                                                    <th>{{ __('Admin/animals.state') }}</th>
                                                     <th>{{ __('Admin/animals.village') }}</th>
                                                     <th>{{ __('Admin/animals.project_name') }}</th>
                                                     <th>{{ __('Admin/animals.hall_num') }}</th>
                                                     <th>{{ __('Admin/animals.animal_count') }}</th>
                                                     <th>{{ __('Admin/animals.type') }}</th>
-
+                                                    <th>{{ __('Admin/animals.food_source') }}</th>
+                                                    <th>{{ __('Admin/animals.marketing_side') }}</th>
+                                                    <th>{{ __('Admin/animals.cost') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -91,9 +114,36 @@
 
 <script>
     let adminsTable = $('#animals-table').DataTable({
-        // dom: "tiplr",
         serverSide: true,
         processing: true,
+
+        dom: 'Bfrtip',
+        buttons: [
+            {text:'excel',
+                extend: 'excel',
+                orientation: 'landscape',
+                pageSize: 'A3',
+                exportOptions: {
+                    columns: [ 1,4,5,6,7,8,9,10,11]
+                },
+                className: 'btn btn-primary ml-1',
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns:  [ 1,4,5,6,7,8,9,10,11]
+                },
+                // columns: ':visible',
+                autoPrint: true,
+                orientation: 'landscape',
+                className: 'btn btn-success ml-1',
+                pageSize: 'A3',
+                text:'print'
+            },
+
+        ],
+
         lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
@@ -105,11 +155,17 @@
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+            {data: 'area', name: 'area',searchable: true, sortable: true},
+            {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village',searchable: true, sortable: true},
             {data: 'project_name', name: 'project_name',searchable: true, sortable: true},
             {data: 'hall_num', name: 'hall_num',searchable: true, sortable: true},
             {data: 'animal_count', name: 'animal_count',searchable: true, sortable: true},
-            {data: 'type', name: 'type',searchable: true, sortable: true},
+            {data: 'type', name:'type',searchable: true, sortable: true},
+            {data: 'food_source', name:'food_source',searchable: true, sortable: true},
+            {data: 'marketing_side', name:'marketing_side',searchable: true, sortable: true},
+            {data: 'cost', name: 'cost' ,searchable: true, sortable: true},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

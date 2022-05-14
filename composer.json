@@ -23,6 +23,8 @@
         "pusher/pusher-php-server": "^7.0",
         "realrashid/sweet-alert": "^5.0",
         "spatie/laravel-translatable": "^4.6",
+        "staudenmeir/belongs-to-through": "^2.5",
+        "staudenmeir/eloquent-has-many-deep": "^1.7",
         "yajra/laravel-datatables": "1.5",
         "yajra/laravel-datatables-oracle": "~9.0",
         "yoeunes/toastr": "^1.2"

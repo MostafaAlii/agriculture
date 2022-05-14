@@ -13,13 +13,28 @@
                 <h3 class="content-header-title">{{ __('Admin/income_products.income_productPageTitle') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/income_products.income_productPageTitle') }}</a>
-                            </li>
+                        @if($admin->type == 'employee')
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('AdminDepartment.index') }}">{{ $dep_name }}</a>
+                                </li>
 
-                        </ol>
+                                <li class="breadcrumb-item"><a href="{{route('IncomeProducts.index')}}">{{ __('Admin/income_products.income_productPageTitle') }}</a>
+                                </li>
+                                </li>
+                            </ol>
+                        @else
+
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{route('IncomeProducts.index')}}">{{ __('Admin/income_products.income_productPageTitle') }}</a>
+                                </li>
+
+                            </ol>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -59,11 +74,14 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
+                                                    <th>{{ __('Admin/income_products.admin') }}</th>
                                                     <th>{{ __('Admin/income_products.country') }}</th>
                                                     <th>{{ __('Admin/income_products.province') }}</th>
                                                     <th>{{ __('Admin/income_products.area') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_amount') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_price') }}</th>
+                                                    <th>{{ __('Admin/income_products.currency') }}</th>
+
                                                     <th>{{ __('Admin/income_products.income_product_date') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
@@ -102,6 +120,8 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+
             {data: 'country', name: 'country',searchable: true, sortable: true},
             {data: 'province', name: 'province',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
@@ -109,9 +129,12 @@
 
             {data: 'income_product_amount', name: 'income_product_amount',searchable: true, sortable: true},
             {data: 'income_product_price', name: 'income_product_price',searchable: true, sortable: true},
+            {data: 'currency', name: 'currency',searchable: true, sortable: true},
+
             {data: 'income_product_date', name: 'income_product_date',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
+
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
         order: [[3, 'desc']],

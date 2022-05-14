@@ -12,17 +12,22 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\land_areas.dashboard')}}</h3>
+                <h3 class="content-header-title">{{trans('Admin\land_areas.landAreaPageTitle')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('LandAreas.index') }}">{{ __('Admin/land_areas.land_areas') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
                         </ol>
+
                     </div>
                 </div>
             </div>
@@ -74,7 +79,7 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col col-md-6">
 
                                                             <div class="form-group">
                                                                 <label for="state_id">{{ __('Admin/land_areas.state') }}</label>
@@ -85,52 +90,26 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col">
 
-                                                            <div class="form-group">
-                                                                <label for="village_id">{{ __('Admin/land_areas.village') }}</label>
-                                                                <select class=" form-control" name="village_id" id="village_id">
-                                                                    <option value="">{{ __('Admin/site.select') }}</option>
-
-                                                                </select>
-
-                                                            </div>
-                                                        </div>
 
                                                     </div>
 
 
-                                                    <div class="row mb-3">
-                                                        <div class="col">
-                                                            <div  class="form-group mb-3">
-                                                                <label class="">{{__('Admin\land_areas.departments')}}</label>
-                                                                <hr>
-                                                                <div id="jstree"></div>
-                                                                <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                    <div class="row">
-                                                        <div class="col">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Admin/land_areas.L_area') }}</label>
-                                                                <input name="L_area" value=""  class="form-control"type="number">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-group">
-                                                                <label>{{ __('Admin/land_areas.unit') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="unit_id" >
-                                                                    <option selected disabled>--select--</option>
+                                                       <div class="col col-md-6">
 
-                                                                @foreach($units as $unit)
-                                                                        <option value="{{$unit->id}}">{{ $unit->Name }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                       <div class="col">
+                                                           <div class="form-group">
+                                                               <label for="village_id">{{ __('Admin/land_areas.village') }}</label>
+                                                               <select class=" form-control" name="village_id" id="village_id">
+                                                                   <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                               </select>
+
+                                                           </div>
+                                                       </div>
+
+                                                       <div class="col col-md-6">
                                                            <div class="form-group">
                                                                <label for="customSelect">{{ __('Admin/land_areas.land_category_id') }}</label>
                                                                <select class="custom-select form-control" id="customSelect" name="land_category_id" >
@@ -144,6 +123,27 @@
 
 
                                                    </div>
+                                            <div class="row">
+                                                <div class="col col-md-6">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/land_areas.L_area') }}</label>
+                                                        <input name="L_area" value=""  class="form-control"type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="col col-md-6">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/land_areas.unit') }}</label>
+                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                            <option selected disabled>--select--</option>
+
+                                                            @foreach($units as $unit)
+                                                                <option value="{{$unit->id}}">{{ $unit->Name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
 
                                             <div class="form-actions center">
                                                 <button type="submit" class="btn btn-primary">
@@ -230,46 +230,6 @@
     </script>
 
 
-
-{{--departments--}}
-
-    <script  type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep(old('admin_department_id')) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
-
-
-
-            });
-    </script>
-
-<script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>
-<script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

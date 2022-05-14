@@ -13,13 +13,29 @@
                 <h3 class="content-header-title">{{ __('Admin/p_houses.protectedHousePageTitle') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/p_houses.protectedHousePageTitle') }}</a>
-                            </li>
 
-                        </ol>
+                        @if($admin->type == 'employee')
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('ProtectedHouse.index') }}">{{ __('Admin/p_houses.protectedHouses') }}</a>
+                                </li>
+                                </li>
+                            </ol>
+                        @else
+
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('ProtectedHouse.index') }}">{{ __('Admin/p_houses.protectedHouses') }}</a>
+
+                            </ol>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -59,15 +75,16 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ __('Admin/site.area') }}</th>
-                                                    <th>{{ __('Admin/site.state') }}</th>
+                                                    <th>{{ __('Admin/p_houses.admin') }}</th>
+                                                    <th>{{ __('Admin/p_houses.area') }}</th>
+                                                    <th>{{ __('Admin/p_houses.state') }}</th>
                                                     <th>{{ __('Admin/p_houses.village') }}</th>
-                                                    <th>{{ __('Admin/site.Department') }}</th>
-                                                    <th>{{ __('Admin/site.farmer') }}</th>
+                                                    <th>{{ __('Admin/p_houses.farmer') }}</th>
                                                     <th>{{ __('Admin/p_houses.status') }}</th>
+                                                    <th>{{ __('Admin/p_houses.supported_side') }}</th>
+                                                    <th>{{ __('Admin/p_houses.count_protected_house') }}</th>
                                                     <th>{{ __('Admin/p_houses.average_product_annual') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
-
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
                                             </thead>
@@ -103,16 +120,16 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village',searchable: true, sortable: true},
-            {data: 'adminDepartment', name: 'adminDepartment',searchable: true, sortable: true},
-
-
-            {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+            {data: 'farmer', name: 'farmer',searchable: true, sortable: true},
             {data: 'status', name: 'status',searchable: true, sortable: true},
-            {data: 'average_product_annual', name: 'average_product_annual',searchable: true, sortable: true},
+            {data: 'supported_side', name: 'supported_side',searchable: true, sortable: true},
+            {data: 'count_protected_house', name: 'count_protected_house',searchable: true, sortable: true},
 
+            {data: 'average_product_annual', name: 'average_product_annual',searchable: true, sortable: true},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

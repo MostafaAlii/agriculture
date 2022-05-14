@@ -18,11 +18,15 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
+                            <li class="breadcrumb-item"><a href="{{ route('AdminDepartments.index') }}">{{ $admin_dep_name }}</a>
+                            </li>
+                            </li>
                             <li class="breadcrumb-item"><a href="{{ route('IncomeProducts.index') }}">{{ __('Admin/income_products.income_productPageTitle') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.edit') }}
                             </li>
                         </ol>
+
                     </div>
                 </div>
             </div>
@@ -61,7 +65,7 @@
                                         <div class="form-body">
 
                                             <div class="row mt-2">
-                                                <div class="col col-md-3 ">
+                                                <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label for="whole_product_id">{{ __('Admin/income_products.whole_product') }}</label>
                                                         <select name="whole_product_id" id="whole_product_id" class="form-control" required>
@@ -75,7 +79,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col col-md-3">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label for="country_id">{{ __('Admin/income_products.country') }}</label>
                                                         <select name="country_id" id="country_id" class="form-control" required>
@@ -89,52 +93,58 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col col-md-3">
+                                                <div class="col col-md-4">
 
                                                     <div class="form-group">
                                                         <label for="province_id">{{ __('Admin/income_products.province') }}</label>
                                                         <select class="select2 form-control" name="province_id" id="province_id">
-                                                            <option value="{{$income_product->province_id >0?$income_product->province_id:'' }}" selected>{{$income_product->province>0?$income_product->province->name:''}}</option>
+                                                            <?php
+                                                                $province_count = \App\Models\Province::where('id',$income_product->province_id )->count();
+                                                            ?>
+                                                            @if($province_count>0)
+
+                                                            <option value="{{$income_product->province_id }}" selected>{{$income_product->province->name}}</option>
+                                                                @else
+                                                                    <option value="" ></option>
+                                                            @endif
 
                                                         </select>
 
                                                     </div>
                                                 </div>
-                                                <div class="col col-md-3">
+
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col col-md-4">
 
                                                     <div class="form-group">
                                                         <label for="province_id">{{ __('Admin/income_products.area') }}</label>
                                                         <select class="select2 form-control" name="area_id" id="area_id">
-                                                            <option value="{{$income_product->area_id >0?$income_product->area_id:'' }}" selected>
-                                                                {{$income_product->area>0?$income_product->area->name:''}}</option>
+                                                            <?php
+                                                          $area_count = \App\Models\Area::where('id',$income_product->area_id )->count();
+                                                            ?>
+                                                            @if($area_count>0)
+
+                                                                <option value="{{$income_product->area_id }}" selected>{{$income_product->area->name}}</option>
+                                                            @else
+                                                                <option value="" ></option>
+                                                            @endif
 
                                                         </select>
 
                                                     </div>
                                                 </div>
-
-                                            </div>
-
-
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <div  class="form-group mb-3">
-                                                        <label class="">{{__('Admin\income_products.departments')}}</label>
-                                                        <hr>
-                                                        <div id="jstree"></div>
-                                                        <input name="admin_department_id" type="hidden" value="{{$income_product->admin_department_id}}" class="admin_department_id">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/income_products.income_product_amount') }}</label>
                                                         <input name="income_product_amount" value="{{$income_product->income_product_amount}}"  class="form-control"type="text">
+                                                        <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="hidden">
+
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/income_products.unit') }}</label>
                                                         <select class="custom-select form-control" id="customSelect" name="unit_id" >
@@ -147,14 +157,15 @@
                                                     </div>
                                                 </div>
 
-
-                                                <div class="col">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
-                                                        <label>{{ __('Admin/outcome_products.income_product_price') }}</label>
+                                                        <label>{{ __('Admin/income_products.income_product_price') }}</label>
                                                         <input name="income_product_price" value="{{$income_product->income_product_price}}"  class="form-control"type="text">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/income_products.currency') }}</label>
                                                         <select class="custom-select form-control" id="customSelect" name="currency_id" >
@@ -164,15 +175,13 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
-                                                        <label>{{ __('Admin/outcome_products.income_product_date') }}</label>
+                                                        <label>{{ __('Admin/income_products.income_product_date') }}</label>
                                                         <input name="income_product_date"value="{{$income_product->income_product_date}}" class="form-control"type="date">
 
                                                     </div>
                                                 </div>
-
-
 
                                             </div>
 
@@ -258,44 +267,6 @@
                 }
             });
         });
-    </script>
-
-
-    {{--departments--}}
-
-    <script  type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep($income_product->admin_department_id) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
-
-
-
-            });
     </script>
 
     <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>

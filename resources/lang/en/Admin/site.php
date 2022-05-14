@@ -5,6 +5,16 @@ return [
     'logout' => 'Logout',
     'login' => 'Login',
     'serial' => 'Serial',
+    'whole_sale_market'=>'WholeSale Market',
+    'planning'=>'Planning',
+    'animal_wealth'=>'Animal Wealth',
+    'reporting'=>'Reporting',
+
+    'planet_protection_services'=>'Plant Protection && Services',
+    'Horticulture'=>'Horticulture',
+    ''=>'',
+    ''=>'',
+    ''=>'',
 
     'add' => 'Add',
     'edit' => 'Edit',
@@ -56,6 +66,7 @@ return [
     'incorrect_old_password' => 'Incorrect old password',
 
     'newuser'=>'New User',
+    'newworker'=>'New Worker',
     'newfarmer'=>'New Farmer',
     'farmer'=>'Farmers',
     'warning' => 'Are you sure to delete ?',
@@ -73,6 +84,7 @@ return [
 
     'signvendor'=>'sign in as vendor',
     'signfarmer'=>'sign in as farmer',
+    'signworker'=>'sign in as Worker',
     'newfarmer'=>'New Farmer',
     'newvendor'=>'New Vendor',
     'yourtype'=>'Select Your Type',
@@ -164,4 +176,20 @@ return [
     'sendmails'=>'Send Emails',
 
     'contact' => 'Contact US',
+
+      //for worker
+      'worker'=>'Worker',
+      'workers'=>'Workers',
+      'workersdash'=>'Workers data',
+      'newworker'=>'New Worker',
+      'salarytype'=>'Salary Type',
+      'perday'=>'Per Day',
+      'perhour'=>'Per Hour',
+      'worktype'=>'Work Type',
+      'alone'=>'Individually',
+      'team'=>'Teamwork',
+      'daily'=>'Daily Price',
+      'hourly'=>'Hourly Price',
+      'dhprice'=>'Day/Hour Price',
+
 ];

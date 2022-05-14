@@ -13,13 +13,28 @@
                 <h3 class="content-header-title">{{ __('Admin/services.farmerServicePageTitle') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
-                            </li>
-                            <li class="breadcrumb-item"><a href="#">{{ __('Admin/services.farmerServicePageTitle') }}</a>
-                            </li>
+                        @if($admin->type == 'employee')
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('FarmerServices.index') }}">{{ __('Admin/services.farmerServicePageTitle') }}</a>
+                                </li>
+                                </li>
+                            </ol>
+                        @else
 
-                        </ol>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ route('FarmerServices.index') }}">{{ __('Admin/services.farmerServicePageTitle') }}</a>
+                                </li>
+
+                            </ol>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -60,10 +75,8 @@
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/services.farmer') }}</th>
-                                                    <th>{{ __('Admin/services.area') }}</th>
-                                                    <th>{{ __('Admin/services.state') }}</th>
+                                                    <th>{{ __('Admin/services.admin') }}</th>
                                                     <th>{{ __('Admin/services.village') }}</th>
-
 
                                                     <th>{{ __('Admin/services.agriServices') }}</th>
                                                     <th>{{ __('Admin/services.agriTServices') }}</th>
@@ -94,9 +107,34 @@
 
 <script>
     let adminsTable = $('#farmerservice-table').DataTable({
-        // dom: "tiplr",
-        serverSide: true,
-        processing: true,
+        dom: 'Bfrtip',
+        buttons: [
+            { text:'excel',
+                extend: 'excel',
+                orientation: 'landscape',
+                pageSize: 'A3',
+                exportOptions: {
+                    columns: [ 1,2,3,4,5,6]
+                },
+                className: 'btn btn-primary ml-1',
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns:  [1, 2,3,4, 5,6]
+                },
+                autoPrint: true,
+                orientation: 'landscape',
+                className: 'btn btn-success ml-1',
+                pageSize: 'A3',
+                text:'print'
+            },
+
+
+
+        ],
+
         lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
@@ -107,8 +145,8 @@
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
-            {data: 'area', name: 'area',searchable: true, sortable: true},
-            {data: 'state', name: 'state',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+
             {data: 'village', name: 'village',searchable: true, sortable: true},
 
             {data: 'name_a', name: 'name_a',searchable: true, sortable: true},

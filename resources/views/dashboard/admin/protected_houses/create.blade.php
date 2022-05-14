@@ -12,17 +12,22 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\p_houses.protectedHouses')}}</h3>
+                <h3 class="content-header-title">{{trans('Admin\p_houses.protectedHousePageTitle')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('ProtectedHouse.index') }}">{{ __('Admin/p_houses.protectedHouses') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
                         </ol>
+
                     </div>
                 </div>
             </div>
@@ -42,7 +47,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/p_house.newprotectedHouse') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/p_houses.newprotectedHouse') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -61,42 +66,20 @@
                                         <div class="form-body">
 
                                                     <div class="row mt-2">
-                                                        <div class="col col-md-4">
+                                                        <div class="col col-md-6">
                                                             <div class="form-group">
-                                                                <label for="area_id">{{ __('Admin/p_houses.area') }}</label>
-                                                                <select name="area_id" id="area_id" class="form-control" required>
+                                                                <label for="village_id">{{ __('Admin/p_houses.village') }}</label>
+                                                                <select name="village_id" id="village_id" class="form-control" required>
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
-                                                                    @foreach ($areas as $area)
-                                                                        <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                                    @foreach ($villages as $village)
+                                                                        <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                                     @endforeach
                                                                 </select>
 
                                                             </div>
                                                         </div>
-                                                        <div class="col col-md-4">
-
-                                                            <div class="form-group">
-                                                                <label for="state_id">{{ __('Admin/p_houses.state') }}</label>
-                                                                <select class=" form-control" name="state_id" id="state_id">
-                                                                    <option value="">{{ __('Admin/site.select') }}</option>
-
-                                                                </select>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="village_id">{{ __('Admin/p_houses.village') }}</label>
-                                                                <select class=" form-control" name="village_id" id="village_id">
-
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                   <div class="row mt-2">
-
-                                                        <div class="col">
+                                                        <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="farmer_id">{{ __('Admin/p_houses.farmer') }}</label>
                                                                 <select class="select2 form-control" name="farmer_id" id="farmer_id">
@@ -105,41 +88,55 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col">
+                                                    </div>
+                                                   <div class="row mt-2">
+
+
+
+                                                        <div class="col col-md-3">
                                                             <div class="form-group">
                                                                 <label  for="admin_id">{{ __('Admin/p_houses.farmer_phone') }}</label>
                                                              <input name="phone"  id="farmer_phone"typ="text" class="form-control">
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col col-md-3">
                                                             <div class="form-group">
                                                                 <label  for="admin_id">{{ __('Admin/p_houses.farmer_email') }}</label>
                                                                 <input name="email"   id="farmer_email"typ="text" class="form-control">
                                                             </div>
                                                         </div>
+                                                       <div class="col col-md-3">
+                                                           <div class="form-group">
+                                                               <label for="customSelect1">{{ __('Admin/p_houses.supported_side') }}</label>
+                                                               <select class="custom-select form-control" id="customSelect1" name="supported_side" >
+                                                                   <option selected disabled>--select--</option>
+                                                                       <option value="private">{{ __('Admin\p_houses.private')}}</option>
+                                                                   <option value="govermental">{{ __('Admin\p_houses.govermental')}}</option>
+                                                                   <option value="international organizations">{{ __('Admin\p_houses.international_organizations')}}</option>
 
+
+                                                               </select>
+
+                                                           </div>
+                                                       </div>
+                                                       <div class="col col-md-3">
+                                                           <div class="form-group">
+                                                               <label  for="count_protected_house_id">{{ __('Admin/p_houses.count_protected_house') }}</label>
+                                                               <input name="count_protected_house"   id="count_protected_house_id"typ="text" class="form-control">
+                                                           </div>
+                                                       </div>
 
                                                     </div>
 
-                                                    <div class="row mb-3">
-                                                        <div class="col">
-                                                            <div  class="form-group mb-3">
-                                                                <label class="">{{__('Admin\p_houses.departments')}}</label>
-                                                                <hr>
-                                                                <div id="jstree"></div>
-                                                                <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                    <div class="row">
-                                                        <div class="col">
+                                                        <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/p_houses.average_product_annual') }}</label>
                                                                 <input name="average_product_annual" value=""  class="form-control"type="text">
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/p_houses.unit') }}</label>
                                                                 <select class="custom-select form-control" id="customSelect" name="unit_id" >
@@ -151,7 +148,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/p_houses.status') }}</label>
                                                                 <select class="custom-select form-control" id="customSelect" name="status" >
@@ -162,19 +159,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col">
-                                                            <div class="form-group">
-                                                                <label for="customSelect1">{{ __('Admin/p_houses.supported_side') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect1" name="supported_side_id" >
-                                                                    <option selected disabled>--select--</option>
-                                                                    @foreach($supported_sides as $supported_side)
-                                                                        <option value="{{$supported_side->id}}">{{ $supported_side->Name }}</option>
-                                                                    @endforeach
 
-                                                                </select>
-
-                                                            </div>
-                                                        </div>
 
                                                    </div>
 
@@ -327,40 +312,6 @@
 
 {{--departments--}}
 
-    <script  type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep(old('admin_department_id')) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
-
-
-
-            });
-    </script>
 
 <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>
 <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>

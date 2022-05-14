@@ -21,12 +21,25 @@ use Yajra\DataTables\DataTables;
 
 class OutcomeProductRepository implements OutcomeProductInterface {
     public function index() {
-        return view('dashboard.admin.outcome_products.index') ;
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $department_id = $admin->adminDepartment->id;
+        $adminDepartment = AdminDepartment::findorfail($department_id);
+        $dep_name = $adminDepartment->dep_name_ar;
+        return view('dashboard.admin.outcome_products.index',compact('admin','dep_name')) ;
     }
 
     public function data()
     {
-        $outcomes = OutcomeProduct::with('area','country','province','adminDepartment','whole_product');
+        $adminID = Auth::user()->id;
+        $admin=Admin::findorfail($adminID);
+        if($admin->type =='employee') {
+            $outcomes = OutcomeProduct::with('area', 'country', 'province', 'whole_product', 'admin','currency')
+                ->where('admin_id', '==', $admin->id);
+        }else{
+            $outcomes = OutcomeProduct::with('area', 'country', 'province', 'whole_product', 'admin','currency');
+
+        }
 
         return DataTables::of($outcomes)
             ->addColumn('record_select', 'dashboard.admin.outcome_products.data_table.record_select')
@@ -34,8 +47,14 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             ->editColumn('created_at', function (OutcomeProduct $outcome) {
                 return $outcome ->created_at->diffforhumans();
             })
+            ->editColumn('admin', function (OutcomeProduct $outcome) {
+                return $outcome ->admin->firstname;
+            })
             ->addColumn('country', function (OutcomeProduct $outcome) {
                 return $outcome->country->name;
+            })
+            ->addColumn('currency', function (OutcomeProduct $outcome) {
+                return $outcome->currency->Name;
             })
             ->addColumn('province', function (OutcomeProduct $outcome) {
                 if(!empty($outcome->province)){
@@ -52,9 +71,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                     return null;
                 }
             })
-            ->addColumn('adminDepartment', function (OutcomeProduct $outcome) {
-                return $outcome->adminDepartment->dep_name_ar;
-            })
+
             ->addColumn('whole_product', function (OutcomeProduct $outcome) {
                 return $outcome->whole_product->name;
             })
@@ -68,19 +85,23 @@ class OutcomeProductRepository implements OutcomeProductInterface {
     }
 
     public function create() {
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $department_id = $admin->adminDepartment->id;
+
+        $admin_dep_name = $admin->adminDepartment->dep_name_ar;
         $areas = Area::all();
         $provinces = Province::all();
         $countries = Country::all();
 
         $whole_products = WholeProduct::all();
-        $admin_dpartments = AdminDepartment::all();
         $currencies = Currency::all();
 
         $units = Unit::all();
 
 
         return view('dashboard.admin.outcome_products.create',
-            compact( 'whole_products', 'areas', 'provinces', 'countries','admin_dpartments','units','currencies'));
+            compact( 'admin','admin_dep_name','whole_products', 'areas', 'provinces', 'countries','units','currencies'));
     }
 
     public function store($request) {
@@ -105,8 +126,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
             $outcome_product->unit_id = $requestData['unit_id'];
             $outcome_product->currency_id = $requestData['currency_id'];
+            $outcome_product->admin_dep_name = $request->admin_dep_name;
 
-            $outcome_product->admin_department_id = $requestData['admin_department_id'];
             $outcome_product->outcome_product_amount = $requestData['outcome_product_amount'];
             $outcome_product->outcome_product_price = $requestData['outcome_product_price'];
             $outcome_product->outcome_product_date = $requestData['outcome_product_date'];
@@ -133,19 +154,20 @@ class OutcomeProductRepository implements OutcomeProductInterface {
     public function edit($id)
     {
         $outID = Crypt::decrypt($id);
+        $outcome_product = OutcomeProduct::findorfail($outID);
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $department_id = $admin->adminDepartment->id;
+        $admin_dep_name = $admin->adminDepartment->dep_name_ar;
         $areas = Area::all();
-        $countries = Country::all();
         $provinces = Province::all();
+        $countries = Country::all();
         $whole_products = WholeProduct::all();
-
-        $outcome_product  = OutcomeProduct::findorfail($outID);
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
-        $units = Unit::all();
         $currencies = Currency::all();
+        $units = Unit::all();
 
         return view('dashboard.admin.outcome_products.edit',
-            compact('admin_dpartments', 'areas', 'provinces','countries', 'units',
+            compact('admin_dep_name', 'areas', 'provinces','countries', 'units','dep_name',
                 'outcome_product','whole_products','currencies'));
     }
 
@@ -172,6 +194,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             $outcome_product->country_id = $requestData['country_id'];
             $outcome_product->unit_id = $requestData['unit_id'];
             $outcome_product->currency_id = $requestData['currency_id'];
+            $outcome_product->admin_dep_name = $request->admin_dep_name;
 
             $outcome_product->outcome_product_amount = $requestData['outcome_product_amount'];
             $outcome_product->outcome_product_price = $requestData['outcome_product_price'];
@@ -231,4 +254,21 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
     }// end of bulkDelete
+
+
+    public function outcome_product_statistics(){
+        $statistics = OutcomeProduct::select('country_translations.name AS country','province_translations.name AS province',
+            'outcome_products.admin_dep_name AS admin_dep_name as dep_name','whole_product_translations.name as product_name',
+            'outcome_products.outcome_product_amount as outcome_product_amount',
+            'outcome_products.outcome_product_price as outcome_product_price','outcome_products.outcome_product_date as outcome_product_date')
+
+
+            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+            ->join('province_translations', 'outcome_products.province_id', '=', 'province_translations.id')
+            ->join('whole_product_translations','outcome_products.whole_product_id','=','whole_product_translations.id')
+            ->get();
+
+        return view('dashboard.admin.outcome_products.outcome_products_statistics',compact('statistics'));
+
+    }
 }

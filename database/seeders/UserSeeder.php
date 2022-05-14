@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
             'state_id'          => 1,
             'village_id'        => 1,
             'department_id'     => 1,
+            'admin_department_id'=>4,
             'remember_token' => Str::random(10),
         ]);
         User::create([
@@ -44,6 +45,7 @@ class UserSeeder extends Seeder
             'state_id'          => 2,
             'village_id'        => 2,
             'department_id'     => 2,
+            'admin_department_id'=>4,
             'remember_token' => Str::random(10),
         ]);
     }

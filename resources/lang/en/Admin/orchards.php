@@ -10,16 +10,22 @@ return [
     'farmer' =>'Farmer',
     'area' =>'Area',
     'state' =>'State',
-
+    'private'=>'Private',
+    'international_organizations'=>'International Organization',
+    'govermental'=>'Govermental',
+    'orchardPageTitle'=>'Orchards',
     'village' =>'Village',
-
     'farmer_phone' =>'Farmer Phone',
-
     'farmer_email' =>'Farmer Email',
-
     'farmer_address' =>' Farmer Address',
     'dashboard'=> 'Dashboard',
     'orchards'=>'Orchards',
+    'tree_name'=>'Tree Name',
+    'category_name'=>'Orchard Category',
+    'Report_on_the_lands_planted_with_trees'=>'Report on the lands planted with trees',
+    'Tree_Lands_Database'=>'Tree Lands Database',
+    'admin'=>'Employee Responsible',
+'orchardsPageTitle'=>'Orchards',
     'neworchard'=>'New Orchard',
     'farmer_phone'=>'Farmer Phone',
     'farmer_email'=>'Farmer Email',

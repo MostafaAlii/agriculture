@@ -1,7 +1,6 @@
 <?php
 namespace  App\Http\Repositories\Admin;
 use App\Models\BeeKeeper;
-use App\Models\Farmer;
 use App\Models\Admin;
 use App\Models\Area;
 use App\Models\State;
@@ -9,10 +8,7 @@ use App\Models\Village;
 use App\Models\CourseBee;
 use App\Models\BeeDisaster;
 use App\Models\Unit;
-use App\Models\SupportedSide;
 
-use App\Models\AdminDepartment;
-use App\Models\LandCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -22,35 +18,72 @@ use Yajra\DataTables\DataTables;
 use App\Http\Interfaces\Admin\BeekeeperInterface;
 class BeekeeperRepository implements BeekeeperInterface {
     public function index(){
-        return view('dashboard.admin.beekeepers.index');
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+        return view('dashboard.admin.beekeepers.index',
+                    compact('admin','area_name','state_name'));
+
 
     }
 
 
     public function data()
     {
-        $beekeeper = BeeKeeper::with('farmer', 'village', 'adminDepartment','coursebees','beedisasters')
-            ->selectRaw('distinct bee_keepers.*')->get();;
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $beekeepers = BeeKeeper::with('admin','farmer', 'village', 'coursebees', 'beedisasters','area','state')
+                ->where('admin_id','==',$admin->id )
 
-        return DataTables::of($beekeeper)
+            ->selectRaw('distinct bee_keepers.*')->get();
+        }else{
+            $beekeepers = BeeKeeper::with('admin','farmer', 'village', 'coursebees', 'beedisasters')
+                ->selectRaw('distinct bee_keepers.*')->get();
+        }
+        return DataTables::of($beekeepers)
             ->addColumn('record_select', 'dashboard.admin.beekeepers.data_table.record_select')
             ->addIndexColumn()
+
             ->editColumn('created_at', function (BeeKeeper $beekeeper) {
                 return $beekeeper ->created_at->diffforhumans();
+            })
+
+            ->editColumn('supported_side', function (BeeKeeper $beekeeper) {
+                return view('dashboard.admin.beekeepers.data_table.supported_side', compact('beekeeper'));
             })
             ->addColumn('farmer', function (BeeKeeper $beekeeper) {
                 return $beekeeper ->farmer->email;
             })
+            ->addColumn('admin', function (BeeKeeper $beekeeper) {
+                return $beekeeper ->admin->firstname;
+            })
+
+            ->addColumn('area', function (BeeKeeper $beekeeper) {
+                return $beekeeper->area->name;
+
+            })
+
+            ->addColumn('state', function (BeeKeeper $beekeeper) {
+                return $beekeeper->state->name;
+
+            })
+
             ->addColumn('village', function (BeeKeeper $beekeeper) {
                 return $beekeeper->village->name;
-            })->addColumn('c_name', function ($beekeeper) {
-                return implode(', ', $beekeeper->coursebees->pluck('name')->toArray());
+
             })
-            ->rawColumns(['c_name'])
+
+            ->addColumn('c_name', function ($beekeeper) {
+                return implode(', ', $beekeeper->coursebees->pluck('name')->toArray());
+            })->rawColumns(['c_name'])
+
             ->addColumn('d_name', function ($beekeeper) {
                 return implode(', ', $beekeeper->beedisasters->pluck('name')->toArray());
-            })
-            ->rawColumns(['d_name'])
+            }) ->rawColumns(['d_name'])
             ->addColumn('actions', 'dashboard.admin.beekeepers.data_table.actions')
             ->rawColumns(['record_select', 'actions'])
             ->toJson();
@@ -58,20 +91,21 @@ class BeekeeperRepository implements BeekeeperInterface {
     }
     public function create()
     {
-        $areas = Area::all();
-        $states = State::all();
-        $villages = Village::all();
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+
+        $villages = Village::where('state_id',$stateID)->get();
         $courses = CourseBee::all();
         $disasters = BeeDisaster::all();
         $units = Unit::all();
-        $supported_sides = SupportedSide::all();
 
         return view('dashboard.admin.beekeepers.create',
-            compact('farmers', 'admins', 'admin_dpartments', 'supported_sides',
-                'disasters', 'areas', 'courses', 'states', 'units'));
+            compact( 'admin', 'villages','area_name','areaID','stateID','state_name',
+                'disasters', 'courses', 'units'));
     }
 
 
@@ -81,22 +115,26 @@ class BeekeeperRepository implements BeekeeperInterface {
     {
         DB::beginTransaction();
         try {
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $area_name = $admin->area->name;
+            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $beekeeper = new BeeKeeper();
-            $beekeeper->admin_id = Auth::user()->id;
+            $beekeeper->admin_id = $admin->id;
             $beekeeper->farmer_id = $requestData['farmer_id'];
-            $beekeeper->area_id = $requestData['area_id'];
-            $beekeeper->state_id = $requestData['state_id'];
+            $beekeeper->state_id = $stateID;
+            $beekeeper->area_id = $areaID;
             $beekeeper->village_id = $requestData['village_id'];
             $beekeeper->died_beehive_count = $requestData['died_beehive_count'];
-
-            $beekeeper->admin_department_id = $requestData['admin_department_id'];
             $beekeeper->annual_new_product_beehive = $requestData['annual_new_product_beehive'];
             $beekeeper->annual_old_product_beehive = $requestData['annual_old_product_beehive'];
             $beekeeper->new_beehive_count = $requestData['new_beehive_count'];
             $beekeeper->old_beehive_count = $requestData['old_beehive_count'];
             $beekeeper->unit_id = $requestData['unit_id'];
-            $beekeeper->supported_side_id = $requestData['supported_side_id'];
+            $beekeeper->supported_side = $requestData['supported_side'];
+            $beekeeper->cost = $requestData['cost'];
             $beekeeper->phone = $requestData['phone'];
             $beekeeper->email = $requestData['email'];
 
@@ -127,40 +165,44 @@ class BeekeeperRepository implements BeekeeperInterface {
     {
         $beekeeper = BeeKeeper::findorfail($id);
 
-        $areas = Area::all();
-        $states = State::all();
-        $villages = Village::all();
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+
+        $villages = Village::where('state_id',$stateID)->get();
         $courses = CourseBee::all();
         $disasters = BeeDisaster::all();
         $units = Unit::all();
-        $supported_sides = SupportedSide::all();
         return view('dashboard.admin.beekeepers.edit',
-            compact('farmers', 'admins', 'admin_dpartments', 'supported_sides',
-                'disasters', 'areas', 'courses', 'states', 'units','beekeeper'));
+            compact('villages', 'admin', 'areaID','area_name','state_name','stateID',
+                'disasters', 'courses', 'units','beekeeper'));
     }
 
     public function update( $request, $id) {
         DB::beginTransaction();
         try {
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $beekeeper =  BeeKeeper::findorfail($id);
-            $beekeeper->admin_id = Auth::user()->id;
+            $beekeeper->admin_id =  $admin->id;
             $beekeeper->farmer_id = $requestData['farmer_id'];
-            $beekeeper->area_id = $requestData['area_id'];
-            $beekeeper->state_id = $requestData['state_id'];
+            $beekeeper->area_id = $areaID;
+            $beekeeper->state_id = $stateID;
             $beekeeper->village_id = $requestData['village_id'];
             $beekeeper->died_beehive_count = $requestData['died_beehive_count'];
-
-            $beekeeper->admin_department_id = $requestData['admin_department_id'];
             $beekeeper->annual_new_product_beehive = $requestData['annual_new_product_beehive'];
             $beekeeper->annual_old_product_beehive = $requestData['annual_old_product_beehive'];
             $beekeeper->new_beehive_count = $requestData['new_beehive_count'];
             $beekeeper->old_beehive_count = $requestData['old_beehive_count'];
             $beekeeper->unit_id = $requestData['unit_id'];
-            $beekeeper->supported_side_id = $requestData['supported_side_id'];
+            $beekeeper->supported_side= $requestData['supported_side'];
+            $beekeeper->cost = $requestData['cost'];
             $beekeeper->phone = $requestData['phone'];
             $beekeeper->email = $requestData['email'];
 
@@ -222,4 +264,37 @@ class BeekeeperRepository implements BeekeeperInterface {
 
 
     }// end of bulkDelete
+
+    public function statistics(){
+        $statistics = BeeKeeper::select('area_translations.name AS Area',
+//            'state_translations.name AS State',
+                DB::raw("COUNT(bee_keepers.village_id) As village_count") ,
+
+                DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+
+                ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+
+                ->GroupBy('Area'
+            )->get();
+
+        return view('dashboard.admin.beekeepers.beekeepers_statistics',compact('statistics'));}
+
+    public function beekeeper_details_statistics(){
+        $statistics = BeeKeeper::select('area_translations.name AS Area',
+            'state_translations.name AS State', 'village_translations.name AS Village', 'farmers.firstname AS farmer',
+           'bee_keepers.old_beehive_count as old_beehive_count','bee_keepers.new_beehive_count',
+            'bee_keepers.annual_new_product_beehive as annual_new_product_beehive',
+            'bee_keepers.annual_old_product_beehive as annual_old_product_beehive',
+            'bee_keepers.supported_side as supported_side',   'bee_keepers.cost as cost')
+
+            ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+            ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+            ->join('farmers', 'bee_keepers.farmer_id', '=', 'farmers.id')->get();
+
+        return view('dashboard.admin.beekeepers.beekeepers_details_statistics',compact('statistics'));}
 }

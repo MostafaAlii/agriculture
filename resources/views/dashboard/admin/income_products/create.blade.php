@@ -12,17 +12,21 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{trans('Admin\orchards.dashboard')}}</h3>
+                <h3 class="content-header-title">{{trans('Admin\income_products.income_productPageTitle')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('AdminDepartments.index') }}">{{ $dep_name }}</a>
+                            </li>
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('IncomeProducts.index') }}">{{ __('Admin/income_products.income_productPageTitle') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
                         </ol>
+
                     </div>
                 </div>
             </div>
@@ -61,10 +65,10 @@
                                         <div class="form-body">
 
                                                     <div class="row mt-2">
-                                                        <div class="col col-md-3">
+                                                        <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label for="area_id">{{ __('Admin/income_products.whole_product') }}</label>
-                                                                <select name="whole_product_id" id="area_id" class="form-control" required>
+                                                                <select  name="whole_product_id" id="area_id" class="form-control" required autocomplete="on">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($whole_products as $whole_product)
@@ -74,7 +78,7 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col col-md-3">
+                                                        <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label for="area_id">{{ __('Admin/income_products.country') }}</label>
                                                                 <select name="country_id" id="area_id" class="form-control" required>
@@ -87,7 +91,7 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col col-md-3">
+                                                        <div class="col col-md-4">
 
                                                             <div class="form-group">
                                                                 <label for="state_id">{{ __('Admin/income_products.province') }}</label>
@@ -98,43 +102,29 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col col-md-3">
-
-                                                            <div class="form-group">
-                                                                <label for="state_id">{{ __('Admin/income_products.area') }}</label>
-                                                                <select class=" form-control" name="area_id" id="area_id">
-                                                                    <option value="">{{ __('Admin/site.select') }}</option>
-
-                                                                </select>
-
-                                                            </div>
-                                                        </div>
 
                                                     </div>
 
 
-
-
-
-                                                    <div class="row mb-3">
-                                                        <div class="col">
-                                                            <div  class="form-group mb-3">
-                                                                <label class="">{{__('Admin\precipitations.departments')}}</label>
-                                                                <hr>
-                                                                <div id="jstree"></div>
-                                                                <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                    <div class="row">
-                                                        <div class="col">
+                                                       <div class="col col-md-4">
+
+                                                           <div class="form-group">
+                                                               <label for="state_id">{{ __('Admin/income_products.area') }}</label>
+                                                               <select class=" form-control" name="area_id" id="area_id">
+                                                                   <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                               </select>
+
+                                                           </div>
+                                                       </div>
+                                                       <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.income_product_amount') }}</label>
                                                                 <input name="income_product_amount" value=""  class="form-control"type="text">
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                       <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.unit') }}</label>
                                                                 <select class="custom-select form-control" id="customSelect" name="unit_id" >
@@ -145,24 +135,30 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                       <div class="col">
-                                                           <div class="form-group">
-                                                               <label>{{ __('Admin/income_products.income_product_price') }}</label>
-                                                               <input name="income_product_price" value=""  class="form-control"type="text">
-                                                           </div>
-                                                       </div>
-                                                       <div class="col">
-                                                           <div class="form-group">
-                                                               <label>{{ __('Admin/income_products.currency') }}</label>
-                                                               <select class="custom-select form-control" id="customSelect" name="currency_id" >
-                                                                   <option selected disabled>--select--</option>
-                                                                   @foreach($currencies as $currency)
-                                                                       <option value="{{$currency->id}}">{{ $currency->Name }}</option>
-                                                                   @endforeach
-                                                               </select>
-                                                           </div>
-                                                       </div>
-                                                        <div class="col">
+
+                                                   </div>
+                                                    <div class="row">
+
+                                                        <div class="col col col-md-4">
+                                                            <div class="form-group">
+                                                                <label>{{ __('Admin/income_products.income_product_price') }}</label>
+                                                                <input name="income_product_price" value=""  class="form-control"type="text">
+                                                                <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="hidden">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col col-md-4">
+                                                            <div class="form-group">
+                                                                <label>{{ __('Admin/income_products.currency') }}</label>
+                                                                <select class="custom-select form-control" id="customSelect" name="currency_id" >
+                                                                    <option selected disabled>--select--</option>
+                                                                    @foreach($currencies as $currency)
+                                                                        <option value="{{$currency->id}}">{{ $currency->Name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.income_product_date') }}</label>
                                                                 <input name="income_product_date" value=""  class="form-control"type="date">
@@ -170,8 +166,7 @@
                                                             </div>
                                                         </div>
 
-
-                                                   </div>
+                                                    </div>
 
                                             <div class="form-actions center">
                                                 <button type="submit" class="btn btn-primary">
@@ -265,36 +260,9 @@
     <script  type="text/javascript">
 
         $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep(old('admin_department_id')) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
+//change selectboxes to selectize mode to be searchable
+            $("select").select2();
         });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
-
-
-
-            });
     </script>
 
 <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>

@@ -18,6 +18,9 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
+                            <li class="breadcrumb-item"><a href="{{ route('AdminDepartments.index') }}">{{ $admin_dep_name }}</a>
+                            </li>
+                            </li>
                             <li class="breadcrumb-item"><a href="{{ route('OutcomeProducts.index') }}">{{ __('Admin/outcome_products.outcome_productPageTitle') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.edit') }}
@@ -61,7 +64,7 @@
                                         <div class="form-body">
 
                                             <div class="row mt-2">
-                                                <div class="col col-md-3 ">
+                                                <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label for="whole_product_id">{{ __('Admin/outcome_products.whole_product') }}</label>
                                                         <select name="whole_product_id" id="whole_product_id" class="form-control" required>
@@ -75,7 +78,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col col-md-3">
+                                                <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label for="country_id">{{ __('Admin/outcome_products.country') }}</label>
                                                         <select name="country_id" id="country_id" class="form-control" required>
@@ -89,7 +92,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col col-md-3">
+                                                <div class="col col-md-4 ">
 
                                                     <div class="form-group">
                                                         <label for="province_id">{{ __('Admin/outcome_products.province') }}</label>
@@ -100,7 +103,13 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col col-md-3">
+
+
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col col-md-4 ">
 
                                                     <div class="form-group">
                                                         <label for="province_id">{{ __('Admin/outcome_products.area') }}</label>
@@ -111,29 +120,15 @@
 
                                                     </div>
                                                 </div>
-
-                                            </div>
-
-
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <div  class="form-group mb-3">
-                                                        <label class="">{{__('Admin\outcome_products.departments')}}</label>
-                                                        <hr>
-                                                        <div id="jstree"></div>
-                                                        <input name="admin_department_id" type="hidden" value="{{$outcome_product->admin_department_id}}" class="admin_department_id">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
+                                                <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/outcome_products.outcome_product_amount') }}</label>
                                                         <input name="outcome_product_amount" value="{{$outcome_product->outcome_product_amount}}"  class="form-control"type="text">
+                                                        <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="hidden">
+
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/outcome_products.unit') }}</label>
                                                         <select class="custom-select form-control" id="customSelect" name="unit_id" >
@@ -147,13 +142,16 @@
                                                 </div>
 
 
-                                                <div class="col">
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/outcome_products.outcome_product_price') }}</label>
                                                         <input name="outcome_product_price" value="{{$outcome_product->outcome_product_price}}"  class="form-control"type="text">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/outcome_products.currency') }}</label>
                                                         <select class="custom-select form-control" id="customSelect" name="currency_id" >
@@ -163,16 +161,13 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/outcome_products.outcome_product_date') }}</label>
                                                         <input name="outcome_product_date"value="{{$outcome_product->outcome_product_date}}" class="form-control"type="date">
 
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
 
 
@@ -257,44 +252,6 @@
                 }
             });
         });
-    </script>
-
-
-    {{--departments--}}
-
-    <script  type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep($outcome_product->admin_department_id) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
-
-
-
-            });
     </script>
 
     <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>

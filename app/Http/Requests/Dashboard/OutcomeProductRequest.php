@@ -21,7 +21,6 @@ class OutcomeProductRequest extends FormRequest
             'province_id' => 'sometimes|nullable',
             'country_id' => 'required|exists:countries,id',
             'unit_id'=>'required|exists:units,id',
-            'admin_department_id' => 'required',
             'outcome_product_amount' =>'required|numeric',
             'outcome_product_price' =>'required|numeric',
             'outcome_product_date' => 'required|date',
@@ -45,7 +44,6 @@ class OutcomeProductRequest extends FormRequest
             'outcome_product_amount.required' => trans('Admin/validation.required'),
             'outcome_product_price.required' => trans('Admin/validation.required'),
             'outcome_product_date.required' => trans('Admin/validation.required'),
-            'admin_department_id.required' => trans('Admin/validation.required'),
             'unit_id.required' => trans('Admin/validation.required'),
 
 

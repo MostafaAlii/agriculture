@@ -40,5 +40,12 @@ class BeeKeepersController extends Controller
     public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
     }
+    public function statistics(){
+        return $this->Data->statistics();
+    }
+
+    public function  beekeeper_details_statistics(){
+        return $this->Data->beekeeper_details_statistics();
+    }
 
 }

@@ -1,7 +1,21 @@
 <?php
 return [
 
+    'admin'=>'Responsible Employee',
+    'sum_old_beehive_count'=>'All Old Beehive Count',
+    'sum_new_beehive_count'=>'All New Beehive Count',
+    'beehive_count'=>'All Beehive Count',
+    'farmer_count'=>'Farmer Count',
+    'total_product'=>'Total Product',
+    'Statistics_table_of_breeders_and_apiaries_for_the_district_of_Dohuk'=>'Statistics table of breeders and apiaries for the district of Dohuk',
+    'Apiaries_report_to_the_judiciary'=>'Apiaries report to the Areas',
+    'count_village'=>'Village Count',
+    'database_about_of_breeders'=>'Database About Breeders',
+    'Apiaries_report'=>'Apiaries Report',
+    'cost'=>'Cost',
+    ''=>'',
 
+    'count_village'=>'',
 
     'action' =>'Processes',
     'admin_departments' =>'Admin Departments Related',

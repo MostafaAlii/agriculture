@@ -1,6 +1,6 @@
 <?php
 return [
-
+'admin'=>'الموظف المسؤول',
     'action' =>'العمليات',
     'farmer_inf' =>'معلومات الفلاح',
     'admin_departments' =>'الهيكلية الإدارية التابعة',
@@ -21,6 +21,20 @@ return [
     'delete'=>'حذف',
     'died_beehive_count'=>'عدد الخلايا الميتة',
     'beekeepers_and_settings'=>'النحالين و الإعدادات',
+    'sum_old_beehive_count'=>'عدد الخلايا القديمة',
+    'sum_new_beehive_count'=>'عدد الخلايا الحديثة',
+    'beehive_count'=>'عدد المناحل',
+    'farmer_count'=>'عدد مربي النحل',
+    'total_product'=>'الإنتاج الكلي',
+    'Statistics_table_of_breeders_and_apiaries_for_the_district_of_Dohuk'=>'جدول احصاء مربي المناحل و المناحل لقضاء داهوك',
+    'Apiaries_report_to_the_judiciary'=>'تقرير المناحل للقضاءات',
+    'count_village'=>'عدد القرى',
+    'database_about_of_breeders'=>'قاعدة بيانات عن مربي النحل',
+    'Apiaries_report'=>'تقرير مربي النحل',
+    'cost'=>'التكلفة',
+    ''=>'',
+    ''=>'',
+
 
 
     'close'=>'إلغاء الأمر',

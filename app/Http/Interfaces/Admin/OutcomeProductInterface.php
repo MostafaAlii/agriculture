@@ -9,4 +9,5 @@ interface OutcomeProductInterface {
     public function update($request,$id);
     public function destroy($id);
     public function bulkDelete($request) ;
+    public function outcome_product_statistics();
 }

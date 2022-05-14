@@ -72,6 +72,14 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a class="menu-item" href="{{ route('workers.index') }}">
+                                        <i class="icon-user-follow"
+                                            style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                                        <span
+                                            data-i18n="{{ __('Admin/site.workers') }}">{{ __('Admin/site.workers') }}</span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="menu-item" href="{{ route('users.index') }}">
                                         <i class="icon-users"
                                             style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
@@ -606,7 +614,7 @@
                 <li class=" nav-item">
                         <li>
                             <a class="menu-item" href="{{ route('contact_us') }}">
-                                <i class="material-icons"> mail_outline </i> 
+                                <i class="material-icons"> mail_outline </i>
                                 <span data-i18n="Options"> {{ trans('Admin/site.contact') }}</span>
                             </a>
                         </li>

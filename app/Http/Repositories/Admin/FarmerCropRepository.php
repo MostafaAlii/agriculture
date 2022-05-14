@@ -100,7 +100,6 @@ class FarmerCropRepository implements FarmerCropInterface {
             $farmerCrop->area_id = $requestData['area_id'];
             $farmerCrop->state_id = $requestData['state_id'];
             $farmerCrop->village_id = $requestData['village_id'];
-            $farmerCrop->admin_department_id = $requestData['admin_department_id'];
             $farmerCrop->land_category_id = $requestData['land_category_id'];
             $farmerCrop->phone = $requestData['phone'];
             $farmerCrop->email = $requestData['email'];
@@ -140,4 +139,6 @@ class FarmerCropRepository implements FarmerCropInterface {
             return ['area' => $i];
         });
     }
+
+
 }

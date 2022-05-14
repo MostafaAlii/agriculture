@@ -31,11 +31,11 @@ class AppServiceProvider extends ServiceProvider
                 return false;
             }elseif(Auth::guard('admin')->check()){
                 return false;
-            }
-            else{
+            }elseif(Auth::guard('worker')->check()){
+                return false;
+            }else{
                 return true;
             }
-
         });
     }
 }

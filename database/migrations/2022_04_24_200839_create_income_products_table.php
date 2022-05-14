@@ -18,9 +18,9 @@ class CreateIncomeProductsTable extends Migration
             $table->foreignId('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreignId('province_id')->nullable()->references('id')->on('provinces')->onDelete('cascade');
             $table->foreignId('area_id')->nullable()->references('id')->on('areas')->onDelete('cascade');
-            $table->foreignId('admin_department_id')->references('id')->on('admin_departments')->onDelete('cascade');
             $table->foreignId('admin_id')->references('id')->on('admins');
             $table->foreignId('unit_id')->references('id')->on('units');
+            $table->string('admin_dep_name');
 
             $table->foreignId('whole_product_id')->references('id')->on('whole_products')->onDelete('cascade');
             $table->double('income_product_amount','15','2');

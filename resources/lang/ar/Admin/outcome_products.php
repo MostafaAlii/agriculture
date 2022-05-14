@@ -8,6 +8,7 @@ return [
     'village' =>'القرية',
     'dashboard'=> 'الرئيسية',
     'unit'=>'الوحدة القياسية',
+    'admin'=>'الموظف المسؤول',
     'departments'=>'القسم الإداري التابع لها',
      'edit'=>'تحرير',
     'delete'=>'حذف',
@@ -20,6 +21,10 @@ return [
     'newprecipitation'=>'هطولات مطرية جديدة',
     'update'=>'تعديل',
     'editprecipitation'=>'تحرير بيانات الهطول المطري',
+    'product_name'=>'اسم المنتج',
+    'dep_name'=>'العلوة',
+    'outcome_products_report'=>'تقرير بالمنتجات الصادرة من العلوة',
+    'database_about_outcome_products'=>'قاعدة بيانات المنتجات الصادرة من العلوة',
 
 
     'new_outcome_product'=>'منتج جديد صادر',

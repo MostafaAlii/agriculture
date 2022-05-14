@@ -20,18 +20,32 @@ use Yajra\DataTables\DataTables;
 class FarmerServiceRepository implements FarmerServiceInterface {
     public function index()
     {
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+        return view('dashboard.admin.farmer_services.index',
+            compact('admin','areaID','area_name','stateID','state_name'));
 
-        return view('dashboard.admin.farmer_services.index');
 
     }
 
     public function data()
     {
-        $farmers_s = FarmerService::with('farmer', 'village', 'area','state','adminDepartment',
-            'agri_services','agrit_services','water_services')
-
-            ->selectRaw('distinct farmer_services.*')->get();
-
+        $adminID = Auth::user()->id;
+        $admin=Admin::findorfail($adminID);
+        if($admin->type =='employee') {
+            $farmers_s = FarmerService::with('farmer', 'village','admin',
+                'agri_services', 'agrit_services', 'water_services')
+                ->where('admin_id', '==', $admin->id)
+                ->selectRaw('distinct farmer_services.*')->get();
+        }else{
+            $farmers_s = FarmerService::with('farmer', 'village', 'admin',
+                'agri_services', 'agrit_services', 'water_services')
+                ->selectRaw('distinct farmer_services.*')->get();
+        }
         return DataTables::of($farmers_s)
             ->addColumn('record_select', 'dashboard.admin.farmer_services.data_table.record_select')
             ->addIndexColumn()
@@ -41,11 +55,8 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             ->addColumn('farmer', function (FarmerService $farmer_service) {
                 return $farmer_service ->farmer->email;
             })
-            ->addColumn('area', function (FarmerService $farmer_service) {
-                return $farmer_service->area->name;
-            })
-            ->addColumn('state', function (FarmerService $farmer_service) {
-                return $farmer_service->state->name;
+            ->addColumn('admin', function (FarmerService $farmer_service) {
+                return $farmer_service ->admin->firstname;
             })
 
             ->addColumn('village', function (FarmerService $farmer_service) {
@@ -75,17 +86,21 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
     public function create(){
 
-        $areas = Area::all();
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+        $villages = Village::where('state_id',$stateID)->get();
         $agri_services = AgriService::all();
         $agri_t_services = AgriTService::all();
         $water_services = WaterService::all();
-        $state = State::all();
+        $areas = Area::all();
+        $states = State::all();
 
         return view('dashboard.admin.farmer_services.create',
-            compact('farmers', 'admin_dpartments', 'agri_services', 'agri_t_services','areas','water_services'));
+            compact('states','stateID','state_name', 'area_name','areaID','villages', 'agri_services', 'agri_t_services','areas','water_services'));
     }
 
     public function store($request)
@@ -93,21 +108,26 @@ class FarmerServiceRepository implements FarmerServiceInterface {
     {
         DB::beginTransaction();
         try {
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $farmerService = new FarmerService();
-            $farmerService->admin_id = Auth::user()->id;
+            $farmerService->admin_id = $admin->id;
             $farmerService->farmer_id = $requestData['farmer_id'];
-            $farmerService->area_id = $requestData['area_id'];
-            $farmerService->state_id = $requestData['state_id'];
+            $farmerService->area_id = $areaID;
+            $farmerService->state_id = $stateID;
             $farmerService->village_id = $requestData['village_id'];
-            $farmerService->admin_department_id = $requestData['admin_department_id'];
             $farmerService->phone = $requestData['phone'];
             $farmerService->email = $requestData['email'];
-
+            $farmerService->agri_services_count = count($request->agri_services);
+            $farmerService->agri_t_services_count = count($request->agri_t_services);
+            $farmerService->water_services_count = count($request->water_services);
 
             $farmerService->save($requestData);
             $farmerService->agri_services()->attach($request->agri_services);
-            $farmerService->agrit_services()->attach($request->agrit_services);
+            $farmerService->agrit_services()->attach($request->agri_t_services);
             $farmerService->water_services()->attach($request->water_services);
 
             DB::commit();
@@ -124,40 +144,51 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
     public function edit($id){
         $farmer_service = FarmerService::findorfail($id);
-        $areas = Area::all();
-        $farmers = Farmer::all();
-        $admins = Admin::all();
-        $admin_dpartments = AdminDepartment::all();
+        $adminId = Auth::user()->id;
+        $admin = Admin::findorfail($adminId);
+        $areaID = $admin->area->id;
+        $area_name = $admin->area->name;
+        $stateID = $admin->state->id;
+        $state_name = $admin->state->name;
+        $villages = Village::where('state_id',$stateID)->get();
         $agri_services = AgriService::all();
         $agri_t_services = AgriTService::all();
         $water_services = WaterService::all();
-        $state = State::all();
+        $areas = Area::all();
+        $states = State::all();
 
         return view('dashboard.admin.farmer_services.edit',
-            compact('farmers','farmer_service', 'admin_dpartments',
+            compact('areaID','area_name','farmer_service', 'state_name','stateID','states','villages',
                 'agri_services', 'agri_t_services','areas','water_services'));
     }
 
     public function update($request,$id)
 
     {
+        return count($request->water_services);
         DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $farmerService =  FarmerService::findorfail($id);
-            $farmerService->admin_id = Auth::user()->id;
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $areaID = $admin->area->id;
+            $stateID = $admin->state->id;
+            $farmerService->admin_id = $admin->id;
             $farmerService->farmer_id = $requestData['farmer_id'];
-            $farmerService->area_id = $requestData['area_id'];
-            $farmerService->state_id = $requestData['state_id'];
+            $farmerService->area_id = $areaID;
+            $farmerService->state_id = $stateID;
             $farmerService->village_id = $requestData['village_id'];
-            $farmerService->admin_department_id = $requestData['admin_department_id'];
             $farmerService->phone = $requestData['phone'];
             $farmerService->email = $requestData['email'];
+            $farmerService->agri_services_count = count($request->agri_services);
+            $farmerService->agri_t_services_count = count($request->agri_t_services);
+            $farmerService->water_services_count = count($request->water_services);
 
 
             $farmerService->update($requestData);
             $farmerService->agri_services()->sync($request->agri_services);
-            $farmerService->agrit_services()->sync($request->agrit_services);
+            $farmerService->agrit_services()->sync($request->agri_t_services);
             $farmerService->water_services()->sync($request->water_services);
 
             DB::commit();
@@ -193,7 +224,8 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
     }
 
-    public function bulkDelete($request) {
+    public function bulkDelete($request)
+    {
         try {
             DB::beginTransaction();
             if ($request->delete_select_id) {
@@ -206,7 +238,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
                     $agri_services = $farmer_service->agri_services->count();
 
-                    if($agri_services> 0 and $agri_services>0 and $water_services>0){
+                    if ($agri_services > 0 and $agri_services > 0 and $water_services > 0) {
                         toastr()->error(__('Admin/services.cant_delete'));
                         return redirect()->route('FarmerServices.index');
                     }
@@ -221,14 +253,47 @@ class FarmerServiceRepository implements FarmerServiceInterface {
                 toastr()->error(__('Admin/site.no_data_found'));
                 return redirect()->route('FarmerServices.index');
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }
+    }
+    // end of bulkDelete
+        public function statistics(){
+            $statistics = FarmerService::select('area_translations.name AS Area','state_translations.name AS State',
+                'village_translations.name AS Village', 'farmers.email AS email',
+                DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count") ,
+                DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count") ,
+                DB::raw("SUM(farmer_services.water_services_count) As water_services_count") )
+//                'agri_service_translations.name As agri_service_name',
+//                DB::raw("COUNT(agri_service_translations.name) As agri_service_count") ,
+//                'agri_t_service_translations.name As agri_t_service_name',
+//                DB::raw("COUNT(agri_t_service_translations.name) As agri_t_service_count") ,
+//                'water_service_translations.name as water_service_name',
+//                DB::raw("COUNT(water_service_translations.name) As water_service_count"))
 
+                ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
+                ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
+                ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
+                ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
 
-    }// end of bulkDelete
+//                ->join('farmer_service_agris', 'farmer_services.id', '=', 'farmer_service_agris.farmer_service_id')
+//                ->join('agri_service_translations', 'agri_service_translations.id', '=', 'farmer_service_agris.agri_service_id')
+//
+//                    ->join('farmer_service_agri_t_s', 'farmer_services.id', '=', 'farmer_service_agri_t_s.farmer_service_id')
+//                    ->join('agri_t_service_translations', 'agri_t_service_translations.id', '=', 'farmer_service_agri_t_s.agri_t_service_id')
+//
+//                    ->join('farmer_service_waters', 'farmer_services.id', '=', 'farmer_service_waters.farmer_service_id')
+//                    ->join('water_service_translations', 'water_service_translations.id', '=', 'farmer_service_waters.water_service_id')
+
+                ->GroupBy('Area','State','Village','email'
+//                    ,'agri_service_name','agri_t_service_name','water_service_name'
+                )->get();
+
+            return view('dashboard.admin.farmer_services.statistics',compact('statistics'));
+
+    }
 
 
 

@@ -18,10 +18,9 @@ class PrecipitationFactory extends Factory
     {
         return [
 
-            'area_id'       => $this->faker->numberBetween(1, Area::count()),
-            'state_id'      => $this->faker->numberBetween(1, State::count()),
-            'admin_department_id'  => 17,
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
+            'area_id'       => $this->faker->numberBetween(1, Area::count()),
+            'state_id'       => $this->faker->numberBetween(1, State::count()),
             'unit_id'      => $this->faker->randomElement([5, 6]),
             'precipitation_rate'=>$this->faker->numberBetween([1,2,3,4,5]),
             'date'    => $this->faker->date(),
