@@ -63,13 +63,14 @@
                                                     <th>{{ __('Admin/orchards.state') }}</th>
                                                     <th>{{ __('Admin/orchards.farmer') }}</th>
                                                     <th>{{ __('Admin/orchards.village') }}</th>
-                                                    <th>{{ __('Admin/orchards.tree_name') }}</th>
+
+                                                    {{--<th>{{ __('Admin/orchards.tree_name') }}</th>--}}
 
                                                     <th>{{ __('Admin/orchards.orchard_area') }}</th>
                                                     <th>{{ __('Admin/orchards.tree_count_per_orchard') }}</th>
                                                     <th>{{ __('Admin/orchards.supported_side') }}</th>
                                                     <th>{{ __('Admin/orchards.category_name') }}</th>
-
+                                                    <th>{{ __('Admin/orchards.admin') }}</th>
                                                 </tr>
                                             <tbody>
                                             @foreach($statistics as $statistic)
@@ -79,12 +80,15 @@
                                                     <td>{{ $statistic->State }}</td>
                                                     <td>{{ $statistic->farmer_name }}</td>
                                                     <td>{{ $statistic->village_name }}</td>
-                                                    <td>{{ $statistic->name }}</td>
+
+
+                                                    {{--<td>{{ $statistic->tree_name }}</td>--}}
 
                                                     <td>{{ $statistic->orchard_area }}</td>
                                                     <td>{{ $statistic->tree_count_per_orchard }}</td>
                                                     <td>{{ $statistic->getSupportedSide()}}</td>
                                                     <td>{{ $statistic->category_name }}</td>
+                                                    <td>{{ $statistic->admin_name }}</td>
                                                  </tr>
                                             @endforeach
 
@@ -126,7 +130,7 @@
             {
                 extend: 'print',
                 exportOptions: {
-                    columns:  [ 2,3,4, 5,6,7,8,9,1]
+                    columns:  [1, 2,3,4, 5,6,7,8,9]
                 },
                 autoPrint: true,
                 orientation: 'landscape',

@@ -76,7 +76,7 @@
                                                 <td>{{$statistc->Area}}</td>
                                                 <td>{{$statistc->State}}</td>
                                                 <td>{{$statistc->Village}}</td>
-                                                <td>{{$statistc->email}}</td>
+                                                <td>{{$statistc->email_farmer}}</td>
                                                 <td>{{$statistc->agri_services_count}}</td>
 
                                                 {{--<td>{{$statistc->agri_service_name}}</td>--}}

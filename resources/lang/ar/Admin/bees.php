@@ -32,8 +32,9 @@ return [
     'database_about_of_breeders'=>'قاعدة بيانات عن مربي النحل',
     'Apiaries_report'=>'تقرير مربي النحل',
     'cost'=>'التكلفة',
-    ''=>'',
-    ''=>'',
+    'private'=>'خاص',
+    'govermental'=>'حكومي',
+    'international_organizations'=>'منظمات دولية',
 
 
 

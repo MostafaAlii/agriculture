@@ -57,7 +57,7 @@
                                                     <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/bees.area') }}</th>
-                                                    {{--<th>{{ __('Admin/bees.state_name') }}</th>--}}
+                                                    <th>{{ __('Admin/bees.state_name') }}</th>
                                                     <th>{{ __('Admin/bees.count_village') }}</th>
                                                     <th>{{ __('Admin/bees.sum_old_beehive_count') }}</th>
                                                     <th>{{ __('Admin/bees.sum_new_beehive_count') }}</th>
@@ -72,7 +72,7 @@
                                             <tr>
                                                 <td>#</td>
                                                 <td>{{$statistc->Area}}</td>
-                                                {{--<td>{{$statistc->State}}</td>--}}
+                                                <td>{{$statistc->State}}</td>
                                                 <td>{{$statistc->village_count}}</td>
                                                 <td>{{$statistc->old_beehive_count}}</td>
                                                 <td>{{$statistc->new_beehive_count}}</td>
@@ -112,7 +112,7 @@
                  orientation: 'landscape',
                  pageSize: 'A3',
                  exportOptions: {
-                     columns: [ 2,3,4,5,6,7,1]
+                     columns: [1, 2,3,4,5,6,7,8]
                  },
                  className: 'btn btn-primary ml-1',
 
@@ -120,7 +120,7 @@
              {
                  extend: 'print',
                  exportOptions: {
-                     columns:  [ 1,2,3,4, 5,6,7]
+                     columns:  [ 1,2,3,4, 5,6,7,8]
                  },
                  autoPrint: true,
                  orientation: 'landscape',

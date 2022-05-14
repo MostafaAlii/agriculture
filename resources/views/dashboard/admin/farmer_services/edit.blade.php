@@ -60,7 +60,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('FarmerServices.update',($farmer_service->id)) }}" >
+                                    <form class="form" method="post" action="{{ route('FarmerServices.update',encrypt($farmer_service->id)) }}" >
                                         @csrf
                                         @method('put')
                                         <div class="form-body">

@@ -22,7 +22,7 @@ class CreateOrchardsTable extends Migration
 
             $table->foreignId('admin_id')->references('id')->on('admins');
             $table->foreignId('land_category_id')->references('id')->on('land_categories')->onDelete('cascade');
-            $table->enum('supported_side',['private','govermental','international organizations']);
+            $table->enum('supported_side',['private','govermental','international_organizations']);
             $table->foreignId('unit_id')->references('id')->on('units');
             $table->double('orchard_area');
             $table->string('phone');

@@ -20,7 +20,7 @@ return [
     'admin'=>'Employee Responsible',
 
     'update'=>'Update',
-
+    'date'=>'Date',
     'new_income_product'=>'New Income Product',
     'income_productPageTitle'=>'Income Products',
 
@@ -28,6 +28,7 @@ return [
     'income_product_amount'=>'Income Product Amount',
     'unit'=>'Unit',
     'income_product_price'=>'Income Product Price',
+
     'income_product_date'=>'Income Product Price',
     'currency'=>'Currency',
     'whole_product'=>'Product',
@@ -35,6 +36,13 @@ return [
     'province'=>'Province',
     'WholeProduct'=>'Product In wholeSale',
     'wholeSale_and_product'=>'Products And wholeSale',
+    'local_product'=>'Local Product',
+    'iraq_product'=>'Iraq Product',
+    'imported_product'=>'Imported Product',
+    'product'=>'Product',
+    'income_products_database_details_in_date_report'=>'Income Products Database Periodically',
+    'income_products_details_in_date_report'=>'Income Products Report Periodically',
+
 
 
 

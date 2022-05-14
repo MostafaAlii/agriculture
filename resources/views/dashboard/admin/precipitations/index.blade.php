@@ -68,22 +68,22 @@
                                                 <i class="fa fa-trash"></i>
                                                 {{ __('Admin/site.bulkdelete') }}
                                             </button>
-                                    <h2>{{__('Admin\precipitations.choose_period_date')}}</h2>
-                                    <div class="form-group col-md-6">
-                                        <h5>{{__('Admin\precipitations.start_date')}}<span class="text-danger"></span></h5>
-                                        <div class="controls">
-                                            <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <h5>{{__('Admin\precipitations.end_date')}}<span class="text-danger"></span></h5>
-                                        <div class="controls">
-                                            <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
-                                    </div>
-                                    <div class="text-left" style="    margin-left: 15px;    ">
-                                        <button type="text" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
-                                    </div>
+                                    {{--<h2>{{__('Admin\precipitations.choose_period_date')}}</h2>--}}
+                                    {{--<div class="form-group col-md-6">--}}
+                                        {{--<h5>{{__('Admin\precipitations.start_date')}}<span class="text-danger"></span></h5>--}}
+                                        {{--<div class="controls">--}}
+                                            {{--<input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group col-md-6">--}}
+                                        {{--<h5>{{__('Admin\precipitations.end_date')}}<span class="text-danger"></span></h5>--}}
+                                        {{--<div class="controls">--}}
+                                            {{--<input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="text-left" style="    margin-left: 15px;    ">--}}
+                                        {{--<button type="text" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>--}}
+                                    {{--</div>--}}
 
-                                    <br>
+                                    {{--<br>--}}
 
 
                                     <div class="table-responsive">
@@ -122,9 +122,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-<script>
 
-    let adminsTable = $('#precipitations-table').DataTable({
+
+
+<script>
+    let precipitationTable = $('#precipitations-table').DataTable({
         serverSide: true,
         processing: true,
         dom: 'Bfrtip',
@@ -135,7 +137,7 @@
                 orientation: 'landscape',
                 pageSize: 'A3',
                 exportOptions: {
-                    columns: [1, 2,3,4,5]
+                    columns: [1, 2,3,4,5,6,7,8,9]
                 },
                 className: 'btn btn-primary ml-1',
 
@@ -143,7 +145,7 @@
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [1, 2,3,4,5]
+                    columns: [1, 2,3,4,5,6,7,8,9]
                 },
                 autoPrint: true,
                 orientation: 'landscape',
@@ -157,15 +159,10 @@
         ],
         lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
-                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },
+            "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
         ajax: {
             url: '{{ route('precipitation.data') }}',
-            type: 'GET',
-            data: function (d) {
-                d.start_date = $('#start_date').val();
-                d.end_date = $('#end_date').val();
-            }
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
@@ -180,11 +177,7 @@
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
         order: [[3, 'desc']],
-    });
 
-    $('#btnFiterSubmitSearch').click(function(){
-        $('#precipitations-table').DataTable().draw(true);
     });
-
 </script>
 @endsection

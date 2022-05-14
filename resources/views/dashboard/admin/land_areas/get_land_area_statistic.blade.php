@@ -55,9 +55,10 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ __('Admin/land_areas.area') }}</th>
+
                                                     <th>{{ __('Admin/land_areas.state') }}</th>
-                                                    <th>{{ __('Admin/land_areas.category_type') }}</th>
+                                                    <th>{{ __('Admin/land_areas.agricultural') }}</th>
+                                                    <th>{{ __('Admin/land_areas.non_agricultural') }}</th>
 
                                                 </tr>
                                             </thead>
@@ -65,9 +66,9 @@
                                             @foreach($statistics as $statistic)
                                                 <tr>
                                                     <td>#</td>
-                                                    <td>{{$statistic->L_area}}</td>
-                                                    <td>{{$statistic->state_name}}</td>
-                                                    <td>{{$statistic->Category_type}}</td>
+                                                    <td>{{$statistic->State}}</td>
+                                                    <td>{{$statistic->agricultural}}</td>
+                                                    <td>{{$statistic->non_agricultural}}</td>
                                                 </tr>
 
                                             @endforeach

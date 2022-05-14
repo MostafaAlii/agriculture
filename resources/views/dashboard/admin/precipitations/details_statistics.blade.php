@@ -3,21 +3,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/precipitations.precipitation_report') }}
+    {{ trans('Admin/precipitations.precipitation_details_report') }}
 @endsection
 @section('content')
 @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/precipitations.precipitation_report') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/precipitations.precipitation_details_report') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
 
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="">{{ __('Admin/precipitations.precipitation_database_in_all_area') }}</a>
+                                <li class="breadcrumb-item"><a href="">{{ __('Admin/precipitations.precipitation_database_in_zawita_station') }}</a>
                                 </li>
 
                             </ol>
@@ -70,7 +70,9 @@
                                                     <th>{{ __('Admin/precipitations.area') }}</th>
                                                     <th>{{ __('Admin/precipitations.state') }}</th>
                                                     <th>{{ __('Admin/precipitations.precipitation_rate') }}</th>
-                                                    <th>{{ __('Admin/precipitations.date') }}</th>
+                                                    <th>{{ __('Admin/precipitations.day') }}</th>
+                                                    <th>{{ __('Admin/precipitations.month') }}</th>
+                                                    <th>{{ __('Admin/precipitations.year') }}</th>
 
 
                                                 </tr>
@@ -112,7 +114,7 @@
                     orientation: 'landscape',
                     pageSize: 'A3',
                     exportOptions: {
-                        columns: [ 0,1,2,3]
+                        columns: [ 0,1,2,3,4,5]
                     },
                     className: 'btn btn-primary ml-1',
 
@@ -120,7 +122,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns:  [0,1, 2,3]
+                        columns:  [0,1, 2,3,4,5]
                     },
                     autoPrint: true,
                     orientation: 'landscape',
@@ -133,7 +135,7 @@
 
             ],
             ajax: {
-                url: "{{ URL::to('dashboard_admin/dtable-custom-statstic') }}",
+                url: "{{ URL::to('dashboard_admin/dtable-details-statistic') }}",
                 type: 'GET',
                 data: function (d) {
                     d.start_date = $('#start_date').val();
@@ -145,7 +147,9 @@
                 { data: 'Area', name: 'Area' },
                 { data: 'State', name: 'State' },
                 { data: 'precipitation_rate', name: 'precipitation_rate' },
-                { data: 'date', name: 'date' },
+                { data: 'day', name: 'day' },
+                { data: 'month', name: 'month' },
+                { data: 'year', name: 'year' },
 
             ],
             order: [[0, 'desc']]

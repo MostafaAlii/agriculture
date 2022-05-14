@@ -40,8 +40,17 @@ return [
     'currency'=>'العملة',
     'whole_product'=>'المنتج',
     ''=>'',
-    ''=>'',
-    ''=>'',
+    'whole_product'=>'المنتج',
+    'country'=>'البلد',
+    'province'=>'المحافظة',
+    'local_product'=>'منتج محلى',
+    'iraq_product'=>'منتج عراقي',
+    'imported_product'=>'منتج مستورد',
+    'date'=>'التاريخ',
+    'admin_dep_name'=>'اسم العلوة',
+    'product'=>'المنتج',
+    'outcome_products_database_details_in_date_report'=>'تقرير قاعدة البيانات التفصيلية زمنيا للمنتجات الصادرة من العلوة',
+    'outcome_products_details_in_date_report'=>'تقرير تفصيلي بالمنتجات الصادرة من العلوة زمنياً(اسبوع - شهر - سنة)',
 
 
 

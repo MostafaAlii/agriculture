@@ -46,4 +46,10 @@ class OutcomeProductController extends Controller
 
     return $this->Data->outcome_product_statistics();
       }
+    public function index_outcome_products(){
+        return $this->Data->index_outcome_products();
+    }
+    public function get_weekly_monthly_anual_outcome_product_statistics(){
+        return $this->Data->get_weekly_monthly_anual_outcome_product_statistics();
+    }
 }

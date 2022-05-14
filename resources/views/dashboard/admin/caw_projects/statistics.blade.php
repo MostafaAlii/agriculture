@@ -59,12 +59,12 @@
 
                                                     <th>{{ __('Admin/animals.area') }}</th>
                                                     <th>{{ __('Admin/animals.state') }}</th>
-                                                    <th>{{ __('Admin/animals.farmer') }}</th>
+                                                    <th>{{ __('Admin/animals.farmer_name') }}</th>
                                                     <th>{{ __('Admin/animals.farmer_phone') }}</th>
                                                     <th>{{ __('Admin/animals.village') }}</th>
-                                                    <th>{{ __('Admin/animals.type') }}</th>
-                                                    <th>{{ __('Admin/animals.animal_count') }}</th>
-                                                    {{--<th>{{ __('Admin/animals.ship_count') }}</th>--}}
+
+                                                    <th>{{ __('Admin/animals.count_ship') }}</th>
+                                                    <th>{{ __('Admin/animals.count_caw') }}</th>
 
                                                 </tr>
                                             <tbody>
@@ -74,11 +74,10 @@
                                                     <td>{{ $statistic->Area }}</td>
                                                     <td>{{ $statistic->State }}</td>
                                                     <td>{{ $statistic->farmer_name }}</td>
-                                                    <td>{{ $statistic->phone }}</td>
+                                                    <td>{{ $statistic->farmer_phone }}</td>
                                                     <td>{{ $statistic->village_name }}</td>
-                                                    <td>{{ $statistic->getType() }}</td>
-                                                    <td>{{ $statistic->animal_count }}</td>
-                                                    {{--<td>{{ $statistic->ship_count }}</td>--}}
+                                                    <td>{{ $statistic->ship_count }}</td>
+                                                    <td>{{ $statistic->caw_count }}</td>
 
                                                  </tr>
                                             @endforeach

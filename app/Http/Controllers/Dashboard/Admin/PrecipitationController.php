@@ -41,9 +41,22 @@ class PrecipitationController extends Controller
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
-    public function statistics()
-    {
-        return $this->Data->statistics();
+//    public function statistics()
+//    {
+//        return $this->Data->statistics();
+//    }
+    public function index_statistic(){
+        return $this->Data->index_statistic();
     }
 
+    public function get_custom_statistics(){
+        return $this->Data->get_custom_statistics();
+    }
+
+    public function get_details_statistics_index(){
+        return $this->Data->get_details_statistics_index();
+    }
+    public function get_details_statistics(){
+        return $this->Data->get_details_statistics();
+    }
 }

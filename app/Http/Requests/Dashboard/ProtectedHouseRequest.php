@@ -20,7 +20,7 @@ class ProtectedHouseRequest extends FormRequest
             'village_id' => 'required|exists:villages,id',
 
             'average_product_annual' =>'sometimes:nullable|numeric',
-            'protected_house_count' =>'required|numeric',
+            'count_protected_house' =>'required|numeric',
             'status' => 'required',
             'supported_side'=>'required',
             'unit_id'=>'required|exists:units,id',
@@ -35,7 +35,7 @@ class ProtectedHouseRequest extends FormRequest
         return [
             'farmer_id.required' => trans('Admin/validation.required'),
 //           'admin_id.required' => trans('Admin/validation.required'),
-            'protected_house_count.required'=>trans('Admin/validation.required'),
+            'count_protected_house.required'=>trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
             'average_product_annual.required' => trans('Admin/validation.required'),
             'status.required' => trans('Admin/validation.required'),

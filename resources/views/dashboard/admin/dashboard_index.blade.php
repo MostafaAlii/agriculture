@@ -873,7 +873,7 @@
                     </div>
 
                 </div>
-                <h1>{{__('Admin\site.planet_protection_services')}}</h1>
+                <h1>{{__('Admin\site.planet_protection')}}</h1>
                 <div class="row">
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('beekeepers.statistics') }}">
@@ -920,6 +920,13 @@
                             </div>
                         </a>
                     </div>
+
+
+                </div>
+
+                <h1>{{__('Admin\site.services')}}</h1>
+                <div class="row">
+
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('farmer_service.statistics') }}">
                             <div class="card pull-up">
@@ -943,7 +950,7 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('precipitation.statistics') }}">
+                        <a href="{{ route('precipitations.index_statistic') }}">
                             <div class="card pull-up">
                                 <div class="card-content">
                                     <div class="card-body">
@@ -958,6 +965,28 @@
                                         </div>
                                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                                             <div class="progress-bar bg-gradient-x-pink" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <a href="{{ route('precipitations.index_details_statistic') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="gray-bg" style="color: orange;">{{ \App\Models\Precipitation::count() }}</h3>
+                                                <h6>  {{ trans('Admin/precipitations.precipitation_details_report') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="fa fa-list-alt" aria-hidden="true" style="color: orange;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-red" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1066,6 +1095,29 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12">
+                        <a href="{{ route('index_income_products') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+
+                                                <h3 class="gray-bg" style="color: green;">{{ \App\Models\IncomeProduct::count() }}</h3>
+                                                <h6>  {{ trans('Admin/income_products.income_products_details_in_date_report') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="fa fa-list-alt" aria-hidden="true" style="color: green;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('outcome_product.statistics') }}">
                             <div class="card pull-up">
                                 <div class="card-content">
@@ -1088,6 +1140,30 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <a href="{{ route('index_outcome_products') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+
+                                                <h3 class="gray-bg" style="color: yellow;">{{ \App\Models\OutcomeProduct::count() }}</h3>
+                                                <h6>  {{ trans('Admin/outcome_products.outcome_products_details_in_date_report') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="fa fa-list-alt" aria-hidden="true" style="color: yellow;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-yellow" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
 
 

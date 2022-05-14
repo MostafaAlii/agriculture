@@ -25,7 +25,7 @@ class OrchardFactory extends Factory
             'village_id'    => $this->faker->numberBetween(1, Village::count()),
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
             'farmer_id'      => $this->faker->numberBetween(1, Farmer::count()),
-            'supported_side'      => $this->faker->randomElement(["private","govermental","international organizations"]),
+            'supported_side'      => $this->faker->randomElement(["private","govermental","international_organizations"]),
             'unit_id'      => $this->faker->randomElement([3, 4]),
             'orchard_area'=>$this->faker->numberBetween([1,2,3,4, 5]),
             'tree_count_per_orchard'=>$this->faker->numberBetween([100,200,300,400, 500,600,700,800,900,1000]),

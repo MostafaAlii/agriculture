@@ -3,21 +3,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/precipitations.precipitation_report') }}
+    {{ trans('Admin/income_products.income_products_details_in_date_report') }}
 @endsection
 @section('content')
 @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/precipitations.precipitation_report') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/income_products.income_products_details_in_date_report') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
 
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="">{{ __('Admin/precipitations.precipitation_database_in_all_area') }}</a>
+                                <li class="breadcrumb-item"><a href="">{{ __('Admin/income_products.income_products_database_details_in_date_report') }}</a>
                                 </li>
 
                             </ol>
@@ -32,7 +32,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">{{ __('Admin/precipitations.precipitation_database_in_zawita_station') }}</h4>
+                                <h4 class="card-title">{{ __('Admin/income_products.income_products_database_details_in_date_report') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -63,14 +63,15 @@
                                     <br>
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration" id="precipitation-statistic-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="income_products_periodly-statistic-table">
                                             <thead>
                                                 <tr>
-
-                                                    <th>{{ __('Admin/precipitations.area') }}</th>
-                                                    <th>{{ __('Admin/precipitations.state') }}</th>
-                                                    <th>{{ __('Admin/precipitations.precipitation_rate') }}</th>
-                                                    <th>{{ __('Admin/precipitations.date') }}</th>
+                                                    <th>{{ __('Admin/income_products.admin_dep_name') }}</th>
+                                                    <th>{{ __('Admin/income_products.product') }}</th>
+                                                    <th>{{ __('Admin/income_products.local_product') }}</th>
+                                                    <th>{{ __('Admin/income_products.iraq_product') }}</th>
+                                                    <th>{{ __('Admin/income_products.imported_product') }}</th>
+                                                    <th>{{ __('Admin/income_products.date') }}</th>
 
 
                                                 </tr>
@@ -101,7 +102,7 @@
             }
         });
 
-        $('#precipitation-statistic-table').DataTable({
+        $('#income_products_periodly-statistic-table').DataTable({
             processing: true,
             serverSide: true,
             dom: 'Bfrtip',
@@ -112,7 +113,7 @@
                     orientation: 'landscape',
                     pageSize: 'A3',
                     exportOptions: {
-                        columns: [ 0,1,2,3]
+                        columns: [ 0,1,2,3,4,5]
                     },
                     className: 'btn btn-primary ml-1',
 
@@ -120,7 +121,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns:  [0,1, 2,3]
+                        columns:  [0,1, 2,3,4,5]
                     },
                     autoPrint: true,
                     orientation: 'landscape',
@@ -133,7 +134,7 @@
 
             ],
             ajax: {
-                url: "{{ URL::to('dashboard_admin/dtable-custom-statstic') }}",
+                url: "{{ URL::to('dashboard_admin/dtable_weekly_monthly_anual_income_product') }}" ,
                 type: 'GET',
                 data: function (d) {
                     d.start_date = $('#start_date').val();
@@ -142,9 +143,12 @@
             },
 
             columns: [
-                { data: 'Area', name: 'Area' },
-                { data: 'State', name: 'State' },
-                { data: 'precipitation_rate', name: 'precipitation_rate' },
+                { data: 'admin_dep_name', name: 'admin_dep_name' },
+
+                { data: 'Product', name: 'Product' },
+                { data: 'local_product', name: 'local_product' },
+                { data: 'iraq_product', name: 'iraq_product' },
+                { data: 'imported_product', name: 'imported_product' },
                 { data: 'date', name: 'date' },
 
             ],
@@ -154,7 +158,7 @@
     });
 
     $('#btnFiterSubmitSearch').click(function(){
-        $('#precipitation-statistic-table').DataTable().draw(true);
+        $('#income_products_periodly-statistic-table').DataTable().draw(true);
     });
 
 </script>

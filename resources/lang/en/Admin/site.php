@@ -12,7 +12,8 @@ return [
 
     'planet_protection_services'=>'Plant Protection && Services',
     'Horticulture'=>'Horticulture',
-    ''=>'',
+    'services'=>'Services',
+    'planet_protection'=>'Planet Protection',
     ''=>'',
     ''=>'',
 

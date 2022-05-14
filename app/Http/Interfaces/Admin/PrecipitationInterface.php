@@ -9,6 +9,10 @@ interface PrecipitationInterface {
     public function update($request,$id);
     public function destroy($id);
     public function bulkDelete($request) ;
-    public function statistics();
+//    public function statistics();
+    public function index_statistic();
+    public function get_custom_statistics();
+    public function get_details_statistics_index();
+    public function get_details_statistics();
 
     }

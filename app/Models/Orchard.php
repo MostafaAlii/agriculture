@@ -9,12 +9,12 @@ class Orchard extends Model {
     public $timestamps = true;
     protected $table = "orchards";
     protected $guarded = [];
-    const SPATIAL = 'private', GOVERMENTAL = 'govermental', INTERNATIONAL_ORGANIZATION = 'international organizations';
+    const SPATIAL = 'private', GOVERMENTAL = 'govermental', INTERNATIONAL_ORGANIZATION = 'international_organizations';
     public function getSupportedSide() {
         switch ($this->supported_side) {
             case 'private': $result =   trans('Admin/orchards.private'); break;
             case 'govermental': $result = trans('Admin/orchards.govermental') ; break;
-            case 'international organizations': $result =  trans('Admin/orchards.international_organizations') ; break;
+            case 'international_organizations': $result =  trans('Admin/orchards.international_organizations') ; break;
         }
         return $result;
     }

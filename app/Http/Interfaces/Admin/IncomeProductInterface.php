@@ -10,5 +10,7 @@ interface IncomeProductInterface {
     public function destroy($id);
     public function bulkDelete($request) ;
     public function income_product_statistics();
+    public function index_income_products();
+    public function get_weekly_monthly_anual_income_product_statistics();
 
     }
