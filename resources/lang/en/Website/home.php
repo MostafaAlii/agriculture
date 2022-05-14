@@ -4,7 +4,7 @@
 return [
     // nav bar **************************************
     'home'                 => ' Home',
-    'home2'                => ' Home2',
+    'home2'                => ' Latest Product',
     'shop'                 => ' Shop',
     'blog'                 => 'Blog',
     'aboutus'              => ' About Us',
@@ -17,6 +17,9 @@ return [
     'my_profile'           => 'My Profile',
     'change_password'      => 'Change Password',
     'farmer'               =>  'Farmer',
+    'servfarmers'          =>  'Farmer Services',
+    'servworkers'          =>  'Worker Services',
+    'services'             =>  'Services',
     // nav bar **************************************
 
     // contact us page translation *******************************************

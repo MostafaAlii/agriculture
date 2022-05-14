@@ -1,16 +1,17 @@
 <ul>
-    <li class="active has-submenu">
-        <a href="javascript:void(0);">{{ __('website\home.home') }}</a>
+    <li   style="padding: 30px;"> <a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
+
+    <li class="active has-submenu" >
+        <a href="javascript:void(0);">{{ __('website\home.services') }}</a>
         <ul class="submenu">
-            <li  class="active" > <a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
-            <li                 > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
+            <li class="active"> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
+            <li               > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
+            <li               > <a href="{{ route('farmer') }}">{{ __('website\home.servfarmers') }}</a> </li>
+            <li               > <a href="{{ route('farmer') }}">{{ __('website\home.servworkers') }}</a> </li>
         </ul>
     </li>
     {{--  start links in navebar *************************************************************************--}}
-
-    <li> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
     <li> <a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a> </li>
-    <li> <a href="{{ route('farmer') }}">{{ __('website\home.farmer') }}</a> </li>
     <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
     <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
     @if (Auth::guard('vendor')->user())
