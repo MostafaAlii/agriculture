@@ -47,8 +47,8 @@ Route::group(
         Route::get('/farmer',[FarmerAllDataController::class,'get_farmer'])->name('farmer'); // all farmer
         route::get('/farmer/{id}',[FarmerAllDataController::class,'farmer_detail'])->name('farmer_detail'); //farmer detail
         //----------------------------------worker---------------------------------------------------------------
-        Route::get('/worker',[WorkerAllDataController::class,'get_worker'])->name('worker'); // all worker
-        route::get('/worker/{id}',[WorkerAllDataController::class,'worker_detail'])->name('worker_detail'); //worker detail
+        Route::get('/worker',[WorkerAllDataController::class,'get_worker'])->name('servworker'); // all worker
+        route::get('/worker_details/{id}',[WorkerAllDataController::class,'worker_details'])->name('worker_details'); //worker detail
 
         //------------------------------------------ start blogs & products comments----------------------------------------
         Route::post('/blogs/{blog}/comments', [CommentsController::class, 'store_blog']);//add &replay (blog)
