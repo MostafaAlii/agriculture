@@ -82,7 +82,7 @@ class ContactUs extends Component
             }
         );
 
-        session()->flash('message','Thanks your message has been sent successfully !');
+        session()->flash('message',__('website\home.msg'));
         // session()->flash('add');
         $this->resetFields();
         

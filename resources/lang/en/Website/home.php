@@ -77,4 +77,7 @@ return [
 
    'all_products' => 'All Products',
    'cat_count' =>'Sub Categories',
+
+
+   'msg'  =>'Thanks your message has been sent successfully !',
 ];

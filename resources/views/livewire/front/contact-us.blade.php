@@ -114,7 +114,7 @@
 
                             <button class="custom-btn custom-btn--medium custom-btn--style-3 wide" type="submit" role="button">{{ __('website\home.send') }}</button>
 
-                            <div class="form__note"></div>
+                            <!-- <div class="form__note"></div> -->
                         </form>
                     </div>
                 </div>
