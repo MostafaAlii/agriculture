@@ -29,7 +29,7 @@
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="{{ route('worker_detail',encrypt($worker->id) ) }}">{{ $worker->firstname.'  '.$worker->lastname  }}</a></p>
+                                        <p class="__category"><a href="{{ route('worker_details',encrypt($worker->id) ) }}">{{ $worker->firstname.'  '.$worker->lastname  }}</a></p>
 
                                     </div>
                                 </div>

@@ -18,9 +18,9 @@ class WorkerAllDataController extends Controller
         return $this->Data->get_worker();
     }
 
-    public function worker_detail($id)
+    public function worker_details($id)
     {
-        return $this->Data->worker_detail($id);
+        return $this->Data->worker_details($id);
     }
 }
 ?>

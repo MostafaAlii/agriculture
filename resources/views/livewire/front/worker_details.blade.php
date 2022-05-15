@@ -94,7 +94,7 @@ label.star:before {
                                             <p><b>@lang('Admin/site.name')  : </b> {{ $workers->firstname }} {{ $workers->lastname }}</p>
                                             <p><b>@lang('Admin/site.email') : </b> {{ $workers->email }}</p>
                                             <p><b>@lang('Admin/site.phone') : </b> {{ $workers->phone }}</p>
-                                            <p><b>@lang('Admin/site.status') : </b> {{$workers->status == 1 ?  __('Admin/site.active') : __('Admin/site.unactive')}}</p>
+                                            {{-- <p><b>@lang('Admin/site.status') : </b> {{$workers->status == 1 ?  __('Admin/site.active') : __('Admin/site.unactive')}}</p> --}}
                                             <p><b>@lang('Admin/site.worktype') : </b> {{$workers->work == 'alone' ?  __('Admin/site.alone') : __('Admin/site.team')}}</p>
                                             <p><b>@lang('Admin/site.salarytype') : </b> {{$workers->salary == 'perday' ?  __('Admin/site.perday') : __('Admin/site.perhour')}}</p>
                                             @if($workers->daily_price != null)
@@ -146,11 +146,11 @@ label.star:before {
                     @endif
                         <!-- --------------------------------------------------- -->
                     <!-- ###################################################################3 -->
-                        <?php
+                        {{-- <?php
                         $type='workers';
                         $type_id=$workers->id;
                         ?>
-                        @include('livewire.front.comments')
+                        @include('livewire.front.comments') --}}
                     <!-- ###################################################################3 -->
 
                 </div>
