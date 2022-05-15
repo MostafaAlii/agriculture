@@ -13,7 +13,7 @@
 <script src="{{ asset('assets/admin/js/dataTables.buttons.min.js')}}"></script>
 
 
-{{-- <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script> --}}
+<script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script>
 <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/admin/vendors/js/vendors.min.js')}}"></script>
     <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"></script>
