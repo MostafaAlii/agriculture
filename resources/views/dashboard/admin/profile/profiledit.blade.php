@@ -115,7 +115,9 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
                                                         <input type="password" name="password" class="form-control"
-                                                        value="" required>
+                                                           required>
+                                                         {{-- value="" --}}
+                                                         {{-- value="{{ old('password',Auth::user()->password) }}" --}}
                                                         {{-- <input type="password" name="password" class="form-control" value="" required> --}}
                                                     </div>
                                                     {{--password_confirmation--}}

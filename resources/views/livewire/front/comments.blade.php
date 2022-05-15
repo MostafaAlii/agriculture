@@ -16,9 +16,9 @@
 <hr>
 
 @if (Auth::guard('vendor')->user() || Auth::guard('web')->user() || Auth::guard('admin')->user())
-   
+
        <center> <h3> {{ __('website\comments.leave_comment') }}</h3></center>
-        
+
         <form class="auth-form" name="form-login" method="POST" action="/{{$type}}/{{ $type_id }}/comments">
             @csrf
             <div class="row">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </form>
-           
+
     <hr>
 @else
     <div class="alert alert-danger">
@@ -61,7 +61,7 @@
             <tr>
 
                 <td width="100%">
-                
+
                 <?php
                 if(Auth::guard('web')->user()){
                      $src=asset('Dashboard/img/farmers/' . $comment->image);
