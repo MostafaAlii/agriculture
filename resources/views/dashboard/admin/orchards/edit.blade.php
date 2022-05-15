@@ -59,7 +59,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('orchards.update',($orchard->id)) }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('orchards.update',encrypt($orchard->id)) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">
@@ -181,7 +181,7 @@
                                                         <select class="select2 custom-select form-control" name="supported_side" id="supported_side_id">
                                                         <option value="private" {{$orchard->supported_side=='private'?'selected':''}} >{{ __('Admin\orchards.private') }}</option>
                                                         <option value="govermental" {{$orchard->supported_side=='govermental'?'selected':''}}>{{ __('Admin\orchards.govermental') }}</option>
-                                                        <option value="international organization" {{$orchard->supported_side=='international organization'?'selected':''}}>{{ __('Admin\orchards.international_organizations') }}</option>
+                                                        <option value="international_organizations" {{$orchard->supported_side=='international_organizations'?'selected':''}}>{{ __('Admin\orchards.international_organizations') }}</option>
                                                         </select>
 
                                                     </div>

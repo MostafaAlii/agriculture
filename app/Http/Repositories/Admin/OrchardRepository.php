@@ -3,13 +3,13 @@ namespace  App\Http\Repositories\Admin;
 use App\Models\Orchard;
 use App\Models\Farmer;
 use App\Models\Admin;
-use App\Models\Area;
-use App\Models\State;
+
+use App\Models\TreeTranslation;
 use App\Models\Village;
 use App\Models\Unit;
 
 use App\Models\Tree;
-use App\Models\AdminDepartment;
+
 use App\Models\LandCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -143,7 +143,6 @@ class OrchardRepository implements OrchardInterface
             $orchard->area_id = $areaID;
             $orchard->state_id = $stateID;
             $orchard->village_id = $requestData['village_id'];
-
             $orchard->land_category_id = $requestData['land_category_id'];
             $orchard->tree_count_per_orchard = $requestData['tree_count_per_orchard'];
             $orchard->orchard_area = $requestData['orchard_area'];
@@ -169,7 +168,10 @@ class OrchardRepository implements OrchardInterface
     }
 
     public function edit($id)
-    {   $orchard = Orchard::findorfail($id);
+
+    {
+        $orchardID = Crypt::decrypt($id);
+        $orchard = Orchard::findorfail($orchardID);
         $adminId = Auth::user()->id;
         $admin = Admin::findorfail($adminId);
         $areaID = $admin->area->id;
@@ -193,9 +195,9 @@ class OrchardRepository implements OrchardInterface
     {
         DB::beginTransaction();
         try {
-//            $orchardID = Crypt::decrypt($id);
+            $orchardID = Crypt::decrypt($id);
             $requestData = $request->validated();
-            $orchard = Orchard::findorfail($id);
+            $orchard = Orchard::findorfail($orchardID);
             $adminId = Auth::user()->id;
             $admin = Admin::findorfail($adminId);
             $areaID = $admin->area->id;
@@ -282,26 +284,64 @@ class OrchardRepository implements OrchardInterface
 
 
     public function statistics(){
+        $adminID = Auth::user()->id;
+        $admin=Admin::findorfail($adminID);
+        $first_name = $admin->firstname;
+        $trees = Tree::all();
+        $tree_name = $trees->pluck('name');
+        if($admin->type == 'employee' ) {
         $statistics = Orchard::select( 'area_translations.name AS Area','state_translations.name AS State',
             'farmers.firstname AS farmer_name','village_translations.name AS village_name' ,
 
             DB::raw('SUM(orchards.orchard_area) As orchard_area'),
             DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard'),
-            'tree_translations.name AS name',
-            'orchards.supported_side AS supported_side',
+//            'tree_translations.name AS name',
+            'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
             'land_category_translations.category_name AS category_name')
-            ->join('orchard_trees', 'orchards.id', '=', 'orchard_trees.orchard_id')
-            ->join('tree_translations', 'tree_translations.id', '=', 'orchard_trees.tree_id')
-//
+//            ->join('orchard_trees', 'orchards.id', '=', 'orchard_trees.orchard_id')
+//            ->join('tree_translations', 'tree_translations.id', '=', 'orchard_trees.tree_id')
+            ->join('admins', 'orchards.admin_id', '=', 'admins.id')
             ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
             ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
             ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
             ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
             ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-            ->where('land_category_translations.category_name','like','%سيحي%')
-            ->orWhere('land_category_translations.category_name','like','%ديمي%')
-            ->orWhere('land_category_translations.category_name','like','%قمريات%')
-            ->GroupBy('Area','State','village_name','farmer_name','supported_side','category_name','name')->get();
+            ->where('orchards.admin_id' ,$admin->id)
+//                ->whereIN('tree_translations.name',$tree_name)
+            ->whereIn('land_category_translations.category_name', ['سيحي', 'ديمي', 'قمريات'])
+            ->GroupBy('Area','State','village_name','farmer_name','supported_side','category_name',
+                'admin_name')
+//             'tree_name'
+            ->get();
+        }
+        else if($admin->type == 'admin' ){
+            $statistics = Orchard::select( 'area_translations.name AS Area','state_translations.name AS State',
+                'farmers.firstname AS farmer_name','village_translations.name AS village_name' ,
+
+                DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard'),
+//                'tree_translations.name AS tree_name',
+                'orchards.supported_side AS supported_side','admins.firstname AS admin_name',
+                'land_category_translations.category_name AS category_name')
+//                ->join('orchard_trees', 'orchards.id', '=', 'orchard_trees.orchard_id')
+//                ->join('tree_translations', 'tree_translations.id', '=', 'orchard_trees.tree_id')
+////
+                ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+
+                ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+//                ->whereIN('tree_translations.name',$tree_name)
+                ->whereIn('land_category_translations.category_name', ['سيحي', 'ديمي', 'قمريات'])
+                ->GroupBy('Area','State','village_name','farmer_name','supported_side','category_name',
+//                    'tree_name',
+                    'admin_name'
+                   )
+            ->get();
+        }
+
 
         return view('dashboard.admin.orchards.statistics',compact('statistics'));}
 

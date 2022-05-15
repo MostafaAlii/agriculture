@@ -7,16 +7,20 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 class LandCategorySeeder extends Seeder {
     public function run() {
-        $count =3;
+        $count =5;
         $category_name_1 = [
-            "سيحي",
-            "ديمي",
+            "أراضي سيحية",
+            "أراضي ديمية",
             "قمريات",
+            "بساتين سيحية",
+            "بساتين ديمية"
         ];
         $category_name_2 = [
-            "غابات",
-            "مراعي",
+            "غابات طبيعية",
+            "أراضي بلدية",
             "مباني حكومية",
+            "أراضي صخرية و مرعى",
+            "منافع عامة"
 
         ];
 

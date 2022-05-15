@@ -47,7 +47,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.editbeekeeper') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/bees.editbeekeeper') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -167,12 +167,10 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="customSelect1">{{ __('Admin/bees.supported_side') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect1" name="supported_side_id" >
-                                                            <option selected disabled>--select--</option>
-                                                            @foreach($supported_sides as $supported_side)
-                                                                <option value="{{$supported_side->id}}"{{$beekeeper->supported_side_id==$supported_side->id?'selected':''}}>{{ $supported_side->Name }}</option>
-                                                            @endforeach
-
+                                                        <select class="select2 custom-select form-control" name="supported_side" id="supported_side_id">
+                                                            <option value="private" {{$beekeeper->supported_side=='private'?'selected':''}} >{{ __('Admin\bees.private') }}</option>
+                                                            <option value="govermental" {{$beekeeper->supported_side=='govermental'?'selected':''}}>{{ __('Admin\bees.govermental') }}</option>
+                                                            <option value="international_organizations" {{$beekeeper->supported_side=='international_organizations'?'selected':''}}>{{ __('Admin\bees.international_organizations') }}</option>
                                                         </select>
 
                                                     </div>
@@ -200,7 +198,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div  class="form-group">
-                                                        <label for="id_h5_multi_1">{{ __('Admin/bees.disaster') }}</label>
+                                                        <label for="id_h5_multi_1">{{ __('Admin/bees.disasters') }}</label>
 
                                                         <select name="disasters[]"class="select2 form-control"name="disasters[]" multiple="multiple" id="id_h5_multi_1">
                                                             @foreach($beekeeper->beedisasters as $beedisaster)

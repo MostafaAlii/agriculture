@@ -100,6 +100,9 @@ use App\Http\Repositories\Front\RatingRepository;
 use App\Http\Interfaces\Front\FarmerAllDataInterface;
 use App\Http\Repositories\Front\FarmerAllDataRepository;
 
+use App\Http\Interfaces\Front\WorkerAllDataInterface;
+use App\Http\Repositories\Front\WorkerAllDataRepository;
+
 use App\Http\Interfaces\Admin\PaymentMethodInterface;
 use App\Http\Repositories\Admin\PaymentMethodRepository;
 
@@ -228,6 +231,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RatingInterface::class, RatingRepository::class);
         $this->app->bind(SearchInterface::class, SearchRepository::class);
         $this->app->bind(FarmerAllDataInterface::class, FarmerAllDataRepository::class);
+        $this->app->bind(WorkerAllDataInterface::class, WorkerAllDataRepository::class);
         $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
         $this->app->bind(PaymentInterface::class, PaymentRepository::class);
 

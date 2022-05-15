@@ -14,6 +14,9 @@ return [
     'Apiaries_report'=>'Apiaries Report',
     'cost'=>'Cost',
     ''=>'',
+    'private'=>'Private',
+    'govermental'=>'Govermental',
+    'international_organizations'=>'International Organizations',
 
     'count_village'=>'',
 

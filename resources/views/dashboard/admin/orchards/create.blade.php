@@ -156,12 +156,12 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="customSelect1">{{ __('Admin/orchards.supported_side') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect1" name="supported_side_id" >
+                                                        <label for="customSelect1-1">{{ __('Admin/orchards.supported_side') }}</label>
+                                                        <select class="custom-select form-control" id="customSelect1-1" name="supported_side" >
                                                             <option selected disabled>--select--</option>
                                                                 <option value="private">{{ __('Admin\orchards.private') }}</option>
                                                             <option value="govermental">{{ __('Admin\orchards.govermental') }}</option>
-                                                            <option value="international organization">{{ __('Admin\orchards.international_organizations') }}</option>
+                                                            <option value="international_organizations">{{ __('Admin\orchards.international_organizations') }}</option>
 
                                                         </select>
 

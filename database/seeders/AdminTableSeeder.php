@@ -30,7 +30,7 @@ class AdminTableSeeder extends Seeder {
             'firstname'         =>  'yyy',
             'lastname'          =>  'yyy',
             'email'             =>  'ahmedragabyasin2020@gmail.com',
-            'phone'             =>  '01015588628',
+            'phone'             =>  '01021493036',
             'password'          =>  bcrypt('123123'),
             'address1'          =>  'cairo',
             'address2'          =>  'alex',

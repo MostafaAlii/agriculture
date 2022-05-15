@@ -1,6 +1,6 @@
 
 
-<a href="{{ route('orchards.edit',  ($id)) }}" class="btn btn-info btn-sm">
+<a href="{{ route('orchards.edit',  encrypt($id)) }}" class="btn btn-info btn-sm">
     <i class="fa fa-edit"></i>
     {{ __('Admin/orchards.edit') }}
 </a>

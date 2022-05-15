@@ -2,6 +2,21 @@
 return [
 
 
+
+'natural_forests'=>'غابات طبيعية',
+    'municipal_lands'=>'أراضي بلدية ',
+    'rocky_lands_and_pastures'=>'أراضي صخرية و مراعي',
+    'public_restrooms'=>'منافع عامة',
+    'govermental_biulding'=>'مباني حكومية',
+    'irrigated_orchard'=>'بساتين سيحية',
+    'rainy_orchard'=>'بساتين بعلية',
+    'rainy_land'=>'أراضي بعلية',
+    'kamariat'=>'قمريات',
+    'irrigated_land'=>'أراضي سيحية',
+
+    'agricultural'=>'زراعي',
+    'non_agricultural'=>'غير زراعي',
+
 'admin'=>'الموظف المسؤول',
     'action' =>'العمليات',
     'admin_departments' =>'الهيكلية الإدارية التابعة',

@@ -17,9 +17,9 @@ return [
     'close'=>' Close',
     'precipitation_rate'=>'Precipitation Rate',
     'date'=>'Date',
-    'choose_period_date'=>'Choose Period Date',
-    'start_date'=>'Start Date',
-    'end_date'=>'End Date',
+    'choose_date'=>'Choose Period Date',
+    'from_date'=>'From',
+    'to_date'=>'To',
     'submit'=>'Submit',
     'precipitationsPageTitle'=>'Precipitations',
     'precipitations'=>'Precipitations',
@@ -32,6 +32,8 @@ return [
     'year'=>'Year',
     'month'=>'Month',
     'day'=>'Day',
+    'precipitation_details_report'=>'Precipitation Details Report',
+    'precipitation_database_in_all_area'=>'Precipitation Database In All Area'
 
 
 

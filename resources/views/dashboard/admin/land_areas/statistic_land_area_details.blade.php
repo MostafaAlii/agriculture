@@ -54,14 +54,23 @@
                                                 <tr>
                                                     <th>
 
+
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/land_areas.area') }}</th>
                                                     <th>{{ __('Admin/land_areas.state') }}</th>
                                                     <th>{{ __('Admin/land_areas.village') }}</th>
-                                                    <th>{{ __('Admin/land_areas.L_area') }}</th>
-                                                    <th>{{ __('Admin/land_areas.category_name') }}</th>
-                                                    <th>{{ __('Admin/land_areas.category_type') }}</th>
+                                                    <th>{{ __('Admin/land_areas.rocky_lands_and_pastures') }}</th>
+                                                    <th>{{ __('Admin/land_areas.natural_forests') }}</th>
+                                                    <th>{{ __('Admin/land_areas.municipal_lands') }}</th>
+
+                                                    <th>{{ __('Admin/land_areas.public_restrooms') }}</th>
+                                                    <th>{{ __('Admin/land_areas.govermental_biulding') }}</th>
+                                                    <th>{{ __('Admin/land_areas.irrigated_orchard') }}</th>
+                                                    <th>{{ __('Admin/land_areas.rainy_orchard') }}</th>
+                                                    <th>{{ __('Admin/land_areas.irrigated_land') }}</th>
+                                                    <th>{{ __('Admin/land_areas.rainy_land') }}</th>
+                                                    <th>{{ __('Admin/land_areas.kamariat') }}</th>
 
                                                 </tr>
                                             </thead>
@@ -72,9 +81,18 @@
                                                     <td>{{$statistic->Area}}</td>
                                                     <td>{{$statistic->State}}</td>
                                                     <td>{{$statistic->Village}}</td>
-                                                    <td>{{$statistic->L_area}}</td>
-                                                    <td>{{$statistic->Category_name}}</td>
-                                                    <td>{{$statistic->Category_type}}</td>
+                                                    <td>{{$statistic->rocky_lands_and_pastures}}</td>
+                                                    <td>{{$statistic->natural_forests}}</td>
+                                                    <td>{{$statistic->municipal_lands}}</td>
+
+                                                    <td>{{$statistic->public_restrooms}}</td>
+                                                    <td>{{$statistic->govermental_biulding}}</td>
+                                                    <td>{{$statistic->irrigated_orchard}}</td>
+                                                    <td>{{$statistic->rainy_orchard}}</td>
+                                                    <td>{{$statistic->irrigated_land}}</td>
+                                                    <td>{{$statistic->rainy_land}}</td>
+                                                    <td>{{$statistic->kamariat}}</td>
+
                                                 </tr>
 
                                             @endforeach
@@ -107,7 +125,7 @@
                 orientation: 'landscape',
                 pageSize: 'A3',
                 exportOptions: {
-                    columns: [ 1,2,3,4,5,6]
+                    columns: [ 1,2,3,4,5,6,7,8,9,10,11,12,13]
                 },
                 className: 'btn btn-primary ml-1',
 
@@ -115,7 +133,7 @@
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 1,2,3,4,5,6]
+                    columns:  [ 1,2,3,4,5,6,7,8,9,10,11,12,13]
                 },
                 autoPrint: true,
                 orientation: 'landscape',

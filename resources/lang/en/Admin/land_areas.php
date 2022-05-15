@@ -19,6 +19,18 @@ return [
     'state' =>'State',
 
     'village' =>'Village',
+    'natural_forests'=>'Nature Forest',
+    'municipal_lands'=>'Municipal Land',
+    'rocky_lands_and_pastures'=>'Rocky Lands And Pastures',
+    'public_restrooms'=>'Public Rest rooms',
+    'govermental_biulding'=>'Govermental Building',
+    'irrigated_orchard'=>'irrigated Orchard',
+    'rainy_orchard'=>'Rainy Orchard',
+    'rainy_land'=>'Rainy Land',
+    'kamariat'=>'Kamariat',
+    'irrigated_land'=>'Irrigated Land',
+    'agricultural'=>'Agricultural',
+    'non_agricultural'=>'Non Agricultural',
 
 
     'dashboard'=> 'Dashboard',

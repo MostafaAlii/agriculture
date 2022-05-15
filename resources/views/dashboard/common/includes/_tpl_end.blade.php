@@ -52,7 +52,7 @@
     <script src="{{asset('assets/admin/vendors/js/editors/quill/quill.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/scripts/pages/app-email.js')}}"></script>
 
-    
+
      @toastr_js
     @toastr_render
     {{-- image preview --}}

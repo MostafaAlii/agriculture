@@ -11,6 +11,8 @@ return [
     'logout' => 'الخروج',
     'login' => 'تسجيل الدخول',
     'serial' => 'تسلسل',
+    'services'=>'الخدمات',
+    'planet_protection'=>'المناحل',
 
     'add' => 'اضافه',
     'edit' => 'تعديل',

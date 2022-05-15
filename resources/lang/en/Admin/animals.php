@@ -3,7 +3,8 @@ return [
 
     'phone'=>'',
     ''=>'',
-
+    'count_ship'=>'Sheeps and Goats Count',
+    'counr_caw'=>'Caws Count',
 
     'action' =>'Processes',
     'admin_departments' =>'Admin Departments Related',

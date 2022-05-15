@@ -16,8 +16,10 @@ use Illuminate\Http\Request;
 use Auth;
 use Yajra\DataTables\DataTables;
 
-class PrecipitationRepository implements PrecipitationInterface {
-    public function index() {
+class PrecipitationRepository implements PrecipitationInterface
+{
+    public function index()
+    {
         $adminId = Auth::user()->id;
         $admin = Admin::findorfail($adminId);
         $areaID = $admin->area->id;
@@ -25,34 +27,25 @@ class PrecipitationRepository implements PrecipitationInterface {
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
         return view('dashboard.admin.precipitations.index',
-            compact('area_name','state_name','admin')) ;
+            compact('area_name', 'state_name', 'admin'));
     }
 
     public function data()
     {
         $adminID = Auth::user()->id;
-        $admin=Admin::findorfail($adminID);
-        $precipitationQuery = Precipitation::query();
+        $admin = Admin::findorfail($adminID);
 
-        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
-        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
-
-        if($start_date && $end_date){
-
-            $start_date = date('Y-m-d', strtotime($start_date));
-            $end_date = date('Y-m-d', strtotime($end_date));
-
-            $precipitationQuery->whereRaw("date(precipitations.date ) >= '" . $start_date . "' AND date(precipitations.date) <= '" . $end_date . "'");
-        }
-        $precipitations = $precipitationQuery->select('*');
         if ($admin->type == 'employee') {
-            $precipitations->where('admin_id','==',$admin->id );}
-
+            $precipitations = Precipitation::with('admin', 'area', 'state')
+                ->where('admin_id', '==', $admin->id)->get();
+        } else {
+            $precipitations = Precipitation::with('admin', 'area', 'state')->get();
+        }
         return DataTables::of($precipitations)
             ->addColumn('record_select', 'dashboard.admin.precipitations.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (Precipitation $precipitation) {
-                return $precipitation ->created_at->diffforhumans();
+                return $precipitation->created_at->diffforhumans();
             })
             ->addColumn('area', function (Precipitation $precipitation) {
                 return $precipitation->area->name;
@@ -63,15 +56,14 @@ class PrecipitationRepository implements PrecipitationInterface {
             ->addColumn('admin', function (Precipitation $precipitation) {
                 return $precipitation->admin->firstname;
             })
-
-
             ->addColumn('actions', 'dashboard.admin.precipitations.data_table.actions')
             ->rawColumns(['record_select', 'actions'])
             ->toJson();
 
     }
 
-    public function create() {
+    public function create()
+    {
         $areas = Area::all();
         $adminId = Auth::user()->id;
         $admin = Admin::findorfail($adminId);
@@ -83,10 +75,11 @@ class PrecipitationRepository implements PrecipitationInterface {
 
 
         return view('dashboard.admin.precipitations.create',
-            compact( 'area_name', 'areas','state_name', 'units','admin'));
+            compact('area_name', 'areas', 'state_name', 'units', 'admin'));
     }
 
-    public function store($request) {
+    public function store($request)
+    {
         DB::beginTransaction();
         try {
             $requestData = $request->validated();
@@ -97,7 +90,6 @@ class PrecipitationRepository implements PrecipitationInterface {
             $precipitation->precipitation_rate = $requestData['precipitation_rate'];
             $precipitation->date = $requestData['date'];
             $precipitation->unit_id = $requestData['unit_id'];
-
 
 
             $precipitation->save($requestData);
@@ -113,7 +105,8 @@ class PrecipitationRepository implements PrecipitationInterface {
         }
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         //
     }
 
@@ -131,14 +124,13 @@ class PrecipitationRepository implements PrecipitationInterface {
         $units = Unit::all();
 
 
-
         return view('dashboard.admin.precipitations.edit',
-            compact( 'areas','state_name' ,'area_name','admin','units', 'precipitation'));
+            compact('areas', 'state_name', 'area_name', 'admin', 'units', 'precipitation'));
     }
 
 
-
-    public function update( $request, $id) {
+    public function update($request, $id)
+    {
         DB::beginTransaction();
         try {
             $preID = Crypt::decrypt($id);
@@ -150,7 +142,6 @@ class PrecipitationRepository implements PrecipitationInterface {
             $precipitation->precipitation_rate = $requestData['precipitation_rate'];
             $precipitation->date = $requestData['date'];
             $precipitation->unit_id = $requestData['unit_id'];
-
 
 
             $precipitation->update($requestData);
@@ -166,7 +157,8 @@ class PrecipitationRepository implements PrecipitationInterface {
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $precipitationID = Crypt::decrypt($id);
         $precipitation = Precipitation::findorfail($precipitationID);
 
@@ -177,7 +169,8 @@ class PrecipitationRepository implements PrecipitationInterface {
 
     }
 
-    public function bulkDelete($request) {
+    public function bulkDelete($request)
+    {
         try {
             DB::beginTransaction();
             if ($request->delete_select_id) {
@@ -197,7 +190,7 @@ class PrecipitationRepository implements PrecipitationInterface {
                 toastr()->error(__('Admin/site.no_data_found'));
                 return redirect()->route('Precipitations.index');
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
@@ -205,17 +198,84 @@ class PrecipitationRepository implements PrecipitationInterface {
 
 
     }// end of bulkDelete
-    public function statistics(){
 
-        $statistics = Precipitation::select('area_translations.name AS Area','state_translations.name AS State',
-            DB::raw("EXTRACT(DAY FROM precipitations.date) As Day") ,
-            DB::raw("EXTRACT(MONTH FROM precipitations.date) AS Month") ,
-            DB::raw("EXTRACT(YEAR FROM precipitations.date) AS Year") ,
-            DB::raw('SUM(precipitations.precipitation_rate) As precipitation_rate'))
+    public function index_statistic()
+    {
+        return view('dashboard.admin.precipitations.statistics');
 
+    }
+
+    public function get_custom_statistics()
+    {
+        $precipitationQueryfirst = Precipitation::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $precipitationQuery = $precipitationQueryfirst
+                ->where('admin_id', '==', $admin->id)->get();
+        } else {
+            $precipitationQuery = $precipitationQueryfirst;
+        }
+
+        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
+        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
+
+        if ($start_date && $end_date) {
+
+            $start_date = date('Y-m-d', strtotime($start_date));
+            $end_date = date('Y-m-d', strtotime($end_date));
+
+            $precipitationQuery->whereRaw("date(precipitations.date) >= '" . $start_date . "' AND date(precipitations.date) <= '" . $end_date . "'");
+        }
+        $precipitations = $precipitationQuery->select(
+    'area_translations.name AS Area',    'state_translations.name AS State',
+
+            DB::raw('SUM(precipitations.precipitation_rate) As precipitation_rate'),
+             'precipitations.date AS date')
             ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
             ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->GroupBy('Area','State','Month','Year','Day')->get();
+            ->groupBy ('Area','State','date','precipitation_rate')->get();
+        return datatables()->of($precipitations)
+            ->make(true);
+    }
+    public function get_details_statistics_index(){
+        return view('dashboard.admin.precipitations.details_statistics');
+    }
+    public function get_details_statistics()
+    {
+        $precipitationQueryfirst = Precipitation::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $precipitationQuery = $precipitationQueryfirst
+                ->where('admin_id', '==', $admin->id)->get();
+        } else {
+            $precipitationQuery = $precipitationQueryfirst;
+        }
 
-        return view('dashboard.admin.precipitations.statistics',compact('statistics'));}
+        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
+        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
+
+        if ($start_date && $end_date) {
+
+            $start_date = date('Y-m-d', strtotime($start_date));
+            $end_date = date('Y-m-d', strtotime($end_date));
+
+            $precipitationQuery->whereRaw("date(precipitations.date) >= '" . $start_date . "' AND date(precipitations.date) <= '" . $end_date . "'");
+        }
+        $precipitations = $precipitationQuery->select(
+            'area_translations.name AS Area',
+            'state_translations.name AS State',
+            'precipitations.precipitation_rate as precipitation_rate',
+            DB::raw('Extract( DAY From precipitations.date) As day'),
+            DB::raw('EXTRACT(MONTH From precipitations.date) As month'),
+            DB::raw('EXTRACT(YEAR From precipitations.date) As year'),
+            'precipitations.precipitation_rate As precipitation_rate'
+           )
+            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+            ->groupBy ('Area','State','day','month','year','precipitation_rate')->get();
+        return datatables()->of($precipitations)
+            ->make(true);
+    }
 }

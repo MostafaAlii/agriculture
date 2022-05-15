@@ -174,7 +174,7 @@ Route::group(
             Route::resource('orchards', OrchardController::class)->except(['show']);
             Route::get('/orchards/data', [OrchardController::class,'data'])->name('orchards.data');
             Route::delete('/orchards/bulk_delete/{ids}', [OrchardController::class,'bulkDelete'])->name('orchards.bulk_delete');
-            Route::get('/orchards/beekeeper_statistic/', [OrchardController::class,'statistics'])->name('orchards.statistics');
+            Route::get('/orchards/orchard_statistic/', [OrchardController::class,'statistics'])->name('orchards.statistics');
 
             Route::get('/orchards/admin/{village_id}', [OrchardController::class, 'getAdmin']);// route ajax for get village admins
             Route::get('/orchards/farmer/{village_id}', [OrchardController::class, 'getFarmer']);// route ajax for get village farmers
@@ -209,8 +209,11 @@ Route::group(
             Route::resource('Precipitations', PrecipitationController::class)->except(['show']);
             Route::get('/Precipitations/data', [PrecipitationController::class,'data'])->name('precipitation.data');
             Route::delete('/Precipitations/bulk_delete/{ids}', [PrecipitationController::class,'bulkDelete'])->name('precipitation.bulk_delete');
-            Route::get('/Precipitations/statistic/', [PrecipitationController::class,'statistics'])->name('precipitation.statistics');
-
+//            Route::get('/Precipitations/statistic/', [PrecipitationController::class,'statistics'])->name('precipitation.statistics');
+            Route::get('/Precipitations/index_statistic', [PrecipitationController::class,'index_statistic'])->name('precipitations.index_statistic');;
+            Route::get('dtable-custom-statistic', [PrecipitationController::class,'get_custom_statistics']);
+            Route::get('/Precipitations/index_details_statistic', [PrecipitationController::class,'get_details_statistics_index'])->name('precipitations.index_details_statistic');
+            Route::get('dtable-details-statistic', [PrecipitationController::class,'get_details_statistics']);
             /***********end precipitation ****/
             /******start LandArea ********/
 
@@ -329,7 +332,8 @@ Route::group(
 
             Route::delete('/OutcomeProducts/bulk_delete/{ids}', [OutcomeProductController::class,'bulkDelete'])->name('outcome_products.bulk_delete');
             Route::get('/OutcomeProducts/statistic/', [OutcomeProductController::class,'outcome_product_statistics'])->name('outcome_product.statistics');
-
+            Route::get('/OutcomeProducts/index_outcome_products', [OutcomeProductController::class,'index_outcome_products'])->name('index_outcome_products');
+            Route::get('dtable_weekly_monthly_anual_outcome_product', [OutcomeProductController::class,'get_weekly_monthly_anual_outcome_product_statistics'])->name('dtable_weekly_monthly_anual_outcome_product');
             /********************************* End outcome products Routes ************************************/
 
             /********************************* outcome products Routes ************************************/
@@ -337,7 +341,8 @@ Route::group(
             Route::get('/IncomeProducts/data', [IncomeProductController::class,'data'])->name('income_products.data');
             Route::delete('/IncomeProducts/bulk_delete/{ids}', [IncomeProductController::class,'bulkDelete'])->name('income_products.bulk_delete');
             Route::get('/IncomeProducts/statistic/', [IncomeProductController::class,'income_product_statistics'])->name('income_product.statistics');
-
+            Route::get('/IncomeProducts/index_income_products', [IncomeProductController::class,'index_income_products'])->name('index_income_products');
+            Route::get('dtable_weekly_monthly_anual_income_product', [IncomeProductController::class,'get_weekly_monthly_anual_income_product_statistics'])->name('dtable_weekly_monthly_anual_income_product');
             /********************************* End outcome products Routes ************************************/
 
 

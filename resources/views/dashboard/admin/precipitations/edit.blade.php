@@ -65,7 +65,7 @@
                                         <div class="form-body">
 
                                             <div class="row mt-2">
-                                                <div class="col">
+                                                <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="area_id">{{ __('Admin/precipitations.area') }}</label>
                                                         <select name="area_id" id="area_id" class="form-control" required>
@@ -79,7 +79,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-6">
 
                                                     <div class="form-group">
                                                         <label for="state_id">{{ __('Admin/precipitations.state') }}</label>
@@ -94,13 +94,13 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/precipitations.precipitation_rate') }}</label>
                                                         <input name="precipitation_rate" value="{{$precipitation->precipitation_rate}}"  class="form-control"type="text">
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/precipitations.unit') }}</label>
                                                         <select class="custom-select form-control" id="customSelect" name="unit_id" >
@@ -112,7 +112,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/precipitations.date') }}</label>
                                                         <input name="date" value="{{$precipitation->date}}"  class="form-control"type="date">
