@@ -1,7 +1,6 @@
 <?php
 namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
-
 use App\Http\Interfaces\Admin\TagInterface;
 use App\Http\Repositories\Admin\TagRepository;
 
@@ -86,8 +85,10 @@ use App\Http\Repositories\Admin\ProtectedHouseRepository;
 use App\Http\Interfaces\Admin\ContactInterface;
 use App\Http\Repositories\Admin\ContactRepository;
 
-// ------------------------Front Uses-------------------------------
+use App\Http\Interfaces\Admin\RoleRepositoryInterface;
+use App\Http\Repositories\Admin\RoleRepository;
 
+// ------------------------Front Uses-------------------------------
 use App\Http\Interfaces\Front\CommentInterface;
 use App\Http\Repositories\Front\CommentRepository;
 
@@ -120,7 +121,6 @@ use App\Http\Repositories\Admin\AgriToolServiceRepository;
 
 use App\Http\Interfaces\Admin\FarmerServiceInterface;
 use App\Http\Repositories\Admin\FarmerServiceRepository;
-
 
 use App\Http\Interfaces\Admin\CropInterface;
 use App\Http\Repositories\Admin\CropRepository;
@@ -161,41 +161,24 @@ use App\Http\Repositories\Admin\IncomeProductRepository;
 use App\Http\Interfaces\Admin\SubscribeInterface;
 use App\Http\Repositories\Admin\SubscribeRepository;
 
-class RepositoryServiceProvider extends ServiceProvider
-{
+class RepositoryServiceProvider extends ServiceProvider {
     public function register() {
         $this->app->bind(OutcomeProductInterface::class, OutcomeProductRepository::class);
-
         $this->app->bind(IncomeProductInterface::class, IncomeProductRepository::class);
-
         $this->app->bind(WholeSaleProductInterface::class, WholeSaleProductRepository::class);
-
         $this->app->bind(BeeDisasterInterface::class, BeeDisasterRepository::class);
-
         $this->app->bind(CourseBeeInterface::class, CourseBeeRepository::class);
-
         $this->app->bind(BeekeeperInterface::class, BeekeeperRepository::class);
-
         $this->app->bind(CawProjectInterface::class, CawProjectRepository::class);
-
         $this->app->bind(ChickenProjectInterface::class, ChickenProjectRepository::class);
-
         $this->app->bind(PrecipitationInterface::class, PrecipitationRepository::class);
-
         $this->app->bind(LandAreaInterface::class, LandAreaRepository::class);
-
         $this->app->bind(FarmerCropInterface::class, FarmerCropRepository::class);
-
         $this->app->bind(CropInterface::class, CropRepository::class);
-
         $this->app->bind(FarmerServiceInterface::class, FarmerServiceRepository::class);
-
         $this->app->bind(AgriServiceInterface::class, AgriServiceRepository::class);
-
         $this->app->bind(WaterServiceInterface::class, WaterServiceRepository::class);
-
         $this->app->bind(AgriToolServiceInterface::class, AgriToolServiceRepository::class);
-
         $this->app->bind(ProtectedHouseInterface::class, ProtectedHouseRepository::class);
         $this->app->bind(OrchardInterface::class, OrchardRepository::class);
         $this->app->bind(TreeInterface::class, TreeRepository::class);
@@ -224,8 +207,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductCouponInterface::class, ProductCouponRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
-
         $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);
+        $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(RatingInterface::class, RatingRepository::class);
@@ -234,7 +217,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(WorkerAllDataInterface::class, WorkerAllDataRepository::class);
         $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
         $this->app->bind(PaymentInterface::class, PaymentRepository::class);
-
         $this->app->bind(ContactInterface::class, ContactRepository::class);
 
     }

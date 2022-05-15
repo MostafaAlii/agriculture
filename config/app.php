@@ -172,6 +172,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -247,6 +249,8 @@ return [
         'Order'         => App\Models\Order::class,
         'Paytabscom'    => Paytabscom\Laravel_paytabs\Facades\paypage::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
     'Currency' => 'USD',
 ];
