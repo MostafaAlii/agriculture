@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         $count = 32;
         $this->call([
+           
             CurrencySeeder::class,
             CountrySeeder::class,
             ProvinceSeeder::class,
@@ -69,6 +70,9 @@ class DatabaseSeeder extends Seeder {
             FarmerCropSeeder::class,
             CropFarmerCropSeeder::class,
             SubscriptionTableSeeder::class,
+
+            AboutSeeder::class,
+            
         ]);
 
         \App\Models\Farmer::factory(30)->create();

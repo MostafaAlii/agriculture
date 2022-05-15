@@ -193,4 +193,7 @@ return [
       'hourly'=>'Hourly Price',
       'dhprice'=>'Day/Hour Price',
 
+
+      'about_us' =>'About US',
+
 ];

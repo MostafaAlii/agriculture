@@ -9,7 +9,7 @@ trait UploadT
     public function verifyAndStoreImage(Request $request, $inputname , $foldername , $disk, $imageable_id, $imageable_type) {
 
         if( $request->hasFile( $inputname ) ) {
-
+// dd('22');
             // Check img
             if (!$request->file($inputname)->isValid()) {
                 flash('Invalid Image!')->error()->important();

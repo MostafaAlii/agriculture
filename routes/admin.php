@@ -53,7 +53,7 @@ use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
 use App\Http\Controllers\Dashboard\Admin\AgriToolServiceController;
 use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
 
-
+use App\Http\Controllers\Dashboard\Admin\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -432,11 +432,18 @@ Route::group(
                 Route::get('Orders/showOrder/{id}', [OrdersController::class,'showOrder'])->name('order.show');
                 Route::get('Orders/printOrder/{id}', [OrdersController::class,'printOrder'])->name('order.print');
                 /********************************* End Orders **********************************/
+
+                 /********************************* Start mail **********************************/
                 Route::get('contact_us', [ContactController::class,'show'])->name('contact_us');
                 route::POST('/replayMail/{mail}',[ContactController::class,'replay'])->name('mail.replay');
                 route::POST('/sendMail',[ContactController::class,'send'])->name('mail.send');
                 route::POST('/deleteMail',[ContactController::class,'delete'])->name('mail.delete');
+                 /********************************* end mail **********************************/
 
+                 /********************************* about us **********************************/
+                Route::get('about_us.show', [AboutController::class,'show'])->name('about_us/show');
+                Route::post('about_us.save', [AboutController::class,'save'])->name('about_us/save');
+                 /*****************************************************************************/
 
 
         });

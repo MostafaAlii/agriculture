@@ -161,6 +161,9 @@ use App\Http\Repositories\Admin\IncomeProductRepository;
 use App\Http\Interfaces\Admin\SubscribeInterface;
 use App\Http\Repositories\Admin\SubscribeRepository;
 
+use App\Http\Interfaces\Admin\AboutInterface;
+use App\Http\Repositories\Admin\AboutRepository;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register() {
@@ -236,6 +239,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PaymentInterface::class, PaymentRepository::class);
 
         $this->app->bind(ContactInterface::class, ContactRepository::class);
+        $this->app->bind(AboutInterface::class, AboutRepository::class);
 
     }
 
