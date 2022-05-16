@@ -10,10 +10,10 @@ class Admin extends Authenticatable {
    use \Znck\Eloquent\Traits\BelongsToThrough;
     use HasFactory, Notifiable, HasRoles;
     protected $table = "admins";
+    protected $guard = 'admin';
     protected $guarded = [];
     public $timestamps = true;
 
-    // rel
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
     }
