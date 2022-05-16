@@ -419,6 +419,7 @@ Route::group(
 
                 /********************************* Start Roles **********************************/
                 Route::resource('Roles',RoleController::class);
+                Route::get('/data', [RoleController::class,'data'])->name('roles.data');
                 /********************************* End Roles **********************************/
         });
     });

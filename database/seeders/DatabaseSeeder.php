@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         $count = 32;
         $this->call([
+            PermissionTableSeeder::class,
             CurrencySeeder::class,
             CountrySeeder::class,
             ProvinceSeeder::class,
@@ -25,9 +26,7 @@ class DatabaseSeeder extends Seeder {
             DepartmentSeeder::class,
             FarmerTableSeeder::class,
             WorkerTableSeeder::class,
-            PaymentMethodSeeder::class,
             AdminDepartmentSeeder::class,
-
             AdminTableSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
