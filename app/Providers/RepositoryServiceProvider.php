@@ -86,6 +86,8 @@ use App\Http\Repositories\Admin\ProtectedHouseRepository;
 use App\Http\Interfaces\Admin\ContactInterface;
 use App\Http\Repositories\Admin\ContactRepository;
 
+use App\Http\Interfaces\Admin\ReviewInterface;
+use App\Http\Repositories\Admin\ReviewRepository;
 // ------------------------Front Uses-------------------------------
 
 use App\Http\Interfaces\Front\CommentInterface;
@@ -229,6 +231,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(OrderInterface::class, OrderRepository::class);
 
         $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);
+        
+        $this->app->bind(ReviewInterface::class, ReviewRepository::class);
+
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(RatingInterface::class, RatingRepository::class);

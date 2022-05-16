@@ -5,7 +5,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/setting.settingPageTitle') }}
+    {{ trans('Admin/about.about_title') }}
 @endsection
 @section('content')
     @include('dashboard\common\_partials.messages')
@@ -20,7 +20,7 @@
                                         href="{{ route('admin.dashboard') }}">{{trans('Admin\setting.dashboard')}}</a>
                             </li>
                             <li class="breadcrumb-item"><a
-                                        href="{{ route('settings') }}">{{trans('Admin\setting.settings')}}</a>
+                                        href="{{ route('about_us/show') }}">{{trans('Admin\about.about_title')}}</a>
                             </li>
 
                         </ol>
@@ -44,7 +44,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title"
-                                    id="basic-layout-form">{{trans('Admin\setting.setting_info')}}</h4>
+                                    id="basic-layout-form">{{trans('Admin\about.about_title')}}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
 
@@ -59,15 +59,14 @@
                                           enctype="multipart/form-data" autocomplete="off">
                                     @csrf
                                         <div class="form-body">
-                                            <h4 class="form-section"><i
-                                                        class="ft-settings"></i> {{trans('Admin\setting.setting_info')}}
+                                            <h4 class="form-section"> <i class="material-icons"> info </i> {{trans('Admin\about.brief')}}
                                             </h4>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1">{{trans('Admin\setting.site_name')}}</label>
+                                                        <label for="projectinput1">{{trans('Admin\about.title')}}</label>
                                                         <input type="text" id="name" class="form-control"
-                                                               placeholder="{{trans('Admin\setting.site_name')}}"
+                                                               placeholder="{{trans('Admin\about.title')}}"
                                                                name="name"
                                                                value="{{$info->title}}">
                                                         <input type="hidden" id="id" class="form-control" name="id" value="{{$info->id}}"
@@ -76,14 +75,14 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>{{trans('Admin\setting.site_logo')}} </label>
+                                                        <label>{{trans('Admin\about.image')}} </label>
 
                                                             <input type="file" accept="image/*" name="image"  onchange="readURL(this);">
                                                             <?php
                                                             if(isset($info->image->filename)){
                                                                 $src=$info->image->filename;
                                                             }else{
-                                                                $src='12.jpg';
+                                                                $src='104.jpg';
                                                             }
                                                             ?>
                                                             <img src="{{asset('Dashboard/img/about/'.$src)}}"  id="previewImg" class="img-thumbnail img-preview" width="100px" height="100px" alt="image" id="output">
@@ -95,11 +94,11 @@
                                             <div class="row">
                                                 <div class="col col-md-12">
                                                     <div class="form-group">
-                                                        <label for="description">{{trans('Admin\setting.address')}}</label>
+                                                        <label for="description">{{trans('Admin\about.desc')}}</label>
                                                         <textarea type="text" id="description" class="form-control"
-                                                               placeholder="{{trans('Admin\setting.address')}}"
+                                                               placeholder="{{trans('Admin\about.desc')}}"
                                                                   name="description">
-                                                            {{ old('description',$info->description) }}
+                                                            {!! old('description',$info->description) !!}
                                                         </textarea>
                                                     </div>
                                                 </div>
@@ -122,9 +121,7 @@
 
 
                 </div>
-@foreach($about_cache as $cc)
-{{$cc->title}}<br>{{$cc->image->filename}}
-@endforeach
+
             </section>
             <!-- // Basic form layout section end -->
         </div>
@@ -134,6 +131,7 @@
 
 @endsection
 @section('js')
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script type="text/javascript">
 
@@ -151,5 +149,23 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
+    
+    tinymce.init({
+    selector: '#description',
+    directionality : 'rtl',
+    language: 'ar',
+    height: 300,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+    content_css: '//www.tiny.cloud/css/codepen.min.css'
+  });
+</script>
 @endsection

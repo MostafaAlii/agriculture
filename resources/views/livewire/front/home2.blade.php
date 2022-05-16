@@ -125,14 +125,15 @@
 
             <div class="container">
                 <div class="row align-items-center">
+                    @foreach($about_us as $info)
                     <div class="col-12 col-lg-4">
                         <div data-aos="fade-left" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
                             <div class="section-heading">
-                                <h2 class="__title">About agro  <span>farm company</span></h2>
+                                <h2 class="__title">{{$info->title}}</h2>
                             </div>
 
                             <p class="d-none d-sm-block">
-                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">More about</a>
+                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{route('aboutUs')}}">{{__('Website/home.about_more')}}</a>
                             </p>
                         </div>
                     </div>
@@ -141,7 +142,7 @@
 
                     <div class="col-12 col-lg-4  text-center">
                         <div data-aos="fade-up" ddata-aos-duration="600" data-aos-offset="100">
-                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/img_1.png') }}" alt="demo" />
+                            <img class="img-fluid  lazy" src="{{ asset('Dashboard/img/about/'.$info->image->filename) }}" data-src="{{ asset('Dashboard/img/about/'.$info->image->filename) }}" style="width:500px;height:400px" alt="demo" />
                         </div>
                     </div>
 
@@ -149,19 +150,15 @@
 
                     <div class="col-12 col-lg-4">
                         <div data-aos="fade-right" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
-                            <p>
-                                Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.
-                            </p>
+                            <p><?php echo substr($info->description,0,500);?>...</p>
 
-                            <p>
-                                The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classi
-                            </p>
 
                             <p class="d-sm-none">
                                 <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">More about</a>
                             </p>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -328,7 +325,7 @@
                                         <figure class="__image">
                                         @if(!($cat->products)->isEmpty())
                                             @foreach($cat->products->random(1) as $pp)
-                                            <img class="lazy" src="{{ asset('Dashboard/img/products/' .  $pp->image->filename) }}"
+                                                 <img class="lazy" src="{{ asset('Dashboard/img/products/' .  $pp->image->filename) }}"
                                                 data-src="{{ asset('Dashboard/img/products/' . $pp->image->filename) }}"
                                                 alt="demo" />
                                             @endforeach
@@ -359,73 +356,42 @@
         <!-- end section -->
         @endif
 
+        @if(count($reviews)>0)
         <!-- start section -->
         <section class="section section--review  lazy" data-src="{{ asset('frontassets/img/review_bg_1.png') }}">
             <div class="container">
                 <div class="section-heading section-heading--center" data-aos="fade">
-                    <h2 class="__title">People says <span>about agro</span></h2>
-
-                    <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
+                    <h2 class="__title">{{__('Admin/about.review_title')}}</h2>
                 </div>
 
                 <!-- start review -->
                 <div class="review review--slider">
                     <div class="js-slick" data-slick='{"autoplay": true, "arrows": false, "dots": true, "speed": 1000}'>
-                        <!-- start item -->
+                    @foreach($reviews as $rev)
+                    <!-- start item -->
                         <div class="review__item">
                             <div class="review__item__text">
                                 <p>
-                                    <i>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over</i>
+                                    <i>{{$rev->message}}</i>
                                 </p>
                             </div>
 
                             <div class="review__item__author  d-table">
                                 <div class="d-table-cell align-middle">
-                                    <div class="review__item__author-image">
-                                        <img class="circled" src="{{ asset('frontassets/img/ava.png') }}" alt="ava" />
-                                    </div>
-                                </div>
-
-                                <div class="d-table-cell align-middle">
-                                    <span class="review__item__author-name"><strong>Terens Smith</strong></span>
-                                    <span class="review__item__author-position">/CEO AntalAgro</span>
+                                    <span class="review__item__author-name"><strong>{{$rev->name}}</strong></span>
                                 </div>
                             </div>
                         </div>
                         <!-- end item -->
+                        @endforeach
 
-                        <!-- start item -->
-                        <div class="review__item">
-                            <div class="review__item__text">
-                                <p>
-                                    <i>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over</i>
-                                </p>
-
-                                <p>
-                                    <i>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over</i>
-                                </p>
-                            </div>
-
-                            <div class="review__item__author  d-table">
-                                <div class="d-table-cell align-middle">
-                                    <div class="review__item__author-image">
-                                        <img class="circled" src="{{ asset('frontassets/img/ava.png') }}" alt="ava" />
-                                    </div>
-                                </div>
-
-                                <div class="d-table-cell align-middle">
-                                    <span class="review__item__author-name"><strong>Terens Smith</strong></span>
-                                    <span class="review__item__author-position">/CEO AntalAgro</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
                     </div>
                 </div>
                 <!-- start review -->
             </div>
         </section>
         <!-- end section -->
+        @endif
 
         <!-- start section -->
         <section class="section section--no-pt section--no-pb section--gutter">
@@ -490,7 +456,7 @@
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="100" data-aos-offset="0">
                                     <figure class="__image">
-                                        @if($blog->image->filename)
+                                        @if(isset($blog->image->filename))
                                             <img  src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                             alt="demo" />

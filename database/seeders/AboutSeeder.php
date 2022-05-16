@@ -29,7 +29,7 @@ class AboutSeeder extends Seeder {
            $info->save();
 
            Image::insert([
-            'filename'          => '12.jpg', // in public\Dashboard\img\about
+            'filename'          => '104.jpg', // in public\Dashboard\img\about
             'imageable_id'      => '1',
             'imageable_type'    => 'App\Models\About'
         ]);

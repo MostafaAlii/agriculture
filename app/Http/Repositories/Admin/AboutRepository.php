@@ -29,10 +29,10 @@ class AboutRepository implements AboutInterface {
             $info->description=$request->description;
             $info->save();
 
-            if($request->image){
+            if(isset($request->image)){
                 if($info->image) {
                     $old_photo = $info->image->filename;
-                    $this->deleteImage('about', $old_photo,$info->id);
+                    $this->Delete_attachment('about', $old_photo, $info->id, $old_photo);
                 }
                 //===========add new image and store in image table=========================
                 $photo_name= str_replace(' ', '_',($request->image)->getClientOriginalName());
@@ -52,11 +52,11 @@ class AboutRepository implements AboutInterface {
             //==================================================
 
             DB::commit();
-            toastr()->success(__('Admin/attributes.updated_done'));
+            toastr()->success(__('Admin/about.updated_done'));
             return redirect()->route('about_us/show');
         } catch (\Exception $ex) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->success(__('Admin/about.edit_wrong'));
             return redirect()->route('about_us/show');
          }
     }

@@ -1,6 +1,7 @@
 <?php
 use App\Http\Livewire;
 use App\Http\Controllers\front;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\front\SearchController;
@@ -9,14 +10,15 @@ use App\Http\Controllers\front\CommentsController;
 use App\Http\Livewire\Front\User\ThankYouComponent;
 use App\Http\Controllers\front\user\UserEditProfile;
 use App\Http\Controllers\front\FarmerAllDataController;
-use App\Http\Controllers\front\WorkerAllDataController;
 use App\Http\Controllers\front\PaymentMethodController;
 use App\Http\Controllers\front\vendor\VendorController;
+use App\Http\Controllers\front\WorkerAllDataController;
 use App\Http\Controllers\front\CategoryProductController;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Livewire\Front\User\UserOrderDetailsComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+use App\Http\Controllers\front\ReviewController;
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -113,7 +115,8 @@ Route::group(
         });
 
         Route::get('/category_products/{id}',[CategoryProductController::class,'showCategoryProduct'])->name('pro_cat');
-
+        Route::get('/review/add',[ReviewController::class,'add'])->name('review.add');
+        
     require __DIR__.'/auth.php';
     });
 

@@ -9,7 +9,7 @@ class AboutRequest extends FormRequest {
     public function rules() {
         return [
             'name' =>'required|string|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
-            'description' =>'required|string|min:3|max:1000|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+            'description' =>'required|string|min:3|max:1000',
         ];
     }
 
@@ -23,7 +23,6 @@ class AboutRequest extends FormRequest {
             'description.required'   =>  trans('Admin/validation.required'),
             'description.min'        =>  trans('Admin/validation.min'),
             'description.string'     =>  trans('Admin/validation.string'),
-            'description.regex'      =>  trans('Admin/validation.regex'),
         ];
     }
 }

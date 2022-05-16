@@ -195,5 +195,6 @@ return [
 
 
       'about_us' =>'About US',
+      'reviwe' =>'}Clients opinions',
 
 ];
