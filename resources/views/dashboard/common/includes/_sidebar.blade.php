@@ -96,8 +96,8 @@
                 <!-- Start Main Setting Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">tune</i> 
-                        <span class="menu-title" data-i18n="settings"> 
+                        <i class="material-icons">tune</i>
+                        <span class="menu-title" data-i18n="settings">
                             {{ trans('Admin/setting.page_title_in_sidebar') }}
                         </span>
                     </a>
@@ -105,7 +105,7 @@
                         <!-- Start Settings -->
                         <li>
                             <a class="menu-item" href="{{ route('settings') }}">
-                                <i class="material-icons">tune</i> 
+                                <i class="material-icons">tune</i>
                                 <span data-i18n="settings"> {{ trans('Admin/setting.page_title_in_sidebar') }}</span>
                             </a>
                         </li>
@@ -113,15 +113,21 @@
                         <!-- Start Sliders -->
                         <li>
                             <a class="menu-item" href="{{ route('sliders.index') }}">
-                                <i class="material-icons">photo_library</i>  
+                                <i class="material-icons">photo_library</i>
                                 <span data-i18n="Sliders"> {{ trans('Admin/sliders.sliderPageTitle') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('brands.index') }}">
+                                <i class="material-icons">photo_library</i>
+                                <span data-i18n="Brands"> {{ trans('Admin/site.brand') }}</span>
                             </a>
                         </li>
                         <!-- End Sliders -->
                         <!-- Start Roles Permissions -->
                         <li>
                             <a class="menu-item" href="{{ route('Roles.index') }}">
-                                <i class="material-icons">flash_on</i> 
+                                <i class="material-icons">flash_on</i>
                                 <span data-i18n="Roles"> {{ trans('Admin/roles.role_title_in_sidebar') }}</span>
                             </a>
                         </li>

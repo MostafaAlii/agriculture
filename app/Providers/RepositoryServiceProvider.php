@@ -21,6 +21,8 @@ use App\Http\Repositories\Admin\OptionRepository;
 
 use App\Http\Interfaces\Admin\SliderInterface;
 use App\Http\Repositories\Admin\SliderRepository;
+use App\Http\Interfaces\Admin\BrandInterface;
+use App\Http\Repositories\Admin\BrandRepository;
 
 use App\Http\Interfaces\Admin\OrchardInterface;
 use App\Http\Repositories\Admin\OrchardRepository;
@@ -199,6 +201,7 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->bind(ProvienceInterface::class, ProvienceRepository::class);
         $this->app->bind(DepartmentInterface::class, DepartmentRepository::class);
         $this->app->bind(SliderInterface::class, SliderRepository::class);
+        $this->app->bind(BrandInterface::class, BrandRepository::class);
         $this->app->bind(BlogInterface::class, BlogRepository::class);
         $this->app->bind(TagInterface::class, TagRepository::class);
         $this->app->bind(AttributeInterface::class, AttributeRepository::class);

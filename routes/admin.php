@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\OptionController;
 use App\Http\Controllers\Dashboard\Admin\OrdersController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
+use App\Http\Controllers\Dashboard\Admin\BrandController;
 use App\Http\Controllers\Dashboard\Admin\WorkerController;
 use App\Http\Controllers\Dashboard\Admin\ContactController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
@@ -397,6 +398,12 @@ Route::group(
                 Route::get('/sliders/data', [SliderController::class,'data'])->name('sliders.data');
                 Route::delete('/sliders/bulk_delete/{ids}', [SliderController::class,'bulkDelete'])->name('sliders.bulk_delete');
                 /********************************* End Slider Routes ************************************/
+
+                /********************************* brand Routes ************************************/
+                Route::resource('brands', BrandController::class)->except(['show']);
+                Route::get('/brands/data', [BrandController::class,'data'])->name('brands.data');
+                Route::delete('/brands/bulk_delete/{ids}', [BrandController::class,'bulkDelete'])->name('brands.bulk_delete');
+                /********************************* End brand Routes ************************************/
 
                 /********************************* Start Payment Method **********************************/
                 Route::resource('Payments', PaymentMethodController::class)->except(['show']);

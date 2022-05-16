@@ -194,4 +194,8 @@ return [
       'dhprice'=>'Day/Hour Price',
       'desc'=>'Description',
 
+
+      // Brand
+      'brand'=>'Brand'
+
 ];

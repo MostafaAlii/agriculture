@@ -1018,30 +1018,14 @@
                             }
                         }
                     ]}'>
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/1.jpg') }}"
-                            alt="demo" />
-                    </div>
 
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/2.jpg') }}"
-                            alt="demo" />
-                    </div>
 
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/3.jpg') }}"
-                            alt="demo" />
-                    </div>
-
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/4.jpg') }}"
-                            alt="demo" />
-                    </div>
-
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/5.jpg') }}"
-                            alt="demo" />
-                    </div>
+                    @foreach( \App\Models\Brand::limit(5)->get() as $brand)
+                        <div class="__item">
+                            <img class="img-fluid m-auto" src="{{ asset('Dashboard/img/brands/' . $brand->image->filename) }}"
+                                alt="{{ $brand->title }}" />
+                        </div>
+                   @endforeach
                 </div>
             </div>
         </div>
