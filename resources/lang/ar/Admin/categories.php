@@ -22,6 +22,7 @@ return [
     'depart_cant_delete'            =>'لا يمكن حذف هذا القسم لارتباطه بجداول اخرى',
 
     'department'                    =>'الاداره',
-    'departments'                    =>'الادارات',
     'depart_choise'                 =>'اختر الاداره',
+    'departments'                    =>'الاقسام الرئيسيه',
+    'department_sub'                 =>'الاقسام الفرعيه',
 ];

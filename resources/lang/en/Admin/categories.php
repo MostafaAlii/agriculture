@@ -22,6 +22,7 @@ return [
     'depart_cant_delete'            =>'Can\'t delete this Category because it related with another tables',
 
     'department'                    =>'Department',
-    'department'                    =>'Departments',
     'depart_choise'                 =>'Choise Department',
+    'departments'                    =>'Main Departments',
+    'department_sub'                 =>'Sub Department',
 ];
