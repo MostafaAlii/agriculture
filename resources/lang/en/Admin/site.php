@@ -192,5 +192,6 @@ return [
       'daily'=>'Daily Price',
       'hourly'=>'Hourly Price',
       'dhprice'=>'Day/Hour Price',
+      'desc'=>'Description',
 
 ];

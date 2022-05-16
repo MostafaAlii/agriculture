@@ -20,6 +20,7 @@ class CreateWorkersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone')->unique();
+            $table->text('desc')->nullable();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
             // $table->unsignedBigInteger('view')->default(0);
@@ -29,7 +30,7 @@ class CreateWorkersTable extends Migration
             $table->foreignId('area_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('state_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('village_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('department_id')->default('1')->constrained()->cascadeOnDelete();
+            // $table->foreignId('department_id')->default('1')->constrained()->cascadeOnDelete();
             $table->date('birthdate')->nullable();
             $table->boolean('status')->default(false);
             $table->enum('salary',['perday','perhour'])->default('perday');

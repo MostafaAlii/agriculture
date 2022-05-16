@@ -26,6 +26,7 @@ class WorkerTableSeeder extends Seeder {
             'email'             =>  'worker@app.com',
             'password'          =>  bcrypt('123123'),
             'phone'             =>'01099999999',
+            'desc'             => 'thank you for use morasoft',
             'address1'          =>  'cairo',
             'address2'          =>  'alex',
             'birthdate'         =>  Carbon::create('2000', '01', '01'),
@@ -34,7 +35,7 @@ class WorkerTableSeeder extends Seeder {
             'area_id'           => 1,
             'state_id'          => 1,
             'village_id'        => 1,
-            'department_id'     => 1,
+            // 'department_id'     => 1,
             'status'            =>true,
             'remember_token'    => Str::random(10),
         ]);
@@ -44,6 +45,7 @@ class WorkerTableSeeder extends Seeder {
                 'lastname'         => $faker->name(),
                 'email'            => $faker->unique()->safeEmail(),
                 'phone'            => $faker->numerify('###########'),
+                'desc'             => $faker->sentence(),
                 'email_verified_at' => now(),
                 'password'         => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'address1'         => $faker->streetAddress,
@@ -53,7 +55,7 @@ class WorkerTableSeeder extends Seeder {
                 'country_id'       => $faker->numberBetween(1, Country::count()),
                 'state_id'         => $faker->numberBetween(1, State::count()),
                 'village_id'       => $faker->numberBetween(1, Village::count()),
-                'department_id'    => $faker->numberBetween(1, Department::count()),
+                // 'department_id'    => $faker->numberBetween(1, Department::count()),
                 'status'           => rand(0,1),
                 'salary'           => $faker->randomElement(['perhour', 'perday']),
                 'work'             => $faker->randomElement(['alone', 'team']),
