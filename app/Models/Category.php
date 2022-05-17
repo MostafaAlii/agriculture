@@ -40,6 +40,9 @@ class Category extends Model implements TranslatableContract{
         return $this->belongsTo('App\Models\Department','department_id') ;
     }
 
+    public function scopeParentCategory() {
+        return $this->whereNull('parent_id')->get();
+    }
     public function scopeChildCategory() {
         return $this->whereNotNull('parent_id')->get();
     }
