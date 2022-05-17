@@ -7,14 +7,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Interfaces\Admin\AboutInterface;
 
+// use Intervention\Image\Facades\Image;
+
 class AboutRepository implements AboutInterface {
     use UploadT;
 
 //------------------------------------------------------------------------------------------
     public function show() {
+
         $data['info']   =About::first();
 
-      $data['about_cache']= Cache::get('about_us');
+       //read info from cache
+       $data['about_cache']= Cache::get('about_us');
+       
        return view('dashboard.admin.about.form',$data);
 
     }
@@ -30,20 +35,25 @@ class AboutRepository implements AboutInterface {
             $info->save();
 
             if(isset($request->image)){
-                if($info->image) {
+                if($info->image) {//delete old image
                     $old_photo = $info->image->filename;
                     $this->Delete_attachment('about', $old_photo, $info->id, $old_photo);
                 }
                 //===========add new image and store in image table=========================
                 $photo_name= str_replace(' ', '_',($request->image)->getClientOriginalName());
                 ($request->image)->storeAs('',$photo_name,$disk="about");
-                 // insert Image
+
+                // insert Image
                 $Image = new Image();
                 $Image->filename = $photo_name;
                 $Image->imageable_id = $info->id;
                 $Image->imageable_type = 'App\Models\About';
                 $Image->save();
                 //============================================================================
+                // Image::make($request->image)->resize(70, 70, function ($constraint) {
+                //     $constraint->aspectRatio();
+                // })->save(public_path('Dashboard/img/about/' . $request->image->hashName()));
+                
             }
 
              //==============update cache file=================
@@ -55,6 +65,7 @@ class AboutRepository implements AboutInterface {
             toastr()->success(__('Admin/about.updated_done'));
             return redirect()->route('about_us/show');
         } catch (\Exception $ex) {
+           // dd($ex->getMessage());
             DB::rollBack();
             toastr()->success(__('Admin/about.edit_wrong'));
             return redirect()->route('about_us/show');
