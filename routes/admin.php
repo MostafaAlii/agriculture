@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\TagController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
-use App\Http\Controllers\Dashboard\Admin\CropController;
+use App\Http\Controllers\Dashboard\Admin\WinterCropController;
+use App\Http\Controllers\Dashboard\Admin\SummerCropController;
 use App\Http\Controllers\Dashboard\Admin\TreeController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
 use App\Http\Controllers\Dashboard\Admin\AdminController;
@@ -249,16 +250,27 @@ Route::group(
             Route::get('/FarmerServices/statistic/', [FarmerServiceController::class,'statistics'])->name('farmer_service.statistics');
             /***********end Farmer service****/
 
-            /******start Crops ********/
-            Route::resource('Crops', CropController::class)->except(['show']);
-            Route::get('/Crops/data', [CropController::class,'data'])->name('crops.data');
-            Route::delete('/Crops/bulk_delete/{ids}', [CropController::class,'bulkDelete'])->name('crops.bulk_delete');
+
+            Route::resource('WinterCrops', WinterCropController::class)->except(['show']);
+            Route::get('/WinterCrops/data', [WinterCropController::class,'data'])->name('winter_crops.data');
+            Route::delete('/WinterCrops/bulk_delete/{ids}', [WinterCropController::class,'bulkDelete'])->name('winter_crops.bulk_delete');
+
             /***********end Crops ****/
+            /******start Crops ********/
+
+            Route::resource('SummerCrops', SummerCropController::class)->except(['show']);
+            Route::get('/SummerCrops/data', [SummerCropController::class,'data'])->name('summer_crops.data');
+            Route::delete('/SummerCrops/bulk_delete/{ids}', [SummerCropController::class,'bulkDelete'])->name('summer_crops.bulk_delete');
+
+
 
             /******start farmer crops********/
             Route::resource('FarmerCrops', FarmerCropController::class)->except(['show']);
             Route::get('/FarmerCrops/data', [FarmerCropController::class,'data'])->name('farmer_crop.data');
             Route::delete('/FarmerCrops/bulk_delete/{ids}', [FarmerCropController::class,'bulkDelete'])->name('farmer_crop.bulk_delete');
+            Route::get('/FarmerCrops/statistic/', [FarmerCropController::class,'statistics'])->name('farmer_crops.statistics');
+
+
             /***********end farmer crops****/
 
             /******start animals ********/
@@ -311,6 +323,16 @@ Route::group(
             Route::get('/OutcomeProducts/statistic/', [OutcomeProductController::class,'outcome_product_statistics'])->name('outcome_product.statistics');
             Route::get('/OutcomeProducts/index_outcome_products', [OutcomeProductController::class,'index_outcome_products'])->name('index_outcome_products');
             Route::get('dtable_weekly_monthly_anual_outcome_product', [OutcomeProductController::class,'get_weekly_monthly_anual_outcome_product_statistics'])->name('dtable_weekly_monthly_anual_outcome_product');
+
+            Route::get( '/OutcomeProducts/index_outcome_local_products', [OutcomeProductController::class,'index_outcome_local_products'])->name('index_outcome_local_products');
+            Route::get('dtable_weekly_monthly_anual_outcome_local_product', [OutcomeProductController::class,'get_weekly_monthly_anual_outcome_local_product_statistics'])->name('dtable_weekly_monthly_anual_outcome_local_product');
+
+            Route::get('/OutcomeProducts/index_outcome_imported_products', [OutcomeProductController::class,'index_outcome_imported_products'])->name('index_outcome_imported_products');
+            Route::get('dtable_weekly_monthly_anual_outcome_imported_product', [OutcomeProductController::class,'get_weekly_monthly_anual_outcome_imported_product_statistics'])->name('dtable_weekly_monthly_anual_outcome_imported_product');
+
+            Route::get('/OutcomeProducts/index_outcome_iraq_products', [OutcomeProductController::class,'index_outcome_iraq_products'])->name('index_outcome_iraq_products');
+            Route::get('dtable_weekly_monthly_anual_outcome_iraq_product', [OutcomeProductController::class,'get_weekly_monthly_anual_outcome_iraq_product_statistics'])->name('dtable_weekly_monthly_anual_outcome_iraq_product');
+
             /********************************* End outcome products Routes ************************************/
 
             /********************************* outcome products Routes ************************************/
@@ -320,6 +342,16 @@ Route::group(
             Route::get('/IncomeProducts/statistic/', [IncomeProductController::class,'income_product_statistics'])->name('income_product.statistics');
             Route::get('/IncomeProducts/index_income_products', [IncomeProductController::class,'index_income_products'])->name('index_income_products');
             Route::get('dtable_weekly_monthly_anual_income_product', [IncomeProductController::class,'get_weekly_monthly_anual_income_product_statistics'])->name('dtable_weekly_monthly_anual_income_product');
+
+            Route::get('/IncomeProducts/index_income_local_products', [IncomeProductController::class,'index_income_local_products'])->name('index_income_local_products');
+            Route::get('dtable_weekly_monthly_anual_income_local_product', [IncomeProductController::class,'get_weekly_monthly_anual_income_local_product_statistics'])->name('dtable_weekly_monthly_anual_income_local_product');
+
+            Route::get('/IncomeProducts/index_income_imported_products', [IncomeProductController::class,'index_income_imported_products'])->name('index_income_imported_products');
+            Route::get('dtable_weekly_monthly_anual_income_imported_product', [IncomeProductController::class,'get_weekly_monthly_anual_income_imported_product_statistics'])->name('dtable_weekly_monthly_anual_income_imported_product');
+
+            Route::get('/IncomeProducts/index_income_iraq_products', [IncomeProductController::class,'index_income_iraq_products'])->name('index_income_iraq_products');
+            Route::get('dtable_weekly_monthly_anual_income_iraq_product', [IncomeProductController::class,'get_weekly_monthly_anual_income_iraq_product_statistics'])->name('dtable_weekly_monthly_anual_income_iraq_product');
+
             /********************************* End outcome products Routes ************************************/
 
             /********************************* Department Routes ************************************/

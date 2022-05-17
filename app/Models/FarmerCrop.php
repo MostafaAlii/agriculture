@@ -20,6 +20,7 @@ class FarmerCrop extends Model {
     public function village(){
         return $this->belongsTo(Village::class,'village_id');
     }
+
     public function area(){
         return $this->belongsTo(Area::class,'area_id');
     }
@@ -31,9 +32,14 @@ class FarmerCrop extends Model {
         return $this->belongsTo(LandCategory::class,'land_category_id');
     }
 
-    public function crops()
+    public function summer_crops()
     {
-        return $this->belongsToMany( Crop::class,'crop_farmer_crops','farmer_crop_id',
-            'crop_id')->withPivot('area');
+        return $this->belongsToMany( SummerCrop::class,'summer_crop_farmer_crop','farmer_crop_id',
+            'summer_crop_id');
+    }
+    public function winter_crops()
+    {
+        return $this->belongsToMany( WinterCrop::class,'winter_crop_farmer_crop','farmer_crop_id',
+            'winter_crop_id');
     }
 }

@@ -124,8 +124,15 @@ use App\Http\Repositories\Admin\AgriToolServiceRepository;
 use App\Http\Interfaces\Admin\FarmerServiceInterface;
 use App\Http\Repositories\Admin\FarmerServiceRepository;
 
-use App\Http\Interfaces\Admin\CropInterface;
-use App\Http\Repositories\Admin\CropRepository;
+
+
+use App\Http\Interfaces\Admin\WinterCropInterface;
+use App\Http\Repositories\Admin\WinterCropRepository;
+
+use App\Http\Interfaces\Admin\SummerCropInterface;
+use App\Http\Repositories\Admin\SummerCropRepository;
+
+
 
 use App\Http\Interfaces\Admin\FarmerCropInterface;
 use App\Http\Repositories\Admin\FarmerCropRepository;
@@ -176,7 +183,8 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->bind(PrecipitationInterface::class, PrecipitationRepository::class);
         $this->app->bind(LandAreaInterface::class, LandAreaRepository::class);
         $this->app->bind(FarmerCropInterface::class, FarmerCropRepository::class);
-        $this->app->bind(CropInterface::class, CropRepository::class);
+        $this->app->bind(SummerCropInterface::class, SummerCropRepository::class);
+        $this->app->bind(WinterCropInterface::class, WinterCropRepository::class);
         $this->app->bind(FarmerServiceInterface::class, FarmerServiceRepository::class);
         $this->app->bind(AgriServiceInterface::class, AgriServiceRepository::class);
         $this->app->bind(WaterServiceInterface::class, WaterServiceRepository::class);

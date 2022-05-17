@@ -49,7 +49,16 @@ return [
     'newprecipitation'=>'New Precipitations',
     'update'=>'Update',
     'editprecipitation'=>'Edit Precipitations Data',
-    'precipitationsPageTitle'=>''
+    'precipitationsPageTitle'=>'',
+    'outcome_imported_products_details_in_date_report'=>'Outcome Imported Products Report Periodically',
+    'outcome_imported_products_database_details_in_date_report'=>'Outcome Imported Products Database Periodically',
+
+
+    'outcome_iraq_products_details_in_date_report'=>'Outcome Iraq Products Report Periodically',
+    'outcome_iraq_products_database_details_in_date_report'=>'Outcome Iraq Products Database Periodically',
+
+    'outcome_local_products_details_in_date_report'=>'Outcome Local Products Report Periodically',
+    'outcome_local_products_database_details_in_date_report'=>'Outcome Local Products Database Periodically',
 
 
 
