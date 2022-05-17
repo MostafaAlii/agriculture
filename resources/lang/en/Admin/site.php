@@ -199,4 +199,9 @@ return [
       'brand'=>'Brand',
       'newbrand'=>'New Brand',
 
+
+      //sidebar
+      'settings'=>'Settings',
+      'sliderimages'=>'Slider Images',
+
 ];

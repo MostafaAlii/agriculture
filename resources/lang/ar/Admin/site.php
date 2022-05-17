@@ -191,4 +191,8 @@ return [
     // Brand
     'brand'=>'العلامه التجاريه',
     'newbrand'=>' اضف علامه التجاريه',
+
+        //sidebar
+        'settings'=>'الاعدادات العامه',
+        'sliderimages'=>'الصور المتحركه',
 ];

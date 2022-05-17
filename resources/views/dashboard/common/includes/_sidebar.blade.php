@@ -98,7 +98,7 @@
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">tune</i>
                         <span class="menu-title" data-i18n="settings">
-                            {{ trans('Admin/setting.page_title_in_sidebar') }}
+                            {{ trans('Admin/site.settings') }}
                         </span>
                     </a>
                     <ul class="menu-content">
@@ -106,7 +106,7 @@
                         <li>
                             <a class="menu-item" href="{{ route('settings') }}">
                                 <i class="material-icons">tune</i>
-                                <span data-i18n="settings"> {{ trans('Admin/setting.page_title_in_sidebar') }}</span>
+                                <span data-i18n="settings"> {{ trans('Admin/site.settings') }}</span>
                             </a>
                         </li>
                         <!-- End Settings -->
@@ -114,7 +114,7 @@
                         <li>
                             <a class="menu-item" href="{{ route('sliders.index') }}">
                                 <i class="material-icons">photo_library</i>
-                                <span data-i18n="Sliders"> {{ trans('Admin/sliders.sliderPageTitle') }}</span>
+                                <span data-i18n="Sliders"> {{ trans('Admin/site.sliderimages') }}</span>
                             </a>
                         </li>
                         <li>
