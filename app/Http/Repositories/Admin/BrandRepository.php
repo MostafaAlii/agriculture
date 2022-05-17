@@ -26,53 +26,53 @@ class BrandRepository implements BrandInterface {
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
-    // public function create() {
-    //     return view('dashboard.admin.brands.create');
-    // }
+    public function create() {
+        return view('dashboard.admin.brands.create');
+    }
 
-    // public function store($request) {
-    //     DB::beginTransaction();
-    //     try{
-    //         $requestData = $request->validated();
-    //         brand::create($requestData);
-    //         $brand = brand::latest()->first();
-    //         $this->addImageblog($request, 'image' , 'brands' , 'upload_image',$brand->id, 'App\Models\brand');
-    //         DB::commit();
-    //         toastr()->success(__('Admin/site.added_successfully'));
-    //         return redirect()->route('brands.index');
-    //      } catch (\Exception $e) {
-    //          DB::rollBack();
-    //          toastr()->error(__('Admin/site.sorry'));
-    //          return redirect()->back();
-    //      }
-    // }
+    public function store($request) {
+        DB::beginTransaction();
+        try{
+            $requestData = $request->validated();
+            Brand::create($requestData);
+            $brand = Brand::latest()->first();
+            $this->addImageblog($request, 'image' , 'brands' , 'upload_image',$brand->id, 'App\Models\Brand');
+            DB::commit();
+            toastr()->success(__('Admin/site.added_successfully'));
+            return redirect()->route('brands.index');
+         } catch (\Exception $e) {
+             DB::rollBack();
+             toastr()->error(__('Admin/site.sorry'));
+             return redirect()->back();
+         }
+    }
 
-    // public function edit($id) {
-    //     $brandID = Crypt::decrypt($id);
-    //     $brand=brand::findorfail($brandID);
-    //     return view('dashboard.admin.brands.edit', compact('brand'));
-    // }
+    public function edit($id) {
+        $brandID = Crypt::decrypt($id);
+        $brand=Brand::findorfail($brandID);
+        return view('dashboard.admin.brands.edit', compact('brand'));
+    }
 
-    // public function update($request,$id) {
-    //     try{
-    //         DB::beginTransaction();
-    //         $brandID = Crypt::decrypt($id);
-    //         $brand=brand::findorfail($brandID);
-    //         $requestData = $request->validated();
-    //         $brand->update($requestData);
-    //         if($request->image){
-    //             $this->deleteImage('upload_image','/brands/' . $brand->image->filename,$brand->id);
-    //         }
-    //         $this->addImageblog($request, 'image' , 'brands' , 'upload_image',$brand->id, 'App\Models\brand');
-    //         DB::commit();
-    //         toastr()->success( __('Admin/site.updated_successfully'));
-    //         return redirect()->route('brands.index');
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         toastr()->error(__('Admin/site.sorry'));
-    //         return redirect()->back();
-    //     }
-    // }
+    public function update($request,$id) {
+        try{
+            DB::beginTransaction();
+            $brandID = Crypt::decrypt($id);
+            $brand=Brand::findorfail($brandID);
+            $requestData = $request->validated();
+            $brand->update($requestData);
+            if($request->image){
+                $this->deleteImage('upload_image','/brands/' . $brand->image->filename,$brand->id);
+            }
+            $this->addImageblog($request, 'image' , 'brands' , 'upload_image',$brand->id, 'App\Models\Brand');
+            DB::commit();
+            toastr()->success( __('Admin/site.updated_successfully'));
+            return redirect()->route('brands.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
+        }
+    }
 
     public function destroy($id) {
         try{

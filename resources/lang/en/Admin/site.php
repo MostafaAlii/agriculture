@@ -196,6 +196,7 @@ return [
 
 
       // Brand
-      'brand'=>'Brand'
+      'brand'=>'Brand',
+      'newbrand'=>'New Brand',
 
 ];

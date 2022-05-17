@@ -3,20 +3,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-{{ __('Admin/site.slider') }}
+{{ __('Admin/site.brand') }}
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/site.slider') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/site.brand') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('sliders.index') }}">{{ __('Admin/site.slider') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('brands.index') }}">{{ __('Admin/site.brand') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.edit') }}
                             </li>
@@ -40,7 +40,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newslider') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newbrand') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -53,22 +53,15 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('sliders.update', encrypt($slider->id)) }}" enctype="multipart/form-data" autocomplete="off">
+                                    <form class="form" method="post" action="{{ route('brands.update', encrypt($brand->id)) }}" enctype="multipart/form-data" autocomplete="off">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label for="eventRegInput1">{{ __('Admin/site.title') }}<span class="text-danger">*</span></label>
-                                                <input type="text" id="eventRegInput1" class="form-control"  name="title" value="{{ old('title',$slider->title) }}" required>
+                                                <input type="text" id="eventRegInput1" class="form-control"  name="title" value="{{ old('title',$brand->title) }}" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="eventRegInput1">{{ __('Admin/site.body') }}<span class="text-danger">*</span></label>
-                                                <textarea name="subtitle" rows="5"
-                                                placeholder="{{ __('Admin/site.body') }}"
-                                                class="form-control"  required>
-                                                     {{ old('subtitle',$slider->subtitle) }}
-                                                </textarea>
-                                            </div>
+                                         
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
@@ -77,7 +70,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <img src="{{ asset('Dashboard/img/sliders/'. $slider->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                    <img src="{{ asset('Dashboard/img/brands/'. $brand->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
                                                 </div>
                                             </div>
                                         </div>

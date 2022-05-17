@@ -21,21 +21,21 @@ class BrandController extends Controller
         return $this->Data->data();
 
     }
-    // public function create() {
-    //     return $this->Data->create();
-    // }
+    public function create() {
+        return $this->Data->create();
+    }
 
-    // public function store(BrandRequest $request) {
-    //     return $this->Data->store($request);
-    // }
+    public function store(BrandRequest $request) {
+        return $this->Data->store($request);
+    }
 
-    // public function edit($id) {
-    //     return $this->Data->edit($id);
-    // }
+    public function edit($id) {
+        return $this->Data->edit($id);
+    }
 
-    // public function update(BrandRequest $request , $id) {
-    //     return $this->Data->update($request,$id);
-    // }
+    public function update(BrandRequest $request , $id) {
+        return $this->Data->update($request,$id);
+    }
 
     public function destroy($id) {
          return $this->Data->destroy($id);

@@ -1020,12 +1020,22 @@
                     ]}'>
 
 
-                    @foreach( \App\Models\Brand::limit(5)->get() as $brand)
+                    @foreach( \App\Models\Brand::orderByDesc('created_at')->limit(5)->get() as $brand)
+                        @if ($brand->image->filename)
+                            <div class="__item">
+                                <img class="img-fluid m-auto" src="{{ asset('Dashboard/img/brands/' . $brand->image->filename) }}"
+                                    alt="{{ $brand->title }}" />
+                            </div>
+                        @else
                         <div class="__item">
-                            <img class="img-fluid m-auto" src="{{ asset('Dashboard/img/brands/' . $brand->image->filename) }}"
+                            <img class="img-fluid m-auto" src="{{ asset('Dashboard/img/images/brands/brand1.jpg') }}"
                                 alt="{{ $brand->title }}" />
                         </div>
-                   @endforeach
+                        @endif
+                    @endforeach
+
+
+
                 </div>
             </div>
         </div>
