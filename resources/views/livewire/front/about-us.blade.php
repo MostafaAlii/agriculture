@@ -22,103 +22,14 @@
             </div>
             
         </div>
+        <br>
     </section>
     <!-- end section -->
     @endforeach
 
-    <!-- start section -->
-    <section class="section">
-        <div class="container">
-            <!-- start counters -->
-            <div class="counter">
-                <div class="__inner">
-                    <div class="row justify-content-sm-center">
-                        <!-- start item -->
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-3">
-                            <div class="__item" data-aos="zoom-in" data-aos-duration="350" data-aos-delay="150">
-                                <div class="d-table">
-                                    <div class="d-table-cell align-middle">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/ico/ico_count_1-1.png') }}" alt="demo" />
-                                        </i>
-                                    </div>
 
-                                    <div class="d-table-cell align-middle">
-                                        <p class="__count js-count" data-from="0" data-to="19500">19 500</p>
+@include('livewire.front._counter')
 
-                                        <p class="__title">Tons of harvest</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-3">
-                            <div class="__item" data-aos="zoom-in" data-aos-duration="350" data-aos-delay="300">
-                                <div class="d-table">
-                                    <div class="d-table-cell align-middle">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/ico/ico_count_2-1.png') }}" alt="demo" />
-                                        </i>
-                                    </div>
-
-                                    <div class="d-table-cell align-middle">
-                                        <p class="__count js-count" data-from="0" data-to="2720">2 720</p>
-
-                                        <p class="__title">Units of Cattle</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-3">
-                            <div class="__item" data-aos="zoom-in" data-aos-duration="350" data-aos-delay="450">
-                                <div class="d-table">
-                                    <div class="d-table-cell align-middle">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/ico/ico_count_3-1.png') }}" alt="demo" />
-                                        </i>
-                                    </div>
-
-                                    <div class="d-table-cell align-middle">
-                                        <p class="__count js-count" data-from="0" data-to="10000">10 000</p>
-
-                                        <p class="__title">Hectares of farm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-3">
-                            <div class="__item" data-aos="zoom-in" data-aos-duration="350" data-aos-delay="600">
-                                <div class="d-table">
-                                    <div class="d-table-cell align-middle">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/ico/ico_count_4-1.png') }}" alt="demo" />
-                                        </i>
-                                    </div>
-
-                                    <div class="d-table-cell align-middle">
-                                        <p class="__count js-count" data-from="0" data-to="128">128</p>
-
-                                        <p class="__title">Units of technic</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
-                    </div>
-                </div>
-            </div>
-            <!-- end counters -->
-        </div>
-    </section>
-    <!-- end section -->
 
     <!-- start section -->
     <section class="section section--no-pb section--custom-03">
@@ -237,74 +148,9 @@
     <!-- end section -->
 
     
-    <!-- start section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-heading section-heading--center" data-aos="fade">
-                <h2 class="__title">Partners</h2>
 
-                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
-            </div>
+@include('livewire.front._brand')
 
-            <div class="partners-list">
-                <div class="js-slick"
-                     data-slick='{
-                     "autoplay": true,
-                     "arrows": false,
-                     "dots": true,
-                     "speed": 1000,
-                     "responsive": [
-                        {
-                            "breakpoint":576,
-                            "settings":{
-                                "slidesToShow": 2
-                            }
-                        },
-                        {
-                            "breakpoint":767,
-                            "settings":{
-                                "slidesToShow": 3
-                            }
-                        },
-                        {
-                            "breakpoint":991,
-                            "settings":{
-                                "slidesToShow": 4
-                            }
-                        },
-                        {
-                            "breakpoint":1199,
-                            "settings":{
-                                "autoplay": false,
-                                "dots": false,
-                                "slidesToShow": 5
-                            }
-                        }
-                    ]}'>
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/1.jpg') }}" alt="demo" />
-                    </div>
-
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/2.jpg') }}" alt="demo" />
-                    </div>
-
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/3.jpg') }}" alt="demo" />
-                    </div>
-
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/4.jpg') }}" alt="demo" />
-                    </div>
-
-                    <div class="__item">
-                        <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/5.jpg') }}" alt="demo" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end section -->
 
     @if(Session::has('success'))
         <div>
