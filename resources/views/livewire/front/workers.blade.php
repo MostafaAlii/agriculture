@@ -16,7 +16,7 @@
                     <div class="row">
                         @foreach($workers as $worker)
                             <!-- start item -->
-                            <div class="col-12 col-sm-6 col-lg-4">
+                            <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="__item __item--preview">
                                     <figure class="__image">
                                         @if($worker->image->filename)

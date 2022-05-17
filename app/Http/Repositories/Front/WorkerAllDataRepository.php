@@ -9,7 +9,7 @@ class WorkerAllDataRepository implements WorkerAllDataInterface{
     use WithPagination;
     //--------------------------------------------------------------------
     public function get_worker() {
-        $data['workers']= Worker::where('status',1)->orderby('id','desc')->paginate(6);
+        $data['workers']= Worker::where('status',1)->orderby('id','desc')->paginate(20);
         return view('livewire.front.workers',$data);
     }
     //--------------------------------------------------------------------

@@ -127,10 +127,7 @@
                                     <td>{{ $worker->village->name }}</td>
                                 @endif
                             </tr>
-                            <tr>
-                                <td>@lang('Admin/site.department'):</td>
-                                <td>{{ $worker->department->name }}</td>
-                            </tr>
+
                             <tr>
                                 <td>@lang('Admin/site.address1'):</td>
                                 <td>{{ $worker->address1 }}</td>
@@ -138,6 +135,10 @@
                             <tr>
                                 <td>@lang('Admin/site.address2'):</td>
                                 <td>{{ $worker->address2 }}</td>
+                            </tr>
+                            <tr>
+                                <td>@lang('Admin/site.desc'):</td>
+                                <td>{{ $worker->desc }}</td>
                             </tr>
                         </tbody>
                     </table>

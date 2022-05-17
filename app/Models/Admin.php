@@ -5,32 +5,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Traits\HasRoles;
 class Admin extends Authenticatable {
    use \Znck\Eloquent\Traits\BelongsToThrough;
-    use HasFactory, Notifiable;
-
+    use HasFactory, Notifiable, HasRoles;
     protected $table = "admins";
+    protected $guard = 'admin';
     protected $guarded = [];
     public $timestamps = true;
 
-    // rel
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
     }
 
-//    public function country_1() {
-//        return $this->belongsToThrough(Country::class, [Province::class,Area::class,State::class,Village::class]);
-//    }
-//    public function province_1() {
-//        return $this->belongsToThrough(Province::class, [Area::class,State::class,Village::class]);
-//    }
-//    public function area_1() {
-//        return $this->belongsToThrough(Area::class, [State::class,Village::class]);
-//    }
-//
-//    public function state_1() {
-//        return $this->belongsToThrough(State::class, Village::class);
-//    }
     public function country() {
         return $this->belongsTo(Country::class, 'country_id');
     }
@@ -62,11 +49,6 @@ class Admin extends Authenticatable {
     public function blogs(): HasMany {
         return $this->hasMany(Blog::class);
     }
-
-        // public function profile(){
-        //     return $this->hasOne(Profile::class, 'admin_id');
-        //    }
-        // attr
 
     protected $hidden = [
         'password',

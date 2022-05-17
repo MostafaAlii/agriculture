@@ -204,19 +204,36 @@
                                                     <input type="text" class="form-control"  value="{{ old('lastname',$worker->address2) }}"
                                                     name="address2" required data-validation-required-message="This address2 field is required">
                                                 </div>
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
                                                     <select class="form-control" id="accountSelect" name="department_id">
-                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
+
                                                         <option value="{{ $worker->department_id }}"  >{{ $worker->department->name }}</option>
                                                         @foreach (\App\Models\Department::get() as $department)
                                                          <option value="{{ $department->id }}">{{ $department->name }}</option>
                                                         @endforeach
                                                     </select>
+                                                </div> --}}
+                                                <div class="form-group">
+                                                    <label for="projectinput1">
+                                                        {{ trans('Admin\site.desc') }}
+                                                    </label>
+                                                    <textarea name="desc" class="form-control" id="description"
+                                                    placeholder="{{ trans('Admin\site.desc') }}">
+                                                     {{ $worker->desc }}
+                                                    </textarea>
+
+                                                    @error("desc")
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
-                                                
 
                                             </div>
+                                            {{-- <div class="row">
+                                                <div class="col-md-12">
+
+                                                </div>
+                                            </div> --}}
 
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
@@ -241,6 +258,27 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+    tinymce.init({
+    selector: '#description',
+    directionality : 'rtl',
+    language: 'ar',
+    height: 300,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+    content_css: '//www.tiny.cloud/css/codepen.min.css'
+  });
+</script>
+
 <script>
     $(".salary").on('change',function(){
         var select = $(".salary").val();

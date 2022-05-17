@@ -90,11 +90,6 @@
                             </ul>
                         </li>
                         <!-- End Admins & Moderators -->
-                        <!-- Start Setting -->
-                        <li>
-
-                        </li>
-                        <!-- End Setting -->
                     </ul>
                 </li>
                 <!-- End Dashboard Dropdown Menu -->
@@ -111,7 +106,7 @@
                         <li>
                             <a class="menu-item" href="{{ route('settings') }}">
                                 <i class="material-icons">tune</i>
-                                <span data-i18n="settings">{{ trans('Admin/setting.page_title_in_sidebar') }}</span>
+                                <span data-i18n="settings"> {{ trans('Admin/setting.page_title_in_sidebar') }}</span>
                             </a>
                         </li>
                         <!-- End Settings -->
@@ -119,18 +114,24 @@
                         <li>
                             <a class="menu-item" href="{{ route('sliders.index') }}">
                                 <i class="material-icons">photo_library</i>
-                                <span data-i18n="Sliders">{{ trans('Admin/sliders.sliderPageTitle') }}</span>
+                                <span data-i18n="Sliders"> {{ trans('Admin/sliders.sliderPageTitle') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('brands.index') }}">
+                                <i class="material-icons">photo_library</i>
+                                <span data-i18n="Brands"> {{ trans('Admin/site.brand') }}</span>
                             </a>
                         </li>
                         <!-- End Sliders -->
-                        <!-- Start Payments -->
+                        <!-- Start Roles Permissions -->
                         <li>
-                            <a class="menu-item" href="{{ route('Payments.index') }}">
-                                <i class="material-icons">payment</i>
-                                <span data-i18n="Sliders">{{ trans('Admin/payments.paymentPageTitle') }}</span>
+                            <a class="menu-item" href="{{ route('Roles.index') }}">
+                                <i class="material-icons">flash_on</i>
+                                <span data-i18n="Roles"> {{ trans('Admin/roles.role_title_in_sidebar') }}</span>
                             </a>
                         </li>
-                        <!-- End Payments -->
+                        <!-- End Roles Permissions -->
                     </ul>
                 </li>
                 <!-- End Main Setting Dropdown Menu -->
