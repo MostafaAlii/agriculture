@@ -142,7 +142,7 @@
 
                     <div class="col-12 col-lg-4  text-center">
                         <div data-aos="fade-up" ddata-aos-duration="600" data-aos-offset="100">
-                            <img class="img-fluid  lazy" src="{{ asset('Dashboard/img/about/'.$info->image->filename) }}" data-src="{{ asset('Dashboard/img/about/'.$info->image->filename) }}" style="width:500px;height:400px" alt="demo" />
+                            <img class="img-fluid  lazy" src="{{ asset('Dashboard/img/about/'.$info->image) }}" data-src="{{ asset('Dashboard/img/about/'.$info->image) }}" style="width:500px;height:400px" alt="demo" />
                         </div>
                     </div>
 

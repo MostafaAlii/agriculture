@@ -1,13 +1,12 @@
 <?php
 namespace App\Http\Repositories\Admin;
 use App\Models\About;
-use App\Models\Image;
 use App\Traits\UploadT;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Interfaces\Admin\AboutInterface;
 
-// use Intervention\Image\Facades\Image;
+use Intervention\Image\Facades\Image;
 
 class AboutRepository implements AboutInterface {
     use UploadT;
@@ -29,33 +28,25 @@ class AboutRepository implements AboutInterface {
         //dd($request->all());
         try{
             $info = About::first();
-            
+            //apply editing info
             $info->title=$request->name;
             $info->description=$request->description;
-            $info->save();
-
+            
             if(isset($request->image)){
                 if($info->image) {//delete old image
-                    $old_photo = $info->image->filename;
+                    $old_photo = $info->image;
                     $this->Delete_attachment('about', $old_photo, $info->id, $old_photo);
                 }
-                //===========add new image and store in image table=========================
-                $photo_name= str_replace(' ', '_',($request->image)->getClientOriginalName());
-                ($request->image)->storeAs('',$photo_name,$disk="about");
-
-                // insert Image
-                $Image = new Image();
-                $Image->filename = $photo_name;
-                $Image->imageable_id = $info->id;
-                $Image->imageable_type = 'App\Models\About';
-                $Image->save();
-                //============================================================================
-                // Image::make($request->image)->resize(70, 70, function ($constraint) {
-                //     $constraint->aspectRatio();
-                // })->save(public_path('Dashboard/img/about/' . $request->image->hashName()));
-                
+                //===========resize image and store in abouts table=========================
+                $filename    = $request->image->getClientOriginalName();
+                Image::make($request->image)->resize(600, 400, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(public_path('Dashboard/img/about/' . $filename));
+                $info->image=$filename;
+                 //============================================================================
             }
-
+            $info->save();
+            
              //==============update cache file=================
              $i=About::get();
              Cache::store('file')->put('about_us',$i);
@@ -65,7 +56,7 @@ class AboutRepository implements AboutInterface {
             toastr()->success(__('Admin/about.updated_done'));
             return redirect()->route('about_us/show');
         } catch (\Exception $ex) {
-           // dd($ex->getMessage());
+            dd($ex->getMessage());
             DB::rollBack();
             toastr()->success(__('Admin/about.edit_wrong'));
             return redirect()->route('about_us/show');

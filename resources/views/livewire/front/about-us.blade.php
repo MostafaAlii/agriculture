@@ -7,7 +7,7 @@
 <div>
     @foreach($about_us as $info)
    	<!-- start section -->
-       <section class="section section--no-pb section--custom-01" style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image->filename);?>');width:700pxwi">
+       <section class="section section--no-pb section--custom-01" style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');">
         <div class="container">
            
             <div class="section-heading">

@@ -75,16 +75,16 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>{{trans('Admin\about.image')}} </label>
-
-                                                            <input type="file" accept="image/*" name="image"  onchange="readURL(this);">
-                                                            <?php
-                                                            if(isset($info->image->filename)){
-                                                                $src=$info->image->filename;
+                                                        <?php
+                                                            if(isset($info->image)){
+                                                                $src=$info->image;
                                                             }else{
                                                                 $src='104.jpg';
                                                             }
-                                                            ?>
+                                                        ?>
+                                                        <label>{{trans('Admin\about.image')}} </label>
+
+                                                            <input type="file" accept="image/*" name="image"  onchange="readURL(this);">
                                                             <img src="{{asset('Dashboard/img/about/'.$src)}}"  id="previewImg" class="img-thumbnail img-preview" width="100px" height="100px" alt="image" id="output">
                                                     </div>
                                                 </div>

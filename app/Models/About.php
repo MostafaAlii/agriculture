@@ -12,7 +12,4 @@ class About extends Model {
     public $translatedAttributes = ['title','description'];
     public $timestamps = true;
 
-    public function image() {
-        return $this->morphOne(Image::class, 'imageable');
-    }
 }
