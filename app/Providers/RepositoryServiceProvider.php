@@ -87,11 +87,11 @@ use App\Http\Repositories\Admin\ProtectedHouseRepository;
 use App\Http\Interfaces\Admin\ContactInterface;
 use App\Http\Repositories\Admin\ContactRepository;
 
-use App\Http\Interfaces\Admin\RoleRepositoryInterface;
 use App\Http\Repositories\Admin\RoleRepository;
+use App\Http\Interfaces\Admin\ReviewInterface;
+// ------------------------Front Uses-------------------------------
 
 // ------------------------Front Uses-------------------------------
-use App\Http\Interfaces\Front\CommentInterface;
 use App\Http\Repositories\Front\CommentRepository;
 
 use App\Http\Interfaces\Front\SearchInterface;
@@ -170,7 +170,11 @@ use App\Http\Repositories\Admin\IncomeProductRepository;
 use App\Http\Interfaces\Admin\SubscribeInterface;
 use App\Http\Repositories\Admin\SubscribeRepository;
 
-class RepositoryServiceProvider extends ServiceProvider {
+use App\Http\Interfaces\Admin\AboutInterface;
+use App\Http\Repositories\Admin\AboutRepository;
+
+class RepositoryServiceProvider extends ServiceProvider
+{
     public function register() {
         $this->app->bind(OutcomeProductInterface::class, OutcomeProductRepository::class);
         $this->app->bind(IncomeProductInterface::class, IncomeProductRepository::class);
@@ -220,6 +224,8 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->bind(OrderInterface::class, OrderRepository::class);
         $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
+        $this->app->bind(ReviewInterface::class, ReviewRepository::class);
+
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(RatingInterface::class, RatingRepository::class);
@@ -229,6 +235,7 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
         $this->app->bind(PaymentInterface::class, PaymentRepository::class);
         $this->app->bind(ContactInterface::class, ContactRepository::class);
+        $this->app->bind(AboutInterface::class, AboutRepository::class);
 
     }
 

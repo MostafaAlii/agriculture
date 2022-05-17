@@ -204,4 +204,8 @@ return [
       'settings'=>'Settings',
       'sliderimages'=>'Slider Images',
 
+
+      'about_us' =>'About US',
+      'reviwe' =>'}Clients opinions',
+
 ];

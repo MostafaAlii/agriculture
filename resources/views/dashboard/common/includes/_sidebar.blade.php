@@ -5,7 +5,7 @@
     <div class="main-menu-content">
         <div class="user-profile">
             <div class="user-info text-center pt-1 pb-1">
-                @if (Auth::user()->image->filename)
+                @if (isset(Auth::user()->image->filename))
                     <a class="mr-2" href="{{ route('profile.index') }}">
                         <img class="user-img img-fluid rounded-circle" style="width:50%; height:50%;border-radius: 15%;"
                             class="rounded-circle"
@@ -40,6 +40,17 @@
         </div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                 <!-- Start about Us -->
+                 <li class=" nav-item">
+                        <li>
+                            <a class="menu-item" href="{{ route('about_us/show') }}">
+                                <i class="material-icons"> info </i>
+                                <span data-i18n="Options"> {{ trans('Admin/site.about_us') }}</span>
+                            </a>
+                        </li>
+                </li>
+                <!-- End about Us  -->
+                
                 <!-- Start Dashboard Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
@@ -627,6 +638,20 @@
                         <!-- End Orders -->
                 </li>
                 <!-- End Contact Us  -->
+
+
+                <!-- Start Contact Us -->
+                <li class=" nav-item">
+                    <li>
+                        <a class="menu-item" href="{{ route('review.index') }}">
+                            <i class="material-icons"> mail_outline </i>
+                            <span data-i18n="Options"> {{ trans('Admin/site.reviwe') }}</span>
+                        </a>
+                    </li>
+                    <!-- End Orders -->
+                </li>
+                <!-- End Contact Us  -->
+                
             </ul>
         </div>
     </div>

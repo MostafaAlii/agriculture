@@ -192,7 +192,11 @@ return [
     'brand'=>'العلامه التجاريه',
     'newbrand'=>' اضف علامه التجاريه',
 
-        //sidebar
-        'settings'=>'الاعدادات العامه',
-        'sliderimages'=>'الصور المتحركه',
+    //sidebar
+    'settings'=>'الاعدادات العامه',
+    'sliderimages'=>'الصور المتحركه',
+
+
+    'about_us' =>'من نحن',
+    'reviwe' =>'اراء العملاء',
 ];

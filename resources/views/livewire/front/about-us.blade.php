@@ -2,40 +2,29 @@
 @section('css')
 
 @endsection
+<br>
+<br>
 <div>
+    @foreach($about_us as $info)
    	<!-- start section -->
-       <section class="section section--no-pb section--custom-01">
+       <section class="section section--no-pb section--custom-01" style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');">
         <div class="container">
+           
             <div class="section-heading">
-                <h2 class="__title">We are <span>Agriculture Farm</span></h2>
+                <h2 class="__title">{{$info->title}}</h2>
             </div>
 
             <div class="row">
                 <div class="col-12 col-lg-6 col-xl-8">
-                    <p>
-                        We believe in helping brands create through strategy, <a href="#">story-telling, digital products</a>, and integrated experiences on web, mobile, and in the world. And you're here, friends, because you also believe.
-                    </p>
+                    <p>{!! $info->description !!} </p>
 
-                    <p>
-                        Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography. Designers, engineers, creatives, makers, developers, artists, unite. Let’s do something real-special together.
-                    </p>
-
-                    <p>
-                        Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites.
-                    </p>
-
-                    <p>
-                        Our team has a passion for making things with real value. This has led us to assemble a multi-talented group that can do just about anything: from building sets to photographing food, crafting websites to developing apps, beautiful design to adventure cinematography.crafting websites to developing apps, beautiful design to adventure cinematography.
-                    </p>
-
-                    <p>
-                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">Get in Touch</a>
-                    </p>
                 </div>
             </div>
+            
         </div>
     </section>
     <!-- end section -->
+    @endforeach
 
     <!-- start section -->
     <section class="section">
@@ -127,104 +116,6 @@
                 </div>
             </div>
             <!-- end counters -->
-        </div>
-    </section>
-    <!-- end section -->
-
-    <!-- start section -->
-    <section class="section section--gutter section--base-bg section--custom-02">
-        <div class="container">
-            <div class="section-heading" data-aos="fade">
-                <h2 class="__title">The Openfield <span>Timeline</span></h2>
-            </div>
-
-            <!-- start timeline -->
-            <div class="timeline">
-                <div class="__inner">
-                    <div class="row">
-                        <!-- start item -->
-                        <div class="col-12 col-md-3">
-                            <div class="__item">
-                                <i class="__ico"></i>
-
-                                <div class="row">
-                                    <div class="col-lg-11 col-xl-9">
-                                        <p class="__year">1907</p>
-
-                                        <h5 class="__title">Smells Racy Free Announcing</h5>
-
-                                        <p>
-                                            Vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-md-3">
-                            <div class="__item">
-                                <i class="__ico"></i>
-
-                                <div class="row">
-                                    <div class="col-lg-11 col-xl-9">
-                                        <p class="__year">1996</p>
-
-                                        <h5 class="__title">Grainfarmers <br> Formed</h5>
-
-                                        <p>
-                                            Vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-md-3">
-                            <div class="__item">
-                                <i class="__ico"></i>
-
-                                <div class="row">
-                                    <div class="col-lg-11 col-xl-9">
-                                        <p class="__year">2000</p>
-
-                                        <h5 class="__title">Group Cereals and Lingrain Merge</h5>
-
-                                        <p>
-                                            Vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        <div class="col-12 col-md-3">
-                            <div class="__item">
-                                <i class="__ico"></i>
-
-                                <div class="row">
-                                    <div class="col-lg-11 col-xl-9">
-                                        <p class="__year">2017</p>
-
-                                        <h5 class="__title">Aquired Countrywide Farmers</h5>
-
-                                        <p>
-                                            Vast a real proven works discount secure care. Market invigorate a awesome handcrafted bigger comes
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end item -->
-                    </div>
-                </div>
-            </div>
-            <!-- end timeline -->
         </div>
     </section>
     <!-- end section -->
@@ -345,6 +236,7 @@
     </section>
     <!-- end section -->
 
+    
     <!-- start section -->
     <section class="section">
         <div class="container">
@@ -414,35 +306,50 @@
     </section>
     <!-- end section -->
 
+    @if(Session::has('success'))
+        <div>
+           <center><h3 style="color:#bfa43c">{{Session::get('success')}}</h2></center>
+           <br>
+        </div>
+    @endif
     <!-- start section -->
     <section class="section section--dark-bg">
         <div class="container">
             <div class="section-heading section-heading--center section-heading--white" data-aos="fade">
-                <h2 class="__title">Get <span>in touch</span></h2>
+                <h2 class="__title">{{__('Admin/about.review_tit1')}} <span>{{__('Admin/about.review_tit2')}}</span></h2>
 
-                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
+                <p>{{__('Admin/about.msg')}} </p>
             </div>
 
-            <form class="contact-form js-contact-form" action="#" data-aos="fade">
+            <form class="contact-form" action="{{route('review.add')}}" data-aos="fade">
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="input-wrp">
-                            <input class="textfield" name="name" type="text" placeholder="Name" />
+                            <input class="textfield" name="name" value="{{old('name')}}" type="text" placeholder="{{__('Admin/about.name')}}" required/>
+                            @error('name')
+                               <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                         <div class="input-wrp">
-                            <input class="textfield" name="email" type="text" placeholder="E-mail" />
+                            <input class="textfield" name="email" value="{{old('email')}}" type="text" placeholder="{{__('Admin/about.email')}}" required/>
+                            @error('email')
+                               <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
 
                 <div class="input-wrp">
-                    <textarea class="textfield" name="message" placeholder="Comments"></textarea>
+                    <textarea class="textfield" name="message" placeholder="{{__('Admin/about.message')}}" required>{{old('message')}}</textarea>
+                    @error('message')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
-                <button class="custom-btn custom-btn--medium custom-btn--style-3 wide" type="submit" role="button">Send</button>
+                <button class="custom-btn custom-btn--medium custom-btn--style-3 wide" type="submit" role="button">{{__('Admin/about.send')}}</button>
 
                 <div class="form__note"></div>
             </form>

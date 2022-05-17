@@ -74,6 +74,8 @@ class DatabaseSeeder extends Seeder {
 
             SubscriptionTableSeeder::class,
             BrandSeeder::class,
+            AboutSeeder::class,
+            
         ]);
 
         \App\Models\Farmer::factory(30)->create();

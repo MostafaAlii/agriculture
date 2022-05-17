@@ -53,6 +53,10 @@ use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
 use App\Http\Controllers\Dashboard\Admin\AgriToolServiceController;
 use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
 use App\Http\Controllers\Dashboard\Admin\RoleController;
+
+use App\Http\Controllers\Dashboard\Admin\AboutController;
+use App\Http\Controllers\Dashboard\Admin\ReviewController;
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -460,5 +464,16 @@ Route::group(
                 Route::resource('Roles',RoleController::class);
                 Route::get('/data', [RoleController::class,'data'])->name('roles.data');
                 /********************************* End Roles **********************************/
+                 /********************************* end mail **********************************/
+
+                 /********************************* about us **********************************/
+                Route::get('about_us.show', [AboutController::class,'show'])->name('about_us/show');
+                Route::post('about_us.save', [AboutController::class,'save'])->name('about_us/save');
+                 /*****************************************************************************/
+                Route::resource('review', ReviewController::class)->except(['show']);
+                Route::get('/review/data', [ReviewController::class,'data'])->name('review.data');
+                Route::delete('/review/bulk_delete/{ids}', [ReviewController::class,'bulkDelete'])->name('review.bulk_delete');
+                /*****************************************************************************/
+
         });
     });
