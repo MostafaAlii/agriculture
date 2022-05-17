@@ -119,6 +119,123 @@
         </div>
     </section>
     <!-- end section -->
+
+    <!-- start section -->
+    <section class="section section--no-pb section--custom-03">
+        <div class="container">
+            <div class="section-heading section-heading--center" data-aos="fade">
+                <h2 class="__title">our dream <span>team</span></h2>
+
+                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
+            </div>
+
+            <!-- start team -->
+            <div class="team">
+                <div class="__inner">
+                    <div class="row">
+                        <!-- start item -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="__item" data-aos="fade" data-aos-delay="100" data-aos-offset="0">
+                                <figure class="__image">
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/1.jpg') }}" alt="demo" />
+                                </figure>
+
+                                <div class="__content">
+                                    <h5 class="__title">William Doe</h5>
+
+                                    <span>Tractor-Driver</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end item -->
+
+                        <!-- start item -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="__item" data-aos="fade" data-aos-delay="200" data-aos-offset="0">
+                                <figure class="__image">
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/2.jpg') }}" alt="demo" />
+                                </figure>
+
+                                <div class="__content">
+                                    <h5 class="__title">Jack Silver</h5>
+
+                                    <span>Mechanic</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end item -->
+
+                        <!-- start item -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="__item" data-aos="fade" data-aos-delay="300" data-aos-offset="0">
+                                <figure class="__image">
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/3.jpg') }}" alt="demo" />
+                                </figure>
+
+                                <div class="__content">
+                                    <h5 class="__title">Billi Moore</h5>
+
+                                    <span>Combine Operator</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end item -->
+
+                        <!-- start item -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="__item" data-aos="fade" data-aos-delay="400" data-aos-offset="0">
+                                <figure class="__image">
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/4.jpg') }}" alt="demo" />
+                                </figure>
+
+                                <div class="__content">
+                                    <h5 class="__title">Steve Jonson</h5>
+
+                                    <span>Agronomist</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end item -->
+
+                        <!-- start item -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="__item" data-aos="fade" data-aos-delay="500" data-aos-offset="0">
+                                <figure class="__image">
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/5.jpg') }}" alt="demo" />
+                                </figure>
+
+                                <div class="__content">
+                                    <h5 class="__title">Billi Moorer</h5>
+
+                                    <span>Assistant</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end item -->
+
+                        <!-- start item -->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="__item" data-aos="fade" data-aos-delay="600" data-aos-offset="0">
+                                <figure class="__image">
+                                    <img class="lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/team_img/6.jpg') }}" alt="demo" />
+                                </figure>
+
+                                <div class="__content">
+                                    <h5 class="__title">Allan Bolt</h5>
+
+                                    <span>Farmer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end item -->
+                    </div>
+                </div>
+            </div>
+            <!-- end team -->
+        </div>
+    </section>
+    <!-- end section -->
+
     
     <!-- start section -->
     <section class="section">
