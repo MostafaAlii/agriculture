@@ -54,6 +54,21 @@ return [
 
 
 
+    'outcome_imported_products_database_details_in_date_report'=>'تقرير قاعدة البيانات التفصيلية زمنيا للمنتجات المستوردة الصادرة من العلوة',
+    'outcome_imported_products_details_in_date_report'=>'تقرير تفصيلي بالمنتجات المستوردة الصادرة  من العلوة زمنياً(اسبوع - شهر - سنة)',
+
+
+    'outcome_iraq_products_database_details_in_date_report'=>'تقرير قاعدة البيانات التفصيلية زمنيا للمنتجات العراقية الصادرةمن العلوة',
+    'outcome_iraq_products_details_in_date_report'=>'تقرير تفصيلي للمنتجات العراقية الصادرة من العلوة زمنياً(اسبوع - شهر - سنة)',
+
+
+    'outcome_local_products_database_details_in_date_report'=>'تقرير قاعدة البيانات التفصيلية زمنيا للمنتجات المحلية الصادرة  من العلوة',
+    'outcome_local_products_details_in_date_report'=>'تقرير تفصيلي بالمنتجات المحلية الصادرة من العلوة زمنياً(اسبوع - شهر - سنة)',
+
+
+
+
+
 
 
 ];

@@ -65,9 +65,13 @@ class DatabaseSeeder extends Seeder {
             WholeProductSeeder::class,
             OutcomeProductSeeder::class,
             IncomeProductSeeder::class,
-            CropSeeder::class,
+            SummerCropSeeder::class,
+            WinterCropSeeder::class,
+
             FarmerCropSeeder::class,
-            CropFarmerCropSeeder::class,
+            SummerCropFarmerCropSeeder::class,
+            WinterCropFarmerCropSeeder::class,
+
             SubscriptionTableSeeder::class,
         ]);
 

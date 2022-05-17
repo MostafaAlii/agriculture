@@ -18,11 +18,16 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('FarmerCrops.index') }}">{{ __('Admin/crops.farmer_crops') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('FarmerCrops.index') }}">{{ __('Admin/crops.farmerCropsPageTitle') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
                         </ol>
+
                     </div>
                 </div>
             </div>
@@ -61,42 +66,21 @@
                                         <div class="form-body">
 
                                                     <div class="row mt-2">
-                                                        <div class="col col-md-4">
+                                                        <div class="col col-md-3">
                                                             <div class="form-group">
-                                                                <label for="area_id">{{ __('Admin/crops.area') }}</label>
-                                                                <select name="area_id" id="area_id" class="form-control" required>
+                                                                <label for="area_id">{{ __('Admin/crops.village') }}</label>
+                                                                <select name="village_id" id="area_id" class="form-control" required>
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
-                                                                    @foreach ($areas as $area)
-                                                                        <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                                    @foreach ($villages as $village)
+                                                                        <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                                     @endforeach
                                                                 </select>
 
                                                             </div>
                                                         </div>
-                                                        <div class="col col-md-4">
 
-                                                            <div class="form-group">
-                                                                <label for="state_id">{{ __('Admin/crops.state') }}</label>
-                                                                <select class=" form-control" name="state_id" id="state_id">
-                                                                    <option value="">{{ __('Admin/site.select') }}</option>
-
-                                                                </select>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="village_id">{{ __('Admin/crops.village') }}</label>
-                                                                <select class=" form-control" name="village_id" id="village_id">
-
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                   <div class="row mt-2">
-
-                                                        <div class="col">
+                                                        <div class="col col-md-3">
                                                             <div class="form-group">
                                                                 <label for="farmer_id">{{ __('Admin/crops.farmer') }}</label>
                                                                 <select class="select2 form-control" name="farmer_id" id="farmer_id">
@@ -104,21 +88,24 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-
-                                                        <div class="col">
+                                                        <div class="col col-md-3">
                                                             <div class="form-group">
                                                                 <label  for="admin_id">{{ __('Admin/crops.farmer_phone') }}</label>
-                                                             <input name="phone"  id="farmer_phone"typ="text" class="form-control">
+                                                                <input name="phone"  id="farmer_phone"typ="text" class="form-control">
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col col-md-3">
                                                             <div class="form-group">
                                                                 <label  for="admin_id">{{ __('Admin/crops.farmer_email') }}</label>
                                                                 <input name="email"   id="farmer_email"typ="text" class="form-control">
                                                             </div>
                                                         </div>
 
-                                                        <div class="col">
+                                                    </div>
+                                                   <div class="row mt-2">
+
+
+                                                        <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label for="customSelect">{{ __('Admin/crops.land_category_id') }}</label>
                                                                 <select class="custom-select form-control" id="customSelect" name="land_category_id" >
@@ -129,32 +116,53 @@
 
                                                             </div>
                                                         </div>
+                                                       <div class="col col-md-4">
+                                                           <div  class="form-group">
+                                                               <label for="id_h5_multi-2">{{ __('Admin/crops.winter_crops') }}</label>
+                                                               <select name="winter_crops[]"class="select2 form-control" multiple="multiple" id="id_h5_multi-2">
+                                                                   @foreach($winter_crops as $winter_crop)
+                                                                       <option value="{{$winter_crop->id}}">{{ $winter_crop->name }}</option>
+                                                                   @endforeach
+                                                               </select>
 
-                                                    </div>
-
-                                                    <div class="row mb-3">
-                                                        <div class="col">
-                                                            <div  class="form-group mb-3">
-                                                                <label class="">{{__('Admin\crops.departments')}}</label>
-                                                                <hr>
-                                                                <div id="jstree"></div>
-                                                                <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                   <div class="row">
-                                                       <div class="form-group">
-                                                           <label class="required" for="ingredients">{{ __('Admin\crops.all_crops_with_area') }}</label>
-
-                                                           @include('dashboard.admin.farmer_crops.partials.crops')
-
-                                                           @if($errors->has('crops'))
-                                                               <div class="invalid-feedback">
-                                                                   {{ $errors->first('crops') }}
-                                                               </div>
-                                                           @endif
+                                                           </div>
                                                        </div>
+                                                       <div class="col col-md-4">
+                                                           <div class="form-group">
+                                                               <label  for="admin_id">{{ __('Admin/crops.winter_area_crop') }}</label>
+                                                               <input name="winter_area_crop"  id="winter_area_crop"typ="text" class="form-control">
+                                                           </div>
+                                                       </div>
+
+                                                    </div>
+
+
+                                                   <div class="row">
+
+                                                       <div class="col">
+                                                           <div  class="form-group">
+                                                               <label for="id_h5_multi-3">{{ __('Admin/crops.summer_crops') }}</label>
+                                                               <select name="summer_crops[]"class="select2 form-control" multiple="multiple" id="id_h5_multi-3">
+                                                                   @foreach($summer_crops as $summer_crop)
+                                                                       <option value="{{$summer_crop->id}}">{{ $summer_crop->name }}</option>
+                                                                   @endforeach
+                                                               </select>
+
+                                                           </div>
+                                                       </div>
+                                                       <div class="col">
+                                                           <div class="form-group">
+                                                               <label  for="summer_area_crop">{{ __('Admin/crops.summer_area_crop') }}</label>
+                                                               <input name="summer_area_crop"  id="summer_area_crop"typ="text" class="form-control">
+                                                           </div>
+                                                       </div>
+                                                       <div class="col">
+                                                           <div class="form-group">
+                                                               <label  for="date">{{ __('Admin/crops.date') }}</label>
+                                                               <input name="date"  id="date"type="date" class="form-control">
+                                                           </div>
+                                                       </div>
+
 
                                                    </div>
 
@@ -259,9 +267,7 @@
                             $('select[name="farmer_id"]').append( '<option selected disabled>--select--</option>');
 
                             $.each(data, function(key, value) {
-                                // console.log(data);
-                                // console.log(key);
-                                // console.log(value);
+
                                 $('select[name="farmer_id"]').append(
                                     '<option value="' + key + '">' + value +'</option>'
                                 );
@@ -307,41 +313,6 @@
 
 {{--departments--}}
 
-    <script  type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#jstree').jstree({
-                "core" : {
-                    'data' :   {!! load_dep(old('admin_department_id')) !!},
-                    "themes" : {
-                        "variant" : "large"
-                    }
-                },
-                "checkbox" : {
-                    "keep_selected_style" : false
-                },
-                "plugins" : [ "wholerow",  ]
-            });
-        });
-
-
-        $('#jstree')
-        // listen for event
-            .on('changed.jstree', function (e, data) {
-                var i, j,r = [];
-                var name=[];
-                for(i=0,j=data.selected.length;i<j;i++){
-                    r.push(data.instance.get_node(data.selected[i]).id);
-
-                }
-                $('.admin_department_id').val(r.join(', '));
-
-
-
-            });
-    </script>
-
 <script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>
 <script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>
 
@@ -354,6 +325,6 @@
     });
 
 </script>
-
+@yield('scripts')
 @endsection
 

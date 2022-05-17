@@ -381,8 +381,13 @@
 
                         </li>
                         <li>
-                            <a class="menu-item" href="{{ route('Crops.index') }}"> <i class="material-icons">list</i><span
-                                        data-i18n="Vertical">{{ __('Admin\crops.cropPageTitle') }}</span></a>
+                            <a class="menu-item" href="{{ route('WinterCrops.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\crops.winter_cropPageTitle') }}</span></a>
+
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('SummerCrops.index') }}"> <i class="material-icons">list</i><span
+                                        data-i18n="Vertical">{{ __('Admin\crops.summer_cropPageTitle') }}</span></a>
 
                         </li>
 

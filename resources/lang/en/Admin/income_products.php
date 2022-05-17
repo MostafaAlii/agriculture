@@ -42,6 +42,16 @@ return [
     'product'=>'Product',
     'income_products_database_details_in_date_report'=>'Income Products Database Periodically',
     'income_products_details_in_date_report'=>'Income Products Report Periodically',
+    'income_imported_products_details_in_date_report'=>'Income Imported Products Report Periodically',
+    'income_imported_products_database_details_in_date_report'=>'Income Imported Products Database Periodically',
+
+
+    'income_iraq_products_details_in_date_report'=>'Income Iraq Products Report Periodically',
+    'income_iraq_products_database_details_in_date_report'=>'Income Iraq Products Database Periodically',
+
+    'income_local_products_details_in_date_report'=>'Income Local Products Report Periodically',
+    'income_local_products_database_details_in_date_report'=>'Income Local Products Database Periodically',
+
 
 
 

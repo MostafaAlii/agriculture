@@ -19,12 +19,29 @@ return [
     'editfarmerCrop'=>'Edit Farmer Crop',
     'crops'=>'Crops',
     'cancel'=>'Cancel',
+    'summer_area_crop'=>'Summer Crops Area',
+    'winter_area_crop'=>'Winter Crops Area',
+    'date'=>'Date',
+    'summer_cropPageTitle'=>'Summer Crops',
+    'winter_cropPageTitle'=>'Winter Crops',
+    'category_name'=>'Category Name',
+    'winter_crops'=>'Winter Crops',
+    'semmer_crops'=>'Summer Crops',
+    'winter_area_crop'=>'Winter Crops Area',
+    'summer_area_crop'=>'Summer Crops Area',
+    'admin'=>'Employee Responsible',
+
+    ''=>'',
+    ''=>'',
+    ''=>'',
+
     'FarmerCrops_and_settings'=>'Farmer Crops And Areas',
 
     'farmerCropsPageTitle_and_setting'=>'Farmer Crops And Settings',
-    ''=>'',
-    ''=>'',
-    ''=>'',
+    'emai'=>'Farmer Email',
+    'farmer_crops_report'=>'Farmer Area Summer Winter Crops for Farmers',
+
+    'database_about_farmer_crops'=>'Database Area Summer Winter Crops',
 
 
 
