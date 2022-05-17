@@ -2,6 +2,7 @@
 namespace Database\Seeders;
 
 use App\Models\Blog;
+use App\Models\Brand;
 use App\Models\Country;
 use App\Models\CountryTranslation;
 use Illuminate\Database\Seeder;
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         $count = 32;
         $this->call([
+            PermissionTableSeeder::class,
             CurrencySeeder::class,
             CountrySeeder::class,
             ProvinceSeeder::class,
@@ -25,9 +27,7 @@ class DatabaseSeeder extends Seeder {
             DepartmentSeeder::class,
             FarmerTableSeeder::class,
             WorkerTableSeeder::class,
-            PaymentMethodSeeder::class,
             AdminDepartmentSeeder::class,
-
             AdminTableSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
@@ -65,10 +65,15 @@ class DatabaseSeeder extends Seeder {
             WholeProductSeeder::class,
             OutcomeProductSeeder::class,
             IncomeProductSeeder::class,
-            CropSeeder::class,
+            SummerCropSeeder::class,
+            WinterCropSeeder::class,
+
             FarmerCropSeeder::class,
-            CropFarmerCropSeeder::class,
+            SummerCropFarmerCropSeeder::class,
+            WinterCropFarmerCropSeeder::class,
+
             SubscriptionTableSeeder::class,
+            BrandSeeder::class,
         ]);
 
         \App\Models\Farmer::factory(30)->create();
@@ -89,7 +94,7 @@ class DatabaseSeeder extends Seeder {
                 'imageable_type' => 'App\Models\Farmer'
             ]);
         }
-    
+
 
             // images
             for ($i = 1; $i <= $count ; $i++) {
@@ -113,6 +118,14 @@ class DatabaseSeeder extends Seeder {
                     'filename'     => rand(100,107) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Slider'
+                ]);
+            }
+            // images for brand
+            for ($i = 1; $i <= Brand::count() ; $i++) {
+                Image::insert([
+                    'filename'     => 'brand'. rand(1,5) . ".jpg",
+                    'imageable_id' => $i,
+                    'imageable_type' => 'App\Models\Brand'
                 ]);
             }
             // images for product

@@ -42,19 +42,5 @@ class SliderController extends Controller
     {
         return $this->Data->bulkDelete($request);
     }
-    // public function addImages() {
-    //     return $this->Data->addImages();
-    // }
 
-    // public function saveSliderImages(Request $request){
-    //     return $this->Data->saveSliderImages($request);
-    // }
-
-    // public function saveSliderImagesDB(SliderRequest $request){
-    //     return $this->Data->saveSliderImagesDB($request);
-    // }
-
-    // public function destroy($id) {
-    //     //
-    // }
 }

@@ -24,18 +24,19 @@ class FarmerCropFactory extends Factory
             'village_id'    => $this->faker->numberBetween(1, Village::count()),
             'area_id'    => $this->faker->numberBetween(1, Area::count()),
             'state_id'    => $this->faker->numberBetween(1, State::count()),
+
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
             'farmer_id'      => $this->faker->numberBetween(1, Farmer::count()),
             'land_category_id'    => $this->faker->randomElement([1,2, 3]),
+            'summer_area_crop'    => $this->faker->randomElement([10,500]),
+            'winter_area_crop'    => $this->faker->randomNumber([10,100]),
+            'date'    => $this->faker->date(),
+
+
 
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
     public function unverified()
     {
         return $this->state(function (array $attributes) {

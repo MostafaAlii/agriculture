@@ -36,4 +36,14 @@ class FarmerCropController extends Controller
     public function update(FarmerCropRequest $request,$id){
         return $this->Data->update($request,$id);
     }
+    public function destroy($id) {
+        return $this->Data->destroy($id);
+    }
+
+    public function bulkDelete(Request $request) {
+        return $this->Data->bulkDelete($request);
+    }
+ public function statistics() {
+    return $this->Data->statistics();
+}
 }

@@ -81,7 +81,7 @@ label.star:before {
                                     class="users-avatar-shadow rounded-circle img-preview"  width="30%">
                                  </a>
                              @endif
-                             <center> <span class="score" id="rate_msg" ><span style="width: <?php echo $workers->workerRate();?>%"></span></span></center>
+                             {{-- <center> <span class="score" id="rate_msg" ><span style="width: <?php echo $workers->workerRate();?>%"></span></span></center> --}}
 
                                 <div class="__content">
                                     <div class="mb-6 mb-md-8">
@@ -102,6 +102,7 @@ label.star:before {
                                             @else
                                               <p><b>@lang('Admin/site.hourly') : </b> $ {{number_format($workers->hourly_price,2) }}</p>
                                             @endif
+                                             <p><b>@lang('Admin/site.desc') : </b> {{ $workers->desc }}</p>
                                             <p><b>@lang('Admin/site.birthday') : </b> {{ $workers->birthdate }}</p>
                                             <p><b>@lang('Admin/site.address1') : </b> {{ $workers->address1 }}</p>
                                             <p><b>@lang('Admin/site.address2') : </b> {{ $workers->address2 }}</p>
@@ -113,7 +114,7 @@ label.star:before {
                                             <p><b>@lang('Admin/site.area') : </b> {{ $workers->area->name }}</p>
                                             <p><b>@lang('Admin/site.state') : </b> {{ $workers->state->name }}</p>
                                             <p><b>@lang('Admin/site.village') : </b> {{ $workers->village->name }}</p>
-                                            <p><b>@lang('Admin/site.department') : </b> {{ $workers->department->name }}</p>
+
                                         </div>
                                     </div>
 
@@ -127,7 +128,7 @@ label.star:before {
 
                     <!-- ###################################################################3 -->
                      <!-- --------------------------------------------------- -->
-                     @if (Auth::guard('vendor')->user() )
+                     {{-- @if (Auth::guard('vendor')->user() )
                         <h4>{{ __('Website/comments.rate_now') }}</h4>
                         <form action="" style="margin-right: 50%;">
                             <input class="star star-5" id="star-5" type="radio" name="star" onclick="javascript:add_rate(5,'farmer');"/>
@@ -143,14 +144,11 @@ label.star:before {
                         </form>
                         <br>
                         <br>
-                    @endif
+                    @endif --}}
                         <!-- --------------------------------------------------- -->
                     <!-- ###################################################################3 -->
-                        {{-- <?php
-                        $type='workers';
-                        $type_id=$workers->id;
-                        ?>
-                        @include('livewire.front.comments') --}}
+
+
                     <!-- ###################################################################3 -->
 
                 </div>

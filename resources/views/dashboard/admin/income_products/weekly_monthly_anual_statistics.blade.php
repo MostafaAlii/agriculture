@@ -113,7 +113,7 @@
                     orientation: 'landscape',
                     pageSize: 'A3',
                     exportOptions: {
-                        columns: [ 0,1,2,3,4,5]
+                        columns: [ 0,1,4,5]
                     },
                     className: 'btn btn-primary ml-1',
 
@@ -121,7 +121,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns:  [0,1, 2,3,4,5]
+                        columns:  [0,1,4,5]
                     },
                     autoPrint: true,
                     orientation: 'landscape',

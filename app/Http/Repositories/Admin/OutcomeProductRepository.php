@@ -313,4 +313,123 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         return datatables()->of($outcome_products)
             ->make(true);
     }
+
+    public function index_outcome_imported_products(){
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_imported_statistics');
+    }
+
+    public function get_weekly_monthly_anual_outcome_imported_product_statistics()
+    {
+        $outcome_productQueryfirst = OutcomeProduct::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $outcome_productQuery = $outcome_productQueryfirst
+                ->where('admin_id', '==', $admin->id)->get();
+        } else {
+            $outcome_productQuery = $outcome_productQueryfirst;
+        }
+
+        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
+        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
+
+        if ($start_date && $end_date) {
+
+            $start_date = date('Y-m-d', strtotime($start_date));
+            $end_date = date('Y-m-d', strtotime($end_date));
+
+            $outcome_productQuery->whereRaw("date(outcome_products.outcome_product_date) >= '" . $start_date . "' AND date(outcome_products.outcome_product_date) <= '" . $end_date . "'");
+        }
+        $outcome_products = $outcome_productQuery->select(
+            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
+            DB::raw('SUM(outcome_products.outcome_product_amount)AS imported_product')
+
+
+            , 'outcome_products.outcome_product_date AS date')
+            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+            ->whereNotIn('country_translations.name',['Iraq','العراق','Kurdistan‏','كوردستان'])            ->groupBy ('Product','date','admin_dep_name')->get();
+           return datatables()->of($outcome_products)
+            ->make(true);
+    }
+
+    public function index_outcome_iraq_products(){
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_iraq_statistics');
+    }
+
+    public function get_weekly_monthly_anual_outcome_iraq_product_statistics()
+    {
+        $outcome_productQueryfirst = OutcomeProduct::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $outcome_productQuery = $outcome_productQueryfirst
+                ->where('admin_id', '==', $admin->id)->get();
+        } else {
+            $outcome_productQuery = $outcome_productQueryfirst;
+        }
+
+        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
+        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
+
+        if ($start_date && $end_date) {
+
+            $start_date = date('Y-m-d', strtotime($start_date));
+            $end_date = date('Y-m-d', strtotime($end_date));
+
+            $outcome_productQuery->whereRaw("date(outcome_products.outcome_product_date) >= '" . $start_date . "' AND date(outcome_products.outcome_product_date) <= '" . $end_date . "'");
+        }
+        $outcome_products = $outcome_productQuery->select(
+            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
+            DB::raw('SUM(outcome_products.outcome_product_amount)AS iraq_product')
+
+
+            , 'outcome_products.outcome_product_date AS date')
+            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+            ->whereIn('country_translations.name',['Iraq','العراق'])
+            ->groupBy ('Product','date','admin_dep_name')->get();
+        return datatables()->of($outcome_products)
+            ->make(true);
+    }
+
+    public function index_outcome_local_products(){
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_local_statistics');
+    }
+
+    public function get_weekly_monthly_anual_outcome_local_product_statistics()
+    {
+        $outcome_productQueryfirst = OutcomeProduct::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $outcome_productQuery = $outcome_productQueryfirst
+                ->where('admin_id', '==', $admin->id)->get();
+        } else {
+            $outcome_productQuery = $outcome_productQueryfirst;
+        }
+
+        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
+        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
+
+        if ($start_date && $end_date) {
+
+            $start_date = date('Y-m-d', strtotime($start_date));
+            $end_date = date('Y-m-d', strtotime($end_date));
+
+            $outcome_productQuery->whereRaw("date(outcome_products.outcome_product_date) >= '" . $start_date . "' AND date(outcome_products.outcome_product_date) <= '" . $end_date . "'");
+        }
+        $outcome_products = $outcome_productQuery->select(
+            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
+            DB::raw('SUM(outcome_products.outcome_product_amount)AS local_product')
+
+
+            , 'outcome_products.outcome_product_date AS date')
+            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+            ->whereIn('country_translations.name',['Kurdistan‏','كوردستان'])
+            ->groupBy ('Product','date','admin_dep_name')->get();
+        return datatables()->of($outcome_products)
+            ->make(true);
+    }
 }

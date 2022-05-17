@@ -44,6 +44,16 @@ return [
     'income_products_database_details_in_date_report'=>'تقرير قاعدة البيانات التفصيلية زمنيا للمنتجات الواردة الى العلوة',
     'income_products_details_in_date_report'=>'تقرير تفصيلي بالمنتجات الواردة الى العلوة زمنياً(اسبوع - شهر - سنة)',
 
+    'income_imported_products_database_details_in_date_report'=>'تقرير قاعدة البيانات التفصيلية زمنيا للمنتجات الواردة من البلدان الأخرى الى العلوة',
+    'income_imported_products_details_in_date_report'=>'تقرير تفصيلي بالمنتجات الواردة من البلدان الأخرى الى العلوة زمنياً(اسبوع - شهر - سنة)',
+
+
+    'income_iraq_products_database_details_in_date_report'=>'تقرير قاعدة البيانات التفصيلية زمنيا للمنتجات الواردة من العراق الى العلوة',
+    'income_iraq_products_details_in_date_report'=>'تقرير تفصيلي بالمنتجات الواردة من العراق  الى العلوة زمنياً(اسبوع - شهر - سنة)',
+
+
+    'income_local_products_database_details_in_date_report'=>'تقرير قاعدة البيانات التفصيلية زمنيا للمنتجات الواردةمحلياً الى العلوة',
+    'income_local_products_details_in_date_report'=>'تقرير تفصيلي بالمنتجات الواردة محلياً الى العلوة زمنياً(اسبوع - شهر - سنة)',
 
 
     'WholeProduct'=>'المنتجات في العلوة',

@@ -172,6 +172,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -245,8 +247,13 @@ return [
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'ProductCoupon' => App\Models\ProductCoupon::class,
         'Order'         => App\Models\Order::class,
+        'Category'      => App\Models\Category::class,
+        'Product'       => App\Models\Product::class,
+        'FarmerService' => App\Models\FarmerService::class,
         'Paytabscom'    => Paytabscom\Laravel_paytabs\Facades\paypage::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
     'Currency' => 'USD',
 ];

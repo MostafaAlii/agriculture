@@ -8,15 +8,14 @@ use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
 class AdminRepository implements AdminInterface{
     use UploadT;
     public function index() {
         return view('dashboard.admin.admins.index');
     }
+
     public function data() {
         $admins = Admin::get()->except(auth()->user()->id);
-
         return DataTables::of($admins)
             ->addColumn('record_select', 'dashboard.admin.admins.data_table.record_select')
             ->addIndexColumn()
@@ -29,16 +28,10 @@ class AdminRepository implements AdminInterface{
             ->addColumn('image', function (Admin $admin) {
                 return view('dashboard.admin.admins.data_table.image', compact('admin'));
             })
-             ->addColumn('country', function (Admin $admin) {
+            ->addColumn('country', function (Admin $admin) {
                 return $admin->country->name??null;
-                    // return $admin->country->name??null != null ? $admin->country->name:null;
-                })
+            })
             ->addColumn('actions', 'dashboard.admin.admins.data_table.actions')
-            // test for ralation in yagra
-                // ->addColumn('example', function (Admin $admin) {
-                //     return $admin->profile != null ? $admin->profile->address:null;
-                // })
-            // test for ralation in yagra
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
 
@@ -48,38 +41,30 @@ class AdminRepository implements AdminInterface{
         $areas = Area::all();
         return view('dashboard.admin.admins.create',compact('areas'));
     }
+
     public function store($request) {
         DB::beginTransaction();
         try{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             $requestData['type'] = $request->type;
-//            $requestData['latitude']=$request->latitude;
-//            $requestData['longitude']= $request->longitude;
+            /* $requestData['latitude']=$request->latitude;
+            $requestData['longitude']= $request->longitude; */
             Admin::create($requestData);
             $admin = Admin::latest()->first();
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
-
-            // $admin = Admin::latest()->first();
-//         Notification::send($admin, new \App\Notifications\NewAdmin($admin));
-
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Admins.index');
          } catch (\Exception $e) {
             DB::rollBack();
-//            toastr()->error(__('Admin/site.sorry'));
             return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
-//            return redirect()->back();
          }
     }
 
     public function edit($id) {
         $adminID = Crypt::decrypt($id);
-        // dd($adminID);
         $admin=Admin::findorfail($adminID);
-
-        // return view('dashboard.admin.admins.edit', compact('admin'));
         return view('dashboard.admin.admins.profile.profiledit', compact('admin'));
     }
 
@@ -91,12 +76,10 @@ class AdminRepository implements AdminInterface{
             $requestData = $request->validated();
             $requestData['type'] = $request->type;
             $admin->update($requestData);
-
             if($request->image){
                 $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
             }
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
-
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');
@@ -110,7 +93,6 @@ class AdminRepository implements AdminInterface{
     public function destroy($id) {
         try{
             $adminID = Crypt::decrypt($id);
-            //  dd($adminID);
             $admin=Admin::findorfail($adminID);
             $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
             $admin->delete();
@@ -121,6 +103,7 @@ class AdminRepository implements AdminInterface{
             return redirect()->back();
         }
     }
+
     public function bulkDelete($request) {
         if($request->delete_select_id){
             $delete_select_id = explode(",",$request->delete_select_id);
@@ -137,15 +120,11 @@ class AdminRepository implements AdminInterface{
         Admin::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('Admins.index');
-
     }// end of bulkDelete
 
-    public function showProfile($id){
+    public function showProfile($id) {
         $adminID = Crypt::decrypt($id);
-        // dd($adminID);
-        // dd($id);
         $admin=Admin::findorfail($adminID);
-
         return view('dashboard.admin.admins.profile.profileview', compact('admin'));
     }
 
@@ -155,14 +134,11 @@ class AdminRepository implements AdminInterface{
             $adminID = Crypt::decrypt($id);
             $admin=Admin::findorfail($adminID);
             $requestData = $request->validated();
-            // $requestData['type'] = $request->type;
             $admin->update($requestData);
-
             if($request->image){
                 $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
             }
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
-
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');
@@ -172,6 +148,7 @@ class AdminRepository implements AdminInterface{
             return redirect()->back();
         }
     }// end of update
+    
     public function updateInformation($request,$id) {
         try{
             $adminID = Crypt::decrypt($id);
