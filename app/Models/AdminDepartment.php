@@ -5,15 +5,21 @@ use Astrotomic\Translatable\Translatable;
 
 use Illuminate\Database\Eloquent\Model;
 class AdminDepartment extends Model {
-    use HasFactory;
+    use HasFactory,Translatable;
 
     protected $table = "admin_departments";
-    protected $fillable = ['dep_name_ar','dep_name_en','key','desc','parent'];
+    protected $guarded = [];
 
+    public $translatedAttributes=['name'];
     public $timestamps = true;
+    protected $with=['translations'];
 
     public function parents(){
         return $this->hasMany(AdminDepartment::class , 'id','parent');
     }
 
 }
+
+
+
+

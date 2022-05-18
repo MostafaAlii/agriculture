@@ -57,6 +57,8 @@ use App\Http\Controllers\Dashboard\Admin\ProtectedHouseController;
 use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
 use App\Http\Controllers\Dashboard\Admin\AgriToolServiceController;
 use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
+use App\Http\Controllers\Dashboard\Admin\CurrencyController;
+use App\Http\Controllers\Dashboard\Admin\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -160,6 +162,18 @@ Route::group(
             Route::delete('/Villages/bulk_delete/{ids}', [VillageController::class,'bulkDelete'])->name('villages.bulk_delete');
             /********************************* End Villages Routes ************************************/
 
+            /********************************* currency Routes ************************************/
+            Route::resource('Currencies', CurrencyController::class)->except(['show']);
+            Route::get('/Currencies/data', [CurrencyController::class,'data'])->name('currencies.data');
+            Route::delete('/Currencies/bulk_delete/{ids}', [CurrencyController::class,'bulkDelete'])->name('currencies.bulk_delete');
+            /********************************* End Currency Routes ************************************/
+
+            /********************************* Unit Routes ************************************/
+            Route::resource('Units', UnitController::class)->except(['show']);
+            Route::get('/Units/data', [UnitController::class,'data'])->name('units.data');
+            Route::delete('/Units/bulk_delete/{ids}', [UnitController::class,'bulkDelete'])->name('units.bulk_delete');
+            /********************************* End Unit Routes ************************************/
+
             /********************************* Start settings Routes ************************************/
             Route::get('Settings', [SettingController::class, 'index'])->name('settings');
             Route::post('Settings/store', [SettingController::class, 'store'])->name('settings.store');
@@ -208,9 +222,9 @@ Route::group(
             Route::delete('/Precipitations/bulk_delete/{ids}', [PrecipitationController::class,'bulkDelete'])->name('precipitation.bulk_delete');
 //            Route::get('/Precipitations/statistic/', [PrecipitationController::class,'statistics'])->name('precipitation.statistics');
             Route::get('/Precipitations/index_statistic', [PrecipitationController::class,'index_statistic'])->name('precipitations.index_statistic');;
-            Route::get('dtable-custom-statistic', [PrecipitationController::class,'get_custom_statistics']);
+            Route::get('dtable-custom-statistics', [PrecipitationController::class,'get_custom_statistics']);
             Route::get('/Precipitations/index_details_statistic', [PrecipitationController::class,'get_details_statistics_index'])->name('precipitations.index_details_statistic');
-            Route::get('dtable-details-statistic', [PrecipitationController::class,'get_details_statistics']);
+            Route::get('dtable-details-statistics', [PrecipitationController::class,'get_details_statistics']);
             /***********end precipitation ****/
 
             /******start LandArea ********/

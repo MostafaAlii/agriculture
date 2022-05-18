@@ -84,36 +84,41 @@ class AdminDepartmentSeeder extends Seeder {
 
         for ($i = 0; $i < $level_1_count ; $i++) {
             AdminDepartment::create([
-                'dep_name_ar'          => $dep_name_ar_level_1[$i],
-                'dep_name_en'    => $dep_name_en_level_1[$i],
+//                'dep_name_ar'          => $dep_name_ar_level_1[$i],
+//                'dep_name_en'    => $dep_name_en_level_1[$i],
+            'name'=>$dep_name_ar_level_1[$i],
                 'parent' => null
             ]);
         }
         for ($i = 0; $i < $level_1_2_count ; $i++) {
             AdminDepartment::create([
-                'dep_name_ar'          => $dep_name_ar_level_1_2[$i],
-                'dep_name_en'    => $dep_name_en_level_1_2[$i],
+//                'dep_name_ar'          => $dep_name_ar_level_1_2[$i],
+//                'dep_name_en'    => $dep_name_en_level_1_2[$i],
+                'name'=>$dep_name_ar_level_1_2[$i],
                 'parent'=>'2',
             ]);
         }
         for ($i = 0; $i < $level_1_3_count ; $i++) {
             AdminDepartment::create([
-                'dep_name_ar'          => $dep_name_ar_level_1_3[$i],
-                'dep_name_en'    => $dep_name_en_level_1_3[$i],
+//                'dep_name_ar'          => $dep_name_ar_level_1_3[$i],
+//                'dep_name_en'    => $dep_name_en_level_1_3[$i],
+            'name'=>$dep_name_ar_level_1_3[$i],
                 'parent'=>'3',
             ]);
         }
         for ($i = 0; $i < $level_1_3_1_count ; $i++) {
             AdminDepartment::create([
-                'dep_name_ar'          => $dep_name_ar_level_1_3_1[$i],
-                'dep_name_en'    => $dep_name_ar_level_1_3_1[$i],
+//                'dep_name_ar'          => $dep_name_ar_level_1_3_1[$i],
+//                'dep_name_en'    => $dep_name_ar_level_1_3_1[$i],
+                'name'=>$dep_name_ar_level_1_3_1[$i],
                 'parent'=>'8',
             ]);
         }
         for ($i = 0; $i < $level_1_3_1_1_count ; $i++) {
             AdminDepartment::create([
-                'dep_name_ar'          => $dep_name_ar_level_1_3_1_1[$i],
-                'dep_name_en'    => $dep_name_ar_level_1_3_1_1[$i],
+                'name'=>$dep_name_ar_level_1_3_1_1[$i],
+//                'dep_name_ar'          => $dep_name_ar_level_1_3_1_1[$i],
+//                'dep_name_en'    => $dep_name_ar_level_1_3_1_1[$i],
                 'parent'=>'15',
             ]);
         }

@@ -37,7 +37,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
         if ($admin->type == 'employee') {
             $precipitations = Precipitation::with('admin', 'area', 'state')
-                ->where('admin_id', '==', $admin->id)->get();
+                ->where('admin_id',  $admin->id)->get();
         } else {
             $precipitations = Precipitation::with('admin', 'area', 'state')->get();
         }
@@ -212,7 +212,7 @@ class PrecipitationRepository implements PrecipitationInterface
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $precipitationQuery = $precipitationQueryfirst
-                ->where('admin_id', '==', $admin->id)->get();
+                ->where('admin_id',  $admin->id)->get();
         } else {
             $precipitationQuery = $precipitationQueryfirst;
         }
@@ -238,6 +238,8 @@ class PrecipitationRepository implements PrecipitationInterface
         return datatables()->of($precipitations)
             ->make(true);
     }
+
+
     public function get_details_statistics_index(){
         return view('dashboard.admin.precipitations.details_statistics');
     }
@@ -247,8 +249,7 @@ class PrecipitationRepository implements PrecipitationInterface
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
-            $precipitationQuery = $precipitationQueryfirst
-                ->where('admin_id', '==', $admin->id)->get();
+            $precipitationQuery = Precipitation::select('*')->where('admin_id',  $admin->id);
         } else {
             $precipitationQuery = $precipitationQueryfirst;
         }
@@ -261,7 +262,7 @@ class PrecipitationRepository implements PrecipitationInterface
             $start_date = date('Y-m-d', strtotime($start_date));
             $end_date = date('Y-m-d', strtotime($end_date));
 
-            $precipitationQuery->whereRaw("date(precipitations.date) >= '" . $start_date . "' AND date(precipitations.date) <= '" . $end_date . "'");
+            $precipitationQuery =   $precipitationQuery->whereRaw("date(precipitations.date) >= '" . $start_date . "' AND date(precipitations.date) <= '" . $end_date . "'");
         }
         $precipitations = $precipitationQuery->select(
             'area_translations.name AS Area',
@@ -269,8 +270,7 @@ class PrecipitationRepository implements PrecipitationInterface
             'precipitations.precipitation_rate as precipitation_rate',
             DB::raw('Extract( DAY From precipitations.date) As day'),
             DB::raw('EXTRACT(MONTH From precipitations.date) As month'),
-            DB::raw('EXTRACT(YEAR From precipitations.date) As year'),
-            'precipitations.precipitation_rate As precipitation_rate'
+            DB::raw('EXTRACT(YEAR From precipitations.date) As year')
            )
             ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
             ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')

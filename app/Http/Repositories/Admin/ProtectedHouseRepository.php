@@ -37,7 +37,7 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area', 'state', 'admin')
-                ->where('admin_id', '==', $admin->id);
+                ->where('admin_id',  $admin->id);
         } else {
             $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area', 'state', 'admin');
 

@@ -49,7 +49,7 @@
                                 <div class="card-body card-dashboard">
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration" id="land-area-statistic-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="land-area-statistic-details-table">
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -117,7 +117,7 @@
 
 <script>
 
-    $('#land-area-statistic-table').DataTable( {
+    $('#land-area-statistic-details-table').DataTable( {
         dom: 'Bfrtip',
         buttons: [
             { text:'excel',

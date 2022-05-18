@@ -27,7 +27,7 @@ class IncomeProductRepository implements IncomeProductInterface {
         $admin = Admin::findorfail($adminID);
         $department_id = $admin->adminDepartment->id;
         $adminDepartment = AdminDepartment::findorfail($department_id);
-        $dep_name = $adminDepartment->dep_name_ar;
+        $dep_name = $adminDepartment->name;
         return view('dashboard.admin.income_products.index',compact('admin','dep_name')) ;
     }
 
@@ -36,10 +36,10 @@ class IncomeProductRepository implements IncomeProductInterface {
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         if($admin->type =='employee') {
-            $incomes = IncomeProduct::with('area', 'country', 'province', 'whole_product','admin')
-                ->where('admin_id', '==', $admin->id);
+            $incomes = IncomeProduct::with( 'country', 'whole_product','admin')
+                ->where('admin_id',  $admin->id);
         }else{
-            $incomes = IncomeProduct::with('area', 'country', 'province', 'whole_product','admin');
+            $incomes = IncomeProduct::with( 'country', 'whole_product','admin');
 
         }
         return DataTables::of($incomes)
@@ -54,12 +54,9 @@ class IncomeProductRepository implements IncomeProductInterface {
             ->addColumn('country', function (IncomeProduct $income) {
                 return $income->country->name;
             })
-            ->addColumn('province', function (IncomeProduct $income) {
-                if(!empty($income->province)){
-                    return $income->province->name;
-                }else{
-                    return null;
-                }
+            ->editColumn('country_product_type', function (IncomeProduct $income) {
+                return view('dashboard.admin.income_products.data_table.country_product_type', compact('income'));
+
 
             })
             ->addColumn('area', function (IncomeProduct $income) {
@@ -89,9 +86,7 @@ class IncomeProductRepository implements IncomeProductInterface {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         $department_id = $admin->adminDepartment->id;
-        $admin_dep_name = $admin->adminDepartment->dep_name_ar;
-        $areas = Area::all();
-        $provinces = Province::all();
+        $admin_dep_name = $admin->adminDepartment->name;
         $countries = Country::all();
         $whole_products = WholeProduct::all();
         $currencies = Currency::all();
@@ -99,7 +94,7 @@ class IncomeProductRepository implements IncomeProductInterface {
 
 
         return view('dashboard.admin.income_products.create',
-            compact( 'admin','whole_products', 'areas', 'provinces', 'countries','$admin_dep_name','units','currencies'));
+            compact( 'admin','whole_products','countries','admin_dep_name','units','currencies'));
     }
 
     public function store($request) {
@@ -110,16 +105,8 @@ class IncomeProductRepository implements IncomeProductInterface {
             $income_product->admin_id = Auth::user()->id;
             $income_product->country_id = $requestData['country_id'];
 
-            if(!empty($income_product->area_id)){
-                $income_product->area_id = $requestData['area_id'];
-            }else{
-                $income_product->area_id = null;
-            }
-            if(!empty($income_product->province_id)){
-                $income_product->province_id = $requestData['province_id'];
-            }else{
-                $income_product->province_id = null;
-            }
+            $income_product->country_product_type = $requestData['country_product_type'];
+
             $income_product->whole_product_id = $requestData['whole_product_id'];
 
             $income_product->unit_id = $requestData['unit_id'];
@@ -152,21 +139,19 @@ class IncomeProductRepository implements IncomeProductInterface {
     public function edit($id)
     {
         $outID = Crypt::decrypt($id);
-        $areas = Area::all();
         $countries = Country::all();
-        $provinces = Province::all();
         $whole_products = WholeProduct::all();
 
         $income_product  = IncomeProduct::findorfail($outID);
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        $admin_dep_name = $admin->adminDepartment->dep_name_ar;
+        $admin_dep_name = $admin->adminDepartment->name;
 
         $units = Unit::all();
         $currencies = Currency::all();
 
         return view('dashboard.admin.income_products.edit',
-            compact('admin_dep_name', 'areas', 'provinces','countries', 'units',
+            compact('admin_dep_name','countries', 'units',
                 'income_product','whole_products','currencies','admin'));
     }
 
@@ -179,19 +164,11 @@ class IncomeProductRepository implements IncomeProductInterface {
             $requestData = $request->validated();
             $income_product = IncomeProduct::findorfail($InID);
             $income_product->admin_id = Auth::user()->id;
-            if(!empty($income_product->area_id)){
-                $income_product->area_id = $requestData['area_id'];
-            }else{
-                $income_product->area_id = null;
-            }
-            if(!empty($income_product->province_id)){
-                $income_product->province_id = $requestData['province_id'];
-            }else{
-                $income_product->province_id = null;
-            }
+
 
             $income_product->country_id = $requestData['country_id'];
             $income_product->unit_id = $requestData['unit_id'];
+            $income_product->country_product_type = $requestData['country_product_type'];
 
 
             $income_product->admin_dep_name = $request->admin_dep_name;
@@ -255,20 +232,23 @@ class IncomeProductRepository implements IncomeProductInterface {
 
 
     public function income_product_statistics(){
-        $statistics = IncomeProduct::select('country_translations.name AS country','province_translations.name AS province',
-            'income_products.admin_dep_name AS admin_dep_name as dep_name','whole_product_translations.name as product_name',
+        $statistics = IncomeProduct::select('country_translations.name AS country',
+            'income_products.admin_dep_name AS admin_dep_name',
+            'whole_product_translations.name as product_name',
             'income_products.income_product_amount as income_product_amount',
-            'income_products.income_product_price as income_product_price','income_products.income_product_date as income_product_date')
+            'income_products.income_product_price as income_product_price',
+            'income_products.country_product_type as country_product_type',
+            'income_products.income_product_date as income_product_date')
 
 
             ->join('country_translations', 'income_products.country_id', '=', 'country_translations.id')
-            ->join('province_translations', 'income_products.province_id', '=', 'province_translations.id')
             ->join('whole_product_translations','income_products.whole_product_id','=','whole_product_translations.id')
             ->get();
 
         return view('dashboard.admin.income_products.income_products_statistics',compact('statistics'));
 
     }
+
     public function index_income_products(){
         return view('dashboard.admin.income_products.weekly_monthly_anual_statistics');
     }
@@ -280,7 +260,7 @@ class IncomeProductRepository implements IncomeProductInterface {
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $income_productQuery = $income_productQueryfirst
-                ->where('admin_id', '==', $admin->id)->get();
+                ->where('admin_id',  $admin->id)->get();
         } else {
             $income_productQuery = $income_productQueryfirst;
         }
@@ -295,20 +275,21 @@ class IncomeProductRepository implements IncomeProductInterface {
 
             $income_productQuery->whereRaw("date(income_products.income_product_date) >= '" . $start_date . "' AND date(income_products.income_product_date) <= '" . $end_date . "'");
         }
-        $income_products = $income_productQuery->select(
+        $income_products = $income_productQuery->select('country_translations.name as country',
             'whole_product_translations.name AS Product','income_products.admin_dep_name as admin_dep_name'
-            , DB::raw('SUM(CASE WHEN country_translations.name = "كردستان" THEN income_products.income_product_amount ELSE 0 END )AS local_product')
-            , DB::raw('SUM(CASE WHEN country_translations.name = "العراق" THEN income_products.income_product_amount ELSE 0 END )AS iraq_product')
-            , DB::raw('SUM(CASE WHEN (country_translations.name != "العراق" && country_translations.name != "كردستان")  THEN income_products.income_product_amount ELSE 0 END )AS imported_product')
+            , DB::raw('SUM(CASE WHEN income_products.country_product_type = "local" THEN income_products.income_product_amount ELSE 0 END )AS local_product')
+            , DB::raw('SUM(CASE WHEN income_products.country_product_type = "iraq" THEN income_products.income_product_amount ELSE 0 END )AS iraq_product')
+            , DB::raw('SUM(CASE WHEN (income_products.country_product_type = "imported")  THEN income_products.income_product_amount ELSE 0 END )AS imported_product')
 
            , 'income_products.income_product_date AS date')
             ->join('country_translations', 'income_products.country_id', '=', 'country_translations.id')
             ->join('whole_product_translations', 'income_products.whole_product_id', '=', 'whole_product_translations.id')
 
-            ->groupBy ('Product','date','admin_dep_name')->get();
+            ->groupBy ('country','Product','date','admin_dep_name')->get();
         return datatables()->of($income_products)
             ->make(true);
     }
+
     public function index_income_local_products(){
         return view('dashboard.admin.income_products.weekly_monthly_anual_local_statistics');
     }
@@ -319,7 +300,7 @@ class IncomeProductRepository implements IncomeProductInterface {
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $income_productQuery = $income_productQueryfirst
-                ->where('admin_id', '==', $admin->id)->get();
+                ->where('admin_id', $admin->id)->get();
         } else {
             $income_productQuery = $income_productQueryfirst;
         }
@@ -334,17 +315,14 @@ class IncomeProductRepository implements IncomeProductInterface {
 
             $income_productQuery->whereRaw("date(income_products.income_product_date) >= '" . $start_date . "' AND date(income_products.income_product_date) <= '" . $end_date . "'");
         }
-        $income_products = $income_productQuery->select(
+        $income_products = $income_productQuery->select('country_translations.name as country',
             'whole_product_translations.name AS Product','income_products.admin_dep_name as admin_dep_name',
              DB::raw('SUM(income_products.income_product_amount)AS local_product')
-//            , DB::raw('SUM(CASE WHEN country_translations.name = "العراق" THEN income_products.income_product_amount ELSE 0 END )AS iraq_product')
-//            , DB::raw('SUM(CASE WHEN (country_translations.name != "العراق" && country_translations.name != "كردستان")  THEN income_products.income_product_amount ELSE 0 END )AS imported_product')
-
             , 'income_products.income_product_date AS date')
             ->join('country_translations', 'income_products.country_id', '=', 'country_translations.id')
             ->join('whole_product_translations', 'income_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->whereIn('country_translations.name',['Kurdistan‏','كوردستان'])
-            ->groupBy ('Product','date','admin_dep_name')->get();
+            ->where('income_products.country_product_type','local')
+            ->groupBy ('country','Product','date','admin_dep_name')->get();
         return datatables()->of($income_products)
             ->make(true);
     }
@@ -360,7 +338,7 @@ class IncomeProductRepository implements IncomeProductInterface {
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $income_productQuery = $income_productQueryfirst
-                ->where('admin_id', '==', $admin->id)->get();
+                ->where('admin_id',  $admin->id)->get();
         } else {
             $income_productQuery = $income_productQueryfirst;
         }
@@ -375,20 +353,16 @@ class IncomeProductRepository implements IncomeProductInterface {
 
             $income_productQuery->whereRaw("date(income_products.income_product_date) >= '" . $start_date . "' AND date(income_products.income_product_date) <= '" . $end_date . "'");
         }
-        $income_products = $income_productQuery->select(
+        $income_products = $income_productQuery->select('country_translations.name as country',
             'whole_product_translations.name AS Product','income_products.admin_dep_name as admin_dep_name',
             DB::raw('SUM(income_products.income_product_amount)AS iraq_product')
-
-//            , DB::raw('SUM(CASE WHEN country_translations.name = "كردستان" THEN income_products.income_product_amount ELSE 0 END )AS local_product')
-//            , DB::raw('SUM(CASE WHEN country_translations.name = "العراق" THEN income_products.income_product_amount ELSE 0 END )AS iraq_product')
-//            , DB::raw('SUM(CASE WHEN (country_translations.name != "العراق" && country_translations.name != "كردستان")  THEN income_products.income_product_amount ELSE 0 END )AS imported_product')
 
             , 'income_products.income_product_date AS date')
             ->join('country_translations', 'income_products.country_id', '=', 'country_translations.id')
             ->join('whole_product_translations', 'income_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->whereIn('country_translations.name',['Iraq','العراق'])
+            ->where('income_products.country_product_type','iraq')
 
-            ->groupBy ('Product','date','admin_dep_name')->get();
+            ->groupBy ('country','Product','date','admin_dep_name')->get();
         return datatables()->of($income_products)
             ->make(true);
     }
@@ -403,7 +377,7 @@ class IncomeProductRepository implements IncomeProductInterface {
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $income_productQuery = $income_productQueryfirst
-                ->where('admin_id', '==', $admin->id)->get();
+                ->where('admin_id', $admin->id)->get();
         } else {
             $income_productQuery = $income_productQueryfirst;
         }
@@ -418,19 +392,16 @@ class IncomeProductRepository implements IncomeProductInterface {
 
             $income_productQuery->whereRaw("date(income_products.income_product_date) >= '" . $start_date . "' AND date(income_products.income_product_date) <= '" . $end_date . "'");
         }
-        $income_products = $income_productQuery->select(
+        $income_products = $income_productQuery->select('country_translations.name as country',
             'whole_product_translations.name AS Product','income_products.admin_dep_name as admin_dep_name',
-//            , DB::raw('SUM(CASE WHEN country_translations.name = "كردستان" THEN income_products.income_product_amount ELSE 0 END )AS local_product')
-//            , DB::raw('SUM(CASE WHEN country_translations.name = "العراق" THEN income_products.income_product_amount ELSE 0 END )AS iraq_product')
-//            , DB::raw('SUM(CASE WHEN (country_translations.name != "العراق" && country_translations.name != "كردستان")  THEN income_products.income_product_amount ELSE 0 END )AS imported_product')
-            DB::raw('SUM(income_products.income_product_amount)AS imported_product')
+        DB::raw('SUM(income_products.income_product_amount)AS imported_product')
 
             , 'income_products.income_product_date AS date')
             ->join('country_translations', 'income_products.country_id', '=', 'country_translations.id')
             ->join('whole_product_translations', 'income_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->whereNotIn('country_translations.name',['Iraq','العراق','Kurdistan‏','كوردستان'])
+            ->where('income_products.country_product_type','imported')
 
-            ->groupBy ('Product','date','admin_dep_name')->get();
+            ->groupBy ('country','Product','date','admin_dep_name')->get();
         return datatables()->of($income_products)
             ->make(true);
     }

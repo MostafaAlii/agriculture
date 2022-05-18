@@ -67,24 +67,24 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1">{{trans('Admin\admin_departments.dep_name_ar')}}</label>
+                                                        <label for="projectinput1">{{trans('Admin\admin_departments.name')}}</label>
                                                         <input type="text" id="projectinput1" class="form-control"
-                                                               placeholder="{{trans('Admin\admin_departments.dep_name_ar')}}"
-                                                               name="dep_name_ar" >
+                                                               placeholder="{{trans('Admin\admin_departments.name')}}"
+                                                               name="name" >
                                                         {{--<input type="hidden" id="projectinput1" class="form-control"  name="id" >--}}
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">{{trans('Admin\admin_departments.dep_name_en')}}</label>
-                                                        <input type="text" id="projectinput1" class="form-control"
-                                                               placeholder="{{trans('Admin\admin_departments.dep_name_en')}}"
-                                                               name="dep_name_en" >
+                                                {{--<div class="col-md-6">--}}
+                                                    {{--<div class="form-group">--}}
+                                                        {{--<label for="projectinput1">{{trans('Admin\admin_departments.dep_name_en')}}</label>--}}
+                                                        {{--<input type="text" id="projectinput1" class="form-control"--}}
+                                                               {{--placeholder="{{trans('Admin\admin_departments.dep_name_en')}}"--}}
+                                                               {{--name="dep_name_en" >--}}
                                                         {{--<input type="hidden" id="projectinput1" class="form-control"  name="id" >--}}
-                                                    </div>
+                                                    {{--</div>--}}
 
-                                                </div>
+                                                {{--</div>--}}
 
                                             </div>
 

@@ -18,7 +18,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('AdminDepartments.index') }}">{{ $dep_name }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('AdminDepartments.index') }}">{{ $admin_dep_name }}</a>
                             </li>
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('IncomeProducts.index') }}">{{ __('Admin/income_products.income_productPageTitle') }}</a>
@@ -80,8 +80,8 @@
                                                         </div>
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
-                                                                <label for="area_id">{{ __('Admin/income_products.country') }}</label>
-                                                                <select name="country_id" id="area_id" class="form-control" required>
+                                                                <label for="country_id-1">{{ __('Admin/income_products.country') }}</label>
+                                                                <select name="country_id" id="country_id-1" class="form-control" required>
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($countries as $country)
@@ -94,9 +94,13 @@
                                                         <div class="col col-md-4">
 
                                                             <div class="form-group">
-                                                                <label for="state_id">{{ __('Admin/income_products.province') }}</label>
-                                                                <select class=" form-control" name="province_id" id="province_id">
+                                                                <label for="country_product_type-1">{{ __('Admin/income_products.country_product_type') }}</label>
+                                                                <select class="form-control" name="country_product_type" id="country_product_type-1">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
+                                                                    <option value="local">{{ __('Admin/income_products.local') }}</option>
+                                                                    <option value="iraq">{{ __('Admin/income_products.iraq') }}</option>
+                                                                    <option value="imported">{{ __('Admin/income_products.imported') }}</option>
+
 
                                                                 </select>
 
@@ -110,11 +114,8 @@
                                                        <div class="col col-md-4">
 
                                                            <div class="form-group">
-                                                               <label for="state_id">{{ __('Admin/income_products.area') }}</label>
-                                                               <select class=" form-control" name="area_id" id="area_id">
-                                                                   <option value="">{{ __('Admin/site.select') }}</option>
-
-                                                               </select>
+                                                               <label for="area_id-1">{{ __('Admin/income_products.wholesale') }}</label>
+                                                               <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="text">
 
                                                            </div>
                                                        </div>
@@ -198,7 +199,7 @@
             //  ajax for get states data of area =====================================================================
             $('select[name="country_id"]').on('change', function() {
                 var country_id = $(this).val();
-                if (area_id) {
+                if (country_id) {
                     $.ajax({
                         url: "{{ URL::to('dashboard_admin/admin/province') }}/" + country_id,
                         type: "GET",

@@ -24,6 +24,11 @@ return [
 
     'product'=>'المنتج',
 
+    'imported'=>'مستورد',
+    'local'=>'محلي',
+    'iraq'=>'عراقي',
+    'country_product_type'=>'نوع المنتج',
+
     'new_income_product'=>'منتج جديد وارد',
     'income_productPageTitle'=>'المنتجات الواردة إلى العلوة',
 

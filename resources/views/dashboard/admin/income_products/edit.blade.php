@@ -96,17 +96,13 @@
                                                 <div class="col col-md-4">
 
                                                     <div class="form-group">
-                                                        <label for="province_id">{{ __('Admin/income_products.province') }}</label>
-                                                        <select class="select2 form-control" name="province_id" id="province_id">
-                                                            <?php
-                                                                $province_count = \App\Models\Province::where('id',$income_product->province_id )->count();
-                                                            ?>
-                                                            @if($province_count>0)
+                                                        <label for="country_product_type-1">{{ __('Admin/income_products.country_product_type') }}</label>
+                                                        <select class="form-control" name="country_product_type" id="country_product_type-1">
+                                                            <option value="">{{ __('Admin/site.select') }}</option>
+                                                            <option value="local" {{$income_product->country_product_type == 'local'?'selected':'' }}>{{ __('Admin/income_products.local') }}</option>
+                                                            <option value="iraq" {{$income_product->country_product_type == 'iraq'?'selected':'' }}>{{ __('Admin/income_products.iraq') }}</option>
+                                                            <option value="imported" {{$income_product->country_product_type == 'imported'?'selected':'' }}>{{ __('Admin/income_products.imported') }}</option>
 
-                                                            <option value="{{$income_product->province_id }}" selected>{{$income_product->province->name}}</option>
-                                                                @else
-                                                                    <option value="" ></option>
-                                                            @endif
 
                                                         </select>
 
@@ -120,19 +116,8 @@
                                                 <div class="col col-md-4">
 
                                                     <div class="form-group">
-                                                        <label for="province_id">{{ __('Admin/income_products.area') }}</label>
-                                                        <select class="select2 form-control" name="area_id" id="area_id">
-                                                            <?php
-                                                          $area_count = \App\Models\Area::where('id',$income_product->area_id )->count();
-                                                            ?>
-                                                            @if($area_count>0)
-
-                                                                <option value="{{$income_product->area_id }}" selected>{{$income_product->area->name}}</option>
-                                                            @else
-                                                                <option value="" ></option>
-                                                            @endif
-
-                                                        </select>
+                                                        <label for="area_id-1">{{ __('Admin/income_products.wholesale') }}</label>
+                                                        <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="text">
 
                                                     </div>
                                                 </div>

@@ -123,7 +123,7 @@
                                                                 <select name="food_source"class="select2 form-control"id="id_h5_multi">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     <option value="local">{{ __('Admin/animals.local') }}</option>
-                                                                    <option value="outer">{{ __('Admin/animals.outer') }}</option>
+                                                                    <option value="imported">{{ __('Admin/animals.imported') }}</option>
 
                                                                 </select>
 

@@ -24,9 +24,12 @@ if (! function_exists('farmer')) {
 
 if(!function_exists('load_dep')){
     function load_dep($select =null,$dep_hide=null){
-        $admin_departments =  App\Models\AdminDepartment::selectRaw('dep_name_'.app()->getLocale() .' as text')
-            ->selectRaw('id as id')
-            ->selectRaw('parent as parent')->get(['text','parent','id']);
+
+        $admin_departments =  App\Models\AdminDepartment::select('admin_department_translations.name as text',
+            'admin_departments.id as id','admin_departments.parent as parent')
+
+            ->join('admin_department_translations','admin_departments.id','=','admin_department_translations.admin_department_id')
+            ->get(['text','parent','id']);
 
         $dep_arr =[];
         foreach ($admin_departments as $admin_department){

@@ -133,7 +133,7 @@
 
             ],
             ajax: {
-                url: "{{ URL::to('dashboard_admin/dtable-custom-statstic') }}",
+                url: "{{ URL::to('dashboard_admin/dtable-custom-statstics') }}",
                 type: 'GET',
                 data: function (d) {
                     d.start_date = $('#start_date').val();

@@ -36,7 +36,7 @@ class ChickenProjectRepository implements ChickenProjectInterface{
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $chickenProjects = ChickenProject::with('farmer', 'village', 'admin')
-                ->where('admin_id', '==', $admin->id);
+                ->where('admin_id', $admin->id);
         }else{
             $chickenProjects = ChickenProject::with('farmer', 'village', 'admin');
         }

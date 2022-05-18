@@ -18,6 +18,10 @@ return [
     'delete'=>'Delete',
     'close'=>' Close',
     'admin'=>'Employee Responsible',
+    'local'=>'Local',
+    'iraq'=>'Iraq',
+    'imported'=>'Imported',
+    'country_product_type'=>'Country Product Type',
 
     'update'=>'Update',
     'date'=>'Date',

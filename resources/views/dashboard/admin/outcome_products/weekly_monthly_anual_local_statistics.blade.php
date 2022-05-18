@@ -66,6 +66,7 @@
                                         <table class="table table-striped table-bordered zero-configuration" id="outcome_local_products_periodly-statistic-table">
                                             <thead>
                                                 <tr>
+                                                    <th>{{ __('Admin/outcome_products.country') }}</th>
                                                     <th>{{ __('Admin/outcome_products.admin_dep_name') }}</th>
                                                     <th>{{ __('Admin/outcome_products.product') }}</th>
                                                     <th>{{ __('Admin/outcome_products.local_product') }}</th>
@@ -112,7 +113,7 @@
                     orientation: 'landscape',
                     pageSize: 'A3',
                     exportOptions: {
-                        columns: [ 0,1,2,3]
+                        columns: [ 0,1,2,3,4]
                     },
                     className: 'btn btn-primary ml-1',
 
@@ -120,7 +121,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns:[ 0,1,2,3]
+                        columns:[ 0,1,2,3,4]
                     },
                     autoPrint: true,
                     orientation: 'landscape',
@@ -142,6 +143,7 @@
             },
 
             columns: [
+                { data: 'country', name: 'country' },
                 { data: 'admin_dep_name', name: 'admin_dep_name' },
 
                 { data: 'Product', name: 'Product' },

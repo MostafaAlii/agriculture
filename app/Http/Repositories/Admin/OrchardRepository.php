@@ -44,7 +44,7 @@ class OrchardRepository implements OrchardInterface
         $admin=Admin::findorfail($adminID);
         if($admin->type =='employee') {
             $orchards = Orchard::with('admin', 'farmer', 'village', 'trees', 'landCategory', 'area', 'state')
-                ->where('admin_id', '==', $admin->id)
+                ->where('admin_id',  $admin->id)
                 ->selectRaw('distinct orchards.*')->get();
         }else {
             $orchards = Orchard::with('admin', 'farmer', 'village', 'trees', 'landCategory', 'area', 'state')
@@ -100,10 +100,11 @@ class OrchardRepository implements OrchardInterface
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
-        $villages = Village::where('state_id',$stateID)->get();
+//        $villages = Village::where('state_id',$stateID)->get();
         $land_categories = LandCategory::all();
-        $trees = Tree::all();
+        $villages = Village::all();
         $units = Unit::all();
+        $trees = Tree::all();
 
         return view('dashboard.admin.orchards.create',
             compact('admin','area_name','areaID','stateID',
@@ -235,16 +236,10 @@ class OrchardRepository implements OrchardInterface
     {
         $orchardID = Crypt::decrypt($id);
         $orchard = Orchard::findorfail($orchardID);
-        $trees = $orchard->trees->count();
-        if($trees> 0){
-            toastr()->error(__('Admin/orchards.cant_delete'));
-            return redirect()->route('orchards.index');
-        }else{
+        $orchard->trees()->detach();
             $orchard->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('orchards.index');
-        }
-
 
     }
 
@@ -256,14 +251,9 @@ class OrchardRepository implements OrchardInterface
                 foreach ($delete_select_id as $orchard_ids) {
 
                     $orchard = Orchard::findorfail($orchard_ids);
-                    $trees = $orchard->trees->count();
+                    $orchard->trees()->detach();
 
-                    if ($trees > 0) {
-                        toastr()->error(__('Admin/orchards.cant_delete'));
-                        return redirect()->route('orchards.index');
-                    }
-
-                    Orchard::destroy($orchard_ids);
+                    $orchard->delete();
                 }
                 DB::commit();
 
@@ -308,7 +298,7 @@ class OrchardRepository implements OrchardInterface
             ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
             ->where('orchards.admin_id' ,$admin->id)
 //                ->whereIN('tree_translations.name',$tree_name)
-            ->whereIn('land_category_translations.category_name', ['سيحي', 'ديمي', 'قمريات'])
+            ->whereIn('land_category_translations.category_name', ['بساتين سيحية', 'بساتين ديمية', 'قمريات'])
             ->GroupBy('Area','State','village_name','farmer_name','supported_side','category_name',
                 'admin_name')
 //             'tree_name'
@@ -334,7 +324,7 @@ class OrchardRepository implements OrchardInterface
                 ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                 ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
 //                ->whereIN('tree_translations.name',$tree_name)
-                ->whereIn('land_category_translations.category_name', ['سيحي', 'ديمي', 'قمريات'])
+                ->whereIn('land_category_translations.category_name', ['بساتين سيحية', 'بساتين ديمية', 'قمريات'])
                 ->GroupBy('Area','State','village_name','farmer_name','supported_side','category_name',
 //                    'tree_name',
                     'admin_name'

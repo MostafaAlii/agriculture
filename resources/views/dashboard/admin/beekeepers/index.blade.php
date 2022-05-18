@@ -21,7 +21,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('BeeKeeper.index') }}">{{ __('Admin/bees.beekeeperPageTitle') }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('BeeKeepers.index') }}">{{ __('Admin/bees.beekeeperPageTitle') }}</a>
                                 </li>
                                 </li>
                             </ol>

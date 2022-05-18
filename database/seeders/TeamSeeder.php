@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
-
 class TeamSeeder extends Seeder {
     public function run() {
 
@@ -13,7 +12,7 @@ class TeamSeeder extends Seeder {
 
         DB::table('teams')->truncate();
         DB::table('team_translations')->truncate();
-        Team::factory()->count(5)->create();
+        Team::factory()->count(12)->create();
 
         Schema::enableForeignKeyConstraints();
         

@@ -17,7 +17,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('AdminDepartment.index') }}">{{ $dep_name }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('AdminDepartments.index') }}">{{ $dep_name }}</a>
                                 </li>
 
                                 <li class="breadcrumb-item"><a href="{{route('IncomeProducts.index')}}">{{ __('Admin/income_products.income_productPageTitle') }}</a>
@@ -76,8 +76,7 @@
                                                     </th>
                                                     <th>{{ __('Admin/income_products.admin') }}</th>
                                                     <th>{{ __('Admin/income_products.country') }}</th>
-                                                    <th>{{ __('Admin/income_products.province') }}</th>
-                                                    <th>{{ __('Admin/income_products.area') }}</th>
+                                                    <th>{{ __('Admin/income_products.country_product_type') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_amount') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_price') }}</th>
                                                     <th>{{ __('Admin/income_products.currency') }}</th>
@@ -123,8 +122,7 @@
             {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'country', name: 'country',searchable: true, sortable: true},
-            {data: 'province', name: 'province',searchable: true, sortable: true},
-            {data: 'area', name: 'area',searchable: true, sortable: true},
+            {data: 'country_product_type', name: 'country_product_type',searchable: true, sortable: true},
 
 
             {data: 'income_product_amount', name: 'income_product_amount',searchable: true, sortable: true},

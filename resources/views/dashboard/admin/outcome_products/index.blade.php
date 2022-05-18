@@ -67,7 +67,7 @@
                                     </button>
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration" id="outcom-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="outcome-table">
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -75,8 +75,9 @@
                                                     </th>
                                                     <th>{{ __('Admin/outcome_products.admin') }}</th>
                                                     <th>{{ __('Admin/outcome_products.country') }}</th>
-                                                    <th>{{ __('Admin/outcome_products.province') }}</th>
-                                                    <th>{{ __('Admin/outcome_products.area') }}</th>
+                                                    <th>{{ __('Admin/income_products.country_product_type') }}</th>
+                                                    <th>{{ __('Admin/income_products.product') }}</th>
+
                                                     <th>{{ __('Admin/outcome_products.outcome_product_amount') }}</th>
                                                     <th>{{ __('Admin/outcome_products.outcome_product_price') }}</th>
                                                     <th>{{ __('Admin/outcome_products.currency') }}</th>
@@ -106,7 +107,7 @@
 
 
 <script>
-    let adminsTable = $('#outcom-table').DataTable({
+    let adminsTable = $('#outcome-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -122,8 +123,8 @@
             {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'country', name: 'country',searchable: true, sortable: true},
-            {data: 'province', name: 'province',searchable: true, sortable: true},
-            {data: 'area', name: 'area',searchable: true, sortable: true},
+            {data: 'country_product_type', name: 'country_product_type',searchable: true, sortable: true},
+            {data: 'whole_product', name: 'whole_product',searchable: true, sortable: true},
 
 
             {data: 'outcome_product_amount', name: 'outcome_product_amount',searchable: true, sortable: true},

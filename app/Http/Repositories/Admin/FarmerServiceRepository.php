@@ -39,7 +39,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
         if($admin->type =='employee') {
             $farmers_s = FarmerService::with('farmer', 'village','admin',
                 'agri_services', 'agrit_services', 'water_services')
-                ->where('admin_id', '==', $admin->id)
+                ->where('admin_id',  $admin->id)
                 ->selectRaw('distinct farmer_services.*')->get();
         }else{
             $farmers_s = FarmerService::with('farmer', 'village', 'admin',
@@ -168,7 +168,6 @@ class FarmerServiceRepository implements FarmerServiceInterface {
     public function update($request,$id)
 
     {
-        return count($request->water_services);
         DB::beginTransaction();
         try {
             $requestData = $request->validated();
@@ -263,7 +262,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
                     ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
                     ->where('farmer_services.admin_id', $admin->id)
 
-                    ->GroupBy('Area', 'State', 'Village', 'email'
+                    ->GroupBy('Area', 'State', 'Village', 'email_farmer'
                     )->get();
             }
             else if($admin->type == 'admin' ){

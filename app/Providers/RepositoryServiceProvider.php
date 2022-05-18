@@ -2,187 +2,204 @@
 namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Interfaces\Admin\TagInterface;
-use App\Http\Repositories\Admin\TagRepository;
-
 use App\Http\Interfaces\Admin\AreaInterface;
-use App\Http\Repositories\Admin\AreaRepository;
 
 use App\Http\Interfaces\Admin\BlogInterface;
-use App\Http\Repositories\Admin\BlogRepository;
+use App\Http\Interfaces\Admin\TeamInterface;
 
 use App\Http\Interfaces\Admin\TreeInterface;
-use App\Http\Repositories\Admin\TreeRepository;
-
-use App\Http\Interfaces\Admin\StateInterface;
-use App\Http\Repositories\Admin\StateRepository;
-
-use App\Http\Interfaces\Admin\OptionInterface;
-use App\Http\Repositories\Admin\OptionRepository;
-
-use App\Http\Interfaces\Admin\SliderInterface;
-use App\Http\Repositories\Admin\SliderRepository;
-use App\Http\Interfaces\Admin\BrandInterface;
-use App\Http\Repositories\Admin\BrandRepository;
-
-use App\Http\Interfaces\Admin\OrchardInterface;
-use App\Http\Repositories\Admin\OrchardRepository;
-
-use App\Http\Interfaces\Admin\ProductInterface;
-use App\Http\Repositories\Admin\ProductRepository;
-
-use App\Http\Interfaces\Admin\ProfileInterface;
-use App\Http\Repositories\Admin\ProfileRepository;
-
-use App\Http\Interfaces\Admin\SettingInterface;
-use App\Http\Repositories\Admin\SettingRepository;
-
 use App\Http\Interfaces\Admin\UserInterface;
-use App\Http\Repositories\Admin\UserRepository;
-
-use App\Http\Interfaces\Admin\VillageInterface;
-use App\Http\Repositories\Admin\VillageRepository;
-
-use App\Http\Interfaces\Admin\TreeTypeInterface;
-use App\Http\Repositories\Admin\TreeTypeRepository;
-
-use App\Http\Interfaces\Admin\AdminDepartmentInterface;
-use App\Http\Repositories\Admin\AdminDepartmentRepository;
-
-use App\Http\Interfaces\Admin\AdminInterface;
-use App\Http\Repositories\Admin\AdminRepository;
-
-use App\Http\Interfaces\Admin\WorkerInterface;
-use App\Http\Repositories\Admin\WorkerRepository;
-
-use App\Http\Interfaces\Admin\CategoryInterface;
-use App\Http\Repositories\Admin\CategoryRepository;
-
-use App\Http\Interfaces\Admin\AttributeInterface;
-use App\Http\Repositories\Admin\AttributeRepository;
-
-use App\Http\Interfaces\Admin\farmerInterface;
-use App\Http\Repositories\Admin\FarmerRepository;
-
-use App\Http\Interfaces\Admin\ProvienceInterface;
-use App\Http\Repositories\Admin\ProvienceRepository;
-
-use App\Http\Interfaces\Admin\CountryInterface;
-use App\Http\Repositories\Admin\CountryRepository;
-
-use App\Http\Interfaces\Admin\DepartmentInterface;
-use App\Http\Repositories\Admin\DepartmentRepository;
-
-use App\Http\Interfaces\Admin\LandCategoryInterface;
-use App\Http\Repositories\Admin\LandCategoryRepository;
-
-use App\Http\Interfaces\Admin\ProductCouponInterface;
-use App\Http\Repositories\Admin\ProductCouponRepository;
-
-use App\Http\Interfaces\Admin\OrderInterface;
-use App\Http\Repositories\Admin\OrderRepository;
-
-use App\Http\Interfaces\Admin\ProtectedHouseInterface;
-use App\Http\Repositories\Admin\ProtectedHouseRepository;
-
-use App\Http\Interfaces\Admin\ContactInterface;
-use App\Http\Repositories\Admin\ContactRepository;
-
-use App\Http\Repositories\Admin\RoleRepository;
-
-use App\Http\Interfaces\Admin\ReviewInterface;
-use App\Http\Repositories\Admin\ReviewRepository;
-
-use App\Http\Interfaces\Admin\TeamInterface;
-use App\Http\Repositories\Admin\TeamRepository;
-
-
-// ------------------------Front Uses-------------------------------
-
-// ------------------------Front Uses-------------------------------
-use App\Http\Repositories\Front\CommentRepository;
-
-use App\Http\Interfaces\Front\SearchInterface;
-use App\Http\Repositories\Front\SearchRepository;
-
-use App\Http\Interfaces\Front\RatingInterface;
-use App\Http\Repositories\Front\RatingRepository;
-
-use App\Http\Interfaces\Front\FarmerAllDataInterface;
-use App\Http\Repositories\Front\FarmerAllDataRepository;
-
-use App\Http\Interfaces\Front\WorkerAllDataInterface;
-use App\Http\Repositories\Front\WorkerAllDataRepository;
-
-use App\Http\Interfaces\Admin\PaymentMethodInterface;
-use App\Http\Repositories\Admin\PaymentMethodRepository;
-
-use App\Http\Interfaces\Front\PaymentInterface;
-use App\Http\Repositories\Front\PaymentRepository;
-
-use App\Http\Interfaces\Admin\AgriServiceInterface;
-use App\Http\Repositories\Admin\AgriServiceRepository;
-
-use App\Http\Interfaces\Admin\WaterServiceInterface;
-use App\Http\Repositories\Admin\WaterServiceRepository;
-
-use App\Http\Interfaces\Admin\AgriToolServiceInterface;
-use App\Http\Repositories\Admin\AgriToolServiceRepository;
-
-use App\Http\Interfaces\Admin\FarmerServiceInterface;
-use App\Http\Repositories\Admin\FarmerServiceRepository;
-
-
-
-use App\Http\Interfaces\Admin\WinterCropInterface;
-use App\Http\Repositories\Admin\WinterCropRepository;
-
-use App\Http\Interfaces\Admin\SummerCropInterface;
-use App\Http\Repositories\Admin\SummerCropRepository;
-
-
-
-use App\Http\Interfaces\Admin\FarmerCropInterface;
-use App\Http\Repositories\Admin\FarmerCropRepository;
-
-use App\Http\Interfaces\Admin\PrecipitationInterface;
-use App\Http\Repositories\Admin\PrecipitationRepository;
-
-use App\Http\Interfaces\Admin\LandAreaInterface;
-use App\Http\Repositories\Admin\LandAreaRepository;
-
-use App\Http\Interfaces\Admin\CawProjectInterface;
-use App\Http\Repositories\Admin\CawProjectRepository;
-
-use App\Http\Interfaces\Admin\ChickenProjectInterface;
-use App\Http\Repositories\Admin\ChickenProjectRepository;
-
-use App\Http\Interfaces\Admin\BeeDisasterInterface;
-use App\Http\Repositories\Admin\BeeDisasterRepository;
-
-use App\Http\Interfaces\Admin\CourseBeeInterface;
-use App\Http\Repositories\Admin\CourseBeeRepository;
-
-use App\Http\Interfaces\Admin\BeekeeperInterface;
-use App\Http\Repositories\Admin\BeekeeperRepository;
-
-use App\Http\Interfaces\Admin\WholeSaleProductInterface;
-use App\Http\Repositories\Admin\WholeSaleProductRepository;
-
-use App\Http\Interfaces\Admin\OutcomeProductInterface;
-use App\Http\Repositories\Admin\OutcomeProductRepository;
-
-use App\Http\Interfaces\Admin\IncomeProductInterface;
-use App\Http\Repositories\Admin\IncomeProductRepository;
-
-use App\Http\Interfaces\Admin\SubscribeInterface;
-use App\Http\Repositories\Admin\SubscribeRepository;
 
 use App\Http\Interfaces\Admin\AboutInterface;
+use App\Http\Interfaces\Admin\AdminInterface;
+
+use App\Http\Interfaces\Admin\BrandInterface;
+use App\Http\Interfaces\Admin\OrderInterface;
+
+use App\Http\Interfaces\Admin\StateInterface;
+use App\Http\Interfaces\Admin\farmerInterface;
+
+use App\Http\Interfaces\Admin\OptionInterface;
+use App\Http\Interfaces\Admin\ReviewInterface;
+use App\Http\Interfaces\Admin\SliderInterface;
+use App\Http\Interfaces\Admin\WorkerInterface;
+
+use App\Http\Interfaces\Front\RatingInterface;
+use App\Http\Interfaces\Front\SearchInterface;
+
+use App\Http\Repositories\Admin\TagRepository;
+use App\Http\Interfaces\Admin\ContactInterface;
+use App\Http\Interfaces\Admin\CountryInterface;
+use App\Http\Interfaces\Admin\OrchardInterface;
+
+use App\Http\Interfaces\Admin\ProvinceInterface;
+
+use App\Http\Interfaces\Admin\ProductInterface;
+use App\Http\Interfaces\Admin\ProfileInterface;
+
+use App\Http\Interfaces\Admin\SettingInterface;
+use App\Http\Interfaces\Admin\VillageInterface;
+
+use App\Http\Interfaces\Front\PaymentInterface;
+use App\Http\Repositories\Admin\AreaRepository;
+
+use App\Http\Repositories\Admin\BlogRepository;
+
+use App\Http\Interfaces\Admin\RoleRepositoryInterface;
+use App\Http\Repositories\Admin\RoleRepository;
+
+
+use App\Http\Repositories\Admin\TeamRepository;
+use App\Http\Repositories\Admin\TreeRepository;
+
+use App\Http\Repositories\Admin\UserRepository;
+use App\Http\Interfaces\Admin\CategoryInterface;
+
+use App\Http\Interfaces\Admin\LandAreaInterface;
+use App\Http\Interfaces\Admin\TreeTypeInterface;
+
 use App\Http\Repositories\Admin\AboutRepository;
+use App\Http\Repositories\Admin\AdminRepository;
+
+use App\Http\Repositories\Admin\BrandRepository;
+use App\Http\Repositories\Admin\OrderRepository;
+
+use App\Http\Repositories\Admin\StateRepository;
+use App\Http\Interfaces\Admin\AttributeInterface;
+
+use App\Http\Interfaces\Admin\BeekeeperInterface;
+use App\Http\Interfaces\Admin\CourseBeeInterface;
+
+use App\Http\Interfaces\Admin\ProvienceInterface;
+use App\Http\Interfaces\Admin\SubscribeInterface;
+
+use App\Http\Repositories\Admin\FarmerRepository;
+use App\Http\Repositories\Admin\OptionRepository;
+
+use App\Http\Repositories\Admin\ReviewRepository;
+use App\Http\Repositories\Admin\SliderRepository;
+
+use App\Http\Repositories\Admin\WorkerRepository;
+use App\Http\Repositories\Front\RatingRepository;
+
+use App\Http\Repositories\Front\SearchRepository;
+use App\Http\Interfaces\Admin\CawProjectInterface;
+
+use App\Http\Interfaces\Admin\DepartmentInterface;
+use App\Http\Interfaces\Admin\FarmerCropInterface;
+
+use App\Http\Interfaces\Admin\SummerCropInterface;
+use App\Http\Interfaces\Admin\WinterCropInterface;
+
+use App\Http\Repositories\Admin\ContactRepository;
+
+
+use App\Http\Repositories\Admin\CountryRepository;
+use App\Http\Repositories\Admin\ProvinceRepository;
+
+use App\Http\Repositories\Admin\OrchardRepository;
+
+use App\Http\Repositories\Admin\ProductRepository;
+use App\Http\Repositories\Admin\ProfileRepository;
+
+
+// ------------------------Front Uses-------------------------------
+
+// ------------------------Front Uses-------------------------------
+use App\Http\Repositories\Admin\SettingRepository;
+
+use App\Http\Repositories\Admin\VillageRepository;
+use App\Http\Repositories\Front\CommentRepository;
+
+use App\Http\Repositories\Front\PaymentRepository;
+use App\Http\Interfaces\Admin\AgriServiceInterface;
+
+use App\Http\Interfaces\Admin\BeeDisasterInterface;
+use App\Http\Repositories\Admin\CategoryRepository;
+
+use App\Http\Repositories\Admin\LandAreaRepository;
+use App\Http\Repositories\Admin\TreeTypeRepository;
+
+use App\Http\Interfaces\Admin\LandCategoryInterface;
+use App\Http\Interfaces\Admin\WaterServiceInterface;
+
+use App\Http\Repositories\Admin\AttributeRepository;
+use App\Http\Repositories\Admin\BeekeeperRepository;
+
+use App\Http\Repositories\Admin\CourseBeeRepository;
+use App\Http\Repositories\Admin\ProvienceRepository;
+
+use App\Http\Repositories\Admin\SubscribeRepository;
+use App\Http\Interfaces\Admin\FarmerServiceInterface;
+
+use App\Http\Interfaces\Admin\IncomeProductInterface;
+use App\Http\Interfaces\Admin\PaymentMethodInterface;
+
+use App\Http\Interfaces\Admin\PrecipitationInterface;
+use App\Http\Interfaces\Admin\ProductCouponInterface;
+
+
+
+use App\Http\Interfaces\Front\FarmerAllDataInterface;
+use App\Http\Interfaces\Front\WorkerAllDataInterface;
+
+use App\Http\Repositories\Admin\CawProjectRepository;
+use App\Http\Repositories\Admin\DepartmentRepository;
+
+
+
+use App\Http\Repositories\Admin\FarmerCropRepository;
+use App\Http\Repositories\Admin\SummerCropRepository;
+
+use App\Http\Repositories\Admin\WinterCropRepository;
+use App\Http\Interfaces\Admin\ChickenProjectInterface;
+
+use App\Http\Interfaces\Admin\OutcomeProductInterface;
+use App\Http\Interfaces\Admin\ProtectedHouseInterface;
+
+use App\Http\Repositories\Admin\AgriServiceRepository;
+
+use App\Http\Repositories\Admin\BeeDisasterRepository;
+use App\Http\Interfaces\Admin\AdminDepartmentInterface;
+
+use App\Http\Interfaces\Admin\AgriToolServiceInterface;
+use App\Http\Repositories\Admin\LandCategoryRepository;
+
+use App\Http\Repositories\Admin\WaterServiceRepository;
+use App\Http\Interfaces\Admin\WholeSaleProductInterface;
+
+use App\Http\Repositories\Admin\FarmerServiceRepository;
+use App\Http\Repositories\Admin\IncomeProductRepository;
+
+use App\Http\Repositories\Admin\PaymentMethodRepository;
+use App\Http\Repositories\Admin\PrecipitationRepository;
+
+
+use App\Http\Interfaces\Admin\CurrencyInterface;
+use App\Http\Repositories\Admin\CurrencyRepository;
+
+use App\Http\Interfaces\Admin\UnitInterface;
+use App\Http\Repositories\Admin\UnitRepository;
+
+
+use App\Http\Repositories\Admin\ProductCouponRepository;
+use App\Http\Repositories\Front\FarmerAllDataRepository;
+
+use App\Http\Repositories\Front\WorkerAllDataRepository;
+use App\Http\Repositories\Admin\ChickenProjectRepository;
+
+use App\Http\Repositories\Admin\OutcomeProductRepository;
+use App\Http\Repositories\Admin\ProtectedHouseRepository;
+
+use App\Http\Repositories\Admin\AdminDepartmentRepository;
+use App\Http\Repositories\Admin\AgriToolServiceRepository;
+use App\Http\Repositories\Admin\WholeSaleProductRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register() {
+        $this->app->bind(CurrencyInterface::class, CurrencyRepository::class);
+        $this->app->bind(UnitInterface::class, UnitRepository::class);
         $this->app->bind(OutcomeProductInterface::class, OutcomeProductRepository::class);
         $this->app->bind(IncomeProductInterface::class, IncomeProductRepository::class);
         $this->app->bind(WholeSaleProductInterface::class, WholeSaleProductRepository::class);

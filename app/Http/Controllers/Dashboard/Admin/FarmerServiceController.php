@@ -37,7 +37,7 @@ class FarmerServiceController extends Controller
     }
 
     public function update(FarmerServiceRequest $request,$id) {
-        return $this->Data->store($request,$id);
+        return $this->Data->update($request,$id);
     }
     public function destroy($id) {
         return $this->Data->destroy($id);

@@ -94,8 +94,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>{{ __('Admin/admin.admin_department') }}</label>
-                                                    <label class="">{{__('Admin\admin.admin_departments')}}</label>
+                                                    <label class="">{{__('Admin\admins.admin_department')}}</label>
                                                     <hr>
                                                     <div id="jstree"></div>
                                                     <input name="admin_department_id" type="hidden" value="" class="admin_department_id">
@@ -154,10 +153,10 @@
                                             </div>
 
                                             <div class="form-actions center">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
-                                            </button>
-                                        </div>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
 

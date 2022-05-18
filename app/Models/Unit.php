@@ -10,6 +10,11 @@ class Unit extends Model {
     protected $with = ['translations'];
     public $translatedAttributes = ['Name'];
     public $timestamps = true;
+    public function beekeepers(){
+        return $this->hasMany(BeeKeeper::class);
+    }
+
+
 }
 
 

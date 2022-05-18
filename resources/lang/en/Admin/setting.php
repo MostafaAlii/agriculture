@@ -38,5 +38,7 @@ return [
     'site_name.required' => 'Site Name is required',
     'status.required' => 'Status is Required',
     'message_maintenance.required'=>'Message Maintenance Required',
+    'unit_title_in_sidebar'                                 =>               'Measurement Units',
+    'currency_title_in_sidebar'                             =>                'Currencies'
 
 ];

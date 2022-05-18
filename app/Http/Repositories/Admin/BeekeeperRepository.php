@@ -37,7 +37,7 @@ class BeekeeperRepository implements BeekeeperInterface {
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $beekeepers = BeeKeeper::with('admin','farmer', 'village', 'coursebees', 'beedisasters','area','state')
-                ->where('admin_id','==',$admin->id )
+                ->where('admin_id',$admin->id )
 
             ->selectRaw('distinct bee_keepers.*')->get();
         }else{
@@ -166,8 +166,8 @@ class BeekeeperRepository implements BeekeeperInterface {
 
     public function edit($id)
     {
-        $beekeeper = BeeKeeper::findorfail($id);
-
+        $beekeeperID = Crypt::decrypt($id);
+        $beekeeper = BeeKeeper::findorfail($beekeeperID);
         $adminId = Auth::user()->id;
         $admin = Admin::findorfail($adminId);
         $areaID = $admin->area->id;
@@ -187,12 +187,13 @@ class BeekeeperRepository implements BeekeeperInterface {
     public function update( $request, $id) {
         DB::beginTransaction();
         try {
+            $beekeeperID = Crypt::decrypt($id);
             $adminId = Auth::user()->id;
             $admin = Admin::findorfail($adminId);
             $areaID = $admin->area->id;
             $stateID = $admin->state->id;
             $requestData = $request->validated();
-            $beekeeper =  BeeKeeper::findorfail($id);
+            $beekeeper =  BeeKeeper::findorfail($beekeeperID);
             $beekeeper->admin_id =  $admin->id;
             $beekeeper->farmer_id = $requestData['farmer_id'];
             $beekeeper->area_id = $areaID;
@@ -226,18 +227,19 @@ class BeekeeperRepository implements BeekeeperInterface {
         }
     }
 
+
+
     public function destroy($id)
     {
         $beekeeperlID = Crypt::decrypt($id);
         $beekeeper = BeeKeeper::findorfail($beekeeperlID);
+         $beekeeper->coursebees()->detach();
 
-        $beekeeper->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
+         $beekeeper->beedisasters()->detach();
+         $beekeeper->delete();
+        toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('BeeKeepers.index');
-
-
-
-    }
+        }
 
     public function bulkDelete( $request) {
         try {
@@ -247,9 +249,11 @@ class BeekeeperRepository implements BeekeeperInterface {
                 foreach ($delete_select_id as $beekeeper_ids) {
 
                     $beekeeper = BeeKeeper::findorfail($beekeeper_ids);
+                    $beekeeper->coursebees()->detach();
 
+                    $beekeeper->beedisasters()->detach();
 
-                    BeeKeeper::destroy($beekeeper_ids);
+                    $beekeeper->delete();
                 }
                 DB::commit();
 

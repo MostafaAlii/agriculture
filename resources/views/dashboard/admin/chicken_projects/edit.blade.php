@@ -108,10 +108,11 @@
                                                     <div  class="form-group">
                                                         <label for="id_h5_multi">{{ __('Admin/animals.marketing_side') }}</label>
                                                         <select name="marketing_side"class="select2 form-control"id="id_h5_multi">
-                                                            <option value="{{$chicken->marketing_side}}" selected>{{$chicken->marketing_side}}</option>
+
                                                             <option value="">{{ __('Admin/site.select') }}</option>
-                                                            <option value="private">{{ __('Admin/animals.private') }}</option>
-                                                            <option value="govermental">{{ __('Admin/animals.govermental') }}</option>
+                                                            <option value="local" {{$chicken->marketing_side=='private'?'selected':''}}>{{ __('Admin/animals.private') }}</option>
+                                                            <option value="govermental" {{$chicken->marketing_side=='govermental'?'selected':''}}>{{ __('Admin/animals.govermental') }}</option>
+
 
                                                         </select>
 
@@ -123,7 +124,7 @@
                                                         <select name="food_source"class="select2 form-control"id="id_h5_multi">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             <option value="local" {{$chicken->food_source=='local'?'selected':''}}>{{ __('Admin/animals.local') }}</option>
-                                                            <option value="outer" {{$chicken->food_source=='outer'?'selected':''}}>{{ __('Admin/animals.outer') }}</option>
+                                                            <option value="imported" {{$chicken->food_source=='imported'?'selected':''}}>{{ __('Admin/animals.imported') }}</option>
 
                                                         </select>
 

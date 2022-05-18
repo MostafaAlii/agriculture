@@ -25,8 +25,7 @@ class OutcomeProductFactory extends Factory
 
 
             'country_id'       => $this->faker->numberBetween(1, Country::count()),
-            'Province_id'      => $this->faker->numberBetween(1, Province::count()),
-            'area_id'    => $this->faker->numberBetween(1, Area::count()),
+            'country_product_type'=>$this->faker->randomElement(["iraq", "local",'imported']),
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
             'unit_id'      => $this->faker->randomElement([1, 2]),
             'whole_product_id'=>$this->faker->numberBetween(1, WholeProduct::count()),
