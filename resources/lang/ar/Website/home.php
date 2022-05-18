@@ -23,13 +23,13 @@ return [
     // nav bar **************************************
 
    // contact us page translation *******************************************
-   'get'                 => ' بنا',
-   'touch'               => ' اتصل',
-   'contactsms' =>'فى خدمه عملائنا 24 ساعه',
+   'get'                 => ' اتصل',
+   'touch'               => 'بنا ',
+   'contactsms'          =>'فى خدمه عملائنا 24 ساعه',
    'firstname'           => 'الاسم الاول',
    'lastname'            => 'اسم العائله',
-   'phone'               => 'تليفون',
-   'email'               => 'ايميل',
+   'phone'               => 'الهاتف',
+   'email'               => 'البريد الالكترونى',
    'comment'             => 'رسالتك',
    'send'                => 'ارسال',
    // endcontact us page translation *******************************************
@@ -89,4 +89,13 @@ return [
       // worker pages
    'worker_details' =>'بيانات العامل',
    //    'worker_details' =>'Sub Categories',
+
+
+
+   'msg'  =>'شكراا لك .. تم ارسال رسالتك بنجاح !',
+   'about_more' =>'للمزيد',
+
+   'team_datail' =>'بروفايل الفريق',
+
+   
 ];

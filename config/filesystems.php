@@ -66,6 +66,20 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'about' => [
+            'driver' => 'local',
+            'root' => public_path('Dashboard/img/about'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'team' => [
+            'driver' => 'local',
+            'root' => public_path('Dashboard/img/team'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

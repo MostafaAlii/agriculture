@@ -196,6 +196,19 @@ return [
 
 
       // Brand
-      'brand'=>'Brand'
+      'brand'=>'Brand',
+      'newbrand'=>'New Brand',
+
+
+      //sidebar
+      'settings'=>'Settings',
+      'sliderimages'=>'Slider Images',
+
+
+      'about_us' =>'About US',
+      'reviwe' =>'}Clients opinions',
+
+      'our_team' =>'Team',
+
 
 ];

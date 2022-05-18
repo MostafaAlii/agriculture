@@ -22,7 +22,7 @@ class RoleController extends Controller {
     }// end of data
 
     public function create() {
-        //
+        return $this->Data->create();
     }
 
     public function store(Request $request) {

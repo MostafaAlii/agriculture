@@ -5,7 +5,7 @@
     <div class="main-menu-content">
         <div class="user-profile">
             <div class="user-info text-center pt-1 pb-1">
-                @if (Auth::user()->image->filename)
+                @if (isset(Auth::user()->image->filename))
                     <a class="mr-2" href="{{ route('profile.index') }}">
                         <img class="user-img img-fluid rounded-circle" style="width:50%; height:50%;border-radius: 15%;"
                             class="rounded-circle"
@@ -40,6 +40,17 @@
         </div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                 <!-- Start about Us -->
+                 <li class=" nav-item">
+                        <li>
+                            <a class="menu-item" href="{{ route('about_us/show') }}">
+                                <i class="material-icons"> info </i>
+                                <span data-i18n="Options"> {{ trans('Admin/site.about_us') }}</span>
+                            </a>
+                        </li>
+                </li>
+                <!-- End about Us  -->
+                
                 <!-- Start Dashboard Dropdown Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
@@ -98,7 +109,7 @@
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">tune</i>
                         <span class="menu-title" data-i18n="settings">
-                            {{ trans('Admin/setting.page_title_in_sidebar') }}
+                            {{ trans('Admin/site.settings') }}
                         </span>
                     </a>
                     <ul class="menu-content">
@@ -106,7 +117,7 @@
                         <li>
                             <a class="menu-item" href="{{ route('settings') }}">
                                 <i class="material-icons">tune</i>
-                                <span data-i18n="settings"> {{ trans('Admin/setting.page_title_in_sidebar') }}</span>
+                                <span data-i18n="settings"> {{ trans('Admin/site.settings') }}</span>
                             </a>
                         </li>
                         <!-- End Settings -->
@@ -132,7 +143,7 @@
                         <li>
                             <a class="menu-item" href="{{ route('sliders.index') }}">
                                 <i class="material-icons">photo_library</i>
-                                <span data-i18n="Sliders"> {{ trans('Admin/sliders.sliderPageTitle') }}</span>
+                                <span data-i18n="Sliders"> {{ trans('Admin/site.sliderimages') }}</span>
                             </a>
                         </li>
                         <li>
@@ -636,6 +647,20 @@
 
                 <!-- Start Contact Us -->
                 <li class=" nav-item">
+                    <li>
+                        <a class="menu-item" href="{{ route('team.index') }}">
+                            
+                        <i class="icon-user"
+                                    style="color: whight;;padding: 3px;font-size: 18px;"></i>
+                            <span data-i18n="Options"> {{ trans('Admin/site.our_team') }}</span>
+                        </a>
+                    </li>
+                    <!-- End Orders -->
+                </li>
+                <!-- End Contact Us  -->
+                
+                <!-- Start Contact Us -->
+                <li class=" nav-item">
                         <li>
                             <a class="menu-item" href="{{ route('contact_us') }}">
                                 <i class="material-icons"> mail_outline </i>
@@ -645,6 +670,20 @@
                         <!-- End Orders -->
                 </li>
                 <!-- End Contact Us  -->
+
+
+                <!-- Start Contact Us -->
+                <li class=" nav-item">
+                    <li>
+                        <a class="menu-item" href="{{ route('review.index') }}">
+                            <i class="material-icons"> mail_outline </i>
+                            <span data-i18n="Options"> {{ trans('Admin/site.reviwe') }}</span>
+                        </a>
+                    </li>
+                    <!-- End Orders -->
+                </li>
+                <!-- End Contact Us  -->
+                
             </ul>
         </div>
     </div>

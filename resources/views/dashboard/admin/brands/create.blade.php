@@ -5,14 +5,14 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-{{ __('Admin/site.slider') }}
+{{ __('Admin/site.brand') }}
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">{{ __('Admin/site.slider') }}</h3>
+                <h3 class="content-header-title">{{ __('Admin/site.brand') }}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
@@ -20,7 +20,7 @@
                                     href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
                             <li class="breadcrumb-item"><a
-                                    href="{{ route('sliders.index') }}">{{ __('Admin/site.slider') }}</a>
+                                    href="{{ route('brands.index') }}">{{ __('Admin/site.brand') }}</a>
                             </li>
                             <li class="breadcrumb-item active">{{ __('Admin/site.add') }}
                             </li>
@@ -44,7 +44,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newslider') }}
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/site.newbrand') }}
                                 </h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
@@ -58,7 +58,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('sliders.store') }}" enctype="multipart/form-data" autocomplete="off">
+                                    <form class="form" method="post" action="{{ route('brands.store') }}" enctype="multipart/form-data" autocomplete="off">
                                         @csrf
                                         @method('post')
                                         <div class="form-body">
@@ -71,16 +71,7 @@
                                                             placeholder="{{ __('Admin/site.title') }}"
                                                             name="title" value="{{ old('title') }}" required>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="{{ __('Admin/site.body') }}">{{ __('Admin/site.body') }}<span
-                                                               class="text-danger">*</span>
-                                                        </label>
-                                                        <textarea name="subtitle" rows="5"
-                                                                  placeholder="{{ __('Admin/site.body') }}"
-                                                                  class="form-control" required>
 
-                                                        </textarea>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -114,31 +105,5 @@
     <!-- END: Content-->
 @endsection
 @section('js')
-    {{-- <script type="text/javascript">
-        var loadFile = function(event) {
-            var img = document.getElementById('output');
-            img.src = URL.createObjectURL(event.target.files[0]);
-            output.img = function() {
-                URL.revokeObjectURL(img.src)
-            }
 
-        };
-    </script>
-
-    <script type="text/javascript">
-        var loadFile1 = function(event) {
-            var output = document.getElementById('output1');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src)
-            }
-
-        };
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"
-        integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js"
-        integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 @endsection

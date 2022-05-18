@@ -67,13 +67,15 @@ class DatabaseSeeder extends Seeder {
             IncomeProductSeeder::class,
             SummerCropSeeder::class,
             WinterCropSeeder::class,
-
             FarmerCropSeeder::class,
             SummerCropFarmerCropSeeder::class,
             WinterCropFarmerCropSeeder::class,
-
             SubscriptionTableSeeder::class,
-//            BrandSeeder::class,
+            BrandSeeder::class,
+            AboutSeeder::class,
+            ReviewSeeder::class,
+            TeamSeeder::class,
+            
         ]);
 
         \App\Models\Farmer::factory(30)->create();
