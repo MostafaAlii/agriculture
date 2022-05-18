@@ -114,6 +114,8 @@
 
 <script>
 
+
+
     $('#land-area-statistic-state-table').DataTable( {
         dom: 'Bfrtip',
         buttons: [
@@ -122,7 +124,7 @@
                 orientation: 'landscape',
                 pageSize: 'A3',
                 exportOptions: {
-                    columns: [ 1,2,3,4]
+                    columns: [ 1,2,3,4,5,6,7,8,9,10,11,12]
                 },
                 className: 'btn btn-primary ml-1',
 
@@ -130,7 +132,7 @@
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [1, 2,3,4]
+                    columns:  [ 1,2,3,4,5,6,7,8,9,10,11,12]
                 },
                 autoPrint: true,
                 orientation: 'landscape',
@@ -143,6 +145,7 @@
 
         ],
     } );
+
 
 </script>
 @endsection

@@ -8,6 +8,16 @@ class IncomeProduct extends Model {
     protected $guarded=[];
     public $timestamps = true;
 
+    const LOCAL ='local',IRAQ ='iraq',IMPORTED='imported';
+    public function getCountryProductType() {
+        switch ($this->country_product_type) {
+            case 'local': $result =   trans('Admin/income_products.local'); break;
+            case 'iraq': $result = trans('Admin/income_products.iraq') ; break;
+            case 'imported': $result =  trans('Admin/income_products.imported') ; break;
+        }
+        return $result;
+    }
+
 
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id');
@@ -19,13 +29,7 @@ class IncomeProduct extends Model {
     public function country(){
         return $this->belongsTo(Country::class,'country_id');
     }
-    public function province(){
-        return $this->belongsTo(Province::class,'province_id');
-    }
 
-    public function area(){
-        return $this->belongsTo(Area::class,'area_id');
-    }
     public function currency(){
         return $this->belongsTo(Currency::class,'currency_id');
     }
@@ -34,5 +38,7 @@ class IncomeProduct extends Model {
     public function whole_product(){
         return $this->belongsTo(WholeProduct::class,'whole_product_id');
     }
+
+
 
 }

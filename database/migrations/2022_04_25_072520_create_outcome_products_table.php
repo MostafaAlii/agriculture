@@ -16,8 +16,8 @@ class CreateOutcomeProductsTable extends Migration
         Schema::create('outcome_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->foreignId('province_id')->nullable()->references('id')->on('provinces')->onDelete('cascade');
-            $table->foreignId('area_id')->nullable()->references('id')->on('areas')->onDelete('cascade');
+            $table->enum('country_product_type',['local','iraq','imported']);
+
             $table->foreignId('admin_id')->references('id')->on('admins');
             $table->foreignId('unit_id')->references('id')->on('units');
             $table->string('admin_dep_name');

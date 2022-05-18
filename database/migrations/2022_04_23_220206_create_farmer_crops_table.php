@@ -24,8 +24,8 @@ class CreateFarmerCropsTable extends Migration
             $table->foreignId('land_category_id')->references('id')->on('land_categories')->onDelete('cascade');
             $table->string('phone');
             $table->string('email');
-            $table->double('summer_area_crop',[15,2]);
-            $table->double('winter_area_crop',[15,2]);
+            $table->double('summer_area_crop',[15,2])->nullable();
+            $table->double('winter_area_crop',[15,2])->nullable();
             $table->date('date');
 
             $table->timestamps();

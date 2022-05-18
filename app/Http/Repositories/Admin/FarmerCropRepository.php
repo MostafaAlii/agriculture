@@ -41,7 +41,7 @@ class FarmerCropRepository implements FarmerCropInterface {
         $admin=Admin::findorfail($adminID);
         if($admin->type =='employee') {
             $farmerCrops = FarmerCrop::with('admin', 'farmer', 'village', 'summer_crops', 'landCategory','winter_crops')
-                ->where('admin_id', '==', $admin->id)
+                ->where('admin_id',  $admin->id)
                 ->selectRaw('distinct farmer_crops.*')->get();
         }else {
             $farmerCrops = FarmerCrop::with('admin', 'farmer', 'village', 'summer_crops','winter_crops', 'landCategory')
@@ -221,6 +221,8 @@ class FarmerCropRepository implements FarmerCropInterface {
     {
         $farmerCropID = Crypt::decrypt($id);
         $farmercrop = FarmerCrop::findorfail($farmerCropID);
+        $farmercrop->winter_crops()->detach();
+        $farmercrop->summer_crops()->detach();
 
         $farmercrop->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));
@@ -238,9 +240,10 @@ class FarmerCropRepository implements FarmerCropInterface {
                 foreach ($delete_select_id as $farmer_crop_ids) {
 
                     $farmer_crop = FarmerCrop::findorfail($farmer_crop_ids);
+                    $farmer_crop->winter_crops()->detach();
+                    $farmer_crop->summer_crops()->detach();
 
-
-                    FarmerCrop::destroy($farmer_crop_ids);
+                    $farmer_crop->delete();
                 }
                 DB::commit();
 
@@ -278,7 +281,7 @@ class FarmerCropRepository implements FarmerCropInterface {
                 ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
 
                 ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                ->where('farmer_services.admin_id', $admin->id)
+                ->where('farmer_crops.admin_id', $admin->id)
 
                 ->get();
         }
@@ -289,8 +292,6 @@ class FarmerCropRepository implements FarmerCropInterface {
                 'farmer_crops.summer_area_crop As summer_area_crop',
                 'farmer_crops.winter_area_crop As winter_area_crop',
                 'farmer_crops.date As date','land_category_translations.category_name As category_name')
-
-
                 ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
                 ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
                 ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')

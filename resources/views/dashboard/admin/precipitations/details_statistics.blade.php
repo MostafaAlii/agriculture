@@ -63,7 +63,7 @@
                                     <br>
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration" id="precipitation-statistic-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="precipitation-statistic-details-table">
                                             <thead>
                                                 <tr>
 
@@ -103,7 +103,7 @@
             }
         });
 
-        $('#precipitation-statistic-table').DataTable({
+        $('#precipitation-statistic-details-table').DataTable({
             processing: true,
             serverSide: true,
             dom: 'Bfrtip',
@@ -135,7 +135,7 @@
 
             ],
             ajax: {
-                url: "{{ URL::to('dashboard_admin/dtable-details-statistic') }}",
+                url: "{{ URL::to('dashboard_admin/dtable-details-statistics') }}",
                 type: 'GET',
                 data: function (d) {
                     d.start_date = $('#start_date').val();
@@ -158,7 +158,7 @@
     });
 
     $('#btnFiterSubmitSearch').click(function(){
-        $('#precipitation-statistic-table').DataTable().draw(true);
+        $('#precipitation-statistic-details-table').DataTable().draw(true);
     });
 
 </script>

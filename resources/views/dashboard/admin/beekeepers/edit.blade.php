@@ -60,7 +60,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('BeeKeepers.update',($beekeeper->id)) }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route('BeeKeepers.update',encrypt($beekeeper->id)) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="form-body">

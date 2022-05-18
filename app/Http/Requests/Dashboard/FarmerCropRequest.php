@@ -20,8 +20,8 @@ class FarmerCropRequest extends FormRequest
             'village_id' => 'required|exists:villages,id',
 
             'land_category_id' => 'required',
-            'winter_area_crop' => 'required|string',
-            'summer_area_crop' => 'required|string',
+            'winter_area_crop' => 'sometimes:nullable',
+            'summer_area_crop' =>  'sometimes:nullable',
             'date'=>'required|date',
 
             'phone'=>'required',
@@ -31,14 +31,15 @@ class FarmerCropRequest extends FormRequest
                 'string',
             ],
             'winter_crops'   => [
-                'required',
+                'sometimes:nullable',
                 'array',
             ],
             'summer_crops.*' => [
                 'string',
             ],
             'summer_crops'   => [
-                'required',
+//                'required',
+                'sometimes:nullable',
                 'array',
             ],
 
@@ -49,9 +50,9 @@ class FarmerCropRequest extends FormRequest
     {
         return [
             'winter_crops.*.string'=>trans('Admin/validation.string'),
-            'winter_crops.required'=>trans('Admin/validation.required'),
+//            'winter_crops.required'=>trans('Admin/validation.required'),
             'summer_crops.*.string'=>trans('Admin/validation.string'),
-            'summer_crops.required'=>trans('Admin/validation.required'),
+//            'summer_crops.required'=>trans('Admin/validation.required'),
             'summer_area_crop.required' => trans('Admin/validation.required'),
             'winter_area_crop.required' => trans('Admin/validation.required'),
             'date.required' => trans('Admin/validation.required'),

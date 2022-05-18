@@ -29,16 +29,7 @@ class LandAreaRepository implements LandAreaInterface{
             compact('admin','area_name','state_name'));
 
     }
-//
-//$users = User::select([
-//'users.id',
-//'users.name',
-//'users.email',
-//\DB::raw('count(posts.user_id) as count'),
-//'users.created_at',
-//'users.updated_at'
-//])->join('posts','posts.user_id','=','users.id')
-//->groupBy('posts.user_id');
+
 
     public function data()
     {
@@ -46,7 +37,7 @@ class LandAreaRepository implements LandAreaInterface{
         $admin=Admin::findorfail($adminID);
         if($admin->type =='employee') {
             $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin')
-                ->where('admin_id', '==', $admin->id);
+                ->where('admin_id',  $admin->id);
         }else{
             $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin');
         }
@@ -71,9 +62,7 @@ class LandAreaRepository implements LandAreaInterface{
             ->addColumn('landCategory', function (LandArea $land_area) {
                 return $land_area->landCategory->category_name;
             })
-            ->addColumn('count', function (LandArea $land_area) {
-                return $land_area->where('land_category_id', 'like', '1')->sum('L_area');
-            })
+
 
 
             ->addColumn('actions', 'dashboard.admin.land_areas.data_table.actions')

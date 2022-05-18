@@ -110,6 +110,24 @@
                             </a>
                         </li>
                         <!-- End Settings -->
+                        <!-- Start units -->
+                        <li>
+                            <a class="menu-item" href="{{ route('Units.index') }}">
+                                <i class="fa fa-text-height" aria-hidden="true"></i>
+                                <span data-i18n="settings"> {{ trans('Admin/setting.unit_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End units -->
+
+                        <!-- Start currencies -->
+                        <li>
+                            <a class="menu-item" href="{{ route('Currencies.index') }}">  <i class="fa fa-gbp x-1" aria-hidden="true"></i>
+
+                                <span data-i18n="settings"> {{ trans('Admin/setting.currency_title_in_sidebar') }}</span>
+                            </a>
+                        </li>
+                        <!-- End currencies -->
+
                         <!-- Start Sliders -->
                         <li>
                             <a class="menu-item" href="{{ route('sliders.index') }}">

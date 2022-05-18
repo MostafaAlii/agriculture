@@ -119,7 +119,7 @@
                                                        <div class="col">
                                                            <div  class="form-group">
                                                                <label for="id_h5_multi">{{ __('Admin/services.agriTServices') }}</label>
-                                                               <select name="agrit_services[]"class="select2 form-control" multiple="multiple" id="id_h5_multi">
+                                                               <select name="agri_t_services[]"class="select2 form-control" multiple="multiple" id="id_h5_multi">
 
 
                                                                        @foreach($agri_t_services as $agri_t_service)

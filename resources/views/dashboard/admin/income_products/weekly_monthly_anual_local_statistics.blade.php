@@ -66,11 +66,12 @@
                                         <table class="table table-striped table-bordered zero-configuration" id="income_local_products_periodly-statistic-table">
                                             <thead>
                                                 <tr>
+                                                    <th>{{ __('Admin/income_products.country') }}</th>
+
                                                     <th>{{ __('Admin/income_products.admin_dep_name') }}</th>
                                                     <th>{{ __('Admin/income_products.product') }}</th>
                                                     <th>{{ __('Admin/income_products.local_product') }}</th>
-                                                    {{--<th>{{ __('Admin/income_products.iraq_product') }}</th>--}}
-                                                    {{--<th>{{ __('Admin/income_products.imported_product') }}</th>--}}
+
                                                     <th>{{ __('Admin/income_products.date') }}</th>
 
 
@@ -113,7 +114,7 @@
                     orientation: 'landscape',
                     pageSize: 'A3',
                     exportOptions: {
-                        columns: [0,1,2,3]
+                        columns: [0,1,2,3,4]
                     },
                     className: 'btn btn-primary ml-1',
 
@@ -121,7 +122,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns:  [0,1,2,3]
+                        columns:  [0,1,2,3,4]
                     },
                     autoPrint: true,
                     orientation: 'landscape',
@@ -144,11 +145,9 @@
 
             columns: [
                 { data: 'admin_dep_name', name: 'admin_dep_name' },
-
+                { data: 'country', name: 'country' },
                 { data: 'Product', name: 'Product' },
                 { data: 'local_product', name: 'local_product' },
-                // { data: 'iraq_product', name: 'iraq_product' },
-                // { data: 'imported_product', name: 'imported_product' },
                 { data: 'date', name: 'date' },
 
             ],

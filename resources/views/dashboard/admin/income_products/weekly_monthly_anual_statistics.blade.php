@@ -65,7 +65,7 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="income_products_periodly-statistic-table">
                                             <thead>
-                                                <tr>
+                                                <tr> <th>{{ __('Admin/income_products.country') }}</th>
                                                     <th>{{ __('Admin/income_products.admin_dep_name') }}</th>
                                                     <th>{{ __('Admin/income_products.product') }}</th>
                                                     <th>{{ __('Admin/income_products.local_product') }}</th>
@@ -113,7 +113,7 @@
                     orientation: 'landscape',
                     pageSize: 'A3',
                     exportOptions: {
-                        columns: [ 0,1,4,5]
+                        columns: [ 0,1,2,3,4,5,6]
                     },
                     className: 'btn btn-primary ml-1',
 
@@ -121,7 +121,7 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns:  [0,1,4,5]
+                        columns:  [ 0,1,2,3,4,5,6]
                     },
                     autoPrint: true,
                     orientation: 'landscape',
@@ -143,6 +143,7 @@
             },
 
             columns: [
+                { data: 'country', name: 'country' },
                 { data: 'admin_dep_name', name: 'admin_dep_name' },
 
                 { data: 'Product', name: 'Product' },

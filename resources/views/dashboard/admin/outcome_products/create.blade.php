@@ -94,9 +94,13 @@
                                                         <div class="col col-md-4">
 
                                                             <div class="form-group">
-                                                                <label for="state_id">{{ __('Admin/outcome_products.province') }}</label>
-                                                                <select class=" form-control" name="province_id" id="province_id">
+                                                                <label for="country_product_type-1">{{ __('Admin/income_products.country_product_type') }}</label>
+                                                                <select class="form-control" name="country_product_type" id="country_product_type-1">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
+                                                                    <option value="local">{{ __('Admin/income_products.local') }}</option>
+                                                                    <option value="iraq">{{ __('Admin/income_products.iraq') }}</option>
+                                                                    <option value="imported">{{ __('Admin/income_products.imported') }}</option>
+
 
                                                                 </select>
 
@@ -109,14 +113,11 @@
                                                    <div class="row">
                                                         <div class="col col-md-4">
 
-                                                           <div class="form-group">
-                                                               <label for="state_id">{{ __('Admin/outcome_products.area') }}</label>
-                                                               <select class=" form-control" name="area_id" id="area_id">
-                                                                   <option value="">{{ __('Admin/site.select') }}</option>
+                                                            <div class="form-group">
+                                                                <label for="area_id-1">{{ __('Admin/income_products.wholesale') }}</label>
+                                                                <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="text">
 
-                                                               </select>
-
-                                                           </div>
+                                                            </div>
                                                        </div>
                                                         <div class="col col-md-4">
                                                             <div class="form-group">

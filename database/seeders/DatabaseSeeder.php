@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder {
             WinterCropFarmerCropSeeder::class,
 
             SubscriptionTableSeeder::class,
-            BrandSeeder::class,
+//            BrandSeeder::class,
         ]);
 
         \App\Models\Farmer::factory(30)->create();

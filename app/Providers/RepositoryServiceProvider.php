@@ -170,8 +170,16 @@ use App\Http\Repositories\Admin\IncomeProductRepository;
 use App\Http\Interfaces\Admin\SubscribeInterface;
 use App\Http\Repositories\Admin\SubscribeRepository;
 
+use App\Http\Interfaces\Admin\CurrencyInterface;
+use App\Http\Repositories\Admin\CurrencyRepository;
+
+use App\Http\Interfaces\Admin\UnitInterface;
+use App\Http\Repositories\Admin\UnitRepository;
+
 class RepositoryServiceProvider extends ServiceProvider {
     public function register() {
+        $this->app->bind(CurrencyInterface::class, CurrencyRepository::class);
+        $this->app->bind(UnitInterface::class, UnitRepository::class);
         $this->app->bind(OutcomeProductInterface::class, OutcomeProductRepository::class);
         $this->app->bind(IncomeProductInterface::class, IncomeProductRepository::class);
         $this->app->bind(WholeSaleProductInterface::class, WholeSaleProductRepository::class);

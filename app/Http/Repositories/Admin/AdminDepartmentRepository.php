@@ -24,8 +24,8 @@ class AdminDepartmentRepository implements AdminDepartmentInterface{
             try {
 
                 $admin_department = new AdminDepartment();
-                $admin_department->dep_name_ar = $dataRequest['dep_name_ar'];
-                $admin_department->dep_name_en = $dataRequest['dep_name_en'];
+//                $admin_department->dep_name_ar = $dataRequest['dep_name_ar'];
+                $admin_department->name = $dataRequest['name'];
 
                 $admin_department->keys = $dataRequest['keys'];
                 $admin_department->desc = $dataRequest['desc'];
@@ -66,8 +66,8 @@ class AdminDepartmentRepository implements AdminDepartmentInterface{
                 $validated = $request->validated();
                 $admin_department = AdminDepartment::findorfail($id);
 
-                $admin_department->dep_name_ar = $validated['dep_name_ar'];
-                $admin_department->dep_name_en = $validated['dep_name_en'];
+                $admin_department->name = $validated['name'];
+//                $admin_department->dep_name_en = $validated['dep_name_en'];
 
                 $admin_department->parent = $validated['parent'];
                 $admin_department->keys = $validated['keys'];

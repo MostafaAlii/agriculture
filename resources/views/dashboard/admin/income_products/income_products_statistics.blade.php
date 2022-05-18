@@ -58,7 +58,7 @@
                                                     <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/income_products.country') }}</th>
-                                                    <th>{{ __('Admin/income_products.province') }}</th>
+                                                    <th>{{ __('Admin/income_products.country_product_type') }}</th>
                                                     <th>{{ __('Admin/income_products.dep_name') }}</th>
                                                     <th>{{ __('Admin/income_products.product_name') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_amount') }}</th>
@@ -72,7 +72,7 @@
                                             <tr>
                                                 <td>#</td>
                                                 <td>{{$statistc->country}}</td>
-                                                <td>{{$statistc->province}}</td>
+                                                <td>{{$statistc->getCountryProductType()}}</td>
                                                 <td>{{$statistc->admin_dep_name}}</td>
                                                 <td>{{$statistc->product_name}}</td>
                                                 <td>{{$statistc->income_product_amount}}</td>

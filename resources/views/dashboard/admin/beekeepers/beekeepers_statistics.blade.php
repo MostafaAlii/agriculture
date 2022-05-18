@@ -57,7 +57,7 @@
                                                     <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/bees.area') }}</th>
-                                                    <th>{{ __('Admin/bees.state_name') }}</th>
+                                                    <th>{{ __('Admin/bees.state') }}</th>
                                                     <th>{{ __('Admin/bees.count_village') }}</th>
                                                     <th>{{ __('Admin/bees.sum_old_beehive_count') }}</th>
                                                     <th>{{ __('Admin/bees.sum_new_beehive_count') }}</th>

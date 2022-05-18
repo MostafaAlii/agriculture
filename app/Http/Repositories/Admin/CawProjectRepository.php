@@ -36,8 +36,8 @@ class CawProjectRepository implements CawProjectInterface{
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
-            $cawProjects = CawProject::with('farmer', 'village', 'adminDepartment','admin','area','state','translations')
-                ->where('admin_id','==',$admin->id );
+            $cawProjects = CawProject::with('farmer', 'village','admin','area','state')
+                ->where('admin_id',$admin->id );
 
           }
           else {

@@ -33,5 +33,7 @@ return [
     'site_name.required'                                    =>               'اسم الموقع مطلوب',
     'status.required'                                       =>               'حالة الموقع مطلوبة',
     'message_maintenance.required'                          =>              'رسالة الصيانة مطلوبة',
-    'inestergrame'                                          =>              'انستغرام'
+    'inestergrame'                                          =>              'انستغرام',
+    'unit_title_in_sidebar'                                 =>               'وحدات القياس',
+    'currency_title_in_sidebar'                             =>                'العملات'
 ];
