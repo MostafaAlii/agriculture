@@ -3,26 +3,10 @@ return[
     'title1'       =>' Team',
     'title2'       =>'Our Dream',
     
-    'brief'             =>'نبذه عنا',
-    'title'             =>'العنوان',
-    'image'             =>'صوره',
-    'desc'              =>'الوصف',
-    'updated_done'      =>'تم التعديل بنجاح',
-    'edit_wrong'        =>'حدث مشكله اثناء التعديل..حاول مره اخرى',
-
-    'review_tit1'       =>'شاركنا', 
-    'review_tit2'       =>'الرائ',
-    'msg'               =>'نسعد باستقبال ارائكم',
-
-    'name'              =>'الاسم',
-    'email'             =>'البريد الالكترونى',
-    'message'           =>'الرائ',
-    'send'              =>'ارسال',
-
-    'add_done'          =>'تم الارسال بنجاح.. شكرا لك',
-    'add_wrong'         =>'حدث خطا اثناء الارسال ..حاول مره اخرى',
-
-
+    'team_title'   =>'Team',
     
+    'position'     =>'Position',
+    'image'        =>'Image',
+    'desc'         =>'Description',
     ];
 ?>

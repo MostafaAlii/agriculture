@@ -12,10 +12,17 @@
              @include('front.layouts.include.header2')
 			<!-- end header -->
 
+			<?php
+			$slider = \App\Models\Slider::latest()->first();
+			if(isset($slider->image->filename)){
+				$src=$slider->image->filename;
+			}else{
+				$src='100.jpg';
+			}
+			?>
 			<!-- start hero -->
-            {{ $slider = \App\Models\Slider::latest()->first() }}
 			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
-                 style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});
+                 style="background-image: url({{ asset('Dashboard/img/sliders/'. $src) }});
                         color: #333;">
 				<div class="container">
 					<div class="row">
@@ -88,120 +95,7 @@
 			</main>
 			<!-- end main -->
 
-			<!-- start footer -->
-			<footer id="footer" class="footer footer--style-4">
-				<div class="container">
-					<div class="row">
-						<div class="col-12 col-sm-4 col-md-3 col-lg-2">
-							<div class="footer__item">
-								<a class="site-logo" href="index.html"> "
-									{{--<img class="img-fluid  lazy" src="" data-src="{{ asset('frontassets/img/site_logo.png')}}" alt="demo" />--}}
-									<img class="img-fluid  lazy" src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" data-src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
-
-								</a>
-							</div>
-						</div>
-
-						<div class="col-12 col-md-9 col-lg-6">
-							<div class="footer__item">
-								<nav id="footer__navigation" class="navigation">
-									<div class="row">
-										<div class="col-6 col-sm-4">
-											<h5 class="footer__item__title h6">Menu</h5>
-
-											<ul>
-												<li class="active"><a href="index.html">Home</a></li>
-												<li><a href="#">About</a></li>
-												<li><a href="#">Pages</a></li>
-												<li><a href="#">Gallery</a></li>
-												<li><a href="#">Blog</a></li>
-												<li><a href="#">Contacts</a></li>
-											</ul>
-										</div>
-
-										<div class="col-6 col-sm-4">
-											<h5 class="footer__item__title h6">Shop</h5>
-
-											<ul>
-												<li><a href="#">Partners</a></li>
-												<li><a href="#">Customer Service</a></li>
-												<li><a href="#">Vegetables</a></li>
-												<li><a href="#">Fruits</a></li>
-												<li><a href="#">Organic Food</a></li>
-												<li><a href="#">Privacy policy</a></li>
-											</ul>
-										</div>
-
-										<div class="col-6 col-sm-4">
-											<h5 class="footer__item__title h6">Information</h5>
-
-											<ul>
-												<li><a href="#">Delivery</a></li>
-												<li><a href="#">Legal Notice</a></li>
-												<li><a href="#">About Us</a></li>
-												<li><a href="#">Secure Payment</a></li>
-												<li><a href="#">Prices Drop</a></li>
-												<li><a href="#">Documents</a></li>
-											</ul>
-										</div>
-									</div>
-								</nav>
-							</div>
-						</div>
-
-						<div class="col-12 col-md col-lg-4">
-							<div class="footer__item">
-								<h5 class="footer__item__title h6">Contacts</h5>
-
-                                <address>
-                                    <p>
-                                        <span>{{ \App\Models\setting::first()->address }}</span>
-                                    </p>
-
-                                    <p>
-                                        {{  \App\Models\setting::first()->primary_phone }},
-                                        {{  \App\Models\setting::first()->secondery_phone }} <br>
-                                        <a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>
-                                    </p>
-                                </address>
-
-                                <div class="social-btns">
-                                    <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
-                                    <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
-                                    <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
-                                </div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row align-items-lg-end justify-content-lg-between copyright">
-						<div class="col-12 col-lg-6">
-							<div class="footer__item">
-								<span class="__copy">© 2019, AgroTheme by <a class="__dev" href="https://themeforest.net/user/artureanec" target="_blank">Artureanec</a> | <a href="#">Privacy Policy</a> | <a href="#">Sitemap</a></span>
-							</div>
-						</div>
-
-						<div class="col-12 col-lg-6">
-							<div class="footer__item">
-                                <form class="form--horizontal no-gutters" method="post"  id="ajaxform" autocomplete="off">
-                                    @csrf
-                                    @method('post')
-									<div class="col-sm-6">
-										<div class="input-wrp">
-											<input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }}" />
-										</div>
-									</div>
-
-									<div class="col-sm-6">
-										<button class="custom-btn custom-btn--medium custom-btn--style-3 wide save-data" type="submit" role="button">{{ __('Website/home.sub') }}</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
-			<!-- end footer -->
+			@include('front.layouts.include.footer')
 		</div>
 
         @include('front.layouts.include.footerjs')

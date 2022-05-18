@@ -28,8 +28,8 @@ class AboutSeeder extends Seeder {
            $info->save();
            
         //create cache file
-        Cache::store('file')->add('about_us',$info);
-       }
+        Cache::store('file')->put('about_us',$info);
+      }
        
       
 

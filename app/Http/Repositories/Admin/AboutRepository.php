@@ -34,8 +34,8 @@ class AboutRepository implements AboutInterface {
             
             if(isset($request->image)){
                 if($info->image) {//delete old image
-                    $old_photo = $info->image;
-                    $this->Delete_attachment('about', $old_photo, $info->id, $old_photo);
+                    unlink(public_path().'\Dashboard\img\about\\'.$info->image);
+                    //$this->Delete_attachment('about', $info->image, $info->id, $info->image);
                 }
                 //===========resize image and store in abouts table=========================
                 $filename    = $request->image->getClientOriginalName();

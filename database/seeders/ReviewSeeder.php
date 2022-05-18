@@ -4,14 +4,14 @@ namespace Database\Seeders;
 use App\Models\Review;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Traits\TableAutoIncreamentTrait;
+use Illuminate\Support\Facades\Schema;
+
 class ReviewSeeder extends Seeder {
-    use TableAutoIncreamentTrait;
     
     public function run() {
-        DB::table('reviews')->delete();
-        //call trait to handel aut-increament
-        $this->refreshTable('reviews');
-        Review::factory(9)->create();
+        Schema::disableForeignKeyConstraints();
+        DB::table('reviews')->truncate();
+        Review::factory()->count(5)->create();
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\Product;
-use App\Models\Tag;
-use Livewire\Component;
-use Livewire\WithPagination;
 use Cart;
+use App\Models\Tag;
+use App\Models\Product;
+use Livewire\Component;
+use App\Models\Category;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 class Shop extends Component
@@ -45,27 +46,32 @@ class Shop extends Component
 
     public function render()
     {
-        $tags=Tag::get();
-        $newProducts = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(3)->get();
+        $data['tags']=Tag::get();
+        $data['newProducts'] = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(3)->get();
 
         if($this->sorting=='date'){
-            $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
+            $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
             ->where('in_stock',1)->where('qty','>',0)->orderByDesc('created_at')->paginate($this->pagesize);
           }elseif($this->sorting=='price'){
-              $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
+              $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
               ->where('in_stock',1)->where('qty','>',0)->orderBy('price')->paginate($this->pagesize);
           }elseif($this->sorting=='price-desc'){
-              $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
+              $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
               ->where('in_stock',1)->where('qty','>',0)->orderByDesc('price')->paginate($this->pagesize);
           }else{
-              $products = Product::whereBetween('price',[$this->min_price,$this->max_price])
+              $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
               ->where('in_stock',1)->where('qty','>',0)->paginate($this->pagesize);
           }
+
           if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->store(Auth::guard('vendor')->user()->email);
             Cart::instance('wishlist')->store(Auth::guard('vendor')->user()->email);
           }
-        return view('livewire.front.shop',compact('products','newProducts','tags'))
+
+
+          $data['home_category']=Category::whereNotNull('parent_id')->inRandomOrder()->get();
+
+        return view('livewire.front.shop',$data)
         ->layout('front.layouts.master2');
     }
 }

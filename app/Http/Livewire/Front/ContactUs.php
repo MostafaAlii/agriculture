@@ -3,8 +3,9 @@
 namespace App\Http\Livewire\Front;
 
 use App\Models\Contact;
-use Illuminate\Support\Facades\DB;
+use App\Models\Setting;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ContactUs extends Component
@@ -80,6 +81,7 @@ class ContactUs extends Component
     }
     public function render()
     {
-        return view('livewire.front.contact-us')->layout('front.layouts.master3');
+        $data['contact_info']=Setting::first();
+        return view('livewire.front.contact-us',$data)->layout('front.layouts.master3');
     }
 }

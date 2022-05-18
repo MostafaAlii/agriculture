@@ -174,20 +174,6 @@
 
 
                                 <!-- start widget -->
-                                {{-- <div class="widget">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col">
-                                            <button class="custom-btn custom-btn--medium custom-btn--style-1" role="button">Show Products</button>
-                                        </div>
-
-                                        <div class="col-auto">
-                                            <a class="clear-filter" href="#">Clear all</a>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                <!-- end widget -->
-
-                                <!-- start widget -->
                                 <div class="widget widget--products">
                                     <h4 class="h6 widget-title">{{ __('Admin/site.featproducts') }}</h4>
 

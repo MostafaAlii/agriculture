@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/about.review_title') }}
+    {{ trans('Admin/team.team_title') }}
 @endsection
 
 @section('content')
@@ -14,24 +14,17 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">
-                    <i class="material-icons">playlist_add_check</i>
-                    {{ trans('Admin/about.review_title') }}
+                    <i class="icon-user" style="color: whight;;padding: 3px;font-size: 18px;"></i>
+                    {{ trans('Admin/team.team_title') }}
                 </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('team.index') }}">{{ trans('Admin/about.review_title') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('team.index') }}">{{ trans('Admin/team.team_title') }}</a>
                             </li>
                         </ol>
-                    </div>
-                </div>
-                <div class="content-header-right col-md-6 col-12">
-                    <div class="media width-250 float-right">
-                        <media-left class="media-middle">
-                            <div id="sp-bar-total-sales"></div>
-                        </media-left>
                     </div>
                 </div>
             </div>
@@ -45,7 +38,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/about.review_title') }}</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/team.team_title') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -63,7 +56,7 @@
                                         @method('put')
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label><i class="material-icons">mode_edit</i> {{ trans('Admin/about.name') }}</label>
+                                                <label><i class="material-icons">mode_edit</i> {{ trans('Admin/team.name') }}</label>
                                                 <input type="text" name="name" class="form-control" value="{{ old('name',$team->name) }}" required/>
                                                 @error('name')
                                                     <small class="form-text text-danger">{{$message}}</small>
@@ -71,7 +64,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label><i class="material-icons">mode_edit</i> {{ trans('Admin/about.position') }}</label>
+                                                <label><i class="material-icons">mode_edit</i> {{ trans('Admin/team.position') }}</label>
                                                 <input type="text" name="position" class="form-control" value="{{ old('position',$team->position) }}" required />
                                                 @error('position')
                                                     <small class="form-text text-danger">{{$message}}</small>
@@ -79,7 +72,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label><i class="material-icons">mode_edit</i> {{ trans('Admin/about.description') }}</label>
+                                                <label><i class="material-icons">mode_edit</i> {{ trans('Admin/team.desc') }}</label>
                                                 <textarea type="text" id="description" class="form-control"
                                                         placeholder="{{trans('Admin\about.desc')}}"
                                                             name="description">
@@ -98,7 +91,7 @@
                                                         $src='104.jpg';
                                                     }
                                                 ?>
-                                                <label>{{trans('Admin\about.image')}} </label>
+                                                <label>{{trans('Admin\team.image')}} </label>
 
                                                     <input type="file" accept="image/*" name="image"  onchange="readURL(this);">
                                                     <img src="{{asset('Dashboard/img/team/'.$src)}}"  id="previewImg" class="img-thumbnail img-preview" width="100px" height="100px" alt="image" id="output">

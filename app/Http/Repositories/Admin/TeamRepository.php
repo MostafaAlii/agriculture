@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Repositories\Admin;
 
-use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Crypt;
-use App\Http\Interfaces\Admin\TeamInterface;
 use App\Models\Team;
 use App\Traits\UploadT;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Crypt;
+use App\Http\Interfaces\Admin\TeamInterface;
+
 class TeamRepository implements TeamInterface {
     use UploadT;
     public function index() {
@@ -14,7 +16,10 @@ class TeamRepository implements TeamInterface {
     }
 //------------------------------------------------------------------------------------------
     public function data() {
-        $team = Team::get();
+        
+        // $t = Team::get();
+        $team = Cache::get('teams');
+        
         return DataTables::of($team)
             ->addColumn('record_select', 'dashboard.admin.teams.data_table.record_select')
             ->editColumn('created_at', function (Team $team) {
@@ -23,6 +28,9 @@ class TeamRepository implements TeamInterface {
             ->editColumn('description', function (Team $team) {
                 //remove HTML tags (all) from a string--------
                 return substr(strip_tags($team->description),0,50).' ....';
+            })
+            ->editColumn('image', function (Team $team) {
+                return view('dashboard.admin.teams.data_table.image', compact('team'));
             })
             ->addColumn('actions', 'dashboard.admin.teams.data_table.actions')
             ->rawColumns([ 'record_select','actions'])
@@ -49,10 +57,16 @@ class TeamRepository implements TeamInterface {
             // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
             $team->image=$filename;
             $team->save();
+
+            //==============update cache file=================
+            $t=Team::get();
+            Cache::store('file')->put('teams',$t);
+           //==================================================
+           
             toastr()->success(__('Admin/attributes.added_done'));
             return redirect()->route('team.index');   
-         } catch (\Exception $ex) {
-             dd($ex->getMessage());
+
+        } catch (\Exception $ex) {
             toastr()->success(__('Admin/attributes.add_wrong'));
             return redirect()->route('team.index');
          }
@@ -91,6 +105,12 @@ class TeamRepository implements TeamInterface {
                  //============================================================================
             }
             $team->save();
+
+             //==============update cache file=================
+             $t=Team::get();
+             Cache::store('file')->put('teams',$t);
+            //==================================================
+            
             
             toastr()->success(__('Admin/attributes.updated_done'));
             return redirect()->route('team.index');
@@ -104,7 +124,15 @@ class TeamRepository implements TeamInterface {
         try{
             $real_id = decrypt($id);
 
-                Team::findorfail($real_id)->delete();
+            $t= Team::findorfail($real_id);
+            unlink(public_path().'\Dashboard\img\team\\'.$t->image);
+            $t->delete();
+
+            //==============update cache file=================
+            $t=Team::get();
+            Cache::store('file')->put('teams',$t);
+           //==================================================
+           
                 toastr()->error(__('Admin/attributes.delete_done'));
                 return redirect()->route('team.index');
            
@@ -125,13 +153,21 @@ class TeamRepository implements TeamInterface {
             
             foreach($all_ids as $ids){
                 
-                    Team::findorfail($ids)->delete();
+                    $t=Team::findorfail($ids);
+                    unlink(public_path().'\Dashboard\img\team\\'.$t->image);
+                    //$this->Delete_attachment('team', $t->image, $t->id, $t->image);
+                    $t->delete();
                     $delete_or_no++;
             }
             if($delete_or_no==0){
                 toastr()->error(__('Admin/attributes.cant_delete'));
                 return redirect()->route('team.index');
             }else{
+                //==============update cache file=================
+                    $t=Team::get();
+                    Cache::store('file')->put('teams',$t);
+                //==================================================
+           
                 toastr()->error(__('Admin/attributes.delete_done'));
                 return redirect()->route('team.index');
             }

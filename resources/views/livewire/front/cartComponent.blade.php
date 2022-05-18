@@ -1,6 +1,26 @@
 @section('title', __('website\home.cart'))
 @section('css')
-
+<style>
+/* --------------------------------- */
+.score {
+  display: inline-block;
+  font-family: Wingdings;
+  font-size: 30px;
+  color: #ccc;
+  position: relative;
+}
+.score::before,
+.score span::before{
+  content: "\2605\2605\2605\2605\2605";
+  display: block;
+}
+.score span {
+  color: gold;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+</style>
 @endsection
 <div>
     <!-- start section -->
@@ -236,13 +256,9 @@
 
                                                         <div class="__content">
                                                             <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->model->id)) }}">{{ $product->model->name }}</a></h4>
-                                                            <div class="rating">
-                                                                <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                                <span class="rating__item"><i class="fontello-star"></i></span>
-                                                            </div>
+
+                                                            <span class="score"><span style="width:<?php echo $product->model->productRate();?>%"></span></span>
+
                                                             <div class="stock-info in-stock">
                                                                 <p class="availability">{{ __("Admin/site.status") }} :
                                                                     <b class="text {{ $product->model->in_stock ==1 ?'text-success':'text-danger' }}">

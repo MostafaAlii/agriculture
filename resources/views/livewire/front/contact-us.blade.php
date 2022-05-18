@@ -15,10 +15,10 @@
                         <div class="__item">
                             <i class="__ico fontello-location"></i>
 
-                            <h4 class="__title">adress</h4>
+                            <h4 class="__title">{{__('Admin\setting.address')}}</h4>
 
                             <p>
-                                523 Sylvan Ave, 5th Floor Mountain View, CA 94041USA
+                                {{$contact_info->address}}
                             </p>
                         </div>
                     </div>
@@ -29,10 +29,10 @@
                         <div class="__item">
                             <i class="__ico fontello-phone"></i>
 
-                            <h4 class="__title">phone</h4>
+                            <h4 class="__title">{{ __('website\home.phone') }}</h4>
 
                             <p>
-                                +1 (234) 56789,<br>+1 987 654 3210
+                                {{$contact_info->primary_phone}},<br>{{$contact_info->secondery_phone}}
                             </p>
                         </div>
                     </div>
@@ -43,9 +43,9 @@
                         <div class="__item">
                             <i class="__ico fontello-mail-1"></i>
 
-                            <h4 class="__title">e-mail</h4>
+                            <h4 class="__title">{{ __('website\home.email') }}</h4>
 
-                            <p><a href="mailto:support@agrocompany.com">support@agrocompany.com</a></p>
+                            <p><a href="mailto:{{$contact_info->support_mail}}">{{$contact_info->support_mail}}</a></p>
                         </div>
                     </div>
                     <!-- end item -->

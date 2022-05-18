@@ -1,80 +1,106 @@
-<footer id="footer" class="footer--style-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-sm-auto">
-                <div class="footer__item">
-                    <a class="site-logo" href="index.html">
-                        <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />
-                    </a>
-                </div>
-            </div>
+	<!-- start footer -->
+    <footer id="footer" class="footer footer--style-4">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-sm-4 col-md-3 col-lg-2">
+							<div class="footer_cont_item">
+								<a class="site-logo" href="{{ route('front') }}"> 
+									{{--<img class="img-fluid  lazy" src="" data-src="{{ asset('frontassets/img/site_logo.png')}}" alt="demo" />--}}
+									<img class="img-fluid  lazy" src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" data-src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
 
-            <div class="col-12 col-sm">
-                <div class="row align-items-md-center no-gutters">
-                    <div class="col-12 col-md">
-                        <div class="footer__item">
-                            <address>
-                                <p>
-                                    <span>{{ \App\Models\setting::first()->address }}</span>
-                                </p>
+								</a>
+							</div>
+						</div>
 
-                                <p>
-                                    {{  \App\Models\setting::first()->primary_phone }},
-                                    {{  \App\Models\setting::first()->secondery_phone }} <br>
-                                    <a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>
-                                </p>
-                            </address>
-                        </div>
-                    </div>
+						<div class="col-12 col-md-9 col-lg-6">
+							<div class="footer__item">
+								<nav id="footer__navigation" class="navigation">
+									<div class="row">
+										<div class="col-6 col-sm-4">
+											<h5 class="footer__item__title h6">{{__('Admin\site.menu')}}</h5>
 
-                    <div class="col-12 col-md-auto">
-                        <div class="footer__item">
-                            <div class="social-btns">
-                                <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
-                                <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
-                                <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+											<ul>
+												<li><a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
+												<li><a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a></li>
+												<li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
+   												<li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
+												
+											</ul>
+										</div>
 
-            <div class="col-12 col-lg-5 col-xl-4 offset-xl-1">
-                <div class="footer__item">
-                    <h5 class="h6">Get a newslatter</h5>
+										
+										<div class="col-6 col-sm-4">
+											<?php
+												$home_category=App\Models\Category::whereNotNull('parent_id')->inRandomOrder()->get();
+												if(count($home_category)>0){
+											?>
+											<h5 class="footer__item__title h6">{{__('Admin/categories.department_sub')}}</h5>
+											<ul>
+												
+												@foreach($home_category as $cat)
+													<li><a href="{{route('pro_cat',encrypt($cat->id))}}">{{$cat->name}}</a></li>
+												@endforeach
+											</ul>
+											<?php
+											}
+											?>
+										</div>
 
-                    <form class="form--horizontal" action="#">
-                        <div class="input-wrp">
-                            <input class="textfield" name="s" type="text" placeholder="Your E-mail" />
-                        </div>
+									</div>
+								</nav>
+							</div>
+						</div>
 
-                        <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit" role="button">subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+						<div class="col-12 col-md col-lg-4">
+							<div class="footer__item">
+								<h5 class="footer__item__title h6">{{__('Admin\site.contact_info')}}</h5>
 
-        <div class="row flex-lg-row-reverse">
-            <div class="col-12 col-lg-6">
-                <div class="footer__item">
-                    <nav id="footer__navigation" class="navigation  text-lg-right">
-                        <ul>
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Pages</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+                                <address>
+                                    <p>
+                                        <span>{{ \App\Models\setting::first()->address }}</span>
+                                    </p>
 
-            <div class="col-12 col-lg-6">
-                <div class="footer__item">
-                    <span class="__copy">© 2019 Agro. All rights reserved. Created by <a class="__dev" href="https://themeforest.net/user/artureanec" target="_blank">Artureanec</a></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+                                    <p>
+                                        {{  \App\Models\setting::first()->primary_phone }},
+                                        {{  \App\Models\setting::first()->secondery_phone }} <br>
+                                        <a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>
+                                    </p>
+                                </address>
+
+                                <div class="social-btns">
+                                    <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
+                                    <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
+                                    <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
+                                </div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row align-items-lg-end justify-content-lg-between copyright">
+						<div class="col-12 col-lg-6">
+							<div class="footer__item">
+								<span class="__copy">© 2019, AgroTheme by <a class="__dev" href="https://themeforest.net/user/artureanec" target="_blank">Artureanec</a> | <a href="#">Privacy Policy</a> | <a href="#">Sitemap</a></span>
+							</div>
+						</div>
+
+						<div class="col-12 col-lg-6">
+							<div class="footer__item">
+                                <form class="form--horizontal no-gutters" method="post"  id="ajaxform" autocomplete="off">
+                                    @csrf
+                                    @method('post')
+									<div class="col-sm-6">
+										<div class="input-wrp">
+											<input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }}" />
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<button class="custom-btn custom-btn--medium custom-btn--style-3 wide save-data" type="submit" role="button">{{ __('Website/home.sub') }}</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- end footer -->

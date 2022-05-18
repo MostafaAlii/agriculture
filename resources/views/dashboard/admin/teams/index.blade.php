@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/about.review_title') }}
+    {{ trans('Admin/team.team_title') }}
 @endsection
 
 @section('content')
@@ -14,15 +14,15 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">
-                    <i class="material-icons">playlist_add_check</i>
-                    {{ trans('Admin/about.review_title') }}
+                    <i class="icon-user" style="color: whight;;padding: 3px;font-size: 18px;"></i>
+                    {{ trans('Admin/team.team_title') }}
                 </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('review.index') }}">{{ trans('Admin/about.review_title') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('team.index') }}">{{ trans('Admin/team.team_title') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -42,7 +42,7 @@
                         <div class="card">
                             <!-- Start Card Header -->
                             <div class="card-header">
-                                <h4 class="card-title">{{ trans('Admin/about.review_title') }}</h4>
+                                <h4 class="card-title">{{ trans('Admin/team.team_title') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -76,9 +76,10 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ __('Admin/about.name') }}</th>
-                                                    <th>{{ __('Admin/about.position') }}</th>
-                                                    <th>{{ __('Admin/about.description') }}</th>
+                                                    <th>{{ __('Admin/team.image') }}</th>
+                                                    <th>{{ __('Admin/team.name') }}</th>
+                                                    <th>{{ __('Admin/team.position') }}</th>
+                                                    <th>{{ __('Admin/team.desc') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -125,9 +126,10 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name', searchable: false},
-            {data: 'position', name: 'position', searchable: false},
-            {data: 'description', name: 'description', searchable: false},
+            {data: 'image', name: 'image', searchable: false},
+            {data: 'name', name: 'name', searchable: true},
+            {data: 'position', name: 'position', searchable: true},
+            {data: 'description', name: 'description', searchable: true},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
