@@ -92,7 +92,7 @@
                                 @enderror
                             </div>
                             <div class="input-wrp">
-                                <input class="textfield" name="phone" type="number" placeholder="{{ __('website\home.phone') }}" wire:model='phone'/>
+                                <input class="textfield" name="phone" type="tel" placeholder="{{ __('website\home.phone') }}" wire:model='phone'/>
                                 @error('phone')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror

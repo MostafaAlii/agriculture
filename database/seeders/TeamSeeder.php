@@ -4,18 +4,14 @@ use App\Models\Team;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use App\Traits\TableAutoIncreamentTrait;
-
 class TeamSeeder extends Seeder {
-    use TableAutoIncreamentTrait;
-    
     public function run() {
-        DB::table('teams')->delete();
-        //call trait to handel aut-increament
-        $this->refreshTable('teams');
-       
-        Team::factory(9)->create();
-
+        Schema::disableForeignKeyConstraints();
+        DB::table('teams')->truncate();
+        Team::factory()->count(35)->create();
+        Schema::enableForeignKeyConstraints();
         //create cache file
         Cache::store('file')->add('teams',Team::get());
     }
