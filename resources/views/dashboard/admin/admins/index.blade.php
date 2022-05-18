@@ -66,6 +66,8 @@
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phone') }}</th>
                                                     <th>{{ __('Admin/site.type') }}</th>
+                                                    <th>{{ __('Admin/admins.status') }}</th>
+                                                    <th>{{ __('Admin/admins.permissionLevel') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -110,6 +112,8 @@
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
             {data: 'type', name: 'type',width: '10%'},
+            {data: 'status', name: 'status'},
+            {data: 'roles_name', name: 'roles_name'},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

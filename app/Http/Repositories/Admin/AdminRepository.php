@@ -25,6 +25,12 @@ class AdminRepository implements AdminInterface{
             ->addColumn('type', function (Admin $admin) {
                 return view('dashboard.admin.admins.data_table.types', compact('admin'));
             })
+            ->addColumn('status', function (Admin $admin) {
+                return view('dashboard.admin.admins.data_table.status', compact('admin'));
+            })
+            ->addColumn('roles_name', function (Admin $admin) {
+                return view('dashboard.admin.admins.data_table.permissionLevel', compact('admin'));
+            })
             ->addColumn('image', function (Admin $admin) {
                 return view('dashboard.admin.admins.data_table.image', compact('admin'));
             })

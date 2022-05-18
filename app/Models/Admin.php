@@ -13,6 +13,7 @@ class Admin extends Authenticatable {
     protected $guard = 'admin';
     protected $guarded = [];
     public $timestamps = true;
+    const ACTIVE = 1, NOT_ACTIVE = 0;
 
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
@@ -57,5 +58,6 @@ class Admin extends Authenticatable {
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'roles_name'        =>  'array',
     ];
 }

@@ -7,10 +7,7 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Http\Interfaces\Admin\RoleRepositoryInterface;
 class RoleRepository implements RoleRepositoryInterface {
     public function index() {
-        /*$roles = Role::orderBy('id','DESC')->paginate(5);
-        return view('dashboard.admin.roles.index',compact('roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);*/
-            return view('dashboard.admin.roles.index');
+        return view('dashboard.admin.roles.index');
     }
 
     public function data() {
@@ -26,7 +23,11 @@ class RoleRepository implements RoleRepositoryInterface {
                 return view('dashboard.admin.roles.data_table.actions', compact('role'));
             })
             ->rawColumns([ 'record_select','actions'])
-            //->addIndexColumn()
             ->toJson();
+    }
+
+    public function create() {
+        $permission = Permission::get('name');
+        return view('dashboard.admin.roles.create', compact('permission'));
     }
 }

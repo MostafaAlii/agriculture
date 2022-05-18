@@ -1,7 +1,8 @@
 <?php
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 class CreateAdminsTable extends Migration {
     public function up() {
         Schema::create('admins', function (Blueprint $table) {
@@ -23,10 +24,9 @@ class CreateAdminsTable extends Migration {
             $table->foreignId('village_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('department_id')->default('1')->constrained()->cascadeOnDelete();
             $table->foreignId('admin_department_id')->constrained()->cascadeOnDelete();
-
-
+            $table->text('roles_name')->nullable();
+            $table->tinyInteger('status')->default(Admin::NOT_ACTIVE);
             $table->date('birthdate')->nullable();
-
             $table->rememberToken();
             $table->timestamps();
         });

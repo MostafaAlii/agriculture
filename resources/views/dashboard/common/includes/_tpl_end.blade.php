@@ -1,6 +1,6 @@
 <script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/jquery-ui-1.13.1/jquery-ui.js') }}"></script>
-{{-- <script src="{{ asset('assets/admin/js/jquery.multi-select.js')}}"></script> --}}
+<script src="{{ asset('assets/admin/vendors/js/treeview/treeview.js') }}"></script>
 
 <script src="{{ asset('assets/admin/js/myFun/myFunction.js') }}"></script>
 <script src="{{ asset('assets/admin/js/jquery.repeater.js') }}"></script>
@@ -17,7 +17,7 @@
 <script src="{{ asset('assets/admin/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/bootstrap-multiselect.min.js') }}"></script>
 
-{{-- <script src="{{ asset('assets/admin/vendors/js/material-vendors.min.js') }}"></script> --}}
+
 <!-- END: Page Vendor JS-->
 <script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <!-- BEGIN: Theme JS-->
@@ -43,12 +43,9 @@
 <script src="{{ asset('assets/admin/jstree/jstree.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/jstree/jstree.wholerow.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/admin/jstree/jstree.checkbox.js') }}" type="text/javascript"></script>
-
 <!-- this for contact us page -->
 <script src="{{ asset('assets/admin/vendors/js/editors/quill/quill.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/scripts/pages/app-email.js') }}"></script>
-
-
 @toastr_js
 @toastr_render
 {{-- image preview --}}

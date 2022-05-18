@@ -11,27 +11,28 @@ class AdminTableSeeder extends Seeder {
     public function run() {
         DB::table('admins')->delete();
         $superAdmin = Admin::create([
-                        'firstname'         =>  'Mostafa',
-                        'lastname'          =>  'Ali',
-                        'email'             =>  'admin@app.com',
-                        'phone'             =>  '01015558628',
-                        'password'          =>  bcrypt('123123'),
-                        'address1'          =>  'cairo',
-                        'address2'          =>  'alex',
-                        'birthdate'         =>  Carbon::create('2000', '01', '01'),
-                        'country_id'        => 1,
-                        'province_id'       => 1,
-                        'area_id'           => 1,
-                        'state_id'          => 1,
-                        'village_id'        => 1,
-                        'department_id'     => 1,
-                        'admin_department_id'=>4,
-                        'remember_token'    => Str::random(10),
+                        'firstname'                     =>              'Mostafa',
+                        'lastname'                      =>              'Ali',
+                        'email'                         =>              'admin@app.com',
+                        'phone'                         =>              '01015558628',
+                        'password'                      =>              bcrypt('123123'),
+                        'address1'                      =>              'cairo',
+                        'address2'                      =>              'alex',
+                        'birthdate'                     =>              Carbon::create('2000', '01', '01'),
+                        'country_id'                    =>              1,
+                        'province_id'                   =>              1,
+                        'area_id'                       =>              1,
+                        'state_id'                      =>              1,
+                        'village_id'                    =>              1,
+                        'department_id'                 =>              1,
+                        'admin_department_id'           =>              4,
+                        'roles_name'                    =>              ["Owner"],
+                        'status'                        =>              Admin::ACTIVE,
+                        'remember_token'                =>              Str::random(10),
                     ]);
         $role = Role::create(['guard_name' => 'admin','name' => 'Owner']);
         $permissions = Permission::pluck('id','id')->all();
         $role->syncPermissions($permissions);
         $superAdmin->assignRole([$role->id]);
-        Admin::factory(5)->create();
     }
 }
