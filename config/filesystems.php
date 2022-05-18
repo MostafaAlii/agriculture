@@ -73,6 +73,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'team' => [
+            'driver' => 'local',
+            'root' => public_path('Dashboard/img/team'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

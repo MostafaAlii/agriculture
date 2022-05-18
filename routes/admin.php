@@ -4,17 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\TagController;
 use App\Http\Controllers\Dashboard\Admin\AreaController;
 use App\Http\Controllers\Dashboard\Admin\BlogController;
-use App\Http\Controllers\Dashboard\Admin\WinterCropController;
-use App\Http\Controllers\Dashboard\Admin\SummerCropController;
+use App\Http\Controllers\Dashboard\Admin\RoleController;
+use App\Http\Controllers\Dashboard\Admin\TeamController;
 use App\Http\Controllers\Dashboard\Admin\TreeController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
+use App\Http\Controllers\Dashboard\Admin\AboutController;
 use App\Http\Controllers\Dashboard\Admin\AdminController;
+use App\Http\Controllers\Dashboard\Admin\BrandController;
 use App\Http\Controllers\Dashboard\Admin\StateController;
 use App\Http\Controllers\Dashboard\Admin\FarmerController;
 use App\Http\Controllers\Dashboard\Admin\OptionController;
 use App\Http\Controllers\Dashboard\Admin\OrdersController;
+use App\Http\Controllers\Dashboard\Admin\ReviewController;
 use App\Http\Controllers\Dashboard\Admin\SliderController;
-use App\Http\Controllers\Dashboard\Admin\BrandController;
 use App\Http\Controllers\Dashboard\Admin\WorkerController;
 use App\Http\Controllers\Dashboard\Admin\ContactController;
 use App\Http\Controllers\Dashboard\Admin\CountryController;
@@ -36,6 +38,8 @@ use App\Http\Controllers\Dashboard\Admin\BeeKeepersController;
 use App\Http\Controllers\Dashboard\Admin\CawProjectController;
 use App\Http\Controllers\Dashboard\Admin\DepartmentController;
 use App\Http\Controllers\Dashboard\Admin\FarmerCropController;
+use App\Http\Controllers\Dashboard\Admin\SummerCropController;
+use App\Http\Controllers\Dashboard\Admin\WinterCropController;
 use App\Http\Controllers\Dashboard\Admin\AgriServiceController;
 use App\Http\Controllers\Dashboard\Admin\BeeDisastersController;
 use App\Http\Controllers\Dashboard\Admin\FetchAddressController;
@@ -49,13 +53,10 @@ use App\Http\Controllers\Dashboard\Admin\ProductCouponController;
 use App\Http\Controllers\Dashboard\Admin\ChickenProjectController;
 use App\Http\Controllers\Dashboard\Admin\OutcomeProductController;
 use App\Http\Controllers\Dashboard\Admin\ProtectedHouseController;
+
 use App\Http\Controllers\Dashboard\Admin\AdminDepartmentController;
 use App\Http\Controllers\Dashboard\Admin\AgriToolServiceController;
 use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
-use App\Http\Controllers\Dashboard\Admin\RoleController;
-
-use App\Http\Controllers\Dashboard\Admin\AboutController;
-use App\Http\Controllers\Dashboard\Admin\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -469,11 +470,18 @@ Route::group(
                  /********************************* about us **********************************/
                 Route::get('about_us.show', [AboutController::class,'show'])->name('about_us/show');
                 Route::post('about_us.save', [AboutController::class,'save'])->name('about_us/save');
-                 /*****************************************************************************/
+
+                /***********************************Review***************************************/
                 Route::resource('review', ReviewController::class)->except(['show']);
                 Route::get('/review/data', [ReviewController::class,'data'])->name('review.data');
                 Route::delete('/review/bulk_delete/{ids}', [ReviewController::class,'bulkDelete'])->name('review.bulk_delete');
                 /*****************************************************************************/
+                
+                 /*********************************Team*****************************************/
+                 Route::resource('team', TeamController::class)->except(['show']);
+                 Route::get('/team/data', [TeamController::class,'data'])->name('team.data');
+                 Route::delete('/team/bulk_delete/{ids}', [TeamController::class,'bulkDelete'])->name('team.bulk_delete');
+                 /*****************************************************************************/
 
         });
     });

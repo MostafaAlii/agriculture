@@ -629,6 +629,20 @@
 
                 <!-- Start Contact Us -->
                 <li class=" nav-item">
+                    <li>
+                        <a class="menu-item" href="{{ route('team.index') }}">
+                            
+                        <i class="icon-user"
+                                    style="color: whight;;padding: 3px;font-size: 18px;"></i>
+                            <span data-i18n="Options"> {{ trans('Admin/site.our_team') }}</span>
+                        </a>
+                    </li>
+                    <!-- End Orders -->
+                </li>
+                <!-- End Contact Us  -->
+                
+                <!-- Start Contact Us -->
+                <li class=" nav-item">
                         <li>
                             <a class="menu-item" href="{{ route('contact_us') }}">
                                 <i class="material-icons"> mail_outline </i>

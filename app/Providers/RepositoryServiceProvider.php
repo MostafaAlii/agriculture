@@ -92,6 +92,9 @@ use App\Http\Repositories\Admin\RoleRepository;
 use App\Http\Interfaces\Admin\ReviewInterface;
 use App\Http\Repositories\Admin\ReviewRepository;
 
+use App\Http\Interfaces\Admin\TeamInterface;
+use App\Http\Repositories\Admin\TeamRepository;
+
 
 // ------------------------Front Uses-------------------------------
 
@@ -229,6 +232,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(ReviewInterface::class, ReviewRepository::class);
+        $this->app->bind(TeamInterface::class, TeamRepository::class);
 
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);

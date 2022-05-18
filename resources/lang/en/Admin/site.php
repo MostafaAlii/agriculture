@@ -208,4 +208,7 @@ return [
       'about_us' =>'About US',
       'reviwe' =>'}Clients opinions',
 
+      'our_team' =>'Team',
+
+
 ];

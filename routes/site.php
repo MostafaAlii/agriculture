@@ -1,7 +1,6 @@
 <?php
 use App\Http\Livewire;
 use App\Http\Controllers\front;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\front\SearchController;
@@ -116,6 +115,8 @@ Route::group(
 
         Route::get('/category_products/{id}',[CategoryProductController::class,'showCategoryProduct'])->name('pro_cat');
         Route::get('/review/add',[ReviewController::class,'add'])->name('review.add');
+      
+        Route::view('/team_profile/{id}','livewire.front.team_profile')->name('team_profile');
         
     require __DIR__.'/auth.php';
     });

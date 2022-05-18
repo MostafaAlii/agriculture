@@ -75,6 +75,8 @@ class DatabaseSeeder extends Seeder {
             SubscriptionTableSeeder::class,
             BrandSeeder::class,
             AboutSeeder::class,
+            ReviewSeeder::class,
+            TeamSeeder::class,
             
         ]);
 

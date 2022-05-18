@@ -89,4 +89,7 @@ return [
 'msg'  =>'Thanks your message has been sent successfully !',
 'about_more' =>'More About',
 
+
+'team_datail' => 'team profile',
+
 ];

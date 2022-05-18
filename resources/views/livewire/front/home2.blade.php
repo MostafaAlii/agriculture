@@ -418,7 +418,7 @@
 </section>
 <!-- end section -->
 
-
+@include('livewire.front._brand')
 
 @include('livewire.front._review_form')
 
