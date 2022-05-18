@@ -47,21 +47,6 @@ class ContactUs extends Component
             $contact->email = $this->email;
             $contact->comment = $this->comment;
             $contact->save();
-           
-
-
-        //------------------------------------------------------------------
-        //     $data=[
-        //         'title' => 'Contact Mail -- تواصل معنا ',
-        //         'firstname' => $this->firstname,
-        //         'lastname' => $this->lastname,
-        //         'mail' => $this->email,
-        //         'phone' => $this->phone,
-        //         'content' => $this->comment,
-        //    ];
-
-         //  Mail::to($site)->send(new ConatctEmail($data));
-
 
            Mail::send(
             'livewire.front.emails.contact',
@@ -76,7 +61,6 @@ class ContactUs extends Component
             function ($message) {
                 $message->subject("Contact Mail -- تواصل معنا ");
                 $message->to(env('MAIL_FROM_ADDRESS','magdasaif3@gmail.com'));
-               // $message->to('eradunited@murabba.dev');
                 $message->from($this->email);
 
             }
