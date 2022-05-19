@@ -24,7 +24,7 @@ class SubscribeController extends Controller
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of bulkDelete
-    public function sendMails() {
-        return $this->Data->sendMails();
-    }// end of bulkDelete
+    // public function sendMails() {
+    //     return $this->Data->sendMails();
+    // }// end of bulkDelete
 }

@@ -2,6 +2,7 @@
 namespace App\Console\Commands\Subscriptions;
 use App\Models\Subscription;
 use App\Jobs\Subscriptions\SendExpiredSubscriptionMailJob;
+use App\Jobs\Subscriptions\VerifiedSubscriptionMailJob;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 class SubscripetionExperiedNotification extends Command {
@@ -21,8 +22,8 @@ class SubscripetionExperiedNotification extends Command {
         }
         foreach($verified_subscriptions as $vr_subscription) {
             info('i am here in SubscripetionExperiedNotification Using Scheduling' . Carbon::now());
-            $expired_date = Carbon::createFromFormat('Y-m-d H:i:s', $vr_subscription->subscription_end_date)->toDateString();
-            dispatch(new SendExpiredSubscriptionMailJob($vr_subscription, $expired_date));
+            $verified_date = Carbon::createFromFormat('Y-m-d H:i:s', $vr_subscription->subscription_end_date)->toDateString();
+            dispatch(new VerifiedSubscriptionMailJob($vr_subscription, $verified_date));
         }
         $this->call('queue:work');
     }

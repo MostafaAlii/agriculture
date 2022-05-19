@@ -18,7 +18,8 @@ class SendExpiredSubscriptionMailJob implements ShouldQueue {
     public function handle() {
         info('i am here in SendExpiredSubscriptionMailJob');
         // send mail for expired user
-        sendMail('front.emails.subscriptions.expired', $this->ex_subscription->email, trans('Website/subscriptions.email_expired_subject'), $this->ex_subscription);
+        sendMail('front.emails.subscriptions.expired', $this->ex_subscription->email,
+         trans('Website/subscriptions.email_expired_subject'), $this->ex_subscription);
         info('i email Was Sent');
         $this->ex_subscription->delete();
         info('ex_subscription was deleted ' . Carbon::now());
