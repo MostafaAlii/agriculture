@@ -6,7 +6,8 @@ class SubscriptionFactory extends Factory {
     public function definition() {
         return [
             'email' => $this->faker->unique()->safeEmail(),
-            'subscription_end_date' => Carbon::createFromTimeStamp($this->faker->dateTimeBetween('+10 days', '+30 days')->getTimestamp()),
+            'subscription_end_date' =>
+            Carbon::createFromTimeStamp($this->faker->dateTimeBetween('+10 days', '+30 days')->getTimestamp()),
         ];
     }
 }

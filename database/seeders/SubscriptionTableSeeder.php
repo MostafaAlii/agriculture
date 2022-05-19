@@ -6,6 +6,6 @@ use App\Models\Subscription;
 class SubscriptionTableSeeder extends Seeder {
     public function run() {
         DB::table('subscriptions')->truncate();
-        Subscription::factory(100)->create();
+        Subscription::factory(20)->create();
     }
 }
