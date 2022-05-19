@@ -87,7 +87,7 @@ Route::group(
             Route::get('/subscribe', [SubscribeController::class,'data'])->name('subscribe');
             Route::delete('/subscribe.destroy/{id}', [SubscribeController::class,'destroy'])->name('subscribe.destroy');
             Route::delete('/subscribe/bulk_delete/{ids}', [SubscribeController::class,'bulkDelete'])->name('subscribe.bulk_delete');
-            Route::get('/subscribe/sendmails', [SubscribeController::class,'sendMails'])->name('subscribe.sendmails');
+            // Route::get('/subscribe/sendmails', [SubscribeController::class,'sendMails'])->name('subscribe.sendmails');
             /********************************* Start Admin & Employee Routes ************************************/
             Route::resource('Admins', AdminController::class)->except(['show']);
             Route::get('/Admins/data', [AdminController::class,'data'])->name('admins.data');
@@ -490,7 +490,7 @@ Route::group(
                 Route::get('/review/data', [ReviewController::class,'data'])->name('review.data');
                 Route::delete('/review/bulk_delete/{ids}', [ReviewController::class,'bulkDelete'])->name('review.bulk_delete');
                 /*****************************************************************************/
-                
+
                  /*********************************Team*****************************************/
                  Route::resource('team', TeamController::class)->except(['show']);
                  Route::get('/team/data', [TeamController::class,'data'])->name('team.data');

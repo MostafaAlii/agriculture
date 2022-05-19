@@ -47,9 +47,9 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('subscribe.sendmails') }}" class="btn btn-primary btn-sm mb-3">
+                                    {{-- <a href="{{ route('subscribe.sendmails') }}" class="btn btn-primary btn-sm mb-3">
                                         <i class="material-icons">add_box</i> {{ __('Admin/site.sendmails') }}
-                                    </a>
+                                    </a> --}}
                                     <button type="button" class="btn btn-warning mb-3" id="btn_delete_all"
                                         data-toggle="modal" data-target="#bulkdelete">
                                         <i class="fa fa-trash"></i>

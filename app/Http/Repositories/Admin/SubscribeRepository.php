@@ -78,16 +78,16 @@ class SubscribeRepository implements SubscribeInterface{
     //     toastr()->success(__('Admin/site.emails_success'));
     //     return redirect()->route('subscribe');
     // }
-    public function sendMails()
-    {
-        $emails = Subscription::chunk(50,function($ex_subscription,$expired_date){
-             dispatch(new SendExpiredSubscriptionMailJob($ex_subscription,$expired_date))->delay(\Carbon\Carbon::now()->addSeconds(10));
-             
-        });
-        // $job = (new SendExpiredSubscriptionMailJob)->delay(\Carbon\Carbon::now()->addSeconds(10));
-        // dispatch($job);
-        // dd($data);
-        toastr()->success(__('Admin/site.subsms'));
-        return redirect()->route('subscribe');
-    }
+    // public function sendMails()
+    // {
+    //     $emails = Subscription::chunk(50,function($ex_subscription,$expired_date){
+    //          dispatch(new SendExpiredSubscriptionMailJob($ex_subscription,$expired_date))->delay(\Carbon\Carbon::now()->addSeconds(10));
+
+    //     });
+    //     // $job = (new SendExpiredSubscriptionMailJob)->delay(\Carbon\Carbon::now()->addSeconds(10));
+    //     // dispatch($job);
+    //     // dd($data);
+    //     toastr()->success(__('Admin/site.subsms'));
+    //     return redirect()->route('subscribe');
+    // }
 }
