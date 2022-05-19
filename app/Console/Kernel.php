@@ -8,7 +8,7 @@ class Kernel extends ConsoleKernel {
         SubscripetionExperiedNotification::class,
     ];
     protected function schedule(Schedule $schedule) {
-        $schedule->command('subscription:SubscripetionExperiedNotification')->lastDayOfMonth();
+        $schedule->command('subscription:SubscripetionExperiedNotification')->everyMinute();
     }
 
     protected function commands() {
