@@ -12,10 +12,10 @@ class Subscription extends Model {
     protected $dates = ['subscription_end_date'];
 
     public function scopeExpireSubscribeDate($query) {
-        return $query->where('subscription_end_date', '<' ,Carbon::today());
+        return $query->where('subscription_end_date','<' ,Carbon::today());
     }
 
     public function scopeOnlyNotExpiredDate($query) {
-        return $query->where('subscription_end_date', '>=' ,Carbon::today());
+        return $query->where('subscription_end_date','>=' ,Carbon::today());
     }
 }
