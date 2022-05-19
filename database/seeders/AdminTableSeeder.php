@@ -30,7 +30,7 @@ class AdminTableSeeder extends Seeder {
                         'status'                        =>              Admin::ACTIVE,
                         'remember_token'                =>              Str::random(10),
                     ]);
-        $role = Role::create(['guard_name' => 'admin','name' => 'Owner']);
+        $role = Role::create(['name' => 'Owner']);
         $permissions = Permission::pluck('id','id')->all();
         $role->syncPermissions($permissions);
         $superAdmin->assignRole([$role->id]);

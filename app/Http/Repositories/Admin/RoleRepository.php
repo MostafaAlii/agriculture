@@ -27,7 +27,17 @@ class RoleRepository implements RoleRepositoryInterface {
     }
 
     public function create() {
-        $permission = Permission::get('name');
+        $permission = Permission::get();
         return view('dashboard.admin.roles.create', compact('permission'));
+    }
+
+    public function store($request) {
+        $role = Role::create(['name' => $request->input('name')]);
+        $role->syncPermissions([$request->input('permission')]);
+        
+        
+        
+        toastr()->success(__('Admin/roles.add_roles_successfuly'));
+        return redirect()->route('Roles.index');
     }
 }

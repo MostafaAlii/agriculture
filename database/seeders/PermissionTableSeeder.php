@@ -7,6 +7,7 @@ class PermissionTableSeeder extends Seeder {
         $permissions = [
             // Permissions Widget ::
             // Admins & Moderator ::
+            'admin',
             'moderators-management',
                 'moderator-list',
                 'moderator-create',
@@ -55,7 +56,7 @@ class PermissionTableSeeder extends Seeder {
                 'role-delete-all',
         ];
         foreach ($permissions as $permission) {
-            Permission::create(['guard_name' => 'admin', 'name' => $permission]);
+            Permission::create(['name' => $permission]);
         }
     }
 }

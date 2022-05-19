@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'admin',
+        'passwords' => 'admins',
     ],
 
     /*
@@ -36,13 +36,13 @@ return [
     */
 
     'guards' => [
-        'web' => [ // web guard for farmer
-            'driver' => 'session',
-            'provider' => 'farmers',
-        ],
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+        ],
+        'web' => [ // web guard for farmer
+            'driver' => 'session',
+            'provider' => 'farmers',
         ],
         'vendor' => [
             'driver' => 'session',
