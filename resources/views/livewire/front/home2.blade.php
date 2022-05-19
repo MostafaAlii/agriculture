@@ -139,7 +139,7 @@
                     <div class="col-12 col-lg-4">
                         <div data-aos="fade-left" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
                             <div class="section-heading">
-                                <h2 class="__title">{{-- $info->title --}}</h2>
+                                <h2 class="__title">{{ $info->title }}</h2>
                             </div>
 
                             <p class="d-none d-sm-block">
@@ -152,7 +152,7 @@
 
                     <div class="col-12 col-lg-4  text-center">
                         <div data-aos="fade-up" ddata-aos-duration="600" data-aos-offset="100">
-                            <img class="img-fluid  lazy" src="{{-- asset('Dashboard/img/about/'.$info->image) --}}" data-src="{{-- asset('Dashboard/img/about/'.$info->image) --}}" style="width:500px;height:400px" alt="demo" />
+                            <img class="img-fluid  lazy" src="{{ asset('Dashboard/img/about/'.$info->image) }}" data-src="{{ asset('Dashboard/img/about/'.$info->image) }}" style="width:500px;height:400px" alt="demo" />
                         </div>
                     </div>
 
@@ -160,7 +160,7 @@
 
                     <div class="col-12 col-lg-4">
                         <div data-aos="fade-right" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
-                            {{--  <p><?php echo substr($info->description,0,500);?>...</p>--}}
+                              <p><?php echo substr($info->description,0,500);?>...</p>
                         </div>
                     </div>
                     @endforeach
