@@ -3159,8 +3159,10 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  justify-content: center;
   padding-left: 0;
-  list-style: none
+  list-style: none;
+  width:100%;
 }
 .page-link {
   position: relative;

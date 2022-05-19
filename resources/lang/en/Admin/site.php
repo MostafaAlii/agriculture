@@ -209,10 +209,13 @@ return [
       'reviwe' =>'Clients opinions',
 
       'our_team' =>'Team',
-      
+
       'contact_info' =>'Contact Info',
       'menu' =>'Menu',
 
       'pages'=>'Pages',
+
+       // subscribe
+       'subsms'=>'will send in back ground can do any other things',
 
 ];

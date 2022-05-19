@@ -92,4 +92,12 @@ return [
 
 'team_datail' => 'team profile',
 
+
+// shop page
+'defaultsort'  =>'Default Sorting',
+'sortnew'      =>'Sort by newness',
+'sortlow'      =>'Sort by price: low to high',
+'sorthigh'     =>'Sort by price: high to low',
+'perpage'      =>'per page',
+
 ];

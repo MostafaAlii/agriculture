@@ -97,5 +97,10 @@ return [
 
    'team_datail' =>'بروفايل الفريق',
 
-   
+     // shop page
+    'defaultsort'  =>'الترتيب الافتراضى',
+    'sortnew'      =>'الاحدث',
+    'sortlow'      =>'من الأقل إلى الأعلى',
+    'sorthigh'     =>'من الأعلى إلى الأقل',
+    'perpage'      =>'لكل صفحة',
 ];

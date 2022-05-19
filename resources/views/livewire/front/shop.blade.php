@@ -117,7 +117,7 @@
                                 @livewire('front.header-search-component')
                                 <!-- end widget -->
                                 @livewire('front.category-component')
-                             
+
 
 
                                 <!-- start widget -->
@@ -266,10 +266,10 @@
                                 {{-- <form class="ordering" action="#"> --}}
                                 <div class="input-wrp">
                                     <select name="orderby" class="textfield wide js-select" wire:model='sorting'>
-                                        <option value="default" selected="selected">Default sorting</option>
-                                        <option value="date">Sort by newness</option>
-                                        <option value="price">Sort by price: low to high</option>
-                                        <option value="price-desc">Sort by price: high to low</option>
+                                        <option value="default" selected="selected">{{ __('Website/home.defaultsort') }}</option>
+                                        <option value="date">{{ __('Website/home.sortnew') }}</option>
+                                        <option value="price">{{ __('Website/home.sortlow') }}</option>
+                                        <option value="price-desc">{{ __('Website/home.sorthigh') }}</option>
                                     </select>
                                 </div>
 
@@ -281,13 +281,13 @@
                                 {{-- <form class="ordering" action="#"> --}}
                                 <div class="input-wrp">
                                     <select name="post-per-page" class="textfield wide js-select" wire:model='pagesize'>
-                                        <option value="12" selected="selected">12 per page</option>
-                                        <option value="16">16 per page</option>
-                                        <option value="18">18 per page</option>
-                                        <option value="21">21 per page</option>
-                                        <option value="24">24 per page</option>
-                                        <option value="30">30 per page</option>
-                                        <option value="32">32 per page</option>
+                                        <option value="12" selected="selected">12 {{ __('Website/home.perpage') }}</option>
+                                        <option value="16">16 {{ __('Website/home.perpage') }}</option>
+                                        <option value="18">18 {{ __('Website/home.perpage') }}</option>
+                                        <option value="21">21 {{ __('Website/home.perpage') }}</option>
+                                        <option value="24">24 {{ __('Website/home.perpage') }}</option>
+                                        <option value="30">30 {{ __('Website/home.perpage') }}</option>
+                                        <option value="32">32 {{ __('Website/home.perpage') }}</option>
                                     </select>
                                 </div>
                                 {{-- </form> --}}

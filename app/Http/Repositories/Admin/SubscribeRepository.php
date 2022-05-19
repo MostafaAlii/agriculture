@@ -2,6 +2,7 @@
 namespace  App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\SubscribeInterface;
 use App\Jobs\Sendmails;
+use App\Jobs\Subscriptions\SendExpiredSubscriptionMailJob;
 use App\Models\Admin;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
@@ -69,12 +70,24 @@ class SubscribeRepository implements SubscribeInterface{
         return redirect()->route('subscribe');
 
     }// end of bulkDelete
+    // public function sendMails()
+    // {
+    //     $emails = Subscription::chunk(50,function($data){
+    //          dispatch(new Sendmails($data));
+    //     });
+    //     toastr()->success(__('Admin/site.emails_success'));
+    //     return redirect()->route('subscribe');
+    // }
     public function sendMails()
     {
-        $emails = Subscription::chunk(50,function($data){
-             dispatch(new Sendmails($data));
+        $emails = Subscription::chunk(50,function($ex_subscription,$expired_date){
+             dispatch(new SendExpiredSubscriptionMailJob($ex_subscription,$expired_date))->delay(\Carbon\Carbon::now()->addSeconds(10));
+             
         });
-        toastr()->success(__('Admin/site.emails_success'));
+        // $job = (new SendExpiredSubscriptionMailJob)->delay(\Carbon\Carbon::now()->addSeconds(10));
+        // dispatch($job);
+        // dd($data);
+        toastr()->success(__('Admin/site.subsms'));
         return redirect()->route('subscribe');
     }
 }
