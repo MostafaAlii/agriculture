@@ -23,7 +23,7 @@ class SubscripetionExperiedNotification extends Command {
         foreach($verified_subscriptions as $vr_subscription) {
             info('i am here in SubscripetionExperiedNotification Using Scheduling' . Carbon::now());
             $verified_date = Carbon::createFromFormat('Y-m-d H:i:s', $vr_subscription->subscription_end_date)->toDateString();
-            dispatch(new VerifiedSubscriptionMailJob($vr_subscription, $expired_date));
+            dispatch(new VerifiedSubscriptionMailJob($vr_subscription, $verified_date));
         }
         $this->call('queue:work');
     }
