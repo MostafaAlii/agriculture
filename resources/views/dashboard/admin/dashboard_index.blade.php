@@ -45,9 +45,10 @@
             </div>
             <div class="content-body">
                 <!-- eCommerce statistic -->
-                    <!-- Start Forst Row -->
-                    <div class="row">
-                        <!-- Start Admin -->
+                <!-- Start First Row Admin -->
+                <div class="row">
+                    <!-- Start Admin -->
+                    @can('moderator-list')
                         <div class="col-xl-3 col-lg-6 col-12">
                             <a href="{{ route('Admins.index') }}">
                                 <div class="card pull-up">
@@ -95,7 +96,9 @@
                             </a>
                         </div>
                         <!-- End Employee -->
-                        <!-- Start Farmer -->
+                    @endcan
+                    <!-- Start Farmer -->
+                    @can('farmer-list')
                         <div class="col-xl-3 col-lg-6 col-12">
                             <a href="{{ route('farmers.index') }}">
                             <div class="card pull-up">
@@ -118,8 +121,10 @@
                             </div>
                             </a>
                         </div>
-                        <!-- End Farmer -->
-                        <!-- Start Vendor -->
+                    @endcan
+                    <!-- End Farmer -->
+                    <!-- Start Vendor -->
+                    @can('vendor-list')
                         <div class="col-xl-3 col-lg-6 col-12">
                             <a href="{{ route('users.index') }}">
                             <div class="card pull-up">
@@ -142,8 +147,10 @@
                             </div>
                             </a>
                         </div>
-                        <!-- End Vendor -->
-                        <!-- Start Worker -->
+                    @endcan
+                    <!-- End Vendor -->
+                    <!-- Start Worker -->
+                    @can('worker-list')
                         <div class="col-xl-3 col-lg-6 col-12">
                             <a href="{{ route('workers.index') }}">
                             <div class="card pull-up">
@@ -166,9 +173,11 @@
                             </div>
                             </a>
                         </div>
-                        <!-- End Worker -->
-                    </div>
-                    <!-- End Forst Row -->
+                    @endcan
+                    <!-- End Worker -->
+                </div>
+                <!-- End First Row Admin -->
+                <!-- Start Second Row Country -->
                 <div class="row">
                     <div class="col-xl-2 col-lg-6 col-12">
                         <a href="{{ route('Countries.index') }}">
@@ -305,6 +314,8 @@
                         </a>
                     </div>
                 </div>
+                <!-- End Second Row Country -->
+                <!-- Start Row Blog -->
                 <div class="row">
 
                     <div class="col-xl-3 col-lg-6 col-12">
@@ -376,8 +387,9 @@
                         </a>
                     </div> --}}
                 </div>
+                <!-- End Row Blog -->
+                <!-- Start Row Admin Department -->
                 <div class="row">
-
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('AdminDepartments.index') }}">
                             <div class="card pull-up">
@@ -495,8 +507,9 @@
                         </a>
                     </div> --}}
                 </div>
+                <!-- End Row Admin Department -->
+                <!-- Start Row Precipitations -->
                 <div class="row">
-
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('Precipitations.index') }}">
                             <div class="card pull-up">
@@ -592,8 +605,8 @@
 
 
                 </div>
+                <!-- End Row Precipitations -->
                 <div class="row">
-
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('Chickens.index') }}">
                             <div class="card pull-up">

@@ -1,21 +1,19 @@
-    <a href="{{ route('user.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
-        <i class="fa fa-show"></i>
-        {{ __('Admin/site.showedit') }}
-    </a>
-    {{-- <a href="{{ route('users.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
-        <i class="fa fa-edit"></i>
-        {{ __('Admin/site.edit') }}
-    </a> --}}
-    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
-        <i class="fa fa-trash"></i>
-        {{ __('Admin/site.delete') }}
-    </button>
-
+    @can('vendor-show')
+        <a href="{{ route('user.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
+            <i class="fa fa-show"></i>
+            {{ __('Admin/site.showedit') }}
+        </a>
+    @endcan
+    @can('vendor-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
+            <i class="fa fa-trash"></i>
+            {{ __('Admin/site.delete') }}
+        </button>
+    @endcan
 
     <form action="{{ route('users.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;" autocomplete="off">
         @csrf
         @method('delete')
-
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                 <!-- Modal -->

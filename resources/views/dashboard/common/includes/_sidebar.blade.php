@@ -181,7 +181,7 @@
                 </li>
                 <!-- End Settings -->
             </ul>
-            </li>
+            
             <!-- End Main Setting Dropdown Menu -->
             <!-- Start Countries Dropdown Menu -->
             <li class=" nav-item">
