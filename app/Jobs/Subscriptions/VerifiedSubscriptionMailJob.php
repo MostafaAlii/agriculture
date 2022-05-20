@@ -31,10 +31,11 @@ class VerifiedSubscriptionMailJob implements ShouldQueue
             'thanks' => 'Thank you this is from agro.com',
         ];
         info('i am here in VerifiedSubscriptionMailJob');
-        // send mail for expired user
-        // Notification::send($this->ex_subscription->email, new NewEmails($email));
-        //sendMail('front.emails.subscriptions.expired', $this->ex_subscription->email);
-        // trans('Website/subscriptions.email_expired_subject'), $this->ex_subscription);
-        info('i email Was Sent');
+
+         // send mail for not expired user
+         sendMail('front.emails.subscriptions.verified', $this->ex_subscription->email,
+         'احدث المنتجات التى تمت اضافتها', $this->ex_subscription);
+        
+        info('Email Send successfully');
     }
 }
