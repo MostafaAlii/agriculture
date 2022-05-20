@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>احدث المنتجات</title>
+    <title>{{ __('Website/subscriptions.email_notexpired_subject') }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -98,13 +98,35 @@
         div[style*="margin: 16px 0;"] {
             margin: 0 !important;
         }
+
+     
+     /* --------------------------------- */
+.score {
+  display: inline-block;
+  font-family: Wingdings;
+  font-size: 23px;
+  color: #ccc;
+  position: relative;
+}
+.score::before,
+.score span::before{
+  content: "\2605\2605\2605\2605\2605";
+  display: block;
+}
+.score span {
+  color: gold;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+
     </style>
 </head>
 
 <body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
     <!-- HIDDEN PREHEADER TEXT -->
     <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Lato', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;"> We're thrilled to have you here! Get ready to dive into your new account. </div>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <table style="direction: rtl; border:0; bgcolor:#fcdb5a; cellpadding:0; cellspacing:0; width:100%">
         <!-- LOGO -->
         <tr>
             <td bgcolor="#fcdb5a" align="center">
@@ -122,7 +144,11 @@
                         <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
                             <h1 style="font-size: 48px; font-weight: 400; margin: 2;">
                             </h1> {{ __('Website/subscriptions.welcome_text') }}
-                             <img src="{{URL::asset('public/Dashboard/img/settingLogo/'.setting()->site_logo)}}" width="125" height="120" style="display: block; border: 0px;" />
+                            <?php
+                            use App\Models\Setting;
+                            $site= Setting::first();
+                            ?>
+                             <img src="{{URL::asset('public/Dashboard/img/settingLogo/'.$site->site_logo)}}" width="125" height="120" style="display: block; border: 0px;" />
                         </td>
                     </tr>
                 </table>
@@ -130,14 +156,20 @@
         </tr>
         <tr>
             <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                    <tr>
-                        <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                <table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;">
+                    <tr align="center" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                        <td colspan="5">
                             <p style="margin: 0;">
-                                <br><br>
-                                احدث المنتجات 
+                               <h2>{{ __('Website/subscriptions.email_notexpired_subject') }}</h2><br>
                             </p>
                         </td>
+                    </tr>
+                    <tr>
+                        <th>{{__('Website/subscriptions.product_name')}}</th>
+                        <th>{{__('Website/subscriptions.product_price')}}</th>
+                        <th>{{__('Website/subscriptions.product_image')}}</th>
+                        <th>{{__('Website/subscriptions.product_rate')}}</th>
+                        <th>{{__('Website/subscriptions.product_link')}}</th>
                     </tr>
                     <?php
                     use App\Models\Product;
@@ -146,11 +178,20 @@
                         echo '<tr>
                                 <td>'.$p->name.'</td>
                                 <td>'.$p->price.'</td>
+                               
+                                <td>'; ?>
+                                <img style="width:100px;height:100px;" src="{{ asset('Dashboard/img/products/' . $p->image->filename) }}" data-src="{{ asset('Dashboard/img/products/' . $p->image->filename) }}"/>
+                                <?php echo'</td>
+                                <td><span class="score"><span style="width:'.$p->productRate().'%"></span></span></td>
+                                <td>';?>
+                                <a href="{{route('product_details', encrypt($p->id))}}">{{__('Website/subscriptions.product_link')}}</a>
+                                <?php
+                                echo'</td>
                             </tr>';
                     }
                     ?>
                     <tr>
-                        <td align="center" style="border-radius: 3px;" bgcolor="#fcdb5a">
+                        <td align="center" style="border-radius: 3px;" bgcolor="#fcdb5a" colspan="5">
                             <a href="{{ url('http://127.0.0.1:8000/'. app()->getLocale() .'/home2') }}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #f4f4f4; text-decoration: none; color: #f4f4f4; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #fcdb5a; display: inline-block;">
                                 {{ __('Website/subscriptions.website') }}
                             </a>

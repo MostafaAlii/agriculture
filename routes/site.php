@@ -118,6 +118,8 @@ Route::group(
       
         Route::view('/team_profile/{id}','livewire.front.team_profile')->name('team_profile');
         
+        Route::view('/subscripe_mail','front.emails.subscriptions.verified')->name('subscripe_mail');
+        
     require __DIR__.'/auth.php';
     });
 
