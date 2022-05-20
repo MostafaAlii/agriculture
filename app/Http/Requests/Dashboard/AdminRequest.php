@@ -23,6 +23,8 @@ class AdminRequest extends FormRequest {
             'state_id'        => 'required',
             'village_id'      => 'sometimes|nullable',
             // "image"        => 'image|mimes:jpeg,png|max:4096',
+            'roles_name'     =>'required|array|min:1',
+            'roles_name.*'   =>'exists:roles,name',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

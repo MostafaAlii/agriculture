@@ -9,4 +9,8 @@ return [
     'this_user_not_have_any_permission'         =>                          'لا يوجد صلاحيات له',
     'add_new_permission'                        =>                          'اضافة صلاحية جديدة',
     'no_roles_found'                            =>                          'عفــوا لا يوجد صلاحيات',
+    'add_roles_successfuly'                     =>                          'تم اضافة الصلاحية بنجاح',
+    'show'                                      =>                          'عرض',
+    'role_show'                                 =>                          'عرض بيانات الصلاحية',
+    'no_premission_for_this_role'               =>                          'لا يوجد صلاحيات لهذا الدور',
 ];

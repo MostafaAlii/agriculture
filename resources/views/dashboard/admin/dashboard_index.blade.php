@@ -45,119 +45,130 @@
             </div>
             <div class="content-body">
                 <!-- eCommerce statistic -->
-                <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('Admins.index') }}">
+                    <!-- Start Forst Row -->
+                    <div class="row">
+                        <!-- Start Admin -->
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('Admins.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="info">{{ \App\Models\Admin::where('type','admin')->count() }}</h3>
+                                                    <h6>{{ __('Admin/site.admins') }}</h6>
+                                                </div>
+                                                <div>
+                                                    <i class="icon-home info font-large-2 float-right"></i>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- End Admin -->
+                        <!-- Start Employee -->
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('Admins.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="info">{{ \App\Models\Admin::where('type','employee')->count() }}</h3>
+                                                    <h6>{{ __('Admin/site.employees') }}</h6>
+                                                </div>
+                                                <div>
+                                                    <i class="icon-emoticon-smile info font-large-2 float-right"></i>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- End Employee -->
+                        <!-- Start Farmer -->
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('farmers.index') }}">
                             <div class="card pull-up">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
                                             <div class="media-body text-left">
-                                                <h3 class="info">{{ \App\Models\Admin::where('type','admin')->count() }}</h3>
-                                                <h6>{{ __('Admin/site.admins') }}</h6>
+                                                <h3 class="warning">{{ \App\Models\Farmer::count() }}</h3>
+                                                <h6>{{ __('Admin/site.farmer') }}</h6>
                                             </div>
                                             <div>
-                                                <i class="icon-home info font-large-2 float-right"></i>
+                                                <i class="icon-users warning font-large-2 float-right"></i>
                                             </div>
                                         </div>
                                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('Admins.index') }}">
+                            </a>
+                        </div>
+                        <!-- End Farmer -->
+                        <!-- Start Vendor -->
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('users.index') }}">
                             <div class="card pull-up">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
                                             <div class="media-body text-left">
-                                                <h3 class="info">{{ \App\Models\Admin::where('type','employee')->count() }}</h3>
-                                                <h6>{{ __('Admin/site.employees') }}</h6>
+                                                <h3 class="success">{{ \App\Models\User::count() }}</h3>
+                                                <h6>{{ __('Admin/site.users') }}</h6>
                                             </div>
                                             <div>
-                                                <i class="icon-emoticon-smile info font-large-2 float-right"></i>
+                                                <i class="icon-user-follow success font-large-2 float-right"></i>
                                             </div>
                                         </div>
                                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('farmers.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="warning">{{ \App\Models\Farmer::count() }}</h3>
-                                            <h6>{{ __('Admin/site.farmer') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="icon-users warning font-large-2 float-right"></i>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('users.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="success">{{ \App\Models\User::count() }}</h3>
-                                            <h6>{{ __('Admin/site.users') }}</h6>
+                        <!-- End Vendor -->
+                        <!-- Start Worker -->
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('workers.index') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="success">{{ \App\Models\Worker::count() }}</h3>
+                                                <h6>{{ __('Admin/site.workers') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="icon-user-follow success font-large-2 float-right"></i>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <i class="icon-user-follow success font-large-2 float-right"></i>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
-                        </a>
+                        <!-- End Worker -->
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('workers.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="success">{{ \App\Models\Worker::count() }}</h3>
-                                            <h6>{{ __('Admin/site.workers') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="icon-user-follow success font-large-2 float-right"></i>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-
-                </div>
+                    <!-- End Forst Row -->
                 <div class="row">
                     <div class="col-xl-2 col-lg-6 col-12">
                         <a href="{{ route('Countries.index') }}">

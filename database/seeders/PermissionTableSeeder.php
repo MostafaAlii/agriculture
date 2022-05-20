@@ -7,6 +7,7 @@ class PermissionTableSeeder extends Seeder {
         $permissions = [
             // Permissions Widget ::
             // Admins & Moderator ::
+            'dashboard',
             'admin',
             'moderators-management',
                 'moderator-list',

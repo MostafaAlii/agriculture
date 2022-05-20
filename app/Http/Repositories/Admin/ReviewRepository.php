@@ -99,9 +99,7 @@ class ReviewRepository implements ReviewInterface {
        // dd($request->delete_select_id);
         if($request->delete_select_id){
             $all_ids = explode(',',$request->delete_select_id);
-
             $delete_or_no=0;
-            
             foreach($all_ids as $ids){
                 
                     Review::findorfail($ids)->delete();

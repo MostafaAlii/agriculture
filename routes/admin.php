@@ -478,6 +478,7 @@ Route::group(
                 /********************************* Start Roles **********************************/
                 Route::resource('Roles',RoleController::class);
                 Route::get('/data', [RoleController::class,'data'])->name('roles.data');
+                Route::delete('/Roles/bulk_delete/{ids}', [RoleController::class,'bulkDelete'])->name('roles.bulk_delete');
                 /********************************* End Roles **********************************/
                  /********************************* end mail **********************************/
 

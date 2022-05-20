@@ -8,6 +8,8 @@ use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+
 class AdminRepository implements AdminInterface{
     use UploadT;
     public function index() {
@@ -45,7 +47,8 @@ class AdminRepository implements AdminInterface{
 
     public function create() {
         $areas = Area::all();
-        return view('dashboard.admin.admins.create',compact('areas'));
+        $roles = Role::pluck('name', 'name')->all();
+        return view('dashboard.admin.admins.create',compact(['areas', 'roles']));
     }
 
     public function store($request) {
@@ -58,6 +61,7 @@ class AdminRepository implements AdminInterface{
             $requestData['longitude']= $request->longitude; */
             Admin::create($requestData);
             $admin = Admin::latest()->first();
+            $admin->assignRole($request->input('roles_name'));
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
@@ -71,7 +75,9 @@ class AdminRepository implements AdminInterface{
     public function edit($id) {
         $adminID = Crypt::decrypt($id);
         $admin=Admin::findorfail($adminID);
-        return view('dashboard.admin.admins.profile.profiledit', compact('admin'));
+        $roles = Role::pluck('name','name')->all();
+        $adminRole = $admin->roles->pluck('name','name')->all();
+        return view('dashboard.admin.admins.profile.profiledit', compact(['admin', 'roles', 'adminRole']));
     }
 
     public function update( $request,$id) {
@@ -81,11 +87,17 @@ class AdminRepository implements AdminInterface{
             $admin=Admin::findorfail($adminID);
             $requestData = $request->validated();
             $requestData['type'] = $request->type;
+            //$requestData['roles_name'] = $request->$request->input('roles_name');
             $admin->update($requestData);
+
             if($request->image){
                 $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
             }
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
+            //DB::table('model_has_roles')->where('model_id',$id)->delete();
+            //$admin->assignRole($requestData['roles']);
+            DB::table('model_has_roles')->where('model_id',$id)->delete();
+$admin->assignRole($request->input('roles_name'));
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');

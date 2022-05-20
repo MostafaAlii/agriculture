@@ -128,7 +128,6 @@
 
                                             </div>
                                             <div class="row">
-
                                                 <div class="col-md-4">
                                                     <fieldset class="form-group">
                                                         <label>{{ __('Admin/site.user-type') }}<span class="text-danger">*</span></label>
@@ -152,6 +151,19 @@
                                                 </div>
                                             </div>
 
+                                            <!-- Start Permisson Select -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="projectinput1">
+                                                        {{ trans('Admin\admins.permission_select_placeholder') }} <span class="text-danger">*</span>
+                                                    </label>
+                                                    {!! Form::select('roles_name[]', $roles,[], array('class' =>'select2', 'form-control','multiple')) !!}
+                                                    @error('roles_name.0')
+                                                        <span class="text-danger"> {{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <!-- End Permission Select -->
                                             <div class="form-actions center">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}

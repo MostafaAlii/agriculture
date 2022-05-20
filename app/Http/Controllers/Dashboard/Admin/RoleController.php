@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
-use App\Http\Controllers\Controller;
-use App\Http\Interfaces\Admin\RoleRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\RolesRequest;
+use App\Http\Requests\Dashboard\RoleUpdateRequest;
+use App\Http\Interfaces\Admin\RoleRepositoryInterface;
+
 class RoleController extends Controller {
     protected $Data;
     public function __construct(RoleRepositoryInterface $Data) {
@@ -25,23 +28,27 @@ class RoleController extends Controller {
         return $this->Data->create();
     }
 
-    public function store(Request $request) {
+    public function store(RolesRequest $request) {
         return $this->Data->store($request);
     }
 
     public function show($id) {
-        //
+        return $this->Data->show($id);
     }
 
     public function edit($id) {
-        //
+        return $this->Data->edit($id);
     }
 
-    public function update(Request $request, $id) {
-        //
+    public function update(RoleUpdateRequest $request, $id) {
+        return $this->Data->update($request, $id);
     }
 
     public function destroy($id) {
-        //
+        return $this->Data->destroy($id);
+    }
+
+    public function bulkDelete(Request $request) {
+        return $this->Data->bulkDelete($request);
     }
 }

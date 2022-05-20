@@ -9,4 +9,6 @@ return [
     'admin_department'                      =>                  'القسم الإداري التابع له',
     'status'                                =>                  'الحالة',
     'permissionLevel'                       =>                  'الصلاحية',
+    'permission_select_placeholder'         =>                  'اختر الصلاحية',
+    'user_level'                            =>                  'مستوى العضو',
 ];
