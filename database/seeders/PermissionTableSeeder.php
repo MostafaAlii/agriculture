@@ -40,7 +40,8 @@ class PermissionTableSeeder extends Seeder {
             
             // Settings ::
             'settings-managment',
-                'setting-list',
+                'pages',
+                'settings',
                 // Sliders ::
                 'slider-list',
                 'slider-create',
@@ -55,6 +56,8 @@ class PermissionTableSeeder extends Seeder {
                 'brand-delete-all',
                 // Roles ::
                 'role-list',
+                'role-processes',
+                'role-show',
                 'role-create',
                 'role-edit',
                 'role-delete',
