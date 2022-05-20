@@ -7549,6 +7549,7 @@
                 "issues": "https://github.com/yoeunes/toastr/issues",
                 "source": "https://github.com/yoeunes/toastr"
             },
+            "abandoned": "php-flasher/flasher-toastr-laravel",
             "time": "2022-01-28T20:29:38+00:00"
         }
     ],
@@ -10345,5 +10346,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.2.0"
 }

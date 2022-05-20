@@ -1,6 +1,14 @@
 <?php
 
 return [
+    'administrative_part'=>'ADMINISTRATIVE PARTS',
+    'parts'=>'PARTS',
+    'administrative_desc'=>'Administrative parts including five main parts existing in each state on seven Area as follow:',
+    'wholesale'=>'WHOLESALE',
+    'wholesale_desc'=>'including all Income and outcome products to these four wholesales',
+
+
+
     'home' => 'Home',
     'logout' => 'Logout',
     'login' => 'Login',

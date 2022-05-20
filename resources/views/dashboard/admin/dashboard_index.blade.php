@@ -1139,7 +1139,8 @@
 
 
                 </div>
-                <h1> {{__('Admin\site.whole_sale_market')}} </h1>
+                <h1> {{__('Admin\site.
+                ')}} </h1>
 
                 <div class="row">
                     <div class="col-xl-2 col-lg-6 col-12">
