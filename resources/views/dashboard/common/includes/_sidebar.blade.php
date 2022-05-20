@@ -141,57 +141,70 @@
                                         @endcan
                                         <!-- End Setting -->
                                         <!-- Start AboutUs -->
-                                        <li>
-                                            <a class="menu-item" href="{{ route('about_us/show') }}">
-                                                <i class="material-icons"> info </i>
-                                                <span data-i18n="Options"> {{ trans('Admin/site.about_us') }}</span>
-                                            </a>
-                                        </li>
+                                        @can('abouts-us')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('about_us/show') }}">
+                                                    <i class="material-icons"> info </i>
+                                                    <span data-i18n="Options"> {{ trans('Admin/site.about_us') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
                                         <!-- End AboutUs -->
                                         <!-- Start Contact Us -->
-                                        <li>
-                                            <a class="menu-item" href="{{ route('contact_us') }}">
-                                                <i class="material-icons"> mail_outline </i>
-                                                <span data-i18n="Options"> {{ trans('Admin/site.contact') }}</span>
-                                            </a>
-                                        </li>
+                                        @can('contact-us')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('contact_us') }}">
+                                                    <i class="material-icons"> mail_outline </i>
+                                                    <span data-i18n="Options"> {{ trans('Admin/site.contact') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
                                         <!-- End Contact Us -->
                                         <!-- Start Teams -->
-                                        <li>
-                                            <a class="menu-item" href="{{ route('team.index') }}">
-                                                <i class="icon-user" style="color: whight;;padding: 3px;font-size: 18px;"></i>
-                                                <span data-i18n="Options"> {{ trans('Admin/site.our_team') }}</span>
-                                            </a>
-                                        </li>
+                                        @can('team-managment')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('team.index') }}">
+                                                    <i class="icon-user" style="color: whight;;padding: 3px;font-size: 18px;"></i>
+                                                    <span data-i18n="Options"> {{ trans('Admin/site.our_team') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
                                         <!-- End Teams -->
                                         <!-- Start Review -->
-                                        <li>
-                                            <a class="menu-item" href="{{ route('review.index') }}">
-                                                <i class="material-icons"> mail_outline </i>
-                                                <span data-i18n="Options"> {{ trans('Admin/site.reviwe') }}</span>
-                                            </a>
-                                        </li>
+                                        @can('client-review')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('review.index') }}">
+                                                    <i class="material-icons"> mail_outline </i>
+                                                    <span data-i18n="Options"> {{ trans('Admin/site.reviwe') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
                                         <!-- End Review -->
                                         <!-- Start Slider -->
-                                        <li>
-                                            <a class="menu-item" href="{{ route('sliders.index') }}">
-                                                <i class="material-icons">photo_library</i>
-                                                <span data-i18n="Sliders"> {{ trans('Admin/site.sliderimages') }}</span>
-                                            </a>
-                                        </li>
+                                        @can('photo-slider')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('sliders.index') }}">
+                                                    <i class="material-icons">photo_library</i>
+                                                    <span data-i18n="Sliders"> {{ trans('Admin/site.sliderimages') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
                                         <!-- End Slider -->
                                         <!-- Start Brand -->
-                                        <li>
-                                            <a class="menu-item" href="{{ route('brands.index') }}">
-                                                <i class="material-icons">photo_library</i>
-                                                <span data-i18n="Brands"> {{ trans('Admin/site.brand') }}</span>
-                                            </a>
-                                        </li>
+                                        @can('brands-list')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('brands.index') }}">
+                                                    <i class="material-icons">photo_library</i>
+                                                    <span data-i18n="Brands"> {{ trans('Admin/site.brand') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
                                         <!-- End Brand -->
                                     </ul>
                                 </li>
                             @endcan
                             <!-- End Pages -->
+                        
                     </li>
                 @endcan
                 <!-- End Settings -->

@@ -40,8 +40,14 @@ class PermissionTableSeeder extends Seeder {
             
             // Settings ::
             'settings-managment',
-                'pages',
                 'settings',
+                    'pages',
+                        'abouts-us',
+                        'contact-us',
+                        'team-managment',
+                        'client-review',
+                        'photo-slider',
+                        'brands-list',
                 // Sliders ::
                 'slider-list',
                 'slider-create',

@@ -9,6 +9,7 @@ class AboutController extends Controller
 {
     protected $Data;
     public function __construct(AboutInterface $Data) {
+        $this->middleware('permission:about-us', ['only' => ['show','save']]);
         $this->Data = $Data;
     }
 
