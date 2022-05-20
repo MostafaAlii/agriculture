@@ -3,6 +3,8 @@
 return [
     'whole_sale_market'=>'العلوات',
     'planet_protection_services'=>'النباتات المحمية و الخدمات',
+    'wholesale'=>'العلوات',
+    'wholesale_desc'=>'تتضمن جميع المنتجات الواردة الى العلوة و الصادرة منها في العلوات الأربعة',
     'planning'=>'التخطيط',
     'Horticulture'=>'البستنة',
     'animal_wealth'=>'الثروة الحيوانية',
@@ -13,6 +15,9 @@ return [
     'serial' => 'تسلسل',
     'services'=>'الخدمات',
     'planet_protection'=>'المناحل',
+    'administrative_part'=>'أقسام الهيكلية الإدارية',
+    'parts'=>'أقسام',
+    'administrative_desc'=>'تتضمن الهيكلية الإدارية خمس أقسام رئيسية موجودة بكل ناحية على القضاءات السبعة و هي كالتالي',
 
     'add' => 'اضافه',
     'edit' => 'تعديل',
