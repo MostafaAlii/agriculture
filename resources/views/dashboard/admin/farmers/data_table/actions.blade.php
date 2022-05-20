@@ -1,16 +1,15 @@
+    @can('farmer-show')
     <a href="{{ route('farmer.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-show"></i>
         {{ __('Admin/site.showedit') }}
     </a>
-    {{-- <a href="{{ route('farmers.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
-        <i class="fa fa-edit"></i>
-        {{ __('Admin/site.edit') }}
-    </a> --}}
+    @endcan
+    @can('farmer-delete')
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
         <i class="fa fa-trash"></i>
         {{ __('Admin/site.delete') }}
     </button>
-
+    @endcan
 
     <form action="{{ route('farmers.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;" autocomplete="off">
         @csrf

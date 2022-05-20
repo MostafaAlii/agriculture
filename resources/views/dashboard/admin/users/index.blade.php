@@ -44,37 +44,21 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
-                                    <button type="button" class="btn btn-warning mb-3"
-                                            id="btn_delete_all" data-toggle="modal"
-                                            data-target="#bulkdelete">
-                                            <i class="fa fa-trash"></i>
-                                            {{ __('Admin/site.bulkdelete') }}
-                                    </button>
-
-                                    {{-- <form method="post" action="{{ route('users.bulk_delete') }}" >
-                                        @csrf
-                                        @method('delete')
-                                        <input type="text" name="record_ids" id="record-ids">
-                                        <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true">
-                                            <i class="fa fa-trash"></i>
-                                            {{ __('Admin/site.bulkdelete') }}
+                                    @can('vendor-create')
+                                        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
+                                    @endcan
+                                    @can('vendor-delete-all')
+                                        <button type="button" class="btn btn-warning mb-3"
+                                                id="btn_delete_all" data-toggle="modal"
+                                                data-target="#bulkdelete">
+                                                <i class="fa fa-trash"></i>
+                                                {{ __('Admin/site.bulkdelete') }}
                                         </button>
-                                    </form><!-- end of form --> --}}
-
-
+                                    @endcan
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="users-table" >
                                             <thead>
                                                 <tr>
-                                                    {{-- <th>
-                                                        <div class="animated-checkbox">
-                                                            <label class="m-0">
-                                                                <input type="checkbox" id="record__select-all">
-                                                                <span class="label-text"></span>
-                                                            </label>
-                                                        </div>
-                                                    </th> --}}
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>

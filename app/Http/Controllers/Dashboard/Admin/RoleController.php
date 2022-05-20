@@ -9,10 +9,12 @@ use App\Http\Interfaces\Admin\RoleRepositoryInterface;
 class RoleController extends Controller {
     protected $Data;
     public function __construct(RoleRepositoryInterface $Data) {
-        /*$this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:role-list', ['only' => ['index']]);
         $this->middleware('permission:role-create', ['only' => ['create','store']]);
         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:role-delete', ['only' => ['destroy']]);*/
+        $this->middleware('permission:role-show', ['only' => ['show']]);
+        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:role-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

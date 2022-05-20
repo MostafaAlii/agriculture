@@ -34,7 +34,7 @@ class VerifiedSubscriptionMailJob implements ShouldQueue
 
          // send mail for not expired user
          sendMail('front.emails.subscriptions.verified', $this->ex_subscription->email,
-         'احدث المنتجات التى تمت اضافتها', $this->ex_subscription);
+         trans('Website/subscriptions.email_notexpired_subject'), $this->ex_subscription);
         
         info('Email Send successfully');
     }

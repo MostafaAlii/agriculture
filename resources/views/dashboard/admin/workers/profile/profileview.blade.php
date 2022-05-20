@@ -40,7 +40,9 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-5 px-0 d-flex justify-content-end align-items-center px-1 mb-2">
+                        @can('worker-edit')
                         <a href="{{ route('workers.edit',encrypt($worker->id)) }}" class="btn btn-sm btn-primary"> @lang('Admin/site.edit')</a>
+                        @endcan
                         <a href="{{ route('workers.index') }}" class="btn btn-sm mr-25 border"> @lang('Admin/site.back')</a>
                     </div>
                 </div>

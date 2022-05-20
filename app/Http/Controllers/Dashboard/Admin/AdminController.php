@@ -10,6 +10,12 @@ class AdminController extends Controller {
 
     protected $Data;
     public function __construct(AdminInterface $Data) {
+        $this->middleware('permission:moderator-list', ['only' => ['index']]);
+        $this->middleware('permission:moderator-create', ['only' => ['create','store']]);
+        $this->middleware('permission:moderator-show', ['only' => ['show']]);
+        $this->middleware('permission:moderator-show|moderator-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:moderator-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:moderator-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

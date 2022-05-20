@@ -12,6 +12,12 @@ use Yajra\DataTables\DataTables;
 class FarmerController extends Controller {
     protected $Data;
     public function __construct(farmerInterface $Data) {
+        $this->middleware('permission:farmer-list', ['only' => ['index']]);
+        $this->middleware('permission:farmer-create', ['only' => ['create','store']]);
+        $this->middleware('permission:farmer-show', ['only' => ['show']]);
+        $this->middleware('permission:farmer-show|farmer-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:farmer-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:farmer-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

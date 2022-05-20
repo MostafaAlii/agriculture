@@ -12,6 +12,12 @@ use Yajra\DataTables\DataTables;
 class UserController extends Controller {
     protected $Data;
     public function __construct(UserInterface $Data) {
+        $this->middleware('permission:vendor-list', ['only' => ['index']]);
+        $this->middleware('permission:vendor-create', ['only' => ['create','store']]);
+        $this->middleware('permission:vendor-show', ['only' => ['show']]);
+        $this->middleware('permission:vendor-show|vendor-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:vendor-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:vendor-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

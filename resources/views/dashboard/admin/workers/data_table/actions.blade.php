@@ -1,17 +1,13 @@
-
-
-
+    @can('worker-show')
     <a href="{{ route('worker.profile', encrypt($id)) }}" class="btn btn-info btn-sm" title=" {{ __('Admin/site.showedit') }}">
         <i class="fa fa-show"></i>
-
     </a>
-
+    @endcan
+    @can('worker-delete')
     <a href="#" type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" title=" {{ __('Admin/site.delete') }}">
         <i class="fa fa-trash"></i>
-
     </a>
-
-
+    @endcan
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                 <!-- Modal -->

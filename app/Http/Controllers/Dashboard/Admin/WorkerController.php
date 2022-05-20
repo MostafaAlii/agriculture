@@ -7,9 +7,14 @@ use App\Http\Requests\Dashboard\WorkerProfileInformationRequest;
 use App\Http\Requests\Dashboard\WorkerRequest;
 use Illuminate\Http\Request;
 class WorkerController extends Controller {
-
     protected $Data;
     public function __construct(WorkerInterface $Data) {
+        $this->middleware('permission:worker-list', ['only' => ['index']]);
+        $this->middleware('permission:worker-create', ['only' => ['create','store']]);
+        $this->middleware('permission:worker-show', ['only' => ['show']]);
+        $this->middleware('permission:worker-show|worker-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:worker-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:worker-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
@@ -34,11 +39,6 @@ class WorkerController extends Controller {
         return $this->Data->edit($id);
     }// end of edit
 
-    // public function update(AdminRequest $request,$id) {
-    //     return $this->Data->update($request,$id);
-    // }// end of update
-
-
     public function destroy($id) {
         return $this->Data->destroy($id);
     }// end of destroy
@@ -49,7 +49,6 @@ class WorkerController extends Controller {
     public function showProfile($id) {
         return $this->Data->showProfile($id);
     }// end of showprofile
-
 
     public function updateAccount(WorkerProfileAccountRequest $request,$id) {
         return $this->Data->updateAccount($request,$id);

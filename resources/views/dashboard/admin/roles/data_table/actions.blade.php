@@ -1,20 +1,28 @@
-<div class="btn-group">
-<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{ __('Admin/site.action') }}
-    </button>
-    <div class="dropdown-menu dropmenu-menu-right">
-        <a href="{{ route('Roles.show', $role->id) }}" class="dropdown-item btn btn-outline-success btn-md">
-            {{ __('Admin/roles.show') }}
-        </a>
-        <a href="{{ route('Roles.edit', encrypt($role->id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
-            {{ __('Admin/site.edit') }}
-        </a>
-        <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $role->id }}">
-            {{ __('Admin/site.delete') }}
-        </a>
-        <div class="dropdown-divider"></div>
+@can('role-processes')
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ __('Admin/site.action') }}
+        </button>
+        <div class="dropdown-menu dropmenu-menu-right">
+            @can('role-show')
+                <a href="{{ route('Roles.show', $role->id) }}" class="dropdown-item btn btn-outline-success btn-md">
+                    {{ __('Admin/roles.show') }}
+                </a>
+            @endcan
+            @can('role-edit')
+            <a href="{{ route('Roles.edit', encrypt($role->id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
+                {{ __('Admin/site.edit') }}
+            </a>
+            @endcan
+            @can('role-delete')
+            <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $role->id }}">
+                {{ __('Admin/site.delete') }}
+            </a>
+            @endcan
+            <div class="dropdown-divider"></div>
+        </div>
     </div>
-</div>
+@endcan
 
 {{-- modal delete --}}
 <form action="{{ route('Roles.destroy', encrypt($role->id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
