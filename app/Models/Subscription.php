@@ -11,10 +11,14 @@ class Subscription extends Model {
     protected $casts = ['subscription_end_date' => 'datetime:Y/m/d'];
     protected $dates = ['subscription_end_date'];
 
+
+    //subscription for this mails is stoped
     public function scopeExpireSubscribeDate($query) {
         return $query->where('subscription_end_date','<' ,Carbon::today());
     }
 
+    
+    //this mails still subscribe with recent updates
     public function scopeOnlyNotExpiredDate($query) {
         return $query->where('subscription_end_date','>=' ,Carbon::today());
     }
