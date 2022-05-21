@@ -11,6 +11,11 @@ class CountryController extends Controller
 {
     protected $Data;
     public function __construct(CountryInterface $Data) {
+        $this->middleware('permission:country-managment', ['only' => ['index']]);
+        $this->middleware('permission:country-create', ['only' => ['store']]);
+        $this->middleware('permission:country-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:country-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:country-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

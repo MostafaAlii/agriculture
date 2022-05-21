@@ -11,12 +11,9 @@ class ContactRepository implements ContactInterface {
         return view('dashboard.admin.contact_us_mails',$data);
     }
 
-
     public function replay($request,$id){
         $mail_name='sender_mail_'.$id;
         $comment_name='comment_'.$id;
-      //  dd($request[$mail_name].' '.$request[$comment_name]);
-
        try {
 
            Mail::send(

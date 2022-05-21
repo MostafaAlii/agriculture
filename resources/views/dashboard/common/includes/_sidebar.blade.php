@@ -181,7 +181,7 @@
                                         @endcan
                                         <!-- End Review -->
                                         <!-- Start Slider -->
-                                        @can('photo-slider')
+                                        @can('slider-managment')
                                             <li>
                                                 <a class="menu-item" href="{{ route('sliders.index') }}">
                                                     <i class="material-icons">photo_library</i>
@@ -191,7 +191,7 @@
                                         @endcan
                                         <!-- End Slider -->
                                         <!-- Start Brand -->
-                                        @can('brands-list')
+                                        @can('brands-managment')
                                             <li>
                                                 <a class="menu-item" href="{{ route('brands.index') }}">
                                                     <i class="material-icons">photo_library</i>

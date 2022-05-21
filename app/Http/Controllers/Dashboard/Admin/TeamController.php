@@ -8,6 +8,11 @@ use App\Http\Interfaces\Admin\TeamInterface;
 class TeamController extends Controller {
     protected $Data;
     public function __construct(TeamInterface $Data) {
+        $this->middleware('permission:team-managment', ['only' => ['index']]);
+        $this->middleware('permission:team-create', ['only' => ['store']]);
+        $this->middleware('permission:team-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:team-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:team-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

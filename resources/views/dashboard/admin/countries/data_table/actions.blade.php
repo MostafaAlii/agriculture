@@ -1,17 +1,15 @@
-
-
+@can('country-edit')
 <a href="{{ route('Countries.edit', encrypt($id)) }}" class="btn btn-success btn-sm">
     <i class="fa fa-edit"></i>
     {{ __('Admin/countries.edit') }}
 </a>
+@endcan
+@can('country-delete')
 <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
     <i class="fa fa-trash"></i>
     {{ __('Admin/countries.delete') }}
 </button>
-
-
-
-
+@endcan
 <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-group">
         <!-- Modal -->

@@ -1,10 +1,13 @@
-<a href="{{ route('review.edit', encrypt($id)) }}" class="btn btn-primary btn-sm">
-    {{ __('Admin/site.edit') }}
-</a>
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
-    {{ __('Admin/site.delete') }}
-</button>
-
+@can('client-review-edit')
+    <a href="{{ route('review.edit', encrypt($id)) }}" class="btn btn-primary btn-sm">
+        {{ __('Admin/site.edit') }}
+    </a>
+@endcan
+@can('client-review-delete')
+    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
+        {{ __('Admin/site.delete') }}
+    </button>
+@endcan
 <form action="{{ route('review.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')
