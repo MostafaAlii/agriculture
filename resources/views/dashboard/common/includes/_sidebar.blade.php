@@ -141,7 +141,7 @@
                                         @endcan
                                         <!-- End Setting -->
                                         <!-- Start AboutUs -->
-                                        @can('abouts-us')
+                                        @can('about-us')
                                             <li>
                                                 <a class="menu-item" href="{{ route('about_us/show') }}">
                                                     <i class="material-icons"> info </i>
