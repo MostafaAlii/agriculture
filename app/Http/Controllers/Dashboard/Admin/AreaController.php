@@ -12,6 +12,11 @@ class AreaController extends Controller
 {
     protected $Data;
     public function __construct(AreaInterface $Data) {
+        $this->middleware('permission:area-managment', ['only' => ['index']]);
+        $this->middleware('permission:area-create', ['only' => ['store']]);
+        $this->middleware('permission:area-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:area-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:area-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

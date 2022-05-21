@@ -141,7 +141,7 @@
                                         @endcan
                                         <!-- End Setting -->
                                         <!-- Start AboutUs -->
-                                        @can('abouts-us')
+                                        @can('about-us')
                                             <li>
                                                 <a class="menu-item" href="{{ route('about_us/show') }}">
                                                     <i class="material-icons"> info </i>
@@ -181,7 +181,7 @@
                                         @endcan
                                         <!-- End Review -->
                                         <!-- Start Slider -->
-                                        @can('photo-slider')
+                                        @can('slider-managment')
                                             <li>
                                                 <a class="menu-item" href="{{ route('sliders.index') }}">
                                                     <i class="material-icons">photo_library</i>
@@ -191,7 +191,7 @@
                                         @endcan
                                         <!-- End Slider -->
                                         <!-- Start Brand -->
-                                        @can('brands-list')
+                                        @can('brands-managment')
                                             <li>
                                                 <a class="menu-item" href="{{ route('brands.index') }}">
                                                     <i class="material-icons">photo_library</i>
@@ -211,56 +211,68 @@
             </ul>
             <!-- End Main Setting Dropdown Menu -->
             <!-- Start Countries Dropdown Menu -->
-            <li class=" nav-item">
-                <a href="{{-- route('admin.dashboard') --}}">
-                    <i class="material-icons">flag</i>
-                    <span class="menu-title" data-i18n="Countries">
-                        {{ trans('Admin/countries.country_title_in_sidebar') }}
-                    </span>
-                </a>
-                <ul class="menu-content">
-                    <!-- Start Countries -->
-                    <li>
-                        <a class="menu-item" href="{{ route('Countries.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="Countries">{{ trans('Admin/countries.countryPageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End Countries -->
-                    <!-- Start Proviences -->
-                    <li>
-                        <a class="menu-item" href="{{ route('Proviences.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="Proviences">{{ trans('Admin/proviences.proviencePageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End Proviences -->
-                    <!-- Start Areas -->
-                    <li>
-                        <a class="menu-item" href="{{ route('Areas.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="Areas">{{ trans('Admin/areas.areaPageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End Areas -->
-                    <!-- Start States -->
-                    <li>
-                        <a class="menu-item" href="{{ route('States.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="States">{{ trans('Admin/states.statePageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End States -->
-                    <!-- Start Villages -->
-                    <li>
-                        <a class="menu-item" href="{{ route('Villages.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="Villages">{{ trans('Admin/villages.villagePageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End Villages -->
-                </ul>
-            </li>
+            @can('countries-list')
+                <li class=" nav-item">
+                    <a href="{{-- route('admin.dashboard') --}}">
+                        <i class="material-icons">flag</i>
+                        <span class="menu-title" data-i18n="Countries">
+                            {{ trans('Admin/countries.country_title_in_sidebar') }}
+                        </span>
+                    </a>
+                    <ul class="menu-content">
+                        <!-- Start Countries -->
+                        @can('country-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('Countries.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="Countries">{{ trans('Admin/countries.countryPageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End Countries -->
+                        <!-- Start Proviences -->
+                        @can('provience-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('Proviences.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="Proviences">{{ trans('Admin/proviences.proviencePageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End Proviences -->
+                        <!-- Start Areas -->
+                        @can('area-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('Areas.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="Areas">{{ trans('Admin/areas.areaPageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End Areas -->
+                        <!-- Start States -->
+                        @can('state-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('States.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="States">{{ trans('Admin/states.statePageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End States -->
+                        <!-- Start Villages -->
+                        @can('village-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('Villages.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="Villages">{{ trans('Admin/villages.villagePageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End Villages -->
+                    </ul>
+                </li>
+            @endcan
             <!-- End Countries Dropdown Menu -->
             <!-- Start Department Dropdown Menu -->
             <li class=" nav-item">

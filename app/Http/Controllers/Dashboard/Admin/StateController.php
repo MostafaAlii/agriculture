@@ -9,6 +9,11 @@ class StateController extends Controller
 {
     protected $Data;
     public function __construct(StateInterface $Data) {
+        $this->middleware('permission:state-managment', ['only' => ['index']]);
+        $this->middleware('permission:state-create', ['only' => ['store']]);
+        $this->middleware('permission:state-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:state-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:state-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

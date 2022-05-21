@@ -11,6 +11,11 @@ class BrandController extends Controller
 {
     protected $Data;
     public function __construct(BrandInterface $Data) {
+        $this->middleware('permission:brands-managment', ['only' => ['index']]);
+        $this->middleware('permission:brands-create', ['only' => ['create','store']]);
+        $this->middleware('permission:brands-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:brands-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:brands-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
     public function index() {
