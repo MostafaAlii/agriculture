@@ -72,12 +72,39 @@ class PermissionTableSeeder extends Seeder {
                             'brands-edit',
                             'brands-delete',
                             'brands-delete-all',
-            //Country & Provinces ::
-            'country-managment',
-                'country-create',
-                'country-edit',
-                'country-delete',
-                'country-delete-all',
+            //Country List ::
+            'countries-list',
+                // Country ::
+                'country-managment',
+                    'country-create',
+                    'country-edit',
+                    'country-delete',
+                    'country-delete-all',
+                // Proviences ::
+                'provience-managment',
+                    'provience-create',
+                    'provience-edit',
+                    'provience-delete',
+                    'provience-delete-all',
+                // Areas ::
+                'area-managment',
+                    'area-create',
+                    'area-edit',
+                    'area-delete',
+                    'area-delete-all',
+                    'area-filter-operation',
+                // States ::
+                'state-managment',
+                    'state-create',
+                    'state-edit',
+                    'state-delete',
+                    'state-delete-all',
+                // Villages ::
+                'village-managment',
+                    'village-create',
+                    'village-edit',
+                    'village-delete',
+                    'village-delete-all',
 
         ];
         foreach ($permissions as $permission) {

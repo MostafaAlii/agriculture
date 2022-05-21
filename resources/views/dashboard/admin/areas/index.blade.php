@@ -63,42 +63,43 @@
 
                             <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
-                                        <i class="material-icons">add_box</i>
-                                        {{ trans('Admin/areas.add_new_area') }}
-                                   </button>
-                                    <button type="button" class="btn btn-warning btn-md mb-3"
-                                        id="btn_delete_all" data-toggle="modal"
-                                        data-target="#bulkdelete" >
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
-
-
+                                    @can('area-create')
+                                        <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                            <i class="material-icons">add_box</i>
+                                            {{ trans('Admin/areas.add_new_area') }}
+                                        </button>
+                                   @endcan
+                                   @can('area-delete-all')
+                                        <button type="button" class="btn btn-warning btn-md mb-3"
+                                            id="btn_delete_all" data-toggle="modal"
+                                            data-target="#bulkdelete" >
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
-                                        <div class="row">
-                                            <div class="col col-md-6 m-2 p-2 pull-right">
-                                                <div class="form-group">
-                                                    <label for="eventRegInput1">{{ __('Admin/areas.choose_columns') }}<span class="text-danger">*</span></label>
-
-                                                    <select class="select form-control" multiple="multiple"
-                                                            id="people" name="people[]">
-                                                        <option value="0">id</option>
-                                                        <option value="1">{{ __('Admin/areas.area_name') }}</option>
-                                                        <option value="2">{{ __('Admin/areas.provience_name') }}</option>
-                                                        <option value="3">{{ __('Admin/areas.state_name') }}</option>
-                                                        <option value="4">{{ __('Admin/general.created_since') }}</option>
-                                                        <option value="5">{{ __('Admin/site.action') }}</option>
-
-
-                                                    </select>
+                                        <!-- Start Area Filter -->
+                                        @can('area-filter-operation')
+                                            <div class="row">
+                                                <div class="col col-md-6 m-2 p-2 pull-right">
+                                                    <div class="form-group">
+                                                        <label for="eventRegInput1">{{ __('Admin/areas.choose_columns') }}<span class="text-danger">*</span></label>
+                                                        <select class="select form-control" multiple="multiple"
+                                                                id="people" name="people[]">
+                                                            <option value="0">id</option>
+                                                            <option value="1">{{ __('Admin/areas.area_name') }}</option>
+                                                            <option value="2">{{ __('Admin/areas.provience_name') }}</option>
+                                                            <option value="3">{{ __('Admin/areas.state_name') }}</option>
+                                                            <option value="4">{{ __('Admin/general.created_since') }}</option>
+                                                            <option value="5">{{ __('Admin/site.action') }}</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endcan
+                                        <!-- End Area Filter -->
                                         <!-- Start Table -->
                                         <table class="table table-striped table-bordered zero-configuration" id="areas_table">
-
-
                                             <thead>
                                                 <tr>
                                                     <th>
