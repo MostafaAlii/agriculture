@@ -7549,6 +7549,7 @@
                 "issues": "https://github.com/yoeunes/toastr/issues",
                 "source": "https://github.com/yoeunes/toastr"
             },
+            "abandoned": "php-flasher/flasher-toastr-laravel",
             "time": "2022-01-28T20:29:38+00:00"
         }
     ],

@@ -40,7 +40,7 @@ class LoginRequest extends FormRequest {
                 'login' => trans('Admin/auth.failed'),
             ]);
         }
-        auth()->login($farmer,$this->boolean('remember'));
+        auth('web')->login($farmer,$this->boolean('remember'));
         RateLimiter::clear($this->throttleKey());
     }
 

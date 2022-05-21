@@ -11,8 +11,8 @@ class FarmerTableSeeder extends Seeder {
     public function run() {
         DB::table('farmers')->delete();
         Farmer::create([
-            'Firstname'       =>  'MostafaF',
-            'lastname'        => 'Ali',
+            'Firstname'       =>  'xxxxxx',
+            'lastname'        => 'zzzzzzz',
             'email'           =>  'farmer@app.com',
             'password'        =>  bcrypt('123123'),
             'phone'           =>'01021555555',

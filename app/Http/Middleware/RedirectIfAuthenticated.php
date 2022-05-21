@@ -45,7 +45,7 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
             }
          if (auth('web')->check()) {
-                // return redirect(RouteServiceProvider::FRONT);
+                // return redirect(RouteServiceProvider::FARMER_DASHBOARD);
                 return redirect()->route('home.farmer');
             }
          if (auth('worker')->check()) {
