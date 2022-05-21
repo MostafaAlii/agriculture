@@ -8,6 +8,11 @@ class ProvienceController extends Controller
 {
     protected $Data;
     public function __construct(ProvienceInterface $Data) {
+        $this->middleware('permission:provience-managment', ['only' => ['index']]);
+        $this->middleware('permission:provience-create', ['only' => ['store']]);
+        $this->middleware('permission:provience-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:provience-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:provience-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
