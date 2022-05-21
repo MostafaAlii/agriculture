@@ -8,8 +8,7 @@
     <section class="section section--no-pb section--custom-01">
         <div class="container">
             <div class="section-heading">
-                <h2 class="__title">الموقع فى الصيانه </h2>
-                <h2 class="__title">Coming Soon </h2>
+                <h2 class="__title">{{__('setting.close')}}</h2>
             </div>
 
             <div class="row">
@@ -17,7 +16,8 @@
 
 
                     <p>
-                       الموقع فى الصيانه
+                      {{__('Admin\setting.maintenance_message')}}
+                        <span><a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a></span>
                     </p>
 
                     <p>

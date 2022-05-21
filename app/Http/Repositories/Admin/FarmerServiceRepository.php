@@ -100,7 +100,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
         $states = State::all();
 
         return view('dashboard.admin.farmer_services.create',
-            compact('states','stateID','state_name', 'area_name','areaID','villages', 'agri_services', 'agri_t_services','areas','water_services'));
+            compact('states','stateID','state_name', 'adminId','area_name','areaID','villages', 'agri_services', 'agri_t_services','areas','water_services'));
     }
 
     public function store($request)
@@ -109,16 +109,12 @@ class FarmerServiceRepository implements FarmerServiceInterface {
         DB::beginTransaction();
         try {
 
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $farmerService = new FarmerService();
-            $farmerService->admin_id = $admin->id;
             $farmerService->farmer_id = $requestData['farmer_id'];
-            $farmerService->area_id = $areaID;
-            $farmerService->state_id = $stateID;
+            $farmerService->admin_id = $requestData['admin_id'];
+            $farmerService->area_id = $requestData['area_id'];
+            $farmerService->state_id = $requestData['state_id'];
             $farmerService->village_id = $requestData['village_id'];
             $farmerService->phone = $requestData['phone'];
             $farmerService->email = $requestData['email'];
@@ -161,7 +157,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
         $states = State::all();
 
         return view('dashboard.admin.farmer_services.edit',
-            compact('areaID','area_name','farmer_service', 'state_name','stateID','states','villages',
+            compact('areaID','area_name','farmer_service', 'state_name','stateID','states','villages','adminId',
                 'agri_services', 'agri_t_services','areas','water_services'));
     }
 
@@ -173,14 +169,11 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             $requestData = $request->validated();
             $farmer_serviceID = Crypt::decrypt($id);
             $farmerService =  FarmerService::findorfail($farmer_serviceID);
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
-            $farmerService->admin_id = $admin->id;
+
             $farmerService->farmer_id = $requestData['farmer_id'];
-            $farmerService->area_id = $areaID;
-            $farmerService->state_id = $stateID;
+            $farmerService->admin_id = $requestData['admin_id'];
+            $farmerService->area_id = $requestData['area_id'];
+            $farmerService->state_id = $requestData['state_id'];
             $farmerService->village_id = $requestData['village_id'];
             $farmerService->phone = $requestData['phone'];
             $farmerService->email = $requestData['email'];

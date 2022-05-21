@@ -15,7 +15,9 @@ class AnimalRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'area_id'         => 'required',
+            'state_id'        => 'required',
+            'admin_id'        => 'required',
             'farmer_id' => 'required|exists:farmers,id',
             'village_id' => 'required|exists:villages,id',
             'project_name' => [

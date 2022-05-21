@@ -8,6 +8,11 @@ use App\Http\Interfaces\Admin\ReviewInterface;
 class ReviewController extends Controller {
     protected $Data;
     public function __construct(ReviewInterface $Data) {
+        $this->middleware('permission:client-review', ['only' => ['index']]);
+        $this->middleware('permission:client-review-create', ['only' => ['store']]);
+        $this->middleware('permission:client-review-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:client-review-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:client-review-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
@@ -36,8 +41,7 @@ class ReviewController extends Controller {
         return $this->Data->destroy($id);
     }// end of destroy
 
-    public function bulkDelete(Request $request)
-    {
+    public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }
 }

@@ -9,6 +9,11 @@ class VillageController extends Controller
 {
     protected $Data;
     public function __construct(VillageInterface $Data) {
+        $this->middleware('permission:village-managment', ['only' => ['index']]);
+        $this->middleware('permission:village-create', ['only' => ['store']]);
+        $this->middleware('permission:village-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:village-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:village-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

@@ -34,63 +34,65 @@
                         <i class="ft-x"></i>
                     </span>
                     <!-- sidebar close icon -->
-                    <div class="email-app-menu">
-                        <div class="form-group form-group-compose">
-                            <!-- compose button  -->
-                            <button type="button" class="btn btn-danger btn-glow btn-block my-2 compose-btn">
-                                <i class="ft-plus"></i>
-                                {{__('Admin\contact.send_new')}}
-                            </button>
+                    @can('send-new-contact-messeage')
+                        <div class="email-app-menu">
+                            <div class="form-group form-group-compose">
+                                <!-- compose button  -->
+                                    <button type="button" class="btn btn-danger btn-glow btn-block my-2 compose-btn">
+                                        <i class="ft-plus"></i>
+                                        {{__('Admin\contact.send_new')}}
+                                    </button>
+                            </div>
                         </div>
-                        
-                    </div>
+                    @endcan
                 </div>
                 <!-- User new mail right area -->
-                <div class="compose-new-mail-sidebar">
-                    <div class="card mb-0 shadow-none quill-wrapper p-0">
-                        <div class="card-header">
-                            <h3 class="card-title" id="emailCompose">{{__('Admin\contact.new')}}</h3>
-                            <button type="button" class="close close-icon">
-                                <i class="ft-x"></i>
-                            </button>
-                        </div>
-                        <!-- form start -->
-                        <form action="{{ route('mail.send') }}" method="post" autocomplete="off" id="compose-form">
-                         @csrf
-                            <div class="card-content">
-                                <div class="card-body pt-0">
-                                    <div class="form-group pb-50">
-                                        <label for="emailfrom">{{__('Admin\contact.from')}}</label>
-                                        <input type="text" id="emailfrom" class="form-control" placeholder="{{env('MAIL_FROM_ADDRESS')}}" disabled>
-                                    </div>
-                                    <div class="form-label-group mb-1">
-                                        <input type="email" id="emailTo" class="form-control" placeholder="{{__('Admin\contact.to')}}" name="emailTo" required>
-                                    </div>
-                                    <div class="form-label-group mb-1">
-                                        <input type="text" id="emailSubject" class="form-control" placeholder="{{__('Admin\contact.subject')}}" name="emailSubject" required>
-                                    </div>
-                            
-                                    <!-- Compose mail Quill editor -->
-                                    <div class="snow-container border rounded p-50 ">
-                                    <textarea class="form-control" placeholder="{{__('Admin\contact.message')}}" name="emailComment" required></textarea>
+                @can('send-new-contact-messeage')
+                    <div class="compose-new-mail-sidebar">
+                        <div class="card mb-0 shadow-none quill-wrapper p-0">
+                            <div class="card-header">
+                                <h3 class="card-title" id="emailCompose">{{__('Admin\contact.new')}}</h3>
+                                <button type="button" class="close close-icon">
+                                    <i class="ft-x"></i>
+                                </button>
+                            </div>
+                            <!-- form start -->
+                            <form action="{{ route('mail.send') }}" method="post" autocomplete="off" id="compose-form">
+                            @csrf
+                                <div class="card-content">
+                                    <div class="card-body pt-0">
+                                        <div class="form-group pb-50">
+                                            <label for="emailfrom">{{__('Admin\contact.from')}}</label>
+                                            <input type="text" id="emailfrom" class="form-control" placeholder="{{env('MAIL_FROM_ADDRESS')}}" disabled>
+                                        </div>
+                                        <div class="form-label-group mb-1">
+                                            <input type="email" id="emailTo" class="form-control" placeholder="{{__('Admin\contact.to')}}" name="emailTo" required>
+                                        </div>
+                                        <div class="form-label-group mb-1">
+                                            <input type="text" id="emailSubject" class="form-control" placeholder="{{__('Admin\contact.subject')}}" name="emailSubject" required>
+                                        </div>
+                                
+                                        <!-- Compose mail Quill editor -->
+                                        <div class="snow-container border rounded p-50 ">
+                                        <textarea class="form-control" placeholder="{{__('Admin\contact.message')}}" name="emailComment" required></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer border-0 d-flex justify-content-end pt-0">
-                                <button type="reset" class="btn btn-secondary cancel-btn mr-1">
-                                    <i class='ft-x mr-25'></i>
-                                    <span class="d-sm-inline d-none">{{__('Admin\contact.cancel')}}</span>
-                                </button>
-                                <button type="submit" class="btn-send btn btn-danger btn-glow">
-                                    <i class='ft-play mr-25'></i> <span class="d-sm-inline d-none">{{__('Admin\contact.send')}}</span>
-                                </button>
-                            </div>
-                        </form>
-                        <!-- form start end-->
+                                <div class="card-footer border-0 d-flex justify-content-end pt-0">
+                                    <button type="reset" class="btn btn-secondary cancel-btn mr-1">
+                                        <i class='ft-x mr-25'></i>
+                                        <span class="d-sm-inline d-none">{{__('Admin\contact.cancel')}}</span>
+                                    </button>
+                                    <button type="submit" class="btn-send btn btn-danger btn-glow">
+                                        <i class='ft-play mr-25'></i> <span class="d-sm-inline d-none">{{__('Admin\contact.send')}}</span>
+                                    </button>
+                                </div>
+                            </form>
+                            <!-- form start end-->
+                        </div>
                     </div>
-                </div>
+                @endcan
                 <!--/ User Chat profile right area -->
-
             </div>
         </div>
         
@@ -119,11 +121,12 @@
                                         <!-- delete unread dropdown -->
                                         <ul class="list-inline m-0 d-flex">
                                             <li class="list-inline-item mail-delete">
-                                                <button type="button" class="btn btn-icon action-icon" data-toggle="modal"
-                                                    data-target="#bulkdelete" id="btn_delete_all"  disabled>
-                                                    <i class="ft-trash-2"></i>
-                                                </button>
-
+                                                @can('contact-us-delete')
+                                                    <button type="button" class="btn btn-icon action-icon" data-toggle="modal"
+                                                        data-target="#bulkdelete" id="btn_delete_all"  disabled>
+                                                        <i class="ft-trash-2"></i>
+                                                    </button>
+                                                @endcan
                                             </li>
                                         </ul>
                                     </div>
@@ -152,7 +155,6 @@
 
                                 <!-- email user list start -->
                                 <div class="email-user-list list-group">
-                               
                                     <ul class="users-list-wrapper media-list" id="list_id">
                                         @foreach($mails as $msgs)
                                         <li class="media mail-read" id="{{$msgs->id}}">
@@ -262,17 +264,19 @@
                                                         <span class="favorite">
                                                             <i class="ft-star mr-25"></i>
                                                         </span>
-                                                        <div class="dropdown">
-                                                            <a href="#" class="dropdown-toggle" id="fisrt-open-submenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <i class='ft-more-vertical mr-0'></i>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="fisrt-open-submenu">
-                                                                <a href="#" class="dropdown-item mail-reply">
-                                                                    <i class='ft-share-2'></i>
-                                                                    Reply
+                                                        @can('contact-replay')
+                                                            <div class="dropdown">
+                                                                <a href="#" class="dropdown-toggle" id="fisrt-open-submenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <i class='ft-more-vertical mr-0'></i>
                                                                 </a>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="fisrt-open-submenu">
+                                                                    <a href="#" class="dropdown-item mail-reply">
+                                                                        <i class='ft-share-2'></i>
+                                                                        Reply
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endcan
                                                     </div>
                                                 </div>
                                                 <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5" class="collapse show">

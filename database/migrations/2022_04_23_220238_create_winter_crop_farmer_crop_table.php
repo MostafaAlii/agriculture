@@ -13,6 +13,8 @@ class CreateWinterCropFarmerCropTable extends Migration
             $table->id();
             $table->foreignId('farmer_crop_id')->references('id')->on('farmer_crops')->onDelete('cascade');
             $table->foreignId('winter_crop_id')->references('id')->on('winter_crops')->onDelete('cascade');
+            $table->timestamps();
+
         });
     }
 

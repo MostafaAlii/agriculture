@@ -8,6 +8,11 @@ class SliderController extends Controller
 {
     protected $Data;
     public function __construct(SliderInterface $Data) {
+        $this->middleware('permission:slider-managment', ['only' => ['index']]);
+        $this->middleware('permission:photo-slider-create', ['only' => ['create','store']]);
+        $this->middleware('permission:photo-slider-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:photo-slider-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:photo-slider-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
     public function index() {

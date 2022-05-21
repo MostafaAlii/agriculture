@@ -63,7 +63,7 @@
                                     <p>
                                         {{  \App\Models\setting::first()->primary_phone }},
                                         {{  \App\Models\setting::first()->secondery_phone }} <br>
-                                        <a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>
+                                        {{--<a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>--}}
                                     </p>
                                 </address>
 

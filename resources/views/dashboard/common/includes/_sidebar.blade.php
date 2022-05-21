@@ -102,138 +102,177 @@
                 @endcan
                 <!-- End Dashboard Dropdown Menu -->
                 <!-- Start Main Setting Dropdown Menu -->
+                @can('settings-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">tune</i>
+                            <span class="menu-title" data-i18n="settings">
+                                {{ trans('Admin/site.settings') }}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Roles Permissions -->
+                            @can('role-list')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Roles.index') }}">
+                                        <i class="material-icons">flash_on</i>
+                                        <span data-i18n="Roles"> {{ trans('Admin/roles.role_title_in_sidebar') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Roles Permissions -->
+
+                            <!-- Start Pages -->
+                            @can('pages')
+                                <li>
+                                    <a class="menu-item" href="#">
+                                        <i class="material-icons">pages</i>
+                                        <span data-i18n="Vertical">{{ trans('Admin\site.pages') }}</span>
+                                    </a>
+                                    <ul class="menu-content">
+                                        <!-- Start Setting -->
+                                        @can('settings')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('settings') }}">
+                                                    <i class="material-icons">tune</i>
+                                                    <span data-i18n="settings"> {{ trans('Admin/site.settings') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        <!-- End Setting -->
+                                        <!-- Start AboutUs -->
+                                        @can('about-us')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('about_us/show') }}">
+                                                    <i class="material-icons"> info </i>
+                                                    <span data-i18n="Options"> {{ trans('Admin/site.about_us') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        <!-- End AboutUs -->
+                                        <!-- Start Contact Us -->
+                                        @can('contact-us')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('contact_us') }}">
+                                                    <i class="material-icons"> mail_outline </i>
+                                                    <span data-i18n="Options"> {{ trans('Admin/site.contact') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        <!-- End Contact Us -->
+                                        <!-- Start Teams -->
+                                        @can('team-managment')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('team.index') }}">
+                                                    <i class="icon-user" style="color: whight;;padding: 3px;font-size: 18px;"></i>
+                                                    <span data-i18n="Options"> {{ trans('Admin/site.our_team') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        <!-- End Teams -->
+                                        <!-- Start Review -->
+                                        @can('client-review')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('review.index') }}">
+                                                    <i class="material-icons"> mail_outline </i>
+                                                    <span data-i18n="Options"> {{ trans('Admin/site.reviwe') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        <!-- End Review -->
+                                        <!-- Start Slider -->
+                                        @can('slider-managment')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('sliders.index') }}">
+                                                    <i class="material-icons">photo_library</i>
+                                                    <span data-i18n="Sliders"> {{ trans('Admin/site.sliderimages') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        <!-- End Slider -->
+                                        <!-- Start Brand -->
+                                        @can('brands-managment')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('brands.index') }}">
+                                                    <i class="material-icons">photo_library</i>
+                                                    <span data-i18n="Brands"> {{ trans('Admin/site.brand') }}</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        <!-- End Brand -->
+                                    </ul>
+                                </li>
+                            @endcan
+                            <!-- End Pages -->
+                        
+                    </li>
+                @endcan
+                <!-- End Settings -->
+            </ul>
+            <!-- End Main Setting Dropdown Menu -->
+            <!-- Start Countries Dropdown Menu -->
+            @can('countries-list')
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">tune</i>
-                        <span class="menu-title" data-i18n="settings">
-                            {{ trans('Admin/site.settings') }}
+                        <i class="material-icons">flag</i>
+                        <span class="menu-title" data-i18n="Countries">
+                            {{ trans('Admin/countries.country_title_in_sidebar') }}
                         </span>
                     </a>
                     <ul class="menu-content">
-                        <!-- Start Settings -->
-                        <li>
-
-                            <!-- Start Roles Permissions -->
-                        <li>
-                            <a class="menu-item" href="{{ route('Roles.index') }}">
-                                <i class="material-icons">flash_on</i>
-                                <span data-i18n="Roles"> {{ trans('Admin/roles.role_title_in_sidebar') }}</span>
-                            </a>
-                        </li>
-                        <!-- End Roles Permissions -->
-
-                        <!-- Start Admins & Moderators -->
-                        <li>
-                            <a class="menu-item" href="#">
-                                <i class="material-icons">pages</i>
-                                <span data-i18n="Vertical">{{ trans('Admin\site.pages') }}</span>
-                            </a>
-                            <ul class="menu-content">
-                                <li>
-                                    <a class="menu-item" href="{{ route('settings') }}">
-                                        <i class="material-icons">tune</i>
-                                        <span data-i18n="settings"> {{ trans('Admin/site.settings') }}</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item" href="{{ route('about_us/show') }}">
-                                        <i class="material-icons"> info </i>
-                                        <span data-i18n="Options"> {{ trans('Admin/site.about_us') }}</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item" href="{{ route('contact_us') }}">
-                                        <i class="material-icons"> mail_outline </i>
-                                        <span data-i18n="Options"> {{ trans('Admin/site.contact') }}</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class="menu-item" href="{{ route('team.index') }}">
-                                        <i class="icon-user" style="color: whight;;padding: 3px;font-size: 18px;"></i>
-                                        <span data-i18n="Options"> {{ trans('Admin/site.our_team') }}</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class="menu-item" href="{{ route('review.index') }}">
-                                        <i class="material-icons"> mail_outline </i>
-                                        <span data-i18n="Options"> {{ trans('Admin/site.reviwe') }}</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class="menu-item" href="{{ route('sliders.index') }}">
-                                        <i class="material-icons">photo_library</i>
-                                        <span data-i18n="Sliders"> {{ trans('Admin/site.sliderimages') }}</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item" href="{{ route('brands.index') }}">
-                                        <i class="material-icons">photo_library</i>
-                                        <span data-i18n="Brands"> {{ trans('Admin/site.brand') }}</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <!-- End Admins & Moderators -->
+                        <!-- Start Countries -->
+                        @can('country-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('Countries.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="Countries">{{ trans('Admin/countries.countryPageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End Countries -->
+                        <!-- Start Proviences -->
+                        @can('provience-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('Proviences.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="Proviences">{{ trans('Admin/proviences.proviencePageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End Proviences -->
+                        <!-- Start Areas -->
+                        @can('area-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('Areas.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="Areas">{{ trans('Admin/areas.areaPageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End Areas -->
+                        <!-- Start States -->
+                        @can('state-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('States.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="States">{{ trans('Admin/states.statePageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End States -->
+                        <!-- Start Villages -->
+                        @can('village-managment')
+                            <li>
+                                <a class="menu-item" href="{{ route('Villages.index') }}">
+                                    <i class="material-icons">flag</i>
+                                    <span data-i18n="Villages">{{ trans('Admin/villages.villagePageTitle') }}</span>
+                                </a>
+                            </li>
+                        @endcan
+                        <!-- End Villages -->
+                    </ul>
                 </li>
-                <!-- End Settings -->
-            </ul>
-            
-            <!-- End Main Setting Dropdown Menu -->
-            <!-- Start Countries Dropdown Menu -->
-            <li class=" nav-item">
-                <a href="{{-- route('admin.dashboard') --}}">
-                    <i class="material-icons">flag</i>
-                    <span class="menu-title" data-i18n="Countries">
-                        {{ trans('Admin/countries.country_title_in_sidebar') }}
-                    </span>
-                </a>
-                <ul class="menu-content">
-                    <!-- Start Countries -->
-                    <li>
-                        <a class="menu-item" href="{{ route('Countries.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="Countries">{{ trans('Admin/countries.countryPageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End Countries -->
-                    <!-- Start Proviences -->
-                    <li>
-                        <a class="menu-item" href="{{ route('Proviences.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="Proviences">{{ trans('Admin/proviences.proviencePageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End Proviences -->
-                    <!-- Start Areas -->
-                    <li>
-                        <a class="menu-item" href="{{ route('Areas.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="Areas">{{ trans('Admin/areas.areaPageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End Areas -->
-                    <!-- Start States -->
-                    <li>
-                        <a class="menu-item" href="{{ route('States.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="States">{{ trans('Admin/states.statePageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End States -->
-                    <!-- Start Villages -->
-                    <li>
-                        <a class="menu-item" href="{{ route('Villages.index') }}">
-                            <i class="material-icons">flag</i>
-                            <span data-i18n="Villages">{{ trans('Admin/villages.villagePageTitle') }}</span>
-                        </a>
-                    </li>
-                    <!-- End Villages -->
-                </ul>
-            </li>
+            @endcan
             <!-- End Countries Dropdown Menu -->
             <!-- Start Department Dropdown Menu -->
             <li class=" nav-item">

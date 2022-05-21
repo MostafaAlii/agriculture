@@ -97,7 +97,7 @@ class FarmerCropRepository implements FarmerCropInterface {
         $land_categories = LandCategory::all();
 
         return view('dashboard.admin.farmer_crops.create'
-            ,compact('villages','land_categories','stateID',
+            ,compact('villages','land_categories','stateID','adminId',
                 'winter_crops','summer_crops','state_name','area_name','areaID')
         );
     }
@@ -106,17 +106,18 @@ class FarmerCropRepository implements FarmerCropInterface {
 
     public function store( $request)
     {
-
         DB::beginTransaction();
         try {
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $farmerCrop = new FarmerCrop();
-            $farmerCrop->area_id = $areaID;
-            $farmerCrop->state_id = $stateID;
+            $adminId = Auth::user()->id;
+            $admin = Admin::findorfail($adminId);
+            $farmerCrop->admin_id = $requestData['admin_id'];
+            $farmerCrop->area_id = $requestData['area_id'];
+            $farmerCrop->state_id = $requestData['state_id'];
+
+
+
             $farmerCrop->admin_id = $admin->id;
             $farmerCrop->farmer_id = $requestData['farmer_id'];
             $farmerCrop->village_id = $requestData['village_id'];
@@ -166,8 +167,8 @@ class FarmerCropRepository implements FarmerCropInterface {
 
 
 
-        return view('dashboard.admin.farmer_crops.edit', compact('winter_crops','area_name',
-            'state_name','areaID','stateID','admin',
+        return view('dashboard.admin.farmer_crops.edit', compact('winter_crops','area_name','areaID','stateID',
+            'state_name','areaID','stateID','admin','adminId',
             'farmerCrop','land_categories','summer_crops','villages'));
     }
 
@@ -177,17 +178,14 @@ class FarmerCropRepository implements FarmerCropInterface {
 
         DB::beginTransaction();
         try {
+
             $requestData = $request->validated();
             $farmerCropID = Crypt::decrypt($id);
 
             $farmerCrop =  FarmerCrop::findorfail($farmerCropID);
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
-            $farmerCrop->admin_id = $admin->id;
-            $farmerCrop->area_id = $admin->$areaID;
-            $farmerCrop->state_id = $admin->$stateID;
+            $farmerCrop->admin_id = $requestData['admin_id'];
+            $farmerCrop->area_id = $requestData['area_id'];
+            $farmerCrop->state_id = $requestData['state_id'];
 
             $farmerCrop->farmer_id = $requestData['farmer_id'];
             $farmerCrop->village_id = $requestData['village_id'];

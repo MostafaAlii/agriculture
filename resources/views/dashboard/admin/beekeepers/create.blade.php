@@ -71,15 +71,14 @@
                                                                 <label for="village_id">{{ __('Admin/bees.village') }}</label>
                                                                 <select name="village_id" id="village_id" class="form-control" required>
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
-                                                                    </option>
                                                                     @foreach ($villages as $village)
                                                                         <option value="{{ $village->id }}">{{ $village->name }}</option>
-                                                                   <input type="hidden" name="area_id" value="{{$areaID}}">
-                                                                    <input type="hidden" name="state_id" value="{{$stateID}}">
+
 
                                                                     @endforeach
                                                                 </select>
-
+                                                                <input type="hidden" name="area_id" value="{{$areaID}}">
+                                                                <input type="hidden" name="state_id" value="{{$stateID}}">
                                                             </div>
                                                         </div>
                                                         <div class="col col-md-4">

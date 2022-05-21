@@ -8,10 +8,9 @@
     <section class="section">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
-                <h2 class="__title">Special <span>Offers</span></h2>
+                <h2 class="__title">{{__('Admin\site.administrative_part')}}</h2>
 
-                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which
-                    looks reasonable.</p>
+                <p>{{__('Admin\site.administrative_desc')}}</p>
             </div>
 
             <!-- start feature -->
@@ -26,7 +25,10 @@
                                         data-src="{{ asset('frontassets/img/feature_img/1.png') }}" alt="demo" />
                                 </i>
 
-                                <h5 class="__title">Farm Livestock</h5>
+                                <h5 class="__title">{{__('Admin\site.animal_wealth')}}
+
+                                </h5>
+                                <h6>{{ \App\Models\CawProject::where('marketing_side','like','govermental')->count() }} %</h6>
                             </div>
                         </div>
                         <!-- end item -->
@@ -39,7 +41,8 @@
                                         data-src="{{ asset('frontassets/img/feature_img/2.png') }}" alt="demo" />
                                 </i>
 
-                                <h5 class="__title">Garden Tillage</h5>
+                                <h5 class="__title">{{__('Admin\site.Horticulture')}}</h5>
+                                <h6>{{ \App\Models\Orchard::count() }} %</h6>
                             </div>
                         </div>
                         <!-- end item -->
@@ -49,10 +52,11 @@
                             <div class="__item  text-center" data-aos="fade" data-aos-delay="300" data-aos-offset="100">
                                 <i class="__ico">
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                        data-src="{{ asset('frontassets/img/feature_img/3.png') }}" alt="demo" />
+                                        data-src="{{ asset('frontassets/img/feature_img/hony-bee.png') }}" alt="demo" />
                                 </i>
 
-                                <h5 class="__title">Fresh Fruits</h5>
+                                <h5 class="__title">{{__('Admin\site.planet_protection')}}</h5>
+                                <h6>{{ \App\Models\BeeKeeper::count() }} %</h6>
                             </div>
                         </div>
                         <!-- end item -->
@@ -62,25 +66,26 @@
                             <div class="__item  text-center" data-aos="fade" data-aos-delay="400" data-aos-offset="100">
                                 <i class="__ico">
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                        data-src="{{ asset('frontassets/img/feature_img/4.png') }}" alt="demo" />
+                                        data-src="{{ asset('frontassets/img/feature_img/planing.png') }}" alt="demo" />
                                 </i>
 
-                                <h5 class="__title">Vegatables</h5>
+                                <h5 class="__title">{{__('Admin\site.planning')}}</h5>
+                                <h6>{{ \App\Models\LandArea::count() }} %</h6>
                             </div>
                         </div>
                         <!-- end item -->
 
                         <!-- start item -->
-                        <div class="col-6 col-sm-4 col-lg-2">
-                            <div class="__item  text-center" data-aos="fade" data-aos-delay="500" data-aos-offset="100">
-                                <i class="__ico">
-                                    <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                        data-src="{{ asset('frontassets/img/feature_img/5.png') }}" alt="demo" />
-                                </i>
+                        {{--<div class="col-6 col-sm-4 col-lg-2">--}}
+                            {{--<div class="__item  text-center" data-aos="fade" data-aos-delay="500" data-aos-offset="100">--}}
+                                {{--<i class="__ico">--}}
+                                    {{--<img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"--}}
+                                        {{--data-src="{{ asset('frontassets/img/feature_img/5.png') }}" alt="demo" />--}}
+                                {{--</i>--}}
 
-                                <h5 class="__title">Awesome Wheats</h5>
-                            </div>
-                        </div>
+                                {{--<h5 class="__title">Awesome Wheats</h5>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                         <!-- end item -->
 
                         <!-- start item -->
@@ -91,7 +96,8 @@
                                         data-src="{{ asset('frontassets/img/feature_img/6.png') }}" alt="demo" />
                                 </i>
 
-                                <h5 class="__title">Agro Machinery</h5>
+                                <h5 class="__title">{{__('Admin\site.services')}}</h5>
+                                <h6>{{ \App\Models\FarmerService::count() }} %</h6>
                             </div>
                         </div>
                         <!-- end item -->
@@ -102,6 +108,58 @@
         </div>
     </section>
     <!-- end section -->
+
+        <!-- start wholesale section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-heading section-heading--center" data-aos="fade">
+                    <h2 class="__title">{{__('Admin\site.wholesale')}}</h2>
+
+                    <p>{{__('Admin\site.wholesale_desc')}}</p>
+                </div>
+
+                <!-- start feature -->
+                <div class="feature feature--style-1">
+                    <div class="__inner">
+                        <div class="row">
+                            <!-- start item -->
+                            <div class="col-12 col-sm-6 col-lg-6">
+                                <div class="__item  text-center" data-aos="fade" data-aos-delay="100" data-aos-offset="100">
+                                    <i class="__ico">
+                                        <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
+                                             data-src="{{ asset('frontassets/img/feature_img/wholesale1.png') }}" alt="demo" />
+                                    </i>
+
+                                    <h5 class="__title">{{__('Admin\outcome_products.outcome_productPageTitle')}}
+
+                                    </h5>
+                                    <h6>{{ \App\Models\OutcomeProduct::count() }} %</h6>
+                                </div>
+                            </div>
+                            <!-- end item -->
+
+                            <!-- start item -->
+                            <div class="col-12 col-sm-6 col-lg-6">
+                                <div class="__item  text-center" data-aos="fade" data-aos-delay="200" data-aos-offset="100">
+                                    <i class="__ico">
+                                        <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
+                                             data-src="{{ asset('frontassets/img/feature_img/wholesale2.png') }}" alt="demo" />
+                                    </i>
+
+                                    <h5 class="__title">{{__('Admin\income_products.income_productPageTitle')}}</h5>
+                                    <h6>{{ \App\Models\IncomeProduct::count() }} %</h6>
+                                </div>
+                            </div>
+                            <!-- end item -->
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end feature -->
+            </div>
+        </section>
+        <!-- end wholesale section -->
 
     <!-- start section -->
     <section class="section section--no-pt section--no-pb">
