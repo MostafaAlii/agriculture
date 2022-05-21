@@ -6,7 +6,7 @@
             {{-- dd($orders) --}}
             <div>
                 <div class="d-flex align-items-center ml-4 form-group">
-                    <label for="paginate" class="text-nowrap mr-2 mb-0"> Per Page </label>
+                    <label for="paginate" class="text-nowrap mr-2 mb-0"> {{__('Website/vendor/dashboard.per_page')}}</label>
                     <select wire:model="paginate" name="paginate" id="paginate" class="form-control form-control-md" autocomplete="off">
                         <option value="10">10</option>
                         <option value="20">20</option>
@@ -16,7 +16,7 @@
             </div>
             <div>
                 <div class="d-flex align-items-center ml-4">
-                    <label for="paginate" class="text-nowrap mr-2 mb-0">FilterBy Status</label>
+                    <label for="paginate" class="text-nowrap mr-2 mb-0">{{__('Website/vendor/dashboard.status_filter')}}</label>
                     <select class="form-control form-control-sm" wire:model="selectedStatus">
                             <option value="">{{ trans('Admin/orders.order_status') }}</option>
                             <option value="ordered"> {{ trans('Admin/orders.ordered') }} </option>
@@ -29,16 +29,22 @@
             <div>
                 @if ($checked)
                 <div class="dropdown ml-4">
-                    <button class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"> With Checked
+                    <button class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"> {{__('Website/vendor/dashboard.check_no')}}
                         ({{ count($checked) }})</button>
                     <div class="dropdown-menu">
                         <a href="#" class="dropdown-item" type="button"
-                            onclick="confirm('Are you sure you want to export these Records?') || event.stopImmediatePropagation()"
+                            onclick="confirm('<?php echo __('Website/vendor/dashboard.export_confirm_msg');?>') || event.stopImmediatePropagation()"
                             wire:click="exportSelected()">
-                            Export
+                            {{__('Website/vendor/dashboard.export')}}
                         </a>
 
+                        <a href="#" class="dropdown-item" type="button"
+                            onclick="confirm('<?php echo __('Website/vendor/dashboard.cancel_confirm_msg');?>') || event.stopImmediatePropagation()"
+                            wire:click="cancelSelected()">
+                            {{__('Website/vendor/dashboard.cancel')}}
+                        </a>
                     </div>
+                    
                 </div>
                 @endif
             </div>
@@ -47,7 +53,7 @@
         <!-- Start Searchbar -->
         <div class=" col-md-4">
             <input type="search" wire:model.debounce.500ms="search" class="form-control"
-                placeholder="Search by name,email,phone,or address...">
+                placeholder="{{__('Website/vendor/dashboard.search')}}">
         </div>
         <!-- End Searchbar -->
     </div>
@@ -63,7 +69,7 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th><input type="checkbox" wire:model="selectPage"></th>
+                    <th><!--<input type="checkbox" wire:model="selectPage" onclick="checkAll('box1',this)">--></th>
                     <th>{{ __('Admin/orders.order_referance') }}</th>
                     <th>{{ __('Admin/orders.order_subTotal') }}</th>
                     <th>{{ __('Admin/orders.order_total') }}</th>
@@ -76,7 +82,7 @@
                 <tbody>
                 @forelse($orders as $order)
                     <tr wire:key="{{ $order->id }}"  {{--  class="@if($this->isChecked($order->id)) table-primary @endif"--}}>
-                        <td><input type="checkbox" value="{{ $order->id }}" wire:model="checked"></td>
+                        <td><input type="checkbox" class="box1" value="{{ $order->id }}" wire:model="checked" ></td>
                         <td>{{ $order->referance_id }}</td>
                         <td>{{ $order->currency() . ' ' . $order->subtotal }}</td>
                         <td>{{ $order->currency() . ' ' . $order->total }}</td>
@@ -100,7 +106,7 @@
                 @empty
                     <tr class="">
                         <td class="align-center mt-5">
-                            <p class="text-danger">{{ trans('Website/vendor/orders.no_data_found') }}</p>
+                            <p class="text-danger">{{ trans('Website/vendor/dashboard.no_data_found') }}</p>
                         </td>
                     </tr>
                 @endforelse
@@ -116,3 +122,19 @@
     </div>
     <!-- End Pagination -->
 </div>
+<script>
+    function checkAll(name,elem){
+        var checkboxes = document.getElementsByClassName(name);
+        var leng = checkboxes.length;
+        
+        if(elem.checked){
+            for(var i=0 ; i < leng ; i++){
+                checkboxes[i].checked = true;
+             }
+        }else{
+            for(var i=0 ; i < leng ; i++){
+                checkboxes[i].checked = false;
+             }
+        }
+    }
+</script>
