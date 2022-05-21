@@ -95,9 +95,35 @@
 
 <script>
     let adminsTable = $('#farmer-crop-table').DataTable({
-        // dom: "tiplr",
         serverSide: true,
         processing: true,
+
+        dom: 'Bfrtip',
+        buttons: [
+            {text:'excel',
+                extend: 'excel',
+                orientation: 'landscape',
+                pageSize: 'A3',
+                exportOptions: {
+                    columns: [ 1,3,4,5,6,7,8]
+                },
+                className: 'btn btn-primary ml-1',
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns:  [ 1,3,4,5,6,7,8]
+                },
+                // columns: ':visible',
+                autoPrint: true,
+                orientation: 'landscape',
+                className: 'btn btn-success ml-1',
+                pageSize: 'A3',
+                text:'print'
+            },
+
+        ],
         lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
@@ -119,7 +145,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[3, 'desc']],
+        order: [[9, "DESC"]],
     });
 </script>
 @endsection

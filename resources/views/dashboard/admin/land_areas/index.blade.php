@@ -80,6 +80,7 @@
                                                     <th>{{ __('Admin/land_areas.state') }}</th>
                                                     <th>{{ __('Admin/land_areas.village') }}</th>
                                                     <th>{{ __('Admin/land_areas.L_area') }}</th>
+                                                    <th>{{ __('Admin/land_areas.unit') }}</th>
                                                     <th>{{ __('Admin/land_areas.land_category') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
@@ -106,9 +107,36 @@
 
 <script>
     let adminsTable = $('#land-area-table').DataTable({
-        // dom: "tiplr",
         serverSide: true,
         processing: true,
+        dom: 'Bfrtip',
+
+        buttons: [
+            { text:'excel',
+                extend: 'excel',
+                orientation: 'landscape',
+                pageSize: 'A3',
+                exportOptions: {
+                    columns: [1, 2,3,4,5,6,7]
+                },
+                className: 'btn btn-primary ml-1',
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: [1, 2,3,4,5,6,7]
+                },
+                autoPrint: true,
+                orientation: 'landscape',
+                className: 'btn btn-success ml-1',
+                pageSize: 'A3',
+                text:'print'
+            },
+
+
+
+        ],
         lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
@@ -123,12 +151,12 @@
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village',searchable: true, sortable: true},
             {data: 'L_area', name: 'L_area',searchable: true, sortable: true},
-
+            {data: 'unit', name: 'unit',searchable: true, sortable: true},
             {data: 'landCategory', name: 'landCategory',searchable: true, sortable: true},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[3, 'desc']],
+        order: [[8, 'desc']],
     });
 </script>
 @endsection

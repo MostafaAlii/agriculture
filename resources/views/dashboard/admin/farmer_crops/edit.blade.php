@@ -68,7 +68,7 @@
                                             <div class="row mt-2">
                                                 <div class="col col-md-3">
                                                     <div class="form-group">
-                                                        <label for="area_id">{{ __('Admin/crops.area') }}</label>
+                                                        <label for="area_id">{{ __('Admin/crops.village') }}</label>
                                                         <select name="village_id" id="area_id" class="form-control" required>
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
@@ -77,6 +77,10 @@
                                                                 <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                             @endforeach
                                                         </select>
+                                                        <input type="hidden" name="area_id" value="{{$areaID}}" >
+                                                        <input type="hidden" name="state_id" value="{{$stateID}}" >
+                                                        <input type="hidden" name="admin_id" value="{{$adminId}}" >
+
 
                                                     </div>
                                                 </div>

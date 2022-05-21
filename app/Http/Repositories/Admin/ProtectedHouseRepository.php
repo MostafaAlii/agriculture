@@ -91,7 +91,7 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
 
 
         return view('dashboard.admin.protected_houses.create',
-            compact('admin', 'stateID', 'areaID', 'villages', 'area_name', 'state_name', 'units'));
+            compact('admin', 'stateID', 'areaID','adminId', 'villages', 'area_name', 'state_name', 'units'));
     }
 
     public function store($request)
@@ -99,16 +99,16 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
     {
         DB::beginTransaction();
         try {
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
+
             $requestData = $request->validated();
             $protected_house = new ProtectedHouse();
-            $protected_house->admin_id = $admin->id;
+
             $protected_house->farmer_id = $requestData['farmer_id'];
-            $protected_house->area_id = $areaID;
-            $protected_house->state_id = $stateID;
+
+            $protected_house->area_id = $requestData['area_id'];
+            $protected_house->state_id = $requestData['state_id'];
+            $protected_house->admin_id = $requestData['admin_id'];
+
             $protected_house->village_id = $requestData['village_id'];
             $protected_house->status = $requestData['status'];
             $protected_house->average_product_annual = $requestData['average_product_annual'];
@@ -143,12 +143,14 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
         $area_name = $admin->area->name;
         $state_name = $admin->state->name;
         $stateID = $admin->state->id;
+        $areaID = $admin->area->id;
         $units = Unit::all();
         $villages = Village::where('state_id', $stateID)->get();
 
 
         return view('dashboard.admin.protected_houses.edit',
-            compact('admin', 'area_name', 'state_name', 'villages', 'units', 'protected_house'));
+            compact('admin', 'area_name', 'state_name', 'stateID','adminId'
+                ,'areaID','villages', 'units', 'protected_house'));
     }
 
     public function update($request, $id)

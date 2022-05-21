@@ -1,5 +1,6 @@
 <?php
 return [
+    'wholesale'=>'Wholesale',
 
     'product_name'=>' Product Name',
     'dep_name'=>'WholeSale',

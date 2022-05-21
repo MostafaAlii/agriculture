@@ -16,7 +16,7 @@ class OutcomeProductRequest extends FormRequest
     {
         return [
 
-//            'admin_id' => 'required|exists:admins,id',
+            'country_product_type' => 'required',
             'area_id' => 'sometimes|nullable',
             'province_id' => 'sometimes|nullable',
             'country_id' => 'required|exists:countries,id',
@@ -37,7 +37,7 @@ class OutcomeProductRequest extends FormRequest
             'currency_id.required' => trans('Admin/validation.required'),
 
             'whole_product_id.required' => trans('Admin/validation.required'),
-//            'admin_id.required' => trans('Admin/validation.required'),
+            'country_product_type.required' => trans('Admin/validation.required'),
 //            'area_id.required' => trans('Admin/validation.required'),
 //            'province_id.required' => trans('Admin/validation.required'),
             'country_id.required' => trans('Admin/validation.required'),
