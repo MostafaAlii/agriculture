@@ -80,28 +80,24 @@ class ChickenProjectRepository implements ChickenProjectInterface{
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
-        $areas = Area::all();
-        $states = State::all();
+
         $villages = Village::where('state_id',$stateID)->get();
         return view('dashboard.admin.chicken_projects.create',
-            compact('admin', 'area_name', 'areas','areaID', 'villages','states','state_name','stateID'));
+            compact('admin', 'area_name','areaID', 'villages','state_name','stateID','adminId'));
     }
     public function store($request)
 
     {
         DB::beginTransaction();
         try {
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $chicken = new ChickenProject();
-            $chicken->admin_id = $admin->id;
             $chicken->farmer_id = $requestData['farmer_id'];
             $chicken->village_id = $requestData['village_id'];
-            $chicken->area_id = $areaID;
-            $chicken->state_id =$stateID;
+            $chicken->admin_id =  $requestData['admin_id'];
+            $chicken->village_id = $requestData['village_id'];
+            $chicken->area_id =  $requestData['area_id'];
+            $chicken->state_id =  $requestData['state_id'];
             $chicken->project_name = $requestData['project_name'];
             $chicken->hall_num = $requestData['hall_num'];
             $chicken->power = $requestData['power'];
@@ -139,7 +135,7 @@ class ChickenProjectRepository implements ChickenProjectInterface{
         $villages = Village::where('state_id',$stateID)->get();
 
         return view('dashboard.admin.chicken_projects.edit',
-            compact('admin', 'area_name', 'areas','areaID', 'villages','states','state_name','stateID','chicken'));
+            compact('admin', 'adminId','area_name', 'areas','areaID', 'villages','states','state_name','stateID','chicken'));
     }
 
     public function update($request,$id)
@@ -150,15 +146,12 @@ class ChickenProjectRepository implements ChickenProjectInterface{
             $animalID = Crypt::decrypt($id);
             $requestData = $request->validated();
             $chicken = ChickenProject::findorfail($animalID);
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
-            $chicken->admin_id = Auth::user()->id;
+
+            $chicken->admin_id =  $requestData['admin_id'];
             $chicken->farmer_id = $requestData['farmer_id'];
             $chicken->village_id = $requestData['village_id'];
-            $chicken->area_id = $areaID;
-            $chicken->state_id = $stateID;
+            $chicken->area_id =  $requestData['area_id'];
+            $chicken->state_id =  $requestData['state_id'];
             $chicken->project_name = $requestData['project_name'];
             $chicken->hall_num = $requestData['hall_num'];
             $chicken->power = $requestData['power'];

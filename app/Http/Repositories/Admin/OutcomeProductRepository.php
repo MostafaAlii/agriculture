@@ -25,7 +25,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $admin = Admin::findorfail($adminID);
         $department_id = $admin->adminDepartment->id;
         $adminDepartment = AdminDepartment::findorfail($department_id);
-        $dep_name = $adminDepartment->dep_name_ar;
+        $dep_name = $adminDepartment->name;
         return view('dashboard.admin.outcome_products.index',compact('admin','dep_name')) ;
     }
 
@@ -79,7 +79,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $admin = Admin::findorfail($adminID);
         $department_id = $admin->adminDepartment->id;
 
-        $admin_dep_name = $admin->adminDepartment->dep_name_ar;
+        $admin_dep_name = $admin->adminDepartment->name;
 
         $countries = Country::all();
 
@@ -138,7 +138,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         $department_id = $admin->adminDepartment->id;
-        $admin_dep_name = $admin->adminDepartment->dep_name_ar;
+        $admin_dep_name = $admin->adminDepartment->name;
 
         $countries = Country::all();
         $whole_products = WholeProduct::all();
@@ -146,7 +146,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $units = Unit::all();
 
         return view('dashboard.admin.outcome_products.edit',
-            compact('admin_dep_name', 'countries', 'units','dep_name',
+            compact('admin_dep_name', 'countries', 'units',
                 'outcome_product','whole_products','currencies'));
     }
 

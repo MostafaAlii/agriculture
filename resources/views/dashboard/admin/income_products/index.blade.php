@@ -135,7 +135,7 @@
 
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[3, 'desc']],
+        order: [[8, 'desc']],
     });
 </script>
 @endsection

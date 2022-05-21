@@ -36,10 +36,10 @@ class LandAreaRepository implements LandAreaInterface{
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         if($admin->type =='employee') {
-            $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin')
+            $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin','unit')
                 ->where('admin_id',  $admin->id);
         }else{
-            $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin');
+            $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin','unit');
         }
         return DataTables::of($land_areas)
             ->addColumn('record_select', 'dashboard.admin.land_areas.data_table.record_select')
@@ -55,6 +55,9 @@ class LandAreaRepository implements LandAreaInterface{
             })
             ->addColumn('state', function (LandArea $land_area) {
                 return $land_area->state->name;
+            })
+            ->addColumn('unit', function (LandArea $land_area) {
+                return $land_area->unit->Name;
             })
             ->addColumn('village', function (LandArea $land_area) {
                 return $land_area->village->name;

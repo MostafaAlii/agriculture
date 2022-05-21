@@ -84,6 +84,9 @@
                                                             <div class="form-group">
                                                                 <label for="farmer_id">{{ __('Admin/crops.farmer') }}</label>
                                                                 <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                                    <input type="hidden" name="area_id" value="{{$areaID}}" >
+                                                                    <input type="hidden" name="state_id" value="{{$stateID}}" >
+                                                                    <input type="hidden" name="admin_id" value="{{$adminId}}" >
 
                                                                 </select>
                                                             </div>

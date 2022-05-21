@@ -24,6 +24,7 @@ return [
     'twitter'=>'Twitter',
     'inestergrame'=>'Instegram',
     'status'=>' Site Status',
+    'maintenance_message'                                   =>'Sorry The WebSite is in maintenance State ,Hope Visit us Later',
 
 
 

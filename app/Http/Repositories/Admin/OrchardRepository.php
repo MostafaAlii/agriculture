@@ -100,9 +100,9 @@ class OrchardRepository implements OrchardInterface
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
-//        $villages = Village::where('state_id',$stateID)->get();
+        $villages = Village::where('state_id',$stateID)->get();
         $land_categories = LandCategory::all();
-        $villages = Village::all();
+//        $villages = Village::all();
         $units = Unit::all();
         $trees = Tree::all();
 
