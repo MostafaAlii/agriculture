@@ -88,7 +88,10 @@
                                 <i class="fa fa-eye"> </i> 
                             </a>
                             @if($order->status == Order::ORDERED)
-                                <button class="btn btn-danger btn-sm" type="button" wire:click="cancelOrder('{{ $order->id }}')">
+                                <button class="btn btn-danger btn-sm" type="button"
+                                onclick="confirm('Are you sure you want to cancel these Records?') || event.stopImmediatePropagation()"
+                                wire:click="cancelOrder('{{ $order->id }}')"
+                                >
                                     <i class="fontello-cancel"> </i>
                                 </button>
                             @endif
