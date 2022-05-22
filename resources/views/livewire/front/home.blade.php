@@ -46,6 +46,26 @@
     .fill-heart{
         color: #ff7007 !important;
     }
+
+     /* --------------------------------- */
+.score {
+  display: inline-block;
+  font-family: Wingdings;
+  font-size: 23px;
+  color: #ccc;
+  position: relative;
+}
+.score::before,
+.score span::before{
+  content: "\2605\2605\2605\2605\2605";
+  display: block;
+}
+.score span {
+  color: gold;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
 </style>
 @endif
 @endsection
@@ -57,8 +77,7 @@
             <div class="promo-banners">
                 <div class="__inner">
                     <div class="row">
-                        @foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get()
-    as $blog)
+                        @foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
                             <div class="col-12 col-md-6 col-lg-4">
                                 @if ($blog->image->filename)
                                     <a class="__item" href="{{ route('blogdetails', encrypt($blog->id)) }}"><img
@@ -340,20 +359,19 @@
             <!-- start banner simple -->
             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
                 <div class="d-none d-lg-block">
-                    <img class="img-logo img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                        data-src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />
+                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}"
+                    data-src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}" width="50" height="50"
+                    alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
                 </div>
-
                 <div class="row no-gutters">
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                data-src="{{ asset('frontassets/img/banner_bg_3.jpg') }}" alt="demo" /></a>
+                    @foreach($random_blog as $b)
+                    <div class="col-12 col-lg-6 " >
+                        <h3 style="color:coral">{{$b->title}}</h3>
+                        <p>{{substr($b->body,0,100)}}</p>
+                        <a class="custom-btn custom-btn--medium custom-btn--style-1"
+                                            href="{{ route('blogdetails', encrypt($b->id)) }}">{{ __('website\home.readmore') }}</a>
                     </div>
-
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                data-src="{{ asset('frontassets/img/banner_bg_4.jpg') }}" alt="demo" /></a>
-                    </div>
+                    @endforeach                   
                 </div>
             </div>
             <!-- end banner simple -->
@@ -388,10 +406,13 @@
                                 data-src="{{ asset('frontassets/img/logo_small.png') }}" width="50" height="50"
                                 alt="demo" />
                         </p>
+                        @if(app()->getLocale()=='en')
+                        <h2 class="__title">agro <span>products</span></h2>
+                        @else
+                        <h2 class="__title"><span>منتجاتـ</span> ـنا  </h2>
+                        @endif
 
-                        <h2 class="__title">Fruits & vegetables <span>farm products</span></h2>
-
-                        <p><a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">More about</a></p>
+                        <p><a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('shop') }}">{{ __('website\home.all_products') }}</a></p>
                     </div>
                 </div>
 
@@ -400,133 +421,31 @@
                     <div class="feature feature--style-3">
                         <div class="__inner">
                             <div class="row">
+                                @foreach($home_category as $main)
                                 <!-- start item -->
                                 <div class="col-6 col-sm-4 col-lg-3">
                                     <div class="__item  text-center" data-aos="fade" data-aos-delay="100"
                                         data-aos-offset="100">
+                                        <a href="{{route('pro_cat',encrypt($main->id))}}">
                                         <i class="__ico">
-                                            <img class="img-fluid  lazy"
-                                                src="{{ asset('frontassets/img/blank.gif') }}"
-                                                data-src="{{ asset('frontassets/img/feature_img/7.png') }}"
+                                        @if(!($main->products)->isEmpty())
+                                            @foreach($main->products->random(1) as $pp)
+                                                 <img class="img-fluid lazy" src="{{ asset('Dashboard/img/products/' .  $pp->image->filename) }}"
+                                                data-src="{{ asset('Dashboard/img/products/' . $pp->image->filename) }}"
                                                 alt="demo" />
+                                            @endforeach
+                                        @else
+                                            <img class="img-fluid lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                alt="demo" />
+                                        @endif
                                         </i>
-
-                                        <h5 class="__title">Blueberry</h5>
+                                        <h5 class="__title">{{$main->name}}</h5>
+                                        </a>
                                     </div>
                                 </div>
                                 <!-- end item -->
-
-                                <!-- start item -->
-                                <div class="col-6 col-sm-4 col-lg-3">
-                                    <div class="__item  text-center" data-aos="fade" data-aos-delay="200"
-                                        data-aos-offset="100">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy"
-                                                src="{{ asset('frontassets/img/blank.gif') }}"
-                                                data-src="{{ asset('frontassets/img/feature_img/8.png') }}"
-                                                alt="demo" />
-                                        </i>
-
-                                        <h5 class="__title">Strawberry</h5>
-                                    </div>
-                                </div>
-                                <!-- end item -->
-
-                                <!-- start item -->
-                                <div class="col-6 col-sm-4 col-lg-3">
-                                    <div class="__item  text-center" data-aos="fade" data-aos-delay="300"
-                                        data-aos-offset="100">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy"
-                                                src="{{ asset('frontassets/img/blank.gif') }}"
-                                                data-src="{{ asset('frontassets/img/feature_img/9.png') }}"
-                                                alt="demo" />
-                                        </i>
-
-                                        <h5 class="__title">Apples</h5>
-                                    </div>
-                                </div>
-                                <!-- end item -->
-
-                                <!-- start item -->
-                                <div class="col-6 col-sm-4 col-lg-3">
-                                    <div class="__item  text-center" data-aos="fade" data-aos-delay="400"
-                                        data-aos-offset="100">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy"
-                                                src="{{ asset('frontassets/img/blank.gif') }}"
-                                                data-src="{{ asset('frontassets/img/feature_img/10.png') }}"
-                                                alt="demo" />
-                                        </i>
-
-                                        <h5 class="__title">Orange</h5>
-                                    </div>
-                                </div>
-                                <!-- end item -->
-
-                                <!-- start item -->
-                                <div class="col-6 col-sm-4 col-lg-3">
-                                    <div class="__item  text-center" data-aos="fade" data-aos-delay="500"
-                                        data-aos-offset="100">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy"
-                                                src="{{ asset('frontassets/img/blank.gif') }}"
-                                                data-src="{{ asset('frontassets/img/feature_img/11.png') }}"
-                                                alt="demo" />
-                                        </i>
-
-                                        <h5 class="__title">Carrot</h5>
-                                    </div>
-                                </div>
-                                <!-- end item -->
-
-                                <!-- start item -->
-                                <div class="col-6 col-sm-4 col-lg-3">
-                                    <div class="__item  text-center" data-aos="fade" data-aos-delay="600"
-                                        data-aos-offset="100">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy"
-                                                src="{{ asset('frontassets/img/blank.gif') }}"
-                                                data-src="{{ asset('frontassets/img/feature_img/12.png') }}"
-                                                alt="demo" />
-                                        </i>
-
-                                        <h5 class="__title">Cabbage</h5>
-                                    </div>
-                                </div>
-                                <!-- end item -->
-
-                                <!-- start item -->
-                                <div class="col-6 col-sm-4 col-lg-3">
-                                    <div class="__item  text-center" data-aos="fade" data-aos-delay="700"
-                                        data-aos-offset="100">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy"
-                                                src="{{ asset('frontassets/img/blank.gif') }}"
-                                                data-src="{{ asset('frontassets/img/feature_img/13.png') }}"
-                                                alt="demo" />
-                                        </i>
-
-                                        <h5 class="__title">Potato</h5>
-                                    </div>
-                                </div>
-                                <!-- end item -->
-
-                                <!-- start item -->
-                                <div class="col-6 col-sm-4 col-lg-3">
-                                    <div class="__item  text-center" data-aos="fade" data-aos-delay="800"
-                                        data-aos-offset="100">
-                                        <i class="__ico">
-                                            <img class="img-fluid  lazy"
-                                                src="{{ asset('frontassets/img/blank.gif') }}"
-                                                data-src="{{ asset('frontassets/img/feature_img/14.png') }}"
-                                                alt="demo" />
-                                        </i>
-
-                                        <h5 class="__title">Eggplant</h5>
-                                    </div>
-                                </div>
-                                <!-- end item -->
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -559,8 +478,6 @@
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
                 <h2 class="__title">{{ __('Admin/site.popproducts') }}</h2>
-
-                {{-- <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p> --}}
             </div>
 
             <!-- start goods -->
@@ -595,17 +512,8 @@
                                                         href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                 </h4>
 
-                                                <div class="rating">
-                                                    <span class="rating__item rating__item--active"><i
-                                                            class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i
-                                                            class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i
-                                                            class="fontello-star"></i></span>
-                                                    <span class="rating__item rating__item--active"><i
-                                                            class="fontello-star"></i></span>
-                                                    <span class="rating__item"><i class="fontello-star"></i></span>
-                                                </div>
+                                                <span class="score"><span style="width:<?php echo $product->productRate();?>%"></span></span>
+
                                                 <div class="stock-info in-stock">
                                                     <p class="availability">
                                                         <b
@@ -783,21 +691,20 @@
         </div>
     </section>
     <!-- end section -->
-
+@if(isset($offer_product))
     <!-- start section -->
     <section class="section section--no-pt section--no-pb section--gutter">
         <!-- start banner simple -->
-        <div class="simple-banner simple-banner--style-1" data-aos="fade" data-aos-offset="50">
+        <div class="simple-banner simple-banner--style-1" data-aos="fade" data-aos-offset="50" style="background-image:{{ asset('Dashboard/img/products/' . $offer_product->image->filename) }}">
 
-            <div class="__label d-none d-md-block">
+            <div class="__label d-none d-md-block" >
                 <div class="d-table m-auto h-100">
                     <div class="d-table-cell align-middle">
-                        <span class="num-1">1</span>
+                        <span class="num-1">{{$offer_product->special_price}}</span>
                     </div>
 
                     <div class="d-table-cell align-middle">
-                        <span class="num-2">50$</span>
-                        <span>Kg</span>
+                        <span class="num-2">$</span>
                     </div>
                 </div>
             </div>
@@ -806,23 +713,22 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="__inner">
-                            <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                data-src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />
+                            
+                                <img class="img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}"
+                                data-src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}" width="50" height="50"
+                                alt="demo"  style="width: 145px;height: 200px;"/>
 
                             <div class="row">
                                 <div class="col-12 col-lg-7 col-xl-6">
                                     <div class="banner__text" data-aos="fade-left" data-delay="500">
-                                        <h2 class="__title h1"><b style="display: block; color: #c6c820;">Fresh
-                                                Exotic Fruits</b> <span>in Our Store</span></h2>
+                                        <h2 class="__title h1">
+                                            <b style="display: block; color: #c6c820;">
+                                                {{$offer_product->name}}
+                                            </b>
+                                        </h2>
 
                                         <p>
-                                            The generated Lorem Ipsum is therefore always free from repetition injected
-                                            humour, or non-characteristic words etc.
-                                        </p>
-
-                                        <p>
-                                            <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                href="#">Buy</a>
+                                        {{substr($offer_product->name,0,100)}}...
                                         </p>
                                     </div>
                                 </div>
@@ -835,6 +741,7 @@
         <!-- end banner simple -->
     </section>
     <!-- end section -->
+@endif
 
     @include('livewire.front._home_review')
 
@@ -843,8 +750,6 @@
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
                 <h2 class="__title">{{ __('website\home.blog') }}</h2>
-
-                {{-- <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p> --}}
             </div>
 
             <!-- start posts -->

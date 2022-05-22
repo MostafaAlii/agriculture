@@ -3,9 +3,12 @@
 namespace App\Http\Livewire\Front;
 
 use Cart;
+use App\Models\Blog;
 use App\Models\Review;
 use App\Models\Product;
+use App\Models\Setting;
 use Livewire\Component;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 class Home extends Component
@@ -31,9 +34,9 @@ class Home extends Component
 
     public function render()
     {
-        $newProducts = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(12)->get();
-        $popProducts = Product::where('in_stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(6);
-        $saleProducts = Product::where('special_price','>',0)
+        $data['newProducts'] = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(12)->get();
+        $data['popProducts'] = Product::where('in_stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(6);
+        $data['saleProducts'] = Product::where('special_price','>',0)
                                  ->where('in_stock','1')
                                  ->latest()->get()->take(4);
         if(Auth::guard('vendor')->check()){
@@ -41,9 +44,14 @@ class Home extends Component
             Cart::instance('wishlist')->restore(Auth::guard('vendor')->user()->email);
           }
 
-          $reviews=Review::where('show_or_hide','1')->get();
+          $data['reviews']=Review::where('show_or_hide','1')->get();
+          $data['home_category']=Category::whereNull('parent_id')->inRandomOrder()->limit(8)->get();
+          $data['random_blog']=Blog::inRandomOrder()->limit(2)->get();
+          $data['logo']=Setting::select('site_logo')->first();
           
-        return view('livewire.front.home',compact('popProducts','saleProducts','newProducts','reviews'))
+          $data['offer_product']=Product::whereNotNull('special_price')->where('in_stock',1)->where('special_price_type','=','fixed')->first();
+          
+        return view('livewire.front.home',$data)
         ->layout('front.layouts.master1');
     }
 }
