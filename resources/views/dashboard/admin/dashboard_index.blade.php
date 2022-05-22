@@ -179,213 +179,247 @@
                 <!-- End First Row Admin -->
                 <!-- Start Second Row Country -->
                 <div class="row">
-                    <div class="col-xl-2 col-lg-6 col-12">
-                        <a href="{{ route('Countries.index') }}">
+                    <!-- Start Countries -->
+                    @can('country-managment')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('Countries.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="info">{{ \App\Models\Country::count() }}</h3>
+                                                    <h6> {{ trans('Admin/countries.countryPageTitle') }}</h6>
+                                                </div>
+                                                <div>
+                                                    <i class="material-icons info font-large-2 float-right">flag</i>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endcan
+                    <!-- End Countries -->
+                    <!-- Start Area -->
+                    @can('area-managment')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('Areas.index') }}">
                             <div class="card pull-up">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
                                             <div class="media-body text-left">
-                                                <h3 class="info">{{ \App\Models\Country::count() }}</h3>
-                                                <h6> {{ trans('Admin/countries.countryPageTitle') }}</h6>
+                                                <h3 class="warning">{{ \App\Models\Area::count() }}</h3>
+                                                <h6>   {{ trans('Admin/areas.areaPageTitle') }}</h6>
                                             </div>
                                             <div>
-                                                <i class="material-icons info font-large-2 float-right">flag</i>
+                                                <i class="material-icons warning font-large-2 float-right">flag</i>
+                                                {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
                                             </div>
                                         </div>
                                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-lg-6 col-12">
-                        <a href="{{ route('Areas.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="warning">{{ \App\Models\Area::count() }}</h3>
-                                            <h6>   {{ trans('Admin/areas.areaPageTitle') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="material-icons warning font-large-2 float-right">flag</i>
-                                            {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-lg-6 col-12">
-                        <a href="{{ route('Proviences.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="success">{{ \App\Models\Province::count() }}</h3>
-                                            <h6>  {{ trans('Admin/proviences.proviencePageTitle') }}</h6>
-                                        </div>
-                                        <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
-                                            <i class="material-icons success font-large-2 float-right">flag</i>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-lg-6 col-12">
-                        <a href="{{ route('States.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="danger">{{ \App\Models\State::count() }}</h3>
-                                            <h6>   {{ trans('Admin/states.statePageTitle') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="material-icons danger font-large-2 float-right">flag</i>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-lg-6 col-12">
-                        <a href="{{ route('Villages.index') }}">
+                    @endcan
+                    <!-- End Area -->
+                    <!-- Start Proviences -->
+                    @can('provience-managment')
+                        <div class="col-xl-2 col-lg-6 col-12">
+                            <a href="{{ route('Proviences.index') }}">
                             <div class="card pull-up">
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="media d-flex">
                                             <div class="media-body text-left">
-                                                <h3 class="info">{{ \App\Models\Village::count() }}</h3>
-                                                <h6>  {{ trans('Admin/villages.villagePageTitle') }}</h6>
+                                                <h3 class="success">{{ \App\Models\Province::count() }}</h3>
+                                                <h6>  {{ trans('Admin/proviences.proviencePageTitle') }}</h6>
                                             </div>
                                             <div>
-                                                <i class="material-icons info font-large-2 float-right">flag</i>
+                                                {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                                <i class="material-icons success font-large-2 float-right">flag</i>
                                             </div>
                                         </div>
                                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-2 col-lg-6 col-12">
-                        <a href="{{ route('Departments.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="danger">{{ \App\Models\Department::count() }}</h3>
-                                            <h6>{{ __('Admin/site.departments') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="icon-graduation danger font-large-2 float-right"></i>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                        </a>
-                    </div>
+                    @endcan
+                    <!-- End Proviences -->
+                    <!-- Start States -->
+                    @can('state-managment')
+                        <div class="col-xl-2 col-lg-6 col-12">
+                            <a href="{{ route('States.index') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="danger">{{ \App\Models\State::count() }}</h3>
+                                                <h6>   {{ trans('Admin/states.statePageTitle') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="material-icons danger font-large-2 float-right">flag</i>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    @endcan
+                    <!-- End States -->
+                    <!-- Start Villages -->
+                    @can('village-managment')
+                        <div class="col-xl-2 col-lg-6 col-12">
+                            <a href="{{ route('Villages.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="info">{{ \App\Models\Village::count() }}</h3>
+                                                    <h6>  {{ trans('Admin/villages.villagePageTitle') }}</h6>
+                                                </div>
+                                                <div>
+                                                    <i class="material-icons info font-large-2 float-right">flag</i>
+                                                </div>
+                                            </div>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endcan
+                    <!-- End Villages -->
                 </div>
                 <!-- End Second Row Country -->
                 <!-- Start Row Blog -->
                 <div class="row">
-
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('blogs.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="warning">{{ \App\Models\Blog::count() }}</h3>
-                                            <h6> {{ trans('Admin/site.blog') }}</h6>
+                    <!-- Start Departments -->
+                    @can('department-managment')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('Departments.index') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="danger">{{ \App\Models\Department::count() }}</h3>
+                                                <h6>{{ __('Admin/site.departments') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="material-icons danger font-large-2 float-right">account_balance</i>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <i class="icon-globe warning font-large-2 float-right"></i>
-                                            {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('tags.data') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="success">{{ \App\Models\Tag::count() }}</h3>
-                                            <h6>  {{ trans('Admin/site.tag') }}</h6>
+                    @endcan
+                    <!-- End Departments -->
+                    <!-- Start Categories -->
+                    @can('category-managment')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('Categories.index') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="danger">{{ \App\Models\Category::count() }}</h3>
+                                                <h6>{{ __('Admin/categories.categories_title_in_sidebar') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="material-icons danger font-large-2">account_balance</i>
+                                            </div>
                                         </div>
-                                        <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
-                                            <i class="icon-speech success font-large-2 float-right"></i>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
-                        </a>
-                    </div>
-                    {{-- <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('States.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="danger">{{ \App\Models\State::count() }}</h3>
-                                            <h6>   {{ trans('Admin/states.statePageTitle') }}</h6>
+                    @endcan
+                    <!-- End Categories -->
+                    <!-- Start Blogs -->
+                    @can('articles-managment')
+                        <div class="col-xl-2 col-lg-6 col-12">
+                            <a href="{{ route('blogs.index') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="warning">{{ \App\Models\Blog::count() }}</h3>
+                                                <h6> {{ trans('Admin/site.blog') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="icon-globe warning font-large-2 float-right"></i>
+                                                {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                            </div>
                                         </div>
-                                        <div>
-                                            <i class="material-icons danger font-large-2 float-right">flag</i>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
-                        </a>
-                    </div> --}}
+                    @endcan
+                    <!-- End Blogs -->
+                    <!-- Start Tags -->
+                    @can('tags-managment')
+                        <div class="col-xl-2 col-lg-6 col-12">
+                            <a href="{{ route('tags.data') }}">
+                            <div class="card pull-up">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="media d-flex">
+                                            <div class="media-body text-left">
+                                                <h3 class="success">{{ \App\Models\Tag::count() }}</h3>
+                                                <h6>  {{ trans('Admin/site.tag') }}</h6>
+                                            </div>
+                                            <div>
+                                                <i class="icon-speech success font-large-2 float-right"></i>
+                                            </div>
+                                        </div>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    @endcan
+                    <!-- End Tags -->
                 </div>
                 <!-- End Row Blog -->
                 <!-- Start Row Admin Department -->

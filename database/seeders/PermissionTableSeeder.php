@@ -40,13 +40,20 @@ class PermissionTableSeeder extends Seeder {
             // Settings ::
             'settings-managment',
                 'settings',
+                    'role-list',
+                        'role-processes',
+                            'role-show', 
+                            'role-edit', 
+                            'role-delete', 
+                        'role-create', 
+                        'role-delete-all',
                     'pages',
                         // About Us ::
                         'about-us',
                         // Contact Us ::
                         'contact-us',
-                            'contact-replay',
-                            'contact-us-delete',
+                            'contact-replay', 
+                            'contact-us-delete', 
                             'send-new-contact-messeage',
                         // Teams ::
                         'team-managment',
@@ -105,7 +112,20 @@ class PermissionTableSeeder extends Seeder {
                     'village-edit',
                     'village-delete',
                     'village-delete-all',
-
+            // Departments ::
+            'department-list',
+                'department-managment',
+                    'department-create',
+                    'department-edit',
+                    'department-delete',
+                    'department-delete-all',
+            // Categories ::
+            'category-list',
+                'category-managment',
+                    'category-create',
+                    'category-edit',
+                    'category-delete',
+                    'category-delete-all',
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);

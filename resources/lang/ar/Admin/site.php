@@ -124,7 +124,7 @@ return [
     'updatetag'=>'تعديل تاج',
     'admins'=>'المدراء',
     'employees'=>'الموظفين',
-    'departments'=>'الاقسام',
+    'departments'=>'الادارات',
 
     'slider'=>'صور متحركه',
     'newslider'=>'صوره متحركه جديده',

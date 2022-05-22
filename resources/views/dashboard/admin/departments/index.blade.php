@@ -50,15 +50,17 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('Departments.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/site.create') }}</a>
-
-                                    <button type="button" class="btn btn-warning mb-3"
-                                        id="btn_delete_all" data-toggle="modal"
-                                        data-target="#bulkdelete" >
-                                        <i class="fa fa-trash"></i>
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
-                                    
+                                    @can('department-create')
+                                        <a href="{{ route('Departments.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> {{ __('Admin/site.create') }}</a>
+                                    @endcan
+                                    @can('department-delete-all')
+                                        <button type="button" class="btn btn-warning mb-3"
+                                            id="btn_delete_all" data-toggle="modal"
+                                            data-target="#bulkdelete" >
+                                            <i class="fa fa-trash"></i>
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="department-table">
                                             <thead>

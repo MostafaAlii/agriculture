@@ -8,6 +8,11 @@ class DepartmentController extends Controller
 {
     protected $Data;
     public function __construct(DepartmentInterface $Data) {
+        $this->middleware('permission:department-managment', ['only' => ['index']]);
+        $this->middleware('permission:department-create', ['only' => ['create','store']]);
+        $this->middleware('permission:department-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:department-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:department-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

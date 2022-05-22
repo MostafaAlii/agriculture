@@ -8,6 +8,11 @@ class CategoryController extends Controller
 {
     protected $Data;
     public function __construct(CategoryInterface $Data) {
+        $this->middleware('permission:category-managment', ['only' => ['index']]);
+        $this->middleware('permission:category-create', ['only' => ['create','store']]);
+        $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:category-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
