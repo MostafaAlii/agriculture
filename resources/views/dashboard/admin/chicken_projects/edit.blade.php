@@ -96,6 +96,10 @@
                                                     <div class="form-group">
                                                         <label  for="admin_id">{{ __('Admin/animals.farmer_phone') }}</label>
                                                         <input name="phone"  id="farmer_phone"typ="text"  value="{{$chicken->phone}}"class="form-control">
+                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
+
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -108,9 +112,8 @@
                                                     <div  class="form-group">
                                                         <label for="id_h5_multi">{{ __('Admin/animals.marketing_side') }}</label>
                                                         <select name="marketing_side"class="select2 form-control"id="id_h5_multi">
-
                                                             <option value="">{{ __('Admin/site.select') }}</option>
-                                                            <option value="local" {{$chicken->marketing_side=='private'?'selected':''}}>{{ __('Admin/animals.private') }}</option>
+                                                            <option value="private" {{$chicken->marketing_side=='private'?'selected':''}}>{{ __('Admin/animals.private') }}</option>
                                                             <option value="govermental" {{$chicken->marketing_side=='govermental'?'selected':''}}>{{ __('Admin/animals.govermental') }}</option>
 
 

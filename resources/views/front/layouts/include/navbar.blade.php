@@ -40,7 +40,7 @@
     {{-- links for farmer الفلاح****************************************************--}}
     @if(Auth::guard('web')->user())
         <li class="menu-item menu-item-has-children parent" >
-            <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('web')->user()->firstname }} {{ Auth::guard('web')->user()->lastname }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
                     <a title="{{ trans('Admin/site.products') }}" href="{{ route('farmer.product') }}" target="_blank">{{ trans('Admin/site.products') }}</a>
@@ -68,7 +68,8 @@
     {{-- links for vendor or user  التاجر*******************************************--}}
     @if(Auth::guard('vendor')->user())
         <li class="menu-item menu-item-has-children parent" >
-            <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a title="My Account" href="#">{{ __('Admin/site.welcome') }} : {{ Auth::guard('vendor')->user()->firstname }} {{ Auth::guard('vendor')->user()->lastname }}
+                <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="submenu curency" >
                 <li class="menu-item" >
                     <a title="{{ trans('Website/home.dashboard') }}" href="{{ route('vendor.dashboard') }}">{{ trans('Website/home.dashboard') }}</a>

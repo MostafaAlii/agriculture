@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Front;
 
+use Cart;
+use App\Models\Review;
 use App\Models\Product;
 use Livewire\Component;
-use Cart;
 use Illuminate\Support\Facades\Auth;
 
 class Home extends Component
@@ -39,7 +40,10 @@ class Home extends Component
             Cart::instance('cart')->restore(Auth::guard('vendor')->user()->email);
             Cart::instance('wishlist')->restore(Auth::guard('vendor')->user()->email);
           }
-        return view('livewire.front.home',compact('popProducts','saleProducts','newProducts'))
+
+          $reviews=Review::where('show_or_hide','1')->get();
+          
+        return view('livewire.front.home',compact('popProducts','saleProducts','newProducts','reviews'))
         ->layout('front.layouts.master1');
     }
 }

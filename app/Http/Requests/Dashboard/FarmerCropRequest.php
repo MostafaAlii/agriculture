@@ -16,7 +16,9 @@ class FarmerCropRequest extends FormRequest
     {
         return [
             'farmer_id' => 'required|exists:farmers,id',
-//          'admin_id' => 'required|exists:admins,id',
+          'admin_id' => 'required',
+            'area_id' => 'required',
+            'state_id' => 'required',
             'village_id' => 'required|exists:villages,id',
 
             'land_category_id' => 'required',
@@ -27,21 +29,21 @@ class FarmerCropRequest extends FormRequest
             'phone'=>'required',
             'email'=>'required',
 
-            'winter_crops.*' => [
-                'string',
-            ],
-            'winter_crops'   => [
-                'sometimes:nullable',
-                'array',
-            ],
-            'summer_crops.*' => [
-                'string',
-            ],
-            'summer_crops'   => [
-//                'required',
-                'sometimes:nullable',
-                'array',
-            ],
+//            'winter_crops.*' => [
+//                'string',
+//            ],
+//            'winter_crops'   => [
+//                'sometimes:nullable',
+//                'array',
+//            ],
+//            'summer_crops.*' => [
+//                'string',
+//            ],
+//            'summer_crops'   => [
+////                'required',
+//                'sometimes:nullable',
+//                'array',
+//            ],
 
         ];
     }
@@ -49,9 +51,9 @@ class FarmerCropRequest extends FormRequest
     public function messages()
     {
         return [
-            'winter_crops.*.string'=>trans('Admin/validation.string'),
-//            'winter_crops.required'=>trans('Admin/validation.required'),
-            'summer_crops.*.string'=>trans('Admin/validation.string'),
+//            'winter_crops.*.string'=>trans('Admin/validation.string'),
+////            'winter_crops.required'=>trans('Admin/validation.required'),
+//            'summer_crops.*.string'=>trans('Admin/validation.string'),
 //            'summer_crops.required'=>trans('Admin/validation.required'),
             'summer_area_crop.required' => trans('Admin/validation.required'),
             'winter_area_crop.required' => trans('Admin/validation.required'),

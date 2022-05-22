@@ -20,6 +20,7 @@ class AdminController extends Controller
     }
 
     public function store(AdminLoginRequest $request) {
+        //  dd($request->all());
         if( $request->authenticate()){
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);

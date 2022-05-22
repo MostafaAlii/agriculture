@@ -1,6 +1,6 @@
 <?php
 return [
-
+'wholesale'=>'العلوة',
     'action' =>'العمليات',
     'admin_departments' =>'الهيكلية الإدارية التابعة',
     'area' =>'القضاء',

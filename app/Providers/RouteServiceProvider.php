@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
     // public const HOME = '/dashboard_farmer';
     public const ADMIN_DASHBOARD = 'dashboard_admin/';
     public const FRONT = '/home';
-    //public const FARMER_DASHBOARD = '/farmer_dashboard';
+    // public const FARMER_DASHBOARD = '/dashboard_farmer/home';
 
     /**
      * The controller namespace for the application.

@@ -14,7 +14,11 @@ class FarmerServiceRequest extends FormRequest
 
     public function rules()
     {
-        return [
+        return[
+            'admin_id' => 'required',
+            'area_id' => 'required',
+            'state_id' => 'required',
+
             'farmer_id' => 'required|exists:farmers,id',
             'village_id' => 'required|exists:villages,id',
             'phone'=>'required',

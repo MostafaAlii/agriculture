@@ -45,6 +45,14 @@ class OrdersComponents extends Component {
         $this->showOrder = true;
     }
 
+    //-----------cancel selected orders--------------------
+    public function cancelSelected() {
+        $all=$this->checked;
+        foreach ($all as $order_id) {
+             $this->cancelOrder($order_id);
+        }        
+    }
+    
     public function cancelOrder($id) {
         $order = Order::find($id);
 	    $order->status = "canceled";

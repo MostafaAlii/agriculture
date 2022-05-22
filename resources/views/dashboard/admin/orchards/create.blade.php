@@ -140,8 +140,8 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/orchards.unit') }}</label>
                                                         <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                            <option selected disabled>--select--</option>
                                                             @foreach($units as $unit)
-                                                                <option selected disabled>--select--</option>
                                                                 <option value="{{$unit->id}}">{{ $unit->Name }}</option>
                                                             @endforeach
                                                         </select>

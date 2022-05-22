@@ -6,6 +6,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Controllers\front\farmer\EditProduct;
 use App\Http\Controllers\front\farmer\FarmerEditProfile;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 Route::group(
@@ -16,7 +17,7 @@ Route::group(
     ], function(){
 
                 // Dashboard prifex in RouteServiceProvider
-        Route::group(['prefix'=>'dashboard_farmer', 'middleware' =>'auth'], function() {
+        Route::group(['prefix'=>'dashboard_farmer', 'middleware' =>'auth:web'], function() {
             route::get('/home',Livewire\front\Home2::class)->name('home.farmer');
             /********************************* Start Admins Dashboard Routes ************************************/
             // Route::get('/', [DashboardController::class, 'index'])->name('farmer.dashboard');

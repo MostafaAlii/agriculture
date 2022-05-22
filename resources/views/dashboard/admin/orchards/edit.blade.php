@@ -65,7 +65,7 @@
                                         <div class="form-body">
 
                                             <div class="row mt-2">
-                                                <div class="col col-md-4">
+                                                <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="village_id">{{ __('Admin/orchards.village') }}</label>
                                                         <select name="village_id" id="village_id" class="form-control" required>
@@ -79,7 +79,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col col-md-4">
+                                                <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/orchards.farmer') }}</label>
                                                         <select class="select2 form-control" name="farmer_id" id="farmer_id">

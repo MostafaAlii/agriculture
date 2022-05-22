@@ -20,9 +20,11 @@ class AuthenticatedSessionController extends Controller
     }
 
     public function store(LoginRequest $request) {
+        // dd($request->all());
         if( $request->authenticate()){
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::FRONT);
+            // return redirect()->intended(RouteServiceProvider::FARMER_DASHBOARD );
         }
        return redirect()->back()->withErrors(['name'=>(trans('Admin/auth.failed'))]);
     }

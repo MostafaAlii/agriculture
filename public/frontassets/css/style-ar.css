@@ -4,10 +4,14 @@ body.compensate-for-scrollbar {
     overflow: hidden;
 }
 
-html {
-    direction: rtl;
-    background-color: black !important;
 
+html {
+    @if(app()->getLocale()=='ar')
+    direction: rtl;
+    @else
+    direction: ltr;
+    @endif
+    background-color: black !important;
 }
 .section-heading--left {
     text-align: right;

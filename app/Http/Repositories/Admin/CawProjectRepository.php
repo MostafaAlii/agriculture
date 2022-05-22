@@ -101,17 +101,15 @@ class CawProjectRepository implements CawProjectInterface{
     public function store($request)    {
         DB::beginTransaction();
         try {
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
+
             $requestData = $request->validated();
             $animal = new CawProject();
-            $animal->admin_id = $admin->id;
             $animal->farmer_id = $requestData['farmer_id'];
             $animal->village_id = $requestData['village_id'];
-            $animal->area_id = $areaID;
-            $animal->state_id = $stateID;
+            $animal->state_id = $requestData['state_id'];
+            $animal->area_id = $requestData['area_id'];
+            $animal->admin_id = $requestData['admin_id'];
+
             $animal->project_name = $requestData['project_name'];
             $animal->hall_num = $requestData['hall_num'];
             $animal->animal_count = $requestData['animal_count'];
@@ -149,7 +147,7 @@ class CawProjectRepository implements CawProjectInterface{
         $animal = CawProject::findorfail($animalID);
 
         return view('dashboard.admin.caw_projects.edit',
-            compact('area_name','areas','state_name','states','admin','villages', 'animal','stateID','state_name','areaID'));
+            compact('area_name','areas','state_name','states','admin','villages', 'animal','adminId','stateID','state_name','areaID'));
     }
 
     public function update($request,$id)
@@ -157,18 +155,17 @@ class CawProjectRepository implements CawProjectInterface{
     {
         DB::beginTransaction();
         try {
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
             $requestData = $request->validated();
             $animalID = Crypt::decrypt($id);
             $animal = CawProject::findorfail($animalID);
-            $animal->admin_id = $admin->id;
+            $animal->area_id = $requestData['area_id'];
+            $animal->admin_id = $requestData['admin_id'];
+            $animal->state_id = $requestData['state_id'];
+
+
             $animal->farmer_id = $requestData['farmer_id'];
             $animal->village_id = $requestData['village_id'];
-            $animal->area_id = $areaID;
-            $animal->state_id = $stateID;
+
 
             $animal->project_name = $requestData['project_name'];
             $animal->hall_num = $requestData['hall_num'];
