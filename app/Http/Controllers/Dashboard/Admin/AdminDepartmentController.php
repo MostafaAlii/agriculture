@@ -8,6 +8,10 @@ class AdminDepartmentController extends Controller
 {
     protected $Data;
     public function __construct(AdminDepartmentInterface $Data) {
+        $this->middleware('permission:admin-department-managment', ['only' => ['index']]);
+        $this->middleware('permission:admin-department-create', ['only' => ['create','store']]);
+        $this->middleware('permission:admin-department-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:admin-department-delete', ['only' => ['destroy']]);
         $this->Data = $Data;
     }
 

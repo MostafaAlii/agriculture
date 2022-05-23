@@ -61,9 +61,13 @@
                                         <hr/>
                                     </div>
                                     <div class="mb-1">
-                                        <a href="" class="btn btn-info edit-dep show-btn-control hidden">{{__('Admin\admin_departments.edit')}}</a>
-                                        <a href="" class="btn btn-danger delete-dep show-btn-control hidden" data-toggle="modal"
-                                           data-target="#exampleModal">{{__('Admin\admin_departments.delete')}}</a>
+                                        @can('admin-department-edit')
+                                            <a href="" class="btn btn-info edit-dep show-btn-control hidden">{{__('Admin\admin_departments.edit')}}</a>
+                                        @endcan
+                                        @can('admin-department-delete')
+                                            <a href="" class="btn btn-danger delete-dep show-btn-control hidden" data-toggle="modal"
+                                            data-target="#exampleModal">{{__('Admin\admin_departments.delete')}}</a>
+                                        @endcan
                                     </div>
 
                                 {{--modal start delete department--}}

@@ -424,53 +424,62 @@
                 <!-- End Row Blog -->
                 <!-- Start Row Admin Department -->
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('AdminDepartments.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="info">{{ \App\Models\AdminDepartment::count() }}</h3>
-                                                <h6> {{ trans('Admin/admin_departments.adminDepartmentPageTitle') }}</h6>
+                    <!-- Start AdminDepartments -->
+                    @can('admin-department-managment')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('AdminDepartments.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="info">{{ \App\Models\AdminDepartment::count() }}</h3>
+                                                    <h6> {{ trans('Admin/admin_departments.adminDepartmentPageTitle') }}</h6>
+                                                </div>
+                                                <div>
+                                                    <i class="icon-list info font-large-2 float-right"></i>
+                                                    {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                                </div>
                                             </div>
-                                            <div>
-                                                <i class="icon-list info font-large-2 float-right"></i>
-                                                {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('orchards.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="success">{{ \App\Models\Orchard::count() }}</h3>
-                                                <h6>  {{ trans('Admin/orchards.orchards') }}</h6>
+                            </a>
+                        </div>
+                    @endcan
+                    <!-- End AdminDepartments -->
+                    <!-- Start Orchards -->
+                    @can('orchards-managment')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('orchards.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="success">{{ \App\Models\Orchard::count() }}</h3>
+                                                    <h6>  {{ trans('Admin/orchards.orchards') }}</h6>
+                                                </div>
+                                                <div>
+                                                    {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                                    <i class="fas fa-tree fa-2x success"></i>
+                                                    <i class="icon-box-item success font-large-2 float-right"></i>
+                                                </div>
                                             </div>
-                                            <div>
-                                                {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
-                                                <i class="fas fa-tree fa-2x success"></i>
-                                                <i class="icon-box-item success font-large-2 float-right"></i>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    @endcan
+                    <!-- End Orchards -->
+                    <!-- Start ProtectedHouse -->
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('ProtectedHouse.index') }}">
                             <div class="card pull-up">
@@ -494,6 +503,8 @@
                             </div>
                         </a>
                     </div>
+                    <!-- End ProtectedHouse -->
+                    <!-- Start FarmerServices -->
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('FarmerServices.index') }}">
                             <div class="card pull-up">
@@ -517,31 +528,10 @@
                             </div>
                         </a>
                     </div>
-
-                    {{-- <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('States.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="media-body text-left">
-                                            <h3 class="danger">{{ \App\Models\State::count() }}</h3>
-                                            <h6>   {{ trans('Admin/states.statePageTitle') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="material-icons danger font-large-2 float-right">flag</i>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div> --}}
+                    <!-- End FarmerServices -->
                 </div>
                 <!-- End Row Admin Department -->
+
                 <!-- Start Row Precipitations -->
                 <div class="row">
                     <div class="col-xl-3 col-lg-6 col-12">
@@ -640,7 +630,10 @@
 
                 </div>
                 <!-- End Row Precipitations -->
+
+                <!-- Start Row Chicken -->
                 <div class="row">
+                    <!-- Start Row Chicken Project -->
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('Chickens.index') }}">
                             <div class="card pull-up">
@@ -664,6 +657,7 @@
                             </div>
                         </a>
                     </div>
+                    <!-- End Row Chicken Project -->
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('BeeKeepers.index') }}">
                             <div class="card pull-up">
@@ -686,6 +680,7 @@
                             </div>
                         </a>
                     </div>
+                    <!-- Start OutcomeProducts -->
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('OutcomeProducts.index') }}">
                             <div class="card pull-up">
@@ -709,6 +704,8 @@
                             </div>
                         </a>
                     </div>
+                    <!-- End OutcomeProducts -->
+                    <!-- Start IncomeProducts -->
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('IncomeProducts.index') }}">
                             <div class="card pull-up">
@@ -732,10 +729,11 @@
                             </div>
                         </a>
                     </div>
-
-
+                    <!-- End IncomeProducts -->
                 </div>
-            <br>
+                <!-- End Row Chicken -->
+                <br>
+                <!--------------------------------------------------------- Start Report -------------------------------------------------------------->
                 <h1 class="bold; color:green;center">{{__('Admin\site.reporting')}}:</h1>
                 <h1>{{__('Admin\site.animal_wealth')}}</h1>
 
@@ -835,6 +833,7 @@
                     </div>
 
                 </div>
+
                 <div class="row">
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('chicken.statistics') }}">
@@ -860,6 +859,7 @@
                     </div>
 
                 </div>
+
                 <h1>{{__('Admin\site.Horticulture')}} </h1>
 
                 <div class="row">
@@ -953,7 +953,9 @@
                     </div>
 
                 </div>
+
                 <h1>{{__('Admin\site.planet_protection')}}</h1>
+
                 <div class="row">
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('beekeepers.statistics') }}">
@@ -1005,8 +1007,8 @@
                 </div>
 
                 <h1>{{__('Admin\site.services')}}</h1>
-                <div class="row">
 
+                <div class="row">
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('farmer_service.statistics') }}">
                             <div class="card pull-up">
@@ -1077,6 +1079,7 @@
                 </div>
 
                 <h1>{{__('Admin\site.planning')}}</h1>
+
                 <div class="row">
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('landAreas.getStatisticaldata') }}">
@@ -1173,8 +1176,6 @@
 
 
                 </div>
-                <h1> {{__('Admin\site.
-                ')}} </h1>
 
                 <div class="row">
                     <div class="col-xl-2 col-lg-6 col-12">
@@ -1295,9 +1296,8 @@
 
 
                 </div>
+
                 <div class="row">
-
-
                     <div class="col-xl-2 col-lg-6 col-12">
                         <a href="{{ route('outcome_product.statistics') }}">
                             <div class="card pull-up">
@@ -1417,7 +1417,7 @@
 
 
                 </div>
-
+                <!--------------------------------------------------------- End Report -------------------------------------------------------------->
 
 
 
@@ -2039,4 +2039,5 @@
         </div>
 @endsection
 @section('js')
+
 @endsection
