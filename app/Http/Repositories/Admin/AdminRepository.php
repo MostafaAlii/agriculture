@@ -57,8 +57,8 @@ class AdminRepository implements AdminInterface{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             $requestData['type'] = $request->type;
-            /* $requestData['latitude']=$request->latitude;
-            $requestData['longitude']= $request->longitude; */
+            /*$requestData['latitude']= NULL;
+            $requestData['longitude']= NULL;*/
             Admin::create($requestData);
             $admin = Admin::latest()->first();
             $admin->assignRole($request->input('roles_name'));
@@ -80,24 +80,20 @@ class AdminRepository implements AdminInterface{
         return view('dashboard.admin.admins.profile.profiledit', compact(['admin', 'roles', 'adminRole']));
     }
 
-    public function update( $request,$id) {
+    public function update($request,$id) {
         try{
             DB::beginTransaction();
             $adminID = Crypt::decrypt($id);
             $admin=Admin::findorfail($adminID);
             $requestData = $request->validated();
             $requestData['type'] = $request->type;
-            //$requestData['roles_name'] = $request->$request->input('roles_name');
             $admin->update($requestData);
-
             if($request->image){
                 $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
             }
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
-            //DB::table('model_has_roles')->where('model_id',$id)->delete();
-            //$admin->assignRole($requestData['roles']);
-            DB::table('model_has_roles')->where('model_id',$id)->delete();
-$admin->assignRole($request->input('roles_name'));
+            /*DB::table('model_has_roles')->where('model_id',$adminID)->delete();
+            $admin->assignRole($request->input('roles_name'));*/
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');
@@ -157,6 +153,8 @@ $admin->assignRole($request->input('roles_name'));
                 $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
             }
             $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
+            DB::table('model_has_roles')->where('model_id',$adminID)->delete();
+            $admin->assignRole($request->input('roles_name'));
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');

@@ -357,23 +357,55 @@
                 <!-- End Admin Department Menu -->
 
                 {{-- start orchard --}}
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-tree  success"></i>
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\orchards.orchards_settings') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li><a class="menu-item" href="{{ route('LandCategories.index') }}">
-                                <span data-i18n="Vertical">{{ __('Admin\site.land_category') }}</span></a>
-                        </li>
-                        <li><a class="menu-item" href="{{ route('TreeTypes.index') }}"><i class="material-icons"></i><span data-i18n="Vertical">{{ __('Admin\site.treeType') }}</span></a>
-                        </li>
-                        <li><a class="menu-item" href="{{ route('Trees.index') }}"><i class="material-icons"></i><span data-i18n="Vertical">{{ __('Admin\site.trees') }}</span></a>
-                        </li>
-                        <li><a class="menu-item" href="{{ route('orchards.index') }}"><i class="material-icons"></i><span data-i18n="Horizontal">{{ __('Admin\site.orchards') }}</span></a>
-                        </li>
-                    </ul>
-                </li>
+                @can('orchards-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-tree  success"></i>
+                            <span class="menu-title" data-i18n="Categories">{{ __('Admin\orchards.orchards_settings') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Land Category -->
+                            @can('land-categories')
+                                <li>
+                                    <a class="menu-item" href="{{ route('LandCategories.index') }}">
+                                        <span data-i18n="Vertical">{{ __('Admin\site.land_category') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Land Category -->
+                            <!-- Start TreeTypes -->
+                            @can('tree-type')
+                                <li>
+                                    <a class="menu-item" href="{{ route('TreeTypes.index') }}">
+                                        <i class="material-icons"></i>
+                                        <span data-i18n="Vertical">{{ __('Admin\site.treeType') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End TreeTypes -->
+                            <!-- Start Trees -->
+                            @can('tree')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Trees.index') }}">
+                                        <i class="material-icons"></i>
+                                        <span data-i18n="Vertical">{{ __('Admin\site.trees') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Trees -->
+                            <!-- Start Orchards -->
+                            @can('orchard')
+                                <li>
+                                    <a class="menu-item" href="{{ route('orchards.index') }}">
+                                        <i class="material-icons"></i>
+                                        <span data-i18n="Horizontal">{{ __('Admin\site.orchards') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- Start Orchards -->
+                        </ul>
+                    </li>
+                @endcan
                 {{-- end orchard --}}
 
                 <!-- start protected house Menu -->

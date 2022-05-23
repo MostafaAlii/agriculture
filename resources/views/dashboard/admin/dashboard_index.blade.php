@@ -452,7 +452,7 @@
                     @endcan
                     <!-- End AdminDepartments -->
                     <!-- Start Orchards -->
-                    @can('orchards-managment')
+                    @can('orchards')
                         <div class="col-xl-3 col-lg-6 col-12">
                             <a href="{{ route('orchards.index') }}">
                                 <div class="card pull-up">
