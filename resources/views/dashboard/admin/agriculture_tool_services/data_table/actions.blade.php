@@ -1,13 +1,16 @@
 <div>
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
-    <i class="fa fa-trash"></i>
-    {{ __('Admin\services.delete') }}
-</button>
-
-<button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
-    <i class="fa fa-trash"></i>
-    {{ __('Admin\services.edit') }}
-</button>
+    @can('agriculture-tools-service-edit')
+    <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
+        <i class="fa fa-trash"></i>
+        {{ __('Admin\services.edit') }}
+    </button>
+    @endcan
+    @can('agriculture-tools-service-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+            <i class="fa fa-trash"></i>
+            {{ __('Admin\services.delete') }}
+        </button>
+    @endcan
 </div>
 
 <div class="col-lg-4 col-md-6 col-sm-12">

@@ -60,14 +60,17 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-
-                                            <a href="{{ route('Precipitations.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
-                                            <button type="button" class="btn btn-warning mb-3"
-                                                    id="btn_delete_all" data-toggle="modal"
-                                                    data-target="#bulkdelete" >
-                                                <i class="fa fa-trash"></i>
-                                                {{ __('Admin/site.bulkdelete') }}
-                                            </button>
+                                            @can('precipitation-create')
+                                                <a href="{{ route('Precipitations.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
+                                            @endcan
+                                            @can('precipitation-delete-all')
+                                                <button type="button" class="btn btn-warning mb-3"
+                                                        id="btn_delete_all" data-toggle="modal"
+                                                        data-target="#bulkdelete" >
+                                                    <i class="fa fa-trash"></i>
+                                                    {{ __('Admin/site.bulkdelete') }}
+                                                </button>
+                                            @endcan
                                     {{--<h2>{{__('Admin\precipitations.choose_period_date')}}</h2>--}}
                                     {{--<div class="form-group col-md-6">--}}
                                         {{--<h5>{{__('Admin\precipitations.start_date')}}<span class="text-danger"></span></h5>--}}

@@ -30,7 +30,7 @@ class PermissionTableSeeder extends Seeder {
                     'worker-edit',
                     'worker-delete',
                     'worker-delete-all',
-                // {Vendors} ::
+                // Vendors ::
                 'vendor-list',
                     'vendor-create',
                     'vendor-show',
@@ -154,8 +154,42 @@ class PermissionTableSeeder extends Seeder {
                     'orchard-edit',
                     'orchard-delete',
                     'orchard-delete-all',
-                    'orchard-export',
-                    'orchard-print',
+            // Protect Houses ::
+            'protect-house-list',
+                'protect-house',
+                'protect-house-create',
+                'protect-house-edit',
+                'protect-house-delete',
+                'protect-house-delete-all',
+            // Agri Service ::
+            'service-list',
+                'agriculture-service',
+                    'agriculture-service-create',
+                    'agriculture-service-edit',
+                    'agriculture-service-delete',
+                    'agriculture-service-delete-all',
+                'agriculture-tools-service',
+                    'agriculture-tools-service-create',
+                    'agriculture-tools-service-edit',
+                    'agriculture-tools-service-delete',
+                    'agriculture-tools-service-delete-all',
+                'water-service',
+                    'water-service-create',
+                    'water-service-edit',
+                    'water-service-delete',
+                    'water-service-delete-all',
+                'farmer-service',
+                    'farmer-service-create',
+                    'farmer-service-edit',
+                    'farmer-service-delete',
+                    'farmer-service-delete-all',
+            'precipitation-list',
+                'precipitation',
+                'precipitation-create',
+                'precipitation-edit',
+                'precipitation-delete',
+                'precipitation-delete-all',
+
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);

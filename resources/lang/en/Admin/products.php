@@ -105,4 +105,7 @@ return [
     'product_price_original'            =>'Original Price',
     'product_price_sale'                =>'Sale Price',
     'farmereditproduct'                 =>'Farmer Edit Product',
+
+
+    'statment '                 =>'update to ',
 ];

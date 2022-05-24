@@ -62,7 +62,15 @@ class AdminController extends Controller {
     public function updateAccount(adminProfileAccountRequest $request,$id) {
         return $this->Data->updateAccount($request,$id);
     }// end of update
+
     public function updateInformation(adminProfileInformationRequest $request,$id) {
         return $this->Data->updateInformation($request,$id);
     }// end of update
+
+    public function change_status($id) {
+        return $this->Data->change_status($id);
+    }
+
+
+    
 }

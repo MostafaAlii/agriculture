@@ -1,15 +1,15 @@
-
-
+@can('precipitation-edit')
     <a href="{{ route('Precipitations.edit',  encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/precipitations.edit') }}
     </a>
-
+@endcan
+@can('precipitation-delete')
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
         <i class="fa fa-trash"></i>
         {{ __('Admin/precipitations.delete') }}
     </button>
-
+@endcan
 
 
 

@@ -95,6 +95,11 @@ Route::group(
             Route::get('/admin/profile/{id}', [AdminController::class,'showProfile'])->name('admin.profile');
             Route::put('/admin/profileupdate/{id}', [AdminController::class,'updateAccount'])->name('admin.updateAccount'); // update admin form account
             Route::put('/admin/profileupdateinfo/{id}', [AdminController::class,'updateInformation'])->name('admin.updateInformation'); //update admin form information
+
+            Route::get('/admin/change_status/{id}', [AdminController::class,'change_status'])->name('change_status');
+
+
+
             // route for auth profile Authadmin *******************************************************************
             /********************************* Start Worker Routes ************************************/
             Route::resource('workers', WorkerController::class)->except(['show']);
@@ -497,6 +502,7 @@ Route::group(
                  Route::get('/team/data', [TeamController::class,'data'])->name('team.data');
                  Route::delete('/team/bulk_delete/{ids}', [TeamController::class,'bulkDelete'])->name('team.bulk_delete');
                  /*****************************************************************************/
+
 
         });
     });

@@ -1,13 +1,16 @@
 <div>
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
-    <i class="fa fa-trash"></i>
-    {{ __('Admin\trees.delete') }}
-</button>
-
-<button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
-    <i class="fa fa-trash"></i>
-    {{ __('Admin\trees.edit') }}
-</button>
+    @can('tree-type-edit')
+        <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
+            <i class="fa fa-trash"></i>
+            {{ __('Admin\trees.edit') }}
+        </button>
+    @endcan
+    @can('tree-type-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+            <i class="fa fa-trash"></i>
+            {{ __('Admin\trees.delete') }}
+        </button>
+    @endcan
 </div>
 
 <div class="col-lg-4 col-md-6 col-sm-12">

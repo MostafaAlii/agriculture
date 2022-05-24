@@ -6,12 +6,14 @@ use App\Models\Area;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
+use Exception;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class AdminRepository implements AdminInterface{
     use UploadT;
+
     public function index() {
         return view('dashboard.admin.admins.index');
     }
@@ -68,7 +70,9 @@ class AdminRepository implements AdminInterface{
             return redirect()->route('Admins.index');
          } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
+            //return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 
@@ -179,4 +183,20 @@ class AdminRepository implements AdminInterface{
         }
 
     }// end of update
+
+
+    public function change_status($id) {
+       // dd('oooo');
+        
+        try{
+            $adminID = Crypt::decrypt($id);
+            $admin=Admin::findorfail($adminID);
+            ($admin->status=='1')?$admin->status=0:$admin->status=1;
+            $admin->update();
+            return redirect()->route('Admins.index');
+        }catch(Exception $e){
+            toastr()->success(__('Admin/site.updated_successfully'));
+            return redirect()->back();
+        }
+    }
 }
