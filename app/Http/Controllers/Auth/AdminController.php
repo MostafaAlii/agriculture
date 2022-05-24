@@ -31,7 +31,6 @@ class AdminController extends Controller
            return redirect()->back()->withErrors(['email'=>(trans('Admin/auth.failed'))]);
         }else{
             return redirect()->back()->withErrors(['email'=>(trans('Admin/auth.notactive'))]);
-            dd($admin->status);
         }
     }
 
