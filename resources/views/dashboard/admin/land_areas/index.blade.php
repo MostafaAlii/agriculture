@@ -60,14 +60,17 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('LandAreas.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
-                                    <button type="button" class="btn btn-warning mb-3"
-                                        id="btn_delete_all" data-toggle="modal"
-                                        data-target="#bulkdelete" >
-                                        <i class="fa fa-trash"></i>
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
-
+                                    @can('land-area-create')
+                                        <a href="{{ route('LandAreas.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
+                                    @endcan
+                                    @can('land-area-delete')
+                                        <button type="button" class="btn btn-warning mb-3"
+                                            id="btn_delete_all" data-toggle="modal"
+                                            data-target="#bulkdelete" >
+                                            <i class="fa fa-trash"></i>
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="land-area-table">
                                             <thead>

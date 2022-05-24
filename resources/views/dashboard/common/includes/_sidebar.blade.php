@@ -492,23 +492,30 @@
                 <!-- end precipitation  Menu -->
 
                 <!-- start Land Area  Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-adjust" style="color: bisque"></i>
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\land_areas.landAreaPageTitle')
-                            }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('LandAreas.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\land_areas.landAreaPageTitle') }}</span></a>
-                        </li>
-
-                    </ul>
-                </li>
+                @can('land-area-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-adjust" style="color: bisque"></i>
+                            <span class="menu-title" data-i18n="Categories">
+                                {{ __('Admin\land_areas.landAreaPageTitle')}}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('land-area')
+                                <li>
+                                    <a class="menu-item" href="{{ route('LandAreas.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\land_areas.landAreaPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end Land Area  Menu -->
 
-                <!-- start Land Area  Menu -->
+                <!-- start FarmerCrops  Menu -->
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="fas fa-crop-simple " style="color:green;"></i>
@@ -530,7 +537,7 @@
                         </li>
                     </ul>
                 </li>
-                <!-- end Land Area  Menu -->
+                <!-- end FarmerCrops  Menu -->
 
                 <!-- start Animals Chicken Projecta Menu -->
                 <li class=" nav-item">
@@ -618,7 +625,7 @@
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
-                        <span class="menu-title" data-i18n="Departments">{{ trans('Admin/site.blogstags') }}</span>
+                        <span class="menu-title" data-i18n="Blogs">{{ trans('Admin/site.blogstags') }}</span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start blog -->
@@ -669,7 +676,8 @@
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">grain</i>
                         <span class="menu-title" data-i18n="">
-                            {{ trans('Admin/products.product_title_in_sidebar') }}</span>
+                            {{ trans('Admin/products.product_title_in_sidebar') }}
+                        </span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start Product -->
@@ -690,7 +698,8 @@
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">fiber_new</i>
                         <span class="menu-title" data-i18n="ProductCoupons">
-                            {{ trans('Admin/coupons.coupon_title_in_sidebar') }}</span>
+                            {{ trans('Admin/coupons.coupon_title_in_sidebar') }}
+                        </span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start ProductCoupons -->
@@ -711,7 +720,8 @@
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">credit_card</i>
                         <span class="menu-title" data-i18n="Options">
-                            {{ trans('Admin/options.options_title') }}</span>
+                            {{ trans('Admin/options.options_title') }}
+                        </span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start options -->
@@ -730,7 +740,7 @@
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">add_shopping_cart</i>
-                        <span class="menu-title" data-i18n="Options"> {{ trans('Admin/orders.orders') }}</span>
+                        <span class="menu-title" data-i18n="Orders"> {{ trans('Admin/orders.orders') }}</span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start Orders -->
@@ -762,6 +772,4 @@
         <!-- End Main Content -->
     </div>
 </div>
-
-
 <!-- END: Main Menu-->
