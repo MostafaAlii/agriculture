@@ -16,6 +16,11 @@ class AgriToolServiceController extends Controller
 {
     protected $Data;
     public function __construct(AgriToolServiceInterface $Data) {
+        $this->middleware('permission:agriculture-tools-service', ['only' => ['index']]);
+        $this->middleware('permission:agriculture-tools-service-create', ['only' => ['store']]);
+        $this->middleware('permission:agriculture-tools-service-edit', ['only' => ['update']]);
+        $this->middleware('permission:agriculture-tools-service-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:agriculture-tools-service-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

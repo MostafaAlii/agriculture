@@ -1,13 +1,14 @@
-<div >
-{{--delete one raw--}}
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
-    <i class="fa fa-trash">{{__('Admin\lands.delete')}}</i>
-
-</button>
-
-<button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}">
-    <i class="fa fas-edit">{{__('Admin\lands.edit')}}</i>
-</button>
+<div>
+    @can('land-categories-edit')
+        <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}">
+            <i class="fa fa-edit">{{__('Admin\lands.edit')}}</i>
+        </button>
+    @endcan
+    @can('land-categories-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
+            <i class="fa fa-trash">{{__('Admin\lands.delete')}}</i>
+        </button>
+    @endcan
 </div>
 
 

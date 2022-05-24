@@ -11,6 +11,11 @@ class OrchardController extends Controller
 {
     protected $Data;
     public function __construct(OrchardInterface $Data) {
+        $this->middleware('permission:orchard', ['only' => ['index']]);
+        $this->middleware('permission:orchard-create', ['only' => ['create','store']]);
+        $this->middleware('permission:orchard-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:orchard-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:orchard-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

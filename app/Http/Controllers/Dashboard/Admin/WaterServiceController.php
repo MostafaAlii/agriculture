@@ -11,6 +11,11 @@ class WaterServiceController extends Controller
 {
     protected $Data;
     public function __construct(WaterServiceInterface $Data) {
+        $this->middleware('permission:water-service', ['only' => ['index']]);
+        $this->middleware('permission:water-service-create', ['only' => ['store']]);
+        $this->middleware('permission:water-service-edit', ['only' => ['update']]);
+        $this->middleware('permission:water-service-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:water-service-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

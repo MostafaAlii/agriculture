@@ -12,7 +12,7 @@ class ProductFactory extends Factory {
             'manage_stock'                  =>      $this->faker->boolean(),
             'in_stock'                      =>      $this->faker->boolean(),
             'viewed'                        =>      $this->faker->randomDigitNotNull(),
-            'name'                          =>      $this->faker->name,
+            'name'                          =>      $this->faker->unique()->name,
             'slug'                          =>      $this->faker->unique()->name,
             'description'                   =>      $this->faker->paragraph,
             'status'                        =>      $this->faker->boolean(),

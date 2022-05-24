@@ -11,6 +11,11 @@ class ProtectedHouseController extends Controller
 {
     protected $Data;
     public function __construct(ProtectedHouseInterface $Data) {
+        $this->middleware('permission:protect-house', ['only' => ['index']]);
+        $this->middleware('permission:protect-house-create', ['only' => ['create','store']]);
+        $this->middleware('permission:protect-house-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:protect-house-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:protect-house-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
