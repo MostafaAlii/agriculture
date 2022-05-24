@@ -106,4 +106,7 @@ return [
     'product_price_sale'                =>'السعر بعد الخصم',
     'farmereditproduct'                 =>'صفحه تعديل المنتج',
 
+
+    'statment '                 =>'تعديل ل  ',
+
 ];
