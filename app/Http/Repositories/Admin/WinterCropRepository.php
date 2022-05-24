@@ -79,8 +79,8 @@ class WinterCropRepository implements WinterCropInterface{
     public function destroy($id) {
 
         $wcropID = Crypt::decrypt($id);
-        $winter_crop = WinterCrop::findorfail($wcropID)->first();
-        WinterCrop::destroy($wcropID);
+        $winter_crop = WinterCrop::findorfail($wcropID);
+        $winter_crop->delete();
         toastr()->success(__('Admin/site.deleted_successfully'));
         return redirect()->route('WinterCrops.index');
 

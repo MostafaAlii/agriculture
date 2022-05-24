@@ -128,14 +128,15 @@
                 url: '{{ route('landCategories.data') }}',
             },
             columns: [
-                {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'category_name', name: 'category_name', searchable: false, sortable: false},
+                {data: 'record_select', name: 'record_select',  width: '1%'},
+                {data: 'category_name', name: 'category_name',searchable:false},
 
-                {data: 'category_type', name: 'category_type', searchable: false, sortable: false},
+                {data: 'category_type', name: 'category_type',searchable:false},
 
-                {data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'actions', name: 'actions', width: '20%'},
             ],
+            order: [[3, "DESC"]]
         });
     </script>
 

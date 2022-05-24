@@ -94,7 +94,7 @@ class CourseBeeRepository implements CourseBeeInterface{
     public function destroy($id) {
 
         $courseBeeID = Crypt::decrypt($id);
-        $courseBee=CourseBee::findorfail($courseBeeID)->first();
+        $courseBee=CourseBee::findorfail($courseBeeID);
 
         $courseBee->delete();
         toastr()->success(__('Admin/site.deleted_successfully'));
@@ -107,7 +107,7 @@ class CourseBeeRepository implements CourseBeeInterface{
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
                 foreach ($delete_select_id as $course_bee_ids) {
-                    $course_bee = CourseBee::findorfail($course_bee_ids)->first();
+                    $course_bee = CourseBee::findorfail($course_bee_ids);
 
                     $course_bee->delete();
                 }

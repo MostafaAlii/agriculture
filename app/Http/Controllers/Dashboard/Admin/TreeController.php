@@ -26,17 +26,9 @@ class TreeController extends Controller
         return $this->Data->data();
     }// end of data
 
-    public function create() {
-        return $this->Data->create();
-    }
-
     public function store(TreeRequest $request) {
         return $this->Data->store($request);
     }
-
-    public function edit($id) {
-        return $this->Data->edit($id);
-    }// end of edit
 
     public function update(TreeRequest $request,$id) {
 
@@ -47,7 +39,7 @@ class TreeController extends Controller
         return $this->Data->destroy($id);
     }// end of destroy
 
-    public function bulkDelete(Requests $request) {
+    public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
 }

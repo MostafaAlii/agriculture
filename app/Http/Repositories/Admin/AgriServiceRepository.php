@@ -38,7 +38,7 @@ class AgriServiceRepository implements AgriServiceInterface {
             DB::commit();
 
             toastr()->success(__('Admin/country.added_successfully'));
-            return redirect()->route('AgricultureService.index');
+            return redirect()->route('AgricultureServices.index');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -72,10 +72,9 @@ class AgriServiceRepository implements AgriServiceInterface {
 
     public function destroy($id) {
 
-        $data = [];
         $agriSID = Crypt::decrypt($id);
 
-            $agri_service=AgriService::findorfail($agriSID);
+        $agri_service=AgriService::findorfail($agriSID);
 
         $agri_service->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));

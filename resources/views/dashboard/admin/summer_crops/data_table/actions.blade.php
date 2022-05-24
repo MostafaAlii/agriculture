@@ -73,7 +73,7 @@
                         <input type="hidden" value="{{ $id }}" name="id">
 
                         @php
-                            $crop = \App\Models\SummerCrop::findorfail($id)->first();
+                            $crop = \App\Models\SummerCrop::findorfail($id);
                         @endphp
 
                         <div class="modal-body">

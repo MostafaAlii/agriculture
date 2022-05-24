@@ -30,13 +30,13 @@ class LandCategorySeeder extends Seeder {
         for ($i = 0; $i < $count ; $i++) {
             LandCategory::create([
                 'category_name'          => $category_name_1[$i],
-                'category_type'    => 'زراعي',
+                'category_type'    => 'agriculture',
             ]);
         }
         for ($i = 0; $i < $count ; $i++) {
             LandCategory::create([
                 'category_name'          => $category_name_2[$i],
-                'category_type'    => 'غير زراعي',
+                'category_type'    => 'non_agriculture',
             ]);
         }
 

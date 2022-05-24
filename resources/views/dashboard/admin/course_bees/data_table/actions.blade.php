@@ -72,14 +72,14 @@
                                 <input type="text" name="name" class="form-control"
 
                                        placeholder="{{ trans('Admin\bees.enter_course_name_placeholder') }}"
-                                       value="{{\App\Models\CourseBee::findorFail($id)->first()->name}}"/>
+                                       value="{{\App\Models\CourseBee::findorFail($id)->name}}"/>
                             </div>
 
                             <div class="form-group">
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin/bees.enter_course_desc') }}</label>
                                 <textarea type="text" name="desc" class="form-control"
 
-                                          rows="3" placeholder="{{ trans('Admin/bees.enter_course_desc_placeholder') }}">{{\App\Models\CourseBee::findorFail($id)->first()->desc}}</textarea>
+                                          rows="3" placeholder="{{ trans('Admin/bees.enter_course_desc_placeholder') }}">{{\App\Models\CourseBee::findorFail($id)->desc}}</textarea>
                             </div>
 
                         </div>

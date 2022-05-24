@@ -89,9 +89,6 @@ class OrchardRepository implements OrchardInterface
 
         }
 
-
-
-
     public function create()
     {
         $adminId = Auth::user()->id;
@@ -111,7 +108,6 @@ class OrchardRepository implements OrchardInterface
                 'land_categories', 'state_name', 'trees', 'villages', 'units'));
     }
 
-
     public function getFarmer($village_id)
     {
         $farmers = Farmer::where('id',$village_id)->pluck('firstname','id');
@@ -119,14 +115,12 @@ class OrchardRepository implements OrchardInterface
         return $farmers;
     }
 
-
     public function getFarmerInf($farmer_id)
     {
 
         $data = Farmer::where('id', $farmer_id)->first();
         return response()->json($data);
     }
-
 
     public function store($request)
     {
@@ -271,7 +265,6 @@ class OrchardRepository implements OrchardInterface
 
 
     }// end of bulkDelete
-
 
     public function statistics(){
         $adminID = Auth::user()->id;

@@ -12,4 +12,5 @@ class LandCategory extends Model {
     public $translatedAttributes = ['category_name','category_type'];
 
     public $timestamps = true;
+    const  AGRICULTURE = 'agriculture', NON_AGRICULTURE ='non_agriculture';
 }
