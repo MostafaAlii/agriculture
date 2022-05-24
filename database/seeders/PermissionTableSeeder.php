@@ -200,10 +200,10 @@ class PermissionTableSeeder extends Seeder {
             // Farmer Crop List ::
             'farmer-crop-list',
                 'farmer-crop',
-                'farmer-crop-create',
-                'farmer-crop-edit',
-                'farmer-crop-delete',
-                'farmer-crop-delete-all',
+                    'farmer-crop-create',
+                    'farmer-crop-edit',
+                    'farmer-crop-delete',
+                    'farmer-crop-delete-all',
 
         ];
         foreach ($permissions as $permission) {

@@ -1,5 +1,5 @@
 @can('land-area-edit')
-    <a href="{{ route('LandAreas.edit', encrypt ($id)) }}" class="btn btn-info btn-sm">
+    <a href="{{ route('LandAreas.edit', encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/land_areas.edit') }}
     </a>
