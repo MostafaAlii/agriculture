@@ -22,6 +22,7 @@
                                 action="{{ route('admin.login.post') }}">
                                 @csrf
                                 <fieldset class="form-group position-relative has-icon-left">
+                                
                                     <input class="form-control" id="login"
                                         placeholder="{{ trans('Admin/site.loginby') }}" type="login" name="login" required
                                         autofocus>
