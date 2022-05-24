@@ -79,8 +79,8 @@ class SummerCropRepository implements SummerCropInterface{
     public function destroy($id) {
 
         $wcropID = Crypt::decrypt($id);
-        $summer_crop = SummerCrop::findorfail($wcropID)->first();
-        SummerCrop::destroy($wcropID);
+        $summer_crop = SummerCrop::findorfail($wcropID);
+        $summer_crop->delete();
         toastr()->success(__('Admin/site.deleted_successfully'));
         return redirect()->route('SummerCrops.index');
 

@@ -72,14 +72,15 @@
                                 <input type="text" name="name" class="form-control"
 
                                        placeholder="{{ trans('Admin\trees.enter_reason_disaster_placeholder') }}"
-                                       value="{{\App\Models\BeeDisaster::findorFail($id)->first()->name}}"/>
+                                       value="{{\App\Models\BeeDisaster::findorFail($id)->name}}"/>
                             </div>
 
                             <div class="form-group">
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin/bees.enter_desc_reason_disaster') }}</label>
                                 <textarea type="text" name="desc" class="form-control"
-
-                                          rows="3" placeholder="{{ trans('Admin/bees.enter_desc_reason_disaster_placeholder') }}">{{\App\Models\BeeDisaster::findorFail($id)->first()->desc}}</textarea>
+                                      rows="3" placeholder="{{ trans('Admin/bees.enter_desc_reason_disaster_placeholder') }}">
+                                    {{\App\Models\BeeDisaster::findorFail($id)->desc}}
+                                </textarea>
                             </div>
 
                         </div>
