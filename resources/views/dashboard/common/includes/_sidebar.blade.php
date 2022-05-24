@@ -492,23 +492,27 @@
                 <!-- end precipitation  Menu -->
 
                 <!-- start Land Area  Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-adjust" style="color: bisque"></i>
-                        <span class="menu-title" data-i18n="Categories">
-                            {{ __('Admin\land_areas.landAreaPageTitle')}}
-                        </span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('LandAreas.index') }}"> <i class="material-icons">list</i>
-                                <span data-i18n="Vertical">
-                                    {{__('Admin\land_areas.landAreaPageTitle') }}
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @can('land-area-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-adjust" style="color: bisque"></i>
+                            <span class="menu-title" data-i18n="Categories">
+                                {{ __('Admin\land_areas.landAreaPageTitle')}}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('land-area')
+                                <li>
+                                    <a class="menu-item" href="{{ route('LandAreas.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\land_areas.landAreaPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end Land Area  Menu -->
 
                 <!-- start FarmerCrops  Menu -->

@@ -183,12 +183,20 @@ class PermissionTableSeeder extends Seeder {
                     'farmer-service-edit',
                     'farmer-service-delete',
                     'farmer-service-delete-all',
+            // Precipitation ::
             'precipitation-list',
                 'precipitation',
                 'precipitation-create',
                 'precipitation-edit',
                 'precipitation-delete',
                 'precipitation-delete-all',
+            // Land Area ::
+            'land-area-list',
+                'land-area',
+                'land-area-create',
+                'land-area-edit',
+                'land-area-delete',
+                'land-area-delete-all',
 
         ];
         foreach ($permissions as $permission) {
