@@ -13,6 +13,11 @@ class LandAreaController extends Controller
 {
     protected $Data;
     public function __construct(LandAreaInterface $Data) {
+        $this->middleware('permission:land-area', ['only' => ['index']]);
+        $this->middleware('permission:land-area-create', ['only' => ['create','store']]);
+        $this->middleware('permission:land-area-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:land-area-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:land-area-delete-all', ['only' => ['bulkDelete']]);
         return $this->Data = $Data;
     }
 
