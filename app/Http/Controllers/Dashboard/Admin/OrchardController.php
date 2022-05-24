@@ -35,19 +35,14 @@ class OrchardController extends Controller
     public function store(OrchardRequest $request) {
         return $this->Data->store($request);
     }
-
-
     public function edit($id) {
         return $this->Data->edit($id);
     }
-
     public function update(OrchardRequest $request, $id) {
         return $this->Data->update($request, $id);
     }
-
     public function destroy($id) {
         return $this->Data->destroy($id);    }
-
     public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
     }

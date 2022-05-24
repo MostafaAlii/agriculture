@@ -6,7 +6,7 @@
 </button>
 
 <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}">
-    <i class="fa fas-edit">{{__('Admin\lands.edit')}}</i>
+    <i class="fa fa-edit">{{__('Admin\lands.edit')}}</i>
 </button>
 </div>
 
@@ -99,9 +99,8 @@
                                 <select name="category_type" class="select2 form-control">
                                     <optgroup >
 
-
-                                        <option value="agricultural"{{($land_category->category_type == 'زراعي') ? 'selected' : '' }} >{{__('Admin\lands.agricultural')}}</option>
-                                        <option value="non agricultural" {{ ($land_category->category_type == 'غير زراعي'? 'selected' : '')}}>{{__('Admin\lands.non_agricultural')}}</option>
+                                        <option value="agriculture"{{($land_category->category_type == 'agriculture') ? 'selected' : '' }} >{{__('Admin\lands.agricultural')}}</option>
+                                        <option value="non_agriculture" {{ ($land_category->category_type == 'non_agriculture'? 'selected' : '')}}>{{__('Admin\lands.non_agricultural')}}</option>
 
                                     </optgroup>
                                 </select>
