@@ -75,7 +75,7 @@
                                 <input type="text" name="tree_type" class="form-control"
 
                                        placeholder="{{ trans('Admin\trees.enter_tree_type_placeholder') }}"
-                                       value="{{\App\Models\TreeType::findorFail($id)->first()->tree_type}}"/>
+                                       value="{{\App\Models\TreeType::findorFail($id)->tree_type}}"/>
                             </div>
 
                         </div>

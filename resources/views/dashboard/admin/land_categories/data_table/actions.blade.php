@@ -75,7 +75,7 @@
                         <input type="hidden" value="{{ $id }}" name="id">
 
                         @php
-                            $land_category = \App\Models\LandCategory::findorfail($id)->first();
+                            $land_category = \App\Models\LandCategory::findorfail($id);
                         @endphp
 
                         <div class="modal-body">
