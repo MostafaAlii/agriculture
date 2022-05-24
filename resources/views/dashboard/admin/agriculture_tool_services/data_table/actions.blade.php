@@ -72,7 +72,7 @@
                                 <input type="text" name="name" class="form-control"
 
                                        placeholder="{{ trans('Admin\services.enter_service_tool_name_placeholder') }}"
-                                       value="{{\App\Models\AgriTService::findorFail($id)->first()->name}}"/>
+                                       value="{{\App\Models\AgriTService::findorFail($id)->name}}"/>
                             </div>
 
                         </div>

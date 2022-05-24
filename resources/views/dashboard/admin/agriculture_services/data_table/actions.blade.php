@@ -31,7 +31,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin\agriculture_services.close') }}</button>
+                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin\services.close') }}</button>
                             <button type="submit" class="btn btn-outline-primary"> {{ __('Admin\services.delete') }}</button>
                         </div>
                     </form>
@@ -72,7 +72,7 @@
                                 <input type="text" name="name" class="form-control"
 
                                        placeholder="{{ trans('Admin\services.enter_service_name_placeholder') }}"
-                                       value="{{\App\Models\AgriService::findorFail($id)->first()->name}}"/>
+                                       value="{{\App\Models\AgriService::findorFail($id)->name}}"/>
                             </div>
 
                         </div>

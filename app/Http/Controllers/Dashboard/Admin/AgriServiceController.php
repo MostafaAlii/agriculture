@@ -19,11 +19,6 @@ class AgriServiceController extends Controller
         return $this->Data->data();
     }
 
-    public function create() {
-        return $this->Data->create();
-    }
-
-
     public function store(AgriServiceRequest $request) {
         return $this->Data->store($request);
     }
