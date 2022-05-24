@@ -204,6 +204,18 @@ class PermissionTableSeeder extends Seeder {
                     'farmer-crop-edit',
                     'farmer-crop-delete',
                     'farmer-crop-delete-all',
+                'winter-crops',
+                    'winter-crop-create',
+                    'winter-crop-edit',
+                    'winter-crop-delete',
+                    'winter-crop-delete-all',
+                'summer-crops',
+                    'summer-crop-create',
+                    'summer-crop-edit',
+                    'summer-crop-delete',
+                    'summer-crop-delete-all',
+            // Animal Projects ::
+            
 
         ];
         foreach ($permissions as $permission) {

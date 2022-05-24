@@ -12,6 +12,11 @@ class WinterCropController extends Controller
 {
     protected $Data;
     public function __construct(WinterCropInterface $Data) {
+        $this->middleware('permission:winter-crops', ['only' => ['index']]);
+        $this->middleware('permission:winter-crop-create', ['only' => ['store']]);
+        $this->middleware('permission:winter-crop-edit', ['only' => ['update']]);
+        $this->middleware('permission:winter-crop-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:winter-crop-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

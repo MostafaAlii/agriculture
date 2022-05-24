@@ -536,22 +536,26 @@
                             @endcan
                             <!-- End Farmer Crop -->
                             <!-- Start Winter Crop -->
-                            <li>
-                                <a class="menu-item" href="{{ route('WinterCrops.index') }}"> <i class="material-icons">list</i>
-                                    <span data-i18n="Vertical">
-                                        {{__('Admin\crops.winter_cropPageTitle') }}
-                                    </span>
-                                </a>
-                            </li>
+                            @can('winter-crops')
+                                <li>
+                                    <a class="menu-item" href="{{ route('WinterCrops.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\crops.winter_cropPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
                             <!-- End Winter Crop -->
                             <!-- Start Summer Crop -->
-                            <li>
-                                <a class="menu-item" href="{{ route('SummerCrops.index') }}"> <i class="material-icons">list</i>
-                                    <span data-i18n="Vertical">
-                                        {{__('Admin\crops.summer_cropPageTitle') }}
-                                    </span>
-                                </a>
-                            </li>
+                            @can('summer-crops')
+                                <li>
+                                    <a class="menu-item" href="{{ route('SummerCrops.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\crops.summer_cropPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
                             <!-- End Summer Crop -->
                         </ul>
                     </li>
