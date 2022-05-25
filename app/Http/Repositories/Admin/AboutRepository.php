@@ -56,7 +56,7 @@ class AboutRepository implements AboutInterface {
             toastr()->success(__('Admin/about.updated_done'));
             return redirect()->route('about_us/show');
         } catch (\Exception $ex) {
-            dd($ex->getMessage());
+            //dd($ex->getMessage());
             DB::rollBack();
             toastr()->success(__('Admin/about.edit_wrong'));
             return redirect()->route('about_us/show');

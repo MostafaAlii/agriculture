@@ -120,69 +120,42 @@
     <section class="section section--no-pt">
         <div class="container">
             <ul class="post-nav">
+                <?php
+                $num=1;
+                foreach($random_blogs as $blog2){
+                if($num==1){
+                    $cond='prev';
+                    $cond2='<span class="d-table-cell align-middle"><i class="ico fontello-left-1"></i></span>';
+                    $cond3='';
+                }else{
+                    $cond='next';
+                    $cond2='';
+                    $cond3='<span class="d-table-cell align-middle"><i class="ico fontello-right-1"></i></span>';
+                }
+                ?>
                 <li class="post-nav__item">
-                    <a class="post-nav__link post-nav__link--prev" href="#">
+                    <a class="post-nav__link post-nav__link--{{$cond}}" href="{{ route('blogdetails',encrypt($blog2->id) ) }}">
                         <span class="d-table">
-                            <span class="d-table-cell align-middle"><i class="ico fontello-left-1"></i></span>
+                            <?php echo $cond2;?>
                             <span class="d-table-cell align-middle">
-                                Previous reading
-                                <span class="name">Health Benefits of a Raw Food</span>
+                                 <span class="name">{{$blog2->title}}</span>
                             </span>
+                            <?php echo $cond3;?>
                         </span>
                     </a>
                 </li>
-
-                <li class="post-nav__item">
-                    <a class="post-nav__link post-nav__link--next" href="#">
-                        <span class="d-table">
-                            <span class="d-table-cell align-middle">
-                                next reading
-                                <span class="name">Tips for Ripening your Fruit</span>
-                            </span>
-                            <span class="d-table-cell align-middle"><i class="ico fontello-right-1"></i></span>
-                        </span>
-                    </a>
-                </li>
+                <?php
+                $num++;
+                 }
+                 ?>
+                
             </ul>
         </div>
     </section>
     <!-- end section -->
 
-    <!-- start section -->
-    <section class="section section--dark-bg">
-        <div class="container">
-            <div class="section-heading section-heading--center section-heading--white" data-aos="fade">
-                <h2 class="__title">Get <span>in touch</span></h2>
+    @include('livewire.front._review_form')
 
-                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
-            </div>
-
-            <form class="contact-form js-contact-form" action="#" data-aos="fade">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="input-wrp">
-                            <input class="textfield" name="name" type="text" placeholder="Name" />
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                        <div class="input-wrp">
-                            <input class="textfield" name="email" type="text" placeholder="E-mail" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input-wrp">
-                    <textarea class="textfield" name="message" placeholder="Comments"></textarea>
-                </div>
-
-                <button class="custom-btn custom-btn--medium custom-btn--style-3 wide" type="submit" role="button">Send</button>
-
-                <div class="form__note"></div>
-            </form>
-        </div>
-    </section>
-    <!-- end section -->
 
     <!-- start section -->
     <section class="section section--no-pt section--no-pb">

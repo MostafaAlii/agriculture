@@ -19,10 +19,10 @@ class ReviewController extends Controller
             $review->show_or_hide='0';
             $review->save();
             
-            return redirect()->back()->with(['success'=>__('Admin/about.add_done')]);   
+            return redirect()->back()->with(['review_success'=>__('Admin/about.add_done')]);   
 
         } catch (\Exception $ex) {
-            return redirect()->back()->with(['success'=>__('Admin/about.add_wrong')]);   
+            return redirect()->back()->with(['review_success'=>__('Admin/about.add_wrong')]);   
          }
     }
 
