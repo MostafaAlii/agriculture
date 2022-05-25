@@ -22,7 +22,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
-        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/material.css') }}"> --}}
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap-extended.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/colors.css')}}">
@@ -33,12 +32,10 @@
     @else
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
-        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/material.css') }}"> --}}
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/bootstrap-extended.css') }}">
         <!-- END: Theme CSS-->
         <!-- BEGIN: Page CSS-->
-        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/material-vertical-menu.css') }}"> --}}
     @endif
     <!-- END: Custom CSS-->
     <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
