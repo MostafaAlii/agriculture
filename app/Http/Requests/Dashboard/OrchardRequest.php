@@ -16,7 +16,7 @@ class OrchardRequest extends FormRequest
     {
         return [
             'farmer_id' => 'required|exists:farmers,id',
-//            'admin_id' => 'required|exists:admins,id',
+            'admin_id' => 'required',
             'village_id' => 'required|exists:villages,id',
 
             'land_category_id' => 'required',

@@ -11,14 +11,14 @@ class LandCategoryRequest extends FormRequest {
 
         return [
 
-            'category_name' => ['required','string'
-//                'required',
-//                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+            'category_name' => [
+                'required',
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
 
             ],
             'category_type' => [
-                'required','string'
-//                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'required',
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
 
             ]
         ];

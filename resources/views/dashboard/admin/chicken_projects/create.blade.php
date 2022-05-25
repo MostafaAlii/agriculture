@@ -281,9 +281,7 @@
                             $('select[name="farmer_id"]').append( '<option selected disabled>--select--</option>');
 
                             $.each(data, function(key, value) {
-                                // console.log(data);
-                                // console.log(key);
-                                // console.log(value);
+
                                 $('select[name="farmer_id"]').append(
                                     '<option value="' + key + '">' + value +'</option>'
                                 );
@@ -327,11 +325,8 @@
 
     </script>
 
-{{--departments--}}
 
 
-<script src="{{ asset('assets/admin/js/jquery-1.12.1.min.js')}}"></script>
-<script src="{{asset('assets/admin/jstree/jstree.js')}}" type="text/javascript"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

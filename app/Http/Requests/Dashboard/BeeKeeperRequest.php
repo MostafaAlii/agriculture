@@ -16,10 +16,11 @@ class BeeKeeperRequest extends FormRequest
     {
         return [
             'farmer_id' => 'required|exists:farmers,id',
-//            'admin_id' => 'required|exists:admins,id',
             'village_id' => 'required|exists:villages,id',
-            'cost' => 'required|string',
-//            'state_id' => 'required|exists:states,id',
+            'cost' => 'required|numeric',
+            'admin_id' => 'required',
+            'area_id' => 'required',
+            'state_id' => 'required',
             'annual_old_product_beehive' =>'required|numeric',
             'annual_new_product_beehive'=>'required|numeric',
             'old_beehive_count' => 'required|numeric',
@@ -37,8 +38,9 @@ class BeeKeeperRequest extends FormRequest
     {
         return [
             'farmer_id.required' => trans('Admin/validation.required'),
-//            'admin_id.required' => trans('Admin/validation.required'),
-//            'area_id.required' => trans('Admin/validation.required'),
+            'admin_id.required' => trans('Admin/validation.required'),
+            'area_id.required' => trans('Admin/validation.required'),
+            'state_id.required' => trans('Admin/validation.required'),
             'cost.required' => trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
 

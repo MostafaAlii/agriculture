@@ -16,7 +16,7 @@ class FarmerCropRequest extends FormRequest
     {
         return [
             'farmer_id' => 'required|exists:farmers,id',
-          'admin_id' => 'required',
+            'admin_id' => 'required',
             'area_id' => 'required',
             'state_id' => 'required',
             'village_id' => 'required|exists:villages,id',
