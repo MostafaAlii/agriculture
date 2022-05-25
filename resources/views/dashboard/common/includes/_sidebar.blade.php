@@ -409,107 +409,158 @@
                 {{-- end orchard --}}
 
                 <!-- start protected house Menu -->
+                @can('protect-house-list')
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="fas fa-warehouse " style="color:deeppink;"></i>
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\p_houses.protectedHousePageTitle')
-                            }}</span>
+                        <span class="menu-title" data-i18n="Categories">
+                            {{ __('Admin\p_houses.protectedHousePageTitle')}}
+                        </span>
                     </a>
                     <ul class="menu-content">
+                        @can('protect-house')
                         <li>
-                            <a class="menu-item" href="{{ route('ProtectedHouse.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\p_houses.protectedHousePageTitle') }}</span></a>
+                            <a class="menu-item" href="{{ route('ProtectedHouse.index') }}"> <i class="material-icons">list</i>
+                                <span data-i18n="Vertical">
+                                    {{__('Admin\p_houses.protectedHousePageTitle') }}
+                                </span>
+                            </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
+                @endcan
                 <!-- end protected house Menu -->
 
                 <!-- start Agriculture Services house Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-tractor" style="color:yellow;"></i>
-                        <span class="menu-title" data-i18n="Categories">{{
-                            __('Admin\services.farmer_agriculture_services_setting') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('AgricultureServices.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\services.agricultureServicePageTitle') }}</span></a>
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('AgricultureToolServices.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\services.agricultureToolServicePageTitle') }}</span></a>
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('WaterServices.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\services.waterServicePageTitle') }}</span></a>
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('FarmerServices.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\services.farmerServicePageTitle') }}</span></a>
-                        </li>
-                    </ul>
-                </li>
+                @can('service-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-tractor" style="color:yellow;"></i>
+                            <span class="menu-title" data-i18n="Categories">{{
+                                __('Admin\services.farmer_agriculture_services_setting') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('agriculture-service')
+                                <li>
+                                    <a class="menu-item" href="{{ route('AgricultureServices.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                                            __('Admin\services.agricultureServicePageTitle') }}</span></a>
+                                </li>
+                            @endcan
+                            @can('agriculture-tools-service')
+                                <li>
+                                    <a class="menu-item" href="{{ route('AgricultureToolServices.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                                            __('Admin\services.agricultureToolServicePageTitle') }}</span></a>
+                                </li>
+                            @endcan
+                            @can('water-service')
+                                <li>
+                                    <a class="menu-item" href="{{ route('WaterServices.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                                            __('Admin\services.waterServicePageTitle') }}</span></a>
+                                </li>
+                            @endcan
+                            @can('farmer-service')
+                                <li>
+                                    <a class="menu-item" href="{{ route('FarmerServices.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                                            __('Admin\services.farmerServicePageTitle') }}</span></a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end Agriculture Services house Menu -->
 
                 <!-- start precipitation  Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-cloud-showers-heavy" style="color:grey"></i> {{-- <i
-                            class="icon-users warning font-large-2 float-right"></i> --}}
-                        <span class="menu-title" data-i18n="Categories">{{
-                            __('Admin\precipitations.precipitationsPageTitle') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('Precipitations.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\precipitations.precipitationsPageTitle') }}</span></a>
-                        </li>
-
-                    </ul>
-                </li>
+                @can('precipitation-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-cloud-showers-heavy" style="color:grey"></i> {{-- <i
+                                class="icon-users warning font-large-2 float-right"></i> --}}
+                            <span class="menu-title" data-i18n="Categories">{{
+                                __('Admin\precipitations.precipitationsPageTitle') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('precipitation')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Precipitations.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                                            __('Admin\precipitations.precipitationsPageTitle') }}</span></a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end precipitation  Menu -->
 
                 <!-- start Land Area  Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-adjust" style="color: bisque"></i>
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\land_areas.landAreaPageTitle')
-                            }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('LandAreas.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\land_areas.landAreaPageTitle') }}</span></a>
-                        </li>
-
-                    </ul>
-                </li>
+                @can('land-area-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-adjust" style="color: bisque"></i>
+                            <span class="menu-title" data-i18n="Categories">
+                                {{ __('Admin\land_areas.landAreaPageTitle')}}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('land-area')
+                                <li>
+                                    <a class="menu-item" href="{{ route('LandAreas.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\land_areas.landAreaPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end Land Area  Menu -->
 
-                <!-- start Land Area  Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-crop-simple " style="color:green;"></i>
-                        <span class="menu-title" data-i18n="Categories">{{
-                            __('Admin\crops.farmerCropsPageTitle_and_setting') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('FarmerCrops.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\crops.farmerCropsPageTitle') }}</span></a>
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('WinterCrops.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\crops.winter_cropPageTitle') }}</span></a>
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('SummerCrops.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\crops.summer_cropPageTitle') }}</span></a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- end Land Area  Menu -->
+                <!-- start FarmerCrops  Menu -->
+                @can('farmer-crop-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-crop-simple " style="color:green;"></i>
+                            <span class="menu-title" data-i18n="Categories">{{
+                                __('Admin\crops.farmerCropsPageTitle_and_setting') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Farmer Crop -->
+                            @can('farmer-crop')
+                            <li>
+                                <a class="menu-item" href="{{ route('FarmerCrops.index') }}"> <i class="material-icons">list</i>
+                                    <span data-i18n="Vertical">
+                                        {{__('Admin\crops.farmerCropsPageTitle') }}
+                                    </span>
+                                </a>
+                            </li>
+                            @endcan
+                            <!-- End Farmer Crop -->
+                            <!-- Start Winter Crop -->
+                            @can('winter-crops')
+                                <li>
+                                    <a class="menu-item" href="{{ route('WinterCrops.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\crops.winter_cropPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Winter Crop -->
+                            <!-- Start Summer Crop -->
+                            @can('summer-crops')
+                                <li>
+                                    <a class="menu-item" href="{{ route('SummerCrops.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\crops.summer_cropPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Summer Crop -->
+                        </ul>
+                    </li>
+                @endcan
+                <!-- end FarmerCrops  Menu -->
 
                 <!-- start Animals Chicken Projecta Menu -->
                 <li class=" nav-item">
@@ -525,7 +576,7 @@
                         </li>
 
                         <li>
-                            <a class="menu-item" href="{{ route('Animals.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                            <a class="menu-item" href="{{ route('Chickens.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
                                     __('Admin\animals.chickens_project') }}</span></a>
                         </li>
 
@@ -597,7 +648,7 @@
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
-                        <span class="menu-title" data-i18n="Departments">{{ trans('Admin/site.blogstags') }}</span>
+                        <span class="menu-title" data-i18n="Blogs">{{ trans('Admin/site.blogstags') }}</span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start blog -->
@@ -648,7 +699,8 @@
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">grain</i>
                         <span class="menu-title" data-i18n="">
-                            {{ trans('Admin/products.product_title_in_sidebar') }}</span>
+                            {{ trans('Admin/products.product_title_in_sidebar') }}
+                        </span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start Product -->
@@ -669,7 +721,8 @@
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">fiber_new</i>
                         <span class="menu-title" data-i18n="ProductCoupons">
-                            {{ trans('Admin/coupons.coupon_title_in_sidebar') }}</span>
+                            {{ trans('Admin/coupons.coupon_title_in_sidebar') }}
+                        </span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start ProductCoupons -->
@@ -690,7 +743,8 @@
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">credit_card</i>
                         <span class="menu-title" data-i18n="Options">
-                            {{ trans('Admin/options.options_title') }}</span>
+                            {{ trans('Admin/options.options_title') }}
+                        </span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start options -->
@@ -709,7 +763,7 @@
                 <li class=" nav-item">
                     <a href="{{-- route('admin.dashboard') --}}">
                         <i class="material-icons">add_shopping_cart</i>
-                        <span class="menu-title" data-i18n="Options"> {{ trans('Admin/orders.orders') }}</span>
+                        <span class="menu-title" data-i18n="Orders"> {{ trans('Admin/orders.orders') }}</span>
                     </a>
                     <ul class="menu-content">
                         <!-- Start Orders -->
@@ -741,6 +795,4 @@
         <!-- End Main Content -->
     </div>
 </div>
-
-
 <!-- END: Main Menu-->

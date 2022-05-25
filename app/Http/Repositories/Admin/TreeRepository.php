@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 class TreeRepository implements TreeInterface {
 
-
     public function index() {
         $tree_types = TreeType::get();
         return view('dashboard.admin.trees.index',compact('tree_types'));
@@ -38,7 +37,6 @@ class TreeRepository implements TreeInterface {
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
-
     public function store($request) {
         DB::beginTransaction();
         try{
@@ -61,7 +59,6 @@ class TreeRepository implements TreeInterface {
 
 
     }
-
     public function update( $request,$id) {
 
         try{
@@ -86,36 +83,24 @@ class TreeRepository implements TreeInterface {
     }
     public function destroy($id) {
 
-        $data = [];
         $treeID = Crypt::decrypt($id);
-        $data['tree'] = Tree::where('tree_type_id', $treeID)->pluck('tree_type_id');
-        if($data['tree']->count() == 0) {
+
             $tree=Tree::findorfail($treeID);
 
             $tree->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('Trees.index');
-        } else {
-            toastr()->error(__('Admin/trees.cant_delete'));
-            return redirect()->route('Trees.index');
-        }
-    }
 
+    }
     public function bulkDelete($request) {
         try {
             DB::beginTransaction();
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
                 foreach ($delete_select_id as $tree_ids) {
-//                    $tree_ids = Crypt::decrypt($tree_ids);
                     $trees = Tree::findorfail($tree_ids);
-                    $tree_type = $trees->tree_type->count();
-                    if ($tree_type > 0) {
-                        toastr()->error(__('Admin/countries.delete_related_trees'));
-                        return redirect()->route('Trees.index');
-                    }
 
-                    Tree::destroy($tree_ids);
+                    $trees->delete();
                 }
                 DB::commit();
 

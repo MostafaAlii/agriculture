@@ -1,13 +1,16 @@
 <div>
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
-    <i class="fa fa-trash"></i>
-    {{ __('Admin\services.delete') }}
-</button>
-
-<button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
-    <i class="fa fa-trash"></i>
-    {{ __('Admin\services.edit') }}
-</button>
+    @can('agriculture-service-edit')
+        <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
+            <i class="fa fa-trash"></i>
+            {{ __('Admin\services.edit') }}
+        </button>
+    @endcan
+    @can('agriculture-service-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+            <i class="fa fa-trash"></i>
+            {{ __('Admin\services.delete') }}
+        </button>
+    @endcan
 </div>
 
 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -31,7 +34,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin\agriculture_services.close') }}</button>
+                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin\services.close') }}</button>
                             <button type="submit" class="btn btn-outline-primary"> {{ __('Admin\services.delete') }}</button>
                         </div>
                     </form>
@@ -72,7 +75,7 @@
                                 <input type="text" name="name" class="form-control"
 
                                        placeholder="{{ trans('Admin\services.enter_service_name_placeholder') }}"
-                                       value="{{\App\Models\AgriService::findorFail($id)->first()->name}}"/>
+                                       value="{{\App\Models\AgriService::findorFail($id)->name}}"/>
                             </div>
 
                         </div>

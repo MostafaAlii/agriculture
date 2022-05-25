@@ -1,13 +1,15 @@
-<div >
-{{--delete one raw--}}
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
-    <i class="fa fa-trash">{{__('Admin\lands.delete')}}</i>
 
-</button>
-
-<button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}">
-    <i class="fa fas-edit">{{__('Admin\lands.edit')}}</i>
-</button>
+<div>
+    @can('land-categories-edit')
+        <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}">
+            <i class="fa fa-edit">{{__('Admin\lands.edit')}}</i>
+        </button>
+    @endcan
+    @can('land-categories-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
+            <i class="fa fa-trash">{{__('Admin\lands.delete')}}</i>
+        </button>
+    @endcan
 </div>
 
 
@@ -73,7 +75,7 @@
                         <input type="hidden" value="{{ $id }}" name="id">
 
                         @php
-                            $land_category = \App\Models\LandCategory::findorfail($id)->first();
+                            $land_category = \App\Models\LandCategory::findorfail($id);
                         @endphp
 
                         <div class="modal-body">
@@ -99,9 +101,8 @@
                                 <select name="category_type" class="select2 form-control">
                                     <optgroup >
 
-
-                                        <option value="agricultural"{{($land_category->category_type == 'زراعي') ? 'selected' : '' }} >{{__('Admin\lands.agricultural')}}</option>
-                                        <option value="non agricultural" {{ ($land_category->category_type == 'غير زراعي'? 'selected' : '')}}>{{__('Admin\lands.non_agricultural')}}</option>
+                                        <option value="agriculture"{{($land_category->category_type == 'agriculture') ? 'selected' : '' }} >{{__('Admin\lands.agricultural')}}</option>
+                                        <option value="non_agriculture" {{ ($land_category->category_type == 'non_agriculture'? 'selected' : '')}}>{{__('Admin\lands.non_agricultural')}}</option>
 
                                     </optgroup>
                                 </select>

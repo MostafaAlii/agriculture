@@ -77,19 +77,13 @@
     $(function() {
         $('#btn_delete_all').click(function() {
             var selected = [];
-            //    $('.table input[name=delete_select]:checked').each(function(){
             $('.table #delete_select:checked').each(function() {
                 selected.push(this.value);
             });
-            // console.log(selected);
             if (selected.length > 0) {
-                //    $('#btn_delete_all').attr('disabled', false)
                 $('#delete_select').modal('show')
                 $('input[id="delete_select_id"]').val(selected);
             }
-            // else{
-            //    $('#btn_delete_all').attr('disabled', true)
-            //  }
         });
     });
 </script>

@@ -1,13 +1,14 @@
 <div >
-{{--delete one raw--}}
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
-    <i class="fa fa-trash">{{__('Admin\crops.delete')}}</i>
-
-</button>
-
-<button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}">
-    <i class="fa fa-edit">{{__('Admin\crops.edit')}}</i>
-</button>
+    @can('summer-crop-edit')
+        <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}">
+            <i class="fa fa-edit">{{__('Admin\crops.edit')}}</i>
+        </button>
+    @endcan
+    @can('summer-crop-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
+            <i class="fa fa-trash">{{__('Admin\crops.delete')}}</i>
+        </button>
+    @endcan
 </div>
 
 
@@ -73,7 +74,7 @@
                         <input type="hidden" value="{{ $id }}" name="id">
 
                         @php
-                            $crop = \App\Models\SummerCrop::findorfail($id)->first();
+                            $crop = \App\Models\SummerCrop::findorfail($id);
                         @endphp
 
                         <div class="modal-body">

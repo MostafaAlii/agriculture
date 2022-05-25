@@ -5,7 +5,7 @@
         </button>
         <div class="dropdown-menu dropmenu-menu-right">
             @can('role-show')
-                <a href="{{ route('Roles.show', $role->id) }}" class="dropdown-item btn btn-outline-success btn-md">
+                <a href="{{ route('Roles.show', encrypt($role->id)) }}" class="dropdown-item btn btn-outline-success btn-md">
                     {{ __('Admin/roles.show') }}
                 </a>
             @endcan

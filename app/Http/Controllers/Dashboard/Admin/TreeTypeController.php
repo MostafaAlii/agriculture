@@ -9,6 +9,11 @@ class TreeTypeController extends Controller
 {
     protected $Data;
     public function __construct(TreeTypeInterface $Data) {
+        $this->middleware('permission:tree-type', ['only' => ['index']]);
+        $this->middleware('permission:tree-type-create', ['only' => ['store']]);
+        $this->middleware('permission:tree-type-edit', ['only' => ['update']]);
+        $this->middleware('permission:tree-type-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:tree-type-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

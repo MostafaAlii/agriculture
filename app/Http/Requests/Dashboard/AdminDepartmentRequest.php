@@ -22,14 +22,11 @@ class AdminDepartmentRequest extends FormRequest
 
             'keys' => 'sometimes|nullable|string',
             'desc' => 'sometimes|nullable|string',
-            'dep_name_ar' => [
+            'name' => [
                 'required',
-                'string'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
             ],
-            'dep_name_en' => [
-                'required',
-                'string'
-            ],
+
 
         ];
 
@@ -39,12 +36,8 @@ class AdminDepartmentRequest extends FormRequest
     public function messages()
     {
         return [
-            'dep_name_ar.required' => trans('Admin/validation.required'),
-            'dep_name_en.required' => trans('Admin/validation.required'),
-
-//            'keys.required' => trans('Admin/validation.required'),
-//
-//            'desc.required' => trans('Admin/validation.required'),
+            'name.required'  =>  trans('Admin/validation.required'),
+            'name.regex'     =>  trans('Admin/validation.regex'),
 
         ];
     }

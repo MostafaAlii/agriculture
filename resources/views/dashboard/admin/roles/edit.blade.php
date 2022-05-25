@@ -89,13 +89,11 @@
                                                             <ul class="m-1">
                                                                 <li>
                                                                     @foreach($permission as $value)
-                                                                    <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                                                                        {{ $value->name }}</label>
-                                                                    <br />
+                                                                        <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
+                                                                            {{ $value->name }}</label>
+                                                                        <br/>
                                                                     @endforeach
-                                                                    
                                                                 </li>
-                        
                                                             </ul>
                                                         </li>
                                                     </ul>

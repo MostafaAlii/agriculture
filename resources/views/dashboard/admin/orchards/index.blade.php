@@ -58,14 +58,17 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('orchards.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
-                                    <button type="button" class="btn btn-warning mb-3"
-                                            id="btn_delete_all" data-toggle="modal"
-                                            data-target="#bulkdelete" >
-                                        <i class="fa fa-trash"></i>
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
-
+                                    @can('orchard-create')
+                                        <a href="{{ route('orchards.create') }}" class="btn btn-primary btn-sm mb-3"><i class="material-icons">add_box</i> {{ __('Admin/site.create') }}</a>
+                                    @endcan
+                                    @can('orchard-delete-all')
+                                        <button type="button" class="btn btn-warning mb-3"
+                                                id="btn_delete_all" data-toggle="modal"
+                                                data-target="#bulkdelete" >
+                                            <i class="fa fa-trash"></i>
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="orchard-table">
                                             <thead>

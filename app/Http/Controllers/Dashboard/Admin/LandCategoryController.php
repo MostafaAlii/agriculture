@@ -11,6 +11,11 @@ class LandCategoryController extends Controller
 {
     protected $Data;
     public function __construct(LandCategoryInterface $Data) {
+        $this->middleware('permission:land-categories', ['only' => ['index']]);
+        $this->middleware('permission:land-categories-create', ['only' => ['store']]);
+        $this->middleware('permission:land-categories-edit', ['only' => ['update']]);
+        $this->middleware('permission:land-categories-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:land-categories-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

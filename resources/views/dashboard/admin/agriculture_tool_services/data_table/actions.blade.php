@@ -1,13 +1,16 @@
 <div>
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
-    <i class="fa fa-trash"></i>
-    {{ __('Admin\services.delete') }}
-</button>
-
-<button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
-    <i class="fa fa-trash"></i>
-    {{ __('Admin\services.edit') }}
-</button>
+    @can('agriculture-tools-service-edit')
+    <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
+        <i class="fa fa-trash"></i>
+        {{ __('Admin\services.edit') }}
+    </button>
+    @endcan
+    @can('agriculture-tools-service-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+            <i class="fa fa-trash"></i>
+            {{ __('Admin\services.delete') }}
+        </button>
+    @endcan
 </div>
 
 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -72,7 +75,7 @@
                                 <input type="text" name="name" class="form-control"
 
                                        placeholder="{{ trans('Admin\services.enter_service_tool_name_placeholder') }}"
-                                       value="{{\App\Models\AgriTService::findorFail($id)->first()->name}}"/>
+                                       value="{{\App\Models\AgriTService::findorFail($id)->name}}"/>
                             </div>
 
                         </div>

@@ -15,8 +15,9 @@ class Home extends Component
 {
     public function store($product_id,$product_name,$product_price){
         Cart::instance('cart')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
-        session()->flash('success_message','Item addded in cart');
-        return redirect()->route('product.cart');
+        // session()->flash('success_message','Item addded in cart');
+        // return redirect()->route('product.cart');
+        $this->emitTo('front.cart-count-component','refreshComponent');
     }
     public function addToWishlist($product_id,$product_name,$product_price){
         Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
@@ -48,9 +49,9 @@ class Home extends Component
           $data['home_category']=Category::whereNull('parent_id')->inRandomOrder()->limit(8)->get();
           $data['random_blog']=Blog::inRandomOrder()->limit(2)->get();
           $data['logo']=Setting::select('site_logo')->first();
-          
+
           $data['offer_product']=Product::whereNotNull('special_price')->where('in_stock',1)->where('special_price_type','=','fixed')->first();
-          
+
         return view('livewire.front.home',$data)
         ->layout('front.layouts.master1');
     }

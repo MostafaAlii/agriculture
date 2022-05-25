@@ -12,8 +12,13 @@ class FarmerCropController extends Controller
 {
     protected $Data;
     public function __construct(FarmerCropInterface $Data) {
+        $this->middleware('permission:farmer-crop', ['only' => ['index']]);
+        $this->middleware('permission:farmer-crop-create', ['only' => ['create','store']]);
+        $this->middleware('permission:farmer-crop-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:farmer-crop-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:farmer-crop-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
-     }
+    }
 
 
    public function index(){

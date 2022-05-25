@@ -1,15 +1,15 @@
-
-
+@can('protect-house-edit')
     <a href="{{ route('ProtectedHouse.edit',  encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/p_houses.edit') }}
     </a>
-
+@endcan
+@can('protect-house-delete')
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
         <i class="fa fa-trash"></i>
         {{ __('Admin/p_houses.delete') }}
     </button>
-
+@endcan
 
 
 

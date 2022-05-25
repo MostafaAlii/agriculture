@@ -15,6 +15,11 @@ class FarmerServiceController extends Controller
 {
     protected $Data;
     public function __construct(FarmerServiceInterface $Data) {
+        $this->middleware('permission:farmer-service', ['only' => ['index']]);
+        $this->middleware('permission:farmer-service-create', ['only' => ['create','store']]);
+        $this->middleware('permission:farmer-service-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:farmer-service-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:farmer-service-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

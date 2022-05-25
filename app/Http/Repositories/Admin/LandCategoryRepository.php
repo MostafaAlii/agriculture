@@ -12,20 +12,29 @@ class LandCategoryRepository implements LandCategoryInterface {
 
 
     public function index() {
-        $land_categories = LandCategory::get();
+        $land_categories = LandCategory::query();
         return view('dashboard.admin.land_categories.index',compact('land_categories'));
 
     }
     public function data() {
 
         $land_categories = LandCategory::query();
-        return DataTables::of($land_categories)
+        return DataTables::eloquent($land_categories)
 
             ->addColumn('record_select', 'dashboard.admin.land_categories.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (LandCategory $land_category) {
                 return $land_category ->created_at->diffforhumans();
             })
+            ->editColumn('category_type', function (LandCategory $land_category) {
+                return view('dashboard.admin.land_categories.data_table.category_type', compact('land_category'));
+            })
+
+//           ->filter(function ($query) {
+//               if (request()->has('category_name')) {
+//                   $query->where('category_name', 'like', "%" . request('category_name') . "%");
+//               }
+//           })
 
             ->addColumn('actions', 'dashboard.admin.land_categories.data_table.actions')
 

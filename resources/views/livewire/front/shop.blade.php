@@ -1,79 +1,85 @@
 @section('title', __('website\home.shop'))
 @section('css')
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
-@if(app()->getLocale()=='ar')
-<style>
-    .product-wish{
-        position: absolute;
-        bottom :3%;
-        z-index:99;
-        left:30px;
-        text-align: right;
-        padding-top:0;
-    }
-    .product-wish .fa {
-        /* color:red; */
-        font-size: 30px;
-    }
-    .product-wish .fa:hover {
-        color:#ff7007;
-        font-size: 30px;
-    }
-    .fill-heart{
-        color: #ff7007 !important;
-    }
+    @if (app()->getLocale() == 'ar')
+        <style>
+            .product-wish {
+                position: absolute;
+                bottom: 3%;
+                z-index: 99;
+                left: 30px;
+                text-align: right;
+                padding-top: 0;
+            }
 
+            .product-wish .fa {
+                /* color:red; */
+                font-size: 30px;
+            }
 
+            .product-wish .fa:hover {
+                color: #ff7007;
+                font-size: 30px;
+            }
 
-</style>
-</style>
-@else
+            .fill-heart {
+                color: #ff7007 !important;
+            }
 
-<style>
-    .product-wish{
-        position: absolute;
-        top:3%;
-        left: 0;
-        z-index:99;
-        right:30px;
-        text-align: right;
-        padding-top:0;
-    }
-    .product-wish .fa {
-        /* color:red; */
-        font-size: 30px;
-    }
-    .product-wish .fa:hover {
-        color:#ff7007;
-        font-size: 30px;
-    }
-    .fill-heart{
-        color: #ff7007 !important;
-    }
-</style>
-@endif
-<style>
-     /* --------------------------------- */
-.score {
-  display: inline-block;
-  font-family: Wingdings;
-  font-size: 23px;
-  color: #ccc;
-  position: relative;
-}
-.score::before,
-.score span::before{
-  content: "\2605\2605\2605\2605\2605";
-  display: block;
-}
-.score span {
-  color: gold;
-  position: absolute;
-  top: 0;
-  overflow: hidden;
-}
-</style>
+        </style>
+    @else
+        <style>
+            .product-wish {
+                position: absolute;
+                top: 3%;
+                left: 0;
+                z-index: 99;
+                right: 30px;
+                text-align: right;
+                padding-top: 0;
+            }
+
+            .product-wish .fa {
+                /* color:red; */
+                font-size: 30px;
+            }
+
+            .product-wish .fa:hover {
+                color: #ff7007;
+                font-size: 30px;
+            }
+
+            .fill-heart {
+                color: #ff7007 !important;
+            }
+
+        </style>
+    @endif
+    <style>
+        /* --------------------------------- */
+        .score {
+            display: inline-block;
+            font-family: Wingdings;
+            font-size: 23px;
+            color: #ccc;
+            position: relative;
+        }
+
+        .score::before,
+        .score span::before {
+            content: "\2605\2605\2605\2605\2605";
+            display: block;
+        }
+
+        .score span {
+            color: gold;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+        }
+
+    </style>
 @endsection
 <div>
     <!-- start section -->
@@ -158,19 +164,21 @@
                                 <!-- end widget -->
 
 
-                            @if(count(\App\Models\Tag::get())>0)
-                            <!-- start widget -->
-                            <div class="widget widget--tags">
-                                <h4 class="h6 widget-title">{{ __('Admin/site.keywords') }}</h4>
+                                @if (count(\App\Models\Tag::get()) > 0)
+                                    <!-- start widget -->
+                                    <div class="widget widget--tags">
+                                        <h4 class="h6 widget-title">{{ __('Admin/site.keywords') }}</h4>
 
-                                <ul id="all_tags">
-                                    @foreach(\App\Models\Tag::get() as $tag)
-                                    <li id="{{$tag->id}}" onclick="javascript:search_result('products',this.id,'Tag')"><a style="color:#36df33">{{$tag->name}}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <!-- end widget -->
-                            @endif
+                                        <ul id="all_tags">
+                                            @foreach (\App\Models\Tag::get() as $tag)
+                                                <li id="{{ $tag->id }}"
+                                                    onclick="javascript:search_result('products',this.id,'Tag')"><a
+                                                        style="color:#36df33">{{ $tag->name }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <!-- end widget -->
+                                @endif
 
 
                                 <!-- start widget -->
@@ -179,33 +187,34 @@
 
                                     <ul>
                                         @foreach ($newProducts as $product)
-                                                <li>
-                                                    <div class="row no-gutters">
-                                                        <div class="col-auto __image-wrap">
-                                                            <figure class="__image">
-                                                                <a
-                                                                    href="{{ route('product_details', encrypt($product->id)) }}">
-                                                                    @if ($product->image->filename)
-                                                                        <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                            data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                            alt="demo" />
-                                                                    @else
-                                                                        <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                            alt="demo" />
-                                                                    @endif
-                                                                </a>
-                                                            </figure>
-                                                        </div>
+                                            <li>
+                                                <div class="row no-gutters">
+                                                    <div class="col-auto __image-wrap">
+                                                        <figure class="__image">
+                                                            <a
+                                                                href="{{ route('product_details', encrypt($product->id)) }}">
+                                                                @if ($product->image->filename)
+                                                                    <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
+                                                                        data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
+                                                                        alt="demo" />
+                                                                @else
+                                                                    <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                        alt="demo" />
+                                                                @endif
+                                                            </a>
+                                                        </figure>
+                                                    </div>
 
-                                                        <div class="col">
-                                                            <h4 class="h6 __title"><a
-                                                                    href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
-                                                            </h4>
+                                                    <div class="col">
+                                                        <h4 class="h6 __title"><a
+                                                                href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
+                                                        </h4>
 
-                                                            <span class="score"><span style="width:<?php echo $product->productRate();?>%"></span></span>
+                                                        <span class="score"><span
+                                                                style="width:<?php echo $product->productRate(); ?>%"></span></span>
 
-                                                            <!-- <div class="rating">
+                                                        <!-- <div class="rating">
                                                                 <span class="rating__item rating__item--active"><i
                                                                         class="fontello-star"></i></span>
                                                                 <span class="rating__item rating__item--active"><i
@@ -218,25 +227,25 @@
                                                                         class="fontello-star"></i></span>
                                                             </div> -->
 
-                                                            @if ($product->special_price > 0)
-                                                                <div class="product-price">
-                                                                    <span
-                                                                        class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                                        $</span>
-                                                                    <span
-                                                                        class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                                        $</span>
-                                                                </div>
-                                                            @else
-                                                                <div class="product-price">
-                                                                    <span
-                                                                        class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
-                                                                        $</span>
-                                                                </div>
-                                                            @endif
-                                                        </div>
+                                                        @if ($product->special_price > 0)
+                                                            <div class="product-price">
+                                                                <span
+                                                                    class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
+                                                                    $</span>
+                                                                <span
+                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
+                                                                    $</span>
+                                                            </div>
+                                                        @else
+                                                            <div class="product-price">
+                                                                <span
+                                                                    class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
+                                                                    $</span>
+                                                            </div>
+                                                        @endif
                                                     </div>
-                                                </li>
+                                                </div>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -266,7 +275,8 @@
                                 {{-- <form class="ordering" action="#"> --}}
                                 <div class="input-wrp">
                                     <select name="orderby" class="textfield wide js-select" wire:model='sorting'>
-                                        <option value="default" selected="selected">{{ __('Website/home.defaultsort') }}</option>
+                                        <option value="default" selected="selected">
+                                            {{ __('Website/home.defaultsort') }}</option>
                                         <option value="date">{{ __('Website/home.sortnew') }}</option>
                                         <option value="price">{{ __('Website/home.sortlow') }}</option>
                                         <option value="price-desc">{{ __('Website/home.sorthigh') }}</option>
@@ -281,7 +291,8 @@
                                 {{-- <form class="ordering" action="#"> --}}
                                 <div class="input-wrp">
                                     <select name="post-per-page" class="textfield wide js-select" wire:model='pagesize'>
-                                        <option value="12" selected="selected">12 {{ __('Website/home.perpage') }}</option>
+                                        <option value="12" selected="selected">12 {{ __('Website/home.perpage') }}
+                                        </option>
                                         <option value="16">16 {{ __('Website/home.perpage') }}</option>
                                         <option value="18">18 {{ __('Website/home.perpage') }}</option>
                                         <option value="21">21 {{ __('Website/home.perpage') }}</option>
@@ -306,11 +317,11 @@
                                             ->content()
                                             ->pluck('id');
                                     @endphp
-                                      @if ($products->count() > 0)
+                                    @if ($products->count() > 0)
                                         @foreach ($products as $product)
                                             <!-- start item -->
                                             <div class="col-12 col-sm-6 col-lg-4">
-                                                <div class="__item">
+                                                <div class="__item product-cart">
                                                     <figure class="__image">
                                                         @if ($product->image->filename)
                                                             <a
@@ -351,9 +362,8 @@
                                                         </div>
                                                         <div class="stock-info in-stock">
                                                             <p class="availability">
-                                                                <b
-                                                                    class="text text-success ">
-                                                                    @lang('Admin/site.qty') ({{ $product->qty  }})
+                                                                <b class="text text-success ">
+                                                                    @lang('Admin/site.qty') ({{ $product->qty }})
                                                                 </b>
                                                             </p>
                                                         </div>
@@ -373,9 +383,9 @@
                                                                     $</span>
                                                             </div>
                                                         @endif
-                                                        @if (Auth::guard('vendor')->user() )
-                                                          @if($product->in_stock ==1)
-                                                                <a class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                        @if (Auth::guard('vendor')->user())
+                                                            @if ($product->in_stock == 1)
+                                                                <a class="custom-btn custom-btn--medium custom-btn--style-1 " id="demo"
                                                                     href="#"
                                                                     wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                                     <i class="fontello-shopping-bag"></i>
@@ -395,8 +405,8 @@
                                                                         </a>
                                                                     @endif
                                                                 </div>
-                                                            {{-- wishlist route ******************* *************************************** --}}
-                                                           @endif
+                                                                {{-- wishlist route ******************* *************************************** --}}
+                                                            @endif
                                                         @endif
                                                     </div>
                                                     @if ($product->special_price > 0)
@@ -491,4 +501,10 @@
             @this.set('max_price', value[1]);
         });
     </script>
+    {{-- <script>
+        $(".product-cart").click(function(){
+            document.getElementById("demo").innerHTML = ""
+            document.getElementById("demo").innerHTML = "I have changed!"
+        });
+    </script> --}}
 @endpush

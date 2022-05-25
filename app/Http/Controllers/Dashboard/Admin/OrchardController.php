@@ -11,6 +11,11 @@ class OrchardController extends Controller
 {
     protected $Data;
     public function __construct(OrchardInterface $Data) {
+        $this->middleware('permission:orchard', ['only' => ['index']]);
+        $this->middleware('permission:orchard-create', ['only' => ['create','store']]);
+        $this->middleware('permission:orchard-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:orchard-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:orchard-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
@@ -35,19 +40,14 @@ class OrchardController extends Controller
     public function store(OrchardRequest $request) {
         return $this->Data->store($request);
     }
-
-
     public function edit($id) {
         return $this->Data->edit($id);
     }
-
     public function update(OrchardRequest $request, $id) {
         return $this->Data->update($request, $id);
     }
-
     public function destroy($id) {
         return $this->Data->destroy($id);    }
-
     public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
     }

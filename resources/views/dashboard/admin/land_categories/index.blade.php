@@ -58,15 +58,19 @@
                             <div class="card-content collapse show">
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
-                                        <i class="material-icons">add_box</i>
-                                        {{ trans('Admin/lands.add_new_land_category') }}
-                                    </button>
-                                    <button type="button" class="btn btn-warning btn-md mb-3"
-                                            id="btn_delete_all" data-toggle="modal"
-                                            data-target="#bulkdelete" >
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
+                                    @can('land-categories-create')
+                                        <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                            <i class="material-icons">add_box</i>
+                                            {{ trans('Admin/lands.add_new_land_category') }}
+                                        </button>
+                                    @endcan
+                                    @can('land-categories-delete-all')
+                                        <button type="button" class="btn btn-warning btn-md mb-3"
+                                                id="btn_delete_all" data-toggle="modal"
+                                                data-target="#bulkdelete" >
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->
@@ -124,14 +128,15 @@
                 url: '{{ route('landCategories.data') }}',
             },
             columns: [
-                {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'category_name', name: 'category_name', searchable: false, sortable: false},
+                {data: 'record_select', name: 'record_select',  width: '1%'},
+                {data: 'category_name', name: 'category_name',searchable:false},
 
-                {data: 'category_type', name: 'category_type', searchable: false, sortable: false},
+                {data: 'category_type', name: 'category_type',searchable:false},
 
-                {data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'actions', name: 'actions', width: '20%'},
             ],
+            order: [[3, "DESC"]]
         });
     </script>
 

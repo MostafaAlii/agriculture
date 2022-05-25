@@ -1,17 +1,15 @@
-
-
-    <a href="{{ route('LandAreas.edit', encrypt ($id)) }}" class="btn btn-info btn-sm">
+@can('land-area-edit')
+    <a href="{{ route('LandAreas.edit', encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/land_areas.edit') }}
     </a>
-
+@endcan
+@can('land-area-delete')
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
         <i class="fa fa-trash"></i>
         {{ __('Admin/land_areas.delete') }}
     </button>
-
-
-
+@endcan
 
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">

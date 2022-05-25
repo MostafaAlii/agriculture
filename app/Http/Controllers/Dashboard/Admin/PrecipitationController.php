@@ -12,6 +12,11 @@ class PrecipitationController extends Controller
 {
     protected $Data;
     public function __construct(PrecipitationInterface $Data) {
+        $this->middleware('permission:precipitation', ['only' => ['index']]);
+        $this->middleware('permission:precipitation-create', ['only' => ['create','store']]);
+        $this->middleware('permission:precipitation-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:precipitation-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:precipitation-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

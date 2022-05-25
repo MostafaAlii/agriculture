@@ -81,7 +81,7 @@ class BeeDisasterRepository implements BeeDisasterInterface{
     public function destroy($id) {
 
         $bDisasterID = Crypt::decrypt($id);
-        $bDisaster=BeeDisaster::findorfail($bDisasterID)->first();
+        $bDisaster=BeeDisaster::findorfail($bDisasterID);
 
         $bDisaster->delete();
         toastr()->success(__('Admin/site.deleted_successfully'));
@@ -94,7 +94,7 @@ class BeeDisasterRepository implements BeeDisasterInterface{
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
                 foreach ($delete_select_id as $bee_disaster_ids) {
-                    $bDisaster = BeeDisaster::findorfail($bee_disaster_ids)->first();
+                    $bDisaster = BeeDisaster::findorfail($bee_disaster_ids);
 
                     $bDisaster->delete();
                 }
