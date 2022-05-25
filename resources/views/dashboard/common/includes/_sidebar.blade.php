@@ -576,7 +576,7 @@
                         </li>
 
                         <li>
-                            <a class="menu-item" href="{{ route('Animals.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                            <a class="menu-item" href="{{ route('Chickens.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
                                     __('Admin\animals.chickens_project') }}</span></a>
                         </li>
 
