@@ -516,27 +516,50 @@
                 <!-- end Land Area  Menu -->
 
                 <!-- start FarmerCrops  Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-crop-simple " style="color:green;"></i>
-                        <span class="menu-title" data-i18n="Categories">{{
-                            __('Admin\crops.farmerCropsPageTitle_and_setting') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('FarmerCrops.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\crops.farmerCropsPageTitle') }}</span></a>
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('WinterCrops.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\crops.winter_cropPageTitle') }}</span></a>
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('SummerCrops.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\crops.summer_cropPageTitle') }}</span></a>
-                        </li>
-                    </ul>
-                </li>
+                @can('farmer-crop-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-crop-simple " style="color:green;"></i>
+                            <span class="menu-title" data-i18n="Categories">{{
+                                __('Admin\crops.farmerCropsPageTitle_and_setting') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Farmer Crop -->
+                            @can('farmer-crop')
+                            <li>
+                                <a class="menu-item" href="{{ route('FarmerCrops.index') }}"> <i class="material-icons">list</i>
+                                    <span data-i18n="Vertical">
+                                        {{__('Admin\crops.farmerCropsPageTitle') }}
+                                    </span>
+                                </a>
+                            </li>
+                            @endcan
+                            <!-- End Farmer Crop -->
+                            <!-- Start Winter Crop -->
+                            @can('winter-crops')
+                                <li>
+                                    <a class="menu-item" href="{{ route('WinterCrops.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\crops.winter_cropPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Winter Crop -->
+                            <!-- Start Summer Crop -->
+                            @can('summer-crops')
+                                <li>
+                                    <a class="menu-item" href="{{ route('SummerCrops.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\crops.summer_cropPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Summer Crop -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end FarmerCrops  Menu -->
 
                 <!-- start Animals Chicken Projecta Menu -->

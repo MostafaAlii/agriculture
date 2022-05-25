@@ -58,15 +58,19 @@
                             <div class="card-content collapse show">
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
-                                        <i class="material-icons">add_box</i>
-                                        {{ trans('Admin/crops.add_new_crop') }}
-                                    </button>
-                                    <button type="button" class="btn btn-warning btn-md mb-3"
-                                            id="btn_delete_all" data-toggle="modal"
-                                            data-target="#bulkdelete" >
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
+                                    @can('winter-crop-create')
+                                        <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                            <i class="material-icons">add_box</i>
+                                            {{ trans('Admin/crops.add_new_crop') }}
+                                        </button>
+                                    @endcan
+                                    @can('winter-crop-delete-all')
+                                        <button type="button" class="btn btn-warning btn-md mb-3"
+                                                id="btn_delete_all" data-toggle="modal"
+                                                data-target="#bulkdelete" >
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->

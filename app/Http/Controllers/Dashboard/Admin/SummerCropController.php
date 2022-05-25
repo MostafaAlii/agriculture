@@ -12,6 +12,11 @@ class SummerCropController extends Controller
 {
     protected $Data;
     public function __construct(SummerCropInterface $Data) {
+        $this->middleware('permission:summer-crops', ['only' => ['index']]);
+        $this->middleware('permission:summer-crop-create', ['only' => ['store']]);
+        $this->middleware('permission:summer-crop-edit', ['only' => ['update']]);
+        $this->middleware('permission:summer-crop-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:summer-crop-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

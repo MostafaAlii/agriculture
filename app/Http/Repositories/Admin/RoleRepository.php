@@ -68,9 +68,10 @@ class RoleRepository implements RoleRepositoryInterface {
     }
 
     public function show($id) {
-        $role=Role::findOrfail($id);
+        $real_id = Crypt::decrypt($id);
+        $role=Role::findOrfail($real_id);
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-            ->where("role_has_permissions.role_id",$id)
+            ->where("role_has_permissions.role_id",$real_id)
             ->get();
         return view('dashboard.admin.roles.show',compact('role','rolePermissions'));
     }
