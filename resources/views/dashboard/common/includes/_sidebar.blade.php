@@ -40,7 +40,7 @@
                 @can('dashboard')
                     <li class=" nav-item">
                         <a href="{{-- route('admin.dashboard') --}}">
-                            <!--<i class="material-icons">drag_indicator</i>-->
+                            <i class="material-icons">assessment</i>
                             <span class="menu-title" data-i18n="Dashboard">{{ trans('Admin/setting.dashboard') }}</span>
                         </a>
                         @can('moderators-management')
