@@ -201,6 +201,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
     public function index_statistic()
     {
+
         return view('dashboard.admin.precipitations.statistics');
 
     }
@@ -241,6 +242,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
 
     public function get_details_statistics_index(){
+
         return view('dashboard.admin.precipitations.details_statistics');
     }
     public function get_details_statistics()
@@ -277,5 +279,46 @@ class PrecipitationRepository implements PrecipitationInterface
             ->groupBy ('Area','State','day','month','year','precipitation_rate')->get();
         return datatables()->of($precipitations)
             ->make(true);
+    }
+
+
+    public function get_graph_precipitation_index(){
+        $precipitationQueryfirst = Precipitation::select(\DB::raw("COUNT(*) as count"))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy(\DB::raw("Month(created_at)"))
+            ->pluck('count');
+
+        $areas = Area::all();
+        $states = State::all();
+        return view('dashboard.admin.precipitations.graph',compact('areas','precipitationQueryfirst'));
+
+    }
+
+    public function get_graph_precipitation_query($request)
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $area_id = $request->area_id;
+        $state_id = $request->state_id;
+        $areas = Area::all();
+        $precipitationQueryfirst = Precipitation::query();
+
+        if ($start_date && $end_date) {
+
+            $start_date = date('Y-m-d', strtotime($start_date));
+            $end_date = date('Y-m-d', strtotime($end_date));
+
+            $precipitationQueryfirst =   $precipitationQueryfirst->whereRaw("date(precipitations.date) >= '" . $start_date . "' AND date(precipitations.date) <= '" . $end_date . "'");
+        }
+        if($area_id){
+            $precipitationQueryfirst = $precipitationQueryfirst->where('area_id',$area_id);
+        }
+        if($state_id){
+            $precipitationQueryfirst = $precipitationQueryfirst->where('state_id',$state_id);
+        }
+
+        return view('dashboard.admin.precipitations.graph',compact('precipitationQueryfirst','areas'));
+
+
     }
 }

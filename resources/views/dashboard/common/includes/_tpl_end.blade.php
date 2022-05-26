@@ -87,6 +87,35 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        //  ajax for get states data of area =====================================================================
+        $('select[name="area_id"]').on('change', function() {
+            var area_id = $(this).val();
+            // console.log(province_id);
+            if (area_id) {
+                $.ajax({
+                    url: "{{ URL::to('dashboard_admin/admin/state') }}/" + area_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="state_id"]').empty();
+                        $('select[name="state_id"]').append( '<option selected disabled>--select--</option>');
+
+                        $.each(data, function(key, value) {
+
+                            $('select[name="state_id"]').append(
+                                '<option value="' + key + '">' + value +'</option>'
+                            );
+                        });
+                    },
+                });
+            } else {
+                console.log('AJAX load did not work');
+            }
+        });
+    });
+</script>
 {{-- test bulk delete 2 --}}
 @yield('js')
 {{-- @stack('js') --}}

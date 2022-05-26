@@ -230,6 +230,9 @@ Route::group(
             Route::get('dtable-custom-statistics', [PrecipitationController::class,'get_custom_statistics']);
             Route::get('/Precipitations/index_details_statistic', [PrecipitationController::class,'get_details_statistics_index'])->name('precipitations.index_details_statistic');
             Route::get('dtable-details-statistics', [PrecipitationController::class,'get_details_statistics']);
+            Route::get('/Precipitations/graph', [PrecipitationController::class,'get_graph_precipitation_index'])->name('precipitation.graph');
+            Route::post('/Precipitations/query_graph', [PrecipitationController::class,'get_graph_precipitation_query'])->name('graph.query');
+
             /***********end precipitation ****/
 
             /******start LandArea ********/
