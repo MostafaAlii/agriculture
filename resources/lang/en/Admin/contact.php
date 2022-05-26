@@ -16,4 +16,8 @@ return[
     'delete_title' =>'Delete Selected Mails',
     'delete_confirm'=>'Are you Sure deleting selected mails?',
     'delete' =>'Delete',
+
+
+    'send_fail' =>'Problem occure while sending mail .. please try again',
+    'send_done' =>'Thanks your message has been sent successfully !',
 ];

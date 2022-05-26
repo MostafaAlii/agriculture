@@ -13,7 +13,7 @@
                                 <div class="col-12 col-sm-6 col-lg-4">
                                     <div class="__item __item--preview">
                                         <figure class="__image">
-                                            @if($blog->image->filename)
+                                            @if(isset($blog->image->filename))
                                                 <img  src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                                 data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
                                                 alt="demo" />
