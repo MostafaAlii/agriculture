@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 @endsection
 @section('page-header')
 	<!-- breadcrumb -->
@@ -43,7 +43,59 @@
         <div class="content-wrapper">
             <div class="content-header row">
             </div>
-            <div class="content-body">
+
+                <div class="card-body">
+
+                    <div class="form-body">
+                        <form action="{{route('precipitation.graph')}}" method="get">
+                            @csrf
+
+                            <div class="row mt-2">
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label for="area_id" style="float: right">{{ __('Admin/precipitations.area') }}</label>
+                                        <select name="area_id" id="area_id" class="form-control"
+                                                required>
+                                            <option value="">{{ __('Admin/site.select') }}</option>
+                                            </option>
+                                            @foreach (\App\Models\Area::all() as $area)
+                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <h5 style="float: right">{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <h5 style="float: right">{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                    </div>
+                                </div>
+
+                                <div class="col col-md-6">
+                                    <div class="pie-chart-container">
+                                        <canvas id="pie-chart" height="75"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="text-left" style="    margin-left: 15px;  ">
+                                <button type="submit" id="" class="btn btn-info">{{trans('Admin\Site.Get_chart')}}</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+                {{--end precipitation graph--}}
                 <!-- eCommerce statistic -->
                 <!-- Start First Row Admin -->
                 <div class="row">
@@ -1440,5 +1492,71 @@
         </div>
 @endsection
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function(){
+            //get the pie chart canvas
+            var cData = JSON.parse(`<?php echo $chart_data; ?>`);
+            var ctx = $("#pie-chart");
 
+            //pie chart data
+            var data = {
+                labels: cData.label,
+                datasets: [
+                    {
+                        label: "Precipitation Rate",
+                        data: cData.data,
+                        backgroundColor: [
+                            "#DEB887",
+                            "#A9A9A9",
+                            "#DC143C",
+                            "#F4A460",
+                            "#2E8B57",
+                            "#1D7A46",
+                            "#CDA776",
+                        ],
+                        borderColor: [
+                            "#CDA776",
+                            "#989898",
+                            "#CB252B",
+                            "#E39371",
+                            "#1D7A46",
+                            "#F4A460",
+                            "#CDA776",
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1,1,1]
+                    }
+                ]
+            };
+
+            //options
+            var options = {
+                responsive: true,
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "{{trans('Admin\site.precipitation_rate_in_state_for_spatial_area')}}",
+                    fontSize: 18,
+                    fontColor: "#111"
+                },
+                legend: {
+                    display: true,
+                    position: "bottom",
+                    labels: {
+                        fontColor: "#333",
+                        fontSize: 16
+                    }
+                }
+            };
+
+            //create Pie Chart class object
+            var chart1 = new Chart(ctx, {
+                type: "pie",
+                data: data,
+                options: options
+            });
+
+        });
+    </script>
 @endsection

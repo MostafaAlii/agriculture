@@ -22,8 +22,8 @@ return [
     'Horticulture'=>'Horticulture',
     'services'=>'Services',
     'planet_protection'=>'Planet Protection',
-    ''=>'',
-    ''=>'',
+    'precipitation_rate_in_state_for_spatial_area'=>'Precipitation Rate in State For Spatial Area',
+    'Get_chart'=>'Draw Chart',
 
     'add' => 'Add',
     'edit' => 'Edit',
