@@ -1,6 +1,6 @@
-@if(Session::has('success'))
+@if(Session::has('review_success'))
         <div>
-           <center><h3 style="color:#bfa43c">{{Session::get('success')}}</h2></center>
+           <center><h3 style="color:#bfa43c">{{Session::get('review_success')}}</h2></center>
            <br>
         </div>
     @endif

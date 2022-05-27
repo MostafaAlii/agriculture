@@ -64,4 +64,13 @@ class PrecipitationController extends Controller
     public function get_details_statistics(){
         return $this->Data->get_details_statistics();
     }
+
+    public function get_graph_precipitation_index(){
+        return $this->Data->get_graph_precipitation_index();
+
+    }
+    public function get_graph_precipitation_query(Request $request){
+        return $this->Data->get_graph_precipitation_query($request);
+
+    }
 }

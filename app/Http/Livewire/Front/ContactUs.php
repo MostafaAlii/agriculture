@@ -75,7 +75,8 @@ class ContactUs extends Component
         } catch (\Exception $e) {
           //  DB::rollBack();
            // dd($e->getMessage());
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+           toastr()->error(__('Admin/contact.send_fail'));
+            return redirect()->back();
 
         }
     }

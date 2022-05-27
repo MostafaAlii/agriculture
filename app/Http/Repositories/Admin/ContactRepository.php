@@ -29,12 +29,13 @@ class ContactRepository implements ContactInterface {
                 $message->from(env('MAIL_FROM_ADDRESS','magdasaif3@gmail.com'));
             }
         );
-        toastr()->success('Thanks your message has been sent successfully !');
+        toastr()->success(__('Admin/contact.send_done'));
         return redirect()->back();           
         //------------------------------------------------------------------
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+           // dd($e->getMessage());
+           toastr()->error(__('Admin/contact.send_fail'));
+            return redirect()->back();
 
         }
     }
@@ -57,12 +58,13 @@ class ContactRepository implements ContactInterface {
             }
         );
 
-        toastr()->success('Thanks your message has been sent successfully !');
+        toastr()->success(__('Admin/contact.send_done'));
         return redirect()->back();           
         //------------------------------------------------------------------
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+           // dd($e->getMessage());
+           toastr()->error(__('Admin/contact.send_fail'));
+            return redirect()->back();
 
         }
     }
