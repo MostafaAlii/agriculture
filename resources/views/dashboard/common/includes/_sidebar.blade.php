@@ -562,86 +562,122 @@
                 @endcan
                 <!-- end FarmerCrops  Menu -->
 
-                <!-- start Animals Chicken Projecta Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-fish" style="color:yellow;"></i>
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\animals.animals_chiken_fish_PageTitle')
-                            }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('Animals.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\animals.animalsPageTitle') }}</span></a>
-                        </li>
-
-                        <li>
-                            <a class="menu-item" href="{{ route('Chickens.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\animals.chickens_project') }}</span></a>
-                        </li>
-
-                    </ul>
-                </li>
+                <!-- start Animals Chicken Project Menu -->
+                @can('projects-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-fish" style="color:yellow;"></i>
+                            <span class="menu-title" data-i18n="Categories">
+                                {{ __('Admin\animals.animals_chiken_fish_PageTitle')}}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Caws & Fish Project -->
+                            @can('caws-project')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Animals.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\animals.animalsPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Caws & Fish Project -->
+                            <!-- Start Chicken Project -->
+                            @can('chicken-project')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Chickens.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\animals.chickens_project') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Chicken Project -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end Animals   Menu -->
 
                 <!-- start beekeepers & settings Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fab fa-forumbee" style="color:yellow"></i>
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\bees.beekeepers_and_settings')
-                            }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('BeeKeepers.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\bees.beekeeperPageTitle') }}</span></a>
-
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('BeeDisasters.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\bees.beesDisasterPageTitle') }}</span></a>
-                        </li>
-
-                        <li>
-                            <a class="menu-item" href="{{ route('CourseBees.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\bees.courseBeesPageTitle') }}</span></a>
-
-                        </li>
-
-                    </ul>
-                </li>
+                @can('bee-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fab fa-forumbee" style="color:yellow"></i>
+                            <span class="menu-title" data-i18n="Categories">{{ __('Admin\bees.beekeepers_and_settings')
+                                }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('bee-keepers')
+                                <li>
+                                    <a class="menu-item" href="{{ route('BeeKeepers.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\bees.beekeeperPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('bee-disasters')
+                                <li>
+                                    <a class="menu-item" href="{{ route('BeeDisasters.index') }}"> 
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\bees.beesDisasterPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('bee-courses')
+                                <li>
+                                    <a class="menu-item" href="{{ route('CourseBees.index') }}">
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\bees.courseBeesPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end beekeepers & settings   Menu -->
 
                 <!-- start WholeSale & settings Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-plane-arrival" style="color:blue;"></i>-
-                        <i class="fas fa-plane-departure" style="color:blue;"></i>
+                @can('whole-products-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-plane-arrival" style="color:blue;"></i>-
+                            <i class="fas fa-plane-departure" style="color:blue;"></i>
+                            <span class="menu-title" data-i18n="Categories">
+                                {{ __('Admin\income_products.wholeSale_and_product')}}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('whole-sale-products')
+                                <li>
+                                    <a class="menu-item" href="{{ route('WholeSaleProducts.index') }}"> 
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\income_products.WholeProduct') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <li>
+                                <a class="menu-item" href="{{ route('IncomeProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                                        __('Admin\income_products.income_productPageTitle') }}</span></a>
 
+                            </li>
 
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\income_products.wholeSale_and_product')
-                            }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('WholeSaleProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\income_products.WholeProduct') }}</span></a>
+                            <li>
+                                <a class="menu-item" href="{{ route('OutcomeProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
+                                        __('Admin\outcome_products.outcome_productPageTitle') }}</span></a>
 
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('IncomeProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\income_products.income_productPageTitle') }}</span></a>
+                            </li>
 
-                        </li>
-
-                        <li>
-                            <a class="menu-item" href="{{ route('OutcomeProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\outcome_products.outcome_productPageTitle') }}</span></a>
-
-                        </li>
-
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end WholeSale & settings   Menu -->
 
                 <!-- Start Bolgs Dropdown Menu -->

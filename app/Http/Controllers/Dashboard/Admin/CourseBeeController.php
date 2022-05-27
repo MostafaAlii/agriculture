@@ -13,6 +13,11 @@ class CourseBeeController extends Controller
 
     protected $Data;
     public function __construct(CourseBeeInterface $Data) {
+        $this->middleware('permission:bee-courses', ['only' => ['index']]);
+        $this->middleware('permission:bee-courses-create', ['only' => ['store']]);
+        $this->middleware('permission:bee-courses-edit', ['only' => ['update']]);
+        $this->middleware('permission:bee-courses-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:bee-courses-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

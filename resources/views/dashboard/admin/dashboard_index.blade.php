@@ -620,38 +620,41 @@
                         </div>
                     @endcan
                     <!-- End FarmerCrops -->
-                    <!-- Start Animals -->
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('Animals.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="yellow" style="color:greenyellow">{{ \App\Models\CawProject::count() }}</h3>
-                                                <h6>  {{ trans('Admin/animals.animalsPageTitle') }}</h6>
+                    <!-- Start Caws Project -->
+                    @can('caws-project')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('Animals.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="yellow" style="color:greenyellow">{{ \App\Models\CawProject::count() }}</h3>
+                                                    <h6>  {{ trans('Admin/animals.animalsPageTitle') }}</h6>
+                                                </div>
+                                                <div>
+                                                    {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                                    <i class="fas fa-democrat fa-2x " style="color:blue;"></i>
+                                                    <i class="fas fa-fish fa-2x " style="color:yellow;"></i>
+                                                </div>
                                             </div>
-                                            <div>
-                                                {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
-                                                <i class="fas fa-democrat fa-2x " style="color:blue;"></i>
-                                                <i class="fas fa-fish fa-2x " style="color:yellow;"></i>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-yellow"  role="progressbar" style=" width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-yellow"  role="progressbar" style=" width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- End Animals -->
+                            </a>
+                        </div>
+                    @endcan
+                    <!-- End Caws Project -->
                 </div>
                 <!-- End Row Precipitations -->
 
                 <!-- Start Row Chicken -->
                 <div class="row">
                     <!-- Start Row Chicken Project -->
+                    @can('chicken-project')
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('Chickens.index') }}">
                             <div class="card pull-up">
@@ -675,29 +678,32 @@
                             </div>
                         </a>
                     </div>
+                    @endcan
                     <!-- End Row Chicken Project -->
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('BeeKeepers.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="gray-bg" style="color:yellow;">{{ \App\Models\Beekeeper::count() }}</h3>
-                                                <h6>  {{ trans('Admin/bees.beekeeperPageTitle') }}</h6>
+                    @can('bee-keepers')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('BeeKeepers.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="gray-bg" style="color:yellow;">{{ \App\Models\Beekeeper::count() }}</h3>
+                                                    <h6>  {{ trans('Admin/bees.beekeeperPageTitle') }}</h6>
+                                                </div>
+                                                <div>
+                                                    <i class="fab fa-forumbee fa-2x" style="color:yellow"></i>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <i class="fab fa-forumbee fa-2x" style="color:yellow"></i>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-yellow" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-yellow" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    @endcan
                     <!-- Start OutcomeProducts -->
                     <div class="col-xl-3 col-lg-6 col-12">
                         <a href="{{ route('OutcomeProducts.index') }}">

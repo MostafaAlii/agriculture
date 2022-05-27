@@ -12,6 +12,11 @@ class BeeKeepersController extends Controller
 {
     protected $Data;
     public function __construct(BeekeeperInterface $Data) {
+        $this->middleware('permission:bee-keepers', ['only' => ['index']]);
+        $this->middleware('permission:bee-keepers-create', ['only' => ['create','store']]);
+        $this->middleware('permission:bee-keepers-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:bee-keepers-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:bee-keepers-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
     public function index(){

@@ -58,15 +58,19 @@
                             <div class="card-content collapse show">
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
-                                        <i class="material-icons">add_box</i>
-                                        {{ trans('Admin\bees.add_new_course') }}
-                                    </button>
-                                    <button type="button" class="btn btn-warning btn-md mb-3"
-                                            id="btn_delete_all" data-toggle="modal"
-                                            data-target="#bulkdelete" >
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
+                                    @can('bee-courses-create')
+                                        <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                            <i class="material-icons">add_box</i>
+                                            {{ trans('Admin\bees.add_new_course') }}
+                                        </button>
+                                    @endcan
+                                    @can('bee-courses-delete-all')
+                                        <button type="button" class="btn btn-warning btn-md mb-3"
+                                                id="btn_delete_all" data-toggle="modal"
+                                                data-target="#bulkdelete" >
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->

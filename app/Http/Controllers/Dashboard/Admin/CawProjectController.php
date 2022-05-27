@@ -13,6 +13,11 @@ class CawProjectController extends Controller
 
     protected $Data;
     public function __construct(CawProjectInterface $Data) {
+        $this->middleware('permission:caws-project', ['only' => ['index']]);
+        $this->middleware('permission:caws-project-create', ['only' => ['create','store']]);
+        $this->middleware('permission:caws-project-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:caws-project-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:caws-project-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

@@ -26,6 +26,11 @@ class ChickenProjectController extends Controller
 
     protected $Data;
     public function __construct(ChickenProjectInterface $Data) {
+        $this->middleware('permission:chicken-project', ['only' => ['index']]);
+        $this->middleware('permission:chicken-project-create', ['only' => ['create','store']]);
+        $this->middleware('permission:chicken-project-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:chicken-project-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:chicken-project-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
