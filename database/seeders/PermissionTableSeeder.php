@@ -190,6 +190,8 @@ class PermissionTableSeeder extends Seeder {
                 'precipitation-edit',
                 'precipitation-delete',
                 'precipitation-delete-all',
+                // Precipitation Graph ::
+                'precipitation-graph',
             // Land Area ::
             'land-area-list',
                 'land-area',
