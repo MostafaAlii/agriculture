@@ -289,8 +289,8 @@ class PrecipitationRepository implements PrecipitationInterface
             ->pluck('count');
 
         $areas = Area::all();
-        $states = State::all();
-        return view('dashboard.admin.precipitations.graph',compact('areas','precipitationQueryfirst'));
+        $states = State::select('*')->where('area_id',5)->get();
+        return view('dashboard.admin.precipitations.graph',compact('areas','precipitationQueryfirst','states'));
 
     }
 

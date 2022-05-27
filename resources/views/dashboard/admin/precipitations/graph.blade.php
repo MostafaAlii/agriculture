@@ -112,7 +112,17 @@
 
                                             </form>
                                         </div>
+                                        <?php
+                                        $cat=array();
+                                        foreach ($states as $s){
+                                            array_push($cat,$s->name);
+                                        }
+                                       // echo'<pre>'. print_r($cat).'</pre>';
+                                        echo '<input type="hidden" id="states" value="'.implode(",",$cat).'">';
+                                        ?>
+                                        
                                     <div class="row">
+                                        
                                         <div id="container"></div>
                                     </div>
 
@@ -134,7 +144,11 @@
 
 
     <script>
+     
+         
         $(document).ready(function() {
+
+         
             //  ajax for get states data of area =====================================================================
             $('select[name="area_id"]').on('change', function() {
                 var area_id = $(this).val();
@@ -169,7 +183,14 @@
     {{--<script type="text/javascript" src="{% static 'js/jspdf.min.js'%}"></script>--}}
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
+       
         var precipitationQueryfirst =  <?php echo json_encode($precipitationQueryfirst) ?>;
+
+        
+        var ss= document.getElementById('states').value;
+        var state = ss.split(",");
+        alert(state);
+         
 
         Highcharts.chart('container', {
             title: {
@@ -179,7 +200,8 @@
                 text: 'for Area'
             },
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                categories: state
             },
             yAxis: {
                 title: {
