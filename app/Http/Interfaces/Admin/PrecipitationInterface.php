@@ -27,7 +27,4 @@ interface PrecipitationInterface
 
     public function get_details_statistics();
 
-    public function get_graph_precipitation_index();
-
-    public function get_graph_precipitation_query($request);
 }
