@@ -1,13 +1,15 @@
-
+@can('tag-edit')
     <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $tag->id }}">
         <i class="fa fa-edit"></i>
         {{ __('Admin/site.edit') }}
     </button>
+@endcan
+@can('tag-delete')
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $tag->id }}">
         <i class="fa fa-trash"></i>
         {{ __('Admin/site.delete') }}
     </button>
-
+@endcan
 
     <form action="{{ route('tags.destroy', encrypt($tag->id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf

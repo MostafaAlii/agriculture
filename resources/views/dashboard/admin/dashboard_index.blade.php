@@ -414,7 +414,7 @@
                     @endcan
                     <!-- End Categories -->
                     <!-- Start Blogs -->
-                    @can('articles-managment')
+                    @can('blogs')
                         <div class="col-xl-2 col-lg-6 col-12">
                             <a href="{{ route('blogs.index') }}">
                             <div class="card pull-up">
@@ -441,7 +441,7 @@
                     @endcan
                     <!-- End Blogs -->
                     <!-- Start Tags -->
-                    @can('tags-managment')
+                    @can('tags')
                         <div class="col-xl-2 col-lg-6 col-12">
                             <a href="{{ route('tags.data') }}">
                             <div class="card pull-up">
@@ -699,29 +699,29 @@
                 <div class="row">
                     <!-- Start Row Chicken Project -->
                     @can('chicken-project')
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('Chickens.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="gray-bg" style="color: purple;">{{ \App\Models\ChickenProject::count() }}</h3>
-                                                <h6>  {{ trans('Admin/animals.chickensPageTitle') }}</h6>
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('Chickens.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="gray-bg" style="color: purple;">{{ \App\Models\ChickenProject::count() }}</h3>
+                                                    <h6>  {{ trans('Admin/animals.chickensPageTitle') }}</h6>
+                                                </div>
+                                                <div>
+                                                    {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                                    <i class="fas fa-kiwi-bird fa-2x" style="color:purple"></i>
+                                                </div>
                                             </div>
-                                            <div>
-                                                {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
-                                                <i class="fas fa-kiwi-bird fa-2x" style="color:purple"></i>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
                     @endcan
                     <!-- End Row Chicken Project -->
                     @can('bee-keepers')
@@ -749,54 +749,58 @@
                         </div>
                     @endcan
                     <!-- Start OutcomeProducts -->
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('OutcomeProducts.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="green"  style="color:blue;">{{ \App\Models\OutcomeProduct::count() }}</h3>
-                                                <h6>  {{ trans('Admin/outcome_products.outcome_productPageTitle') }}</h6>
+                    @can('outcome-products')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('OutcomeProducts.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="green"  style="color:blue;">{{ \App\Models\OutcomeProduct::count() }}</h3>
+                                                    <h6>  {{ trans('Admin/outcome_products.outcome_productPageTitle') }}</h6>
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-plane-departure fa-2x " style="color:blue;"></i>
+                                                    <i class="fab fa-pagelines fa-2x " style="color:green;"></i>
+                                                </div>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-info"  role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <div>
-                                                <i class="fas fa-plane-departure fa-2x " style="color:blue;"></i>
-                                                <i class="fab fa-pagelines fa-2x " style="color:green;"></i>
-                                            </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info"  role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            </div>
-                        </a>
-                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endcan
                     <!-- End OutcomeProducts -->
                     <!-- Start IncomeProducts -->
-                    <div class="col-xl-3 col-lg-6 col-12">
-                        <a href="{{ route('IncomeProducts.index') }}">
-                            <div class="card pull-up">
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <div class="media d-flex">
-                                            <div class="media-body text-left">
-                                                <h3 class="green" style="color:green">{{ \App\Models\IncomeProduct::count() }}</h3>
-                                                <h6>  {{ trans('Admin/income_products.income_productPageTitle') }}</h6>
+                    @can('income-products')
+                        <div class="col-xl-3 col-lg-6 col-12">
+                            <a href="{{ route('IncomeProducts.index') }}">
+                                <div class="card pull-up">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="media-body text-left">
+                                                    <h3 class="green" style="color:green">{{ \App\Models\IncomeProduct::count() }}</h3>
+                                                    <h6>  {{ trans('Admin/income_products.income_productPageTitle') }}</h6>
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-plane-arrival fa-2x " style="color:blue;"></i>
+                                                    <i class="fas fa-leaf fa-2x " style="color:green;"></i>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <i class="fas fa-plane-arrival fa-2x " style="color:blue;"></i>
-                                                <i class="fas fa-leaf fa-2x " style="color:green;"></i>
+                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="progress-bar bg-gradient-x-success"  role="progressbar" style=" width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                        </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-success"  role="progressbar" style=" width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    @endcan
                     <!-- End IncomeProducts -->
                 </div>
                 <!-- End Row Chicken -->

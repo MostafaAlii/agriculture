@@ -9,6 +9,11 @@ class OptionController extends Controller
 {
     protected $Data;
     public function __construct(OptionInterface $Data) {
+        $this->middleware('permission:options', ['only' => ['index']]);
+        $this->middleware('permission:option-create', ['only' => ['store']]);
+        $this->middleware('permission:option-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:option-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:option-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
