@@ -19,7 +19,7 @@ class AdminRepository implements AdminInterface{
     }
 
     public function data() {
-        $admins = Admin::get()->except(auth()->user()->id);
+        $admins = Admin::orderByDesc('created_at')->get()->except(auth()->user()->id);
         return DataTables::of($admins)
             ->addColumn('record_select', 'dashboard.admin.admins.data_table.record_select')
             ->addIndexColumn()
@@ -168,7 +168,7 @@ class AdminRepository implements AdminInterface{
             return redirect()->back();
         }
     }// end of update
-    
+
     public function updateInformation($request,$id) {
         try{
             $adminID = Crypt::decrypt($id);
@@ -187,7 +187,7 @@ class AdminRepository implements AdminInterface{
 
     public function change_status($id) {
        // dd('oooo');
-        
+
         try{
             $adminID = Crypt::decrypt($id);
             $admin=Admin::findorfail($adminID);
