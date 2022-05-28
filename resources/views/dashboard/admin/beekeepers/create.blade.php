@@ -77,8 +77,10 @@
 
                                                                     @endforeach
                                                                 </select>
-                                                                <input type="hidden" name="area_id" value="{{$areaID}}">
-                                                                <input type="hidden" name="state_id" value="{{$stateID}}">
+                                                                <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                                <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+                                                                <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
+
                                                             </div>
                                                         </div>
                                                         <div class="col col-md-4">

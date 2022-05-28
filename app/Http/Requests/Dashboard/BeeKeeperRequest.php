@@ -18,17 +18,17 @@ class BeeKeeperRequest extends FormRequest
             'farmer_id' => 'required|exists:farmers,id',
             'village_id' => 'required|exists:villages,id',
             'cost' => 'required|numeric',
-            'admin_id' => 'required',
-            'area_id' => 'required',
-            'state_id' => 'required',
+            'admin_id' => 'required|exists:admins,id',
+            'area_id' => 'required|exists:areas,id',
+            'state_id' => 'required|exists:states,id',
             'annual_old_product_beehive' =>'required|numeric',
             'annual_new_product_beehive'=>'required|numeric',
             'old_beehive_count' => 'required|numeric',
             'new_beehive_count' => 'required|numeric',
             'supported_side'=>'required',
             'unit_id'=>'required|exists:units,id',
-            'phone'=>'required',
-            'email'=>'required',
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
+            'email'=>'required|email',
             'died_beehive_count'=>'required|numeric'
 
         ];

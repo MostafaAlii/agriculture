@@ -120,7 +120,7 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin.firstname',searchable: true, sortable: true},
 
             {data: 'country', name: 'country',searchable: true, sortable: true},
             {data: 'country_product_type', name: 'country_product_type',searchable: true, sortable: true},

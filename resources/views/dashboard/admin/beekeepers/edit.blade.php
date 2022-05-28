@@ -75,8 +75,6 @@
                                                             <option value="{{$beekeeper->village_id }}" selected>{{ $beekeeper->village->name }}</option>
                                                             @foreach ($villages as $village)
                                                                 <option value="{{ $village->id }}">{{ $village->name }}</option>
-                                                            <input type="hidden" name="area_id" value="{{$areaID}}">
-                                                            <input type="hidden" name="state_id" value="{{$stateID}}">
 
                                                             @endforeach
                                                         </select>
@@ -120,6 +118,10 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/bees.new_beehive_count') }}</label>
                                                         <input name="new_beehive_count" value="{{$beekeeper->new_beehive_count}}" class="form-control"type="number">
+                                                        <input name="admin_id" type="hidden"  value="{{$adminId}}"class="form-control">
+                                                        <input name="area_id"  type="hidden"  value="{{$areaID}}"class="form-control">
+                                                        <input name="state_id"  type="hidden"  value="{{$stateID}}"class="form-control">
+
                                                     </div>
                                                 </div>
 

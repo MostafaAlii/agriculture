@@ -36,12 +36,12 @@ class IncomeProductRepository implements IncomeProductInterface {
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         if($admin->type =='employee') {
-            $incomes = IncomeProduct::with( 'country', 'whole_product','admin')
+            $incomes = IncomeProduct::with( 'country', 'whole_product','admin','unit','currency')
                 ->where('admin_id',  $admin->id);
         }else{
-            $incomes = IncomeProduct::with( 'country', 'whole_product','admin');
+            $incomes = IncomeProduct::with( 'country', 'whole_product','admin','unit','currency');
 
-        }
+       }
         return DataTables::of($incomes)
             ->addColumn('record_select', 'dashboard.admin.income_products.data_table.record_select')
             ->addIndexColumn()
@@ -49,7 +49,7 @@ class IncomeProductRepository implements IncomeProductInterface {
                 return $income ->created_at->diffforhumans();
             })
             ->editColumn('admin', function (IncomeProduct $income) {
-                return $income ->admin->firstname;
+                return $income->admin->firstname;
             })
             ->addColumn('country', function (IncomeProduct $income) {
                 return $income->country->name;
@@ -94,7 +94,7 @@ class IncomeProductRepository implements IncomeProductInterface {
 
 
         return view('dashboard.admin.income_products.create',
-            compact( 'admin','whole_products','countries','admin_dep_name','units','currencies'));
+            compact( 'admin','whole_products','countries','admin_dep_name','units','currencies','adminID'));
     }
 
     public function store($request) {
@@ -102,7 +102,7 @@ class IncomeProductRepository implements IncomeProductInterface {
         try {
             $requestData = $request->validated();
             $income_product = new IncomeProduct();
-            $income_product->admin_id = Auth::user()->id;
+            $income_product->admin_id =  $requestData['admin_id'];
             $income_product->country_id = $requestData['country_id'];
 
             $income_product->country_product_type = $requestData['country_product_type'];
@@ -151,7 +151,7 @@ class IncomeProductRepository implements IncomeProductInterface {
         $currencies = Currency::all();
 
         return view('dashboard.admin.income_products.edit',
-            compact('admin_dep_name','countries', 'units',
+            compact('admin_dep_name','countries', 'units','adminID',
                 'income_product','whole_products','currencies','admin'));
     }
 
@@ -163,7 +163,7 @@ class IncomeProductRepository implements IncomeProductInterface {
             $InID = Crypt::decrypt($id);
             $requestData = $request->validated();
             $income_product = IncomeProduct::findorfail($InID);
-            $income_product->admin_id = Auth::user()->id;
+            $income_product->admin_id =  $requestData['admin_id'];
 
 
             $income_product->country_id = $requestData['country_id'];

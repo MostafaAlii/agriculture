@@ -90,7 +90,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
         return view('dashboard.admin.outcome_products.create',
-            compact( 'admin','admin_dep_name','whole_products',  'countries','units','currencies'));
+            compact( 'admin','admin_dep_name','whole_products',  'countries','units','currencies','adminID'));
     }
 
     public function store($request) {
@@ -98,7 +98,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         try {
             $requestData = $request->validated();
             $outcome_product = new OutcomeProduct();
-            $outcome_product->admin_id = Auth::user()->id;
+            $outcome_product->admin_id =  $requestData['admin_id'];
             $outcome_product->country_id = $requestData['country_id'];
 
             $outcome_product->country_product_type = $requestData['country_product_type'];
@@ -158,7 +158,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             $outID = Crypt::decrypt($id);
             $requestData = $request->validated();
             $outcome_product = OutcomeProduct::findorfail($outID);
-            $outcome_product->admin_id = Auth::user()->id;
+            $outcome_product->admin_id =  $requestData['admin_id'];
             $outcome_product->country_product_type = $requestData['country_product_type'];
             $outcome_product->country_id = $requestData['country_id'];
             $outcome_product->unit_id = $requestData['unit_id'];

@@ -24,6 +24,7 @@ class OutcomeProductRequest extends FormRequest
             'outcome_product_amount' =>'required|numeric',
             'outcome_product_price' =>'required|numeric',
             'outcome_product_date' => 'required|date',
+            'admin_id' => 'required|exists:admins,id',
 
             'whole_product_id'=> 'required|exists:whole_products,id',
             'currency_id'=>'required|exists:currencies,id',

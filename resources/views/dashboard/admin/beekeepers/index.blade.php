@@ -162,7 +162,7 @@
             {data: 'admin', name: 'admin',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
             {data: 'state', name: 'state',searchable: true, sortable: true},
-            {data: 'village', name: 'village.name',searchable: true, sortable: true},
+            {data: 'village', name: 'village',searchable: true, sortable: true},
             {data: 'old_beehive_count', name: 'old_beehive_count.name',searchable: true, sortable: true},
             {data: 'new_beehive_count', name: 'new_beehive_count.name',searchable: true, sortable: true},
             {data: 'died_beehive_count', name: 'died_beehive_count.name',searchable: true, sortable: true},

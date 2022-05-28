@@ -116,6 +116,7 @@
                                                            <div class="form-group">
                                                                <label for="area_id-1">{{ __('Admin/income_products.wholesale') }}</label>
                                                                <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="text">
+                                                               <input name="admin_id" value="{{$adminID}}"  class="form-control"type="hidden">
 
                                                            </div>
                                                        </div>

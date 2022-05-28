@@ -118,17 +118,13 @@ class BeekeeperRepository implements BeekeeperInterface {
     {
         DB::beginTransaction();
         try {
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $area_name = $admin->area->name;
-            $stateID = $admin->state->id;
+
             $requestData = $request->validated();
             $beekeeper = new BeeKeeper();
-            $beekeeper->admin_id = $admin->id;
+            $beekeeper->admin_id = $requestData['admin_id'];
             $beekeeper->farmer_id = $requestData['farmer_id'];
-            $beekeeper->state_id = $stateID;
-            $beekeeper->area_id = $areaID;
+            $beekeeper->state_id = $requestData['state_id'];
+            $beekeeper->area_id = $requestData['area_id'];
             $beekeeper->village_id = $requestData['village_id'];
             $beekeeper->died_beehive_count = $requestData['died_beehive_count'];
             $beekeeper->annual_new_product_beehive = $requestData['annual_new_product_beehive'];
@@ -180,7 +176,7 @@ class BeekeeperRepository implements BeekeeperInterface {
         $disasters = BeeDisaster::all();
         $units = Unit::all();
         return view('dashboard.admin.beekeepers.edit',
-            compact('villages', 'admin', 'areaID','area_name','state_name','stateID',
+            compact('villages', 'admin', 'areaID','area_name','state_name','stateID','adminId',
                 'disasters', 'courses', 'units','beekeeper'));
     }
 
@@ -188,16 +184,13 @@ class BeekeeperRepository implements BeekeeperInterface {
         DB::beginTransaction();
         try {
             $beekeeperID = Crypt::decrypt($id);
-            $adminId = Auth::user()->id;
-            $admin = Admin::findorfail($adminId);
-            $areaID = $admin->area->id;
-            $stateID = $admin->state->id;
+
             $requestData = $request->validated();
             $beekeeper =  BeeKeeper::findorfail($beekeeperID);
-            $beekeeper->admin_id =  $admin->id;
+            $beekeeper->admin_id = $requestData['admin_id'];
             $beekeeper->farmer_id = $requestData['farmer_id'];
-            $beekeeper->area_id = $areaID;
-            $beekeeper->state_id = $stateID;
+            $beekeeper->state_id = $requestData['state_id'];
+            $beekeeper->area_id = $requestData['area_id'];
             $beekeeper->village_id = $requestData['village_id'];
             $beekeeper->died_beehive_count = $requestData['died_beehive_count'];
             $beekeeper->annual_new_product_beehive = $requestData['annual_new_product_beehive'];

@@ -148,6 +148,8 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/income_products.income_product_price') }}</label>
                                                         <input name="income_product_price" value="{{$income_product->income_product_price}}"  class="form-control"type="text">
+                                                        <input name="admin_id" value="{{$adminID}}"  class="form-control"type="hidden">
+
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-4">

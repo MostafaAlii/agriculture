@@ -15,9 +15,9 @@ class AnimalRequest extends FormRequest
     public function rules()
     {
         return [
-            'area_id'         => 'required',
-            'state_id'        => 'required',
-            'admin_id'        => 'required',
+            'area_id'         => 'required|exists:areas,id',
+            'state_id'        => 'required|exists:states,id',
+            'admin_id'        => 'required|exists:admins,id',
             'farmer_id' => 'required|exists:farmers,id',
             'village_id' => 'required|exists:villages,id',
             'project_name' => [
@@ -32,7 +32,7 @@ class AnimalRequest extends FormRequest
             'cost'=>'required|numeric',
             'type'=>'required',
             'phone'=>'required',
-            'email'=>'required',
+            'email'=>'required|email',
 
         ];
     }
