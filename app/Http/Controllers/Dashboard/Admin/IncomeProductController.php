@@ -12,6 +12,11 @@ class IncomeProductController extends Controller
 {
     protected $Data;
     public function __construct(IncomeProductInterface $Data) {
+        $this->middleware('permission:income-products', ['only' => ['index']]);
+        $this->middleware('permission:income-products-create', ['only' => ['create','store']]);
+        $this->middleware('permission:income-products-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:income-products-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:income-products-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

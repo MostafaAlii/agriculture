@@ -1,13 +1,13 @@
-{{-- <ahref="route('Options.show',encrypt($id))" class="btn btn-success  btn-sm">
-    {{ __('Admin/attributes.options') }}
-</a>--}}
-<a href="{{ route('Attributes.edit', encrypt($id)) }}" class="btn btn-primary btn-sm">
-    {{ __('Admin/site.edit') }}
-</a>
-<button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
-    {{ __('Admin/site.delete') }}
-</button>
-
+@can('attribute-edit')
+    <a href="{{ route('Attributes.edit', encrypt($id)) }}" class="btn btn-primary btn-sm">
+        {{ __('Admin/site.edit') }}
+    </a>
+@endcan
+@can('attribute-delete')
+    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
+        {{ __('Admin/site.delete') }}
+    </button>
+@endcan
 <form action="{{ route('Attributes.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')

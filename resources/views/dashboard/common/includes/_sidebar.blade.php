@@ -40,7 +40,7 @@
                 @can('dashboard')
                     <li class=" nav-item">
                         <a href="{{-- route('admin.dashboard') --}}">
-                            <!--<i class="material-icons">drag_indicator</i>-->
+                            <i class="material-icons">assessment</i>
                             <span class="menu-title" data-i18n="Dashboard">{{ trans('Admin/setting.dashboard') }}</span>
                         </a>
                         @can('moderators-management')
@@ -562,136 +562,189 @@
                 @endcan
                 <!-- end FarmerCrops  Menu -->
 
-                <!-- start Animals Chicken Projecta Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-fish" style="color:yellow;"></i>
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\animals.animals_chiken_fish_PageTitle')
-                            }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('Animals.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\animals.animalsPageTitle') }}</span></a>
-                        </li>
-
-                        <li>
-                            <a class="menu-item" href="{{ route('Chickens.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\animals.chickens_project') }}</span></a>
-                        </li>
-
-                    </ul>
-                </li>
+                <!-- start Animals Chicken Project Menu -->
+                @can('projects-list')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-fish" style="color:yellow;"></i>
+                            <span class="menu-title" data-i18n="Categories">
+                                {{ __('Admin\animals.animals_chiken_fish_PageTitle')}}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Caws & Fish Project -->
+                            @can('caws-project')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Animals.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\animals.animalsPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Caws & Fish Project -->
+                            <!-- Start Chicken Project -->
+                            @can('chicken-project')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Chickens.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\animals.chickens_project') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Chicken Project -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end Animals   Menu -->
 
                 <!-- start beekeepers & settings Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fab fa-forumbee" style="color:yellow"></i>
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\bees.beekeepers_and_settings')
-                            }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('BeeKeepers.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\bees.beekeeperPageTitle') }}</span></a>
-
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('BeeDisasters.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\bees.beesDisasterPageTitle') }}</span></a>
-                        </li>
-
-                        <li>
-                            <a class="menu-item" href="{{ route('CourseBees.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\bees.courseBeesPageTitle') }}</span></a>
-
-                        </li>
-
-                    </ul>
-                </li>
+                @can('bee-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fab fa-forumbee" style="color:yellow"></i>
+                            <span class="menu-title" data-i18n="Categories">{{ __('Admin\bees.beekeepers_and_settings')
+                                }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('bee-keepers')
+                                <li>
+                                    <a class="menu-item" href="{{ route('BeeKeepers.index') }}"> <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{__('Admin\bees.beekeeperPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('bee-disasters')
+                                <li>
+                                    <a class="menu-item" href="{{ route('BeeDisasters.index') }}"> 
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\bees.beesDisasterPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('bee-courses')
+                                <li>
+                                    <a class="menu-item" href="{{ route('CourseBees.index') }}">
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\bees.courseBeesPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end beekeepers & settings   Menu -->
 
                 <!-- start WholeSale & settings Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-plane-arrival" style="color:blue;"></i>-
-                        <i class="fas fa-plane-departure" style="color:blue;"></i>
-
-
-                        <span class="menu-title" data-i18n="Categories">{{ __('Admin\income_products.wholeSale_and_product')
-                            }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li>
-                            <a class="menu-item" href="{{ route('WholeSaleProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\income_products.WholeProduct') }}</span></a>
-
-                        </li>
-                        <li>
-                            <a class="menu-item" href="{{ route('IncomeProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\income_products.income_productPageTitle') }}</span></a>
-
-                        </li>
-
-                        <li>
-                            <a class="menu-item" href="{{ route('OutcomeProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                    __('Admin\outcome_products.outcome_productPageTitle') }}</span></a>
-
-                        </li>
-
-                    </ul>
-                </li>
+                @can('whole-products-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-plane-arrival" style="color:blue;"></i>-
+                            <i class="fas fa-plane-departure" style="color:blue;"></i>
+                            <span class="menu-title" data-i18n="Categories">
+                                {{ __('Admin\income_products.wholeSale_and_product')}}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('whole-sale-products')
+                                <li>
+                                    <a class="menu-item" href="{{ route('WholeSaleProducts.index') }}"> 
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\income_products.WholeProduct') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('income-products')
+                                <li>
+                                    <a class="menu-item" href="{{ route('IncomeProducts.index') }}"> 
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\income_products.income_productPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('outcome-products')
+                            <li>
+                                <a class="menu-item" href="{{ route('OutcomeProducts.index') }}"> 
+                                    <i class="material-icons">list</i><span data-i18n="Vertical">
+                                        {{ __('Admin\outcome_products.outcome_productPageTitle') }}
+                                    </span>
+                                </a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
                 <!-- end WholeSale & settings   Menu -->
 
                 <!-- Start Bolgs Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
-                        <span class="menu-title" data-i18n="Blogs">{{ trans('Admin/site.blogstags') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start blog -->
-                        <li>
-                            <a class="menu-item" href="{{ route('blogs.index') }}">
-                                <i class="icon-globe " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
-                                <span data-i18n="{{ trans('Admin/site.blog') }}">
-                                    {{ trans('Admin/site.blog') }}</span>
-                            </a>
-                        </li>
-                        <!-- End blog -->
-                        <!-- Start tag -->
-                        <li>
-                            <a class="menu-item" href="{{ route('tags.data') }}">
-                                <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
-                                <span data-i18n="{{ trans('Admin/site.tag') }}">
-                                    {{ trans('Admin/site.tag') }}</span>
-                            </a>
-                        </li>
-                        <!-- End tag -->
-                    </ul>
-                </li>
+                @can('blogs-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
+                            <span class="menu-title" data-i18n="Blogs">{{ trans('Admin/site.blogstags') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start blog -->
+                            @can('blogs')
+                                <li>
+                                    <a class="menu-item" href="{{ route('blogs.index') }}">
+                                        <i class="icon-globe " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                                        <span data-i18n="{{ trans('Admin/site.blog') }}">
+                                            {{ trans('Admin/site.blog') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End blog -->
+                            <!-- Start tag -->
+                            @can('tags')
+                                <li>
+                                    <a class="menu-item" href="{{ route('tags.data') }}">
+                                        <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
+                                        <span data-i18n="{{ trans('Admin/site.tag') }}">
+                                            {{ trans('Admin/site.tag') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End tag -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- End Bolgs Dropdown Menu -->
 
                 <!-- Start Attributes Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">playlist_add_check</i>
-                        <span class="menu-title" data-i18n="Attributes">
-                            {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start Attributes -->
-                        <li>
-                            <a class="menu-item" href="{{ route('Attributes.index') }}">
-                                <i class="material-icons">playlist_add_check</i>
-                                <span data-i18n="Attributes">
-                                    {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
-                            </a>
-                        </li>
-                        <!-- End Attributes -->
-                    </ul>
-                </li>
+                @can('attributes-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">playlist_add_check</i>
+                            <span class="menu-title" data-i18n="Attributes">
+                                {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Attributes -->
+                            @can('attributes')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Attributes.index') }}">
+                                        <i class="material-icons">playlist_add_check</i>
+                                        <span data-i18n="Attributes">
+                                            {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Attributes -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- End Attributes Dropdown Menu -->
 
                 <!-- Start Product Dropdown Menu -->
@@ -716,47 +769,29 @@
                 </li>
                 <!-- End Product Dropdown Menu -->
 
-                <!-- Start ProductCoupons Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">fiber_new</i>
-                        <span class="menu-title" data-i18n="ProductCoupons">
-                            {{ trans('Admin/coupons.coupon_title_in_sidebar') }}
-                        </span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start ProductCoupons -->
-                        <li>
-                            <a class="menu-item" href="{{ route('ProductCoupons.index') }}">
-                                <i class="material-icons">fiber_new</i>
-                                <span data-i18n="ProductCoupons">
-                                    {{ trans('Admin/coupons.coupon_title_in_sidebar') }}</span>
-                            </a>
-                        </li>
-                        <!-- End ProductCoupons -->
-                    </ul>
-                </li>
-                <!-- End ProductCoupons Dropdown Menu -->
-
                 <!-- Start options Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">credit_card</i>
-                        <span class="menu-title" data-i18n="Options">
-                            {{ trans('Admin/options.options_title') }}
-                        </span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start options -->
-                        <li>
-                            <a class="menu-item" href="{{ route('Options.index') }}">
-                                <i class="material-icons">credit_card</i>
-                                <span data-i18n="Options"> {{ trans('Admin/options.options_title') }}</span>
-                            </a>
-                        </li>
-                        <!-- End options -->
-                    </ul>
-                </li>
+                @can('options-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">credit_card</i>
+                            <span class="menu-title" data-i18n="Options">
+                                {{ trans('Admin/options.options_title') }}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start options -->
+                            @can('options')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Options.index') }}">
+                                        <i class="material-icons">credit_card</i>
+                                        <span data-i18n="Options"> {{ trans('Admin/options.options_title') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End options -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- End options Dropdown Menu -->
 
                 <!-- Start Orders Dropdown Menu -->

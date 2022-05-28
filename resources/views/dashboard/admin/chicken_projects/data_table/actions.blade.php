@@ -1,15 +1,15 @@
-
-
+@can('chicken-project-edit')
     <a href="{{ route('Chickens.edit', encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/animals.edit') }}
     </a>
-
+@endcan
+@can('chicken-project-delete')
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
         <i class="fa fa-trash"></i>
         {{ __('Admin/animals.delete') }}
     </button>
-
+@endcan
 
 
 

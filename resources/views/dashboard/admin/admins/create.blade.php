@@ -130,7 +130,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <fieldset class="form-group">
-                                                        <label>{{ __('Admin/site.user-type') }}<span class="text-danger">*</span></label>
+                                                        <label>{{ __('Admin/site.type') }}<span class="text-danger">*</span></label>
 
                                                         <select class="custom-select" id="customSelect" name="type">
                                                             <option selected>{{ __('Admin/site.select') }}</option>
@@ -215,7 +215,7 @@
             //  ajax for get states data of area =====================================================================
             $('select[name="area_id"]').on('change', function() {
                 var area_id = $(this).val();
-                // console.log(province_id);
+                console.log(area_id);
                 if (area_id) {
                     $.ajax({
                         url: "{{ URL::to('dashboard_admin/admin/state') }}/" + area_id,

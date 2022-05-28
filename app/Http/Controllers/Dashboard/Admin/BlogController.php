@@ -9,6 +9,11 @@ class BlogController extends Controller
 {
     protected $Data;
     public function __construct(BlogInterface $Data) {
+        $this->middleware('permission:blogs', ['only' => ['index']]);
+        $this->middleware('permission:blog-create', ['only' => ['create','store']]);
+        $this->middleware('permission:blog-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:blog-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:blog-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

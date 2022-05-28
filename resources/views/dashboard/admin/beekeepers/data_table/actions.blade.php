@@ -1,11 +1,13 @@
+@can('bee-keepers-edit')
     <a href="{{ route('BeeKeepers.edit',  encrypt($id)) }}" class="btn btn-info btn-sm" >
         <i class="fa fa-edit"></i>
     </a>
-
+@endcan
+@can('bee-keepers-delete')
     <button type="button" style="display: inline-block"class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
         <i class="fa fa-trash"></i>
     </button>
-
+@endcan
 
 
 

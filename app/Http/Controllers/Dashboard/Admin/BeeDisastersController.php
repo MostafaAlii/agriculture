@@ -12,6 +12,11 @@ class BeeDisastersController extends Controller
 {
     protected $Data;
     public function __construct(BeeDisasterInterface $Data) {
+        $this->middleware('permission:bee-disasters', ['only' => ['index']]);
+        $this->middleware('permission:bee-disasters-create', ['only' => ['store']]);
+        $this->middleware('permission:bee-disasters-edit', ['only' => ['update']]);
+        $this->middleware('permission:bee-disasters-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:bee-disasters-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
