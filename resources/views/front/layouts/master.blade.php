@@ -4,6 +4,7 @@
 	<head>
         @include('front.layouts.include.headcss')
 	</head>
+	
 
 	<body>
 		<div id="app">

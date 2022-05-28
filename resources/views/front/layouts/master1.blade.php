@@ -23,9 +23,13 @@
 					"dots": false
 				}'>
                 @foreach (\App\Models\Slider::get() as $slider)
+					<?php if(isset($slider->image->filename)){$scr=$slider->image->filename;}else{$scr="";}?>
+						
+					
+																
                     <div class="start-screen__slide">
                         <div class="start-screen__bg"
-                        style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});
+                        style="background-image: url({{ asset('Dashboard/img/sliders/'. $scr) }});
                         background-position: top 30% right 30%;"></div>
                         <div class="start-screen__content__item align-items-center">
                             <div class="container">

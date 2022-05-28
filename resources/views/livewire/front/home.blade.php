@@ -97,7 +97,7 @@
                     <div class="row">
                         @foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
                             <div class="col-12 col-md-6 col-lg-4">
-                                @if ($blog->image->filename)
+                                @if (isset($blog->image->filename))
                                     <a class="__item" href="{{ route('blogdetails', encrypt($blog->id)) }}"><img
                                             src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}"
                                             alt="demo" class="img-fluid " style="width:620px; height:210px" /></a>
@@ -296,7 +296,7 @@
                     @foreach ($newProducts as $product)
                         <div class="__item">
                             <figure class="__image">
-                                @if ($product->image->filename)
+                                @if (isset($product->image->filename))
                                     <a href="{{ route('product_details', encrypt($product->id)) }}">
                                         <img width="188"
                                             src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
@@ -510,7 +510,7 @@
                                         <div class="col-12 col-md-6">
                                             <figure class="__image">
                                                 <a href="{{ route('product_details', encrypt($product->id)) }}">
-                                                    @if ($product->image->filename)
+                                                    @if (isset($product->image->filename))
                                                         <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                             alt="demo" />
@@ -616,7 +616,7 @@
                                     <div class="__item">
                                         <figure class="__image">
                                             <a href="{{ route('product_details', encrypt($product->id)) }}">
-                                                @if ($product->image->filename)
+                                                @if (isset($product->image->filename))
                                                     <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                         alt="demo" />
@@ -709,60 +709,10 @@
         </div>
     </section>
     <!-- end section -->
-@if(isset($offer_product))
-    <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
-        <!-- start banner simple -->
-        <div class="simple-banner simple-banner--style-1" data-aos="fade" data-aos-offset="50" style="background-image:{{ asset('Dashboard/img/products/' . $offer_product->image->filename) }}">
 
-            <div class="__label d-none d-md-block" >
-                <div class="d-table m-auto h-100">
-                    <div class="d-table-cell align-middle">
-                        <span class="num-1">{{$offer_product->special_price}}</span>
-                    </div>
-
-                    <div class="d-table-cell align-middle">
-                        <span class="num-2">$</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="__inner">
-
-                                <img class="img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}"
-                                data-src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}" width="50" height="50"
-                                alt="demo"  style="width: 145px;height: 200px;"/>
-
-                            <div class="row">
-                                <div class="col-12 col-lg-7 col-xl-6">
-                                    <div class="banner__text" data-aos="fade-left" data-delay="500">
-                                        <h2 class="__title h1">
-                                            <b style="display: block; color: #c6c820;">
-                                                {{$offer_product->name}}
-                                            </b>
-                                        </h2>
-
-                                        <p>
-                                        {{substr($offer_product->name,0,100)}}...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end banner simple -->
-    </section>
-    <!-- end section -->
-@endif
-
-  @include('livewire.front._home_review')
-
+    
+    @include('livewire.front._offer_price')
+    @include('livewire.front._home_review')
 
     <!-- start section blog-->
     <section class="section section--no-pt section--no-pb">
@@ -781,7 +731,7 @@
                                 <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="100"
                                     data-aos-offset="0">
                                     <figure class="__image">
-                                        @if ($blog->image->filename)
+                                        @if (isset($blog->image->filename))
                                             <img src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}"
                                                 data-src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}"
                                                 alt="demo" />
@@ -863,7 +813,7 @@
 
 
                     @foreach( \App\Models\Brand::orderByDesc('created_at')->limit(5)->get() as $brand)
-                        @if ($brand->image->filename)
+                        @if (isset($brand->image->filename))
                             <div class="__item">
                                 <img class="img-fluid m-auto" src="{{ asset('Dashboard/img/brands/' . $brand->image->filename) }}"
                                     alt="{{ $brand->title }}" />
