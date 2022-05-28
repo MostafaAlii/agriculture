@@ -67,19 +67,26 @@
 </style>
 
 @endif
-@endsection
-
 <style>
     .goods {
     @if (app()->getLocale() == 'en')
     direction: ltr;
-    @else
-    direction: ltr;
+    /* @else
+    direction: ltr; */
     @endif
-    /* background-color: black !important; */
 
 }
+    .review--slider {
+    @if (app()->getLocale() == 'en')
+    direction: ltr;
+    /* @else
+    direction: ltr; */
+    @endif
+    }
 </style>
+@endsection
+
+
 <div>
     {{-- ********************** Home 2 ****************************************** --}}
     <section class="section section--no-pt section--no-pb">
@@ -754,7 +761,8 @@
     <!-- end section -->
 @endif
 
-    @include('livewire.front._home_review')
+  @include('livewire.front._home_review')
+
 
     <!-- start section blog-->
     <section class="section section--no-pt section--no-pb">
