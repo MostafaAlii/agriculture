@@ -1,5 +1,14 @@
 @section('title', __('website\home.home'))
 @section('css')
+<style>
+      .review--slider {
+    @if (app()->getLocale() == 'en')
+    direction: ltr;
+    /* @else
+    direction: ltr; */
+    @endif
+    }
+</style>
 
 @endsection
 <div>
