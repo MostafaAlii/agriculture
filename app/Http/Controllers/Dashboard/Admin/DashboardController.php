@@ -12,15 +12,19 @@ class DashboardController extends Controller {
     public function index(Request $request) {
 
         event(new MyEvent('agricultre project', auth()->user()->firstname . ' ' . auth()->user()->lastname));
+
         $validated = $request->validate([
             'area_id' => 'sometimes|nullable|exists:areas,id',
-            'start_date' => 'sometimes|nullable|date|date_format:Y-m-d',
-            'end_date' => 'sometimes|nullable|date|date_format:Y-m-d|after:start_date',
+            'start_date' => 'sometimes|nullable|date|before:end_date',
+            'end_date' => 'sometimes|nullable|date|after:start_date',
         ],[
-            
-        ],[
-
+            'area_id.exists'=>trans('Admin/validation.exists'),
+            'start_date.date'=>trans('Admin/validation.date'),
+            'start_date.before'=>trans('Admin/validation.before'),
+            'end_date.date'=>trans('Admin/validation.date'),
+            'end_date.after'=>trans('Admin/validation.after'),
         ]);
+        
         $area_id = (!empty($_GET["area_id"])) ? ($_GET["area_id"]) : ('');
         $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
         $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');

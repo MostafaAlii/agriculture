@@ -62,18 +62,29 @@
                                                 <option value="{{ $area->id }}">{{ $area->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('area_id')
+                                            <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
 
                                     </div>
                                     <div class="form-group col-md-3">
                                         <h5 style="float: right">{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
                                         <div class="controls">
-                                            <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
-                                    </div>
+                                            <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date">
+                                            <div class="help-block"></div>
+                                        </div>
+                                        @error('start_date')
+                                            <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
+                                        </div>
                                     <div class="form-group col-md-3">
                                         <h5 style="float: right">{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
                                         <div class="controls">
                                             <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
-                                    </div>
+                                            @error('end_date')
+                                            <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
+                                        </div>
                                     <div class="form-group  col-md-3" >
                                         <br>
                                         <button type="submit" id="" class="btn btn-info">{{trans('Admin\Site.Get_chart')}}</button>
@@ -91,8 +102,8 @@
                         </form>
                         </div>
                     </div>
-                @endcan
-                <!--End Precipitation Graph-->
+            @endcan
+                    <!--End Precipitation Graph-->
                 <hr>
                 <!-- eCommerce statistic -->
                 <!-- Start First Row Admin -->
