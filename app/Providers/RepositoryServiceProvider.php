@@ -109,6 +109,8 @@ use App\Http\Repositories\Admin\ProfileRepository;
 use App\Http\Repositories\Admin\SettingRepository;
 
 use App\Http\Repositories\Admin\VillageRepository;
+
+use App\Http\Interfaces\Front\CommentInterface;
 use App\Http\Repositories\Front\CommentRepository;
 
 use App\Http\Repositories\Front\PaymentRepository;
