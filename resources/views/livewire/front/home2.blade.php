@@ -1,5 +1,14 @@
 @section('title', __('website\home.home'))
 @section('css')
+<style>
+      .review--slider {
+    @if (app()->getLocale() == 'en')
+    direction: ltr;
+    /* @else
+    direction: ltr; */
+    @endif
+    }
+</style>
 
 @endsection
 <div>
@@ -333,56 +342,7 @@
 
 @include('livewire.front._home_review')
 
-<!-- start section -->
-<section class="section section--no-pt section--no-pb section--gutter">
-    <!-- start banner simple -->
-    <div class="simple-banner simple-banner--style-1" data-aos="fade" data-aos-offset="50">
-
-        <div class="__label d-none d-md-block">
-            <div class="d-table m-auto h-100">
-                <div class="d-table-cell align-middle">
-                    <span class="num-1">1</span>
-                </div>
-
-                <div class="d-table-cell align-middle">
-                    <span class="num-2">50$</span>
-                    <span>Kg</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="__inner">
-                        <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                            data-src="{{ asset('frontassets/img/site_logo.png') }}" alt="demo" />
-
-                        <div class="row">
-                            <div class="col-12 col-lg-7 col-xl-5">
-                                <div class="banner__text" data-aos="fade-left" data-delay="500">
-                                    <h2 class="__title h1"><b style="display: block; color: #c6c820;">Fresh
-                                            Apples</b> <span>in Our Store</span></h2>
-
-                                    <p>
-                                        The generated Lorem Ipsum is therefore always free from repetition injected
-                                        humour, or non-characteristic words etc.
-                                    </p>
-
-                                    <p>
-                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#">Buy</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end banner simple -->
-</section>
-<!-- end section -->
+@include('livewire.front._offer_price')
 
 <!-- start section blog-->
 <section class="section section--no-pb">

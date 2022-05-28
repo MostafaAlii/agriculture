@@ -663,71 +663,88 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('income-products')
+                                <li>
+                                    <a class="menu-item" href="{{ route('IncomeProducts.index') }}"> 
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\income_products.income_productPageTitle') }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('outcome-products')
                             <li>
-                                <a class="menu-item" href="{{ route('IncomeProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                        __('Admin\income_products.income_productPageTitle') }}</span></a>
-
+                                <a class="menu-item" href="{{ route('OutcomeProducts.index') }}"> 
+                                    <i class="material-icons">list</i><span data-i18n="Vertical">
+                                        {{ __('Admin\outcome_products.outcome_productPageTitle') }}
+                                    </span>
+                                </a>
                             </li>
-
-                            <li>
-                                <a class="menu-item" href="{{ route('OutcomeProducts.index') }}"> <i class="material-icons">list</i><span data-i18n="Vertical">{{
-                                        __('Admin\outcome_products.outcome_productPageTitle') }}</span></a>
-
-                            </li>
-
+                            @endcan
                         </ul>
                     </li>
                 @endcan
                 <!-- end WholeSale & settings   Menu -->
 
                 <!-- Start Bolgs Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
-                        <span class="menu-title" data-i18n="Blogs">{{ trans('Admin/site.blogstags') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start blog -->
-                        <li>
-                            <a class="menu-item" href="{{ route('blogs.index') }}">
-                                <i class="icon-globe " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
-                                <span data-i18n="{{ trans('Admin/site.blog') }}">
-                                    {{ trans('Admin/site.blog') }}</span>
-                            </a>
-                        </li>
-                        <!-- End blog -->
-                        <!-- Start tag -->
-                        <li>
-                            <a class="menu-item" href="{{ route('tags.data') }}">
-                                <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
-                                <span data-i18n="{{ trans('Admin/site.tag') }}">
-                                    {{ trans('Admin/site.tag') }}</span>
-                            </a>
-                        </li>
-                        <!-- End tag -->
-                    </ul>
-                </li>
+                @can('blogs-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
+                            <span class="menu-title" data-i18n="Blogs">{{ trans('Admin/site.blogstags') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start blog -->
+                            @can('blogs')
+                                <li>
+                                    <a class="menu-item" href="{{ route('blogs.index') }}">
+                                        <i class="icon-globe " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                                        <span data-i18n="{{ trans('Admin/site.blog') }}">
+                                            {{ trans('Admin/site.blog') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End blog -->
+                            <!-- Start tag -->
+                            @can('tags')
+                                <li>
+                                    <a class="menu-item" href="{{ route('tags.data') }}">
+                                        <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
+                                        <span data-i18n="{{ trans('Admin/site.tag') }}">
+                                            {{ trans('Admin/site.tag') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End tag -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- End Bolgs Dropdown Menu -->
 
                 <!-- Start Attributes Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">playlist_add_check</i>
-                        <span class="menu-title" data-i18n="Attributes">
-                            {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start Attributes -->
-                        <li>
-                            <a class="menu-item" href="{{ route('Attributes.index') }}">
-                                <i class="material-icons">playlist_add_check</i>
-                                <span data-i18n="Attributes">
-                                    {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
-                            </a>
-                        </li>
-                        <!-- End Attributes -->
-                    </ul>
-                </li>
+                @can('attributes-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">playlist_add_check</i>
+                            <span class="menu-title" data-i18n="Attributes">
+                                {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Attributes -->
+                            @can('attributes')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Attributes.index') }}">
+                                        <i class="material-icons">playlist_add_check</i>
+                                        <span data-i18n="Attributes">
+                                            {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Attributes -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- End Attributes Dropdown Menu -->
 
                 <!-- Start Product Dropdown Menu -->
@@ -752,47 +769,29 @@
                 </li>
                 <!-- End Product Dropdown Menu -->
 
-                <!-- Start ProductCoupons Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">fiber_new</i>
-                        <span class="menu-title" data-i18n="ProductCoupons">
-                            {{ trans('Admin/coupons.coupon_title_in_sidebar') }}
-                        </span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start ProductCoupons -->
-                        <li>
-                            <a class="menu-item" href="{{ route('ProductCoupons.index') }}">
-                                <i class="material-icons">fiber_new</i>
-                                <span data-i18n="ProductCoupons">
-                                    {{ trans('Admin/coupons.coupon_title_in_sidebar') }}</span>
-                            </a>
-                        </li>
-                        <!-- End ProductCoupons -->
-                    </ul>
-                </li>
-                <!-- End ProductCoupons Dropdown Menu -->
-
                 <!-- Start options Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">credit_card</i>
-                        <span class="menu-title" data-i18n="Options">
-                            {{ trans('Admin/options.options_title') }}
-                        </span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start options -->
-                        <li>
-                            <a class="menu-item" href="{{ route('Options.index') }}">
-                                <i class="material-icons">credit_card</i>
-                                <span data-i18n="Options"> {{ trans('Admin/options.options_title') }}</span>
-                            </a>
-                        </li>
-                        <!-- End options -->
-                    </ul>
-                </li>
+                @can('options-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">credit_card</i>
+                            <span class="menu-title" data-i18n="Options">
+                                {{ trans('Admin/options.options_title') }}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start options -->
+                            @can('options')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Options.index') }}">
+                                        <i class="material-icons">credit_card</i>
+                                        <span data-i18n="Options"> {{ trans('Admin/options.options_title') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End options -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- End options Dropdown Menu -->
 
                 <!-- Start Orders Dropdown Menu -->

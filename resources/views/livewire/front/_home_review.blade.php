@@ -11,21 +11,39 @@
                     <div class="js-slick" data-slick='{"autoplay": true, "arrows": false, "dots": true, "speed": 1000}'>
                     @foreach($reviews as $rev)
                     <!-- start item -->
-                        <div class="review__item">
-                            <div class="review__item__text">
-                                <p>
-                                    <i>{{$rev->message}}</i>
-                                </p>
-                            </div>
+                            {{-- @if(app()->getLocale() == 'ar' ) --}}
+                                <div class="review__item">
+                                    <div class="review__item__text">
+                                        <p>
+                                            <i>{{$rev->message}}</i>
 
-                            <div class="review__item__author  d-table">
-                                <div class="d-table-cell align-middle">
-                                    <span class="review__item__author-name"><strong>{{$rev->name}}</strong></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="review__item__author  d-table">
+                                        <div class="d-table-cell align-middle">
+                                            <span class="review__item__author-name"><strong>{{$rev->name}}</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{-- @endif --}}
+                            {{-- @if(app()->getLocale() == 'en')
+                            <div class="review__item">
+                                <div class="review__item__text">
+                                    <p>
+                                        <i>{{$rev->message}}</i>
+                                    </p>
+                                </div>
+
+                                <div class="review__item__author  d-table">
+                                    <div class="d-table-cell align-middle">
+                                        <span class="review__item__author-name"><strong>{{$rev->name}}</strong></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            @endif --}}
                         <!-- end item -->
-                        @endforeach
+                    @endforeach
 
                     </div>
                 </div>
@@ -33,4 +51,4 @@
             </div>
         </section>
         <!-- end section -->
-        @endif
+@endif

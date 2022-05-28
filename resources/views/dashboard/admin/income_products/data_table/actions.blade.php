@@ -1,15 +1,15 @@
-
-
+@can('income-products-edit')
     <a href="{{ route('IncomeProducts.edit',  encrypt($id)) }}" class="btn btn-info btn-sm">
         <i class="fa fa-edit"></i>
         {{ __('Admin/income_products.edit') }}
     </a>
-
+@endcan
+@can('income-products-delete')
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
         <i class="fa fa-trash"></i>
         {{ __('Admin/income_products.delete') }}
     </button>
-
+@endcan
 
 
 
