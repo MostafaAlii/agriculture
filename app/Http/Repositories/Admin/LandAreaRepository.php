@@ -88,7 +88,7 @@ class LandAreaRepository implements LandAreaInterface{
 
 
         return view('dashboard.admin.land_areas.create',
-            compact( 'area_name', 'areas', 'state_name', 'units','land_categories','admin'));
+            compact( 'area_name', 'areas', 'state_name', 'units','land_categories','admin','adminId'));
     }
 
     public function store($request) {
@@ -96,7 +96,7 @@ class LandAreaRepository implements LandAreaInterface{
         try {
             $requestData = $request->validated();
             $landArea = new LandArea();
-            $landArea->admin_id = Auth::user()->id;
+            $landArea->area_id = $requestData['admin_id'];
             $landArea->area_id = $requestData['area_id'];
             $landArea->state_id = $requestData['state_id'];
             $landArea->village_id = $requestData['village_id'];
@@ -138,7 +138,7 @@ class LandAreaRepository implements LandAreaInterface{
 
 
         return view('dashboard.admin.land_areas.edit',
-            compact('area_name', 'areas', 'state_name', 'units','land_area','land_categories','admin'));
+            compact('area_name', 'areas', 'adminId','state_name', 'units','land_area','land_categories','admin'));
     }
 
     public function update($request, $id) {
@@ -148,7 +148,7 @@ class LandAreaRepository implements LandAreaInterface{
 
             $requestData = $request->validated();
             $landArea = LandArea::findorfail($LandID);
-            $landArea->admin_id = Auth::user()->id;
+            $landArea->area_id = $requestData['admin_id'];
             $landArea->area_id = $requestData['area_id'];
             $landArea->state_id = $requestData['state_id'];
             $landArea->village_id = $requestData['village_id'];

@@ -96,6 +96,10 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label  for="admin_id">{{ __('Admin/orchards.farmer_phone') }}</label>
+                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
+
                                                         <input name="phone" value="{{$orchard->phone}}" id="farmer_phone"typ="text" class="form-control">
                                                     </div>
                                                 </div>

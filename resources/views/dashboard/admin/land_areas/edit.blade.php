@@ -131,7 +131,10 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/land_areas.L_area') }}</label>
+
                                                         <input name="L_area" value="{{$land_area->L_area}}"  class="form-control"type="text">
+                                                        <input name="admin_id" value="{{$adminId}}"  class="form-control"type="hidden">
+
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-6">
