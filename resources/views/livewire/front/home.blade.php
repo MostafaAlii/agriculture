@@ -2,52 +2,50 @@
 @section('title', __('website\home.home'))
 @section('css')
 @if(app()->getLocale()=='ar')
-<style>
-    .product-wish{
-        position: absolute;
-        bottom :3%;
-        z-index:99;
-        left:30px;
-        text-align: right;
-        padding-top:0;
-    }
-    .product-wish .fa {
-        /* color:red; */
-        font-size: 30px;
-    }
-    .product-wish .fa:hover {
-        color:#ff7007;
-        font-size: 30px;
-    }
-    .fill-heart{
-        color: #ff7007 !important;
-    }
-</style>
+    <style>
+        .product-wish{
+            position: absolute;
+            bottom :3%;
+            z-index:99;
+            left:30px;
+            text-align: right;
+            padding-top:0;
+        }
+        .product-wish .fa {
+            /* color:red; */
+            font-size: 30px;
+        }
+        .product-wish .fa:hover {
+            color:#ff7007;
+            font-size: 30px;
+        }
+        .fill-heart{
+            color: #ff7007 !important;
+        }
+    </style>
 @else
-
-<style>
-    .product-wish{
-        position: absolute;
-        top:3%;
-        left: 0;
-        z-index:99;
-        right:30px;
-        text-align: right;
-        padding-top:0;
-    }
-    .product-wish .fa {
-        /* color:red; */
-        font-size: 30px;
-    }
-    .product-wish .fa:hover {
-        color:#ff7007;
-        font-size: 30px;
-    }
-    .fill-heart{
-        color: #ff7007 !important;
-    }
-
-     /* --------------------------------- */
+    <style>
+        .product-wish{
+            position: absolute;
+            top:3%;
+            left: 0;
+            z-index:99;
+            right:30px;
+            text-align: right;
+            padding-top:0;
+        }
+        .product-wish .fa {
+            /* color:red; */
+            font-size: 30px;
+        }
+        .product-wish .fa:hover {
+            color:#ff7007;
+            font-size: 30px;
+        }
+        .fill-heart{
+            color: #ff7007 !important;
+        }
+        /* --------------------------------- */
 .score {
   display: inline-block;
   font-family: Wingdings;
@@ -67,8 +65,21 @@
   overflow: hidden;
 }
 </style>
+
 @endif
 @endsection
+
+<style>
+    .goods {
+    @if (app()->getLocale() == 'en')
+    direction: ltr;
+    @else
+    direction: ltr;
+    @endif
+    /* background-color: black !important; */
+
+}
+</style>
 <div>
     {{-- ********************** Home 2 ****************************************** --}}
     <section class="section section--no-pt section--no-pb">
@@ -371,7 +382,7 @@
                         <a class="custom-btn custom-btn--medium custom-btn--style-1"
                                             href="{{ route('blogdetails', encrypt($b->id)) }}">{{ __('website\home.readmore') }}</a>
                     </div>
-                    @endforeach                   
+                    @endforeach
                 </div>
             </div>
             <!-- end banner simple -->
@@ -474,7 +485,7 @@
     <!-- end section -->
 
     <!-- start section -->
-    <section class="section section--no-pt">
+    <section class="section section--no-pt ">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
                 <h2 class="__title">{{ __('Admin/site.popproducts') }}</h2>
@@ -487,7 +498,7 @@
                         <!-- start item -->
                         @foreach ($popProducts as $product)
                             <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
-                                <div class="__item">
+                                <div class="__item ">
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <figure class="__image">
@@ -713,7 +724,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="__inner">
-                            
+
                                 <img class="img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}"
                                 data-src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}" width="50" height="50"
                                 alt="demo"  style="width: 145px;height: 200px;"/>
