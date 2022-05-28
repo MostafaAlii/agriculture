@@ -7,6 +7,11 @@ use App\Http\Requests\Dashboard\AttributeRequest;
 class AttributeController extends Controller {
     protected $Data;
     public function __construct(AttributeInterface $Data) {
+        $this->middleware('permission:attributes', ['only' => ['index']]);
+        $this->middleware('permission:attribute-create', ['only' => ['store']]);
+        $this->middleware('permission:attribute-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:attribute-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:attribute-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 

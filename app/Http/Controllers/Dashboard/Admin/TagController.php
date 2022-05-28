@@ -8,28 +8,22 @@ class TagController extends Controller
 {
     protected $Data;
     public function __construct(TagInterface $Data) {
+        $this->middleware('permission:tags', ['only' => ['index']]);
+        $this->middleware('permission:tag-create', ['only' => ['store']]);
+        $this->middleware('permission:tag-edit', ['only' => ['update']]);
+        $this->middleware('permission:tag-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:tag-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
     public function data(Request $request) {
         return $this->Data->data($request);
     }
-    // public function data()
-    // {
-    //     return $this->Data->data();
-
-    // }
-    // public function create() {
-    //     return $this->Data->create();
-    // }
 
     public function store(TagRequest $request) {
         return $this->Data->store($request);
     }
 
-    // public function edit($id) {
-    //     return $this->Data->edit($id);
-    // }
 
     public function update(TagRequest $request ,$id) {
         return $this->Data->update($request,$id);

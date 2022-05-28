@@ -12,6 +12,11 @@ class OutcomeProductController extends Controller
 {
     protected $Data;
     public function __construct(OutcomeProductInterface $Data) {
+        $this->middleware('permission:outcome-products', ['only' => ['index']]);
+        $this->middleware('permission:outcome-products-create', ['only' => ['create','store']]);
+        $this->middleware('permission:outcome-products-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:outcome-products-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:outcome-products-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
