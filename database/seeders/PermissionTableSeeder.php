@@ -79,6 +79,14 @@ class PermissionTableSeeder extends Seeder {
                             'brands-edit',
                             'brands-delete',
                             'brands-delete-all',
+                        // Transactions Setting ::
+                        'transaction-managment',
+                            'currencies',
+                                'currency-create',
+                                'currency-edit',
+                            'units',
+                                'unit-create',
+                                'unit-edit',
             //Country List ::
             'countries-list',
                 // Country ::

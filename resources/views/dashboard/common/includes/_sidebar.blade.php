@@ -124,7 +124,34 @@
                                 </li>
                             @endcan
                             <!-- End Roles Permissions -->
-
+                            <!-- Start Transactions settings -->
+                                @can('transaction-managment')
+                                <li>
+                                    <a class="menu-item" href="#">
+                                        <i class="material-icons">swap_calls</i> 
+                                        <span data-i18n="Vertical"> {{ trans('Admin\setting.transaction_setting') }} </span>
+                                    </a>
+                                    <ul class="menu-content">
+                                        @can('currencies')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('Currencies.index') }}">
+                                                    <i class="material-icons">attach_money</i>  
+                                                    <span data-i18n="Currencies"> {{ trans('Admin/setting.currency_title_in_sidebar') }} </span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('units')
+                                            <li>
+                                                <a class="menu-item" href="{{ route('Units.index') }}">
+                                                    <i class="material-icons">ac_unit</i>  
+                                                    <span data-i18n="Units"> {{ trans('Admin/setting.unit_title_in_sidebar') }} </span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                    </ul>        
+                                </li>
+                            @endcan
+                            <!-- End Transactions settings -->
                             <!-- Start Pages -->
                             @can('pages')
                                 <li>
