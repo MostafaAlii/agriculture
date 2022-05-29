@@ -36,6 +36,7 @@ return [
     'inestergrame'                                          =>              'انستغرام',
     'unit_title_in_sidebar'                                 =>               'وحدات القياس',
     'currency_title_in_sidebar'                             =>                'العملات',
-    'maintenance_message'                                   =>'الموقع في حالة الصيانة يرجى زيارتنا لاحقا',
+    'maintenance_message'                                   =>                'الموقع في حالة الصيانة يرجى زيارتنا لاحقا',
+    'transaction_setting'                                   =>                'اعدادات المعاملات',
 
 ];

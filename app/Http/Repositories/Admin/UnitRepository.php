@@ -25,13 +25,14 @@ class UnitRepository implements UnitInterface
 
         $units = Unit::query();
         return DataTables::of($units)
-            ->addColumn('record_select', 'dashboard.admin.units.data_table.record_select')
+
             ->addIndexColumn()
             ->editColumn('created_at', function (Unit $unit) {
                 return $unit->created_at->diffforhumans();
             })
             ->addColumn('actions', 'dashboard.admin.units.data_table.actions')
-            ->rawColumns(['record_select', 'actions'])
+
+            ->rawColumns(['actions'])
             ->toJson();
     }
 

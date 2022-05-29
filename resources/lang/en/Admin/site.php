@@ -226,4 +226,9 @@ return [
        // subscribe
        'subsms'=>'will send in back ground can do any other things',
 
+
+
+       'we'=>'We Are',
+       'world'=>'One The World',
+       'worldsms'=>'Thanks For Your Support',
 ];

@@ -19,8 +19,6 @@ class CurrencyRepository implements CurrencyInterface{
 
         $currencies = Currency::query();
         return DataTables::of($currencies)
-
-            ->addColumn('record_select', 'dashboard.admin.currencies.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (Currency $currency) {
                 return $currency->created_at->diffforhumans();
@@ -28,7 +26,7 @@ class CurrencyRepository implements CurrencyInterface{
 
             ->addColumn('actions', 'dashboard.admin.currencies.data_table.actions')
 
-            ->rawColumns([ 'record_select','actions'])
+            ->rawColumns(['actions'])
             ->toJson();
     }
     public function store($request) {

@@ -9,6 +9,9 @@ class CurrencyController extends Controller
 {
     protected $Data;
     public function __construct(CurrencyInterface $Data) {
+        $this->middleware('permission:currencies', ['only' => ['index']]);
+        $this->middleware('permission:currency-create', ['only' => ['store']]);
+        $this->middleware('permission:currency-edit', ['only' => ['update']]);
         $this->Data = $Data;
     }
 
@@ -31,13 +34,5 @@ class CurrencyController extends Controller
     public function update(CurrencyRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
-
-//    public function destroy($id) {
-//        return $this->Data->destroy($id);
-//    }// end of destroy
-//
-//    public function bulkDelete(Request $request) {
-//        return $this->Data->bulkDelete($request);
-//    }// end of destroy
 }
 

@@ -40,6 +40,7 @@ return [
     'status.required' => 'Status is Required',
     'message_maintenance.required'=>'Message Maintenance Required',
     'unit_title_in_sidebar'                                 =>               'Measurement Units',
-    'currency_title_in_sidebar'                             =>                'Currencies'
+    'currency_title_in_sidebar'                             =>                'Currencies',
+    'transaction_setting'                                   =>                'Transactions Setting',
 
 ];
