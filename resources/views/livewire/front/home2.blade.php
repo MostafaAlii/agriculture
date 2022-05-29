@@ -243,10 +243,9 @@
     <section class="section">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
-                <h2 class="__title">We are <span>on the world</span></h2>
+                <h2 class="__title"> {{ __('Admin/site.we') }} <span> {{ __('Admin/site.world') }}</span></h2>
 
-                <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which
-                    looks reasonable.</p>
+                <p>{{ __('Admin/site.worldsms') }}</p>
             </div>
 
             <div data-aos="slide-up" data-aos-duration="800" data-aos-offset="50">
