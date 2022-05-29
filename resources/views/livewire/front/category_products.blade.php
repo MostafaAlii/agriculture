@@ -35,16 +35,23 @@
 
     <div class="spacer py-3"></div>
 
+        <center>  {{$products}}</center><br>
+
     <!-- start goods -->
     <div class="goods goods--style-1">
         <div class="__inner">
             <div class="row">
+            
+            
                 @php
                     $witems = Cart::instance('wishlist')
                         ->content()
                         ->pluck('id');
                 @endphp
                 @if ($products->count() > 0)
+
+              
+                
                     @foreach ($products as $product)
                         <!-- start item -->
                         <div class="col-12 col-sm-6 col-lg-3">
@@ -140,6 +147,7 @@
                         </div>
                         <!-- end item -->
                     @endforeach
+                  
                 @else
                 <div class="col-12 col-sm-12 col-lg-12" style="padding-right: 36%;"><center><h2 style="color: green;">{{ __('website\search.no_cat_product') }}</h2></center></div>
                 @endif

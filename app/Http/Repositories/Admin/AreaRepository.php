@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Repositories\Admin;
 
 use App\Http\Interfaces\Admin\AreaInterface;
@@ -9,14 +10,18 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
-class AreaRepository implements AreaInterface {
-    public function index() {
+
+class AreaRepository implements AreaInterface
+{
+    public function index()
+    {
         $provencies = Province::get();
         return view('dashboard.admin.areas.index', compact('provencies'));
     }
 
-    public function data() {
-        $areas = Area::with(['province','states']);
+    public function data()
+    {
+        $areas = Area::with(['province', 'states']);
         return DataTables::of($areas)
             ->addColumn('province', function (Area $area) {
                 return $area->province->name;
@@ -29,55 +34,83 @@ class AreaRepository implements AreaInterface {
                 return $area->created_at->diffforhumans();
             })
             ->addColumn('actions', 'dashboard.admin.areas.data_table.actions')
-
-            ->rawColumns([ 'record_select','actions'])
+            ->rawColumns(['record_select', 'actions'])
             ->toJson();
     }
 
-    public function store($request) {
-        Area::create([
-            'name'  => $request->input('name'),
-            'province_id'    =>  $request->province_id,
-        ]);
-        toastr()->success(__('Admin/site.added_successfully'));
-        return redirect()->route('Areas.index');
+    public function store($request)
+    {
+        try {
+            Area::create([
+                'name' => $request->input('name'),
+                'province_id' => $request->province_id,
+            ]);
+            toastr()->success(__('Admin/site.added_successfully'));
+            return redirect()->route('Areas.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
+
+        }
+
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $areaID = Crypt::decrypt($id);
-        $area=Area::findorfail($areaID);
+        $area = Area::findorfail($areaID);
         $proviences = Province::get();
         return view('dashboard.admin.areas.data_table.edit', compact('area', 'proviences'));
     }
 
-    public function update($request,$id) {
-        $areaID = Crypt::decrypt($id);
-        $area=Area::findorfail($areaID);
-        $area->update([
-            'name'  => $request->input('name'),
-            'province_id'    =>  $request->province_id,
-        ]);
-        toastr()->success(__('Admin/site.added_successfully'));
-        return redirect()->route('Areas.index');
-    }
+    public function update($request, $id)
+    {
+        try {
+            $areaID = Crypt::decrypt($id);
+            $area = Area::findorfail($areaID);
+            $area->update([
+                'name' => $request->input('name'),
+                'province_id' => $request->province_id,
+            ]);
+            toastr()->success(__('Admin/site.added_successfully'));
+            return redirect()->route('Areas.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/attributes.edit_wrong'));
 
-    public function destroy($id) {
-        $data = [];
-        $areaID = Crypt::decrypt($id);
-        $data['state'] = State::where('area_id', $areaID)->pluck('area_id'); 
-        if($data['state']->count() == 0) {
-            $area=Area::findorfail($areaID);
-            $area->delete();
-            toastr()->success(__('Admin/site.deleted_successfully'));
-            return redirect()->route('Areas.index');
-        } else {
-            toastr()->error(__('Admin/areas.cant_delete'));
-            return redirect()->route('Areas.index');
+            return redirect()->back();
+
         }
+
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $data = [];
+            $areaID = Crypt::decrypt($id);
+            $data['state'] = State::where('area_id', $areaID)->pluck('area_id');
+            if ($data['state']->count() == 0) {
+                $area = Area::findorfail($areaID);
+                $area->delete();
+                toastr()->success(__('Admin/site.deleted_successfully'));
+                return redirect()->route('Areas.index');
+            } else {
+                toastr()->error(__('Admin/areas.cant_delete'));
+                return redirect()->route('Areas.index');
+            }
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
+
+        }
+
     }
 
 
-    public function bulkDelete($request) {
+    public function bulkDelete($request)
+    {
         try {
             DB::beginTransaction();
             if ($request->delete_select_id) {
@@ -101,9 +134,11 @@ class AreaRepository implements AreaInterface {
                 toastr()->error(__('Admin/site.no_data_found'));
                 return redirect()->route('Areas.index');
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

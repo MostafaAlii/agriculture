@@ -80,7 +80,6 @@ class PrecipitationRepository implements PrecipitationInterface
 
     public function store($request)
     {
-        DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $precipitation = new Precipitation();
@@ -94,13 +93,12 @@ class PrecipitationRepository implements PrecipitationInterface
 
             $precipitation->save($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Precipitations.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
+            toastr()->success(__('Admin/attributes.add_wrong'));
             return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
@@ -131,7 +129,6 @@ class PrecipitationRepository implements PrecipitationInterface
 
     public function update($request, $id)
     {
-        DB::beginTransaction();
         try {
             $preID = Crypt::decrypt($id);
             $requestData = $request->validated();
@@ -146,26 +143,31 @@ class PrecipitationRepository implements PrecipitationInterface
 
             $precipitation->update($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Precipitations.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();
         }
     }
 
     public function destroy($id)
     {
-        $precipitationID = Crypt::decrypt($id);
-        $precipitation = Precipitation::findorfail($precipitationID);
+        try{
+            $precipitationID = Crypt::decrypt($id);
+            $precipitation = Precipitation::findorfail($precipitationID);
 
 
-        $precipitation->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
-        return redirect()->route('Precipitations.index');
+            $precipitation->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('Precipitations.index');
+        }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+            return redirect()->back();
+        }
+
 
     }
 
@@ -192,7 +194,9 @@ class PrecipitationRepository implements PrecipitationInterface
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

@@ -17,7 +17,7 @@ class CategoryProductController extends Controller
             array_push($new,$products->pivot->product_id);
         }
    
-        $data['products']= Product::whereIn('id',$new)->get();
+        $data['products']= Product::whereIn('id',$new)->paginate(12);
            //dd($data['products']); 
        return view('livewire.front.category_products',$data);
     }
