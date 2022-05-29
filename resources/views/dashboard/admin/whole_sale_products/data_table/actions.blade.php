@@ -19,8 +19,7 @@
              id="delete{{ $id }}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="{{ route('WholeSaleProducts.destroy', ($id)) }}" class="my-1 my-xl-0"
-                    <form action="{{ route('WholeSaleProducts.destroy', ($id)) }}" class="my-1 my-xl-0"
+                    <form action="{{ route('WholeSaleProducts.destroy',encrypt($id)) }}" class="my-1 my-xl-0"
                           method="post" style="display: inline-block;">
                         @csrf
                         @method('delete')
@@ -68,14 +67,14 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('WholeSaleProducts.update', ($id)) }}" class="my-1 my-xl-0" method="post"
+                    <form action="{{ route('WholeSaleProducts.update', encrypt($id)) }}" class="my-1 my-xl-0" method="post"
                           style="display: inline-block;">
                         @csrf
                         @method('patch')
                         <input type="hidden" value="{{ $id }}" name="id">
 
                         @php
-                            $whole_product = \App\Models\WholeProduct::findorfail($id)->first();
+                            $whole_product = \App\Models\WholeProduct::findorfail($id)->get();
                         @endphp
 
                         <div class="modal-body">

@@ -99,7 +99,7 @@ class CawProjectRepository implements CawProjectInterface{
 
 
     public function store($request)    {
-        DB::beginTransaction();
+
         try {
 
             $requestData = $request->validated();
@@ -121,14 +121,14 @@ class CawProjectRepository implements CawProjectInterface{
             $animal->email = $requestData['email'];
             $animal->save($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Animals.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
 
     }
@@ -153,7 +153,6 @@ class CawProjectRepository implements CawProjectInterface{
     public function update($request,$id)
 
     {
-        DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $animalID = Crypt::decrypt($id);
@@ -180,26 +179,33 @@ class CawProjectRepository implements CawProjectInterface{
 
             $animal->update($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Animals.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
 
     }
 
     public function destroy($id)
     {
-        $animalID = Crypt::decrypt($id);
-        $animal = CawProject::findorfail($animalID);
+        try{
+            $animalID = Crypt::decrypt($id);
+            $animal = CawProject::findorfail($animalID);
 
-        $animal->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
-        return redirect()->route('Animals.index');
+            $animal->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('Animals.index');
+        }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
+        }
+
 
 
 

@@ -97,7 +97,6 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
     public function store($request)
 
     {
-        DB::beginTransaction();
         try {
 
             $requestData = $request->validated();
@@ -122,14 +121,13 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
 
             $protected_house->save($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('ProtectedHouse.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
         }
 
     }
@@ -156,7 +154,6 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
     public function update($request, $id)
     {
 
-        DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $protectedID = Crypt::decrypt($id);
@@ -183,27 +180,32 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
 
             $protected_house->update($requestData);
 
-            DB::commit();
-            toastr()->success(__('Admin/site.added_successfully'));
+            toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('ProtectedHouse.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();
         }
 
 
     }
 
     public function destroy($id)
-    {
+    { try{
         $protectedID = Crypt::decrypt($id);
         $protected_house = ProtectedHouse::findorfail($protectedID);
 
         $protected_house->delete();
         toastr()->success(__('Admin/site.deleted_successfully'));
         return redirect()->route('ProtectedHouse.index');
+    }
+    catch (\Exception $e) {
+        toastr()->success(__('Admin/attributes.delete_wrong'));
+        return redirect()->back();
+    }
+
 
 
     }
@@ -231,7 +233,9 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

@@ -99,7 +99,6 @@ class OrchardRepository implements OrchardInterface
         $state_name = $admin->state->name;
         $villages = Village::where('state_id',$stateID)->get();
         $land_categories = LandCategory::all();
-//        $villages = Village::all();
         $units = Unit::all();
         $trees = Tree::all();
 
@@ -152,7 +151,9 @@ class OrchardRepository implements OrchardInterface
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
 
     }
@@ -172,10 +173,6 @@ class OrchardRepository implements OrchardInterface
         $land_categories = LandCategory::all();
         $trees = Tree::all();
         $units = Unit::all();
-
-
-
-
 
         return view('dashboard.admin.orchards.edit',
             compact('state_name', 'villages', 'land_categories','stateID',
@@ -215,19 +212,28 @@ class OrchardRepository implements OrchardInterface
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+
+            return redirect()->back();
         }
 
     }
 
     public function destroy($id)
     {
+        try{
         $orchardID = Crypt::decrypt($id);
         $orchard = Orchard::findorfail($orchardID);
         $orchard->trees()->detach();
-            $orchard->delete();
-            toastr()->success(__('Admin/site.deleted_successfully'));
-            return redirect()->route('orchards.index');
+        $orchard->delete();
+        toastr()->success(__('Admin/site.deleted_successfully'));
+        return redirect()->route('orchards.index');
+    }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
+        }
+
 
     }
 
@@ -253,7 +259,9 @@ class OrchardRepository implements OrchardInterface
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

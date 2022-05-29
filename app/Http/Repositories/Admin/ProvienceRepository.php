@@ -34,15 +34,22 @@ class ProvienceRepository implements ProvienceInterface {
     }
 
     public function store($request) {
-        Province::create([
-            'name'  => $request->input('name'),
-            'country_id'    =>  $request->country_id,
-        ]);
-        toastr()->success(__('Admin/site.added_successfully'));
-        return redirect()->route('Proviences.index');
+        try{
+            Province::create([
+                'name'  => $request->input('name'),
+                'country_id'    =>  $request->country_id,
+            ]);
+            toastr()->success(__('Admin/site.added_successfully'));
+            return redirect()->route('Proviences.index');
+        } catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
+        }
+
     }
 
     public function edit($id) {
+
         $provinceID = Crypt::decrypt($id);
         $provience=Province::findorfail($provinceID);
         $countries = Country::get();
@@ -50,29 +57,43 @@ class ProvienceRepository implements ProvienceInterface {
     }
 
     public function update($request,$id) {
-        $provinceID = Crypt::decrypt($id);
-        $provience=Province::findorfail($provinceID);
-        $provience->update([
-            'name'  => $request->input('name'),
-            'country_id'    =>  $request->country_id,
-        ]);
-        toastr()->success(__('Admin/site.added_successfully'));
-        return redirect()->route('Proviences.index');
+try{
+    $provinceID = Crypt::decrypt($id);
+    $provience=Province::findorfail($provinceID);
+    $provience->update([
+        'name'  => $request->input('name'),
+        'country_id'    =>  $request->country_id,
+    ]);
+    toastr()->success(__('Admin/site.added_successfully'));
+    return redirect()->route('Proviences.index');
+} catch (\Exception $e) {
+    toastr()->error(__('Admin/attributes.edit_wrong'));
+    return redirect()->back();
+}
+
+
     }
 
     public function destroy($id) {
-        $data = [];
-        $provinceID = Crypt::decrypt($id);
-        $data['area'] = Area::where('province_id', $provinceID)->pluck('province_id'); 
-        if($data['area']->count() == 0) {
-            $province=Province::findorfail($provinceID);
-            $province->delete();
-            toastr()->success(__('Admin/site.deleted_successfully'));
-            return redirect()->route('Proviences.index');
-        } else {
-            toastr()->error(__('Admin/proviences.cant_delete'));
-            return redirect()->route('Proviences.index');
+        try{
+            $data = [];
+            $provinceID = Crypt::decrypt($id);
+            $data['area'] = Area::where('province_id', $provinceID)->pluck('province_id');
+            if($data['area']->count() == 0) {
+                $province=Province::findorfail($provinceID);
+                $province->delete();
+                toastr()->success(__('Admin/site.deleted_successfully'));
+                return redirect()->route('Proviences.index');
+            } else {
+                toastr()->error(__('Admin/proviences.cant_delete'));
+                return redirect()->route('Proviences.index');
+            }
         }
+        catch (\Exception $e) {
+            toastr()->error(__('Admin/attributes.delete_wrong'));
+            return redirect()->back();
+        }
+
     }
 
 
@@ -105,7 +126,9 @@ class ProvienceRepository implements ProvienceInterface {
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

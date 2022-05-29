@@ -94,7 +94,6 @@ class OutcomeProductRepository implements OutcomeProductInterface {
     }
 
     public function store($request) {
-        DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $outcome_product = new OutcomeProduct();
@@ -116,14 +115,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
             $outcome_product->save($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('OutcomeProducts.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
         }
     }
 
@@ -153,7 +151,6 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
     public function update( $request, $id) {
-        DB::beginTransaction();
         try {
             $outID = Crypt::decrypt($id);
             $requestData = $request->validated();
@@ -173,25 +170,30 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
             $outcome_product->update($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('OutcomeProducts.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();
         }
     }
 
     public function destroy($id) {
-        $outID = Crypt::decrypt($id);
-        $outcome_product = OutcomeProduct::findorfail($outID);
+        try{
+            $outID = Crypt::decrypt($id);
+            $outcome_product = OutcomeProduct::findorfail($outID);
 
 
-        $outcome_product->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
-        return redirect()->route('OutcomeProducts.index');
+            $outcome_product->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('OutcomeProducts.index');
+        }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+            return redirect()->back();
+        }
+
 
     }
 
@@ -217,7 +219,9 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

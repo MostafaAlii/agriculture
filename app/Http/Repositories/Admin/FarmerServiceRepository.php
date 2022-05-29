@@ -135,7 +135,9 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
 
     }
@@ -194,19 +196,28 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+
+            return redirect()->back();
         }
 
     }
 
     public function destroy($id)
     {
-        $farmer_serviceID = Crypt::decrypt($id);
-        $farmer_service = FarmerService::findorfail($farmer_serviceID);
+        try{
+            $farmer_serviceID = Crypt::decrypt($id);
+            $farmer_service = FarmerService::findorfail($farmer_serviceID);
 
             $farmer_service->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('FarmerServices.index');
+
+        }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
+        }
 
 
     }
@@ -233,8 +244,9 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
 
+            return redirect()->back();
         }
     }
     // end of bulkDelete

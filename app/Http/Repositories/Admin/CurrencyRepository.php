@@ -32,7 +32,6 @@ class CurrencyRepository implements CurrencyInterface{
             ->toJson();
     }
     public function store($request) {
-        DB::beginTransaction();
         try{
             $validated = $request->validated();
 
@@ -40,13 +39,14 @@ class CurrencyRepository implements CurrencyInterface{
                 'Name'=>$validated['Name']
             ]);
 
-            DB::commit();
 
             toastr()->success(__('Admin/country.added_successfully'));
             return redirect()->route('Currencies.index');
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
+
         }
 
 
@@ -55,7 +55,6 @@ class CurrencyRepository implements CurrencyInterface{
     public function update( $request,$id) {
 
         try{
-            DB::beginTransaction();
 
             $currencyId = Crypt::decrypt($id);
             $currency=Currency::findorfail($currencyId);
@@ -67,8 +66,8 @@ class CurrencyRepository implements CurrencyInterface{
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('Currencies.index');
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();
 
         }
 
