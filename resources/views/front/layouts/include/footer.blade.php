@@ -4,7 +4,7 @@
 					<div class="row">
 						<div class="col-12 col-sm-4 col-md-3 col-lg-2">
 							<div class="footer_cont_item">
-								<a class="site-logo" href="{{ route('front') }}"> 
+								<a class="site-logo" href="{{ route('front') }}">
 									{{--<img class="img-fluid  lazy" src="" data-src="{{ asset('frontassets/img/site_logo.png')}}" alt="demo" />--}}
 									<img class="img-fluid  lazy" src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" data-src="{{ asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
 
@@ -24,11 +24,11 @@
 												<li><a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a></li>
 												<li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
    												<li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
-												
+
 											</ul>
 										</div>
 
-										
+
 										<div class="col-6 col-sm-4">
 											<?php
 												$home_category=App\Models\Category::whereNotNull('parent_id')->inRandomOrder()->get();
@@ -36,7 +36,7 @@
 											?>
 											<h5 class="footer__item__title h6">{{__('Admin/categories.department_sub')}}</h5>
 											<ul>
-												
+
 												@foreach($home_category as $cat)
 													<li><a href="{{route('pro_cat',encrypt($cat->id))}}">{{$cat->name}}</a></li>
 												@endforeach
@@ -102,5 +102,5 @@
 						</div>
 					</div>
 				</div>
-			</footer>
+	</footer>
 			<!-- end footer -->
