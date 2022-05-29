@@ -297,6 +297,13 @@ class PermissionTableSeeder extends Seeder {
                     'option-delete',
                     'option-delete-all',
             // Reports ::
+            'animal-reports',
+                'statistics-report',
+                'ship-report-statistics',
+                'caw_statistics-report',
+                'fish-report-statistics',
+                'chicken-report-statistics',
+
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);

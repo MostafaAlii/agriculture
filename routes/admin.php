@@ -463,14 +463,9 @@ Route::group(
                 Route::delete('/brands/bulk_delete/{ids}', [BrandController::class,'bulkDelete'])->name('brands.bulk_delete');
                 /********************************* End brand Routes ************************************/
 
-                /********************************* Start Payment Method **********************************/
-                Route::resource('Payments', PaymentMethodController::class)->except(['show']);
-                Route::get('/data', [PaymentMethodController::class,'data'])->name('payments.data');
-                /********************************* End Payment Method **********************************/
-
                 /********************************* Start Orders **********************************/
                 Route::resource('Orders', OrdersController::class)->except(['destory', 'create', 'store', 'show']);
-                Route::get('/data', [OrdersController::class,'data'])->name('orders.data');
+                Route::get('Orders/data', [OrdersController::class,'data'])->name('orders.data');
                 Route::get('Orders/showOrder/{id}', [OrdersController::class,'showOrder'])->name('order.show');
                 Route::get('Orders/printOrder/{id}', [OrdersController::class,'printOrder'])->name('order.print');
                 /********************************* End Orders **********************************/
