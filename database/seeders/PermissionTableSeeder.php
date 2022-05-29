@@ -296,7 +296,7 @@ class PermissionTableSeeder extends Seeder {
                     'option-edit',
                     'option-delete',
                     'option-delete-all',
-
+            // Reports ::
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
