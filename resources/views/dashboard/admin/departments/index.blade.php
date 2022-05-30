@@ -125,7 +125,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-         order: [[8, 'desc']],
+         order: [[8, 'desc']], //order table by created_at desc
        
 
     });

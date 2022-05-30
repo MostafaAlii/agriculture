@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
-use Illuminate\Http\Request;
-use App\Events\Dashboard\MyEvent;
-use App\Http\Controllers\Controller;
-use App\Models\Precipitation;
 use App\Models\Area;
+use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Models\Precipitation;
+use App\Events\Dashboard\MyEvent;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller {
 
@@ -72,6 +74,11 @@ class DashboardController extends Controller {
         }
 
         $data['chart_data'] = json_encode($data);
+
+
+        $data['latest_products']=Product::orderBy('id','desc')->limit('5')->get();
+        $data['orders'] = Order::latest()->get();
+        //dd($data['orders']);
         return view('dashboard.admin.dashboard_index',$data);
     }
 }

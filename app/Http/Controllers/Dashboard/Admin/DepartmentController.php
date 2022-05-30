@@ -19,19 +19,16 @@ class DepartmentController extends Controller
     public function index() {
         return $this->Data->index();
     }
-    public function data()
-    {
+    
+    public function data(){
         return $this->Data->data();
-
     }
     public function create() {
         return $this->Data->create();
     }
 
     public function store(DepartmentRequest $request) {
-      // dd('ff');
         return $this->Data->store($request);
-        //return $request;
     }
 
     public function edit($id) {
@@ -46,8 +43,7 @@ class DepartmentController extends Controller
          return $this->Data->destroy($id);
     }
 
-    public function bulkDelete(Request $request)
-    {
+    public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
     }
 }

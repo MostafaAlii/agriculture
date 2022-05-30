@@ -77,12 +77,9 @@
                                                                         'childs' => $main->childs,
                                                                         'color'=>'#209c41',
                                                                         'number'=>2,
-                                                                        // 'depart_id'=>$depart->id,
-                                                                        // 'parent_id'=>$main->parent_id
-                                                                        
-                                                                        'depart_id'=>$main->id,//pramiry key of supplier we edit on it 
-                                                                        'parent_id'=>$depart->parent_id //parent_id of another supplier
-                                                                        
+                                                                        'depart_id'=>$depart->id,//pramiry key of department we edit on it 
+                                                                        'parent_id'=>$depart->parent_id,//parent_id of another department
+                                                                                                                                                
                                                                     ];
                                                                      ?>
                                                                     <option style="color: {{$color}};"  value="{{$main->id}}" <?php if($depart->parent_id == $main->id){echo'selected';}?>>-{{$main->name}}</option>

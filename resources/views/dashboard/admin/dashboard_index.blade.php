@@ -1469,6 +1469,13 @@
                 @endcan
                 <!-- End planning Report التخطيط -->
                 <!--------------------------------------------------------- End Report -------------------------------------------------------------->
+
+              @include('dashboard.admin.recent_product')
+              <br>
+              <hr>
+              @include('dashboard.admin.orders')
+            
+
             </div>
         </div>
 @endsection

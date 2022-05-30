@@ -40,7 +40,7 @@
     <select class="form-control" id="state_id" name="state_id">
         <option value="" disabled <?php if(isset($depart->state_id) && ($depart->state_id == Null)){echo'selected';}elseif(old('state_id') == ''){echo "selected";}?>>{{ __('Admin/site.select') }}</option>
             @foreach($state as $s)
-                    <option value="{{$s->id}}"  <?php if(isset($depart->state_id) && ($s->id==$depart->state_id)){echo'selected';}elseif(old('state_id') == ''){echo "selected";}?>>{{$s->name}}</option>
+                    <option value="{{$s->id}}"  <?php if(isset($depart->state_id) && ($s->id==$depart->state_id)){echo'selected';}elseif(old('state_id') == $s->id){echo "selected";}?>>{{$s->name}}</option>
                 @endforeach
         </select>
     @error('state_id')

@@ -1,18 +1,19 @@
 <?php
 namespace App\Http\Repositories\Admin;
 
+use App\Http\Interfaces\Admin\DepartmentInterface;
+use Yajra\DataTables\DataTables;
+
 use App\Models\Admin;
-use App\Models\State;
 use App\Models\Farmer;
-use App\Models\Country;
 use App\Models\User;
 
 use App\Models\Department;
-use Yajra\DataTables\DataTables;
-
-use App\Http\Interfaces\Admin\DepartmentInterface;
-use App\Models\Area;
 use App\Models\Category;
+
+use App\Models\Country;
+use App\Models\Area;
+use App\Models\State;
 use App\Models\Province;
 use App\Models\Village;
 
@@ -87,17 +88,13 @@ class DepartmentRepository implements DepartmentInterface {
         $data['state']=State::all();
         $data['village']=Village::all();
        
-
-       // return view('dashboard.admin.departments.create', compact('main_departments','country','state'));
         return view('dashboard.admin.departments.create', $data);
     }
 //------------------------------------------------------------------------------------------
-//DepartmentRequest
     public function store($request) {
       
-            
         try{
-            $validated = $request->validated();
+           // $validated = $request->validated();
            
             $depart=new Department;
             ($request->parent_id!='0')?$depart->parent_id=$request->parent_id:'';
@@ -136,13 +133,14 @@ class DepartmentRepository implements DepartmentInterface {
         $real_id= decrypt($id);
         
         $data['depart']=Department::findOrfail($real_id);
-        $data['main_departments']=Department::where('parent_id',Null)->where('id','!=',$real_id)->get();
+        $data['main_departments']=Department::whereNull('parent_id')->where('id','!=',$real_id)->get();
         $data['country']=Country::all();
         $data['province']=Province::all();
         $data['area']=Area::all();
         $data['state']=State::all();
         $data['village']=Village::all();
-        
+
+      //  dd($data['depart']);
         return view('dashboard.admin.departments.edit',$data);
     }
 
