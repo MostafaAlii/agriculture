@@ -17,7 +17,7 @@ class WorkerLoginRequest extends FormRequest {
 
     public function rules() {
         return [
-            // 'email' => ['required', 'string', 'email'],
+            // 'login' => 'required,mailorphone',
             'password' => ['required', 'string'],
             // 'g-recaptcha-response' => 'required|captcha'
         ];
