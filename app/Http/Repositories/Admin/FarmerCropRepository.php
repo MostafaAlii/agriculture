@@ -141,7 +141,9 @@ class FarmerCropRepository implements FarmerCropInterface {
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
 
 
@@ -209,7 +211,9 @@ class FarmerCropRepository implements FarmerCropInterface {
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+
+            return redirect()->back();
         }
 
 
@@ -217,14 +221,23 @@ class FarmerCropRepository implements FarmerCropInterface {
 
     public function destroy($id)
     {
-        $farmerCropID = Crypt::decrypt($id);
-        $farmercrop = FarmerCrop::findorfail($farmerCropID);
-        $farmercrop->winter_crops()->detach();
-        $farmercrop->summer_crops()->detach();
+        try{
+            $farmerCropID = Crypt::decrypt($id);
+            $farmercrop = FarmerCrop::findorfail($farmerCropID);
+            $farmercrop->winter_crops()->detach();
+            $farmercrop->summer_crops()->detach();
 
-        $farmercrop->delete();
+            $farmercrop->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('FarmerCrops.index');
+
+        }
+        catch (\Exception $e) {
+            DB::rollBack();
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
+        }
 
 
 
@@ -253,7 +266,9 @@ class FarmerCropRepository implements FarmerCropInterface {
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

@@ -225,7 +225,6 @@ Route::group(
             Route::resource('Precipitations', PrecipitationController::class)->except(['show']);
             Route::get('/Precipitations/data', [PrecipitationController::class,'data'])->name('precipitation.data');
             Route::delete('/Precipitations/bulk_delete/{ids}', [PrecipitationController::class,'bulkDelete'])->name('precipitation.bulk_delete');
-//            Route::get('/Precipitations/statistic/', [PrecipitationController::class,'statistics'])->name('precipitation.statistics');
             Route::get('/Precipitations/index_statistic', [PrecipitationController::class,'index_statistic'])->name('precipitations.index_statistic');;
             Route::get('dtable-custom-statistics', [PrecipitationController::class,'get_custom_statistics']);
             Route::get('/Precipitations/index_details_statistic', [PrecipitationController::class,'get_details_statistics_index'])->name('precipitations.index_details_statistic');
@@ -445,12 +444,6 @@ Route::group(
                 });
                 /********************************* End Products Routes ************************************/
 
-                /********************************* Start Coupon Routes ************************************/
-                Route::resource('ProductCoupons', ProductCouponController::class)->except(['show']);
-                Route::get('ProductCoupons/data', [ProductCouponController::class,'data'])->name('Coupons.data');
-                Route::delete('ProductCoupons/bulk_delete/{ids}', [ProductCouponController::class,'bulkDelete'])->name('Coupons.bulk_delete');
-                /********************************* End Coupon Routes ************************************/
-
                 /********************************* Slider Routes ************************************/
                 Route::resource('sliders', SliderController::class)->except(['show']);
                 Route::get('/sliders/data', [SliderController::class,'data'])->name('sliders.data');
@@ -463,14 +456,9 @@ Route::group(
                 Route::delete('/brands/bulk_delete/{ids}', [BrandController::class,'bulkDelete'])->name('brands.bulk_delete');
                 /********************************* End brand Routes ************************************/
 
-                /********************************* Start Payment Method **********************************/
-                Route::resource('Payments', PaymentMethodController::class)->except(['show']);
-                Route::get('/data', [PaymentMethodController::class,'data'])->name('payments.data');
-                /********************************* End Payment Method **********************************/
-
                 /********************************* Start Orders **********************************/
                 Route::resource('Orders', OrdersController::class)->except(['destory', 'create', 'store', 'show']);
-                Route::get('/data', [OrdersController::class,'data'])->name('orders.data');
+                Route::get('Orders/data', [OrdersController::class,'data'])->name('orders.data');
                 Route::get('Orders/showOrder/{id}', [OrdersController::class,'showOrder'])->name('order.show');
                 Route::get('Orders/printOrder/{id}', [OrdersController::class,'printOrder'])->name('order.print');
                 /********************************* End Orders **********************************/

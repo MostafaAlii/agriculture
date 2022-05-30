@@ -18,6 +18,10 @@ class CawProjectController extends Controller
         $this->middleware('permission:caws-project-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:caws-project-delete', ['only' => ['destroy']]);
         $this->middleware('permission:caws-project-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:statistics-report', ['only' => ['statistics']]);
+        $this->middleware('permission:ship-report-statistics', ['only' => ['ship_statistics']]);
+        $this->middleware('permission:caw-report-statistics', ['only' => ['caw_statistics']]);
+        $this->middleware('permission:fish-report-statistics', ['only' => ['fish_statistics']]);
         $this->Data = $Data;
     }
 

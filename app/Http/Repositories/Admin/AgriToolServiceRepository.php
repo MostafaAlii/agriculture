@@ -1,5 +1,7 @@
 <?php
-namespace  App\Http\Repositories\Admin;
+
+namespace App\Http\Repositories\Admin;
+
 use App\Models\AgriTService;
 
 use Illuminate\Http\Request;
@@ -8,13 +10,17 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use App\Http\Interfaces\Admin\AgriToolServiceInterface;
 
-class AgriToolServiceRepository implements AgriToolServiceInterface{
+class AgriToolServiceRepository implements AgriToolServiceInterface
+{
 
 
-    public function index() {
+    public function index()
+    {
         return view('dashboard.admin.agriculture_tool_services.index');
     }
-    public function data() {
+
+    public function data()
+    {
 
         $agriculture_tool_service = AgriTService::query();
         return DataTables::of($agriculture_tool_service)
@@ -23,70 +29,74 @@ class AgriToolServiceRepository implements AgriToolServiceInterface{
             ->editColumn('created_at', function (AgriTService $agri_tool_service) {
                 return $agri_tool_service->created_at->diffforhumans();
             })
-
             ->addColumn('actions', 'dashboard.admin.agriculture_tool_services.data_table.actions')
-
-            ->rawColumns([ 'record_select','actions'])
+            ->rawColumns(['record_select', 'actions'])
             ->toJson();
     }
 
-    public function store( $request) {
-        DB::beginTransaction();
-        try{
+    public function store($request)
+    {
+        try {
             $validated = $request->validated();
-
             AgriTService::create([
-                'name'=>$validated['name']
+                'name' => $validated['name']
             ]);
 
-            DB::commit();
 
             toastr()->success(__('Admin/country.added_successfully'));
             return redirect()->route('AgricultureToolServices.index');
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
 
 
     }
 
-    public function update(  $request,$id) {
+    public function update($request, $id)
+    {
 
-        try{
-            DB::beginTransaction();
-
+        try {
             $agriTSID = Crypt::decrypt($id);
-            $agri_t_service=AgriTService::findorfail($agriTSID);
+            $agri_t_service = AgriTService::findorfail($agriTSID);
             $agri_t_service->name = $request->name;
 
             $agri_t_service->update();
 
-            DB::commit();
-            toastr()->success( __('Admin/site.updated_successfully'));
+            toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('AgricultureToolServices.index');
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/attributes.edit_wrong'));
+
+            return redirect()->back();
 
         }
 
 
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
+        try {
+            $agriTSID = Crypt::decrypt($id);
 
-        $data = [];
-        $agriTSID = Crypt::decrypt($id);
+            $agri_t_service = AgriTService::findorfail($agriTSID);
 
-        $agri_t_service=AgriTService::findorfail($agriTSID);
+            $agri_t_service->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('AgricultureToolServices.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
-        $agri_t_service->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
-        return redirect()->route('AgricultureToolServices.index');
+            return redirect()->back();
+
+        }
+
     }
 
-    public function bulkDelete( $request) {
+    public function bulkDelete($request)
+    {
         try {
             DB::beginTransaction();
             if ($request->delete_select_id) {
@@ -105,9 +115,12 @@ class AgriToolServiceRepository implements AgriToolServiceInterface{
                 toastr()->error(__('Admin/site.no_data_found'));
                 return redirect()->route('AgricultureToolServices.index');
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
+
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

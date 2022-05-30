@@ -74,7 +74,9 @@ class SettingRepository implements SettingInterface{
 
             } catch (\Exception $e) {
                 DB::rollBack();
-                return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+                toastr()->success(__('Admin/attributes.edit_wrong'));
+
+                return redirect()->back();
 
             }
         }

@@ -34,12 +34,21 @@ class StateRepository implements StateInterface {
     }
 
     public function store($request) {
-        State::create([
-            'name'  => $request->input('name'),
-            'area_id'    =>  $request->area_id,
-        ]);
-        toastr()->success(__('Admin/site.added_successfully'));
-        return redirect()->route('States.index');
+        try{
+            State::create([
+                'name'  => $request->input('name'),
+                'area_id'    =>  $request->area_id,
+            ]);
+            toastr()->success(__('Admin/site.added_successfully'));
+            return redirect()->route('States.index');
+        }catch (\Exception $e) {
+            DB::rollBack();
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
+
+        }
+
     }
 
     public function edit($id) {
@@ -50,29 +59,47 @@ class StateRepository implements StateInterface {
     }
 
     public function update($request,$id) {
-        $stateID = Crypt::decrypt($id);
-        $state=State::findorfail($stateID);
-        $state->update([
-            'name'  => $request->input('name'),
-            'area_id'    =>  $request->area_id,
-        ]);
-        toastr()->success(__('Admin/site.added_successfully'));
-        return redirect()->route('States.index');
+        try{
+            $stateID = Crypt::decrypt($id);
+            $state=State::findorfail($stateID);
+            $state->update([
+                'name'  => $request->input('name'),
+                'area_id'    =>  $request->area_id,
+            ]);
+            toastr()->success(__('Admin/site.added_successfully'));
+            return redirect()->route('States.index');
+        }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+
+            return redirect()->back();
+
+        }
+
     }
 
     public function destroy($id) {
-        $data = [];
-        $stateID = Crypt::decrypt($id);
-        $data['village'] = Village::where('state_id', $stateID)->pluck('state_id'); 
-        if($data['village']->count() == 0) {
-            $state=State::findorfail($stateID);
-            $state->delete();
-            toastr()->success(__('Admin/site.deleted_successfully'));
-            return redirect()->route('States.index');
-        } else {
-            toastr()->error(__('Admin/states.cant_delete'));
-            return redirect()->route('States.index');
+        try{
+            $data = [];
+            $stateID = Crypt::decrypt($id);
+            $data['village'] = Village::where('state_id', $stateID)->pluck('state_id');
+            if($data['village']->count() == 0) {
+                $state=State::findorfail($stateID);
+                $state->delete();
+                toastr()->success(__('Admin/site.deleted_successfully'));
+                return redirect()->route('States.index');
+            } else {
+                toastr()->error(__('Admin/states.cant_delete'));
+                return redirect()->route('States.index');
+            }
+
+} catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
+
         }
+
+
     }
 
     public function bulkDelete($request) {
@@ -103,7 +130,9 @@ class StateRepository implements StateInterface {
 
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

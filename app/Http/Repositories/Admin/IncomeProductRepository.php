@@ -98,7 +98,6 @@ class IncomeProductRepository implements IncomeProductInterface {
     }
 
     public function store($request) {
-        DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $income_product = new IncomeProduct();
@@ -121,14 +120,14 @@ class IncomeProductRepository implements IncomeProductInterface {
 
             $income_product->save($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('IncomeProducts.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
     }
 
@@ -158,7 +157,6 @@ class IncomeProductRepository implements IncomeProductInterface {
 
 
     public function update( $request, $id) {
-        DB::beginTransaction();
         try {
             $InID = Crypt::decrypt($id);
             $requestData = $request->validated();
@@ -179,25 +177,30 @@ class IncomeProductRepository implements IncomeProductInterface {
 
             $income_product->update($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('IncomeProducts.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();
         }
     }
 
     public function destroy($id) {
-        $InID = Crypt::decrypt($id);
-        $income_product = IncomeProduct::findorfail($InID);
+        try{
+            $InID = Crypt::decrypt($id);
+            $income_product = IncomeProduct::findorfail($InID);
 
 
-        $income_product->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
-        return redirect()->route('IncomeProducts.index');
+            $income_product->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('IncomeProducts.index');
+        }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+            return redirect()->back();
+        }
+
 
     }
 
@@ -223,7 +226,9 @@ class IncomeProductRepository implements IncomeProductInterface {
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

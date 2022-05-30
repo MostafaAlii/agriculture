@@ -88,7 +88,6 @@ class ChickenProjectRepository implements ChickenProjectInterface{
     public function store($request)
 
     {
-        DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $chicken = new ChickenProject();
@@ -109,19 +108,20 @@ class ChickenProjectRepository implements ChickenProjectInterface{
             $chicken->email = $requestData['email'];
             $chicken->save($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Chickens.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
 
     }
     public function edit($id)
     {
+
         $animalID = Crypt::decrypt($id);
         $chicken = ChickenProject::findorfail($animalID);
         $adminId = Auth::user()->id;
@@ -141,7 +141,6 @@ class ChickenProjectRepository implements ChickenProjectInterface{
     public function update($request,$id)
 
     {
-        DB::beginTransaction();
         try {
             $animalID = Crypt::decrypt($id);
             $requestData = $request->validated();
@@ -167,27 +166,34 @@ class ChickenProjectRepository implements ChickenProjectInterface{
 
             $chicken->update($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('Chickens.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+
+            return redirect()->back();
         }
 
     }
 
     public function destroy($id)
     {
-        $animalID = Crypt::decrypt($id);
+        try{
+            $animalID = Crypt::decrypt($id);
 
-        $chicken = ChickenProject::findorfail($animalID);
+            $chicken = ChickenProject::findorfail($animalID);
 
-        $chicken->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
-        return redirect()->route('Chickens.index');
+            $chicken->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('Chickens.index');
+        }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
+        }
+
 
 
 
@@ -215,7 +221,9 @@ class ChickenProjectRepository implements ChickenProjectInterface{
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

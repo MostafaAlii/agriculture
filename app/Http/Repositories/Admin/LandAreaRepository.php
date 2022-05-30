@@ -92,7 +92,6 @@ class LandAreaRepository implements LandAreaInterface{
     }
 
     public function store($request) {
-        DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $landArea = new LandArea();
@@ -104,17 +103,14 @@ class LandAreaRepository implements LandAreaInterface{
             $landArea->land_category_id = $requestData['land_category_id'];
             $landArea->unit_id = $requestData['unit_id'];
 
-
-
             $landArea->save($requestData);
 
-            DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('LandAreas.index');
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
+            toastr()->success(__('Admin/attributes.add_wrong'));
             return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
@@ -142,10 +138,8 @@ class LandAreaRepository implements LandAreaInterface{
     }
 
     public function update($request, $id) {
-        DB::beginTransaction();
         try {
             $LandID = Crypt::decrypt($id);
-
             $requestData = $request->validated();
             $landArea = LandArea::findorfail($LandID);
             $landArea->area_id = $requestData['admin_id'];
@@ -155,9 +149,6 @@ class LandAreaRepository implements LandAreaInterface{
             $landArea->L_area = $requestData['L_area'];
             $landArea->land_category_id = $requestData['land_category_id'];
             $landArea->unit_id = $requestData['unit_id'];
-
-
-
             $landArea->update($requestData);
 
             DB::commit();
@@ -166,19 +157,25 @@ class LandAreaRepository implements LandAreaInterface{
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();
         }
     }
 
     public function destroy($id) {
-        $landAreaID = Crypt::decrypt($id);
-        $land_area = LandArea::findorfail($landAreaID);
+        try{
+            $landAreaID = Crypt::decrypt($id);
+            $land_area = LandArea::findorfail($landAreaID);
 
 
-        $land_area->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
-        return redirect()->route('LandAreas.index');
+            $land_area->delete();
+            toastr()->success(__('Admin/site.deleted_successfully'));
+            return redirect()->route('LandAreas.index');
+        }catch (\Exception $e) {
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+            return redirect()->back();
+        }
+
 
     }
 
@@ -204,7 +201,9 @@ class LandAreaRepository implements LandAreaInterface{
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

@@ -31,6 +31,7 @@ class ChickenProjectController extends Controller
         $this->middleware('permission:chicken-project-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:chicken-project-delete', ['only' => ['destroy']]);
         $this->middleware('permission:chicken-project-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:chicken-report-statistics', ['only' => ['chicken_project_statistics']]);
         $this->Data = $Data;
     }
 

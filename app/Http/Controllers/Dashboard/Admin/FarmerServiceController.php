@@ -20,6 +20,7 @@ class FarmerServiceController extends Controller
         $this->middleware('permission:farmer-service-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:farmer-service-delete', ['only' => ['destroy']]);
         $this->middleware('permission:farmer-service-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:farmer-service-statistics', ['only' => ['statistics']]);
         $this->Data = $Data;
     }
 

@@ -29,13 +29,6 @@ class LandCategoryRepository implements LandCategoryInterface {
             ->editColumn('category_type', function (LandCategory $land_category) {
                 return view('dashboard.admin.land_categories.data_table.category_type', compact('land_category'));
             })
-
-//           ->filter(function ($query) {
-//               if (request()->has('category_name')) {
-//                   $query->where('category_name', 'like', "%" . request('category_name') . "%");
-//               }
-//           })
-
             ->addColumn('actions', 'dashboard.admin.land_categories.data_table.actions')
 
             ->rawColumns([ 'record_select','actions'])
@@ -43,7 +36,6 @@ class LandCategoryRepository implements LandCategoryInterface {
     }
 
     public function store($request) {
-        DB::beginTransaction();
         try{
             $validated = $request->validated();
 
@@ -52,12 +44,11 @@ class LandCategoryRepository implements LandCategoryInterface {
                 'category_type'=>$validated['category_type']
             ]);
 
-            DB::commit();
 
             toastr()->success(__('Admin/lands.added_successfully'));
             return redirect()->route('LandCategories.index');
         } catch (\Exception $e) {
-            DB::rollBack();
+            toastr()->success(__('Admin/attributes.add_wrong'));
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
 
@@ -68,7 +59,6 @@ class LandCategoryRepository implements LandCategoryInterface {
     public function update( $request,$id) {
 
         try{
-            DB::beginTransaction();
 
             $land_categoryID = Crypt::decrypt($id);
             $land_category=LandCategory::findorfail($land_categoryID);
@@ -77,25 +67,30 @@ class LandCategoryRepository implements LandCategoryInterface {
 
             $land_category->update();
 
-            DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('LandCategories.index');
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+            return redirect()->back();
 
         }
 
 
     }
     public function destroy($id) {
+try{
+    $land_categoryID = Crypt::decrypt($id);
+    $land_category=LandCategory::findorfail($land_categoryID);
 
-        $land_categoryID = Crypt::decrypt($id);
-            $land_category=LandCategory::findorfail($land_categoryID);
+    $land_category->delete();
+    toastr()->success(__('Admin/site.deleted_successfully'));
+    return redirect()->route('LandCategories.index');
+}catch (\Exception $e) {
+    toastr()->success(__('Admin/attributes.delete_wrong'));
+    return redirect()->back();
 
-        $land_category->delete();
-            toastr()->success(__('Admin/site.deleted_successfully'));
-            return redirect()->route('LandCategories.index');
+}
+
 
     }
 
@@ -120,7 +115,9 @@ class LandCategoryRepository implements LandCategoryInterface {
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

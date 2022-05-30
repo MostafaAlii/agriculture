@@ -33,7 +33,6 @@ class CourseBeeRepository implements CourseBeeInterface{
     }
 
     public function store( $request) {
-        DB::beginTransaction();
         try{
             $validated = $request->validated();
 
@@ -42,22 +41,19 @@ class CourseBeeRepository implements CourseBeeInterface{
                 'desc'=>$validated['desc']
             ]);
 
-            DB::commit();
 
             toastr()->success(__('Admin/country.added_successfully'));
             return redirect()->route('CourseBees.index');
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.add_wrong'));
+
+            return redirect()->back();
         }
 
 
     }
 
-    public function show(CourseBeeRequest $request)
-    {
-        //
-    }
+
 
 
     public function edit(CourseBeeRequest $request)
@@ -67,7 +63,6 @@ class CourseBeeRepository implements CourseBeeInterface{
 
     public function update($request,$id)
     {
-        DB::beginTransaction();
 
         try{
             $validated = $request->validated();
@@ -79,12 +74,12 @@ class CourseBeeRepository implements CourseBeeInterface{
             $coursBee->desc =$validated['desc'];
             $coursBee->update();
 
-            DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('CourseBees.index');
         } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.edit_wrong'));
+
+            return redirect()->back();
 
         }
 
@@ -92,13 +87,20 @@ class CourseBeeRepository implements CourseBeeInterface{
     }
 
     public function destroy($id) {
+try{
+    $courseBeeID = Crypt::decrypt($id);
+    $courseBee=CourseBee::findorfail($courseBeeID);
 
-        $courseBeeID = Crypt::decrypt($id);
-        $courseBee=CourseBee::findorfail($courseBeeID);
+    $courseBee->delete();
+    toastr()->success(__('Admin/site.deleted_successfully'));
+    return redirect()->route('CourseBees.index');
+}catch (\Exception $e) {
+    toastr()->success(__('Admin/attributes.delete_wrong'));
 
-        $courseBee->delete();
-        toastr()->success(__('Admin/site.deleted_successfully'));
-        return redirect()->route('CourseBees.index');
+    return redirect()->back();
+
+}
+
 
     }
     public function bulkDelete( $request) {
@@ -121,7 +123,9 @@ class CourseBeeRepository implements CourseBeeInterface{
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->success(__('Admin/attributes.delete_wrong'));
+
+            return redirect()->back();
 
         }
 

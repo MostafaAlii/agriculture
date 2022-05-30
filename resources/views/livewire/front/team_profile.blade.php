@@ -13,7 +13,7 @@
                         $teams= Illuminate\Support\Facades\Cache::get('teams');
                         ?>
                         @foreach($teams as $t)
-                            @if(request()->route('id')==$t->id)
+                            @if(decrypt(request()->route('id'))==$t->id)
                             <!-- start posts -->
                             <div class="posts">
                                 <!-- start item -->

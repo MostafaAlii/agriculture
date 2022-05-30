@@ -17,6 +17,7 @@ class FarmerCropController extends Controller
         $this->middleware('permission:farmer-crop-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:farmer-crop-delete', ['only' => ['destroy']]);
         $this->middleware('permission:farmer-crop-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:farmer-crop-statistics', ['only' => ['statistics']]);
         $this->Data = $Data;
     }
 

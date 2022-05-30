@@ -42,6 +42,9 @@ return [
     'fish_govermental_supported'=>'Counting the number of fisheries subsidized by the government',
     'caw_govermental_supported_report'=>'Report on the number of fish tanks subsidized by the government',
     'ship_govermental_supported'=>'Counting the number of ship subsidized by the government',
+    'fish_govermental_supported_report'=>'Report about fish project supported by government',
+
+    'chicken_govermental_supported_report'=>'Report about Chicken rojects supported by government',
 
     'ship_govermental_supported_report'=>'Report on the number of chicken project supported by the government',
     'caw_govermental_supported'=>'Counting the number of chicken project supported by the government',
