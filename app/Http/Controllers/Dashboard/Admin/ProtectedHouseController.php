@@ -16,6 +16,9 @@ class ProtectedHouseController extends Controller
         $this->middleware('permission:protect-house-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:protect-house-delete', ['only' => ['destroy']]);
         $this->middleware('permission:protect-house-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:protected-house-statistics', ['only' => ['protected_house_statistics']]);
+        $this->middleware('permission:protected-house-government-statistics', ['only' => ['protected_house_gov_statistics']]);
+        $this->middleware('permission:protected-house-private-statistics', ['only' => ['protected_house_private_statistics']]);
         $this->Data = $Data;
     }
 
@@ -30,12 +33,7 @@ class ProtectedHouseController extends Controller
     public function create() {
         return $this->Data->create();
     }
-//    public function getFarmer($id){
-//        return $this->Data->getFarmer($id);
-//    }
-//    public function getFarmerInf($id){
-//        return $this->Data->getFarmerInf($id);
-//    }
+
     public function store(ProtectedHouseRequest $request) {
         return $this->Data->store($request);
     }

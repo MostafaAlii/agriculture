@@ -225,7 +225,6 @@ Route::group(
             Route::resource('Precipitations', PrecipitationController::class)->except(['show']);
             Route::get('/Precipitations/data', [PrecipitationController::class,'data'])->name('precipitation.data');
             Route::delete('/Precipitations/bulk_delete/{ids}', [PrecipitationController::class,'bulkDelete'])->name('precipitation.bulk_delete');
-//            Route::get('/Precipitations/statistic/', [PrecipitationController::class,'statistics'])->name('precipitation.statistics');
             Route::get('/Precipitations/index_statistic', [PrecipitationController::class,'index_statistic'])->name('precipitations.index_statistic');;
             Route::get('dtable-custom-statistics', [PrecipitationController::class,'get_custom_statistics']);
             Route::get('/Precipitations/index_details_statistic', [PrecipitationController::class,'get_details_statistics_index'])->name('precipitations.index_details_statistic');
@@ -444,12 +443,6 @@ Route::group(
                     Route::delete('/products/bulk_delete/{ids}', [ProductController::class,'bulkDelete'])->name('products.bulk_delete');
                 });
                 /********************************* End Products Routes ************************************/
-
-                /********************************* Start Coupon Routes ************************************/
-                Route::resource('ProductCoupons', ProductCouponController::class)->except(['show']);
-                Route::get('ProductCoupons/data', [ProductCouponController::class,'data'])->name('Coupons.data');
-                Route::delete('ProductCoupons/bulk_delete/{ids}', [ProductCouponController::class,'bulkDelete'])->name('Coupons.bulk_delete');
-                /********************************* End Coupon Routes ************************************/
 
                 /********************************* Slider Routes ************************************/
                 Route::resource('sliders', SliderController::class)->except(['show']);

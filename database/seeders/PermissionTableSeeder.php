@@ -303,6 +303,18 @@ class PermissionTableSeeder extends Seeder {
                 'caw_statistics-report',
                 'fish-report-statistics',
                 'chicken-report-statistics',
+            'horticulture-reports',
+                'orchard-report-statistics',
+                'protected-house-statistics',
+                'protected-house-government-statistics',
+                'protected-house-private-statistics',
+            'beekeeper-reports',
+                'bee-keepers-statistics',
+                'bee-keepers-details-statistics',
+            'service-reports',
+                'farmer-service-statistics',
+                'precipitation-statistics',
+                'precipitation-details-statistics',
 
         ];
         foreach ($permissions as $permission) {

@@ -17,6 +17,8 @@ class PrecipitationController extends Controller
         $this->middleware('permission:precipitation-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:precipitation-delete', ['only' => ['destroy']]);
         $this->middleware('permission:precipitation-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:precipitation-statistics', ['only' => ['index_statistic']]);
+        $this->middleware('permission:precipitation-details-statistics', ['only' => ['get_details_statistics_index']]);
         $this->Data = $Data;
     }
 
