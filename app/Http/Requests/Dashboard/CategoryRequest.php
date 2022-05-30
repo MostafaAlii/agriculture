@@ -1,9 +1,6 @@
 <?php
 namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Enum;
-
 class CategoryRequest extends FormRequest {
     public function authorize() {
         return true;
@@ -23,12 +20,13 @@ class CategoryRequest extends FormRequest {
 
     public function messages() {
         return [
-            'name.required'         => trans('Admin\validation.required'),            
-            'name.regex'            => trans('Admin\validation.regex'),
-            'name.unique'           =>  trans('Admin/validation.unique'),
-            'parent_id.required'    => trans('Admin\validation.required'),
+            'name.required'             => trans('Admin\validation.required'),            
+            'name.regex'                => trans('Admin\validation.regex'),
+            'name.unique'               =>  trans('Admin/validation.unique'),
+            'parent_id.required'        => trans('Admin\validation.required'),
 
-            'department_id.required'   => trans('Admin\validation.required'),
+            'department_id.required'    => trans('Admin\validation.required'),
+            'department_id.exists'      => trans('Admin\validation.exists'),
         ];
     }
 }

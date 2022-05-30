@@ -15,7 +15,7 @@
 
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/options.options_add_opt_name') }}</label>
-                        <input type="text" name="name" class="form-control" placeholder="{{ trans('Admin/options.options_add_opt_name') }}" />
+                        <input type="text" name="name" class="form-control" required placeholder="{{ trans('Admin/options.options_add_opt_name') }}" />
                         @error('name')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -23,7 +23,7 @@
 
                     <div class="form-group">
                         <label><i class="material-icons">attach_money</i> {{ trans('Admin/options.options_price') }}</label>
-                        <input type="number" name="price" class="form-control" placeholder="{{ trans('Admin/options.options_add_opt_price') }}" />
+                        <input type="number" name="price"  required class="form-control" placeholder="{{ trans('Admin/options.options_add_opt_price') }}" />
                         @error('price')
                             <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -31,7 +31,7 @@
                     
                     <div class="form-group">
                         <label>{{ __('Admin/options.attribute') }}</label>
-                        <select class="form-control" name="attribute_id">
+                        <select class="form-control" name="attribute_id" required>
                                 @foreach($attributes as $attr)
                                     <option value="{{$attr->id}}" >{{$attr->name}}</option>
                                 @endforeach
@@ -44,7 +44,7 @@
 
                     <div class="form-group" id="product_div">
                         <label>{{ __('Admin/options.all_product') }}</label>
-                        <select class="form-control" name="product_id" id="product_id">
+                        <select class="form-control" name="product_id" id="product_id" required>
                                 @foreach($products as $pro)
                                     <option value="{{$pro->id}}"  <?php if(old('product_id')==$pro->id){echo "selected";}?>>{{$pro->name}}</option>
                                 @endforeach

@@ -46,9 +46,7 @@ class OptionRepository implements OptionInterface{
 //------------------------------------------------------------------------------------------
     public function store($request) {
       //dd($request->all());
-        try{
-            $validated = $request->validated();
-           
+        try{           
             $options=new Option();
 
             $options->attribute_id=$request->attribute_id;
@@ -84,7 +82,6 @@ class OptionRepository implements OptionInterface{
     public function update($request,$id) {
 
         try{
-            $validated = $request->validated();
             $real_id = decrypt($id);
 
             $options=Option::findOrfail($real_id);

@@ -148,9 +148,7 @@ class DepartmentRepository implements DepartmentInterface {
     public function update($request) {
         // dd('inside repo'); 
           
-         try{
-             $validated = $request->validated();
-            
+         try{            
              $depart= Department::findOrfail($request->id);
             
              ($request->parent_id!='0')?$depart->parent_id=$request->parent_id:$depart->parent_id=Null;
