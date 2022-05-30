@@ -315,7 +315,11 @@ class PermissionTableSeeder extends Seeder {
                 'farmer-service-statistics',
                 'precipitation-statistics',
                 'precipitation-details-statistics',
-
+            'planning-reports',
+                'land-area-report',
+                'land-area-details-report',
+                'land-area-state-report',
+                'farmer-crop-statistics',
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);

@@ -1324,6 +1324,150 @@
                     </section>
                 @endcan
                 <!-- End Service Report -->
+
+                <!-- Start planning Report التخطيط -->
+                @can('planning-reports')
+                    <section id="collapsible">
+                        <!-- Start First Row -->
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="card default-collapse collapse-icon accordion-icon-rotate">
+                                    <a id="headingCollapse55" class="card-header bg-dark" data-toggle="collapse" href="#collapse55" aria-expanded="true" aria-controls="collapse55">
+                                        <div class="card-title lead white">
+                                            <i class="ft-activity mr-50"></i>
+                                            {{__('Admin\site.reporting')}} / {{__('Admin\site.planning')}}
+                                        </div>
+                                    </a>
+                                    <div id="collapse55" role="tabpanel" aria-labelledby="headingCollapse55" class="card-collapse collapse" aria-expanded="true">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <!-- Start land_areas_report -->
+                                                    @can('land-area-report')
+                                                        <div class="col-xl-3 col-lg-6 col-12">
+                                                            <a href="{{ route('landAreas.getStatisticaldata') }}">
+                                                                <div class="card pull-up">
+                                                                    <div class="card-content">
+                                                                        <div class="card-body">
+                                                                            <div class="media d-flex">
+                                                                                <div class="media-body text-left">
+                                    
+                                                                                    <h3 class="gray-bg" style="color: blue;">{{ \App\Models\LandArea::count() }}</h3>
+                                                                                    <h6>  {{ trans('Admin/land_areas.land_areas_report') }}</h6>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <i class="fa fa-list-alt" aria-hidden="true" style="color: blue;"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                                                <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endcan
+                                                    <!-- End land_areas_report -->
+                                                    
+                                                    <!-- Start land_areas_details_report -->
+                                                    @can('land-area-details-report')
+                                                        <div class="col-xl-3 col-lg-6 col-12">
+                                                            <a href="{{ route('land_area_details.statistic') }}">
+                                                                <div class="card pull-up">
+                                                                    <div class="card-content">
+                                                                        <div class="card-body">
+                                                                            <div class="media d-flex">
+                                                                                <div class="media-body text-left">
+                                    
+                                                                                    <h3 class="gray-bg" style="color: purple;">{{ \App\Models\LandArea::count() }}</h3>
+                                                                                    <h6>  {{ trans('Admin/land_areas.land_areas_details_report') }}</h6>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <i class="fa fa-list-alt" aria-hidden="true" style="color: purple;"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                                                <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endcan
+                                                    <!-- End land_areas_details_report -->
+
+                                                    <!-- Start land_areas_state_report -->
+                                                    @can('land-area-state-report')
+                                                        <div class="col-xl-3 col-lg-6 col-12">
+                                                            <a href="{{ route('land_area_state.statistic') }}">
+                                                                <div class="card pull-up">
+                                                                    <div class="card-content">
+                                                                        <div class="card-body">
+                                                                            <div class="media d-flex">
+                                                                                <div class="media-body text-left">
+                                    
+                                                                                    <h3 class="gray-bg" style="color: green;">{{ \App\Models\LandArea::count() }}</h3>
+                                                                                    <h6>  {{ trans('Admin/land_areas.land_areas_state_report') }}</h6>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <i class="fa fa-list-alt" aria-hidden="true" style="color: green;"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                                                <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endcan
+                                                    <!-- End land_areas_state_report -->
+
+                                                    <!-- Start farmer-crop-statistics -->
+                                                    @can('farmer-crop-statistics')
+                                                        <div class="col-xl-3 col-lg-6 col-12">
+                                                            <a href="{{ route('farmer_crops.statistics') }}">
+                                                                <div class="card pull-up">
+                                                                    <div class="card-content">
+                                                                        <div class="card-body">
+                                                                            <div class="media d-flex">
+                                                                                <div class="media-body text-left">
+                                    
+                                                                                    <h3 class="gray-bg" style="color: yellow;">{{ \App\Models\FarmerCrop::count() }}</h3>
+                                                                                    <h6>  {{ trans('Admin/crops.farmer_crops_report') }}</h6>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <i class="fa fa-list-alt" aria-hidden="true" style="color: yellow;"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                                                <div class="progress-bar bg-gradient-x-yellow" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endcan
+                                                    <!-- End farmer-crop-statistics -->
+                                                </div>
+                                                <!-- End Row -->
+                                            </div>
+                                            <!-- End Card Body -->
+                                        </div>
+                                        <!-- End Card Content -->
+                                    </div>
+                                    <!-- End div #colapse53 -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End First Row -->
+                    </section>
+                @endcan
+                <!-- End planning Report التخطيط -->
                 <!--------------------------------------------------------- End Report -------------------------------------------------------------->
             </div>
         </div>
