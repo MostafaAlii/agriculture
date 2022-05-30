@@ -23,14 +23,20 @@ class AdminController extends Controller
     public function store(AdminLoginRequest $request) {
          $login = $request->login;
          $admin = Admin::where('email',$login)->orWhere('phone',$login)->first();
-        if ($admin->status == 1){
-            if( $request->authenticate()){
-                $request->session()->regenerate();
-                return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
-            }
-           return redirect()->back()->withErrors(['email'=>(trans('Admin/auth.failed'))]);
+         if($admin){
+                if ($admin->status == 1){
+                    if( $request->authenticate()){
+                        $request->session()->regenerate();
+                        return redirect()->intended(RouteServiceProvider::ADMIN_DASHBOARD);
+                    }
+                    else{
+                        return redirect()->back()->withErrors(['name'=>(trans('Admin/auth.failed'))]);
+                    }
+                }else{
+                    return redirect()->back()->withErrors(['email'=>(trans('Admin/auth.notactive'))]);
+                }
         }else{
-            return redirect()->back()->withErrors(['email'=>(trans('Admin/auth.notactive'))]);
+            return redirect()->back()->withErrors(['name'=>(trans('Admin/auth.failed'))]);
         }
     }
 
