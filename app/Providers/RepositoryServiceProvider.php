@@ -133,7 +133,6 @@ use App\Http\Repositories\Admin\SubscribeRepository;
 use App\Http\Interfaces\Admin\FarmerServiceInterface;
 
 use App\Http\Interfaces\Admin\IncomeProductInterface;
-use App\Http\Interfaces\Admin\PaymentMethodInterface;
 
 use App\Http\Interfaces\Admin\PrecipitationInterface;
 
@@ -170,7 +169,6 @@ use App\Http\Interfaces\Admin\WholeSaleProductInterface;
 use App\Http\Repositories\Admin\FarmerServiceRepository;
 use App\Http\Repositories\Admin\IncomeProductRepository;
 
-use App\Http\Repositories\Admin\PaymentMethodRepository;
 use App\Http\Repositories\Admin\PrecipitationRepository;
 
 
@@ -254,7 +252,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SearchInterface::class, SearchRepository::class);
         $this->app->bind(FarmerAllDataInterface::class, FarmerAllDataRepository::class);
         $this->app->bind(WorkerAllDataInterface::class, WorkerAllDataRepository::class);
-        $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
         $this->app->bind(ContactInterface::class, ContactRepository::class);
         $this->app->bind(AboutInterface::class, AboutRepository::class);
 
