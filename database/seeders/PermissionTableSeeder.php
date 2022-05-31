@@ -320,6 +320,23 @@ class PermissionTableSeeder extends Seeder {
                 'land-area-details-report',
                 'land-area-state-report',
                 'farmer-crop-statistics',
+                'income-product-statistics',
+                'index-income-product-statistics',
+                    'index-income-product-statistics-filter',
+                'income-local-product-statistics',
+                    'income-local-product-statistics-filter',
+                'income-imported-product-statistics',
+                    'income-imported-product-statistics-filter',
+                'income-iraq-product-statistics',
+                    'income-iraq-product-statistics-filter',
+                'outcome-product-statistics',
+                'index-outcome-products-statistics',
+                    'index_outcome_products-statistics-filter',
+                'index-outcome-local-products-statistics',
+                    'index-outcome-local-products-statistics-filter',
+                'index-outcome-imported-products-statistics',
+                    'index-outcome-imported-products-statistics-filter',
+                'outcome-iraq-products-statistics',
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);

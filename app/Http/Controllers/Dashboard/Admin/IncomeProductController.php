@@ -17,6 +17,11 @@ class IncomeProductController extends Controller
         $this->middleware('permission:income-products-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:income-products-delete', ['only' => ['destroy']]);
         $this->middleware('permission:income-products-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:income-product-statistics', ['only' => ['income_product_statistics']]);
+        $this->middleware('permission:index-income-product-statistics', ['only' => ['index_income_products']]);
+        $this->middleware('permission:income-local-product-statistics', ['only' => ['index_income_local_products']]);
+        $this->middleware('permission:income-imported-product-statistics', ['only' => ['index_income_imported_products']]);
+        $this->middleware('permission:income-iraq-product-statistics', ['only' => ['index_income_iraq_products']]);
         $this->Data = $Data;
     }
 
