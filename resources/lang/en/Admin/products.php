@@ -107,5 +107,5 @@ return [
     'farmereditproduct'                 =>'Farmer Edit Product',
 
 
-    'statment '                 =>'update to ',
+    'change '                         =>'update to ',
 ];

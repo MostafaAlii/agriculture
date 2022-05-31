@@ -107,6 +107,6 @@ return [
     'farmereditproduct'                 =>'صفحه تعديل المنتج',
 
 
-    'statment '                 =>'تعديل ل  ',
+    'change '                         =>'للتحويل الى   ',
 
 ];

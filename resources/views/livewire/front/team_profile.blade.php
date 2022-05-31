@@ -41,7 +41,12 @@
                                         <!-- start form -->
                                         <div class="row">
                                             <div class="col-12 col-md-12 col-lg-12">
-                                                <p>{{ $t->description }}</p>
+                                                <hr>
+                                                <center>
+                                                    <p>
+                                                    {!! $t->description !!}
+                                                    </p>
+                                                </center>
                                             </div>
                                         </div>
                                     

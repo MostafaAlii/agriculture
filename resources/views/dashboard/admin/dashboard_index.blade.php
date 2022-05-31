@@ -1470,11 +1470,10 @@
                 <!-- End planning Report التخطيط -->
                 <!--------------------------------------------------------- End Report -------------------------------------------------------------->
 
-              @include('dashboard.admin.recent_product')
+              @includeWhen($latest_products,'dashboard.admin.recent_product')
               <br>
               <hr>
               @includeWhen($orders,'dashboard.admin.orders')
-            
 
             </div>
         </div>
