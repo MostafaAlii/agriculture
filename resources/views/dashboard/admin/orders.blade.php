@@ -1,5 +1,5 @@
 <!-- start Recent 5 products -->
-@if(isset($orders))
+@if(count($orders)>0)
 <!-- Start Table Responsive -->
 <div class="table-responsive">
     <center><h3>{{ trans('Admin/orders.orderPageTitle') }}</h3></center>
