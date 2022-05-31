@@ -40,9 +40,7 @@ class AttributeRepository implements AttributeInterface {
 //------------------------------------------------------------------------------------------
     public function edit($id) {
         $real_id = Crypt::decrypt($id);
-        $attributes = Attribute::orderBy('id', 'DESC')->find($real_id);
-        if (!$attributes)
-            return redirect()->route('admin.maincategories')->with(['error' => __('Admin/attributes.Nodata')]);
+        $attributes = Attribute::findOrfail($real_id);
         return view('dashboard.admin.attributes.edit', compact('attributes'));
         /*$real_id = Crypt::decrypt($id);
         $attributes=Attribute::findOrfail($real_id);
