@@ -50,4 +50,8 @@ return [
     'card'                                     =>                  'Via credit card',
     'byPayPal'                                 =>                  'Via PayPal',
     'shipping_data_is_billing_data'            =>                  'Shipping data is the same as that client\'s purchase data.',
-    ];
+
+    'order_item_num'                           =>                   'Products number',
+
+
+];

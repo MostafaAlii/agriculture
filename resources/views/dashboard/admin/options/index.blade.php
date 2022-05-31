@@ -131,14 +131,14 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name',sortable: false},
-            {data: 'attribute', name: 'attribute', sortable: false},
+            {data: 'name', name: 'name'},
+            {data: 'attribute', name: 'attribute'},
             {data: 'price', name: 'price'},
-            {data: 'product', name: 'product',sortable: false},
-            {data: 'created_at', name: 'created_at', searchable: false},
+            {data: 'product', name: 'product'},
+            {data: 'created_at', name: 'created_at'},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[4, 'desc']],
+        order: [[1, 'desc']],
     });
 </script>
 

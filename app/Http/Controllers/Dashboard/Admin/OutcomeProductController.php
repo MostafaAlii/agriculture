@@ -17,6 +17,11 @@ class OutcomeProductController extends Controller
         $this->middleware('permission:outcome-products-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:outcome-products-delete', ['only' => ['destroy']]);
         $this->middleware('permission:outcome-products-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:outcome-product-statistics', ['only' => ['outcome_product_statistics']]);
+        $this->middleware('permission:index-outcome-products-statistics', ['only' => ['index_outcome_products']]);
+        $this->middleware('permission:index-outcome-local-products-statistics', ['only' => ['index_outcome_local_products']]);
+        $this->middleware('permission:index-outcome-imported-products-statistics', ['only' => ['index_outcome_imported_products']]);
+        $this->middleware('permission:outcome-iraq-products-statistics', ['only' => ['index_outcome_iraq_products']]);
         $this->Data = $Data;
     }
 
@@ -48,9 +53,9 @@ class OutcomeProductController extends Controller
     }// end of destroy
 
     public function outcome_product_statistics(){
+        return $this->Data->outcome_product_statistics();
+    }
 
-    return $this->Data->outcome_product_statistics();
-      }
     public function index_outcome_products(){
         return $this->Data->index_outcome_products();
     }

@@ -40,7 +40,6 @@ use App\Http\Interfaces\Admin\ProfileInterface;
 use App\Http\Interfaces\Admin\SettingInterface;
 use App\Http\Interfaces\Admin\VillageInterface;
 
-use App\Http\Interfaces\Front\PaymentInterface;
 use App\Http\Repositories\Admin\AreaRepository;
 
 use App\Http\Repositories\Admin\BlogRepository;
@@ -113,7 +112,6 @@ use App\Http\Repositories\Admin\VillageRepository;
 use App\Http\Interfaces\Front\CommentInterface;
 use App\Http\Repositories\Front\CommentRepository;
 
-use App\Http\Repositories\Front\PaymentRepository;
 use App\Http\Interfaces\Admin\AgriServiceInterface;
 
 use App\Http\Interfaces\Admin\BeeDisasterInterface;
@@ -135,10 +133,8 @@ use App\Http\Repositories\Admin\SubscribeRepository;
 use App\Http\Interfaces\Admin\FarmerServiceInterface;
 
 use App\Http\Interfaces\Admin\IncomeProductInterface;
-use App\Http\Interfaces\Admin\PaymentMethodInterface;
 
 use App\Http\Interfaces\Admin\PrecipitationInterface;
-use App\Http\Interfaces\Admin\ProductCouponInterface;
 
 
 
@@ -173,7 +169,6 @@ use App\Http\Interfaces\Admin\WholeSaleProductInterface;
 use App\Http\Repositories\Admin\FarmerServiceRepository;
 use App\Http\Repositories\Admin\IncomeProductRepository;
 
-use App\Http\Repositories\Admin\PaymentMethodRepository;
 use App\Http\Repositories\Admin\PrecipitationRepository;
 
 
@@ -184,7 +179,6 @@ use App\Http\Interfaces\Admin\UnitInterface;
 use App\Http\Repositories\Admin\UnitRepository;
 
 
-use App\Http\Repositories\Admin\ProductCouponRepository;
 use App\Http\Repositories\Front\FarmerAllDataRepository;
 
 use App\Http\Repositories\Front\WorkerAllDataRepository;
@@ -245,7 +239,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AttributeInterface::class, AttributeRepository::class);
         $this->app->bind(OptionInterface::class, OptionRepository::class);
         $this->app->bind(ProductInterface::class, ProductRepository::class);
-        $this->app->bind(ProductCouponInterface::class, ProductCouponRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
         $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);
@@ -259,8 +252,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SearchInterface::class, SearchRepository::class);
         $this->app->bind(FarmerAllDataInterface::class, FarmerAllDataRepository::class);
         $this->app->bind(WorkerAllDataInterface::class, WorkerAllDataRepository::class);
-        $this->app->bind(PaymentMethodInterface::class, PaymentMethodRepository::class);
-        $this->app->bind(PaymentInterface::class, PaymentRepository::class);
         $this->app->bind(ContactInterface::class, ContactRepository::class);
         $this->app->bind(AboutInterface::class, AboutRepository::class);
 

@@ -18,6 +18,9 @@ class LandAreaController extends Controller
         $this->middleware('permission:land-area-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:land-area-delete', ['only' => ['destroy']]);
         $this->middleware('permission:land-area-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:land-area-report', ['only' => ['getStatisticaldata']]);
+        $this->middleware('permission:land-area-details-report', ['only' => ['statistic_land_area_detail']]);
+        $this->middleware('permission:land-area-state-report', ['only' => ['statistic_land_area_state']]);
         return $this->Data = $Data;
     }
 

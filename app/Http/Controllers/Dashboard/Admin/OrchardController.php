@@ -16,6 +16,7 @@ class OrchardController extends Controller
         $this->middleware('permission:orchard-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:orchard-delete', ['only' => ['destroy']]);
         $this->middleware('permission:orchard-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:orchard-report-statistics', ['only' => ['statistics']]);
         $this->Data = $Data;
     }
 

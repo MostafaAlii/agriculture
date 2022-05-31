@@ -17,6 +17,8 @@ class BeeKeepersController extends Controller
         $this->middleware('permission:bee-keepers-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:bee-keepers-delete', ['only' => ['destroy']]);
         $this->middleware('permission:bee-keepers-delete-all', ['only' => ['bulkDelete']]);
+        $this->middleware('permission:bee-keepers-statistics', ['only' => ['statistics']]);
+        $this->middleware('permission:bee-keepers-details-statistics', ['only' => ['beekeeper_details_statistics']]);
         $this->Data = $Data;
     }
     public function index(){

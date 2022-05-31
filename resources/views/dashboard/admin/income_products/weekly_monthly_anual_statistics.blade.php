@@ -45,21 +45,24 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <h2>{{__('Admin\precipitations.choose_date')}}</h2>
-                                    <div class="form-group col-md-6">
-                                        <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
-                                        <div class="controls">
-                                            <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
-                                        <div class="controls">
-                                            <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
-                                    </div>
-                                    <div class="text-left" style="    margin-left: 15px;  ">
-                                        <button type="text" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
-                                    </div>
-
+                                    <!-- Start Filter -->
+                                    @can('index-income-product-statistics-filter')
+                                        <h2>{{__('Admin\precipitations.choose_date')}}</h2>
+                                        <div class="form-group col-md-6">
+                                            <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
+                                            <div class="controls">
+                                                <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
+                                            <div class="controls">
+                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                        </div>
+                                        <div class="text-left" style="    margin-left: 15px;  ">
+                                            <button type="text" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
+                                        </div>
+                                    @endcan
+                                    <!-- End Filter -->
                                     <br>
 
                                     <div class="table-responsive">
@@ -110,7 +113,9 @@
             },
 
             dom: 'Bfrtip',
-
+            "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
             buttons: [
                 {
                     text:'{{trans('Admin\site.excel')}}',

@@ -62,13 +62,8 @@ class CategoryRepository implements CategoryInterface {
 //------------------------------------------------------------------------------------------
 //CategoryRequest
     public function store($request) {
-        
-       // dd('inside repo');
-       //dd($request);
-     
-            
+                   
         try{
-            $validated = $request->validated();
            
             $cate=new Category;
 
@@ -117,7 +112,6 @@ class CategoryRepository implements CategoryInterface {
         // dd('inside repo'); 
           
          try{
-             $validated = $request->validated();
             
              $cate= Category::findOrfail($request->id);
              ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:$cate->parent_id=Null;

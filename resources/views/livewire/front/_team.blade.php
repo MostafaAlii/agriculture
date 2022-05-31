@@ -14,7 +14,7 @@
                         <!-- start item -->
                         
                             <div class="col-12 col-md-6 col-lg-4">
-                              <a href="{{route('team_profile',$t->id)}}">
+                              <a href="{{route('team_profile',encrypt($t->id))}}">
                                   <div class="__item" data-aos="fade" data-aos-delay="100" data-aos-offset="0">
                                     <figure class="__image">
                                         <img class="lazy" src="{{ asset('Dashboard/img/team/'.$t->image) }}" data-src="{{ asset('Dashboard/img/team/'.$t->image) }}" alt="demo" />

@@ -125,12 +125,15 @@
         ajax: {
             url: '{{ route("Attributes.data") }}',
         },
-        columns: [
+       columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name', searchable: false},
-            {data: 'created_at', name: 'created_at', searchable: false},
+            {data: 'name', name: 'name'},
+            {data: 'created_at', name: 'created_at'},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
+         order: [[2, 'desc']], //order table by created_at desc
+
+         
     });
 </script>
 

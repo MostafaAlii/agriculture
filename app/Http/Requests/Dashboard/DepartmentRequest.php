@@ -37,8 +37,11 @@ class DepartmentRequest extends FormRequest {
             'parent_id.required'    => trans('Admin\validation.required'),
 
             'country_id.required'   => trans('Admin\validation.required'),
+            'country_id.exists'     => trans('Admin\validation.exists'),
             'province_id.required'  => trans('Admin\validation.required'),
+            'province_id.exists'    => trans('Admin\validation.exists'),
             'area_id.required'      => trans('Admin\validation.required'),
+            'area_id.exists'        => trans('Admin\validation.exists'),
             // 'state_id.required'     => trans('Admin\validation.required'),
             // 'village_id.required'   => trans('Admin\validation.required'),
 
