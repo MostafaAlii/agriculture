@@ -20,10 +20,15 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="__inner">
-                            
-                                <img class="img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}"
-                                data-src="{{URL::asset('Dashboard/img/settingLogo/'.$logo->site_logo)}}" width="50" height="50"
-                                alt="demo"  style="width: 145px;height: 200px;"/>
+                            @if(app()->getLocale()=='ar')
+                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
+                                     data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
+                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                            @else
+                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
+                                     data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
+                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                            @endif
 
                             <div class="row">
                                 <div class="col-12 col-lg-7 col-xl-6">

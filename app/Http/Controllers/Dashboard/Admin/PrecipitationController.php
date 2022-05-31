@@ -51,15 +51,15 @@ class PrecipitationController extends Controller
         return $this->Data->index_statistic();
     }
 
-    public function get_custom_statistics(){
-        return $this->Data->get_custom_statistics();
+    public function get_custom_statistics(Request $request){
+        return $this->Data->get_custom_statistics($request);
     }
 
     public function get_details_statistics_index(){
         return $this->Data->get_details_statistics_index();
     }
-    public function get_details_statistics(){
-        return $this->Data->get_details_statistics();
+    public function get_details_statistics(Request $request){
+        return $this->Data->get_details_statistics($request);
     }
 
 

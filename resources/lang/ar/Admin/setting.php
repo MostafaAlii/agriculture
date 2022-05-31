@@ -14,7 +14,10 @@ return [
     'primary_phone'                                         =>               'رقم الهاتف الرئيسي',
     'secondery_phone'                                       =>               'رقم الهاتف الثانوي ',
     'address'                                               =>               'العنوان',
-    'site_logo'                                             =>               'شعار الموقع ',
+    'ar_site_logo'                                             =>               'شعار الموقع العربي ',
+    'en_site_logo'                                             =>               'شعار الموقع الإنكليزي ',
+
+
     'message_maintenance'                                   =>               'رسالة الصيانة ',
     'cancel'                                                =>               'إلغاء الأمر',
     'save'                                                  =>               'حفظ',

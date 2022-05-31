@@ -17,9 +17,9 @@ class ChickenRequest extends FormRequest
         return [
 
             'farmer_id' => 'required|exists:farmers,id',
-            'admin_id' => 'required',
-            'area_id' => 'required',
-            'state_id' => 'required',
+            'admin_id' => 'required|exists:admins,id',
+            'area_id' => 'required|exists:areas,id',
+            'state_id' => 'required|exists:states,id',
             'village_id' => 'required|exists:villages,id',
 
             'project_name' => [
@@ -29,12 +29,12 @@ class ChickenRequest extends FormRequest
             ],
             'hall_num' =>'required|numeric',
 
-            'suse_source' =>'required',
-            'food_source'=>'required',
-            'marketing_side'=>'required',
+            'suse_source' =>'required|in:local,imported',
+            'food_source'=>'required|in:local,imported',
+            'marketing_side'=>'required|in:private,govermental',
             'cost'=>'required|numeric',
             'power'=>'required|string',
-            'phone'=>'required',
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
             'email'=>'required',
 
         ];
@@ -48,6 +48,13 @@ class ChickenRequest extends FormRequest
             'farmer_id.required' => trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
             'project_name.required' => trans('Admin/validation.required'),
+            'project_name.regex' => trans('Admin/validation.regex'),
+            'farmer_id.exists' => trans('Admin/validation.exists'),
+            'admin_id.exists' => trans('Admin/validation.exists'),
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'state_id.exists' => trans('Admin/validation.exists'),
+            'village_id.exists' => trans('Admin/validation.exists'),
+
             'hall_num.required' => trans('Admin/validation.required'),
             'animal_count.required' => trans('Admin/validation.required'),
             'food_source.required' => trans('Admin/validation.required'),

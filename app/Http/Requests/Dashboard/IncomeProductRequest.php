@@ -23,7 +23,7 @@ class IncomeProductRequest extends FormRequest
             'income_product_amount' =>'required|numeric',
             'income_product_price' =>'required|numeric',
             'income_product_date' => 'required|date',
-            'country_product_type'=>'required'
+            'country_product_type'=>'required|in:local,iraq,imported',
 
 
         ];
@@ -33,7 +33,12 @@ class IncomeProductRequest extends FormRequest
     {
         return [
             'currency_id.required' => trans('Admin/validation.required'),
+            'currency_id.exists' => trans('Admin/validation.exists'),
             'whole_product_id.required' => trans('Admin/validation.required'),
+            'whole_product_id.exists' => trans('Admin/validation.exists'),
+            'admin_id.exists' => trans('Admin/validation.exists'),
+
+
             'admin_id.required' => trans('Admin/validation.required'),
             'country_product_type.required' => trans('Admin/validation.required'),
             'country_id.required' => trans('Admin/validation.required'),
@@ -41,6 +46,12 @@ class IncomeProductRequest extends FormRequest
             'income_product_price.required' => trans('Admin/validation.required'),
             'income_product_date.required' => trans('Admin/validation.required'),
             'unit_id.required' => trans('Admin/validation.required'),
+            'unit_id.exists' => trans('Admin/validation.exists'),
+            'currency_id.required' => trans('Admin/validation.required'),
+            'currency_id.exists' => trans('Admin/validation.exists'),
+
+
+
 
 
         ];

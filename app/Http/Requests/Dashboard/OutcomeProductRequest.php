@@ -16,9 +16,9 @@ class OutcomeProductRequest extends FormRequest
     {
         return [
 
-            'country_product_type' => 'required',
-            'area_id' => 'sometimes|nullable',
-            'province_id' => 'sometimes|nullable',
+            'country_product_type' => 'required|in:local,iraq,imported',
+            'area_id' => 'sometimes|nullable|exists:areas,id',
+            'province_id' => 'sometimes|nullable|exists:provinces,id',
             'country_id' => 'required|exists:countries,id',
             'unit_id'=>'required|exists:units,id',
             'outcome_product_amount' =>'required|numeric',
@@ -36,16 +36,18 @@ class OutcomeProductRequest extends FormRequest
     {
         return [
             'currency_id.required' => trans('Admin/validation.required'),
-
             'whole_product_id.required' => trans('Admin/validation.required'),
             'country_product_type.required' => trans('Admin/validation.required'),
-//            'area_id.required' => trans('Admin/validation.required'),
-//            'province_id.required' => trans('Admin/validation.required'),
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'province_id.exists' => trans('Admin/validation.exists'),
             'country_id.required' => trans('Admin/validation.required'),
             'outcome_product_amount.required' => trans('Admin/validation.required'),
             'outcome_product_price.required' => trans('Admin/validation.required'),
             'outcome_product_date.required' => trans('Admin/validation.required'),
             'unit_id.required' => trans('Admin/validation.required'),
+            'unit_id.exists' => trans('Admin/validation.exists'),
+            'currency_id.exists' => trans('Admin/validation.exists'),
+
 
 
         ];

@@ -25,9 +25,9 @@ class BeeKeeperRequest extends FormRequest
             'annual_new_product_beehive'=>'required|numeric',
             'old_beehive_count' => 'required|numeric',
             'new_beehive_count' => 'required|numeric',
-            'supported_side'=>'required',
+            'supported_side'=>'required|in:private,govermental,international organizations',
             'unit_id'=>'required|exists:units,id',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
             'email'=>'required|email',
             'died_beehive_count'=>'required|numeric'
 
@@ -41,6 +41,12 @@ class BeeKeeperRequest extends FormRequest
             'admin_id.required' => trans('Admin/validation.required'),
             'area_id.required' => trans('Admin/validation.required'),
             'state_id.required' => trans('Admin/validation.required'),
+            'farmer_id.exists' => trans('Admin/validation.exists'),
+            'admin_id.exists' => trans('Admin/validation.exists'),
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'state_id.exists' => trans('Admin/validation.exists'),
+            'village_id.exists' => trans('Admin/validation.exists'),
+
             'cost.required' => trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
 

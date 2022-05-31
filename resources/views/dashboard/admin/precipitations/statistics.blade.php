@@ -45,21 +45,46 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
+                                    <form method="get" action="{{route('get_custom_statistics')}}">
+                                        @csrf
+
                                     <h2>{{__('Admin\precipitations.choose_date')}}</h2>
                                     <div class="form-group col-md-6">
                                         <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
                                         <div class="controls">
                                             <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                        @error('start_date')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-6">
                                         <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
                                         <div class="controls">
                                             <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                        @error('end_date')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
-                                    <div class="text-left" style="    margin-left: 15px;  ">
-                                        <button type="text" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
-                                    </div>
+                                        <div class="form-group col-md-6">
+                                                <label for="area_id">{{ __('Admin/animals.village') }}</label>
+                                                <select name="village_id" id="area_id" class="form-control" required>
+                                                    <option value="">--{{ __('Admin/animals.select') }}--</option>
+                                                    </option>
+                                                    @foreach (\App\Models\Area::all() as $area)
+                                                        <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                    @endforeach
+                                                </select>
 
+                                            @error('area_id')
+                                            <small class="form-text text-danger">{{$message}}</small>
+                                            @enderror
+                                        </div>
+
+
+                                    <div class="text-left" style="    margin-left: 15px;  ">
+                                        <button type="submit" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
+                                    </div>
+                                    </form>
                                     <br>
 
                                     <div class="table-responsive">
@@ -67,7 +92,6 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th>{{ __('Admin/precipitations.area') }}</th>
                                                     <th>{{ __('Admin/precipitations.state') }}</th>
                                                     <th>{{ __('Admin/precipitations.precipitation_rate') }}</th>
                                                     <th>{{ __('Admin/precipitations.date') }}</th>
@@ -75,7 +99,18 @@
 
                                                 </tr>
                                             </thead>
+                                            <tbody>
+                                            @foreach($precipitations as $statistic)
+                                                <tr>
 
+                                                    <td>{{ $statistic->state }}</td>
+                                                    <td>{{ $statistic->precipitation_rate }}</td>
+                                                    <td>{{ $statistic->date }}</td>
+
+                                                </tr>
+                                            @endforeach
+
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -93,69 +128,43 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script>
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
-        $('#precipitation-statistic-table').DataTable({
-            processing: true,
-            serverSide: true,
-            dom: 'Bfrtip',
+    <script>
 
-            buttons: [
-                { text:'excel',
-                    extend: 'excel',
-                    orientation: 'landscape',
-                    pageSize: 'A3',
-                    exportOptions: {
-                        columns: [ 0,1,2,3]
-                    },
-                    className: 'btn btn-primary ml-1',
 
+    $('#precipitation-statistic-table').DataTable({
+        dom: 'Bfrtip',
+        "language": {
+            "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
+
+        buttons: [
+            {
+                text: '{{trans('Admin\site.excel')}}',
+                extend: 'excel',
+                orientation: 'landscape',
+                pageSize: 'A3',
+                exportOptions: {
+                    columns: [0,1, 2]
                 },
-                {
-                    extend: 'print',
-                    exportOptions: {
-                        columns:  [0,1, 2,3]
-                    },
-                    autoPrint: true,
-                    orientation: 'landscape',
-                    className: 'btn btn-success ml-1',
-                    pageSize: 'A3',
-                    text:'print'
+                className: 'btn btn-primary ml-1',
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: [0.1, 2]
                 },
-
-
-
-            ],
-            ajax: {
-                url: "{{ URL::to('dashboard_admin/dtable-custom-statstics') }}",
-                type: 'GET',
-                data: function (d) {
-                    d.start_date = $('#start_date').val();
-                    d.end_date = $('#end_date').val();
-                }
+                autoPrint: true,
+                orientation: 'landscape',
+                className: 'btn btn-success ml-1',
+                pageSize: 'A3',
+                text: '{{trans('Admin\site.print')}}',
             },
 
-            columns: [
-                { data: 'Area', name: 'Area' },
-                { data: 'State', name: 'State' },
-                { data: 'precipitation_rate', name: 'precipitation_rate' },
-                { data: 'date', name: 'date' },
 
-            ],
-            order: [[0, 'desc']]
-
-
+        ],
     });
-
-    $('#btnFiterSubmitSearch').click(function(){
-        $('#precipitation-statistic-table').DataTable().draw(true);
-    });
-
-</script>
+    </script>
 @endsection

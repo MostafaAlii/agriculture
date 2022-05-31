@@ -227,9 +227,9 @@ Route::group(
             Route::delete('/Precipitations/bulk_delete/{ids}', [PrecipitationController::class,'bulkDelete'])->name('precipitation.bulk_delete');
 //            Route::get('/Precipitations/statistic/', [PrecipitationController::class,'statistics'])->name('precipitation.statistics');
             Route::get('/Precipitations/index_statistic', [PrecipitationController::class,'index_statistic'])->name('precipitations.index_statistic');;
-            Route::get('dtable-custom-statistics', [PrecipitationController::class,'get_custom_statistics']);
+            Route::get('dtable-custom-statistics', [PrecipitationController::class,'get_custom_statistics'])->name('get_custom_statistics');
             Route::get('/Precipitations/index_details_statistic', [PrecipitationController::class,'get_details_statistics_index'])->name('precipitations.index_details_statistic');
-            Route::get('dtable-details-statistics', [PrecipitationController::class,'get_details_statistics']);
+            Route::get('dtable-details-statistics', [PrecipitationController::class,'get_details_statistics'])->name('get_details_statistics');
             Route::get('/Precipitations/graph', [DashboardController::class,'index'])->name('precipitation.graph');
 
             /***********end precipitation ****/

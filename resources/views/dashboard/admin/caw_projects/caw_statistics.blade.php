@@ -119,8 +119,12 @@
 <script>
     let adminsTable = $('#animals-table').DataTable({
         dom: 'Bfrtip',
+        "language": {
+            "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
+
         buttons: [
-            { text:'excel',
+            { text:'{{trans('Admin\site.excel')}}',
                 extend: 'excel',
                 orientation: 'landscape',
                 pageSize: 'A3',
@@ -131,6 +135,7 @@
 
             },
             {
+                text:'{{trans('Admin\site.print')}}',
                 extend: 'print',
                 exportOptions: {
                     columns: [ 1,2,3,4,5,6,6,7,8,9,10]
@@ -139,7 +144,6 @@
                 orientation: 'landscape',
                 className: 'btn btn-success ml-1',
                 pageSize: 'A3',
-                text:'print'
             },
 
 

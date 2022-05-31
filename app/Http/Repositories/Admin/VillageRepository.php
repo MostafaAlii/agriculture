@@ -44,7 +44,7 @@ class VillageRepository implements VillageInterface
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Villages.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
             return redirect()->back();
         }
 
@@ -70,7 +70,7 @@ class VillageRepository implements VillageInterface
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Villages.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
         }
 
@@ -92,7 +92,7 @@ class VillageRepository implements VillageInterface
                 return redirect()->route('Villages.index');
             }
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
             return redirect()->back();
         }
 
@@ -130,7 +130,7 @@ class VillageRepository implements VillageInterface
 
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

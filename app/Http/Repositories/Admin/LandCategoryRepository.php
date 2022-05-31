@@ -48,7 +48,7 @@ class LandCategoryRepository implements LandCategoryInterface {
             toastr()->success(__('Admin/lands.added_successfully'));
             return redirect()->route('LandCategories.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
 
@@ -70,7 +70,7 @@ class LandCategoryRepository implements LandCategoryInterface {
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('LandCategories.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
 
         }
@@ -86,7 +86,7 @@ try{
     toastr()->success(__('Admin/site.deleted_successfully'));
     return redirect()->route('LandCategories.index');
 }catch (\Exception $e) {
-    toastr()->success(__('Admin/attributes.delete_wrong'));
+    toastr()->error(__('Admin/attributes.delete_wrong'));
     return redirect()->back();
 
 }
@@ -115,7 +115,7 @@ try{
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'ar_site_logo'                                             =>               'Arabic Logo',
+    'en_site_logo'                                             =>               'ُEnglish Logo',
     'open'=>'Open',
     'close'=>'Close',
     'choose_status'=>'Choose Status',

@@ -26,7 +26,8 @@ class Home2 extends Component
           $data['about_us']=Cache::get('about_us');
 
           $data['reviews']=Review::where('show_or_hide','1')->get();
-          $data['logo']=Setting::select('site_logo')->first();
+          $data['ar_logo']=Setting::select('ar_site_logo')->first();
+          $data['en_logo']=Setting::select('en_site_logo')->first();
 
           $data['offer_product']=Product::whereNotNull('special_price')->where('in_stock',1)->where('special_price_type','=','fixed')->first();
 

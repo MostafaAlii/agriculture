@@ -21,10 +21,10 @@ interface PrecipitationInterface
 //    public function statistics();
     public function index_statistic();
 
-    public function get_custom_statistics();
+    public function get_custom_statistics($request);
 
     public function get_details_statistics_index();
 
-    public function get_details_statistics();
+    public function get_details_statistics($request);
 
 }

@@ -17,8 +17,10 @@ class SettingSeeder extends Seeder {
             'primary_phone' => '01021493036',
             'secondery_phone' => '01021493030',
 //            'status' => 'open',
-            // 'site_logo' => ,
-            // 'site_icon' => ,
+             'ar_site_logo' => '',
+            'en_site_logo' => '',
+
+            'site_icon' => '',
         ]);
 
 

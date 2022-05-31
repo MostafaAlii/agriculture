@@ -106,9 +106,14 @@
 
      let adminsTable = $('#beekeeper-table').DataTable({
          dom: 'Bfrtip',
+         "language": {
+             "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+         },
+
          buttons: [
-                { text:'excel',
-                 extend: 'excel',
+                {
+                    text:'{{trans('Admin\site.excel')}}',
+                    extend: 'excel',
                  orientation: 'landscape',
                  pageSize: 'A3',
                  exportOptions: {
@@ -126,8 +131,7 @@
                  orientation: 'landscape',
                  className: 'btn btn-success ml-1',
                  pageSize: 'A3',
-                 text:'print'
-             },
+                 text:'{{trans('Admin\site.print')}}',             },
 
 
 

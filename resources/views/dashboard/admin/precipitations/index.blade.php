@@ -169,9 +169,9 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin.email',searchable: true, sortable: true},
 
-            {data: 'area', name: 'area.name',searchable: true, sortable: true},
+            {data: 'area', name: 'area',searchable: true, sortable: true},
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'precipitation_rate', name: 'precipitation_rate',searchable: true, sortable: true},
             {data: 'date', name: 'date',searchable: true, sortable: true},

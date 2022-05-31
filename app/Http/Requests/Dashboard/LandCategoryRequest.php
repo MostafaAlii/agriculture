@@ -27,9 +27,9 @@ class LandCategoryRequest extends FormRequest {
     public function messages() {
         return [
             'category_name.required'   => trans('Admin\validation.required'),
-//            'category_name.regex'   => trans('Admin\validation.regex'),
+            'category_name.regex'   => trans('Admin\validation.regex'),
             'category_type.required'   => trans('Admin\validation.required'),
-//            'category_type.regex'   => trans('Admin\validation.regex'),
+            'category_type.regex'   => trans('Admin\validation.regex'),
 
         ];
     }

@@ -5,8 +5,15 @@
         <div class="row justify-content-between no-gutters">
 
             <a class="top-bar__logo site-logo" href="index_4.html">
-                <img class="img-fluid" src="{{URL::asset('Dashboard/img/settingLogo/'.setting()->site_logo)}}" alt="demo" />
-
+                @if(app()->getLocale()=='ar')
+                    <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
+                         data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
+                         alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                @else
+                    <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
+                         data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
+                         alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                @endif
             </a>
 
             <a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--dark" href="javascript:void(0);"><span></span></a>
