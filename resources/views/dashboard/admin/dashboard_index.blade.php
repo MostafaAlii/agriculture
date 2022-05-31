@@ -1473,7 +1473,7 @@
               @include('dashboard.admin.recent_product')
               <br>
               <hr>
-              @include('dashboard.admin.orders')
+              @includeWhen($orders,'dashboard.admin.orders')
             
 
             </div>

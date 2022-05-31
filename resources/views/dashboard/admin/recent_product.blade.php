@@ -1,5 +1,5 @@
 <!-- start Recent 5 products -->
-@if(isset($latest_products))
+@if(count($latest_products)>0)
 <!-- Start Table Responsive -->
 <div class="table-responsive">
     <center><h3>{{__('Admin/site.newproducts')}}</h3></center>
