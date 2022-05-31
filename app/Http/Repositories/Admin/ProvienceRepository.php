@@ -42,7 +42,7 @@ class ProvienceRepository implements ProvienceInterface {
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Proviences.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
             return redirect()->back();
         }
 

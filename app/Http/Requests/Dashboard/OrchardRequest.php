@@ -23,12 +23,11 @@ class OrchardRequest extends FormRequest
 
             'land_category_id' => 'required',
             'tree_count_per_orchard' =>'required|numeric',
-            'orchard_area' => 'required|string',
-            'supported_side'=>'required',
+            'orchard_area' => 'required|numeric',
+            'supported_side'=>'required|in:govermental,international_organizations,private',
             'unit_id'=>'required|exists:units,id',
-            'phone'=>'required',
-            'email'=>'required',
-
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+            'email'=>'required|email',
         ];
     }
 
@@ -40,6 +39,14 @@ class OrchardRequest extends FormRequest
             'area_id.required' => trans('Admin/validation.required'),
             'state_id.required' => trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
+
+            'farmer_id.exists' => trans('Admin/validation.exists'),
+            'admin_id.exists' => trans('Admin/validation.exists'),
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'state_id.exists' => trans('Admin/validation.exists'),
+            'village_id.exists' => trans('Admin/validation.exists'),
+            'unit_id.exists' => trans('Admin/validation.exists'),
+
 
             'land_category_id.required' => trans('Admin/validation.required'),
             'tree_count_per_orchard.required' => trans('Admin/validation.required'),

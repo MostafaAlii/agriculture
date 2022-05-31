@@ -45,7 +45,7 @@ class SummerCropRepository implements SummerCropInterface
             toastr()->success(__('Admin/summer_crops.added_successfully'));
             return redirect()->route('SummerCrops.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
 
             return redirect()->back();
         }
@@ -69,7 +69,7 @@ class SummerCropRepository implements SummerCropInterface
             toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('SummerCrops.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
 
         }
@@ -87,7 +87,7 @@ class SummerCropRepository implements SummerCropInterface
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('SummerCrops.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
             return redirect()->back();
 
         }
@@ -115,7 +115,7 @@ class SummerCropRepository implements SummerCropInterface
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

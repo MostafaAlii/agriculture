@@ -1,12 +1,14 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"
+            integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
     {{ trans('Admin/crops.farmer_crops_report') }}
 @endsection
 @section('content')
-@include('dashboard.common._partials.messages')
+    @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
@@ -15,13 +17,14 @@
                     <div class="breadcrumb-wrapper col-12">
 
 
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
-                                </li>
-                                <li class="breadcrumb-item"><a href="">{{ __('Admin/crops.database_about_farmer_crops') }}</a>
-                                </li>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a
+                                        href="">{{ __('Admin/crops.database_about_farmer_crops') }}</a>
+                            </li>
 
-                            </ol>
+                        </ol>
 
                     </div>
                 </div>
@@ -50,43 +53,44 @@
 
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration" id="farmer_crops_statistic-table">
+                                        <table class="table table-striped table-bordered zero-configuration"
+                                               id="farmer_crops_statistic-table">
                                             <thead>
-                                                <tr>
-                                                   <th>
+                                            <tr>
+                                                <th>
                                                     <input type="checkbox" name="select_all" id="select-all">
-                                                    </th>
-                                                    <th>{{ __('Admin/crops.area') }}</th>
-                                                    <th>{{ __('Admin/crops.state') }}</th>
-                                                    <th>{{ __('Admin/crops.village') }}</th>
-                                                    <th>{{ __('Admin/crops.email') }}</th>
-                                                    {{--<th>{{ __('Admin/crops.summer_area_crop') }}</th>--}}
-                                                    <th>{{ __('Admin/crops.summer_area_crop') }}</th>
-                                                    <th>{{ __('Admin/crops.winter_area_crop') }}</th>
+                                                </th>
+                                                <th>{{ __('Admin/crops.area') }}</th>
+                                                <th>{{ __('Admin/crops.state') }}</th>
+                                                <th>{{ __('Admin/crops.village') }}</th>
+                                                <th>{{ __('Admin/crops.email') }}</th>
+                                                {{--<th>{{ __('Admin/crops.summer_area_crop') }}</th>--}}
+                                                <th>{{ __('Admin/crops.summer_area_crop') }}</th>
+                                                <th>{{ __('Admin/crops.winter_area_crop') }}</th>
 
-                                                    <th>{{ __('Admin/crops.category_name') }}</th>
-                                                    <th>{{ __('Admin/crops.date') }}</th>
+                                                <th>{{ __('Admin/crops.category_name') }}</th>
+                                                <th>{{ __('Admin/crops.date') }}</th>
 
-                                                </tr>
+                                            </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($statistics as $statistc)
-                                            <tr>
-                                                <td>#</td>
-                                                <td>{{$statistc->Area}}</td>
-                                                <td>{{$statistc->State}}</td>
-                                                <td>{{$statistc->Village}}</td>
-                                                <td>{{$statistc->email_farmer}}</td>
-                                                {{--<td>{{$statistc->summer_area_crop}}</td>--}}
+                                                <tr>
+                                                    <td>#</td>
+                                                    <td>{{$statistc->Area}}</td>
+                                                    <td>{{$statistc->State}}</td>
+                                                    <td>{{$statistc->Village}}</td>
+                                                    <td>{{$statistc->email_farmer}}</td>
+                                                    {{--<td>{{$statistc->summer_area_crop}}</td>--}}
 
-                                                <td>{{$statistc->summer_area_crop}}</td>
-                                                <td>{{$statistc->winter_area_crop}}</td>
+                                                    <td>{{$statistc->summer_area_crop}}</td>
+                                                    <td>{{$statistc->winter_area_crop}}</td>
 
 
-                                                <td>{{$statistc->category_name}}</td>
+                                                    <td>{{$statistc->category_name}}</td>
 
-                                                <td>{{$statistc->date}}</td>
-                                            </tr>
+                                                    <td>{{$statistc->date}}</td>
+                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -100,47 +104,53 @@
             <!--/ Zero configuration table -->
         </div>
     </div>
-<!-- END: Content-->
+    <!-- END: Content-->
 @endsection
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"
+            integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js"
+            integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-<script>
+    <script>
 
 
+        let adminsTable = $('#farmer_crops_statistic-table').DataTable({
+            dom: 'Bfrtip',
+            "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
 
-     let adminsTable = $('#farmer_crops_statistic-table').DataTable({
-         dom: 'Bfrtip',
-         buttons: [
-                { text:'excel',
-                 extend: 'excel',
-                 orientation: 'landscape',
-                 pageSize: 'A3',
-                 exportOptions: {
-                     columns: [ 1,2,3,4,5,6,7,8]
-                 },
-                 className: 'btn btn-primary ml-1',
+            buttons: [
+                {
+                    text: '{{trans('Admin\site.excel')}}',
+                    extend: 'excel',
+                    orientation: 'landscape',
+                    pageSize: 'A3',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                    },
+                    className: 'btn btn-primary ml-1',
 
-               },
-             {
-                 extend: 'print',
-                 exportOptions: {
-                     columns:  [1, 2,3,4, 5,6,7,8]
-                 },
-                 autoPrint: true,
-                 orientation: 'landscape',
-                 className: 'btn btn-success ml-1',
-                 pageSize: 'A3',
-                 text:'print'
-             },
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8]
+                    },
+                    autoPrint: true,
+                    orientation: 'landscape',
+                    className: 'btn btn-success ml-1',
+                    pageSize: 'A3',
+                    text:'{{trans('Admin\site.print')}}',                },
 
 
+            ],
 
-         ],
 
-
-     });
-</script>
+        });
+    </script>
 @endsection

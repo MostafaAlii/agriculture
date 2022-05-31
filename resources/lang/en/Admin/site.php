@@ -6,6 +6,18 @@ return [
     'administrative_desc'=>'Administrative parts including five main parts existing in each state on seven Area as follow:',
     'wholesale'=>'WHOLESALE',
     'wholesale_desc'=>'including all Income and outcome products to these four wholesales',
+    'excel'=>'EXCEL',
+    'print'=>'PRINT',
+    "sSearch"=> "Search:",
+     "sLengthMenu"=> "Show _MENU_Recordsٌ",
+     "sZeroRecords"=> "No data",
+     "sInfo"=> "Show _START_ To _END_ Of _TOTAL_ Records",
+     "sInfoEmpty"=> "show 0 to 0 from of 0 record",
+     "sInfoFiltered"> "(منتقاة من مجموع _MAX_ مُدخل)",
+       "sFirst"=> "First",
+     "sPrevious"=> "Previous",
+     "sNext"=> "Next",
+     "sLast"=> "Last",
 
 
 

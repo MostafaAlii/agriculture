@@ -37,6 +37,11 @@ class LandAreaRequest extends FormRequest
             'L_area.required' => trans('Admin/validation.required'),
             'land_category_id.required' => trans('Admin/validation.required'),
             'unit_id.required' => trans('Admin/validation.required'),
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'village_id.exists' => trans('Admin/validation.exists'),
+            'state_id.exists' => trans('Admin/validation.exists'),
+            'land_category_id.exists' => trans('Admin/validation.exists'),
+            'unit_id.exists' => trans('Admin/validation.exists'),
 
 
         ];

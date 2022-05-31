@@ -1,5 +1,7 @@
 <?php
-namespace  App\Http\Repositories\Admin;
+
+namespace App\Http\Repositories\Admin;
+
 use App\Models\Currency;
 
 use App\Http\Interfaces\Admin\CurrencyInterface;
@@ -9,13 +11,17 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
-class CurrencyRepository implements CurrencyInterface{
+class CurrencyRepository implements CurrencyInterface
+{
 
-    public function index() {
+    public function index()
+    {
 
-           return view('dashboard.admin.currencies.index');
+        return view('dashboard.admin.currencies.index');
     }
-    public function data() {
+
+    public function data()
+    {
 
         $currencies = Currency::query();
         return DataTables::of($currencies)
@@ -23,25 +29,25 @@ class CurrencyRepository implements CurrencyInterface{
             ->editColumn('created_at', function (Currency $currency) {
                 return $currency->created_at->diffforhumans();
             })
-
             ->addColumn('actions', 'dashboard.admin.currencies.data_table.actions')
-
             ->rawColumns(['actions'])
             ->toJson();
     }
-    public function store($request) {
-        try{
+
+    public function store($request)
+    {
+        try {
             $validated = $request->validated();
 
             Currency::create([
-                'Name'=>$validated['Name']
+                'Name' => $validated['Name']
             ]);
 
 
             toastr()->success(__('Admin/country.added_successfully'));
             return redirect()->route('Currencies.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
 
             return redirect()->back();
 
@@ -50,21 +56,22 @@ class CurrencyRepository implements CurrencyInterface{
 
     }
 
-    public function update( $request,$id) {
+    public function update($request, $id)
+    {
 
-        try{
+        try {
 
             $currencyId = Crypt::decrypt($id);
-            $currency=Currency::findorfail($currencyId);
+            $currency = Currency::findorfail($currencyId);
             $currency->Name = $request->Name;
 
             $currency->update();
 
             DB::commit();
-            toastr()->success( __('Admin/site.updated_successfully'));
+            toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('Currencies.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
 
         }

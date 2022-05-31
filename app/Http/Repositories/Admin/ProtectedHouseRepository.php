@@ -126,7 +126,7 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
 
 
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
             return redirect()->back();
         }
 
@@ -185,7 +185,7 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
 
 
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
         }
 
@@ -202,7 +202,7 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
         return redirect()->route('ProtectedHouse.index');
     }
     catch (\Exception $e) {
-        toastr()->success(__('Admin/attributes.delete_wrong'));
+        toastr()->error(__('Admin/attributes.delete_wrong'));
         return redirect()->back();
     }
 
@@ -233,7 +233,7 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

@@ -22,7 +22,7 @@ class StateRequest extends FormRequest
             ],
             'location_x' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
-            'area_id' => 'required',
+            'area_id' => 'required|exists:states,id',
 
 
         ];
@@ -35,6 +35,8 @@ class StateRequest extends FormRequest
             'location_x.numeric' => trans('Admin\validation.numeric'),
             'location_y.numeric' => trans('Admin\validation.numeric'),
             'area_id.required' => trans('Admin\validation.required'),
+            'area_id.exists' => trans('Admin\validation.exists'),
+
             'name.regex' => trans('Admin\validation.regex'),
 
         ];

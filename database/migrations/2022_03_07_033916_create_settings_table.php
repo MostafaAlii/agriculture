@@ -18,7 +18,9 @@ class CreateSettingsTable extends Migration
             $table->string('primary_phone')->nullable();
             $table->string('secondery_phone')->nullable();
             $table->enum('status',['open','close'])->default('open');
-            $table->string('site_logo')->nullable();
+            $table->string('ar_site_logo')->nullable();
+            $table->string('en_site_logo')->nullable();
+
             $table->string('site_icon')->nullable();
             $table->timestamps();
         });

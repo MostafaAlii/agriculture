@@ -61,7 +61,11 @@
     });
 </script>
 {{-- end image preview --}}
-
+<script>
+    $(function() {
+        $('.datepiker').datepiker();
+    })
+</script>
 {{-- test bulk delete 2 --}}
 <script>
     $(function() {
@@ -73,6 +77,8 @@
         });
     })
 </script>
+
+
 <script type="text/javascript">
     $(function() {
         $('#btn_delete_all').click(function() {

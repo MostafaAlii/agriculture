@@ -50,7 +50,7 @@
 
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-bordered zero-configuration" id="animals-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="orchards-table">
                                             <thead>
 
                                                 <tr>
@@ -113,11 +113,15 @@
 
 
 <script>
-    let adminsTable = $('#animals-table').DataTable({
+    let adminsTable = $('#orchards-table').DataTable({
         dom: 'Bfrtip',
+        "language": {
+            "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
 
         buttons: [
-            { text:'excel',
+            {
+                text:'{{trans('Admin\site.excel')}}',
                 extend: 'excel',
                 orientation: 'landscape',
                 pageSize: 'A3',
@@ -136,7 +140,7 @@
                 orientation: 'landscape',
                 className: 'btn btn-success ml-1',
                 pageSize: 'A3',
-                text:'print'
+                text:'{{trans('Admin\site.print')}}',
             },
 
 

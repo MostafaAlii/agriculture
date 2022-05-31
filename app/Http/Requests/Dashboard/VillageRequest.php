@@ -18,7 +18,7 @@ class VillageRequest extends FormRequest {
             ],
             'location_x' =>  'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
-            'state_id' => 'required',
+            'state_id' => 'required|exists:states,id',
 
 
         ];

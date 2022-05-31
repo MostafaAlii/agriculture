@@ -13,7 +13,16 @@
                 <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
                     <div class="card-header border-0">
                         <div class="card-title text-center">
-                            <img src="{{ asset('assets/admin/images/logo/logo-dark.png') }}" alt="branding logo">
+                            @if(app()->getLocale()=='ar')
+                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
+                                     data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
+                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                            @else
+                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
+                                     data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
+                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                            @endif
+
                         </div>
                     </div>
                     <div class="card-content">

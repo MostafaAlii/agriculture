@@ -14,12 +14,12 @@ class Setting extends Model implements TranslatableContract
     protected $fillable = [
         'support_mail','primary_phone','secondery_phone', 'facebook', 'twitter','inestegram',
         'site_name', 'address','message_maintenance','status',
-        'site_logo','site_icon'
+        'ar_site_logo','site_icon','en_site_logo'
     ];
     // 3. To define which attributes needs to be translated
     public $translatedAttributes = ['site_name', 'address','message_maintenance'];
 
-    protected $appends = ['setting_icon_path','setting_logo_path'];
+    protected $appends = ['setting_icon_path','setting_ar_logo_path','setting_en_logo_path'];
     public $timestamps = true;
 
     // Country Flag Image Appends ::
@@ -28,7 +28,10 @@ class Setting extends Model implements TranslatableContract
 
     }
 
-    public function getSettingLogoPathAttribute() {
-        return  asset('Dashboard/img/settingLogo/' . $this->site_logo);
+    public function getSettingArLogoPathAttribute() {
+        return  asset('Dashboard/img/settingArLogo/' . $this->ar_site_logo);
+    }
+    public function getSettingEnLogoPathAttribute() {
+        return  asset('Dashboard/img/settingEnLogo/' . $this->en_site_logo);
     }
 }

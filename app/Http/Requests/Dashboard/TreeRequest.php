@@ -26,6 +26,7 @@ class TreeRequest extends FormRequest {
             'name.regex'   => trans('Admin\validation.regex'),
             'tree_type_id.required'   => trans('Admin\validation.required'),
 
+            'tree_type_id.exists'   => trans('Admin\validation.exists'),
 
         ];
     }

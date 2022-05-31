@@ -24,8 +24,8 @@ class SettingRequest extends FormRequest
         return [
             'support_mail' => 'sometimes|nullable|email',
 
-            'primary_phone' => 'required|numeric',
-            'secondery_phone' => 'required|numeric',
+            'primary_phone'         => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+            'secondery_phone' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
             'facebook' => 'required|url',
             'twitter' => 'required|url',
             'inestegram' => 'required|url',
@@ -35,15 +35,17 @@ class SettingRequest extends FormRequest
             ],
 
 
-//              'site_logo'=>'required_without:id|mimes:png,jpg,jpeg',
-//             'site_icon'=>'required_without:id|mimes:png,jpg,jpeg',
+            'ar_site_logo'=>'sometimes|nullable|mimes:png,jpg,jpeg',
+            'en_site_logo'=>'sometimes|nullable|mimes:png,jpg,jpeg',
+
+            'site_icon'=>'sometimes|nullable|mimes:png,jpg,jpeg',
             'message_maintenance' => [
                 'required','string'
             ],
             'address' => [
                 'required','string'
             ],
-            'status'=>'required',
+            'status'         => 'required|in:open,close',
         ];
 
 
@@ -54,7 +56,7 @@ class SettingRequest extends FormRequest
         return [
 
 
-                'email.required' => trans('Admin/validation.required'),
+            'email.required' => trans('Admin/validation.required'),
             'email.email' => trans('Admin/validation.email'),
 
             'primary_phone.required' => trans('Admin/validation.required'),

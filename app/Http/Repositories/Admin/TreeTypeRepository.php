@@ -52,7 +52,7 @@ class TreeTypeRepository implements TreeTypeInterface
             toastr()->success(__('Admin/country.added_successfully'));
             return redirect()->route('TreeTypes.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
             return redirect()->back();
         }
 
@@ -73,7 +73,7 @@ class TreeTypeRepository implements TreeTypeInterface
             toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('TreeTypes.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
 
         }
@@ -98,7 +98,7 @@ class TreeTypeRepository implements TreeTypeInterface
                 return redirect()->route('TreeTypes.index');
             }
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
             return redirect()->back();
 
         }
@@ -132,7 +132,7 @@ class TreeTypeRepository implements TreeTypeInterface
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

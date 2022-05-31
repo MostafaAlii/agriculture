@@ -6,7 +6,16 @@
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
-                        <img class="brand-logo" alt="modern admin logo" src="{{ asset('assets/admin/images/logo/logo.png') }}">
+
+                        @if(app()->getLocale()=='ar')
+                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
+                        data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="50" height="50"
+                        alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
+                        @else
+                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
+                        data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="50" height="50"
+                        alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
+                        @endif
                         <h3 class="brand-text">Modern</h3>
                     </a>
                 </li>

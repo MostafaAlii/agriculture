@@ -112,9 +112,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="col col-md-4">
-                                                        <div class="form-group">
+                                                        <div class="form-group" >
                                                             <label>{{ __('Admin/precipitations.date') }}</label>
-                                                            <input name="date" value=""  class="form-control"type="date">
+                                                            <input name="date"  id="precipitation_date" value=""  class="form-control datepicker" type="text">
 
                                                         </div>
                                                     </div>
@@ -189,6 +189,8 @@
     });
 
 </script>
+
+
 
 @endsection
 

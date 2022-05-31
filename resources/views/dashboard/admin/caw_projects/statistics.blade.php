@@ -105,8 +105,27 @@
 <script>
     let adminsTable = $('#animals-table').DataTable({
         dom: 'Bfrtip',
+        "language": {
+            "sSearch": "{{trans('Admin\site.sSearch')}}",
+            "sLengthMenu": "{{trans('Admin\site.sLengthMenu')}}",
+            "sZeroRecords": "{{trans('Admin\site.sZeroRecords')}}",
+            "sInfo": "{{trans('Admin\site.sInfo')}}",
+            "sInfoEmpty": "{{trans('Admin\site.sInfoEmpty')}}",
+            "sInfoFiltered":"{{trans('Admin\site.sInfoFiltered')}}",
+            "oPaginate": {
+                "sFirst": "{{trans('Admin\site.sFirst')}}",
+                "sPrevious": "{{trans('Admin\site.sPrevious')}}",
+                "sNext": "{{trans('Admin\site.sNext')}}",
+                "sLast": "{{trans('Admin\site.sLast')}}",
+
+
+
+            }
+        },
+
         buttons: [
-            { text:'excel',
+            {
+                text:'{{trans('Admin\site.excel')}}',
                 extend: 'excel',
                 orientation: 'landscape',
                 pageSize: 'A3',
@@ -125,8 +144,7 @@
                 orientation: 'landscape',
                 className: 'btn btn-success ml-1',
                 pageSize: 'A3',
-                text:'print'
-            },
+                text:'{{trans('Admin\site.print')}}',            },
 
 
 

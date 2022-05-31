@@ -17,7 +17,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">{{ __('Admin/site.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="">{{ __('Admin/precipitations.precipitation_database_in_zawita_station') }}</a>
+                                <li class="breadcrumb-item"><a href="">{{__('Admin/precipitations.precipitation_database_in_zawita_station')}}</a>
                                 </li>
 
                             </ol>
@@ -45,6 +45,9 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
+                                    <form method="get" action="{{route('get_details_statistics')}}">
+                                        @csrf
+
                                     <h2>{{__('Admin\precipitations.choose_date')}}</h2>
                                     <div class="form-group col-md-6">
                                         <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
@@ -57,9 +60,9 @@
                                             <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
                                     </div>
                                     <div class="text-left" style="    margin-left: 15px;  ">
-                                        <button type="text" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
+                                        <button type="submit" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
                                     </div>
-
+                                    </form>
                                     <br>
 
                                     <div class="table-responsive">
@@ -77,7 +80,22 @@
 
                                                 </tr>
                                             </thead>
+                                            <tbody>
 
+                                            @foreach($precipitations as $statistic)
+                                                <tr>
+
+                                                    <td>{{ $statistic->Area }}</td>
+                                                    <td>{{ $statistic->State }}</td>
+                                                    <td>{{ $statistic->precipitation_rate }}</td>
+                                                    <td>{{ $statistic->day }}</td>
+                                                    <td>{{ $statistic->month }}</td>
+                                                    <td>{{ $statistic->year }}</td>
+
+                                                </tr>
+                                            @endforeach
+
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -97,24 +115,22 @@
 
 <script>
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+
 
         $('#precipitation-statistic-details-table').DataTable({
-            processing: true,
-            serverSide: true,
             dom: 'Bfrtip',
+            "language": {
+                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+            },
 
             buttons: [
-                { text:'excel',
+                {
+                    text: '{{trans('Admin\site.excel')}}',
                     extend: 'excel',
                     orientation: 'landscape',
                     pageSize: 'A3',
                     exportOptions: {
-                        columns: [ 0,1,2,3,4,5]
+                        columns: [0,1, 2,3,4,5]
                     },
                     className: 'btn btn-primary ml-1',
 
@@ -122,44 +138,17 @@
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns:  [0,1, 2,3,4,5]
+                        columns: [0,1, 2,3,4,5]
                     },
                     autoPrint: true,
                     orientation: 'landscape',
                     className: 'btn btn-success ml-1',
                     pageSize: 'A3',
-                    text:'print'
+                    text: '{{trans('Admin\site.print')}}',
                 },
 
 
-
             ],
-            ajax: {
-                url: "{{ URL::to('dashboard_admin/dtable-details-statistics') }}",
-                type: 'GET',
-                data: function (d) {
-                    d.start_date = $('#start_date').val();
-                    d.end_date = $('#end_date').val();
-                }
-            },
-
-            columns: [
-                { data: 'Area', name: 'Area' },
-                { data: 'State', name: 'State' },
-                { data: 'precipitation_rate', name: 'precipitation_rate' },
-                { data: 'day', name: 'day' },
-                { data: 'month', name: 'month' },
-                { data: 'year', name: 'year' },
-
-            ],
-            order: [[0, 'desc']]
-
-
-    });
-
-    $('#btnFiterSubmitSearch').click(function(){
-        $('#precipitation-statistic-details-table').DataTable().draw(true);
-    });
-
+        });
 </script>
 @endsection

@@ -43,7 +43,7 @@ class StateRepository implements StateInterface {
             return redirect()->route('States.index');
         }catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
 
             return redirect()->back();
 
@@ -69,7 +69,7 @@ class StateRepository implements StateInterface {
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('States.index');
         }catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
 
             return redirect()->back();
 
@@ -93,7 +93,7 @@ class StateRepository implements StateInterface {
             }
 
 } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

@@ -135,7 +135,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
 
             return redirect()->back();
         }
@@ -196,7 +196,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
 
             return redirect()->back();
         }
@@ -214,7 +214,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             return redirect()->route('FarmerServices.index');
 
         }catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
         }
@@ -244,7 +244,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
         }

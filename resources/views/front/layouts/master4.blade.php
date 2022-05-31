@@ -96,8 +96,16 @@
 						<div class="col-12 col-sm-auto">
 							<div class="footer__item">
 								<a class="site-logo" href="index.html">
-									<img class="img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
-								</a>
+                          @if(app()->getLocale()=='ar')
+                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
+                                     data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
+                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                            @else
+                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
+                                     data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
+                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                            @endif
+                            					</a>
 							</div>
 						</div>
 

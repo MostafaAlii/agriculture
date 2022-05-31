@@ -1,6 +1,25 @@
 <?php
 
 return [
+    'excel'=>'تصدير إكسل',
+    'print'=>'طباعة',
+    'administrative_part'=>'ADMINISTRATIVE PARTS',
+    'parts'=>'PARTS',
+    'administrative_desc'=>'Administrative parts including five main parts existing in each state on seven Area as follow:',
+    'wholesale'=>'WHOLESALE',
+    'wholesale_desc'=>'including all Income and outcome products to these four wholesales',
+
+    "sSearch"=> "ابحث:",
+    "sLengthMenu"=> "أظهر _MENU_ مدخلات",
+    "sZeroRecords"=> "لم يعثر على أية سجلات",
+    "sInfo"=> "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+    "sInfoEmpty"=> "يعرض 0 إلى 0 من أصل 0 سجل",
+    "sInfoFiltered"> "(منتقاة من مجموع _MAX_ مُدخل)",
+    "sFirst"=> "الأول",
+    "sPrevious"=> "السابق",
+    "sNext"=> "التالي",
+    "sLast"=> "الأخير",
+
     'whole_sale_market'=>'العلوات',
     'planet_protection_services'=>'النباتات المحمية و الخدمات',
     'wholesale'=>'العلوات',

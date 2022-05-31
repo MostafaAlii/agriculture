@@ -24,11 +24,9 @@ class OrchardController extends Controller
     public function index() {
         return $this->Data->index();
     }
-
     public function data() {
         return $this->Data->data();
     }// end of data
-
     public function create() {
         return $this->Data->create();
     }

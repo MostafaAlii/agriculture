@@ -110,8 +110,8 @@ class LandAreaRepository implements LandAreaInterface{
 
 
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->error(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
         }
     }
 
@@ -157,7 +157,7 @@ class LandAreaRepository implements LandAreaInterface{
 
 
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
         }
     }
@@ -172,7 +172,7 @@ class LandAreaRepository implements LandAreaInterface{
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('LandAreas.index');
         }catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
             return redirect()->back();
         }
 
@@ -201,7 +201,7 @@ class LandAreaRepository implements LandAreaInterface{
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

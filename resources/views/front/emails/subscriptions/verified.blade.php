@@ -148,7 +148,15 @@
                             use App\Models\Setting;
                             $site= Setting::first();
                             ?>
-                             <img src="{{URL::asset('public/Dashboard/img/settingLogo/'.$site->site_logo)}}" width="125" height="120" style="display: block; border: 0px;" />
+                            @if(app()->getLocale()=='ar')
+                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
+                                     data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
+                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                            @else
+                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
+                                     data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
+                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                            @endif
                         </td>
                     </tr>
                 </table>

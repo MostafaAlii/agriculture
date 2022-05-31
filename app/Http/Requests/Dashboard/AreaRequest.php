@@ -28,6 +28,7 @@ class AreaRequest extends FormRequest {
     public function messages() {
         return [
             'name.required'   => trans('Admin\validation.required'),
+            'province_id.exists'   => trans('Admin\validation.exists'),
             'name.regex'   => trans('Admin\validation.regex'),
             'location_x.numeric'    => trans('Admin\validation.numeric'),
             'location_y.numeric'       => trans('Admin\validation.numeric'),

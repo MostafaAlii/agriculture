@@ -18,7 +18,7 @@ class ProvienceRequest extends FormRequest {
             ],
             'location_x' =>  'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
-            'country_id' => 'required',
+            'country_id' => 'required|exists:countries,id',
 
 
         ];
@@ -32,6 +32,7 @@ class ProvienceRequest extends FormRequest {
             'location_x.numeric'    => trans('Admin\validation.numeric'),
             'location_y.numeric'       => trans('Admin\validation.numeric'),
             'country_id.required'       => trans('Admin\validation.required'),
+            'country_id.exists'       => trans('Admin\validation.exists'),
 
         ];
     }

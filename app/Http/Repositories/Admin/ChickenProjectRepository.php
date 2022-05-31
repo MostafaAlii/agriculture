@@ -108,7 +108,7 @@ class ChickenProjectRepository implements ChickenProjectInterface{
             $chicken->email = $requestData['email'];
             $chicken->save($requestData);
 
-            toastr()->success(__('Admin/site.added_successfully'));
+            toastr()->error(__('Admin/site.added_successfully'));
             return redirect()->route('Chickens.index');
 
 
@@ -166,7 +166,7 @@ class ChickenProjectRepository implements ChickenProjectInterface{
 
             $chicken->update($requestData);
 
-            toastr()->success(__('Admin/site.updated_successfully'));
+            toastr()->error(__('Admin/site.updated_successfully'));
             return redirect()->route('Chickens.index');
 
 
@@ -189,7 +189,7 @@ class ChickenProjectRepository implements ChickenProjectInterface{
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('Chickens.index');
         }catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
         }
@@ -221,7 +221,7 @@ class ChickenProjectRepository implements ChickenProjectInterface{
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

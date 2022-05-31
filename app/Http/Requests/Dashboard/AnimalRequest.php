@@ -27,11 +27,11 @@ class AnimalRequest extends FormRequest
             ],
             'hall_num' =>'required|numeric',
             'animal_count' =>'required|numeric',
-            'food_source'=>'required',
-            'marketing_side'=>'required',
+            'food_source'=>'required|in:local,outer',
+            'marketing_side'=>'required|in:private,govermental',
             'cost'=>'required|numeric',
-            'type'=>'required',
-            'phone'=>'required',
+            'type'         => 'required|in:caw,ship,fish',
+            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
             'email'=>'required|email',
 
         ];
@@ -41,8 +41,15 @@ class AnimalRequest extends FormRequest
     {
         return [
             'farmer_id.required' => trans('Admin/validation.required'),
+            'farmer_id.exists' => trans('Admin/validation.exists'),
+            'admin_id.exists' => trans('Admin/validation.exists'),
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'state_id.exists' => trans('Admin/validation.exists'),
+            'village_id.exists' => trans('Admin/validation.exists'),
+
             'village_id.required' => trans('Admin/validation.required'),
             'project_name.required' => trans('Admin/validation.required'),
+            'project_name.regex' => trans('Admin/validation.regex'),
             'hall_num.required' => trans('Admin/validation.required'),
             'animal_count.required' => trans('Admin/validation.required'),
             'food_source.required' => trans('Admin/validation.required'),

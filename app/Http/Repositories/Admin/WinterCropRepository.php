@@ -45,8 +45,8 @@ class WinterCropRepository implements WinterCropInterface
             toastr()->success(__('Admin/winter_crops.added_successfully'));
             return redirect()->route('WinterCrops.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            toastr()->error(__('Admin/attributes.add_wrong'));
+            return redirect()->back();
         }
 
 
@@ -67,7 +67,7 @@ class WinterCropRepository implements WinterCropInterface
             toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('WinterCrops.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.edit_wrong'));
+            toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
 
         }
@@ -85,7 +85,7 @@ class WinterCropRepository implements WinterCropInterface
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('WinterCrops.index');
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
             return redirect()->back();
 
         }
@@ -113,7 +113,7 @@ class WinterCropRepository implements WinterCropInterface
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
 

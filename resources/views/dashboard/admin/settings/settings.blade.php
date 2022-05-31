@@ -174,7 +174,7 @@
 
 
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
 
                                                         <label>{{trans('Admin\setting.site_icon')}}</label>
@@ -184,30 +184,49 @@
 
                                                             @if(!empty($setting->site_icon))
                                                                     <img src="{{asset('Dashboard/img/settingIcon/'.$setting->site_icon)}}"
-                                                                        class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="icon" id="output_1" >
+                                                                        class="img-thumbnail img-preview" width="70px"
+                                                                         height="70px" alt="icon" id="output_1" >
                                                             @else
-                                                                    <img class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="icon" >
+                                                                    <img class="img-thumbnail img-preview" width="70px"
+                                                                         height="70px" alt="icon" >
                                                             @endif
 
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>{{trans('Admin\setting.site_logo')}} </label>
+                                                        <label>{{trans('Admin\setting.ar_site_logo')}} </label>
                                                         <label id="projectinput7" class="file center-block"></label>
                                                         <label id="projectinput7" class="file center-block">
 
-                                                            <input type="file" accept="image/*" name="site_logo"  onchange="loadFile(event)">
-                                                            @if(!empty($setting->site_logo))
-                                                                    <img src="{{asset('Dashboard/img/settingLogo/'.$setting->site_logo)}}"
-                                                                         class="img-thumbnail img-preview" width="50px"
-                                                                         height="50px" alt="logo" id="output">
+                                                            <input type="file" accept="image/*" name="ar_site_logo"  onchange="loadFile(event)">
+                                                            @if(!empty($setting->ar_site_logo))
+                                                                    <img src="{{asset('Dashboard/img/settingArLogo/'.$setting->ar_site_logo)}}"
+                                                                         class="img-thumbnail img-preview" width="70px"
+                                                                         height="70px" alt="logo" id="output">
                                                             @else
-                                                                    <img class="img-thumbnail img-preview" width="100px"
-                                                                         height="100px" alt="" >
+                                                                    <img class="img-thumbnail img-preview" width="70px"
+                                                                         height="70px" alt="" >
+                                                            @endif
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>{{trans('Admin\setting.en_site_logo')}} </label>
+                                                        <label id="projectinput7" class="file center-block"></label>
+                                                        <label id="projectinput7" class="file center-block">
+
+                                                            <input type="file" accept="image/*" name="en_site_logo"  onchange="loadFile_2(event)">
+                                                            @if(!empty($setting->en_site_logo))
+                                                                <img src="{{asset('Dashboard/img/settingEnLogo/'.$setting->en_site_logo)}}"
+                                                                     class="img-thumbnail img-preview" width="70px"
+                                                                     height="70px" alt="logo" id="output_2">
+                                                            @else
+                                                                <img class="img-thumbnail img-preview" width="70px"
+                                                                     height="70px" alt="" >
                                                             @endif
                                                         </label>
                                                     </div>
@@ -259,6 +278,17 @@
 
         var loadFile_1 = function (event) {
             var output = document.getElementById('output_1');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function () {
+                URL.revokeObjectURL(output.src)
+            }
+
+        };
+    </script>
+    <script type="text/javascript">
+
+        var loadFile_2 = function (event) {
+            var output = document.getElementById('output_2');
             output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function () {
                 URL.revokeObjectURL(output.src)
