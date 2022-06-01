@@ -45,7 +45,30 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/file-uploaders/dropzone.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/rtl.css')}}">
         <!-- END: Page CSS-->
-        <!-- BEGIN: Page CSS--> --}}
+        <!-- BEGIN: Page CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
+    @elseif(app()->getLocale() == 'ku')
+        <!-- BEGIN: Vendor CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
+        <!-- END: Vendor CSS-->
+        <!-- BEGIN: Theme CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/bootstrap-extended.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/colors.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/components.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/custom-rtl.css') }}">
+        <!-- END: Theme CSS-->
+        <!-- BEGIN: Page CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/menu/menu-types/vertical-menu.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/file-uploaders/dropzone.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/rtl.css')}}">
+        <!-- END: Page CSS-->
+        <!-- BEGIN: Page CSS--> 
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">

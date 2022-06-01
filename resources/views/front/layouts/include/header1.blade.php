@@ -21,7 +21,7 @@
                     <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
                          URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
                          URL::asset('Dashboard/img/Default/logo_en.png')}}"
-                         alt="" style="left: 45%;    width: 70px;height: 70px;"/>
+                         alt="" style="left: 45%;    width: 50px;height: 50px;"/>
 
                 @endif
             </a>

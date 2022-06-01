@@ -1,18 +1,23 @@
-<div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{ __('Admin/site.action') }}
+@can('product-processes')
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ __('Admin/site.action') }}
         </button>
-        <div class="dropdown-menu dropmenu-menu-right">
-            <a type="button" class="dropdown-item btn btn-outline-primary btn-md" data-toggle="modal" data-target="#restore{{ $product->id }}">
-                {{ __('Admin/products.restore') }}
-            </a>
-            <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $product->id }}">
-                {{ __('Admin/site.delete') }}
-            </a>
-            <div class="dropdown-divider"></div>
-        </div>
+            <div class="dropdown-menu dropmenu-menu-right">
+                @can('product-restore')
+                    <a type="button" class="dropdown-item btn btn-outline-primary btn-md" data-toggle="modal" data-target="#restore{{ $product->id }}">
+                        {{ __('Admin/products.restore') }}
+                    </a>
+                @endcan
+                @can('product-trushed-delete')
+                    <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $product->id }}">
+                        {{ __('Admin/site.delete') }}
+                    </a>
+                @endcan
+                <div class="dropdown-divider"></div>
+            </div>
     </div>
-    
+@endcan
     {{-- modal delete --}}
     <form action="{{ route('product_force_delete', encrypt($product->id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf

@@ -69,9 +69,6 @@ class ProductRepository implements ProductInterface {
              ->editColumn('price', function (Product $product) {
                 return view('dashboard.admin.products.data_table.price_formated', compact('product'));
             })
-            /*->editColumn('deleted_at', function (Product $product) {
-                return $product->deleted_at->'datetime:Y-m-d;
-            })*/
             ->addColumn('image', function (Product $product) {
                 return view('dashboard.admin.products.data_table.image', compact('product'));
             })
@@ -178,8 +175,8 @@ class ProductRepository implements ProductInterface {
     }
 
     public function additionalPrice($id) {
-        $real_id= Crypt::decrypt($id);
-        $data = [];
+        $real_id                =       Crypt::decrypt($id);
+        $data                   =       [];
         $data['product']        =       Product::findOrfail($real_id);
         return view('dashboard.admin.products.prices.additionalPrice', $data);
     }

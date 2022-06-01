@@ -1,24 +1,33 @@
-<div class="btn-group">
-<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{ __('Admin/site.action') }}
-    </button>
-    <div class="dropdown-menu dropmenu-menu-right">
-        <a href="{{ route('product_edit', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
-            {{ __('Admin/site.edit') }}
-        </a>
-        <a href="{{ route('products.prices', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-warning btn-md">
-            {{ __('Admin/products.prices_managment') }}
-        </a>
-        <a href="{{ route('products.stock', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-success btn-md">
-            {{ __('Admin/products.stock') }}
-        </a>
-        <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $product->id }}">
-            {{ __('Admin/site.delete') }}
-        </a>
-        <div class="dropdown-divider"></div>
+@can('product-processes')
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ __('Admin/site.action') }}
+        </button>
+        <div class="dropdown-menu dropmenu-menu-right">
+            @can('product-edit')
+                <a href="{{ route('product_edit', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
+                    {{ __('Admin/site.edit') }}
+                </a>
+            @endcan
+            @can('product-special-price')
+                <a href="{{ route('products.prices', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-warning btn-md">
+                    {{ __('Admin/products.prices_managment') }}
+                </a>
+            @endcan
+            @can('product-stock')
+                <a href="{{ route('products.stock', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-success btn-md">
+                    {{ __('Admin/products.stock') }}
+                </a>
+            @endcan
+            @can('product-delete')
+                <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $product->id }}">
+                    {{ __('Admin/site.delete') }}
+                </a>
+            @endcan
+            <div class="dropdown-divider"></div>
+        </div>
     </div>
-</div>
-
+@endcan
 {{-- modal delete --}}
 <form action="{{ route('product_delete', encrypt($product->id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf

@@ -24,9 +24,9 @@
 				}'>
                 @foreach (\App\Models\Slider::get() as $slider)
 					<?php if(isset($slider->image->filename)){$scr=$slider->image->filename;}else{$scr="";}?>
-						
-					
-																
+
+
+
                     <div class="start-screen__slide">
                         <div class="start-screen__bg"
                         style="background-image: url({{ asset('Dashboard/img/sliders/'. $scr) }});
@@ -66,6 +66,8 @@
 				================================================== -->
                 @if(app()->getLocale()=='ar')
                 <link rel="stylesheet" href="{{ asset('frontassets/css/style-ar.css') }}" type="text/css">
+                @elseif(app()->getLocale()=='ku')
+                 <link rel="stylesheet" href="{{ asset('frontassets/css/style-ar.css') }}" type="text/css">
                 @else
                 {{-- <link rel="stylesheet" href="{{ asset('frontassets/css/style.min.css') }}" type="text/css"> --}}
                 <link rel="stylesheet" href="{{ asset('frontassets/css/style.css') }}" type="text/css">

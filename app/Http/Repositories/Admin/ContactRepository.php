@@ -26,7 +26,7 @@ class ContactRepository implements ContactInterface {
                 $mail_name='sender_mail_'.$id;
                 $message->subject("Replay to your message.. ");
                 $message->to($request[$mail_name]);
-                $message->from(env('MAIL_FROM_ADDRESS','magdasaif3@gmail.com'));
+                $message->from(env('MAIL_FROM_ADDRESS'));
             }
         );
         toastr()->success(__('Admin/contact.send_done'));
@@ -52,7 +52,7 @@ class ContactRepository implements ContactInterface {
             ),
             function ($message) use ($request){
                 $message->subject($request['emailSubject']);
-                $message->from(env('MAIL_FROM_ADDRESS','magdasaif3@gmail.com'));
+                $message->from(env('MAIL_FROM_ADDRESS'));
                 $message->to($request['emailTo']);
 
             }

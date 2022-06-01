@@ -38,6 +38,7 @@
                         @endif
                     </div>
                 </div>
+               
             </div>
             <!-- end posts -->
         </div>

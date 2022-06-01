@@ -27,8 +27,9 @@ class SearchRepository implements SearchInterface{
     public function search_product($id,$type) {
         
         $model="App\\Models\\".$type;
-        //echo $model;
+       // echo $model;
         $d=$model::find($id);
+        //dd($d->products);
         $new=array();
         foreach ($d->products as $products) {
             array_push($new,$products->pivot->product_id);

@@ -3,46 +3,32 @@
     <div class="navbar-wrapper">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mobile-menu d-md-none mr-auto"><a
-                            class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
-                                class="ft-menu font-large-1"></i></a></li>
+                <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
 
                         @if(app()->getLocale()=='ar')
-                            <img class="img-logo  img-fluid  lazy"
-                                 src="{{ setting()->ar_site_logo ?
-                                    URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
-                                    URL::asset('Dashboard/img/Default/logo_ar.png')}}" width="50" height="50" alt=""
-                                 style="left: 45%;    width: 50px;height: 50px;"/>
-                        @elseif(app()->getLocale()=='ku')
-                            <img class="img-logo  img-fluid  lazy"
-                                 src="{{setting()->ku_site_logo ?
-                                    URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
-                                    URL::asset('Dashboard/img/Default/logo_ku.png')}}"
-                                 alt="" style="left: 45%;    width: 50px;height: 50px;"/>
-                        @elseif(app()->getLocale()=='en')
-                            <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
-                                     URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
-                                     URL::asset('Dashboard/img/Default/logo_en.png')}}"
-                                 alt="" style="left: 45%;    width: 50px;height: 50px;"/>
-
+                            <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
+                                 data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="50" height="50"
+                                 alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
+                        @else
+                            <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
+                                 data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="50" height="50"
+                                 alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
                         @endif
-                        <h3 class="brand-text">Modern</h3>
+                        <h5 class="brand-text">
+                            {{ ucfirst(setting()->site_name) }}
+                        </h5>
                     </a>
                 </li>
-                <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse"
-                                                  data-target="#navbar-mobile"><i
-                                class="material-icons mt-50">more_vert</i></a></li>
+                <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="material-icons mt-50">more_vert</i></a></li>
             </ul>
         </div>
         <div class="navbar-container content">
             <div class="collapse navbar-collapse" id="navbar-mobile">
                 <ul class="nav navbar-nav mr-auto float-left">
-                    <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle" href="#"><i
-                                    class="ft-menu"></i></a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a>
-                    </li>
+                    <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle" href="#"><i class="ft-menu"></i></a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
                 </ul>
                 <ul class="nav navbar-nav float-right">
                     <li class="">
@@ -51,12 +37,17 @@
                                aria-expanded="false">
                                 @if (App::getLocale() == 'ar')
                                     <i class="flag-icon flag-icon-eg"></i>
-                                    <strong
-                                            class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleNative() }}</strong>
+                                    <strong class="mr-2 ml-2 my-auto">
+                                        {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                    </strong>
+                                @elseif(App::getLocale() == 'ku')
+                                    <i class="flag-icon flag-icon-iq"></i>
+                                    {{ LaravelLocalization::getCurrentLocaleNative() }}
                                 @else
                                     <i class="flag-icon flag-icon-us"></i>
-                                    <strong
-                                            class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleNative() }}</strong>
+                                    <strong class="mr-2 ml-2 my-auto">
+                                        {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                    </strong>
                                 @endif
                                 <div class="my-auto">
                                 </div>
@@ -69,6 +60,8 @@
                                             <i class="flag-icon flag-icon-us"></i>
                                         @elseif($properties['native'] == "العربية")
                                             <i class="flag-icon flag-icon-eg"></i>
+                                        @else
+                                            <i class="flag-icon flag-icon-iq"></i>
                                         @endif
                                         {{ $properties['native'] }}
                                     </a>
@@ -78,10 +71,8 @@
                     </li>
 
                     <li class="dropdown dropdown-user nav-item">
-                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span
-                                    class="mr-1 user-name text-bold-700">
-                            {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span><span
-                                    class="avatar avatar-online">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">
+                            {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span><span class="avatar avatar-online">
                                 @if(isset(Auth::user()->image->filename))
                                     <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
                                          alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}">
@@ -99,7 +90,7 @@
                                 {{ trans('Admin/dashboard.website') }}
                             </a>
                             {{-- route to go website ******************************************** --}}
-                            <a class="dropdown-item" href="{{ route('profile.index') }}">
+                            <a class="dropdown-item" href="{{ route('profile.index') }}" >
                                 <i class="material-icons">person_outline</i>
                                 @lang('Admin/site.profile')
                             </a>

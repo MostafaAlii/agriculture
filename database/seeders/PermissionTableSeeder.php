@@ -289,6 +289,20 @@ class PermissionTableSeeder extends Seeder {
                     'attribute-edit',
                     'attribute-delete',
                     'attribute-delete-all',
+            // Products Managment ::
+            'products-managment',
+                'products',
+                    'product-create',
+                    'product-processes',
+                        'product-edit',
+                        'product-delete',
+                    'product-delete-all',
+                    'product-stock',
+                    'product-special-price',
+                    'product-trushed',
+                    'product-restore',
+                    'product-trushed-delete',
+                    'product-trushed-delete-all',
             // Options Managment ::
             'options-managment',
                 'options',
@@ -296,6 +310,17 @@ class PermissionTableSeeder extends Seeder {
                     'option-edit',
                     'option-delete',
                     'option-delete-all',
+            // Orders ::
+            'orders-managment',
+                'orders',
+                    'order-processes',
+                    'order-show',
+                        'order-change-status',
+                    'order-invoice-print',
+            // Subscribes ::
+            'subscribes',
+                'subscribe-delete',
+                'subscribe-delete-all',
             // Reports ::
             'animal-reports',
                 'statistics-report',
