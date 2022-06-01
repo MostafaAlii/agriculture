@@ -1,9 +1,9 @@
-
+@can('subscribe-delete')
     <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}">
         <i class="fa fa-trash"></i>
         {{ __('Admin/site.delete') }}
     </button>
-
+@endcan
 
     <form action="{{ route('subscribe.destroy', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;" autocomplete="off">
         @csrf

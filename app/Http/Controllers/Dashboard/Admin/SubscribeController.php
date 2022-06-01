@@ -13,6 +13,9 @@ class SubscribeController extends Controller
 {
     protected $Data;
     public function __construct(SubscribeInterface $Data) {
+        $this->middleware('permission:subscribes', ['only' => ['data']]);
+        $this->middleware('permission:subscribe-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:subscribe-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
     public function data(Request $request) {
@@ -23,8 +26,5 @@ class SubscribeController extends Controller
     }
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
-    }// end of bulkDelete
-    // public function sendMails() {
-    //     return $this->Data->sendMails();
-    // }// end of bulkDelete
+    }
 }

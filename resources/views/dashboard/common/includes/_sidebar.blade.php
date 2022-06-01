@@ -849,15 +849,17 @@
                 <!-- End Orders Dropdown Menu -->
 
                 <!-- Start Subscriptions -->
-                <li class=" nav-item">
-                    <li>
-                        <a class="menu-item" href="{{ route('subscribe') }}">
-                            <i class="fas fa-dragon"></i>
-                            <span data-i18n="Options"> {{ trans('Admin/site.sub') }}</span>
-                        </a>
+                @can('subscribes')
+                    <li class=" nav-item">
+                        <li>
+                            <a class="menu-item" href="{{ route('subscribe') }}">
+                                <i class="fas fa-dragon"></i>
+                                <span data-i18n="subscribe"> {{ trans('Admin/site.sub') }}</span>
+                            </a>
+                        </li>
+                    <!-- End Orders -->
                     </li>
-                <!-- End Orders -->
-                </li>
+                @endcan
                 <!-- Start Subscriptions -->
             </ul>
             <!-- End Navigations UL -->
