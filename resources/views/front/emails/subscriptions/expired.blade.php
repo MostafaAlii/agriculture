@@ -120,17 +120,25 @@
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                            <h1 style="font-size: 48px; font-weight: 400; margin: 2;">
+                            <h1 style="font-size: 48px; font-weight: 400; margin: 2px;">
                             </h1> {{ __('Website/subscriptions.welcome_text') }}
                             @if(app()->getLocale()=='ar')
-                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                                     data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
-                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                            @else
-                                <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                                     data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
-                                     alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                                <img class="img-logo  img-fluid  lazy" src="{{setting()->ar_site_logo ?
+                             URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_ar.png')}}"
+                                     width="70" height="70"  alt="demo"  style="left: 45%;   "/>
+                            @elseif(app()->getLocale()=='ku')
+                                <img class="img-logo  img-fluid  lazy" src="{{setting()->ku_site_logo ?
+                             URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_ku.png')}}"
+                                     width="70" height="70"  alt="demo"  style="left: 45%;  "/>
+                            @elseif(app()->getLocale()=='en')
+                                <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
+                             URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_en.png')}}"
+                                     width="70" height="70"  alt="demo"  style="left: 45%;  "/>
                             @endif
+
                         </td>
                     </tr>
                 </table>

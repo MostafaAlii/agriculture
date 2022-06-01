@@ -8,13 +8,20 @@
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
 
                         @if(app()->getLocale()=='ar')
-                            <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                                 data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="50" height="50"
-                                 alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
-                        @else
-                            <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                                 data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="50" height="50"
-                                 alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
+                            <img class="img-logo  img-fluid  lazy" src="{{setting()->ar_site_logo ?
+                             URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_ar.png')}}"
+                                width="50" height="50"  alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
+                        @elseif(app()->getLocale()=='ku')
+                            <img class="img-logo  img-fluid  lazy" src="{{setting()->ku_site_logo ?
+                             URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_ku.png')}}"
+                                 width="50" height="50"  alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
+                        @elseif(app()->getLocale()=='en')
+                            <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
+                             URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_en.png')}}"
+                                 width="50" height="50"  alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
                         @endif
                         <h5 class="brand-text">
                             {{ ucfirst(setting()->site_name) }}

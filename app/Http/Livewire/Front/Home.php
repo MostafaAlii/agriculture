@@ -50,6 +50,7 @@ class Home extends Component
           $data['random_blog']=Blog::inRandomOrder()->limit(2)->get();
         $data['ar_logo']=Setting::select('ar_site_logo')->first();
         $data['en_logo']=Setting::select('en_site_logo')->first();
+        $data['ku_logo']=Setting::select('ku_site_logo')->first();
 
           $data['offer_product']=Product::whereNotNull('special_price')->where('in_stock',1)->where('special_price_type','=','fixed')->first();
 

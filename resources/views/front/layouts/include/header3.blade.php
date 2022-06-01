@@ -6,14 +6,22 @@
 
             <a class="top-bar__logo site-logo" href="index.html">
                 @if(app()->getLocale()=='ar')
-                    <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                         data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
-                         alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                @else
-                    <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                         data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
-                         alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                    <img class="img-logo  img-fluid  lazy" src="{{setting()->ar_site_logo ?
+                             URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_ar.png')}}"
+                         width="70" height="70"  alt="demo"  style="left: 45%;    width: 200px;height: 260px; "/>
+                @elseif(app()->getLocale()=='ku')
+                    <img class="img-logo  img-fluid  lazy" src="{{setting()->ku_site_logo ?
+                             URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_ku.png')}}"
+                         width="70" height="70"  alt="demo"  style="left: 45%;   width: 200px;height: 260px; "/>
+                @elseif(app()->getLocale()=='en')
+                    <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
+                             URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo):
+                             URL::asset('Dashboard/img/Default/logo_en.png')}}"
+                         width="70" height="70"  alt="demo"  style="left: 45%;   width: 200px;height: 260px; "/>
                 @endif
+
             </a>
 
             <a id="top-bar__navigation-toggler" class="top-bar__navigation-toggler top-bar__navigation-toggler--light" href="javascript:void(0);"><span></span></a>
