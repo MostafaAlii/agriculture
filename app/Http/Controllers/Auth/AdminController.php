@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
-     */
     public function create() {
         return view('dashboard.admin.auth.login');
     }
@@ -40,11 +35,12 @@ class AdminController extends Controller
         }
     }
 
-
     public function destroy(Request $request) {
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
     }
+
+
 }

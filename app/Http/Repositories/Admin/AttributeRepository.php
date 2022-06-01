@@ -6,13 +6,13 @@ use App\Http\Interfaces\Admin\AttributeInterface;
 use App\Models\Option;
 use Illuminate\Support\Facades\Crypt;
 class AttributeRepository implements AttributeInterface {
-    
+
     public function index() {
         return view('dashboard.admin.attributes.index');
     }
 //------------------------------------------------------------------------------------------
     public function data() {
-        $attr = Attribute::select();
+        $attr = Attribute::get();
         return DataTables::of($attr)
             ->addColumn('record_select', 'dashboard.admin.attributes.data_table.record_select')
             ->editColumn('created_at', function (Attribute $attr) {
@@ -24,14 +24,14 @@ class AttributeRepository implements AttributeInterface {
     }
 //------------------------------------------------------------------------------------------
     public function store($request) {
-      
+
         try{
             $validated = $request->validated();
             $attr=new Attribute;
             $attr->name=$request->name;
             $attr->save();
             toastr()->success(__('Admin/attributes.added_done'));
-            return redirect()->route('Attributes.index');   
+            return redirect()->route('Attributes.index');
          } catch (\Exception $ex) {
             toastr()->success(__('Admin/attributes.add_wrong'));
             return redirect()->route('Attributes.index');
@@ -55,7 +55,7 @@ class AttributeRepository implements AttributeInterface {
             $attr=Attribute::findOrfail($real_id);
             $attr->name=$request->name;
             $attr->save();
-            
+
             toastr()->success(__('Admin/attributes.updated_done'));
             return redirect()->route('Attributes.index');
         } catch (\Exception $ex) {
@@ -83,7 +83,7 @@ class AttributeRepository implements AttributeInterface {
             return redirect()->route('Attributes.index');
         }
     }
-    
+
 //------------------------------------------------------------------------------------------
     public function bulkDelete($request)
     {
@@ -92,16 +92,16 @@ class AttributeRepository implements AttributeInterface {
             $all_ids = explode(',',$request->delete_select_id);
 
             $delete_or_no=0;
-            
+
             foreach($all_ids as $ids){
-                
+
                 $data['options'] = Option::where('attribute_id', $ids)->pluck('attribute_id');
 
                 if($data['options']->count() == 0 ){
                     Attribute::findorfail($ids)->delete();
                     $delete_or_no++;
                 }
-                
+
             }
             if($delete_or_no==0){
                 toastr()->error(__('Admin/attributes.cant_delete'));
