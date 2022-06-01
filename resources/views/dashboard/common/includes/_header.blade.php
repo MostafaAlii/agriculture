@@ -16,7 +16,9 @@
                         data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="50" height="50"
                         alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
                         @endif
-                        <h3 class="brand-text">Modern</h3>
+                        <h5 class="brand-text">
+                            {{ ucfirst(setting()->site_name) }}
+                        </h5>
                     </a>
                 </li>
                 <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="material-icons mt-50">more_vert</i></a></li>
