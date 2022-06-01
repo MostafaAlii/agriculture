@@ -35,12 +35,17 @@
                                aria-expanded="false">
                                 @if (App::getLocale() == 'ar')
                                     <i class="flag-icon flag-icon-eg"></i>
-                                    <strong
-                                            class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleNative() }}</strong>
+                                    <strong class="mr-2 ml-2 my-auto">
+                                        {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                    </strong>
+                                @elseif(App::getLocale() == 'ku')
+                                    <i class="flag-icon flag-icon-iq"></i>
+                                    {{ LaravelLocalization::getCurrentLocaleNative() }}
                                 @else
-                                     <i class="flag-icon flag-icon-us"></i>
-                                    <strong
-                                            class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleNative() }}</strong>
+                                    <i class="flag-icon flag-icon-us"></i>
+                                    <strong class="mr-2 ml-2 my-auto">
+                                        {{ LaravelLocalization::getCurrentLocaleNative() }}
+                                    </strong>
                                 @endif
                                 <div class="my-auto">
                                 </div>
@@ -53,6 +58,8 @@
                                             <i class="flag-icon flag-icon-us"></i>
                                         @elseif($properties['native'] == "العربية")
                                             <i class="flag-icon flag-icon-eg"></i>
+                                        @else
+                                            <i class="flag-icon flag-icon-iq"></i>
                                         @endif
                                         {{ $properties['native'] }}
                                     </a>
