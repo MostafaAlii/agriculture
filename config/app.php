@@ -255,5 +255,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
     ],
+    'Morasoft_ar'   =>  'فريق مورا سوفت',
+    'Morasoft_en'   =>  'MoraSoft Team',
+    'Morasoft_ku'   =>  'Tîmê Morasoft',
     'Currency' => 'USD',
 ];
