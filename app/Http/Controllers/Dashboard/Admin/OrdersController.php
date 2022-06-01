@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 class OrdersController extends Controller {
     protected $Data;
     public function __construct(OrderInterface $Data) {
+        $this->middleware('permission:orders', ['only' => ['index']]);
+        $this->middleware('permission:order-show', ['only' => ['showOrder']]);
+        $this->middleware('permission:order-invoice-print', ['only' => ['printOrder']]);
+        $this->middleware('permission:order-change-status', ['only' => ['update']]);
         $this->Data = $Data;
     }
 

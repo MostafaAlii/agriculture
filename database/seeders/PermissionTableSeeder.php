@@ -310,6 +310,12 @@ class PermissionTableSeeder extends Seeder {
                     'option-edit',
                     'option-delete',
                     'option-delete-all',
+            'orders-managment',
+                'orders',
+                    'order-processes',
+                    'order-show',
+                        'order-change-status',
+                    'order-invoice-print',
             // Reports ::
             'animal-reports',
                 'statistics-report',

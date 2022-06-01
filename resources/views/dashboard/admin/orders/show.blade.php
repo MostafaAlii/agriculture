@@ -39,29 +39,31 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card shadow-none">
                     <!-- Start Order Update Status -->
-                    <div class="card shadow mb-0">
-                        <div class="card-header py-3 d-flex">
-                            <div class="mr-auto">
-                                <form action="{{ route('Orders.update', encrypt($order->id)) }}" method="post">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="form-row align-item">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text font-weight-bold font-weight-italic">{{ trans('Admin/orders.order_status') }}</div>
+                    @can('order-change-status')
+                        <div class="card shadow mb-0">
+                            <div class="card-header py-3 d-flex">
+                                <div class="mr-auto">
+                                    <form action="{{ route('Orders.update', encrypt($order->id)) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="form-row align-item">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text font-weight-bold font-weight-italic">{{ trans('Admin/orders.order_status') }}</div>
+                                                </div>
+                                                <select class="form-control form-control-md" name="status" style="outline-style: none;" onchange="this.form.submit()">
+                                                    <option value="">{{ trans('Admin/orders.order_status') }}</option>
+                                                    <option value="ordered" {{ $order->status == 'ordered' ? 'selected' : null }}> {{ trans('Admin/orders.ordered') }} </option>
+                                                    <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : null }}> {{ trans('Admin/orders.deliverd') }} </option>
+                                                    <option value="canceled" {{ $order->status == 'canceled' ? 'selected' : null }}> {{ trans('Admin/orders.canceled') }} </option>
+                                                </select>
                                             </div>
-                                            <select class="form-control form-control-md" name="status" style="outline-style: none;" onchange="this.form.submit()">
-                                                <option value="">{{ trans('Admin/orders.order_status') }}</option>
-                                                <option value="ordered" {{ $order->status == 'ordered' ? 'selected' : null }}> {{ trans('Admin/orders.ordered') }} </option>
-                                                <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : null }}> {{ trans('Admin/orders.deliverd') }} </option>
-                                                <option value="canceled" {{ $order->status == 'canceled' ? 'selected' : null }}> {{ trans('Admin/orders.canceled') }} </option>
-                                            </select>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endcan
                     <!-- End Order Update Status -->
                     <section id="collapsible">
                         <div class="row">

@@ -826,22 +826,26 @@
                 <!-- End options Dropdown Menu -->
 
                 <!-- Start Orders Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">add_shopping_cart</i>
-                        <span class="menu-title" data-i18n="Orders"> {{ trans('Admin/orders.orders') }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start Orders -->
-                        <li>
-                            <a class="menu-item" href="{{ route('Orders.index') }}">
-                                <i class="material-icons">add_shopping_cart</i>
-                                <span data-i18n="Options"> {{ trans('Admin/orders.order_title_in_sidebar') }}</span>
-                            </a>
-                        </li>
-                        <!-- End Orders -->
-                    </ul>
-                </li>
+                @can('orders-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">add_shopping_cart</i>
+                            <span class="menu-title" data-i18n="Orders"> {{ trans('Admin/orders.orders') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Orders -->
+                            @can('orders')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Orders.index') }}">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                        <span data-i18n="Options"> {{ trans('Admin/orders.order_title_in_sidebar') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Orders -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- End Orders Dropdown Menu -->
 
                 <!-- Start Subscriptions -->
