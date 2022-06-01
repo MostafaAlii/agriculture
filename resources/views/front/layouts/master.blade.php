@@ -4,7 +4,7 @@
 	<head>
         @include('front.layouts.include.headcss')
 	</head>
-	
+
 
 	<body>
 		<div id="app">
@@ -482,6 +482,8 @@
 				================================================== -->
                 @if(app()->getLocale()=='ar')
                 <link rel="stylesheet" href="{{ asset('frontassets/css/style-ar.css') }}" type="text/css">
+                @elseif(app()->getLocale()=='ku')
+                 <link rel="stylesheet" href="{{ asset('frontassets/css/style-ar.css') }}" type="text/css">
                 @else
                 {{-- <link rel="stylesheet" href="{{ asset('frontassets/css/style.min.css') }}" type="text/css"> --}}
                 <link rel="stylesheet" href="{{ asset('frontassets/css/style.css') }}" type="text/css">
@@ -623,7 +625,7 @@
 					</div>
 				</div>
 			</footer> --}}
-            
+
 			<!-- end footer -->
 		</div>
 
