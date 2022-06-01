@@ -78,7 +78,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{__('Admin\site.delete')}}</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -87,11 +87,11 @@
                                                     @csrf
                                                     @method('delete')
                                                     <div class="modal-body">
-                                                        {{__('Admin\admin_departments.ask_delete')}} <span id="dept_name"></span>
+                                                        {{__('Admin\site.ask_delete')}} <span id="dept_name"></span>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Admin\admin_departments.cancel')}}</button>
-                                                        <button type="submit" class="btn btn-primary">{{__('Admin\admin_departments.delete')}}</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Admin\site.cancel')}}</button>
+                                                        <button type="submit" class="btn btn-primary">{{__('Admin\site.delete')}}</button>
                                                     </div>
                                                 </form>
 

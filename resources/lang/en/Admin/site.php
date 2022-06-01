@@ -18,6 +18,8 @@ return [
      "sPrevious"=> "Previous",
      "sNext"=> "Next",
      "sLast"=> "Last",
+    'ask_delete'=>'Are you sure to delete ?',
+    'cancel'=>'Cancel',
 
 
 

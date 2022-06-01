@@ -178,13 +178,23 @@
             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
                 <div class="d-none d-lg-block">
                     @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @else
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
+                        <img class="img-logo  img-fluid  lazy"
+                             src="{{ setting()->ar_site_logo ?
+                                    URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
+                                    URL::asset('Dashboard/img/Default/logo_ar.png')}}" width="50" height="50" alt=""
+                             style="left: 45%;    width: 50px;height: 50px;"/>
+                    @elseif(app()->getLocale()=='ku')
+                        <img class="img-logo  img-fluid  lazy"
+                             src="{{setting()->ku_site_logo ?
+                                    URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
+                                    URL::asset('Dashboard/img/Default/logo_ku.png')}}"
+                             alt="" style="left: 45%;    width: 50px;height: 50px;"/>
+                    @elseif(app()->getLocale()=='en')
+                        <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
+                                     URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
+                                     URL::asset('Dashboard/img/Default/logo_en.png')}}"
+                             alt="" style="left: 45%;    width: 50px;height: 50px;"/>
+
                     @endif
                 </div>
 

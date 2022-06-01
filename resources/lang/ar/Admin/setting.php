@@ -14,8 +14,9 @@ return [
     'primary_phone'                                         =>               'رقم الهاتف الرئيسي',
     'secondery_phone'                                       =>               'رقم الهاتف الثانوي ',
     'address'                                               =>               'العنوان',
-    'ar_site_logo'                                             =>               'شعار الموقع العربي ',
-    'en_site_logo'                                             =>               'شعار الموقع الإنكليزي ',
+    'ar_site_logo'                                             =>               'شعار الموقع العربي',
+    'en_site_logo'                                             =>               'شعار الموقع الإنكليزي',
+    'ku_site_logo'                                             =>               'شعار الموقع الكردي',
 
 
     'message_maintenance'                                   =>               'رسالة الصيانة ',

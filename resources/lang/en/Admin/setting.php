@@ -3,6 +3,8 @@
 return [
     'ar_site_logo'                                             =>               'Arabic Logo',
     'en_site_logo'                                             =>               'ُEnglish Logo',
+    'ku_site_logo'                                             =>               'Kurdish Logo',
+
     'open'=>'Open',
     'close'=>'Close',
     'choose_status'=>'Choose Status',

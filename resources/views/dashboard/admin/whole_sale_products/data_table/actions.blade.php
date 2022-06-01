@@ -1,7 +1,7 @@
 <div >
     @can('whole-sale-products-edit')
         <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}">
-            <i class="fa fas-edit">{{__('Admin\whole_sale_products.edit')}}</i>
+            <i class="fa fa-edit">{{__('Admin\whole_sale_products.edit')}}</i>
         </button>
     @endcan
     @can('whole-sale-products-delete')
@@ -73,16 +73,15 @@
                         @method('patch')
                         <input type="hidden" value="{{ $id }}" name="id">
 
-                        @php
-                            $whole_product = \App\Models\WholeProduct::findorfail($id)->get();
-                        @endphp
+
 
                         <div class="modal-body">
                             <div class="form-group">
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin\whole_sale_products.enter_whole_sale_product_name') }}
                                 </label>
+
                                 <input type="text" name="name" class="form-control"
-                                       value="{{$whole_product->name}}"
+                                       value="{{App\Models\WholeProduct::findorfail($id)->name}}"
                                        placeholder="{{ trans('Admin/whole_sale_products.enter_whole_sale_product_name_placeholder') }}"/>
                                 @error('name')
                                 <span class="text-danger"> {{$message}}</span>

@@ -12,6 +12,7 @@ return [
     'save'=>'Save',
     'edit'=>'Edit',
     'delete'=>'Delete',
+    'update'=>'Update',
 
     'dep_name_ar'=>'Department Name Arabic',
 

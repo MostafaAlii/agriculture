@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'ask_delete'=>'هل أنت متأكد من عملية الحذف',
+'cancel'=>'إلغاء الأمر',
+
     'excel'=>'تصدير إكسل',
     'print'=>'طباعة',
     'administrative_part'=>'ADMINISTRATIVE PARTS',

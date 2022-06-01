@@ -25,7 +25,7 @@ class SettingRepository implements SettingInterface{
             try {
                 $validated = $request->validated();
                 $setting = Setting::OrderBy('id','desc')->first();
-                $dataRequest = $request->except(['site_logo','ar_site_icon','en_site_icon']);
+                $dataRequest = $request->except(['ku_site_logo','ar_site_icon','en_site_logo','site_icon']);
                 $setting->support_mail = $dataRequest['support_mail'];
                 $setting->primary_phone = $dataRequest['primary_phone'];
                 $setting->secondery_phone = $dataRequest['secondery_phone'];
@@ -36,6 +36,18 @@ class SettingRepository implements SettingInterface{
                 $setting->status =  (isset($dataRequest['status']) ? $dataRequest['status'] : 'open');
 
 
+                if($request->ku_site_logo) {
+
+                    if(File::exists(public_path('Dashboard/img/settingKuLogo/' . $setting->ku_site_logo)))
+                    {
+                        File::delete(public_path('Dashboard/img/settingKuLogo/' . $setting->ku_site_logo));
+                    }
+                    Image::make($request->ku_site_logo)->resize(70, 70, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save(public_path('Dashboard/img/settingKuLogo/' . $request->ku_site_logo->hashName()));
+
+                         $dataRequest['ku_site_logo'] = $request->ku_site_logo->hashName();
+                }
                 if($request->ar_site_logo) {
 
                     if(File::exists(public_path('Dashboard/img/settingArLogo/' . $setting->ar_site_logo)))
@@ -46,7 +58,7 @@ class SettingRepository implements SettingInterface{
                         $constraint->aspectRatio();
                     })->save(public_path('Dashboard/img/settingArLogo/' . $request->ar_site_logo->hashName()));
 
-                         $dataRequest['ar_site_logo'] = $request->ar_site_logo->hashName();
+                    $dataRequest['ar_site_logo'] = $request->ar_site_logo->hashName();
                 }
                 if($request->en_site_logo) {
 

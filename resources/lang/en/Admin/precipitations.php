@@ -26,7 +26,7 @@ return [
     'newprecipitation'=>'New Precipitations',
     'update'=>'Update',
     'editprecipitation'=>'Edit Precipitations Data',
-    'precipitationsPageTitle'=>'',
+    'precipitationsPageTitle'=>'Precipitations',
     'precipitation_report'=>'Precipitation Report',
     'precipitation_database_in_zawita_station'=>'Precipitation DataBase in Zawita Station',
     'year'=>'Year',

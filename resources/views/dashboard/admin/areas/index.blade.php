@@ -79,24 +79,24 @@
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Area Filter -->
-                                        @can('area-filter-operation')
-                                            <div class="row">
-                                                <div class="col col-md-6 m-2 p-2 pull-right">
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/areas.choose_columns') }}<span class="text-danger">*</span></label>
-                                                        <select class="select form-control" multiple="multiple"
-                                                                id="people" name="people[]">
-                                                            <option value="0">id</option>
-                                                            <option value="1">{{ __('Admin/areas.area_name') }}</option>
-                                                            <option value="2">{{ __('Admin/areas.provience_name') }}</option>
-                                                            <option value="3">{{ __('Admin/areas.state_name') }}</option>
-                                                            <option value="4">{{ __('Admin/general.created_since') }}</option>
-                                                            <option value="5">{{ __('Admin/site.action') }}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endcan
+                                        {{--@can('area-filter-operation')--}}
+                                            {{--<div class="row">--}}
+                                                {{--<div class="col col-md-6 m-2 p-2 pull-right">--}}
+                                                    {{--<div class="form-group">--}}
+                                                        {{--<label for="eventRegInput1">{{ __('Admin/areas.choose_columns') }}<span class="text-danger">*</span></label>--}}
+                                                        {{--<select class="select form-control" multiple="multiple"--}}
+                                                                {{--id="people" name="people[]">--}}
+                                                            {{--<option value="0">id</option>--}}
+                                                            {{--<option value="1">{{ __('Admin/areas.area_name') }}</option>--}}
+                                                            {{--<option value="2">{{ __('Admin/areas.provience_name') }}</option>--}}
+                                                            {{--<option value="3">{{ __('Admin/areas.state_name') }}</option>--}}
+                                                            {{--<option value="4">{{ __('Admin/general.created_since') }}</option>--}}
+                                                            {{--<option value="5">{{ __('Admin/site.action') }}</option>--}}
+                                                        {{--</select>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--@endcan--}}
                                         <!-- End Area Filter -->
                                         <!-- Start Table -->
                                         <table class="table table-striped table-bordered zero-configuration" id="areas_table">
@@ -204,27 +204,6 @@
 
         dom: 'Bfrtip',
         order: [[0, 'desc']],
-        // buttons: [
-        //     {
-        //         extend: 'copyHtml5',
-        //         exportOptions: {
-        //             columns: [ 1, ':visible' ]
-        //         }
-        //     },
-        //     {
-        //         extend: 'excelHtml5',
-        //         exportOptions: {
-        //             columns: ':visible'
-        //         }
-        //     },
-        //     {
-        //         extend: 'pdfHtml5',
-        //         exportOptions: {
-        //             columns: [ 1, 2, 4 ]
-        //         }
-        //     },
-        //     // 'colvis'
-        // ],
 
     buttons: [
         {
@@ -251,13 +230,6 @@
             pageSize: 'A4',
         },
 'colvis',
-
-
-        {
-            extend: 'excel',
-            className: 'btn btn-success ml-1',
-            'text':'export excel'
-        },
 
 
     ],

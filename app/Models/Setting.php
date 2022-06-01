@@ -14,12 +14,12 @@ class Setting extends Model implements TranslatableContract
     protected $fillable = [
         'support_mail','primary_phone','secondery_phone', 'facebook', 'twitter','inestegram',
         'site_name', 'address','message_maintenance','status',
-        'ar_site_logo','site_icon','en_site_logo'
+        'ar_site_logo','site_icon','en_site_logo','ku_site_logo'
     ];
     // 3. To define which attributes needs to be translated
     public $translatedAttributes = ['site_name', 'address','message_maintenance'];
 
-    protected $appends = ['setting_icon_path','setting_ar_logo_path','setting_en_logo_path'];
+    protected $appends = ['setting_icon_path','setting_ar_logo_path','setting_en_logo_path','setting_ku_logo_path'];
     public $timestamps = true;
 
     // Country Flag Image Appends ::
@@ -34,4 +34,33 @@ class Setting extends Model implements TranslatableContract
     public function getSettingEnLogoPathAttribute() {
         return  asset('Dashboard/img/settingEnLogo/' . $this->en_site_logo);
     }
+
+    public function getSettingKuLogoPathAttribute() {
+        return  asset('Dashboard/img/settingKuLogo/' . $this->ku_site_logo);
+    }
+//    public function getArSiteLogoAttribute()
+//    {
+//        if (! $this->attributes['ar_site_logo']) {
+//        return asset('Dashboard/img/Default/logo_2_ar.png');
+//    }
+//
+//        return $this->attributes['ar_site_logo'];
+//    }
+//
+//    public function getEnSiteLogoAttribute()
+//    {
+//        if (! $this->attributes['en_site_logo']) {
+//            return (url::asset('Dashboard/img/Default/Logo_2_en.png'));
+//        }
+//
+//        return $this->attributes['en_site_logo'];
+//    }
+//    public function getKuSiteLogoAttribute()
+//    {
+//        if (! $this->attributes['ku_site_logo']) {
+//            return asset('Dashboard/img/Default/Logo_2_ku.png');
+//        }
+//
+//        return $this->attributes['ku_site_logo'];
+//    }
 }

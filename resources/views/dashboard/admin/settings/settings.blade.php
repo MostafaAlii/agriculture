@@ -174,7 +174,7 @@
 
 
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
 
                                                         <label>{{trans('Admin\setting.site_icon')}}</label>
@@ -188,13 +188,13 @@
                                                                          height="70px" alt="icon" id="output_1" >
                                                             @else
                                                                     <img class="img-thumbnail img-preview" width="70px"
-                                                                         height="70px" alt="icon" >
+                                                                         height="70px" alt="icon" src="{{asset('Dashboard/img/Default/logo_2_ku.png')}}">
                                                             @endif
 
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>{{trans('Admin\setting.ar_site_logo')}} </label>
                                                         <label id="projectinput7" class="file center-block"></label>
@@ -207,13 +207,13 @@
                                                                          height="70px" alt="logo" id="output">
                                                             @else
                                                                     <img class="img-thumbnail img-preview" width="70px"
-                                                                         height="70px" alt="" >
+                                                                         height="70px" alt="" src="{{asset('Dashboard/img/Default/logo_2_ar.png')}}" >
                                                             @endif
                                                         </label>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>{{trans('Admin\setting.en_site_logo')}} </label>
                                                         <label id="projectinput7" class="file center-block"></label>
@@ -226,7 +226,25 @@
                                                                      height="70px" alt="logo" id="output_2">
                                                             @else
                                                                 <img class="img-thumbnail img-preview" width="70px"
-                                                                     height="70px" alt="" >
+                                                                     height="70px" alt=""src="{{asset('Dashboard/img/Default/logo_2_en.png')}}" >
+                                                            @endif
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>{{trans('Admin\setting.ku_site_logo')}} </label>
+                                                        <label id="projectinput7" class="file center-block"></label>
+                                                        <label id="projectinput7" class="file center-block">
+
+                                                            <input type="file" accept="image/*" name="ku_site_logo"  onchange="loadFile_3(event)">
+                                                            @if(!empty($setting->ku_site_logo))
+                                                                <img src="{{asset('Dashboard/img/settingKuLogo/'.$setting->ku_site_logo)}}"
+                                                                     class="img-thumbnail img-preview" width="70px"
+                                                                     height="70px" alt="logo" id="output">
+                                                            @else
+                                                                <img class="img-thumbnail img-preview" width="70px"
+                                                                     height="70px" src="{{asset('Dashboard/img/Default/logo_2_ku.png')}}"alt="" >
                                                             @endif
                                                         </label>
                                                     </div>
@@ -289,6 +307,17 @@
 
         var loadFile_2 = function (event) {
             var output = document.getElementById('output_2');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function () {
+                URL.revokeObjectURL(output.src)
+            }
+
+        };
+    </script>
+    <script type="text/javascript">
+
+        var loadFile_3 = function (event) {
+            var output = document.getElementById('output_3');
             output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function () {
                 URL.revokeObjectURL(output.src)

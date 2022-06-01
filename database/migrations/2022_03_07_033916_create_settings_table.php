@@ -20,6 +20,8 @@ class CreateSettingsTable extends Migration
             $table->enum('status',['open','close'])->default('open');
             $table->string('ar_site_logo')->nullable();
             $table->string('en_site_logo')->nullable();
+            $table->string('ku_site_logo')->nullable();
+
 
             $table->string('site_icon')->nullable();
             $table->timestamps();
