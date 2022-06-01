@@ -60,15 +60,13 @@
                             <div class="card-content collapse show">
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <a href="{{-- route('products.product_trashed') --}}" class="btn btn-primary btn-sm mb-3">
-                                        <i class="material-icons">refresh</i>
-                                        {{ __('Admin/products.restore') }}
-                                    </a>
-                                    <button type="button" class="btn btn-danger btn-md mb-3"
-                                        id="btn_delete_all" data-toggle="modal"
-                                        data-target="#bulkdelete" >
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
+                                    @can('product-trushed-delete-all')
+                                        <button type="button" class="btn btn-danger btn-md mb-3"
+                                            id="btn_delete_all" data-toggle="modal"
+                                            data-target="#bulkdelete" >
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->

@@ -437,25 +437,25 @@
 
                 <!-- start protected house Menu -->
                 @can('protect-house-list')
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="fas fa-warehouse " style="color:deeppink;"></i>
-                        <span class="menu-title" data-i18n="Categories">
-                            {{ __('Admin\p_houses.protectedHousePageTitle')}}
-                        </span>
-                    </a>
-                    <ul class="menu-content">
-                        @can('protect-house')
-                        <li>
-                            <a class="menu-item" href="{{ route('ProtectedHouse.index') }}"> <i class="material-icons">list</i>
-                                <span data-i18n="Vertical">
-                                    {{__('Admin\p_houses.protectedHousePageTitle') }}
-                                </span>
-                            </a>
-                        </li>
-                        @endcan
-                    </ul>
-                </li>
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="fas fa-warehouse " style="color:deeppink;"></i>
+                            <span class="menu-title" data-i18n="Categories">
+                                {{ __('Admin\p_houses.protectedHousePageTitle')}}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            @can('protect-house')
+                            <li>
+                                <a class="menu-item" href="{{ route('ProtectedHouse.index') }}"> <i class="material-icons">list</i>
+                                    <span data-i18n="Vertical">
+                                        {{__('Admin\p_houses.protectedHousePageTitle') }}
+                                    </span>
+                                </a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </li>
                 @endcan
                 <!-- end protected house Menu -->
 
@@ -775,25 +775,29 @@
                 <!-- End Attributes Dropdown Menu -->
 
                 <!-- Start Product Dropdown Menu -->
-                <li class=" nav-item">
-                    <a href="{{-- route('admin.dashboard') --}}">
-                        <i class="material-icons">grain</i>
-                        <span class="menu-title" data-i18n="">
-                            {{ trans('Admin/products.product_title_in_sidebar') }}
-                        </span>
-                    </a>
-                    <ul class="menu-content">
-                        <!-- Start Product -->
-                        <li>
-                            <a class="menu-item" href="{{ route('products') }}">
-                                <i class="material-icons">grain</i>
-                                <span data-i18n="products">
-                                    {{ trans('Admin/products.product_title_in_sidebar') }}</span>
-                            </a>
-                        </li>
-                        <!-- End Product -->
-                    </ul>
-                </li>
+                @can('products-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">grain</i>
+                            <span class="menu-title" data-i18n="">
+                                {{ trans('Admin/products.product_title_in_sidebar') }}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Product -->
+                            @can('products')
+                                <li>
+                                    <a class="menu-item" href="{{ route('products') }}">
+                                        <i class="material-icons">grain</i>
+                                        <span data-i18n="products">
+                                            {{ trans('Admin/products.product_title_in_sidebar') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Product -->
+                        </ul>
+                    </li>
+                @endcan
                 <!-- End Product Dropdown Menu -->
 
                 <!-- Start options Dropdown Menu -->

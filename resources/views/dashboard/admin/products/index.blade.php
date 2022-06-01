@@ -58,19 +58,25 @@
                             <div class="card-content collapse show">
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    <a href="{{ route('products.generalInformation') }}" class="btn btn-primary btn-sm mb-3">
-                                        <i class="material-icons">add_box</i>
-                                        {{ __('Admin/products.add_new_product') }}
-                                    </a>
-                                    <a href="{{ route('products.trashed') }}" class="btn btn-warning btn-sm mb-3">
-                                        <i class="material-icons">delete_sweep</i>
-                                        {{ __('Admin/products.trashed_product') }}
-                                    </a>
-                                    <button type="button" class="btn btn-danger btn-md mb-3"
-                                        id="btn_delete_all" data-toggle="modal"
-                                        data-target="#bulkdelete" >
-                                        {{ __('Admin/site.bulkdelete') }}
-                                    </button>
+                                    @can('product-create')
+                                        <a href="{{ route('products.generalInformation') }}" class="btn btn-primary btn-sm mb-3">
+                                            <i class="material-icons">add_box</i>
+                                            {{ __('Admin/products.add_new_product') }}
+                                        </a>
+                                    @endcan
+                                    @can('product-trushed')
+                                        <a href="{{ route('products.trashed') }}" class="btn btn-warning btn-sm mb-3">
+                                            <i class="material-icons">delete_sweep</i>
+                                            {{ __('Admin/products.trashed_product') }}
+                                        </a>
+                                    @endcan
+                                    @can('product-delete-all')
+                                        <button type="button" class="btn btn-danger btn-md mb-3"
+                                            id="btn_delete_all" data-toggle="modal"
+                                            data-target="#bulkdelete" >
+                                            {{ __('Admin/site.bulkdelete') }}
+                                        </button>
+                                    @endcan
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->
