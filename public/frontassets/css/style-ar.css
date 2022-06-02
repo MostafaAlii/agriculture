@@ -4939,7 +4939,7 @@ img {
 }
 
 .lazy[src] {
-    opacity: 0;
+    opacity: 1;
     will-change: opacity;
     -webkit-transition: opacity .2s;
     -o-transition: opacity .2s;
