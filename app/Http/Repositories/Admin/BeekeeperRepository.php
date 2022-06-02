@@ -105,7 +105,7 @@ class BeekeeperRepository implements BeekeeperInterface
         $units = Unit::all();
 
         return view('dashboard.admin.beekeepers.create',
-            compact('admin', 'villages', 'area_name', 'areaID', 'stateID', 'state_name',
+            compact('admin', 'villages', 'area_name', 'areaID', 'stateID', 'state_name','adminId',
                 'disasters', 'courses', 'units'));
     }
 

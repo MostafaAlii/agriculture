@@ -48,6 +48,9 @@
                                     <!-- Start Filter -->
                                     @can('outcome-iraq-products-statistics-filter')
                                         <h2>{{__('Admin\precipitations.choose_date')}}</h2>
+                                        <form action="{{route('dtable_weekly_monthly_anual_outcome_iraq_product')}}" method="get">
+                                            @csrf
+
                                         <div class="form-group col-md-6">
                                             <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
                                             <div class="controls">
@@ -59,8 +62,9 @@
                                                 <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
                                         </div>
                                         <div class="text-left" style="    margin-left: 15px;  ">
-                                            <button type="text" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
+                                            <button type="submit" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
                                         </div>
+                                        </form>
                                     @endcan
                                     <!-- End Filter -->
                                     <br>
@@ -81,7 +85,18 @@
 
                                                 </tr>
                                             </thead>
+                                            <tbody>
+                                            @foreach($outcome_products as $statistc)
+                                                <tr>
 
+                                                    <td>{{$statistc->country}}</td>
+                                                    <td>{{$statistc->admin_dep_name}}</td>
+                                                    <td>{{$statistc->Product}}</td>
+                                                    <td>{{$statistc->iraq_product}}</td>
+                                                    <td>{{$statistc->date}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -101,77 +116,43 @@
 
 <script>
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
-        $('#outcome_iraq_products_periodly-statistic-table').DataTable({
-            processing: true,
-            serverSide: true,
-            dom: 'Bfrtip',
-            "language": {
-                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+
+    let adminsTable = $('#outcome_iraq_products_periodly-statistic-table').DataTable({
+        dom: 'Bfrtip',
+        "language": {
+            "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
+        },
+
+        buttons: [
+            {
+                text:'{{trans('Admin\site.excel')}}',
+                extend: 'excel',
+                orientation: 'landscape',
+                pageSize: 'A3',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4]
+                },
+                className: 'btn btn-primary ml-1',
+
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4]
+                },
+                autoPrint: true,
+                orientation: 'landscape',
+                className: 'btn btn-success ml-1',
+                pageSize: 'A3',
+                text:'{{trans('Admin\site.print')}}',
             },
 
 
-            buttons: [
-                {
-                    text:'{{trans('Admin\site.excel')}}',
-                    extend: 'excel',
-                    orientation: 'landscape',
-                    pageSize: 'A3',
-                    exportOptions: {
-                        columns: [ 0,1,2,3,4]
-                    },
-                    className: 'btn btn-primary ml-1',
 
-                },
-                {
-                    extend: 'print',
-                    exportOptions: {
-                        columns:  [0,1, 2,3,4]
-                    },
-                    autoPrint: true,
-                    orientation: 'landscape',
-                    className: 'btn btn-success ml-1',
-                    pageSize: 'A3',
-                    text:'{{trans('Admin\site.print')}}',
-                },
-
-
-
-            ],
-            ajax: {
-                url: "{{ URL::to('dashboard_admin/dtable_weekly_monthly_anual_outcome_iraq_product') }}" ,
-                type: 'GET',
-                data: function (d) {
-                    d.start_date = $('#start_date').val();
-                    d.end_date = $('#end_date').val();
-                }
-            },
-
-            columns: [
-                { data: 'country', name: 'country' },
-
-                { data: 'admin_dep_name', name: 'admin_dep_name' },
-
-                { data: 'Product', name: 'Product' },
-                // { data: 'local_product', name: 'local_product' },
-                { data: 'iraq_product', name: 'iraq_product' },
-                // { data: 'imported_product', name: 'imported_product' },
-                { data: 'date', name: 'date' },
-
-            ],
-            order: [[0, 'desc']]
+        ],
 
 
     });
-
-    $('#btnFiterSubmitSearch').click(function(){
-        $('#outcome_iraq_products_periodly-statistic-table').DataTable().draw(true);
-    });
-
 </script>
 @endsection

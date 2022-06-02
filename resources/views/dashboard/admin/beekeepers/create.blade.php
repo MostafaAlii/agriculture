@@ -98,6 +98,7 @@
                                                             <div class="form-group">
                                                                 <label  for="admin_id">{{ __('Admin/bees.farmer_phone') }}</label>
                                                                 <input name="phone"  id="farmer_phone"typ="text" class="form-control">
+
                                                             </div>
                                                         </div>
 

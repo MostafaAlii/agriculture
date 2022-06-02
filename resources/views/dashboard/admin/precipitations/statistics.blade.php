@@ -66,7 +66,7 @@
                                         @enderror
                                     </div>
                                         <div class="form-group col-md-6">
-                                                <label for="area_id">{{ __('Admin/animals.village') }}</label>
+                                                <label for="area_id">{{ __('Admin/animals.area') }}</label>
                                                 <select name="village_id" id="area_id" class="form-control" required>
                                                     <option value="">--{{ __('Admin/animals.select') }}--</option>
                                                     </option>
