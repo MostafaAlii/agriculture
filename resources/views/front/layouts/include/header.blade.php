@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row align-items-center justify-content-between no-gutters">
 
-            <a class="top-bar__logo site-logo" href="index.html">
+            <a class="top-bar__logo site-logo" href="#">
                 @if(app()->getLocale()=='ar')
                     <img class="img-logo  img-fluid  lazy"
                          src="{{ setting()->ar_site_logo ?

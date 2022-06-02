@@ -174,7 +174,7 @@
                 <div class="footer__item">
                     <nav id="footer__navigation" class="navigation  text-lg-right">
                         <ul>
-                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="#">Home</a></li>
                             <li><a href="#">About</a></li>
                             <li><a href="#">Pages</a></li>
                             <li><a href="#">Gallery</a></li>
