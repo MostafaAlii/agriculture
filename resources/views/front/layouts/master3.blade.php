@@ -98,7 +98,7 @@ if(isset($slider->image->filename)){
         <div class="row">
             <div class="col-12 col-sm-auto">
                 <div class="footer__item">
-                    <a class="site-logo" href="index.html">
+                    <a class="site-logo" href="#">
 
                         @if(app()->getLocale()=='ar')
                             <img class="img-logo  img-fluid  lazy"
