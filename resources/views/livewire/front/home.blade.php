@@ -5,10 +5,11 @@
     <style>
         .product-wish{
             position: absolute;
-            bottom :3%;
+            top:3%;
+            left: 20px;
             z-index:99;
-            left:30px;
-            text-align: right;
+            /* right:20px; */
+            /* text-align: right; */
             padding-top:0;
         }
         .product-wish .fa {
