@@ -100,4 +100,22 @@ return [
 'sorthigh'     =>'Sort by price: high to low',
 'perpage'      =>'per page',
 
+//cart
+'cart_remove_success'=>'Product removed successfully',
+'all_items_removed'=>'All items removed',
+'item_save_for_later'=>'Item saved for later',
+'item_move_to_cart'=>'  Item moved to cart',
+'item_delete_from_save_for_later'=>'Item deleted from saved for later',
+'coupon_not_found'=>'Coupon not found',
+
+//thank you page
+'order_success'=>'Order Success',
+'order_success_msg'=>'Your order has been placed successfully. You will be notified once your order is confirmed.',
+'confirmation_email'=>'Confirmation Email Sent',
+'continue_shopping'=>'Continue Shopping',
+
+//product details
+'item_added_to_cart'=>'Item added to cart',
+
+
 ];

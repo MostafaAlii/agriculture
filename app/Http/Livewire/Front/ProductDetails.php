@@ -22,7 +22,7 @@ class ProductDetails extends Component
     }
     public function store($product_id,$product_name,$product_price){
         Cart::instance('cart')->add($product_id,$product_name,$this->qty,$product_price)->associate('App\Models\Product');
-        session()->flash('success_message','Item addded in cart');
+        session()->flash('success_message',__('Website/home.item_added_to_cart'));
         return redirect()->route('product.cart');
     }
     public function increaseQty(){
@@ -56,12 +56,12 @@ class ProductDetails extends Component
 
         $data['options0']=$data['product']->options()->pluck('id');
         $data['options1']=Option::whereIn('id',$data['options0'])->get();
-        
+
         //retreive product comments
         $data['comments'] = $data['product']->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);
 
         $data['avg']=$data['product']->ProductRate();
-       
+
         return view('livewire.front.product-details',$data)->layout('front.layouts.master2');
     }
 }

@@ -1099,14 +1099,14 @@
                                     {{ $slider->subtitle }}
                                 </p>
 
-                                <p class="text-center mt-5 mt-md-10">
+                                {{-- <p class="text-center mt-5 mt-md-10">
                                     <span class="d-none d-sm-block"><a
                                                 class="custom-btn custom-btn--big custom-btn--style-3"
                                                 href="#">Discover</a></span>
 
                                     <span class="d-block d-sm-none"><a
                                                 class="custom-btn custom-btn--small custom-btn--style-3" href="#">Discover</a></span>
-                                </p>
+                                </p> --}}
                             </div>
                         </div>
                     </div>
@@ -1285,7 +1285,7 @@
 
             <div class="col-12 col-lg-5 col-xl-4 offset-xl-1">
                 <div class="footer__item">
-                    <h5 class="h6">Get a newslatter</h5>
+                    <h5 class="h6">{{ __('Admin/general.newslatter') }}</h5>
                     <form class="form--horizontal" method="post"  id="ajaxform">
                         @csrf
                         @method('post')
@@ -1318,7 +1318,9 @@
 
             <div class="col-12 col-lg-6">
                 <div class="footer__item">
-                    <span class="__copy">© 2019 Agro. All rights reserved. Created by <a class="__dev" href="https://themeforest.net/user/artureanec" target="_blank">Artureanec</a></span>
+                    <span class="__copy">  {{ trans('Admin/general.copyright') }} &copy; 2022
+                        <a class="__dev" href="#">{{ ucfirst(setting()->site_name) }}</a>
+                    </span>
                 </div>
             </div>
         </div>

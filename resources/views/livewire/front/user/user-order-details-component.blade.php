@@ -42,23 +42,23 @@
                                                             <div class="panel-heading">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <h5>Order Details</h5>
+                                                                        <h5>{{ trans('Website/vendor/orders.order_details') }}</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="panel-body">
                                                                 <table class="table">
-                                                                    <th>Order Ref</th>
+                                                                    <th>{{ trans('Website/vendor/orders.order_ref') }}</th>
                                                                     <td>{{ $order->referance_id }}</td>
-                                                                    <th>Order Date</th>
+                                                                    <th>{{ trans('Website/vendor/orders.order_date') }}</th>
                                                                     <td>{{ $order->created_at->format('d-m-Y') }}</td>
-                                                                    <th>Order Status</th>
+                                                                    <th>{{ trans('Website/vendor/orders.order_status') }}</th>
                                                                     <td>{!! $order->getStatus() !!}</td>
                                                                     @if($order->status == Order::DELIVERED)
-                                                                        <th>Delivered Date</th>
+                                                                        <th>{{ trans('Website/vendor/orders.order_delivered_date') }}</th>
                                                                         <td>{{ $order->delivered_date->format('d-m-Y') }}</td>
                                                                     @elseif($order->status == Order::CANCELED)
-                                                                        <th>Canceled Date</th>
+                                                                        <th>{{ trans('Website/vendor/orders.order_canceled_date') }}</th>
                                                                         <td>{{ $order->canceled_date->format('d-m-Y') }}</td>
                                                                     @endif
                                                                 </table>
@@ -71,10 +71,10 @@
                                                     <table class="table">
                                                         <thead class="bg-light">
                                                             <tr>
-                                                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">Product</strong></th>
-                                                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">Price</strong></th>
-                                                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">Quantity</strong></th>
-                                                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">Total</strong></th>
+                                                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">{{ trans('Website/vendor/orders.product') }}</strong></th>
+                                                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">{{ trans('Website/vendor/orders.price') }}</strong></th>
+                                                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">{{ trans('Website/vendor/orders.quantity') }}</strong></th>
+                                                                <th class="border-0" scope="col"><strong class="text-small text-uppercase">{{ trans('Website/vendor/orders.total') }}</strong></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -97,43 +97,35 @@
                                                                 </tr>
                                                             @endforeach
                                                             <tr>
-                                                                <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
+                                                                <td colspan="3" class="text-right"><strong>{{ trans('Website/vendor/orders.subtotal') }}</strong></td>
                                                                 <td>{{ $order->currency() . ' ' . number_format($order->subtotal, 2) }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="3" class="text-right"><strong>Discount</strong></td>
+                                                                <td colspan="3" class="text-right"><strong>{{ trans('Website/vendor/orders.discount') }}</strong></td>
                                                                 <td>{{ $order->currency() . ' ' . number_format($order->discount, 2) }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="3" class="text-right"><strong>Tax</strong></td>
+                                                                <td colspan="3" class="text-right"><strong>{{ trans('Website/vendor/orders.tax') }}</strong></td>
                                                                 <td>{{ $order->currency() . ' ' . number_format($order->tax, 2) }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="3" class="text-right"><strong>Amount</strong></td>
+                                                                <td colspan="3" class="text-right"><strong>{{ trans('Website/vendor/orders.amount') }}</strong></td>
                                                                 <td>{{ $order->currency() . ' ' . number_format($order->total, 2) }}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <h2 class="h5 text-uppercase">Transactions</h2>
+                                                <h2 class="h5 text-uppercase">{{ trans('Website/vendor/orders.transactions') }}</h2>
                                                 <div class="table-responsive mb-4">
                                                     <table class="table bg-light">
                                                         <tbody>
                                                             <tr>
-                                                                <th>Transaction Mode</th>
+                                                                <th>{{ trans('Website/vendor/orders.transactions_mode') }}</th>
                                                                 <td>{!! $order->transaction->getTransaction() !!}</td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Transaction Date</th>
+                                                                <th>{{ trans('Website/vendor/orders.transactions_date') }}</th>
                                                                 <td>{{$order->transaction->created_at->format('d-m-Y')}}</td>
-                                                               {{--
-                                                                  @if($order->status == Order::DELIVERED && \Carbon\Carbon::now()->addDays(5)->diffInDays($order->delivered_date->format('d-m-Y')) !=0)
-                                                                    <td>
-                                                                        <button type="button" class="btn btn-link text-center">
-                                                                            <p class="btn btn-warning">You Can Return Order In {{ 5-$order->delivered_date->diffInDays()  }} Days !!</p>
-                                                                        </button>
-                                                                    </td>
-                                                                @endif--}}
                                                             </tr>
                                                         </tbody>
                                                     </table>
