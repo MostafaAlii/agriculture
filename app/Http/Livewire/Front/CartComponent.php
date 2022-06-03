@@ -37,13 +37,13 @@ class CartComponent extends Component {
   public function destroy($rowID) {
       Cart::instance('cart')->remove($rowID);
       $this->emitTo('front.cart-count-component','refreshComponent');
-      session()->flash('success_message','Item has been removed');
+      session()->flash('success_message',__('website/home.cart_remove_success'));
   }
 
   public function destroyAll() {
       Cart::instance('cart')->destroy();
       $this->emitTo('front.cart-count-component','refreshComponent');
-      session()->flash('success_message','All Item has been removed');
+      session()->flash('success_message',__('website/home.all_items_removed'));
   }
 
   public function SaveForLater($rowId) {
@@ -51,7 +51,7 @@ class CartComponent extends Component {
       Cart::instance('cart')->remove($rowId);
       Cart::instance('saveforlater')->add($item->id,$item->name,1,$item->price)->associate('App\Models\Product');
       $this->emitTo('front.cart-count-component','refreshComponent');
-      session()->flash('success_message','Item has been saved for later');
+      session()->flash('success_message',__('website/home.item_save_for_later'));
   }
 
   public function moveProductFromSaveForLaterToCart($rowId) {
@@ -59,19 +59,19 @@ class CartComponent extends Component {
       Cart::instance('saveforlater')->remove($rowId);
       Cart::instance('cart')->add($item->id,$item->name,1,$item->price)->associate('App\Models\Product');
       $this->emitTo('front.cart-count-component','refreshComponent');
-      session()->flash('s_success_message','item has been moved to cart successfully');
+      session()->flash('s_success_message',__('website/home.item_move_to_cart'));
   }
 
   public function DeleteFromSaveForLater($rowId) {
       Cart::instance('saveforlater')->remove($rowId);
-      session()->flash('s_success_message','Item has been removed from saved for later');
+      session()->flash('s_success_message',__('website/home.item_delete_from_save_for_later'));
   }
 
   public function applyCouponCode() {
     //$coupon = ProductCoupon::whereIn(['code', $this->couponCode],['status', 1])->whereIn('value', '<=', Cart::instance('cart')->subtotal())->first();
     $coupon = ProductCoupon::where('code', $this->couponCode)->where('value', '<=', Cart::instance('cart')->subtotal())->first();
     if(!$coupon) {
-        session()->flash('coupon_msg', 'Coupon Is Invalid !');
+        session()->flash('coupon_msg', __('website/home.coupon_not_found'));
         return;
     }
     session()->put('coupon',[
@@ -94,7 +94,7 @@ class CartComponent extends Component {
       $this->totalAfterDiscount = $this->subtotalAfterDiscount * $this->taxAfterDiscount;
     }
   }
-  
+
   public function update_cart() {
       $this->cartCount = Cart::instance('default')->count();
       $this->wishlistCount = Cart::instance('wishlist')->count();
