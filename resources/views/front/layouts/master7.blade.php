@@ -156,7 +156,7 @@
 
 						<div class="col-12 col-lg-5 col-xl-4 offset-xl-1">
 							<div class="footer__item">
-								<h5 class="h6">Get a newslatter</h5>
+								<h5 class="h6">{{ __('Admin/general.newslatter') }}</h5>
                                 <form class="form--horizontal" method="post"  id="ajaxform">
                                     @csrf
                                     @method('post')
