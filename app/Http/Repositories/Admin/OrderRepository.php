@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Interfaces\Admin\OrderInterface;
+use Carbon\Carbon;
+
 class OrderRepository implements OrderInterface {
     public function index() {
         return view('dashboard.admin.orders.index');
@@ -45,12 +47,12 @@ class OrderRepository implements OrderInterface {
             $orderID    =   Crypt::decrypt($id);
             $order     =   Order::findorfail($orderID);
             $order->status = $request->status;
-        if($request->status == Order::DELIVERED) {
-            $order->delivered_date = DB::raw('CURRENT_DATE');
-        }
-        elseif($request->status == Order::CANCELED) {
-            $order->canceled_date = DB::raw('CURRENT_DATE');
-        }
+            if($request->status == Order::DELIVERED) {
+                $order->delivered_date = Carbon::now();
+            }
+            elseif($request->status == Order::CANCELED) {
+                $order->canceled_date = Carbon::now();
+            }
         $order->save();
         toastr()->success(__('Admin/site.added_successfully'));
         return redirect()->route('Orders.index');
