@@ -247,7 +247,7 @@
             </div>
 
             <!-- start goods -->
-            <div class="goods goods--style-2 goods--slider">
+            <div class="goods goods--style-1 goods--slider">
                 <div class="js-slick"
                 data-slick='{
                     "autoplay": true,
