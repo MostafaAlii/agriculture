@@ -105,7 +105,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
             $outcome_product->unit_id = $requestData['unit_id'];
             $outcome_product->currency_id = $requestData['currency_id'];
-            $outcome_product->admin_dep_name = $request->admin_dep_name;
+            $outcome_product->admin_dep_name = $requestData['currency_id'];
 
             $outcome_product->outcome_product_amount = $requestData['outcome_product_amount'];
             $outcome_product->outcome_product_price = $requestData['outcome_product_price'];
@@ -144,7 +144,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $units = Unit::all();
 
         return view('dashboard.admin.outcome_products.edit',
-            compact('admin_dep_name', 'countries', 'units',
+            compact('admin_dep_name', 'countries', 'units','adminID',
                 'outcome_product','whole_products','currencies'));
     }
 

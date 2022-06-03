@@ -147,6 +147,9 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/outcome_products.outcome_product_price') }}</label>
                                                         <input name="outcome_product_price" value=""  class="form-control"type="text">
+                                                        <input name="admin_id" value="{{$adminID}}"  class="form-control"type="hidden">
+
+
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-4">

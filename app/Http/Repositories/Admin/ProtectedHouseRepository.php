@@ -153,7 +153,6 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
 
     public function update($request, $id)
     {
-
         try {
             $requestData = $request->validated();
             $protectedID = Crypt::decrypt($id);
