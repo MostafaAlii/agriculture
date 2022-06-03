@@ -34,7 +34,7 @@ class ChickenRequest extends FormRequest
             'marketing_side'=>'required|in:private,govermental',
             'cost'=>'required|numeric',
             'power'=>'required|string',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+            'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
             'email'=>'required',
 
         ];

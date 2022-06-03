@@ -18,8 +18,6 @@ class PrecipitationRequest extends FormRequest
             'admin_id' => 'required|exists:admins,id',
             'area_id' => 'required|exists:areas,id',
             'state_id' => 'required|exists:states,id',
-//            'admin_department_id' => 'required|exists:admin_departments',
-
             'precipitation_rate' =>'required|numeric',
             'date' => 'required|date',
             'unit_id'=>'required|exists:units,id',

@@ -26,8 +26,8 @@ class FarmerCropRequest extends FormRequest
             'summer_area_crop' =>  'sometimes:nullable',
             'date'=>'required|date',
 
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
-            'email'=>'required|email',
+            'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+            'email'        => 'required|email',
 
 //            'winter_crops.*' => [
 //                'string',

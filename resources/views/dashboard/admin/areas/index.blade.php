@@ -249,6 +249,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
+        order: [[4, 'desc']],
     });
     // function hideAllColumns(){
     //     for($i=0 ;i<4;i++){

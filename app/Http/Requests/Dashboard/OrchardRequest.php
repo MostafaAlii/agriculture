@@ -26,8 +26,8 @@ class OrchardRequest extends FormRequest
             'orchard_area' => 'required|numeric',
             'supported_side'=>'required|in:govermental,international_organizations,private',
             'unit_id'=>'required|exists:units,id',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
-            'email'=>'required|email',
+            'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+            'email'        => 'required|email',
         ];
     }
 
@@ -46,7 +46,7 @@ class OrchardRequest extends FormRequest
             'state_id.exists' => trans('Admin/validation.exists'),
             'village_id.exists' => trans('Admin/validation.exists'),
             'unit_id.exists' => trans('Admin/validation.exists'),
-
+            'tree_count_per_orchard' => trans('Admin/validation.required'),
 
             'land_category_id.required' => trans('Admin/validation.required'),
             'tree_count_per_orchard.required' => trans('Admin/validation.required'),
