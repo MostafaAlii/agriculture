@@ -11,19 +11,19 @@ interface IncomeProductInterface {
     public function bulkDelete($request) ;
     public function income_product_statistics();
     public function index_income_products();
-    public function get_weekly_monthly_anual_income_product_statistics();
+    public function get_weekly_monthly_anual_income_product_statistics($request);
 
     public function index_income_local_products();
 
-    public function get_weekly_monthly_anual_income_local_product_statistics();
+    public function get_weekly_monthly_anual_income_local_product_statistics($request);
 
     public function index_income_iraq_products();
 
-    public function get_weekly_monthly_anual_income_iraq_product_statistics();
+    public function get_weekly_monthly_anual_income_iraq_product_statistics($request);
 
     public function index_income_imported_products();
 
-    public function get_weekly_monthly_anual_income_imported_product_statistics();
+    public function get_weekly_monthly_anual_income_imported_product_statistics($request);
 
 
     }

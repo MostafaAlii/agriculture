@@ -101,7 +101,7 @@
 
         dom: 'Bfrtip',
         buttons: [
-            {text:'excel',
+            {text:'{{trans('Admin\site.excel')}}',
                 extend: 'excel',
                 orientation: 'landscape',
                 pageSize: 'A3',
@@ -121,7 +121,7 @@
                 orientation: 'landscape',
                 className: 'btn btn-success ml-1',
                 pageSize: 'A3',
-                text:'print'
+                text:'{{trans('Admin\site.print')}}'
             },
 
         ],

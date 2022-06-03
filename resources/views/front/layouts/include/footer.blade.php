@@ -95,7 +95,9 @@
 					<div class="row align-items-lg-end justify-content-lg-between copyright">
 						<div class="col-12 col-lg-6">
 							<div class="footer__item">
-								<span class="__copy">© 2019, AgroTheme by <a class="__dev" href="https://themeforest.net/user/artureanec" target="_blank">Artureanec</a> | <a href="#">Privacy Policy</a> | <a href="#">Sitemap</a></span>
+                                <span class="__copy">  {{ trans('Admin/general.copyright') }} &copy; 2022
+                                    <a class="__dev" href="#">{{ ucfirst(setting()->site_name) }}</a>
+                                </span>
 							</div>
 						</div>
 

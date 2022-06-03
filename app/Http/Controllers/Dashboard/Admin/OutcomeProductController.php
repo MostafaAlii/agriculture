@@ -59,8 +59,8 @@ class OutcomeProductController extends Controller
     public function index_outcome_products(){
         return $this->Data->index_outcome_products();
     }
-    public function get_weekly_monthly_anual_outcome_product_statistics(){
-        return $this->Data->get_weekly_monthly_anual_outcome_product_statistics();
+    public function get_weekly_monthly_anual_outcome_product_statistics(Request $request){
+        return $this->Data->get_weekly_monthly_anual_outcome_product_statistics($request);
     }
 
 
@@ -69,8 +69,8 @@ class OutcomeProductController extends Controller
         return $this->Data->index_outcome_imported_products();
     }
 
-    public function get_weekly_monthly_anual_outcome_imported_product_statistics(){
-        return $this->Data->get_weekly_monthly_anual_outcome_imported_product_statistics();
+    public function get_weekly_monthly_anual_outcome_imported_product_statistics(Request $request){
+        return $this->Data->get_weekly_monthly_anual_outcome_imported_product_statistics($request);
     }
 
     public function index_outcome_iraq_products(){
@@ -78,8 +78,8 @@ class OutcomeProductController extends Controller
 
     }
 
-    public function get_weekly_monthly_anual_outcome_iraq_product_statistics(){
-        return $this->Data->get_weekly_monthly_anual_outcome_iraq_product_statistics();
+    public function get_weekly_monthly_anual_outcome_iraq_product_statistics(Request $request){
+        return $this->Data->get_weekly_monthly_anual_outcome_iraq_product_statistics($request);
 
     }
 
@@ -87,8 +87,8 @@ class OutcomeProductController extends Controller
         return $this->Data->index_outcome_local_products();
     }
 
-    public function get_weekly_monthly_anual_outcome_local_product_statistics(){
-        return $this->Data->get_weekly_monthly_anual_outcome_local_product_statistics();
+    public function get_weekly_monthly_anual_outcome_local_product_statistics(Request $request){
+        return $this->Data->get_weekly_monthly_anual_outcome_local_product_statistics($request);
 
     }
 }

@@ -247,11 +247,41 @@ class OutcomeProductRepository implements OutcomeProductInterface {
     }
 
     public function index_outcome_products(){
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_statistics');
+        $outcome_productQueryfirst = OutcomeProduct::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $outcome_productQuery = $outcome_productQueryfirst
+                ->where('admin_id',  $admin->id)->get();
+        } else {
+            $outcome_productQuery = $outcome_productQueryfirst;
+        }
+        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name'
+            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "local" THEN outcome_products.outcome_product_amount ELSE 0 END )AS local_product')
+            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "iraq" THEN outcome_products.outcome_product_amount ELSE 0 END )AS iraq_product')
+            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "imported"  THEN outcome_products.outcome_product_amount ELSE 0 END )AS imported_product')
+
+
+            , 'outcome_products.outcome_product_date AS date')
+            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+
+            ->groupBy ('country','Product','date','admin_dep_name')->get();
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_statistics',compact('outcome_products'));
     }
 
-    public function get_weekly_monthly_anual_outcome_product_statistics()
+    public function get_weekly_monthly_anual_outcome_product_statistics($request)
     {
+        $validated = $request->validate([
+            'start_date' => 'sometimes|nullable|date|before:end_date',
+            'end_date' => 'sometimes|nullable|date|after:start_date',
+        ],[
+            'start_date.date'=>trans('Admin/validation.date'),
+            'start_date.before'=>trans('Admin/validation.before'),
+            'end_date.date'=>trans('Admin/validation.date'),
+            'end_date.after'=>trans('Admin/validation.after'),
+        ]);
         $outcome_productQueryfirst = OutcomeProduct::query();
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
@@ -284,16 +314,43 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
 
             ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return datatables()->of($outcome_products)
-            ->make(true);
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_statistics',compact('outcome_products'));
+
     }
 
     public function index_outcome_imported_products(){
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_imported_statistics');
+        $outcome_productQueryfirst = OutcomeProduct::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $outcome_productQuery = $outcome_productQueryfirst
+                ->where('admin_id',  $admin->id)->get();
+        } else {
+            $outcome_productQuery = $outcome_productQueryfirst;
+        }
+        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
+            DB::raw('SUM(outcome_products.outcome_product_amount)AS imported_product')
+
+            , 'outcome_products.outcome_product_date AS date')
+            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+            ->where('outcome_products.country_product_type','imported')
+            ->groupBy ('country','Product','date','admin_dep_name')->get();
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_imported_statistics',compact('outcome_products'));
     }
 
-    public function get_weekly_monthly_anual_outcome_imported_product_statistics()
+    public function get_weekly_monthly_anual_outcome_imported_product_statistics($request)
     {
+        $validated = $request->validate([
+            'start_date' => 'sometimes|nullable|date|before:end_date',
+            'end_date' => 'sometimes|nullable|date|after:start_date',
+        ],[
+            'start_date.date'=>trans('Admin/validation.date'),
+            'start_date.before'=>trans('Admin/validation.before'),
+            'end_date.date'=>trans('Admin/validation.date'),
+            'end_date.after'=>trans('Admin/validation.after'),
+        ]);
         $outcome_productQueryfirst = OutcomeProduct::query();
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
@@ -323,16 +380,44 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
             ->where('outcome_products.country_product_type','imported')
             ->groupBy ('country','Product','date','admin_dep_name')->get();
-           return datatables()->of($outcome_products)
-            ->make(true);
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_imported_statistics',compact('outcome_products'));
+
     }
 
     public function index_outcome_iraq_products(){
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_iraq_statistics');
+        $outcome_productQueryfirst = OutcomeProduct::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $outcome_productQuery = $outcome_productQueryfirst
+                ->where('admin_id',  $admin->id)->get();
+        } else {
+            $outcome_productQuery = $outcome_productQueryfirst;
+        }
+        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
+            DB::raw('SUM(outcome_products.outcome_product_amount)AS iraq_product')
+
+
+            , 'outcome_products.outcome_product_date AS date')
+            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+            ->where('outcome_products.country_product_type','iraq')
+            ->groupBy ('country','Product','date','admin_dep_name')->get();
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_iraq_statistics',compact('outcome_products'));
     }
 
-    public function get_weekly_monthly_anual_outcome_iraq_product_statistics()
+    public function get_weekly_monthly_anual_outcome_iraq_product_statistics($request)
     {
+        $validated = $request->validate([
+            'start_date' => 'sometimes|nullable|date|before:end_date',
+            'end_date' => 'sometimes|nullable|date|after:start_date',
+        ],[
+            'start_date.date'=>trans('Admin/validation.date'),
+            'start_date.before'=>trans('Admin/validation.before'),
+            'end_date.date'=>trans('Admin/validation.date'),
+            'end_date.after'=>trans('Admin/validation.after'),
+        ]);
         $outcome_productQueryfirst = OutcomeProduct::query();
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
@@ -363,16 +448,45 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
             ->where('outcome_products.country_product_type','iraq')
             ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return datatables()->of($outcome_products)
-            ->make(true);
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_iraq_statistics',compact('outcome_products'));
+
     }
 
     public function index_outcome_local_products(){
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_local_statistics');
+        $outcome_productQueryfirst = OutcomeProduct::query();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $outcome_productQuery = $outcome_productQueryfirst
+                ->where('admin_id', $admin->id)->get();
+        } else {
+            $outcome_productQuery = $outcome_productQueryfirst;
+        }
+        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
+            DB::raw('SUM(outcome_products.outcome_product_amount)AS local_product')
+
+
+            , 'outcome_products.outcome_product_date AS date')
+            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+            ->where('outcome_products.country_product_type','local')
+            ->groupBy ('country','Product','date','admin_dep_name')->get();
+
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_local_statistics',compact('outcome_products'));
     }
 
-    public function get_weekly_monthly_anual_outcome_local_product_statistics()
+    public function get_weekly_monthly_anual_outcome_local_product_statistics($request)
     {
+        $validated = $request->validate([
+            'start_date' => 'sometimes|nullable|date|before:end_date',
+            'end_date' => 'sometimes|nullable|date|after:start_date',
+        ],[
+            'start_date.date'=>trans('Admin/validation.date'),
+            'start_date.before'=>trans('Admin/validation.before'),
+            'end_date.date'=>trans('Admin/validation.date'),
+            'end_date.after'=>trans('Admin/validation.after'),
+        ]);
         $outcome_productQueryfirst = OutcomeProduct::query();
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
@@ -403,7 +517,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
             ->where('outcome_products.country_product_type','local')
             ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return datatables()->of($outcome_products)
-            ->make(true);
+        return view('dashboard.admin.outcome_products.weekly_monthly_anual_local_statistics',compact('outcome_products'));
+
     }
 }
