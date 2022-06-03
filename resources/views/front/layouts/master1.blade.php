@@ -39,7 +39,7 @@
                                             {{ $slider->title }}
                                         </h3>
                                         <h4 style="background-color:rgb(169, 202, 20)">{{ $slider->subtitle }}</h4>
-                                        <p>
+                                        {{-- <p>
                                             <span class="d-none d-sm-block">
                                                 <a class="custom-btn custom-btn--big custom-btn--style-1" href="#">
                                                     Discover
@@ -50,7 +50,7 @@
                                                     Discover
                                                 </a>
                                             </span>
-                                        </p>
+                                        </p> --}}
                                     </div>
                                 </div>
                             </div>

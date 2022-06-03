@@ -1099,14 +1099,14 @@
                                     {{ $slider->subtitle }}
                                 </p>
 
-                                <p class="text-center mt-5 mt-md-10">
+                                {{-- <p class="text-center mt-5 mt-md-10">
                                     <span class="d-none d-sm-block"><a
                                                 class="custom-btn custom-btn--big custom-btn--style-3"
                                                 href="#">Discover</a></span>
 
                                     <span class="d-block d-sm-none"><a
                                                 class="custom-btn custom-btn--small custom-btn--style-3" href="#">Discover</a></span>
-                                </p>
+                                </p> --}}
                             </div>
                         </div>
                     </div>
