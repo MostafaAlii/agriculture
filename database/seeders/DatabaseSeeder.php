@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder {
             AboutSeeder::class,
             ReviewSeeder::class,
             TeamSeeder::class,
-            
+
         ]);
 
         \App\Models\Farmer::factory(30)->create();
@@ -133,7 +133,7 @@ class DatabaseSeeder extends Seeder {
             // images for product
             for ($i = 1; $i <= Product::count() ; $i++) {
                 Image::insert([
-                    'filename'     => rand(1,67) . ".jpg",
+                    'filename'     => rand(1,73) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Product'
                 ]);

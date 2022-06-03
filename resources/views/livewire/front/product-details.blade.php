@@ -24,7 +24,7 @@
     }
 
 
-    
+
 </style>
 @else
 
@@ -191,7 +191,7 @@ label.star:before {
                                          <span class="score" id="rate_msg"><span style="width: <?php echo $product->productRate();?>%"></span></span>
 
                                         <!-- <div class="stars"> -->
-                                                
+
                                         <!-- Start Rating -->
                                         <!-- <div class="rating">
                                             <div class="form-group">
@@ -223,7 +223,7 @@ label.star:before {
                                                 </b>
                                             </p>
                                         </div>
-         
+
 
                                         @if (Auth::guard('vendor')->user() )
                                             @if($product->in_stock ==1)
@@ -243,7 +243,7 @@ label.star:before {
 
                                                         <button class="custom-btn custom-btn--medium custom-btn--style-1"
                                                         type="submit" role="button"
-                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                         <i class="fontello-shopping-bag"></i>
                                                             {{ __('Admin/site.addtocart') }}
                                                         </button>
@@ -293,14 +293,14 @@ label.star:before {
                                             <div id="myDIV2" class="tab-content__item">
                                                 <p>
                                                     {{ $product->description }}
-                                                   
+
                                                 </p>
 
                                                 @if(count($options1)>0)
                                                 <div class="description-table" style="max-width: 370px;">
                                                     <table>
                                                         <tbody>
-                                                       
+
                                                            <tr>
                                                                 <th>{{ __('website\comments.attribute') }}</th>
                                                                 <th>{{ __('website\comments.option') }}</th>
@@ -313,7 +313,7 @@ label.star:before {
                                                                     <td>{{$opt->price}}</td>
                                                                 </tr>
                                                             @endforeach
-                                                            
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -408,7 +408,7 @@ label.star:before {
                                                         </div>
                                                         {{-- wishlist route ******************* ***************************************--}}
                                                         <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
-                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->price }})">
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                             <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
                                                 @endif
                                                 @endif
@@ -446,7 +446,7 @@ label.star:before {
                             </div> --}}
                             <!-- end widget -->
 
-                            
+
                             @if(count($product->categories)>0)
                             <!-- start widget -->
                             <div class="widget widget--categories">
@@ -470,7 +470,7 @@ label.star:before {
                                             @endif
                                         @endif
                                     @endforeach
-                                   
+
                                 </ul>
                             </div>
                             <!-- end widget -->
@@ -489,7 +489,7 @@ label.star:before {
                             </div>
                             <!-- end widget -->
                             @endif
-                            
+
 
                             <!-- start widget -->
                             {{-- <div class="widget">

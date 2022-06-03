@@ -95,8 +95,8 @@ class LandAreaRepository implements LandAreaInterface{
         try {
             $requestData = $request->validated();
             $landArea = new LandArea();
-            $landArea->area_id = $requestData['admin_id'];
             $landArea->area_id = $requestData['area_id'];
+            $landArea->admin_id = $requestData['admin_id'];
             $landArea->state_id = $requestData['state_id'];
             $landArea->village_id = $requestData['village_id'];
             $landArea->L_area = $requestData['L_area'];
@@ -142,7 +142,7 @@ class LandAreaRepository implements LandAreaInterface{
             $LandID = Crypt::decrypt($id);
             $requestData = $request->validated();
             $landArea = LandArea::findorfail($LandID);
-            $landArea->area_id = $requestData['admin_id'];
+            $landArea->admin_id = $requestData['admin_id'];
             $landArea->area_id = $requestData['area_id'];
             $landArea->state_id = $requestData['state_id'];
             $landArea->village_id = $requestData['village_id'];

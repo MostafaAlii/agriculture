@@ -110,6 +110,8 @@
                                                                 <option value ="{{$unit->id}}">{{ $unit->Name }}</option>
                                                             @endforeach
                                                         </select>
+                                                        <input name="admin_id" value="{{$adminId}}"  class="form-control"type="hidden">
+
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-4">

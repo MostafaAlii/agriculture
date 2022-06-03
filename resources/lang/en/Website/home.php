@@ -114,4 +114,8 @@ return [
 'confirmation_email'=>'Confirmation Email Sent',
 'continue_shopping'=>'Continue Shopping',
 
+//product details
+'item_added_to_cart'=>'Item added to cart',
+
+
 ];

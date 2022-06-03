@@ -5,10 +5,11 @@
     <style>
         .product-wish{
             position: absolute;
-            bottom :3%;
+            top:3%;
+            left: 20px;
             z-index:99;
-            left:30px;
-            text-align: right;
+            /* right:20px; */
+            /* text-align: right; */
             padding-top:0;
         }
         .product-wish .fa {
@@ -248,45 +249,46 @@
 
             <!-- start goods -->
             <div class="goods goods--style-1 goods--slider">
-                <div class="js-slick" data-slick='{
-                        "autoplay": true,
-                        "arrows": false,
-                        "dots": true,
-                        "speed": 1200,
-                        "responsive": [
-                        {
-                            "breakpoint": 575,
-                            "settings":{
-                                "rows": 2,
-                                "slidesToShow": 2,
-                                "slidesToScroll": 2
-                            }
-                        },
-                        {
-                            "breakpoint": 767,
-                            "settings":{
-                                "rows": 2,
-                                "slidesToShow": 3,
-                                "slidesToScroll": 3
-                            }
-                        },
-                        {
-                            "breakpoint": 991,
-                            "settings":{
-                                "rows": 2,
-                                "slidesToShow": 4,
-                                "slidesToScroll": 2
-                            }
-                        },
-                        {
-                            "breakpoint": 1199,
-                            "settings":{
-                                "rows": 2,
-                                "slidesToShow": 4,
-                                "slidesToScroll": 2
-                            }
-                        }]
-                    }'>
+                <div class="js-slick"
+                data-slick='{
+                    "autoplay": true,
+                    "arrows": false,
+                    "dots": true,
+                    "speed": 1200,
+                    "responsive": [
+                    {
+                        "breakpoint": 575,
+                        "settings":{
+                            "rows": 2,
+                            "slidesToShow": 2,
+                            "slidesToScroll": 2
+                        }
+                    },
+                    {
+                        "breakpoint": 767,
+                        "settings":{
+                            "rows": 2,
+                            "slidesToShow": 3,
+                            "slidesToScroll": 3
+                        }
+                    },
+                    {
+                        "breakpoint": 991,
+                        "settings":{
+                            "rows": 2,
+                            "slidesToShow": 4,
+                            "slidesToScroll": 2
+                        }
+                    },
+                    {
+                        "breakpoint": 1199,
+                        "settings":{
+                            "rows": 2,
+                            "slidesToShow": 4,
+                            "slidesToScroll": 2
+                        }
+                    }]
+                }'>
                     <!-- start item  12 product here to show-->
                     @php
                         $witems = Cart::instance('wishlist')
@@ -726,7 +728,7 @@
     </section>
     <!-- end section -->
 
-    
+
     @include('livewire.front._offer_price')
     @include('livewire.front._home_review')
 

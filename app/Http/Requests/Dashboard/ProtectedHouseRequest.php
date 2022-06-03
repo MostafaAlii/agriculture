@@ -23,11 +23,11 @@ class ProtectedHouseRequest extends FormRequest
 
             'average_product_annual' =>'sometimes:nullable|numeric',
             'count_protected_house' =>'required|numeric',
-            'status' => 'required',
-            'supported_side'=>'required',
+            'status' => 'required|in:active,inactive',
+            'supported_side'=>'required|in:private,govermental,international organizations',
             'unit_id'=>'required|exists:units,id',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
-            'email'        => 'required|email|unique:farmers',
+            'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+            'email'        => 'required|email',
 
         ];
     }
@@ -36,7 +36,7 @@ class ProtectedHouseRequest extends FormRequest
     {
         return [
             'farmer_id.required' => trans('Admin/validation.required'),
-//           'admin_id.required' => trans('Admin/validation.required'),
+           'admin_id.required' => trans('Admin/validation.required'),
             'count_protected_house.required'=>trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
             'average_product_annual.required' => trans('Admin/validation.required'),

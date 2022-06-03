@@ -118,4 +118,7 @@ return [
 'order_success_msg'=>'  شكراا لك على طلبك ، سيتم التواصل معك في أقرب وقت ممكن',
 'confirmation_email'=>' تم ارسال رسالة تأكيد إلى بريدك الإلكتروني',
 'continue_shopping'=>'  الاستمرار في التسوق',
+
+//product details
+'item_added_to_cart'=>'تم إضافة المنتج للسله',
 ];

@@ -44,6 +44,7 @@ class CartComponent extends Component {
       Cart::instance('cart')->destroy();
       $this->emitTo('front.cart-count-component','refreshComponent');
       session()->flash('success_message',__('website/home.all_items_removed'));
+
   }
 
   public function SaveForLater($rowId) {

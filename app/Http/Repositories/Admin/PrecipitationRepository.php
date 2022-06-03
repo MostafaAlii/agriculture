@@ -75,7 +75,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
 
         return view('dashboard.admin.precipitations.create',
-            compact('area_name', 'areas', 'state_name', 'units', 'admin'));
+            compact('area_name', 'areas', 'state_name', 'units', 'admin','adminId'));
     }
 
     public function store($request)
@@ -83,7 +83,7 @@ class PrecipitationRepository implements PrecipitationInterface
         try {
             $requestData = $request->validated();
             $precipitation = new Precipitation();
-            $precipitation->admin_id = Auth::user()->id;
+            $precipitation->admin_id = $requestData['admin_id'];
             $precipitation->area_id = $requestData['area_id'];
             $precipitation->state_id = $requestData['state_id'];
             $precipitation->precipitation_rate = $requestData['precipitation_rate'];
@@ -123,7 +123,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
 
         return view('dashboard.admin.precipitations.edit',
-            compact('areas', 'state_name', 'area_name', 'admin', 'units', 'precipitation'));
+            compact('areas', 'state_name', 'area_name', 'admin','adminId', 'units', 'precipitation'));
     }
 
 
@@ -133,7 +133,7 @@ class PrecipitationRepository implements PrecipitationInterface
             $preID = Crypt::decrypt($id);
             $requestData = $request->validated();
             $precipitation = Precipitation::findorfail($preID);
-            $precipitation->admin_id = Auth::user()->id;
+            $precipitation->admin_id = $requestData['admin_id'];
             $precipitation->area_id = $requestData['area_id'];
             $precipitation->state_id = $requestData['state_id'];
             $precipitation->precipitation_rate = $requestData['precipitation_rate'];

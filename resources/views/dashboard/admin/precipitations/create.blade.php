@@ -98,6 +98,8 @@
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/precipitations.precipitation_rate') }}</label>
                                                                 <input name="precipitation_rate" value=""  class="form-control"type="text">
+                                                                <input name="admin_id" value="{{$adminId}}"  class="form-control"type="hidden">
+
                                                             </div>
                                                         </div>
                                                         <div class="col col-md-4">
@@ -114,7 +116,7 @@
                                                         <div class="col col-md-4">
                                                         <div class="form-group" >
                                                             <label>{{ __('Admin/precipitations.date') }}</label>
-                                                            <input name="date"  id="precipitation_date" value=""  class="form-control datepicker" type="text">
+                                                            <input name="date"  id="precipitation_date" value=""  class="form-control datepicker" type="date">
 
                                                         </div>
                                                     </div>
