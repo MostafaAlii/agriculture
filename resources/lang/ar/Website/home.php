@@ -103,4 +103,19 @@ return [
     'sortlow'      =>'من الأقل إلى الأعلى',
     'sorthigh'     =>'من الأعلى إلى الأقل',
     'perpage'      =>'لكل صفحة',
+
+
+    //cart
+    'cart_remove_success'=>'تم حذف المنتج من السله',
+    'all_items_removed'=>'تم حذف جميع المنتجات من السله',
+    'item_save_for_later'=>'تم حفظ المنتج للاسترجاع في وقت لاحق',
+    'item_move_to_cart'=>'تم إضافة المنتج للسله',
+    'item_delete_from_save_for_later'=>'تم حذف المنتج من المحفوظات',
+    'coupon_not_found'=>'قسيمة الشراء غير صحيحة',
+
+    //thank you page
+'order_success'=>'تم تنفيذ الطلب بنجاح',
+'order_success_msg'=>'  شكراا لك على طلبك ، سيتم التواصل معك في أقرب وقت ممكن',
+'confirmation_email'=>' تم ارسال رسالة تأكيد إلى بريدك الإلكتروني',
+'continue_shopping'=>'  الاستمرار في التسوق',
 ];
