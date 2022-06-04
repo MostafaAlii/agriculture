@@ -23,7 +23,7 @@ integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRk
 {{-- <script>
      window.jQuery || document.write('<script src="frontassets/js/jquery-2.2.4.min.js"></script>')
 </script> --}}
-
+{{-- <script src="{{ asset('frontassets/js/jquery-2.2.4.min.js') }}"></script> --}}
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if(session('status'))
