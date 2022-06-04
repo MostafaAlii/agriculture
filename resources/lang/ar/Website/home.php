@@ -129,4 +129,7 @@ return [
 'with'=>'مع',
 'fresh'=>'الطازجه',
 'products'=>'المنتجات',
+
+//guest controller subscribe
+'subscribed_successfully'=>'تم الاشتراك بنجاح',
 ];

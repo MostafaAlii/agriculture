@@ -125,4 +125,7 @@ return [
 'fresh'=>'Fresh',
 'products'=>'Products',
 
+//guest controller subscribe
+'subscribed_successfully'=>'Subscribed Successfully',
+
 ];

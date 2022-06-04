@@ -252,10 +252,10 @@
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget widget--banner">
+                                {{-- <div class="widget widget--banner">
                                     <a href="#"><img class="img-fluid  lazy" src="img/blank.gif"
                                             data-src="img/widget_banner_2.jpg" alt="demo" /></a>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
                             </div>
                         </aside>
@@ -455,7 +455,7 @@
     <!-- end section -->
 
     <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
+    {{-- <section class="section section--no-pt section--no-pb section--gutter">
         <div class="container-fluid px-md-0">
             <!-- start banner simple -->
             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
@@ -485,7 +485,7 @@
             </div>
             <!-- end banner simple -->
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 </div>
 @push('js')

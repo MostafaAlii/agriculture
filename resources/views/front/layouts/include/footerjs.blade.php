@@ -70,7 +70,8 @@ integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amn
     $(document).ready(function() {
         $(".save-data").click(function(e) {
             e.preventDefault();
-            let email = $("input[name=email]").val();
+            // let email = $("input[name=email]").val();
+            let email = $('#email').val();
             console.log(email);
             $.ajax({
                 method: "POST",
