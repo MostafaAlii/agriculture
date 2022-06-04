@@ -91,7 +91,7 @@
 
 
 <div>
-    {{-- ********************** Home 2 ****************************************** --}}
+
     <section class="section section--no-pt section--no-pb">
         <div class="container-fluid">
             <!-- start promo banners -->
@@ -376,7 +376,7 @@
     <!-- end section -->
 
     <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
+    {{-- <section class="section section--no-pt section--no-pb section--gutter">
         <div class="container-fluid px-md-0">
             <!-- start banner simple -->
             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
@@ -414,11 +414,11 @@
             </div>
             <!-- end banner simple -->
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 
     <!-- start section -->
-    <section class="section">
+    {{-- <section class="section">
         <div class="d-none d-lg-block">
             <img id="bg-img-1" class="img-fluid lazy" src="{{ asset('frontassets/img/blank.gif') }}"
                 data-src="{{ asset('frontassets/img/agro_2.png') }}" alt="demo" />
@@ -491,7 +491,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 
     <!-- start section -->
@@ -500,11 +500,20 @@
             <div class="special-offer special-offer--style-2" data-aos="zoom-in" data-aos-duration="600"
                 data-aos-offset="70">
                 <h2 class="text  text-center">
-                    <span style="color: #635729">Healthy</span>
-                    <span style="color: #ff6262">life</span>
-                    <span style="color: #ffbb4c">with</span>
-                    <span style="color: #fcdb5a">fresh</span>
-                    <span style="color: #5e9a4b">products</span>
+                    @if(app()->getLocale()=='ar' || app()->getLocale()=='ku')
+                    <span style="color: #ff6262">{{ __('website/home.life') }}</span>
+                    <span style="color: #635729">{{ __('website/home.healthy') }}</span>
+                    <span style="color: #ffbb4c">{{ __('website/home.with') }}</span>
+                    <span style="color: #5e9a4b">{{ __('website/home.products') }}</span>
+                    <span style="color: #fcdb5a">{{ __('website/home.fresh') }}</span>
+                    @else
+                    <span style="color: #635729">{{ __('website/home.healthy') }}</span>
+                    <span style="color: #ff6262">{{ __('website/home.life') }}</span>
+                    <span style="color: #ffbb4c">{{ __('website/home.with') }}</span>
+                    <span style="color: #fcdb5a">{{ __('website/home.fresh') }}</span>
+                    <span style="color: #5e9a4b">{{ __('website/home.products') }}</span>
+                    @endif
+
                 </h2>
             </div>
         </div>

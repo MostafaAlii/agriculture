@@ -118,5 +118,11 @@ return [
 'item_added_to_cart'=>'Item added to cart',
 'homesms'=>'Special products for most people',
 
+//home2
+'healthy'=>'Healthy',
+'life'=>'Life',
+'with'=>'With',
+'fresh'=>'Fresh',
+'products'=>'Products',
 
 ];

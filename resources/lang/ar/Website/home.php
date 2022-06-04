@@ -122,4 +122,11 @@ return [
 //product details
 'item_added_to_cart'=>'تم إضافة المنتج للسله',
 'homesms'=>' احدث المنتجات لجميع الفئات',
+
+//home2
+'healthy'=>'الصحيه',
+'life'=>'الحياة',
+'with'=>'مع',
+'fresh'=>'الطازجه',
+'products'=>'المنتجات',
 ];
