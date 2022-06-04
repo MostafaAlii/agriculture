@@ -375,8 +375,8 @@
     </section>
     <!-- end section -->
 
-    <!-- start section -->
-    {{-- <section class="section section--no-pt section--no-pb section--gutter">
+    <!-- start section ده الى عايز يظبط ***********************************************************-->
+    <section class="section section--no-pt section--no-pb section--gutter">
         <div class="container-fluid px-md-0">
             <!-- start banner simple -->
             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
@@ -414,11 +414,11 @@
             </div>
             <!-- end banner simple -->
         </div>
-    </section> --}}
+    </section>
     <!-- end section -->
 
-    <!-- start section -->
-    {{-- <section class="section">
+    <!-- start section ده الى عايز يظبط *******************************************************-->
+    <section class="section">
         <div class="d-none d-lg-block">
             <img id="bg-img-1" class="img-fluid lazy" src="{{ asset('frontassets/img/blank.gif') }}"
                 data-src="{{ asset('frontassets/img/agro_2.png') }}" alt="demo" />
@@ -491,7 +491,7 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
     <!-- end section -->
 
     <!-- start section -->
