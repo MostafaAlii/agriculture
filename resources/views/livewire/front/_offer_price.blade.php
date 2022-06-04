@@ -48,8 +48,8 @@
                                                 <a href="{{ route('product_details', encrypt($offer_product->id)) }}">{{$offer_product->name}}</a>
                                             </b>
                                         </h2>
-                                        <p>
-                                        {{substr($offer_product->name,0,100)}}...
+                                        <p style="margin-right: -35px !important;">
+                                        {{substr($offer_product->description,0,100)}}...
                                         </p>
                                     </div>
                                 </div>
