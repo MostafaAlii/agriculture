@@ -13,6 +13,8 @@
             padding-top:0;
         }
         .product-wish .fa {
+            position: absolute;
+            left: 200px;
             /* color:red; */
             font-size: 30px;
         }
