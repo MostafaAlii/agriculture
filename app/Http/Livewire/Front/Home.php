@@ -15,9 +15,9 @@ class Home extends Component
 {
     public function store($product_id,$product_name,$product_price){
         Cart::instance('cart')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
-        $this->emitTo('front.cart-count-component','refreshComponent');
-        // session()->flash('success_message',__('Website/home.item_added_in_cart'));
+        session()->flash('success_message',__('Website/home.item_move_to_cart'));
         return redirect()->route('product.cart');
+        $this->emitTo('front.cart-count-component','refreshComponent');
     }
     public function addToWishlist($product_id,$product_name,$product_price){
         Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
