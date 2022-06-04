@@ -116,6 +116,7 @@ return [
 
 //product details
 'item_added_to_cart'=>'Item added to cart',
+'homesms'=>'Special products for most people',
 
 
 ];

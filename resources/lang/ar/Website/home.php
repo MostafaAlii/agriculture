@@ -121,4 +121,5 @@ return [
 
 //product details
 'item_added_to_cart'=>'تم إضافة المنتج للسله',
+'homesms'=>' احدث المنتجات لجميع الفئات',
 ];
