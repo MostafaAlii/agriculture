@@ -185,29 +185,6 @@
             </div>
         </div>
     </section>
-    <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-            <!-- start banner simple -->
-            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    <img class="img-logo img-fluid  lazy" src="img/blank.gif" data-src="img/site_logo.png" alt="demo" />
-                </div>
-
-                <div class="row no-gutters">
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_3.jpg" alt="demo" /></a>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_4.jpg" alt="demo" /></a>
-                    </div>
-                </div>
-            </div>
-            <!-- end banner simple -->
-        </div>
-    </section>
-    <!-- end section -->
 </div>
 @push('js')
 <script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js')}}"></script>

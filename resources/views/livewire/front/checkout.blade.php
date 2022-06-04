@@ -271,14 +271,14 @@
                                                                 <label for="payment-method-bank" class="text-small">
                                                                     <b>{{ trans('Website/checkout.cash_on_delivery') }}</b>
                                                                 </label>
-                                                            <input
+                                                            {{--<input
                                                                 type="radio"
                                                                 id="payment-method-bank"
                                                                 value="card" wire:model="paymentmode">
                                                                 <label for="payment-method-bank" class="text-small">
                                                                     <b>{{ trans('Website/checkout.credit_card') }}</b>
                                                                 </label>
-                                                                @error('paymentmode') <span class="text-danger">{{ $message }}</span> @enderror
+                                                                @error('paymentmode') <span class="text-danger">{{ $message }}</span> @enderror--}}
                                                         </div>
                                                 </div>
                                             </div>
