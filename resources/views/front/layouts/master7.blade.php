@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" oncontextmenu="return false">
 
 	<head>
 		@include('front.layouts.include.headcss')
