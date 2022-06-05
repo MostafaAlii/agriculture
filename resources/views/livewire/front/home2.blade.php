@@ -200,6 +200,7 @@
 
             <div class="container">
                 <div class="row align-items-center">
+                    <?php $x=0;?>
                     @foreach($about_us as $info)
                     <div class="col-12 col-lg-4">
                         <div data-aos="fade-left" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
@@ -212,15 +213,15 @@
                             </p>
                         </div>
                     </div>
+                    <?php if($x==0){?>
+                        <div class="col-12 my-3 d-lg-none"></div>
 
-                    <div class="col-12 my-3 d-lg-none"></div>
-
-                    <div class="col-12 col-lg-4  text-center">
-                        <div data-aos="fade-up" ddata-aos-duration="600" data-aos-offset="100">
-                            <img class="img-fluid  lazy" src="{{ asset('Dashboard/img/about/'.$info->image) }}" data-src="{{ asset('Dashboard/img/about/'.$info->image) }}" style="width:500px;height:400px" alt="demo" />
+                        <div class="col-12 col-lg-4  text-center">
+                            <div data-aos="fade-up" ddata-aos-duration="600" data-aos-offset="100">
+                                <img class="img-fluid  lazy" src="{{ asset('Dashboard/img/about/'.$info->image) }}" data-src="{{ asset('Dashboard/img/about/'.$info->image) }}" style="width:500px;height:400px" alt="demo" />
+                            </div>
                         </div>
-                    </div>
-
+                    <?php }?>
                     <div class="col-12 my-3 d-lg-none"></div>
 
                     <div class="col-12 col-lg-4">
@@ -228,6 +229,7 @@
                               <p><?php echo substr($info->description,0,500);?>...</p>
                         </div>
                     </div>
+                    <?php $x++;?>
                     @endforeach
                 </div>
             </div>
