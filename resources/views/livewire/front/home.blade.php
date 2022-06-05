@@ -455,7 +455,7 @@
 
      .wolf{
         @if(app()->getLocale()=='ar' || app()->getLocale()=='ku')
-           margin-left: -172px;
+           margin-left: -60px;
            margin-right: 160px;
         @else
           margin-left: 138px;
