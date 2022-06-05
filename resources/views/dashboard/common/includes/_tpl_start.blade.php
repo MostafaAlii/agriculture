@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="rtl">
+<html class="loading" lang="en" data-textdirection="rtl" oncontextmenu="return false">
 <!-- BEGIN: Head-->
 
 <head>
@@ -68,7 +68,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/file-uploaders/dropzone.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/rtl.css')}}">
         <!-- END: Page CSS-->
-        <!-- BEGIN: Page CSS--> 
+        <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">

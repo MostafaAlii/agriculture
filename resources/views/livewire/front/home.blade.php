@@ -3,6 +3,7 @@
 @section('css')
 @if(app()->getLocale()=='ar')
     <style>
+
         .product-wish{
             position: absolute;
             top:3%;
@@ -376,7 +377,7 @@
     <!-- end section -->
 
     <!-- start section ده الى عايز يظبط ***********************************************************-->
-    <section class="section section--no-pt section--no-pb section--gutter">
+    {{-- <section class="section section--no-pt section--no-pb section--gutter">
         <div class="container-fluid px-md-0">
             <!-- start banner simple -->
             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
@@ -403,7 +404,44 @@
                 </div>
                 <div class="row no-gutters">
                     @foreach($random_blog as $b)
-                    <div class="col-12 col-lg-6 " >
+                        <div class="col-12 col-lg-6 " >
+                            <h3 style="color:coral">{{$b->title}}</h3>
+                            <p>{{substr($b->body,0,100)}}</p>
+                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('blogdetails', encrypt($b->id)) }}">{{ __('website\home.readmore') }}</a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <!-- end banner simple -->
+        </div>
+    </section> --}}
+     {{-- <section class="section section--no-pt section--no-pb section--gutter">
+        <div class="container-fluid px-md-0">
+             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
+                <div class="d-none d-lg-block">
+                    @if(app()->getLocale()=='ar')
+                        <img class="img-logo  img-fluid  lazy"
+                             src="{{ setting()->ar_site_logo ?
+                        URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
+                        URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
+                             style="left: 45%;   width: 200px;height: 260px;  "/>
+                    @elseif(app()->getLocale()=='ku')
+                        <img class="img-logo  img-fluid  lazy"
+                             src="{{setting()->ku_site_logo ?
+                        URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
+                        URL::asset('Dashboard/img/Default/logo_ku.png')}}"
+                             alt="" style="left: 45%;    width: 200px; height: 260px;"/>
+                    @elseif(app()->getLocale()=='en')
+                        <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
+                         URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
+                         URL::asset('Dashboard/img/Default/logo_en.png')}}"
+                             alt="" style="left: 45%;    width: 200px;height: 260px;"/>
+
+                    @endif
+                </div>
+                <div class="row no-gutters">
+                    @foreach($random_blog as $b)
+                    <div class="col-12 col-lg-6 "  >
                         <h3 style="color:coral">{{$b->title}}</h3>
                         <p>{{substr($b->body,0,100)}}</p>
                         <a class="custom-btn custom-btn--medium custom-btn--style-1"
@@ -411,10 +449,67 @@
                     </div>
                     @endforeach
                 </div>
+            </div>  </div>
+    </section> --}}
+    <style>
+
+     .wolf{
+        @if(app()->getLocale()=='ar' || app()->getLocale()=='ku')
+           margin-left: -60px;
+           margin-right: 160px;
+        @else
+          margin-left: 138px;
+          margin-right: -128px;
+        @endif
+     }
+    </style>
+	<section class="section section--no-pt section--no-pb section--gutter wolf" style="">
+        <div class="container-fluid px-md-0">
+            <!-- start banner simple -->
+            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
+                <div class="d-none d-lg-block">
+                        @if(app()->getLocale()=='ar')
+                        <img class="img-logo  img-fluid  lazy"
+                            src="{{ setting()->ar_site_logo ?
+                            URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
+                            URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
+                            style=" left: 57% !important;"/>
+                        @elseif(app()->getLocale()=='ku')
+                            <img class="img-logo  img-fluid  lazy"
+                                src="{{setting()->ku_site_logo ?
+                            URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
+                            URL::asset('Dashboard/img/Default/logo_ku.png')}}"
+                                alt=""  style=" left: 57% !important;" />
+                        @elseif(app()->getLocale()=='en')
+                            <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
+                            URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
+                            URL::asset('Dashboard/img/Default/logo_en.png')}}"
+                                alt=""   style=" left: 43% !important;"/>
+                        @endif
+                </div>
+
+                <div class="row no-gutters">
+                    {{-- <div class="col-12 col-lg-6">
+                        <a href="#"><img class="img-fluid w-100  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/banner_bg_3.jpg') }}" alt="demo" /></a>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <a href="#"><img class="img-fluid w-100  lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/banner_bg_4.jpg') }}" alt="demo" /></a>
+                    </div> --}}
+
+                    @foreach($random_blog as $b)
+                        <div class="col-12 col-lg-6 " >
+                            <h3 style="color:coral">{{$b->title}}</h3>
+                            <p>{{substr($b->body,0,100)}}</p>
+                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('blogdetails', encrypt($b->id)) }}">{{ __('website\home.readmore') }}</a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <!-- end banner simple -->
         </div>
     </section>
+
     <!-- end section -->
 
     <!-- start section ده الى عايز يظبط *******************************************************-->
@@ -456,7 +551,7 @@
 
                 <div class="col-12 col-md-7 col-lg-8">
                     <!-- start feature -->
-                    <div class="feature feature--style-3">
+                    <div class="feature feature--style-3" style="padding: 75px;">
                         <div class="__inner">
                             <div class="row">
                                 @foreach($home_category as $main)
