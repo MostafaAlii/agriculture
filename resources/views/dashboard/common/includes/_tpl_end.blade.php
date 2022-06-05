@@ -83,12 +83,27 @@
     $(function() {
         $('#btn_delete_all').click(function() {
             var selected = [];
-            $('.table #delete_select:checked').each(function() {
-                selected.push(this.value);
+            $("input:checkbox[name=delete_select]:checked").each(function() {
+                selected.push($(this).val());
             });
+            // $('.table #delete_select:checked').each(function() {
+            //     selected.push(this.value);
+            // });
+            // console.log(selected);
+            // console.log(selected.length);
             if (selected.length > 0) {
-                $('#delete_select').modal('show')
+                $('#bulkdeleteall').modal('show');
                 $('input[id="delete_select_id"]').val(selected);
+            }else{
+                // alert('Please select at least one record');
+                toastr.error('الرجاء اختيار على الاقل عنصر واحد');
+                // toastr.error(@lang('Admin/site.please_select_at_least_one_record'));
+                // if(app()->getLocale() == 'ar'){
+                //     toastr.error('الرجاء اختيار على الاقل عنصر واحد');
+                //     alert(trans('Admin/site.please_select_at_least_one_record'));
+                // }else{
+                //     toastr.error('Please select at least one record');
+                // }
             }
         });
     });
@@ -122,21 +137,21 @@
         });
     });
 </script>
-<script>
-    window.oncontextmenu = function () {
-    return false;
-};
-
-document.addEventListener("keydown", function(event){
-    var key = event.key || event.keyCode;
-
-    if (key == 123) {
+{{-- <script>
+        window.oncontextmenu = function () {
         return false;
-    } else if ((event.ctrlKey && event.shiftKey && key == 73) || (event.ctrlKey && event.shiftKey && key == 74)) {
-        return false;
-    }
-}, false);
-</script>
+    };
+
+    document.addEventListener("keydown", function(event){
+        var key = event.key || event.keyCode;
+
+        if (key == 123) {
+            return false;
+        } else if ((event.ctrlKey && event.shiftKey && key == 73) || (event.ctrlKey && event.shiftKey && key == 74)) {
+            return false;
+        }
+    }, false);
+</script> --}}
 {{-- test bulk delete 2 --}}
 @yield('js')
 {{-- @stack('js') --}}

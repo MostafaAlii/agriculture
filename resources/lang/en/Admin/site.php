@@ -245,4 +245,6 @@ return [
        'we'=>'We Are',
        'world'=>'One The World',
        'worldsms'=>'Thanks For Your Support',
+
+       'please_select_at_least_one_record'=>'Please select at least one record',
 ];
