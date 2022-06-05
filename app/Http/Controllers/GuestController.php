@@ -29,10 +29,15 @@ class GuestController extends Controller
 
     public function sendmails(Request $request) {
         $email = $request->input('email');
+        $messages = [
+            'email.required'    => trans('validation.required'),
+            'email.email'       => trans('validation.email'),
+            'email.unique'      => trans('validation.unique'),
+        ];
         $validator = Validator::make($request->all(),
         [
            'email'    => 'required|email|unique:subscriptions,email',
-        ]);
+        ],$messages);
         if ($validator->fails()) {
             return response()->json(['status'=>$validator->errors()->first()]);
         }
