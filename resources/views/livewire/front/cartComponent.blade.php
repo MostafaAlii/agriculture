@@ -79,7 +79,7 @@
                                     <tbody>
                                         @if (Session::has('success_message'))
                                             <div class="alert alert-success">
-                                                <strong>Success </strong> {{ Session::get('success_message') }}
+                                                 {{ Session::get('success_message') }}
                                             </div>
                                         @endif
                                         @if (Cart::instance('cart')->count() > 0)

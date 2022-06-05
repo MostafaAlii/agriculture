@@ -96,7 +96,7 @@
                                                   <div class="col col-md-3">
                                                     <div class="form-group">
                                                         <label  for="admin_id">{{ __('Admin/p_houses.farmer_phone') }}</label>
-                                                        <input name="phone" value="{{$protected_house->phone}}" id="farmer_phone"typ="text" class="form-control">
+                                                        <input name="phone" value="{{$protected_house->phone}}"  id="farmer_phone"typ="text" class="form-control">
                                                         <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
                                                         <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
                                                         <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
@@ -106,7 +106,7 @@
                                                 <div class="col col-md-3">
                                                     <div class="form-group">
                                                         <label  for="admin_id">{{ __('Admin/p_houses.farmer_email') }}</label>
-                                                        <input name="email"  value="{{$protected_house->email}}" id="farmer_email"typ="text" class="form-control">
+                                                        <input name="email"  value="{{$protected_house->email}}"  id="farmer_email"typ="text" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-3">

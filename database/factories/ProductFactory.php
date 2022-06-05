@@ -18,6 +18,7 @@ class ProductFactory extends Factory {
             'status'                        =>      $this->faker->boolean(),
             'product_location'              =>      $this->faker->address(),
             'qty'                           =>      $this->faker->numberBetween(100,200),
+            'special_price'                 =>      $this->faker->numberBetween(0,100),
         ];
     }
 }

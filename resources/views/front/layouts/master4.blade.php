@@ -92,109 +92,110 @@
     <!-- end main -->
 
     <!-- start footer -->
- <footer id="footer" class="footer--style-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-sm-auto">
-                <div class="footer__item">
-                    <a class="site-logo" href="index.html">
-    @if(app()->getLocale()=='ar')
-        <img class="img-logo  img-fluid  lazy"
-             src="{{ setting()->ar_site_logo ?
-                        URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
-             style="left: 45%;   width: 200px;height: 260px;  "/>
-    @elseif(app()->getLocale()=='ku')
-        <img class="img-logo  img-fluid  lazy"
-             src="{{setting()->ku_site_logo ?
-                        URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ku.png')}}"
-             alt="" style="left: 45%;    width: 200px; height: 260px;"/>
-    @elseif(app()->getLocale()=='en')
-        <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
-                         URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
-                         URL::asset('Dashboard/img/Default/logo_en.png')}}"
-             alt="" style="left: 45%;    width: 200px;height: 260px;"/>
+ {{-- <footer id="footer" class="footer--style-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-auto">
+                    <div class="footer__item">
+                        <a class="site-logo" href="index.html">
+        @if(app()->getLocale()=='ar')
+            <img class="img-logo  img-fluid  lazy"
+                src="{{ setting()->ar_site_logo ?
+                            URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
+                            URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
+                style="left: 45%;   width: 200px;height: 260px;  "/>
+        @elseif(app()->getLocale()=='ku')
+            <img class="img-logo  img-fluid  lazy"
+                src="{{setting()->ku_site_logo ?
+                            URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
+                            URL::asset('Dashboard/img/Default/logo_ku.png')}}"
+                alt="" style="left: 45%;    width: 200px; height: 260px;"/>
+        @elseif(app()->getLocale()=='en')
+            <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
+                            URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
+                            URL::asset('Dashboard/img/Default/logo_en.png')}}"
+                alt="" style="left: 45%;    width: 200px;height: 260px;"/>
 
-@endif
-                                    </a>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm">
-                <div class="row align-items-md-center no-gutters">
-                    <div class="col-12 col-md">
-                        <div class="footer__item">
-                            <address>
-                                <p>
-                                    <span>{{ \App\Models\setting::first()->address }}</span>
-                                </p>
-                                <p>
-                                    {{  \App\Models\setting::first()->primary_phone }},
-                                    {{  \App\Models\setting::first()->secondery_phone }} <br>
-                                    <a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>
-                                </p>
-                            </address>
-                        </div>
+    @endif
+                                        </a>
                     </div>
+                </div>
 
-                    <div class="col-12 col-md-auto">
-                        <div class="footer__item">
+                <div class="col-12 col-sm">
+                    <div class="row align-items-md-center no-gutters">
+                        <div class="col-12 col-md">
+                            <div class="footer__item">
+                                <address>
+                                    <p>
+                                        <span>{{ \App\Models\setting::first()->address }}</span>
+                                    </p>
+                                    <p>
+                                        {{  \App\Models\setting::first()->primary_phone }},
+                                        {{  \App\Models\setting::first()->secondery_phone }} <br>
+                                        <a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>
+                                    </p>
+                                </address>
+                            </div>
+                        </div>
 
-                            <div class="social-btns">
-                                <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
-                                <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
-                                <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
+                        <div class="col-12 col-md-auto">
+                            <div class="footer__item">
+
+                                <div class="social-btns">
+                                    <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
+                                    <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
+                                    <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-12 col-lg-5 col-xl-4 offset-xl-1">
+                    <div class="footer__item">
+                        <h5 class="h6">{{ __('Admin/general.newslatter') }}</h5>
+
+                        <form class="form--horizontal" method="post"  id="ajaxform">
+                            @csrf
+                            @method('post')
+                            <div class="input-wrp">
+                                <input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }}" />
+                            </div>
+                            <button class="custom-btn custom-btn--medium custom-btn--style-1 save-data" type="submit" role="button">
+                                {{ __('Website/home.sub') }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-12 col-lg-5 col-xl-4 offset-xl-1">
-                <div class="footer__item">
-                    <h5 class="h6">{{ __('Admin/general.newslatter') }}</h5>
+            <div class="row flex-lg-row-reverse">
+                <div class="col-12 col-lg-6">
+                    <div class="footer__item">
+                        <nav id="footer__navigation" class="navigation  text-lg-right">
+                            <ul>
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Pages</a></li>
+                                <li><a href="#">Gallery</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Contacts</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
 
-                    <form class="form--horizontal" method="post"  id="ajaxform">
-                        @csrf
-                        @method('post')
-                        <div class="input-wrp">
-                            <input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }}" />
-                        </div>
-                        <button class="custom-btn custom-btn--medium custom-btn--style-1 save-data" type="submit" role="button">
-                            {{ __('Website/home.sub') }}
-                        </button>
-                    </form>
+                <div class="col-12 col-lg-6">
+                    <div class="footer__item">
+                        <span class="__copy">  {{ trans('Admin/general.copyright') }} &copy; 2022
+                            <a class="__dev" href="#">{{ ucfirst(setting()->site_name) }}</a>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="row flex-lg-row-reverse">
-            <div class="col-12 col-lg-6">
-                <div class="footer__item">
-                    <nav id="footer__navigation" class="navigation  text-lg-right">
-                        <ul>
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Pages</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="footer__item">
-                    <span class="__copy">  {{ trans('Admin/general.copyright') }} &copy; 2022
-                        <a class="__dev" href="#">{{ ucfirst(setting()->site_name) }}</a>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+</footer> --}}
+@include('front.layouts.include.footer')
 <!-- end footer -->
 </div>
 

@@ -121,7 +121,7 @@ class CawProjectRepository implements CawProjectInterface{
             $animal->email = $requestData['email'];
             $animal->save($requestData);
 
-            toastr()->error(__('Admin/site.added_successfully'));
+            toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Animals.index');
 
 
@@ -179,12 +179,12 @@ class CawProjectRepository implements CawProjectInterface{
 
             $animal->update($requestData);
 
-            toastr()->error(__('Admin/site.added_successfully'));
+            toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Animals.index');
 
 
         } catch (\Exception $e) {
-            toastr()->success(__('Admin/attributes.add_wrong'));
+            toastr()->error(__('Admin/attributes.add_wrong'));
 
             return redirect()->back();
         }

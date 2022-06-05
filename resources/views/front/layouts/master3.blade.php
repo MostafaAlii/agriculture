@@ -93,7 +93,7 @@ if(isset($slider->image->filename)){
     <!-- end main -->
 
     <!-- start footer -->
- <footer id="footer" class="footer--style-1">
+ {{-- <footer id="footer" class="footer--style-1">
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-auto">
@@ -196,8 +196,8 @@ if(isset($slider->image->filename)){
             </div>
         </div>
     </div>
-</footer>
-
+</footer> --}}
+@include('front.layouts.include.footer')
 <!-- end footer -->
 </div>
 

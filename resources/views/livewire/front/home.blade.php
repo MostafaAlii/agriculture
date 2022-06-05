@@ -5,13 +5,16 @@
     <style>
         .product-wish{
             position: absolute;
-            bottom :3%;
+            top:3%;
+            left: 20px;
             z-index:99;
-            left:30px;
-            text-align: right;
+            /* right:20px; */
+            /* text-align: right; */
             padding-top:0;
         }
         .product-wish .fa {
+            position: absolute;
+            left: 200px;
             /* color:red; */
             font-size: 30px;
         }
@@ -88,7 +91,7 @@
 
 
 <div>
-    {{-- ********************** Home 2 ****************************************** --}}
+
     <section class="section section--no-pt section--no-pb">
         <div class="container-fluid">
             <!-- start promo banners -->
@@ -248,45 +251,46 @@
 
             <!-- start goods -->
             <div class="goods goods--style-1 goods--slider">
-                <div class="js-slick" data-slick='{
-                        "autoplay": true,
-                        "arrows": false,
-                        "dots": true,
-                        "speed": 1200,
-                        "responsive": [
-                        {
-                            "breakpoint": 575,
-                            "settings":{
-                                "rows": 2,
-                                "slidesToShow": 2,
-                                "slidesToScroll": 2
-                            }
-                        },
-                        {
-                            "breakpoint": 767,
-                            "settings":{
-                                "rows": 2,
-                                "slidesToShow": 3,
-                                "slidesToScroll": 3
-                            }
-                        },
-                        {
-                            "breakpoint": 991,
-                            "settings":{
-                                "rows": 2,
-                                "slidesToShow": 4,
-                                "slidesToScroll": 2
-                            }
-                        },
-                        {
-                            "breakpoint": 1199,
-                            "settings":{
-                                "rows": 2,
-                                "slidesToShow": 4,
-                                "slidesToScroll": 2
-                            }
-                        }]
-                    }'>
+                <div class="js-slick"
+                data-slick='{
+                    "autoplay": true,
+                    "arrows": false,
+                    "dots": true,
+                    "speed": 1200,
+                    "responsive": [
+                    {
+                        "breakpoint": 575,
+                        "settings":{
+                            "rows": 2,
+                            "slidesToShow": 2,
+                            "slidesToScroll": 2
+                        }
+                    },
+                    {
+                        "breakpoint": 767,
+                        "settings":{
+                            "rows": 2,
+                            "slidesToShow": 3,
+                            "slidesToScroll": 3
+                        }
+                    },
+                    {
+                        "breakpoint": 991,
+                        "settings":{
+                            "rows": 2,
+                            "slidesToShow": 4,
+                            "slidesToScroll": 2
+                        }
+                    },
+                    {
+                        "breakpoint": 1199,
+                        "settings":{
+                            "rows": 2,
+                            "slidesToShow": 4,
+                            "slidesToScroll": 2
+                        }
+                    }]
+                }'>
                     <!-- start item  12 product here to show-->
                     @php
                         $witems = Cart::instance('wishlist')
@@ -371,7 +375,7 @@
     </section>
     <!-- end section -->
 
-    <!-- start section -->
+    <!-- start section ده الى عايز يظبط ***********************************************************-->
     <section class="section section--no-pt section--no-pb section--gutter">
         <div class="container-fluid px-md-0">
             <!-- start banner simple -->
@@ -413,7 +417,7 @@
     </section>
     <!-- end section -->
 
-    <!-- start section -->
+    <!-- start section ده الى عايز يظبط *******************************************************-->
     <section class="section">
         <div class="d-none d-lg-block">
             <img id="bg-img-1" class="img-fluid lazy" src="{{ asset('frontassets/img/blank.gif') }}"
@@ -496,11 +500,20 @@
             <div class="special-offer special-offer--style-2" data-aos="zoom-in" data-aos-duration="600"
                 data-aos-offset="70">
                 <h2 class="text  text-center">
-                    <span style="color: #635729">Healthy</span>
-                    <span style="color: #ff6262">life</span>
-                    <span style="color: #ffbb4c">with</span>
-                    <span style="color: #fcdb5a">fresh</span>
-                    <span style="color: #5e9a4b">products</span>
+                    @if(app()->getLocale()=='ar' || app()->getLocale()=='ku')
+                    <span style="color: #ff6262">{{ __('website/home.life') }}</span>
+                    <span style="color: #635729">{{ __('website/home.healthy') }}</span>
+                    <span style="color: #ffbb4c">{{ __('website/home.with') }}</span>
+                    <span style="color: #5e9a4b">{{ __('website/home.products') }}</span>
+                    <span style="color: #fcdb5a">{{ __('website/home.fresh') }}</span>
+                    @else
+                    <span style="color: #635729">{{ __('website/home.healthy') }}</span>
+                    <span style="color: #ff6262">{{ __('website/home.life') }}</span>
+                    <span style="color: #ffbb4c">{{ __('website/home.with') }}</span>
+                    <span style="color: #fcdb5a">{{ __('website/home.fresh') }}</span>
+                    <span style="color: #5e9a4b">{{ __('website/home.products') }}</span>
+                    @endif
+
                 </h2>
             </div>
         </div>
@@ -726,7 +739,7 @@
     </section>
     <!-- end section -->
 
-    
+
     @include('livewire.front._offer_price')
     @include('livewire.front._home_review')
 

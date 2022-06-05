@@ -5650,7 +5650,7 @@ img {
 .product-label {
     position: absolute;
     top: 5px;
-    right: 5px;
+    /* right: 5px; */
     min-width: 60px;
     padding: 9px 15px;
     line-height: 1;
@@ -11873,3 +11873,5 @@ img {
         transition: none
     }
 }
+
+

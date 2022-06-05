@@ -219,18 +219,6 @@
                         @endif
 
                     </div>
-
-                    <div class="row no-gutters">
-                        <div class="col-12 col-lg-6">
-                            <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif"
-                                    data-src="img/banner_bg_3.jpg" alt="demo" /></a>
-                        </div>
-
-                        <div class="col-12 col-lg-6">
-                            <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif"
-                                    data-src="img/banner_bg_4.jpg" alt="demo" /></a>
-                        </div>
-                    </div>
                 </div>
                 <!-- end banner simple -->
             </div>

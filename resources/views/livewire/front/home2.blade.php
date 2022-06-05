@@ -12,7 +12,6 @@
 
 @endsection
 <div>
-    {{-- ********************** Home 1 ****************************************** --}}
     <!-- start section -->
     <section class="section">
         <div class="container">
@@ -176,8 +175,7 @@
             <div class="special-offer special-offer--style-1" data-aos="zoom-in" data-aos-duration="600"
                 data-aos-offset="70">
                 <h2 class="text text-center lazy"
-                    data-src="{{ asset('frontassets/img/special_offer_text_bg.jpg') }}">Special products for most
-                    people</h2>
+                    data-src="{{ asset('frontassets/img/special_offer_text_bg.jpg') }}">{{ __('Website/home.homesms') }}</h2>
             </div>
         </div>
     </section>
