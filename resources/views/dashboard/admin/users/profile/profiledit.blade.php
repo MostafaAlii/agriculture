@@ -40,7 +40,7 @@
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
-                                            @if($user->image->filename)
+                                            @if($user->image)
                                                 <a class="mr-2" href="#">
                                                     <img src="{{ asset('Dashboard/img/admins/'. $user->image->filename) }}"
                                                     alt="{{ asset('Dashboard/img/admins/'. $user->image->filename) }}"

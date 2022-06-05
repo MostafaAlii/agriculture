@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-7">
                         <div class="media mb-2">
-                            @if($farmer->image->filename)
+                            @if($farmer->image)
                                 <a class="mr-2" href="#">
                                     <img src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
                                     alt="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
