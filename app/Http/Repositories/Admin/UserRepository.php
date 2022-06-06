@@ -102,8 +102,9 @@ class UserRepository implements UserInterface{
             return redirect()->route('users.index');
         } catch (\Exception $e) {
             // toastr()->error(__('Admin/site.sorry'));
-            // return redirect()->back();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.cant_delete'));
+            return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 

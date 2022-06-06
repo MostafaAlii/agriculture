@@ -99,13 +99,15 @@ class FarmerRepository implements FarmerInterface{
             if($farmer->image){
                 $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
             }
+
             $farmer->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('farmers.index');
         } catch (\Exception $e) {
             // toastr()->error(__('Admin/site.sorry'));
-            // return redirect()->back();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.cant_delete'));
+            return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 

@@ -113,7 +113,8 @@ class WorkerRepository implements WorkerInterface{
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('workers.index');
         } catch (\Exception $e) {
-            toastr()->error(__('Admin/site.sorry'));
+            // toastr()->error(__('Admin/site.sorry'));
+            toastr()->error(__('Admin/site.cant_delete'));
             return redirect()->back();
         }
     }

@@ -247,4 +247,5 @@ return [
        'worldsms'=>'Thanks For Your Support',
 
        'please_select_at_least_one_record'=>'Please select at least one record',
+       'cant_delete'=>'Can\'t delete this record because it has related records',
 ];
