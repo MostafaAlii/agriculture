@@ -106,7 +106,9 @@ class WorkerRepository implements WorkerInterface{
             $workerID = Crypt::decrypt($id);
             //  dd($workerID);
             $worker=Worker::findorfail($workerID);
-            $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
+            if($worker->image){
+                $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
+            }
             $worker->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('workers.index');

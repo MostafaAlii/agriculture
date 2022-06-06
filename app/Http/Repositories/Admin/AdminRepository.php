@@ -122,7 +122,9 @@ class AdminRepository implements AdminInterface
         try {
             $adminID = Crypt::decrypt($id);
             $admin = Admin::findorfail($adminID);
-            $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+            if($admin->image){
+                $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+            }
             $admin->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('Admins.index');

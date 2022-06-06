@@ -1,13 +1,13 @@
     @can('moderator-show')
-    <a href="{{ route('admin.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
+    <a href="{{ route('admin.profile', encrypt($id)) }}" class="btn btn-info btn-sm" title=" {{ __('Admin/site.showedit') }}">
         <i class="fa fa-show"></i>
-        {{ __('Admin/site.showedit') }}
+
     </a>
     @endcan
     @can('moderator-delete')
-    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" title=" {{ __('Admin/site.delete') }}">
         <i class="fa fa-trash"></i>
-        {{ __('Admin/site.delete') }}
+
     </button>
     @endcan
 

@@ -96,7 +96,9 @@ class FarmerRepository implements FarmerInterface{
         try{
             $farmerID = Crypt::decrypt($id);
             $farmer=Farmer::findorfail($farmerID);
-            $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+            if($farmer->image){
+                $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+            }
             $farmer->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('farmers.index');

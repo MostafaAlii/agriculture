@@ -94,13 +94,16 @@ class UserRepository implements UserInterface{
         try{
             $userID = Crypt::decrypt($id);
             $user=User::findorfail($userID);
-            $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+            if($user->image){
+                $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+            }
             $user->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('users.index');
         } catch (\Exception $e) {
-            toastr()->error(__('Admin/site.sorry'));
-            return redirect()->back();
+            // toastr()->error(__('Admin/site.sorry'));
+            // return redirect()->back();
+            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 
