@@ -11,6 +11,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Farmer extends Authenticatable {
     use HasFactory, Notifiable;
     protected $table = "farmers";
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    //     'status',
+    //     'visibility',
+    //     'farmer_id',
+    // ];
     protected $guarded = [];
     public $timestamps = true;
         // rel
@@ -74,7 +82,7 @@ class Farmer extends Authenticatable {
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-    
+
     protected $hidden = [
         'password',
         'remember_token',

@@ -176,7 +176,7 @@ return [
     'addtocart'=>'Add To Cart',
     'sale'=>'Sale',
     'new'=>'New',
-    'search'=>'search for product',
+    // 'search'=>'search for product',
     'find'=>'Find',
     'keywords'=>'Key Words',
     'tags'=>'Product Tags',
