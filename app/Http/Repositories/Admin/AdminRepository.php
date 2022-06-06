@@ -137,21 +137,26 @@ class AdminRepository implements AdminInterface
 
     public function bulkDelete($request)
     {
-        if ($request->delete_select_id) {
-            $delete_select_id = explode(",", $request->delete_select_id);
-            foreach ($delete_select_id as $admins_ids) {
-                $admin = Admin::findorfail($admins_ids);
-                if ($admin->image) {
-                    $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+        try {
+            if ($request->delete_select_id) {
+                $delete_select_id = explode(",", $request->delete_select_id);
+                foreach ($delete_select_id as $admins_ids) {
+                    $admin = Admin::findorfail($admins_ids);
+                    if ($admin->image) {
+                        $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+                    }
                 }
+            } else {
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('Admins.index');
             }
-        } else {
-            toastr()->error(__('Admin/site.no_data_found'));
+            Admin::destroy($delete_select_id);
+            toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('Admins.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/site.cant_delete_all'));
+            return redirect()->back();
         }
-        Admin::destroy($delete_select_id);
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('Admins.index');
     }// end of bulkDelete
 
     public function showProfile($id)

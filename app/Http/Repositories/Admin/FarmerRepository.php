@@ -130,7 +130,9 @@ class FarmerRepository implements FarmerInterface{
                 toastr()->error(__('Admin/site.deleted_successfully'));
                 return redirect()->route('farmers.index');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.cant_delete_all'));
+            return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
 
     }// end of bulkDelete

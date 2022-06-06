@@ -248,4 +248,5 @@ return [
 
        'please_select_at_least_one_record'=>'Please select at least one record',
        'cant_delete'=>'Can\'t delete this record because it has related records',
+       'cant_delete_all'=>'Cant\'t delete all this records because some of them have related records',
 ];

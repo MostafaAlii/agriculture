@@ -119,22 +119,26 @@ class WorkerRepository implements WorkerInterface{
         }
     }
     public function bulkDelete($request) {
-        if($request->delete_select_id){
-            $delete_select_id = explode(",",$request->delete_select_id);
-            foreach($delete_select_id as $workers_ids){
-               $worker = Worker::findorfail($workers_ids);
-               if($worker->image){
-                $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
-               }
+        try{
+            if($request->delete_select_id){
+                $delete_select_id = explode(",",$request->delete_select_id);
+                foreach($delete_select_id as $workers_ids){
+                $worker = Worker::findorfail($workers_ids);
+                if($worker->image){
+                    $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
+                }
+                }
+            }else{
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('workers.index');
             }
-        }else{
-            toastr()->error(__('Admin/site.no_data_found'));
+            Worker::destroy( $delete_select_id );
+            toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('workers.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/site.cant_delete_all'));
+            return redirect()->back();
         }
-        Worker::destroy( $delete_select_id );
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('workers.index');
-
     }// end of bulkDelete
 
     public function showProfile($id){
