@@ -39,8 +39,24 @@
 	<!-- breadcrumb -->
 @endsection
 @section('content')
-
+<div class="news-container" id='news-container'>
+    {{-- <div class="title">
+        {{ __('Admin/site.BreakingNews') }}
+    </div> --}}
+    <ul>
+        <li>
+             {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+        </li>
+        <li>
+             {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+        </li>
+        {{-- <li>
+             {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+        </li> --}}
+    </ul>
+</div>
 <div class="content-overlay"></div>
+
         <div class="content-wrapper">
 
             <div class="content-header row">
@@ -49,31 +65,7 @@
 
             @can('precipitation-graph')
                 <div class="card-body">
-                    <div class="news-container" id='news-container'>
-                        {{-- <div class="title">
-                            {{ __('Admin/site.BreakingNews') }}
-                        </div> --}}
-                        <ul>
-                            <li>
-                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
-                            </li>
-                            <li>
-                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
-                            </li>
-                            {{-- <li>
-                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
-                            </li>
-                            <li>
-                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
-                            </li>
-                            <li>
-                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
-                            </li>
-                            <li>
-                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
-                            </li> --}}
-                        </ul>
-                    </div>
+
                     <div class="form-body">
                         <form action="{{route('precipitation.graph')}}" method="get">
                             @csrf
