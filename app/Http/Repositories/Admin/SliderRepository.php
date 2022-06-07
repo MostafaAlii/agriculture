@@ -12,7 +12,7 @@ class SliderRepository implements SliderInterface {
         return view('dashboard.admin.sliders.index');
     }
     public function data() {
-        $sliders = Slider::select();
+        $sliders = Slider::get();
         return DataTables::of($sliders)
             ->addColumn('record_select', 'dashboard.admin.sliders.data_table.record_select')
             ->addIndexColumn()

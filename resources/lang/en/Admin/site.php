@@ -176,7 +176,7 @@ return [
     'addtocart'=>'Add To Cart',
     'sale'=>'Sale',
     'new'=>'New',
-    'search'=>'search for product',
+    // 'search'=>'search for product',
     'find'=>'Find',
     'keywords'=>'Key Words',
     'tags'=>'Product Tags',
@@ -245,4 +245,8 @@ return [
        'we'=>'We Are',
        'world'=>'One The World',
        'worldsms'=>'Thanks For Your Support',
+
+       'please_select_at_least_one_record'=>'Please select at least one record',
+       'cant_delete'=>'Can\'t delete this record because it has related records',
+       'cant_delete_all'=>'Cant\'t delete all this records because some of them have related records',
 ];

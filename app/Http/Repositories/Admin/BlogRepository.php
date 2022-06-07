@@ -12,6 +12,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Interfaces\Admin\BlogInterface;
+use App\Models\BlogTranslation;
 
 class BlogRepository implements BlogInterface {
     use UploadT;
@@ -20,13 +21,16 @@ class BlogRepository implements BlogInterface {
     }
 
     public function data() {
-        $blogs = Blog::select();
+        $blogs = Blog::get();
         return DataTables::of($blogs)
             ->addColumn('record_select', 'dashboard.admin.blogs.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (Blog $blog) {
                 return $blog->created_at->format('Y-m-d');
             })
+            // ->editColumn('title', function (Blog $blog) {
+            //     return $blog->title;
+            // })
             ->addColumn('image', function (Blog $blog) {
                 return view('dashboard.admin.blogs.data_table.image', compact('blog'));
             })
@@ -58,25 +62,25 @@ class BlogRepository implements BlogInterface {
         try{
 
             $requestData = $request->validated();
-            
+
            // Blog::create($requestData);
            // $blog = Blog::latest()->first();
-           
+
             $blog = new Blog;
             $blog ->admin_id = $request->admin_id;
-            
+
             $blog->title=$request->title;
             $blog->body=$request->body;
             $blog->save();
-            
+
             $this->addImageblog($request, 'image' , 'blogs' , 'upload_image',$blog->id, 'App\Models\Blog');
 
              // Attach Category ::
              $blog->categories()->attach($request->categories);
-             
+
              // Attach Tag ::
              $blog->tags()->attach($request->tags);
-          
+
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('blogs.index');
@@ -103,20 +107,20 @@ class BlogRepository implements BlogInterface {
             DB::beginTransaction();
             $blogID = Crypt::decrypt($id);
 
-            
+
             $blog=Blog::findorfail($blogID);
 
              // $requestData = $request->validated();
             // $blog->update($requestData);
-            
+
             $blog ->admin_id = $request->admin_id;
             $blog->save();
-            
+
             $blog->title=$request->title;
             $blog->body=$request->body;
             $blog->save();
-            
-            
+
+
             if($request->image){
                 $this->deleteImage('upload_image','/blogs/' . $blog->image->filename,$blog->id);
             }
@@ -126,7 +130,7 @@ class BlogRepository implements BlogInterface {
              $blog->categories()->sync($request->categories);
              $blog->tags()->sync($request->tags);
 
-             
+
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('blogs.index');

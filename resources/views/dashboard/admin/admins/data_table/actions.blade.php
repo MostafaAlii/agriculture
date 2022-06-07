@@ -1,13 +1,13 @@
     @can('moderator-show')
-    <a href="{{ route('admin.profile', encrypt($id)) }}" class="btn btn-info btn-sm">
+    <a href="{{ route('admin.profile', encrypt($id)) }}" class="btn btn-info btn-sm" title=" {{ __('Admin/site.showedit') }}">
         <i class="fa fa-show"></i>
-        {{ __('Admin/site.showedit') }}
+
     </a>
     @endcan
     @can('moderator-delete')
-    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" title=" {{ __('Admin/site.delete') }}">
         <i class="fa fa-trash"></i>
-        {{ __('Admin/site.delete') }}
+
     </button>
     @endcan
 
@@ -52,7 +52,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                 <!-- Modal -->
-                <div class="modal animated flipInY text-left" id="bulkdelete" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal animated flipInY text-left" id="bulkdeleteall" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

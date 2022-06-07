@@ -57,6 +57,15 @@
                                                 {{ __('Admin/site.bulkdelete') }}
                                         </button>
                                     @endcan
+                                    {{-- button for search --}}
+                                    {{-- <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('Admin/site.search')">
+                                        </div>
+                                    </div> --}}
+
+
+
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="blogs-table" >
                                             <thead>
@@ -95,7 +104,7 @@
 
 
 <script>
-    let usersTable = $('#blogs-table').DataTable({
+    let blogsTable = $('#blogs-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -110,16 +119,19 @@
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'DT_RowIndex', name: '', orderable: false, searchable: false},
             {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
-            {data: 'title', name: 'title', searchable: false, sortable: false, width: '10%'},
-            {data: 'body', name: 'body', searchable: false, sortable: false},
-            {data: 'admin', name: 'admin', searchable: false, sortable: false, width: '10%'},
-            {data: 'category_name', name: 'category_name'},
+            {data: 'title', name: 'title', width: '10%'},
+            {data: 'body', name: 'body',width: '20%'},
+            {data: 'admin', name: 'admin', width: '10%'},
+            {data: 'category_name', name: 'category_name', searchable: false, sortable: false, width: '10%'},
             {data: 'type', name: 'type', searchable: false, sortable: false, width: '10%'},
-            {data: 'created_at', name: 'created_at', searchable: false},
+            {data: 'created_at', name: 'created_at', searchable: false, sortable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[7, 'desc']],
+        order: [[8, 'desc']],
     });
+        // $('#data-table-search').keyup(function () {
+        //         blogsTable.search(this.value).draw();
+        //     })
 </script>
 @endsection
 

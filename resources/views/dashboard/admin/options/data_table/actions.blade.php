@@ -39,7 +39,7 @@
             </div>
         </div>
     </form>
-    
+
       {{-- modal bulk delete --}}
       <form action="{{ route('options.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
         @csrf
@@ -47,7 +47,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-group">
                 <!-- Modal -->
-                <div class="modal animated flipInY text-left" id="bulkdelete" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal animated flipInY text-left" id="bulkdeleteall" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

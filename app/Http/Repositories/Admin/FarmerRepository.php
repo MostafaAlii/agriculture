@@ -96,33 +96,44 @@ class FarmerRepository implements FarmerInterface{
         try{
             $farmerID = Crypt::decrypt($id);
             $farmer=Farmer::findorfail($farmerID);
-            $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+            if($farmer->image){
+                $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+            }
+
             $farmer->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('farmers.index');
         } catch (\Exception $e) {
-            toastr()->error(__('Admin/site.sorry'));
+            // toastr()->error(__('Admin/site.sorry'));
+            toastr()->error(__('Admin/site.cant_delete'));
             return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 
     public function bulkDelete($request) {
-        if($request->delete_select_id){
-            // dd($request->delete_select_id);
-            $delete_select_id = explode(",",$request->delete_select_id);
-            foreach($delete_select_id as $farmers_ids){
-            $farmer = Farmer::findorfail($farmers_ids);
-            if($farmer->image){
-                $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
-            }
-            }
-        }else{
-            toastr()->error(__('Admin/site.no_data_found'));
-            return redirect()->route('farmers.index');
+        try{
+                if($request->delete_select_id){
+                    // dd($request->delete_select_id);
+                    $delete_select_id = explode(",",$request->delete_select_id);
+                    foreach($delete_select_id as $farmers_ids){
+                    $farmer = Farmer::findorfail($farmers_ids);
+                    if($farmer->image){
+                        $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+                    }
+                    }
+                }else{
+                    toastr()->error(__('Admin/site.no_data_found'));
+                    return redirect()->route('farmers.index');
+                }
+                Farmer::destroy( $delete_select_id );
+                toastr()->error(__('Admin/site.deleted_successfully'));
+                return redirect()->route('farmers.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/site.cant_delete_all'));
+            return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
-        Farmer::destroy( $delete_select_id );
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('farmers.index');
 
     }// end of bulkDelete
     public function showProfile($id){

@@ -27,7 +27,7 @@ class CountryRepository implements CountryInterface {
     }
     public function data() {
 
-        $countries = Country::with('provinces');
+        $countries = Country::with('provinces')->get();
         return DataTables::of($countries)
             ->addColumn('provinces', function (Country $country) {
                 return view('dashboard.admin.countries.btn.related', compact('country'));
