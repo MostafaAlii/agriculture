@@ -15,12 +15,12 @@ class CreateFarmersTable extends Migration {
             $table->string('address2')->nullable();
             $table->unsignedBigInteger('view')->default(0);
             $table->unsignedBigInteger('sales')->default(0);
-            $table->foreignId('country_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('province_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('area_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('state_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('village_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('department_id')->default('1')->constrained()->cascadeOnDelete();
+            $table->foreignId('country_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('province_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('area_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('state_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('village_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('department_id')->nullable()->constrained()->cascadeOnDelete();
             $table->date('birthdate')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

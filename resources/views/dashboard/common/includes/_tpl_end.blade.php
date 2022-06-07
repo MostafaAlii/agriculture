@@ -89,8 +89,8 @@
             // $('.table #delete_select:checked').each(function() {
             //     selected.push(this.value);
             // });
-            // console.log(selected);
-            // console.log(selected.length);
+            console.log(selected);
+            console.log(selected.length);
             if (selected.length > 0) {
                 $('#bulkdeleteall').modal('show');
                 $('input[id="delete_select_id"]').val(selected);

@@ -19,11 +19,11 @@ class CreateAdminsTable extends Migration {
             $table->string('address2')->nullable();
             $table->foreignId('country_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('province_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('area_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('state_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('area_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('state_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('village_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('department_id')->default('1')->constrained()->cascadeOnDelete();
-            $table->foreignId('admin_department_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('department_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('admin_department_id')->nullable()->constrained()->cascadeOnDelete();
             $table->text('roles_name')->nullable();
             $table->tinyInteger('status')->default(Admin::NOT_ACTIVE);
             $table->date('birthdate')->nullable();
