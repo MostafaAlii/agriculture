@@ -2,12 +2,7 @@
 namespace App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\CountryInterface;
 use App\Models\Country;
-
-
-
-use App\Models\Admin;
-use App\Models\Farmer;
-use App\Models\User;
+use App\Models\CountryTranslation;
 
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -19,6 +14,7 @@ use App\Traits\UploadT;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class CountryRepository implements CountryInterface {
     use UploadT;
@@ -28,22 +24,33 @@ class CountryRepository implements CountryInterface {
     public function data() {
 
         $countries = Country::with('provinces');
+
         return DataTables::of($countries)
             ->addColumn('provinces', function (Country $country) {
                 return view('dashboard.admin.countries.btn.related', compact('country'));
             })
+
             ->addColumn('record_select', 'dashboard.admin.countries.data_table.record_select')
             ->addIndexColumn()
-            ->editColumn('created_at', function (Country $country) {
+            ->addColumn('created_at', function (Country $country) {
                 return $country->created_at->diffforhumans();
             })
 
             ->addColumn('image', function (Country $country) {
                 return view('dashboard.admin.countries.data_table.image', compact('country'));
             })
+            ->addColumn('name', function (Country $country) {
+                return $country->country_trans->name;
+            })
+
             ->addColumn('actions', 'dashboard.admin.countries.data_table.actions')
 
+
             ->rawColumns([ 'record_select','actions'])
+            ->filterColumn('name', function($qountries, $keyword) {
+                $sql = "country_translations.name  like ?";
+                $qountries->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->toJson();
     }
 
@@ -56,12 +63,12 @@ class CountryRepository implements CountryInterface {
 
         try{
 
-            $requestData = $request->except(['country_logo']);
-            if($request->country_logo) {
-                Image::make($request->country_logo)->resize(150, 150, function ($constraint) {
+            $requestData = $request->except(['image']);
+            if($request->image) {
+                Image::make($request->image)->resize(150, 150, function ($constraint) {
                     $constraint->aspectRatio();
-                })->save(public_path('Dashboard/img/countryFlags/' . $request->country_logo->hashName()));
-                $requestData['country_logo'] = $request->country_logo->hashName();
+                })->save(public_path('Dashboard/img/countries/' . $request->image->hashName()));
+                $requestData['country_logo'] = $request->image->hashName();
             }
             $country=  Country::create($requestData);
             $country->name = $request->name;
@@ -86,28 +93,32 @@ class CountryRepository implements CountryInterface {
     }
 
     public function update( $request,$id) {
-
             try{
                 $countryID = Crypt::decrypt($id);
                 $country=Country::findorfail($countryID);
-                $dataRequest = $request->except(['country_logo']);
-                if($request->country_logo) {
-                    if($country->country_logo != 'default_flag.jpg') {
-                        Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
+                $dataRequest = $request->except(['image']);
+
+
+                if($request->image) {
+
+                    if(File::exists('Dashboard/img/countries/' . $country->country_logo))
+                    {
+                        File::delete('Dashboard/img/countries/' . $country->country_logo);
                     }
-                    Image::make($request->country_logo)->resize(150, 150, function ($constraint) {
+                    Image::make($request->image)->resize(70, 70, function ($constraint) {
                         $constraint->aspectRatio();
-                    })->save(public_path('Dashboard/img/countryFlags/' . $request->country_logo->hashName()));
-                    $dataRequest['country_logo'] = $request->country_logo->hashName();
+                    })->save(public_path('/Dashboard/img/countries/' . $request->image->hashName()));
+
+                    $dataRequest['country_logo'] = $request->image->hashName();
                 }
                 $country->update($dataRequest);
 
                 toastr()->success( __('Admin/site.updated_successfully'));
                 return redirect()->route('Countries.index');
             } catch (\Exception $e) {
-                toastr()->error(__('Admin/attributes.edit_wrong'));
+//                toastr()->error(__('Admin/attributes.edit_wrong'));
 
-                return redirect()->back();
+                return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
 
             }
 
@@ -119,19 +130,23 @@ class CountryRepository implements CountryInterface {
         try{
             $data = [];
             $countryID = Crypt::decrypt($id);
-            $data['province'] = Province::where('country_id', $countryID)->pluck('country_id');
-            if($data['province']->count() == 0) {
+//            $data['province'] = Province::where('country_id', $countryID)->pluck('country_id');
+//            if($data['province']->count() == 0) {
                 $country=Country::findorfail($countryID);
-                if($country->country_logo != 'default_flag.jpg') {
-                    Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
-                }
+            if(File::exists('Dashboard/img/countries/' . $country->country_logo))
+            {
+                File::delete('Dashboard/img/countries/' . $country->country_logo);
+            }
+//                if($country->country_logo != 'default_flag.jpg') {
+//                    Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
+//                }
                 $country->delete();
                 toastr()->success(__('Admin/site.deleted_successfully'));
                 return redirect()->route('Countries.index');
-            } else {
-                toastr()->error(__('Admin/countries.cant_delete'));
-                return redirect()->route('Countries.index');
-            }
+//            } else {
+//                toastr()->error(__('Admin/countries.cant_delete'));
+//                return redirect()->route('Countries.index');
+//            }
         }catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.delete_wrong'));
 
@@ -151,13 +166,14 @@ class CountryRepository implements CountryInterface {
                 foreach ($delete_select_id as $countries_ids) {
 //                    $countries_ids = Crypt::decrypt($countries_ids);
                     $country = Country::findorfail($countries_ids);
-                    $provinces = $country->provinces->count();
-                    if ($provinces > 0) {
-                        toastr()->error(__('Admin/countries.delete_related_provinces'));
-                        return redirect()->route('Countries.index');
-                    }
-                    if ($country->country_logo) {
-                        Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
+//                    $provinces = $country->provinces->count();
+//                    if ($provinces > 0) {
+//                        toastr()->error(__('Admin/countries.delete_related_provinces'));
+//                        return redirect()->route('Countries.index');
+//                    }
+                    if(File::exists('Dashboard/img/countries/' . $country->country_logo))
+                    {
+                        File::delete('Dashboard/img/countries/' . $country->country_logo);
                     }
                     Country::destroy($countries_ids);
                 }
@@ -173,8 +189,7 @@ class CountryRepository implements CountryInterface {
             DB::rollBack();
             toastr()->error(__('Admin/attributes.delete_wrong'));
 
-            return redirect()->back();
-
+            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
         }
 
 

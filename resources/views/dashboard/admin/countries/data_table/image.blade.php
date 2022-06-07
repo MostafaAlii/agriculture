@@ -1,6 +1,13 @@
 
+
 @if($country->country_logo)
-    <img style="width:65px; height:65px;border-radius: 5px;" class="rounded-circle" src="{{ $country->country_flag_path }}" alt="{{ $country->name }}" />
+    <a href="#">
+        <img src="{{ asset('Dashboard/img/countries/'. $country->country_logo) }}" style="width: 100px; height: 100px;" alt="">
+    </a>
+
 @else
-    <img style="width:65px; height:65px;border-radius: 5px;" class="rounded-circle" src="{{Url::asset('Dashboard/img/countryFlags/default_flag.jpg')}}" alt="" />
+    <a href="#">
+        <img src="{{ asset('Dashboard/img/countries/avatar.jpg') }}" style="width: 100px;" alt="">
+    </a>
+
 @endif

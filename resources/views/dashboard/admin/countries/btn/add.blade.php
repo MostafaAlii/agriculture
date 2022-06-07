@@ -18,7 +18,20 @@
                     </div>
                     <div class="form-group">
                         <label>{{ trans('Admin/countries.country_flag') }}</label>
-                        <input type="file" name="country_logo" class="form-control" />
+
+
+                            <a href="#" class="btn btn-sm btn-primary mr-25">
+                                <input class="form-control img" name="image"  type="file" accept="image/*">
+                            </a>
+
+
+                            <a class="mr-2" href="#">
+                                <img src="{{ asset('Dashboard/img/countries/avatar.jpg') }}"
+                                     alt="{{ asset('Dashboard/img/countries/avatar.jpg') }}"
+                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                            </a>
+
+
                     </div>
                 </div>
 

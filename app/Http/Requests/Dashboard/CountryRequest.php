@@ -14,6 +14,7 @@ class CountryRequest extends FormRequest {
             'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
             ],
+//            'image'=>image_validate(),
 
         ];
     }
@@ -22,6 +23,7 @@ class CountryRequest extends FormRequest {
         return [
             'name.required'   =>  trans('Admin/validation.required'),
             'name.regex'     =>  trans('Admin/validation.regex'),
+//            'image.required'=> trans('Admin/validation.required'),
         ];
     }
 }
