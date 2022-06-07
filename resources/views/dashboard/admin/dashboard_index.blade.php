@@ -39,13 +39,41 @@
 	<!-- breadcrumb -->
 @endsection
 @section('content')
+
 <div class="content-overlay"></div>
         <div class="content-wrapper">
+
             <div class="content-header row">
+
             </div>
+
             @can('precipitation-graph')
                 <div class="card-body">
-
+                    <div class="news-container" id='news-container'>
+                        {{-- <div class="title">
+                            {{ __('Admin/site.BreakingNews') }}
+                        </div> --}}
+                        <ul>
+                            <li>
+                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+                            </li>
+                            <li>
+                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+                            </li>
+                            {{-- <li>
+                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+                            </li>
+                            <li>
+                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+                            </li>
+                            <li>
+                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+                            </li>
+                            <li>
+                                 {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+                            </li> --}}
+                        </ul>
+                    </div>
                     <div class="form-body">
                         <form action="{{route('precipitation.graph')}}" method="get">
                             @csrf
@@ -482,7 +510,7 @@
                     <!-- End Tags -->
                 </div>
                 <!-- End Row Blog -->
-                
+
                 <!-- Start Row Admin Department -->
                 <div class="row">
                     <!-- Start AdminDepartments -->
@@ -905,7 +933,7 @@
                                                                                 </div>
                                                                                 <div>
                                                                                     <i class="fa fa-list-alt" aria-hidden="true" style="color: blue;"></i>
-                                    
+
                                                                                 </div>
                                                                             </div>
                                                                             <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -933,7 +961,7 @@
                                                                                 </div>
                                                                                 <div>
                                                                                     <i class="fa fa-list-alt" aria-hidden="true" style="color: red;"></i>
-                                    
+
                                                                                 </div>
                                                                             </div>
                                                                             <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -1153,7 +1181,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: green;">{{ \App\Models\BeeKeeper::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/bees.Apiaries_report_to_the_judiciary') }}</h6>
                                                                                 </div>
@@ -1352,7 +1380,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: blue;">{{ \App\Models\LandArea::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/land_areas.land_areas_report') }}</h6>
                                                                                 </div>
@@ -1370,7 +1398,7 @@
                                                         </div>
                                                     @endcan
                                                     <!-- End land_areas_report -->
-                                                    
+
                                                     <!-- Start land_areas_details_report -->
                                                     @can('land-area-details-report')
                                                         <div class="col-xl-3 col-lg-6 col-12">
@@ -1380,7 +1408,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: purple;">{{ \App\Models\LandArea::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/land_areas.land_areas_details_report') }}</h6>
                                                                                 </div>
@@ -1408,7 +1436,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: green;">{{ \App\Models\LandArea::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/land_areas.land_areas_state_report') }}</h6>
                                                                                 </div>
@@ -1436,7 +1464,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: yellow;">{{ \App\Models\FarmerCrop::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/crops.farmer_crops_report') }}</h6>
                                                                                 </div>
@@ -1468,7 +1496,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: blue;">{{ \App\Models\IncomeProduct::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/income_products.income_products_report') }}</h6>
                                                                                 </div>
@@ -1495,7 +1523,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: green;">{{ \App\Models\IncomeProduct::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/income_products.income_products_details_in_date_report') }}</h6>
                                                                                 </div>
@@ -1549,7 +1577,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: purple;">{{ \App\Models\IncomeProduct::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/income_products.income_imported_products_details_in_date_report') }}</h6>
                                                                                 </div>
@@ -1581,7 +1609,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: yellow;">{{ \App\Models\IncomeProduct::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/income_products.income_iraq_products_details_in_date_report') }}</h6>
                                                                                 </div>
@@ -1609,7 +1637,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: purple;">{{ \App\Models\OutcomeProduct::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/outcome_products.outcome_products_report') }}</h6>
                                                                                 </div>
@@ -1637,7 +1665,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: yellow;">{{ \App\Models\OutcomeProduct::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/outcome_products.outcome_products_details_in_date_report') }}</h6>
                                                                                 </div>
@@ -1665,7 +1693,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: yellow;">{{ \App\Models\OutcomeProduct::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/outcome_products.outcome_local_products_details_in_date_report') }}</h6>
                                                                                 </div>
@@ -1697,7 +1725,7 @@
                                                                         <div class="card-body">
                                                                             <div class="media d-flex">
                                                                                 <div class="media-body text-left">
-                                    
+
                                                                                     <h3 class="gray-bg" style="color: red;">{{ \App\Models\OutcomeProduct::count() }}</h3>
                                                                                     <h6>  {{ trans('Admin/outcome_products.outcome_imported_products_details_in_date_report') }}</h6>
                                                                                 </div>
@@ -1724,7 +1752,7 @@
                                                                     <div class="card-body">
                                                                         <div class="media d-flex">
                                                                             <div class="media-body text-left">
-                                
+
                                                                                 <h3 class="gray-bg" style="color: blue;">{{ \App\Models\OutcomeProduct::count() }}</h3>
                                                                                 <h6>  {{ trans('Admin/outcome_products.outcome_iraq_products_details_in_date_report') }}</h6>
                                                                             </div>
