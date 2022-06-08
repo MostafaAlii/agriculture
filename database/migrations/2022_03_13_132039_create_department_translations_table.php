@@ -9,19 +9,13 @@ class CreateDepartmentTranslationsTable extends Migration
         Schema::create('department_translations', function (Blueprint $table) {
 
             $table->id();
-
             $table->string('locale');
-
-            $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
-
+            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             $table->unique(['department_id', 'locale']);
-
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('keyword')->nullable();
             $table->longText('description')->nullable();
-            
             $table->index(['name', 'locale','keyword','slug']);
             $table->timestamps();
 

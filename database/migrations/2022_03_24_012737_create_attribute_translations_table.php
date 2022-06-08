@@ -8,10 +8,9 @@ class CreateAttributeTranslationsTable extends Migration {
             $table->id();
             $table->string('name');
             $table->string('locale');
-            $table->unsignedBigInteger('attribute_id');
+            $table->foreignId('attribute_id')->constrained()->cascadeOnDelete();
             $table->unique(['attribute_id', 'locale']);
             $table->index(['name', 'locale']);
-            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
         });
     }
 
