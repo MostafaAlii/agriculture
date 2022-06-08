@@ -50,9 +50,9 @@ class ProfileRepository implements ProfileInterface{
             return redirect()->route('profile.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            // toastr()->error(__('Admin/site.sorry'));
-            // return redirect()->back();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
     public function updateInformation($request,$id) {
