@@ -52,15 +52,15 @@ class FarmerRepository implements FarmerInterface{
             $farmer = Farmer::latest()->first();
             $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
 
-            Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
+            // Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('farmers.index');
          } catch (\Exception $e) {
             DB::rollBack();
 //            toastr()->error(__('Admin/site.sorry'));
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
 //            return redirect()->back();
+            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 

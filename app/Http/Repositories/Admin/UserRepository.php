@@ -51,14 +51,15 @@ class UserRepository implements UserInterface{
             User::create($requestData);
             $user = User::latest()->first();
             $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
-            Notification::send($user, new \App\Notifications\NewUser($user));
+            // Notification::send($user, new \App\Notifications\NewUser($user));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('users.index');
          } catch (\Exception $e) {
              DB::rollBack();
-             toastr()->error(__('Admin/site.sorry'));
-             return redirect()->back();
+            //  toastr()->error(__('Admin/site.sorry'));
+            //  return redirect()->back();
+             return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 

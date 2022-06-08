@@ -15,7 +15,7 @@ class UserRequest extends FormRequest {
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
             'email'        => 'required|email|unique:users',
             'password'     => 'required|confirmed|min:6|max:10',
-            "image"        => 'image|mimes:jpeg,png|max:4096',
+            // "image"        => 'image|mimes:jpeg,png|max:4096',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

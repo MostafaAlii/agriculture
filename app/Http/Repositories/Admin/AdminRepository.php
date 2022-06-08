@@ -66,8 +66,6 @@ class AdminRepository implements AdminInterface
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             $requestData['type'] = $request->type;
-            /*$requestData['latitude']= NULL;
-            $requestData['longitude']= NULL;*/
             Admin::create($requestData);
             $admin = Admin::latest()->first();
             $admin->assignRole($request->input('roles_name'));

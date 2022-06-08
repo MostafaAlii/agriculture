@@ -95,6 +95,7 @@ return [
     'warning' => 'Are you sure to delete ?',
 
     'phone'=>'Phone number must be 11 digits',
+    'phonenum' => 'Phone number',
     'address'=>'Address',
     'admins' => 'Admin',
     'type'=>'Type',

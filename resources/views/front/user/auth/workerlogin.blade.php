@@ -40,7 +40,7 @@
                             action="{{ route('worker.login.post') }}" autocomplete="off">
                             @csrf
                             <div class="input-wrp">
-                                <input id="login" class="textfield" type="login" name="login"
+                                <input id="login" class="textfield" type="login" name="login" value="{{ old('login') }}"
                                     required autofocus placeholder=" {{ trans('Admin/site.loginby') }}" />
                                 @error('login')
                                 <span class="text-danger">{{$message}}</span>
