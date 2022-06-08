@@ -15,7 +15,7 @@ class WorkerRegisterRequest extends FormRequest {
             'lastname'     =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers',
             'email'        => ['required', 'string', 'email', 'max:255', 'unique:workers'],
-            'password'     => ['required','confirmed','min:6'],
+            'password'     => ['required','confirmed','min:6','max:10'],
             'g-recaptcha-response' => 'required|captcha'
         ];
         return $rules;

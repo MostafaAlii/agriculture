@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" oncontextmenu="return false">
-
+{{-- <html class="no-js" lang="en" oncontextmenu="return false"> --}}
+    <html class="no-js" lang="en" >
 <head>
     @include('front.layouts.include.headcss')
 </head>

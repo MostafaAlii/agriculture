@@ -14,7 +14,7 @@ class FarmerProfileAccountRequest extends FormRequest {
             'lastname'     => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
             'email'        => 'required|email|unique:farmers',
-            'password'     => 'required|confirmed|min:3|max:10',
+            'password'     => 'required|confirmed|min:6|max:10',
             // "image"        => 'image|mimes:jpeg,png|max:4096',
         ];
 

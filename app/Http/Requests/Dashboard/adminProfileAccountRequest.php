@@ -14,7 +14,7 @@ class adminProfileAccountRequest extends FormRequest {
             'lastname'     => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins',
             'email'        => 'required|email|unique:admins',
-            'password'     => 'required|confirmed|min:3|max:10',
+            'password'     => 'required|confirmed|min:6|max:10',
             'type'         => 'required|in:admin,employee',
             // "image"        => 'image|mimes:jpeg,png|max:4096',
         ];

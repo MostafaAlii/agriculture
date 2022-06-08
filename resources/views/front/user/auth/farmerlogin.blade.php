@@ -94,7 +94,7 @@
                         @csrf
                         <input type="hidden" name="type" value="farmer">
                             <div class="input-wrp">
-                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" />
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required />
                                     @if ($errors->has('firstname'))
                                 <span class="help-block">
                                     <strong class="text-danger">{{ $errors->first('firstname') }}</strong>
@@ -102,7 +102,7 @@
                                 @endif
                             </div>
                             <div class="input-wrp">
-                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" />
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required />
                                 @if ($errors->has('lastname'))
                                 <span class="help-block">
                                     <strong class="text-danger">{{ $errors->first('lastname') }}</strong>
@@ -111,7 +111,7 @@
                             </div>
 
                             <div class="input-wrp">
-                                <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" />
+                                <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" value="{{ old('email') }}" required/>
                                 @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong class="text-danger">{{ $errors->first('email') }}</strong>
@@ -119,7 +119,8 @@
                                 @endif
                             </div>
                             <div class="input-wrp">
-                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" />
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" value="{{ old('phone') }}"
+                                maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' required />
                                 @if ($errors->has('phone'))
                                 <span class="help-block">
                                     <strong class="text-danger">{{ $errors->first('phone') }}</strong>
@@ -128,7 +129,7 @@
                             </div>
 
                             <div class="input-wrp">
-                                <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" />
+                                <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" value="{{ old('password') }}" required />
                                 @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong class="text-danger">{{ $errors->first('password') }}</strong>

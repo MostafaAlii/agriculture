@@ -19,7 +19,7 @@ class WorkerProfileAccountRequest extends FormRequest {
             'daily_price'  => 'numeric|min:1',
             'hourly_price' => 'numeric|min:1',
             'status'       => 'boolean',
-            'password'     => 'required|confirmed|min:3|max:10',
+            'password'     => 'required|confirmed|min:6|max:10',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

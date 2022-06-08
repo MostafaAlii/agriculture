@@ -15,7 +15,7 @@ class WorkerRequest extends FormRequest {
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers',
             'desc'         => 'sometimes|string|nullable',
             'email'        => 'required|email|unique:workers',
-            'password'     => 'required|confirmed|min:3|max:10',
+            'password'     => 'required|confirmed|min:6|max:10',
             'salary'       => 'required|in:perday,perhour',
             'work'         => 'required|in:alone,team',
             'daily_price'  => 'numeric|min:1',

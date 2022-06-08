@@ -94,7 +94,7 @@ return [
     'farmer'=>'Farmers',
     'warning' => 'Are you sure to delete ?',
 
-    'phone'=>'Phone',
+    'phone'=>'Phone number must be 11 digits',
     'address'=>'Address',
     'admins' => 'Admin',
     'type'=>'Type',
@@ -102,7 +102,7 @@ return [
 
     'select'=>'Open this select menu',
     'employee'=>'Employee',
-    'loginby'=>'Enter phone number or email address',
+    'loginby'=>'Enter phone number 11 digits or email address',
     'register'=>'Register Now',
 
     'signvendor'=>'sign in as vendor',
