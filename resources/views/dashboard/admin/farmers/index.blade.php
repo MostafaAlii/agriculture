@@ -94,7 +94,7 @@
 
 <script>
 
-    let usersTable = $('#farmer-table').DataTable({
+    let farmersTable = $('#farmer-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -118,7 +118,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[9, 'desc']],
+        // order: [[9, 'desc']],
 
     });
 </script>

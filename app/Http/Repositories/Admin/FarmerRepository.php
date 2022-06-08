@@ -16,7 +16,7 @@ class FarmerRepository implements FarmerInterface{
     }
 
     public function data() {
-        $farmers = Farmer::select();
+        $farmers = Farmer::orderByDesc('created_at')->get();
 
         return DataTables::of($farmers)
             ->addColumn('record_select', 'dashboard.admin.farmers.data_table.record_select')
@@ -28,7 +28,7 @@ class FarmerRepository implements FarmerInterface{
                 return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
             })
             ->addColumn('country', function (Farmer $farmer) {
-                return $farmer->country->name != null ? $farmer->country->name:null;
+                return $farmer->country->name ?? null;
             })
             ->addColumn('productcount', function (Farmer $farmer) {
 
