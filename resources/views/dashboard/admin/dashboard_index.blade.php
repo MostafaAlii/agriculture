@@ -45,10 +45,10 @@
     </div> --}}
     <ul>
         <li>
-             {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
         </li>
         <li>
-             {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
+             {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
         </li>
         {{-- <li>
              {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
@@ -70,7 +70,7 @@
                         <form action="{{route('precipitation.graph')}}" method="get">
                             @csrf
 
-                            <div class="row mt-2">
+                            <div class="row mt-3">
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                         <label for="area_id" style="float: right">{{ __('Admin/precipitations.area') }}</label>

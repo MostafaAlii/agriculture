@@ -44,13 +44,13 @@
                                                 <a class="mr-2" href="#">
                                                     <img
                                                     src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
-                                                    alt="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
+                                                    alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @else
                                                 <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
-                                                    alt="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
+                                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                                    alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @endif
@@ -94,6 +94,20 @@
                                                         <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',$farmer->email) }}"
                                                         required data-validation-required-message="This email field is required">
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
+                                                    <input type="password" name="password" class="form-control"
+                                                    placeholder="{{ __('Admin/site.enter_new_password') }}" required>
+                                                </div>
+                                                {{--password_confirmation--}}
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                    <input type="password" name="password_confirmation" class="form-control"
+                                                    placeholder="{{ __('Admin/site.enter_passord_confirm') }}"
+                                                    value="{{ old('password_confirmation') }}" required>
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">

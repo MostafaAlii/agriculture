@@ -146,7 +146,13 @@ class UserRepository implements UserInterface{
             DB::beginTransaction();
             $userID = Crypt::decrypt($id);
             $user=User::findorfail($userID);
+            $userpassword =  $user->password;
             $requestData = $request->validated();
+            if($request->password){
+                $requestData['password'] = bcrypt($request->password);
+            }else{
+                $requestData['password'] = $userpassword ;
+            }
             $user->update($requestData);
             if($request->image){
                 $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);

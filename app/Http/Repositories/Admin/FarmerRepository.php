@@ -147,7 +147,13 @@ class FarmerRepository implements FarmerInterface{
             DB::beginTransaction();
             $farmerID = Crypt::decrypt($id);
             $farmer=Farmer::findorfail($farmerID);
+            $farmerpassword = $farmer->password;
             $requestData = $request->validated();
+            if($request->password){
+                $requestData['password'] = bcrypt($request->password);
+            }else{
+                $requestData['password'] = $farmerpassword ;
+            }
             $farmer->update($requestData);
             if($request->image){
                 $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);

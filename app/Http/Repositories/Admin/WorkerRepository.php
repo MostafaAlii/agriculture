@@ -152,7 +152,13 @@ class WorkerRepository implements WorkerInterface{
             DB::beginTransaction();
             $workerID = Crypt::decrypt($id);
             $worker=Worker::findorfail($workerID);
+            $workerpassword = $worker->password;
             $requestData = $request->validated();
+            if($request->password){
+                $requestData['password'] = bcrypt($request->password);
+            }else{
+                $requestData['password'] = $workerpassword ;
+            }
             // $requestData['status'] = $request->status;
             if($request->daily_price ){
                 $requestData['hourly_price'] = null;

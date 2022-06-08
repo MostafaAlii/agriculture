@@ -6,6 +6,7 @@
     /* font-family: "Roboto", sans-serif; */
     font-family: 'Cairo', sans-serif !important;
     /* box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.3); */
+    /* direction: ltr; */
 }
 
 .news-container .title {
@@ -36,8 +37,9 @@
     position: relative;
     font-size: 30px;
     font-weight: bold;
-    background-color: #100f0f;
-    color: #fff;
+    background-color: #85474733;
+    border: 1px solid #e1461708;
+    color: #1c1919;
 }
 
 .news-container ul li::after {

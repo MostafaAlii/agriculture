@@ -22,13 +22,13 @@
                             @if(Auth::user()->image)
                                 <a class="mr-2" href="#">
                                         <img src="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
-                                        alt="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
+                                        alt="{{ __('Admin/site.no-image') }}"
                                         class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                 </a>
                             @else
                                 <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
-                                    alt="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
+                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                    alt="{{ __('Admin/site.no-image') }}"
                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                 </a>
                             @endif

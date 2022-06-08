@@ -251,4 +251,8 @@ return [
        'cant_delete_all'=>'Cant\'t delete all this records because some of them have related records',
        'again'=>'welcome back again in our website',
        'BreakingNews'=>'Breaking News',
+       'no-image'=>'No Image',
+
+       'enter_new_password'=>'Enter New Password',
+       'enter_passord_confirm'=>'Enter Password Confirm',
 ];

@@ -172,7 +172,13 @@ class AdminRepository implements AdminInterface
             DB::beginTransaction();
             $adminID = Crypt::decrypt($id);
             $admin = Admin::findorfail($adminID);
+            $adminpassword = $admin->password;
             $requestData = $request->validated();
+            if ($request->password) {
+                $requestData['password'] = bcrypt($request->password);
+            } else {
+                $requestData['password'] = $adminpassword;
+            }
             $admin->update($requestData);
             if ($request->image) {
                 $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
