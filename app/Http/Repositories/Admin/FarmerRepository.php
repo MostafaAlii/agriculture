@@ -157,8 +157,11 @@ class FarmerRepository implements FarmerInterface{
             $farmer->update($requestData);
             if($request->image){
                 $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+            }else{
+                $this->deleteImage('upload_image','/farmers/' . $farmer->image,$farmer->id);
             }
-            $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
+                $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
+
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('farmers.index');
@@ -166,6 +169,7 @@ class FarmerRepository implements FarmerInterface{
             DB::rollBack();
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
+            //    return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
     public function updateInformation($request,$id) {
@@ -179,6 +183,7 @@ class FarmerRepository implements FarmerInterface{
         } catch (\Exception $e) {
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
+            //  return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
 
     }// end of update

@@ -43,7 +43,7 @@
                                             @if($farmer->image)
                                                 <a class="mr-2" href="#">
                                                     <img
-                                                    src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
+                                                    src="{{ asset('Dashboard/img/farmers/'. $farmer->image->filename) }}"
                                                     alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
@@ -72,6 +72,9 @@
                                                         <label>{{ __('Admin/site.firstname') }}</label>
                                                         <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',$farmer->firstname) }}"
                                                         name="firstname" required data-validation-required-message="This firstname field is required">
+                                                        @error('firstname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -79,13 +82,17 @@
                                                         <label>{{ __('Admin/site.lastname') }}</label>
                                                         <input type="text" class="form-control"  value="{{ old('lastname',$farmer->lastname) }}"
                                                         name="lastname" required data-validation-required-message="This lastname field is required">
+                                                        @error('lastname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                      @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.phone') }}</label>
                                                         <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$farmer->phone) }}"
-                                                        required data-validation-required-message="This phone field is required">
+                                                        required data-validation-required-message="This phone field is required"
+                                                        maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -93,6 +100,9 @@
                                                         <label>{{ __('Admin/site.email') }}</label>
                                                         <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',$farmer->email) }}"
                                                         required data-validation-required-message="This email field is required">
+                                                        @error('email')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -100,7 +110,10 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
                                                     <input type="password" name="password" class="form-control"
-                                                    placeholder="{{ __('Admin/site.enter_new_password') }}" required>
+                                                    placeholder="{{ __('Admin/site.enter_new_password') }}" value="{{ old('password') }}" required>
+                                                    @error('password')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 {{--password_confirmation--}}
                                                 <div class="form-group">
@@ -108,6 +121,9 @@
                                                     <input type="password" name="password_confirmation" class="form-control"
                                                     placeholder="{{ __('Admin/site.enter_passord_confirm') }}"
                                                     value="{{ old('password_confirmation') }}" required>
+                                                    @error('password_confirmation')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
@@ -129,9 +145,12 @@
                                                 <div class="form-group">
                                                     <div class="controls position-relative">
                                                         <label>{{ __('Admin/site.birthday') }}</label>
-                                                        <input type="date" class="form-control birthdate-picker" required placeholder="Birth date"
-                                                        value="{{ $farmer->birthdate }}"
+                                                        <input type="date" class="form-control birthdate-picker" required placeholder="{{ __('Admin/site.birthday') }}"
+                                                        value="{{ old('birthday',$farmer->birthdate) }}"
                                                         data-validation-required-message="This birthdate field is required">
+                                                        @error('birthdate')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -142,97 +161,87 @@
                                                          <option value="{{ $country->id }}" {{$farmer->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
+                                                    @error('country_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
                                                     <select class="select2 form-control" id="province_id" name="province_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $farmer->province_id }}"  >{{ $farmer->province->name }}</option>
+                                                        <option value="{{ $farmer->province_id }}"  >{{ $farmer->province->name ??null }}</option>
                                                     </select>
+                                                    @error('province_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
                                                     <select class="select2 form-control" id="area_id" name="area_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $farmer->area_id }}"  >{{ $farmer->area->name }}</option>
+                                                        <option value="{{ $farmer->area_id }}"  >{{ $farmer->area->name ??null}}</option>
                                                     </select>
+                                                    @error('area_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.state') }}</label>
                                                     <select class="select2 form-control" id="state_id" name="state_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $farmer->state_id }}"  >{{ $farmer->state->name }}</option>
+                                                        <option value="{{ $farmer->state_id }}"  >{{ $farmer->state->name ??null }}</option>
                                                     </select>
+                                                    @error('state_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
                                                     <select class="select2 form-control" id="village_id" name="village_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $farmer->village_id }}"  >{{ $farmer->village->name }}</option>
+                                                        <option value="{{ $farmer->village_id }}"  >{{ $farmer->village->name ??null }}</option>
                                                     </select>
+                                                    @error('village_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-1 mt-sm-0">
                                                 <h5 class="mb-1"><i class="ft-user mr-25"></i></h5>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address1') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',$farmer->address1) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('address1',$farmer->address1) }}"
                                                     name="address1" required data-validation-required-message="This address1 field is required">
+                                                    @error('address1')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address2') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',$farmer->address2) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('address2',$farmer->address2) }}"
                                                     name="address2" required data-validation-required-message="This address2 field is required">
+                                                    @error('address2')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
                                                     <select class="form-control" id="accountSelect" name="department_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $farmer->department_id }}"  >{{ $farmer->department->name }}</option>
+                                                        <option value="{{ $farmer->department_id }}"  >{{ $farmer->department->name ??null }}</option>
                                                         @foreach (\App\Models\Department::get() as $department)
-                                                         <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                                         <option value="{{ $department->id }}">{{ $department->name ??null }}</option>
                                                         @endforeach
                                                     </select>
+                                                    @error('department_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
 
                                             </div>
-                                            {{-- <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Website</label>
-                                                    <input type="text" class="form-control" placeholder="Website address">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Favourite Music</label>
-                                                    <select class="form-control" id="users-music-select2" multiple="multiple">
-                                                        <option value="Rock">Rock</option>
-                                                        <option value="Jazz" selected>Jazz</option>
-                                                        <option value="Disco">Disco</option>
-                                                        <option value="Pop">Pop</option>
-                                                        <option value="Techno">Techno</option>
-                                                        <option value="Folk" selected>Folk</option>
-                                                        <option value="Hip hop">Hip hop</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Favourite movies</label>
-                                                    <select class="form-control" id="users-movies-select2" multiple="multiple">
-                                                        <option value="The Dark Knight" selected>The Dark Knight
-                                                        </option>
-                                                        <option value="Harry Potter" selected>Harry Potter</option>
-                                                        <option value="Airplane!">Airplane!</option>
-                                                        <option value="Perl Harbour">Perl Harbour</option>
-                                                        <option value="Spider Man">Spider Man</option>
-                                                        <option value="Iron Man" selected>Iron Man</option>
-                                                        <option value="Avatar">Avatar</option>
-                                                    </select>
-                                                </div>
-                                            </div> --}}
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>
-                                                {{-- <button type="reset" class="btn btn-light">Cancel</button> --}}
                                             </div>
                                         </div>
                                     </form>

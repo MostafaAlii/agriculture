@@ -256,4 +256,5 @@ return [
 
        'enter_new_password'=>'Enter New Password',
        'enter_passord_confirm'=>'Enter Password Confirm',
+       'birthday'=>'Birthday',
 ];

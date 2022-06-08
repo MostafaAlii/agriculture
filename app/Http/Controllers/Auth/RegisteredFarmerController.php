@@ -17,14 +17,6 @@ class RegisteredFarmerController extends Controller
 
     public function store(FarmerRegisterRequest $request)
     {
-        // $request->validate([
-        //     'firstname'    => ['required', 'string', 'max:255'],
-        //     'lastname'     => ['required', 'string', 'max:255'],
-        //     'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
-        //     'email'        => ['required', 'string', 'email', 'max:255', 'unique:farmers'],
-        //     'password'     => ['required','confirmed'],
-        // ]);
-        // dd($request->all());
         $requestData = $request->validated();
         $farmer = Farmer::create([
             'firstname'    => $request->firstname,
@@ -33,10 +25,10 @@ class RegisteredFarmerController extends Controller
             'email'        => $request->email,
             'password'     => bcrypt($request->password),
         ]);
-        Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
+        // Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
         event(new Registered($farmer));
 
-        Auth::login($farmer);
+        auth('web')->login($farmer);
 
         // return redirect(RouteServiceProvider::FRONT);
         return redirect()->route('front');
