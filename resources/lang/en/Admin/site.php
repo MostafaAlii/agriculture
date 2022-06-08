@@ -94,7 +94,8 @@ return [
     'farmer'=>'Farmers',
     'warning' => 'Are you sure to delete ?',
 
-    'phone'=>'Phone',
+    'phone'=>'Phone number must be 11 digits',
+    'phonenum' => 'Phone number',
     'address'=>'Address',
     'admins' => 'Admin',
     'type'=>'Type',
@@ -102,7 +103,7 @@ return [
 
     'select'=>'Open this select menu',
     'employee'=>'Employee',
-    'loginby'=>'Enter phone number or email address',
+    'loginby'=>'Enter phone number 11 digits or email address',
     'register'=>'Register Now',
 
     'signvendor'=>'sign in as vendor',
@@ -249,4 +250,11 @@ return [
        'please_select_at_least_one_record'=>'Please select at least one record',
        'cant_delete'=>'Can\'t delete this record because it has related records',
        'cant_delete_all'=>'Cant\'t delete all this records because some of them have related records',
+       'again'=>'welcome back again in our website',
+       'BreakingNews'=>'Breaking News',
+       'no-image'=>'No Image',
+
+       'enter_new_password'=>'Enter New Password',
+       'enter_passord_confirm'=>'Enter Password Confirm',
+       'birthday'=>'Birthday',
 ];

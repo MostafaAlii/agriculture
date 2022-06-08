@@ -43,13 +43,13 @@
                                             @if(Auth::user()->image)
                                                 <a class="mr-2" href="#">
                                                         <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
-                                                        alt="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
+                                                        alt="{{ __('Admin/site.no-image') }}"
                                                         class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @else
                                                 <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
-                                                    alt="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                                    alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @endif
@@ -114,7 +114,7 @@
                                                 <!-- End Roles Select -->
                                             </div>
 
-                                            <div class="col-12 col-sm-6">
+                                            {{-- <div class="col-12 col-sm-6">
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
                                                     <input class="form-control img" name="address" value="{{$admin->address}}" type="text" />
@@ -122,6 +122,21 @@
                                                     <input class="form-control " value="{{$admin->longitude}}" name="longitude"  type="hidden" id="longitude">
                                                 </div>
                                                 <div id="map" style="height: 500px;width: 1000px;"></div>
+                                            </div> --}}
+                                            <div class="col-md-6">
+                                                {{--password--}}
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
+                                                    <input type="password" name="password" class="form-control"
+                                                    placeholder="{{ __('Admin/site.enter_new_password') }}" required>
+                                                </div>
+                                                {{--password_confirmation--}}
+                                                <div class="form-group">
+                                                    <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                    <input type="password" name="password_confirmation" class="form-control"
+                                                    placeholder="{{ __('Admin/site.enter_passord_confirm') }}"
+                                                    value="{{ old('password_confirmation') }}" required>
+                                                </div>
                                             </div>
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">

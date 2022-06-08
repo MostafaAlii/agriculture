@@ -68,7 +68,7 @@
                                                     <th>{{ __('Admin/site.lastname') }}</th>
                                                     <th>{{ __('Admin/site.country') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
-                                                    <th>{{ __('Admin/site.phone') }}</th>
+                                                    <th>{{ __('Admin/site.phonenum') }}</th>
                                                     <th>{{ __('Admin/site.type') }}</th>
                                                     <th>{{ __('Admin/admins.status') }}</th>
                                                     <th>{{ __('Admin/admins.permissionLevel') }}</th>

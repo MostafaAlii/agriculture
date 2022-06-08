@@ -40,7 +40,7 @@
                             action="{{ route('farmer.login.post') }}" autocomplete="off">
                             @csrf
                             <div class="input-wrp">
-                                <input id="login" class="textfield" type="login" name="login"
+                                <input id="login" class="textfield" type="login" name="login" value="{{ old('login') }}"
                                     required autofocus placeholder=" {{ trans('Admin/site.loginby') }}" />
                                 @error('login')
                                 <span class="text-danger">{{$message}}</span>
@@ -74,10 +74,6 @@
                                     <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
                                         role="button">{{ trans('Admin/site.login') }}</button>
                                 </div>
-
-                                {{-- <div class="d-table-cell align-middle">
-                                <a class="link-to" href="#">Sign up</a>
-                            </div> --}}
                             </div>
                         </form>
                         <!-- end form -->
@@ -94,66 +90,53 @@
                         @csrf
                         <input type="hidden" name="type" value="farmer">
                             <div class="input-wrp">
-                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" />
-                                    @if ($errors->has('firstname'))
-                                <span class="help-block">
-                                    <strong class="text-danger">{{ $errors->first('firstname') }}</strong>
-                                </span>
-                                @endif
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required />
+                                @error('firstname')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="input-wrp">
-                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" />
-                                @if ($errors->has('lastname'))
-                                <span class="help-block">
-                                    <strong class="text-danger">{{ $errors->first('lastname') }}</strong>
-                                </span>
-                                @endif
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required />
+                                @error('lastname')
+                                  <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
 
                             <div class="input-wrp">
-                                <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" />
-                                @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong class="text-danger">{{ $errors->first('email') }}</strong>
-                                </span>
-                                @endif
+                                <input class="textfield" type="email" placeholder="{{ trans('Admin/site.email') }}" name="email" value="{{ old('email') }}" required/>
+                                @error('email')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="input-wrp">
-                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" />
-                                @if ($errors->has('phone'))
-                                <span class="help-block">
-                                    <strong class="text-danger">{{ $errors->first('phone') }}</strong>
-                                </span>
-                                @endif
+                                <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" value="{{ old('phone') }}"
+                                maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' required />
+                                @error('phone')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
 
                             <div class="input-wrp">
-                                <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" />
-                                @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong class="text-danger">{{ $errors->first('password') }}</strong>
-                                </span>
-                                @endif
+                                <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password') }}" name="password" value="{{ old('password') }}" required />
+                                @error('password')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
 
                             <div class="input-wrp">
                                 <input class="textfield" type="password" placeholder="{{ trans('Admin/site.password_confirmation') }}"
                                     name="password_confirmation" />
-                                    @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong class="text-danger">{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                    @endif
+                                    @error('password_confirmation')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                             </div>
                             <div class="input-wrp">
                                 <div class="{{$errors->has('g-recaptcha-response')? 'has-error' : ''}}">
                                     {!! NoCaptcha::display(['data-theme' => 'dark']) !!}
                                 </div>
-                                @if ($errors->has('g-recaptcha-response'))
-                                    <span class="help-block">
-                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
-                                    </span>
-                                @endif
+                                @error('g-recaptcha-response')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
 
                         <div class="d-table mt-8">
@@ -171,51 +154,7 @@
                 </div>
         </div>
     </section>
-    <!-- end section -->
 
-    <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-            <!-- start banner simple -->
-            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy"
-                             src="{{ setting()->ar_site_logo ?
-                        URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
-                             style="left: 45%;   width: 200px;height: 260px;  "/>
-                    @elseif(app()->getLocale()=='ku')
-                        <img class="img-logo  img-fluid  lazy"
-                             src="{{setting()->ku_site_logo ?
-                        URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ku.png')}}"
-                             alt="" style="left: 45%;    width: 200px; height: 260px;"/>
-                    @elseif(app()->getLocale()=='en')
-                        <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
-                         URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
-                         URL::asset('Dashboard/img/Default/logo_en.png')}}"
-                             alt="" style="left: 45%;    width: 200px;height: 260px;"/>
-
-                    @endif
-                </div>
-
-                <div class="row no-gutters">
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_3.jpg"
-                                alt="demo" /></a>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_4.jpg"
-                                alt="demo" /></a>
-                    </div>
-                </div>
-            </div>
-            <!-- end banner simple -->
-        </div>
-    </section>
-    <!-- end section -->
 
 @endsection
 

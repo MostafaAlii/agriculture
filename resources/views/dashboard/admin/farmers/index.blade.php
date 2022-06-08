@@ -67,7 +67,7 @@
                                                     <th>{{ __('Admin/site.lastname') }}</th>
                                                     <th>{{ __('Admin/site.country') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
-                                                    <th>{{ __('Admin/site.phone') }}</th>
+                                                    <th>{{ __('Admin/site.phonenum') }}</th>
                                                     <th>{{ __('Admin/site.productcount') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -94,7 +94,7 @@
 
 <script>
 
-    let usersTable = $('#farmer-table').DataTable({
+    let farmersTable = $('#farmer-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -118,7 +118,7 @@
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[8, 'desc']],
+        // order: [[9, 'desc']],
 
     });
 </script>

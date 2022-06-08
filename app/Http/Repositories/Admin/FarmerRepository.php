@@ -16,7 +16,7 @@ class FarmerRepository implements FarmerInterface{
     }
 
     public function data() {
-        $farmers = Farmer::select();
+        $farmers = Farmer::orderByDesc('created_at')->get();
 
         return DataTables::of($farmers)
             ->addColumn('record_select', 'dashboard.admin.farmers.data_table.record_select')
@@ -28,7 +28,7 @@ class FarmerRepository implements FarmerInterface{
                 return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
             })
             ->addColumn('country', function (Farmer $farmer) {
-                return $farmer->country->name != null ? $farmer->country->name:null;
+                return $farmer->country->name ?? null;
             })
             ->addColumn('productcount', function (Farmer $farmer) {
 
@@ -52,15 +52,15 @@ class FarmerRepository implements FarmerInterface{
             $farmer = Farmer::latest()->first();
             $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
 
-            Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
+            // Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('farmers.index');
          } catch (\Exception $e) {
             DB::rollBack();
 //            toastr()->error(__('Admin/site.sorry'));
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
 //            return redirect()->back();
+            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 
@@ -147,12 +147,19 @@ class FarmerRepository implements FarmerInterface{
             DB::beginTransaction();
             $farmerID = Crypt::decrypt($id);
             $farmer=Farmer::findorfail($farmerID);
+            $farmerpassword = $farmer->password;
             $requestData = $request->validated();
+            if($request->password){
+                $requestData['password'] = bcrypt($request->password);
+            }else{
+                $requestData['password'] = $farmerpassword ;
+            }
             $farmer->update($requestData);
             if($request->image){
-                $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+                $this->deleteImage('upload_image','/farmers/' . $farmer->image,$farmer->id);
             }
             $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
+
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('farmers.index');
@@ -160,6 +167,7 @@ class FarmerRepository implements FarmerInterface{
             DB::rollBack();
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
+            //    return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
     public function updateInformation($request,$id) {
@@ -173,6 +181,7 @@ class FarmerRepository implements FarmerInterface{
         } catch (\Exception $e) {
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
+            //  return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
 
     }// end of update

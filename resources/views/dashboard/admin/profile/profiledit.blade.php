@@ -32,10 +32,6 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-                                    <!-- users edit media object start -->
-
-                                    <!-- users edit media object ends -->
-                                    <!-- users edit account form start -->
                                     <form novalidate action="{{ route('profile.updateAccount', encrypt(Auth::user()->id)) }}"  enctype="multipart/form-data" method="post" autocomplete="off">
                                         @csrf
                                         @method('put')
@@ -43,13 +39,13 @@
                                             @if(Auth::user()->image)
                                                 <a class="mr-2" href="#">
                                                         <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
-                                                        alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
+                                                        alt="{{ __('Admin/site.no-image') }}"
                                                         class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @else
                                                 <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
-                                                    alt="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
+                                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                                    alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @endif
@@ -57,11 +53,9 @@
                                             <div class="media-body">
                                                 <h4 class="media-heading"> @lang('Admin/site.image')</h4>
                                                 <div class="col-12 px-0 d-flex">
-                                                    {{-- <input class="form-control img" name="image"  type="file" accept="image/*"> --}}
                                                     <a href="#" class="btn btn-sm btn-primary mr-25">
                                                         <input class="form-control img" name="image"  type="file" accept="image/*">
                                                     </a>
-                                                    {{-- <a href="#" class="btn btn-sm btn-secondary">Reset</a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -107,128 +101,21 @@
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    {{--password--}}
-                                                    {{-- <div class="form-group">
-                                                        <label>{{ __('Admin/site.oldpassword') }}<span class="text-danger">*</span></label>
-                                                        <input type="password" name="old_password" class="form-control" value="" required>
-                                                    </div> --}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
                                                         <input type="password" name="password" class="form-control"
-                                                           required>
-                                                         {{-- value="" --}}
-                                                         {{-- value="{{ old('password',Auth::user()->password) }}" --}}
-                                                        {{-- <input type="password" name="password" class="form-control" value="" required> --}}
+                                                        placeholder="{{ __('Admin/site.enter_new_password') }}" required>
                                                     </div>
                                                     {{--password_confirmation--}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
                                                         <input type="password" name="password_confirmation" class="form-control"
-                                                        value="{{ old('password_confirmation') }}" required>
+                                                        value="{{ old('password_confirmation') }}"
+                                                        placeholder="{{ __('Admin/site.enter_passord_confirm') }}" required>
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-12 col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Role</label>
-                                                    <select class="form-control">
-                                                        <option>User</option>
-                                                        <option>Staff</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Status</label>
-                                                    <select class="form-control">
-                                                        <option>Active</option>
-                                                        <option>Banned</option>
-                                                        <option>Close</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Company</label>
-                                                    <input type="text" class="form-control" placeholder="Company name">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="table-responsive">
-                                                    <table class="table mt-1">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Module Permission</th>
-                                                                <th>Read</th>
-                                                                <th>Write</th>
-                                                                <th>Create</th>
-                                                                <th>Delete</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Users</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox1" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox1"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox2" class="custom-control-input"><label class="custom-control-label" for="users-checkbox2"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox3" class="custom-control-input"><label class="custom-control-label" for="users-checkbox3"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox4" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox4"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Articles</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox5" class="custom-control-input"><label class="custom-control-label" for="users-checkbox5"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox6" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox6"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox7" class="custom-control-input"><label class="custom-control-label" for="users-checkbox7"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox8" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox8"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Staff</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox9" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox9"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox10" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox10"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox11" class="custom-control-input"><label class="custom-control-label" for="users-checkbox11"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox12" class="custom-control-input"><label class="custom-control-label" for="users-checkbox12"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div> --}}
+
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>

@@ -21,14 +21,14 @@
                         <div class="media mb-2">
                             @if($farmer->image)
                                 <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
-                                    alt="{{ asset('Dashboard/img/admins/'. $farmer->image->filename) }}"
+                                    <img src="{{ asset('Dashboard/img/farmers/'. $farmer->image->filename) }}"
+                                    alt="{{ __('Admin/site.no-image') }}"
                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                 </a>
                             @else
                                 <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
-                                    alt="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
+                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                    alt="{{ __('Admin/site.no-image') }}"
                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                 </a>
                             @endif
@@ -81,27 +81,27 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.country'):</td>
-                                            <td>{{ $farmer->country->name }}</td>
+                                            <td>{{ $farmer->country->name ?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.province'):</td>
-                                            <td>{{ $farmer->province->name }}</td>
+                                            <td>{{ $farmer->province->name?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.area'):</td>
-                                            <td>{{ $farmer->area->name }}</td>
+                                            <td>{{ $farmer->area->name?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.state'):</td>
-                                            <td>{{ $farmer->state->name}}</td>
+                                            <td>{{ $farmer->state->name?? null}}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.village'):</td>
-                                            <td>{{ $farmer->village->name }}</td>
+                                            <td>{{ $farmer->village->name?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.department'):</td>
-                                            <td>{{ $farmer->department->name }}</td>
+                                            <td>{{ $farmer->department->name?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.address1'):</td>

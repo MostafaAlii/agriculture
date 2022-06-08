@@ -39,13 +39,13 @@
                                             @if(Auth::user()->image)
                                                 <a class="mr-2" href="#">
                                                         <img src="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
-                                                        alt="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
+                                                        alt="{{ __('Admin/site.no-image') }}"
                                                         class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @else
                                                 <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
-                                                    alt="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
+                                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                                    alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @endif
@@ -119,6 +119,20 @@
                                                             <option value="perday">{{ __('Admin/site.perday') }}</option>
                                                             <option value="perhour">{{ __('Admin/site.perhour') }}</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="password" class="form-control"
+                                                        placeholder="{{ __('Admin/site.enter_new_password') }}" required>
+                                                    </div>
+                                                    {{--password_confirmation--}}
+                                                    <div class="form-group">
+                                                        <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                        <input type="password" name="password_confirmation" class="form-control"
+                                                        placeholder="{{ __('Admin/site.enter_passord_confirm') }}"
+                                                        value="{{ old('password_confirmation') }}" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group myInput">

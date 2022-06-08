@@ -68,12 +68,12 @@
                                                     <th>{{ __('Admin/site.lastname') }}</th>
                                                     <th>{{ __('Admin/site.country') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
-                                                    <th>{{ __('Admin/site.phone') }}</th>
+                                                    <th>{{ __('Admin/site.phonenum') }}</th>
                                                     <th>{{ __('Admin/site.status') }}</th>
                                                     <th>{{ __('Admin/site.worktype') }}</th>
                                                     <th>{{ __('Admin/site.salarytype') }}</th>
                                                     <th>{{ __('Admin/site.dhprice') }}</th>
-                                                    {{-- <th>{{ __('Admin/site.created_at') }}</th> --}}
+                                                    <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
                                             </thead>
@@ -120,7 +120,7 @@
             {data: 'work', name: 'work',width: '5%'},
             {data: 'salary', name: 'salary',width: '5%'},
             {data: 'dhprice', name: 'dhprice',width: '5%'},
-            // {data: 'created_at', name: 'created_at', searchable: false},
+            {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
         order: [[12, 'desc']],

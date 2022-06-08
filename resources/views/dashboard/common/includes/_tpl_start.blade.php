@@ -132,6 +132,7 @@
     @toastr_css
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/multiple-select.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/ticker.css') }}">
     @yield('css')
 </head>
 <!-- END: Head-->

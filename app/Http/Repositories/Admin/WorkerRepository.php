@@ -59,15 +59,15 @@ class WorkerRepository implements WorkerInterface{
             Worker::create($requestData);
             $worker = Worker::latest()->first();
             $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
-            Notification::send($worker, new \App\Notifications\NewWorker($worker));
+            // Notification::send($worker, new \App\Notifications\NewWorker($worker));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('workers.index');
          } catch (\Exception $e) {
             DB::rollBack();
-           toastr()->error(__('Admin/site.sorry'));
-            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
-           return redirect()->back();
+        //    toastr()->error(__('Admin/site.sorry'));
+        //    return redirect()->back();
+            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 
@@ -152,7 +152,13 @@ class WorkerRepository implements WorkerInterface{
             DB::beginTransaction();
             $workerID = Crypt::decrypt($id);
             $worker=Worker::findorfail($workerID);
+            $workerpassword = $worker->password;
             $requestData = $request->validated();
+            if($request->password){
+                $requestData['password'] = bcrypt($request->password);
+            }else{
+                $requestData['password'] = $workerpassword ;
+            }
             // $requestData['status'] = $request->status;
             if($request->daily_price ){
                 $requestData['hourly_price'] = null;

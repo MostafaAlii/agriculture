@@ -19,6 +19,7 @@ class WorkerProfileAccountRequest extends FormRequest {
             'daily_price'  => 'numeric|min:1',
             'hourly_price' => 'numeric|min:1',
             'status'       => 'boolean',
+            'password'     => 'required|confirmed|min:6|max:10',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -26,6 +27,7 @@ class WorkerProfileAccountRequest extends FormRequest {
             $worker = $this->route()->parameter('id');
             $rules['email'] = 'required|email|unique:workers,id,' . $worker;
             $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers,id,' . $worker;
+            $rules['password'] = 'confirmed';
 
         }//end of if
 
@@ -51,6 +53,13 @@ class WorkerProfileAccountRequest extends FormRequest {
             'phone.unique'         => trans('Admin\validation.unique'),
             'image.image'          => trans('Admin\validation.image'),
             'image.mimes'          => trans('Admin\validation.mimes'),
+
+            'password.required' => trans('Admin\validation.required'),
+            'password.confirmed' => trans('Admin\validation.confirmed'),
+            'password.min' => trans('Admin\validation.min'),
+            'password.max' => trans('Admin\validation.max'),
+            'password_confirmation.required'=> trans('Admin\validation.required'),
+            'password_confirmation.same'=> trans('Admin\validation.same'),
         ];
     }
 }
