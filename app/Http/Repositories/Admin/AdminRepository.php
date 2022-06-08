@@ -179,7 +179,7 @@ class AdminRepository implements AdminInterface
             }
             $admin->update($requestData);
             if ($request->image) {
-                $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+                $this->deleteImage('upload_image', '/admins/' . $admin->image, $admin->id);
             }
             $this->addImage($request, 'image', 'admins', 'upload_image', $admin->id, 'App\Models\Admin');
             DB::table('model_has_roles')->where('model_id', $adminID)->delete();
