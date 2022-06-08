@@ -93,6 +93,9 @@
                                                         <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$farmer->phone) }}"
                                                         required data-validation-required-message="This phone field is required"
                                                         maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                                                        @error('phone')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

@@ -156,11 +156,9 @@ class FarmerRepository implements FarmerInterface{
             }
             $farmer->update($requestData);
             if($request->image){
-                $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
-            }else{
                 $this->deleteImage('upload_image','/farmers/' . $farmer->image,$farmer->id);
             }
-                $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
+            $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
 
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));

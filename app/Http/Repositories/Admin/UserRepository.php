@@ -156,7 +156,7 @@ class UserRepository implements UserInterface{
             }
             $user->update($requestData);
             if($request->image){
-                $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+                $this->deleteImage('upload_image','/users/' . $user->image,$user->id);
             }
             $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
             DB::commit();
@@ -164,8 +164,9 @@ class UserRepository implements UserInterface{
             return redirect()->route('users.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->error(__('Admin/site.sorry'));
-            return redirect()->back();
+            // toastr()->error(__('Admin/site.sorry'));
+            // return redirect()->back();
+                 return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
     public function updateInformation($request,$id) {

@@ -21,7 +21,7 @@
                         <div class="media mb-2">
                             @if($user->image)
                                 <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/admins/'. $user->image->filename) }}"
+                                    <img src="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
                                     alt="{{ __('Admin/site.no-image') }}"
                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                 </a>
@@ -82,27 +82,27 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.country'):</td>
-                                            <td>{{ $user->country->name }}</td>
+                                            <td>{{ $user->country->name ?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.province'):</td>
-                                            <td>{{ $user->province->name }}</td>
+                                            <td>{{ $user->province->name ?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.area'):</td>
-                                            <td>{{ $user->area->name }}</td>
+                                            <td>{{ $user->area->name ?? null}}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.state'):</td>
-                                            <td>{{ $user->state->name}}</td>
+                                            <td>{{ $user->state->name ?? null}}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.village'):</td>
-                                            <td>{{ $user->village->name }}</td>
+                                            <td>{{ $user->village->name ?? null}}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.department'):</td>
-                                            <td>{{ $user->department->name }}</td>
+                                            <td>{{ $user->department->name ?? null}}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.address1'):</td>

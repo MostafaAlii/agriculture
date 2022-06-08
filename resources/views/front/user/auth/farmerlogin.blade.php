@@ -154,51 +154,7 @@
                 </div>
         </div>
     </section>
-    <!-- end section -->
 
-    <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-            <!-- start banner simple -->
-            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy"
-                             src="{{ setting()->ar_site_logo ?
-                        URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
-                             style="left: 45%;   width: 200px;height: 260px;  "/>
-                    @elseif(app()->getLocale()=='ku')
-                        <img class="img-logo  img-fluid  lazy"
-                             src="{{setting()->ku_site_logo ?
-                        URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ku.png')}}"
-                             alt="" style="left: 45%;    width: 200px; height: 260px;"/>
-                    @elseif(app()->getLocale()=='en')
-                        <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
-                         URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
-                         URL::asset('Dashboard/img/Default/logo_en.png')}}"
-                             alt="" style="left: 45%;    width: 200px;height: 260px;"/>
-
-                    @endif
-                </div>
-
-                <div class="row no-gutters">
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_3.jpg"
-                                alt="demo" /></a>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_4.jpg"
-                                alt="demo" /></a>
-                    </div>
-                </div>
-            </div>
-            <!-- end banner simple -->
-        </div>
-    </section>
-    <!-- end section -->
 
 @endsection
 
