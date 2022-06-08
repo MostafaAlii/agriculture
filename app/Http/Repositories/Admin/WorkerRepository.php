@@ -169,7 +169,7 @@ class WorkerRepository implements WorkerInterface{
             $worker->update($requestData);
 
             if($request->image){
-                $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
+                $this->deleteImage('upload_image','/workers/' . $worker->image,$worker->id);
             }
             $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
 

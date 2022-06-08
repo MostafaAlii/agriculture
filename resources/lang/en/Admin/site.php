@@ -212,8 +212,8 @@ return [
       'worktype'=>'Work Type',
       'alone'=>'Individually',
       'team'=>'Teamwork',
-      'daily'=>'Daily Price',
-      'hourly'=>'Hourly Price',
+      'daily'=>'Daily Price by USD',
+      'hourly'=>'Hourly Price by USD',
       'dhprice'=>'Day/Hour Price',
       'desc'=>'Description',
 

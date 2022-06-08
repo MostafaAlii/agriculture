@@ -36,7 +36,7 @@
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
-                                            @if(Auth::user()->image)
+                                            @if($worker->image)
                                                 <a class="mr-2" href="#">
                                                         <img src="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
                                                         alt="{{ __('Admin/site.no-image') }}"
@@ -65,6 +65,9 @@
                                                         <label>{{ __('Admin/site.firstname') }}</label>
                                                         <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',$worker->firstname) }}"
                                                         name="firstname" required data-validation-required-message="This firstname field is required">
+                                                        @error('firstname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -72,13 +75,20 @@
                                                         <label>{{ __('Admin/site.lastname') }}</label>
                                                         <input type="text" class="form-control"  value="{{ old('lastname',$worker->lastname) }}"
                                                         name="lastname" required data-validation-required-message="This lastname field is required">
+                                                        @error('lastname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                      @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.phone') }}</label>
                                                         <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$worker->phone) }}"
-                                                        required data-validation-required-message="This phone field is required">
+                                                        required  maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                        data-validation-required-message="This phone field is required" />
+                                                        @error('phone')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -86,6 +96,9 @@
                                                         <label>{{ __('Admin/site.email') }}</label>
                                                         <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',$worker->email) }}"
                                                         required data-validation-required-message="This email field is required">
+                                                        @error('email')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -96,6 +109,9 @@
                                                             <option value= '1'>{{ __('Admin/site.active') }}</option>
                                                             <option value= '0'>{{ __('Admin/site.unactive') }}</option>
                                                         </select>
+                                                        @error('status')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,6 +125,9 @@
                                                             <option value="alone">{{ __('Admin/site.alone') }}</option>
                                                             <option value="team">{{ __('Admin/site.team') }}</option>
                                                         </select>
+                                                        @error('work')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -119,13 +138,21 @@
                                                             <option value="perday">{{ __('Admin/site.perday') }}</option>
                                                             <option value="perhour">{{ __('Admin/site.perhour') }}</option>
                                                         </select>
+                                                        @error('salary')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
+                                                </div>
+                                                <div class="form-group myInput">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
                                                         <input type="password" name="password" class="form-control"
                                                         placeholder="{{ __('Admin/site.enter_new_password') }}" required>
+                                                        @error('password')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                     {{--password_confirmation--}}
                                                     <div class="form-group">
@@ -133,10 +160,12 @@
                                                         <input type="password" name="password_confirmation" class="form-control"
                                                         placeholder="{{ __('Admin/site.enter_passord_confirm') }}"
                                                         value="{{ old('password_confirmation') }}" required>
+                                                        @error('password_confirmation')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                     </div>
                                                 </div>
-                                                <div class="form-group myInput">
-                                                </div>
+
 
                                             </div>
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
@@ -157,9 +186,12 @@
                                                 <div class="form-group">
                                                     <div class="controls position-relative">
                                                         <label>{{ __('Admin/site.birthday') }}</label>
-                                                        <input type="date" class="form-control birthdate-picker" required placeholder="Birth date"
-                                                        value="{{ $worker->birthdate }}"
+                                                        <input type="date" class="form-control birthdate-picker" required placeholder="{{ __('Admin/site.birthday') }}"
+                                                        value="{{ old('birthday',$worker->birthdate) }}"
                                                         data-validation-required-message="This birthdate field is required">
+                                                        @error('birthdate')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -170,6 +202,9 @@
                                                          <option value="{{ $country->id }}" {{$worker->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
+                                                    @error('country_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
@@ -177,23 +212,32 @@
                                                         @if($worker->province_id == null)
                                                          <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @else
-                                                        <option value="{{ $worker->province_id }}"  >{{ $worker->province->name }}</option>
+                                                        <option value="{{ $worker->province_id }}"  >{{ $worker->province->name ??null}}</option>
                                                         @endif
                                                     </select>
+                                                    @error('province_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
                                                     <select class="select2 form-control" id="area_id" name="area_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $worker->area_id }}"  >{{ $worker->area->name }}</option>
+                                                        <option value="{{ $worker->area_id }}"  >{{ $worker->area->name ??null}}</option>
                                                     </select>
+                                                    @error('area_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.state') }}</label>
                                                     <select class="select2 form-control" id="state_id" name="state_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $worker->state_id }}"  >{{ $worker->state->name }}</option>
+                                                        <option value="{{ $worker->state_id }}"  >{{ $worker->state->name ??null}}</option>
                                                     </select>
+                                                    @error('state_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
@@ -201,9 +245,12 @@
                                                         @if($worker->village_id ==null)
                                                          <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                         @else
-                                                        <option value="{{ $worker->village_id }}"  >{{ $worker->village->name }}</option>
+                                                        <option value="{{ $worker->village_id }}"  >{{ $worker->village->name ??null}}</option>
                                                         @endif
                                                     </select>
+                                                    @error('village_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-1 mt-sm-0">
@@ -212,22 +259,19 @@
                                                     <label>{{ __('Admin/site.address1') }}</label>
                                                     <input type="text" class="form-control"  value="{{ old('lastname',$worker->address1) }}"
                                                     name="address1" required data-validation-required-message="This address1 field is required">
+                                                    @error('address1')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address2') }}</label>
                                                     <input type="text" class="form-control"  value="{{ old('lastname',$worker->address2) }}"
                                                     name="address2" required data-validation-required-message="This address2 field is required">
+                                                    @error('address2')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
-                                                {{-- <div class="form-group">
-                                                    <label>{{ __('Admin/site.department') }}</label>
-                                                    <select class="form-control" id="accountSelect" name="department_id">
 
-                                                        <option value="{{ $worker->department_id }}"  >{{ $worker->department->name }}</option>
-                                                        @foreach (\App\Models\Department::get() as $department)
-                                                         <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div> --}}
                                                 <div class="form-group">
                                                     <label for="projectinput1">
                                                         {{ trans('Admin\site.desc') }}
@@ -243,16 +287,11 @@
                                                 </div>
 
                                             </div>
-                                            {{-- <div class="row">
-                                                <div class="col-md-12">
 
-                                                </div>
-                                            </div> --}}
 
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>
-                                                {{-- <button type="reset" class="btn btn-light">Cancel</button> --}}
                                             </div>
                                         </div>
                                     </form>

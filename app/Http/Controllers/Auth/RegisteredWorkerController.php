@@ -32,7 +32,7 @@ class RegisteredWorkerController extends Controller
             'email'        => $request->email,
             'password'     => bcrypt($request->password),
         ]);
-        Notification::send($worker, new \App\Notifications\NewWorker($worker));
+        // Notification::send($worker, new \App\Notifications\NewWorker($worker));
         event(new Registered($worker));
 
         auth('worker')->login($worker);

@@ -164,9 +164,9 @@ class UserRepository implements UserInterface{
             return redirect()->route('users.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            // toastr()->error(__('Admin/site.sorry'));
-            // return redirect()->back();
-                 return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.sorry'));
+            return redirect()->back();
+                //  return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
     public function updateInformation($request,$id) {
