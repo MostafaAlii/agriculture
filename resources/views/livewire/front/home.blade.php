@@ -301,7 +301,7 @@
                     @foreach ($newProducts as $product)
                         <div class="__item">
                             <figure class="__image">
-                                @if (isset($product->image->filename))
+                                @if (isset($product->image))
                                     <a href="{{ route('product_details', encrypt($product->id)) }}">
                                         <img width="188"
                                             src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
@@ -328,26 +328,25 @@
                                         </b>
                                     </p>
                                 </div>
-                                <div class="stock-info in-stock">
+                                {{-- <div class="stock-info in-stock">
                                     <p class="availability">
                                         <b
                                             class="text text-success ">
                                             @lang('Admin/site.qty') ({{ $product->qty  }})
                                         </b>
                                     </p>
-                                </div>
+                                </div> --}}
                                 <div class="product-price">
                                     <span
                                         class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
                                         $</span>
                                 </div>
 
-                                @if (Auth::guard('vendor')->user() )
+                                {{-- @if (Auth::guard('vendor')->user() )
                                 @if($product->in_stock ==1)
                                     <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                         <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
-                                    {{-- wishlist route ******************* *************************************** --}}
                                     <div class="product-wish">
                                         @if ($witems->contains($product->id))
                                             <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
@@ -360,9 +359,8 @@
                                             </a>
                                         @endif
                                     </div>
-                                    {{-- wishlist route ******************* *************************************** --}}
                                 @endif
-                                @endif
+                                @endif --}}
                             </div>
 
                             <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
@@ -376,81 +374,7 @@
     </section>
     <!-- end section -->
 
-    <!-- start section ده الى عايز يظبط ***********************************************************-->
-    {{-- <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-            <!-- start banner simple -->
-            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy"
-                             src="{{ setting()->ar_site_logo ?
-                        URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
-                             style="left: 45%;   width: 200px;height: 260px;  "/>
-                    @elseif(app()->getLocale()=='ku')
-                        <img class="img-logo  img-fluid  lazy"
-                             src="{{setting()->ku_site_logo ?
-                        URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ku.png')}}"
-                             alt="" style="left: 45%;    width: 200px; height: 260px;"/>
-                    @elseif(app()->getLocale()=='en')
-                        <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
-                         URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
-                         URL::asset('Dashboard/img/Default/logo_en.png')}}"
-                             alt="" style="left: 45%;    width: 200px;height: 260px;"/>
 
-                    @endif
-                </div>
-                <div class="row no-gutters">
-                    @foreach($random_blog as $b)
-                        <div class="col-12 col-lg-6 " >
-                            <h3 style="color:coral">{{$b->title}}</h3>
-                            <p>{{substr($b->body,0,100)}}</p>
-                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{ route('blogdetails', encrypt($b->id)) }}">{{ __('website\home.readmore') }}</a>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <!-- end banner simple -->
-        </div>
-    </section> --}}
-     {{-- <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy"
-                             src="{{ setting()->ar_site_logo ?
-                        URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
-                             style="left: 45%;   width: 200px;height: 260px;  "/>
-                    @elseif(app()->getLocale()=='ku')
-                        <img class="img-logo  img-fluid  lazy"
-                             src="{{setting()->ku_site_logo ?
-                        URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ku.png')}}"
-                             alt="" style="left: 45%;    width: 200px; height: 260px;"/>
-                    @elseif(app()->getLocale()=='en')
-                        <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
-                         URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
-                         URL::asset('Dashboard/img/Default/logo_en.png')}}"
-                             alt="" style="left: 45%;    width: 200px;height: 260px;"/>
-
-                    @endif
-                </div>
-                <div class="row no-gutters">
-                    @foreach($random_blog as $b)
-                    <div class="col-12 col-lg-6 "  >
-                        <h3 style="color:coral">{{$b->title}}</h3>
-                        <p>{{substr($b->body,0,100)}}</p>
-                        <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                            href="{{ route('blogdetails', encrypt($b->id)) }}">{{ __('website\home.readmore') }}</a>
-                    </div>
-                    @endforeach
-                </div>
-            </div>  </div>
-    </section> --}}
     <style>
 
      .wolf{
@@ -634,7 +558,7 @@
                                         <div class="col-12 col-md-6">
                                             <figure class="__image">
                                                 <a href="{{ route('product_details', encrypt($product->id)) }}">
-                                                    @if (isset($product->image->filename))
+                                                    @if (isset($product->image))
                                                         <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                             alt="demo" />
@@ -664,14 +588,14 @@
                                                         </b>
                                                     </p>
                                                 </div>
-                                                <div class="stock-info in-stock">
+                                                {{-- <div class="stock-info in-stock">
                                                     <p class="availability">
                                                         <b
                                                             class="text text-success ">
                                                             @lang('Admin/site.qty') ({{ $product->qty  }})
                                                         </b>
                                                     </p>
-                                                </div>
+                                                </div> --}}
                                                 @if ($product->special_price > 0)
                                                     <div class="product-price">
                                                         <span
@@ -688,7 +612,7 @@
                                                             $</span>
                                                     </div>
                                                 @endif
-                                                @if (Auth::guard('vendor')->user() )
+                                                {{-- @if (Auth::guard('vendor')->user() )
                                                 @if($product->in_stock ==1)
                                                     <a class="custom-btn custom-btn--small custom-btn--style-1" href="#"
                                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
@@ -696,7 +620,7 @@
                                                             class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}
                                                     </a>
                                                 @endif
-                                                @endif
+                                                @endif --}}
                                             </div>
                                         </div>
                                     </div>
@@ -740,7 +664,7 @@
                                     <div class="__item">
                                         <figure class="__image">
                                             <a href="{{ route('product_details', encrypt($product->id)) }}">
-                                                @if (isset($product->image->filename))
+                                                @if (isset($product->image))
                                                     <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                         alt="demo" />
@@ -758,9 +682,9 @@
                                                     href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                             </h4>
 
-                                            <div class="__category"><a href="#">Fruits</a></div>
+                                            {{-- <div class="__category"><a href="#">Fruits</a></div> --}}
 
-                                            <div class="rating">
+                                            {{-- <div class="rating">
                                                 <span class="rating__item rating__item--active"><i
                                                         class="fontello-star"></i></span>
                                                 <span class="rating__item rating__item--active"><i
@@ -770,7 +694,7 @@
                                                 <span class="rating__item rating__item--active"><i
                                                         class="fontello-star"></i></span>
                                                 <span class="rating__item"><i class="fontello-star"></i></span>
-                                            </div>
+                                            </div> --}}
                                             <div class="stock-info in-stock">
                                                 <p class="availability">
                                                     <b
@@ -779,14 +703,14 @@
                                                     </b>
                                                 </p>
                                             </div>
-                                            <div class="stock-info in-stock">
+                                            {{-- <div class="stock-info in-stock">
                                                 <p class="availability">
                                                     <b
                                                         class="text text-success ">
                                                         @lang('Admin/site.qty') ({{ $product->qty  }})
                                                     </b>
                                                 </p>
-                                            </div>
+                                            </div> --}}
                                             <div class="product-price">
                                                 <span
                                                     class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
@@ -795,13 +719,12 @@
                                                     class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
                                                     $</span>
                                             </div>
-                                            @if (Auth::guard('vendor')->user() )
+                                            {{-- @if (Auth::guard('vendor')->user() )
                                             @if($product->in_stock ==1)
                                                 <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
                                                     wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                     <i
                                                         class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
-                                                {{-- wishlist route ******************* *************************************** --}}
                                                 <div class="product-wish">
                                                     @if ($witems->contains($product->id))
                                                         <a href="#"
@@ -815,9 +738,8 @@
                                                         </a>
                                                     @endif
                                                 </div>
-                                                {{-- wishlist route ******************* *************************************** --}}
                                             @endif
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <span
                                             class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
