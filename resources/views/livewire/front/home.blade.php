@@ -549,7 +549,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="col-12 col-md-7 col-lg-8">
+                <div class="col-12 col-md-7 col-lg-8">
                     <!-- start feature -->
                     <div class="feature feature--style-3" style="padding: 75px;">
                         <div class="__inner">
@@ -583,7 +583,7 @@
                         </div>
                     </div>
                     <!-- end feature -->
-                </div> --}}
+                </div>
             </div>
         </div>
     </section>
