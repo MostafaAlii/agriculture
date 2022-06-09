@@ -6,7 +6,7 @@
 @section('content')
     <div>
         <!-- start section -->
-
+        {{-- @include('dashboard.common._partials.messages') --}}
         <!-- end section -->
         <section class="section">
             <div class="decor-el decor-el--1" data-jarallax-element="-70" data-speed="0.2">
@@ -60,21 +60,21 @@
 
                                         <p><b>@lang('Admin/site.firstname'): </b>
                                             <input type="text" class="textfield" name="firstname"
-                                                value="{{ Auth::guard('worker')->user()->firstname }}">
+                                                value="{{ old('firstname',Auth::guard('worker')->user()->firstname) }}">
                                             @error('firstname')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </p>
 
                                         <p><b>@lang('Admin/site.lastname') : </b> <input type="text" class="textfield"
-                                                name="lastname" value="{{ Auth::guard('worker')->user()->lastname }}">
+                                                name="lastname" value="{{ old('lastname',Auth::guard('worker')->user()->lastname) }}">
                                             @error('lastname')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </p>
                                         <p><b>@lang('Admin/site.email') : </b>{{ Auth::guard('worker')->user()->email }} </p>
                                         <p><b>@lang('Admin/site.phone') : </b> <input type="text" class="textfield" maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                                                name="phone" value="{{ Auth::guard('worker')->user()->phone }}">
+                                                name="phone" value="{{ old('phone',Auth::guard('worker')->user()->phone) }}">
                                             @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -82,7 +82,7 @@
                                         <p><b>@lang('Admin/site.desc') : </b>
                                             <textarea name="desc" class="form-control" id="description" style="font-size: 2rem;"
                                                     placeholder="{{ trans('Admin\site.desc') }}">
-                                                     {{ Auth::guard('worker')->user()->desc }}
+                                                     {{ old('desc',Auth::guard('worker')->user()->desc )}}
                                             </textarea>
                                             @error('desc')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -119,13 +119,13 @@
 
                                     <div class="col-12 col-md-7 col-lg-6 col-xl-5">
                                         <p><b>@lang('Admin/site.address1') : </b> <input type="text" class="textfield"
-                                            name="address1" value="{{ Auth::guard('worker')->user()->address1 }}">
+                                            name="address1" value="{{ old('address1',Auth::guard('worker')->user()->address1) }}">
                                         @error('address1')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </p>
                                     <p><b>@lang('Admin/site.address2') : </b> <input type="text" class="textfield"
-                                            name="address2" value="{{ Auth::guard('worker')->user()->address2 }}">
+                                            name="address2" value="{{ old('address1',Auth::guard('worker')->user()->address2) }}">
                                         @error('address2')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -136,7 +136,7 @@
                                                 <select class=" textfield wide js-select select2" id="country_id" name="country_id" >
                                                     <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                     @foreach (\App\Models\Country::get() as $country)
-                                                     <option value="{{ $country->id }}" {{Auth::guard('worker')->user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                                                     <option value="{{ $country->id }}" {{Auth::guard('worker')->user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name ??null}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -148,7 +148,7 @@
                                             <b>@lang('Admin/site.province') : </b>
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="province_id" name="province_id">
-                                                    <option value="{{ Auth::guard('worker')->user()->province_id }}"  >{{ Auth::guard('worker')->user()->province->name }}</option>
+                                                    <option value="{{ Auth::guard('worker')->user()->province_id }}"  >{{ Auth::guard('worker')->user()->province->name ??null}}</option>
                                                 </select>
                                             </div>
                                             @error('province_id')
@@ -159,7 +159,7 @@
                                                 <b>@lang('Admin/site.area') : </b>
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="area_id" name="area_id">
-                                                    <option value="{{ Auth::guard('worker')->user()->area_id }}"  >{{ Auth::guard('worker')->user()->area->name }}</option>
+                                                    <option value="{{ Auth::guard('worker')->user()->area_id }}"  >{{ Auth::guard('worker')->user()->area->name ??null}}</option>
 
                                                 </select>
                                             </div>
@@ -171,7 +171,7 @@
                                                 <b>@lang('Admin/site.state') : </b>
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="state_id" name="state_id">
-                                                    <option value="{{ Auth::guard('worker')->user()->state_id }}"  >{{ Auth::guard('worker')->user()->state->name }}</option>
+                                                    <option value="{{ Auth::guard('worker')->user()->state_id }}"  >{{ Auth::guard('worker')->user()->state->name ??null}}</option>
 
                                                 </select>
                                             </div>
@@ -184,7 +184,7 @@
                                             <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="village_id"
                                                     name="village_id">
-                                                    <option value="{{ Auth::guard('worker')->user()->village_id }}"  >{{ Auth::guard('worker')->user()->village->name }}</option>
+                                                    <option value="{{ Auth::guard('worker')->user()->village_id }}"  >{{ Auth::guard('worker')->user()->village->name ??null}}</option>
 
                                                 </select>
                                             </div>

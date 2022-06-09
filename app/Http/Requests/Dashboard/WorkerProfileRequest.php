@@ -23,7 +23,7 @@ class WorkerProfileRequest extends FormRequest {
             'village_id'      => 'required',
             'address1'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'address2'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'desc'            => 'sometimes|string|nullable',
+            'desc'            => 'sometimes|string|nullable|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'salary'          => 'in:perday,perhour',
             'work'            => 'in:alone,team',
             'daily_price'     => 'numeric|min:1',
@@ -34,7 +34,7 @@ class WorkerProfileRequest extends FormRequest {
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
             // $worker = $this->route()->parameter('id');
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers,id,' . Auth::user()->id;
+            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers,id,' . Auth::guard('worker')->user()->id;
         }//end of if
 
         return $rules;

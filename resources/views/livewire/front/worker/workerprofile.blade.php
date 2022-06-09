@@ -83,11 +83,11 @@
                     <p><b>@lang('Admin/site.birthday') : </b> {{ $worker->birthdate }}</p>
                     <p><b>@lang('Admin/site.address1') : </b> {{ $worker->address1 }}</p>
                     <p><b>@lang('Admin/site.address2') : </b> {{ $worker->address2 }}</p>
-                    <p><b>@lang('Admin/site.country') : </b> {{ $worker->country->name }}</p>
-                    <p><b>@lang('Admin/site.province') : </b> {{ $worker->province->name }}</p>
-                    <p><b>@lang('Admin/site.area') : </b> {{ $worker->area->name }}</p>
-                    <p><b>@lang('Admin/site.state') : </b> {{ $worker->state->name }}</p>
-                    <p><b>@lang('Admin/site.village') : </b> {{ $worker->village->name }}</p>
+                    <p><b>@lang('Admin/site.country') : </b> {{ $worker->country->name ??null}}</p>
+                    <p><b>@lang('Admin/site.province') : </b> {{ $worker->province->name ??null}}</p>
+                    <p><b>@lang('Admin/site.area') : </b> {{ $worker->area->name ??null}}</p>
+                    <p><b>@lang('Admin/site.state') : </b> {{ $worker->state->name ??null}}</p>
+                    <p><b>@lang('Admin/site.village') : </b> {{ $worker->village->name ??null}}</p>
                     <p><b>@lang('Admin/site.desc') : </b> {{ $worker->desc }}</p>
                     <p><b>@lang('Admin/site.worktype') : </b> {{$worker->work == 'alone' ?  __('Admin/site.alone') : __('Admin/site.team')}}</p>
                     <p><b>@lang('Admin/site.salarytype') : </b> {{$worker->salary == 'perday' ?  __('Admin/site.perday') : __('Admin/site.perhour')}}</p>

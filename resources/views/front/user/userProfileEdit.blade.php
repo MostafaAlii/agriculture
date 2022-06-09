@@ -164,7 +164,7 @@
                                                     name="department_id">
                                                     <option value="{{ Auth::guard('vendor')->user()->department_id }}"  >{{ Auth::guard('vendor')->user()->department->name ??null}}</option>
                                                     @foreach (\App\Models\Department::get() as $department)
-                                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                                    <option value="{{ $department->id }}">{{ $department->name ??null}}</option>
                                                    @endforeach
                                                 </select>
                                             </div>
