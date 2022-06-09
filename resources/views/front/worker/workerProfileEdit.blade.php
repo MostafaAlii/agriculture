@@ -41,16 +41,16 @@
                                 <div class="row justify-content-xl-between">
                                     <div class="col-12 col-md-5 col-lg-6">
                                         <!-- start form -->
-                                        @if (Auth::guard('worker')->user()->image->filename)
+                                        @if (Auth::guard('worker')->user()->image)
                                             <a class="mr-2" href="#">
                                                 <img src="{{ asset('Dashboard/img/workers/' . Auth::guard('worker')->user()->image->filename) }}"
-                                                    alt="{{ asset('Dashboard/img/workers/' . Auth::guard('worker')->user()->image->filename) }}"
+                                                alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" width="50%">
                                             </a>
                                         @else
                                             <a class="mr-2" href="#">
-                                                <img src="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
-                                                    alt="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
+                                                <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                                alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" width="50%">
                                             </a>
                                         @endif
@@ -73,7 +73,7 @@
                                             @enderror
                                         </p>
                                         <p><b>@lang('Admin/site.email') : </b>{{ Auth::guard('worker')->user()->email }} </p>
-                                        <p><b>@lang('Admin/site.phone') : </b> <input type="text" class="textfield"
+                                        <p><b>@lang('Admin/site.phone') : </b> <input type="text" class="textfield" maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                                                 name="phone" value="{{ Auth::guard('worker')->user()->phone }}">
                                             @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -196,7 +196,7 @@
                                         <p>
                                                 <b>@lang('Admin/site.birthday') : </b>
                                             <div class="input-wrp">
-                                                <input type="date" class="textfield birthdate-picker" required
+                                                <input type="date" class="textfield birthdate-picker" required name="birthdate"
                                                     placeholder="Birth date" value="{{ Auth::guard('worker')->user()->birthdate }}"
                                                     data-validation-required-message="This birthdate field is required">
                                             </div>

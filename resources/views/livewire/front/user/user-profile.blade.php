@@ -34,16 +34,16 @@
                     <h2>@lang('website\home.my_profile')</h2>
 
                     <!-- start form -->
-                    @if($user->image->filename)
+                    @if($user->image)
                         <a class="mr-2" href="#">
                             <img src="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
-                            alt="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
+                            alt="{{ __('Admin/site.no-image') }}"
                             class="users-avatar-shadow rounded-circle img-preview"  width="100%">
                         </a>
                     @else
                         <a class="mr-2" href="#">
-                            <img src="{{ asset('Dashboard/img/users/avatar.jpg') }}"
-                            alt="{{ asset('Dashboard/img/users/avatar.jpg') }}"
+                            <img src="{{ asset('Dashboard/img/profile.png') }}"
+                            alt="{{ __('Admin/site.no-image') }}"
                             class="users-avatar-shadow rounded-circle img-preview"  width="100%">
                         </a>
                     @endif
@@ -58,16 +58,16 @@
                     <!-- start form -->
                     <p><b>@lang('Admin/site.name')  : </b> {{ $user->firstname }} {{ $user->lastname }}</p>
                     <p><b>@lang('Admin/site.email') : </b> {{ $user->email }}</p>
-                    <p><b>@lang('Admin/site.phone') : </b> {{ $user->phone }}</p>
+                    <p><b>@lang('Admin/site.phonenum') : </b> {{ $user->phone }}</p>
                     <p><b>@lang('Admin/site.birthday') : </b> {{ $user->birthdate }}</p>
                     <p><b>@lang('Admin/site.address1') : </b> {{ $user->address1 }}</p>
                     <p><b>@lang('Admin/site.address2') : </b> {{ $user->address2 }}</p>
-                    <p><b>@lang('Admin/site.country') : </b> {{ $user->country->name }}</p>
-                    <p><b>@lang('Admin/site.province') : </b> {{ $user->province->name }}</p>
-                    <p><b>@lang('Admin/site.area') : </b> {{ $user->area->name }}</p>
-                    <p><b>@lang('Admin/site.state') : </b> {{ $user->state->name }}</p>
-                    <p><b>@lang('Admin/site.village') : </b> {{ $user->village->name }}</p>
-                    <p><b>@lang('Admin/site.department') : </b> {{ $user->department->name }}</p>
+                    <p><b>@lang('Admin/site.country') : </b> {{ $user->country->name ??null}}</p>
+                    <p><b>@lang('Admin/site.province') : </b> {{ $user->province->name ??null}}</p>
+                    <p><b>@lang('Admin/site.area') : </b> {{ $user->area->name ??null}}</p>
+                    <p><b>@lang('Admin/site.state') : </b> {{ $user->state->name ??null}}</p>
+                    <p><b>@lang('Admin/site.village') : </b> {{ $user->village->name ??null}}</p>
+                    <p><b>@lang('Admin/site.department') : </b> {{ $user->department->name ??null}}</p>
                     <!-- end form -->
                     <a href="{{ route('user.editownprofile') }}"
                     class="custom-btn custom-btn--medium custom-btn--style-1"

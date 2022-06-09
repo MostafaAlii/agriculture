@@ -55,16 +55,16 @@
                     <h2>@lang('website\home.my_profile')</h2>
 
                     <!-- start form -->
-                    @if($worker->image->filename)
+                    @if($worker->image)
                         <a class="mr-2" href="#">
                                 <img src="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
-                                alt="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
+                                alt="{{ __('Admin/site.no-image') }}"
                                 class="users-avatar-shadow rounded-circle img-preview"  width="100%">
                         </a>
                     @else
                         <a class="mr-2" href="#">
-                            <img src="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
-                            alt="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
+                            <img src="{{ asset('Dashboard/img/profile.png') }}"
+                            alt="{{ __('Admin/site.no-image') }}"
                             class="users-avatar-shadow rounded-circle img-preview"  width="100%">
                         </a>
                     @endif
@@ -79,7 +79,7 @@
                     <!-- start form -->
                     <p><b>@lang('Admin/site.name')  : </b> {{ $worker->firstname }} {{ $worker->lastname }}</p>
                     <p><b>@lang('Admin/site.email') : </b> {{ $worker->email }}</p>
-                    <p><b>@lang('Admin/site.phone') : </b> {{ $worker->phone }}</p>
+                    <p><b>@lang('Admin/site.phonenum') : </b> {{ $worker->phone }}</p>
                     <p><b>@lang('Admin/site.birthday') : </b> {{ $worker->birthdate }}</p>
                     <p><b>@lang('Admin/site.address1') : </b> {{ $worker->address1 }}</p>
                     <p><b>@lang('Admin/site.address2') : </b> {{ $worker->address2 }}</p>
