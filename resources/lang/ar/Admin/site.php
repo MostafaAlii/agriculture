@@ -254,5 +254,14 @@ return [
        'enter_passord_confirm'=>'اعد ادخال كلمة المرور',
        'birthday'=>'تاريخ الميلاد',
        'permission_name'=>'اسم الصلاحيه',
+       //section 2 in home page
+       'Free_Shipping_On_Order_Over'=>'شحن مجاني على الطلبات أكثر من 120دولار',
+       'Free_shipping_on_all_order'=>'شحن مجاني على جميع الطلبات',
+       'Member_Discount'=>'خصم لأعضاء',
+       'Back_guarantee_under_7_days'=>'ضمان على الطلبات السابقة تحت 7 أيام',
+       'Money_Return'=>'إرجاع المال',
+       'Support_online_24_hours_a_day'=>'دعم 24 ساعة فى اليوم',
+       'Online Support'=>'دعم عبر الانترنت',
+       'Online Support 24/7'=>'دعم عبر الانترنت 24/7',
 ];
 

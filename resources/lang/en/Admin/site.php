@@ -257,4 +257,14 @@ return [
        'enter_new_password'=>'Enter New Password',
        'enter_passord_confirm'=>'Enter Password Confirm',
        'birthday'=>'Birthday',
+
+          //section 2 in home page
+          'Free_Shipping_On_Order_Over'=>'Free Shipping On Order Over',
+          'Free_shipping_on_all_order'=>'Free shipping on all order',
+          'Member_Discount'=>'Member Discount',
+          'Back_guarantee_under_7_days'=>'Back guarantee under 7 days',
+          'Money_Return'=>' Money Return',
+          'Support_online_24_hours_a_day'=>'Support online 24 hours a day',
+          'Online Support'=>'Online Support',
+          'Online Support 24/7'=>'Online Support 24/7',
 ];

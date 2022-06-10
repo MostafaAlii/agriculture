@@ -10,7 +10,8 @@ use App\Traits\UploadT;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
-
+// use Notification;
+use App\Notifications\NewUser;
 class UserRepository implements UserInterface{
     use UploadT;
     public function index() {
@@ -52,6 +53,19 @@ class UserRepository implements UserInterface{
             $user = User::latest()->first();
             $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
             // Notification::send($user, new \App\Notifications\NewUser($user));
+            // $details = [
+            //     'greeting' => 'Hi Artisan',
+            //     'body' => 'This is my first notification from ItSolutionStuff.com',
+            //     'thanks' => 'Thank you for using ItSolutionStuff.com tuto!',
+            //     'actionText' => 'View My Site',
+            //     'actionURL' => url('/'),
+            //     'order_id' => 101
+
+            // ];
+            // Notification::send($user, new NewUser($details));
+            // dd('done');
+            // dd($user->notifications);
+
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('users.index');

@@ -142,9 +142,9 @@
                                     </svg>
                                 </i>
 
-                                <h4 class="__title h6">Free Shipping On Order Over $120</h4>
+                                <h4 class="__title h6">{{ __('admin/site.Free_Shipping_On_Order_Over') }}</h4>
 
-                                <span>Free shipping on all order</span>
+                                <span>{{ __('admin/site.Free_shipping_on_all_order') }}</span>
                             </div>
                         </div>
                         <!-- end item -->
@@ -164,9 +164,9 @@
                                     </svg>
                                 </i>
 
-                                <h4 class="__title h6">Member Discount</h4>
+                                <h4 class="__title h6">{{ __('admin/site.Member_Discount') }}</h4>
 
-                                <span>Back guarantee under 7 days</span>
+                                <span>{{ __('admin/site.Back_guarantee_under_7_days') }}</span>
                             </div>
                         </div>
                         <!-- end item -->
@@ -186,9 +186,9 @@
                                     </svg>
                                 </i>
 
-                                <h4 class="__title h6">Money Return</h4>
+                                <h4 class="__title h6">{{ __('admin/site.Money_Return') }}</h4>
 
-                                <span>Support online 24 hours a day</span>
+                                <span>{{ __('admin/site.Support_online_24_hours_a_day') }}</span>
                             </div>
                         </div>
                         <!-- end item -->
@@ -204,9 +204,9 @@
                                     </svg>
                                 </i>
 
-                                <h4 class="__title h6">Online Support</h4>
+                                <h4 class="__title h6">{{ __('admin/site.Online Support') }}</h4>
 
-                                <span>Online Support 24/7</span>
+                                <span>{{ __('admin/site.Online Support 24/7') }}</span>
                             </div>
                         </div>
                         <!-- end item -->
