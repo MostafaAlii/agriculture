@@ -17,7 +17,7 @@
                             Auth::user()->firstname }}
                             {{ Auth::user()->lastname }}</span></a>
                     <div class="text-light text-center">
-                        {{ Auth::user()->type == 'admin' ? __('Admin/site.admins') : __('Admin/site.employee') }}
+                        {{ Auth::user()->type == 'admin' ? __('Admin/site.admin') : __('Admin/site.employee') }}
                     </div>
                     <div class="text-light text-center">
                         {{ Auth::user()->email }}

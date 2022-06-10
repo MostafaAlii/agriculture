@@ -108,7 +108,11 @@
                                     @method('post')
 									<div class="col-sm-6">
 										<div class="input-wrp">
-											<input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }} " id="email" />
+											<input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }} " id="email"
+                                            value="{{ old('email') }}" required />
+                                            @error('email')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
 										</div>
 									</div>
 
