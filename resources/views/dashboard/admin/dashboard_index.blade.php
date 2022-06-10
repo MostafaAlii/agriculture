@@ -47,9 +47,9 @@
         <li>
              {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
         </li>
-        <li>
+        {{-- <li>
              {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
-        </li>
+        </li> --}}
         {{-- <li>
              {{ Auth::user()->firstname }}{{ Auth::user()->lastname }}  {{ __('Admin/site.again') }}
         </li> --}}
