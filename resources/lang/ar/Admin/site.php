@@ -253,5 +253,6 @@ return [
        'enter_new_password'=>'ادخل كلمة المرور الجديدة',
        'enter_passord_confirm'=>'اعد ادخال كلمة المرور',
        'birthday'=>'تاريخ الميلاد',
+       'permission_name'=>'اسم الصلاحيه',
 ];
 
