@@ -244,7 +244,7 @@ label.star:before {
                                                                 wire:model='qty'
                                                                 autocomplete="off"
                                                         />
-                                                        @if($qty  < $product->qty)
+                                                        @if($qty < $product->qty)
                                                             <span class="__btn __btn--plus"
                                                                 wire:click.prevent='increaseQty' >
                                                             </span>
