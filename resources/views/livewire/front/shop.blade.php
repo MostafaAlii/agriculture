@@ -385,6 +385,9 @@
                                                         @endif
                                                         @if (Auth::guard('vendor')->user())
                                                             @if ($product->in_stock == 1)
+                                                                  {{-- @if($condition)
+                                                                  @else
+                                                                  @endif --}}
                                                                 <a class="custom-btn custom-btn--medium custom-btn--style-1 add-to-cart-cartbtnbtn" title="{{ __('Admin/site.addtocart') }}"
                                                                     href="#" id="add-to-cart-cartbtnbtn" onclick="myFunction()"
                                                                     {{-- onClick="(function(){
@@ -523,7 +526,7 @@
             alert('{{ __('Website/home.item_added_to_cart') }}');
                         // this.text('{{ __('Admin/site.loading') }}');
                 //  $("this").text("{{ __('Admin/site.adding_to_cart') }}");
-                // document.getElementById("add-to-cart-cartbtnbtn").innerText = "{{ __('Admin/site.adding_to_cart') }}";
+                // document.getElementById("add-to-cart-cartbtnbtn").innerHTML = "{{ __('Admin/site.adding_to_cart') }}";
                 // document.getElementById("add-to-cart-cartbtnbtn").attr("disabled", true);
                 // document.getElementById("add-to-cart-cartbtnbtn").classList.add("disabled");
                 // document.getElementById("add-to-cart-cartbtnbtn").classList.remove("custom-btn--style-1");

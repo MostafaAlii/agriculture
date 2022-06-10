@@ -138,7 +138,7 @@
                                                                 max="{{ $item->model->qty }}"
                                                                 value="{{ $item->qty }}"
                                                                 onkeydown="return false"
-                                                                autocomplete="off"/>
+                                                                autocomplete="off" />
 
                                                             @if($item->qty < $item->model->qty)
                                                                 <span class="__btn __btn--plus"
