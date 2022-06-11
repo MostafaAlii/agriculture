@@ -54,15 +54,12 @@ class ProtectedHouseController extends Controller
         return $this->Data->bulkDelete($request);
     }// end of destroy
 
-    public function protected_house_statistics(){
-        return $this->Data->protected_house_statistics();
+    public function protected_house_index(){
+        return $this->Data->protected_house_index();
     }
-    public function protected_house_private_statistics(){
-        return $this->Data->protected_house_private_statistics();
 
+    public function protected_house_statistics(Request $request){
+        return $this->Data->protected_house_statistics($request);
     }
-    public function protected_house_gov_statistics(){
-        return $this->Data->protected_house_gov_statistics();
 
-    }
 }

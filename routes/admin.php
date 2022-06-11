@@ -247,9 +247,9 @@ Route::group(
             Route::resource('ProtectedHouse', ProtectedHouseController::class)->except(['show']);
             Route::get('/ProtectedHouse/data', [ProtectedHouseController::class,'data'])->name('protectedHouse.data');
             Route::delete('/ProtectedHouse/bulk_delete/{ids}', [ProtectedHouseController::class,'bulkDelete'])->name('protectedHouse.bulk_delete');
-            Route::get('/ProtectedHouse/protected_house_statistic/', [ProtectedHouseController::class,'protected_house_statistics'])->name('protected_house.statistic');
-            Route::get('/ProtectedHouse/protected_house_g_statistic/', [ProtectedHouseController::class,'protected_house_gov_statistics'])->name('protected_house_g.statistic');
-            Route::get('/ProtectedHouse/protected_house_p_statistic/', [ProtectedHouseController::class,'protected_house_private_statistics'])->name('protected_house_p.statistic');
+            Route::get('/ProtectedHouse/protected_house_index/', [ProtectedHouseController::class,'protected_house_index'])->name('protected_house_index');
+            Route::post('/ProtectedHouse/protected_house_statistic/', [ProtectedHouseController::class,'protected_house_statistics'])->name('protected_house.statistic');
+
             /***********end protected hoses***/
 
             /******start agriculture service********/

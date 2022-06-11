@@ -12,7 +12,7 @@ return [
     'area' =>'القضاء',
     'state' =>'الناحية',
     'search'=>'بحث',
-
+'select'=>'إختر من القائمة',
     'orchardsPageTitle'=>'البساتين',
     'village' =>'القرية',
     'private'=>'خاص',

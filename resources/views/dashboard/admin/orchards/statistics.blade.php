@@ -82,7 +82,7 @@
                                                             <label for="customSelect1-1">{{ __('Admin/orchards.supported_side') }}</label>
                                                             <select class="custom-select form-control"
                                                                     id="customSelect1-1" name="supported_side">
-                                                                <option selected value = ""disabled>--select--</option>
+                                                                <option selected value = ""disabled>{{__('Admin\orchards.select')}}</option>
                                                                 <option value="private">{{ __('Admin\orchards.private') }}</option>
                                                                 <option value="govermental">{{ __('Admin\orchards.govermental') }}</option>
                                                                 <option value="international_organizations">{{ __('Admin\orchards.international_organizations') }}</option>
@@ -135,7 +135,7 @@
                                                             <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
                                                             <select class="custom-select form-control select2" id="customSelect"
                                                                     name="land_category_id">
-                                                                <option value="" selected >--select--</option>
+                                                                <option value="" selected >{{__('Admin\orchards.select')}}</option>
                                                                 @foreach(App\Models\LandCategory::all() as $land_category)
                                                                     <option value="{{$land_category->id}}">{{ $land_category->category_name }}</option>
                                                                 @endforeach
@@ -148,7 +148,7 @@
                                                             <label for="customSelect1-1">{{ __('Admin/orchards.supported_side') }}</label>
                                                             <select class="custom-select form-control"
                                                                     id="customSelect1-1" name="supported_side">
-                                                                <option value="" selected >--select--</option>
+                                                                <option value="" selected >{{__('Admin\orchards.select')}}</option>
                                                                 <option value="private">{{ __('Admin\orchards.private') }}</option>
                                                                 <option value="govermental">{{ __('Admin\orchards.govermental') }}</option>
                                                                 <option value="international_organizations">{{ __('Admin\orchards.international_organizations') }}</option>
@@ -171,6 +171,8 @@
                                                     <button type="submit" class="btn btn-primary">
                                                         <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
                                                     </button>
+                                                    <a type="button" href="{{route('orchards.statistics_index')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+
                                                 </div>
 
                                         </div>
