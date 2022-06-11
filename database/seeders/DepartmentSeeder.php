@@ -49,7 +49,7 @@ class DepartmentSeeder extends Seeder {
                 'area_id'       => Area::all()->random()->id,
                 'state_id'      => State::all()->random()->id,
                 'village_id'    => Village::all()->random()->id,
-                'created_by'    => Admin::all()->random()->id,
+              //  'created_by'    => Admin::all()->random()->id,
                 ]);
         }
 
