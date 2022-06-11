@@ -25,8 +25,8 @@ return [
     'report_on_the_number_of_greenhouses_govermental_supported'=>'Report On The Number Of Greenhouses Govermental Supported',
     'Database_about_greenhouses_private_supported'=>'Database About Greenhouses Private Supported',
     'report_on_the_number_of_greenhouses_private_supported'=>'Report On The Number Of Greenhouses Private Supported',
-    ''=>'',
-    ''=>'',
+    'back'=>'Back',
+    'select'=>'Choose from list',
     ''=>'',
 
 

@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-7">
                         <div class="media mb-2">
-                            @if(Auth::user()->image)
+                            @if($admin->image)
                                 <a class="mr-2" href="#">
                                         <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}"
                                         alt="{{ __('Admin/site.no-image') }}"
@@ -83,41 +83,27 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.country'):</td>
-                                            @if(($admin->country_id == null))
-                                                <td></td>
-
-                                                @else
-                                                <td>{{ $admin->country->name }}</td>
-                                                @endif
+                                            <td>{{ $admin->country->name ?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.province'):</td>
-                                            @if(($admin->province_id==null))
-                                                <td></td>
-
-                                            @else
-                                                <td>{{ $admin->province->name }}</td>
-                                            @endif
+                                            <td>{{ $admin->province->name?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.area'):</td>
-                                            <td>{{ $admin->area->name }}</td>
+                                            <td>{{ $admin->area->name ?? null}}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.state'):</td>
-                                            <td>{{ $admin->state->name}}</td>
+                                            <td>{{ $admin->state->name?? null}}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.village'):</td>
-                                            @if(($admin->village_id ==null))
-                                            <td></td>
-                                            @else
-                                                <td>{{ $admin->village->name }}</td>
-                                            @endif
+                                            <td>{{ $admin->village->name?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.department'):</td>
-                                            <td>{{ $admin->department->name }}</td>
+                                            <td>{{ $admin->department->name?? null }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.address1'):</td>

@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
             'email'        => $request->email,
             'password'     => bcrypt($request->password),
         ]);
-        // Notification::send($user, new \App\Notifications\NewUser($user));
+        Notification::send($user, new \App\Notifications\NewUser($user));
         event(new Registered($user));
 
         auth('vendor')->login($user);

@@ -92,7 +92,7 @@
                                                     <td>
                                                         <figure class="__image">
 
-                                                            @if ($item->model->image->filename)
+                                                            @if ($item->model->image)
                                                                 <a
                                                                     href="{{ route('product_details', encrypt($item->model->id)) }}">
                                                                     <img src="{{ asset('Dashboard/img/products/' . $item->model->image->filename) }}"
@@ -127,15 +127,23 @@
 
                                                     <td>
                                                         <div class="quantity-counter js-quantity-counter">
-                                                            <span class="__btn __btn--minus"
+                                                            @if($item->qty > 1)
+                                                                <span class="__btn __btn--minus"
                                                                 wire:click.prevent="decreaseQuntity('{{ $item->rowId }}')"></span>
+                                                            @endif
+
                                                             <input class="__q-input" type="text"
-                                                                name="product-quatity" min="1"
+                                                                name="product-quatity"
+                                                                min="1"
                                                                 max="{{ $item->model->qty }}"
                                                                 value="{{ $item->qty }}"
-                                                                onkeydown="return false" />
-                                                            <span class="__btn __btn--plus"
+                                                                onkeydown="return false"
+                                                                autocomplete="off" />
+
+                                                            @if($item->qty < $item->model->qty)
+                                                                <span class="__btn __btn--plus"
                                                                 wire:click.prevent="increaseQuntity('{{ $item->rowId }}')"></span>
+                                                            @endif
 
 
                                                             <a href="#"
@@ -217,90 +225,95 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(!Cart::instance('saveforlater')->count() == null)
 
-                            <h2>{{ __('Admin/site.savelater') }}</h2>
-                            <div class="spacer py-2"></div>
 
-                            <!-- start goods -->
-                            <div class="goods goods--style-1">
-                                <h3 class="title-box"
-                                style="border-bottom: 1px solid; padding: 13px 18px; background-color: #ff2832; color: #fefefe; text-transform: uppercase; font-size: 14px; line-height: 14px;">
-                                {{ __('Admin/site.itemsave') }}
-                                <strong style="font-size: 20px">{{ Cart::instance('saveforlater')->count() }}</strong>
-                                {{ __('Admin/site.inbox') }}
-                               </h3>
-                                @if(Session::has('s_success_message'))
-                                    <div class="alert alert-success">
-                                        <strong>Success </strong> {{ Session::get('s_success_message') }}
-                                    </div>
-                                @endif
-                                <div class="__inner">
-                                    <div class="row">
-                                        @if(Cart::instance('saveforlater')->count() > 0)
-                                            @foreach (Cart::instance('saveforlater')->content() as $product)
-                                            <!-- start item -->
-                                                <div class="col-12 col-sm-6 col-lg-3">
-                                                    <div class="__item">
-                                                        <figure class="__image">
-                                                            <a href="{{ route('product_details',encrypt($product->model->id)) }}">
-                                                                @if($product->model->image->filename)
-                                                                    <img  src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
-                                                                    data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
+                                <h2>{{ __('Admin/site.savelater') }}</h2>
+                                <div class="spacer py-2"></div>
+
+                                <!-- start goods -->
+                                <div class="goods goods--style-1">
+                                    <h3 class="title-box"
+                                    style="border-bottom: 1px solid; padding: 13px 18px; background-color: #ff2832; color: #fefefe; text-transform: uppercase; font-size: 14px; line-height: 14px;">
+                                    {{ __('Admin/site.itemsave') }}
+                                    <strong style="font-size: 20px">{{ Cart::instance('saveforlater')->count() }}</strong>
+                                    {{ __('Admin/site.inbox') }}
+                                </h3>
+                                    @if(Session::has('s_success_message'))
+                                        <div class="alert alert-success">
+                                            <strong>Success </strong> {{ Session::get('s_success_message') }}
+                                        </div>
+                                    @endif
+                                    <div class="__inner">
+                                        <div class="row">
+                                            @if(Cart::instance('saveforlater')->count() > 0)
+                                                @foreach (Cart::instance('saveforlater')->content() as $product)
+                                                <!-- start item -->
+                                                    <div class="col-12 col-sm-6 col-lg-3">
+                                                        <div class="__item">
+                                                            <figure class="__image">
+                                                                <a href="{{ route('product_details',encrypt($product->model->id)) }}">
+                                                                    @if($product->model->image)
+                                                                        <img  src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
+                                                                        data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
+                                                                    @else
+                                                                        <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                                    @endif
+
+                                                                </a>
+                                                            </figure>
+
+                                                            <div class="__content">
+                                                                <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->model->id)) }}">{{ $product->model->name }}</a></h4>
+
+                                                                <span class="score"><span style="width:<?php echo $product->model->productRate();?>%"></span></span>
+
+                                                                <div class="stock-info in-stock">
+                                                                    <p class="availability">{{ __("Admin/site.status") }} :
+                                                                        <b class="text {{ $product->model->in_stock ==1 ?'text-success':'text-danger' }}">
+                                                                            {{ $product->model->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
+                                                                        </b>
+                                                                    </p>
+                                                                </div>
+                                                                @if($product->model->special_price >0)
+                                                                    <div class="product-price">
+                                                                        <span class="product-price__item product-price__item--old">{{ number_format($product->model->price, 2) }} $</span>
+                                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->model->special_price, 2) }} $</span>
+                                                                    </div>
                                                                 @else
-                                                                    <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                    data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                                    <div class="product-price">
+                                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->model->price, 2) }} $</span>
+                                                                    </div>
                                                                 @endif
-
-                                                            </a>
-                                                        </figure>
-
-                                                        <div class="__content">
-                                                            <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->model->id)) }}">{{ $product->model->name }}</a></h4>
-
-                                                            <span class="score"><span style="width:<?php echo $product->model->productRate();?>%"></span></span>
-
-                                                            <div class="stock-info in-stock">
-                                                                <p class="availability">{{ __("Admin/site.status") }} :
-                                                                    <b class="text {{ $product->model->in_stock ==1 ?'text-success':'text-danger' }}">
-                                                                        {{ $product->model->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
-                                                                    </b>
-                                                                </p>
+                                                                <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                                wire:click.prevent=' moveProductFromSaveForLaterToCart("{{ $product->rowId }}")' > {{ __('Admin/site.addtocart') }}
+                                                                </button>
+                                                                <a class="__remove" href="#" aria-label="Remove this item"
+                                                                wire:click.prevent="DeleteFromSaveForLater('{{ $product->rowId }}')"
+                                                                style="color: #e71d1d; font-size: 20px; padding: 10px;">
+                                                                <i class="fontello-cancel"></i>
+                                                                </a>
                                                             </div>
                                                             @if($product->model->special_price >0)
-                                                                <div class="product-price">
-                                                                    <span class="product-price__item product-price__item--old">{{ number_format($product->model->price, 2) }} $</span>
-                                                                    <span class="product-price__item product-price__item--new">{{ number_format($product->model->special_price, 2) }} $</span>
-                                                                </div>
+                                                            <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
                                                             @else
-                                                                <div class="product-price">
-                                                                    <span class="product-price__item product-price__item--new">{{ number_format($product->model->price, 2) }} $</span>
-                                                                </div>
+                                                            <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
                                                             @endif
-                                                            <button class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                            wire:click.prevent=' moveProductFromSaveForLaterToCart("{{ $product->rowId }}")' > {{ __('Admin/site.addtocart') }}
-                                                            </button>
-                                                            <a class="__remove" href="#" aria-label="Remove this item"
-                                                            wire:click.prevent="DeleteFromSaveForLater('{{ $product->rowId }}')"
-                                                            style="color: #e71d1d; font-size: 20px; padding: 10px;">
-                                                            <i class="fontello-cancel"></i>
-                                                            </a>
                                                         </div>
-                                                        @if($product->model->special_price >0)
-                                                        <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
-                                                        @else
-                                                        <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>
-                                                        @endif
                                                     </div>
-                                                </div>
-                                            <!-- end item -->
-                                            @endforeach
-                                        @else
-                                          <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
-                                        @endif
+                                                <!-- end item -->
+                                                @endforeach
+                                            @else
+                                            <h3 style="color: #e71d1d;"> ({{ __('Admin/site.no_data_found') }})</h3>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             <!-- end goods -->
+                            {{-- @else
+                            <h2>{{ __('Admin/site.no_data_found') }}</h2> --}}
+                            @endif
                         </form>
                     </div>
                     <!-- start cart -->
@@ -311,37 +324,5 @@
     </section>
     <!-- end section -->
 
-    <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-            <!-- start banner simple -->
-            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @else
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @endif
-                </div>
 
-                <div class="row no-gutters">
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif"
-                                data-src="img/banner_bg_3.jpg" alt="demo" /></a>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif"
-                                data-src="img/banner_bg_4.jpg" alt="demo" /></a>
-                    </div>
-                </div>
-            </div>
-            <!-- end banner simple -->
-        </div>
-    </section>
-    <!-- end section -->
 </div>

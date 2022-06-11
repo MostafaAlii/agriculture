@@ -46,8 +46,133 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
+                                    <form class="form" method="POST" action="{{ route('protected_house.statistic') }}">
+                                        @csrf
+                                        <div class="form-body">
+                                            @if($admin->type == 'employee')
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/orchards.village') }}</label>
+                                                            <select class="select2 form-control" name="village_id"
+                                                                    id="village_id">
+                                                                @foreach (App\Models\Village::all() as $village)
+                                                                    <option value="{{ $village->id }}">{{ $village->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/orchards.status') }}</label>
+                                                            <select class="custom-select form-control" id="customSelect"
+                                                                    name="status">
+                                                                <option selected value = ""disabled>{{__('Admin\p_houses.select')}}</option>
+                                                                <option value="active">{{ __('Admin\p_houses.active') }}</option>
+                                                                <option value="inactive">{{ __('Admin\p_houses.inactive') }}</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect1-1">{{ __('Admin/orchards.supported_side') }}</label>
+                                                            <select class="custom-select form-control"
+                                                                    id="customSelect1-1" name="supported_side">
+                                                                <option selected value = ""disabled>{{__('Admin\p_houses.select')}}</option>
+                                                                <option value="private">{{ __('Admin\p_houses.private') }}</option>
+                                                                <option value="govermental">{{ __('Admin\p_houses.govermental') }}</option>
+                                                                <option value="international organizations">{{ __('Admin\p_houses.international_organizations') }}</option>
+
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
 
 
+                                                </div>
+                                            @elseif($admin->type =='admin')
+
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="area_id">{{ __('Admin/precipitations.area') }}</label>
+                                                            <select name="area_id" id="area_id" class="form-control" required>
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                </option>
+                                                                @foreach (App\Models\Area::all() as $area)
+                                                                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+
+                                                        <div class="form-group">
+                                                            <label for="state_id">{{ __('Admin/precipitations.state') }}</label>
+                                                            <select class=" form-control" name="state_id" id="state_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/orchards.village') }}</label>
+                                                            <select class=" form-control" name="village_id" id="village_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/p_houses.status') }}</label>
+                                                            <select class="custom-select form-control" id="customSelect"
+                                                                    name="status">
+                                                                <option selected value = ""disabled>{{__('Admin\p_houses.select')}}</option>
+                                                                <option value="active">{{ __('Admin\p_houses.active') }}</option>
+                                                                <option value="inactive">{{ __('Admin\p_houses.inactive') }}</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect1-1">{{ __('Admin/p_houses.supported_side') }}</label>
+                                                            <select class="custom-select form-control"
+                                                                    id="customSelect1-1" name="supported_side">
+                                                                <option selected value = ""disabled>{{__('Admin\p_houses.select')}}</option>
+                                                                <option value="private">{{ __('Admin\p_houses.private') }}</option>
+                                                                <option value="govermental">{{ __('Admin\p_houses.govermental') }}</option>
+                                                                <option value="international organizations">{{ __('Admin\p_houses.international_organizations') }}</option>
+
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            @endif
+                                   <div class="row">
+
+
+                                            </div>
+
+                                            <div class="form-actions center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
+                                                </button>
+                                                <a type="button" href="{{route('protected_house_index')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                <hr/>
+                                    @if(isset($statistics))
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="animals-table">
                                             <thead>
@@ -95,6 +220,7 @@
 
                                         </table>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

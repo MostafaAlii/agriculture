@@ -23,9 +23,9 @@ return [
     'report_on_the_number_of_greenhouses_govermental_supported'=>'تقرير عن عدد البيوت المحمية المدعومة من الحكومة',
     'Database_about_greenhouses_private_supported'=>'قاعدة بيانات حول البيوت المحمية المدعومة من جهات خاصة',
     'report_on_the_number_of_greenhouses_private_supported'=>'تقرير عن عدد البيوت المحمية المدعومة من جهات خاصة',
-    ''=>'',
+    'back'=>'رجوع',
 
-
+    'select'=>'اختر من القائمة',
     'action' =>'العمليات',
     'farmer_inf' =>'معلومات الفلاح',
     'admin_departments' =>'الهيكلية الإدارية التابعة',

@@ -17,8 +17,10 @@ class ProductDetails extends Component
 {
     public $product_id;
     public $qty=1;
+    public $qtymax;
     public function mount($product_id){
         $this->product_id = Crypt::decrypt($product_id);
+        $this->qtymax = Product::find($this->product_id)->qty;
     }
     public function store($product_id,$product_name,$product_price){
         Cart::instance('cart')->add($product_id,$product_name,$this->qty,$product_price)->associate('App\Models\Product');

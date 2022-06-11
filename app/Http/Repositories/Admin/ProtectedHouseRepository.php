@@ -5,6 +5,12 @@ namespace App\Http\Repositories\Admin;
 use App\Models\ProtectedHouse;
 use App\Models\Admin;
 use App\Models\Village;
+use App\Models\VillageTranslation;
+use App\Models\Area;
+use App\Models\AreaTranslation;
+use App\Models\State;
+use App\Models\StateTranslation;
+
 use App\Models\Unit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -37,9 +43,9 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area', 'state', 'admin')
-                ->where('admin_id',  $admin->id);
+                ->where('admin_id',  $admin->id)->get();
         } else {
-            $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area', 'state', 'admin');
+            $protectedHouse = ProtectedHouse::with('farmer', 'village', 'area', 'state', 'admin')->get();
 
         }
 
@@ -242,13 +248,38 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
     }// end of bulkDelete
 
 
-    public function protected_house_statistics()
+    public function protected_house_index(){
+        $adminID = Auth::user()->id;
+        $admin=Admin::findorfail($adminID);
+        return view('dashboard.admin.protected_houses.protected_house_statistics',compact('admin'));
+
+    }
+
+
+    public function protected_house_statistics($request)
     {
         $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        $first_name = $admin->firstname;;
+        $admin=Admin::findorfail($adminID);
+        $supported_side = $request->supported_side;
+        $status = $request->status;
+        if(!empty($request->area_id)){
+            $area_name = AreaTranslation::where('area_id','=',$request->area_id)->pluck('name');
+
+        }
+        if(!empty($request->state_id)){
+            $state_name = StateTranslation::where('state_id','=',$request->state_id)->pluck('name');
+        }
+        if(!empty($request->village_id)){
+            $village_name = VillageTranslation::where('village_id','=',$request->village_id)->pluck('name');
+        }
+
         if ($admin->type == 'employee') {
-            $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+            if  ($request->village_id !=null  && $request->status !=null && $request->supported_side != null)
+            {
+
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
                 'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
                 'protected_houses.supported_side AS supported_side',
                 'protected_houses.status AS status',
@@ -261,112 +292,364 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
                 ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
                 ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
                 ->where('protected_houses.admin_id', $admin->id)
+                ->where('area_translations.area_id', $area_id)
+                ->where('state_translations.state_id', $state_id)
+                ->where('village_translations.name', $village_name)
+                ->where('protected_houses.status', $status)
+                ->where('protected_houses.supported_side', $supported_side)
                 ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics',compact('admin','statistics'));
+
+            }
+            elseif
+            ( $request->village_id !=null  && $request->status !=null && $request->supported_side == null)
+            {
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('protected_houses.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->where('protected_houses.supported_side', $supported_side)
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif
+            ( $request->village_id !=null  && $request->status ==null && $request->supported_side == null)
+            {
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('protected_houses.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif
+            ( $request->village_id !=null  && $request->status ==null && $request->supported_side != null)
+            {
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('protected_houses.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->where('protected_houses.status', $status)
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
         } elseif ($admin->type == 'admin') {
-            $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
-                'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
-                'protected_houses.supported_side AS supported_side',
-                'protected_houses.status AS status',
-                'protected_houses.count_protected_house AS count_protected_house',
-                'protected_houses.average_product_annual AS average_product_annual',
-                'unit_translations.Name AS unit_name')
-                ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
-                ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
-                ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
-                ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
-                ->get();
+
+            if ($request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->status != null && $request->supported_side != null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('protected_houses.supported_side', $supported_side)
+                    ->where('protected_houses.status', $status)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->status != null && $request->supported_side != null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('protected_houses.supported_side', $supported_side)
+                    ->where('protected_houses.status', $status)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+           elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->status == null && $request->supported_side != null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('protected_houses.supported_side', $supported_side)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->status != null && $request->supported_side == null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('protected_houses.status', $status)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->status == null && $request->supported_side == null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->status == null && $request->supported_side == null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->status != null && $request->supported_side == null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('protected_houses.status', $status)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->status == null && $request->supported_side != null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('protected_houses.supported_side', $supported_side)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->status != null && $request->supported_side != null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('protected_houses.supported_side', $supported_side)
+                    ->where('protected_houses.status', $status)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->status == null && $request->supported_side == null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->status != null && $request->supported_side == null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('protected_houses.status', $status)
+
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->status == null && $request->supported_side != null) {
+
+                $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
+                    'protected_houses.supported_side AS supported_side',
+                    'protected_houses.status AS status',
+                    'protected_houses.count_protected_house AS count_protected_house',
+                    'protected_houses.average_product_annual AS average_product_annual',
+                    'unit_translations.Name AS unit_name')
+                    ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
+                    ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('protected_houses.supported_side', $supported_side)
+
+                    ->get();
+                return view('dashboard.admin.protected_houses.protected_house_statistics', compact('admin','statistics'));
+
+            }
         }
 
-        return view('dashboard.admin.protected_houses.protected_house_statistics', compact('statistics'));
     }
 
-    public function protected_house_gov_statistics()
-    {
-        $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == "employee") {
-            $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
-                'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
-                'protected_houses.supported_side AS supported_side',
-                'protected_houses.status AS status'
-                , DB::raw('SUM(protected_houses.count_protected_house) As count_protected_house')
-                , DB::raw('SUM(protected_houses.average_product_annual) As average_product_annual'),
 
-                'unit_translations.Name AS unit_name')
-                ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
-                ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
-                ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
-                ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
-                ->where('protected_houses.admin_id', $admin->id)
-                ->where('protected_houses.supported_side', 'like', 'govermental')
-                ->GROUPBY('Area', 'State', 'village_name', 'status', 'farmer_name', 'phone', 'supported_side',
-                    'status', 'count_protected_house', 'average_product_annual', 'unit_name')->get();
-        } elseif ($admin->type == "admin") {
-            $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
-                'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
-                'protected_houses.supported_side AS supported_side',
-                'protected_houses.status AS status'
-                , DB::raw('SUM(protected_houses.count_protected_house) As count_protected_house')
-                , DB::raw('SUM(protected_houses.average_product_annual) As average_product_annual'),
-
-                'unit_translations.Name AS unit_name')
-                ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
-                ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
-                ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
-                ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
-                ->where('protected_houses.supported_side', 'like', 'govermental')
-                ->GROUPBY('Area', 'State', 'village_name', 'status', 'farmer_name', 'phone', 'supported_side',
-                    'status', 'count_protected_house', 'average_product_annual', 'unit_name')->get();
-        }
-
-
-        return view('dashboard.admin.protected_houses.protected_house_g_statistics', compact('statistics'));
-    }
-
-    public function protected_house_private_statistics()
-    { $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == "employee") {
-            $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
-                'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
-                'protected_houses.supported_side AS supported_side',
-                'protected_houses.status AS status',
-                'protected_houses.count_protected_house AS count_protected_house',
-                'protected_houses.average_product_annual AS average_product_annual'
-                , DB::raw('SUM(protected_houses.count_protected_house) As count_protected_house')
-                , DB::raw('SUM(protected_houses.average_product_annual) As average_product_annual'),
-                'unit_translations.Name AS unit_name')
-                ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
-                ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
-                ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
-                ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
-                ->where('protected_houses.admin_id', $admin->id)
-                ->whereIn('protected_houses.supported_side', ['private', 'International Organization'])
-                ->GROUPBY('Area', 'State', 'village_name', 'status', 'farmer_name', 'phone', 'supported_side',
-                    'status', 'count_protected_house', 'average_product_annual', 'unit_name')->get();
-        }elseif ($admin->type == "admin"){
-            $statistics = ProtectedHouse::select('area_translations.name AS Area', 'state_translations.name AS State',
-                'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name',
-                'protected_houses.supported_side AS supported_side',
-                'protected_houses.status AS status',
-                'protected_houses.count_protected_house AS count_protected_house',
-                'protected_houses.average_product_annual AS average_product_annual'
-                , DB::raw('SUM(protected_houses.count_protected_house) As count_protected_house')
-                , DB::raw('SUM(protected_houses.average_product_annual) As average_product_annual'),
-                'unit_translations.Name AS unit_name')
-                ->join('area_translations', 'protected_houses.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'protected_houses.state_id', '=', 'state_translations.id')
-                ->join('village_translations', 'protected_houses.village_id', '=', 'village_translations.id')
-                ->join('farmers', 'protected_houses.farmer_id', '=', 'farmers.id')
-                ->join('unit_translations', 'protected_houses.unit_id', '=', 'unit_translations.id')
-                ->whereIn('protected_houses.supported_side', ['private', 'International Organization'])
-                ->GROUPBY('Area', 'State', 'village_name', 'status', 'farmer_name', 'phone', 'supported_side',
-                    'status', 'count_protected_house', 'average_product_annual', 'unit_name')->get();
-        }
-        return view('dashboard.admin.protected_houses.protected_house_P_statistics', compact('statistics'));
-    }
 }

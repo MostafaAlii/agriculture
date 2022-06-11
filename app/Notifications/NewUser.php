@@ -18,40 +18,19 @@ class NewUser extends Notification
         $this->user = $user;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via($notifiable)
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
     public function toMail($notifiable)
     {
-    // $url = 'http://127.0.0.1:8000/dashboard_admin/user/profile/'.$this->user->id;
-    $url = 'http://127.0.0.1:8000/user/dashboard';
+    $url = 'http://127.0.0.1:8000/home';
     return (new MailMessage)
-                ->subject('اضافة مستخدم جديد')
-                ->line('اضافه مستخدم جديد')
-                ->action('عرض تفاصيل', $url)
-                ->line('شكرا لاستخدامك مورا سوفت ');
+                ->subject(__('Admin/site.add_new_user'))
+                ->view( 'front.emails.subscriptions.notyuseremail', ['user' => $this->user]);
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray($notifiable)
     {
         return [

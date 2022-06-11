@@ -25,9 +25,7 @@ class BeekeeperRepository implements BeekeeperInterface
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        $areaID = $admin->area->id;
         $area_name = $admin->area->name;
-        $stateID = $admin->state->id;
         $state_name = $admin->state->name;
         return view('dashboard.admin.beekeepers.index',
             compact('admin', 'area_name', 'state_name'));
@@ -117,25 +115,26 @@ class BeekeeperRepository implements BeekeeperInterface
         try {
 
             $requestData = $request->validated();
-            $beekeeper = new BeeKeeper();
-            $beekeeper->admin_id = $requestData['admin_id'];
-            $beekeeper->farmer_id = $requestData['farmer_id'];
-            $beekeeper->state_id = $requestData['state_id'];
-            $beekeeper->area_id = $requestData['area_id'];
-            $beekeeper->village_id = $requestData['village_id'];
-            $beekeeper->died_beehive_count = $requestData['died_beehive_count'];
-            $beekeeper->annual_new_product_beehive = $requestData['annual_new_product_beehive'];
-            $beekeeper->annual_old_product_beehive = $requestData['annual_old_product_beehive'];
-            $beekeeper->new_beehive_count = $requestData['new_beehive_count'];
-            $beekeeper->old_beehive_count = $requestData['old_beehive_count'];
-            $beekeeper->unit_id = $requestData['unit_id'];
-            $beekeeper->supported_side = $requestData['supported_side'];
-            $beekeeper->cost = $requestData['cost'];
-            $beekeeper->phone = $requestData['phone'];
-            $beekeeper->email = $requestData['email'];
+
+            $beekeeper = BeeKeeper::create([
+                'admin_id' => $requestData['admin_id'],
+                'farmer_id' => $requestData['farmer_id'],
+                'state_id' => $requestData['state_id'],
+                'area_id' => $requestData['area_id'],
+                'village_id' => $requestData['village_id'],
+                'died_beehive_count' => $requestData['died_beehive_count'],
+                'annual_new_product_beehive' => $requestData['annual_new_product_beehive'],
+                'annual_old_product_beehive' => $requestData['annual_old_product_beehive'],
+                'new_beehive_count' => $requestData['new_beehive_count'],
+                'old_beehive_count' => $requestData['old_beehive_count'],
+                'unit_id' => $requestData['unit_id'],
+                'supported_side' => $requestData['supported_side'],
+                'cost' => $requestData['cost'],
+                'phone' => $requestData['phone'],
+                'email' => $requestData['email'],
 
 
-            $beekeeper->save($requestData);
+            ]);
             $beekeeper->beedisasters()->attach($request->disasters);
             $beekeeper->coursebees()->attach($request->courses);
 

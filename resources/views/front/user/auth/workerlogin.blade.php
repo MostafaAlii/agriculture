@@ -115,6 +115,7 @@
                             <div class="input-wrp">
                                 <input class="textfield" type="text" placeholder="{{ trans('Admin/site.phone') }}" name="phone" value="{{ old('phone') }}"
                                 maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' required />
+                                <div>{{ trans('Admin/site.phone') }}</div>
                                 @error('phone')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror

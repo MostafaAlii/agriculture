@@ -3,13 +3,13 @@
     <div class="main-menu-content">
         <div class="user-profile">
             <div class="user-info text-center pt-1 pb-1">
-                @if (isset(Auth::user()->image->filename))
+                @if (isset(Auth::user()->image))
                 <a class="mr-2" href="{{ route('profile.index') }}">
                     <img class="user-img img-fluid rounded-circle" style="width:50%; height:50%;border-radius: 15%;" class="rounded-circle" src="{{ asset('Dashboard/img/admins/' . Auth::user()->image->filename) }}" />
                 </a>
                 @else
                 <a class="mr-2" href="{{ route('profile.index') }}">
-                    <img class="user-img img-fluid rounded-circle" src="{{ asset('Dashboard/img/admins/avatar.jpg') }}" />
+                    <img class="user-img img-fluid rounded-circle" src="{{ asset('Dashboard/img/profile.png') }}" />
                 </a>
                 @endif
                 <div class="name-wrapper d-block dropdown text-center">
@@ -17,7 +17,18 @@
                             Auth::user()->firstname }}
                             {{ Auth::user()->lastname }}</span></a>
                     <div class="text-light text-center">
-                        {{ Auth::user()->type == 'admin' ? __('Admin/site.admins') : __('Admin/site.employee') }}
+                        {{ Auth::user()->type == 'admin' ? __('Admin/site.admin') : __('Admin/site.employee') }}
+                    </div>
+                    <div class="text-light text-center">
+                        {{ Auth::user()->email }}
+                    </div>
+                    <div class="text-light text-center">
+
+                        @forelse (Auth::user()->getRoleNames() as $permission)
+                        <label class="badge badge-success " style="font-size: 120%">{{ $permission }}</label>
+                        @empty
+                        <label class="badge badge-warning">{{ trans('Admin/roles.this_user_not_have_any_permission') }}</label>
+                        @endforelse
                     </div>
                     <div class="dropdown-menu arrow" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('profile.index') }}">
@@ -128,14 +139,14 @@
                                 @can('transaction-managment')
                                     <li>
                                         <a class="menu-item" href="#">
-                                            <i class="material-icons">swap_calls</i> 
+                                            <i class="material-icons">swap_calls</i>
                                             <span data-i18n="Vertical"> {{ trans('Admin\setting.transaction_setting') }} </span>
                                         </a>
                                         <ul class="menu-content">
                                             @can('currencies')
                                                 <li>
                                                     <a class="menu-item" href="{{ route('Currencies.index') }}">
-                                                        <i class="material-icons">attach_money</i>  
+                                                        <i class="material-icons">attach_money</i>
                                                         <span data-i18n="Currencies"> {{ trans('Admin/setting.currency_title_in_sidebar') }} </span>
                                                     </a>
                                                 </li>
@@ -143,12 +154,12 @@
                                             @can('units')
                                                 <li>
                                                     <a class="menu-item" href="{{ route('Units.index') }}">
-                                                        <i class="material-icons">ac_unit</i>  
+                                                        <i class="material-icons">ac_unit</i>
                                                         <span data-i18n="Units"> {{ trans('Admin/setting.unit_title_in_sidebar') }} </span>
                                                     </a>
                                                 </li>
                                             @endcan
-                                        </ul>        
+                                        </ul>
                                     </li>
                                 @endcan
                             <!-- End Transactions settings -->
@@ -233,8 +244,8 @@
                                     </ul>
                                 </li>
                             @endcan
-                            <!-- End Pages --> 
-                        </ul> 
+                            <!-- End Pages -->
+                        </ul>
                     </li>
                 @endcan
                 <!-- End Settings -->
@@ -646,7 +657,7 @@
                             @endcan
                             @can('bee-disasters')
                                 <li>
-                                    <a class="menu-item" href="{{ route('BeeDisasters.index') }}"> 
+                                    <a class="menu-item" href="{{ route('BeeDisasters.index') }}">
                                         <i class="material-icons">list</i>
                                         <span data-i18n="Vertical">
                                             {{ __('Admin\bees.beesDisasterPageTitle') }}
@@ -682,7 +693,7 @@
                         <ul class="menu-content">
                             @can('whole-sale-products')
                                 <li>
-                                    <a class="menu-item" href="{{ route('WholeSaleProducts.index') }}"> 
+                                    <a class="menu-item" href="{{ route('WholeSaleProducts.index') }}">
                                         <i class="material-icons">list</i>
                                         <span data-i18n="Vertical">
                                             {{ __('Admin\income_products.WholeProduct') }}
@@ -692,7 +703,7 @@
                             @endcan
                             @can('income-products')
                                 <li>
-                                    <a class="menu-item" href="{{ route('IncomeProducts.index') }}"> 
+                                    <a class="menu-item" href="{{ route('IncomeProducts.index') }}">
                                         <i class="material-icons">list</i>
                                         <span data-i18n="Vertical">
                                             {{ __('Admin\income_products.income_productPageTitle') }}
@@ -702,7 +713,7 @@
                             @endcan
                             @can('outcome-products')
                             <li>
-                                <a class="menu-item" href="{{ route('OutcomeProducts.index') }}"> 
+                                <a class="menu-item" href="{{ route('OutcomeProducts.index') }}">
                                     <i class="material-icons">list</i><span data-i18n="Vertical">
                                         {{ __('Admin\outcome_products.outcome_productPageTitle') }}
                                     </span>

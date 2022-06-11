@@ -5,7 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 class BeeKeeper extends Model {
     use HasFactory;
     protected $table = "bee_keepers";
-    protected $guarded=[];
+
+
+    protected $fillable=['admin_id','farmer_id','state_id','area_id','village_id','died_beehive_count',
+        'annual_new_product_beehive','annual_old_product_beehive','new_beehive_count',
+        'old_beehive_count','unit_id','supported_side','cost','phone','phone'];
     public $timestamps = true;
     const SPATIAL = 'private', GOVERMENTAL = 'govermental', INTERNATIONAL_ORGANIZATION = 'international organizations';
     public function getSupportedSide() {

@@ -2,7 +2,7 @@
     <!-- start section -->
     <section class="section section--no-pt section--no-pb section--gutter">
         <!-- start banner simple -->
-        <div class="simple-banner simple-banner--style-1" data-aos="fade" data-aos-offset="50" style="background-image:url('{{ asset('Dashboard/img/products/' . $offer_product->image->filename) }}')">;
+        <div class="simple-banner simple-banner--style-1" data-aos="fade" data-aos-offset="50" style="background-image:url('{{ asset('Dashboard/img/products/' . $offer_product->image) }}')">;
             <div class="__label d-none d-md-block">
                 <div class="d-table m-auto h-100">
                     <div class="d-table-cell align-middle">

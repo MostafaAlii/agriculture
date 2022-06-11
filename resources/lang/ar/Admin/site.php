@@ -209,8 +209,8 @@ return [
     'worktype'=>'نوع العمل',
     'alone'=>'فردى',
     'team'=>'جماعى',
-    'daily'=>'سعر اليوم',
-    'hourly'=>'سعر الساعه',
+    'daily'=>'  سعر اليوم بالدولار',
+    'hourly'=>'سعر الساعه بالدولار',
     'dhprice'=>'سعر اليوم/الساعه',
     'desc'=>'الوصف',
 
@@ -253,5 +253,23 @@ return [
        'enter_new_password'=>'ادخل كلمة المرور الجديدة',
        'enter_passord_confirm'=>'اعد ادخال كلمة المرور',
        'birthday'=>'تاريخ الميلاد',
+       'permission_name'=>'اسم الصلاحيه',
+       //section 2 in home page
+       'Free_Shipping_On_Order_Over'=>'شحن مجاني على الطلبات أكثر من 120دولار',
+       'Free_shipping_on_all_order'=>'شحن مجاني على جميع الطلبات',
+       'Member_Discount'=>'خصم لأعضاء',
+       'Back_guarantee_under_7_days'=>'ضمان على الطلبات السابقة تحت 7 أيام',
+       'Money_Return'=>'إرجاع المال',
+       'Support_online_24_hours_a_day'=>'دعم 24 ساعة فى اليوم',
+       'Online Support'=>'دعم عبر الانترنت',
+       'Online Support 24/7'=>'دعم عبر الانترنت 24/7',
+       // email notification
+       'welcome_to_our_website'=>'مرحبا بكم فى موقعنا',
+       'subject'=>'تم تسجيلك فى موقعنا',
+       'createsms'=>'تم تسجيل بياناتك بنجاج و تفعيل حسابك شكرا لك',
+       'add_new_user'=>'تم اضافة مستخدم جديد',
+       'add_new_worker'=>'تم اضافة عامل جديد',
+       'add_new_admin'=>'تم اضافة مدير جديد',
+       'add_new_farmer'=>'تم اضافة مزارع جديد',
 ];
 

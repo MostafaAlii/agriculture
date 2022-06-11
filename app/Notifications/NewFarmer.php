@@ -37,12 +37,11 @@ class NewFarmer extends Notification
      */
     public function toMail($notifiable)
     {
-    $url = 'http://127.0.0.1:8000/dashboard_farmer/product';
+    // $url = 'http://127.0.0.1:8000/dashboard_farmer/product';
     return (new MailMessage)
-                ->subject('اضافة فلاح جديد')
-                ->line('اضافة فلاح جديد')
-                ->action('عرض تفاصيل', $url)
-                ->line('شكرا لاستخدامك مورا سوفت ');
+                ->subject(__('Admin/site.add_new_farmer'))
+                ->view( 'front.emails.subscriptions.notyuseremail', ['user' => $this->farmer]);
+
     }
 
     /**

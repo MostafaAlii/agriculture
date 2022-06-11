@@ -28,6 +28,7 @@ class WorkerEditProfile extends Controller
             DB::beginTransaction();
             $worker = Worker::findorfail(Auth::guard('worker')->user()->id);
             $requestData = $request->validated();
+            // dd($worker);
             if($request->daily_price ){
                 $requestData['hourly_price'] = null;
             }
@@ -36,9 +37,9 @@ class WorkerEditProfile extends Controller
             }
             $worker->update($requestData);
             if($request->image){
-                $this->deleteImage('upload_image','/workers/' . Auth::guard('worker')->user()->image->filename,Auth::guard('worker')->user()->id);
+                $this->deleteImage('upload_image','/workers/' . Auth::guard('worker')->user()->image,Auth::guard('worker')->user()->id);
             }
-            $this->addImage($request, 'image' , 'workers' , 'upload_image',Auth::user()->id, 'App\Models\worker');
+            $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\worker');
             DB::commit();
             session()->flash('Edit',__('Admin/site.updated_successfully'));
             return redirect()->route('worker.ownprofile');

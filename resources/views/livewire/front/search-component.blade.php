@@ -120,53 +120,7 @@
                                 </div>
                                 <!-- end widget -->
 
-                                <!-- start widget -->
-                                {{-- <div class="widget widget--additional">
-                                        <h4 class="h6 widget-title">Additional</h4>
 
-                                        <ul>
-                                            <li>
-                                                <label class="checkfield">
-                                                    <input type="checkbox" checked/>
-                                                    <i></i>
-                                                    Organic
-                                                </label>
-                                            </li>
-
-                                            <li>
-                                                <label class="checkfield">
-                                                    <input type="checkbox" />
-                                                    <i></i>
-                                                    Fresh
-                                                </label>
-                                            </li>
-
-                                            <li>
-                                                <label class="checkfield">
-                                                    <input type="checkbox" />
-                                                    <i></i>
-                                                    Sales
-                                                </label>
-                                            </li>
-
-                                            <li>
-                                                <label class="checkfield">
-                                                    <input type="checkbox" />
-                                                    <i></i>
-                                                    Discount
-                                                </label>
-                                            </li>
-
-                                            <li>
-                                                <label class="checkfield">
-                                                    <input type="checkbox" />
-                                                    <i></i>
-                                                    Expired
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div> --}}
-                                <!-- end widget -->
 
                                 <!-- start widget -->
                                 <div class="widget widget--tags">
@@ -180,19 +134,7 @@
                                 </div>
                                 <!-- end widget -->
 
-                                <!-- start widget -->
-                                {{-- <div class="widget">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col">
-                                                <button class="custom-btn custom-btn--medium custom-btn--style-1" role="button">Show Products</button>
-                                            </div>
 
-                                            <div class="col-auto">
-                                                <a class="clear-filter" href="#">Clear all</a>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                <!-- end widget -->
 
                                 <!-- start widget -->
                                 <div class="widget widget--products">
@@ -206,7 +148,7 @@
                                                         <figure class="__image">
                                                             <a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">
-                                                                @if ($product->image->filename)
+                                                                @if ($product->image)
                                                                     <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                                         data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                                         alt="demo" />
@@ -224,7 +166,7 @@
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                         </h4>
 
-                                                        <div class="rating">
+                                                        {{-- <div class="rating">
                                                             <span class="rating__item rating__item--active"><i
                                                                     class="fontello-star"></i></span>
                                                             <span class="rating__item rating__item--active"><i
@@ -235,7 +177,7 @@
                                                                     class="fontello-star"></i></span>
                                                             <span class="rating__item"><i
                                                                     class="fontello-star"></i></span>
-                                                        </div>
+                                                        </div> --}}
 
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
@@ -262,10 +204,10 @@
                                 <!-- end widget -->
 
                                 <!-- start widget -->
-                                <div class="widget widget--banner">
+                                {{-- <div class="widget widget--banner">
                                     <a href="#"><img class="img-fluid  lazy" src="img/blank.gif"
                                             data-src="img/widget_banner_2.jpg" alt="demo" /></a>
-                                </div>
+                                </div> --}}
                                 <!-- end widget -->
                             </div>
                         </aside>
@@ -330,7 +272,7 @@
                                             <div class="col-12 col-sm-6 col-lg-4">
                                                 <div class="__item">
                                                     <figure class="__image">
-                                                        @if ($product->image->filename)
+                                                        @if ($product->image)
                                                             <a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">
                                                                 <img width="188"
@@ -366,14 +308,14 @@
                                                                     </b>
                                                                 </p>
                                                             </div>
-                                                            <div class="stock-info in-stock">
+                                                            {{-- <div class="stock-info in-stock">
                                                                 <p class="availability">
                                                                     <b
                                                                         class="text text-success ">
                                                                         @lang('Admin/site.qty') ({{ $product->qty  }})
                                                                     </b>
                                                                 </p>
-                                                            </div>
+                                                            </div> --}}
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
                                                                 <span
@@ -392,8 +334,8 @@
                                                         @endif
                                                         @if (Auth::guard('vendor')->user() )
                                                         @if($product->in_stock ==1)
-                                                            <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                                href="#"
+                                                            <a class="custom-btn custom-btn--medium custom-btn--style-1" title="{{ __('Admin/site.addtocart') }}"
+                                                                href="#" id="add-to-cart-cartbtnbtn" onclick="myFunction()"
                                                                 wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                                 <i class="fontello-shopping-bag"></i>
                                                                 {{ __('Admin/site.addtocart') }}
@@ -460,41 +402,7 @@
 
         </div>
     </section>
-    <!-- end section -->
 
-    <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-            <!-- start banner simple -->
-            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @else
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @endif
-                </div>
-
-                <div class="row no-gutters">
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif"
-                                data-src="img/banner_bg_3.jpg" alt="demo" /></a>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif"
-                                data-src="img/banner_bg_4.jpg" alt="demo" /></a>
-                    </div>
-                </div>
-            </div>
-            <!-- end banner simple -->
-        </div>
-    </section>
-    <!-- end section -->
 </div>
 @push('js')
     <script>
@@ -517,4 +425,19 @@
             @this.set('max_price', value[1]);
         });
     </script>
+        <script>
+            function myFunction() {
+                console.log('clicked');
+                alert('{{ __('Website/home.item_added_to_cart') }}');
+                            // this.text('{{ __('Admin/site.loading') }}');
+                    //  $("this").text("{{ __('Admin/site.adding_to_cart') }}");
+                    // document.getElementById("add-to-cart-cartbtnbtn").innerText = "{{ __('Admin/site.adding_to_cart') }}";
+                    // document.getElementById("add-to-cart-cartbtnbtn").attr("disabled", true);
+                    // document.getElementById("add-to-cart-cartbtnbtn").classList.add("disabled");
+                    // document.getElementById("add-to-cart-cartbtnbtn").classList.remove("custom-btn--style-1");
+                    // document.getElementById("add-to-cart-cartbtnbtn").classList.add("btn-loading");
+                    // document.getElementById("add-to-cart-cartbtnbtn").disabled = false;
+
+            }
+        </script>
 @endpush

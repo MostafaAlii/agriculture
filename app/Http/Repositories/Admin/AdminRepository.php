@@ -5,12 +5,14 @@ namespace App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\AdminInterface;
 use App\Models\Admin;
 use App\Models\Area;
+use App\Notifications\NewAdmin;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
 use Exception;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Spatie\Permission\Models\Role;
 
 class AdminRepository implements AdminInterface
@@ -70,6 +72,7 @@ class AdminRepository implements AdminInterface
             $admin = Admin::latest()->first();
             $admin->assignRole($request->input('roles_name'));
             $this->addImage($request, 'image', 'admins', 'upload_image', $admin->id, 'App\Models\Admin');
+            Notification::send($admin, new NewAdmin($admin));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Admins.index');
@@ -179,7 +182,7 @@ class AdminRepository implements AdminInterface
             }
             $admin->update($requestData);
             if ($request->image) {
-                $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+                $this->deleteImage('upload_image', '/admins/' . $admin->image, $admin->id);
             }
             $this->addImage($request, 'image', 'admins', 'upload_image', $admin->id, 'App\Models\Admin');
             DB::table('model_has_roles')->where('model_id', $adminID)->delete();

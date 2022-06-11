@@ -92,7 +92,8 @@
                                 @enderror
                             </div>
                             <div class="input-wrp">
-                                <input class="textfield" name="phone" type="tel" placeholder="{{ __('website\home.phone') }}" wire:model='phone'/>
+                                <input class="textfield" name="phone" type="tel" placeholder="{{ __('website\home.phone') }}" wire:model='phone'
+                                maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' required />
                                 @error('phone')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
