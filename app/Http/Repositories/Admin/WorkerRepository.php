@@ -4,6 +4,7 @@ use App\Http\Interfaces\Admin\WorkerInterface;
 use App\Models\Admin;
 use App\Models\Area;
 use App\Models\Worker;
+use App\Notifications\NewWorker;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Traits\UploadT;
@@ -59,15 +60,15 @@ class WorkerRepository implements WorkerInterface{
             Worker::create($requestData);
             $worker = Worker::latest()->first();
             $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
-            // Notification::send($worker, new \App\Notifications\NewWorker($worker));
+            Notification::send($worker, new NewWorker($worker));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('workers.index');
          } catch (\Exception $e) {
             DB::rollBack();
-        //    toastr()->error(__('Admin/site.sorry'));
-        //    return redirect()->back();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+           toastr()->error(__('Admin/site.sorry'));
+           return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 

@@ -263,5 +263,13 @@ return [
        'Support_online_24_hours_a_day'=>'دعم 24 ساعة فى اليوم',
        'Online Support'=>'دعم عبر الانترنت',
        'Online Support 24/7'=>'دعم عبر الانترنت 24/7',
+       // email notification
+       'welcome_to_our_website'=>'مرحبا بكم فى موقعنا',
+       'subject'=>'تم تسجيلك فى موقعنا',
+       'createsms'=>'تم تسجيل بياناتك بنجاج و تفعيل حسابك شكرا لك',
+       'add_new_user'=>'تم اضافة مستخدم جديد',
+       'add_new_worker'=>'تم اضافة عامل جديد',
+       'add_new_admin'=>'تم اضافة مدير جديد',
+       'add_new_farmer'=>'تم اضافة مزارع جديد',
 ];
 
