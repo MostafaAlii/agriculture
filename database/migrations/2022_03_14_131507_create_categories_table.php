@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             $table->foreignId('created_by')->nullable()->constrained('admin')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('admin')->cascadeOnDelete();            
+            $table->softDeletes();
             $table->timestamps();
         });
     }

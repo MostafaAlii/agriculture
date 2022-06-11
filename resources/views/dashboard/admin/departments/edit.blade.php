@@ -56,7 +56,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form method="POST" action="{{route('Departments.update',$depart->id)}}" enctype="multipart/form-data">
+                                    <form method="POST" action="{{route('Departments.update',$depart->id)}}" enctype="multipart/form-data" autocomplete="off">
                                         {{method_field('PATCH ')}}
                                             @csrf
                                         <div class="form-body">

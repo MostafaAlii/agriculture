@@ -12,7 +12,7 @@ class CreateDepartmentsTable extends Migration
         Schema::create('departments', function (Blueprint $table) {
 
             $table->id();
-            $table->foreignId('parent_id')->constrained('departments')->cascadeOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained('departments')->cascadeOnDelete();
             $table->foreignId('country_id')->constrained()->cascadeOnDelete();
             $table->foreignId('province_id')->constrained()->cascadeOnDelete();
             $table->foreignId('area_id')->constrained()->cascadeOnDelete();
@@ -20,6 +20,7 @@ class CreateDepartmentsTable extends Migration
             $table->foreignId('village_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('created_by')->nullable()->constrained('admin')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('admin')->cascadeOnDelete();            
+            $table->softDeletes();
             $table->timestamps();
         });
     }

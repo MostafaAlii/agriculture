@@ -11,13 +11,12 @@ use App\Http\Interfaces\Admin\TeamInterface;
 class TeamRepository implements TeamInterface {
     use UploadT;
     public function index() {
-       // dd('fff');
         return view('dashboard.admin.teams.index');
     }
 //------------------------------------------------------------------------------------------
     public function data() {
         
-        // $t = Team::get();
+        // $team = Team::get();
         $team = Cache::get('teams');
         
         return DataTables::of($team)
@@ -40,33 +39,35 @@ class TeamRepository implements TeamInterface {
     public function store($request) {
     //  dd('gggg');
         try{
-            $team=new Team();
-            $team->name=$request->name;
-            $team->position=$request->position;
-            $team->description=$request->description;
-            // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-            // Check img
-            if (!$request->file('image')->isValid()) {
+             // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+             // Check img
+             if (!$request->file('image')->isValid()) {
                 flash('Invalid Image!')->error()->important();
                 return redirect()->back()->withInput();
             }
-
-            $photo = $request->image;
-            $filename =$request->image->getClientOriginalName();
-            $photo->storeAs('', $filename, 'team');
-            // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-            $team->image=$filename;
-            $team->save();
+             $photo = $request->image;
+             $filename =$request->image->getClientOriginalName();
+             $photo->storeAs('', $filename, 'team');
+             // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+             
+            Team::Create(
+                [
+                    'name' => $request->name,
+                    'position' => $request->position,
+                    'description'=>$request->description,
+                    'image'=>$filename
+                ]
+            );
 
             //==============update cache file=================
             $t=Team::get();
             Cache::store('file')->put('teams',$t);
            //==================================================
-           
             toastr()->success(__('Admin/attributes.added_done'));
             return redirect()->route('team.index');   
 
         } catch (\Exception $ex) {
+             // dd($ex->getMessage());
             toastr()->success(__('Admin/attributes.add_wrong'));
             return redirect()->route('team.index');
          }
@@ -81,11 +82,12 @@ class TeamRepository implements TeamInterface {
     public function update($request,$id) {
         try{
             $real_id = Crypt::decrypt($id);
-
             $team=Team::findOrfail($real_id);
             $team->name=$request->name;
             $team->position=$request->position;
             $team->description=$request->description;
+
+            //============================================================================
             if(isset($request->image)){
                 if($team->image) {//delete old image
                     $old_photo = $team->image;
@@ -102,8 +104,9 @@ class TeamRepository implements TeamInterface {
                 $photo->storeAs('', $filename, 'team');
                 
                 $team->image=$filename;
-                 //============================================================================
             }
+           //============================================================================
+
             $team->save();
 
              //==============update cache file=================

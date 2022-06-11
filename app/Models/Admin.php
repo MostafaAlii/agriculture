@@ -6,9 +6,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Traits\HasRoles;
+
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Admin extends Authenticatable {
    use \Znck\Eloquent\Traits\BelongsToThrough;
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles , SoftDeletes;
+    
     protected $table = "admins";
     protected $guard = 'admin';
     // protected $fillable = [

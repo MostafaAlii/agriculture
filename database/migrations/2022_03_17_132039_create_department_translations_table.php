@@ -16,7 +16,7 @@ class CreateDepartmentTranslationsTable extends Migration
             $table->string('slug')->unique();
             $table->string('keyword')->nullable();
             $table->longText('description')->nullable();
-            $table->index(['name', 'locale','keyword','slug']);
+           // $table->index(['name', 'locale','keyword','slug']);
             $table->timestamps();
 
         });

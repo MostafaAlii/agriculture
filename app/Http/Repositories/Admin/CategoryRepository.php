@@ -67,12 +67,12 @@ class CategoryRepository implements CategoryInterface {
            
             $cate=new Category;
 
-            ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:'';
+            ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:NULL;
 
             $cate->department_id=$request->department_id;
             $cate->created_by=auth()->user()->firstname;//----------------------------------------------------------------------------
             
-            $cate->save();
+           // $cate->save();
 
             $cate->name=$request->name;
             $cate->slug=str_replace(' ', '_',$request->name);
@@ -87,8 +87,8 @@ class CategoryRepository implements CategoryInterface {
             return redirect()->route('Categories.index');
             
          } catch (\Exception $e) {
-            // return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-            toastr()->success(__('Admin/attributes.add_wrong'));
+             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+            //toastr()->success(__('Admin/attributes.add_wrong'));
             return redirect()->back();
          }
     }
