@@ -8,7 +8,7 @@ class CreateOptionTranslationsTable extends Migration {
             $table->id();
             $table->string('name');
             $table->string('locale');
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('option_id')->constrained()->cascadeOnDelete();
             $table->unique(['option_id', 'locale']);
             $table->index(['name', 'locale']);
         });
