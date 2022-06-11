@@ -1,12 +1,16 @@
 <?php
+
 namespace App\Http\Controllers\Dashboard\Admin;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProductInterface;
 use App\Http\Requests\Dashboard\Product\GeneralRequest;
 use App\Http\Requests\Dashboard\Product\ProductPriceRequest;
 use App\Http\Requests\Dashboard\Product\ProductStockRequest;
-class ProductController extends Controller {
+use Illuminate\Http\Request;
+
+class ProductController extends Controller
+{
     protected $Data;
     public function __construct(ProductInterface $Data) {
         $this->middleware('permission:products', ['only' => ['index']]);
@@ -21,5 +25,33 @@ class ProductController extends Controller {
         $this->middleware('permission:product-restore', ['only' => ['updateRestore']]);
         $this->middleware('permission:product-trushed-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
+    }
+
+    public function index() {
+        return $this->Data->index();
+    }
+
+    public function create() {
+        //
+    }
+
+    public function store(Request $request) {
+        //
+    }
+
+    public function show($id) {
+        //
+    }
+
+    public function edit($id) {
+        //
+    }
+
+    public function update(Request $request, $id) {
+        //
+    }
+
+    public function destroy($id) {
+        //
     }
 }

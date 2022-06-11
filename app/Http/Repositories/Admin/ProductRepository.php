@@ -14,5 +14,7 @@ use App\Http\Interfaces\Admin\ProductInterface;
 
 class ProductRepository implements ProductInterface {
     use UploadT;
-
+    public function index() {
+        return view('dashboard.admin.products.index');
+    }
 }

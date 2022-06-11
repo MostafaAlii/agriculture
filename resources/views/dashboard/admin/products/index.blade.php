@@ -12,7 +12,7 @@
     <div class="content-wrapper">
         <!-- Start Breadcrumbs -->
         <div class="content-header row">
-            <div class="content-header-left col-md-6 col-12 mb-2">
+            <div class="mb-2 content-header-left col-md-6 col-12">
                 <h3 class="content-header-title">
                     <i class="material-icons">grain</i>
                     {{ trans('Admin/products.product_title_in_sidebar') }}
@@ -22,7 +22,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ trans('Admin/products.product_title_in_sidebar') }}</a>
+                            <li class="breadcrumb-item"><a href="{{ route('Products.index') }}">{{ trans('Admin/products.product_title_in_sidebar') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -45,7 +45,7 @@
                                 <h4 class="card-title">{{ trans('Admin/products.product_title_in_sidebar') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
+                                    <ul class="mb-0 list-inline">
                                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                         <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                         <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
@@ -59,19 +59,19 @@
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
                                     @can('product-create')
-                                        <a href="{{ route('products.generalInformation') }}" class="btn btn-primary btn-sm mb-3">
+                                        <a href="{{-- route('products.generalInformation') --}}" class="mb-3 btn btn-primary btn-sm">
                                             <i class="material-icons">add_box</i>
                                             {{ __('Admin/products.add_new_product') }}
                                         </a>
                                     @endcan
                                     @can('product-trushed')
-                                        <a href="{{ route('products.trashed') }}" class="btn btn-warning btn-sm mb-3">
+                                        <a href="{{-- route('products.trashed') --}}" class="mb-3 btn btn-warning btn-sm">
                                             <i class="material-icons">delete_sweep</i>
                                             {{ __('Admin/products.trashed_product') }}
                                         </a>
                                     @endcan
                                     @can('product-delete-all')
-                                        <button type="button" class="btn btn-danger btn-md mb-3"
+                                        <button type="button" class="mb-3 btn btn-danger btn-md"
                                             id="btn_delete_all" data-toggle="modal"
                                             data-target="#bulkdelete" >
                                             {{ __('Admin/site.bulkdelete') }}
@@ -124,33 +124,5 @@
 
 <!-- Datatable Fire -->
 
-<script>
-
-    let productsTable = $('#products-table').DataTable({
-        // dom: "tiplr",
-        serverSide: true,
-        processing: true,
-        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
-        "language": {
-                "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
-            },
-        ajax: {
-            url: '{{ route("products_data") }}',
-        },
-        columns: [
-            {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
-            {data: 'name', name: 'name'},
-            {data: 'farmer_name', name: 'farmer_name'},
-            {data: 'status', name: 'status'},
-            {data: 'category_name', name: 'category_name'},
-            {data: 'price', name: 'price', searchable: false, sortable: false},
-            {data: 'created_at', name: 'created_at', searchable: false, sortable: false},
-            {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '18%'},
-        ],
-        order: [[5, 'desc']],
-
-    });
-</script>
 
 @endsection

@@ -17,7 +17,7 @@ class Product extends Model {
     protected $guarded = [];
     protected $with=['translations'];
     protected $slugAttribute = ['name'];
-    public $translatedAttributes=['name','description', 'slug'];
+    public $translatedAttributes=['name','description', 'slug', 'other_data'];
     public $timestamps = true;
 
     protected $hidden = ['pivot'];
@@ -48,6 +48,10 @@ class Product extends Model {
 
     public function tags(): BelongsToMany {
         return $this->belongsToMany(Tag::class, 'product_tags');
+    }
+
+    public function units(): BelongsToMany {
+        return $this->belongsToMany(Unit::class, 'product_unit');
     }
 
     // Product Has Many Options ::

@@ -189,6 +189,8 @@ use App\Http\Repositories\Admin\AdminDepartmentRepository;
 use App\Http\Repositories\Admin\AgriToolServiceRepository;
 use App\Http\Repositories\Admin\WholeSaleProductRepository;
 
+use App\Http\Interfaces\Admin\ProductInterface;
+use App\Http\Repositories\Admin\ProductRepository;
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register() {
@@ -242,7 +244,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(ReviewInterface::class, ReviewRepository::class);
         $this->app->bind(TeamInterface::class, TeamRepository::class);
-
+        $this->app->bind(ProductInterface::class, ProductRepository::class);
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(RatingInterface::class, RatingRepository::class);

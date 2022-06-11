@@ -51,9 +51,9 @@ class OrchardController extends Controller
     public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
     }
-public function statistics_index(){
-return $this->Data->statistics_index();
-}
+    public function statistics_index(){
+        return $this->Data->statistics_index();
+    }
     public function statistics(Request $request){
         return $this->Data->statistics($request);
     }

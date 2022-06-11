@@ -798,7 +798,7 @@
                             <!-- Start Product -->
                             @can('products')
                                 <li>
-                                    <a class="menu-item" href="{{-- route('products') --}}">
+                                    <a class="menu-item" href="{{ route('Products.index') }}">
                                         <i class="material-icons">grain</i>
                                         <span data-i18n="products">
                                             {{ trans('Admin/products.product_title_in_sidebar') }}</span>

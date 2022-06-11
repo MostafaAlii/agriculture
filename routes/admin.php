@@ -58,6 +58,7 @@ use App\Http\Controllers\Dashboard\Admin\AgriToolServiceController;
 use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
 use App\Http\Controllers\Dashboard\Admin\CurrencyController;
 use App\Http\Controllers\Dashboard\Admin\UnitController;
+use App\Http\Controllers\Dashboard\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -424,7 +425,7 @@ Route::group(
                 /********************************* End Options Routes ************************************/
 
                 /********************************* Start Products Routes ************************************/
-
+                Route::resource('Products', ProductController::class)->except(['show']);
                 /********************************* End Products Routes ************************************/
 
                 /********************************* Slider Routes ************************************/
