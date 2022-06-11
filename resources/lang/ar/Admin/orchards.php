@@ -11,6 +11,7 @@ return [
     'orchards_inf' =>'معلومات البستان',
     'area' =>'القضاء',
     'state' =>'الناحية',
+    'search'=>'بحث',
 
     'orchardsPageTitle'=>'البساتين',
     'village' =>'القرية',

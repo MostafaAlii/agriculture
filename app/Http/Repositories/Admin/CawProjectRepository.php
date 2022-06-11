@@ -103,23 +103,25 @@ class CawProjectRepository implements CawProjectInterface{
         try {
 
             $requestData = $request->validated();
-            $animal = new CawProject();
-            $animal->farmer_id = $requestData['farmer_id'];
-            $animal->village_id = $requestData['village_id'];
-            $animal->state_id = $requestData['state_id'];
-            $animal->area_id = $requestData['area_id'];
-            $animal->admin_id = $requestData['admin_id'];
 
-            $animal->project_name = $requestData['project_name'];
-            $animal->hall_num = $requestData['hall_num'];
-            $animal->animal_count = $requestData['animal_count'];
-            $animal->food_source = $requestData['food_source'];
-            $animal->marketing_side = $requestData['marketing_side'];
-            $animal->cost = $requestData['cost'];
-            $animal->type = $requestData['type'];
-            $animal->phone = $requestData['phone'];
-            $animal->email = $requestData['email'];
-            $animal->save($requestData);
+            $beekeeper = BeeKeeper::create([
+                'admin_id' => $requestData['admin_id'],
+                'farmer_id' => $requestData['farmer_id'],
+                'state_id' => $requestData['state_id'],
+                'area_id' => $requestData['area_id'],
+                'village_id' => $requestData['village_id'],
+                'unit_id' => $requestData['unit_id'],
+                'project_name' => $requestData['project_name'],
+                'hall_num' => $requestData['hall_num'],
+                'animal_count' => $requestData['animal_count'],
+                'food_source' => $requestData['food_source'],
+                'marketing_side' => $requestData['marketing_side'],
+                'cost' => $requestData['cost'],
+                'type' => $requestData['type'],
+                'phone' => $requestData['phone'],
+                'email' => $requestData['email'],
+            ]);
+
 
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('Animals.index');
@@ -140,14 +142,13 @@ class CawProjectRepository implements CawProjectInterface{
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
-        $areas = Area::all();
-        $states = State::all();
         $villages = Village::where('state_id',$stateID)->get();
         $animalID = Crypt::decrypt($id);
         $animal = CawProject::findorfail($animalID);
 
         return view('dashboard.admin.caw_projects.edit',
-            compact('area_name','areas','state_name','states','admin','villages', 'animal','adminId','stateID','state_name','areaID'));
+            compact('area_name','state_name','admin','villages',
+                'animal','adminId','stateID','areaID'));
     }
 
     public function update($request,$id)

@@ -192,10 +192,12 @@ Route::group(
             Route::resource('orchards', OrchardController::class)->except(['show']);
             Route::get('/orchards/data', [OrchardController::class,'data'])->name('orchards.data');
             Route::delete('/orchards/bulk_delete/{ids}', [OrchardController::class,'bulkDelete'])->name('orchards.bulk_delete');
-            Route::get('/orchards/orchard_statistic/', [OrchardController::class,'statistics'])->name('orchards.statistics');
+            Route::get('/orchards/orchard_statistic_index/', [OrchardController::class,'statistics_index'])->name('orchards.statistics_index');
+            Route::post('/orchards/orchard_statistic/', [OrchardController::class,'statistics'])->name('orchards.statistics');
 
             Route::get('/orchards/admin/{village_id}', [OrchardController::class, 'getAdmin']);// route ajax for get village admins
             Route::get('/orchards/farmer/{village_id}', [OrchardController::class, 'getFarmer']);// route ajax for get village farmers
+
             Route::get('/orchards/farmerInf/{farmer_id}', [OrchardController::class, 'getFarmerInf']);// route ajax for get village farmers
 
 

@@ -1,16 +1,22 @@
 <?php
 namespace  App\Http\Repositories\Admin;
+use App\Models\AreaTranslation;
+use App\Models\LandCategoryTranslation;
 use App\Models\Orchard;
 use App\Models\Farmer;
 use App\Models\Admin;
+use App\Models\Area;
+use App\Models\State;
+use App\Models\LandCategory;
 
+use App\Models\StateTranslation;
 use App\Models\TreeTranslation;
 use App\Models\Village;
 use App\Models\Unit;
 
 use App\Models\Tree;
 
-use App\Models\LandCategory;
+use App\Models\VillageTranslation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -97,21 +103,23 @@ class OrchardRepository implements OrchardInterface
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
-        $villages = Village::where('state_id',$stateID)->get();
+        $villages = Village::where('state_id','=',$stateID)->get();
         $land_categories = LandCategory::all();
         $units = Unit::all();
         $trees = Tree::all();
 
         return view('dashboard.admin.orchards.create',
             compact('admin','area_name','areaID','stateID','adminId',
-                'land_categories', 'state_name', 'trees', 'villages', 'units'));
+                'land_categories', 'state_name', 'trees',
+                'villages',
+                'units'));
     }
 
     public function getFarmer($village_id)
     {
-        $farmers = Farmer::where('id',$village_id)->pluck('firstname','id');
+        $farmers = Farmer::findorfail($village_id)->pluck('firstname','id');
 
-        return $farmers;
+    return $farmers;
     }
 
     public function getFarmerInf($farmer_id)
@@ -268,67 +276,521 @@ class OrchardRepository implements OrchardInterface
 
     }// end of bulkDelete
 
-    public function statistics(){
+    public function statistics_index(){
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
-        $first_name = $admin->firstname;
-        $trees = Tree::all();
-        $tree_name = $trees->pluck('name');
-        if($admin->type == 'employee' ) {
-        $statistics = Orchard::select( 'area_translations.name AS Area','state_translations.name AS State',
-            'farmers.firstname AS farmer_name','village_translations.name AS village_name' ,
+        $land_categories =LandCategory::all();
+        return view('dashboard.admin.orchards.statistics',compact('admin','land_categories'));
 
-            DB::raw('SUM(orchards.orchard_area) As orchard_area'),
-            DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard'),
-//            'tree_translations.name AS name',
-            'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
-            'land_category_translations.category_name AS category_name')
-//            ->join('orchard_trees', 'orchards.id', '=', 'orchard_trees.orchard_id')
-//            ->join('tree_translations', 'tree_translations.id', '=', 'orchard_trees.tree_id')
-            ->join('admins', 'orchards.admin_id', '=', 'admins.id')
-            ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
-            ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
-            ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
-            ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-            ->where('orchards.admin_id' ,$admin->id)
-//                ->whereIN('tree_translations.name',$tree_name)
-            ->whereIn('land_category_translations.category_name', ['بساتين سيحية', 'بساتين ديمية', 'قمريات'])
-            ->GroupBy('Area','State','village_name','farmer_name','supported_side','category_name',
-                'admin_name')
-//             'tree_name'
-            ->get();
+    }
+
+    public function statistics($request){
+
+        $adminID = Auth::user()->id;
+        $admin=Admin::findorfail($adminID);
+        $supported_side = $request->supported_side;
+        if(!empty($request->area_id)){
+            $area_name = AreaTranslation::where('area_id','=',$request->area_id)->pluck('name');
+
         }
-        else if($admin->type == 'admin' ){
-            $statistics = Orchard::select( 'area_translations.name AS Area','state_translations.name AS State',
-                'farmers.firstname AS farmer_name','village_translations.name AS village_name' ,
-
-                DB::raw('SUM(orchards.orchard_area) As orchard_area'),
-                DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard'),
-//                'tree_translations.name AS tree_name',
-                'orchards.supported_side AS supported_side','admins.firstname AS admin_name',
-                'land_category_translations.category_name AS category_name')
-//                ->join('orchard_trees', 'orchards.id', '=', 'orchard_trees.orchard_id')
-//                ->join('tree_translations', 'tree_translations.id', '=', 'orchard_trees.tree_id')
-////
-                ->join('admins', 'orchards.admin_id', '=', 'admins.id')
-
-                ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
-                ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
-                ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
-                ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-//                ->whereIN('tree_translations.name',$tree_name)
-                ->whereIn('land_category_translations.category_name', ['بساتين سيحية', 'بساتين ديمية', 'قمريات'])
-                ->GroupBy('Area','State','village_name','farmer_name','supported_side','category_name',
-//                    'tree_name',
-                    'admin_name'
-                   )
-            ->get();
+        if(!empty($request->state_id)){
+            $state_name = StateTranslation::where('state_id','=',$request->state_id)->pluck('name');
+        }
+        if(!empty($request->village_id)){
+            $village_name = VillageTranslation::where('village_id','=',$request->village_id)->pluck('name');
+        }
+        if($request->land_category_id != null){
+            $land_category_name = LandCategoryTranslation::where('land_category_id','=',$request->land_category_id)->pluck('category_name');
         }
 
+        if($admin->type == 'employee') {
+            if  ($request->village_id !=null  && $request->land_category_id !=null && $request->supported_side != null)
+            {
 
-        return view('dashboard.admin.orchards.statistics',compact('statistics'));}
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('orchards.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }elseif
+                ( $request->village_id !=null  && $request->land_category_id !=null && $request->supported_side == null)
+            {
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('orchards.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif
+            ( $request->village_id !=null  && $request->land_category_id ==null && $request->supported_side != null)
+            {
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('orchards.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.supported_side', $supported_side)
+
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif( $request->village_id !=null  && $request->land_category_id ==null && $request->supported_side == null)
+            {
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('orchards.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+        }
+        else if($admin->type == 'admin' ) {
+            if ($request->area_id !=null  && $request->state_id !=null && $request->village_id !=null
+                && $request->land_category_id !=null && $request->supported_side != null) {
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id !=null  && $request->state_id ==null && $request->village_id ==null
+                && $request->land_category_id ==null && $request->supported_side == null) {
+
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+
+            }
+            elseif ($request->area_id !=null  && $request->state_id ==null && $request->village_id ==null
+                    && $request->land_category_id !=null && $request->supported_side != null)  {
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+
+            }
+            elseif ($request->area_id !=null  && $request->state_id ==null && $request->village_id ==null
+                && $request->land_category_id !=null && $request->supported_side == null)
+             {
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+
+            }
+
+            elseif ($request->area_id !=null  && $request->state_id ==null && $request->village_id ==null
+                && $request->land_category_id ==null && $request->supported_side != null)
+            {
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+
+            }
+            elseif ($request->area_id !=null  && $request->state_id !=null && $request->village_id ==null
+                && $request->land_category_id ==null && $request->supported_side == null)
+            {
+
+                    $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                        'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                        'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                        'land_category_translations.category_name AS category_name',
+
+                        DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                        DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                    )
+                        ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                        ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                        ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                        ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                        ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                        ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                        ->where('area_translations.name', $area_name)
+                        ->where('state_translations.name', $state_name)
+                        ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                            'admin_name')
+                        ->get();
+                    return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+                }
+
+
+            elseif ($request->area_id !=null  && $request->state_id !=null && $request->village_id ==null
+                    && $request->land_category_id !=null && $request->supported_side != null){
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+
+            elseif
+                ($request->area_id !=null  && $request->state_id !=null && $request->village_id ==null
+                    && $request->land_category_id !=null && $request->supported_side == null)
+            {
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif   ($request->area_id !=null  && $request->state_id !=null && $request->village_id ==null
+                    && $request->land_category_id ==null && $request->supported_side != null)
+            {
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id !=null  && $request->state_id !=null && $request->village_id !=null
+                    && $request->land_category_id ==null && $request->supported_side == null)
+            {
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+
+
+            elseif ($request->area_id !=null  && $request->state_id !=null && $request->village_id !=null
+                    && $request->land_category_id !=null && $request->supported_side == null)
+            {
+
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif($request->area_id !=null  && $request->state_id !=null && $request->village_id !=null
+                    && $request->land_category_id ==null && $request->supported_side != null)
+            {
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+            elseif (!empty('area_id') && !empty('state_id') && !empty('village_id') &&   !empty('land_category_id') && !empty($request->supported_side)){
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.supported_side', $supported_side)
+
+
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
+        }
+
+
+    }
 
 
 }

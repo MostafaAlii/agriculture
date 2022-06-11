@@ -33,6 +33,7 @@ class OrchardController extends Controller
     public function getFarmer($id){
         return $this->Data->getFarmer($id);
     }
+
     public function getFarmerInf($id){
         return $this->Data->getFarmerInf($id);
     }
@@ -50,7 +51,10 @@ class OrchardController extends Controller
     public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
     }
-    public function statistics(){
-        return $this->Data->statistics();
+public function statistics_index(){
+return $this->Data->statistics_index();
+}
+    public function statistics(Request $request){
+        return $this->Data->statistics($request);
     }
 }
