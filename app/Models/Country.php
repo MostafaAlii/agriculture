@@ -21,4 +21,7 @@ class Country extends Model {
     public function provinces(): HasMany {
         return $this->hasMany(Province::class);
     }
+    public function country_trans() {
+        return $this->hasOne(CountryTranslation::class);
+    }
 }

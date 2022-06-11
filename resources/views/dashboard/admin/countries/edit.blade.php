@@ -68,23 +68,28 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label for="eventRegInput1">{{ __('Admin/countries.country_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ $country->name}}" required>
+                                                    <input type="text" id="eventRegInput1"  class="form-control"  name="name" value="{{ $country->name}}" required>
                                                 </div>
                                             </div>
                                             <div class="row">
+
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/countries.country_flag') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                                        <input class="form-control img" name="country_logo"  type="file" accept="image/*">
+                                                        <input class="form-control img" name="image" value="{{ $country->country_logo}}"  type="file" accept="image/*">
                                                     </div>
                                                 </div>
-                                                @if(!empty($country->country_logo))
+                                                    @if($country->country_logo)
                                                     <div class="col-lg-6">
-                                                        <img src="{{Storage::url($country->country_logo)}}" class="img-thumbnail img-preview" width="50px" height="50px" alt="">
+                                                        <img src="{{ asset('Dashboard/img/countries/'.$country->country_logo) }}"
+                                                             alt="{{ asset('Dashboard/img/countries/'.$country->country_logo) }}"
+                                                             class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                     </div>
                                                 @else
                                                     <div class="col-lg-6">
-                                                        <img  class="img-thumbnail img-preview" width="50px" height="50px" alt="" id="output">
+                                                        <img src="{{ asset('Dashboard/img/countries/avatar.jpg') }}"
+                                                             alt="{{ asset('Dashboard/img/countries/avatar.jpg') }}"
+                                                             class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                     </div>
                                                 @endif
                                             </div>

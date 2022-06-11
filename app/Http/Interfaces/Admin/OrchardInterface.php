@@ -12,7 +12,7 @@ interface OrchardInterface {
     public function getFarmer($id);
 
     public function getFarmerInf($id);
-
-    public function statistics();
+public function statistics_index();
+    public function statistics($request);
 
     }

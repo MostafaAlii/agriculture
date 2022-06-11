@@ -1030,7 +1030,7 @@
                                                     <!-- Start Orchard Statistics -->
                                                     @can('orchard-report-statistics')
                                                         <div class="col-xl-3 col-lg-6 col-12">
-                                                            <a href="{{ route('orchards.statistics') }}">
+                                                            <a href="{{ route('orchards.statistics_index') }}">
                                                                 <div class="card pull-up">
                                                                     <div class="card-content">
                                                                         <div class="card-body">
