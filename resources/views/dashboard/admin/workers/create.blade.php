@@ -144,13 +144,13 @@
                                                     </div>
                                                     <div class="form-group myInput">
                                                     </div>
-                                                    
+
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.image') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                                        <input class="form-control img" name="image"  type="file" accept="image/*" required>
+                                                        <input class="form-control img" name="image"  type="file" accept="image/*" >
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">

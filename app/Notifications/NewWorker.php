@@ -40,10 +40,8 @@ class NewWorker extends Notification
     {
     $url = 'http://127.0.0.1:8000/home.worker';
     return (new MailMessage)
-                ->subject('اضافه عامل جديد')
-                ->line('اضافه عامل جديد')
-                ->action('عرض تفاصيل', $url)
-                ->line('شكرا لاستخدامك مورا سوفت ');
+                ->subject(__('Admin/site.add_new_worker'))
+                ->view( 'front.emails.subscriptions.notyuseremail', ['user' => $this->worker]);
     }
 
     /**

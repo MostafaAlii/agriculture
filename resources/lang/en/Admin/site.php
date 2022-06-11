@@ -267,4 +267,13 @@ return [
           'Support_online_24_hours_a_day'=>'Support online 24 hours a day',
           'Online Support'=>'Online Support',
           'Online Support 24/7'=>'Online Support 24/7',
+
+                 // email notification
+       'welcome_to_our_website'=>'Welcome to our website',
+       'subject'=>'you have been registered in our website',
+       'createsms'=>'your account have been registered in our website and is activated to login in our website thank you',
+       'add_new_user'=>'Add New User',
+       'add_new_worker'=>'Add New Worker',
+       'add_new_admin'=>'Add New Admin',
+       'add_new_farmer'=>'Add New Farmer',
 ];
