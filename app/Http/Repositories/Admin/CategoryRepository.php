@@ -70,7 +70,7 @@ class CategoryRepository implements CategoryInterface {
             ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:NULL;
 
             $cate->department_id=$request->department_id;
-            $cate->created_by=auth()->user()->firstname;//----------------------------------------------------------------------------
+          //  $cate->created_by=auth()->user()->firstname;//----------------------------------------------------------------------------
             
            // $cate->save();
 
@@ -116,7 +116,7 @@ class CategoryRepository implements CategoryInterface {
              $cate= Category::findOrfail($request->id);
              ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:$cate->parent_id=Null;
              $cate->department_id=$request->department_id;
-             $cate->updated_by=auth()->user()->firstname;//----------------------------------------------------------------------------
+           //  $cate->updated_by=auth()->user()->firstname;//----------------------------------------------------------------------------
              $cate->save();
 
              $cate->name=$request->name;
