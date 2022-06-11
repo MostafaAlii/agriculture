@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
 class NewAdmin extends Notification
 {
     use Queueable;
-    
+
     public $admin;
     public function __construct(Admin $admin)
     {
@@ -37,12 +37,10 @@ class NewAdmin extends Notification
      */
     public function toMail($notifiable)
     {
-    $url = 'http://127.0.0.1:8000/dashboard_admin/admin/profile/'.$this->admin->id;
+    // $url = 'http://127.0.0.1:8000/dashboard_admin/admin/profile/'.$this->admin->id;
     return (new MailMessage)
-                ->subject('اضافةادمن جديد')
-                ->line('اضافة ادمن جديد')
-                ->action('عرض تفاصيل', $url)
-                ->line('شكرا لاستخدامك مورا سوفت ');
+    ->subject(__('Admin/site.add_new_admin'))
+    ->view( 'front.emails.subscriptions.notyuseremail', ['user' => $this->admin]);
     }
 
     /**

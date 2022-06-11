@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
 // use Notification;
 use App\Notifications\NewUser;
+use Illuminate\Support\Facades\Auth;
+
 class UserRepository implements UserInterface{
     use UploadT;
     public function index() {
@@ -49,31 +51,17 @@ class UserRepository implements UserInterface{
         try{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
-            User::create($requestData);
-            $user = User::latest()->first();
+            $user=User::create($requestData);
             $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
-            // Notification::send($user, new \App\Notifications\NewUser($user));
-            // $details = [
-            //     'greeting' => 'Hi Artisan',
-            //     'body' => 'This is my first notification from ItSolutionStuff.com',
-            //     'thanks' => 'Thank you for using ItSolutionStuff.com tuto!',
-            //     'actionText' => 'View My Site',
-            //     'actionURL' => url('/'),
-            //     'order_id' => 101
-
-            // ];
-            // Notification::send($user, new NewUser($details));
-            // dd('done');
-            // dd($user->notifications);
-
+            Notification::send($user, new NewUser($user));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('users.index');
          } catch (\Exception $e) {
              DB::rollBack();
-            //  toastr()->error(__('Admin/site.sorry'));
-            //  return redirect()->back();
-             return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+             toastr()->error(__('Admin/site.sorry'));
+             return redirect()->back();
+            //  return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 

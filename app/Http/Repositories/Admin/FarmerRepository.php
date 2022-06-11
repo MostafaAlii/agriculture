@@ -3,6 +3,7 @@ namespace  App\Http\Repositories\Admin;
 use App\Models\Farmer;
 use App\Http\Interfaces\Admin\FarmerInterface;
 use App\Models\Product;
+use App\Notifications\NewFarmer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -51,16 +52,15 @@ class FarmerRepository implements FarmerInterface{
             Farmer::create($requestData);
             $farmer = Farmer::latest()->first();
             $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
-
-            // Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
+            Notification::send($farmer, new NewFarmer($farmer));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('farmers.index');
          } catch (\Exception $e) {
             DB::rollBack();
-//            toastr()->error(__('Admin/site.sorry'));
-//            return redirect()->back();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+           toastr()->error(__('Admin/site.sorry'));
+           return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 
