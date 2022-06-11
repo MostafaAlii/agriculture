@@ -13,7 +13,7 @@ class Department extends Model implements TranslatableContract{
     use HasFactory,Translatable,SoftDeletes;
     
     protected $table = "departments";
-    protected $fillable = ['parent_id','country_id','province_id','area_id','state_id','village_id','created_by','updated_by'];
+    protected $fillable = ['parent_id','country_id','province_id','area_id','state_id','village_id'];
 
     protected $with=['translations'];
     public $translatedAttributes=['name','description','keyword','slug'];

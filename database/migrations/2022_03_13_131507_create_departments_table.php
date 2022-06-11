@@ -18,8 +18,8 @@ class CreateDepartmentsTable extends Migration
             $table->foreignId('area_id')->constrained()->cascadeOnDelete();
             $table->foreignId('state_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('village_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('created_by')->nullable()->constrained('admin')->cascadeOnDelete();
-            $table->foreignId('updated_by')->nullable()->constrained('admin')->cascadeOnDelete();            
+            // $table->foreignId('created_by')->nullable()->constrained('admin')->cascadeOnDelete();
+            // $table->foreignId('updated_by')->nullable()->constrained('admin')->cascadeOnDelete();            
             $table->softDeletes();
             $table->timestamps();
         });

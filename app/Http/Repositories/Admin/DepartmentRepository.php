@@ -101,7 +101,7 @@ class DepartmentRepository implements DepartmentInterface
                     'area_id'    => $request->area_id,
                     'state_id'   => ($request->state_id)??$request->state_id,
                     'village_id' => ($request->village_id)??$request->village_id,
-                    'created_by' => Auth::guard('admin')->user()->id,
+                   // 'created_by' => Auth::guard('admin')->user()->id,
                     'name'       => $request->name,
                     'slug'       => str_replace(' ', '_', $request->name),
                     'description'=> $request->description,
@@ -147,7 +147,7 @@ class DepartmentRepository implements DepartmentInterface
              $depart->country_id    = $request->country_id;
              $depart->province_id   = $request->province_id;
              $depart->area_id       = $request->area_id;
-             $depart->updated_by    = auth()->user()->id;
+            // $depart->updated_by    = auth()->user()->id;
              $depart->name          = $request->name;
              $depart->slug          = str_replace(' ', '_',$request->name);
              $depart->description   = $request->description;
