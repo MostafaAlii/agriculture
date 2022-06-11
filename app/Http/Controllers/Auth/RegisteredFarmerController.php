@@ -25,7 +25,7 @@ class RegisteredFarmerController extends Controller
             'email'        => $request->email,
             'password'     => bcrypt($request->password),
         ]);
-        // Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
+        Notification::send($farmer, new \App\Notifications\NewFarmer($farmer));
         event(new Registered($farmer));
 
         auth('web')->login($farmer);
