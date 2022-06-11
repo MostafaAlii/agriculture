@@ -100,13 +100,13 @@
 
     <script type="text/javascript">
         // $(document).ready( function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //     }
+        // });
 
-        $('#tags-table').DataTable({
+        let tagsTable = $('#tags-table').DataTable({
             // dom: "tiplr",
             serverSide: true,
             processing: true,
@@ -120,25 +120,12 @@
             ajax: {
                 url: '{{ route("tags.data") }}',
             },
-            columns: [{
-                    data: 'record_select',
-                    name: 'record_select',
-                    searchable: false,
-                    sortable: false,
-                    width: '1%'
-                },
-                {
-                    data: 'DT_RowIndex',
-                    name: '',
-                    orderable: false,
-                    searchable: false,
-                    width: '1%'
-                },
+            columns: [
+                { data: 'record_select',name: 'record_select',searchable: false,sortable: false,width: '1%'},
+                { data: 'DT_RowIndex',name: '',orderable: false,searchable: false,width: '1%'},
                 {
                     data: 'name',
                     name: 'name',
-                    searchable: false,
-                    sortable: false,
                     width: '10%'
                 },
                 {
@@ -166,37 +153,6 @@
                 [4, 'desc']
             ],
         });
-
-        // $('#tagForm').submit(function(e) {
-        //     e.preventDefault();
-        //     var formData = new FormData(this);
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: "{{ route('tags.store') }}",
-        //         data: formData,
-        //         cache: false,
-        //         contentType: false,
-        //         processData: false,
-        //         success: (data) => {
-        //             setTimeout(() => {
-        //               toastr.success(data.message, data.title);
-        //             },500)
-        //             $("#addtag").modal('hide');
-        //             var oTable = $('#tags-table').dataTable();
-        //             oTable.fnDraw(false);
-        //             $("#btn-save").html('Submit');
-        //             $("#btn-save").attr("disabled", false);
-
-        //         },
-        //         error: function(data) {
-        //             console.log(data);
-        //             $("#addtag").modal('show');
-        //             setTimeout(() => {
-        //               toastr.warning(data.message, data.title);
-        //             },500)
-        //         }
-        //     });
-        // });
 
     </script>
 

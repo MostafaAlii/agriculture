@@ -10,7 +10,8 @@ use App\Traits\UploadT;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
-
+// use Notification;
+use App\Notifications\NewUser;
 class UserRepository implements UserInterface{
     use UploadT;
     public function index() {
@@ -51,14 +52,28 @@ class UserRepository implements UserInterface{
             User::create($requestData);
             $user = User::latest()->first();
             $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
-            Notification::send($user, new \App\Notifications\NewUser($user));
+            // Notification::send($user, new \App\Notifications\NewUser($user));
+            // $details = [
+            //     'greeting' => 'Hi Artisan',
+            //     'body' => 'This is my first notification from ItSolutionStuff.com',
+            //     'thanks' => 'Thank you for using ItSolutionStuff.com tuto!',
+            //     'actionText' => 'View My Site',
+            //     'actionURL' => url('/'),
+            //     'order_id' => 101
+
+            // ];
+            // Notification::send($user, new NewUser($details));
+            // dd('done');
+            // dd($user->notifications);
+
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('users.index');
          } catch (\Exception $e) {
              DB::rollBack();
-             toastr()->error(__('Admin/site.sorry'));
-             return redirect()->back();
+            //  toastr()->error(__('Admin/site.sorry'));
+            //  return redirect()->back();
+             return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 
@@ -102,30 +117,35 @@ class UserRepository implements UserInterface{
             return redirect()->route('users.index');
         } catch (\Exception $e) {
             // toastr()->error(__('Admin/site.sorry'));
-            // return redirect()->back();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+            toastr()->error(__('Admin/site.cant_delete'));
+            return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 
 
     public function bulkDelete($request)
     {
-        if($request->delete_select_id){
-                $delete_select_id = explode(",",$request->delete_select_id);
-                foreach($delete_select_id as $users_ids){
-                $user = User::findorfail($users_ids);
-                if($user->image){
-                    $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
-                }
-                }
-        }else{
-            toastr()->error(__('Admin/site.no_data_found'));
+        try{
+            if($request->delete_select_id){
+                    $delete_select_id = explode(",",$request->delete_select_id);
+                    foreach($delete_select_id as $users_ids){
+                    $user = User::findorfail($users_ids);
+                    if($user->image){
+                        $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+                    }
+                    }
+            }else{
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('users.index');
+            }
+            User::destroy( $delete_select_id );
+            toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('users.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/site.cant_delete_all'));
+            return redirect()->back();
         }
-        User::destroy( $delete_select_id );
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('users.index');
-
     }// end of bulkDelete
 
     public function showProfile($id){
@@ -141,10 +161,16 @@ class UserRepository implements UserInterface{
             DB::beginTransaction();
             $userID = Crypt::decrypt($id);
             $user=User::findorfail($userID);
+            $userpassword =  $user->password;
             $requestData = $request->validated();
+            if($request->password){
+                $requestData['password'] = bcrypt($request->password);
+            }else{
+                $requestData['password'] = $userpassword ;
+            }
             $user->update($requestData);
             if($request->image){
-                $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+                $this->deleteImage('upload_image','/users/' . $user->image,$user->id);
             }
             $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
             DB::commit();
@@ -154,6 +180,7 @@ class UserRepository implements UserInterface{
             DB::rollBack();
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
+                //  return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
     public function updateInformation($request,$id) {

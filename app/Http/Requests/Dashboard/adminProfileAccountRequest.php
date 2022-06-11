@@ -14,6 +14,7 @@ class adminProfileAccountRequest extends FormRequest {
             'lastname'     => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins',
             'email'        => 'required|email|unique:admins',
+            'password'     => 'required|confirmed|min:6|max:10',
             'type'         => 'required|in:admin,employee',
             // "image"        => 'image|mimes:jpeg,png|max:4096',
         ];
@@ -25,6 +26,7 @@ class adminProfileAccountRequest extends FormRequest {
             $rules['email'] = 'required|email|unique:admins,id,' . $admin;
             $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins,id,' . $admin;
             $rules['type'] = '';
+            $rules['password'] = 'confirmed';
         }//end of if
 
         return $rules;
@@ -53,6 +55,13 @@ class adminProfileAccountRequest extends FormRequest {
             'phone.unique'         => trans('Admin\validation.unique'),
             'image.image'          => trans('Admin\validation.image'),
             'image.mimes'          => trans('Admin\validation.mimes'),
+
+            'password.required' => trans('Admin\validation.required'),
+            'password.confirmed' => trans('Admin\validation.confirmed'),
+            'password.min' => trans('Admin\validation.min'),
+            'password.max' => trans('Admin\validation.max'),
+            'password_confirmation.required'=> trans('Admin\validation.required'),
+            'password_confirmation.same'=> trans('Admin\validation.same'),
         ];
     }
 }

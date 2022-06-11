@@ -26,13 +26,13 @@ class FarmerEditProfile extends Controller
         try{
             // return 'hellooooo';
             DB::beginTransaction();
-            $farmer = Farmer::findorfail(Auth::user()->id);
+            $farmer = Farmer::findorfail(Auth::guard('web')->user()->id);
             $requestData = $request->validated();
             $farmer->update($requestData);
             if($request->image){
-                $this->deleteImage('upload_image','/farmers/' . Auth::user()->image->filename,Auth::user()->id);
+                $this->deleteImage('upload_image','/farmers/' . Auth::guard('web')->user()->image,Auth::guard('web')->user()->id);
             }
-            $this->addImage($request, 'image' , 'farmers' , 'upload_image',Auth::user()->id, 'App\Models\Farmer');
+            $this->addImage($request, 'image' , 'farmers' , 'upload_image',Auth::guard('web')->user()->id, 'App\Models\Farmer');
             DB::commit();
             session()->flash('Edit',__('Admin/site.updated_successfully'));
             return redirect()->route('farmer.ownprofile');
@@ -40,6 +40,7 @@ class FarmerEditProfile extends Controller
             DB::rollBack();
             session()->flash('error',__('Admin/site.sorry'));
             return redirect()->back();
+            //    return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 

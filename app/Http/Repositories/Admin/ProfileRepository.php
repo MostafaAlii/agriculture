@@ -52,6 +52,7 @@ class ProfileRepository implements ProfileInterface{
             DB::rollBack();
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
     public function updateInformation($request,$id) {

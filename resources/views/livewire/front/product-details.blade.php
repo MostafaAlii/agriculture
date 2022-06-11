@@ -139,7 +139,7 @@ label.star:before {
                                 <div class="col-12 col-lg-7">
                                     <div class="__product-img">
 
-                                        @if($product->image->filename)
+                                        @if($product->image)
                                         <img width="330" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                         @else
                                         <img width="330" src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
@@ -215,33 +215,43 @@ label.star:before {
                                                 </b>
                                             </p>
                                         </div>
-                                        <div class="stock-info in-stock">
+                                        {{-- <div class="stock-info in-stock">
                                             <p class="availability">
                                                 <b
                                                     class="text text-success ">
                                                     @lang('Admin/site.qty') ({{ $product->qty  }})
                                                 </b>
                                             </p>
-                                        </div>
+                                        </div> --}}
 
 
                                         @if (Auth::guard('vendor')->user() )
                                             @if($product->in_stock ==1)
                                                 <form class="__add-to-cart" action="#">
                                                     <div class="quantity-counter js-quantity-counter">
-                                                        <span class="__btn __btn--minus"  wire:click.prevent='decreaseQty' ></span>
+                                                        {{-- @if($product->qty  > 1) --}}
+                                                            <span class="__btn __btn--minus"
+                                                                wire:click.prevent='decreaseQty' >
+                                                            </span>
+                                                        {{-- @endif --}}
                                                         <input class="__q-input"
-                                                        type="text"
-                                                        name="product-quatity"
-                                                        min="1"
-                                                        max="{{ $product->qty }}"
-                                                        value="1"
-                                                        onkeydown="return false"
-                                                        wire:model='qty' />
-                                                        <span class="__btn __btn--plus" wire:click.prevent='increaseQty' ></span>
+                                                                type="text"
+                                                                name="product-quatity"
+                                                                min="1"
+                                                                max="{{ $qtymax }}"
+                                                                value="{{ $qty }}"
+                                                                onkeydown="return false"
+                                                                wire:model='qty'
+                                                                autocomplete="off"
+                                                        />
+                                                        @if($qty < $product->qty)
+                                                            <span class="__btn __btn--plus"
+                                                                wire:click.prevent='increaseQty' >
+                                                            </span>
+                                                        @endif
                                                     </div>
 
-                                                        <button class="custom-btn custom-btn--medium custom-btn--style-1"
+                                                        <button class="custom-btn custom-btn--medium custom-btn--style-1" title="{{ __('Admin/site.addtocart') }}"
                                                         type="submit" role="button"
                                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                         <i class="fontello-shopping-bag"></i>
@@ -358,7 +368,7 @@ label.star:before {
                                         <div class="__item">
                                             <figure class="__image">
                                                 <a href="{{ route('product_details',encrypt($product->id)) }}">
-                                                    @if($product->image->filename)
+                                                    @if($product->image)
                                                         <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                         data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                     @else
@@ -516,7 +526,7 @@ label.star:before {
                                             <div class="col-auto __image-wrap">
                                                 <figure class="__image">
                                                     <a href="{{ route('product_details',encrypt($product->id)) }}">
-                                                        @if($product->image->filename)
+                                                        @if($product->image)
                                                             <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                             data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
                                                         @else

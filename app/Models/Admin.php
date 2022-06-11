@@ -11,6 +11,14 @@ class Admin extends Authenticatable {
     use HasFactory, Notifiable, HasRoles;
     protected $table = "admins";
     protected $guard = 'admin';
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    //     'status',
+    //     'visibility',
+    //     'admin_id',
+    // ];
     protected $guarded = [];
     public $timestamps = true;
     const ACTIVE = 1, NOT_ACTIVE = 0;

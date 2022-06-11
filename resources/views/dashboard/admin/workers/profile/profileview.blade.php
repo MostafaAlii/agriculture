@@ -19,16 +19,16 @@
                 <div class="row">
                     <div class="col-12 col-sm-7">
                         <div class="media mb-2">
-                            @if(Auth::user()->image)
+                            @if($worker->image)
                                 <a class="mr-2" href="#">
                                         <img src="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
-                                        alt="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
+                                        alt="{{ __('Admin/site.no-image') }}"
                                         class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                 </a>
                             @else
                                 <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
-                                    alt="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
+                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                    alt="{{ __('Admin/site.no-image') }}"
                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                 </a>
                             @endif
@@ -59,7 +59,7 @@
                                 <td class="users-view-email">{{ $worker->email }}</td>
                             </tr>
                             <tr>
-                                <td>@lang('Admin/site.phone'):</td>
+                                <td>@lang('Admin/site.phonenum'):</td>
                                 <td>{{ $worker->phone }}</td>
                             </tr>
                             <tr>
@@ -97,37 +97,23 @@
                             </tr>
                             <tr>
                                 <td>@lang('Admin/site.country'):</td>
-                                @if(($worker->country_id == null))
-                                    <td></td>
-
-                                    @else
-                                    <td>{{ $worker->country->name }}</td>
-                                    @endif
+                                <td>{{ $worker->country->name ?? null }}</td>
                             </tr>
                             <tr>
                                 <td>@lang('Admin/site.province'):</td>
-                                @if(($worker->province_id==null))
-                                    <td></td>
-
-                                @else
-                                    <td>{{ $worker->province->name }}</td>
-                                @endif
+                                <td>{{ $worker->province->name?? null }}</td>
                             </tr>
                             <tr>
                                 <td>@lang('Admin/site.area'):</td>
-                                <td>{{ $worker->area->name }}</td>
+                                <td>{{ $worker->area->name ?? null}}</td>
                             </tr>
                             <tr>
                                 <td>@lang('Admin/site.state'):</td>
-                                <td>{{ $worker->state->name}}</td>
+                                <td>{{ $worker->state->name ?? null}}</td>
                             </tr>
                             <tr>
                                 <td>@lang('Admin/site.village'):</td>
-                                @if(($worker->village_id ==null))
-                                <td></td>
-                                @else
-                                    <td>{{ $worker->village->name }}</td>
-                                @endif
+                                <td>{{ $worker->village->name?? null }}</td>
                             </tr>
 
                             <tr>
@@ -140,7 +126,7 @@
                             </tr>
                             <tr>
                                 <td>@lang('Admin/site.desc'):</td>
-                                <td>{{ $worker->desc }}</td>
+                                <td>{!! $worker->desc !!}</td>
                             </tr>
                         </tbody>
                     </table>

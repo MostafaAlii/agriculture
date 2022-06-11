@@ -29,10 +29,6 @@ class userProfileRequest extends FormRequest {
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
-
-            // $farmer = $this->route()->parameter('id');
-
-            // $rules['email'] = 'required|email|unique:admins,id,' . $admin;
             $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id;
         }//end of if
 

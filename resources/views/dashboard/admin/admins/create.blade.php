@@ -62,20 +62,33 @@
                                                     <div class="form-group">
                                                         <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
                                                         <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.firstname') }}" name="firstname" value="{{ old('firstname') }}" required>
+                                                        @error('firstname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="eventRegInput1">{{ __('Admin/site.lastname') }}<span class="text-danger">*</span></label>
                                                         <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/site.lastname') }}" name="lastname" value="{{ old('lastname') }}" required>
+                                                        @error('lastname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="eventRegInput4">{{ __('Admin/site.email') }}<span class="text-danger">*</span></label>
                                                         <input type="email" id="eventRegInput4" class="form-control" placeholder="{{ __('Admin/site.email') }}" name="email" value="{{ old('email') }}" required>
+                                                        @error('email')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="eventRegInput5">{{ __('Admin/site.phone') }}<span class="text-danger">*</span></label>
-                                                        <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone') }}" required>
+                                                        <input type="tel" id="eventRegInput5" class="form-control" name="phone" placeholder="{{ __('Admin/site.phone') }}" value="{{ old('phone') }}"
+                                                        maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' required />
+                                                        @error('phone')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -83,11 +96,17 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
                                                         <input type="password" name="password" class="form-control" value="{{ old('password') }}" required>
+                                                        @error('password')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                     {{--password_confirmation--}}
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
                                                         <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}" required>
+                                                        @error('password_confirmation')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,6 +156,9 @@
                                                             <option value="admin">{{ __('Admin/site.admins') }}</option>
                                                             <option value="employee">{{ __('Admin/site.employee') }}</option>
                                                         </select>
+                                                        @error('type')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </fieldset>
                                                  </div>
 
@@ -147,7 +169,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <img src="{{ asset('assets/admin/images/avatar.jpg') }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                    <img src="{{ asset('Dashboard/img/profile.png') }}" class="img-thumbnail img-preview" width="100" alt="">
                                                 </div>
                                             </div>
 

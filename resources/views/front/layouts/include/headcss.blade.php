@@ -33,7 +33,12 @@
 
           <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
           <!-- END: Page CSS-->
-          <style> body {font-family: 'Cairo', sans-serif !important;} </style>
+          <style>
+          body {font-family: 'Cairo', sans-serif !important;}
+          .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cairo', sans-serif !important;
+        }
+          </style>
     {{-- font cairo --}}
 
     <!-- Critical styles

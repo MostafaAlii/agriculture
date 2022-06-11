@@ -28,6 +28,23 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/classic.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/classic.date.css')}}">
     @if(app()->getLocale()=='ar')
+        {{-- font cairo --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+        <style>
+        body {font-family: 'Cairo', sans-serif !important;}
+        .navigation{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        h1,h2,h3,h4,h5,h6{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        .breadcrumb-item{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        </style>
+        {{-- font cairo --}}
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
@@ -115,6 +132,7 @@
     @toastr_css
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/multiple-select.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/ticker.css') }}">
     @yield('css')
 </head>
 <!-- END: Head-->

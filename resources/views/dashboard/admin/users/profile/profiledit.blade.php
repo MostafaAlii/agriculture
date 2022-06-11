@@ -42,14 +42,14 @@
                                         <div class="media mb-2">
                                             @if($user->image)
                                                 <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/admins/'. $user->image->filename) }}"
-                                                    alt="{{ asset('Dashboard/img/admins/'. $user->image->filename) }}"
+                                                    <img src="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
+                                                    alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @else
                                                 <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/users/avatar.jpg') }}"
-                                                    alt="{{ asset('Dashboard/img/users/avatar.jpg') }}"
+                                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
+                                                    alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
                                             @endif
@@ -72,6 +72,9 @@
                                                         <label>{{ __('Admin/site.firstname') }}</label>
                                                         <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',$user->firstname) }}"
                                                         name="firstname" required data-validation-required-message="This firstname field is required">
+                                                        @error('firstname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -79,13 +82,20 @@
                                                         <label>{{ __('Admin/site.lastname') }}</label>
                                                         <input type="text" class="form-control"  value="{{ old('lastname',$user->lastname) }}"
                                                         name="lastname" required data-validation-required-message="This lastname field is required">
+                                                        @error('lastname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                      @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.phone') }}</label>
                                                         <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$user->phone) }}"
-                                                        required data-validation-required-message="This phone field is required">
+                                                        required maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                        data-validation-required-message="This phone field is required" />
+                                                        @error('phone')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -93,114 +103,34 @@
                                                         <label>{{ __('Admin/site.email') }}</label>
                                                         <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',$user->email) }}"
                                                         required data-validation-required-message="This email field is required">
+                                                        @error('email')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-12 col-sm-6">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Role</label>
-                                                    <select class="form-control">
-                                                        <option>User</option>
-                                                        <option>Staff</option>
-                                                    </select>
+                                                    <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
+                                                    <input type="password" name="password" class="form-control"
+                                                    placeholder="{{ __('Admin/site.enter_new_password') }}" required>
+                                                    @error('password')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
+                                                {{--password_confirmation--}}
                                                 <div class="form-group">
-                                                    <label>Status</label>
-                                                    <select class="form-control">
-                                                        <option>Active</option>
-                                                        <option>Banned</option>
-                                                        <option>Close</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Company</label>
-                                                    <input type="text" class="form-control" placeholder="Company name">
+                                                    <label>{{ __('Admin/site.password_confirmation') }}<span class="text-danger">*</span></label>
+                                                    <input type="password" name="password_confirmation" class="form-control"
+                                                    value="{{ old('password_confirmation') }}" placeholder="{{ __('Admin/site.enter_passord_confirm') }}" required >
+                                                    @error('password_confirmation')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="table-responsive">
-                                                    <table class="table mt-1">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Module Permission</th>
-                                                                <th>Read</th>
-                                                                <th>Write</th>
-                                                                <th>Create</th>
-                                                                <th>Delete</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Users</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox1" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox1"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox2" class="custom-control-input"><label class="custom-control-label" for="users-checkbox2"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox3" class="custom-control-input"><label class="custom-control-label" for="users-checkbox3"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox4" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox4"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Articles</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox5" class="custom-control-input"><label class="custom-control-label" for="users-checkbox5"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox6" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox6"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox7" class="custom-control-input"><label class="custom-control-label" for="users-checkbox7"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox8" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox8"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Staff</td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox9" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox9"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox10" class="custom-control-input" checked>
-                                                                        <label class="custom-control-label" for="users-checkbox10"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox11" class="custom-control-input"><label class="custom-control-label" for="users-checkbox11"></label>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="custom-control custom-checkbox"><input type="checkbox" id="users-checkbox12" class="custom-control-input"><label class="custom-control-label" for="users-checkbox12"></label>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div> --}}
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>
-                                                {{-- <button type="reset" class="btn btn-light">Cancel</button> --}}
                                             </div>
                                         </div>
                                     </form>
@@ -217,9 +147,12 @@
                                                 <div class="form-group">
                                                     <div class="controls position-relative">
                                                         <label>{{ __('Admin/site.birthday') }}</label>
-                                                        <input type="date" class="form-control birthdate-picker" required placeholder="Birth date"
-                                                        value="{{ $user->birthdate }}"
+                                                        <input type="date" class="form-control birthdate-picker" required placeholder="{{ __('Admin/site.birthday') }}"
+                                                         value="{{ old('birthday',$user->birthdate) }}"
                                                         data-validation-required-message="This birthdate field is required">
+                                                        @error('birthdate')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -230,34 +163,49 @@
                                                          <option value="{{ $country->id }}" {{$user->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                                                         @endforeach
                                                     </select>
+                                                    @error('country_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
                                                     <select class="select2 form-control" id="province_id" name="province_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $user->province_id }}"  >{{ $user->province->name }}</option>
+                                                        <option value="{{ $user->province_id }}"  >{{ $user->province->name ??null }}</option>
                                                     </select>
+                                                    @error('province_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
                                                     <select class="select2 form-control" id="area_id" name="area_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $user->area_id }}"  >{{ $user->area->name }}</option>
+                                                        <option value="{{ $user->area_id }}"  >{{ $user->area->name ??null}}</option>
                                                     </select>
+                                                    @error('area_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.state') }}</label>
                                                     <select class="select2 form-control" id="state_id" name="state_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $user->state_id }}"  >{{ $user->state->name }}</option>
+                                                        <option value="{{ $user->state_id }}"  >{{ $user->state->name ??null }}</option>
                                                     </select>
+                                                    @error('state_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
                                                     <select class="select2 form-control" id="village_id" name="village_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $user->village_id }}"  >{{ $user->village->name }}</option>
+                                                        <option value="{{ $user->village_id }}"  >{{ $user->village->name ??null }}</option>
                                                     </select>
+                                                    @error('village_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6 mt-1 mt-sm-0">
@@ -266,61 +214,36 @@
                                                     <label>{{ __('Admin/site.address1') }}</label>
                                                     <input type="text" class="form-control"  value="{{ old('lastname',$user->address1) }}"
                                                     name="address1" required data-validation-required-message="This address1 field is required">
+                                                    @error('address1')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address2') }}</label>
                                                     <input type="text" class="form-control"  value="{{ old('lastname',$user->address2) }}"
                                                     name="address2" required data-validation-required-message="This address2 field is required">
+                                                    @error('address2')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
                                                     <select class="form-control" id="accountSelect" name="department_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ $user->department_id }}"  >{{ $user->department->name }}</option>
+                                                        <option value="{{ $user->department_id }}"  >{{ $user->department->name ??null}}</option>
                                                         @foreach (\App\Models\Department::get() as $department)
-                                                         <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                                         <option value="{{ $department->id }}">{{ $department->name ??null}}</option>
                                                         @endforeach
                                                     </select>
+                                                    @error('department_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
 
                                             </div>
-                                            {{-- <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Website</label>
-                                                    <input type="text" class="form-control" placeholder="Website address">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Favourite Music</label>
-                                                    <select class="form-control" id="users-music-select2" multiple="multiple">
-                                                        <option value="Rock">Rock</option>
-                                                        <option value="Jazz" selected>Jazz</option>
-                                                        <option value="Disco">Disco</option>
-                                                        <option value="Pop">Pop</option>
-                                                        <option value="Techno">Techno</option>
-                                                        <option value="Folk" selected>Folk</option>
-                                                        <option value="Hip hop">Hip hop</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Favourite movies</label>
-                                                    <select class="form-control" id="users-movies-select2" multiple="multiple">
-                                                        <option value="The Dark Knight" selected>The Dark Knight
-                                                        </option>
-                                                        <option value="Harry Potter" selected>Harry Potter</option>
-                                                        <option value="Airplane!">Airplane!</option>
-                                                        <option value="Perl Harbour">Perl Harbour</option>
-                                                        <option value="Spider Man">Spider Man</option>
-                                                        <option value="Iron Man" selected>Iron Man</option>
-                                                        <option value="Avatar">Avatar</option>
-                                                    </select>
-                                                </div>
-                                            </div> --}}
                                             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
                                                 <button type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1">
                                                     {{ __('Admin/site.save') }}</button>
-                                                {{-- <button type="reset" class="btn btn-light">Cancel</button> --}}
                                             </div>
                                         </div>
                                     </form>

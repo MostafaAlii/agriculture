@@ -36,10 +36,10 @@
                             }
                         ]}'>
 
-                      
-                        
+
+
                         @foreach( \App\Models\Brand::orderByDesc('created_at')->limit(5)->get() as $brand)
-                            @if ($brand->image->filename)
+                            @if ($brand->image)
                                 <div class="__item">
                                     <img class="img-fluid m-auto" src="{{ asset('Dashboard/img/brands/' . $brand->image->filename) }}"
                                         alt="{{ $brand->title }}" />

@@ -15,12 +15,35 @@ class Blog extends Model {
     const FOR_ONLY_ME_VISIBIILTY = 4;
 
     protected $table = "blogs";
+    // protected $fillable = [
+    //     'status',
+    //     'visibility',
+    //     'admin_id',
+    // ];
     protected $guarded = [];
     protected $with = ['translations'];
     public $translatedAttributes = ['title', 'body'];
     public $timestamps = true;
 
-    
+
+    public function scopeWhenSearch($query, $search)
+    {
+        // $sss = BlogTranslation::whereHas('translations', function ($query) {
+        //     $query
+        //         ->where('locale', 'en')
+        //         ->where('title', 'like', "%{$search}%");
+        // })->first();
+        // dd($sss);
+        return $query->when($search, function ($q) use ($search) {
+            // 'title', 'like', '%' . $search . '%'
+            return $q->whereHas('title', 'like', "%{$search}%")
+                    //  ->orWhere('body', 'like', "%{$search}%")
+                     ;
+
+        });
+
+    }// end of scopeWhenSearch
+
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
     }

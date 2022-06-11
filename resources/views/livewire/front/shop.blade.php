@@ -193,7 +193,7 @@
                                                         <figure class="__image">
                                                             <a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">
-                                                                @if ($product->image->filename)
+                                                                @if ($product->image)
                                                                     <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                                         data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
                                                                         alt="demo" />
@@ -323,7 +323,7 @@
                                             <div class="col-12 col-sm-6 col-lg-4">
                                                 <div class="__item product-cart">
                                                     <figure class="__image">
-                                                        @if ($product->image->filename)
+                                                        @if ($product->image)
                                                             <a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">
                                                                 <img width="188"
@@ -339,7 +339,7 @@
                                                         @endif
                                                     </figure>
 
-                                                    <div class="__content">
+                                                    <div class="__content ">
                                                         <h4 class="h6 __title"><a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                         </h4>
@@ -360,13 +360,13 @@
                                                                 </b>
                                                             </p>
                                                         </div>
-                                                        <div class="stock-info in-stock">
+                                                        {{-- <div class="stock-info in-stock">
                                                             <p class="availability">
                                                                 <b class="text text-success ">
                                                                     @lang('Admin/site.qty') ({{ $product->qty }})
                                                                 </b>
                                                             </p>
-                                                        </div>
+                                                        </div> --}}
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
                                                                 <span
@@ -385,16 +385,27 @@
                                                         @endif
                                                         @if (Auth::guard('vendor')->user())
                                                             @if ($product->in_stock == 1)
-                                                                <a class="custom-btn custom-btn--medium custom-btn--style-1 " id="demo"
-                                                                    href="#"
-                                                                    wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
+                                                                  {{-- @if($condition)
+                                                                  @else
+                                                                  @endif --}}
+                                                                <a class="custom-btn custom-btn--medium custom-btn--style-1 add-to-cart-cartbtnbtn" title="{{ __('Admin/site.addtocart') }}"
+                                                                    href="#" id="add-to-cart-cartbtnbtn" onclick="myFunction()"
+                                                                    {{-- onClick="(function(){
+                                                                                alert('{{ __('Website/home.item_added_to_cart') }}');
+                                                                                this.innerHTML='{{ __('Website/home.adding') }}';
+                                                                                return false;
+                                                                    })();return false;" --}}
+
+                                                                    wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})"
+                                                                >
                                                                     <i class="fontello-shopping-bag"></i>
                                                                     {{ __('Admin/site.addtocart') }}
                                                                 </a>
+
                                                                 {{-- wishlist route ******************* *************************************** --}}
                                                                 <div class="product-wish">
                                                                     @if ($witems->contains($product->id))
-                                                                        <a href="#"
+                                                                        <a href="#" title=" {{ __('Admin/site.addwish') }}"
                                                                             wire:click.prevent=" removeWishlist({{ $product->id }}) ">
                                                                             <i class="fa fa-heart fill-heart"></i>
                                                                         </a>
@@ -509,10 +520,19 @@
             @this.set('max_price', value[1]);
         });
     </script>
-    {{-- <script>
-        $(".product-cart").click(function(){
-            document.getElementById("demo").innerHTML = ""
-            document.getElementById("demo").innerHTML = "I have changed!"
-        });
-    </script> --}}
+    <script>
+        function myFunction() {
+            console.log('clicked');
+            alert('{{ __('Website/home.item_added_to_cart') }}');
+                        // this.text('{{ __('Admin/site.loading') }}');
+                //  $("this").text("{{ __('Admin/site.adding_to_cart') }}");
+                // document.getElementById("add-to-cart-cartbtnbtn").innerHTML = "{{ __('Admin/site.adding_to_cart') }}";
+                // document.getElementById("add-to-cart-cartbtnbtn").attr("disabled", true);
+                // document.getElementById("add-to-cart-cartbtnbtn").classList.add("disabled");
+                // document.getElementById("add-to-cart-cartbtnbtn").classList.remove("custom-btn--style-1");
+                // document.getElementById("add-to-cart-cartbtnbtn").classList.add("btn-loading");
+                // document.getElementById("add-to-cart-cartbtnbtn").disabled = false;
+
+        }
+    </script>
 @endpush

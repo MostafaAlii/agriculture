@@ -127,8 +127,6 @@
                 {
                     data: 'email',
                     name: 'email',
-                    searchable: false,
-                    sortable: false,
                     width: '10%'
                 },
 

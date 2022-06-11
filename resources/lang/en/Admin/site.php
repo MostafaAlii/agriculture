@@ -94,7 +94,8 @@ return [
     'farmer'=>'Farmers',
     'warning' => 'Are you sure to delete ?',
 
-    'phone'=>'Phone',
+    'phone'=>'Phone number must be 11 digits',
+    'phonenum' => 'Phone number',
     'address'=>'Address',
     'admins' => 'Admin',
     'type'=>'Type',
@@ -102,7 +103,7 @@ return [
 
     'select'=>'Open this select menu',
     'employee'=>'Employee',
-    'loginby'=>'Enter phone number or email address',
+    'loginby'=>'Enter phone number 11 digits or email address',
     'register'=>'Register Now',
 
     'signvendor'=>'sign in as vendor',
@@ -176,7 +177,7 @@ return [
     'addtocart'=>'Add To Cart',
     'sale'=>'Sale',
     'new'=>'New',
-    'search'=>'search for product',
+    // 'search'=>'search for product',
     'find'=>'Find',
     'keywords'=>'Key Words',
     'tags'=>'Product Tags',
@@ -211,8 +212,8 @@ return [
       'worktype'=>'Work Type',
       'alone'=>'Individually',
       'team'=>'Teamwork',
-      'daily'=>'Daily Price',
-      'hourly'=>'Hourly Price',
+      'daily'=>'Daily Price by USD',
+      'hourly'=>'Hourly Price by USD',
       'dhprice'=>'Day/Hour Price',
       'desc'=>'Description',
 
@@ -247,4 +248,23 @@ return [
        'worldsms'=>'Thanks For Your Support',
 
        'please_select_at_least_one_record'=>'Please select at least one record',
+       'cant_delete'=>'Can\'t delete this record because it has related records',
+       'cant_delete_all'=>'Cant\'t delete all this records because some of them have related records',
+       'again'=>'welcome back again in our website',
+       'BreakingNews'=>'Breaking News',
+       'no-image'=>'No Image',
+
+       'enter_new_password'=>'Enter New Password',
+       'enter_passord_confirm'=>'Enter Password Confirm',
+       'birthday'=>'Birthday',
+
+          //section 2 in home page
+          'Free_Shipping_On_Order_Over'=>'Free Shipping On Order Over',
+          'Free_shipping_on_all_order'=>'Free shipping on all order',
+          'Member_Discount'=>'Member Discount',
+          'Back_guarantee_under_7_days'=>'Back guarantee under 7 days',
+          'Money_Return'=>' Money Return',
+          'Support_online_24_hours_a_day'=>'Support online 24 hours a day',
+          'Online Support'=>'Online Support',
+          'Online Support 24/7'=>'Online Support 24/7',
 ];

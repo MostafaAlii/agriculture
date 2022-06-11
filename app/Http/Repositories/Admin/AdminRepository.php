@@ -66,8 +66,6 @@ class AdminRepository implements AdminInterface
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             $requestData['type'] = $request->type;
-            /*$requestData['latitude']= NULL;
-            $requestData['longitude']= NULL;*/
             Admin::create($requestData);
             $admin = Admin::latest()->first();
             $admin->assignRole($request->input('roles_name'));
@@ -129,28 +127,34 @@ class AdminRepository implements AdminInterface
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('Admins.index');
         } catch (\Exception $e) {
-            toastr()->error(__('Admin/site.sorry'));
+            // toastr()->error(__('Admin/site.sorry'));
+            toastr()->error(__('Admin/site.cant_delete'));
             return redirect()->back();
         }
     }
 
     public function bulkDelete($request)
     {
-        if ($request->delete_select_id) {
-            $delete_select_id = explode(",", $request->delete_select_id);
-            foreach ($delete_select_id as $admins_ids) {
-                $admin = Admin::findorfail($admins_ids);
-                if ($admin->image) {
-                    $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+        try {
+            if ($request->delete_select_id) {
+                $delete_select_id = explode(",", $request->delete_select_id);
+                foreach ($delete_select_id as $admins_ids) {
+                    $admin = Admin::findorfail($admins_ids);
+                    if ($admin->image) {
+                        $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+                    }
                 }
+            } else {
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('Admins.index');
             }
-        } else {
-            toastr()->error(__('Admin/site.no_data_found'));
+            Admin::destroy($delete_select_id);
+            toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('Admins.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/site.cant_delete_all'));
+            return redirect()->back();
         }
-        Admin::destroy($delete_select_id);
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('Admins.index');
     }// end of bulkDelete
 
     public function showProfile($id)
@@ -166,10 +170,16 @@ class AdminRepository implements AdminInterface
             DB::beginTransaction();
             $adminID = Crypt::decrypt($id);
             $admin = Admin::findorfail($adminID);
+            $adminpassword = $admin->password;
             $requestData = $request->validated();
+            if ($request->password) {
+                $requestData['password'] = bcrypt($request->password);
+            } else {
+                $requestData['password'] = $adminpassword;
+            }
             $admin->update($requestData);
             if ($request->image) {
-                $this->deleteImage('upload_image', '/admins/' . $admin->image->filename, $admin->id);
+                $this->deleteImage('upload_image', '/admins/' . $admin->image, $admin->id);
             }
             $this->addImage($request, 'image', 'admins', 'upload_image', $admin->id, 'App\Models\Admin');
             DB::table('model_has_roles')->where('model_id', $adminID)->delete();

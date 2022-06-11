@@ -59,15 +59,15 @@ class WorkerRepository implements WorkerInterface{
             Worker::create($requestData);
             $worker = Worker::latest()->first();
             $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
-            Notification::send($worker, new \App\Notifications\NewWorker($worker));
+            // Notification::send($worker, new \App\Notifications\NewWorker($worker));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('workers.index');
          } catch (\Exception $e) {
             DB::rollBack();
-           toastr()->error(__('Admin/site.sorry'));
-            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
-           return redirect()->back();
+        //    toastr()->error(__('Admin/site.sorry'));
+        //    return redirect()->back();
+            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 
@@ -113,27 +113,32 @@ class WorkerRepository implements WorkerInterface{
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('workers.index');
         } catch (\Exception $e) {
-            toastr()->error(__('Admin/site.sorry'));
+            // toastr()->error(__('Admin/site.sorry'));
+            toastr()->error(__('Admin/site.cant_delete'));
             return redirect()->back();
         }
     }
     public function bulkDelete($request) {
-        if($request->delete_select_id){
-            $delete_select_id = explode(",",$request->delete_select_id);
-            foreach($delete_select_id as $workers_ids){
-               $worker = Worker::findorfail($workers_ids);
-               if($worker->image){
-                $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
-               }
+        try{
+            if($request->delete_select_id){
+                $delete_select_id = explode(",",$request->delete_select_id);
+                foreach($delete_select_id as $workers_ids){
+                $worker = Worker::findorfail($workers_ids);
+                if($worker->image){
+                    $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
+                }
+                }
+            }else{
+                toastr()->error(__('Admin/site.no_data_found'));
+                return redirect()->route('workers.index');
             }
-        }else{
-            toastr()->error(__('Admin/site.no_data_found'));
+            Worker::destroy( $delete_select_id );
+            toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('workers.index');
+        } catch (\Exception $e) {
+            toastr()->error(__('Admin/site.cant_delete_all'));
+            return redirect()->back();
         }
-        Worker::destroy( $delete_select_id );
-        toastr()->error(__('Admin/site.deleted_successfully'));
-        return redirect()->route('workers.index');
-
     }// end of bulkDelete
 
     public function showProfile($id){
@@ -147,7 +152,13 @@ class WorkerRepository implements WorkerInterface{
             DB::beginTransaction();
             $workerID = Crypt::decrypt($id);
             $worker=Worker::findorfail($workerID);
+            $workerpassword = $worker->password;
             $requestData = $request->validated();
+            if($request->password){
+                $requestData['password'] = bcrypt($request->password);
+            }else{
+                $requestData['password'] = $workerpassword ;
+            }
             // $requestData['status'] = $request->status;
             if($request->daily_price ){
                 $requestData['hourly_price'] = null;
@@ -158,7 +169,7 @@ class WorkerRepository implements WorkerInterface{
             $worker->update($requestData);
 
             if($request->image){
-                $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
+                $this->deleteImage('upload_image','/workers/' . $worker->image,$worker->id);
             }
             $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
 

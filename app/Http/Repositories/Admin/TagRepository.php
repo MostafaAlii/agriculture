@@ -18,7 +18,7 @@ class TagRepository implements TagInterface {
 
     public function data($request) {
         if(request()->ajax()) {
-            return datatables()->of(Tag::select('*'))
+            return datatables()->of(Tag::get())
             ->addColumn('record_select', 'dashboard.admin.tags.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (Tag $tag) {
