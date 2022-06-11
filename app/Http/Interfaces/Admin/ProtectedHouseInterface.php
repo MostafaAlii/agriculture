@@ -10,8 +10,8 @@ interface ProtectedHouseInterface{
     public function update($request,$id);
     public function destroy($id);
     public function bulkDelete($request);
-    public function protected_house_statistics();
-    public function protected_house_private_statistics();
-    public function protected_house_gov_statistics();
+    public function protected_house_index();
+    public function protected_house_statistics($request);
+
     //    public function getFarmerInf($id);
 }

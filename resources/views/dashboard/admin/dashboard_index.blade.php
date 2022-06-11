@@ -1056,7 +1056,7 @@
                                                     <!-- Start Protect House Statistics -->
                                                     @can('protected-house-statistics')
                                                         <div class="col-xl-3 col-lg-6 col-12">
-                                                            <a href="{{ route('protected_house.statistic') }}">
+                                                            <a href="{{ route('protected_house_index') }}">
                                                                 <div class="card pull-up">
                                                                     <div class="card-content">
                                                                         <div class="card-body">
@@ -1079,58 +1079,8 @@
                                                         </div>
                                                     @endcan
                                                     <!-- End Protect House Statistics -->
-                                                    <!-- Start protected-house-government-statistics -->
-                                                    @can('protected-house-government-statistics')
-                                                        <div class="col-xl-3 col-lg-6 col-12">
-                                                            <a href="{{ route('protected_house_g.statistic') }}">
-                                                                <div class="card pull-up">
-                                                                    <div class="card-content">
-                                                                        <div class="card-body">
-                                                                            <div class="media d-flex">
-                                                                                <div class="media-body text-left">
-                                                                                    <h3 class="gray-bg" style="color: yellow;">{{ \App\Models\ProtectedHouse::where('supported_side','like','govermental')->count() }}</h3>
-                                                                                    <h6>  {{ trans('Admin/p_houses.report_on_the_number_of_greenhouses_govermental_supported') }}</h6>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <i class="fa fa-list-alt" aria-hidden="true" style="color: yellow;"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                                                                <div class="progress-bar bg-gradient-x-yellow" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    @endcan
-                                                    <!-- End protected-house-government-statistics -->
-                                                    <!-- Start protected-house-private-statistics -->
-                                                    @can('protected-house-private-statistics')
-                                                        <div class="col-xl-3 col-lg-6 col-12">
-                                                            <a href="{{ route('protected_house_p.statistic') }}">
-                                                                <div class="card pull-up">
-                                                                    <div class="card-content">
-                                                                        <div class="card-body">
-                                                                            <div class="media d-flex">
-                                                                                <div class="media-body text-left">
-                                                                                    <h3 class="gray-bg" style="color: red;">{{ \App\Models\ProtectedHouse::where('supported_side','like','private')->count() }}</h3>
-                                                                                    <h6>  {{ trans('Admin/p_houses.report_on_the_number_of_greenhouses_private_supported') }}</h6>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <i class="fa fa-list-alt" aria-hidden="true" style="color: red;"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                                                                <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    @endcan
-                                                    <!-- End protected-house-private-statistics -->
+
+
                                                 </div>
                                                 <!-- End Row -->
                                             </div>
