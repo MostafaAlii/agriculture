@@ -10,6 +10,7 @@ return [
     'farmer' =>'Farmer',
     'area' =>'Area',
     'state' =>'State',
+    'search'=>'Search',
     'private'=>'Private',
     'international_organizations'=>'International Organization',
     'govermental'=>'Govermental',

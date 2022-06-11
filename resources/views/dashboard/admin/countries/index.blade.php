@@ -129,7 +129,7 @@
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                 {data: 'image', name: 'country_logo', searchable: false, sortable: false, width: '10%'},
-                {data: 'name', name: 'country_translations.name', searchable: true, sortable: false},
+                {data: 'name', name: 'name', searchable: true, sortable: false},
                 {data: 'provinces', name: 'provinces.name', searchable: false, sortable: false},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

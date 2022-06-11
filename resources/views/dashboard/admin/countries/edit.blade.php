@@ -76,7 +76,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/countries.country_flag') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                                        <input class="form-control img" name="image"  type="file" accept="image/*">
+                                                        <input class="form-control img" name="image" value="{{ $country->country_logo}}"  type="file" accept="image/*">
                                                     </div>
                                                 </div>
                                                     @if($country->country_logo)

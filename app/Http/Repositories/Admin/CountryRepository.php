@@ -3,6 +3,8 @@ namespace App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\CountryInterface;
 use App\Models\Country;
 use App\Models\CountryTranslation;
+use App\Models\Admin;
+use App\Models\Farmer;
 
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -23,7 +25,7 @@ class CountryRepository implements CountryInterface {
     }
     public function data() {
 
-        $countries = Country::with('provinces');
+        $countries = Country::with('provinces')->get();
 
         return DataTables::of($countries)
             ->addColumn('provinces', function (Country $country) {
@@ -47,10 +49,7 @@ class CountryRepository implements CountryInterface {
 
 
             ->rawColumns([ 'record_select','actions'])
-            ->filterColumn('name', function($qountries, $keyword) {
-                $sql = "country_translations.name  like ?";
-                $qountries->whereRaw($sql, ["%{$keyword}%"]);
-            })
+
             ->toJson();
     }
 
@@ -93,9 +92,11 @@ class CountryRepository implements CountryInterface {
     }
 
     public function update( $request,$id) {
+//        return $request;
             try{
                 $countryID = Crypt::decrypt($id);
                 $country=Country::findorfail($countryID);
+
                 $dataRequest = $request->except(['image']);
 
 
@@ -116,9 +117,9 @@ class CountryRepository implements CountryInterface {
                 toastr()->success( __('Admin/site.updated_successfully'));
                 return redirect()->route('Countries.index');
             } catch (\Exception $e) {
-//                toastr()->error(__('Admin/attributes.edit_wrong'));
+                toastr()->error(__('Admin/attributes.edit_wrong'));
 
-                return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+                return redirect()->back();
 
             }
 
@@ -128,30 +129,27 @@ class CountryRepository implements CountryInterface {
 
     public function destroy($id) {
         try{
-            $data = [];
             $countryID = Crypt::decrypt($id);
-//            $data['province'] = Province::where('country_id', $countryID)->pluck('country_id');
-//            if($data['province']->count() == 0) {
-                $country=Country::findorfail($countryID);
+            $admin_count= Admin::where('country_id','=',$countryID)->count();
+            $farmer_count= Farmer::where('country_id','=',$countryID)->count();
+            $country=Country::findorfail($countryID);
+            $province_count = $country->provinces->count();
+            if($province_count == 0 && $admin_count==0 && $farmer_count==0 ) {
             if(File::exists('Dashboard/img/countries/' . $country->country_logo))
             {
                 File::delete('Dashboard/img/countries/' . $country->country_logo);
             }
-//                if($country->country_logo != 'default_flag.jpg') {
-//                    Storage::disk('upload_image')->delete('/countryFlags/' . $country->country_logo);
-//                }
+
                 $country->delete();
                 toastr()->success(__('Admin/site.deleted_successfully'));
                 return redirect()->route('Countries.index');
-//            } else {
-//                toastr()->error(__('Admin/countries.cant_delete'));
-//                return redirect()->route('Countries.index');
-//            }
+            } else {
+                toastr()->error(__('Admin/countries.cant_delete'));
+                return redirect()->route('Countries.index');
+            }
         }catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.delete_wrong'));
-
-            return redirect()->back();
-
+            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
         }
 
 
@@ -164,13 +162,13 @@ class CountryRepository implements CountryInterface {
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
                 foreach ($delete_select_id as $countries_ids) {
-//                    $countries_ids = Crypt::decrypt($countries_ids);
+                    $countries_ids = Crypt::decrypt($countries_ids);
                     $country = Country::findorfail($countries_ids);
-//                    $provinces = $country->provinces->count();
-//                    if ($provinces > 0) {
-//                        toastr()->error(__('Admin/countries.delete_related_provinces'));
-//                        return redirect()->route('Countries.index');
-//                    }
+                    $provinces = $country->provinces->count();
+                    if ($provinces > 0) {
+                        toastr()->error(__('Admin/countries.delete_related_provinces'));
+                        return redirect()->route('Countries.index');
+                    }
                     if(File::exists('Dashboard/img/countries/' . $country->country_logo))
                     {
                         File::delete('Dashboard/img/countries/' . $country->country_logo);
@@ -189,7 +187,7 @@ class CountryRepository implements CountryInterface {
             DB::rollBack();
             toastr()->error(__('Admin/attributes.delete_wrong'));
 
-            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+            return redirect()->back();
         }
 
 

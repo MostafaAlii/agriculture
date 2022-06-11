@@ -137,6 +137,39 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        //  ajax for get villages data of state =====================================================================
+        $('select[name="state_id"]').on('change', function() {
+            var state_id = $(this).val();
+            // console.log(province_id);
+            if (state_id) {
+                $.ajax({
+                    url: "{{ URL::to('dashboard_admin/admin/village') }}/" + state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $('select[name="village_id"]').empty();
+                        $('select[name="village_id"]').append( '<option selected disabled>--select--</option>');
+
+                        $.each(data, function(key, value) {
+                            // console.log(data);
+                            // console.log(key);
+                            // console.log(value);
+                            $('select[name="village_id"]').append(
+                                '<option value="' + key + '">' + value +'</option>'
+                            );
+                        });
+                    },
+                });
+            } else {
+                console.log('AJAX load did not work');
+            }
+        });
+    });
+</script>
+
 {{-- <script>
         window.oncontextmenu = function () {
         return false;

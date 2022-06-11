@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Requests\Dashboard;
+use App\Models\CountryTranslation;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Country;
 
 class CountryRequest extends FormRequest {
     public function authorize() {
@@ -9,12 +11,16 @@ class CountryRequest extends FormRequest {
 
 
     public function rules() {
+
+
         return [
             'name' => [
             'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
-            ],
-//            'image'=>image_validate(),
+            'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+//            'unique:country_translations,name,'.$this->id
+//            ],
+                \Illuminate\Validation\Rule::unique('country_translations', 'name')->ignore($this->id)],
+            'image'=>'sometimes|nullable|image|mimes:png,jpg,jpeg',
 
         ];
     }
@@ -22,8 +28,9 @@ class CountryRequest extends FormRequest {
     public function messages() {
         return [
             'name.required'   =>  trans('Admin/validation.required'),
+            'name.unique'   =>  trans('Admin/validation.unique'),
             'name.regex'     =>  trans('Admin/validation.regex'),
-//            'image.required'=> trans('Admin/validation.required'),
+            'image.image'=> trans('Admin/validation.image'),
         ];
     }
 }

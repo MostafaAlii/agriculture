@@ -14,14 +14,14 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/countries.enter_country_name') }}</label>
-                        <input type="text" name="name" class="form-control" placeholder="{{ trans('Admin/countries.enter_country_name_placeholder') }}" />
+                        <input type="text" name="name" class="form-control" required="required" placeholder="{{ trans('Admin/countries.enter_country_name_placeholder') }}" />
                     </div>
                     <div class="form-group">
                         <label>{{ trans('Admin/countries.country_flag') }}</label>
 
 
                             <a href="#" class="btn btn-sm btn-primary mr-25">
-                                <input class="form-control img" name="image"  type="file" accept="image/*">
+                                <input class="form-control img" name="image" required="required" type="file" accept="image/*">
                             </a>
 
 
