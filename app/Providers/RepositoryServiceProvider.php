@@ -34,7 +34,6 @@ use App\Http\Interfaces\Admin\OrchardInterface;
 
 use App\Http\Interfaces\Admin\ProvinceInterface;
 
-use App\Http\Interfaces\Admin\ProductInterface;
 use App\Http\Interfaces\Admin\ProfileInterface;
 
 use App\Http\Interfaces\Admin\SettingInterface;
@@ -98,7 +97,6 @@ use App\Http\Repositories\Admin\ProvinceRepository;
 
 use App\Http\Repositories\Admin\OrchardRepository;
 
-use App\Http\Repositories\Admin\ProductRepository;
 use App\Http\Repositories\Admin\ProfileRepository;
 
 
@@ -238,7 +236,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(TagInterface::class, TagRepository::class);
         $this->app->bind(AttributeInterface::class, AttributeRepository::class);
         $this->app->bind(OptionInterface::class, OptionRepository::class);
-        $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
         $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);

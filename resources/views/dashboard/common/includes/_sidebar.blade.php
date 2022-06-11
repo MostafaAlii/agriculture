@@ -2,7 +2,7 @@
 <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
         <div class="user-profile">
-            <div class="user-info text-center pt-1 pb-1">
+            <div class="pt-1 pb-1 text-center user-info">
                 @if (isset(Auth::user()->image))
                 <a class="mr-2" href="{{ route('profile.index') }}">
                     <img class="user-img img-fluid rounded-circle" style="width:50%; height:50%;border-radius: 15%;" class="rounded-circle" src="{{ asset('Dashboard/img/admins/' . Auth::user()->image->filename) }}" />
@@ -12,17 +12,17 @@
                     <img class="user-img img-fluid rounded-circle" src="{{ asset('Dashboard/img/profile.png') }}" />
                 </a>
                 @endif
-                <div class="name-wrapper d-block dropdown text-center">
-                    <a class="white dropdown-toggle ml-2" id="user-account" href="{{ route('profile.index') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-name">{{
+                <div class="text-center name-wrapper d-block dropdown">
+                    <a class="ml-2 white dropdown-toggle" id="user-account" href="{{ route('profile.index') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-name">{{
                             Auth::user()->firstname }}
                             {{ Auth::user()->lastname }}</span></a>
-                    <div class="text-light text-center">
+                    <div class="text-center text-light">
                         {{ Auth::user()->type == 'admin' ? __('Admin/site.admin') : __('Admin/site.employee') }}
                     </div>
-                    <div class="text-light text-center">
+                    <div class="text-center text-light">
                         {{ Auth::user()->email }}
                     </div>
-                    <div class="text-light text-center">
+                    <div class="text-center text-light">
 
                         @forelse (Auth::user()->getRoleNames() as $permission)
                         <label class="badge badge-success " style="font-size: 120%">{{ $permission }}</label>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="dropdown-menu arrow" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('profile.index') }}">
-                            <i class="material-icons align-middle mr-1">person</i>
+                            <i class="mr-1 align-middle material-icons">person</i>
                             <span class="align-middle">{{ trans('Admin/site.profile') }}</span>
                         </a>
                         <a class="dropdown-item" href="{{ route('logout.admin') }}" onclick="event.preventDefault(); document.getElementById('log-out').submit();">
@@ -367,7 +367,7 @@
                 @can('admin-department-list')
                     <li class=" nav-item">
                         <a href="{{-- route('admin.dashboard') --}}">
-                            <i class="icon-list info float-left"></i>
+                            <i class="float-left icon-list info"></i>
                             <span class="menu-title" data-i18n="Categories">{{ __('Admin\site.admin_departments') }}</span>
                         </a>
                         <ul class="menu-content">
@@ -398,7 +398,7 @@
                 @can('orchards-list')
                     <li class=" nav-item">
                         <a href="{{-- route('admin.dashboard') --}}">
-                            <i class="fas fa-tree  success"></i>
+                            <i class="fas fa-tree success"></i>
                             <span class="menu-title" data-i18n="Categories">{{ __('Admin\orchards.orchards_settings') }}</span>
                         </a>
                         <ul class="menu-content">
@@ -513,7 +513,7 @@
                     <li class=" nav-item">
                         <a href="{{-- route('admin.dashboard') --}}">
                             <i class="fas fa-cloud-showers-heavy" style="color:grey"></i> {{-- <i
-                                class="icon-users warning font-large-2 float-right"></i> --}}
+                                class="float-right icon-users warning font-large-2"></i> --}}
                             <span class="menu-title" data-i18n="Categories">{{
                                 __('Admin\precipitations.precipitationsPageTitle') }}</span>
                         </a>
@@ -798,7 +798,7 @@
                             <!-- Start Product -->
                             @can('products')
                                 <li>
-                                    <a class="menu-item" href="{{ route('products') }}">
+                                    <a class="menu-item" href="{{-- route('products') --}}">
                                         <i class="material-icons">grain</i>
                                         <span data-i18n="products">
                                             {{ trans('Admin/products.product_title_in_sidebar') }}</span>
