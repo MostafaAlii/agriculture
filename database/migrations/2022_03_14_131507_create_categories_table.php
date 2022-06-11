@@ -13,7 +13,7 @@ class CreateCategoriesTable extends Migration
 
             $table->id();
 
-            $table->foreignId('parent_id')->constrained('categories')->cascadeOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
             $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             // $table->foreignId('created_by')->nullable()->constrained('admin')->cascadeOnDelete();
             // $table->foreignId('updated_by')->nullable()->constrained('admin')->cascadeOnDelete();            
