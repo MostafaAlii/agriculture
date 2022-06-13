@@ -9,11 +9,11 @@ class CreateProductTranslationsTable extends Migration {
             $table->string('locale');
             $table->string('name');
             $table->string('slug')->unique()->nullable();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->unique(['product_id', 'locale']);
             $table->index(['name', 'locale']);
             $table->longText('other_data')->nullable();
-            $table->longText('reject_reason')->nullable();
+            $table->longText('reason')->nullable();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
         });
     }

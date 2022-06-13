@@ -9,6 +9,12 @@ if (! function_exists('admin')) {
 	}
 }
 
+if (!function_exists('aurl')) {
+	function aurl($url = null) {
+		return url('dashboard_admin/'.$url);
+	}
+}
+
 if (! function_exists('vendor')) {
 	function vendor(){
 		return auth()->guard('vendor');

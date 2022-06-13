@@ -32,6 +32,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.ar-AE.min.js" integrity="sha512-heSw7GMfC3mSzYovnKDmr34vA2m2yLMT4efh4W3V0DwgmXDQKDxsflaZcX7lGl+zDkZmUwk4vI7KuCBnueGykA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <style>
         body {font-family: 'Cairo', sans-serif !important;}
         .navigation{
@@ -68,6 +69,24 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
     @elseif(app()->getLocale() == 'ku')
+        {{-- font cairo --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.ar-AE.min.js" integrity="sha512-heSw7GMfC3mSzYovnKDmr34vA2m2yLMT4efh4W3V0DwgmXDQKDxsflaZcX7lGl+zDkZmUwk4vI7KuCBnueGykA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>
+        body {font-family: 'Cairo', sans-serif !important;}
+        .navigation{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        h1,h2,h3,h4,h5,h6{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        .breadcrumb-item{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        </style>
+        {{-- font cairo --}}
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
@@ -91,6 +110,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
     @else
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.en-US.min.js" integrity="sha512-j8zadPEIgyqSe1Lo4LaxHZdaMCxdo4dq4O+3cYo5i3ldZ2lqVa+nTiYSDaSW804Wqd0l5ZrRqRSBgKKCtbOPtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">

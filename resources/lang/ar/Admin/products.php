@@ -67,7 +67,21 @@ return [
 
     'rating_choose'                               =>                'تقييم المنتج',
     /********************************************** Start Product Form Wizard ********************************************/
+    'add_or_edit_product'                         =>                'اضــافة / تعديل منتــج',
     'general_product_information'                 =>                'المعلومات الاساسية للمنتــج',
+    'product_setting'                             =>                'اعدادات المنتــج',
+    'product_unit_and_price'                      =>                'الاسعار و الوحدات',
+    'product_offers'                              =>                'العروض و الخصومات',
+    'product_img_media'                           =>                'الصور و الملحقات',
+    'product_other_data'                          =>                'معلومات اضــافية',
+    'save_and_continue'                           =>                'حفــظ و استمــرار',
+    'product_units_select'                        =>                'اخــتر الوحــدة',
+    'special_offers'                              =>                'العروض و الاسعار الخاصة',
+    'pending'                                     =>                'بانتظار المرافقة',
+    'reject'                                      =>                'مرفوض',
+    'active'                                      =>                'متــاح',
+    'reject_reason'                               =>                'سبب الرفــض',
+    'type_reject_reason'                          =>                'اكتــب سبب الرفــض',
     /********************************************** End Product Form Wizard ********************************************/
 
     'name_required'                     =>'تاكد من ادخال اسم المنتج',

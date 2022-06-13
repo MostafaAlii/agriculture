@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model {
     use HasFactory, Translatable, SoftDeletes;
-    const PENDING = 0, REJECT = 2, ACTIVE = 1;
+    const PENDING = 'pending', REJECT = 'reject', ACTIVE = 'active';
     protected $table = "products";
     protected $guarded = [];
     protected $with=['translations'];
@@ -93,5 +93,14 @@ class Product extends Model {
             $avg=0;
         }
         return $avg;
+    }
+
+    public function getStatusType() {
+        switch ($this->status) {
+            case 'pending' : $result = trans('Admin/products.pending') ; break;
+            case 'reject' : $result = trans('Admin/products.reject') ; break;
+            case 'active' : $result = trans('Admin/products.active') ; break;
+        }
+        return $result;
     }
 }

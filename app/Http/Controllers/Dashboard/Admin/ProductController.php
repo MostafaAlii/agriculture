@@ -44,7 +44,7 @@ class ProductController extends Controller
     }
 
     public function edit($id) {
-        //
+        return $this->Data->edit($id);
     }
 
     public function update(Request $request, $id) {

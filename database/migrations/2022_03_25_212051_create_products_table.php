@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration {
             $table->date('product_end_at')->nullable();
             $table->integer('viewed')->unsigned()->default(0);
             $table->tinyInteger('status')->default(Product::PENDING);
-            $table->foreignId('farmer_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('currency_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('farmer_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('currency_id')->nullable()->constrained()->cascadeOnDelete();
             $table->longText('product_location')->nullable();
             $table->integer('qty')->nullable();
             $table->boolean('is_qty')->default(false);
