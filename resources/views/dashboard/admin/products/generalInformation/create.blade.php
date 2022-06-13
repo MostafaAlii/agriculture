@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css" integrity="sha512-uyGg6dZr3cE1PxtKOCGqKGTiZybe5iSq3LsqOolABqAWlIRLo/HKyrMMD8drX+gls3twJdpYX0gDKEdtf2dpmw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
@@ -7,7 +8,9 @@
 @endsection
 @section('content')
     @include('dashboard.common._partials.messages')
+    <!-- Start content-wrapper -->
     <div class="content-wrapper">
+        <!-- Start content-header -->
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">{{trans('Admin\products.add_new_product')}}</h3>
@@ -16,9 +19,9 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ __('Admin/products.productPageTitle') }}</a>
+                            <li class="breadcrumb-item"><a href="{{-- route('products') --}}">{{ __('Admin/products.productPageTitle') }}</a>
                             </li>
-                            <li class="breadcrumb-item active"><a href="{{ route('products.generalInformation') }}">{{ __('Admin/products.add_new_product') }}</a>
+                            <li class="breadcrumb-item active"><a href="{{-- route('products.generalInformation') --}}">{{ __('Admin/products.add_new_product') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -33,224 +36,271 @@
                 </div>
             </div>
         </div>
+        <!-- End content-header -->
+        <!-- Start content-body -->
         <div class="content-body">
-            <!-- Basic form layout section start -->
-            <section id="basic-form-layouts">
-                <div class="row justify-content-md-center">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/products.add_new_product') }}</h4>
-                                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
-                                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                        <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-content collapse show">
-                                <div class="card-body">
-                                    <form class="form" method="post" action="{{ route('products.generalInformation.store') }}" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('post')
-                                        <div class="form-body">
-                                            <!-- Start Main Product Photo -->
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <div class="form-group">
-                                                        <label>{{ trans('Admin/products.product_main_photo') }} <span class="text-danger">*</span></label>
-                                                        <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                                            <input type="file" accept="image/*" name="photo" onchange="loadFile(event)" />
-                                                            <img style="" class="rounded-circle"  width="85px" height="85px" id="output" />
+            <!-- Start card-content -->
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    <!-- Start Product Wizard -->
+                    <section id="validation">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">{{trans('Admin\products.add_new_product')}}</h4>
+                                        <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
+                                        <div class="heading-elements">
+                                            <ul class="list-inline mb-0">
+                                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-content collapse show">
+                                        <div class="card-body">
+                                            <form action="#" class="steps-validation wizard-circle">
+                                                <!-- Start Step 1 -->
+                                                <h6>{{ trans('Admin/products.general_product_information') }}</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <x-dashboard.inputs.input class="form-control" name="name" :label=" __('Admin/products.product_name')" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <x-dashboard.inputs.select class="js-example-basic-single form-control" name="farmer_id" :options="$farmers->pluck('firstname', 'id')" :label=" __('Admin\products.product_farmer_select')" />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Main Product Photo -->
-                                            <!-- Start Product Name -->
-                                            <div class="row">
-                                                <!-- Start Product Name -->
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="eventRegInput1">{{ __('Admin/products.product_name') }} <span class="text-danger">*</span></label>
-                                                        <input type="text" id="eventRegInput1" class="form-control" placeholder="{{ __('Admin/products.product_name_placeholder') }}" name="name" value="{{ old('name') }}" required>
-                                                        @error('name')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                        @enderror
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <x-dashboard.inputs.select class="js-example-basic-single form-control" multiple name="categories" :options="$categories->pluck('name', 'id')" :label=" __('Admin\products.product_category_select')" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <x-dashboard.inputs.input type="checkbox" :label="trans('Admin\products.product_status')" value="1" name="status" id="switcheryColor4" data-color="success" class="js-switch" checked />
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- End Product Name -->
+                                                </fieldset>
+                                                <!-- End Step 1 -->
 
-                                                <!-- Start Farmer Select List -->
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_farmer_select') }} <span class="text-danger">*</span>
-                                                        </label>
-                                                        <select name="farmer_id" class="select2 form-control">
-                                                            <optgroup label="{{ trans('Admin\products.product_farmer_select_placeholder') }}">
-                                                                @if($farmers && $farmers->count() > 0)
-                                                                    @foreach($farmers as $farmer)
-                                                                        <option
-                                                                            value="{{$farmer->id }}">{{$farmer->firstname . ' ' . $farmer->lastname}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('farmer_id')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
+                                                <!-- Start Step 2 -->
+                                                <h6>Step 2</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="proposalTitle3">
+                                                                    Proposal Title :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="proposalTitle3" name="proposalTitle">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="emailAddress6">
+                                                                    Email Address :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <input type="email" class="form-control required" id="emailAddress6" name="emailAddress">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="videoUrl3">Video URL :</label>
+                                                                <input type="url" class="form-control" id="videoUrl3" name="videoUrl">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="jobTitle5">
+                                                                    Job Title :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="jobTitle5" name="jobTitle">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="shortDescription3">Short Description :</label>
+                                                                <textarea name="shortDescription" id="shortDescription3" rows="4" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- End Farmer Select List -->
-                                                <!-- Start Categories Select -->
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_category_select') }} <span class="text-danger">*</span>
-                                                        </label>
-                                                        <select name="categories[]" class="select2 form-control" multiple>
-                                                            <optgroup label="{{ trans('Admin\products.product_category_select_placeholder') }}">
-                                                                @if($categories && $categories->count() > 0)
-                                                                    @foreach($categories as $category)
-                                                                        <option
-                                                                            value="{{$category->id}}">{{$category->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('categories.0')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
+                                                </fieldset>
+                                                <!-- End Step 2 -->
+
+                                                <!-- Start Step 3 -->
+                                                <h6>Step 3</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="eventName3">
+                                                                    Event Name :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="eventName3" name="eventName">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="eventType3">
+                                                                    Event Type :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <select class="custom-select form-control required" id="eventType3" name="eventType">
+                                                                    <option value="Banquet">Banquet</option>
+                                                                    <option value="Fund Raiser">Fund Raiser</option>
+                                                                    <option value="Dinner Party">Dinner Party</option>
+                                                                    <option value="Wedding">Wedding</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="eventLocation3">Event Location :</label>
+                                                                <select class="custom-select form-control" id="eventLocation3" name="eventLocation">
+                                                                    <option value="">Select City</option>
+                                                                    <option value="Amsterdam">Amsterdam</option>
+                                                                    <option value="Berlin">Berlin</option>
+                                                                    <option value="Frankfurt">Frankfurt</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="eventDate">
+                                                                    Event Date - Time :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <div class='input-group'>
+                                                                    <input type='text' class="form-control datetime required" id="eventDate" name="eventDate" />
+                                                                    <span class="input-group-addon">
+                                                                        <span class="ft-calendar"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="eventStatus3">
+                                                                    Event Status :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <select class="custom-select form-control required" id="eventStatus3" name="eventStatus">
+                                                                    <option value="Planning">Planning</option>
+                                                                    <option value="In Progress">In Progress</option>
+                                                                    <option value="Finished">Finished</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Requirements :</label>
+                                                                <div class="c-inputs-stacked">
+                                                                    <div class="d-inline-block custom-control custom-checkbox">
+                                                                        <input type="checkbox" name="status3" class="custom-control-input" id="staffing3">
+                                                                        <label class="custom-control-label" for="staffing3">Staffing</label>
+                                                                    </div>
+                                                                    <div class="d-inline-block custom-control custom-checkbox">
+                                                                        <input type="checkbox" name="status3" class="custom-control-input" id="catering3">
+                                                                        <label class="custom-control-label" for="catering3">Catering</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- End Categories Select -->
-                                            </div>
-                                            <!-- End Product Name -->
+                                                </fieldset>
+                                                <!-- End Step 3 -->
 
-                                            <!-- Start Tags Multi Select -->
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_tags_select') }}
-                                                        </label>
-                                                        <select name="tags[]" class="select2 form-control" multiple>
-                                                            <optgroup label="{{ trans('Admin\products.product_tags_select_placeholder') }}">
-                                                                @if($tags && $tags->count() > 0)
-                                                                    @foreach($tags as $tag)
-                                                                        <option
-                                                                            value="{{$tag->id}}">{{$tag->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </optgroup>
-                                                        </select>
-                                                        @error('tags.0')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
+                                                <!-- Start Step 4 -->
+                                                <h6>Step 4</h6>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="meetingName3">
+                                                                    Name of Meeting :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="meetingName3" name="meetingName">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="meetingLocation3">
+                                                                    Location :
+                                                                    <span class="danger">*</span>
+                                                                </label>
+                                                                <input type="text" class="form-control required" id="meetingLocation3" name="meetingLocation">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="participants3">Names of Participants</label>
+                                                                <textarea name="participants" id="participants3" rows="4" class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="decisions3">Decisions Reached</label>
+                                                                <textarea name="decisions" id="decisions3" rows="4" class="form-control"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Agenda Items :</label>
+                                                                <div class="c-inputs-stacked">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" name="agenda3" class="custom-control-input" id="item31">
+                                                                        <label class="custom-control-label" for="item31">1st item</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" name="agenda3" class="custom-control-input" id="item32">
+                                                                        <label class="custom-control-label" for="item32">2nd item</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" name="agenda3" class="custom-control-input" id="item33">
+                                                                        <label class="custom-control-label" for="item33">3rd item</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" name="agenda3" class="custom-control-input" id="item34">
+                                                                        <label class="custom-control-label" for="item34">4th item</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" name="agenda3" class="custom-control-input" id="item35">
+                                                                        <label class="custom-control-label" for="item35">5th item</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_main_price') }}
-                                                        </label>
-                                                        <input type="number" name="price" class="form-control" placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}" />
-                                                        @error('price')
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Tags Multi Select -->
-
-                                            <!-- Start Product Status -->
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group mt-1">
-                                                        <input type="checkbox" value="1"
-                                                            name="status"
-                                                            id="switcheryColor4"
-                                                            class="js-switch" data-color="success"
-                                                            checked/>
-                                                        <label for="switcheryColor4"
-                                                            class="card-title ml-1">{{ trans('Admin\products.product_status') }}</label>
-
-                                                        @error("status")
-                                                        <span class="text-danger">{{$message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Status -->
-                                            <hr>
-
-                                            <!-- Start Product Description -->
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1">
-                                                            {{ trans('Admin\products.product_description') }}
-                                                        </label>
-                                                        <textarea name="description" class="form-control" id="description" placeholder="{{ trans('Admin\products.product_description_placeholder') }}">
-                                                            {{old('description')}}
-                                                        </textarea>
-
-                                                        @error("description")
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Description -->
-                                            
-                                            <!-- Start Product Location -->
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="projectinput1"> العنوان  </label>
-                                                        <input type="text" id="pac-input"
-                                                               class="form-control"
-                                                               placeholder="  " name="product_location">
-
-                                                        @error("product_location")
-                                                        <span class="text-danger"> {{$message}}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Location -->
-
-                                            <div id="map" class="col-md-12" style="height:450px"></div>
-                                            <hr>
-                                            <div class="form-actions center">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
-                                                </button>
-                                            </div>
+                                                </fieldset>
+                                                <!-- End Step 4 -->
+                                            </form>
                                         </div>
-                                    </form>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
+                    <!-- End Product Wizard -->
                 </div>
-            </section>
-            <!-- // Basic form layout section end -->
+                <!-- End card-content -->
+            </div>
         </div>
+        <!-- End content-body -->
     </div>
+    <!-- End content-wrapper -->
 </div>
 <!-- END: Content-->
 @endsection
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js" integrity="sha512-lC8vSUSlXWqh7A/F+EUS3l77bdlj+rGMN4NB5XFAHnTR3jQtg4ibZccWpuSSIdPoPUlUxtnGktLyrWcDhG8RvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+</script>
 <script>
     var loadFile = function (event) {
         var img = document.getElementById('output');

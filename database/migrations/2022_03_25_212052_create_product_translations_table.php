@@ -13,6 +13,7 @@ class CreateProductTranslationsTable extends Migration {
             $table->unique(['product_id', 'locale']);
             $table->index(['name', 'locale']);
             $table->longText('other_data')->nullable();
+            $table->longText('reject_reason')->nullable();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
         });
     }

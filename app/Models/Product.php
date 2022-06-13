@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model {
     use HasFactory, Translatable, SoftDeletes;
+    const PENDING = 0, REJECT = 2, ACTIVE = 1;
     protected $table = "products";
     protected $guarded = [];
     protected $with=['translations'];
@@ -25,7 +26,6 @@ class Product extends Model {
     protected $casts = [
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',
-        'status' => 'boolean',
         'deleted_at' => 'datetime:Y/m/d',
     ];
 

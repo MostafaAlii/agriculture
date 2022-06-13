@@ -1,10 +1,18 @@
 <?php
 namespace App\Providers;
+
+use App\Models\Admin;
+use App\Models\Farmer;
+use App\Models\Department;
+use App\Models\User;
+use App\Models\Category;
+
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -37,5 +45,6 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
         });
+        
     }
 }

@@ -28,6 +28,7 @@ class CreateAdminsTable extends Migration {
             $table->tinyInteger('status')->default(Admin::NOT_ACTIVE);
             $table->date('birthdate')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

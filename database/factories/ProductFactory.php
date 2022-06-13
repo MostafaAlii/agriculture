@@ -1,5 +1,7 @@
 <?php
 namespace Database\Factories;
+
+use App\Models\Currency;
 use App\Models\Farmer;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -15,10 +17,11 @@ class ProductFactory extends Factory {
             'name'                          =>      $this->faker->unique()->name,
             'slug'                          =>      $this->faker->unique()->name,
             'description'                   =>      $this->faker->paragraph,
-            'status'                        =>      $this->faker->boolean(),
+            'status'                        =>      Product::PENDING,
             'product_location'              =>      $this->faker->address(),
             'qty'                           =>      $this->faker->numberBetween(100,200),
             'special_price'                 =>      $this->faker->numberBetween(0,100),
+            'currency_id'                   =>      Currency::all()->random()->id,
         ];
     }
 }

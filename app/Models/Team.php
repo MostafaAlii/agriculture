@@ -8,7 +8,7 @@ class Team extends Model {
     use HasFactory, Translatable;
     
     protected $table = "teams";
-    protected $guarded = [];
+    protected $fillable = ['image'];
     protected $with = ['translations'];
     public $translatedAttributes = ['name','position','description'];
     public $timestamps = true;

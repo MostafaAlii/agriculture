@@ -9,10 +9,11 @@ class CreateAboutTranslationsTable extends Migration {
             $table->string('title');
             $table->string('locale');
             $table->longText('description');
-            $table->unsignedBigInteger('about_id');
             $table->unique(['about_id', 'locale']);
            // $table->index(['title', 'locale']);
-            $table->foreign('about_id')->references('id')->on('abouts')->onDelete('cascade');
+            //$table->unsignedBigInteger('about_id');
+            //$table->foreign('about_id')->references('id')->on('abouts')->onDelete('cascade');
+            $table->foreignId('about_id')->constrained()->cascadeOnDelete();;
         });
     }
 

@@ -47,7 +47,6 @@
         {{-- font cairo --}}
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
@@ -65,12 +64,12 @@
         <!-- END: Page CSS-->
         <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/forms/wizard.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
     @elseif(app()->getLocale() == 'ku')
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
@@ -88,12 +87,12 @@
         <!-- END: Page CSS-->
         <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/forms/wizard.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
     @else
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
         <!-- END: Vendor CSS-->
@@ -106,6 +105,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/colors/palette-gradient.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/file-uploaders/dropzone.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/forms/wizard.css')}}">
         <!-- END: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
         <!-- END: Theme CSS-->
@@ -114,6 +114,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/select2-bootstrap4.min.css') }}">
     <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
     <script src="{{ asset('assets/admin/js/multiple-select.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/multiple-select.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/all.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/fontawesome.min.css') }}">

@@ -11,17 +11,12 @@ class CreateCategoryTranslationsTable extends Migration
             $table->id();
 
             $table->string('locale');
-
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->unique(['category_id', 'locale']);
-
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('keyword')->nullable();
             $table->longText('description')->nullable();
-            
             $table->index(['name', 'locale','keyword','slug']);
             $table->timestamps();
 

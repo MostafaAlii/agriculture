@@ -6,19 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCommentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+  
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
-            $table->Integer('commentable_id');
-            $table->string('commentable_type');
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->cascadeOnDelete();
+            $table->morphs('commentable');
+            // $table->Integer('commentable_id');
+            // $table->string('commentable_type');
             $table->string('name');
             $table->string('email');
             $table->string('image');
@@ -27,11 +23,6 @@ class CreateCommentsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('comments');

@@ -32,7 +32,7 @@ class ProductController extends Controller
     }
 
     public function create() {
-        //
+        return $this->Data->create();
     }
 
     public function store(Request $request) {

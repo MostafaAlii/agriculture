@@ -59,7 +59,7 @@
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
                                     @can('product-create')
-                                        <a href="{{-- route('products.generalInformation') --}}" class="mb-3 btn btn-primary btn-sm">
+                                        <a href="{{ route('Products.create') }}" class="mb-3 btn btn-primary btn-sm">
                                             <i class="material-icons">add_box</i>
                                             {{ __('Admin/products.add_new_product') }}
                                         </a>
