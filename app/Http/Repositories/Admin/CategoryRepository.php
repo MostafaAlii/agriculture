@@ -1,18 +1,36 @@
 <?php
 namespace App\Http\Repositories\Admin;
 
-use Yajra\DataTables\DataTables;
-
-use App\Http\Interfaces\Admin\CategoryInterface;
-use App\Models\Department;
 use App\Models\Category;
 
 use App\Traits\Keywords;
+use App\Models\Department;
+use Yajra\DataTables\DataTables;
+
+use App\Events\Dashboard\DeleteEvent2;
+use App\Http\Interfaces\Admin\CategoryInterface;
 
 class CategoryRepository implements CategoryInterface {
     
     use Keywords;
 
+    public $models,$columns,$cond;
+    public function __construct()
+    {
+        $this->models=[
+            'App\Models\Product',
+            'App\Models\Category',
+        ];
+        $this->columns=[
+            'id',
+            'parent_id'
+        ];
+        $this->cond=[
+            'WhereIn',
+            'Where'
+        ];
+       
+    }
     public function index() {
         $categories = Category::get();
         return view('dashboard.admin.categories.index', compact('categories'));
@@ -136,6 +154,17 @@ class CategoryRepository implements CategoryInterface {
             if($data['product']->count() == 0  && $data['sub_cate']->count() == 0 ) {
                */
               Category::findorfail($real_id)->delete();
+
+                //--------------this event for delete related records------------------------------
+                //id,column names[],related models[]
+                // $related_id=[
+                //     [Category::findorfail($real_id)->products()->pluck('id')->toArray()],
+                //     $real_id
+                // ];
+                // //dd($ids);
+                // event(new DeleteEvent2($this->models,$this->cond,$this->columns,$related_id));
+                //-----------------------------------------------------------------------------
+                
                 toastr()->error(__('Admin/categories.depart_delete_done'));
                 return redirect()->route('Categories.index');
            /* }else{
@@ -167,6 +196,17 @@ class CategoryRepository implements CategoryInterface {
                 if($data['product']->count() == 0 && $data['sub_cate']->count() == 0) {
                 */
                     Category::findOrfail($cate_ids)->delete();
+
+                    //--------------this event for delete related records------------------------------
+                    //id,column names[],related models[]
+                    // $related_id=[
+                    //     [Category::findorfail($cate_ids)->products()->pluck('id')->toArray()],
+                    //     $cate_ids
+                    // ];
+                    // //dd($ids);
+                    // event(new DeleteEvent2($this->models,$this->cond,$this->columns,$related_id));
+                    //-----------------------------------------------------------------------------
+                
                     $delete_or_no++;
                 //}
             }
