@@ -8,7 +8,6 @@ class CreateProductTranslationsTable extends Migration {
             $table->id();
             $table->string('locale');
             $table->string('name');
-            $table->string('slug')->unique()->nullable();
             $table->longText('description')->nullable();
             $table->unique(['product_id', 'locale']);
             $table->index(['name', 'locale']);

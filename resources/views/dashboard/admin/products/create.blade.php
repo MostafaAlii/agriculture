@@ -65,7 +65,9 @@
                                                 <div class="card">
                                                     <div class="card-content collapse show">
                                                         <div class="card-body">
-                                                            {!! Form::open(['route' => 'Products.store', 'method' => 'put', 'id'=>'product_form']) !!}
+                                                            <form class="form" id="product_form" method="post" action="{{ route('Products.update', encrypt($product->id)) }}" enctype="multipart/form-data" autocomplete="off">
+                                                                @csrf
+                                                                @method('put')
                                                                 <!-- Start Upper Btn -->
                                                                 <a class="btn btn-success save">
                                                                     <i class="fa fa-arrow-down" aria-hidden="true"> </i>
@@ -74,6 +76,11 @@
                                                                 <a class="btn btn-info save_and_continue">
                                                                     <i class="fa fa-angle-double-left" aria-hidden="true"> </i>
                                                                     {{ trans('Admin/products.save_and_continue') }}
+                                                                    <i class="fa fa-spin fa-spinner loading_save_and_continue hidden"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger delete">
+                                                                    <i class="fa fa fa-undo" aria-hidden="true"> </i>
+                                                                    {{ trans('Admin/products.back') }}
                                                                 </a>
                                                                 <!-- End Upper Btn -->
                                                                 <hr>
@@ -120,7 +127,7 @@
                                                                     <!-- End productOtherData Content -->
                                                                 </div>
                                                                 <!-- End Tabs Ul Content -->
-                                                            {!! Form::close() !!}
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,6 +176,24 @@
             $('.reason').addClass('hidden');
         }
     });
+    $(document).on('click','.save_and_continue',function(){
+        var form_data = $('#product_form').serialize();
+        $.ajax({
+            url:"{{ route('Products.update' , encrypt($product->id)) }}",
+            dataType:'json',
+            type:'post',
+            data:form_data,
+            beforeSend: function(){
+                $('.loading_save_and_continue').removeClass('hidden');
+
+            },success: function(){
+                $('.loading_save_and_continue').addClass('hidden');
+            },error(){
+                $('.loading_save_and_continue').addClass('hidden');
+            }
+        });
+        return false;
+    });
 </script>
 <script>
     var loadFile = function (event) {
@@ -197,189 +222,6 @@
         'removeformat | help',
     content_css: '//www.tiny.cloud/css/codepen.min.css'
   });
-</script>
-<script>
-    $("#pac-input").focusin(function() {
-        $(this).val('');
-    });
-    $('#latitude').val('');
-    $('#longitude').val('');
-    // This example adds a search box to a map, using the Google Place Autocomplete
-    // feature. People can enter geographical searches. The search box will return a
-    // pick list containing a mix of places and predicted search terms.
-    // This example requires the Places library. Include the libraries=places
-    // parameter when you first load the API. For example:
-    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-    function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 36.688831, lng: 42.98341 },
-            zoom: 13,
-            mapTypeId: 'roadmap'
-        });
-        // move pin and current location
-        infoWindow = new google.maps.InfoWindow;
-        geocoder = new google.maps.Geocoder();
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                map.setCenter(pos);
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(pos),
-                    map: map,
-                    title: 'موقعك الحالي'
-                });
-                markers.push(marker);
-                marker.addListener('click', function() {
-                    geocodeLatLng(geocoder, map, infoWindow,marker);
-                });
-                // to get current position address on load
-                google.maps.event.trigger(marker, 'click');
-            }, function() {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            // Browser doesn't support Geolocation
-            console.log('dsdsdsdsddsd');
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-        var geocoder = new google.maps.Geocoder();
-        google.maps.event.addListener(map, 'click', function(event) {
-            SelectedLatLng = event.latLng;
-            geocoder.geocode({
-                'latLng': event.latLng
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[0]) {
-                        deleteMarkers();
-                        addMarkerRunTime(event.latLng);
-                        SelectedLocation = results[0].formatted_address;
-                        console.log( results[0].formatted_address);
-                        splitLatLng(String(event.latLng));
-                        $("#pac-input").val(results[0].formatted_address);
-                    }
-                }
-            });
-        });
-        function geocodeLatLng(geocoder, map, infowindow,markerCurrent) {
-            var latlng = {lat: markerCurrent.position.lat(), lng: markerCurrent.position.lng()};
-            /* $('#branch-latLng').val("("+markerCurrent.position.lat() +","+markerCurrent.position.lng()+")");*/
-            $('#latitude').val(markerCurrent.position.lat());
-            $('#longitude').val(markerCurrent.position.lng());
-            geocoder.geocode({'location': latlng}, function(results, status) {
-                if (status === 'OK') {
-                    if (results[0]) {
-                        map.setZoom(8);
-                        var marker = new google.maps.Marker({
-                            position: latlng,
-                            map: map
-                        });
-                        markers.push(marker);
-                        infowindow.setContent(results[0].formatted_address);
-                        SelectedLocation = results[0].formatted_address;
-                        $("#pac-input").val(results[0].formatted_address);
-                        infowindow.open(map, marker);
-                    } else {
-                        window.alert('No results found');
-                    }
-                } else {
-                    window.alert('Geocoder failed due to: ' + status);
-                }
-            });
-            SelectedLatLng =(markerCurrent.position.lat(),markerCurrent.position.lng());
-        }
-        function addMarkerRunTime(location) {
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            });
-            markers.push(marker);
-        }
-        function setMapOnAll(map) {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
-        function clearMarkers() {
-            setMapOnAll(null);
-        }
-        function deleteMarkers() {
-            clearMarkers();
-            markers = [];
-        }
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        $("#pac-input").val("أبحث هنا ");
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-            searchBox.setBounds(map.getBounds());
-        });
-        var markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-            var places = searchBox.getPlaces();
-            if (places.length == 0) {
-                return;
-            }
-            // Clear out the old markers.
-            markers.forEach(function(marker) {
-                marker.setMap(null);
-            });
-            markers = [];
-            // For each place, get the icon, name and location.
-            var bounds = new google.maps.LatLngBounds();
-            places.forEach(function(place) {
-                if (!place.geometry) {
-                    console.log("Returned place contains no geometry");
-                    return;
-                }
-                var icon = {
-                    url: place.icon,
-                    size: new google.maps.Size(100, 100),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
-                };
-                // Create a marker for each place.
-                markers.push(new google.maps.Marker({
-                    map: map,
-                    icon: icon,
-                    title: place.name,
-                    position: place.geometry.location
-                }));
-                $('#latitude').val(place.geometry.location.lat());
-                $('#longitude').val(place.geometry.location.lng());
-                if (place.geometry.viewport) {
-                    // Only geocodes have viewport.
-                    bounds.union(place.geometry.viewport);
-                } else {
-                    bounds.extend(place.geometry.location);
-                }
-            });
-            map.fitBounds(bounds);
-        });
-    }
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-    }
-    function splitLatLng(latLng){
-        var newString = latLng.substring(0, latLng.length-1);
-        var newString2 = newString.substring(1);
-        var trainindIdArray = newString2.split(',');
-        var lat = trainindIdArray[0];
-        var Lng  = trainindIdArray[1];
-        $("#latitude").val(lat);
-        $("#longitude").val(Lng);
-    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initAutocomplete&language=ar
      async defer"></script>

@@ -17,7 +17,6 @@ class CreateProductUnitTable extends Migration
             $table->unsignedInteger('price')->nullable()->default(10);
             $table->foreignId('unit_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->timestamps();
         });
     }
 

@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder {
             BlogSeeder::class,
             //AttributeTableSeeder::class,
             UnitSeeder::class,
-            //ProductTableSeeder::class,
+            ProductTableSeeder::class,
             //OptionTableSeeder::class,
             SliderSeeder::class,
             TreeTypeSeeder::class,
@@ -130,12 +130,12 @@ class DatabaseSeeder extends Seeder {
                 ]);
             }
             // images for product
-            /*for ($i = 1; $i <= Product::count() ; $i++) {
+            for ($i = 1; $i <= Product::count() ; $i++) {
                 Image::insert([
                     'filename'     => rand(1,73) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Product'
                 ]);
-            }*/
+            }
     }
 }

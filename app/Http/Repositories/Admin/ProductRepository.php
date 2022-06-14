@@ -13,22 +13,10 @@ class ProductRepository implements ProductInterface {
     }
 
     public function create() {
-        /*$data = [];
-        $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
-        $data['tags']           =       Tag::select('id')->get();
-        $data['categories']    =       Category::select('id')->get();*/
-        //dd($data['categories']);
-    //return view('dashboard.admin.products.create'/*, $data*/);
-    $product = Product::create([
-            'name'          =>      '', // For Create Empty Row
-        ]);
+    $product = Product::create(['name'=>'']);
 		if (!empty($product)) {
             return redirect()->route('Products.edit', encrypt($product->id));
-            //return redirect(aurl('products/'.$product->id.'/edit'));
 		}
-    }
-
-    public function store($request) {
     }
 
     public function edit($id) {
@@ -40,5 +28,36 @@ class ProductRepository implements ProductInterface {
         $data['categories']    =       Category::select('id')->get();
         $data['units']    =       Unit::select('id')->get();
         return view('dashboard.admin.products.create', $data);
+    }
+
+    public function update($request, $id) {
+        DB::beginTransaction();
+        try{
+            $real_id= Crypt::decrypt($id);
+            $product = Product::findOrfail($real_id);
+            $product->farmer_id     = $request->farmer_id;
+            $product->special_price = $request->special_price;
+            $product->special_price_start = $request->special_price_start;
+            $product->special_price_end = $request->special_price_end;
+            //$product->status = $request->status;
+            $product->qty = $request->qty;
+            $product->save();
+            // Save Translation ::
+            $product->name = $request->name;
+            $product->description = $request->description;
+            //$product->reason = $request->reason;
+            $product->save();
+            // sync Categories ::
+            $product->categories()->sync($request->categories);
+            // Sync Tags ::
+            $product->tags()->sync($request->tags);
+            // Sync Units ::
+            $product->units()->sync([$request->units, $request->price]);
+            DB::commit();
+            //toastr()->success(__('Admin/products.product_updated_successfully'));
+        } catch(\Exception $ex){
+            DB::rollBack();
+            //toastr()->error(__('Admin/general.wrong'));
+        }
     }
 }

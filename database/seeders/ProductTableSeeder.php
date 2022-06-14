@@ -1,16 +1,13 @@
 <?php
 namespace Database\Seeders;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\Tag;
+use App\Models\{Product, Category, Unit, Tag};
+use Illuminate\Support\Facades\{DB, Schema};
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 class ProductTableSeeder extends Seeder {
     public function run() {
         Schema::disableForeignKeyConstraints();
         DB::table('products')->truncate();
-        Product::factory()->count(50)->create();
+        Product::factory()->count(10)->create();
         // Categories Attach ::
         $Categories = Category::get();
         Product::all()->each(function ($product) use ($Categories) {
@@ -23,6 +20,13 @@ class ProductTableSeeder extends Seeder {
         Product::all()->each(function ($product) use ($Tags) {
             $product->tags()->attach(
                 $Tags->random()->pluck('id')->toArray()
+            );
+        });
+        // Units Attach ::
+        $Units = Unit::get();
+        Product::all()->each(function ($product) use ($Units) {
+            $product->units()->attach(
+                $Units->random()->pluck('id')->toArray()
             );
         });
         Schema::enableForeignKeyConstraints();

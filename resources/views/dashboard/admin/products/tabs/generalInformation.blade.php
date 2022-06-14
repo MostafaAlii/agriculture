@@ -39,13 +39,23 @@
         </div>
         <br>
         <!-- End Category & Tags Select -->
+        <!-- Start Product Description -->
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    {!! Form::label('description',trans('Admin\products.product_description')) !!}
-                    {!! Form::textarea('description',$product->description,['class'=>'form-control','placeholder'=>trans('Admin\products.product_description_placeholder')]) !!}
+                    <label for="projectinput1">
+                        {{ trans('Admin\products.product_description') }}
+                    </label>
+                    <textarea name="description" class="form-control" placeholder="{{ trans('Admin\products.product_description_placeholder') }}">
+                        {{old('description')}}
+                    </textarea>
+
+                    @error("description")
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
             </div>
         </div>
+        <!-- End Product Description -->
     </fieldset>
 </div>

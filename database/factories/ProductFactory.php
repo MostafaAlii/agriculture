@@ -10,18 +10,11 @@ class ProductFactory extends Factory {
     public function definition() {
         return [
             'farmer_id'                     =>      Farmer::all()->random()->id,
-            'price'                         =>      $this->faker->numberBetween($min = 1500, $max = 6000),
-            'manage_stock'                  =>      $this->faker->boolean(),
-            'in_stock'                      =>      $this->faker->boolean(),
-            'viewed'                        =>      $this->faker->randomDigitNotNull(),
             'name'                          =>      $this->faker->unique()->name,
-            'slug'                          =>      $this->faker->unique()->name,
             'description'                   =>      $this->faker->paragraph,
             'status'                        =>      Product::PENDING,
             'product_location'              =>      $this->faker->address(),
             'qty'                           =>      $this->faker->numberBetween(100,200),
-            'special_price'                 =>      $this->faker->numberBetween(0,100),
-            'currency_id'                   =>      Currency::all()->random()->id,
         ];
     }
 }

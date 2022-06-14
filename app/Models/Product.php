@@ -3,14 +3,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\{HasMany, MorphMany, MorphOne, BelongsTo, MorphToMany, BelongsToMany};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
 class Product extends Model {
     use HasFactory, Translatable, SoftDeletes;
     const PENDING = 'pending', REJECT = 'reject', ACTIVE = 'active';
@@ -18,14 +12,12 @@ class Product extends Model {
     protected $guarded = [];
     protected $with=['translations'];
     protected $slugAttribute = ['name'];
-    public $translatedAttributes=['name','description', 'slug', 'other_data'];
+    public $translatedAttributes=['name','description', 'reason', 'other_data'];
     public $timestamps = true;
 
     protected $hidden = ['pivot'];
 
     protected $casts = [
-        'manage_stock' => 'boolean',
-        'in_stock' => 'boolean',
         'deleted_at' => 'datetime:Y/m/d',
     ];
 
@@ -63,7 +55,7 @@ class Product extends Model {
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function comments() {
+    public function comments(): MorphMany {
         return $this->morphMany(Comment::class, 'commentable');
     }
 

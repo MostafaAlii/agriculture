@@ -35,10 +35,6 @@ class ProductController extends Controller
         return $this->Data->create();
     }
 
-    public function store(Request $request) {
-        //
-    }
-
     public function show($id) {
         //
     }
@@ -48,7 +44,7 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, $id) {
-        //
+        return $this->Data->update($request, $id);
     }
 
     public function destroy($id) {

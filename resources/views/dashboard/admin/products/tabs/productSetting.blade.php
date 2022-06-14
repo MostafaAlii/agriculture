@@ -35,12 +35,12 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <x-dashboard.inputs.input class="form-control datepicker" name="special_price_start" :label=" __('Admin/products.product_start_date_offer')" />
+                    <x-dashboard.inputs.input type="date" class="form-control" name="special_price_start" :label=" __('Admin/products.product_start_date_offer')" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <x-dashboard.inputs.input class="form-control datepicker" name="special_price_end" :label=" __('Admin/products.product_end_date_offer')" />
+                    <x-dashboard.inputs.input type="date" class="form-control" name="special_price_end" :label=" __('Admin/products.product_end_date_offer')" />
                 </div>
             </div>
         </div>
@@ -57,10 +57,10 @@
                     {!! Form::select('status',['pending'=>trans('Admin/products.pending'), 'reject'=>trans('Admin/products.reject'), 'active'=>trans('Admin/products.active')],$product->status,['class'=>'form-control status','placeholder'=>trans('Admin\products.product_status')]) !!}
                 </div>
             </div>
-            <div class="col-md-6">{{-- $product->status!='reject'?'hidden':'' --}}
+            <div class="col-md-6">
                 <div class="form-group reason  display:none"  id="reject_resoan">
                     {!! Form::label('reason',trans('Admin\products.reject_reason')) !!}
-                    {!! Form::textarea('reason',$product->reject_reason,['class'=>'form-control','placeholder'=>trans('Admin/products.type_reject_reason')]) !!}
+                    {!! Form::textarea('reason',$product->reason,['class'=>'form-control','placeholder'=>trans('Admin/products.type_reject_reason')]) !!}
                 </div>
             </div>
         </div>

@@ -6,6 +6,6 @@ use Illuminate\Database\Seeder;
 class TagSeeder extends Seeder {
     public function run() {
         DB::table('tags')->delete();
-        Tag::factory(35)->create();
+        Tag::factory(10)->create();
     }
 }
