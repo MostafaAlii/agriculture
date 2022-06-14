@@ -51,11 +51,8 @@ class CategoryRepository implements CategoryInterface {
     {
        
         //return only main categories
-        $data['main_categories']=Category::where('parent_id',Null)->get();
-        $data['main_departments']=Department::where('parent_id',Null)->get();
-       
-
-       // return view('dashboard.admin.categories.create', compact('main_categories','country','state'));
+        $data['main_categories']=Category::whereNull('parent_id')->get();
+        $data['main_departments']=Department::whereNull('parent_id')->get();
         return view('dashboard.admin.categories.create', $data);
     }
     
@@ -65,23 +62,17 @@ class CategoryRepository implements CategoryInterface {
                    
         try{
            
-            $cate=new Category;
-
-            ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:NULL;
-
-            $cate->department_id=$request->department_id;
-          //  $cate->created_by=auth()->user()->firstname;//----------------------------------------------------------------------------
+            Category::Create(
+                [
+                    'parent_id'     => ($request->parent_id!='0')?$request->parent_id:Null,
+                    'department_id' => $request->department_id,
+                    'name'          => $request->name,
+                    'slug'          => str_replace(' ', '_', $request->name),
+                    'description'   => $request->description,
+                    'keyword'       => $this->handel_keyword($request->keyword),
+                ]
+            );
             
-           // $cate->save();
-
-            $cate->name=$request->name;
-            $cate->slug=str_replace(' ', '_',$request->name);
-            $cate->description=$request->description;
-
-              // call to keyword fun
-              $cate->keyword=$this->handel_keyword($request->keyword);
-            
-            $cate->save();
             
             toastr()->success(__('Admin/categories.depart_add_done'));
             return redirect()->route('Categories.index');
@@ -98,12 +89,9 @@ class CategoryRepository implements CategoryInterface {
     {
         //dd($id);
         $real_id= decrypt($id);
-        
         $data['cate']=Category::findOrfail($real_id);
-        $data['main_categories']=Category::where('parent_id',Null)->where('id','!=',$real_id)->get();
-        $data['main_departments']=Department::where('parent_id',Null)->get();
-
-        
+        $data['main_categories']=Category::whereNull('parent_id')->where('id','!=',$real_id)->get();
+        $data['main_departments']=Department::whereNull('parent_id')->get();
         return view('dashboard.admin.categories.edit',$data);
     }
 
@@ -113,20 +101,16 @@ class CategoryRepository implements CategoryInterface {
           
          try{
             
-             $cate= Category::findOrfail($request->id);
-             ($request->parent_id!='0')?$cate->parent_id=$request->parent_id:$cate->parent_id=Null;
-             $cate->department_id=$request->department_id;
-           //  $cate->updated_by=auth()->user()->firstname;//----------------------------------------------------------------------------
-             $cate->save();
-
-             $cate->name=$request->name;
-             $cate->slug=str_replace(' ', '_',$request->name);
-             $cate->description=$request->description;
- 
+            $cate= Category::findOrfail($request->id);
+            
+            $cate->parent_id       = ($request->parent_id!='0')?$request->parent_id:Null;
+            $cate->department_id   = $request->department_id;
+            $cate->name            = $request->name;
+            $cate->slug            = str_replace(' ', '_',$request->name);
+            $cate->description     = $request->description;
             // call to keyword fun
             $cate->keyword=$this->handel_keyword($request->keyword);
-             
-             $cate->save();
+            $cate->save();
              
              toastr()->success(__('Admin/categories.depart_edit_done'));
              return redirect()->route('Categories.index');
@@ -143,20 +127,21 @@ class CategoryRepository implements CategoryInterface {
             $real_id = decrypt($id);
 
             //check category products
-            $d=Category::find($real_id);
+           /* $d=Category::find($real_id);
             $data['product']= $d->products();
 
             //check if there are sub cate for this cate
             $data['sub_cate']=Category::where('parent_id',$real_id);
 
             if($data['product']->count() == 0  && $data['sub_cate']->count() == 0 ) {
-                Category::findorfail($real_id)->delete();
+               */
+              Category::findorfail($real_id)->delete();
                 toastr()->error(__('Admin/categories.depart_delete_done'));
                 return redirect()->route('Categories.index');
-            }else{
+           /* }else{
                 toastr()->error(__('Admin/categories.depart_cant_delete'));
                 return redirect()->route('Categories.index');
-            }
+            }*/
             
             
         } catch (\Exception $e) {
@@ -173,16 +158,17 @@ class CategoryRepository implements CategoryInterface {
             foreach($all_ids as $cate_ids){
   
                  //check category products
-                $d=Category::find($cate_ids);
+               /* $d=Category::find($cate_ids);
                 $data['product']= $d->products();//->withTrashed()
 
                 //check if there are sub cate for this cate
                 $data['sub_cate']=Category::where('parent_id',$cate_ids);
                 
                 if($data['product']->count() == 0 && $data['sub_cate']->count() == 0) {
+                */
                     Category::findOrfail($cate_ids)->delete();
                     $delete_or_no++;
-                }
+                //}
             }
             
             if($delete_or_no==0){
