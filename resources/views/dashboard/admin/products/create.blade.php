@@ -13,7 +13,7 @@
     <div class="content-wrapper">
         <!-- Start content-header -->
         <div class="content-header row">
-            <div class="content-header-left col-md-6 col-12 mb-2">
+            <div class="mb-2 content-header-left col-md-6 col-12">
                 <h3 class="content-header-title">{{trans('Admin\products.add_or_edit_product')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="content-header-right col-md-6 col-12">
-                <div class="media width-250 float-right">
+                <div class="float-right media width-250">
                     <media-left class="media-middle">
                         <div id="sp-bar-total-sales"></div>
                     </media-left>
@@ -50,7 +50,7 @@
                                         <h4 class="card-title">{{trans('Admin\products.add_or_edit_product')}}</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
                                         <div class="heading-elements">
-                                            <ul class="list-inline mb-0">
+                                            <ul class="mb-0 list-inline">
                                                 <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                                 <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                                 <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
@@ -76,10 +76,10 @@
                                                                 <a class="btn btn-info save_and_continue">
                                                                     <i class="fa fa-angle-double-left" aria-hidden="true"> </i>
                                                                     {{ trans('Admin/products.save_and_continue') }}
-                                                                    <i class="fa fa-spin fa-spinner loading_save_and_continue hidden"></i>
+                                                                    <i class="hidden fa fa-spin fa-spinner loading_save_and_continue"></i>
                                                                 </a>
                                                                 <a class="btn btn-danger delete">
-                                                                    <i class="fa fa fa-undo" aria-hidden="true"> </i>
+                                                                    <i class="fa fa-undo" aria-hidden="true"> </i>
                                                                     {{ trans('Admin/products.back') }}
                                                                 </a>
                                                                 <!-- End Upper Btn -->
@@ -113,7 +113,7 @@
                                                                 </ul>
                                                                 <!-- End Tabs Ul Links -->
                                                                 <!-- Start Tabs UL Content -->
-                                                                <div class="tab-content px-1 pt-1">
+                                                                <div class="px-1 pt-1 tab-content">
                                                                     <!-- Start generalInformation Content -->
                                                                     @include('dashboard.admin.products.tabs.generalInformation')
                                                                     <!-- End generalInformation Content -->
@@ -181,7 +181,7 @@
         $.ajax({
             url:"{{ route('Products.update' , encrypt($product->id)) }}",
             dataType:'json',
-            type:'post',
+            type:'PUT',
             data:form_data,
             beforeSend: function(){
                 $('.loading_save_and_continue').removeClass('hidden');
