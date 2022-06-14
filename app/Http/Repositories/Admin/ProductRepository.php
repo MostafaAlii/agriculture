@@ -36,6 +36,8 @@ class ProductRepository implements ProductInterface {
             $real_id= Crypt::decrypt($id);
             $product = Product::findOrfail($real_id);
             $product->farmer_id     = $request->farmer_id;
+            //$->price = $request->;
+            //dd($price);
             $product->special_price = $request->special_price;
             $product->special_price_start = $request->special_price_start;
             $product->special_price_end = $request->special_price_end;
@@ -52,7 +54,12 @@ class ProductRepository implements ProductInterface {
             // Sync Tags ::
             $product->tags()->sync($request->tags);
             // Sync Units ::
-            $product->units()->sync([$request->units]);
+            $product->units()->sync($request->units);
+            $units = collect($request->input('units',[]))
+                ->map(function($unit) {
+                    return ['price'=>$unit];
+                });
+            $product->units()->sync([$request->units, $request->price]);
             // Save Product Main Photo ::
             $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image',$product->id, 'App\Models\Product');
             DB::commit();
