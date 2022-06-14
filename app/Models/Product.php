@@ -43,7 +43,7 @@ class Product extends Model {
     }
 
     public function units(): BelongsToMany {
-        return $this->belongsToMany(Unit::class, 'product_unit');
+        return $this->belongsToMany(Unit::class, 'product_unit')->withPivot(['price']);
     }
 
     // Product Has Many Options ::
