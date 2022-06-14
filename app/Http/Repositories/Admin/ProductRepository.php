@@ -52,7 +52,9 @@ class ProductRepository implements ProductInterface {
             // Sync Tags ::
             $product->tags()->sync($request->tags);
             // Sync Units ::
-            $product->units()->sync([$request->units, $request->price]);
+            $product->units()->sync([$request->units]);
+            // Save Product Main Photo ::
+            $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image',$product->id, 'App\Models\Product');
             DB::commit();
             //toastr()->success(__('Admin/products.product_updated_successfully'));
         } catch(\Exception $ex){
