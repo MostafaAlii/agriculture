@@ -42,7 +42,7 @@ class Product extends Model {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
 
-    public function units(): BelongsToMany {
+    public function units(): BelongsToMany { // Create Group Invoices
         return $this->belongsToMany(Unit::class, 'product_unit')->withPivot(['price']);
     }
 
