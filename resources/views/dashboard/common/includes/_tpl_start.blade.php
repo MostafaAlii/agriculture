@@ -12,7 +12,7 @@
     <meta name="author" content="PIXINVENT">
     <title>{{ trans('Admin/dashboard.dashboard') }} | @yield('pageTitle')</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/admin/images/ico/apple-icon-120.png') }}">
-    <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingIcon/'.setting()->site_icon)}}"
+    <img class="img-logo img-fluid lazy" src="{{URL::asset('Dashboard/img/settingIcon/'.setting()->site_icon)}}"
     data-src="{{URL::asset('Dashboard/img/settingIcon/'.setting()->site_icon)}}" width="70" height="70"
     alt="demo"  style="left: 45%;    width: 70px;height: 70px;"/>
 
@@ -159,4 +159,4 @@
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
-<body class="vertical-layout vertical-menu material-vertical-layout material-layout 2-columns   fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+<body class="vertical-layout vertical-menu material-vertical-layout material-layout 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">

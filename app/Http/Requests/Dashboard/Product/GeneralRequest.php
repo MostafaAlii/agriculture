@@ -14,8 +14,8 @@ class GeneralRequest extends FormRequest {
             'categories.*'   =>'numeric|exists:categories,id',
             'tags'           =>'sometimes|nullable|array',
             'tags.*'         =>'numeric|exists:tags,id',
-            'price'          =>'required|numeric|min:1|digits_between:1,12',
-            'photo'          =>'image|mimes:jpeg,png,jpg|max:4096',
+            //'price'          =>'required|numeric|min:1|digits_between:1,12',
+            'photo'          =>'required|image|mimes:jpeg,png,jpg|max:4096',
         ];
     }
 
@@ -33,6 +33,7 @@ class GeneralRequest extends FormRequest {
             'price.numeric'         =>  trans('Admin/products.price_numeric'),
             'price.min'             =>  trans('Admin/products.price_min'),
             'price.digits_between'  =>  trans('Admin/products.price_digits_between'),
+            'photo.required'        =>  trans('Admin/products.photo_required'),
             'photo.image'           =>  trans('Admin/products.photo_image'),
         ];
     }

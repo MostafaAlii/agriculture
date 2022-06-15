@@ -1,16 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Dashboard\Admin;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProductInterface;
 use App\Http\Requests\Dashboard\Product\GeneralRequest;
-use App\Http\Requests\Dashboard\Product\ProductPriceRequest;
-use App\Http\Requests\Dashboard\Product\ProductStockRequest;
-use Illuminate\Http\Request;
-
-class ProductController extends Controller
-{
+class ProductController extends Controller {
     protected $Data;
     public function __construct(ProductInterface $Data) {
         $this->middleware('permission:products', ['only' => ['index']]);
@@ -32,22 +26,10 @@ class ProductController extends Controller
     }
 
     public function create() {
-        return $this->Data->create();
+        return $this->Data->generalInformation();
     }
 
-    public function show($id) {
-        //
-    }
-
-    public function edit($id) {
-        return $this->Data->edit($id);
-    }
-
-    public function update(Request $request, $id) {
-        return $this->Data->update($request, $id);
-    }
-
-    public function destroy($id) {
-        //
+    public function generalInformationStore(GeneralRequest $request) {
+        return $this->Data->generalInformationStore($request);
     }
 }

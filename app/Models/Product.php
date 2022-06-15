@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\{HasMany, MorphMany, MorphOne, Belong
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Product extends Model {
     use HasFactory, Translatable, SoftDeletes;
-    const PENDING = 'pending', REJECT = 'reject', ACTIVE = 'active';
+    const PENDING = 1, ACTIVE = 2, IN_STOCK = 1;
     protected $table = "products";
     protected $guarded = [];
     protected $with=['translations'];
@@ -89,9 +89,8 @@ class Product extends Model {
 
     public function getStatusType() {
         switch ($this->status) {
-            case 'pending' : $result = trans('Admin/products.pending') ; break;
-            case 'reject' : $result = trans('Admin/products.reject') ; break;
-            case 'active' : $result = trans('Admin/products.active') ; break;
+            case 0 : $result = trans('Admin/products.pending') ; break;
+            case 1 : $result = trans('Admin/products.active') ; break;
         }
         return $result;
     }

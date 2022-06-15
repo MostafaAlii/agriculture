@@ -20,6 +20,7 @@ return [
     'product_main_price'                         =>                  'السعر الاساسى للمنتج',
     'product_main_price_placeholder'             =>                  'ادخل السعر الاساسى للمنتج',
     'product_price'                              =>                  'السعــر',
+    'photo_required'                             =>                  'الصورة مطلوبة',
     'prices_managment'                           =>                  'الاسعــار',
     'product_price_select'                       =>                   'نــوع السعــر',
     'fixed'                                      =>                  'ثابــت',

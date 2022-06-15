@@ -59,7 +59,6 @@ use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
 use App\Http\Controllers\Dashboard\Admin\CurrencyController;
 use App\Http\Controllers\Dashboard\Admin\UnitController;
 use App\Http\Controllers\Dashboard\Admin\ProductController;
-
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -425,7 +424,11 @@ Route::group(
                 /********************************* End Options Routes ************************************/
 
                 /********************************* Start Products Routes ************************************/
-                Route::resource('Products', ProductController::class)->except(['show']);
+                Route::group(['prefix' => 'Products'], function () {
+                    Route::get('/',[ProductController::class, 'index'])->name('products');
+                    Route::get('create',[ProductController::class, 'create'])->name('products.generalInformation');
+                    Route::post('create',[ProductController::class, 'generalInformationStore'])->name('products.generalInformation.store');
+                });
                 /********************************* End Products Routes ************************************/
 
                 /********************************* Slider Routes ************************************/

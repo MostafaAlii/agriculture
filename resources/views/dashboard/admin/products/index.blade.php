@@ -22,7 +22,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Products.index') }}">{{ trans('Admin/products.product_title_in_sidebar') }}</a>
+                            <li class="breadcrumb-item"><a href="{{-- route('products') --}}">{{ trans('Admin/products.product_title_in_sidebar') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -59,7 +59,7 @@
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
                                     @can('product-create')
-                                        <a href="{{ route('Products.create') }}" class="mb-3 btn btn-primary btn-sm">
+                                        <a href="{{ route('products.generalInformation') }}" class="mb-3 btn btn-primary btn-sm">
                                             <i class="material-icons">add_box</i>
                                             {{ __('Admin/products.add_new_product') }}
                                         </a>
@@ -123,6 +123,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Datatable Fire -->
-
 
 @endsection
