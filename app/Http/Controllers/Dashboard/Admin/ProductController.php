@@ -25,6 +25,10 @@ class ProductController extends Controller {
         return $this->Data->index();
     }
 
+    public function data() {
+        return $this->Data->data();
+    }
+
     public function create() {
         return $this->Data->generalInformation();
     }

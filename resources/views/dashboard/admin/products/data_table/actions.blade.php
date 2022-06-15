@@ -5,17 +5,17 @@
         </button>
         <div class="dropdown-menu dropmenu-menu-right">
             @can('product-edit')
-                <a href="{{ route('product_edit', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
+                <a href="{{-- route('product_edit',encrypt($product->id)) --}}" class="dropdown-item btn btn-outline-primary btn-md">
                     {{ __('Admin/site.edit') }}
                 </a>
             @endcan
             @can('product-special-price')
-                <a href="{{ route('products.prices', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-warning btn-md">
+                <a href="{{-- route('products.prices',encrypt($product->id)) --}}" class="dropdown-item btn btn-outline-warning btn-md">
                     {{ __('Admin/products.prices_managment') }}
                 </a>
             @endcan
             @can('product-stock')
-                <a href="{{ route('products.stock', encrypt($product->id)) }}" class="dropdown-item btn btn-outline-success btn-md">
+                <a href="{{-- route('products.stock',encrypt($product->id)) --}}" class="dropdown-item btn btn-outline-success btn-md">
                     {{ __('Admin/products.stock') }}
                 </a>
             @endcan
@@ -29,7 +29,7 @@
     </div>
 @endcan
 {{-- modal delete --}}
-<form action="{{ route('product_delete', encrypt($product->id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+<form action="{{-- route('product_delete',encrypt($product->id)) --}}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')
     <div class="col-lg-4 col-md-6 col-sm-12">
@@ -61,7 +61,7 @@
 {{-- End modal delete --}}
 
 {{-- modal bulk delete --}}
-<form action="{{ route('products.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+<form action="{{-- route('products.bulk_delete','ids') --}}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')
     <div class="col-lg-4 col-md-6 col-sm-12">

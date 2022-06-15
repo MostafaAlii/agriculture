@@ -426,6 +426,7 @@ Route::group(
                 /********************************* Start Products Routes ************************************/
                 Route::group(['prefix' => 'Products'], function () {
                     Route::get('/',[ProductController::class, 'index'])->name('products');
+                    Route::get('/products_data', [ProductController::class,'data'])->name('products_data');
                     Route::get('create',[ProductController::class, 'create'])->name('products.generalInformation');
                     Route::post('create',[ProductController::class, 'generalInformationStore'])->name('products.generalInformation.store');
                 });

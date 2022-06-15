@@ -12,6 +12,38 @@ class ProductRepository implements ProductInterface {
         return view('dashboard.admin.products.index');
     }
 
+    public function data() {
+        $products = Product::productWithOutTrashed();
+        //use datatables (yajra) to handel this data
+        return DataTables::of($products)
+            ->addColumn('record_select',function (Product $products) {
+                return view('dashboard.admin.products.data_table.record_select', compact('products'));
+            })
+            ->addColumn('farmer_name', function (Product $product) {
+                return $product->farmer->firstname.' '.$product->farmer->lastname;
+            })
+            ->editColumn('status', function (Product $product) {
+                return view('dashboard.admin.products.data_table.status', compact('product'));
+            })
+             ->addColumn('category_name', function (Product $product) {
+                return view('dashboard.admin.products.data_table.related_category', compact('product'));
+             })
+             /*->addColumn('price', function (Product $product) {
+                return view('dashboard.admin.products.data_table.price_formated', compact('product'));
+            })*/
+            ->editColumn('created_at', function (Product $product) {
+                return $product->created_at->diffforhumans();
+            })
+            ->addColumn('image', function (Product $product) {
+                return view('dashboard.admin.products.data_table.image', compact('product'));
+            })
+            ->addColumn('actions',function (Product $product) {
+                return view('dashboard.admin.products.data_table.actions', compact('product'));
+            })
+            ->rawColumns(['record_select','actions'])
+            ->toJson();
+    }
+
     public function generalInformation() {
         $data = [];
         $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();

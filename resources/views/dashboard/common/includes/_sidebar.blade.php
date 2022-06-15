@@ -760,31 +760,6 @@
                 @endcan
                 <!-- End Bolgs Dropdown Menu -->
 
-                <!-- Start Attributes Dropdown Menu -->
-                @can('attributes-managment')
-                    <li class=" nav-item">
-                        <a href="{{-- route('admin.dashboard') --}}">
-                            <i class="material-icons">playlist_add_check</i>
-                            <span class="menu-title" data-i18n="Attributes">
-                                {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
-                        </a>
-                        <ul class="menu-content">
-                            <!-- Start Attributes -->
-                            @can('attributes')
-                                <li>
-                                    <a class="menu-item" href="{{ route('Attributes.index') }}">
-                                        <i class="material-icons">playlist_add_check</i>
-                                        <span data-i18n="Attributes">
-                                            {{ trans('Admin/attributes.attributes_title_in_sidebar') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            <!-- End Attributes -->
-                        </ul>
-                    </li>
-                @endcan
-                <!-- End Attributes Dropdown Menu -->
-
                 <!-- Start Product Dropdown Menu -->
                 @can('products-managment')
                     <li class=" nav-item">
@@ -810,31 +785,6 @@
                     </li>
                 @endcan
                 <!-- End Product Dropdown Menu -->
-
-                <!-- Start options Dropdown Menu -->
-                @can('options-managment')
-                    <li class=" nav-item">
-                        <a href="{{-- route('admin.dashboard') --}}">
-                            <i class="material-icons">credit_card</i>
-                            <span class="menu-title" data-i18n="Options">
-                                {{ trans('Admin/options.options_title') }}
-                            </span>
-                        </a>
-                        <ul class="menu-content">
-                            <!-- Start options -->
-                            @can('options')
-                                <li>
-                                    <a class="menu-item" href="{{ route('Options.index') }}">
-                                        <i class="material-icons">credit_card</i>
-                                        <span data-i18n="Options"> {{ trans('Admin/options.options_title') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            <!-- End options -->
-                        </ul>
-                    </li>
-                @endcan
-                <!-- End options Dropdown Menu -->
 
                 <!-- Start Orders Dropdown Menu -->
                 @can('orders-managment')
