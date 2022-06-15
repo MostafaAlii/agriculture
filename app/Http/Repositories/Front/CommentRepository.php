@@ -23,15 +23,17 @@ class CommentRepository implements CommentInterface{
                 $email=Auth::guard('admin')->user()->email;
                 $image=Auth::guard('admin')->user()->image->filename;
             }
-            $comment = new Comment();
-            ($request->from=='replay')?$comment->parent_id=$request->comment_id:'';
-            $comment->commentable_id    = $blog->id;
-            $comment->commentable_type  = $commentable_type;
-            $comment->name              = $name;
-            $comment->email             = $email;
-            $comment->image             = $image;
-            $comment->comment           = $data['comment'];
-            $comment->save();
+            
+            Comment::create([
+                'parent_id'=>($request->from=='replay')?$request->comment_id:NULL,
+                'commentable_id'=>$blog->id,
+                'commentable_type'=>$commentable_type,
+                'name'=>$name,
+                'email'=>$email,
+                'image'=>$image,
+                'comment'=>$data['comment'],
+            ]);
+            
             return redirect()->back()->with([
                     'success'       => trans('Website/comments.add_done'),
                     'div_active'    => 'allow',
@@ -39,6 +41,7 @@ class CommentRepository implements CommentInterface{
             );
 
          } catch (\Exception $ex) {
+            //dd($ex->getMessage());
             return redirect()->back()->withErrors(['error'=> __('Website/comments.error')]);
          }
     }

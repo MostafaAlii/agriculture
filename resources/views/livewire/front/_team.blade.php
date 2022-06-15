@@ -10,7 +10,7 @@
                 <div class="__inner">
                     <div class="row">
 
-                    @foreach($teams as $t)
+                    @forelse ($teams as $t)
                         <!-- start item -->
                         
                             <div class="col-12 col-md-6 col-lg-4">
@@ -30,7 +30,8 @@
                             </div>
                         
                         <!-- end item -->
-                    @endforeach
+                    @empty
+                    @endforelse
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ use Astrotomic\Translatable\Translatable;
 class Contact extends Model {
     use HasFactory,Translatable;
     protected $table = "contact_us";
-    protected $guarded = [];
+    protected $fillable = ['firstname','lastname','phone','email','comment'];
     public $translatedAttributes = [];
     public $timestamps = true;
 }

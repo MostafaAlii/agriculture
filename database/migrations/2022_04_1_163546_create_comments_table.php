@@ -13,8 +13,6 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->foreignId('parent_id')->nullable()->constrained('comments')->cascadeOnDelete();
             $table->morphs('commentable');
-            // $table->Integer('commentable_id');
-            // $table->string('commentable_type');
             $table->string('name');
             $table->string('email');
             $table->string('image');

@@ -30,13 +30,12 @@ class ContactRepository implements ContactInterface {
             }
         );
         toastr()->success(__('Admin/contact.send_done'));
-        return redirect()->back();           
+        return redirect()->back()->with(['success'=>__('Admin/contact.send_done')]);           
         //------------------------------------------------------------------
         } catch (\Exception $e) {
            // dd($e->getMessage());
            toastr()->error(__('Admin/contact.send_fail'));
-            return redirect()->back();
-
+           return redirect()->back()->with(['error'=>__('Admin/contact.send_fail')]);           
         }
     }
 
@@ -59,13 +58,12 @@ class ContactRepository implements ContactInterface {
         );
 
         toastr()->success(__('Admin/contact.send_done'));
-        return redirect()->back();           
+        return redirect()->back()->with(['success'=>__('Admin/contact.send_done')]);           
         //------------------------------------------------------------------
         } catch (\Exception $e) {
            // dd($e->getMessage());
            toastr()->error(__('Admin/contact.send_fail'));
-            return redirect()->back();
-
+           return redirect()->back()->with(['error'=>__('Admin/contact.send_fail')]);           
         }
     }
 
@@ -78,12 +76,12 @@ class ContactRepository implements ContactInterface {
                 Contact::findorfail($ids)->delete();
             }
            
-                toastr()->error(__('Admin/attributes.delete_done'));
-                return redirect()->back();
+             toastr()->error(__('Admin/attributes.delete_done'));
+             return redirect()->back()->with(['error'=>__('Admin/contact.delete_done')]);           
             
         }else{
             toastr()->error(__('Admin/site.no_data_found'));
-            return redirect()->back();
+            return redirect()->back()->with(['error'=>__('Admin/contact.no_data_found')]);           
         }
     }
 }

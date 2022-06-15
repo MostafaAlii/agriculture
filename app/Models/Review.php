@@ -6,6 +6,6 @@ class Review extends Model {
     use HasFactory;
     protected $table = "reviews";
 
-    protected $guarded = [];
+    protected $fillable = ['name','email','message','show_or_hide'];
     public $timestamps = true;
 }

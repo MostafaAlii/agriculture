@@ -13,7 +13,7 @@
                 <p>{{__('Admin/about.msg')}} </p>
             </div>
 
-            <form class="contact-form" action="{{route('review.add')}}" data-aos="fade">
+            <form class="contact-form" action="{{route('review.add')}}" data-aos="fade" id="ggg">
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="input-wrp">
@@ -41,10 +41,26 @@
                     @enderror
                 </div>
 
-                <button class="custom-btn custom-btn--medium custom-btn--style-3 wide" type="submit" role="button">{{__('Admin/about.send')}}</button>
+                <button class="custom-btn custom-btn--medium custom-btn--style-3 wide" id="ccccc" type="submit" role="button">{{__('Admin/about.send')}}</button>
 
                 <div class="form__note"></div>
             </form>
         </div>
     </section>
     <!-- end section -->
+    <script>
+        // var wage = document.getElementById("ccccc");
+        // //alert(wage);
+        //  wage.addEventListener("click", function (e) {
+        //  //   document.getElementById("ccccc").disabled =true;
+        // });
+
+        $(document).ready(function () {
+            $("#ggg").submit(function () {
+               // alert('ggg');
+                document.getElementById("ccccc").disabled =true;
+               // $("#ccccc").attr("disabled", true);
+                //return true;
+            });
+        });
+    </script>

@@ -20,6 +20,25 @@ class DepartmentRepository implements DepartmentInterface
 
     use Keywords;
 
+    public $models,$columns;
+    public function __construct()
+    {
+        $this->models=[
+            'App\Models\Admin',
+            'App\Models\Farmer',
+            'App\Models\User',
+            'App\Models\Category',
+            'App\Models\Department'
+        ];
+        $this->columns=[
+            'department_id',
+            'department_id',
+            'department_id',
+            'department_id',
+            'parent_id'
+        ];
+    }
+    
     public function index()
     {
         $departments = Department::get();
@@ -173,22 +192,8 @@ class DepartmentRepository implements DepartmentInterface
             Department::findorfail($real_id)->delete(); //soft_delete
 
             //--------------this event for delete related records------------------------------
-            //id,column names[],other models[]
-            $models=[
-                'App\Models\Admin',
-                'App\Models\Farmer',
-                'App\Models\User',
-                'App\Models\Category',
-                'App\Models\Department'
-            ];
-            $columns=[
-                'department_id',
-                'department_id',
-                'department_id',
-                'department_id',
-                'parent_id'
-            ];
-            event(new DeleteEvent($real_id,$columns,$models));
+            //id,column names[],related models[]
+            event(new DeleteEvent($real_id,$this->columns,$this->models));
             //-----------------------------------------------------------------------------
                 
                 toastr()->error(__('Admin/departments.depart_delete_done'));
@@ -213,22 +218,8 @@ class DepartmentRepository implements DepartmentInterface
 
                 Department::findOrfail($depart_ids)->delete();
                 //--------------this event for delete related records------------------------------
-                //id,column names[],other models[]
-                $models=[
-                    'App\Models\Admin',
-                    'App\Models\Farmer',
-                    'App\Models\User',
-                    'App\Models\Category',
-                    'App\Models\Department'
-                ];
-                $columns=[
-                    'department_id',
-                    'department_id',
-                    'department_id',
-                    'department_id',
-                    'parent_id'
-                ];
-                event(new DeleteEvent($depart_ids,$columns,$models));
+                //id,column names[],related models[]
+                event(new DeleteEvent($depart_ids,$this->columns,$this->models));
                 //-----------------------------------------------------------------------------
                 $delete_or_no++;
             

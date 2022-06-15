@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Attribute extends Model {
     use HasFactory, Translatable;
     protected $table = "attributes";
-    protected $guarded = [];
+    protected $fillable = ['parent_id','department_id'];
+  //  protected $guarded = [];
     protected $with = ['translations'];
     public $translatedAttributes = ['name'];
     public $timestamps = true;
