@@ -5,12 +5,12 @@
         </button>
         <div class="dropdown-menu dropmenu-menu-right">
             @can('product-edit')
-                <a href="{{-- route('product_edit',encrypt($product->id)) --}}" class="dropdown-item btn btn-outline-primary btn-md">
+                <a href="{{ route('product_edit',encrypt($product->id)) }}" class="dropdown-item btn btn-outline-primary btn-md">
                     {{ __('Admin/site.edit') }}
                 </a>
             @endcan
             @can('product-special-price')
-                <a href="{{-- route('products.prices',encrypt($product->id)) --}}" class="dropdown-item btn btn-outline-warning btn-md">
+                <a href="{{ route('products.prices',encrypt($product->id)) }}" class="dropdown-item btn btn-outline-warning btn-md">
                     {{ __('Admin/products.prices_managment') }}
                 </a>
             @endcan
@@ -35,7 +35,7 @@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <!-- Modal -->
-            <div class="modal animated flipInY text-left" id="delete{{ $product->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="text-left modal animated flipInY" id="delete{{ $product->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -67,7 +67,7 @@
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <!-- Modal -->
-            <div class="modal animated flipInY text-left" id="bulkdeleteall" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="text-left modal animated flipInY" id="bulkdeleteall" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

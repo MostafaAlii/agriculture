@@ -36,4 +36,20 @@ class ProductController extends Controller {
     public function generalInformationStore(GeneralRequest $request) {
         return $this->Data->generalInformationStore($request);
     }
+
+    public function additionalPrice($id) {
+        return $this->Data->additionalPrice($id);
+    }
+
+    public function additionalPriceStore(Request $request) {
+        return $this->Data->additionalPriceStore($request);
+    }
+
+    public function edit($id) {
+        return $this->Data->edit($id);
+    }
+
+    public function update(Request $request) {
+        return $this->Data->update($request);
+    }
 }

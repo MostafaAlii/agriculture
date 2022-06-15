@@ -5,4 +5,8 @@ interface ProductInterface {
     public function data();
     public function generalInformation();
     public function generalInformationStore($request);
+    public function additionalPrice($id);
+    public function additionalPriceStore($request);
+    public function edit($id);
+    public function update($request);
 }

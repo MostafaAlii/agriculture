@@ -427,8 +427,12 @@ Route::group(
                 Route::group(['prefix' => 'Products'], function () {
                     Route::get('/',[ProductController::class, 'index'])->name('products');
                     Route::get('/products_data', [ProductController::class,'data'])->name('products_data');
+                    Route::get('price/{id}',[ProductController::class, 'additionalPrice'])->name('products.prices');
+                    Route::post('price',[ProductController::class, 'additionalPriceStore'])->name('products.prices.store');
                     Route::get('create',[ProductController::class, 'create'])->name('products.generalInformation');
                     Route::post('create',[ProductController::class, 'generalInformationStore'])->name('products.generalInformation.store');
+                    Route::get('/product_edit/{id}', [ProductController::class,'edit'])->name('product_edit');
+                    Route::post('/product_update', [ProductController::class,'update'])->name('product_update');
                 });
                 /********************************* End Products Routes ************************************/
 
