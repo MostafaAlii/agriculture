@@ -251,6 +251,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'UnitTranslation'       => App\Models\UnitTranslation::class,
     ],
     'Morasoft_ar'   =>  'فريق مورا سوفت',
     'Morasoft_en'   =>  'MoraSoft Team',

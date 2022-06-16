@@ -341,26 +341,6 @@
                                         class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
                                         $</span>
                                 </div>
-
-                                {{-- @if (Auth::guard('vendor')->user() )
-                                @if($product->in_stock ==1)
-                                    <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
-                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
-                                        <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
-                                    <div class="product-wish">
-                                        @if ($witems->contains($product->id))
-                                            <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
-                                                <i class="fa fa-heart fill-heart"></i>
-                                            </a>
-                                        @else
-                                            <a href="#"
-                                                wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }}) ">
-                                                <i class="fa fa-heart"></i>
-                                            </a>
-                                        @endif
-                                    </div>
-                                @endif
-                                @endif --}}
                             </div>
 
                             <span class="product-label product-label--new">{{ __('Admin/site.new') }}</span>

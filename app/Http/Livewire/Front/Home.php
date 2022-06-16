@@ -36,10 +36,10 @@ class Home extends Component
 
     public function render()
     {
-        $data['newProducts'] = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(12)->get();
-        $data['popProducts'] = Product::where('in_stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(6);
+        $data['newProducts'] = Product::where('stock',1)->where('qty','>',0)->latest()->limit(12)->get();
+        $data['popProducts'] = Product::where('stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(6);
         $data['saleProducts'] = Product::where('special_price','>',0)
-                                 ->where('in_stock','1')
+                                 ->where('stock','1')
                                  ->latest()->get()->take(4);
         if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->restore(Auth::guard('vendor')->user()->email);
@@ -53,7 +53,7 @@ class Home extends Component
         $data['en_logo']=Setting::select('en_site_logo')->first();
         $data['ku_logo']=Setting::select('ku_site_logo')->first();
 
-          $data['offer_product']=Product::whereNotNull('special_price')->where('in_stock',1)->where('special_price_type','=','fixed')->first();
+          $data['offer_product']=Product::whereNotNull('special_price')->where('stock',1)->where('special_price_type','=','fixed')->first();
 
         return view('livewire.front.home',$data)
         ->layout('front.layouts.master1');

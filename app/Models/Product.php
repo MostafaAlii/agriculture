@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Models\UnitTranslation;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ class Product extends Model {
     const PENDING = 1, ACTIVE = 2, IN_STOCK = 1;
     protected $table = "products";
     protected $guarded = [];
-    protected $with=['translations'];
+    protected $with=['translations','units'];
     protected $slugAttribute = ['name'];
     public $translatedAttributes=['name','description', 'reason', 'other_data'];
     public $timestamps = true;
@@ -44,6 +45,7 @@ class Product extends Model {
 
     public function units(): BelongsToMany { // Create Group Invoices
         return $this->belongsToMany(Unit::class, 'product_unit')->withPivot(['price']);
+        // return $this->belongsToMany(Unit::class, 'product_unit');
     }
 
     // Product Has Many Options ::
@@ -93,5 +95,14 @@ class Product extends Model {
             case 1 : $result = trans('Admin/products.active') ; break;
         }
         return $result;
+    }
+
+    public function scopeGetPrice(){
+        return $this->units()->where('product_id', $this->id)->first()->pivot->price;
+    }
+    public function scopeGetUnit(){
+        $ProductUnits = $this->units->pluck('id');
+        $x=$this->units()->whereIn('unit_id', $ProductUnits)->pluck('id')->first();
+        return UnitTranslation::whereId($x)->select('Name')->first();
     }
 }

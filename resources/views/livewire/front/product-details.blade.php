@@ -210,8 +210,8 @@ label.star:before {
                                         </p>
                                         <div class="stock-info in-stock">
                                             <p class="availability">{{ __("Admin/site.status") }} :
-                                                <b class="text {{ $product->in_stock ==1 ?'text-success':'text-danger' }}">
-                                                    {{ $product->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
+                                                <b class="text {{ $product->stock ==1 ?'text-success':'text-danger' }}">
+                                                    {{ $product->stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
                                                 </b>
                                             </p>
                                         </div>
@@ -226,7 +226,7 @@ label.star:before {
 
 
                                         @if (Auth::guard('vendor')->user() )
-                                            @if($product->in_stock ==1)
+                                            @if($product->stock ==1)
                                                 <form class="__add-to-cart" action="#">
                                                     <div class="quantity-counter js-quantity-counter">
                                                         {{-- @if($product->qty  > 1) --}}
@@ -306,7 +306,7 @@ label.star:before {
 
                                                 </p>
 
-                                                @if(count($options1)>0)
+                                                {{-- @if(count($options1)>0)
                                                 <div class="description-table" style="max-width: 370px;">
                                                     <table>
                                                         <tbody>
@@ -327,7 +327,7 @@ label.star:before {
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                @endif
+                                                @endif --}}
                                             </div>
 
                                             <!-- <div class="tab-content__item <?php /*if(Session::get('div_active')=='allow'){echo'is-visible';}*/?> "> -->
@@ -386,8 +386,8 @@ label.star:before {
 
                                                 <div class="stock-info in-stock">
                                                     <p class="availability">{{ __("Admin/site.status") }} :
-                                                        <b class="text {{ $product->in_stock ==1 ?'text-success':'text-danger' }}">
-                                                            {{ $product->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
+                                                        <b class="text {{ $product->stock ==1 ?'text-success':'text-danger' }}">
+                                                            {{ $product->stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
                                                         </b>
                                                     </p>
                                                 </div>
@@ -402,7 +402,7 @@ label.star:before {
                                                     </div>
                                                 @endif
                                                 @if (Auth::guard('vendor')->user() )
-                                                @if($product->in_stock ==1)
+                                                @if($product->stock ==1)
                                                         {{-- wishlist route ******************* ***************************************--}}
                                                         <div class="product-wish">
                                                             @if($witems->contains($product->id))

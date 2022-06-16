@@ -197,7 +197,7 @@
                                                         <label for="projectinput1">
                                                             {{ trans('Admin\products.product_main_price') }}
                                                         </label>
-                                                        <input type="number" name="price" value="" class="form-control" placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}" />
+                                                        <input type="number" name="price" value="{{ $product->getPrice() }}" class="form-control" placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}" />
                                                         @error('price')
                                                         <span class="text-danger"> {{$message}}</span>
                                                         @enderror

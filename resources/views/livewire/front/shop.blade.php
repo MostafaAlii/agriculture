@@ -229,17 +229,17 @@
 
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
-                                                                <span
+                                                                {{-- <span
                                                                     class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
                                                                     $</span>
-                                                                <span
+                                                                <span --}}
                                                                     class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
                                                                     $</span>
                                                             </div>
                                                         @else
                                                             <div class="product-price">
                                                                 <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
+                                                                    {{-- class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} --}}
                                                                     $</span>
                                                             </div>
                                                         @endif
@@ -338,25 +338,17 @@
                                                                 alt="demo" />
                                                         @endif
                                                     </figure>
-
                                                     <div class="__content ">
                                                         <h4 class="h6 __title"><a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                         </h4>
-
-                                                        {{-- <div class="__category"><a href="#">
-                                                            @foreach ($product->categories as $category)
-                                                                <div class="text-primary text-bold">
-                                                                <span>{{$category->name}}</span>
-                                                                </div>
-                                                                @endforeach
-                                                            </a>
-                                                        </div> --}}
+                                                        {{ number_format($product->getPrice(), 2) }}
+                                                        {{ $product->getUnit()->Name }}
                                                         <div class="stock-info in-stock">
                                                             <p class="availability">
                                                                 <b
-                                                                    class="text {{ $product->in_stock == 1 ? 'text-success' : 'text-danger' }}">
-                                                                    {{ $product->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                                    class="text {{ $product->stock == 1 ? 'text-success' : 'text-danger' }}">
+                                                                    {{ $product->stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
                                                                 </b>
                                                             </p>
                                                         </div>
@@ -370,8 +362,11 @@
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
                                                                 <span
-                                                                    class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                                    $</span>
+                                                                    class="product-price__item product-price__item--old">
+                                                                    {{-- {{ number_format($product->units()->where('product_id', $product->id)->first()->pivot->price, 2) .' '. config('app.currency')}} --}}
+                                                                    {{-- {{ config('app.currency') }} --}}
+                                                                    {{ number_format($product->getPrice(), 2) }}
+                                                                </span>
                                                                 <span
                                                                     class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
                                                                     $</span>
@@ -379,12 +374,14 @@
                                                         @else
                                                             <div class="product-price">
                                                                 <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
+                                                                    class="product-price__item product-price__item--new">
+                                                                    {{-- {{ number_format($product->units()->where('product_id', $product->id)->first()->pivot->price, 2) }} --}}
+                                                                    {{ number_format($product->getPrice(), 2) }}
                                                                     $</span>
                                                             </div>
                                                         @endif
                                                         @if (Auth::guard('vendor')->user())
-                                                            @if ($product->in_stock == 1)
+                                                            @if ($product->stock == 1)
                                                                   {{-- @if($condition)
                                                                   @else
                                                                   @endif --}}
@@ -396,7 +393,7 @@
                                                                                 return false;
                                                                     })();return false;" --}}
 
-                                                                    wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})"
+                                                                    {{-- wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})" --}}
                                                                 >
                                                                     <i class="fontello-shopping-bag"></i>
                                                                     {{ __('Admin/site.addtocart') }}
@@ -411,7 +408,7 @@
                                                                         </a>
                                                                     @else
                                                                         <a href="#"
-                                                                            wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }}) ">
+                                                                            {{-- wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }}) "> --}}
                                                                             <i class="fa fa-heart"></i>
                                                                         </a>
                                                                     @endif
@@ -451,9 +448,9 @@
                                 <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
                             </ul> --}}
 
-                            @if (count($products))
+                            {{-- @if (count($products))
                                 {{ $products->links('page-links') }}
-                            @endif
+                            @endif --}}
                         </nav>
                         <!-- end pagination -->
                     </div>
@@ -465,39 +462,6 @@
     </section>
     <!-- end section -->
 
-    <!-- start section -->
-    {{-- <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-            <!-- start banner simple -->
-            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @else
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @endif
-                </div>
-
-                <div class="row no-gutters">
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif"
-                                data-src="img/banner_bg_3.jpg" alt="demo" /></a>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif"
-                                data-src="img/banner_bg_4.jpg" alt="demo" /></a>
-                    </div>
-                </div>
-            </div>
-            <!-- end banner simple -->
-        </div>
-    </section> --}}
-    <!-- end section -->
 </div>
 @push('js')
     <script>
