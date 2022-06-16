@@ -33,7 +33,7 @@ class ProductController extends Controller {
         return $this->Data->generalInformation();
     }
 
-    public function generalInformationStore(GeneralRequest $request) {
+    public function generalInformationStore(Request $request) {
         return $this->Data->generalInformationStore($request);
     }
 

@@ -171,10 +171,12 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="projectinput1">{{ trans('Admin/products.product_main_price_placeholder') }}</label>
-                                                        <input type="number" class="form-control" placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}" value="{{old('price')}}" name="price">
-                                                        @error("price")
-                                                        <span class="text-danger">{{$message}}</span>
+                                                        <label for="projectinput1">
+                                                            {{ trans('Admin\products.product_main_price') }}
+                                                        </label>
+                                                        <input type="number" name="price" value="" class="form-control" placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}" />
+                                                        @error('price')
+                                                        <span class="text-danger"> {{$message}}</span>
                                                         @enderror
                                                     </div>
                                                 </div>

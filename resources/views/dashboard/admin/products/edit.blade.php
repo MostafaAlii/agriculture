@@ -182,7 +182,7 @@
                                                             <optgroup label="{{ trans('Admin\products.product_units_select') }}">
                                                                 @if($units && $units->count() > 0)
                                                                     @foreach($units as $unit)
-                                                                        <option value="{{$unit->id}} <?php if(in_array($unit->id,$selected_units)){echo'selected';}?>">{{$unit->Name}}</option>
+                                                                        <option value="{{$unit->id}}">{{$unit->Name}}</option>
                                                                     @endforeach
                                                                 @endif
                                                             </optgroup>
