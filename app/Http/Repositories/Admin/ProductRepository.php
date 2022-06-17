@@ -127,7 +127,7 @@ class ProductRepository implements ProductInterface {
 
     public function update($request) {
         DB::beginTransaction();
-            //try{
+            try{
                 if (!$request->has('status'))
                     $request->request->add(['status' => 0]);
                 else
@@ -158,11 +158,11 @@ class ProductRepository implements ProductInterface {
                 DB::commit();
                 toastr()->success(__('Admin/products.product_updated_successfully'));
                 return redirect()->route('products');
-            /*} catch(\Exception $ex){
+            } catch(\Exception $ex){
                 DB::rollBack();
                 toastr()->error(__('Admin/general.wrong'));
                 return redirect()->route('products');
-            }*/
+            }
     }
 
 }
