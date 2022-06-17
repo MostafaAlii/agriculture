@@ -16,7 +16,6 @@
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/units.enter_unit_name') }}</label>
                         <input type="text" name="Name" class="form-control" placeholder="{{ trans('Admin/units.enter_unit_name_placeholder') }}" />
                     </div>
-
                 </div>
 
                 <div class="modal-footer">
