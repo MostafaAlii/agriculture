@@ -2,23 +2,23 @@
 <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light bg-primary navbar-shadow">
     <div class="navbar-wrapper">
         <div class="navbar-header">
-            <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
+            <ul class="flex-row nav navbar-nav">
+                <li class="mr-auto nav-item mobile-menu d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
 
                         @if(app()->getLocale()=='ar')
-                            <img class="img-logo  img-fluid  lazy" src="{{setting()->ar_site_logo ?
+                            <img class="img-logo img-fluid lazy" src="{{setting()->ar_site_logo ?
                              URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo):
                              URL::asset('Dashboard/img/Default/logo_ar.png')}}"
                                 width="50" height="50"  alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
                         @elseif(app()->getLocale()=='ku')
-                            <img class="img-logo  img-fluid  lazy" src="{{setting()->ku_site_logo ?
+                            <img class="img-logo img-fluid lazy" src="{{setting()->ku_site_logo ?
                              URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo):
                              URL::asset('Dashboard/img/Default/logo_ku.png')}}"
                                  width="50" height="50"  alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
                         @elseif(app()->getLocale()=='en')
-                            <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
+                            <img class="img-logo img-fluid lazy" src="{{setting()->en_site_logo ?
                              URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo):
                              URL::asset('Dashboard/img/Default/logo_en.png')}}"
                                  width="50" height="50"  alt="demo"  style="left: 45%;    width: 50px;height: 50px;"/>
@@ -33,26 +33,23 @@
         </div>
         <div class="navbar-container content">
             <div class="collapse navbar-collapse" id="navbar-mobile">
-                <ul class="nav navbar-nav mr-auto float-left">
+                <ul class="float-left mr-auto nav navbar-nav">
                     <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle" href="#"><i class="ft-menu"></i></a></li>
                     <li class="nav-item"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
                 </ul>
-                <ul class="nav navbar-nav float-right">
+                <ul class="float-right nav navbar-nav">
                     <li class="">
-                        <div class="dropdown  nav-itemd-none d-md-flex">
-                            <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
+                        <div class="dropdown nav-itemd-none d-md-flex">
+                            <a href="#" class="pl-0 d-flex nav-item nav-link country-flag1" data-toggle="dropdown"
                                aria-expanded="false">
                                 @if (App::getLocale() == 'ar')
-                                    <i class="flag-icon flag-icon-eg"></i>
-                                    <strong class="mr-2 ml-2 my-auto">
+                                    <strong class="my-auto ml-2 mr-2">
                                         {{ LaravelLocalization::getCurrentLocaleNative() }}
                                     </strong>
                                 @elseif(App::getLocale() == 'ku')
-                                    <i class="flag-icon flag-icon-iq"></i>
                                     {{ LaravelLocalization::getCurrentLocaleNative() }}
                                 @else
-                                    <i class="flag-icon flag-icon-us"></i>
-                                    <strong class="mr-2 ml-2 my-auto">
+                                    <strong class="my-auto ml-2 mr-2">
                                         {{ LaravelLocalization::getCurrentLocaleNative() }}
                                     </strong>
                                 @endif
@@ -63,13 +60,7 @@
                                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                     <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
                                        href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                        @if($properties['native'] == "English")
-                                            <i class="flag-icon flag-icon-us"></i>
-                                        @elseif($properties['native'] == "العربية")
-                                            <i class="flag-icon flag-icon-eg"></i>
-                                        @else
-                                            <i class="flag-icon flag-icon-iq"></i>
-                                        @endif
+                                        
                                         {{ $properties['native'] }}
                                     </a>
                                 @endforeach
