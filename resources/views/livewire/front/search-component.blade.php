@@ -182,17 +182,23 @@
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
                                                                 <span
-                                                                    class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                                    $</span>
+                                                                    class="product-price__item product-price__item--old">
+                                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                                    {{ $product->getUnit()->Name }}
+                                                                </span>
                                                                 <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                                    $</span>
+                                                                    class="product-price__item product-price__item--new">
+                                                                    {{ number_format($product->special_price, 2) }} $
+                                                                    {{ $product->getUnit()->Name }}
+                                                                </span>
                                                             </div>
                                                         @else
                                                             <div class="product-price">
                                                                 <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
-                                                                    $</span>
+                                                                    class="product-price__item product-price__item--new">
+                                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                                    {{ $product->getUnit()->Name }}
+                                                                </span>
                                                             </div>
                                                         @endif
                                                     </div>
@@ -303,40 +309,38 @@
                                                             <div class="stock-info in-stock">
                                                                 <p class="availability">
                                                                     <b
-                                                                        class="text {{ $product->in_stock == 1 ? 'text-success' : 'text-danger' }}">
-                                                                        {{ $product->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                                        class="text {{ $product->stock == 1 ? 'text-success' : 'text-danger' }}">
+                                                                        {{ $product->stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
                                                                     </b>
                                                                 </p>
                                                             </div>
-                                                            {{-- <div class="stock-info in-stock">
-                                                                <p class="availability">
-                                                                    <b
-                                                                        class="text text-success ">
-                                                                        @lang('Admin/site.qty') ({{ $product->qty  }})
-                                                                    </b>
-                                                                </p>
-                                                            </div> --}}
-                                                        @if ($product->special_price > 0)
-                                                            <div class="product-price">
-                                                                <span
-                                                                    class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                                    $</span>
-                                                                <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                                    $</span>
-                                                            </div>
-                                                        @else
-                                                            <div class="product-price">
-                                                                <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
-                                                                    $</span>
-                                                            </div>
-                                                        @endif
+                                                            @if ($product->special_price > 0)
+                                                                <div class="product-price">
+                                                                    <span
+                                                                        class="product-price__item product-price__item--old">
+                                                                        {{ number_format($product->getPrice(), 2) }} $
+                                                                        {{ $product->getUnit()->Name }}
+                                                                    </span>
+                                                                    <span
+                                                                        class="product-price__item product-price__item--new">
+                                                                        {{ number_format($product->special_price, 2) }} $
+                                                                        {{ $product->getUnit()->Name }}
+                                                                    </span>
+                                                                </div>
+                                                            @else
+                                                                <div class="product-price">
+                                                                    <span
+                                                                        class="product-price__item product-price__item--new">
+                                                                        {{ number_format($product->getPrice(), 2) }} $
+                                                                        {{ $product->getUnit()->Name }}
+                                                                    </span>
+                                                                </div>
+                                                            @endif
                                                         @if (Auth::guard('vendor')->user() )
                                                         @if($product->in_stock ==1)
                                                             <a class="custom-btn custom-btn--medium custom-btn--style-1" title="{{ __('Admin/site.addtocart') }}"
                                                                 href="#" id="add-to-cart-cartbtnbtn" onclick="myFunction()"
-                                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
+                                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }})">
                                                                 <i class="fontello-shopping-bag"></i>
                                                                 {{ __('Admin/site.addtocart') }}
                                                             </a>
@@ -349,7 +353,7 @@
                                                                     </a>
                                                                 @else
                                                                     <a href="#"
-                                                                        wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }}) ">
+                                                                        wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }}) ">
                                                                         <i class="fa fa-heart"></i>
                                                                     </a>
                                                                 @endif
@@ -390,9 +394,9 @@
                                     <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
                                 </ul> --}}
 
-                            @if (count($products))
+                            {{-- @if (count($products))
                                 {{ $products->links('page-links') }}
-                            @endif
+                            @endif --}}
                         </nav>
                         <!-- end pagination -->
                     </div>

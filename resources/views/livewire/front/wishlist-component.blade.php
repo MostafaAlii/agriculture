@@ -81,170 +81,12 @@
                             <span class="goods-filter-btn-close js-toggle-filter"><i class="fontello-cancel"></i></span>
 
                             <div class="goods-filter__inner">
-                                <!-- start widget -->
-                                   {{-- @livewire('front.header-search-component') --}}
-                                <!-- end widget -->
-                                <!-- start widget -->
-                                {{-- <div class="widget widget--categories">
-                                    <h4 class="h6 widget-title">{{ __('Admin/categories.departmentPageTitle') }}</h4>
-
-                                    <ul class="list">
-                                        @foreach (\App\Models\Category::get() as $cat)
-                                            <li class="list__item">
-                                                <a class="list__item__link" href="#">{{ $cat->name }}</a>
-                                                <span>(3)</span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div> --}}
-                                <!-- end widget -->
-
-                                <!-- start widget -->
-
-                                <!-- end widget -->
-
-                                <!-- start widget -->
-                                {{-- <div class="widget widget--additional">
-                                    <h4 class="h6 widget-title">Additional</h4>
-
-                                    <ul>
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" checked/>
-                                                <i></i>
-                                                Organic
-                                            </label>
-                                        </li>
-
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" />
-                                                <i></i>
-                                                Fresh
-                                            </label>
-                                        </li>
-
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" />
-                                                <i></i>
-                                                Sales
-                                            </label>
-                                        </li>
-
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" />
-                                                <i></i>
-                                                Discount
-                                            </label>
-                                        </li>
-
-                                        <li>
-                                            <label class="checkfield">
-                                                <input type="checkbox" />
-                                                <i></i>
-                                                Expired
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div> --}}
-                                <!-- end widget -->
-
-                                <!-- start widget -->
-                                {{-- <div class="widget widget--tags">
-                                    <h4 class="h6 widget-title">Popular Tags</h4>
-
-                                    <ul>
-                                        @foreach ($tags as $tag)
-                                            <li><a href="#">{{$tag->name}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div> --}}
-                                <!-- end widget -->
-
-                                <!-- start widget -->
-                                {{-- <div class="widget">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col">
-                                            <button class="custom-btn custom-btn--medium custom-btn--style-1" role="button">Show Products</button>
-                                        </div>
-
-                                        <div class="col-auto">
-                                            <a class="clear-filter" href="#">Clear all</a>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                <!-- end widget -->
-
-                                <!-- start widget -->
-                                {{-- <div class="widget widget--products">
-                                    <h4 class="h6 widget-title">{{ __('Admin/site.featproducts') }}</h4>
-
-                                    <ul>
-                                        @foreach ($newProducts as $product)
-                                        <li>
-                                            <div class="row no-gutters">
-                                                <div class="col-auto __image-wrap">
-                                                    <figure class="__image">
-                                                        <a href="{{ route('product_details',$product->id) }}">
-                                                            @if($product->image->filename)
-                                                            <img class="lazy" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
-                                                            data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
-                                                        @else
-                                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
-                                                        @endif
-                                                        </a>
-                                                    </figure>
-                                                </div>
-
-                                                <div class="col">
-                                                    <h4 class="h6 __title"><a href="{{ route('product_details',$product->id) }}">{{ $product->name }}</a></h4>
-
-                                                    <div class="rating">
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item rating__item--active"><i class="fontello-star"></i></span>
-                                                        <span class="rating__item"><i class="fontello-star"></i></span>
-                                                    </div>
-
-                                                    @if($product->special_price >0)
-                                                        <div class="product-price">
-                                                            <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
-                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
-                                                        </div>
-                                                    @else
-                                                        <div class="product-price">
-                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </div> --}}
-                                <!-- end widget -->
-
-                                <!-- start widget -->
-                                <div class="widget widget--banner">
-                                    <a href="#"><img class="img-fluid  lazy" src="img/blank.gif" data-src="img/widget_banner_2.jpg" alt="demo" /></a>
-                                </div>
-                                <!-- end widget -->
                             </div>
                         </aside>
                     </div>
-
                     <div class="col-12 col-md-8 col-lg-9">
                         <div class="spacer py-6 d-md-none"></div>
-
-
-
                         <div class="spacer py-3"></div>
-
-                        <!-- start goods -->
                         <div class="goods goods--style-1">
                             <div class="__inner">
                                 <div class="row">
@@ -254,7 +96,7 @@
                                                     <div class="col-12 col-sm-6 col-lg-4">
                                                         <div class="__item">
                                                             <figure class="__image">
-                                                                @if($product->model->image->filename)
+                                                                @if($product->model->image)
                                                                     <a href="{{ route('product_details',encrypt($product->model->id)) }}">
                                                                         <img  width="188" src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
                                                                     data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
@@ -267,40 +109,37 @@
 
                                                             <div class="__content">
                                                                 <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->model->id)) }}">{{ $product->model->name }}</a></h4>
+                                                                    <div class="stock-info in-stock">
+                                                                        <p class="availability">
+                                                                            <b
+                                                                                class="text {{ $product->model->stock == 1 ? 'text-success' : 'text-danger' }}">
+                                                                                {{ $product->model->stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                                            </b>
+                                                                        </p>
+                                                                    </div>
 
-                                                                {{-- <div class="__category"><a href="#">
-                                                                    @foreach ($product->model->categories as $category)
-                                                                        <div class="text-primary text-bold">
-                                                                        <span>{{$category->name}}</span>
+                                                                    @if ($product->model->special_price > 0)
+                                                                        <div class="product-price">
+                                                                            <span
+                                                                                class="product-price__item product-price__item--old">
+                                                                                {{ number_format($product->model->getPrice(), 2) }} $
+                                                                                {{ $product->model->getUnit()->Name }}
+                                                                            </span>
+                                                                            <span
+                                                                                class="product-price__item product-price__item--new">
+                                                                                {{ number_format($product->model->special_price, 2) }} $
+                                                                                {{ $product->model->getUnit()->Name }}
+                                                                            </span>
                                                                         </div>
-                                                                        @endforeach
-                                                                    </a></div> --}}
-                                                                    <div class="stock-info in-stock">
-                                                                        <p class="availability">
-                                                                            <b
-                                                                                class="text {{ $product->model->in_stock == 1 ? 'text-success' : 'text-danger' }}">
-                                                                                {{ $product->model->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
-                                                                            </b>
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="stock-info in-stock">
-                                                                        <p class="availability">
-                                                                            <b
-                                                                                class="text text-success ">
-                                                                                @lang('Admin/site.qty') ({{ $product->model->qty  }})
-                                                                            </b>
-                                                                        </p>
-                                                                    </div>
-                                                                @if($product->model->special_price >0)
-                                                                    <div class="product-price">
-                                                                        <span class="product-price__item product-price__item--old">{{ number_format($product->model->price, 2) }} $</span>
-                                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->model->special_price, 2) }} $</span>
-                                                                    </div>
-                                                                @else
-                                                                    <div class="product-price">
-                                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->model->price, 2) }} $</span>
-                                                                    </div>
-                                                                @endif
+                                                                    @else
+                                                                        <div class="product-price">
+                                                                            <span
+                                                                                class="product-price__item product-price__item--new">
+                                                                                {{ number_format($product->model->getPrice(), 2) }} $
+                                                                                {{ $product->model->getUnit()->Name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
 
                                                                 <a class="custom-btn custom-btn--medium custom-btn--style-1"
                                                                     href="#"
@@ -339,17 +178,6 @@
 
                         <!-- start pagination -->
                         <nav aria-label="Page navigation example">
-                            {{-- <ul class="pagination justify-content-center">
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
-                            </ul> --}}
-
-                            {{-- @if (count($item))
-                            {{ $item->links('page-links') }}
-                            @endif --}}
                         </nav>
                         <!-- end pagination -->
                     </div>
@@ -359,39 +187,7 @@
 
         </div>
     </section>
-    <!-- end section -->
 
-    <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
-        <div class="container-fluid px-md-0">
-            <!-- start banner simple -->
-            <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                <div class="d-none d-lg-block">
-                    @if(app()->getLocale()=='ar')
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @else
-                        <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                             data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
-                             alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                    @endif
-                </div>
-
-                <div class="row no-gutters">
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_3.jpg" alt="demo" /></a>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_4.jpg" alt="demo" /></a>
-                    </div>
-                </div>
-            </div>
-            <!-- end banner simple -->
-        </div>
-    </section>
-    <!-- end section -->
 </div>
 @push('js')
     <script>
