@@ -28,7 +28,7 @@
     </style>
 @endsection
 
-@section('content')             
+@section('content')
 <div class="col-12 col-md-12 col-lg-12">
     <div class="spacer py-6 d-md-none"></div>
 
@@ -41,23 +41,18 @@
     <div class="goods goods--style-1">
         <div class="__inner">
             <div class="row">
-            
-            
                 @php
                     $witems = Cart::instance('wishlist')
                         ->content()
                         ->pluck('id');
                 @endphp
                 @if ($products->count() > 0)
-
-              
-                
                     @foreach ($products as $product)
                         <!-- start item -->
                         <div class="col-12 col-sm-6 col-lg-3">
                             <div class="__item">
                                 <figure class="__image">
-                                    @if ($product->image->filename)
+                                    @if ($product->image)
                                         <a
                                             href="{{ route('product_details', encrypt($product->id)) }}">
                                             <img width="188"
@@ -77,48 +72,43 @@
                                     <h4 class="h6 __title"><a
                                             href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                     </h4>
-
-                                    {{-- <div class="__category"><a href="#">
-                                        @foreach ($product->categories as $category)
-                                            <div class="text-primary text-bold">
-                                            <span>{{$category->name}}</span>
-                                            </div>
-                                            @endforeach
-                                        </a>
-                                    </div> --}}
                                     <div class="stock-info in-stock">
                                         <p class="availability">
                                             <b
-                                                class="text {{ $product->in_stock == 1 ? 'text-success' : 'text-danger' }}">
-                                                {{ $product->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                class="text {{ $product->stock == 1 ? 'text-success' : 'text-danger' }}">
+                                                {{ $product->stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
                                             </b>
                                         </p>
                                     </div>
                                     @if ($product->special_price > 0)
                                         <div class="product-price">
                                             <span
-                                                class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                $</span>
+                                                class="product-price__item product-price__item--old">
+                                                {{ number_format($product->getPrice(), 2) }} $
+                                                {{ $product->getUnit()->Name }}
+                                            </span>
                                             <span
-                                                class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                $</span>
+                                                class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $
+                                                {{ $product->getUnit()->Name }}
+                                            </span>
                                         </div>
                                     @else
                                         <div class="product-price">
                                             <span
-                                                class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
-                                                $</span>
+                                                class="product-price__item product-price__item--new">
+                                                {{ number_format($product->getPrice(), 2) }} $
+                                                {{ $product->getUnit()->Name }}
+                                            </span>
                                         </div>
                                     @endif
-                                    @if (Auth::guard('vendor')->user() )
-                                        @if($product->in_stock ==1)
+                                    {{-- @if (Auth::guard('vendor')->user() )
+                                        @if($product->stock ==1)
                                             <a class="custom-btn custom-btn--medium custom-btn--style-1"
                                                 href="#"
                                                 wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
                                                 <i class="fontello-shopping-bag"></i>
                                                 {{ __('Admin/site.addtocart') }}
                                             </a>
-                                            {{-- wishlist route ******************* *************************************** --}}
                                             <div class="product-wish">
                                                 @if ($witems->contains($product->id))
                                                     <a href="#"
@@ -132,9 +122,8 @@
                                                     </a>
                                                 @endif
                                             </div>
-                                        {{-- wishlist route ******************* *************************************** --}}
                                         @endif
-                                    @endif
+                                    @endif --}}
                                 </div>
                                 @if ($product->special_price > 0)
                                     <span
@@ -147,7 +136,7 @@
                         </div>
                         <!-- end item -->
                     @endforeach
-                  
+
                 @else
                 <div class="col-12 col-sm-12 col-lg-12" style="padding-right: 36%;"><center><h2 style="color: green;">{{ __('website\search.no_cat_product') }}</h2></center></div>
                 @endif
