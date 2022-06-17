@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder {
             AgriSeeder::class,
             AgriToolSeeder::class,
             WaterSeeder::class,
+            WholesaleSeeder::class,
             FarmerServicesSeeder::class,
             FarmerServiceAgriSeeder::class,
             FarmerServiceAgriTSeeder::class,

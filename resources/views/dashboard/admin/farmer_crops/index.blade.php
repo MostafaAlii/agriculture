@@ -61,7 +61,7 @@
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/crops.farmer') }}</th>
-                                                    <th>{{ __('Admin/crops.admin') }}</th>
+
                                                     <th>{{ __('Admin/crops.village') }}</th>
 
                                                     <th>{{ __('Admin/crops.winter_crops') }}</th>
@@ -70,6 +70,7 @@
                                                     <th>{{ __('Admin/crops.winter_area_crop') }}</th>
                                                     <th>{{ __('Admin/crops.summer_area_crop') }}</th>
                                                     <th>{{ __('Admin/crops.date') }}</th>
+                                                    <th>{{ __('Admin/crops.admin') }}</th>
 
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
@@ -135,18 +136,19 @@
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'farmer', name: 'farmer',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+
             {data: 'village', name: 'village',searchable: true, sortable: true},
             {data: 'w_name', name: 'w_name',searchable: true, sortable: true},
             {data: 's_name', name: 's_name',searchable: true, sortable: true},
             {data: 'winter_area_crop', name: 'winter_area_crop',searchable: true, sortable: true},
             {data: 'summer_area_crop', name: 'summer_area_crop',searchable: true, sortable: true},
             {data: 'date', name: 'date',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[9, "DESC"]],
+        order: [[8, "DESC"]],
     });
 </script>
 @endsection

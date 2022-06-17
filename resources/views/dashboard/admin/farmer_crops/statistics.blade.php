@@ -51,6 +51,177 @@
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
 
+                                    <form class="form" method="POST" action="{{ route('statistics') }}">
+                                        @csrf
+                                        <div class="form-body">
+                                            @if($admin->type == 'employee')
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/bees.village') }}</label>
+                                                            <select class="select2 form-control" name="village_id"
+                                                                    id="state_id">
+                                                                @foreach (App\Models\Village::all() as $village)
+                                                                    <option value="{{ $village->id }}">{{ $village->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
+                                                            <select class="custom-select form-control" id="customSelect"
+                                                                    name="land_category_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            @foreach($land_categories as $land_category)
+                                                                    <option value="{{$land_category->id}}">{{ $land_category->category_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('land_category_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                                            @error('start_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                                            @error('end_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            @elseif($admin->type =='admin')
+
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="area_id">{{ __('Admin/bees.area') }}</label>
+                                                            <select name="area_id" id="area_id" class="form-control" required>
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                </option>
+                                                                @foreach (App\Models\Area::all() as $area)
+                                                                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('area_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+
+                                                        <div class="form-group">
+                                                            <label for="state_id">{{ __('Admin/bees.state') }}</label>
+                                                            <select class=" form-control" name="state_id" id="state_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('state_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+
+                                                        <div class="form-group">
+                                                            <label for="state_id">{{ __('Admin/bees.village') }}</label>
+                                                            <select class=" form-control" name="village_id" id="village_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
+                                                            <select class="custom-select form-control" id="customSelect"
+                                                                    name="land_category_id">
+                                                            <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            @foreach($land_categories as $land_category)
+                                                                    <option value="{{$land_category->id}}">{{ $land_category->category_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('land_category_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                                            @error('start_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                                            @error('end_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            <div class="row">
+
+
+                                            </div>
+
+                                            <div class="form-actions center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
+                                                </button>
+                                                <a type="button" href="{{route('statistics_index')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <br/>
+                                    @if(isset($statistics))
+
 
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration"
@@ -63,7 +234,7 @@
                                                 <th>{{ __('Admin/crops.area') }}</th>
                                                 <th>{{ __('Admin/crops.state') }}</th>
                                                 <th>{{ __('Admin/crops.village') }}</th>
-                                                <th>{{ __('Admin/crops.email') }}</th>
+                                                <th>{{ __('Admin/crops.farmer') }}</th>
                                                 {{--<th>{{ __('Admin/crops.summer_area_crop') }}</th>--}}
                                                 <th>{{ __('Admin/crops.summer_area_crop') }}</th>
                                                 <th>{{ __('Admin/crops.winter_area_crop') }}</th>
@@ -80,12 +251,9 @@
                                                     <td>{{$statistc->Area}}</td>
                                                     <td>{{$statistc->State}}</td>
                                                     <td>{{$statistc->Village}}</td>
-                                                    <td>{{$statistc->email_farmer}}</td>
-                                                    {{--<td>{{$statistc->summer_area_crop}}</td>--}}
-
+                                                    <td>{{$statistc->farmer}}</td>
                                                     <td>{{$statistc->summer_area_crop}}</td>
                                                     <td>{{$statistc->winter_area_crop}}</td>
-
 
                                                     <td>{{$statistc->category_name}}</td>
 
@@ -95,6 +263,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                        @endif
                                 </div>
                             </div>
                         </div>

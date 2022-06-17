@@ -7,8 +7,12 @@ use App\Models\Admin;
 use App\Models\Area;
 use App\Models\State;
 use App\Models\Country;
+use App\Models\CountryTranslation;
+
 use App\Models\Province;
 use App\Models\WholeProduct;
+use App\Models\WholeProductTranslation;
+
 use App\Models\Unit;
 use App\Models\AdminDepartment;
 use Illuminate\Support\Facades\DB;
@@ -228,296 +232,686 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
     }// end of bulkDelete
 
-
-    public function outcome_product_statistics(){
-        $statistics = OutcomeProduct::select(
-            'country_translations.name AS country','outcome_products.country_product_type AS country_product_type',
-            'outcome_products.admin_dep_name AS admin_dep_name as dep_name','whole_product_translations.name as product_name',
-            'outcome_products.outcome_product_amount as outcome_product_amount',
-            'outcome_products.outcome_product_price as outcome_product_price',
-            'outcome_products.outcome_product_date as outcome_product_date')
-
-
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations','outcome_products.whole_product_id','=','whole_product_translations.id')
-            ->get();
-
-        return view('dashboard.admin.outcome_products.outcome_products_statistics',compact('statistics'));
-
-    }
-
     public function index_outcome_products(){
-        $outcome_productQueryfirst = OutcomeProduct::query();
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $outcome_productQuery = $outcome_productQueryfirst
-                ->where('admin_id',  $admin->id)->get();
-        } else {
-            $outcome_productQuery = $outcome_productQueryfirst;
-        }
-        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name'
-            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "local" THEN outcome_products.outcome_product_amount ELSE 0 END )AS local_product')
-            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "iraq" THEN outcome_products.outcome_product_amount ELSE 0 END )AS iraq_product')
-            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "imported"  THEN outcome_products.outcome_product_amount ELSE 0 END )AS imported_product')
 
-
-            , 'outcome_products.outcome_product_date AS date')
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-
-            ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_statistics',compact('outcome_products'));
+        return view('dashboard.admin.outcome_products.outcome_products_statistics',compact('admin'));
     }
 
-    public function get_weekly_monthly_anual_outcome_product_statistics($request)
+
+    public function outcome_product_statistics($request)
     {
         $validated = $request->validate([
-            'start_date' => 'sometimes|nullable|date|before:end_date',
-            'end_date' => 'sometimes|nullable|date|after:start_date',
-        ],[
-            'start_date.date'=>trans('Admin/validation.date'),
-            'start_date.before'=>trans('Admin/validation.before'),
-            'end_date.date'=>trans('Admin/validation.date'),
-            'end_date.after'=>trans('Admin/validation.after'),
-        ]);
-        $outcome_productQueryfirst = OutcomeProduct::query();
+
+            'start_date' => 'sometimes|nullable|date',
+            'end_date' => 'sometimes|nullable|date|after_or_equal:start_date',
+            'country_id'=>'sometimes|nullable|exists:countries,id',
+            'whole_product_id'=>'sometimes|nullable|exists:whole_products,id',
+            'country_product_type'=>'sometimes|nullable|in:local,iraq,imported',
+        ]
+//            , [
+//            'start_date.date' => trans('Admin/validation.date'),
+//            'end_date.date' => trans('Admin/validation.date'),
+//            'end_date.after_or_equal' => trans('Admin/validation.after_or_equal'),
+//        ]
+        );
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $outcome_productQuery = $outcome_productQueryfirst
-                ->where('admin_id',  $admin->id)->get();
-        } else {
-            $outcome_productQuery = $outcome_productQueryfirst;
+        $country_product_type = $request->country_product_type;
+        $wholesale_name = $request->admin_dep_name;
+
+        if (!empty($request->country_id)) {
+            $country_name = CountryTranslation::where('country_id', '=', $request->country_id)->pluck('name');
+
         }
+        if (!empty($request->whole_product_id)) {
+            $whole_product_name = WholeProductTranslation::where('whole_product_id', '=', $request->whole_product_id)->pluck('name');
+        }
+
 
         $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
         $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
 
-        if ($start_date && $end_date) {
 
-            $start_date = date('Y-m-d', strtotime($start_date));
-            $end_date = date('Y-m-d', strtotime($end_date));
+        $latests = \DB::table('farmer_crops')->orderBy('date', 'desc')->first();
+        $oldest = \DB::table('farmer_crops')->orderBy('date', 'asc')->first();
 
-            $outcome_productQuery->whereRaw("date(outcome_products.outcome_product_date) >= '" . $start_date . "' AND date(outcome_products.outcome_product_date) <= '" . $end_date . "'");
+        if ($admin->type == 'admin') {
+            if ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name !=null &&
+                $request->country_product_type != null && $request->start_date && $request->end_date)
+            {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('country_translations.name', $country_name)
+                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.admin_dep_name', $wholesale_name)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+
+                return view('dashboard.admin.outcome_products.outcome_products_statistics',
+                    compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name !=null &&
+                $request->country_product_type == null && $request->start_date && $request->end_date)
+            {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.admin_dep_name', $wholesale_name)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name ==null &&
+                $request->country_product_type != null && $request->start_date && $request->end_date)
+            {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name ==null &&
+                $request->country_product_type == null && $request->start_date && $request->end_date)
+            {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name==null&&
+                $request->country_product_type != null && $request->start_date && $request->end_date) {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id == null && $request->whole_product_id == null && $request->admin_dep_name==null&&
+                $request->country_product_type != null && $request->start_date && $request->end_date) {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('outcome_products.country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id == null && $request->whole_product_id == null && $request->admin_dep_name==null&&
+                $request->country_product_type == null && $request->start_date && $request->end_date )
+            {
+
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id == null && $request->whole_product_id != null && $request->admin_dep_name!=null&&
+                $request->country_product_type == null && $request->start_date && $request->end_date) {
+
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.admin_dep_name', $wholesale_name)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name!=null &&
+                $request->country_product_type != null ) {
+
+                $outcomeQuery = OutcomeProduct::query();
+
+                $outcome_products = $outcomeQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('admin_dep_name', $wholesale_name)
+                    ->where('country_translations.name', $country_name)
+                    ->where('country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id == null && $request->whole_product_id != null && $request->admin_dep_name != null &&
+                $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('admin_dep_name', $wholesale_name)
+                    ->where('country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+            }
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name == null &&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name != null &&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.admin_dep_name', $wholesale_name)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name == null &&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('whole_product_translations.name', $whole_product_name)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name == null &&
+                $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+                    ->where('whole_product_translations.name', $whole_product_name)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name == null &&
+                $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id == null && $request->whole_product_id == null && $request->admin_dep_name==null&&
+                $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
+
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id == null && $request->whole_product_id == null && $request->admin_dep_name==null&&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id == null && $request->whole_product_id != null && $request->admin_dep_name!=null&&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('admin_dep_name', $wholesale_name)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
         }
-        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name'
-            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "local" THEN outcome_products.outcome_product_amount ELSE 0 END )AS local_product')
-            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "iraq" THEN outcome_products.outcome_product_amount ELSE 0 END )AS iraq_product')
-            , DB::raw('SUM(CASE WHEN outcome_products.country_product_type = "imported"  THEN outcome_products.outcome_product_amount ELSE 0 END )AS imported_product')
+        elseif ($admin=='employee'){
+
+            if ($request->country_id != null && $request->whole_product_id != null &&
+                $request->country_product_type != null && $request->start_date && $request->end_date) {
+
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= 
+                '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id',
+                        '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id',
+                        '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.admin_id', $admin->id)
+                    ->where('country_translations.name', $country_name)
+                    ->where('country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics',
+                    compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id != null &&
+                $request->country_product_type != null && $request->start_date && $request->end_date) {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= 
+                '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id',
+                        '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id',
+                        '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics',
+                    compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id == null &&
+                $request->country_product_type != null && $request->start_date && $request->end_date) {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= 
+                '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id',
+                        '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id',
+                        '=', 'whole_product_translations.id')
+                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics',
+                    compact('outcome_products', 'admin'));
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id == null &&
+                $request->country_product_type == null && $request->start_date && $request->end_date) {
+
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= 
+                '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id',
+                        '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id',
+                        '=', 'whole_product_translations.id')
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics',
+                    compact('outcome_products', 'admin'));
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id != null &&
+                $request->country_product_type == null && $request->start_date && $request->end_date) {
+
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= 
+                '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id',
+                        '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id',
+                        '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics',
+                    compact('outcome_products', 'admin'));
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id != null &&
+                $request->country_product_type == null && $request->start_date && $request->end_date) {
+
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= 
+                '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id',
+                        '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id',
+                        '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->countrry_id != null && $request->whole_product_id != null &&
+                $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
 
 
-            , 'outcome_products.outcome_product_date AS date')
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
-            ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_statistics',compact('outcome_products'));
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.admin_id', $admin->id)
 
+                    ->where('country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id != null &&
+                $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id == null &&
+                $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
+
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id == null &&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+
+
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->countrry_id == null && $request->whole_product_id != null &&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+
+
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.admin_id', $admin->id)
+
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+        }
     }
 
-    public function index_outcome_imported_products(){
-        $outcome_productQueryfirst = OutcomeProduct::query();
-        $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $outcome_productQuery = $outcome_productQueryfirst
-                ->where('admin_id',  $admin->id)->get();
-        } else {
-            $outcome_productQuery = $outcome_productQueryfirst;
-        }
-        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
-            DB::raw('SUM(outcome_products.outcome_product_amount)AS imported_product')
 
-            , 'outcome_products.outcome_product_date AS date')
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->where('outcome_products.country_product_type','imported')
-            ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_imported_statistics',compact('outcome_products'));
-    }
-
-    public function get_weekly_monthly_anual_outcome_imported_product_statistics($request)
-    {
-        $validated = $request->validate([
-            'start_date' => 'sometimes|nullable|date|before:end_date',
-            'end_date' => 'sometimes|nullable|date|after:start_date',
-        ],[
-            'start_date.date'=>trans('Admin/validation.date'),
-            'start_date.before'=>trans('Admin/validation.before'),
-            'end_date.date'=>trans('Admin/validation.date'),
-            'end_date.after'=>trans('Admin/validation.after'),
-        ]);
-        $outcome_productQueryfirst = OutcomeProduct::query();
-        $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $outcome_productQuery = $outcome_productQueryfirst
-                ->where('admin_id',  $admin->id)->get();
-        } else {
-            $outcome_productQuery = $outcome_productQueryfirst;
-        }
-
-        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
-        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
-
-        if ($start_date && $end_date) {
-
-            $start_date = date('Y-m-d', strtotime($start_date));
-            $end_date = date('Y-m-d', strtotime($end_date));
-
-            $outcome_productQuery->whereRaw("date(outcome_products.outcome_product_date) >= '" . $start_date . "' AND date(outcome_products.outcome_product_date) <= '" . $end_date . "'");
-        }
-        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
-            DB::raw('SUM(outcome_products.outcome_product_amount)AS imported_product')
-
-            , 'outcome_products.outcome_product_date AS date')
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->where('outcome_products.country_product_type','imported')
-            ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_imported_statistics',compact('outcome_products'));
-
-    }
-
-    public function index_outcome_iraq_products(){
-        $outcome_productQueryfirst = OutcomeProduct::query();
-        $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $outcome_productQuery = $outcome_productQueryfirst
-                ->where('admin_id',  $admin->id)->get();
-        } else {
-            $outcome_productQuery = $outcome_productQueryfirst;
-        }
-        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
-            DB::raw('SUM(outcome_products.outcome_product_amount)AS iraq_product')
-
-
-            , 'outcome_products.outcome_product_date AS date')
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->where('outcome_products.country_product_type','iraq')
-            ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_iraq_statistics',compact('outcome_products'));
-    }
-
-    public function get_weekly_monthly_anual_outcome_iraq_product_statistics($request)
-    {
-        $validated = $request->validate([
-            'start_date' => 'sometimes|nullable|date|before:end_date',
-            'end_date' => 'sometimes|nullable|date|after:start_date',
-        ],[
-            'start_date.date'=>trans('Admin/validation.date'),
-            'start_date.before'=>trans('Admin/validation.before'),
-            'end_date.date'=>trans('Admin/validation.date'),
-            'end_date.after'=>trans('Admin/validation.after'),
-        ]);
-        $outcome_productQueryfirst = OutcomeProduct::query();
-        $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $outcome_productQuery = $outcome_productQueryfirst
-                ->where('admin_id',  $admin->id)->get();
-        } else {
-            $outcome_productQuery = $outcome_productQueryfirst;
-        }
-
-        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
-        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
-
-        if ($start_date && $end_date) {
-
-            $start_date = date('Y-m-d', strtotime($start_date));
-            $end_date = date('Y-m-d', strtotime($end_date));
-
-            $outcome_productQuery->whereRaw("date(outcome_products.outcome_product_date) >= '" . $start_date . "' AND date(outcome_products.outcome_product_date) <= '" . $end_date . "'");
-        }
-        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
-            DB::raw('SUM(outcome_products.outcome_product_amount)AS iraq_product')
-
-
-            , 'outcome_products.outcome_product_date AS date')
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->where('outcome_products.country_product_type','iraq')
-            ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_iraq_statistics',compact('outcome_products'));
-
-    }
-
-    public function index_outcome_local_products(){
-        $outcome_productQueryfirst = OutcomeProduct::query();
-        $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $outcome_productQuery = $outcome_productQueryfirst
-                ->where('admin_id', $admin->id)->get();
-        } else {
-            $outcome_productQuery = $outcome_productQueryfirst;
-        }
-        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
-            DB::raw('SUM(outcome_products.outcome_product_amount)AS local_product')
-
-
-            , 'outcome_products.outcome_product_date AS date')
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->where('outcome_products.country_product_type','local')
-            ->groupBy ('country','Product','date','admin_dep_name')->get();
-
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_local_statistics',compact('outcome_products'));
-    }
-
-    public function get_weekly_monthly_anual_outcome_local_product_statistics($request)
-    {
-        $validated = $request->validate([
-            'start_date' => 'sometimes|nullable|date|before:end_date',
-            'end_date' => 'sometimes|nullable|date|after:start_date',
-        ],[
-            'start_date.date'=>trans('Admin/validation.date'),
-            'start_date.before'=>trans('Admin/validation.before'),
-            'end_date.date'=>trans('Admin/validation.date'),
-            'end_date.after'=>trans('Admin/validation.after'),
-        ]);
-        $outcome_productQueryfirst = OutcomeProduct::query();
-        $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $outcome_productQuery = $outcome_productQueryfirst
-                ->where('admin_id', $admin->id)->get();
-        } else {
-            $outcome_productQuery = $outcome_productQueryfirst;
-        }
-
-        $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
-        $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
-
-        if ($start_date && $end_date) {
-
-            $start_date = date('Y-m-d', strtotime($start_date));
-            $end_date = date('Y-m-d', strtotime($end_date));
-
-            $outcome_productQuery->whereRaw("date(outcome_products.outcome_product_date) >= '" . $start_date . "' AND date(outcome_products.outcome_product_date) <= '" . $end_date . "'");
-        }
-        $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-            'whole_product_translations.name AS Product','outcome_products.admin_dep_name as admin_dep_name',
-            DB::raw('SUM(outcome_products.outcome_product_amount)AS local_product')
-
-
-            , 'outcome_products.outcome_product_date AS date')
-            ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
-            ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-            ->where('outcome_products.country_product_type','local')
-            ->groupBy ('country','Product','date','admin_dep_name')->get();
-        return view('dashboard.admin.outcome_products.weekly_monthly_anual_local_statistics',compact('outcome_products'));
-
-    }
 }

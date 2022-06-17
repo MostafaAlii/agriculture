@@ -4,7 +4,6 @@ return [
     'treeType'=>'أنواع الأشجار',
     'trees'=>'الأشجار',
     'orchards'=>'البساتين',
-
     'action' =>'العمليات',
     'farmer_inf' =>'معلومات الفلاح',
     'admin_departments' =>'الهيكلية الإدارية التابعة',
@@ -12,7 +11,7 @@ return [
     'area' =>'القضاء',
     'state' =>'الناحية',
     'search'=>'بحث',
-'select'=>'إختر من القائمة',
+    'select'=>'إختر من القائمة',
     'orchardsPageTitle'=>'البساتين',
     'village' =>'القرية',
     'private'=>'خاص',
@@ -23,7 +22,6 @@ return [
     'Report_on_the_lands_planted_with_trees'=>'تقرير عن الأراضي المزروعة بالأشجار',
     'Tree_Lands_Database'=>'قاعدة بيانات الأراضي المزروعة بالأشجار',
     'admin'=>'الموظف المسؤول',
-
     'farmer_phone' =>'هاتف الفلاح',
     'farmer_email' =>'البريد الإلكتروني للفلاح',
     'farmer_address' =>'عنوان الفلاح',

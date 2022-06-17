@@ -46,7 +46,190 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
+                                    <form class="form" method="POST" action="{{ route('income_product_statistics') }}">
+                                        @csrf
+                                        <div class="form-body">
+                                            @if($admin->type == 'employee')
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="country_id">{{ __('Admin/income_products.country') }}</label>
+                                                            <select class="select2 form-control" name="country_id"
+                                                                    id="country_id">
+                                                                @foreach (App\Models\Country::all() as $country)
+                                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('country_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/income_products.whole_product_id') }}</label>
+                                                            <select class="custom-select form-control" id="customSelect"
+                                                                    name="whole_product_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
 
+                                                                @foreach(App\Models\WholeProduct::all() as $product)
+                                                                    <option value="{{$product->id}}">{{ $product->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('whole_product_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                                            @error('start_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                                            @error('end_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            @elseif($admin->type =='admin')
+
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="country_id">{{ __('Admin/income_products.country') }}</label>
+                                                            <select name="country_id" id="country_id" class="form-control" required>
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                </option>
+                                                                @foreach (App\Models\Country::all() as $country)
+                                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('country_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect1-1">{{ __('Admin/income_products.wholesale') }}</label>
+                                                            <select class="custom-select form-control"
+                                                                    id="customSelect1-1" name="admin_dep_name">
+                                                                <option selected value = ""disabled>{{__('Admin\orchards.select')}}</option>
+                                                                <option value="zakho">{{ __('Admin\income_products.zakho') }}</option>
+                                                                <option value="bardarash">{{ __('Admin\income_products.bardarash') }}</option>
+                                                                <option value="akre">{{ __('Admin\income_products.akre') }}</option>
+                                                                <option value="duhok">{{ __('Admin\income_products.duhok') }}</option>
+
+
+                                                            </select>
+                                                            @error('admin_dep_name')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/income_products.whole_product_id') }}</label>
+                                                            <select class="custom-select form-control" id="customSelect"
+                                                                    name="whole_product_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                                @foreach(App\Models\WholeProduct::all() as $product)
+                                                                    <option value="{{$product->id}}">{{ $product->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('whole_product_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect1-1">{{ __('Admin/income_products.country_product_type') }}</label>
+                                                            <select class="custom-select form-control"
+                                                                    id="customSelect1-1" name="country_product_type">
+                                                                <option selected value = ""disabled>{{__('Admin\orchards.select')}}</option>
+                                                                <option value="local">{{ __('Admin\income_products.local') }}</option>
+                                                                <option value="iraq">{{ __('Admin\income_products.iraq') }}</option>
+                                                                <option value="imported">{{ __('Admin\income_products.imported') }}</option>
+
+
+                                                            </select>
+                                                            @error('country_product_type')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                                            @error('start_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                                            @error('end_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            <div class="row">
+
+
+                                            </div>
+
+                                            <div class="form-actions center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
+                                                </button>
+                                                <a type="button" href="{{route('index_income_products')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <br/>
+                                    @if(isset($income_products))
 
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="income_product_statistic-table">
@@ -58,31 +241,32 @@
                                                     <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/income_products.country') }}</th>
-                                                    <th>{{ __('Admin/income_products.country_product_type') }}</th>
-                                                    <th>{{ __('Admin/income_products.dep_name') }}</th>
                                                     <th>{{ __('Admin/income_products.product_name') }}</th>
+
+                                                    <th>{{ __('Admin/income_products.country_product_type') }}</th>
+                                                    <th>{{ __('Admin/income_products.admin_dep_name') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_amount') }}</th>
-                                                    <th>{{ __('Admin/income_products.income_product_price') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_date') }}</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($statistics as $statistc)
+                                            @foreach($income_products as $statistc)
                                             <tr>
                                                 <td>#</td>
                                                 <td>{{$statistc->country}}</td>
+                                                <td>{{$statistc->Product}}</td>
+
                                                 <td>{{$statistc->getCountryProductType()}}</td>
                                                 <td>{{$statistc->admin_dep_name}}</td>
-                                                <td>{{$statistc->product_name}}</td>
-                                                <td>{{$statistc->income_product_amount}}</td>
-                                                <td>{{$statistc->income_product_price}}</td>
-                                                <td>{{$statistc->income_product_date}}</td>
+                                                <td>{{$statistc->product_amount}}</td>
+                                                <td>{{$statistc->date}}</td>
                                             </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

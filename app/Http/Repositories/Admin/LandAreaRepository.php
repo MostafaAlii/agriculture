@@ -4,9 +4,14 @@ use App\Http\Interfaces\Admin\LandAreaInterface;
 use App\Models\LandArea;
 use App\Models\Admin;
 use App\Models\Area;
-use App\Models\Village;
-use App\Models\LandCategory;
 use App\Models\State;
+use App\Models\StateTranslation;
+use App\Models\LandCategoryTranslation;
+
+use App\Models\AreaTranslation;
+use App\Models\Village;
+use App\Models\VillageTranslation;
+use App\Models\LandCategory;
 use App\Models\Unit;
 use App\Models\AdminDepartment;
 use Illuminate\Support\Facades\DB;
@@ -37,9 +42,9 @@ class LandAreaRepository implements LandAreaInterface{
         $admin=Admin::findorfail($adminID);
         if($admin->type =='employee') {
             $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin','unit')
-                ->where('admin_id',  $admin->id);
+                ->where('admin_id',  $admin->id)->get();
         }else{
-            $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin','unit');
+            $land_areas = LandArea::with('area', 'state', 'village', 'landCategory','admin','unit')->get();
         }
         return DataTables::of($land_areas)
             ->addColumn('record_select', 'dashboard.admin.land_areas.data_table.record_select')
@@ -94,16 +99,17 @@ class LandAreaRepository implements LandAreaInterface{
     public function store($request) {
         try {
             $requestData = $request->validated();
-            $landArea = new LandArea();
-            $landArea->area_id = $requestData['area_id'];
-            $landArea->admin_id = $requestData['admin_id'];
-            $landArea->state_id = $requestData['state_id'];
-            $landArea->village_id = $requestData['village_id'];
-            $landArea->L_area = $requestData['L_area'];
-            $landArea->land_category_id = $requestData['land_category_id'];
-            $landArea->unit_id = $requestData['unit_id'];
+            $landArea = LandArea::create([
+             'area_id'=>   $requestData['area_id'],
+                'admin_id'=>$requestData['admin_id'],
+               'state_id' => $requestData['state_id'],
+                'village_id'=> $requestData['village_id'],
+                'L_area'=> $requestData['L_area'],
+                'land_category_id'=> $requestData['land_category_id'] ,
+                'unit_id'=>  $requestData['unit_id']
 
-            $landArea->save($requestData);
+            ]);
+
 
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('LandAreas.index');
@@ -210,152 +216,177 @@ class LandAreaRepository implements LandAreaInterface{
 
     }// end of bulkDelete
 
-
-
-    public function statistic_land_area_detail()
-    {
+    public function index_land_area_statistics(){
         $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $statistics = LandArea::select(
-                'area_translations.name AS Area',
-                'state_translations.name AS State',
-                'village_translations.name AS Village'
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي صخرية و مرعى" THEN land_areas.L_area ELSE 0 END )AS rocky_lands_and_pastures')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "غابات طبيعية" THEN land_areas.L_area ELSE 0 END )AS natural_forests')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي بلدية" THEN land_areas.L_area ELSE 0 END )AS municipal_lands')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "منافع عامة" THEN land_areas.L_area ELSE 0 END )AS public_restrooms')
+        $admin=Admin::findorfail($adminID);
+        return view('dashboard.admin.land_areas.statistic_land_area_details',compact('admin'));
 
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "مباني حكومية" THEN land_areas.L_area ELSE 0 END )AS govermental_biulding')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "بساتين سيحية" THEN land_areas.L_area ELSE 0 END )AS irrigated_orchard')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "بساتين ديمية" THEN land_areas.L_area ELSE 0 END )AS rainy_orchard')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي سيحية" THEN land_areas.L_area ELSE 0 END )AS irrigated_land')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي ديمية" THEN land_areas.L_area ELSE 0 END )AS rainy_land')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "قمريات" THEN land_areas.L_area ELSE 0 END )AS kamariat')
-            )
-                ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
-                ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
-                ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
-                ->where('land_areas.admin_id',$admin->id)
-                ->GroupBy('Area', 'State', 'Village')->get();
-
-    }elseif($admin->type =='admin')
-{
-$statistics = LandArea::select(
-'area_translations.name AS Area',
-'state_translations.name AS State',
-'village_translations.name AS Village'
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي صخرية و مرعى" THEN land_areas.L_area ELSE 0 END )AS rocky_lands_and_pastures')
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "غابات طبيعية" THEN land_areas.L_area ELSE 0 END )AS natural_forests')
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي بلدية" THEN land_areas.L_area ELSE 0 END )AS municipal_lands')
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "منافع عامة" THEN land_areas.L_area ELSE 0 END )AS public_restrooms')
-
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "مباني حكومية" THEN land_areas.L_area ELSE 0 END )AS govermental_biulding')
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "بساتين سيحية" THEN land_areas.L_area ELSE 0 END )AS irrigated_orchard')
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "بساتين ديمية" THEN land_areas.L_area ELSE 0 END )AS rainy_orchard')
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي سيحية" THEN land_areas.L_area ELSE 0 END )AS irrigated_land')
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي ديمية" THEN land_areas.L_area ELSE 0 END )AS rainy_land')
-, DB::raw('SUM(CASE WHEN land_category_translations.category_name = "قمريات" THEN land_areas.L_area ELSE 0 END )AS kamariat')
-)
-->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
-->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
-->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
-->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
-->GroupBy('Area', 'State', 'Village')->get();
-}
-           return view('dashboard.admin.land_areas.statistic_land_area_details',compact('statistics'));
     }
-    public function statistic_land_area_state(){
+
+    public function statistic_land_area_detail($request)
+    {
+        $validated = $request->validate([
+            'area_id' => 'sometimes|nullable|exists:areas,id',
+            'state_id' => 'sometimes|nullable|exists:states,id',
+            'village_id' => 'sometimes|nullable|exists:villages,id',
+            'land_category_id'=>'sometimes|nullable|exists:land_categories,id',
+
+        ],[
+
+        ]);
+
 
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $statistics = LandArea::select(
-//                'area_translations.name AS Area',
-                'state_translations.name AS State'
-//                'village_translations.name AS Village'
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي صخرية و مرعى" THEN land_areas.L_area ELSE 0 END )AS rocky_lands_and_pastures')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "غابات طبيعية" THEN land_areas.L_area ELSE 0 END )AS natural_forests')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي بلدية" THEN land_areas.L_area ELSE 0 END )AS municipal_lands')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "منافع عامة" THEN land_areas.L_area ELSE 0 END )AS public_restrooms')
+        if (!empty($request->area_id)) {
+            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
 
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "مباني حكومية" THEN land_areas.L_area ELSE 0 END )AS govermental_biulding')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "بساتين سيحية" THEN land_areas.L_area ELSE 0 END )AS irrigated_orchard')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "بساتين ديمية" THEN land_areas.L_area ELSE 0 END )AS rainy_orchard')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي سيحية" THEN land_areas.L_area ELSE 0 END )AS irrigated_land')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي ديمية" THEN land_areas.L_area ELSE 0 END )AS rainy_land')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "قمريات" THEN land_areas.L_area ELSE 0 END )AS kamariat')
-            )
-//                ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
-//                ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
-                ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
-                ->where('land_areas.admin_id',$admin->id)
-                ->GroupBy(
-//                    'Area','Village'
-                    'State'
-//
-        )->get();
-
-        }elseif($admin->type =='admin')
-        {
-            $statistics = LandArea::select(
-//                'area_translations.name AS Area',
-                'state_translations.name AS State'
-//                'village_translations.name AS Village'
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي صخرية و مرعى" THEN land_areas.L_area ELSE 0 END )AS rocky_lands_and_pastures')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "غابات طبيعية" THEN land_areas.L_area ELSE 0 END )AS natural_forests')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي بلدية" THEN land_areas.L_area ELSE 0 END )AS municipal_lands')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "منافع عامة" THEN land_areas.L_area ELSE 0 END )AS public_restrooms')
-
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "مباني حكومية" THEN land_areas.L_area ELSE 0 END )AS govermental_biulding')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "بساتين سيحية" THEN land_areas.L_area ELSE 0 END )AS irrigated_orchard')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "بساتين ديمية" THEN land_areas.L_area ELSE 0 END )AS rainy_orchard')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي سيحية" THEN land_areas.L_area ELSE 0 END )AS irrigated_land')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "أراضي ديمية" THEN land_areas.L_area ELSE 0 END )AS rainy_land')
-                , DB::raw('SUM(CASE WHEN land_category_translations.category_name = "قمريات" THEN land_areas.L_area ELSE 0 END )AS kamariat')
-            )
-//                ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
-//                ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
-                ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
-                ->GroupBy(
-//                    'Area', 'Village'
-                    'State')->get();
+        }
+        if (!empty($request->state_id)) {
+            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
+        }
+        if (!empty($request->village_id)) {
+            $village_name = VillageTranslation::where('village_id', '=', $request->village_id)->pluck('name');
+        }
+        if ($request->land_category_id != null) {
+            $land_category_name = LandCategoryTranslation::where('land_category_id', '=', $request->land_category_id)->pluck('category_name');
         }
 
-        return view('dashboard.admin.land_areas.statistic_land_area_state',compact('statistics'));
-    }
-        public function getStatisticaldata(){
-            $adminID = Auth::user()->id;
-            $admin = Admin::findorfail($adminID);
-            if ($admin->type == 'employee') {
+
+        if ($admin->type == 'employee') {
+            $area_id = $admin->area_id;
+            $state_id = $admin->state_id;
+
+            if ($request->village_id != null && $request->land_category_id != null) {
+
                 $statistics = LandArea::select(
-                    'state_translations.name AS State'
-                    , DB::raw('SUM(CASE WHEN land_category_translations.category_type = "زراعي" THEN land_areas.L_area ELSE 0 END )AS agricultural')
-                    , DB::raw('SUM(CASE WHEN land_category_translations.category_type = "غير زراعي" THEN land_areas.L_area ELSE 0 END )AS non_agricultural')
-                )
+                    'area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village',
+                    'land_category_translations.category_name as category_name',
+                    'land_category_translations.category_type as category_type',
+
+                    DB::raw('SUM(land_areas.L_area )AS Area'))
+                    ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
                     ->where('land_areas.admin_id', $admin->id)
-                    ->GroupBy(
-                        'State'
-                    )->get();
-            }elseif ($admin->type == 'admin'){
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
+                return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
+            }
+            if ($request->village_id != null && $request->land_category_id == null) {
+
                 $statistics = LandArea::select(
-                    'state_translations.name AS State'
-                    , DB::raw('SUM(CASE WHEN land_category_translations.category_type = "زراعي" THEN land_areas.L_area ELSE 0 END )AS agricultural')
-                    , DB::raw('SUM(CASE WHEN land_category_translations.category_type = "غير زراعي" THEN land_areas.L_area ELSE 0 END )AS non_agricultural')
-                )
+                    'area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village',
+                    'land_category_translations.category_name as category_name',
+                    'land_category_translations.category_type as category_type',
+
+                    DB::raw('SUM(land_areas.L_area )AS Area'))
+                    ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
-                    ->GroupBy(
-                        'State'
-                    )->get();
+                    ->where('land_areas.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
+                return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
             }
 
-                return view('dashboard.admin.land_areas.get_land_area_statistic',compact('statistics'));
+        } elseif ($admin->type == 'admin') {
+            if ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->land_category_id != null) {
 
+                $statistics = LandArea::select(
+                    'area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village',
+                    'land_category_translations.category_name as category_name',
+                    'land_category_translations.category_type as category_type',
+
+                    DB::raw('SUM(land_areas.L_area )AS Land_Area'))
+                    ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
+                return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->land_category_id == null) {
+
+                $statistics = LandArea::select(
+                    'area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village',
+                    'land_category_translations.category_name as category_name',
+                    'land_category_translations.category_type as category_type',
+
+                    DB::raw('SUM(land_areas.L_area )AS Land_Area'))
+                    ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
+                return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
+
+            }
+
+            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->land_category_id != null) {
+
+                $statistics = LandArea::select(
+                    'area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village',
+                    'land_category_translations.category_name as category_name',
+                    'land_category_translations.category_type as category_type',
+
+                    DB::raw('SUM(land_areas.L_area )AS Land_Area'))
+                    ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
+                return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->land_category_id != null) {
+
+                $statistics = LandArea::select(
+                    'area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village',
+                    'land_category_translations.category_name as category_name',
+                    'land_category_translations.category_type as category_type',
+
+                    DB::raw('SUM(land_areas.L_area )AS Land_Area'))
+                    ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
+                return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
+
+            }
+
+        }
     }
+
 }

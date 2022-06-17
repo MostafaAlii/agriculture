@@ -25,8 +25,6 @@ class CreateOrchardsTable extends Migration
             $table->enum('supported_side',['private','govermental','international_organizations']);
             $table->foreignId('unit_id')->references('id')->on('units');
             $table->double('orchard_area');
-            $table->string('phone');
-            $table->string('email');
             $table->integer('tree_count_per_orchard');
 
             $table->timestamps();

@@ -20,8 +20,7 @@ class FarmerServiceFactory extends Factory
     {
         return [
 
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->numerify('###########'),
+
             'village_id'    => $this->faker->numberBetween(1, Village::count()),
             'area_id'    => $this->faker->numberBetween(1, Area::count()),
             'state_id'    => $this->faker->numberBetween(1, State::count()),

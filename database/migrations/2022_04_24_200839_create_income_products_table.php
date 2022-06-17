@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateIncomeProductsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+   
     public function up()
     {
         Schema::create('income_products', function (Blueprint $table) {
@@ -19,6 +15,8 @@ class CreateIncomeProductsTable extends Migration
            $table->enum('country_product_type',['local','iraq','imported']);
             $table->foreignId('admin_id')->references('id')->on('admins');
             $table->foreignId('unit_id')->references('id')->on('units');
+//            $table->foreignId('wholesale_id')->references('id')->on('wholesales');
+
             $table->string('admin_dep_name');
 
             $table->foreignId('whole_product_id')->references('id')->on('whole_products')->onDelete('cascade');

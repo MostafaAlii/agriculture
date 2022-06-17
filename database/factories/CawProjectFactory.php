@@ -6,7 +6,7 @@ use App\Models\CawProject;
 use App\Models\Orchard;
 use App\Models\Admin;
 use App\Models\Farmer;
-use App\Models\Unit;
+use App\Models\Currency;
 
 use App\Models\AdminDepartment;
 use App\Models\State;
@@ -22,13 +22,15 @@ class CawProjectFactory extends Factory
     {
         return [
 
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->numerify('###########'),
+//            'email' => $this->faker->unique()->safeEmail(),
+//            'phone' => $this->faker->numerify('###########'),
             'village_id'    => $this->faker->numberBetween(1, Village::count()),
             'area_id'    => $this->faker->numberBetween(1, Area::count()),
             'state_id'    => $this->faker->numberBetween(1, State::count()),
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
             'farmer_id'      => $this->faker->numberBetween(1, Farmer::count()),
+            'currency_id'    => $this->faker->numberBetween(1, Currency::count()),
+
             'project_name'=>$this->faker->name(),
             'food_source'=>$this->faker->randomElement(['local','outer']),
             'marketing_side'=>$this->faker->randomElement(['private','govermental']),

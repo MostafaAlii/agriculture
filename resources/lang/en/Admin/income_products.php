@@ -23,6 +23,12 @@ return [
     'iraq'=>'Iraq',
     'imported'=>'Imported',
     'country_product_type'=>'Country Product Type',
+    'product'=>'roduct',
+    'zakho'=>'Zakho',
+    'bardarash'=>'Bardarash',
+    'akre'=>'Akri',
+    'duhok'=>'Duhok',
+
 
     'update'=>'Update',
     'date'=>'Date',

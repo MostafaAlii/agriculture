@@ -27,8 +27,7 @@ class CreateProtectedHousesTable extends Migration
             $table->foreignId('unit_id')->references('id')->on('units');
             $table->enum('supported_side',['private','govermental','international organizations']);
             $table->enum('status',['active','inactive'])->default('active');
-            $table->string('phone');
-            $table->string('email');
+
             $table->timestamps();
         });
     }

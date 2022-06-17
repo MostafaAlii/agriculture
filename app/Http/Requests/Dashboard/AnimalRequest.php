@@ -20,6 +20,7 @@ class AnimalRequest extends FormRequest
             'admin_id'        => 'required|exists:admins,id',
             'farmer_id' => 'required|exists:farmers,id',
             'village_id' => 'required|exists:villages,id',
+            'currency_id' => 'required|exists:currencies,id',
             'project_name' => [
                 'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
@@ -31,8 +32,6 @@ class AnimalRequest extends FormRequest
             'marketing_side'=>'required|in:private,govermental',
             'cost'=>'required|numeric',
             'type'         => 'required|in:caw,ship,fish',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
-            'email'=>'required|email',
 
         ];
     }
@@ -46,7 +45,8 @@ class AnimalRequest extends FormRequest
             'area_id.exists' => trans('Admin/validation.exists'),
             'state_id.exists' => trans('Admin/validation.exists'),
             'village_id.exists' => trans('Admin/validation.exists'),
-
+            'currency_id.required' => trans('Admin/validation.required'),
+            'currency_id.exists' => trans('Admin/validation.exists'),
             'village_id.required' => trans('Admin/validation.required'),
             'project_name.required' => trans('Admin/validation.required'),
             'project_name.regex' => trans('Admin/validation.regex'),
@@ -56,8 +56,6 @@ class AnimalRequest extends FormRequest
             'marketing_side.required' => trans('Admin/validation.required'),
             'cost.required' => trans('Admin/validation.required'),
             'type.required' => trans('Admin/validation.required'),
-            'phone.required' => trans('Admin/validation.required'),
-            'email.required' => trans('Admin/validation.required'),
 
 
         ];

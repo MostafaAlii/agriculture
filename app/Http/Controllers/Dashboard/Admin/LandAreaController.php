@@ -41,24 +41,28 @@ class LandAreaController extends Controller
     public function edit($id){
         return $this->Data->edit($id);
     }
+
     public function update(LandAreaRequest $request,$id){
         return  $this->Data->update( $request,$id);
     }
+
     public function destroy($id){
         return  $this->Data->destroy( $id);
     }
+
     public function bulkDelete(Request $request) {
         return  $this->Data->bulkDelete( $request);
     }
-    public function getStatisticaldata(){
-        return  $this->Data->getStatisticaldata();
+//index for report
+    public function index_land_area_statistics(){
+        return  $this->Data->index_land_area_statistics();
+
     }
-    public function statistic_land_area_detail() {
-        return  $this->Data->statistic_land_area_detail();
+//filter for report
+    public function statistic_land_area_detail(Request $request) {
+        return  $this->Data->statistic_land_area_detail($request);
     }
-    public function statistic_land_area_state() {
-        return  $this->Data->statistic_land_area_state();
-    }
+
 
 
 }

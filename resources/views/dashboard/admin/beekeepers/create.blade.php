@@ -66,7 +66,7 @@
                                         <div class="form-body">
 
                                                     <div class="row mt-2">
-                                                        <div class="col col-md-4">
+                                                        <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="village_id">{{ __('Admin/bees.village') }}</label>
                                                                 <select name="village_id" id="village_id" class="form-control" required>
@@ -83,7 +83,7 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col col-md-4">
+                                                        <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="farmer_id">{{ __('Admin/bees.farmer') }}</label>
                                                                 <select class="select2 form-control" name="farmer_id" id="farmer_id">
@@ -93,14 +93,6 @@
                                                         </div>
 
 
-
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label  for="admin_id">{{ __('Admin/bees.farmer_phone') }}</label>
-                                                                <input name="phone"  id="farmer_phone"typ="text" class="form-control">
-
-                                                            </div>
-                                                        </div>
 
                                                     </div>
                                                    <div class="row mt-2">
@@ -118,12 +110,7 @@
                                                            </div>
                                                        </div>
 
-                                                       <div class="col">
-                                                            <div class="form-group">
-                                                                <label  for="admin_id">{{ __('Admin/bees.farmer_email') }}</label>
-                                                                <input name="email"   id="farmer_email"typ="text" class="form-control">
-                                                            </div>
-                                                        </div>
+
                                                     </div>
 
 

@@ -5,7 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 class IncomeProduct extends Model {
     use HasFactory;
     protected $table = "income_products";
-    protected $guarded=[];
+    protected $fillable=['unit_id','admin_id','country_id','currency_id','whole_product_id',
+       'income_product_amount','income_product_price','country_product_type','income_product_date' ];
+
     public $timestamps = true;
 
     const LOCAL ='local',IRAQ ='iraq',IMPORTED='imported';

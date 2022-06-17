@@ -9,7 +9,7 @@ interface LandAreaInterface {
     public function update($request,$id);
     public function destroy($id);
     public function bulkDelete($request) ;
-    public function getStatisticaldata();
-    public function statistic_land_area_detail();
-    public function statistic_land_area_state() ;
+    public function index_land_area_statistics();
+
+    public function statistic_land_area_detail($request);
 }

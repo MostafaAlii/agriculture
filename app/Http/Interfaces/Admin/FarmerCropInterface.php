@@ -18,5 +18,6 @@ interface FarmerCropInterface
     public function destroy($id);
 
     public function bulkDelete($request);
-    public function statistics() ;
+    public function statistics_index();
+    public function statistics($request) ;
 }

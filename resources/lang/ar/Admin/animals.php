@@ -3,7 +3,7 @@ return [
 
 'count_ship'=>'عدد الأغنام و الماعز',
     'counr_caw'=>'عدد الأبقار و العجول',
-
+'currency'=>'العملة',
     'action' =>'العمليات',
     'admin_departments' =>'الهيكلية الإدارية التابعة',
     'area' =>'القضاء',
@@ -68,12 +68,10 @@ return [
     'caw_govermental_supported_report'=>'تقرير حول عدد الأبقار و العجول في المشاريع المدعومة من الحكومة',
     'fish_govermental_supported'=>'إحصاء عدد المسامك في المشاريع المدعومة من الحكومة',
     'fish_govermental_supported_report'=>'تقرير حول عدد المسامك  في المشاريع المدعومة من الحكومة',
-
     'chicken_govermental_supported_report'=>'تقرير حول مشاريع الدواجن - لحم - المدعومة من الحكومة',
     'chicken_govermental_supported'=>'إحصاء عدد مشاريع الدواجن المدعومة من الحكومة',
-
-
-
+    'animals_statistic_report'=>'تقرير إحصائي عن عدد الأغنام و الأبقار و الماعز و المسامك',
+    'chicken_statistic_report'=>'تقرير إحصائي عن مشاريع الدواجن',
 
 
 

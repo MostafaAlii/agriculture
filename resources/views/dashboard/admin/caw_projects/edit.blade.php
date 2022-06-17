@@ -93,23 +93,6 @@
                                             <div class="row mt-2">
 
 
-
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label  for="admin_id">{{ __('Admin/animals.farmer_phone') }}</label>
-                                                        <input name="phone"  id="farmer_phone"typ="text"  value="{{$animal->phone}}"class="form-control">
-                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
-                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
-                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label  for="admin_id">{{ __('Admin/animals.farmer_email') }}</label>
-                                                        <input name="email"   value="{{$animal->email}}" id="farmer_email"typ="text" class="form-control">
-                                                    </div>
-                                                </div>
-
                                                 <div class="col">
                                                     <div  class="form-group">
                                                         <label for="id_h5_multi">{{ __('Admin/animals.marketing_side') }}</label>
@@ -120,6 +103,9 @@
                                                             <option value="govermental">{{ __('Admin/animals.govermental') }}</option>
 
                                                         </select>
+                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
 
                                                     </div>
                                                 </div>
@@ -140,6 +126,19 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/animals.cost') }}</label>
                                                         <input name="cost" value="{{$animal->cost}}"  class="form-control"type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="currency_id">{{ __('Admin/animals.currency') }}</label>
+                                                        <select name="currency_id" id="currency_id" class="form-control" required>
+                                                            <option value="">{{ __('Admin/site.select') }}</option>
+                                                            </option>
+                                                            <option value="{{ $animal->currency_id }}" selected>{{ $animal->currency->Name }}</option>
+                                                            @foreach ($currencies as $currency)
+                                                                <option value="{{ $currency->id }}">{{ $currency->Name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
 

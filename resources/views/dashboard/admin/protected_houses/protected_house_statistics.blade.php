@@ -60,6 +60,9 @@
                                                                     <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                                 @endforeach
                                                             </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -71,7 +74,9 @@
                                                                 <option value="active">{{ __('Admin\p_houses.active') }}</option>
                                                                 <option value="inactive">{{ __('Admin\p_houses.inactive') }}</option>
                                                             </select>
-
+                                                            @error('status')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -85,7 +90,9 @@
                                                                 <option value="international organizations">{{ __('Admin\p_houses.international_organizations') }}</option>
 
                                                             </select>
-
+                                                            @error('supported_side')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
                                                         </div>
                                                     </div>
 
@@ -104,6 +111,9 @@
                                                                     <option value="{{ $area->id }}">{{ $area->name }}</option>
                                                                 @endforeach
                                                             </select>
+                                                            @error('area_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
 
                                                         </div>
                                                     </div>
@@ -115,7 +125,9 @@
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
 
                                                             </select>
-
+                                                            @error('state_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col ">
@@ -125,6 +137,9 @@
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
 
                                                             </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -136,7 +151,9 @@
                                                                 <option value="active">{{ __('Admin\p_houses.active') }}</option>
                                                                 <option value="inactive">{{ __('Admin\p_houses.inactive') }}</option>
                                                             </select>
-
+                                                            @error('status')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -150,7 +167,9 @@
                                                                 <option value="international organizations">{{ __('Admin\p_houses.international_organizations') }}</option>
 
                                                             </select>
-
+                                                            @error('supported_side')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
                                                         </div>
                                                     </div>
 

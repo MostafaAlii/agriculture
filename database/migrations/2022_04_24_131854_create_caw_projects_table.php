@@ -27,9 +27,9 @@ class CreateCawProjectsTable extends Migration
             $table->enum('food_source',['local','outer']);
             $table->enum('marketing_side',['private','govermental']);
             $table->double('cost','15,2')->default(1);
+            $table->foreignId('currency_id')->references('id')->on('currencies');
             $table->enum('type',['caw','ship','fish']);
-            $table->string('phone');
-            $table->string('email');
+
             $table->timestamps();
         });
     }

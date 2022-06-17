@@ -106,26 +106,22 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
         try {
 
             $requestData = $request->validated();
-            $protected_house = new ProtectedHouse();
+            $protected_house = ProtectedHouse::create([
+               'farmer_id' => $requestData['farmer_id'],
 
-            $protected_house->farmer_id = $requestData['farmer_id'];
+            'area_id' => $requestData['area_id'],
+           'state_id' => $requestData['state_id'],
+            'admin_id' => $requestData['admin_id'],
 
-            $protected_house->area_id = $requestData['area_id'];
-            $protected_house->state_id = $requestData['state_id'];
-            $protected_house->admin_id = $requestData['admin_id'];
+           'village_id' => $requestData['village_id'],
+            'status' => $requestData['status'],
+            'average_product_annual' => $requestData['average_product_annual'],
+            'unit_id' => $requestData['unit_id'],
+            'count_protected_house' => $requestData['count_protected_house'],
 
-            $protected_house->village_id = $requestData['village_id'];
-            $protected_house->status = $requestData['status'];
-            $protected_house->average_product_annual = $requestData['average_product_annual'];
-            $protected_house->unit_id = $requestData['unit_id'];
-            $protected_house->count_protected_house = $requestData['count_protected_house'];
+           'supported_side' => $requestData['supported_side']
 
-            $protected_house->supported_side = $requestData['supported_side'];
-            $protected_house->phone = $requestData['phone'];
-            $protected_house->email = $requestData['email'];
-
-
-            $protected_house->save($requestData);
+            ]);
 
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('ProtectedHouse.index');
@@ -179,9 +175,6 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
             $protected_house->status = $requestData['status'];
             $protected_house->unit_id = $requestData['unit_id'];
             $protected_house->supported_side = $requestData['supported_side'];
-            $protected_house->phone = $requestData['phone'];
-            $protected_house->email = $requestData['email'];
-
 
             $protected_house->update($requestData);
 
@@ -258,6 +251,21 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
 
     public function protected_house_statistics($request)
     {
+        $validated = $request->validate([
+
+                'area_id' => 'sometimes|nullable|exists:areas,id',
+                'state_id' => 'sometimes|nullable|exists:states,id',
+                'village_id'=>'sometimes|nullable|exists:villages,id',
+                'supported_side'=>'sometimes|nullable|in:private,govermental,international organizations',
+                'status'=>'sometimes|nullable|in:active,inactive',
+            ]
+            , [
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'village_id.exists' => trans('Admin/validation.exists'),
+            'state_id.exists' => trans('Admin/validation.exists'),
+
+        ]
+        );
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         $supported_side = $request->supported_side;
