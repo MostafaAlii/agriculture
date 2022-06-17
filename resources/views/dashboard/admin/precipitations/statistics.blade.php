@@ -45,53 +45,134 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    <form method="get" action="{{route('get_custom_statistics')}}">
+
+
+                                    <form class="form" method="POST" action="{{ route('get_custom_statistics') }}">
                                         @csrf
+                                        <div class="form-body">
+                                            @if($admin->type == 'employee')
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/bees.state') }}</label>
+                                                            <select class="select2 form-control" name="state_id"
+                                                                    id="state_id">
+                                                                @foreach (App\Models\State::all() as $state)
+                                                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('state_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+                                                    <div class="form-group">
+                                                        <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
+                                                        <div class="controls">
+                                                            <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                                        @error('start_date')
+                                                        <small class="form-text text-danger">{{$message}}</small>
+                                                        @enderror
+                                                    </div>
+                                                    </div>
 
-                                    <h2>{{__('Admin\precipitations.choose_date')}}</h2>
-                                    <div class="form-group col-md-6">
-                                        <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
-                                        <div class="controls">
-                                            <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
-                                        @error('start_date')
-                                        <small class="form-text text-danger">{{$message}}</small>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
-                                        <div class="controls">
-                                            <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
-                                        @error('end_date')
-                                        <small class="form-text text-danger">{{$message}}</small>
-                                        @enderror
-                                    </div>
-                                        <div class="form-group col-md-6">
-                                                <label for="area_id">{{ __('Admin/animals.area') }}</label>
-                                                <select name="village_id" id="area_id" class="form-control" required>
-                                                    <option value="">--{{ __('Admin/animals.select') }}--</option>
-                                                    </option>
-                                                    @foreach (\App\Models\Area::all() as $area)
-                                                        <option value="{{ $area->id }}">{{ $area->name }}</option>
-                                                    @endforeach
-                                                </select>
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                                            @error('end_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
-                                            @error('area_id')
-                                            <small class="form-text text-danger">{{$message}}</small>
-                                            @enderror
+
+
+                                                </div>
+                                            @elseif($admin->type =='admin')
+
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="area_id">{{ __('Admin/bees.area') }}</label>
+                                                            <select name="area_id" id="area_id" class="form-control" required>
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                </option>
+                                                                @foreach (App\Models\Area::all() as $area)
+                                                                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('area_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+
+                                                        <div class="form-group">
+                                                            <label for="state_id">{{ __('Admin/bees.state') }}</label>
+                                                            <select class=" form-control" name="state_id" id="state_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('state_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                                            @error('start_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
+                                                            <div class="controls">
+                                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                                            @error('end_date')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            @endif
+
+                                            <div class="row">
+
+
+                                            </div>
+
+                                            <div class="form-actions center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
+                                                </button>
+                                                <a type="button" href="{{route('precipitations.index_statistic')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+
+                                            </div>
+
                                         </div>
-
-
-                                    <div class="text-left" style="    margin-left: 15px;  ">
-                                        <button type="submit" id="btnFiterSubmitSearch" class="btn btn-info">{{__('Admin\precipitations.submit')}}</button>
-                                    </div>
                                     </form>
-                                    <br>
+                                    <br/>
+                                    @if(isset($precipitations))
 
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="precipitation-statistic-table">
                                             <thead>
                                                 <tr>
-
+                                                    <th>{{ __('Admin/precipitations.area') }}</th>
                                                     <th>{{ __('Admin/precipitations.state') }}</th>
                                                     <th>{{ __('Admin/precipitations.precipitation_rate') }}</th>
                                                     <th>{{ __('Admin/precipitations.date') }}</th>
@@ -102,7 +183,7 @@
                                             <tbody>
                                             @foreach($precipitations as $statistic)
                                                 <tr>
-
+                                                    <td>{{ $statistic->area }}</td>
                                                     <td>{{ $statistic->state }}</td>
                                                     <td>{{ $statistic->precipitation_rate }}</td>
                                                     <td>{{ $statistic->date }}</td>
@@ -113,6 +194,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                        @endif
                                 </div>
                             </div>
                         </div>

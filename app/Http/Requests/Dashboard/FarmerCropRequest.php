@@ -22,12 +22,10 @@ class FarmerCropRequest extends FormRequest
             'village_id'      => 'required|exists:villages,id',
 
             'land_category_id' => 'required|exists:land_categories,id',
-            'winter_area_crop' => 'sometimes:nullable',
-            'summer_area_crop' =>  'sometimes:nullable',
+            'winter_area_crop' => 'sometimes:nullable|numeric',
+            'summer_area_crop' =>  'sometimes:nullable|numeric',
             'date'=>'required|date',
 
-            'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
-            'email'        => 'required|email',
 
 //            'winter_crops.*' => [
 //                'string',

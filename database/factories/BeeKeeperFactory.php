@@ -18,8 +18,7 @@ class BeeKeeperFactory extends Factory
     {
         return [
 
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->numerify('###########'),
+
             'area_id'    => $this->faker->numberBetween(1, Area::count()),
             'state_id'    => $this->faker->numberBetween(1, State::count()),
             'village_id'    => $this->faker->numberBetween(1, Village::count()),

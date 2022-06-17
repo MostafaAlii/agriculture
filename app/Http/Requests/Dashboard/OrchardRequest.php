@@ -26,8 +26,7 @@ class OrchardRequest extends FormRequest
             'orchard_area' => 'required|numeric',
             'supported_side'=>'required|in:govermental,international_organizations,private',
             'unit_id'=>'required|exists:units,id',
-            'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
-            'email'        => 'required|email',
+
         ];
     }
 
@@ -53,8 +52,6 @@ class OrchardRequest extends FormRequest
             'orchard_area.required' => trans('Admin/validation.required'),
             'supported_side.required' => trans('Admin/validation.required'),
             'unit_id.required' => trans('Admin/validation.required'),
-            'phone.required' => trans('Admin/validation.required'),
-            'email.required' => trans('Admin/validation.required'),
 
 
         ];

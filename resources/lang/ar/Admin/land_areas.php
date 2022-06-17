@@ -16,7 +16,9 @@ return [
 
     'agricultural'=>'زراعي',
     'non_agricultural'=>'غير زراعي',
+    'land_category_name'=>'تصنيف الأرض',
 
+    'land_area'=>'مساحة الأرض',
 'admin'=>'الموظف المسؤول',
     'action' =>'العمليات',
     'admin_departments' =>'الهيكلية الإدارية التابعة',
@@ -47,7 +49,7 @@ return [
     'land_areas_state_report'=>'تقرير عن مساحات الأراضي بالناحية',
     'database_about_land_areas_state'=>'قاعدة بيانات مساحات الأراضي على مستوى النواحي',
     'database_about_land_areas'=>'قاعدة بيانات حول مساحة الأراضي على مستوى التصنيف',
-    'land_areas_report'=>'تقرير عن مساحة الأراضي على مستوى التصنيف',
+    'land_areas_report'=>'تقرير عن مساحة الأراضي',
 
 
 

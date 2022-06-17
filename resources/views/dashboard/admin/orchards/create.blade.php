@@ -79,7 +79,7 @@
                                             <div class="col col-md-6">
                                                 <div class="form-group">
                                                     <label for="farmer_id">{{ __('Admin/orchards.farmer') }}</label>
-                                                    <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                    <select class="select2 form-control" name="farmer_id" id="farmer_id" required="required">
 
                                                     </select>
                                                 </div>
@@ -89,24 +89,6 @@
                                             <div class="row mt-2">
 
 
-
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label  for="admin_id">{{ __('Admin/orchards.farmer_phone') }}</label>
-                                                        <input name="phone"  id="farmer_phone"typ="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label  for="admin_id">{{ __('Admin/orchards.farmer_email') }}</label>
-                                                        <input name="email"   id="farmer_email"typ="text" class="form-control">
-                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
-                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
-                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
-
-                                                    </div>
-                                                </div>
-
                                                 <div class="col">
                                                     <div  class="form-group">
                                                         <label for="id_h5_multi">{{ __('Admin/orchards.trees') }}</label>
@@ -115,6 +97,10 @@
                                                                 <option value="{{$tree->id}}">{{ $tree->name }}</option>
                                                             @endforeach
                                                         </select>
+                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
+
 
                                                     </div>
                                                 </div>

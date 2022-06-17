@@ -27,8 +27,6 @@ class BeeKeeperRequest extends FormRequest
             'new_beehive_count' => 'required|numeric',
             'supported_side'=>'required|in:private,govermental,international organizations',
             'unit_id'=>'required|exists:units,id',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
-            'email'=>'required|email',
             'died_beehive_count'=>'required|numeric'
 
         ];

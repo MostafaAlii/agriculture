@@ -91,25 +91,6 @@
                                             </div>
                                             <div class="row mt-2">
 
-
-
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label  for="admin_id">{{ __('Admin/orchards.farmer_phone') }}</label>
-                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
-                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
-                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
-
-                                                        <input name="phone" value="{{$orchard->phone}}" id="farmer_phone"typ="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label  for="admin_id">{{ __('Admin/orchards.farmer_email') }}</label>
-                                                        <input name="email"  value="{{$orchard->email}}" id="farmer_email"typ="text" class="form-control">
-                                                    </div>
-                                                </div>
-
                                                 <div class="col">
                                                     <div  class="form-group">
                                                         <label for="id_h5_multi">{{ __('Admin/orchards.trees') }}</label>
@@ -122,6 +103,9 @@
                                                                 <option value="{{$tree->id}}" >{{ $tree->name}}</option>
                                                             @endforeach
                                                         </select>
+                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
 
                                                     </div>
                                                 </div>
@@ -141,17 +125,6 @@
 
                                             </div>
 
-                                            {{--<div class="row mb-3">--}}
-                                                {{--<div class="col">--}}
-                                                    {{--<div  class="form-group mb-3">--}}
-                                                        {{--<label class="">{{__('Admin\orchards.departments')}}</label>--}}
-                                                        {{--<hr>--}}
-                                                        {{--<div id="jstree"></div>--}}
-                                                        {{--<input name="admin_department_id" type="hidden" value="{{$orchard->admin_department_id}}" class="admin_department_id">--}}
-
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="form-group">

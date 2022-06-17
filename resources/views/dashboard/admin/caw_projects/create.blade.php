@@ -90,23 +90,6 @@
                                                     </div>
                                                    <div class="row mt-2">
 
-
-                                                        <div class="col">
-                                                            <div class="form-group">
-                                                                <label  for="admin_id">{{ __('Admin/animals.farmer_phone') }}</label>
-                                                             <input name="phone"  id="farmer_phone"typ="text" class="form-control">
-                                                                <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
-                                                                <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
-                                                                <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="form-group">
-                                                                <label  for="admin_id">{{ __('Admin/animals.farmer_email') }}</label>
-                                                                <input name="email"   id="farmer_email"typ="text" class="form-control">
-                                                            </div>
-                                                        </div>
-
                                                         <div class="col">
                                                             <div  class="form-group">
                                                                 <label for="id_h5_multi">{{ __('Admin/animals.marketing_side') }}</label>
@@ -116,6 +99,10 @@
                                                                        <option value="govermental">{{ __('Admin/animals.govermental') }}</option>
 
                                                                 </select>
+                                                                <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                                <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+
+                                                                <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
 
                                                             </div>
                                                         </div>
@@ -138,8 +125,21 @@
 
                                                            </div>
                                                        </div>
+                                                       <div class="col">
+                                                           <div class="form-group">
+                                                               <label for="currency_id">{{ __('Admin/animals.currency') }}</label>
+                                                               <select name="currency_id" id="currency_id" class="form-control" required>
+                                                                   <option value="">--{{ __('Admin/animals.select') }}--</option>
+                                                                   </option>
+                                                                   @foreach ($currencies as $currency)
+                                                                       <option value="{{ $currency->id }}">{{ $currency->Name }}</option>
+                                                                   @endforeach
+                                                               </select>
+                                                           </div>
+                                                       </div>
 
-                                                    </div>
+
+                                                   </div>
 
 
                                                    <div class="row">
@@ -205,67 +205,6 @@
 
 @endsection
 @section('js')
-
-
-    <script>
-        $(document).ready(function() {
-            //  ajax for get states data of area =====================================================================
-            $('select[name="area_id"]').on('change', function() {
-                var area_id = $(this).val();
-                // console.log(province_id);
-                if (area_id) {
-                    $.ajax({
-                        url: "{{ URL::to('dashboard_admin/admin/state') }}/" + area_id,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('select[name="state_id"]').empty();
-                            $('select[name="state_id"]').append( '<option selected disabled>--select--</option>');
-
-                            $.each(data, function(key, value) {
-
-                                $('select[name="state_id"]').append(
-                                    '<option value="' + key + '">' + value +'</option>'
-                                );
-                            });
-                        },
-                    });
-                } else {
-                    console.log('AJAX load did not work');
-                }
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            //  ajax for get villages data of area =====================================================================
-            $('select[name="state_id"]').on('change', function() {
-                var state_id = $(this).val();
-                console.log(state_id);
-                if (area_id) {
-                    $.ajax({
-                        url: "{{ URL::to('dashboard_admin/admin/village') }}/" + state_id,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $('select[name="village_id"]').empty();
-                            $('select[name="village_id"]').append( '<option selected disabled>--select--</option>');
-
-                            $.each(data, function(key, value) {
-
-                                $('select[name="village_id"]').append(
-                                    '<option value="' + key + '">' + value +'</option>'
-                                );
-                            });
-                        },
-                    });
-                } else {
-                    console.log('AJAX load did not work');
-                }
-            });
-        });
-    </script>
 
     <script>
         $(document).ready(function() {

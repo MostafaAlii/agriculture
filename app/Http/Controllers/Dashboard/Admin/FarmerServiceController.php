@@ -52,9 +52,15 @@ class FarmerServiceController extends Controller
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }
-    public function statistics()
+    // index for report
+    public function index_statistics(){
+        return $this->Data->index_statistics();
+    }
+
+    // filter for report
+    public function statistics(Request $request)
     {
-        return $this->Data->statistics();
+        return $this->Data->statistics($request);
     }
 
 

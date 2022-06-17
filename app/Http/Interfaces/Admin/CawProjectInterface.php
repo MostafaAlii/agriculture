@@ -7,9 +7,7 @@ interface CawProjectInterface {
     public function update($request,$id);
     public function destroy($request);
     public function bulkDelete($request);
-    public function statistics();
-    public function caw_statistics();
-    public function fish_statistics();
-    public function ship_statistics();
+    public  function index_statistics();
+    public function statistics($request);
 
 }

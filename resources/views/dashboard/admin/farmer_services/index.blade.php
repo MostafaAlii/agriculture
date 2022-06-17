@@ -78,12 +78,13 @@
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/services.farmer') }}</th>
-                                                    <th>{{ __('Admin/services.admin') }}</th>
                                                     <th>{{ __('Admin/services.village') }}</th>
 
                                                     <th>{{ __('Admin/services.agriServices') }}</th>
                                                     <th>{{ __('Admin/services.agriTServices') }}</th>
                                                     <th>{{ __('Admin/services.waterServices') }}</th>
+                                                    <th>{{ __('Admin/services.admin') }}</th>
+
 
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
@@ -148,13 +149,13 @@
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'village', name: 'village',searchable: true, sortable: true},
 
             {data: 'name_a', name: 'name_a',searchable: true, sortable: true},
             {data: 'name_t', name: 'name_t',searchable: true, sortable: true},
             {data: 'name_w', name: 'name_w',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

@@ -59,16 +59,17 @@ class CawProjectController extends Controller
     public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
     }
-    public function statistics(){
-        return $this->Data->statistics();
+
+
+    //index for reort
+    public  function index_statistics()
+    {
+     return $this->Data->index_statistics();
     }
-    public function caw_statistics(){
-        return $this->Data->caw_statistics();
-    }
-    public function fish_statistics(){
-        return $this->Data->fish_statistics();
-    }
-    public function ship_statistics(){
-        return $this->Data->ship_statistics();
+
+   // filter for report
+    public function statistics(Request $request)
+    {
+        return $this->Data->statistics($request);
     }
 }

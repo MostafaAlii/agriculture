@@ -81,7 +81,6 @@
                                                     </th>
 
                                                     <th>{{ __('Admin/animals.farmer') }}</th>
-                                                    <th>{{ __('Admin/animals.admin') }}</th>
                                                     <th>{{ __('Admin/animals.area') }}</th>
                                                     <th>{{ __('Admin/animals.state') }}</th>
                                                     <th>{{ __('Admin/animals.village') }}</th>
@@ -92,8 +91,8 @@
                                                     <th>{{ __('Admin/animals.food_source') }}</th>
                                                     <th>{{ __('Admin/animals.marketing_side') }}</th>
                                                     <th>{{ __('Admin/animals.cost') }}</th>
+                                                    <th>{{ __('Admin/animals.admin') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
-
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
                                             </thead>
@@ -158,7 +157,6 @@
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin.firstname',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village',searchable: true, sortable: true},
@@ -169,6 +167,7 @@
             {data: 'food_source', name:'food_source',searchable: true, sortable: true},
             {data: 'marketing_side', name:'marketing_side',searchable: true, sortable: true},
             {data: 'cost', name: 'cost' ,searchable: true, sortable: true},
+            {data: 'admin', name: 'admin.firstname',searchable: true, sortable: true},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

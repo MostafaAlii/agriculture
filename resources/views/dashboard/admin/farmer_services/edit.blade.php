@@ -94,22 +94,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row mt-2">
 
-                                                <div class="col col-md-6">
-                                                    <div class="form-group">
-                                                        <label  for="admin_id-1">{{ __('Admin/services.farmer_phone') }}</label>
-                                                        <input name="phone" value="{{$farmer_service->phone}}" id="farmer_phone"typ="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col col-md-6">
-                                                    <div class="form-group">
-                                                        <label  for="admin_id-2">{{ __('Admin/services.farmer_email') }}</label>
-                                                        <input name="email"  value="{{$farmer_service->email}}" id="farmer_email"typ="text" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                            </div>
 
                                             <div class="row">
                                                 <div class="col">

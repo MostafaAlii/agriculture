@@ -78,7 +78,6 @@
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/bees.farmer') }}</th>
-                                                    <th>{{ __('Admin/bees.admin') }}</th>
                                                     <th>{{ __('Admin/bees.area') }}</th>
                                                     <th>{{ __('Admin/bees.state') }}</th>
                                                     <th>{{ __('Admin/bees.village') }}</th>
@@ -92,6 +91,8 @@
 
                                                     <th>{{ __('Admin/bees.courses') }}</th>
                                                     <th>{{ __('Admin/bees.disasters') }}</th>
+                                                    <th>{{ __('Admin/bees.admin') }}</th>
+
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -159,7 +160,6 @@
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village',searchable: true, sortable: true},
@@ -172,6 +172,8 @@
             {data: 'supported_side', name: 'supported_side',searchable: true, sortable: true},
             {data: 'c_name', name: 'c_name'},
             {data: 'd_name', name: 'd_name'},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

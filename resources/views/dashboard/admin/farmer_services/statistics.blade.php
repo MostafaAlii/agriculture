@@ -47,7 +47,97 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
+                                    <form class="form" method="POST" action="{{ route('farmer_service.statistics') }}">
+                                        @csrf
+                                        <div class="form-body">
+                                            @if($admin->type == 'employee')
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/bees.village') }}</label>
+                                                            <select class="select2 form-control" name="village_id"
+                                                                    id="village_id">
+                                                                @foreach (App\Models\Village::all() as $village)
+                                                                    <option value="{{ $village->id }}">{{ $village->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
+
+
+                                                </div>
+                                            @elseif($admin->type =='admin')
+
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="area_id">{{ __('Admin/bees.area') }}</label>
+                                                            <select name="area_id" id="area_id" class="form-control" required>
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                </option>
+                                                                @foreach (App\Models\Area::all() as $area)
+                                                                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('area_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+
+                                                        <div class="form-group">
+                                                            <label for="state_id">{{ __('Admin/bees.state') }}</label>
+                                                            <select class=" form-control" name="state_id" id="state_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('state_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/bees.village') }}</label>
+                                                            <select class=" form-control" name="village_id" id="village_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                            @endif
+
+                                            <div class="row">
+
+
+                                            </div>
+
+                                            <div class="form-actions center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
+                                                </button>
+                                                <a type="button" href="{{route('farmer_index_statistics')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <br/>
+                                    @if(isset($statistics))
 
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="farmer_service_statistic-table">
@@ -59,7 +149,7 @@
                                                     <th>{{ __('Admin/services.area') }}</th>
                                                     <th>{{ __('Admin/services.state') }}</th>
                                                     <th>{{ __('Admin/services.village') }}</th>
-                                                    <th>{{ __('Admin/services.email') }}</th>
+                                                    <th>{{ __('Admin/services.farmer') }}</th>
                                                     <th>{{ __('Admin/services.agri_service_count') }}</th>
                                                     {{--<th>{{ __('Admin/bees.agri_service_name') }}</th>--}}
                                                     <th>{{ __('Admin/services.agri_t_service_count') }}</th>
@@ -76,7 +166,7 @@
                                                 <td>{{$statistc->Area}}</td>
                                                 <td>{{$statistc->State}}</td>
                                                 <td>{{$statistc->Village}}</td>
-                                                <td>{{$statistc->email_farmer}}</td>
+                                                <td>{{$statistc->farmer}}</td>
                                                 <td>{{$statistc->agri_services_count}}</td>
 
                                                 {{--<td>{{$statistc->agri_service_name}}</td>--}}
@@ -91,6 +181,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

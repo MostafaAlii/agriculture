@@ -9,7 +9,8 @@ interface FarmerServiceInterface {
     public function update($request,$id);
     public function destroy($id);
     public function bulkDelete($request);
-    public function statistics();
+    public function index_statistics();
+    public function statistics($request);
 
 
     }

@@ -20,9 +20,7 @@ class FarmerServiceRequest extends FormRequest
             'state_id' =>  'required|exists:states,id',
             'farmer_id' => 'required|exists:farmers,id',
             'village_id' => 'required|exists:villages,id',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
 
-            'email'=>'required|email',
 
             'agri_services.*' => [
                 'string',

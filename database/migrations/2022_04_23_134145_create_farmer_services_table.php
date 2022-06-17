@@ -17,8 +17,7 @@ class CreateFarmerServicesTable extends Migration
             $table->foreignId('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->foreignId('village_id')->references('id')->on('villages')->onDelete('cascade');
 
-            $table->string('phone');
-            $table->string('email');
+
             $table->integer('agri_services_count');
             $table->integer('agri_t_services_count');
             $table->integer('water_services_count');

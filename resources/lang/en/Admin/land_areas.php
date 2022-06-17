@@ -6,7 +6,7 @@ return [
     'database_about_land_areas_details'=>'DataBase for Lands Area in Details',
     'category_name'=>'Land Category Name',
     'category_type'=>'Land Category Type',
-    'land_areas_report'=>'Report about Lands Area on category Type',
+    'land_areas_report'=>'Report about Lands Area',
     'database_about_land_areas'=>'Database about Lands Area on category Type level',
 
     'land_areas_state_report'=>'Report for Lands Area in Each State',
@@ -17,6 +17,8 @@ return [
 
     'area' =>'Area',
     'state' =>'State',
+    'land_category_name'=>'LandCategory Name',
+    'land_area'=>'Land Area',
 
     'village' =>'Village',
     'natural_forests'=>'Nature Forest',

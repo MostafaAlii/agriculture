@@ -23,8 +23,5 @@ interface PrecipitationInterface
 
     public function get_custom_statistics($request);
 
-    public function get_details_statistics_index();
-
-    public function get_details_statistics($request);
 
 }

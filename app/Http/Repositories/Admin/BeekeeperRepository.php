@@ -4,12 +4,14 @@ namespace App\Http\Repositories\Admin;
 
 use App\Models\BeeKeeper;
 use App\Models\Admin;
-use App\Models\Area;
-use App\Models\State;
-use App\Models\Village;
+use App\Models\AreaTranslation;
+use App\Models\StateTranslation;
+use App\Models\VillageTranslation;
 use App\Models\CourseBee;
 use App\Models\BeeDisaster;
 use App\Models\Unit;
+
+use App\Models\Village;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -130,8 +132,6 @@ class BeekeeperRepository implements BeekeeperInterface
                 'unit_id' => $requestData['unit_id'],
                 'supported_side' => $requestData['supported_side'],
                 'cost' => $requestData['cost'],
-                'phone' => $requestData['phone'],
-                'email' => $requestData['email'],
 
 
             ]);
@@ -200,8 +200,7 @@ class BeekeeperRepository implements BeekeeperInterface
             $beekeeper->unit_id = $requestData['unit_id'];
             $beekeeper->supported_side = $requestData['supported_side'];
             $beekeeper->cost = $requestData['cost'];
-            $beekeeper->phone = $requestData['phone'];
-            $beekeeper->email = $requestData['email'];
+
 
 
             $beekeeper->update($requestData);
@@ -276,15 +275,79 @@ class BeekeeperRepository implements BeekeeperInterface
 
     }// end of bulkDelete
 
-    public function statistics()
-    {
+    public function index_statistics(){
         $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $statistics = BeeKeeper::select('area_translations.name AS Area',
-                'state_translations.name AS State',
-                DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+        $admin=Admin::findorfail($adminID);
+        return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin'));
 
+
+    }
+
+    public function statistics($request)
+    {
+        $validated = $request->validate([
+                'area_id'=>'sometimes|nullable|exists:areas,id',
+                'state_id'=>'sometimes|nullable|exists:states,id',
+
+                'village_id'=>'sometimes|nullable|exists:villages,id',
+                'supported_side'=>'sometimes|nullable|in:,private,id',
+            ]
+            , [
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'state_id.exists' => trans('Admin/validation.exists'),
+            'village_id.exists' => trans('Admin/validation.exists'),
+        ]
+        );
+        $adminID = Auth::user()->id;
+        $admin=Admin::findorfail($adminID);
+        $supported_side = $request->supported_side;
+        if(!empty($request->area_id)){
+            $area_name = AreaTranslation::where('area_id','=',$request->area_id)->pluck('name');
+
+        }
+        if(!empty($request->state_id)){
+            $state_name = StateTranslation::where('state_id','=',$request->state_id)->pluck('name');
+        }
+        if(!empty($request->village_id)){
+            $village_name = VillageTranslation::where('village_id','=',$request->village_id)->pluck('name');
+        }
+
+        if ($admin->type == 'employee') {
+            $area_id = $admin->area_id;
+            $state_id = $admin->state_id;
+
+            if ($request->village_id != null && $request->supported_side != null) {
+
+
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('bee_keepers.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->village_id != null && $request->supported_side == null) {
+
+
+            $statistics = BeeKeeper::select('area_translations.name AS Area',
+                'state_translations.name AS State', 'village_translations.name AS village',
+                'bee_keepers.supported_side as supported_side',
+                DB::raw("COUNT(bee_keepers.village_id) As village_count"),
                 DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
                 DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
                 DB::raw('COUNT(bee_keepers.id) As beehive_count'),
@@ -292,59 +355,156 @@ class BeekeeperRepository implements BeekeeperInterface
                 DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
                 ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
                 ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
-                ->where('bee_keepers.admin_id', $admin->id)
-                ->GroupBy('Area', 'State'
-                )->get();
-        } elseif ($admin->type == 'admin') {
-            $statistics = BeeKeeper::select('area_translations.name AS Area',
-                'state_translations.name AS State',
-                DB::raw("COUNT(bee_keepers.village_id) As village_count"),
-
-                DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
-                DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
-                DB::raw('COUNT(bee_keepers.id) As beehive_count'),
-                DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
-                DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
-                ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
-                ->GroupBy('Area', 'State'
-                )->get();
-        }
-
-        return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('statistics'));
-    }
-
-    public function beekeeper_details_statistics()
-    {
-        $adminID = Auth::user()->id;
-        $admin = Admin::findorfail($adminID);
-        if ($admin->type == 'employee') {
-            $statistics = BeeKeeper::select('area_translations.name AS Area',
-                'state_translations.name AS State', 'village_translations.name AS Village', 'farmers.firstname AS farmer',
-                'bee_keepers.old_beehive_count as old_beehive_count', 'bee_keepers.new_beehive_count',
-                'bee_keepers.annual_new_product_beehive as annual_new_product_beehive',
-                'bee_keepers.annual_old_product_beehive as annual_old_product_beehive',
-                'bee_keepers.supported_side as supported_side', 'bee_keepers.cost as cost')
-                ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
                 ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
-                ->join('farmers', 'bee_keepers.farmer_id', '=', 'farmers.id')
                 ->where('bee_keepers.admin_id', $admin->id)
-                ->get();
-        } elseif ($admin->type == 'admin') {
-            $statistics = BeeKeeper::select('area_translations.name AS Area',
-                'state_translations.name AS State', 'village_translations.name AS Village', 'farmers.firstname AS farmer',
-                'bee_keepers.old_beehive_count as old_beehive_count', 'bee_keepers.new_beehive_count',
-                'bee_keepers.annual_new_product_beehive as annual_new_product_beehive',
-                'bee_keepers.annual_old_product_beehive as annual_old_product_beehive',
-                'bee_keepers.supported_side as supported_side', 'bee_keepers.cost as cost')
-                ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
-                ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
-                ->join('farmers', 'bee_keepers.farmer_id', '=', 'farmers.id')
-                ->get();
+                ->where('area_translations.area_id', $area_id)
+                ->where('state_translations.state_id', $state_id)
+                ->where('village_translations.name', $village_name)
+                ->GroupBy('Area', 'State', 'village', 'supported_side'
+                )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
 
         }
-        return view('dashboard.admin.beekeepers.beekeepers_details_statistics', compact('statistics'));
+        }
+        elseif ($admin->type == 'admin') {
+            if ($request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->supported_side != null) {
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('bee_keepers.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
+
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null
+                 && $request->supported_side == null) {
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('bee_keepers.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
+
+            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+                 && $request->supported_side != null) {
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('area_translations.name', $area_name)
+
+                    ->where('bee_keepers.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
+
+            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->supported_side == null) {
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
+
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+               && $request->supported_side != null) {
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('bee_keepers.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+               && $request->supported_side == null) {
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
+        }
+
     }
+
 }

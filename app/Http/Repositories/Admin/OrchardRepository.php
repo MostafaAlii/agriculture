@@ -135,21 +135,20 @@ class OrchardRepository implements OrchardInterface
         DB::beginTransaction();
         try {
             $requestData = $request->validated();
-            $orchard = new OrChard();
-            $orchard->farmer_id =    $requestData['farmer_id'];
-            $orchard->admin_id = $requestData['admin_id'];
-            $orchard->area_id = $requestData['area_id'];
-            $orchard->state_id = $requestData['state_id'];
-            $orchard->village_id = $requestData['village_id'];
-            $orchard->land_category_id = $requestData['land_category_id'];
-            $orchard->tree_count_per_orchard = $requestData['tree_count_per_orchard'];
-            $orchard->orchard_area = $requestData['orchard_area'];
-            $orchard->unit_id = $requestData['unit_id'];
-            $orchard->supported_side = $requestData['supported_side'];
-            $orchard->phone =  $requestData['phone'];
-            $orchard->email =  $requestData['email'];
+            $orchard = OrChard::create([
+           'farmer_id' =>    $requestData['farmer_id'],
+            'admin_id' => $requestData['admin_id'],
+            'area_id' => $requestData['area_id'],
+            'state_id'=> $requestData['state_id'],
+           'village_id' => $requestData['village_id'],
+           'land_category_id' => $requestData['land_category_id'],
+           'tree_count_per_orchard' => $requestData['tree_count_per_orchard'],
+           'orchard_area' => $requestData['orchard_area'],
+            'unit_id' => $requestData['unit_id'],
+            'supported_side' => $requestData['supported_side']
 
-            $orchard->save($requestData);
+            ]);
+
             $orchard->trees()->attach($request->trees);
 
             DB::commit();
@@ -206,8 +205,6 @@ class OrchardRepository implements OrchardInterface
             $orchard->orchard_area = $requestData['orchard_area'];
             $orchard->unit_id = $requestData['unit_id'];
             $orchard->supported_side = $requestData['supported_side'];
-            $orchard->phone =     $requestData['phone'];
-            $orchard->email =   $requestData['email'];
 
 
             $orchard->update($requestData);
@@ -285,7 +282,22 @@ class OrchardRepository implements OrchardInterface
     }
 
     public function statistics($request){
+        $validated = $request->validate([
 
+                'area_id' => 'sometimes|nullable|exists:areas,id',
+                'state_id' => 'sometimes|nullable|exists:states,id',
+                'village_id'=>'sometimes|nullable|exists:villages,id',
+                'marketing_side'=>'sometimes|nullable|in:private,govermental,international_organizations',
+                'land_category_id'=>'sometimes|nullable|exists:land_categories,id',
+            ]
+            , [
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'state_id.exists' => trans('Admin/validation.exists'),
+            'village_id.exists' => trans('Admin/validation.exists'),
+            'land_category_id.exists' => trans('Admin/validation.exists'),
+
+            ]
+        );
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         $supported_side = $request->supported_side;

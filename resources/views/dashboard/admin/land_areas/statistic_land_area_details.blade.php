@@ -47,7 +47,123 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
+                                    <form class="form" method="POST" action="{{ route('land_area_details.statistic') }}">
+                                        @csrf
+                                        <div class="form-body">
+                                            @if($admin->type == 'employee')
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/orchards.village') }}</label>
+                                                            <select class="select2 form-control" name="village_id"
+                                                                    id="village_id">
+                                                                @foreach (App\Models\Village::all() as $village)
+                                                                    <option value="{{ $village->id }}">{{ $village->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
+                                                            <select class="custom-select form-control" id="customSelect"
+                                                                    name="land_category_id">
+                                                                @foreach($land_categories as $land_category)
+                                                                    <option value="{{$land_category->id}}">{{ $land_category->category_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('land_category_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
 
+
+
+                                                </div>
+                                            @elseif($admin->type =='admin')
+
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="area_id">{{ __('Admin/precipitations.area') }}</label>
+                                                            <select name="area_id" id="area_id" class="form-control" required>
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                </option>
+                                                                @foreach (App\Models\Area::all() as $area)
+                                                                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('area_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+
+                                                        <div class="form-group">
+                                                            <label for="state_id">{{ __('Admin/precipitations.state') }}</label>
+                                                            <select class=" form-control" name="state_id" id="state_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('state_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/orchards.village') }}</label>
+                                                            <select class=" form-control" name="village_id" id="village_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
+                                                            <select class="custom-select form-control select2" id="customSelect"
+                                                                    name="land_category_id">
+                                                                <option value="" selected >{{__('Admin\orchards.select')}}</option>
+                                                                @foreach(App\Models\LandCategory::all() as $land_category)
+                                                                    <option value="{{$land_category->id}}">{{ $land_category->category_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('land_category_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            @endif
+
+                                            <div class="row">
+
+
+                                            </div>
+
+                                            <div class="form-actions center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
+                                                </button>
+                                                <a type="button" href="{{route('index_land_area_statistics')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    @if(isset($statistics))
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered zero-configuration" id="land-area-statistic-details-table">
                                             <thead>
@@ -60,17 +176,9 @@
                                                     <th>{{ __('Admin/land_areas.area') }}</th>
                                                     <th>{{ __('Admin/land_areas.state') }}</th>
                                                     <th>{{ __('Admin/land_areas.village') }}</th>
-                                                    <th>{{ __('Admin/land_areas.rocky_lands_and_pastures') }}</th>
-                                                    <th>{{ __('Admin/land_areas.natural_forests') }}</th>
-                                                    <th>{{ __('Admin/land_areas.municipal_lands') }}</th>
+                                                    <th>{{ __('Admin/land_areas.land_category_name') }}</th>
+                                                    <th>{{ __('Admin/land_areas.land_area') }}</th>
 
-                                                    <th>{{ __('Admin/land_areas.public_restrooms') }}</th>
-                                                    <th>{{ __('Admin/land_areas.govermental_biulding') }}</th>
-                                                    <th>{{ __('Admin/land_areas.irrigated_orchard') }}</th>
-                                                    <th>{{ __('Admin/land_areas.rainy_orchard') }}</th>
-                                                    <th>{{ __('Admin/land_areas.irrigated_land') }}</th>
-                                                    <th>{{ __('Admin/land_areas.rainy_land') }}</th>
-                                                    <th>{{ __('Admin/land_areas.kamariat') }}</th>
 
                                                 </tr>
                                             </thead>
@@ -81,17 +189,10 @@
                                                     <td>{{$statistic->Area}}</td>
                                                     <td>{{$statistic->State}}</td>
                                                     <td>{{$statistic->Village}}</td>
-                                                    <td>{{$statistic->rocky_lands_and_pastures}}</td>
-                                                    <td>{{$statistic->natural_forests}}</td>
-                                                    <td>{{$statistic->municipal_lands}}</td>
+                                                    <td>{{$statistic->category_name}}</td>
+                                                    <td>{{$statistic->Land_Area}}</td>
 
-                                                    <td>{{$statistic->public_restrooms}}</td>
-                                                    <td>{{$statistic->govermental_biulding}}</td>
-                                                    <td>{{$statistic->irrigated_orchard}}</td>
-                                                    <td>{{$statistic->rainy_orchard}}</td>
-                                                    <td>{{$statistic->irrigated_land}}</td>
-                                                    <td>{{$statistic->rainy_land}}</td>
-                                                    <td>{{$statistic->kamariat}}</td>
+
 
                                                 </tr>
 
@@ -99,6 +200,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -130,7 +232,7 @@
                 orientation: 'landscape',
                 pageSize: 'A3',
                 exportOptions: {
-                    columns: [ 1,2,3,4,5,6,7,8,9,10,11,12,13]
+                    columns: [ 1,2,3,4,5]
                 },
                 className: 'btn btn-primary ml-1',
 
@@ -138,7 +240,7 @@
             {
                 extend: 'print',
                 exportOptions: {
-                    columns:  [ 1,2,3,4,5,6,7,8,9,10,11,12,13]
+                    columns:  [ 1,2,3,4,5]
                 },
                 autoPrint: true,
                 orientation: 'landscape',

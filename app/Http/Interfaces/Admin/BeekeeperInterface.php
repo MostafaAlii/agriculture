@@ -9,6 +9,9 @@ interface BeekeeperInterface {
     public function update($request,$id);
     public function destroy($id);
     public function bulkDelete($request);
-    public function statistics();
-    public function  beekeeper_details_statistics();
+
+    public function index_statistics();
+
+    public function statistics($request);
+
 }

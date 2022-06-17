@@ -78,13 +78,14 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ __('Admin/land_areas.admin') }}</th>
                                                     <th>{{ __('Admin/land_areas.area') }}</th>
                                                     <th>{{ __('Admin/land_areas.state') }}</th>
                                                     <th>{{ __('Admin/land_areas.village') }}</th>
                                                     <th>{{ __('Admin/land_areas.L_area') }}</th>
                                                     <th>{{ __('Admin/land_areas.unit') }}</th>
                                                     <th>{{ __('Admin/land_areas.land_category') }}</th>
+                                                    <th>{{ __('Admin/land_areas.admin') }}</th>
+
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -149,13 +150,14 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'admin', name: 'admin.firstname',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village',searchable: true, sortable: true},
             {data: 'L_area', name: 'L_area',searchable: true, sortable: true},
             {data: 'unit', name: 'unit',searchable: true, sortable: true},
             {data: 'landCategory', name: 'landCategory',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

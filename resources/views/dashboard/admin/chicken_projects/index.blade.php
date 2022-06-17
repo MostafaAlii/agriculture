@@ -79,7 +79,6 @@
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
                                                     <th>{{ __('Admin/site.farmer') }}</th>
-                                                    <th>{{ __('Admin/site.admin') }}</th>
                                                     <th>{{ __('Admin/site.village') }}</th>
                                                     <th>{{ __('Admin/animals.project_name') }}</th>
                                                     <th>{{ __('Admin/animals.hall_num') }}</th>
@@ -87,9 +86,8 @@
                                                     <th>{{ __('Admin/animals.suse_source') }}</th>
                                                     <th>{{ __('Admin/animals.food_source') }}</th>
                                                     <th>{{ __('Admin/animals.marketing_side') }}</th>
-
+                                                    <th>{{ __('Admin/site.admin') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
-
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
                                             </thead>
@@ -154,7 +152,6 @@
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
             {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'village', name: 'village',searchable: true, sortable: true},
             {data: 'project_name', name: 'project_name',searchable: true, sortable: true},
@@ -163,6 +160,7 @@
             {data: 'suse_source', name: 'suse_source',searchable: true, sortable: true},
             {data: 'food_source', name: 'food_source',searchable: true, sortable: true},
             {data: 'marketing_side', name: 'marketing_side',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

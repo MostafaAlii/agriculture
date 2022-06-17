@@ -30,8 +30,7 @@ class CreateBeeKeepersTable extends Migration
             $table->double('annual_new_product_beehive',[15,2]);
             $table->foreignId('unit_id')->references('id')->on('units');
             $table->enum('supported_side',['private','govermental','international organizations']);
-            $table->string('phone');
-            $table->string('email');
+
             $table->timestamps();
         });
     }

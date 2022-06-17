@@ -153,7 +153,10 @@ class CategoryRepository implements CategoryInterface {
 
             if($data['product']->count() == 0  && $data['sub_cate']->count() == 0 ) {
                */
-              Category::findorfail($real_id)->delete();
+              
+                $d=Category::findorfail($real_id);
+                $d->products()->delete();
+                $d->delete();
 
                 //--------------this event for delete related records------------------------------
                 //id,column names[],related models[]
@@ -195,7 +198,9 @@ class CategoryRepository implements CategoryInterface {
                 
                 if($data['product']->count() == 0 && $data['sub_cate']->count() == 0) {
                 */
-                    Category::findOrfail($cate_ids)->delete();
+                    $d=Category::findorfail($cate_ids);
+                    $d->products()->delete();
+                    $d->delete();
 
                     //--------------this event for delete related records------------------------------
                     //id,column names[],related models[]

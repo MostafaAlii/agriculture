@@ -6,12 +6,14 @@ class CawProject extends Model {
     use HasFactory;
     protected $table = "caw_projects";
 
-    protected $fillable=['admin_id','farmer_id','state_id','area_id','village_id','unit_id',
+    protected $fillable=['admin_id','farmer_id','state_id','area_id','village_id','currency_id',
         'project_name','hall_num','animal_count','food_source','marketing_side','cost','type','phone','email'];
     public $timestamps = true;
     const SHIP = 'ship', CAW = 'caw', FISH = 'fish',LOCAL ='local',OUTER ='outer',SPATIAL ='private',GOVERMENTAL='govermental';
-    public function unit(){
-        return $this->belongsTo(Unit::class,'unit_id');
+
+
+    public function currency(){
+        return $this->belongsTo(Currency::class,'currency_id');
     }
 
 

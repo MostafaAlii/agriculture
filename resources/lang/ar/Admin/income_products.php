@@ -21,8 +21,16 @@ return [
     'product'=>'المنتج',
     'update'=>'تعديل',
     'admin'=>'الموظف المسؤول',
+'whole_product_id'=>'المنتج',
+    'whole_product_id'=>'Product',
+
 
     'product'=>'المنتج',
+    'zakho'=>'زاخو',
+    'bardarash'=>'بارداراش',
+    'akre'=>'أكري',
+    'duhok'=>'داهوك',
+
 
     'imported'=>'مستورد',
     'local'=>'محلي',

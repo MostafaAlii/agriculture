@@ -51,32 +51,18 @@ class IncomeProductController extends Controller
     public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
-    public function income_product_statistics(){
-    return $this->Data->income_product_statistics();
-    }
+
+
+    //index for report
     public function index_income_products(){
         return $this->Data->index_income_products();
     }
-    public function get_weekly_monthly_anual_income_product_statistics(Request $request){
-        return $this->Data->get_weekly_monthly_anual_income_product_statistics($request);
+
+    //filter for report
+    public function income_product_statistics(Request $request){
+        return $this->Data->income_product_statistics($request);
     }
-    public function index_income_local_products(){
-        return $this->Data->index_income_local_products();
-    }
-    public function get_weekly_monthly_anual_income_local_product_statistics(Request $request){
-        return $this->Data->get_weekly_monthly_anual_income_local_product_statistics($request);
-    }
-    public function index_income_iraq_products(){
-        return $this->Data->index_income_iraq_products();
-    }
-    public function get_weekly_monthly_anual_income_iraq_product_statistics(Request $request){
-        return $this->Data->get_weekly_monthly_anual_income_iraq_product_statistics($request);
-    }
-    public function index_income_imported_products(){
-        return $this->Data->index_income_imported_products();
-    }
-    public function get_weekly_monthly_anual_income_imported_product_statistics(Request $request){
-        return $this->Data->get_weekly_monthly_anual_income_imported_product_statistics($request);
-    }
+
+
 
 }

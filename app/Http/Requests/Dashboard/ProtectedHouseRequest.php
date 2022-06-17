@@ -26,8 +26,6 @@ class ProtectedHouseRequest extends FormRequest
             'status' => 'required|in:active,inactive',
             'supported_side'=>'required|in:private,govermental,international organizations',
             'unit_id'=>'required|exists:units,id',
-            'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
-            'email'        => 'required|email',
 
         ];
     }
@@ -43,8 +41,7 @@ class ProtectedHouseRequest extends FormRequest
             'status.required' => trans('Admin/validation.required'),
             'supported_side.required' => trans('Admin/validation.required'),
             'unit_id.required' => trans('Admin/validation.required'),
-            'phone.required' => trans('Admin/validation.required'),
-            'email.required' => trans('Admin/validation.required'),
+
 
 
         ];

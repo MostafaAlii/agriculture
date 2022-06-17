@@ -2,7 +2,7 @@
 return [
 
     'phone'=>'',
-    ''=>'',
+    'currency'=>'Currency',
     'count_ship'=>'Sheeps and Goats Count',
     'counr_caw'=>'Caws Count',
 
@@ -13,10 +13,10 @@ return [
     'state' =>'State',
     'admin'=>'Employee',
     'newchicken'=>'New Chicken Project',
-
+    'animals_statistic_report'=>'Statistic Report About fish ,Caws ,Sheeps and gouts',
     'village' =>'Village',
     'select'=>'Select',
-
+    'chicken_statistic_report'=>'Statistic Report About Chicken',
     'farmer_phone' =>'Farmer Phone',
 
     'farmer_email' =>'Farmer Email',
