@@ -14,8 +14,8 @@ class UnitRequest extends FormRequest {
             'Name' => [
                 'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
-
             ]
+
         ];
     }
 

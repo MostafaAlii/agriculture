@@ -16,15 +16,14 @@ class UnitFactory extends Factory
             "هكتار",
             "دونم",
             "كيلومتر",
-            "طن",
-            "كيلوغرام",
+            "ملى",
+            "سنتى",
             "ميلي متر",
             "سنتي متر",
         ];
 
             return [
                 'Name'             => $this->faker->unique()->randomElement([$units[0],$units[1],$units[2],$units[3],$units[4],$units[5],$units[6]]),
-
             ];
 
 

@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css" integrity="sha512-uyGg6dZr3cE1PxtKOCGqKGTiZybe5iSq3LsqOolABqAWlIRLo/HKyrMMD8drX+gls3twJdpYX0gDKEdtf2dpmw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
@@ -12,7 +13,7 @@
     <div class="content-wrapper">
         <!-- Start Breadcrumbs -->
         <div class="content-header row">
-            <div class="content-header-left col-md-6 col-12 mb-2">
+            <div class="mb-2 content-header-left col-md-6 col-12">
                 <h3 class="content-header-title">
                     <i class="material-icons">flag</i>
                     {{ trans('Admin/units.unitPageTitle') }}
@@ -45,7 +46,7 @@
                                 <h4 class="card-title">{{ trans('Admin\units.unitPageTitle') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
+                                    <ul class="mb-0 list-inline">
                                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                         <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                         <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
@@ -59,7 +60,7 @@
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
                                     @can('unit-create')
-                                        <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                        <button type="button" class="mb-3 btn btn-primary btn-sm" data-toggle="modal" data-target="#add">
                                             <i class="material-icons">add_box</i>
                                             {{ trans('Admin\units.add_new_unit_name') }}
                                         </button>
@@ -71,7 +72,7 @@
                                             <thead>
                                             <tr>
                                                 <th>{{ __('Admin\units.Name') }}</th>
-
+                                                <th>{{ __('Admin\units.available_for') }}</th>
                                                 <th>{{ __('Admin\general.created_since') }}</th>
                                                 <th>{{ __('Admin\trees.action') }}</th>
                                             </tr>
@@ -100,9 +101,28 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js" integrity="sha512-lC8vSUSlXWqh7A/F+EUS3l77bdlj+rGMN4NB5XFAHnTR3jQtg4ibZccWpuSSIdPoPUlUxtnGktLyrWcDhG8RvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script>
+        <script type="text/javascript">
+            $(function (){
+                // Switchery Check Box ::
+                var elem = document.querySelector('.js-switch2');
+                var init = new Switchery(elem,{
+                    color             : '#64bd63',
+                    secondaryColor    : '#ccc',
+                    jackColor         : '#fff',
+                    jackSecondaryColor: null,
+                    className         : 'switchery',
+                    disabled          : false,
+                    disabledOpacity   : 0.5,
+                    speed             : '1s',
+                    size              : 'small',
+                });
+            });
+        </script>
+    </script>
     <!-- Datatable Fire -->
     <script>
         let countriesTable = $('#unit_table').DataTable({
@@ -117,6 +137,7 @@
             },
             columns: [
                 {data: 'Name', name: 'Name', searchable: false, sortable: false},
+                {data: 'visibility', name: 'visibility'},
 
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

@@ -49,7 +49,7 @@ class ProductRepository implements ProductInterface {
         $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
         $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
         $data['categories']    =       Category::select('id')->without('created_at', 'updated_at')->get();
-        $data['units']        =       Unit::select('id')->get();
+        $data['units']        =       Unit::productVisability()->select('id')->get();
         return view('dashboard.admin.products.generalInformation.create', $data);
     }
 
@@ -57,7 +57,7 @@ class ProductRepository implements ProductInterface {
         //dd($request->all());
         DB::beginTransaction();
             //return $request;
-            //try{
+            try{
                 if (!$request->has('status'))
                     $request->request->add(['status' => 0]);
                 else
@@ -70,7 +70,6 @@ class ProductRepository implements ProductInterface {
                     'stock'            => Product::IN_STOCK,
                 ]);
                 $product->save();
-                //$price = $request->input('price');
                 // Save Translation ::
                 $product->name = $request->name;
                 $product->description = $request->description;
@@ -86,11 +85,11 @@ class ProductRepository implements ProductInterface {
                 DB::commit();
                 toastr()->success(__('Admin/products.product_store_successfully'));
                 return redirect()->route('products');
-            /*} catch(\Exception $ex){
+            } catch(\Exception $ex){
                 DB::rollBack();
                 toastr()->error(__('Admin/general.wrong'));
                 return redirect()->route('products');
-            }*/
+            }
     }
 
     public function additionalPrice($id) {
@@ -122,7 +121,7 @@ class ProductRepository implements ProductInterface {
         $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
         $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
         $data['categories']     =       Category::select('id')->without('created_at', 'updated_at')->get();
-        $data['units']     =       Unit::select('id')->get();
+        $data['units']          =       Unit::productVisability()->select('id')->get();
         return view('dashboard.admin.products.edit', $data);
     }
 

@@ -65,10 +65,19 @@
                                                 <div class="col-md-10">
                                                     <div class="form-group">
                                                         <label>{{ trans('Admin/products.product_main_photo') }} <span class="text-danger">*</span></label>
-                                                        <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                                            <input type="file" accept="image/*" name="photo" onchange="loadFile(event)" />
-                                                            <img  class="rounded-circle"  width="85px" height="85px" id="output" />
-                                                        </div>
+                                                        @if($product->image)
+                                                            <a class="mr-2" href="#">
+                                                                    <img src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                                    alt="{{ __('Admin/site.no-image') }}"
+                                                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                                            </a>
+                                                        @else
+                                                            <a class="mr-2" href="#">
+                                                                <img src="{{ asset('Dashboard/img/products/default.jpg') }}"
+                                                                alt="{{ __('Admin/site.no-image') }}"
+                                                                class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
