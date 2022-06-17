@@ -47,26 +47,37 @@ class Shop extends Component
           }
         }
      }
-
+    //  public function getPrice(){
+    //      dd(Product::units()->pivot->price->get());
+    //         // foreach(Product::get() as $product){
+    //         //     // $xx=$product->units()->price->first();
+    //         //     // return $xx;
+    //         //     dd($product->units()->first()->pivot->price);
+    //         // }
+    //         // // dd($xx);
+    //     }
     public function render()
     {
         $data['tags']=Tag::get();
         $data['newProducts'] = Product::where('stock',1)->where('qty','>',0)->latest()->limit(3)->get();
 
-        // if($this->sorting=='date'){
-        //     $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
-        //     ->where('stock',1)->where('qty','>',0)->orderByDesc('created_at')->paginate($this->pagesize);
-        //   }elseif($this->sorting=='price'){
-        //       $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
-        //       ->where('stock',1)->where('qty','>',0)->orderBy('price')->paginate($this->pagesize);
-        //   }elseif($this->sorting=='price-desc'){
-        //       $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
-        //       ->where('stock',1)->where('qty','>',0)->orderByDesc('price')->paginate($this->pagesize);
-        //   }else{
-        //       $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
-        //       ->where('stock',1)->where('qty','>',0)->paginate($this->pagesize);
-        //   }
-        $data['products'] = Product::orderByDesc('created_at')->get();
+        if($this->sorting=='date'){
+            $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
+            ->where('stock',1)->where('qty','>',0)->orderByDesc('created_at')->paginate($this->pagesize);
+          }elseif($this->sorting=='special_price'){
+              $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
+              ->where('stock',1)->where('qty','>',0)->orderBy('special_price')->paginate($this->pagesize);
+          }elseif($this->sorting=='price-desc'){
+              $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
+              ->where('stock',1)->where('qty','>',0)->orderByDesc('special_price')->paginate($this->pagesize);
+          }else{
+              $data['products'] = Product::orderByDesc('created_at')
+                                  ->where('stock',1)
+                                  ->where('qty','>',0)
+                                  ->paginate($this->pagesize);
+          }
+
+        // $data['products'] = Product::orderByDesc('created_at')->get();
           if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->store(Auth::guard('vendor')->user()->email);
             Cart::instance('wishlist')->store(Auth::guard('vendor')->user()->email);
@@ -76,4 +87,5 @@ class Shop extends Component
         return view('livewire.front.shop',$data)
         ->layout('front.layouts.master2');
     }
+
 }

@@ -32,13 +32,13 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-                                    <form novalidate action="{{ route('profile.updateAccount', encrypt(Auth::user()->id)) }}"  enctype="multipart/form-data" method="post" autocomplete="off">
+                                    <form novalidate action="{{ route('profile.updateAccount', encrypt(Auth::guard('admin')->user()->id)) }}"  enctype="multipart/form-data" method="post" autocomplete="off">
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
-                                            @if(Auth::user()->image)
+                                            @if(Auth::guard('admin')->user()->image)
                                                 <a class="mr-2" href="#">
-                                                        <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
+                                                        <img src="{{ asset('Dashboard/img/admins/'. Auth::guard('admin')->user()->image->filename) }}"
                                                         alt="{{ __('Admin/site.no-image') }}"
                                                         class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
                                                 </a>
@@ -64,36 +64,49 @@
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.firstname') }}</label>
-                                                        <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',Auth::user()->firstname) }}"
+                                                        <input type="text" class="form-control" placeholder="Username" value="{{ old('firstname',Auth::guard('admin')->user()->firstname) }}"
                                                         name="firstname" required data-validation-required-message="This firstname field is required">
+                                                        @error('firstname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.lastname') }}</label>
-                                                        <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->lastname) }}"
+                                                        <input type="text" class="form-control"  value="{{ old('lastname',Auth::guard('admin')->user()->lastname) }}"
                                                         name="lastname" required data-validation-required-message="This lastname field is required">
+                                                        @error('lastname')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                      @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.phone') }}</label>
                                                         <input type="text" class="form-control"  name="phone"  value="{{ old('phone',$admin->phone) }}"
-                                                        required data-validation-required-message="This phone field is required">
+                                                        required maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                        data-validation-required-message="This phone field is required" />
+                                                        @error('phone')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.email') }}</label>
-                                                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',Auth::user()->email) }}"
+                                                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',Auth::guard('admin')->user()->email) }}"
                                                         required data-validation-required-message="This email field is required">
+                                                        @error('email')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>{{ __('Admin/site.type') }}</label>
                                                         <select class="custom-select" id="customSelect" name="type">
-                                                            <option value="{{ old('type',Auth::user()->type) }}" disabled selected >{{Auth::user()->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
+                                                            <option value="{{ old('type',Auth::guard('admin')->user()->type) }}" disabled selected >{{Auth::guard('admin')->user()->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
                                                             <option value="admin">{{ __('Admin/site.admins') }}</option>
                                                             <option value="employee">{{ __('Admin/site.employee') }}</option>
                                                         </select>
@@ -105,6 +118,9 @@
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
                                                         <input type="password" name="password" class="form-control"
                                                         placeholder="{{ __('Admin/site.enter_new_password') }}" required>
+                                                        @error('password')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                     {{--password_confirmation--}}
                                                     <div class="form-group">
@@ -112,6 +128,9 @@
                                                         <input type="password" name="password_confirmation" class="form-control"
                                                         value="{{ old('password_confirmation') }}"
                                                         placeholder="{{ __('Admin/site.enter_passord_confirm') }}" required>
+                                                        @error('password_confirmation')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -127,7 +146,7 @@
                                 </div>
                                 <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
                                     <!-- users edit Info form start -->
-                                    <form novalidate action="{{ route('profile.updateInformation', encrypt(Auth::user()->id)) }}"  method="post" autocomplete="off">
+                                    <form novalidate action="{{ route('profile.updateInformation', encrypt(Auth::guard('admin')->user()->id)) }}"  method="post" autocomplete="off">
                                         @csrf
                                         @method('put')
                                         <div class="row">
@@ -137,8 +156,11 @@
                                                     <div class="controls position-relative">
                                                         <label>{{ __('Admin/site.birthday') }}</label>
                                                         <input type="date" class="form-control birthdate-picker" required placeholder="Birth date"
-                                                        value="{{ Auth::user()->birthdate }}"
+                                                        value="{{ Auth::guard('admin')->user()->birthdate }}"
                                                         data-validation-required-message="This birthdate field is required">
+                                                        @error('birthdate')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -146,37 +168,55 @@
                                                     <select class="select2 form-control" id="country_id" name="country_id">
                                                             <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                             @foreach (\App\Models\Country::get() as $country)
-                                                             <option value="{{ $country->id }}" {{Auth::user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                                                             <option value="{{ $country->id }}" {{Auth::guard('admin')->user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                                                             @endforeach
                                                     </select>
+                                                    @error('country_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
                                                     <select class=" select2  form-control" id="province_id" name="province_id">
-                                                        {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ Auth::user()->province_id }}"  >{{ Auth::user()->province->name }}</option>
+                                                        @if( Auth::guard('admin')->user()->province_id == null)
+                                                        <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                                       @else
+                                                       <option value="{{  Auth::guard('admin')->user()->province_id }}"  >{{  Auth::guard('admin')->user()->province->name }}</option>
+                                                       @endif
                                                     </select>
+                                                    @error('province_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.area') }}</label>
                                                     <select class=" select2 form-control" id="area_id" name="area_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ Auth::user()->area_id }}"  >{{ Auth::user()->area->name }}</option>
+                                                        <option value="{{ Auth::guard('admin')->user()->area_id }}"  >{{ Auth::guard('admin')->user()->area->name ?? null}}</option>
                                                     </select>
+                                                    @error('area_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.state') }}</label>
                                                     <select class=" select2 form-control" id="state_id" name="state_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ Auth::user()->state_id }}"  >{{ Auth::user()->state->name }}</option>
+                                                        <option value="{{ Auth::guard('admin')->user()->state_id }}"  >{{ Auth::guard('admin')->user()->state->name ?? null}}</option>
                                                     </select>
+                                                    @error('state_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.village') }}</label>
                                                     <select class=" select2 form-control" id="village_id" name="village_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ Auth::user()->village_id }}"  >{{ Auth::user()->village->name }}</option>
+                                                        <option value="{{ Auth::guard('admin')->user()->village_id }}"  >{{ Auth::guard('admin')->user()->village->name ?? null}}</option>
                                                     </select>
+                                                    @error('village_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
 
@@ -185,23 +225,32 @@
                                                 <h5 class="mb-1"><i class="ft-user mr-25"></i></h5>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address1') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->address1) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('address1',Auth::guard('admin')->user()->address1) }}"
                                                     name="address1" required data-validation-required-message="This address1 field is required">
+                                                    @error('address1')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address2') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',Auth::user()->address2) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('address2',Auth::guard('admin')->user()->address2) }}"
                                                     name="address2" required data-validation-required-message="This address2 field is required">
+                                                    @error('address2')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.department') }}</label>
                                                     <select class="form-control" id="accountSelect" name="department_id">
                                                         {{-- <option disabled selected>{{ __('Admin/site.select') }}</option> --}}
-                                                        <option value="{{ Auth::user()->department_id }}"  >{{ Auth::user()->department->name }}</option>
+                                                        <option value="{{ Auth::guard('admin')->user()->department_id }}"  >{{ Auth::guard('admin')->user()->department->name ?? null}}</option>
                                                         @foreach (\App\Models\Department::get() as $department)
-                                                         <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                                         <option value="{{ $department->id }}">{{ $department->name ?? null}}</option>
                                                         @endforeach
                                                     </select>
+                                                    @error('department_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
 
                                             </div>

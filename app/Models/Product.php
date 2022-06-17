@@ -102,7 +102,7 @@ class Product extends Model {
     }
     public function scopeGetUnit(){
         $ProductUnits = $this->units->pluck('id');
-        $x=$this->units()->whereIn('unit_id', $ProductUnits)->pluck('id')->first();
-        return UnitTranslation::whereId($x)->select('Name')->first();
+        $unit_id=$this->units()->whereIn('unit_id', $ProductUnits)->pluck('id')->first();
+        return UnitTranslation::whereId($unit_id)->select('Name')->first();
     }
 }
