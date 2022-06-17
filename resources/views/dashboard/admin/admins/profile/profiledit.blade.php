@@ -240,7 +240,7 @@
                                                 <h5 class="mb-1"><i class="ft-user mr-25"></i></h5>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address1') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',$admin->address1) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('address1',$admin->address1) }}"
                                                     name="address1" required data-validation-required-message="This address1 field is required">
                                                     @error('address1')
                                                     <span class="text-danger">{{$message}}</span>
@@ -248,7 +248,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.address2') }}</label>
-                                                    <input type="text" class="form-control"  value="{{ old('lastname',$admin->address2) }}"
+                                                    <input type="text" class="form-control"  value="{{ old('address2',$admin->address2) }}"
                                                     name="address2" required data-validation-required-message="This address2 field is required">
                                                     @error('address2')
                                                     <span class="text-danger">{{$message}}</span>
