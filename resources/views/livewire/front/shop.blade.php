@@ -184,7 +184,6 @@
                                 <!-- start widget -->
                                 <div class="widget widget--products">
                                     <h4 class="h6 widget-title">{{ __('Admin/site.featproducts') }}</h4>
-
                                     <ul>
                                         @foreach ($newProducts as $product)
                                             <li>
@@ -210,37 +209,28 @@
                                                         <h4 class="h6 __title"><a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                         </h4>
-
                                                         <span class="score"><span
-                                                                style="width:<?php echo $product->productRate(); ?>%"></span></span>
-
-                                                        <!-- <div class="rating">
-                                                                <span class="rating__item rating__item--active"><i
-                                                                        class="fontello-star"></i></span>
-                                                                <span class="rating__item rating__item--active"><i
-                                                                        class="fontello-star"></i></span>
-                                                                <span class="rating__item rating__item--active"><i
-                                                                        class="fontello-star"></i></span>
-                                                                <span class="rating__item rating__item--active"><i
-                                                                        class="fontello-star"></i></span>
-                                                                <span class="rating__item"><i
-                                                                        class="fontello-star"></i></span>
-                                                            </div> -->
-
+                                                                style="width:<?php echo $product->productRate(); ?>%"></span>
+                                                        </span>
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
-                                                                {{-- <span
-                                                                    class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                                    $</span>
-                                                                <span --}}
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                                    $</span>
+                                                                <span
+                                                                    class="product-price__item product-price__item--old">
+                                                                     {{ number_format($product->getPrice(), 2) }} $
+                                                                     {{ $product->getUnit()->Name }}
+                                                                </span>
+                                                                <span
+                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $
+                                                                    {{ $product->getUnit()->Name }}
+                                                                </span>
                                                             </div>
                                                         @else
                                                             <div class="product-price">
                                                                 <span
-                                                                    {{-- class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} --}}
-                                                                    $</span>
+                                                                    class="product-price__item product-price__item--new">
+                                                                     {{ number_format($product->getPrice(), 2) }} $
+                                                                     {{ $product->getUnit()->Name }}
+                                                                </span>
                                                             </div>
                                                         @endif
                                                     </div>
@@ -249,27 +239,16 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                                <!-- end widget -->
-
-                                <!-- start widget -->
-                                {{-- <div class="widget widget--banner">
-                                    <a href="#"><img class="img-fluid  lazy" src="img/blank.gif"
-                                            data-src="img/widget_banner_2.jpg" alt="demo" /></a>
-                                </div> --}}
-                                <!-- end widget -->
                             </div>
                         </aside>
                     </div>
-
                     <div class="col-12 col-md-8 col-lg-9" id="search_data">
                         <div class="spacer py-6 d-md-none"></div>
-
                         <div class="row align-items-center justify-content-between">
                             <div class="col-auto">
                                 <span class="goods-filter-btn-open js-toggle-filter"><i
                                         class="fontello-filter"></i>Filter</span>
                             </div>
-
                             <div class="col-auto">
                                 <!-- start ordering -->
                                 {{-- <form class="ordering" action="#"> --}}
@@ -319,7 +298,6 @@
                                     @endphp
                                     @if ($products->count() > 0)
                                         @foreach ($products as $product)
-                                            <!-- start item -->
                                             <div class="col-12 col-sm-6 col-lg-4">
                                                 <div class="__item product-cart">
                                                     <figure class="__image">
@@ -342,8 +320,6 @@
                                                         <h4 class="h6 __title"><a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
                                                         </h4>
-                                                        {{ number_format($product->getPrice(), 2) }}
-                                                        {{ $product->getUnit()->Name }}
                                                         <div class="stock-info in-stock">
                                                             <p class="availability">
                                                                 <b
@@ -352,53 +328,42 @@
                                                                 </b>
                                                             </p>
                                                         </div>
-                                                        {{-- <div class="stock-info in-stock">
-                                                            <p class="availability">
-                                                                <b class="text text-success ">
-                                                                    @lang('Admin/site.qty') ({{ $product->qty }})
-                                                                </b>
-                                                            </p>
-                                                        </div> --}}
                                                         @if ($product->special_price > 0)
                                                             <div class="product-price">
                                                                 <span
                                                                     class="product-price__item product-price__item--old">
-                                                                    {{-- {{ number_format($product->units()->where('product_id', $product->id)->first()->pivot->price, 2) .' '. config('app.currency')}} --}}
-                                                                    {{-- {{ config('app.currency') }} --}}
-                                                                    {{ number_format($product->getPrice(), 2) }}
+                                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                                    {{ $product->getUnit()->Name }}
                                                                 </span>
                                                                 <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                                    $</span>
+                                                                    class="product-price__item product-price__item--new">
+                                                                    {{ number_format($product->special_price, 2) }} $
+                                                                    {{ $product->getUnit()->Name }}
+                                                                </span>
                                                             </div>
                                                         @else
                                                             <div class="product-price">
                                                                 <span
                                                                     class="product-price__item product-price__item--new">
-                                                                    {{-- {{ number_format($product->units()->where('product_id', $product->id)->first()->pivot->price, 2) }} --}}
-                                                                    {{ number_format($product->getPrice(), 2) }}
-                                                                    $</span>
+                                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                                    {{ $product->getUnit()->Name }}
+                                                                </span>
                                                             </div>
                                                         @endif
                                                         @if (Auth::guard('vendor')->user())
                                                             @if ($product->stock == 1)
-                                                                  {{-- @if($condition)
-                                                                  @else
-                                                                  @endif --}}
                                                                 <a class="custom-btn custom-btn--medium custom-btn--style-1 add-to-cart-cartbtnbtn" title="{{ __('Admin/site.addtocart') }}"
                                                                     href="#" id="add-to-cart-cartbtnbtn" onclick="myFunction()"
-                                                                    {{-- onClick="(function(){
+                                                                    onClick="(function(){
                                                                                 alert('{{ __('Website/home.item_added_to_cart') }}');
                                                                                 this.innerHTML='{{ __('Website/home.adding') }}';
                                                                                 return false;
-                                                                    })();return false;" --}}
-
-                                                                    {{-- wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})" --}}
+                                                                    })();return false;"
+                                                                    wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }})"
                                                                 >
                                                                     <i class="fontello-shopping-bag"></i>
                                                                     {{ __('Admin/site.addtocart') }}
                                                                 </a>
-
                                                                 {{-- wishlist route ******************* *************************************** --}}
                                                                 <div class="product-wish">
                                                                     @if ($witems->contains($product->id))
@@ -408,7 +373,7 @@
                                                                         </a>
                                                                     @else
                                                                         <a href="#"
-                                                                            {{-- wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }}) "> --}}
+                                                                            wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }}) ">
                                                                             <i class="fa fa-heart"></i>
                                                                         </a>
                                                                     @endif
@@ -488,15 +453,6 @@
         function myFunction() {
             console.log('clicked');
             alert('{{ __('Website/home.item_added_to_cart') }}');
-                        // this.text('{{ __('Admin/site.loading') }}');
-                //  $("this").text("{{ __('Admin/site.adding_to_cart') }}");
-                // document.getElementById("add-to-cart-cartbtnbtn").innerHTML = "{{ __('Admin/site.adding_to_cart') }}";
-                // document.getElementById("add-to-cart-cartbtnbtn").attr("disabled", true);
-                // document.getElementById("add-to-cart-cartbtnbtn").classList.add("disabled");
-                // document.getElementById("add-to-cart-cartbtnbtn").classList.remove("custom-btn--style-1");
-                // document.getElementById("add-to-cart-cartbtnbtn").classList.add("btn-loading");
-                // document.getElementById("add-to-cart-cartbtnbtn").disabled = false;
-
         }
     </script>
 @endpush

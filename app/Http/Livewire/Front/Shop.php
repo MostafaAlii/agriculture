@@ -66,20 +66,7 @@ class Shop extends Component
         //       $data['products'] = Product::whereBetween('price',[$this->min_price,$this->max_price])
         //       ->where('stock',1)->where('qty','>',0)->paginate($this->pagesize);
         //   }
-        $data['products'] = Product::get();
-        $unitid = Unit::select('id')->get();
-        // dd($unitid);
-        // foreach ($data['products'] as $product){
-        //     // $x=$unit->units->id;
-        //     // $x=$product->units()->whereIn('unit_id', $unitid )->pluck('Name')->first();
-        //     $ProductUnits = $product->units->pluck('id');
-        //     $x=$product->units()->whereIn('unit_id', $ProductUnits)->pluck('id')->first();
-        //     $y= UnitTranslation::whereId($x)->select('Name')->first();
-        //     // dd($ProductUnits);
-        //     // dd($x);
-        //     dd($y);
-        // }
-
+        $data['products'] = Product::orderByDesc('created_at')->get();
           if(Auth::guard('vendor')->check()){
             Cart::instance('cart')->store(Auth::guard('vendor')->user()->email);
             Cart::instance('wishlist')->store(Auth::guard('vendor')->user()->email);

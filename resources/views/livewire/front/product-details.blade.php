@@ -173,16 +173,28 @@ label.star:before {
 
                                 <div class="col-12 col-lg-5">
                                     <div class="content-container">
-                                        <h3 class="__name">{{ $product->name }}</h3>
+                                        <h3 class="__name">{{ $product->name  }}</h3>
 
-                                        @if($product->special_price >0)
+                                        @if ($product->special_price > 0)
                                             <div class="product-price">
-                                                <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
-                                                <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                                <span
+                                                    class="product-price__item product-price__item--old">
+                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                    {{ $product->getUnit()->Name }}
+                                                </span>
+                                                <span
+                                                    class="product-price__item product-price__item--new">
+                                                    {{ number_format($product->special_price, 2) }} $
+                                                    {{ $product->getUnit()->Name }}
+                                                </span>
                                             </div>
                                         @else
                                             <div class="product-price">
-                                                <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                                <span
+                                                    class="product-price__item product-price__item--new">
+                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                    {{ $product->getUnit()->Name }}
+                                                </span>
                                             </div>
                                         @endif
 
@@ -215,25 +227,15 @@ label.star:before {
                                                 </b>
                                             </p>
                                         </div>
-                                        {{-- <div class="stock-info in-stock">
-                                            <p class="availability">
-                                                <b
-                                                    class="text text-success ">
-                                                    @lang('Admin/site.qty') ({{ $product->qty  }})
-                                                </b>
-                                            </p>
-                                        </div> --}}
-
-
                                         @if (Auth::guard('vendor')->user() )
                                             @if($product->stock ==1)
                                                 <form class="__add-to-cart" action="#">
                                                     <div class="quantity-counter js-quantity-counter">
-                                                        {{-- @if($product->qty  > 1) --}}
+                                                        @if($product->qty  > 1)
                                                             <span class="__btn __btn--minus"
                                                                 wire:click.prevent='decreaseQty' >
                                                             </span>
-                                                        {{-- @endif --}}
+                                                        @endif
                                                         <input class="__q-input"
                                                                 type="text"
                                                                 name="product-quatity"
@@ -253,7 +255,7 @@ label.star:before {
 
                                                         <button class="custom-btn custom-btn--medium custom-btn--style-1" title="{{ __('Admin/site.addtocart') }}"
                                                         type="submit" role="button"
-                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice()}})">
                                                         <i class="fontello-shopping-bag"></i>
                                                             {{ __('Admin/site.addtocart') }}
                                                         </button>
@@ -268,7 +270,7 @@ label.star:before {
                                                         @else
                                                             <button class="custom-btn custom-btn--medium custom-btn--style-1"
                                                             type="submit" role="button"
-                                                            wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                            wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }}) ">
                                                                 <i class="fa fa-heart"></i>
                                                                 {{ __('Admin/site.addwish') }}
                                                             </button>
@@ -391,37 +393,58 @@ label.star:before {
                                                         </b>
                                                     </p>
                                                 </div>
-                                                @if($product->special_price >0)
+                                                @if ($product->special_price > 0)
                                                     <div class="product-price">
-                                                        <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
-                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
+                                                        <span
+                                                            class="product-price__item product-price__item--old">
+                                                            {{ number_format($product->getPrice(), 2) }} $
+                                                            {{ $product->getUnit()->Name }}
+                                                        </span>
+                                                        <span
+                                                            class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $
+                                                            {{ $product->getUnit()->Name }}
+                                                        </span>
                                                     </div>
                                                 @else
                                                     <div class="product-price">
-                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
+                                                        <span
+                                                            class="product-price__item product-price__item--new">
+                                                            {{ number_format($product->getPrice(), 2) }} $
+                                                            {{ $product->getUnit()->Name }}
+                                                        </span>
                                                     </div>
                                                 @endif
-                                                @if (Auth::guard('vendor')->user() )
-                                                @if($product->stock ==1)
-                                                        {{-- wishlist route ******************* ***************************************--}}
-                                                        <div class="product-wish">
-                                                            @if($witems->contains($product->id))
-                                                                <a href="#" wire:click.prevent=" removeWishlist({{ $product->id }}) ">
+                                                @if (Auth::guard('vendor')->user())
+                                                @if ($product->stock == 1)
+                                                    <a class="custom-btn custom-btn--medium custom-btn--style-1 add-to-cart-cartbtnbtn" title="{{ __('Admin/site.addtocart') }}"
+                                                        href="#" id="add-to-cart-cartbtnbtn" onclick="myFunction()"
+                                                        onClick="(function(){
+                                                                    alert('{{ __('Website/home.item_added_to_cart') }}');
+                                                                    this.innerHTML='{{ __('Website/home.adding') }}';
+                                                                    return false;
+                                                        })();return false;"
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }})"
+                                                    >
+                                                        <i class="fontello-shopping-bag"></i>
+                                                        {{ __('Admin/site.addtocart') }}
+                                                    </a>
+                                                    {{-- wishlist route ******************* *************************************** --}}
+                                                    <div class="product-wish">
+                                                        @if ($witems->contains($product->id))
+                                                            <a href="#" title=" {{ __('Admin/site.addwish') }}"
+                                                                wire:click.prevent=" removeWishlist({{ $product->id }}) ">
                                                                 <i class="fa fa-heart fill-heart"></i>
-                                                                </a>
-                                                            @else
+                                                            </a>
+                                                        @else
                                                             <a href="#"
-                                                                wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name:' ' }}',{{ $product->price }}) ">
+                                                                wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }}) ">
                                                                 <i class="fa fa-heart"></i>
                                                             </a>
-                                                            @endif
-                                                        </div>
-                                                        {{-- wishlist route ******************* ***************************************--}}
-                                                        <a class="custom-btn custom-btn--medium custom-btn--style-1" href="#"
-                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
-                                                            <i class="fontello-shopping-bag"></i>{{ __('Admin/site.addtocart') }}</a>
+                                                        @endif
+                                                    </div>
+                                                    {{-- wishlist route ******************* *************************************** --}}
                                                 @endif
-                                                @endif
+                                            @endif
                                             </div>
                                             @if($product->special_price >0)
                                                <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
@@ -533,27 +556,33 @@ label.star:before {
                                                             <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                             data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
                                                         @endif
-
                                                     </a>
                                                 </figure>
                                             </div>
-
                                             <div class="col">
                                                 <h4 class="h6 __title"><a href="{{ route('product_details',encrypt($product->id)) }}">{{ $product->name }}</a></h4>
-
                                                 <span class="score"><span style="width:<?php echo $product->productRate();?>%"></span></span>
-
-
-                                                @if($product->special_price >0)
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }} $</span>
-                                                    <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $</span>
-                                                </div>
-                                            @else
-                                                <div class="product-price">
-                                                    <span class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }} $</span>
-                                                </div>
-                                            @endif
+                                                @if ($product->special_price > 0)
+                                                            <div class="product-price">
+                                                                <span
+                                                                    class="product-price__item product-price__item--old">
+                                                                     {{ number_format($product->getPrice(), 2) }} $
+                                                                     {{ $product->getUnit()->Name }}
+                                                                </span>
+                                                                <span
+                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $
+                                                                    {{ $product->getUnit()->Name }}
+                                                                </span>
+                                                            </div>
+                                                        @else
+                                                            <div class="product-price">
+                                                                <span
+                                                                    class="product-price__item product-price__item--new">
+                                                                     {{ number_format($product->getPrice(), 2) }} $
+                                                                     {{ $product->getUnit()->Name }}
+                                                                </span>
+                                                            </div>
+                                                        @endif
                                             </div>
                                         </div>
                                     </li>
@@ -568,38 +597,9 @@ label.star:before {
         </section>
         <!-- end section -->
 
-        <!-- start section -->
-        <section class="section section--no-pt section--no-pb section--gutter">
-            <div class="container-fluid px-md-0">
-                <!-- start banner simple -->
-                <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
-                    <div class="d-none d-lg-block">
-                        @if(app()->getLocale()=='ar')
-                            <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}"
-                                 data-src="{{URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo)}}" width="70" height="70"
-                                 alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                        @else
-                            <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}"
-                                 data-src="{{URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo)}}" width="70" height="70"
-                                 alt="demo"  style="left: 45%;    width: 145px;height: 200px;"/>
-                        @endif
-                    </div>
 
-                    <div class="row no-gutters">
-                        <div class="col-12 col-lg-6">
-                            <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_3.jpg" alt="demo" /></a>
-                        </div>
-
-                        <div class="col-12 col-lg-6">
-                            <a href="#"><img class="img-fluid w-100  lazy" src="img/blank.gif" data-src="img/banner_bg_4.jpg" alt="demo" /></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- end banner simple -->
-            </div>
-        </section>
-        <!-- end section -->
 </div>
+@push('js')
 <script>
     // this for show comments tab after adding and hide description tab
 
@@ -617,3 +617,19 @@ label.star:before {
     //alert(element.classList);
 
 </script>
+<script>
+    function myFunction() {
+        console.log('clicked');
+        alert('{{ __('Website/home.item_added_to_cart') }}');
+                    // this.text('{{ __('Admin/site.loading') }}');
+            //  $("this").text("{{ __('Admin/site.adding_to_cart') }}");
+            // document.getElementById("add-to-cart-cartbtnbtn").innerHTML = "{{ __('Admin/site.adding_to_cart') }}";
+            // document.getElementById("add-to-cart-cartbtnbtn").attr("disabled", true);
+            // document.getElementById("add-to-cart-cartbtnbtn").classList.add("disabled");
+            // document.getElementById("add-to-cart-cartbtnbtn").classList.remove("custom-btn--style-1");
+            // document.getElementById("add-to-cart-cartbtnbtn").classList.add("btn-loading");
+            // document.getElementById("add-to-cart-cartbtnbtn").disabled = false;
+
+    }
+</script>
+@endpush
