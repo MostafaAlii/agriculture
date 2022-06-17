@@ -42,31 +42,39 @@ class ContactUs extends Component
        ]);
        DB::beginTransaction();
        try {
-            $contact = new Contact();
-            $contact->firstname = $this->firstname;
-            $contact->lastname = $this->lastname;
-            $contact->phone = $this->phone;
-            $contact->email = $this->email;
-            $contact->comment = $this->comment;
-            $contact->save();
+        
+        Contact::create([
+            'firstname'=>$this->firstname,
+            'lastname'=>$this->lastname,
+            'phone'=>$this->phone,
+            'email'=>$this->email,
+            'comment'=>$this->comment,
+        ]);
+            // $contact = new Contact();
+            // $contact->firstname = $this->firstname;
+            // $contact->lastname = $this->lastname;
+            // $contact->phone = $this->phone;
+            // $contact->email = $this->email;
+            // $contact->comment = $this->comment;
+            // $contact->save();
 
-        //    Mail::send(
-        //     'livewire.front.emails.contact',
-        //     array(
-        //         'title' => 'Contact Mail -- تواصل معنا ',
-        //         'firstname' => $this->firstname,
-        //         'lastname' => $this->lastname,
-        //         'mail' => $this->email,
-        //         'phone' => $this->phone,
-        //         'content' => $this->comment,
-        //     ),
-        //     function ($message) {
-        //         $message->subject("Contact Mail -- تواصل معنا ");
-        //         $message->to(env('MAIL_FROM_ADDRESS','ahmedragabyasin2020@gmail.com'));
-        //         $message->from($this->email);
+           Mail::send(
+            'livewire.front.emails.contact',
+            array(
+                'title' => 'Contact Mail -- تواصل معنا ',
+                'firstname' => $this->firstname,
+                'lastname' => $this->lastname,
+                'mail' => $this->email,
+                'phone' => $this->phone,
+                'content' => $this->comment,
+            ),
+            function ($message) {
+                $message->subject("Contact Mail -- تواصل معنا ");
+                $message->to(env('MAIL_FROM_ADDRESS','ahmedragabyasin2020@gmail.com'));
+                $message->from($this->email);
 
-        //     }
-        // );
+            }
+        );
         DB::commit();
         session()->flash('message',__('website\home.msg'));
         response()->json(['status'=>__('Website/home.subscribed_successfully')]);

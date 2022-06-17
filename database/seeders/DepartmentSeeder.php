@@ -1,14 +1,17 @@
 <?php
 namespace Database\Seeders;
-use App\Models\Admin;
+
 use App\Models\Area;
-use App\Models\Country;
-use App\Models\Department;
-use App\Models\Province;
+use App\Models\Admin;
 use App\Models\State;
+use App\Models\Country;
 use App\Models\Village;
-use Illuminate\Support\Facades\DB;
+use App\Models\Province;
+use App\Models\Department;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
 class DepartmentSeeder extends Seeder {
     public function run() {
         
@@ -29,7 +32,11 @@ class DepartmentSeeder extends Seeder {
             "كلمات اداره الثروه السمكيه",
         ];
         
-        DB::table('departments')->delete();
+        //DB::table('departments')->delete();
+        Schema::disableForeignKeyConstraints();
+
+        DB::table('departments')->truncate();
+        DB::table('department_translations')->truncate();
 
         for ($i = 0; $i < $count ; $i++) {
             Department::create([
@@ -42,7 +49,10 @@ class DepartmentSeeder extends Seeder {
                 'area_id'       => Area::all()->random()->id,
                 'state_id'      => State::all()->random()->id,
                 'village_id'    => Village::all()->random()->id,
-            ]);
+              //  'created_by'    => Admin::all()->random()->id,
+                ]);
         }
+
+        Schema::enableForeignKeyConstraints();
     }
 }

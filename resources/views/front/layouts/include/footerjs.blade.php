@@ -88,6 +88,7 @@ integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amn
                 }
             });
         });
+    
     });
 </script>
 {{-- <script>

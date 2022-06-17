@@ -52,11 +52,14 @@ class OrchardController extends Controller
         return $this->Data->bulkDelete($request);
     }
 
+
     // report index for orchard
     public function statistics_index(){
     return $this->Data->statistics_index();
     }
     // report filter for orchard
+
+
     public function statistics(Request $request){
         return $this->Data->statistics($request);
     }

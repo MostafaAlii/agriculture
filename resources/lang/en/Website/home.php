@@ -2,6 +2,7 @@
 <?php
 
 return [
+    'unit'=>'Unit',
     // nav bar **************************************
     'home'                 => ' Home',
     'home2'                => ' Latest Product',

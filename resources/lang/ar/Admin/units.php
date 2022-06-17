@@ -17,9 +17,8 @@ return [
     'add_new_unit_name'               =>      'أضافة وحدة قياس جديدة',
 
     'Name'               =>      'الاسم',
-    ''               =>      '',
-    ''               =>      '',
-    ''               =>      '',
-    ''               =>      '',
-
+    'switch_between_product_or_general'         =>      'تفعيل الخيار فى حاله المنتج',
+    'available_for'                             =>      'متاحــه الــى',
+    'for_product'                               =>      'منتاجات',
+    'general'                                   =>      'عامــة',
 ];

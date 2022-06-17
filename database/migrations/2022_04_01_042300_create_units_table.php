@@ -1,9 +1,8 @@
 <?php
-
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 class CreateUnitsTable extends Migration
 {
 
@@ -11,6 +10,7 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('visibility')->default(Unit::GENERAL);
             $table->timestamps();
         });
     }

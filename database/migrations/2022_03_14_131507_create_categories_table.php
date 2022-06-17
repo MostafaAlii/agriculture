@@ -6,35 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCategoriesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+  
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
 
-            $table->id()->start_from(1);
-            
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
-            
-            $table->unsignedBigInteger('department_id')->nullable();
-            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
+            $table->id();
 
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
+            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
+            // $table->foreignId('created_by')->nullable()->constrained('admin')->cascadeOnDelete();
+            // $table->foreignId('updated_by')->nullable()->constrained('admin')->cascadeOnDelete();            
+            $table->softDeletes();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+ 
     public function down()
     {
         Schema::dropIfExists('categories');

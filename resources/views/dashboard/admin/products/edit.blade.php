@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css" integrity="sha512-uyGg6dZr3cE1PxtKOCGqKGTiZybe5iSq3LsqOolABqAWlIRLo/HKyrMMD8drX+gls3twJdpYX0gDKEdtf2dpmw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
@@ -9,7 +10,7 @@
     @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
-            <div class="content-header-left col-md-6 col-12 mb-2">
+            <div class="mb-2 content-header-left col-md-6 col-12">
                 <h3 class="content-header-title">{{trans('Admin\products.edit_product')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
@@ -26,7 +27,7 @@
                 </div>
             </div>
             <div class="content-header-right col-md-6 col-12">
-                <div class="media width-250 float-right">
+                <div class="float-right media width-250">
                     <media-left class="media-middle">
                         <div id="sp-bar-total-sales"></div>
                     </media-left>
@@ -44,7 +45,7 @@
                                 <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/products.edit_product') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
+                                    <ul class="mb-0 list-inline">
                                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                         <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                         <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
@@ -64,10 +65,19 @@
                                                 <div class="col-md-10">
                                                     <div class="form-group">
                                                         <label>{{ trans('Admin/products.product_main_photo') }} <span class="text-danger">*</span></label>
-                                                        <div class="col-md-11 mg-t-5 mg-md-t-0">
-                                                            <input type="file" accept="image/*" name="photo" onchange="loadFile(event)" />
-                                                            <img  class="rounded-circle"  width="85px" height="85px" id="output" />
-                                                        </div>
+                                                        @if($product->image)
+                                                            <a class="mr-2" href="#">
+                                                                    <img src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
+                                                                    alt="{{ __('Admin/site.no-image') }}"
+                                                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                                            </a>
+                                                        @else
+                                                            <a class="mr-2" href="#">
+                                                                <img src="{{ asset('Dashboard/img/products/default.jpg') }}"
+                                                                alt="{{ __('Admin/site.no-image') }}"
+                                                                class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,13 +176,37 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1">
+                                                            {{ trans('Admin\products.product_units_select') }}
+                                                        </label>
+                                                        <?php
+                                                        $selected_units=array();
+                                                        foreach ($product->units as $units_select){
+                                                             array_push($selected_units,$units_select->id);
+                                                        }
+                                                        ?>
+                                                        <select name="units" class="select2 form-control">
+                                                            <optgroup label="{{ trans('Admin\products.product_units_select') }}">
+                                                                @if($units && $units->count() > 0)
+                                                                    @foreach($units as $unit)
+                                                                        <option value="{{$unit->id}}">{{$unit->Name}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </optgroup>
+                                                        </select>
+                                                        @error('units')
+                                                        <span class="text-danger"> {{$message}}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="projectinput1">
                                                             {{ trans('Admin\products.product_main_price') }}
                                                         </label>
-                                                        <input type="number" name="price" value="{{ $product->price}}" class="form-control" placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}" />
+                                                        <input type="number" name="price" value="{{ $product->getPrice() }}" class="form-control" placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}" />
                                                         @error('price')
                                                         <span class="text-danger"> {{$message}}</span>
                                                         @enderror
@@ -184,7 +218,7 @@
                                             <!-- Start Product Status -->
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="form-group mt-1">
+                                                    <div class="mt-1 form-group">
                                                         <input type="checkbox" value="1"
                                                             name="status"
                                                             id="switcheryColor4"
@@ -192,7 +226,7 @@
                                                             <?php if($product->status==1)echo 'checked';?>
                                                             />
                                                         <label for="switcheryColor4"
-                                                            class="card-title ml-1">{{ trans('Admin\products.product_status') }}</label>
+                                                            class="ml-1 card-title">{{ trans('Admin\products.product_status') }}</label>
 
                                                         @error("status")
                                                         <span class="text-danger">{{$message }}</span>
@@ -210,7 +244,7 @@
                                                         <label for="projectinput1">
                                                             {{ trans('Admin\products.product_description') }}
                                                         </label>
-                                                        <textarea name="description" class="form-control" id="description" placeholder="{{ trans('Admin\products.product_description_placeholder') }}">
+                                                        <textarea name="description" class="form-control" placeholder="{{ trans('Admin\products.product_description_placeholder') }}">
                                                             {{$product->description}}
                                                         </textarea>
 
@@ -248,6 +282,7 @@
 @endsection
 @section('js')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js" integrity="sha512-lC8vSUSlXWqh7A/F+EUS3l77bdlj+rGMN4NB5XFAHnTR3jQtg4ibZccWpuSSIdPoPUlUxtnGktLyrWcDhG8RvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -260,25 +295,6 @@
         }
 
     };
-</script>
-<script type="text/javascript">
-    tinymce.init({
-    selector: '#description',
-    directionality : 'rtl',
-    language: 'ar',
-    height: 300,
-    menubar: false,
-    plugins: [
-        'advlist autolink lists link image charmap print preview anchor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table paste code help wordcount'
-    ],
-    toolbar: 'undo redo | formatselect | ' +
-        'bold italic backcolor | alignleft aligncenter ' +
-        'alignright alignjustify | bullist numlist outdent indent | ' +
-        'removeformat | help',
-    content_css: '//www.tiny.cloud/css/codepen.min.css'
-  });
 </script>
 
 

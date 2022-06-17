@@ -12,7 +12,7 @@
     <meta name="author" content="PIXINVENT">
     <title>{{ trans('Admin/dashboard.dashboard') }} | @yield('pageTitle')</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/admin/images/ico/apple-icon-120.png') }}">
-    <img class="img-logo  img-fluid  lazy" src="{{URL::asset('Dashboard/img/settingIcon/'.setting()->site_icon)}}"
+    <img class="img-logo img-fluid lazy" src="{{URL::asset('Dashboard/img/settingIcon/'.setting()->site_icon)}}"
     data-src="{{URL::asset('Dashboard/img/settingIcon/'.setting()->site_icon)}}" width="70" height="70"
     alt="demo"  style="left: 45%;    width: 70px;height: 70px;"/>
 
@@ -32,6 +32,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.ar-AE.min.js" integrity="sha512-heSw7GMfC3mSzYovnKDmr34vA2m2yLMT4efh4W3V0DwgmXDQKDxsflaZcX7lGl+zDkZmUwk4vI7KuCBnueGykA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <style>
         body {font-family: 'Cairo', sans-serif !important;}
         .navigation{
@@ -47,7 +48,6 @@
         {{-- font cairo --}}
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
@@ -65,12 +65,30 @@
         <!-- END: Page CSS-->
         <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/forms/wizard.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
     @elseif(app()->getLocale() == 'ku')
+        {{-- font cairo --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.ar-AE.min.js" integrity="sha512-heSw7GMfC3mSzYovnKDmr34vA2m2yLMT4efh4W3V0DwgmXDQKDxsflaZcX7lGl+zDkZmUwk4vI7KuCBnueGykA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>
+        body {font-family: 'Cairo', sans-serif !important;}
+        .navigation{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        h1,h2,h3,h4,h5,h6{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        .breadcrumb-item{
+            font-family: 'Cairo', sans-serif !important;
+        }
+        </style>
+        {{-- font cairo --}}
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
@@ -88,12 +106,13 @@
         <!-- END: Page CSS-->
         <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/forms/wizard.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
     @else
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.en-US.min.js" integrity="sha512-j8zadPEIgyqSe1Lo4LaxHZdaMCxdo4dq4O+3cYo5i3ldZ2lqVa+nTiYSDaSW804Wqd0l5ZrRqRSBgKKCtbOPtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
         <!-- END: Vendor CSS-->
@@ -106,6 +125,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/menu/menu-types/vertical-menu.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/core/colors/palette-gradient.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/file-uploaders/dropzone.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/forms/wizard.css')}}">
         <!-- END: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/style.css') }}">
         <!-- END: Theme CSS-->
@@ -114,6 +134,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/select2-bootstrap4.min.css') }}">
     <script src="{{ asset('assets/admin/js/jquery-3.6.0-jquery.min.js')}}"></script>
     <script src="{{ asset('assets/admin/js/multiple-select.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/forms/selects/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/multiple-select.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/all.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/fontawesome.min.css') }}">
@@ -138,4 +159,4 @@
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
-<body class="vertical-layout vertical-menu material-vertical-layout material-layout 2-columns   fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+<body class="vertical-layout vertical-menu material-vertical-layout material-layout 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">

@@ -9,7 +9,7 @@
     @include('dashboard.common._partials.messages')
     <div class="content-wrapper">
         <div class="content-header row">
-            <div class="content-header-left col-md-6 col-12 mb-2">
+            <div class="mb-2 content-header-left col-md-6 col-12">
                 <h3 class="content-header-title">{{trans('Admin\products.add_special_price')}}</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="content-header-right col-md-6 col-12">
-                <div class="media width-250 float-right">
+                <div class="float-right media width-250">
                     <media-left class="media-middle">
                         <div id="sp-bar-total-sales"></div>
                     </media-left>
@@ -44,7 +44,7 @@
                                 <h4 class="card-title" id="basic-layout-card-center">{{ __('Admin/products.add_special_price') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
+                                    <ul class="mb-0 list-inline">
                                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                         <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                         <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
@@ -82,8 +82,8 @@
                                                         <label for="projectinput1">
                                                             {{ trans('Admin\products.product_private_price') }}
                                                         </label>
-                                                        <input type="number" name="special_price" class="form-control" placeholder="{{ trans('Admin/products.product_private_price') }}" />
-                                                        @error('special_price')
+                                                        <input type="number" name="price" class="form-control" placeholder="{{ trans('Admin/products.product_private_price') }}" />
+                                                        @error('price')
                                                         <span class="text-danger"> {{$message}}</span>
                                                         @enderror
                                                     </div>

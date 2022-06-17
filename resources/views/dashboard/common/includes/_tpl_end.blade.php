@@ -5,6 +5,7 @@
 <script src="{{ asset('assets/admin/js/myFun/myFunction.js') }}"></script>
 <script src="{{ asset('assets/admin/js/jquery.repeater.js') }}"></script>
 
+
 <script src="{{ asset('assets/admin/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/js/tables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/js/tables/datatable/dataTables.bootstrap4.min.js') }}"></script>
@@ -46,6 +47,9 @@
 <!-- this for contact us page -->
 <script src="{{ asset('assets/admin/vendors/js/editors/quill/quill.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/scripts/pages/app-email.js') }}"></script>
+<script src="{{ asset('assets/admin/vendors/js/extensions/jquery.steps.min.js') }}"></script>
+<script src="{{ asset('assets/admin/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/scripts/forms/wizard-steps.js') }}"></script>
 @toastr_js
 @toastr_render
 {{-- image preview --}}
@@ -61,6 +65,25 @@
     });
 </script>
 {{-- end image preview --}}
+{{-- Start Switchery --}}
+<script type="text/javascript">
+    $(function (){
+        // Switchery Check Box ::
+        var elem = document.querySelector('.js-switch');
+        var init = new Switchery(elem,{
+            color             : '#64bd63',
+            secondaryColor    : '#ccc',
+            jackColor         : '#fff',
+            jackSecondaryColor: null,
+            className         : 'switchery',
+            disabled          : false,
+            disabledOpacity   : 0.5,
+            speed             : '1s',
+            size              : 'small',
+        });
+    });
+</script>
+{{-- End Switchery --}}
 <script>
     $(function() {
         $('.datepiker').datepiker();

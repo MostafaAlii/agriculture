@@ -58,7 +58,7 @@
                                         @method('put')
                                         <div class="form-body">
                                             <div class="form-group">
-                                                <label for="eventRegInput1">{{ __('Admin/site.firstname') }}<span class="text-danger">*</span></label>
+                                                 <labelfor="eventRegInput1">__('Admin/site.firstname')<span class="text-danger">*</span></label>
                                                 <input type="text" id="eventRegInput1" class="form-control"  name="firstname" value="{{ old('firstname',$admin->firstname) }}" required>
                                             </div>
                                             <div class="form-group">

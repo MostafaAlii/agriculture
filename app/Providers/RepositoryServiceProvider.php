@@ -34,7 +34,6 @@ use App\Http\Interfaces\Admin\OrchardInterface;
 
 use App\Http\Interfaces\Admin\ProvinceInterface;
 
-use App\Http\Interfaces\Admin\ProductInterface;
 use App\Http\Interfaces\Admin\ProfileInterface;
 
 use App\Http\Interfaces\Admin\SettingInterface;
@@ -98,7 +97,6 @@ use App\Http\Repositories\Admin\ProvinceRepository;
 
 use App\Http\Repositories\Admin\OrchardRepository;
 
-use App\Http\Repositories\Admin\ProductRepository;
 use App\Http\Repositories\Admin\ProfileRepository;
 
 
@@ -191,6 +189,8 @@ use App\Http\Repositories\Admin\AdminDepartmentRepository;
 use App\Http\Repositories\Admin\AgriToolServiceRepository;
 use App\Http\Repositories\Admin\WholeSaleProductRepository;
 
+use App\Http\Interfaces\Admin\ProductInterface;
+use App\Http\Repositories\Admin\ProductRepository;
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register() {
@@ -238,14 +238,13 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(TagInterface::class, TagRepository::class);
         $this->app->bind(AttributeInterface::class, AttributeRepository::class);
         $this->app->bind(OptionInterface::class, OptionRepository::class);
-        $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
         $this->app->bind(SubscribeInterface::class, SubscribeRepository::class);
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(ReviewInterface::class, ReviewRepository::class);
         $this->app->bind(TeamInterface::class, TeamRepository::class);
-
+        $this->app->bind(ProductInterface::class, ProductRepository::class);
         // Front Binding
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(RatingInterface::class, RatingRepository::class);

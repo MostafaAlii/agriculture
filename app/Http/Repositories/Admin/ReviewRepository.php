@@ -9,7 +9,6 @@ use App\Models\Review;
 class ReviewRepository implements ReviewInterface {
     
     public function index() {
-       // dd('fff');
         return view('dashboard.admin.reviews.index');
     }
 //------------------------------------------------------------------------------------------
@@ -38,14 +37,14 @@ class ReviewRepository implements ReviewInterface {
     }
 //------------------------------------------------------------------------------------------
     public function store($request) {
-    //  dd('gggg');
         try{
-            $review=new Review();
-            $review->name=$request->name;
-            $review->email=$request->email;
-            $review->message=$request->message;
-            $review->show_or_hide=$request->show_or_hide;
-            $review->save();
+            Review::create([
+                'name'          =>$request->name,
+                'email'         =>$request->email,
+                'message'       =>$request->message,
+                'show_or_hide'  =>$request->show_or_hide,
+            ]);
+          
             toastr()->success(__('Admin/attributes.added_done'));
             return redirect()->route('review.index');   
          } catch (\Exception $ex) {

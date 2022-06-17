@@ -20,6 +20,7 @@ return [
     'product_main_price'                         =>                  'السعر الاساسى للمنتج',
     'product_main_price_placeholder'             =>                  'ادخل السعر الاساسى للمنتج',
     'product_price'                              =>                  'السعــر',
+    'photo_required'                             =>                  'الصورة مطلوبة',
     'prices_managment'                           =>                  'الاسعــار',
     'product_price_select'                       =>                   'نــوع السعــر',
     'fixed'                                      =>                  'ثابــت',
@@ -66,8 +67,24 @@ return [
     'product_restore_title'                       =>                'استرجاع المنتــج',
 
     'rating_choose'                               =>                'تقييم المنتج',
-
-
+    /********************************************** Start Product Form Wizard ********************************************/
+    'add_or_edit_product'                         =>                'اضــافة / تعديل منتــج',
+    'general_product_information'                 =>                'المعلومات الاساسية للمنتــج',
+    'product_setting'                             =>                'اعدادات المنتــج',
+    'product_unit_and_price'                      =>                'الاسعار و الوحدات',
+    'product_offers'                              =>                'العروض و الخصومات',
+    'product_img_media'                           =>                'الصور و الملحقات',
+    'product_other_data'                          =>                'معلومات اضــافية',
+    'save_and_continue'                           =>                'حفــظ و استمــرار',
+    'product_units_select'                        =>                'اخــتر الوحــدة',
+    'special_offers'                              =>                'العروض و الاسعار الخاصة',
+    'pending'                                     =>                'بانتظار المرافقة',
+    'reject'                                      =>                'مرفوض',
+    'active'                                      =>                'متــاح',
+    'reject_reason'                               =>                'سبب الرفــض',
+    'type_reject_reason'                          =>                'اكتــب سبب الرفــض',
+    'back'                                        =>                'تراجــع',
+    /********************************************** End Product Form Wizard ********************************************/
 
     'name_required'                     =>'تاكد من ادخال اسم المنتج',
     'name_string'                       =>'اسم المنتج يجب ان يكون نص',

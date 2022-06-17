@@ -16,7 +16,6 @@ class UnitRepository implements UnitInterface
 
     public function index()
     {
-
         return view('dashboard.admin.units.index');
     }
 
@@ -29,6 +28,9 @@ class UnitRepository implements UnitInterface
             ->addIndexColumn()
             ->editColumn('created_at', function (Unit $unit) {
                 return $unit->created_at->diffforhumans();
+            })
+            ->addColumn('visibility', function (Unit $unit) {
+                return view('dashboard.admin..units.data_table.visibility', compact('unit'));
             })
             ->addColumn('actions', 'dashboard.admin.units.data_table.actions')
 
@@ -62,7 +64,13 @@ class UnitRepository implements UnitInterface
         try {
 
             $unitID = Crypt::decrypt($id);
+            if (!$request->has('visibility'))
+                    $request->request->add(['visibility' => 0]);
+                else
+                    $request->request->add(['visibility' => 1]);
+
             $unit = Unit::findorfail($unitID);
+            $unit->visibility    = $request->visibility;
             $unit->Name = $request->Name;
 
             $unit->update();

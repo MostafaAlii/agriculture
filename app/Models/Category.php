@@ -3,17 +3,17 @@ namespace App\Models;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 
 class Category extends Model implements TranslatableContract{
     
-    use HasFactory,Translatable;
-    
+    use HasFactory,Translatable,SoftDeletes;
     protected $table = "categories";
-    protected $guarded = [];
+    protected $fillable = ['parent_id','department_id'];
 
     protected $with=['translations'];
     public $translatedAttributes=['name','description','keyword','slug'];
@@ -35,9 +35,8 @@ class Category extends Model implements TranslatableContract{
         return $this->belongsToMany(Blog::class, 'blog_categories'); //blog_categories
     }
 
-    public function Category_department()
-    {
-        return $this->belongsTo('App\Models\Department','department_id') ;
+    public function Category_department():BelongsTo{
+        return $this->belongsTo('App\Models\Department','department_id');
     }
 
     public function scopeParentCategory() {
@@ -46,5 +45,34 @@ class Category extends Model implements TranslatableContract{
     public function scopeChildCategory() {
         return $this->whereNotNull('parent_id')->get();
     }
+
+
+    //-------------this will be used in delete confirmation pop up ------------------------------------
+    //-------------check if there are related models  linked with this  model or no -------------------
+    public function related(){
+
+        $found_or_no=0;
+
+        $output='<center>';
+        if ($this->products()->count()> 0){
+            $found_or_no++;
+             $output.='<h3>'. __('Admin\categories.relate_with_products').'</h3>';
+        }
+        if (Category::where('parent_id', $this->id)->count() > 0){
+            $found_or_no++;
+            $output.= '<h3>'. __('Admin\categories.relate_with_sub').'</h3>';
+        }
+        $output.= '</center>';
+        
+        if($found_or_no>0){
+            $output.= '<center><h3 style="color:red">'. __('Admin\categories.confirm_deletion').'</h3></center>';
+        }else{
+            $output.= '<center><h3 style="color:red">'. __('Admin/site.warning').'</h3></center>';
+        }
+        echo $output;
+    }
+    //---------------------------------------------------------------------------------------------------
+
+
     
 }

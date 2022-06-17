@@ -25,7 +25,17 @@
 
     <!-- BEGIN: Content-->
     <div class="app-content content">
-        
+    @if(Session::has('success'))
+        <div class="alert alert-success">
+        <center><h3>{{Session::get('success')}}</h3></center>
+        </div>
+    @endif
+
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+           <center><h3>{{Session::get('error')}}</h3></center>
+        </div>
+    @endif
         <div class="sidebar-left">
             <div class="sidebar">
                 <div class="sidebar-content email-app-sidebar d-flex">
@@ -33,6 +43,7 @@
                     <span class="sidebar-close-icon">
                         <i class="ft-x"></i>
                     </span>
+                   
                     <!-- sidebar close icon -->
                     @can('send-new-contact-messeage')
                         <div class="email-app-menu">

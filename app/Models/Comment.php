@@ -9,7 +9,7 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['parent_id','commentable_id','commentable_type','name','email','image','comment'];
     public $timestamps = true;
 
 

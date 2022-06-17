@@ -53,11 +53,11 @@ class ProductDetails extends Component
     {
         // $tags=Tag::get();
         $data['product'] = Product::findorfail($this->product_id);
-        $data['newProducts'] = Product::where('in_stock',1)->where('qty','>',0)->latest()->limit(3)->get();
-        $data['popProducts'] = Product::where('in_stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(3);
+        $data['newProducts'] = Product::where('stock',1)->where('qty','>',0)->latest()->limit(3)->get();
+        $data['popProducts'] = Product::where('stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(3);
 
-        $data['options0']=$data['product']->options()->pluck('id');
-        $data['options1']=Option::whereIn('id',$data['options0'])->get();
+        // $data['options0']=$data['product']->options()->pluck('id');
+        // $data['options1']=Option::whereIn('id',$data['options0'])->get();
 
         //retreive product comments
         $data['comments'] = $data['product']->comments()->whereNull('parent_id')->orderby('id','desc')->simplePaginate(5);

@@ -30,4 +30,15 @@ return [
     'no_area'                       =>'No areas for choisen province',
     'no_state'                      =>'No states for choisen area',
     'no_village'                    =>'No villages for choisen state',
+
+
+
+    'relate_with_users'             =>'This department related with users.',
+    'relate_with_farmers'           =>'This department related with farmers',
+    'relate_with_vendors'           =>'This department related with vendors',
+    'relate_with_category'          =>'This department related with categories',
+    'relate_with_sub'               =>'This department related with sub departments',
+    'confirm_deletion'              =>'Are you sure you want to delete this department and related records?',
+    'confirm_deletion_all'          =>'This departments may related with other records like[ users,farmers,vendors,categories and sub departments] ',
+    'confirm_deletion_all2'         =>'Are you sure you want to delete selected departments and related records?',
 ];

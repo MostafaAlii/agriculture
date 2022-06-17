@@ -68,6 +68,7 @@
                                             <td width="10%">&nbsp;</td>
                                             <td width="35%">{{ __('Website/home.addedproduct') }}</td>
                                             <td width="15%">{{ __('Website/home.price') }}</td>
+                                            <td width="15%">{{ __('Website/home.unit') }}</td>
                                             <td width="15%">{{ __('Admin/site.farmername') }}</td>
                                             <td width="20%">{{ __('Website/home.quantity') }}</td>
                                             <td width="15%">{{ __('Website/home.total') }}</td>
@@ -91,7 +92,6 @@
                                                 <tr>
                                                     <td>
                                                         <figure class="__image">
-
                                                             @if ($item->model->image)
                                                                 <a
                                                                     href="{{ route('product_details', encrypt($item->model->id)) }}">
@@ -107,18 +107,20 @@
                                                             @endif
                                                         </figure>
                                                     </td>
-
                                                     <td>
                                                         <a href="{{ route('product_details', encrypt($item->model->id)) }}"
                                                             class="__name">{{ $item->model->name }}</a>
                                                     </td>
-
                                                     <td>
                                                         <span
-                                                            class="__price">{{ number_format($item->model->price, 2) }}
-                                                            $</span>
+                                                            class="__price">{{ $item->model->special_price ? number_format($item->model->special_price,2) : number_format($item->model->getPrice(), 2)}} $
+                                                        </span>
                                                     </td>
-
+                                                    <td>
+                                                        <span
+                                                            class="__price">{{ $item->model->getUnit()->Name}}
+                                                        </span>
+                                                    </td>
                                                     <td>
                                                         <span
                                                             class="__name">{{$item->model->farmer->firstname }} {{$item->model->farmer->lastname }}
@@ -156,8 +158,8 @@
 
                                                     <td>
                                                         <span
-                                                            class="__total">{{ number_format($item->subtotal, 2) }}
-                                                            $</span>
+                                                            class="__total">{{ number_format($item->subtotal, 2) }} $
+                                                        </span>
                                                     </td>
 
                                                     <td>

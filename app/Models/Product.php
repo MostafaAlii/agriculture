@@ -1,31 +1,24 @@
 <?php
 namespace App\Models;
+use App\Models\UnitTranslation;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\{HasMany, MorphMany, MorphOne, BelongsTo, MorphToMany, BelongsToMany};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
 class Product extends Model {
     use HasFactory, Translatable, SoftDeletes;
+    const PENDING = 1, ACTIVE = 2, IN_STOCK = 1;
     protected $table = "products";
     protected $guarded = [];
-    protected $with=['translations'];
+    protected $with=['translations','units'];
     protected $slugAttribute = ['name'];
-    public $translatedAttributes=['name','description', 'slug'];
+    public $translatedAttributes=['name','description', 'reason', 'other_data'];
     public $timestamps = true;
 
     protected $hidden = ['pivot'];
 
     protected $casts = [
-        'manage_stock' => 'boolean',
-        'in_stock' => 'boolean',
-        'status' => 'boolean',
         'deleted_at' => 'datetime:Y/m/d',
     ];
 
@@ -50,6 +43,11 @@ class Product extends Model {
         return $this->belongsToMany(Tag::class, 'product_tags');
     }
 
+    public function units(): BelongsToMany { // Create Group Invoices
+        return $this->belongsToMany(Unit::class, 'product_unit')->withPivot(['price']);
+        // return $this->belongsToMany(Unit::class, 'product_unit');
+    }
+
     // Product Has Many Options ::
     public function options(): HasMany {
         return $this->hasMany(Option::class);
@@ -59,7 +57,7 @@ class Product extends Model {
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function comments() {
+    public function comments(): MorphMany {
         return $this->morphMany(Comment::class, 'commentable');
     }
 
@@ -89,5 +87,22 @@ class Product extends Model {
             $avg=0;
         }
         return $avg;
+    }
+
+    public function getStatusType() {
+        switch ($this->status) {
+            case 0 : $result = trans('Admin/products.pending') ; break;
+            case 1 : $result = trans('Admin/products.active') ; break;
+        }
+        return $result;
+    }
+
+    public function scopeGetPrice(){
+        return $this->units()->where('product_id', $this->id)->first()->pivot->price;
+    }
+    public function scopeGetUnit(){
+        $ProductUnits = $this->units->pluck('id');
+        $x=$this->units()->whereIn('unit_id', $ProductUnits)->pluck('id')->first();
+        return UnitTranslation::whereId($x)->select('Name')->first();
     }
 }

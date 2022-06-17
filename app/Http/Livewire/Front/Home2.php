@@ -31,8 +31,7 @@ class Home2 extends Component
           $data['ku_logo']=Setting::select('ku_site_logo')->first();
 
 
-        $data['offer_product']=Product::whereNotNull('special_price')->where('in_stock',1)->where('special_price_type','=','fixed')->first();
-
+        $data['offer_product']=Product::whereNotNull('special_price')->where('stock',1)->where('special_price_type','=','fixed')->first();
         return view('livewire.front.home2',$data)->layout('front.layouts.master');
     }
 }
