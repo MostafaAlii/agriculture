@@ -351,7 +351,7 @@
     <!-- end section -->
 
     <!-- start section -->
-    <section class="section section--no-pt section--no-pb section--gutter">
+    {{-- <section class="section section--no-pt section--no-pb section--gutter">
         <div class="container-fluid px-md-0">
             <!-- start banner simple -->
             <div class="simple-banner simple-banner--style-2" data-aos="fade" data-aos-offset="50">
@@ -379,6 +379,6 @@
             </div>
             <!-- end banner simple -->
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 </div>

@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header pt-lg-3 mt-5">
                         <h4 class="card-title shadow p-3 mb-5 bg-white rounded">
-                            <i class="fa fa-tachometer" aria-hidden="true"> </i> 
+                            <i class="fa fa-tachometer" aria-hidden="true"> </i>
                             {{ trans('Website/vendor/dashboard.dashboardPageTitle') . ' / ' . \Auth::user()->firstname . ' ' .\Auth::user()->lastname }}
                         </h4>
                         <hr>
@@ -30,7 +30,7 @@
                                     <div class="col-lg-8 shadow p-3 mb-5 bg-white rounded" style="min-height:35%;width: 65%;float:right !important;">
                                         <div class="container shadow p-3 mb-5 bg-white rounded">
                                             <h4>
-                                                <i class="fa fa-bars" aria-hidden="true"></i>  
+                                                <i class="fa fa-bars" aria-hidden="true"></i>
                                                 {{ trans('Website/vendor/dashboard.my_orders') }} :
                                             </h4>
                                             <!-- Order Details Component -->
@@ -81,7 +81,7 @@
                                                             @foreach($order->orderItems as $item)
                                                                 <tr>
                                                                     <td>
-                                                                        @if($item->product->image->filename)
+                                                                        @if($item->product->image)
                                                                             <img src="{{ asset('Dashboard/img/products/'. $item->product->image->filename) }}" style="width: 75px;" alt="">
                                                                         @else
                                                                             <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}" style="width: 75px;" alt="">
@@ -89,7 +89,7 @@
                                                                         <a href="{{ route('product_details', encrypt($item->product->id)) }}">
                                                                             {{ $item->product->name }}
                                                                         </a>
-                                                                        
+
                                                                     </td>
                                                                     <td>{{ $order->currency() . ' ' . number_format($item->price, 2) }}</td>
                                                                     <td>{{ $item->quantity }}</td>
