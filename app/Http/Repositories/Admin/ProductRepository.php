@@ -148,13 +148,10 @@ class ProductRepository implements ProductInterface {
                 $product->tags()->sync($request->tags);
                 $product->units()->syncWithPivotValues([$request->units],['price'=>$request->price]);
                 // Save Product Main Photo ::
-                if($request->has('photo')) {
-                    if($product->image) {
-                        $old_photo = $product->image->filename;
-                        $this->Delete_attachment('upload_image', 'products/', $request->id, $old_photo);
-                    }
-                    $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
+                if ($request->photo) {
+                    $this->deleteImage('upload_image', '/products/' . $product->photo, $product->id);
                 }
+                $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
                 DB::commit();
                 toastr()->success(__('Admin/products.product_updated_successfully'));
                 return redirect()->route('products');
