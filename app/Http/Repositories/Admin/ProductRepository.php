@@ -28,9 +28,9 @@ class ProductRepository implements ProductInterface {
              ->addColumn('category_name', function (Product $product) {
                 return view('dashboard.admin.products.data_table.related_category', compact('product'));
              })
-             /*->addColumn('price', function (Product $product) {
+            ->addColumn('price', function (Product $product) {
                 return view('dashboard.admin.products.data_table.price_formated', compact('product'));
-            })*/
+            })
             ->editColumn('created_at', function (Product $product) {
                 return $product->created_at->diffforhumans();
             })
@@ -160,6 +160,21 @@ class ProductRepository implements ProductInterface {
                 toastr()->error(__('Admin/general.wrong'));
                 return redirect()->route('products');
             }
+    }
+
+    public function additionalStockStore($request) {
+        //return $request;
+        try {
+            $real_id= $request->product_id;
+            Product::whereId($real_id)->update($request->only([
+                'stock', 'qty'
+            ]));
+            toastr()->success(__('Admin/products.product_update_product_stock_qty_successfully'));
+            return redirect()->route('products');
+        } catch(\Exception $ex){
+            toastr()->error(__('Admin/general.wrong'));
+            return redirect()->route('products');
+        }
     }
 
 }

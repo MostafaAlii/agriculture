@@ -91,7 +91,7 @@
                                                     <th>{{ __('Admin/products.product_farmer') }}</th>
                                                     <th>{{ __('Admin/products.product_status') }}</th>
                                                      <th>{{ __('Admin/products.product_category') }}</th>
-                                                     {{-- <th>__('Admin/products.product_price') </th>--}}
+                                                     <th>{{__('Admin/products.product_price') }}</th>
                                                     <th>{{ __('Admin/general.created_since') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
@@ -123,7 +123,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Datatable Fire -->
-
+<script>
+    $(document).on('change','#manageStock',function(){
+       if($(this).val() == '1' ){
+            $('#quantity').show();
+       }else{
+           $('#quantity').hide();
+       }
+    });
+</script>
 <script>
 
     let productsTable = $('#products-table').DataTable({
@@ -144,7 +152,7 @@
             {data: 'farmer_name', name: 'farmer_name'},
             {data: 'status', name: 'status'},
             {data: 'category_name', name: 'category_name'},
-            //{data: 'price', name: 'price', searchable: false, sortable: false},
+            {data: 'price', name: 'price', searchable: false, sortable: false},
             {data: 'created_at', name: 'created_at', searchable: false, sortable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '18%'},
         ],

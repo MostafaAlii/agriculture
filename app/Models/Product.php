@@ -45,7 +45,6 @@ class Product extends Model {
 
     public function units(): BelongsToMany { // Create Group Invoices
         return $this->belongsToMany(Unit::class, 'product_unit')->withPivot(['price']);
-        // return $this->belongsToMany(Unit::class, 'product_unit');
     }
 
     // Product Has Many Options ::
