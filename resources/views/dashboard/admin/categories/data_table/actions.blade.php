@@ -57,8 +57,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                                <center><h4>{{__('Admin/departments.confirm_deletion_all')}}</h4></center>
-                                 <center><h3 style="color:red">{{__('Admin/departments.confirm_deletion_all2')}}</h3></center>
+                                <center><h4>{{__('Admin/categories.confirm_deletion_all')}}</h4></center>
+                                 <center><h3 style="color:red">{{__('Admin/categories.confirm_deletion_all2')}}</h3></center>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin/site.close') }}</button>

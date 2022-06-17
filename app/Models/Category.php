@@ -56,17 +56,16 @@ class Category extends Model implements TranslatableContract{
         $output='<center>';
         if ($this->products()->count()> 0){
             $found_or_no++;
-            // $output.='<h3>'. __('Admin\departments.relate_with_users').'</h3>';
-            $output.='<h3>يوجد منتجات فى هذا القسم</h3>';
+             $output.='<h3>'. __('Admin\categories.relate_with_products').'</h3>';
         }
         if (Category::where('parent_id', $this->id)->count() > 0){
             $found_or_no++;
-            $output.= '<h3>'. __('Admin\departments.relate_with_category').'</h3>';
+            $output.= '<h3>'. __('Admin\categories.relate_with_sub').'</h3>';
         }
         $output.= '</center>';
         
         if($found_or_no>0){
-            $output.= '<center><h3 style="color:red">'. __('Admin\departments.confirm_deletion').'</h3></center>';
+            $output.= '<center><h3 style="color:red">'. __('Admin\categories.confirm_deletion').'</h3></center>';
         }else{
             $output.= '<center><h3 style="color:red">'. __('Admin/site.warning').'</h3></center>';
         }

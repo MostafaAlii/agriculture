@@ -1,7 +1,7 @@
 <?php
 return [
     'departmentPageTitle'           =>'الاقسام',
-    'categories_title_in_sidebar'  => 'الاقسام',
+    'categories_title_in_sidebar'   => 'الاقسام',
     'depart_name'                   =>'الاسم',
     'depart_desc'                   =>'الوصف',
     'depart_keyword'                =>'الكلمات المفتاحيه',
@@ -23,6 +23,14 @@ return [
 
     'department'                    =>'الاداره',
     'depart_choise'                 =>'اختر الاداره',
-    'departments'                    =>'الاقسام الرئيسيه',
-    'department_sub'                 =>'الاقسام الفرعيه',
+    'departments'                   =>'الاقسام الرئيسيه',
+    'department_sub'                =>'الاقسام الفرعيه',
+
+
+
+    'relate_with_products'          =>' . يوجد منتجات فى هذا القسم ',
+    'relate_with_sub'               =>'. يوجد اقسام فرعيه لهذا القسم ',
+    'confirm_deletion'              =>'هل تريد حذف القسم وكل ما يتعلق بها ؟',
+    'confirm_deletion_all'          =>'قد ترتبط هذه الاقسام بجداول اخرى [منتجات-اقسام فرعيه] ',
+    'confirm_deletion_all2'         =>'هل تريد حذف الاقسام المُحدده وكل ما يتعلق بها ؟',
 ];
