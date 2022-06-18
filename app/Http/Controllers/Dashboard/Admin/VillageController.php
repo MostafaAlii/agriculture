@@ -42,7 +42,7 @@ class VillageController extends Controller
         return $this->Data->destroy($id);
     }
 
-    public function bulkDelete(VillageRequest $request) {
+    public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
 }

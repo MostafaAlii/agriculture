@@ -69,7 +69,7 @@
                                                         <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="area_id">{{ __('Admin/crops.village') }}</label>
-                                                                <select name="village_id" id="area_id" class="form-control" required>
+                                                                <select name="village_id" id="area_id" class="form-control"  required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($villages as $village)
@@ -83,7 +83,7 @@
                                                         <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="farmer_id">{{ __('Admin/crops.farmer') }}</label>
-                                                                <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                                <select class="select2 form-control" name="farmer_id" id="farmer_id"  required="required">
                                                                     <input type="hidden" name="area_id" value="{{$areaID}}" >
                                                                     <input type="hidden" name="state_id" value="{{$stateID}}" >
                                                                     <input type="hidden" name="admin_id" value="{{$adminId}}" >
@@ -100,7 +100,7 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label for="customSelect">{{ __('Admin/crops.land_category_id') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="land_category_id" >
+                                                                <select class="custom-select form-control" id="customSelect"  required="required" name="land_category_id" >
                                                                     @foreach($land_categories as $land_category)
                                                                         <option value="{{$land_category->id}}">{{ $land_category->category_name }}</option>
                                                                     @endforeach
@@ -111,7 +111,8 @@
                                                        <div class="col col-md-4">
                                                            <div  class="form-group">
                                                                <label for="id_h5_multi-2">{{ __('Admin/crops.winter_crops') }}</label>
-                                                               <select name="winter_crops[]"class="select2 form-control" multiple="multiple" id="id_h5_multi-2">
+                                                               <select name="winter_crops[]"class="select2 form-control"
+                                                                        multiple="multiple" id="id_h5_multi-2">
                                                                    @foreach($winter_crops as $winter_crop)
                                                                        <option value="{{$winter_crop->id}}">{{ $winter_crop->name }}</option>
                                                                    @endforeach
@@ -151,7 +152,7 @@
                                                        <div class="col">
                                                            <div class="form-group">
                                                                <label  for="date">{{ __('Admin/crops.date') }}</label>
-                                                               <input name="date"  id="date"type="date" class="form-control">
+                                                               <input name="date"  required="required"  id="date"type="date" class="form-control">
                                                            </div>
                                                        </div>
 

@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/proviences.enter_provience_name') }}</label>
-                        <input type="text" name="name" class="form-control" placeholder="{{ trans('Admin/proviences.enter_provience_name_placeholder') }}" />
+                        <input type="text" name="name" required="required" class="form-control" placeholder="{{ trans('Admin/proviences.enter_provience_name_placeholder') }}" />
                     </div>
                     <div class="form-group">
                         <div class="form-group">
@@ -22,7 +22,7 @@
                                 <i class="material-icons">flag</i>
                                 {{ trans('Admin/proviences.choose_country_name') }}
                             </label>
-                            <select name="country_id" class="select2 form-control">
+                            <select name="country_id" class="select2 form-control" required="required">
                                 <optgroup label="{{ trans('Admin/proviences.please_choose_country_name') }}">
                                     @if($countries && $countries -> count() > 0)
                                         @foreach($countries as $country)

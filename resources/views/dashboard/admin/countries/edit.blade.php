@@ -68,7 +68,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label for="eventRegInput1">{{ __('Admin/countries.country_name') }}<span class="text-danger">*</span></label>
-                                                    <input type="text" id="eventRegInput1"  class="form-control"  name="name" value="{{ $country->name}}" required>
+                                                    <input type="text" id="eventRegInput1"  class="form-control"  name="name" value="{{ $country->name}}"  required="required">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -76,7 +76,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/countries.country_flag') }} :  <span style="color:rgb(199, 8, 8)">*</span></label>
-                                                        <input class="form-control img" name="image" value="{{ $country->country_logo}}"  type="file" accept="image/*">
+                                                        <input class="form-control img"  required="required"  name="image" value="{{ $country->country_logo}}"  type="file" accept="image/*">
                                                     </div>
                                                 </div>
                                                     @if($country->country_logo)

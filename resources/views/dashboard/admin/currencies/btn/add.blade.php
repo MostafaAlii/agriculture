@@ -14,7 +14,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/currencies.enter_currency_name') }}</label>
-                        <input type="text" name="Name" class="form-control" placeholder="{{ trans('Admin/currencies.enter_currency_name_placeholder') }}" />
+                        <input type="text" name="Name" class="form-control"  required="required"
+                                placeholder="{{ trans('Admin/currencies.enter_currency_name_placeholder') }}" />
                     </div>
 
                 </div>

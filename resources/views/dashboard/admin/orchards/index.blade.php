@@ -17,10 +17,10 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
-                                </li>
-                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
-                                </li>
+                                {{--<li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area->name }}</a>--}}
+                                {{--</li>--}}
+                                {{--<li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state->name }}</a>--}}
+                                {{--</li>--}}
                                 <li class="breadcrumb-item"><a href="{{ route('orchards.index') }}">{{ __('Admin/orchards.orchardsPageTitle') }}</a>
                                 </li>
                                 </li>

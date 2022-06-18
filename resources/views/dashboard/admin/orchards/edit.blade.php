@@ -68,7 +68,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="village_id">{{ __('Admin/orchards.village') }}</label>
-                                                        <select name="village_id" id="village_id" class="form-control" required>
+                                                        <select name="village_id" id="village_id" class="form-control"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{$orchard->village_id }}" selected>{{ $orchard->village->name }}</option>
@@ -82,7 +82,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/orchards.farmer') }}</label>
-                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id"  required="required">
                                                             <option value="{{$orchard->farmer_id}}" selected>{{$orchard->farmer->firstname}}</option>
 
                                                         </select>
@@ -95,7 +95,8 @@
                                                     <div  class="form-group">
                                                         <label for="id_h5_multi">{{ __('Admin/orchards.trees') }}</label>
 
-                                                        <select name="trees[]"class="select2 form-control"name="trees[]" multiple="multiple" id="id_h5_multi">
+                                                        <select name="trees[]"class="select2 form-control"name="trees[]"
+                                                                multiple="multiple" id="id_h5_multi"  required="required">
                                                             @foreach($orchard->trees as $tree)
                                                                 <option value="{{$tree->id}}"selected>{{$tree->name}}</option>
                                                             @endforeach
@@ -112,7 +113,8 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
-                                                        <select class="select2 custom-select form-control" id="customSelect" name="land_category_id" >
+                                                        <select class="select2 custom-select form-control" id="customSelect"
+                                                                required="required" name="land_category_id" >
                                                             <option value=" {{$orchard->land_category_id }}">{{ $orchard->landCategory->category_name }}</option>
                                                             @foreach($land_categories as $land_category)
                                                                 <option value="{{$land_category->id}} ">{{ $land_category->category_name }}</option>
@@ -129,13 +131,13 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/orchards.orchard_area') }}</label>
-                                                        <input name="orchard_area" value="{{$orchard->orchard_area}}"  class="form-control"type="text">
+                                                        <input name="orchard_area" value="{{$orchard->orchard_area}}"  required="required"  class="form-control"type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/orchards.unit') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                        <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required">
                                                             <option value="{{$orchard->unit_id}}">{{$orchard->unit->Name}}</option>
 
                                                             @foreach($units as $unit)
@@ -147,7 +149,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/orchards.tree_count_per_orchard') }}</label>
-                                                        <input name="tree_count_per_orchard" value="{{$orchard->tree_count_per_orchard}}"  class="form-control"type="text">
+                                                        <input name="tree_count_per_orchard" value="{{$orchard->tree_count_per_orchard}}"  required="required" class="form-control"type="text">
 
                                                     </div>
                                                 </div>
@@ -155,7 +157,7 @@
                                                     <div class="form-group">
                                                         <label for="supported_side_id">{{ __('Admin/orchards.supported_side') }}</label>
                                                         {{--<option selected disabled>--select--</option>--}}
-                                                        <select class="select2 custom-select form-control" name="supported_side" id="supported_side_id">
+                                                        <select class="select2 custom-select form-control" name="supported_side" required="required" id="supported_side_id">
                                                         <option value="private" {{$orchard->supported_side=='private'?'selected':''}} >{{ __('Admin\orchards.private') }}</option>
                                                         <option value="govermental" {{$orchard->supported_side=='govermental'?'selected':''}}>{{ __('Admin\orchards.govermental') }}</option>
                                                         <option value="international_organizations" {{$orchard->supported_side=='international_organizations'?'selected':''}}>{{ __('Admin\orchards.international_organizations') }}</option>

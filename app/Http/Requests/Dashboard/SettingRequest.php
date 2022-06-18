@@ -27,7 +27,8 @@ class SettingRequest extends FormRequest
             'inestegram' => 'required|url',
             'site_name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+
             ],
 
 

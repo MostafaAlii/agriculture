@@ -13,7 +13,9 @@ class AreaRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:area_translations,name,area_id'.$this->id,
+
 
             ],
             'location_x' =>  'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
@@ -30,6 +32,8 @@ class AreaRequest extends FormRequest {
             'name.required'   => trans('Admin\validation.required'),
             'province_id.exists'   => trans('Admin\validation.exists'),
             'name.regex'   => trans('Admin\validation.regex'),
+            'name.unique'   => trans('Admin\validation.unique'),
+
             'location_x.numeric'    => trans('Admin\validation.numeric'),
             'location_y.numeric'       => trans('Admin\validation.numeric'),
             'province_id.required'       => trans('Admin\validation.required'),

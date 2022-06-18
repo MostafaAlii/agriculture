@@ -13,7 +13,10 @@ class CourseBeeRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:course_bee_translations,name,course_bee_id'.$this->id,
+
+
 
             ],
             'desc'=>'required|string'
@@ -25,6 +28,7 @@ class CourseBeeRequest extends FormRequest {
             'name.required'   => trans('Admin\validation.required'),
             'name.regex'   => trans('Admin\validation.regex'),
             'desc.required'   => trans('Admin\validation.required'),
+            'name.unique'   => trans('Admin\validation.unique'),
 
 
         ];

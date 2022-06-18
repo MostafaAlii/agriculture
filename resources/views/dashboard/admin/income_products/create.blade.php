@@ -68,7 +68,7 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label for="area_id">{{ __('Admin/income_products.whole_product') }}</label>
-                                                                <select  name="whole_product_id" id="area_id" class="form-control" required autocomplete="on">
+                                                                <select  name="whole_product_id" id="area_id" class="form-control select2" required autocomplete="on">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($whole_products as $whole_product)
@@ -81,7 +81,7 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label for="country_id-1">{{ __('Admin/income_products.country') }}</label>
-                                                                <select name="country_id" id="country_id-1" class="form-control" required>
+                                                                <select name="country_id" id="country_id-1" class="form-control"  required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($countries as $country)
@@ -95,7 +95,7 @@
 
                                                             <div class="form-group">
                                                                 <label for="country_product_type-1">{{ __('Admin/income_products.country_product_type') }}</label>
-                                                                <select class="form-control" name="country_product_type" id="country_product_type-1">
+                                                                <select class="form-control" name="country_product_type" id="country_product_type-1"  required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     <option value="local">{{ __('Admin/income_products.local') }}</option>
                                                                     <option value="iraq">{{ __('Admin/income_products.iraq') }}</option>
@@ -115,7 +115,7 @@
 
                                                            <div class="form-group">
                                                                <label for="area_id-1">{{ __('Admin/income_products.wholesale') }}</label>
-                                                               <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="text">
+                                                               <input name="admin_dep_name" value="{{$admin_dep_name}}"  required="required" class="form-control"type="text">
                                                                <input name="admin_id" value="{{$adminID}}"  class="form-control"type="hidden">
 
                                                            </div>
@@ -123,13 +123,13 @@
                                                        <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.income_product_amount') }}</label>
-                                                                <input name="income_product_amount" value=""  class="form-control"type="text">
+                                                                <input name="income_product_amount" value=""  required="required" class="form-control"type="text">
                                                             </div>
                                                         </div>
                                                        <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.unit') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                                <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required">
                                                                     <option selected disabled>--select--</option>
                                                                     @foreach($units as $unit)
                                                                         <option value="{{$unit->id}}">{{ $unit->Name }}</option>
@@ -144,7 +144,7 @@
                                                         <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.income_product_price') }}</label>
-                                                                <input name="income_product_price" value=""  class="form-control"type="text">
+                                                                <input name="income_product_price" value=""  class="form-control"type="text"  required="required">
                                                                 <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="hidden">
 
                                                             </div>
@@ -152,7 +152,7 @@
                                                         <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.currency') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="currency_id" >
+                                                                <select class="custom-select form-control" id="customSelect" name="currency_id"  required="required">
                                                                     <option selected disabled>--select--</option>
                                                                     @foreach($currencies as $currency)
                                                                         <option value="{{$currency->id}}">{{ $currency->Name }}</option>
@@ -163,7 +163,7 @@
                                                         <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.income_product_date') }}</label>
-                                                                <input name="income_product_date" value=""  class="form-control"type="date">
+                                                                <input name="income_product_date" value=""  class="form-control"type="date"  required="required">
 
                                                             </div>
                                                         </div>

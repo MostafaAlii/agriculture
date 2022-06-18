@@ -243,13 +243,13 @@
         columns: [
 
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name', searchable: false, sortable: false},
-            {data: 'province', name: 'province.name', searchable: false, sortable: false},
-            {data: 'states', name: 'states.name', searchable: false, sortable: false},
-            {data: 'created_at', name: 'created_at', searchable: false},
+            {data: 'name', name: 'name', searchable: true, sortable: false},
+            {data: 'province', name: 'province', searchable: true, sortable: false},
+            {data: 'states', name: 'states', searchable: true, sortable: false},
+            {data: 'created_at', name: 'created_at', sortable: true},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[4, 'desc']],
+        ORDER: [[4, 'desc']],
     });
     // function hideAllColumns(){
     //     for($i=0 ;i<4;i++){

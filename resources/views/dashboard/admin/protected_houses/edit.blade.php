@@ -69,7 +69,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="village_id">{{ __('Admin/p_houses.village') }}</label>
-                                                        <select name="village_id" id="village_id" class="form-control" required>
+                                                        <select name="village_id" id="village_id" class="form-control" required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{$protected_house->village_id }}" selected>{{ $protected_house->village->name }}</option>
@@ -83,7 +83,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/p_houses.farmer') }}</label>
-                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id" required="required">
                                                             <option value="{{$protected_house->farmer_id}}" selected>{{$protected_house->farmer->firstname}}</option>
 
                                                         </select>
@@ -96,8 +96,8 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="customSelect1">{{ __('Admin/p_houses.supported_side') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect1" name="supported_side" >
-                                                            <option selected disabled>--select--</option>
+                                                        <select class="custom-select form-control" id="customSelect1" name="supported_side" required="required">
+                                                            <option selected disabled>{{ __('Admin/site.select') }}</option>
                                                                 <option value="{{$protected_house->supported_side}}"{{$protected_house->supported_side=='private'?'selected':''}}>{{__('Admin\p_houses.private') }}</option>
                                                             <option value="{{$protected_house->supported_side}}"{{$protected_house->supported_side=='govermental'?'selected':''}}>{{__('Admin\p_houses.govermental') }}</option>
                                                             <option value="{{$protected_house->supported_side}}"{{$protected_house->supported_side=='international_organizations'?'selected':''}}>{{__('Admin\p_houses.international_organizations') }}</option>
@@ -109,7 +109,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label  for="count_protected_house_id">{{ __('Admin/p_houses.count_protected_house') }}</label>
-                                                        <input name="count_protected_house" value="{{$protected_house->count_protected_house}}"  id="count_protected_house_id"typ="text" class="form-control">
+                                                        <input name="count_protected_house" value="{{$protected_house->count_protected_house}}" required="required" id="count_protected_house_id"typ="text" class="form-control">
                                                         <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
                                                         <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
                                                         <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
@@ -125,9 +125,9 @@
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/p_houses.status') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect" name="status" >
+                                                        <select class="custom-select form-control" id="customSelect" name="status" required="required">
 
-                                                            <option  disabled>--select--</option>
+                                                            <option  disabled>{{ __('Admin/site.select') }}</option>
                                                             <option value="active" {{$protected_house->status == 'active'?'selected':''}}>{{ __('Admin/p_houses.active') }}</option>
                                                             <option value="inactive"{{$protected_house->status == 'inactive'?'selected':''}}>{{ __('Admin/p_houses.inactive') }}</option>
                                                         </select>
@@ -137,14 +137,14 @@
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/p_houses.average_product_annual') }}</label>
-                                                        <input name="average_product_annual" value="{{$protected_house->average_product_annual}}"  class="form-control"type="text">
+                                                        <input name="average_product_annual" required="required" value="{{$protected_house->average_product_annual}}"  class="form-control"type="text">
 
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/p_houses.unit') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" required="required" >
                                                             <option value="{{$protected_house->unit_id}}">{{$protected_house->unit->Name}}</option>
 
                                                             @foreach($units as $unit)

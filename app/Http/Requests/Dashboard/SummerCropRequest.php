@@ -13,7 +13,9 @@ class SummerCropRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:summer_crop_translations,name,summer_crop_id'.$this->id,
+
 
             ],
         ];
@@ -23,6 +25,8 @@ class SummerCropRequest extends FormRequest {
         return [
             'name.required'   => trans('Admin\validation.required'),
             'name.regex'   => trans('Admin\validation.regex'),
+            'name.unique'   => trans('Admin\validation.unique'),
+
         ];
     }
 }

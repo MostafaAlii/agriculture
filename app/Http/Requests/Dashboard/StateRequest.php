@@ -17,12 +17,16 @@ class StateRequest extends FormRequest
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:state_translations,name,state_id'.$this->id,
+
 
             ],
             'location_x' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
-            'area_id' => 'required|exists:states,id',
+            'area_id' => 'required|exists:areas,id',
+            'name.unique'   => trans('Admin\validation.unique'),
+
 
 
         ];

@@ -13,7 +13,9 @@ class UnitRequest extends FormRequest {
 
             'Name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:unit_translations,Name,unit_id'.$this->id,
+
             ]
 
         ];
@@ -23,6 +25,8 @@ class UnitRequest extends FormRequest {
         return [
             'Name.required'   => trans('Admin\validation.required'),
             'Name.regex'   => trans('Admin\validation.regex'),
+            'Name.unique'   => trans('Admin\validation.unique'),
+
 
         ];
     }

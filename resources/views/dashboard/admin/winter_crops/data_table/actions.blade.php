@@ -81,8 +81,8 @@
                             <div class="form-group">
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin\crops.enter_crop_name') }}
                                 </label>
-                                <input type="text" name="name" class="form-control"
-                                       value="{{$crop->name}}"
+                                <input type="text" name="name" class=" select2 form-control"
+                                       value="{{$crop->name}}" required="required"
                                        placeholder="{{ trans('Admin/crops.enter_crop_name_placeholder') }}"/>
                                 @error('name')
                                 <span class="text-danger"> {{$message}}</span>

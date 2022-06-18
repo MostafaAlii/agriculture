@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/units.enter_unit_name') }}</label>
-                        <input type="text" name="Name" class="form-control" placeholder="{{ trans('Admin/units.enter_unit_name_placeholder') }}" />
+                        <input type="text" name="Name" class="form-control" placeholder="{{ trans('Admin/units.enter_unit_name_placeholder') }}" required="required" />
                     </div>
                 </div>
 

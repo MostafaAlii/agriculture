@@ -19,7 +19,7 @@ class WaterServiceRepository implements WaterServiceInterface
     public function data()
     {
 
-        $waterServices = WaterService::query();
+        $waterServices = WaterService::query()->get();
         return DataTables::of($waterServices)
             ->addColumn('record_select', 'dashboard.admin.water_services.data_table.record_select')
             ->addIndexColumn()

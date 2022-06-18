@@ -16,7 +16,7 @@ class StateRepository implements StateInterface {
     }
 
     public function data() {
-        $states = State::with(['area','villages']);
+        $states = State::with(['area','villages'])->get();
         return DataTables::of($states)
             ->addColumn('area', function (State $state) {
                 return $state->area->name;
@@ -93,7 +93,7 @@ class StateRepository implements StateInterface {
             }
 
 } catch (\Exception $e) {
-            toastr()->error(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/site.delete_related'));
 
             return redirect()->back();
 
@@ -112,7 +112,7 @@ class StateRepository implements StateInterface {
                     $state = State::findorfail($state_ids);
                     $villages = $state->villages->count();
                     if ($villages > 0) {
-                        toastr()->error(__('Admin/site.delete_related_villages'));
+                        toastr()->error(__('Admin/site.delete_related'));
                         return redirect()->route('States.index');
                     }
 
@@ -130,7 +130,7 @@ class StateRepository implements StateInterface {
 
         }catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.delete_wrong'));
+            toastr()->success(__('Admin/site.cant_delete_all'));
 
             return redirect()->back();
 

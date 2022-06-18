@@ -69,7 +69,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="area_id">{{ __('Admin/bees.village') }}</label>
-                                                        <select name="village_id" id="village_id" class="form-control" required>
+                                                        <select name="village_id" id="village_id" class="form-control" required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{$beekeeper->village_id }}" selected>{{ $beekeeper->village->name }}</option>
@@ -98,13 +98,13 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/bees.old_beehive_count') }}</label>
-                                                        <input name="old_beehive_count" value="{{$beekeeper->old_beehive_count}}"  class="form-control"type="number">
+                                                        <input name="old_beehive_count" value="{{$beekeeper->old_beehive_count}}" required="required" class="form-control"type="number">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/bees.new_beehive_count') }}</label>
-                                                        <input name="new_beehive_count" value="{{$beekeeper->new_beehive_count}}" class="form-control"type="number">
+                                                        <input name="new_beehive_count" value="{{$beekeeper->new_beehive_count}}" required="required" class="form-control"type="number">
                                                         <input name="admin_id" type="hidden"  value="{{$adminId}}"class="form-control">
                                                         <input name="area_id"  type="hidden"  value="{{$areaID}}"class="form-control">
                                                         <input name="state_id"  type="hidden"  value="{{$stateID}}"class="form-control">
@@ -120,19 +120,19 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/bees.annual_old_product_beehive') }}</label>
-                                                        <input name="annual_old_product_beehive" value="{{$beekeeper->annual_old_product_beehive}}" class="form-control"type="text">
+                                                        <input name="annual_old_product_beehive" value="{{$beekeeper->annual_old_product_beehive}}" required="required" class="form-control"type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/bees.annual_new_product_beehive') }}</label>
-                                                        <input name="annual_new_product_beehive" value="{{$beekeeper->annual_new_product_beehive}}" class="form-control"type="text">
+                                                        <input name="annual_new_product_beehive" value="{{$beekeeper->annual_new_product_beehive}}" required="required" class="form-control"type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/bees.unit') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" required="required">
                                                             <option value="{{$beekeeper->unit_id}}">{{$beekeeper->unit->Name}}</option>
 
                                                              @foreach($units as $unit)
@@ -144,7 +144,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/bees.cost') }}</label>
-                                                        <input name="cost" value="{{$beekeeper->cost}}" class="form-control"type="text">
+                                                        <input name="cost" value="{{$beekeeper->cost}}" class="form-control"type="number" required="required">
                                                     </div>
                                                 </div>
 
@@ -156,7 +156,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="customSelect1">{{ __('Admin/bees.supported_side') }}</label>
-                                                        <select class="select2 custom-select form-control" name="supported_side" id="supported_side_id">
+                                                        <select class="select2 custom-select form-control" required="required" name="supported_side" id="supported_side_id">
                                                             <option value="private" {{$beekeeper->supported_side=='private'?'selected':''}} >{{ __('Admin\bees.private') }}</option>
                                                             <option value="govermental" {{$beekeeper->supported_side=='govermental'?'selected':''}}>{{ __('Admin\bees.govermental') }}</option>
                                                             <option value="international_organizations" {{$beekeeper->supported_side=='international_organizations'?'selected':''}}>{{ __('Admin\bees.international_organizations') }}</option>
@@ -182,7 +182,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/bees.died_beehive_count') }}</label>
-                                                        <input name="died_beehive_count" value="{{$beekeeper->died_beehive_count}}" class="form-control"type="text">
+                                                        <input name="died_beehive_count"  required="required" value="{{$beekeeper->died_beehive_count}}" class="form-control"type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col">

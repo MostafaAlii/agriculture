@@ -72,7 +72,7 @@
                                                         {{ trans('Admin/states.state_name') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ old('name',$state->name) }}" required>
+                                                    <input type="text" id="eventRegInput1" class="form-control"   name="name" value="{{ old('name',$state->name) }}" required="required">
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +82,7 @@
                                                     <i class="material-icons">flag</i>
                                                     {{ trans('Admin/states.choose_area_name') }}
                                                 </label>
-                                                <select name="area_id" class="select2 form-control">
+                                                <select name="area_id" class="select2 form-control" required="required">
                                                     <optgroup label="{{ trans('Admin/states.choose_area_name') }}">
 
                                                         <option value="{{$state->area->id }}" selected>

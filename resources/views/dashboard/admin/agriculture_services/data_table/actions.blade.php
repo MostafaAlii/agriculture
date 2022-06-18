@@ -75,7 +75,7 @@
                                 <input type="text" name="name" class="form-control"
 
                                        placeholder="{{ trans('Admin\services.enter_service_name_placeholder') }}"
-                                       value="{{\App\Models\AgriService::findorFail($id)->name}}"/>
+                                       value="{{\App\Models\AgriService::findorFail($id)->name}}" required="required"/>
                             </div>
 
                         </div>

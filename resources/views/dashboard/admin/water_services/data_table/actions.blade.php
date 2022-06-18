@@ -72,7 +72,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin\services.enter_water_service_name') }}</label>
-                                <input type="text" name="name" class="form-control"
+                                <input type="text" name="name" class=" select2 form-control" required="required"
 
                                        placeholder="{{ trans('Admin\services.enter_water_service_name_placeholder') }}"
                                        value="{{\App\Models\WaterService::findorFail($id)->name}}"/>
