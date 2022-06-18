@@ -3,8 +3,7 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProductInterface;
-use App\Http\Requests\Dashboard\Product\GeneralRequest;
-use App\Http\Requests\Dashboard\Product\ProductStockRequest;
+use App\Http\Requests\Dashboard\Product\{GeneralRequest, ProductPriceRequest, ProductStockRequest};
 
 class ProductController extends Controller {
     protected $Data;
@@ -31,19 +30,19 @@ class ProductController extends Controller {
         return $this->Data->data();
     }
 
+    public function trashed_data() {
+        return $this->Data->trashed_data();
+    }
+
     public function create() {
         return $this->Data->generalInformation();
     }
 
-    public function generalInformationStore(Request $request) {
+    public function generalInformationStore(GeneralRequest $request) {
         return $this->Data->generalInformationStore($request);
     }
 
-    public function additionalPrice($id) {
-        return $this->Data->additionalPrice($id);
-    }
-
-    public function additionalPriceStore(Request $request) {
+    public function additionalPriceStore(ProductPriceRequest $request) {
         return $this->Data->additionalPriceStore($request);
     }
 
@@ -57,5 +56,25 @@ class ProductController extends Controller {
 
     public function update(Request $request) {
         return $this->Data->update($request);
+    }
+
+    public function restore() {
+        return $this->Data->restore();
+    }
+
+    public function updateRestore(Request $request, $id) {
+        return $this->Data->updateRestore($request, $id);
+    }
+
+    public function destroy( $id){
+        return $this->Data->destroy($id);
+    }
+
+    public function forceDestroy( $id){
+        return $this->Data->forceDestroy($id);
+    }
+
+    public function bulkDelete(Request $request){
+        return $this->Data->bulkDelete($request);
     }
 }

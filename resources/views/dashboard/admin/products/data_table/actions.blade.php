@@ -10,9 +10,9 @@
                 </a>
             @endcan
             @can('product-special-price')
-                <a href="{{ route('products.prices',encrypt($product->id)) }}" class="dropdown-item btn btn-outline-warning btn-md">
+                <button type="button" class="dropdown-item btn btn-outline-warning btn-md " data-toggle="modal" data-target="#price{{ $product->id }}" >
                     {{ __('Admin/products.prices_managment') }}
-                </a>
+                </button>
             @endcan
             @can('product-stock')
                 <button type="button" class="dropdown-item btn btn-outline-success btn-md " data-toggle="modal" data-target="#stock{{ $product->id }}" >
@@ -31,8 +31,13 @@
 <!-- Start Product Stock Model -->
 @include('dashboard.admin.products.data_table.btn.stock')
 <!-- End Product Stock Model -->
+
+<!-- Start Product Stock Model -->
+@include('dashboard.admin.products.data_table.btn.offer_price')
+<!-- End Product Stock Model -->
+
 {{-- modal delete --}}
-<form action="{{-- route('product_delete',encrypt($product->id)) --}}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+<form action="{{ route('product_delete',encrypt($product->id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')
     <div class="col-lg-4 col-md-6 col-sm-12">
@@ -64,7 +69,7 @@
 {{-- End modal delete --}}
 
 {{-- modal bulk delete --}}
-<form action="{{-- route('products.bulk_delete','ids') --}}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+<form action="{{ route('products.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')
     <div class="col-lg-4 col-md-6 col-sm-12">

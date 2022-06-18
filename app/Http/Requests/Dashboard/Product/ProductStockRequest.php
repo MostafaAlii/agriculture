@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Requests\Dashboard\Product;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Dashborard\Products\ProductStockQty;
 class ProductStockRequest extends FormRequest {
     public function authorize() {
         return true;
@@ -9,16 +10,14 @@ class ProductStockRequest extends FormRequest {
     public function rules() {
         return [
             'stock'                      =>          'required|in:0,1',
-            'qty'                           =>          'required_if:stock,==,1|min:0|numeric',
+            'qty'                 =>          [new ProductStockQty($this->stock)],
         ];
     }
 
     public function messages() {
         return [
-            'sku.unique'                    =>  trans('Admin/products.sku_unique'),
-            'sku.regex'                     =>  trans('Admin/products.sku_regex'),
-            'manage_stock.required'         =>  trans('Admin/products.manage_stock_required'),
-            'in_stock.required'             =>  trans('Admin/products.in_stock_required'),
+            'stock.required'                =>          trans('Admin/products.manage_stock_required'),
+            'qty.numeric'                   =>          trans('Admin/products.qty_numeric'),
 
         ];
     }

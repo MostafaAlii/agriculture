@@ -256,5 +256,5 @@ return [
     'Morasoft_ar'   =>  'فريق مورا سوفت',
     'Morasoft_en'   =>  'MoraSoft Team',
     'Morasoft_ku'   =>  'Tîmê Morasoft',
-    'Currency' => 'USD',
+    'Currency' => '$',
 ];
