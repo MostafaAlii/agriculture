@@ -20,7 +20,7 @@ return [
      "sLast"=> "Last",
     'ask_delete'=>'Are you sure to delete ?',
     'cancel'=>'Cancel',
-
+    'delete_related'=>'you can not delete this field because it is related other main interfaces',
 
 
     'home' => 'Home',

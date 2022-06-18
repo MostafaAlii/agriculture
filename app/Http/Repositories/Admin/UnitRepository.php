@@ -22,7 +22,7 @@ class UnitRepository implements UnitInterface
     public function data()
     {
 
-        $units = Unit::query();
+        $units = Unit::query()->get();
         return DataTables::of($units)
 
             ->addIndexColumn()

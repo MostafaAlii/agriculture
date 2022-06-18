@@ -68,7 +68,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="area_id">{{ __('Admin/land_areas.area') }}</label>
-                                                        <select name="area_id" id="area_id" class="form-control" required>
+                                                        <select name="area_id" id="area_id" class="form-control"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{$land_area->area_id }}" selected>{{ $land_area->area->name }}</option>
@@ -83,7 +83,7 @@
 
                                                     <div class="form-group">
                                                         <label for="state_id">{{ __('Admin/land_areas.state') }}</label>
-                                                        <select class="select2 form-control" name="state_id" id="state_id">
+                                                        <select class="select2 form-control" name="state_id" id="state_id"  required="required">
                                                             <option value="{{$land_area->state_id}}" selected>{{$land_area->state->name}}</option>
 
                                                         </select>
@@ -101,7 +101,7 @@
 
                                                     <div class="form-group">
                                                         <label for="state_id">{{ __('Admin/land_areas.village') }}</label>
-                                                        <select class="select2 form-control" name="village_id" id="village_id">
+                                                        <select class="select2 form-control" name="village_id" id="village_id"  required="required">
                                                             <option value="{{$land_area->village_id}}" selected>{{$land_area->village->name}}</option>
 
                                                         </select>
@@ -112,7 +112,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/land_areas.land_category') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect" name="land_category_id" >
+                                                        <select class="custom-select form-control select2" id="customSelect" name="land_category_id"  required="required" >
                                                             <option value="{{$land_area->land_category_id}}">{{$land_area->landCategory->category_name}}</option>
 
                                                             @foreach($land_categories as $land_category)
@@ -132,7 +132,7 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/land_areas.L_area') }}</label>
 
-                                                        <input name="L_area" value="{{$land_area->L_area}}"  class="form-control"type="text">
+                                                        <input name="L_area" value="{{$land_area->L_area}}"  class="form-control"type="text"  required="required">
                                                         <input name="admin_id" value="{{$adminId}}"  class="form-control"type="hidden">
 
                                                     </div>
@@ -140,7 +140,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/land_areas.unit') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                        <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required">
                                                             <option value="{{$land_area->unit_id}}">{{$land_area->unit->Name}}</option>
 
                                                             @foreach($units as $unit)

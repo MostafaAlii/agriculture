@@ -22,7 +22,7 @@ class CourseBeeRepository implements CourseBeeInterface
     public function data()
     {
 
-        $courseBees = CourseBee::query();
+        $courseBees = CourseBee::query()->get();
         return DataTables::of($courseBees)
             ->addColumn('record_select', 'dashboard.admin.course_bees.data_table.record_select')
             ->addIndexColumn()

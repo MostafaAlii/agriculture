@@ -128,12 +128,13 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'name', name: 'name', searchable: false, sortable: false},
+                {data: 'name', name: 'name', searchable: true, sortable: false},
 
 
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
+            order: [[2, "DESC"]]
         });
     </script>
 

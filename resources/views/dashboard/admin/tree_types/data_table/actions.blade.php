@@ -67,7 +67,7 @@
                     <form action="{{ route('TreeTypes.update', encrypt($id)) }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
                         @csrf
                         @method('patch')
-                        <input type="hidden" value="{{ $id }}" name="id">
+                        <input type="hidden" value="{{ $id }}" name="id" required="required">
 
                         <div class="modal-body">
                             <div class="form-group">

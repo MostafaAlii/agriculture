@@ -18,7 +18,7 @@ class AgriServiceRepository implements AgriServiceInterface
     public function data()
     {
 
-        $agriculture_service = AgriService::query();
+        $agriculture_service = AgriService::query()->get();
         return DataTables::of($agriculture_service)
             ->addColumn('record_select', 'dashboard.admin.agriculture_services.data_table.record_select')
             ->addIndexColumn()

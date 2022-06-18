@@ -20,7 +20,7 @@ class WholeSaleProductRepository implements WholeSaleProductInterface
     public function data()
     {
 
-        $whole_products = WholeProduct::query();
+        $whole_products = WholeProduct::query()->get();
         return DataTables::of($whole_products)
             ->addColumn('record_select', 'dashboard.admin.whole_sale_products.data_table.record_select')
             ->addIndexColumn()

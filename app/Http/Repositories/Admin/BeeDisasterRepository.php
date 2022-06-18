@@ -22,7 +22,7 @@ class BeeDisasterRepository implements BeeDisasterInterface
     public function data()
     {
 
-        $bDisaster = BeeDisaster::query();
+        $bDisaster = BeeDisaster::query()->get();
         return DataTables::of($bDisaster)
             ->addColumn('record_select', 'dashboard.admin.bee_disasters.data_table.record_select')
             ->addIndexColumn()

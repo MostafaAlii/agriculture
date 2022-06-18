@@ -68,7 +68,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="area_id">{{ __('Admin/precipitations.area') }}</label>
-                                                        <select name="area_id" id="area_id" class="form-control" required>
+                                                        <select name="area_id" id="area_id" class="form-control"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{$precipitation->area_id }}" selected>{{ $precipitation->area->name }}</option>
@@ -83,7 +83,7 @@
 
                                                     <div class="form-group">
                                                         <label for="state_id">{{ __('Admin/precipitations.state') }}</label>
-                                                        <select class="select2 form-control" name="state_id" id="state_id">
+                                                        <select class="select2 form-control" name="state_id" id="state_id"  required="required">
                                                             <option value="{{$precipitation->state_id}}" selected>{{$precipitation->state->name}}</option>
 
                                                         </select>
@@ -97,13 +97,13 @@
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/precipitations.precipitation_rate') }}</label>
-                                                        <input name="precipitation_rate" value="{{$precipitation->precipitation_rate}}"  class="form-control"type="text">
+                                                        <input name="precipitation_rate" value="{{$precipitation->precipitation_rate}}" required="required"  class="form-control"type="text">
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/precipitations.unit') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                        <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required" >
                                                             <option value="{{$precipitation->unit_id}}">{{$precipitation->unit->Name}}</option>
 
                                                              @foreach($units as $unit)
@@ -117,7 +117,7 @@
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/precipitations.date') }}</label>
-                                                        <input name="date" value="{{$precipitation->date}}"  class="form-control"type="date">
+                                                        <input name="date" value="{{$precipitation->date}}"  required="required" class="form-control"type="date">
 
                                                     </div>
                                                 </div>

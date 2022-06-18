@@ -14,7 +14,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/trees.enter_tree_type') }}</label>
-                        <input type="text" name="tree_type" class="form-control" placeholder="{{ trans('Admin/trees.enter_tree_type_placeholder') }}" />
+                        <input type="text" name="tree_type" class="form-control"
+                               placeholder="{{ trans('Admin/trees.enter_tree_type_placeholder') }}" required="required" />
                     </div>
 
                 </div>

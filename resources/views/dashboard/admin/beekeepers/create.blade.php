@@ -69,7 +69,7 @@
                                                         <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="village_id">{{ __('Admin/bees.village') }}</label>
-                                                                <select name="village_id" id="village_id" class="form-control" required>
+                                                                <select name="village_id" id="village_id" class="form-control" required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     @foreach ($villages as $village)
                                                                         <option value="{{ $village->id }}">{{ $village->name }}</option>
@@ -86,7 +86,7 @@
                                                         <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="farmer_id">{{ __('Admin/bees.farmer') }}</label>
-                                                                <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                                <select class="select2 form-control" name="farmer_id" id="farmer_id"  required="required">
 
                                                                 </select>
                                                             </div>
@@ -100,13 +100,13 @@
                                                        <div class="col">
                                                            <div class="form-group">
                                                                <label>{{ __('Admin/bees.old_beehive_count') }}</label>
-                                                               <input name="old_beehive_count" value=""  class="form-control"type="number">
+                                                               <input name="old_beehive_count" value=""  class="form-control"type="number" required="required">
                                                            </div>
                                                        </div>
                                                        <div class="col">
                                                            <div class="form-group">
                                                                <label>{{ __('Admin/bees.new_beehive_count') }}</label>
-                                                               <input name="new_beehive_count" value=""  class="form-control"type="number">
+                                                               <input name="new_beehive_count" value=""  class="form-control"type="number" required="required">
                                                            </div>
                                                        </div>
 
@@ -119,19 +119,19 @@
                                                        <div class="col">
                                                            <div class="form-group">
                                                                <label>{{ __('Admin/bees.annual_old_product_beehive') }}</label>
-                                                               <input name="annual_old_product_beehive" value=""  class="form-control"type="text">
+                                                               <input name="annual_old_product_beehive" value="" required="required" class="form-control"type="text">
                                                            </div>
                                                        </div>
                                                        <div class="col">
                                                            <div class="form-group">
                                                                <label>{{ __('Admin/bees.annual_new_product_beehive') }}</label>
-                                                               <input name="annual_new_product_beehive" value=""  class="form-control"type="text">
+                                                               <input name="annual_new_product_beehive" value="" required="required" class="form-control"type="text">
                                                            </div>
                                                        </div>
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/bees.unit') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                                <select class="custom-select select2 form-control" id="customSelect" required="required" name="unit_id" >
                                                                     <option selected disabled>--select--</option>
 
                                                                 @foreach($units as $unit)
@@ -144,7 +144,7 @@
                                                        <div class="col">
                                                            <div class="form-group">
                                                                <label>{{ __('Admin/bees.cost') }}</label>
-                                                               <input name="cost" value=""  class="form-control"type="text">
+                                                               <input name="cost" value="" required="required"  class="form-control"type="text">
                                                            </div>
                                                        </div>
 
@@ -154,7 +154,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="customSelect1">{{ __('Admin/bees.supported_side') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect1" name="supported_side" >
+                                                        <select class="custom-select form-control" id="customSelect1" required="required" name="supported_side" >
                                                             <option selected disabled>--select--</option>
                                                                 <option value="private">{{ __('Admin\bees.private') }}</option>
                                                             <option value="govermental">{{ __('Admin\bees.govermental') }}</option>
@@ -178,7 +178,7 @@
                                                    <div class="col">
                                                        <div class="form-group">
                                                            <label>{{ __('Admin/bees.died_beehive_count') }}</label>
-                                                           <input name="died_beehive_count" value=""  class="form-control"type="text">
+                                                           <input name="died_beehive_count" value=""  required="required" class="form-control"type="text">
                                                        </div>
                                                    </div>
 

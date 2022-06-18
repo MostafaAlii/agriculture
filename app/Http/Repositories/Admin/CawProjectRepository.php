@@ -25,6 +25,7 @@ class CawProjectRepository implements CawProjectInterface{
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
+
         $areaID = $admin->area->id;
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;

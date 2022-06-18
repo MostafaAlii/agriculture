@@ -48,6 +48,7 @@ class OrchardController extends Controller
     }
     public function destroy($id) {
         return $this->Data->destroy($id);    }
+
     public function bulkDelete(Request $request){
         return $this->Data->bulkDelete($request);
     }

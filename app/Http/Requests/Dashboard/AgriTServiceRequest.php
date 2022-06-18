@@ -13,7 +13,9 @@ class AgriTServiceRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:agri_t_service_translations,name,agri_t_service_id'.$this->id,
+
 
             ]
 
@@ -26,6 +28,8 @@ class AgriTServiceRequest extends FormRequest {
         return [
             'name.required'   => trans('Admin\validation.required'),
             'name.regex'   => trans('Admin\validation.regex'),
+            'name.unique'   => trans('Admin\validation.unique'),
+
 
         ];
     }

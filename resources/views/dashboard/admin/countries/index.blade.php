@@ -1,6 +1,8 @@
 @extends('dashboard.layouts.dashboard')
 @section('css')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"
+            integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
     {{ trans('Admin/countries.countryPageTitle') }}
@@ -20,9 +22,11 @@
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
+                            <li class="breadcrumb-item"><a
+                                        href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ route('Countries.index') }}">{{ trans('Admin/countries.countryPageTitle') }}</a>
+                            <li class="breadcrumb-item"><a
+                                        href="{{ route('Countries.index') }}">{{ trans('Admin/countries.countryPageTitle') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -59,7 +63,8 @@
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
                                     @can('country-create')
-                                        <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#add">
+                                        <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal"
+                                                data-target="#add">
                                             <i class="material-icons">add_box</i>
                                             {{ trans('Admin/countries.add_new_country') }}
                                         </button>
@@ -67,14 +72,15 @@
                                     @can('country-delete-all')
                                         <button type="button" class="btn btn-warning btn-md mb-3"
                                                 id="btn_delete_all" data-toggle="modal"
-                                                data-target="#bulkdelete" >
+                                                data-target="#bulkdelete">
                                             {{ __('Admin/site.bulkdelete') }}
                                         </button>
-                                    @endcan
-                                    <!-- Start Table Responsive -->
+                                @endcan
+                                <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->
-                                        <table class="table table-striped table-bordered zero-configuration" id="countries-table">
+                                        <table class="table table-striped table-bordered zero-configuration"
+                                               id="countries-table">
                                             <thead>
                                             <tr>
                                                 <th>
@@ -111,8 +117,12 @@
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js" integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js" integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"
+            integrity="sha512-uE2UhqPZkcKyOjeXjPCmYsW9Sudy5Vbv0XwAVnKBamQeasAVAmH6HR9j5Qpy6Itk1cxk+ypFRPeAZwNnEwNuzQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.js"
+            integrity="sha512-cG69LpvCJkui4+Uuj8gn/zRki74/E7FicYEXBnplyb/f+bbZCNZRHxHa5qwci1dhAFdK2r5T4dUynsztHnOS5g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Datatable Fire -->
     <script>
@@ -133,10 +143,10 @@
                 {data: 'name', name: 'name', searchable: true, sortable: false},
 
                 {data: 'provinces', name: 'provinces.name', searchable: false, sortable: false},
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'created_at', name: 'created_at', sortable: true},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
-            order: [[4, 'desc']],
+            order: [[4, 'asc']],
         });
     </script>
 

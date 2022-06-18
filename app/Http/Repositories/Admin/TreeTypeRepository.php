@@ -24,7 +24,7 @@ class TreeTypeRepository implements TreeTypeInterface
     public function data()
     {
 
-        $tree_types = TreeType::with('trees');
+        $tree_types = TreeType::with('trees')->get();
         return DataTables::of($tree_types)
             ->addColumn('trees', function (TreeType $tree_type) {
                 return view('dashboard.admin.tree_types.btn.related', compact('tree_type'));

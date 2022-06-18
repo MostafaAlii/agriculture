@@ -20,7 +20,7 @@ class VillageRepository implements VillageInterface
 
     public function data()
     {
-        $villages = Village::with('state');
+        $villages = Village::with('state')->get();
         return DataTables::of($villages)
             ->addColumn('state', function (Village $village) {
                 return $village->state->name;
@@ -92,7 +92,7 @@ class VillageRepository implements VillageInterface
                 return redirect()->route('Villages.index');
             }
         } catch (\Exception $e) {
-            toastr()->error(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/site.delete_related'));
             return redirect()->back();
         }
 
@@ -113,7 +113,7 @@ class VillageRepository implements VillageInterface
                     $village = Village::findorfail($village_ids);
                     $state = $village->state->count();
                     if ($state > 0) {
-                        toastr()->error(__('Admin/site.delete_related_state'));
+                        toastr()->error(__('Admin/site.delete_related'));
                         return redirect()->route('Villages.index');
                     }
 
@@ -130,7 +130,7 @@ class VillageRepository implements VillageInterface
 
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->error(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/site.cant_delete_all'));
 
             return redirect()->back();
 

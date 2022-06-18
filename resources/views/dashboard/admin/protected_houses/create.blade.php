@@ -69,7 +69,7 @@
                                                         <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="village_id">{{ __('Admin/p_houses.village') }}</label>
-                                                                <select name="village_id" id="village_id" class="form-control" required>
+                                                                <select name="village_id" id="village_id" class="form-control"  required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($villages as $village)
@@ -94,7 +94,8 @@
                                                        <div class="col col-md-6">
                                                            <div class="form-group">
                                                                <label for="customSelect1">{{ __('Admin/p_houses.supported_side') }}</label>
-                                                               <select class="custom-select form-control" id="customSelect1" name="supported_side" >
+                                                               <select class="custom-select form-control" id="customSelect1"
+                                                                       name="supported_side"  required="required" >
                                                                    <option selected disabled>--select--</option>
                                                                        <option value="private">{{ __('Admin\p_houses.private')}}</option>
                                                                    <option value="govermental">{{ __('Admin\p_houses.govermental')}}</option>
@@ -108,7 +109,8 @@
                                                        <div class="col col-md-6">
                                                            <div class="form-group">
                                                                <label  for="count_protected_house_id">{{ __('Admin/p_houses.count_protected_house') }}</label>
-                                                               <input name="count_protected_house"   id="count_protected_house_id"typ="text" class="form-control">
+                                                               <input name="count_protected_house"  required="required"
+                                                                      id="count_protected_house_id"typ="text" class="form-control">
                                                                <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
                                                                <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
                                                                <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
@@ -123,14 +125,14 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/p_houses.average_product_annual') }}</label>
-                                                                <input name="average_product_annual" value=""  class="form-control"type="text">
+                                                                <input name="average_product_annual" value=""  class="form-control"type="text"  required="required">
                                                             </div>
                                                         </div>
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/p_houses.unit') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="unit_id" >
-                                                                    <option selected disabled>--select--</option>
+                                                                <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required">
+                                                                    <option selected disabled>{{ __('Admin/site.select') }}</option>
 
                                                                 @foreach($units as $unit)
                                                                         <option value="{{$unit->id}}">{{ $unit->Name }}</option>
@@ -141,8 +143,8 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/p_houses.status') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="status" >
-                                                                        <option  disabled>--select--</option>
+                                                                <select class="custom-select form-control" id="customSelect" name="status" required="required">
+                                                                        <option  disabled>{{ __('Admin/site.select') }}</option>
                                                                         <option value="active" >{{ __('Admin/p_houses.active') }}</option>
                                                                         <option value="inactive">{{ __('Admin/p_houses.inactive') }}</option>
 

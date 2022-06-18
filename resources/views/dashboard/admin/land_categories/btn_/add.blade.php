@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/lands.enter_category_name') }}</label>
-                        <input type="text" name="category_name" class="form-control" placeholder="{{ trans('Admin/lands.enter_category_name_placeholder') }}" />
+                        <input type="text" name="category_name"  required="required" class="form-control" placeholder="{{ trans('Admin/lands.enter_category_name_placeholder') }}" />
                         @error('name')
                         <span class="text-danger"> {{$message}}</span>
                         @enderror
@@ -23,7 +23,7 @@
                     <label for="projectinput2"><i class="material-icons">mode_edit</i>
                         {{__('Admin\lands.choose_category_type')}}
                     </label>
-                    <select name="category_type" class="select2 form-control">
+                    <select name="category_type" class="select2 form-control"  required="required">
                         <optgroup >
                             <option value="" disabled selected>{{__('Admin\lands.choose_category_type')}}</option>
                             <option value="agriculture">{{__('Admin\lands.agricultural')}}</option>

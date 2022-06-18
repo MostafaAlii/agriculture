@@ -20,7 +20,7 @@ class SummerCropRepository implements SummerCropInterface
     public function data()
     {
 
-        $summer_crops = SummerCrop::query();
+        $summer_crops = SummerCrop::query()->get();
         return DataTables::of($summer_crops)
             ->addColumn('record_select', 'dashboard.admin.summer_crops.data_table.record_select')
             ->addIndexColumn()

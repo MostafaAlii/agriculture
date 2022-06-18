@@ -72,7 +72,8 @@
                                                         {{ trans('Admin/areas.area_name') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ old('name',$area->name) }}" required>
+                                                    <input type="text" id="eventRegInput1" class="form-control"
+                                                           name="name" value="{{ old('name',$area->name) }}" required="required">
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +83,7 @@
                                                     <i class="material-icons">flag</i>
                                                     {{ trans('Admin/areas.choose_provience_name') }}
                                                 </label>
-                                                <select name="province_id" class="select2 form-control">
+                                                <select name="province_id" class="select2 form-control" required="required">
                                                     <optgroup label="{{ trans('Admin/areas.choose_provience_name') }}">
                                                         @if($proviences && $proviences-> count() > 0) 
                                                         <option value="{{$area->province->id }}" {{$area->province->id == $area->provience_id ? 'selected' : '' }}>

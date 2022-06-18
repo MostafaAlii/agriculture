@@ -19,11 +19,6 @@ class CreateAgriServicesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('agri_services');

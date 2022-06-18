@@ -24,7 +24,7 @@
                         <i class="material-icons"></i>
                         {{ trans('Admin\trees.choose_tree_type_name') }}
                     </label>
-                    <select name="tree_type_id" class="select2 form-control">
+                    <select name="tree_type_id" class="select2 form-control " required="required">
                         <optgroup label="{{ trans('Admin\trees.please_choose_tree_type') }}">
                             @if($tree_types && $tree_types -> count() > 0)
                                 @foreach($tree_types as $tree_type)

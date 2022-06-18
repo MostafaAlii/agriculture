@@ -128,8 +128,8 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'tree_type', name: 'tree_type', searchable: false, sortable: false},
-                {data: 'trees', name: 'trees.name', searchable: false, sortable: false},
+                {data: 'tree_type', name: 'tree_type', searchable: true, sortable: false},
+                {data: 'trees', name: 'trees', searchable: true, sortable: false},
 
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
