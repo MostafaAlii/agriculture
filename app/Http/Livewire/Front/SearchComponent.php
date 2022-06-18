@@ -51,30 +51,73 @@ class SearchComponent extends Component
         $tags=Tag::get();
         $newProducts = Product::where('stock',1)->where('qty','>',0)->inRandomOrder()->limit(3)->get();
 
-        // if($this->sorting=='date'){
-        //     $products =Product::whereHas('translations', function ($query) {
-        //         $query->where('name','like','%'.$this->search.'%');
-        //     })->whereBetween('price',[$this->min_price,$this->max_price])->where('in_stock',1)->where('qty','>',0)
-        //       ->orderByDesc('created_at')->paginate($this->pagesize);
-        // }elseif($this->sorting=='price'){
-        //     $products =Product::whereHas('translations', function ($query) {
-        //         $query->where('name','like','%'.$this->search.'%');
-        //     })->whereBetween('price',[$this->min_price,$this->max_price])->where('in_stock',1)->where('qty','>',0)
-        //       ->orderBy('price')->paginate($this->pagesize);
-        // }elseif($this->sorting=='price-desc'){
-        //     $products =Product::whereHas('translations', function ($query) {
-        //         $query->where('name','like','%'.$this->search.'%');
-        //     })->whereBetween('price',[$this->min_price,$this->max_price])->where('in_stock',1)->where('qty','>',0)
-        //       ->orderByDesc('price')->paginate($this->pagesize);
-        // }else{
-        //     $products =Product::whereHas('translations', function ($query) {
-        //         $query->where('name','like','%'.$this->search.'%');
-        //     })->whereBetween('price',[$this->min_price,$this->max_price])->where('in_stock',1)->where('qty','>',0)
-        //       ->paginate($this->pagesize);
-        // }
-        $products =Product::whereHas('translations', function ($query) {
-                    $query->where('name','like','%'.$this->search.'%');
-                })->get();
+        if($this->sorting=='new_to_old'){
+            $products =Product::whereHas('translations', function ($query) {
+                $query->where('name','like','%'.$this->search.'%');
+            })
+            ->where('stock',1)
+            ->orderByDesc('created_at')
+            ->where('qty','>',0)
+            ->paginate($this->pagesize);
+        }elseif($this->sorting=='old_to_new'){
+            $products =Product::whereHas('translations', function ($query) {
+                $query->where('name','like','%'.$this->search.'%');
+            })
+            ->where('stock',1)
+            ->orderBy('created_at')
+            ->where('qty','>',0)
+            ->paginate($this->pagesize);
+        }elseif($this->sorting=='price_high_to_low'){
+            $products =Product::whereHas('translations', function ($query) {
+                $query->where('name','like','%'.$this->search.'%');
+            })
+            ->where('stock',1)
+            ->where('qty','>',0)
+            ->where('special_price', 0)
+            ->whereHas('units', function($q){
+              $q->orderByDesc('price');
+           })
+              ->paginate($this->pagesize);
+        }elseif($this->sorting=='price_low_to_high'){
+            $products =Product::whereHas('translations', function ($query) {
+                $query->where('name','like','%'.$this->search.'%');
+            })
+            ->where('stock',1)
+            ->where('qty','>',0)
+            ->where('special_price', 0)
+            ->whereHas('units', function($q){
+              $q->orderBy('price');
+           })
+              ->paginate($this->pagesize);
+        }elseif($this->sorting=='newoffer_from_low_to_high'){
+            $products =Product::whereHas('translations', function ($query) {
+                $query->where('name','like','%'.$this->search.'%');
+            })
+            ->where('stock',1)
+            ->where('special_price','>',0)
+            ->orderBy('special_price')
+            ->where('qty','>',0)
+            ->paginate($this->pagesize);
+        }elseif($this->sorting=='newoffer_from_high_to_low'){
+            $products =Product::whereHas('translations', function ($query) {
+                $query->where('name','like','%'.$this->search.'%');
+            })
+            ->where('stock',1)
+            ->where('special_price','>',0)
+            ->orderByDesc('special_price')
+            ->where('qty','>',0)
+            ->paginate($this->pagesize);
+        }else{
+            $products =Product::whereHas('translations', function ($query) {
+                $query->where('name','like','%'.$this->search.'%');
+            })
+            ->where('stock',1)
+            ->orderBy('created_at')
+            ->paginate($this->pagesize);
+        }
+        // $products =Product::whereHas('translations', function ($query) {
+        //             $query->where('name','like','%'.$this->search.'%');
+        //         })->get();
 
         return view('livewire.front.search-component',compact('products','newProducts','tags'))
         ->layout('front.layouts.master2');
