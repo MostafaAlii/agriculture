@@ -273,21 +273,33 @@
 
                                                                 <div class="stock-info in-stock">
                                                                     <p class="availability">{{ __("Admin/site.status") }} :
-                                                                        <b class="text {{ $product->model->in_stock ==1 ?'text-success':'text-danger' }}">
-                                                                            {{ $product->model->in_stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
+                                                                        <b class="text {{ $product->model->stock ==1 ?'text-success':'text-danger' }}">
+                                                                            {{ $product->model->stock ==1 ? __("Admin/site.stock") : __("Admin/site.outstock") }}
                                                                         </b>
                                                                     </p>
                                                                 </div>
-                                                                @if($product->model->special_price >0)
-                                                                    <div class="product-price">
-                                                                        <span class="product-price__item product-price__item--old">{{ number_format($product->model->price, 2) }} $</span>
-                                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->model->special_price, 2) }} $</span>
-                                                                    </div>
-                                                                @else
-                                                                    <div class="product-price">
-                                                                        <span class="product-price__item product-price__item--new">{{ number_format($product->model->price, 2) }} $</span>
-                                                                    </div>
-                                                                @endif
+                                                                @if ($product->model->special_price > 0)
+                                                                        <div class="product-price">
+                                                                            <span
+                                                                                class="product-price__item product-price__item--old">
+                                                                                {{ number_format($product->model->getPrice(), 2) }} $
+                                                                                {{ $product->model->getUnit()->Name }}
+                                                                            </span>
+                                                                            <span
+                                                                                class="product-price__item product-price__item--new">
+                                                                                {{ number_format($product->model->special_price, 2) }} $
+                                                                                {{ $product->model->getUnit()->Name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="product-price">
+                                                                            <span
+                                                                                class="product-price__item product-price__item--new">
+                                                                                {{ number_format($product->model->getPrice(), 2) }} $
+                                                                                {{ $product->model->getUnit()->Name }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
                                                                 <button class="custom-btn custom-btn--medium custom-btn--style-1"
                                                                 wire:click.prevent=' moveProductFromSaveForLaterToCart("{{ $product->rowId }}")' > {{ __('Admin/site.addtocart') }}
                                                                 </button>

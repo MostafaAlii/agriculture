@@ -33,6 +33,8 @@
                                 <th scope="col">{{ __('Admin/products.product_category') }}</th>
                                 <th scope="col">{{ __('Admin/site.tag') }}</th>
                                 <th scope="col">{{ __('website/home.price') }}</th>
+                                {{-- <th scope="col">{{ __('website/home.special') }}</th> --}}
+                                <th scope="col">{{ __('website/home.unit') }}</th>
                                 <th scope="col">@lang('Admin/site.qty')</th>
                                 <th scope="col">{{ __('Admin/products.product_status') }}</th>
                                 <th scope="col">{{ __('Admin/general.created_since') }}</th>
@@ -71,7 +73,17 @@
                                                 </div>
                                             @endforeach
                                         </td>
-                                        <td>{{ number_format($product->price, 2) }} $</td>
+                                        @if ($product->special_price > 0)
+                                            <td>
+                                                <s>{{ number_format($product->getPrice(), 2) }} $</s><br>
+                                                <strong>{{ number_format($product->special_price, 2) }} $</strong>
+                                            </td>
+                                        @else
+                                            <td>{{ number_format($product->getPrice(), 2) }} $</td>
+                                        @endif
+                                        {{-- <td>{{ number_format($product->getPrice(), 2) }} $</td>
+                                        <td>{{ number_format($product->special_price, 2) }} $</td> --}}
+                                        <td>{{ $product->getUnit()->Name }}</td>
                                         <td>{{ $product->qty}} </td>
                                         <td class="font-weight-bold badge badge-pill badge-{{ $product->status == 1 ? 'success' : 'danger'  }}">
                                             {{ $product->status == 1 ? __('Admin/products.active') : __('Admin/products.unactive') }}

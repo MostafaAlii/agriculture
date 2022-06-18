@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProductInterface;
 use App\Http\Requests\Dashboard\Product\GeneralRequest;
+use App\Http\Requests\Dashboard\Product\ProductStockRequest;
+
 class ProductController extends Controller {
     protected $Data;
     public function __construct(ProductInterface $Data) {
@@ -43,6 +45,10 @@ class ProductController extends Controller {
 
     public function additionalPriceStore(Request $request) {
         return $this->Data->additionalPriceStore($request);
+    }
+
+    public function additionalStockStore(ProductStockRequest $request) {
+        return $this->Data->additionalStockStore($request);
     }
 
     public function edit($id) {

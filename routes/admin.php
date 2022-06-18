@@ -416,6 +416,7 @@ Route::group(
                     Route::get('/products_data', [ProductController::class,'data'])->name('products_data');
                     Route::get('price/{id}',[ProductController::class, 'additionalPrice'])->name('products.prices');
                     Route::post('price',[ProductController::class, 'additionalPriceStore'])->name('products.prices.store');
+                    Route::post('stock',[ProductController::class, 'additionalStockStore'])->name('products.stock.store');
                     Route::get('create',[ProductController::class, 'create'])->name('products.generalInformation');
                     Route::post('create',[ProductController::class, 'generalInformationStore'])->name('products.generalInformation.store');
                     Route::get('/product_edit/{id}', [ProductController::class,'edit'])->name('product_edit');

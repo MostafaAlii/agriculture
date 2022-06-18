@@ -63,21 +63,17 @@
                                             <!-- Start Main Product Photo -->
                                             <div class="row">
                                                 <div class="col-md-10">
-                                                    <div class="form-group">
-                                                        <label>{{ trans('Admin/products.product_main_photo') }} <span class="text-danger">*</span></label>
-                                                        @if($product->image)
-                                                            <a class="mr-2" href="#">
-                                                                    <img src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
-                                                                    alt="{{ __('Admin/site.no-image') }}"
-                                                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                                            </a>
-                                                        @else
-                                                            <a class="mr-2" href="#">
-                                                                <img src="{{ asset('Dashboard/img/products/default.jpg') }}"
-                                                                alt="{{ __('Admin/site.no-image') }}"
-                                                                class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                                            </a>
-                                                        @endif
+                                                        <div class="form-group">
+                                                            <label>{{ trans('Admin/products.product_main_photo') }} <span class="text-danger">*</span></label>
+                                                            <div class="col-md-11 mg-t-5 mg-md-t-0">
+                                                                <input type="file" accept="image/*" name="photo"  onchange="loadFile(event)"/>
+                                                                @if($product->image)
+                                                                    <img style="width:65px; height:65px;border-radius: 5px;" id="output" class="rounded-circle" src="{{asset('Dashboard/img/products/' . $product->image->filename)}}" alt="" />
+                                                                @else
+                                                                    <img style="width:65px; height:65px;border-radius: 5px;" class="rounded-circle" src="{{asset('Dashboard/img/products/default.jpg')}}" alt="" />
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,7 +187,8 @@
                                                             <optgroup label="{{ trans('Admin\products.product_units_select') }}">
                                                                 @if($units && $units->count() > 0)
                                                                     @foreach($units as $unit)
-                                                                        <option value="{{$unit->id}}">{{$unit->Name}}</option>
+                                                                        <option
+                                                                            value="{{$unit->id }}" <?php if(in_array($unit->id,$selected_units)){echo'selected';}?>>{{$unit->Name}}</option>
                                                                     @endforeach
                                                                 @endif
                                                             </optgroup>

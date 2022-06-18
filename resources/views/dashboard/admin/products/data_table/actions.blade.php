@@ -15,9 +15,9 @@
                 </a>
             @endcan
             @can('product-stock')
-                <a href="{{-- route('products.stock',encrypt($product->id)) --}}" class="dropdown-item btn btn-outline-success btn-md">
+                <button type="button" class="dropdown-item btn btn-outline-success btn-md " data-toggle="modal" data-target="#stock{{ $product->id }}" >
                     {{ __('Admin/products.stock') }}
-                </a>
+                </button>
             @endcan
             @can('product-delete')
                 <a type="button" class="dropdown-item btn btn-outline-danger btn-md" data-toggle="modal" data-target="#delete{{ $product->id }}">
@@ -28,6 +28,9 @@
         </div>
     </div>
 @endcan
+<!-- Start Product Stock Model -->
+@include('dashboard.admin.products.data_table.btn.stock')
+<!-- End Product Stock Model -->
 {{-- modal delete --}}
 <form action="{{-- route('product_delete',encrypt($product->id)) --}}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf

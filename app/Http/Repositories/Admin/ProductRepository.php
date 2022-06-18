@@ -28,9 +28,9 @@ class ProductRepository implements ProductInterface {
              ->addColumn('category_name', function (Product $product) {
                 return view('dashboard.admin.products.data_table.related_category', compact('product'));
              })
-             /*->addColumn('price', function (Product $product) {
+            ->addColumn('price', function (Product $product) {
                 return view('dashboard.admin.products.data_table.price_formated', compact('product'));
-            })*/
+            })
             ->editColumn('created_at', function (Product $product) {
                 return $product->created_at->diffforhumans();
             })
@@ -127,7 +127,7 @@ class ProductRepository implements ProductInterface {
 
     public function update($request) {
         DB::beginTransaction();
-            //try{
+            try{
                 if (!$request->has('status'))
                     $request->request->add(['status' => 0]);
                 else
@@ -148,21 +148,33 @@ class ProductRepository implements ProductInterface {
                 $product->tags()->sync($request->tags);
                 $product->units()->syncWithPivotValues([$request->units],['price'=>$request->price]);
                 // Save Product Main Photo ::
-                if($request->has('photo')) {
-                    if($product->image) {
-                        $old_photo = $product->image->filename;
-                        $this->Delete_attachment('upload_image', 'products/', $request->id, $old_photo);
-                    }
-                    $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
+                if ($request->photo) {
+                    $this->deleteImage('upload_image', '/products/' . $product->photo, $product->id);
                 }
+                $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
                 DB::commit();
                 toastr()->success(__('Admin/products.product_updated_successfully'));
                 return redirect()->route('products');
-            /*} catch(\Exception $ex){
+            } catch(\Exception $ex){
                 DB::rollBack();
                 toastr()->error(__('Admin/general.wrong'));
                 return redirect()->route('products');
-            }*/
+            }
+    }
+
+    public function additionalStockStore($request) {
+        //return $request;
+        try {
+            $real_id= $request->product_id;
+            Product::whereId($real_id)->update($request->only([
+                'stock', 'qty'
+            ]));
+            toastr()->success(__('Admin/products.product_update_product_stock_qty_successfully'));
+            return redirect()->route('products');
+        } catch(\Exception $ex){
+            toastr()->error(__('Admin/general.wrong'));
+            return redirect()->route('products');
+        }
     }
 
 }

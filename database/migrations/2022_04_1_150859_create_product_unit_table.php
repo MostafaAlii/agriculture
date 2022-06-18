@@ -1,16 +1,8 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
-class CreateProductUnitTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+class CreateProductUnitTable extends Migration {
     public function up()
     {
         Schema::create('product_unit', function (Blueprint $table) {
@@ -20,13 +12,7 @@ class CreateProductUnitTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('product_unit');
     }
 }
