@@ -73,7 +73,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-12 ">
+                                        {{-- <div class="col-12 ">
                                             <div class="input-wrp">
                                                 <label >{{ __('Admin/products.product_name') }} <span class="text-danger">*</span></label>
                                                 <input class="textfield"
@@ -82,7 +82,7 @@
                                                 value="{{ $product->slug }}" readonly
                                                 type="text" />
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-12">
                                             <div class="input-wrp">
                                                 <label >
@@ -139,44 +139,49 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-                                        {{-- <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <p class="row-in-form fill-wife">
-                                                <label class="checkbox-field">
-                                                    <input name="qty" id="qty" value="{{ $product->is_qty }}" type="checkbox" class="check-Front"
-                                                    {{ $product->is_qty == 1 ? 'checked' :''}}>
-                                                    <span>@lang('Admin/site.qty')</span>
+                                        <div class="col-12 " class="qty">
+                                            <div class="input-wrp">
+                                                <label for="projectinput1">
+                                                    {{ trans('Admin\products.product_enterqty') }} <span
+                                                        class="text-danger">*</span>
                                                 </label>
-                                            </p>
-                                        </div> --}}
-                                        {{-- @if($product->is_qty == 1) --}}
-                                            <div class="col-12 " class="qty">
-                                                <div class="input-wrp">
-                                                    <label for="projectinput1">
-                                                        {{ trans('Admin\products.product_enterqty') }} <span
-                                                            class="text-danger">*</span>
-                                                    </label>
-                                                    <input type="number" name="qty" class="textfield"
-                                                        placeholder="{{ trans('Admin/products.product_enterqty') }} *"
-                                                        value="{{ $product->qty }}"required />
-                                                    @error('qty')
+                                                <input type="number" name="qty" class="textfield"
+                                                    placeholder="{{ trans('Admin/products.product_enterqty') }} *"
+                                                    value="{{ $product->qty }}"required />
+                                                @error('qty')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="input-wrp">
+                                                <label>
+                                                    {{ trans('Admin\products.product_units_select') }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div >
+                                                    <select class="select2 textfield wide js-select" id="units"  name="unit_id"
+                                                       style="width: 38.75em;" required >
+                                                        @if($units && $units->count() > 0)
+                                                            <optgroup label="--{{ trans('Admin\products.product_units_select') }}--">
+                                                                @foreach($units as $unit)
+                                                                <option value="{{ $unit->id }}" {{$product->getUnit()->Name == $unit->Name ? 'selected':'' }}>{{ $unit->Name ??null}}</option>
+                                                                @endforeach
+                                                            </optgroup>
+                                                        @endif
+                                                    </select>
+                                                    @error('unit_id')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
-                                        {{-- @endif --}}
-
-
-
-
-
+                                        </div>
                                         <div class="col-12 ">
                                             <div class="input-wrp">
                                                 <label for="projectinput1">
                                                     {{ trans('Admin\products.product_main_price') }}
                                                 </label>
-                                                <input type="number" name="price" value="{{ $product->price}}"
+                                                <input type="number" name="price" value="{{ $product->special_price ?? $product->getPrice()}}"
                                                 class="textfield"
                                                 placeholder="{{ trans('Admin/products.product_main_price_placeholder') }}"
                                                />
@@ -199,19 +204,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        {{-- <div class="col-12 ">
-                                            <div class="input-wrp">
-                                                <label for="projectinput1"> العنوان  </label>
-
-                                                <input type="text" id="pac-input"
-                                                    class="textfield"
-                                                    placeholder=" enter address " name="location" wire:model='location'>
-                                                    @error('location')
-                                                        <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                            </div>
-                                        </div>
-                                        <div id="map" class="col-12" style="height:450px"></div> --}}
                                         <hr>
                                     </div>
                                     <div class="spacer py-6"></div>

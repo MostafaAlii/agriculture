@@ -63,13 +63,25 @@ class Shop extends Component
 
         if($this->sorting=='date'){
             $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
-            ->where('stock',1)->where('qty','>',0)->orderByDesc('created_at')->paginate($this->pagesize);
-          }elseif($this->sorting=='special_price'){
+                                ->where('special_price', null)
+                                ->where('stock',1)
+                                ->where('qty','>',0)
+                                ->orderByDesc('created_at')
+                                ->paginate($this->pagesize);
+          }elseif($this->sorting=='price-low'){
               $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
-              ->where('stock',1)->where('qty','>',0)->orderBy('special_price')->paginate($this->pagesize);
-          }elseif($this->sorting=='price-desc'){
+                                  ->where('special_price', null)
+                                  ->where('stock',1)
+                                  ->where('qty','>',0)
+                                  ->orderBy('special_price')
+                                  ->paginate($this->pagesize);
+          }elseif($this->sorting=='price-high'){
               $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
-              ->where('stock',1)->where('qty','>',0)->orderByDesc('special_price')->paginate($this->pagesize);
+                                  ->where('special_price', null)
+                                  ->where('stock',1)
+                                  ->where('qty','>',0)
+                                  ->orderByDesc('special_price')
+                                  ->paginate($this->pagesize);
           }else{
               $data['products'] = Product::orderByDesc('created_at')
                                   ->where('stock',1)

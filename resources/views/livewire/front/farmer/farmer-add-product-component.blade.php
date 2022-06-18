@@ -30,6 +30,7 @@
                 data-src="{{ asset('frontassets/img/decor-el_5.jpg') }}" alt="demo" />
         </div>
 
+        {{-- @include('dashboard.common._partials.messages') --}}
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -44,11 +45,8 @@
                             enctype="multipart/form-data" autocomplete="off">
                             <div class="row justify-content-xl-between">
                                 <div class="col-12 col-md-5 col-lg-6">
-                                    {{-- <div><h6>Product Information</h6></div> --}}
-
                                     <div class="row">
                                         <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-
                                             <div class="input-wrp">
                                                 @if ($newimage)
                                                     <img src="{{ $newimage->temporaryUrl() }}"
@@ -71,7 +69,6 @@
                                                 <input type="file" accept="image/*" name="image" class="textfield"
                                                     wire:model='newimage' required />
                                             </div>
-
                                         </div>
                                         <div class="col-12 ">
                                             <div class="input-wrp">
@@ -100,12 +97,10 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-
-                                            <p>
-                                                <b>
+                                                <label>
                                                     @lang('Admin\products.product_category_select') <span
                                                         class="text-danger">*</span>
-                                                </b>
+                                                </label>
                                                 <div class="input-wrp">
                                                     <div wire:ignore>
                                                         <select class="select2 textfield wide js-select"
@@ -127,7 +122,6 @@
                                                 @error('cat')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
-                                            </p>
                                         </div>
                                         <div class="col-12">
                                             <div class="input-wrp">
@@ -155,7 +149,32 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="col-12">
+                                            <div class="input-wrp">
+                                                <label>
+                                                    {{ trans('Admin\products.product_units_select') }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <div wire:ignore>
+                                                    <select class="select2 textfield wide js-select" id="units"
+                                                        wire:model='unit' style="width: 38.75em;" required >
+                                                        <option value=""  readonly selected>
+                                                            --{{ trans('Admin\products.product_units_select') }}--
+                                                        </option>
+                                                        @if($units && $units->count() > 0)
+                                                            {{-- <optgroup label="--{{ trans('Admin\products.product_units_select') }}--">
+                                                            </optgroup> --}}
+                                                                @foreach($units as $unit)
+                                                                <option value="{{$unit->id}}">{{$unit->Name}}</option>
+                                                                @endforeach
+                                                        @endif
+                                                    </select>
+                                                    @error('unit')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-12 ">
                                             <div class="input-wrp">
                                                 <label for="projectinput1">
@@ -208,68 +227,9 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        {{-- <div class="col-12 ">
-                                            <div class="input-wrp">
-                                                <label for="projectinput1"> العنوان  </label>
-
-                                                <input type="text" id="pac-input"
-                                                    class="textfield"
-                                                    placeholder=" enter address " name="location" wire:model='location'>
-                                                    @error('location')
-                                                        <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                            </div>
-                                        </div>
-                                        <div id="map" class="col-12" style="height:450px"></div> --}}
                                         <hr>
                                     </div>
                                     <div class="spacer py-6"></div>
-                                    {{-- <div><h6>Adress</h6></div>
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <select class="textfield wide js-select">
-                                                    <option>Country * 1</option>
-                                                    <option>Country * 2</option>
-                                                    <option>Country * 3</option>
-                                                    <option>Country * 4</option>
-                                                    <option>Country * 5</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <input class="textfield" placeholder="Town / City *" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <input class="textfield" placeholder="State / County *" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                                            <div class="input-wrp">
-                                                <input class="textfield" placeholder="ZIP *" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="input-wrp">
-                                                <input class="textfield" placeholder="Street address *" type="text" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="input-wrp">
-                                                <textarea class="textfield" placeholder="Order notes (optional)">
-
-                                                </textarea>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
                                         role="button">{{ __('Admin/site.save') }}
                                     </button>
@@ -542,6 +502,16 @@
             $('#tags').on('change', function(e) {
                 let data = $(this).val();
                 @this.set('tag', data);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#units').select2();
+            $('#units').on('change', function(e) {
+                let data = $(this).val();
+                console.log(data);
+                @this.set('unit', data);
             });
         });
     </script>

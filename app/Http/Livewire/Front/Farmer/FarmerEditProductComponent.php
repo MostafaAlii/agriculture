@@ -39,7 +39,7 @@ class FarmerEditProductComponent extends Component
         $product = Product::where('id',$product_id)->first();
         $this->product_name =$product->name;
         $this->slug         =$product->slug;
-        $this->price        =$product->price;
+        $this->price        =$product->special_price??null ;
         $this->desc         =$product->description;
         $this->product_id   =$product->id;
         $this->image        =$product->image->filename;
