@@ -72,7 +72,7 @@
                                                         {{ trans('Admin/proviences.provience_name') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{$provience->name }}" required>
+                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{$provience->name }}" required="required">
                                                 </div>
                                             </div>
                                         </div>
@@ -82,8 +82,8 @@
                                                     <i class="material-icons">flag</i>
                                                     {{ trans('Admin/proviences.choose_country_name') }}
                                                 </label>
-                                                <select name="country_id" class="select2 form-control">
-                                                    <optgroup label="{{ trans('Admin/proviences.please_choose_country_name') }}">
+                                                <select name="country_id" class="select2 form-control" required="required">
+                                                    <optgroup label="{{ trans('Admin/proviences.please_choose_country_name') }}" >
                                                         <option value="{{$provience->country->id }}" selected>
                                                             {{$provience->country->name}}
                                                         </option>

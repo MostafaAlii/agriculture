@@ -69,7 +69,7 @@
                                                         <div class="col col-md-6">
                                                             <div class="form-group">
                                                                 <label for="area_id">{{ __('Admin/precipitations.area') }}</label>
-                                                                <select name="area_id" id="area_id" class="form-control" required>
+                                                                <select name="area_id" id="area_id" class="form-control"  required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($areas as $area)
@@ -83,7 +83,7 @@
 
                                                             <div class="form-group">
                                                                 <label for="state_id">{{ __('Admin/precipitations.state') }}</label>
-                                                                <select class=" form-control" name="state_id" id="state_id">
+                                                                <select class=" form-control" name="state_id" id="state_id"  required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
 
                                                                 </select>
@@ -97,7 +97,7 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/precipitations.precipitation_rate') }}</label>
-                                                                <input name="precipitation_rate" value=""  class="form-control"type="text">
+                                                                <input name="precipitation_rate" value=""  class="form-control"type="text"  required="required">
                                                                 <input name="admin_id" value="{{$adminId}}"  class="form-control"type="hidden">
 
                                                             </div>
@@ -105,7 +105,7 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/precipitations.unit') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="unit_id" >
+                                                                <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required" >
                                                                     <option selected disabled>--select--</option>
                                                                     @foreach($units as $unit)
                                                                         <option value="{{$unit->id}}">{{ $unit->Name }}</option>
@@ -116,7 +116,8 @@
                                                         <div class="col col-md-4">
                                                         <div class="form-group" >
                                                             <label>{{ __('Admin/precipitations.date') }}</label>
-                                                            <input name="date"  id="precipitation_date" value=""  class="form-control datepicker" type="date">
+                                                            <input name="date"  id="precipitation_date" value=""
+                                                                   required="required" class="form-control datepicker" type="date">
 
                                                         </div>
                                                     </div>

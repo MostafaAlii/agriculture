@@ -79,8 +79,8 @@ class AdminRepository implements AdminInterface
         } catch (\Exception $e) {
             DB::rollBack();
             toastr()->success(__('Admin/attributes.add_wrong'));
-//            return redirect()->back();
-            return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+           return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 

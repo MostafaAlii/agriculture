@@ -17,9 +17,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area->name }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state->name }}</a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{ route('Animals.index') }}">{{ __('Admin/animals.animals_project') }}</a>
                                 </li>
@@ -156,7 +156,7 @@
 
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+            {data: 'farmer', name: 'farmer',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village',searchable: true, sortable: true},
@@ -167,7 +167,7 @@
             {data: 'food_source', name:'food_source',searchable: true, sortable: true},
             {data: 'marketing_side', name:'marketing_side',searchable: true, sortable: true},
             {data: 'cost', name: 'cost' ,searchable: true, sortable: true},
-            {data: 'admin', name: 'admin.firstname',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

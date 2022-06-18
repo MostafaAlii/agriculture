@@ -22,7 +22,7 @@ class AgriToolServiceRepository implements AgriToolServiceInterface
     public function data()
     {
 
-        $agriculture_tool_service = AgriTService::query();
+        $agriculture_tool_service = AgriTService::query()->get();
         return DataTables::of($agriculture_tool_service)
             ->addColumn('record_select', 'dashboard.admin.agriculture_tool_services.data_table.record_select')
             ->addIndexColumn()

@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSettingTranslationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('setting_translations', function (Blueprint $table) {

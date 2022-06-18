@@ -139,7 +139,7 @@
                 {data: 'Name', name: 'Name', searchable: false, sortable: false},
                 {data: 'visibility', name: 'visibility'},
 
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'created_at', name: 'created_at', searchable: true},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
         });

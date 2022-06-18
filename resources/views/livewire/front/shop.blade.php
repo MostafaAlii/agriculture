@@ -257,8 +257,8 @@
                                         <option value="default" selected="selected">
                                             {{ __('Website/home.defaultsort') }}</option>
                                         <option value="date">{{ __('Website/home.sortnew') }}</option>
-                                        <option value="price">{{ __('Website/home.sortlow') }}</option>
-                                        <option value="price-desc">{{ __('Website/home.sorthigh') }}</option>
+                                        <option value="price-low">{{ __('Website/home.sortlow') }}</option>
+                                        <option value="price-high">{{ __('Website/home.sorthigh') }}</option>
                                     </select>
                                 </div>
 
@@ -413,9 +413,9 @@
                                 <li class="page-item"><a class="page-link" href="#"><i class="fontello-angle-right"></i></a></li>
                             </ul> --}}
 
-                            {{-- @if (count($products))
+                            @if (count($products))
                                 {{ $products->links('page-links') }}
-                            @endif --}}
+                            @endif
                         </nav>
                         <!-- end pagination -->
                     </div>

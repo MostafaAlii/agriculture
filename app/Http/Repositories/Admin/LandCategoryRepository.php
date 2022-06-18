@@ -18,8 +18,8 @@ class LandCategoryRepository implements LandCategoryInterface {
     }
     public function data() {
 
-        $land_categories = LandCategory::query();
-        return DataTables::eloquent($land_categories)
+        $land_categories = LandCategory::query()->get();
+        return DataTables::of($land_categories)
 
             ->addColumn('record_select', 'dashboard.admin.land_categories.data_table.record_select')
             ->addIndexColumn()

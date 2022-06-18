@@ -69,7 +69,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="area_id">{{ __('Admin/animals.village') }}</label>
-                                                        <select name="village_id" id="village_id" class="form-control" required>
+                                                        <select name="village_id" id="village_id" class="form-control"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{ $animal->village_id }}" selected>{{ $animal->village->name }}</option>
@@ -83,7 +83,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/animals.farmer') }}</label>
-                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id"  required="required">
                                                             <option value="{{$animal->farmer_id}}" selected>{{$animal->farmer->firstname}}</option>
 
                                                         </select>
@@ -96,7 +96,7 @@
                                                 <div class="col">
                                                     <div  class="form-group">
                                                         <label for="id_h5_multi">{{ __('Admin/animals.marketing_side') }}</label>
-                                                        <select name="marketing_side"class="select2 form-control"id="id_h5_multi">
+                                                        <select name="marketing_side"class="select2 form-control"id="id_h5_multi"  required="required">
                                                             <option value="{{$animal->marketing_side}}" selected>{{$animal->marketing_side}}</option>
                                                             <option value="">--{{ __('Admin/animals.select') }}--</option>
                                                             <option value="private">{{ __('Admin/animals.private') }}</option>
@@ -112,7 +112,7 @@
                                                 <div class="col">
                                                     <div  class="form-group">
                                                         <label for="id_h5_multi">{{ __('Admin/animals.food_source') }}</label>
-                                                        <select name="food_source"class="select2 form-control"id="id_h5_multi">
+                                                        <select name="food_source"class="select2 form-control"id="id_h5_multi" required="required">
                                                             <option value= "{{$animal->food_source}}" selected>{{$animal->food_source}}</option>
                                                             <option value="">--{{ __('Admin/animals.select') }}--</option>
                                                             <option value="local">{{ __('Admin/animals.local') }}</option>
@@ -125,13 +125,13 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/animals.cost') }}</label>
-                                                        <input name="cost" value="{{$animal->cost}}"  class="form-control"type="text">
+                                                        <input name="cost" value="{{$animal->cost}}"  class="form-control"type="text"  required="required">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="currency_id">{{ __('Admin/animals.currency') }}</label>
-                                                        <select name="currency_id" id="currency_id" class="form-control" required>
+                                                        <select name="currency_id" id="currency_id" class="form-control"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{ $animal->currency_id }}" selected>{{ $animal->currency->Name }}</option>
@@ -149,28 +149,29 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/animals.project_name') }}</label>
-                                                        <input name="project_name" value="{{$animal->project_name}}"  class="form-control"type="text">
+                                                        <input name="project_name" value="{{$animal->project_name}}"   required="required"
+                                                               class="form-control"type="text">
                                                     </div>
                                                 </div>
 
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/animals.animal_count') }}</label>
-                                                        <input name="animal_count" value="{{$animal->animal_count}}"  class="form-control"type="number">
+                                                        <input name="animal_count" value="{{$animal->animal_count}}"  required="required" class="form-control"type="number">
 
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/animals.hall_num') }}</label>
-                                                        <input name="hall_num" value="{{$animal->hall_num}}"  class="form-control"type="number">
+                                                        <input name="hall_num" value="{{$animal->hall_num}}"  required="required" class="form-control"type="number">
 
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="customSelect1">{{ __('Admin/animals.type') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect1" name="type" >
+                                                        <select class="custom-select form-control" id="customSelect1" name="type"  required="required">
                                                             <option value="{{$animal->type}}" selected>{{$animal->type}}</option>
                                                             <option value="">--{{ __('Admin/animals.select') }}--</option>
 

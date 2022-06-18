@@ -93,7 +93,7 @@
                                                                     </td>
                                                                     <td>{{ $order->currency() . ' ' . number_format($item->price, 2) }}</td>
                                                                     <td>{{ $item->quantity }}</td>
-                                                                    <td>{{ $order->currency() . ' ' . number_format($item->product->price * $item->quantity, 2) }}</td>
+                                                                    <td>{{ $order->currency() . ' ' . number_format($item->price * $item->quantity, 2) }}</td>
                                                                 </tr>
                                                             @endforeach
                                                             <tr>

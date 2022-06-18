@@ -21,7 +21,7 @@ class AreaRepository implements AreaInterface
 
     public function data()
     {
-        $areas = Area::with(['province', 'states']);
+        $areas = Area::with(['province', 'states'])->get();
         return DataTables::of($areas)
             ->addColumn('province', function (Area $area) {
                 return $area->province->name;
@@ -77,8 +77,8 @@ class AreaRepository implements AreaInterface
             return redirect()->route('Areas.index');
         } catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.edit_wrong'));
-
-            return redirect()->back();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+//            return redirect()->back();
 
         }
 
@@ -100,7 +100,8 @@ class AreaRepository implements AreaInterface
                 return redirect()->route('Areas.index');
             }
         } catch (\Exception $e) {
-            toastr()->error(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/site.delete_related'));
+
 
             return redirect()->back();
 
@@ -136,7 +137,7 @@ class AreaRepository implements AreaInterface
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->error(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/site.cant_delete_all'));
 
             return redirect()->back();
 

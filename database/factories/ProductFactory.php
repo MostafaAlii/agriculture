@@ -11,8 +11,9 @@ class ProductFactory extends Factory {
             'description'                   =>      $this->faker->paragraph,
             'status'                        =>      Product::PENDING,
             'product_location'              =>      $this->faker->address(),
-            'qty'                           =>      $this->faker->numberBetween(100,200),
+            'qty'                           =>      $this->faker->numberBetween(5,20),
             'stock'                         =>      Product::IN_STOCK,
+            'special_price'                 =>      $this->faker->numberBetween(100,200),
         ];
     }
 }

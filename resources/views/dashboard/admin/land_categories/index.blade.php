@@ -129,9 +129,9 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select',  width: '1%'},
-                {data: 'category_name', name: 'category_name',searchable:false},
+                {data: 'category_name', name: 'category_name',searchable:true},
 
-                {data: 'category_type', name: 'category_type',searchable:false},
+                {data: 'category_type', name: 'category_type',searchable:true},
 
                 {data: 'created_at', name: 'created_at'},
                 {data: 'actions', name: 'actions', width: '20%'},

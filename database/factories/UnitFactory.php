@@ -13,9 +13,9 @@ class UnitFactory extends Factory
     public function definition()
     {
         $units = [
-            "هكتار",
+            "كيلو جرام",
+            "كرتونة",
             "دونم",
-            "كيلومتر",
             "ملى",
             "سنتى",
             "ميلي متر",
@@ -24,6 +24,7 @@ class UnitFactory extends Factory
 
             return [
                 'Name'             => $this->faker->unique()->randomElement([$units[0],$units[1],$units[2],$units[3],$units[4],$units[5],$units[6]]),
+                'visibility'       => $this->faker->randomElement([Unit::GENERAL,Unit::FOR_PRODUCT]),
             ];
 
 

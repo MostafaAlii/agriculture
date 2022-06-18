@@ -13,7 +13,9 @@ class WaterServiceRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:water_service_translations,name,water_service_id'.$this->id,
+
 
             ]
 
@@ -26,6 +28,7 @@ class WaterServiceRequest extends FormRequest {
         return [
             'name.required'   => trans('Admin\validation.required'),
             'name.regex'   => trans('Admin\validation.regex'),
+            'name.unique'   => trans('Admin\validation.unique'),
 
         ];
     }

@@ -40,7 +40,7 @@ class ProvienceController extends Controller
     }// end of destroy
 
 
-    public function bulkDelete(ProvienceRequest $request) {
+    public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
 }

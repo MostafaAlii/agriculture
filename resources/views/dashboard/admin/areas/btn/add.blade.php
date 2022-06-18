@@ -14,7 +14,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/areas.enter_area_name') }}</label>
-                        <input type="text" name="name" class="form-control" placeholder="{{ trans('Admin/areas.enter_area_name_placeholder') }}" />
+                        <input type="text" name="name" class="form-control"
+                               placeholder="{{ trans('Admin/areas.enter_area_name_placeholder') }}" required="required"/>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
@@ -22,7 +23,7 @@
                                 <i class="material-icons">flag</i>
                                 {{ trans('Admin/areas.choose_provience_name') }}
                             </label>
-                            <select name="province_id" class="select2 form-control">
+                            <select name="province_id" class="select2 form-control" required="required">
                                 <optgroup label="{{ trans('Admin/areas.please_choose_province_name') }}">
                                     @if($provencies && $provencies -> count() > 0)
                                         @foreach($provencies as $provence)

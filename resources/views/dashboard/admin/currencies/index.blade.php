@@ -116,11 +116,12 @@
                 url: '{{ route('currencies.data') }}',
             },
             columns: [
-                {data: 'Name', name: 'Name', searchable: false, sortable: false},
+                {data: 'Name', name: 'Name', searchable: true, sortable: false},
 
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
+            order: [[1, "DESC"]]
         });
     </script>
 

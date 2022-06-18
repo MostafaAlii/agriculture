@@ -72,7 +72,8 @@
                                                         {{ trans('Admin/villages.village_name') }}
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input type="text" id="eventRegInput1" class="form-control"  name="name" value="{{ old('name',$village->name) }}" required>
+                                                    <input type="text" id="eventRegInput1" class="form-control"
+                                                           name="name"  value="{{ old('name',$village->name) }}" required="required">
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +83,7 @@
                                                     <i class="material-icons">flag</i>
                                                     {{ trans('Admin/villages.choose_state_name') }}
                                                 </label>
-                                                <select name="state_id" class="select2 form-control">
+                                                <select name="state_id" class="select2 form-control" required="required">
                                                     <optgroup label="{{ trans('Admin/villages.choose_state_name') }}">
                                                         @if($states && $states-> count() > 0) 
                                                         <option value="{{$village->state->id }}" {{$village->state->id == $village->state_id ? 'selected' : '' }}>

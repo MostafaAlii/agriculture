@@ -127,9 +127,9 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'name', name: 'name', searchable: false, sortable: false},
-            {data: 'area', name: 'area.name', searchable: false, sortable: false},
-            {data: 'villages', name: 'villages.name', searchable: false, sortable: false},
+            {data: 'name', name: 'name', searchable: true, sortable: false},
+            {data: 'area', name: 'area', searchable: true, sortable: false},
+            {data: 'villages', name: 'villages', searchable: true, sortable: false},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

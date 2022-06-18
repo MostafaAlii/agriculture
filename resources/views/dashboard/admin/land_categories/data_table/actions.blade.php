@@ -82,7 +82,7 @@
                             <div class="form-group">
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin\lands.enter_category_name') }}
                                 </label>
-                                <input type="text" name="category_name" class="form-control"
+                                <input type="text" name="category_name" class="form-control select2"  required="required"
                                        value="{{$land_category->category_name}}"
                                        placeholder="{{ trans('Admin/lands.enter_category_name_placeholder') }}"/>
                                 @error('name')
@@ -98,7 +98,7 @@
                                 <label for="projectinput2"><i class="material-icons">mode_edit</i>
                                     {{__('Admin\lands.choose_category_type')}}
                                 </label>
-                                <select name="category_type" class="select2 form-control">
+                                <select name="category_type" class="select2 form-control select2"  required="required">
                                     <optgroup >
 
                                         <option value="agriculture"{{($land_category->category_type == 'agriculture') ? 'selected' : '' }} >{{__('Admin\lands.agricultural')}}</option>

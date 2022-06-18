@@ -80,7 +80,7 @@
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin\whole_sale_products.enter_whole_sale_product_name') }}
                                 </label>
 
-                                <input type="text" name="name" class="form-control"
+                                <input type="text" name="name" class=" select2 form-control" required="required"
                                        value="{{App\Models\WholeProduct::findorfail($id)->name}}"
                                        placeholder="{{ trans('Admin/whole_sale_products.enter_whole_sale_product_name_placeholder') }}"/>
                                 @error('name')

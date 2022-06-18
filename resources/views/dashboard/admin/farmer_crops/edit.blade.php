@@ -69,7 +69,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="area_id">{{ __('Admin/crops.village') }}</label>
-                                                        <select name="village_id" id="area_id" class="form-control" required>
+                                                        <select name="village_id" id="area_id" class="form-control"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{$farmerCrop->village_id }}" selected>{{ $farmerCrop->village->name }}</option>
@@ -87,7 +87,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/crops.farmer') }}</label>
-                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id"  required="required">
                                                             <option value="{{$farmerCrop->farmer_id}}" selected>{{$farmerCrop->farmer->firstname}}</option>
 
                                                         </select>
@@ -103,7 +103,7 @@
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label for="customSelect">{{ __('Admin/crops.land_category_id') }}</label>
-                                                        <select class="select2 custom-select form-control" id="customSelect" name="land_category_id" >
+                                                        <select class="select2 custom-select form-control" id="customSelect"  required="required" name="land_category_id" >
                                                                 <option value=" {{$farmerCrop->land_category_id }}">{{ $farmerCrop->landCategory->category_name }}</option>
                                                             @foreach($land_categories as $land_category)
                                                                 <option value="{{$land_category->id}} ">{{ $land_category->category_name }}</option>
@@ -162,7 +162,7 @@
                                                 <div class="col col-md-3">
                                                     <div class="form-group">
                                                         <label  for="date">{{ __('Admin/crops.date') }}</label>
-                                                        <input name="date"  value="{{$farmerCrop->date}}" id="date"typ="date" class="form-control">
+                                                        <input name="date"  value="{{$farmerCrop->date}}" id="date"typ="date"   required="required" class="form-control">
                                                     </div>
                                                 </div>
 

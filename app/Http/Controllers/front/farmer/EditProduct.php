@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Farmer;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Traits\UploadT;
 use Illuminate\Support\Facades\Auth;
@@ -26,47 +27,36 @@ class EditProduct extends Controller
         $data['farmers']        =       Farmer::select('id', 'firstname', 'lastname')->get();
         $data['tags']           =       Tag::select('id')->without('created_at', 'updated_at')->get();
         $data['categories']     =       Category::select('id')->without('created_at', 'updated_at')->get();
+        $data['units']          =       Unit::productVisability()->select('id')->get();
        return view('front.farmer.editproduct',$data);
     }
 
     public function update(farmerProductRequest $request) {
-        // return 'hello';
         DB::beginTransaction();
             try{
-                // if (!$request->has('status'))
-                //     $request->request->add(['status' => 0]);
-                // else
-                //     $request->request->add(['status' => 1]);
-
                 $product = Product::findOrfail($request->id);
-                $product->farmer_id     = Auth::user()->id;
-                $product->price         = $request->price;
-                $product->qty           = $request->qty;
-                // $product->status        = $request->status;
-                // $product->product_location = $request->product_location;
-                $product->save();
-                // Save Translation ::
                 $product->name = $request->name;
-                $product->slug=str_replace(' ', '_',$request->name);
+                $product->farmer_id      = Auth::guard('web')->user()->id;
+                $product->is_qty         = 1;
+                $product->qty            = $request->qty;
                 $product->description = $request->description;
                 $product->save();
-                // sync Categories ::
+                // $product->slug=str_replace(' ', '_',$request->name);
                 $product->categories()->sync($request->categories);
                 $product->tags()->sync($request->tags);
-                // Save Product Main Photo ::
+                $product->units()->syncWithPivotValues([$request->unit_id],['price'=>$request->price]);
                 if($request->photo){
                     $this->deleteImage('upload_image','/products/' . $product->image->filename,$product->id);
                 }
                 $this->addImageProduct($request, 'photo' , 'products' , 'upload_image',$product->id, 'App\Models\Product');
-
-
                 DB::commit();
                 session()->flash('Edit',__('Admin/products.product_updated_successfully'));
                 return redirect()->route('farmer.product');
             } catch(\Exception $ex){
                 DB::rollBack();
-                session()->flash('error',__('Admin/site.sorry'));
-                return redirect()->back();
+                // session()->flash('error',__('Admin/site.sorry'));
+                // return redirect()->back();
+                return $ex->getMessage();
             }
     }
 }

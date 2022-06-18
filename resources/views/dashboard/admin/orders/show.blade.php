@@ -85,11 +85,11 @@
                                                         <div class="row">
                                                             <div class="col-md-2">
                                                                 <figure class="figure">
-                                                                    @if ($item->product->image->filename)
+                                                                    @if ($item->product->image)
                                                                         <img src="{{ asset('Dashboard/img/products/' . $item->product->image->filename) }}" alt="{{ $item->product->image->filename .'_'. $item->order->referance_id }}" class="rounded-circle shadow bg-light rounded" style="width: 100px; height:100px;" />
                                                                     @else
                                                                         <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}" class="rounded-circle" style="width: 120px; height:120px;" />
-                                                                    @endif    
+                                                                    @endif
                                                                 </figure>
                                                             </div>
                                                             <div class="col-md-9 mt-1">
@@ -103,7 +103,7 @@
                                                                     <label class="col-md-3 mr-1 col-form-label col-form-label-sm font-weight-bolder">{{ trans('Admin/orders.product_price') }}</label>
                                                                     <p class="col-md-4 mr-1 font-italic font-weight-bold">
                                                                         <mark class="text-success">
-                                                                            {{ $item->product->price . ' ' . $order->currency }}
+                                                                            {{ $item->price . ' ' . $order->currency }}
                                                                         </mark>
                                                                     </p>
                                                                 </div>
@@ -230,7 +230,7 @@
                                             <div class="card-body">
                                                 <div class="table-responsive">
                                                     <table class="table table-striped">
-                                                        @if($order->is_shipping_different != 0) 
+                                                        @if($order->is_shipping_different != 0)
                                                             <tr>
                                                                 <th>{{ trans('Admin/orders.order_vendor_name') }}</th>
                                                                 <td>{{ $order->shipping->firstname .' '. $order->shipping->lastname }}</td>
@@ -261,9 +261,9 @@
                                                                     <td colspan="7">{{ $order->shipping->address2 }}</td>
                                                                 </tr>
                                                             @endif
-                                                             @else 
+                                                             @else
                                                                 <td class="font-weight-bold text-primary text-center mt-2">{{ trans('Admin/orders.shipping_data_is_billing_data') }}</td>
-                                                            
+
                                                         @endif
                                                     </table>
                                                 </div>
@@ -298,7 +298,7 @@
                                             </div>
                                         </div>
                                     </div>
-                
+
                                 </div>
                                 <!-- End Transaction Details -->
                             </div>
@@ -306,7 +306,7 @@
                     </section>
                 </div>
             </div>
-            
+
         </div>
         <!-- End Content Body -->
     </div>

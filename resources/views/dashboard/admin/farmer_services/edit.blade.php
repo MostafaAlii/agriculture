@@ -69,7 +69,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="area_id">{{ __('Admin/services.village') }}</label>
-                                                        <select name="village_id" id="village_id" class="form-control" required>
+                                                        <select name="village_id" id="village_id" class="form-control"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{$farmer_service->village_id }}" selected>{{ $farmer_service->village->name }}</option>
@@ -83,7 +83,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/services.farmer') }}</label>
-                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id">
+                                                        <select class="select2 form-control" name="farmer_id" id="farmer_id"  required="required">
                                                             <option value="{{$farmer_service->farmer_id}}" selected>{{$farmer_service->farmer->firstname}}</option>
 
                                                         </select>

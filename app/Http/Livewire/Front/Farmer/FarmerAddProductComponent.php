@@ -7,6 +7,7 @@ use App\Models\Farmer;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Tag;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -22,10 +23,10 @@ class FarmerAddProductComponent extends Component
     public $slug;
     public $cat=[];
     public $tag=[];
-    public $price;
     public $status=0;
     public $desc;
-    // public $location;
+    public $unit;
+    public $price;
     public $qty;
 
     public function generateslug(){
@@ -35,22 +36,23 @@ class FarmerAddProductComponent extends Component
         $this->slug           = Str::slug($this->product_name,'-');
         $this->categories     = Category::select('id')->get();
         $this->tags           = Tag::select('id')->get();
+        $this->units          = Unit::where('visibility','1')->select('id')->get();
     }
     // real time validation----------------------------------------------------------------------------
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName, [
-            'newimage'       =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'product_name'   =>'required|min:3',
-            'cat'     =>'required',
-            'tag'           =>'required',
-            'price'          =>'required|numeric|min:2',
-            'desc'           =>'required|min:10',
-            // 'location'       =>'required|min:10',
+            'newimage'       =>'required|image|mimes:jpeg,png,jpg|max:2048',
+            'product_name'   =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+            'cat'            =>'required|exists:categories,id|array',
+            'tag'            =>'required|exists:tags,id|array',
+            'unit'           =>'required|exists:units,id|',
+            'price'          =>'required|numeric|min:1|digits_between:1,12|max:9999999999',
+            'desc'           =>'sometimes|string|nullable|min:10|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|max:500',
         ]);
         if($this->is_qty){
             $this->validateOnly($propertyName, [
-                'qty'   =>'required|numeric|min:1',
+                'qty'   =>'required|numeric|min:1|max:9999999999',
                ]);
         }
     }
@@ -58,58 +60,54 @@ class FarmerAddProductComponent extends Component
 
     public function store(){
         DB::beginTransaction();
-        try{
-        $validateData = $this->validate([
-            'newimage'       =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'product_name'   =>'required|min:3',
-            'cat'            =>'required',
-            'tag'            =>'required',
-            'price'          =>'required|numeric|min:2',
-            'desc'           =>'required|min:10',
-
-            // 'location'       =>'required|min:10',
-          ]);
-        if($this->is_qty ){
-        $this->validate([
-            'qty' =>'required|numeric|min:1',
-
+        try
+        {
+            $validateData = $this->validate([
+                'newimage'       =>'required|image|mimes:jpeg,png,jpg|max:2048',
+                'product_name'   =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+                'cat'            =>'required|exists:categories,id|array',
+                'tag'            =>'required|exists:tags,id|array',
+                'unit'           =>'required|exists:units,id|',
+                'price'          =>'required|numeric|min:1|digits_between:1,12|max:9999999999',
+                'desc'           =>'sometimes|string|nullable|min:10|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|max:500',
             ]);
-            $product = new Product();
-            $product->name           = $this->product_name;
-            $product->slug           = $this->slug;
-            $product->farmer_id      = Auth::user()->id;
-            $product->price          = $this->price;
-            $product->description    = $this->desc;
-            $product->status         = $this->status;
-            $product->is_qty         = $this->is_qty ? 1:0;
-            $product->qty            = $this->qty;
-            // $product->product_location = $this->location;
-            $product->save();
-
-            $product->categories()->attach($this->cat);
-            $product->tags()->attach($this->tag);
-            $product->save();
-            if($this->newimage){
-                $image = $this->newimage->extension();
-                $name  = $this->slug;
-                $filename = $name. '.' . $image;
-                $Image = new Image();
-                $Image->filename = $filename;
-                $Image->imageable_id = $product->id;
-                $Image->imageable_type = 'App\Models\Product';
-                $Image->save();
-                $this->newimage->storeAs('products',$filename,'upload_image');
+                if($this->is_qty ){
+                    $this->validate([
+                        'qty' =>'required|numeric|min:1|max:9999999999',
+                        ]);
+                $product = new Product();
+                $product->name           = $this->product_name;
+                $product->farmer_id      = Auth::guard('web')->user()->id;
+                $product->description    = $this->desc;
+                $product->status         = $this->status;
+                $product->is_qty         = $this->is_qty ? 1:0;
+                $product->qty            = $this->qty;
+                $product->save();
+                $product->categories()->attach($this->cat);
+                $product->tags()->attach($this->tag);
+                $product->units()->syncWithPivotValues([$this->unit],['price'=>$this->price]);
+                $product->save();
+                if($this->newimage){
+                    $image = $this->newimage->extension();
+                    $name  = $this->slug;
+                    $filename = $name. '.' . $image;
+                    $Image = new Image();
+                    $Image->filename = $filename;
+                    $Image->imageable_id = $product->id;
+                    $Image->imageable_type = 'App\Models\Product';
+                    $Image->save();
+                    $this->newimage->storeAs('products',$filename,'upload_image');
+                }
+                DB::commit();
+                session()->flash('Add',__('Admin/products.product_store_successfully'));
+                return redirect()->route('farmer.product');
             }
-
-            DB::commit();
-            session()->flash('Add',__('Admin/products.product_store_successfully'));
-            return redirect()->route('farmer.product');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('error',__('Admin/site.sorry'));
+            return redirect()->back();
+            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
-    } catch (\Exception $e) {
-        DB::rollBack();
-        session()->flash('error',__('Admin/site.sorry'));
-        return redirect()->back();
-     }
     }
     public function render()
     {

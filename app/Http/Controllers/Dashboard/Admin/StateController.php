@@ -43,7 +43,7 @@ class StateController extends Controller
         return $this->Data->destroy($id);
     }// end of destroy
 
-    public function bulkDelete(StateRequest $request) {
+    public function bulkDelete(Request $request) {
         return $this->Data->bulkDelete($request);
     }// end of destroy
 }

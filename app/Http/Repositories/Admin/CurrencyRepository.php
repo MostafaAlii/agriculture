@@ -23,7 +23,7 @@ class CurrencyRepository implements CurrencyInterface
     public function data()
     {
 
-        $currencies = Currency::query();
+        $currencies = Currency::query()->get();
         return DataTables::of($currencies)
             ->addIndexColumn()
             ->editColumn('created_at', function (Currency $currency) {

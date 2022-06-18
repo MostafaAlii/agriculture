@@ -13,7 +13,9 @@ class TreeRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:tree_translations,name,tree_id'.$this->id,
+
 
             ],
             'tree_type_id'=>'required|exists:tree_types,id'
@@ -27,6 +29,8 @@ class TreeRequest extends FormRequest {
             'tree_type_id.required'   => trans('Admin\validation.required'),
 
             'tree_type_id.exists'   => trans('Admin\validation.exists'),
+            'name.unique'   => trans('Admin\validation.unique'),
+
 
         ];
     }

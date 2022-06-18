@@ -23,6 +23,10 @@ class CurrencyRequest extends FormRequest {
         return [
             'Name.required'   => trans('Admin\validation.required'),
             'Name.regex'   => trans('Admin\validation.regex'),
+            'Name.unique'   => trans('Admin\validation.unique'),
+
+            'unique:currency_translations,Name,currency_id'.$this->id,
+
 
         ];
     }

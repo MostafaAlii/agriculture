@@ -20,7 +20,7 @@ class WinterCropRepository implements WinterCropInterface
     public function data()
     {
 
-        $winter_crops = WinterCrop::query();
+        $winter_crops = WinterCrop::query()->get();
         return DataTables::of($winter_crops)
             ->addColumn('record_select', 'dashboard.admin.winter_crops.data_table.record_select')
             ->addIndexColumn()

@@ -8,7 +8,8 @@ class Orchard extends Model {
     use HasFactory;
     public $timestamps = true;
     protected $table = "orchards";
-    protected $guarded = [];
+    protected $fillable = ['unit_id','farmer_id','admin_id','village_id','area_id','state_id',
+        'land_category_id','supported_side','orchard_area','tree_count_per_orchard'];
     const SPATIAL = 'private', GOVERMENTAL = 'govermental', INTERNATIONAL_ORGANIZATION = 'international_organizations';
     public function getSupportedSide() {
         switch ($this->supported_side) {

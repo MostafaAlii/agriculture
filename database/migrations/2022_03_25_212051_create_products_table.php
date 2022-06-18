@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration {
             $table->foreignId('farmer_id')->nullable()->constrained()->cascadeOnDelete();
             $table->longText('product_location')->nullable();
             $table->integer('qty')->nullable();
+            $table->boolean('is_qty')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

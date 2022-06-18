@@ -72,7 +72,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label><i class="material-icons">mode_edit</i> {{ trans('Admin\bees.enter_reason_disaster') }}</label>
-                                <input type="text" name="name" class="form-control"
+                                <input type="text" name="name" class="form-control" required="required"
 
                                        placeholder="{{ trans('Admin\trees.enter_reason_disaster_placeholder') }}"
                                        value="{{\App\Models\BeeDisaster::findorFail($id)->name}}"/>
