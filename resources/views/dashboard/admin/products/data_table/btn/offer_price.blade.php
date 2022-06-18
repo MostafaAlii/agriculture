@@ -64,7 +64,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="projectinput1">{{ trans('Admin\products.product_end_date_offer') }}</label>
-                                        <input type="date" id="end_date" name="special_price_end" class="form-control form-control-md form-control-solid" placeholder="{{ trans('Admin\products.product_end_date_offer') }}" value="{{$product->special_price_end }}"  />
+                                        <input type="date" id="end_date" name="special_price_end" class="form-control form-control-md form-control-solid" placeholder="{{ trans('Admin\products.product_end_date_offer') }}" value="{{old('special_price_end') }}"  />
                                         @error('special_price_end')
                                         <span class="text-danger"> {{$message}}</span>
                                         @enderror

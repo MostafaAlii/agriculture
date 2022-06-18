@@ -1,31 +1,18 @@
 <?php
-
 namespace App\Rules\Dashborard\Products;
-
 use Illuminate\Contracts\Validation\Rule;
-
-class ProductOfferPrice implements Rule
-{
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
+use App\Models\Product;
+class ProductOfferPrice implements Rule {
+    private $special_price;
+    public function __construct($special_price) {
+        $this->special_price = $special_price;
     }
 
-    /**
-     * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
-     */
-    public function passes($attribute, $value)
-    {
-        //
+    public function passes($attribute, $value) {
+        $price = Product::getPrice()->get();
+        if($this->special_price >= $price) {
+            return false;
+        }
     }
 
     /**
@@ -35,6 +22,6 @@ class ProductOfferPrice implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return ':attribute should be less than main price';
     }
 }
