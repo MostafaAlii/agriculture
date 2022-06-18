@@ -10,7 +10,7 @@ class ProductStockRequest extends FormRequest {
     public function rules() {
         return [
             'stock'                      =>          'required|in:0,1',
-            'qty'                 =>          ['numeric', new ProductStockQty($this->stock)],
+            'qty'                 =>          [new ProductStockQty($this->stock)],
         ];
     }
 

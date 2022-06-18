@@ -8,7 +8,7 @@ class ProductStockQty implements Rule {
     }
 
     public function passes($attribute, $value) {
-        if($this->stock == 1 && $value != null && $value != 0) {
+        if($this->stock == 1 && $value != null && $value != 0 && is_numeric($value)) {
             return true;
         }
         if($this->stock == 0 && $value == null) {
@@ -17,6 +17,6 @@ class ProductStockQty implements Rule {
     }
 
     public function message() {
-        return 'فى حاله اختيار متاح يجب تحديد الكمية غير ذلك الكمية تكون فارغة';
+        return trans('Admin/products.qty_custom');
     }
 }
