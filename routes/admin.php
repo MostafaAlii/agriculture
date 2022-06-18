@@ -414,13 +414,18 @@ Route::group(
                 Route::group(['prefix' => 'Products'], function () {
                     Route::get('/',[ProductController::class, 'index'])->name('products');
                     Route::get('/products_data', [ProductController::class,'data'])->name('products_data');
-                    Route::get('price/{id}',[ProductController::class, 'additionalPrice'])->name('products.prices');
-                    Route::post('price',[ProductController::class, 'additionalPriceStore'])->name('products.prices.store');
-                    Route::post('stock',[ProductController::class, 'additionalStockStore'])->name('products.stock.store');
                     Route::get('create',[ProductController::class, 'create'])->name('products.generalInformation');
                     Route::post('create',[ProductController::class, 'generalInformationStore'])->name('products.generalInformation.store');
                     Route::get('/product_edit/{id}', [ProductController::class,'edit'])->name('product_edit');
                     Route::post('/product_update', [ProductController::class,'update'])->name('product_update');
+                    Route::post('price',[ProductController::class, 'additionalPriceStore'])->name('products.prices.store');
+                    Route::post('stock',[ProductController::class, 'additionalStockStore'])->name('products.stock.store');
+                    Route::get('restore',[ProductController::class, 'restore'])->name('products.trashed');
+                    Route::get('/trashed_data', [ProductController::class,'trashed_data'])->name('trashed_data');
+                    Route::put('restore/{id}',[ProductController::class, 'updateRestore'])->name('products.restore');
+                    Route::delete('/product_delete/{id}', [ProductController::class,'destroy'])->name('product_delete');
+                    Route::delete('/product_destroy/{id}', [ProductController::class,'forceDestroy'])->name('product_force_delete');
+                    Route::delete('/products/bulk_delete/{ids}', [ProductController::class,'bulkDelete'])->name('products.bulk_delete');
                 });
                 /********************************* End Products Routes ************************************/
 

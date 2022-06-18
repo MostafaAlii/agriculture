@@ -1,18 +1,7 @@
 <?php
 namespace Database\Seeders;
-
-use App\Models\Blog;
-use App\Models\Brand;
-use App\Models\Country;
-use App\Models\CountryTranslation;
+use App\Models\{Blog, Brand,Image, Product, Slider};
 use Illuminate\Database\Seeder;
-use App\Models\Image;
-use App\Models\Product;
-use App\Models\ProductDepartment;
-use App\Models\Profile;
-use App\Models\Slider;
-use Illuminate\Support\Facades\DB;
-
 class DatabaseSeeder extends Seeder {
     public function run() {
         $count = 32;

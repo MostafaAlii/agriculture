@@ -14,8 +14,8 @@ class GeneralRequest extends FormRequest {
             'categories.*'   =>'numeric|exists:categories,id',
             'tags'           =>'sometimes|nullable|array',
             'tags.*'         =>'numeric|exists:tags,id',
-            //'price'          =>'required|numeric|min:1|digits_between:1,12',
-            //'photo'          =>'required|image|mimes:jpeg,png,jpg|max:4096',
+            'price'          =>'required|numeric|min:1|digits_between:1,12',
+            'photo'          =>'required|image|mimes:jpeg,png,jpg|max:4096',
         ];
     }
 
@@ -26,7 +26,7 @@ class GeneralRequest extends FormRequest {
             'name.string'           =>  trans('Admin/products.name_string'),
             'name.unique'           =>  trans('Admin/products.name_unique'),
             'name.regex'            =>  trans('Admin/products.name_regex'),
-           //  'description.regex'     =>  trans('Admin/products.desc_regex'),
+            'description.regex'     =>  trans('Admin/products.desc_regex'),
             'categories.required'   =>  trans('Admin/products.category_required'),
             'tags.sometimes'         =>  trans('Admin/products.tag_required'),
             'price.required'        =>  trans('Admin/products.price_required'),

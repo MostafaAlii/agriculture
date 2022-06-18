@@ -6,7 +6,7 @@
                 <div class="modal-content">
 
                         <div class="modal-header" id="modal">
-                            <h4 class="modal-title" id="myModalLabel62">{{trans('Admin\products.stock_managment')}}</h4>
+                            <h4 class="modal-title" id="myModalLabel62">{{trans('Admin\products.stock_managment')}} / <span class="text-primary">{{ $product->name }}</span></h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -22,7 +22,7 @@
                                         <label for="projectinput1">
                                             {{ trans('Admin\products.product_tracking_stock') }}
                                         </label>
-                                        <select name="stock" class="form-control">
+                                        <select name="stock" id="manageStock" class="form-control">
                                             <optgroup label="{{ trans('Admin\products.product_tracking_stock_placeholder') }}">
                                                 <option {{ $product->stock == '1' ? "selected" : "" }} value="1">{{ __('Admin/products.allow_tracking') }}</option>
                                                 <option {{ $product->stock == '0' ? "selected" : "" }} value="0">{{ __('Admin/products.no_tracking') }}</option>
@@ -33,7 +33,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="quantity">
                                     <div class="form-group">
                                         <label for="projectinput1">{{ trans('Admin/products.product_stock_quantity') }}</label>
                                         <input type="number" class="form-control" placeholder="{{ trans('Admin/products.product_stock_quantity_placeholder') }}" value="{{ $product->qty }}" name="qty">
@@ -50,7 +50,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal"> {{ __('Admin\units.close') }}</button>
-                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin\units.update') }}</button>
+                            <button type="submit" class="btn btn-outline-primary"> {{ __('Admin\general.save') }}</button>
                         </div>
                     </form>
                 </div>

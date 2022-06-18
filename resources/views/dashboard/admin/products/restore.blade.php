@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('pageTitle')
-    {{ trans('Admin/products.product_title_in_sidebar') }}
+    {{ trans('Admin/products.productPageTitle') }}
 @endsection
 
 @section('content')
@@ -12,10 +12,10 @@
     <div class="content-wrapper">
         <!-- Start Breadcrumbs -->
         <div class="content-header row">
-            <div class="mb-2 content-header-left col-md-6 col-12">
+            <div class="content-header-left col-md-6 col-12 mb-2">
                 <h3 class="content-header-title">
                     <i class="material-icons">grain</i>
-                    {{ trans('Admin/products.product_title_in_sidebar') }}
+                    {{ __('Admin/products.trashed_product') }}
                 </h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
@@ -23,6 +23,8 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ trans('Admin/dashboard.dashboard_page_title') }}</a>
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('products') }}">{{ trans('Admin/products.product_title_in_sidebar') }}</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{ route('products.trashed') }}">{{ trans('Admin/products.trashed_product') }}</a>
                             </li>
                         </ol>
                     </div>
@@ -42,10 +44,10 @@
                         <div class="card">
                             <!-- Start Card Header -->
                             <div class="card-header">
-                                <h4 class="card-title">{{ trans('Admin/products.product_title_in_sidebar') }}</h4>
+                                <h4 class="card-title">{{ __('Admin/products.trashed_product_details') }}</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
-                                    <ul class="mb-0 list-inline">
+                                    <ul class="list-inline mb-0">
                                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                         <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                         <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
@@ -58,20 +60,8 @@
                             <div class="card-content collapse show">
                                 <!-- Start Content Body -->
                                 <div class="card-body card-dashboard">
-                                    @can('product-create')
-                                        <a href="{{ route('products.generalInformation') }}" class="mb-3 btn btn-primary btn-sm">
-                                            <i class="material-icons">add_box</i>
-                                            {{ __('Admin/products.add_new_product') }}
-                                        </a>
-                                    @endcan
-                                    @can('product-trushed')
-                                        <a href="{{ route('products.trashed') }}" class="mb-3 btn btn-warning btn-sm">
-                                            <i class="material-icons">delete_sweep</i>
-                                            {{ __('Admin/products.trashed_product') }}
-                                        </a>
-                                    @endcan
-                                    @can('product-delete-all')
-                                        <button type="button" class="mb-3 btn btn-danger btn-md"
+                                    @can('product-trushed-delete-all')
+                                        <button type="button" class="btn btn-danger btn-md mb-3"
                                             id="btn_delete_all" data-toggle="modal"
                                             data-target="#bulkdelete" >
                                             {{ __('Admin/site.bulkdelete') }}
@@ -80,7 +70,7 @@
                                     <!-- Start Table Responsive -->
                                     <div class="table-responsive">
                                         <!-- Start Table -->
-                                        <table class="table table-striped table-bordered zero-configuration" id="products-table">
+                                        <table class="table table-striped table-bordered zero-configuration" id="products-trashed-table">
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -90,9 +80,7 @@
                                                     <th>{{ __('Admin/products.product_name') }}</th>
                                                     <th>{{ __('Admin/products.product_farmer') }}</th>
                                                     <th>{{ __('Admin/products.product_status') }}</th>
-                                                     <th>{{ __('Admin/products.product_category') }}</th>
-                                                     <th>{{__('Admin/products.product_price') . ' ' . config('app.Currency') }}</th>
-                                                    <th>{{ __('Admin/general.created_since') }}</th>
+                                                     <th>{{ __('Admin/products.product_deleted_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
                                                 </tr>
                                             </thead>
@@ -124,17 +112,8 @@
 
 <!-- Datatable Fire -->
 <script>
-    $(document).on('change','#manageStock',function(){
-       if($(this).val() == '1' ){
-            $('#quantity').show();
-       }else{
-           $('#quantity').hide();
-       }
-    });
-</script>
-<script>
 
-    let productsTable = $('#products-table').DataTable({
+    let productsTable = $('#products-trashed-table').DataTable({
         // dom: "tiplr",
         serverSide: true,
         processing: true,
@@ -143,7 +122,7 @@
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
         ajax: {
-            url: '{{ route("products_data") }}',
+            url: '{{ route("trashed_data") }}',
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
@@ -151,9 +130,7 @@
             {data: 'name', name: 'name'},
             {data: 'farmer_name', name: 'farmer_name'},
             {data: 'status', name: 'status'},
-            {data: 'category_name', name: 'category_name'},
-            {data: 'price', name: 'price', searchable: false, sortable: false},
-            {data: 'created_at', name: 'created_at', searchable: false, sortable: false},
+            {data: 'deleted_at', name: 'deleted_at'},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '18%'},
         ],
         order: [[5, 'desc']],
