@@ -8,12 +8,15 @@ class ProductStockQty implements Rule {
     }
 
     public function passes($attribute, $value) {
-        if($this->stock == 1 && $value == 0 || $value == NULL) {
-            return false;
+        if($this->stock == 1 && $value != null && $value != 0) {
+            return true;
+        }
+        if($this->stock == 0 && $value == null) {
+            return true;
         }
     }
 
     public function message() {
-        return 'The validation error message.';
+        return 'فى حاله اختيار متاح يجب تحديد الكمية غير ذلك الكمية تكون فارغة';
     }
 }

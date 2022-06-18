@@ -36,7 +36,7 @@
                                 <div class="col-md-6" id="quantity">
                                     <div class="form-group">
                                         <label for="projectinput1">{{ trans('Admin/products.product_stock_quantity') }}</label>
-                                        <input type="number" class="form-control" placeholder="{{ trans('Admin/products.product_stock_quantity_placeholder') }}" value="{{ $product->qty }}" name="qty">
+                                        <input type="text" class="form-control" placeholder="{{ trans('Admin/products.product_stock_quantity_placeholder') }}" value="{{ $product->qty }}" name="qty">
                                         @error("qty")
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
