@@ -1,6 +1,8 @@
 <?php
 return [
 'wholesale'=>'العلوة',
+    'wholesales'=>'العلوات',
+
     'action' =>'العمليات',
     'admin_departments' =>'الهيكلية الإدارية التابعة',
     'area' =>'القضاء',
