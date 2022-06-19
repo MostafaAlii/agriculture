@@ -117,16 +117,21 @@
 
                                                     <div class="form-group">
                                                         <label for="area_id-1">{{ __('Admin/income_products.wholesale') }}</label>
-                                                        <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="text"  required="required">
-                                                        <input name="admin_id" value="{{$adminID}}"  class="form-control"type="hidden">
+                                                        <select class="custom-select form-control" id="customSelect" name="wholesale_id"  required="required">
+                                                            <option value="{{$outcome_product->wholesale_id}}">{{$outcome_product->wholesale->Name}}</option>
 
+                                                            @foreach(App\Models\Wholesale::all() as $wholesale)
+                                                                <option value ="{{$wholesale->id}}">{{ $wholesale->Name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-4 ">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/outcome_products.outcome_product_amount') }}</label>
                                                         <input name="outcome_product_amount" value="{{$outcome_product->outcome_product_amount}}"  required="required" class="form-control"type="text">
-                                                        <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="hidden">
+                                                        {{--<input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="hidden">--}}
+                                                        <input name="admin_id" value="{{$adminID}}"  class="form-control"type="hidden">
 
                                                     </div>
                                                 </div>

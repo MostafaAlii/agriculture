@@ -129,4 +129,13 @@ return [
 //guest controller subscribe
 'subscribed_successfully'=>'Subscribed Successfully',
 
+
+// filter in product page
+'allproducts'=>'All Products',
+'new_to_old'=>'New to Old',
+'old_to_new'=>'Old to New',
+'price_high_to_low'=>'Price High to Low',
+'price_low_to_high'=>'Price Low to High',
+'newoffer_from_low_to_high'=>'New Offer From Low to High',
+'newoffer_from_high_to_low'=>'New Offer From High to Low',
 ];

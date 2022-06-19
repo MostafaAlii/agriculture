@@ -229,18 +229,28 @@
                             </div>
 
                             <div class="col-auto">
-                                <!-- start ordering -->
-                                {{-- <form class="ordering" action="#"> --}}
-                                <div class="input-wrp">
-                                    <select name="orderby" class="textfield wide js-select" wire:model='sorting'>
-                                        <option value="default" selected="selected">{{ __('Website/home.defaultsort') }}</option>
-                                        <option value="date">{{ __('Website/home.sortnew') }}</option>
-                                        <option value="price">{{ __('Website/home.sortlow') }}</option>
-                                        <option value="price-desc">{{ __('Website/home.sorthigh') }}</option>
+                                <style>
+                                    .textfield.nice-select {
+                                        padding-right: 177px !important;
+                                        /* display:inline !important; */
+                                        display:none !important;
+                                    }
+                                    .textfield {
+                                        /* display:none !important; */
+                                        display:inline !important;
+                                    }
+                                </style>
+                                <div class="input-wrp" >
+                                    <select name="orderby" class=" textfield wide js-select" wire:model='sorting' >
+                                        <option value="default" selected="selected">{{ __('Website/home.allproducts') }}</option>
+                                        <option value="new_to_old">{{ __('Website/home.new_to_old') }}</option>
+                                        <option value="old_to_new">{{ __('Website/home.old_to_new') }}</option>
+                                        <option value="price_high_to_low">{{ __('Website/home.price_high_to_low') }}</option>
+                                        <option value="price_low_to_high">{{ __('Website/home.price_low_to_high') }}</option>
+                                        <option value="newoffer_from_low_to_high">{{ __('Website/home.newoffer_from_low_to_high') }}</option>
+                                        <option value="newoffer_from_high_to_low">{{ __('Website/home.newoffer_from_high_to_low') }}</option>
                                     </select>
                                 </div>
-                                {{-- </form> --}}
-                                <!-- end ordering -->
                             </div>
                             <div class="col-auto">
                                 <!-- start ordering -->

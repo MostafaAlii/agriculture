@@ -61,31 +61,58 @@ class Shop extends Component
         $data['tags']=Tag::get();
         $data['newProducts'] = Product::where('stock',1)->where('qty','>',0)->latest()->limit(3)->get();
 
-        if($this->sorting=='date'){
-            $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
-                                ->where('special_price', null)
-                                ->where('stock',1)
-                                ->where('qty','>',0)
+        if($this->sorting=='new_to_old'){
+            $data['products'] = Product::where('stock',1)
                                 ->orderByDesc('created_at')
+                                ->where('qty','>',0)
                                 ->paginate($this->pagesize);
-          }elseif($this->sorting=='price-low'){
-              $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
-                                  ->where('special_price', null)
-                                  ->where('stock',1)
+          }elseif($this->sorting=='old_to_new'){
+              $data['products'] = Product::where('stock',1)
+                                  ->orderBy('created_at')
                                   ->where('qty','>',0)
+                                //   ->whereBetween('special_price',[$this->min_price,$this->max_price])
+                                  ->paginate($this->pagesize);
+          }elseif($this->sorting=='price_high_to_low'){
+              $data['products'] = Product::where('stock',1)
+                                  ->where('qty','>',0)
+                                  ->where('special_price', 0)
+                                  ->whereHas('units', function($q){
+                                    $q->orderByDesc('price');
+                                 })
+                                //   ->where('special_price','>',0)
+                                //   ->whereBetween('special_price',[$this->min_price,$this->max_price])
+                                //   ->orderBy('special_price')
+                                  ->paginate($this->pagesize);
+          }elseif($this->sorting=='price_low_to_high'){
+              $data['products'] = Product::where('stock',1)
+                                    ->where('qty','>',0)
+                                    ->where('special_price', 0)
+                                    ->whereHas('units', function($q){
+                                        $q->orderBy('price');
+                                     })
+                                    // ->whereHas('units', function($q){
+                                    //     $q->whereBetween('price',[$this->min_price,$this->max_price]);
+                                    //  })
+                                //   ->whereBetween('special_price',[$this->min_price,$this->max_price])
+                                //   ->orderBy('special_price')
+                                  ->paginate($this->pagesize);
+          }elseif($this->sorting=='newoffer_from_low_to_high'){
+              $data['products'] = Product::where('stock',1)
+                                  ->where('special_price','>',0)
                                   ->orderBy('special_price')
-                                  ->paginate($this->pagesize);
-          }elseif($this->sorting=='price-high'){
-              $data['products'] = Product::whereBetween('special_price',[$this->min_price,$this->max_price])
-                                  ->where('special_price', null)
-                                  ->where('stock',1)
+                                //   ->whereBetween('special_price',[$this->min_price,$this->max_price])
                                   ->where('qty','>',0)
-                                  ->orderByDesc('special_price')
                                   ->paginate($this->pagesize);
+          }elseif($this->sorting=='newoffer_from_high_to_low'){
+              $data['products'] = Product::where('stock',1)
+                                ->where('special_price','>',0)
+                                ->orderByDesc('special_price')
+                                //   ->whereBetween('special_price',[$this->min_price,$this->max_price])
+                                ->where('qty','>',0)
+                                ->paginate($this->pagesize);
           }else{
-              $data['products'] = Product::orderByDesc('created_at')
-                                  ->where('stock',1)
-                                  ->where('qty','>',0)
+              $data['products'] = Product::where('stock',1)
+                                  ->orderBy('created_at')
                                   ->paginate($this->pagesize);
           }
 

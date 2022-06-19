@@ -13,6 +13,7 @@ use App\Models\AdminDepartment;
 use App\Models\SupportedSide;
 use App\Models\Village;
 use App\Models\WholeProduct;
+use App\Models\Wholesale;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -29,9 +30,10 @@ class IncomeProductFactory extends Factory
             'admin_id'       => $this->faker->numberBetween(1, Admin::count()),
             'unit_id'      => $this->faker->randomElement([1, 2]),
             'whole_product_id'=>$this->faker->numberBetween(1, WholeProduct::count()),
+            'wholesale_id'=>$this->faker->numberBetween(1, Wholesale::count()),
             'currency_id'=>$this->faker->numberBetween(1, Currency::count()),
             'income_product_amount'=>$this->faker->numberBetween([100,200,300,400, 500]),
-            'admin_dep_name'=>$this->faker->randomElement(["داهوك", "زاخو",'عقرة','برداش']),
+//            'admin_dep_name'=>$this->faker->randomElement(["داهوك", "زاخو",'عقرة','برداش']),
 
             'income_product_price'=>$this->faker->numberBetween([100,200,300,400, 500]),
             'income_product_date'=>$this->faker->date(),

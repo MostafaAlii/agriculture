@@ -136,28 +136,6 @@
                                     </h4>
                                     <div style="padding:10px 5px 40px 5px;">
                                         <div id="slider" wire:ignore>
-                                            {{-- <input type="text" class="js-range-slider" name="my_range" value=""
-                                                data-type="double"
-                                                data-min="0"
-                                                data-max="500"
-                                                data-from="48"
-                                                data-to="365"
-                                                data-grid="false"
-                                                data-skin="round"
-                                                data-prefix="$"
-                                                data-hide-from-to="true"
-                                                data-hide-min-max="true"
-                                            />
-
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <input class="range-slider-min-value" type="text" value="48" name="min-value" readonly="readonly">
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <input class="range-slider-max-value" type="text" value="365" name="max-value" readonly="readonly">
-                                                </div>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -250,25 +228,33 @@
                                         class="fontello-filter"></i>Filter</span>
                             </div>
                             <div class="col-auto">
-                                <!-- start ordering -->
-                                {{-- <form class="ordering" action="#"> --}}
-                                <div class="input-wrp">
-                                    <select name="orderby" class="textfield wide js-select" wire:model='sorting'>
-                                        <option value="default" selected="selected">
-                                            {{ __('Website/home.defaultsort') }}</option>
-                                        <option value="date">{{ __('Website/home.sortnew') }}</option>
-                                        <option value="price-low">{{ __('Website/home.sortlow') }}</option>
-                                        <option value="price-high">{{ __('Website/home.sorthigh') }}</option>
+                                <style>
+                                    .textfield.nice-select {
+                                        padding-right: 177px !important;
+                                        /* display:inline !important; */
+                                        display:none !important;
+                                    }
+                                    .textfield {
+                                        /* display:none !important; */
+                                        display:inline !important;
+                                    }
+                                </style>
+                                <div class="input-wrp" >
+                                    <select name="orderby" class=" textfield wide js-select" wire:model='sorting' >
+                                        <option value="default" selected="selected">{{ __('Website/home.allproducts') }}</option>
+                                        <option value="new_to_old">{{ __('Website/home.new_to_old') }}</option>
+                                        <option value="old_to_new">{{ __('Website/home.old_to_new') }}</option>
+                                        <option value="price_high_to_low">{{ __('Website/home.price_high_to_low') }}</option>
+                                        <option value="price_low_to_high">{{ __('Website/home.price_low_to_high') }}</option>
+                                        <option value="newoffer_from_low_to_high">{{ __('Website/home.newoffer_from_low_to_high') }}</option>
+                                        <option value="newoffer_from_high_to_low">{{ __('Website/home.newoffer_from_high_to_low') }}</option>
                                     </select>
                                 </div>
-
-                                {{-- </form> --}}
-                                <!-- end ordering -->
                             </div>
                             <div class="col-auto">
                                 <!-- start ordering -->
                                 {{-- <form class="ordering" action="#"> --}}
-                                <div class="input-wrp">
+                                <div class="input-wrp" wire:ignore>
                                     <select name="post-per-page" class="textfield wide js-select" wire:model='pagesize'>
                                         <option value="12" selected="selected">12 {{ __('Website/home.perpage') }}
                                         </option>

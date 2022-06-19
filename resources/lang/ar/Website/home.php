@@ -133,4 +133,13 @@ return [
 
 //guest controller subscribe
 'subscribed_successfully'=>'تم الاشتراك بنجاح',
+
+// filter in product page
+'allproducts'=>'كل المنتجات',
+'new_to_old'=>'الجديد إلى القديم',
+'old_to_new'=>'القديم إلى الجديد',
+'price_high_to_low'=>'الاعلى سعرا',
+'price_low_to_high'=>'الأقل سعرا',
+'newoffer_from_low_to_high'=>'احدث العروض من الأقل إلى الأعلى',
+'newoffer_from_high_to_low'=>'احدث العروض من الأعلى إلى الأقل',
 ];
