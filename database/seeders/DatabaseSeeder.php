@@ -1,6 +1,6 @@
 <?php
 namespace Database\Seeders;
-use App\Models\{Blog, Brand,Image, Product, Slider};
+use App\Models\{Blog, Brand,Image, Product, Slider, Farmer, User};
 use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder {
     public function run() {
@@ -23,10 +23,8 @@ class DatabaseSeeder extends Seeder {
             SettingSeeder::class,
             TagSeeder::class,
             BlogSeeder::class,
-            //AttributeTableSeeder::class,
             UnitSeeder::class,
             ProductTableSeeder::class,
-            //OptionTableSeeder::class,
             SliderSeeder::class,
             TreeTypeSeeder::class,
             TreeSeeder::class,
@@ -67,8 +65,8 @@ class DatabaseSeeder extends Seeder {
 
         ]);
 
-        \App\Models\Farmer::factory(30)->create();
-        \App\Models\User::factory(30)->create();
+        Farmer::factory(30)->create();
+        User::factory(30)->create();
          // images
          for ($i = 1; $i <= $count ; $i++) {
             Image::insert([
