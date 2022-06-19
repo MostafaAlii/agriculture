@@ -1,7 +1,7 @@
 <?php
 return [
     'wholesale'=>'Wholesale',
-
+    'wholesales'=>'Wholesales',
     'product_name'=>' Product Name',
     'dep_name'=>'WholeSale',
 'income_products_report'=>'Income Products Report',
