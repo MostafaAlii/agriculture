@@ -24,7 +24,7 @@ class IncomeProductRequest extends FormRequest
             'income_product_price' =>'required|numeric',
             'income_product_date' => 'required|date',
             'country_product_type'=>'required|in:local,iraq,imported',
-
+            'wholesale_id'=>'required|exists:wholesales,id',
 
         ];
     }
@@ -40,6 +40,7 @@ class IncomeProductRequest extends FormRequest
 
 
             'admin_id.required' => trans('Admin/validation.required'),
+            'admin_dep_name.required' => trans('Admin/validation.required'),
             'country_product_type.required' => trans('Admin/validation.required'),
             'country_id.required' => trans('Admin/validation.required'),
             'income_product_amount.required' => trans('Admin/validation.required'),

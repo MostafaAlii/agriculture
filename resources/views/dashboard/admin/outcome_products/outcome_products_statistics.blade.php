@@ -127,23 +127,19 @@
 
 
 
-                                                    <div class="col">
+                                                    <div class="col ">
                                                         <div class="form-group">
-                                                            <label for="customSelect1-1">{{ __('Admin/income_products.wholesale') }}</label>
-                                                            <select class="custom-select form-control"
-                                                                    id="customSelect1-1" name="admin_dep_name">
-                                                                <option selected value = ""disabled>{{__('Admin\orchards.select')}}</option>
-                                                                <option value="zakho">{{ __('Admin\income_products.zakho') }}</option>
-                                                                <option value="bardarash">{{ __('Admin\income_products.bardarash') }}</option>
-                                                                <option value="akre">{{ __('Admin\income_products.akre') }}</option>
-                                                                <option value="duhok">{{ __('Admin\income_products.duhok') }}</option>
-
-
+                                                            <label for="wholesale_id">{{ __('Admin/income_products.wholesale') }}</label>
+                                                            <select name="wholesale_id" id="wholesale_id" class="form-control select2">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                </option>
+                                                                @foreach (App\Models\Wholesale::all() as $wholesale)
+                                                                    <option value="{{ $wholesale->id }}">{{ $wholesale->Name }}</option>
+                                                                @endforeach
                                                             </select>
-                                                            @error('admin_dep_name')
+                                                            @error('wholesale_id')
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                             @enderror
-
                                                         </div>
                                                     </div>
                                                     <div class="col">

@@ -14,7 +14,7 @@ class WholeSaleProductRequest extends FormRequest {
             'name' => [
                 'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'unique:wholesale_translations,Name,wholesale_id'.$this->id,
+                'unique:whole_product_translations,name,whole_product_id'.$this->id,
 
 
             ],

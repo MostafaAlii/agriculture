@@ -52,6 +52,8 @@ class DatabaseSeeder extends Seeder {
             BeeKeeperCourseBeeSeeder::class,
             BeeKeeperBeeDisasterSeeder::class,
             WholeProductSeeder::class,
+            WholesaleSeeder::class,
+
             OutcomeProductSeeder::class,
             IncomeProductSeeder::class,
             SummerCropSeeder::class,

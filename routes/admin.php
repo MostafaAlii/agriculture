@@ -59,6 +59,8 @@ use App\Http\Controllers\Dashboard\Admin\WholeSaleProductController;
 use App\Http\Controllers\Dashboard\Admin\CurrencyController;
 use App\Http\Controllers\Dashboard\Admin\UnitController;
 use App\Http\Controllers\Dashboard\Admin\ProductController;
+use App\Http\Controllers\Dashboard\Admin\WholesaleController;
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -345,6 +347,15 @@ Route::group(
             Route::get('/WholeSaleProducts/data', [WholeSaleProductController::class,'data'])->name('whole_sale_products.data');
             Route::delete('/WholeSaleProducts/bulk_delete/{ids}', [WholeSaleProductController::class,'bulkDelete'])->name('whole_sale_products.bulk_delete');
             /*********end  whole sale product  route ********/
+
+
+            /******* whole sale   route********/
+            Route::resource('Wholesales', WholesaleController::class)->except(['show']);
+            Route::get('/Wholesales/data', [WholesaleController::class,'data'])->name('wholesales.data');
+            Route::delete('/Wholesales/bulk_delete/{ids}', [WholesaleController::class,'bulkDelete'])->name('wholesales.bulk_delete');
+            /*********end  whole sale product  route ********/
+
+
 
             /********************************* outcome products Routes ************************************/
             Route::resource('OutcomeProducts', OutcomeProductController::class)->except(['show']);

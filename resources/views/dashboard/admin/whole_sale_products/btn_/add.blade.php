@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/whole_sale_products.enter_whole_sale_product_name') }}</label>
-                        <input type="text" name="name" class=" select2 form-control" required="required"
+                        <input type="text" name="name" class="form-control" required="required"
                                placeholder="{{ trans('Admin/whole_sale_products.enter_whole_sale_product_name_placeholder') }}" />
                         @error('name')
                         <span class="text-danger"> {{$message}}</span>

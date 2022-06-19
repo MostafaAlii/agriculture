@@ -114,10 +114,14 @@
                                                        <div class="col col-md-4">
 
                                                            <div class="form-group">
-                                                               <label for="area_id-1">{{ __('Admin/income_products.wholesale') }}</label>
-                                                               <input name="admin_dep_name" value="{{$admin_dep_name}}"  required="required" class="form-control"type="text">
-                                                               <input name="admin_id" value="{{$adminID}}"  class="form-control"type="hidden">
-
+                                                               <label for="wholesale_id">{{ __('Admin/income_products.wholesale') }}</label>
+                                                               <select class="form-control select2" name="wholesale_id" id="wholesale_id" required>
+                                                               <option value="">{{ __('Admin/site.select') }}</option>
+                                                               </option>
+                                                               @foreach (App\Models\Wholesale::all() as $wholesale)
+                                                                   <option value="{{ $wholesale->id }}">{{ $wholesale->Name }}</option>
+                                                               @endforeach
+                                                               </select>
                                                            </div>
                                                        </div>
                                                        <div class="col col col-md-4">
@@ -129,8 +133,8 @@
                                                        <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.unit') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required">
-                                                                    <option selected disabled>--select--</option>
+                                                                <select class="custom-select form-control" id="customSelect" name="unit_id"  required>
+                                                                    <option value="">{{ __('Admin/site.select') }}</option>
                                                                     @foreach($units as $unit)
                                                                         <option value="{{$unit->id}}">{{ $unit->Name }}</option>
                                                                     @endforeach
@@ -145,15 +149,15 @@
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.income_product_price') }}</label>
                                                                 <input name="income_product_price" value=""  class="form-control"type="text"  required="required">
-                                                                <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="hidden">
+                                                                <input name="admin_id" value="{{$adminID}}"  class="form-control"type="hidden">
 
                                                             </div>
                                                         </div>
                                                         <div class="col col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/income_products.currency') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect" name="currency_id"  required="required">
-                                                                    <option selected disabled>--select--</option>
+                                                                <select class="custom-select form-control" id="customSelect" name="currency_id"  required>
+                                                                        <option value="">{{ __('Admin/site.select') }}</option>
                                                                     @foreach($currencies as $currency)
                                                                         <option value="{{$currency->id}}">{{ $currency->Name }}</option>
                                                                     @endforeach

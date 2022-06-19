@@ -116,9 +116,14 @@
                                                 <div class="col col-md-4">
 
                                                     <div class="form-group">
-                                                        <label for="area_id-1">{{ __('Admin/income_products.wholesale') }}</label>
-                                                        <input name="admin_dep_name" value="{{$admin_dep_name}}"  class="form-control"type="text">
+                                                        <label for="wholesale_id-1">{{ __('Admin/income_products.wholesale') }}</label>
+                                                        <select class="custom-select form-control" id="wholesale_id-1" name="wholesale_id"  required="required">
+                                                            <option value="{{$income_product->wholesale_id}}">{{$income_product->wholesale->Name}}</option>
 
+                                                            @foreach(App\Models\Wholesale::all() as $wholesale)
+                                                                <option value ="{{$wholesale->id}}">{{ $wholesale->Name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-4">

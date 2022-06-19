@@ -77,14 +77,18 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
-                                                    <th>{{ __('Admin/income_products.admin') }}</th>
+
                                                     <th>{{ __('Admin/income_products.country') }}</th>
+                                                    <th>{{ __('Admin/income_products.wholesale') }}</th>
+                                                    <th>{{ __('Admin/income_products.product') }}</th>
+
                                                     <th>{{ __('Admin/income_products.country_product_type') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_amount') }}</th>
                                                     <th>{{ __('Admin/income_products.income_product_price') }}</th>
                                                     <th>{{ __('Admin/income_products.currency') }}</th>
 
                                                     <th>{{ __('Admin/income_products.income_product_date') }}</th>
+                                                    <th>{{ __('Admin/income_products.admin') }}</th>
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -121,7 +125,7 @@
                 orientation: 'landscape',
                 pageSize: 'A3',
                 exportOptions: {
-                    columns: [1, 2,3,4,5,6,7]
+                    columns: [1, 2,3,4,5,6,7,8,9]
                 },
                 className: 'btn btn-primary ml-1',
 
@@ -129,7 +133,7 @@
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [1, 2,3,4,5,6,7]
+                    columns: [1, 2,3,4,5,6,7,8,9]
                 },
                 autoPrint: true,
                 orientation: 'landscape',
@@ -150,9 +154,11 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'country', name: 'country',searchable: true, sortable: true},
+            {data: 'wholesale', name: 'wholesale',searchable: true, sortable: true},
+            {data: 'product', name: 'product',searchable: true, sortable: true},
+
             {data: 'country_product_type', name: 'country_product_type',searchable: true, sortable: true},
 
 
@@ -161,6 +167,7 @@
             {data: 'currency', name: 'currency',searchable: true, sortable: true},
 
             {data: 'income_product_date', name: 'income_product_date',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
 

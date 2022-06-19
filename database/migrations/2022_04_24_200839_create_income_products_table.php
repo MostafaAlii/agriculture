@@ -15,9 +15,9 @@ class CreateIncomeProductsTable extends Migration
            $table->enum('country_product_type',['local','iraq','imported']);
             $table->foreignId('admin_id')->references('id')->on('admins');
             $table->foreignId('unit_id')->references('id')->on('units');
-//            $table->foreignId('wholesale_id')->references('id')->on('wholesales');
+            $table->foreignId('wholesale_id')->references('id')->on('wholesales')->onDelete('cascade');
 
-            $table->string('admin_dep_name');
+//            $table->string('admin_dep_name');
 
             $table->foreignId('whole_product_id')->references('id')->on('whole_products')->onDelete('cascade');
             $table->double('income_product_amount','15','2');
