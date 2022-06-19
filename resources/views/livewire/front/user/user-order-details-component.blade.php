@@ -54,9 +54,21 @@
                                                                     <td>{{ $order->created_at->format('d-m-Y') }}</td>
                                                                     <th>{{ trans('Website/vendor/orders.order_status') }}</th>
                                                                     <td>{!! $order->getStatus() !!}</td>
-                                                                    @if($order->status == Order::DELIVERED)
+                                                                    @if($order->status == Order::DELIVERED) <!-- تم الشحن -->
                                                                         <th>{{ trans('Website/vendor/orders.order_delivered_date') }}</th>
+                                                                        <td>{{ $order->suggestion_delivered_date->format('d-m-Y') }}</td>
+                                                                    @elseif($order->status == Order::UNDER_PROCESS)
+                                                                        <th>{{ trans('Website/vendor/orders.order_under_process_date') }}</th>
+                                                                        <td>{{ $order->under_proces_date->format('d-m-Y') }}</td>
+                                                                    @elseif($order->status == Order::FINISHED)
+                                                                        <th>{{ trans('Website/vendor/orders.order_finish_process_date') }}</th>
                                                                         <td>{{ $order->delivered_date->format('d-m-Y') }}</td>
+                                                                    @elseif($order->status == Order::REJECTED)
+                                                                        <th>{{ trans('Website/vendor/orders.order_reject_reason') }}</th>
+                                                                        <td>{!! $order->reason !!}</td>
+                                                                    @elseif($order->status == Order::PUSH_FROM_STOCK)
+                                                                        <th>{{ trans('Website/vendor/orders.order_push_from_stock_process_date') }}</th>
+                                                                        <td>{{ $order->push_from_stock_date->format('d-m-Y') }}</td>
                                                                     @elseif($order->status == Order::CANCELED)
                                                                         <th>{{ trans('Website/vendor/orders.order_canceled_date') }}</th>
                                                                         <td>{{ $order->canceled_date->format('d-m-Y') }}</td>

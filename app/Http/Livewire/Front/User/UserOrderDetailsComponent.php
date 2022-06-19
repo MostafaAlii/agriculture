@@ -18,7 +18,7 @@ class UserOrderDetailsComponent extends Component
     }
     public function cancelOrder($id) {
         $order = Order::find($id);
-	    $order->status = "canceled";
+	    $order->status = Order::CANCELED;
 	    $order->canceled_date = DB::raw('CURRENT_DATE');
 	    $order->save();
 	    session()->flash('order_message','Order has been canceled!');

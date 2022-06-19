@@ -6,7 +6,12 @@ class AddDeliveredCanceledDateToOrdersTable extends Migration {
     public function up() {
         Schema::table('orders', function (Blueprint $table) {
             $table->date('delivered_date')->nullable();
+            $table->date('suggestion_delivered_date')->nullable();
             $table->date('canceled_date')->nullable();
+            $table->date('under_proces_date')->nullable();
+            $table->date('refunded_date')->nullable();
+            $table->date('push_from_stock_date')->nullable();
+            $table->date('reject_date')->nullable();
         });
     }
 

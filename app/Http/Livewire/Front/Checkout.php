@@ -129,7 +129,7 @@ class Checkout extends Component {
             ->decrement('qty', $orderItem->quantity);
             $orderItem->save();
         }
-        
+
         if($this->ship_to_different) {
             $this->validate([
                 'shipping_firstname'             =>           'required|string|regex:/^[A-Za-z-أ-ي]+$/u',
@@ -163,7 +163,7 @@ class Checkout extends Component {
 
 
         if($this->paymentmode == Transaction::COD) {
-            $this->makeTransaction($order->id, Transaction::PENDING);
+            $this->makeTransaction($order->id, Transaction::ORDERED);
             $this->resetCard();
         }
         elseif($this->paymentmode == Transaction::CARD) {
@@ -193,7 +193,7 @@ class Checkout extends Component {
                     null, // for IP
                 );
                 //if($paytabs == 'succeeded') {
-                    $this->makeTransaction($order->id,'approved');
+                    $this->makeTransaction($order->id,Transaction::UNDER_PROCESS);
                     $this->resetCard();
                 /*} else {
                     session()->flash('paytabs_error','Error in Transaction!');
@@ -201,7 +201,7 @@ class Checkout extends Component {
                 }*/
                 //dd ($paytabs);
                 Notification::send(Auth::guard('vendor')->user(), new \App\Notifications\NewOrder(Auth::guard('vendor')->user()));
-                
+
             } catch(\Exception $ex){
                 session()->flash('paytabs_error',$ex->getMessage());
                 $this->thankyou = 0;

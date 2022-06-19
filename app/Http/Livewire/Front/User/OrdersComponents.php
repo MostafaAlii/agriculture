@@ -50,12 +50,12 @@ class OrdersComponents extends Component {
         $all=$this->checked;
         foreach ($all as $order_id) {
              $this->cancelOrder($order_id);
-        }        
+        }
     }
-    
+
     public function cancelOrder($id) {
         $order = Order::find($id);
-	    $order->status = "canceled";
+	    $order->status = Order::CANCELED;
 	    $order->canceled_date = Carbon::now()->format('Y-m-d');
         /*DB::table('products')
             ->whereId($order->orderItems->product_id)

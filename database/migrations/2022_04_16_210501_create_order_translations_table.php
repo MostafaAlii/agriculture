@@ -19,7 +19,7 @@ class CreateOrderTranslationsTable extends Migration
             $table->mediumText('reason')->nullable();
             $table->unique(['order_id', 'locale']);
             $table->index(['locale']);
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->nullable()->constrained()->cascadeOnDelete();
         });
     }
 
