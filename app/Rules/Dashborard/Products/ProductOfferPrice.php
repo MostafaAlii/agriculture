@@ -10,16 +10,14 @@ class ProductOfferPrice implements Rule {
 
     public function passes($attribute, $value) {
         $price = Product::getPrice()->get();
-        if($this->special_price >= $price) {
-            return false;
+        foreach($price as $p) {
+            if($this->special_price >= $p) {
+                return false;
+            }
         }
+        
     }
 
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
     public function message()
     {
         return ':attribute should be less than main price';

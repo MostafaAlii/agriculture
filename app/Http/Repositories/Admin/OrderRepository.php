@@ -57,48 +57,20 @@ class OrderRepository implements OrderInterface {
             }
             elseif($request->status == Order::UNDER_PROCESS) { // جارى تجهيز الطلب
                 $order->under_proces_date = Carbon::now();
-                /*$order->delivered_date = NULL;
-                $order->suggestion_delivered_date = NULL;
-                $order->reject_date = NULL;
-                $order->push_from_stock_date = NULL;
-                $order->canceled_date = NULL;*/
             }
             elseif($request->status == Order::FINISHED) { // جارى تجهيز الطلب
                 $order->delivered_date = Carbon::now();
-                /*$order->under_proces_date = NULL;
-                $order->suggestion_delivered_date = NULL;
-                $order->reject_date = NULL;
-                $order->push_from_stock_date = NULL;
-                $order->canceled_date = NULL;*/
             }
             elseif($request->status == Order::REJECTED) { // رفض الطلب
                 $order->reject_date = Carbon::now();
                 $order->reason  =   $request->reason;
-                /*$order->under_proces_date = NULL;
-                $order->suggestion_delivered_date = NULL;
-                $order->delivered_date = NULL;
-                $order->reject_date = NULL;
-                $order->push_from_stock_date = NULL;
-                $order->canceled_date = NULL;*/
             }
             elseif($request->status == Order::PUSH_FROM_STOCK) { // الخروج من المخزن
                 $order->push_from_stock_date = Carbon::now();
-                /*$order->suggestion_delivered_date = NULL;
-                $order->under_proces_date = NULL;
-                $order->delivered_date = NULL;
-                $order->reject_date = NULL;
-                $order->reason  =   NULL;
-                $order->canceled_date = NULL;*/
 
             }
             elseif($request->status == Order::CANCELED) { // تم الالغاء
                 $order->canceled_date = Carbon::now();
-                /*$order->push_from_stock_date = NULL;
-                $order->suggestion_delivered_date = NULL;
-                $order->under_proces_date = NULL;
-                $order->delivered_date = NULL;
-                $order->reject_date = NULL;
-                $order->reason  =   NULL;*/
             }
         $order->save();
         toastr()->success(__('Admin/site.added_successfully'));

@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\OrderInterface;
+use App\Http\Requests\Dashboard\Orders\OrderUpdateStatus;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller {
