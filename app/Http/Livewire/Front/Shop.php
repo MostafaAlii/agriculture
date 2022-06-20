@@ -59,21 +59,21 @@ class Shop extends Component
     public function render()
     {
         $data['tags']=Tag::get();
-        $data['newProducts'] = Product::where('stock',1)->where('qty','>',0)->latest()->limit(3)->get();
+        $data['newProducts'] = Product::where('status',1)->where('stock',1)->where('qty','>',0)->latest()->limit(3)->get();
 
         if($this->sorting=='new_to_old'){
-            $data['products'] = Product::where('stock',1)
+            $data['products'] = Product::where('status',1)->where('stock',1)
                                 ->orderByDesc('created_at')
                                 ->where('qty','>',0)
                                 ->paginate($this->pagesize);
           }elseif($this->sorting=='old_to_new'){
-              $data['products'] = Product::where('stock',1)
+              $data['products'] = Product::where('status',1)->where('stock',1)
                                   ->orderBy('created_at')
                                   ->where('qty','>',0)
                                 //   ->whereBetween('special_price',[$this->min_price,$this->max_price])
                                   ->paginate($this->pagesize);
           }elseif($this->sorting=='price_high_to_low'){
-              $data['products'] = Product::where('stock',1)
+              $data['products'] = Product::where('status',1)->where('stock',1)
                                   ->where('qty','>',0)
                                   ->where('special_price', 0)
                                   ->whereHas('units', function($q){
@@ -84,7 +84,7 @@ class Shop extends Component
                                 //   ->orderBy('special_price')
                                   ->paginate($this->pagesize);
           }elseif($this->sorting=='price_low_to_high'){
-              $data['products'] = Product::where('stock',1)
+              $data['products'] = Product::where('status',1)->where('stock',1)
                                     ->where('qty','>',0)
                                     ->where('special_price', 0)
                                     ->whereHas('units', function($q){
@@ -97,21 +97,21 @@ class Shop extends Component
                                 //   ->orderBy('special_price')
                                   ->paginate($this->pagesize);
           }elseif($this->sorting=='newoffer_from_low_to_high'){
-              $data['products'] = Product::where('stock',1)
+              $data['products'] = Product::where('status',1)->where('stock',1)
                                   ->where('special_price','>',0)
                                   ->orderBy('special_price')
                                 //   ->whereBetween('special_price',[$this->min_price,$this->max_price])
                                   ->where('qty','>',0)
                                   ->paginate($this->pagesize);
           }elseif($this->sorting=='newoffer_from_high_to_low'){
-              $data['products'] = Product::where('stock',1)
+              $data['products'] = Product::where('status',1)->where('stock',1)
                                 ->where('special_price','>',0)
                                 ->orderByDesc('special_price')
                                 //   ->whereBetween('special_price',[$this->min_price,$this->max_price])
                                 ->where('qty','>',0)
                                 ->paginate($this->pagesize);
           }else{
-              $data['products'] = Product::where('stock',1)
+              $data['products'] = Product::where('status',1)->where('stock',1)
                                   ->orderBy('created_at')
                                   ->paginate($this->pagesize);
           }

@@ -68,7 +68,7 @@ label.star:before {
                         <div class="posts">
                             <!-- start item -->
                             <div class="__item">
-                            @if($farmers->image->filename)
+                            @if($farmers->image)
                                 <a class="mr-2" href="#">
                                         <center><img src="{{ asset('Dashboard/img/farmers/'. $farmers->image->filename) }}"
                                         alt="{{ asset('Dashboard/img/farmers/'. $farmers->image->filename) }}"
@@ -99,16 +99,16 @@ label.star:before {
                                             <p><b>@lang('Admin/site.address2') : </b> {{ $farmers->address2 }}</p>
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
-                                    
-                                            <p><b>@lang('Admin/site.country') : </b> {{ $farmers->country->name }}</p>
-                                            <p><b>@lang('Admin/site.province') : </b> {{ $farmers->province->name }}</p>
-                                            <p><b>@lang('Admin/site.area') : </b> {{ $farmers->area->name }}</p>
-                                            <p><b>@lang('Admin/site.state') : </b> {{ $farmers->state->name }}</p>
-                                            <p><b>@lang('Admin/site.village') : </b> {{ $farmers->village->name }}</p>
-                                            <p><b>@lang('Admin/site.department') : </b> {{ $farmers->department->name }}</p>
+
+                                            <p><b>@lang('Admin/site.country') : </b> {{ $farmers->country->name ?? null}}</p>
+                                            <p><b>@lang('Admin/site.province') : </b> {{ $farmers->province->name ?? null}}</p>
+                                            <p><b>@lang('Admin/site.area') : </b> {{ $farmers->area->name ?? null}}</p>
+                                            <p><b>@lang('Admin/site.state') : </b> {{ $farmers->state->name ?? null}}</p>
+                                            <p><b>@lang('Admin/site.village') : </b> {{ $farmers->village->name ?? null}}</p>
+                                            <p><b>@lang('Admin/site.department') : </b> {{ $farmers->department->name ?? null}}</p>
                                         </div>
                                     </div>
-                                
+
                                     <!-- end form -->
                                 </div>
                             </div>
