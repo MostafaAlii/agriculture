@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers\Dashboard\Admin;
-use App\Models\Area;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -79,6 +78,10 @@ class DashboardController extends Controller {
         $data['latest_products']=Product::orderBy('id','desc')->limit('5')->get();
         $data['orders'] = Order::latest()->limit('5')->get();
        // dd($data['orders']);
+
+
+
+       
         return view('dashboard.admin.dashboard_index',$data);
     }
 }
