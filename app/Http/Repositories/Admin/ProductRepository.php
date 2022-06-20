@@ -129,13 +129,19 @@ class ProductRepository implements ProductInterface {
     }
 
     public function additionalPriceStore($request) {
+  
         try {
-            $real_id= $request->product_id;
-            Product::whereId($real_id)->update($request->only([
-                'special_price_type', 'special_price', 'special_price_start', 'special_price_end'
-            ]));
-            toastr()->success(__('Admin/products.product_add_special_price_successfully'));
-            return redirect()->route('products');
+            $productPrice  = productPrice($request->product_id,$request->special_price);
+            if ($productPrice) {
+                Product::findorfail($request->product_id)->update($request->only([
+                    'special_price_type', 'special_price', 'special_price_start', 'special_price_end'
+                ]));
+                toastr()->success(__('Admin/products.product_add_special_price_successfully'));
+                return redirect()->route('products');
+            }else{
+                toastr()->error(__('Admin/products.special_price_must_be_less_than_main_price'));
+                return redirect()->route('products'); 
+            }
         } catch(\Exception $ex){
             toastr()->error(__('Admin/general.wrong'));
             return redirect()->route('products');

@@ -26,11 +26,13 @@ class WholesaleRepository implements WholesaleInterface
         $wholesales = Wholesale::query()->get();
         return DataTables::of($wholesales)
             ->addIndexColumn()
+            ->addColumn('record_select', 'dashboard.admin.wholesales.data_table.record_select')
+
             ->editColumn('created_at', function (Wholesale $wholesale) {
                 return $wholesale->created_at->diffforhumans();
             })
             ->addColumn('actions', 'dashboard.admin.wholesales.data_table.actions')
-            ->rawColumns(['actions'])
+            ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
 
@@ -97,18 +99,18 @@ class WholesaleRepository implements WholesaleInterface
             DB::beginTransaction();
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
-                foreach ($delete_select_id as $currency_id) {
-                    $currency = Currency::findorfail($currency_id);
-                    $currency->delete();
+                foreach ($delete_select_id as $wholesale_id) {
+                    $wholesale = Wholesale::findorfail($wholesale_id);
+                    $wholesale->delete();
 
                 }
                 DB::commit();
 
                 toastr()->error(__('Admin/site.deleted_successfully'));
-                return redirect()->route('Currencies.index');
+                return redirect()->route('Wholesales.index');
             } else {
                 toastr()->error(__('Admin/site.no_data_found'));
-                return redirect()->route('Currencies.index');
+                return redirect()->route('Wholesales.index');
             }
         }catch (\Exception $e) {
             DB::rollBack();

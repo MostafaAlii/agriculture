@@ -701,6 +701,14 @@
                                     </a>
                                 </li>
                             @endcan
+                                <li>
+                                    <a class="menu-item" href="{{ route('Wholesales.index') }}">
+                                        <i class="material-icons">list</i>
+                                        <span data-i18n="Vertical">
+                                            {{ __('Admin\income_products.wholesales') }}
+                                        </span>
+                                    </a>
+                                </li>
                             @can('income-products')
                                 <li>
                                     <a class="menu-item" href="{{ route('IncomeProducts.index') }}">

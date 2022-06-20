@@ -1,10 +1,14 @@
 <div>
-    @can('currency-edit')
+
         <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
             <i class="fa fa-trash"></i>
             {{ __('Admin\wholesales.edit') }}
         </button>
-    @endcan
+
+    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+        <i class="fa fa-trash"></i>
+        {{ __('Admin/wholesales.delete') }}
+    </button>
 </div>
 
 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -88,7 +92,7 @@
 {{--end edit one raw--}}
 
 {{-- modal bulk delete --}}
-<form action="{{ route('Wholesales.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
+<form action="{{ route('wholesales.bulk_delete','ids') }}" class="my-1 my-xl-0" method="post" style="display: inline-block;">
     @csrf
     @method('delete')
     <div class="col-lg-4 col-md-6 col-sm-12">

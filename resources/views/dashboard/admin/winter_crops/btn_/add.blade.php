@@ -12,9 +12,11 @@
             <form action="{{ route('WinterCrops.store') }}" method="post" autocomplete="off" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
+
+
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/crops.enter_crop_name') }}</label>
-                        <input type="text" name="name" class= placeholder="{{ trans('Admin/crops.enter_crop_name_placeholder') }}" required="required" />
+                        <input type="text" name="name" class="form-control" placeholder="{{ trans('Admin/crops.enter_crop_name_placeholder') }}" required="required" />
                         @error('name')
                         <span class="text-danger"> {{$message}}</span>
                         @enderror

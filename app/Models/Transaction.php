@@ -9,8 +9,9 @@ class Transaction extends Model {
     protected $guarded = [];
     public $timestamps = true;
     const COD = 'cod', CARD = 'card', PAYPAL = 'paypal';
-    const PENDING = 'pending', APPROVED = 'approved', DECLINED = 'declined', REFUNDED = 'refunded';
-    const THANK_YOU = 1;
+    //const PENDING = 'pending', APPROVED = 'approved', DECLINED = 'declined', REFUNDED = 'refunded';
+    const ORDERED = 0, DELIVERED = 1, UNDER_PROCESS = 2, FINISHED = 3, REJECTED = 4, CANCELED = 5,
+          REFUNDED_REQUEST = 6, REFUNDED = 7, PUSH_FROM_STOCK = 8, THANK_YOU = 9, CURRENCY = 'USD';
 
     public function order(): BelongsTo {
         return $this->belongsTo(Order::class);
@@ -18,20 +19,31 @@ class Transaction extends Model {
 
     public function getStatus() {
         switch ($this->status) {
-            case 'pending': $result = '<label class="badge badge-warning">'. trans('Admin/orders.pending_order') .'</label>'; break;
-            case 'approved': $result = '<label class="badge badge-primary">'. trans('Admin/orders.approved_order') .'</label>'; break;
-            case 'declined': $result = '<label class="badge badge-danger">'. trans('Admin/orders.declined_order') .'</label>'; break;
-            case 'refunded': $result = '<label class="badge bg-dark text-white">'. trans('Admin/orders.refunded_order') .'</label>'; break;
+            case 0 : $result = '<label class="badge badge-primary">'.  trans('Admin/orders.ordered')  .'</label>'; break;
+            case 1 : $result = '<label class="badge badge-success">'. trans('Admin/orders.deliverd_process') .'</label>'; break;
+            case 2 : $result = '<label class="badge badge-default">'. trans('Admin/orders.under_process') .'</label>'; break;
+            case 3 : $result = '<label class="badge badge-success">'. trans('Admin/orders.finish') .'</label>'; break;
+            case 4 : $result = '<label class="badge badge-danger">'. trans('Admin/orders.reject') .'</label>'; break;
+            case 5 : $result = '<label class="badge badge-danger">'. trans('Admin/orders.canceled') .'</label>'; break;
+            case 6 : $result = '<label class="badge badge-warning">'. trans('Admin/orders.request_refunded') .'</label>'; break;
+            case 7 : $result = '<label class="badge badge-warning">'. trans('Admin/orders.refunded') .'</label>'; break;
+            case 8 : $result = '<label class="badge badge-info">'. trans('Admin/orders.push_from_stock') .'</label>'; break;
+
         }
         return $result;
     }
 
     public function getStatusForPrint() {
         switch ($this->status) {
-            case 'pending': $result = trans('Admin/orders.pending_order'); break;
-            case 'approved': $result = trans('Admin/orders.approved_order'); break;
-            case 'declined': $result = trans('Admin/orders.declined_order'); break;
-            case 'refunded': $result = trans('Admin/orders.refunded_order'); break;
+            case 0 : $result        =          trans('Admin/orders.ordered') ; break;
+            case 1 : $result        =          trans('Admin/orders.deliverd_process'); break;
+            case 2 : $result        =          trans('Admin/orders.under_process'); break;
+            case 3 : $result        =          trans('Admin/orders.finish'); break;
+            case 4 : $result        =          trans('Admin/orders.reject'); break;
+            case 5 : $result        =          trans('Admin/orders.canceled'); break;
+            case 6 : $result        =          trans('Admin/orders.request_refunded'); break;
+            case 7 : $result        =          trans('Admin/orders.refunded'); break;
+            case 8 : $result        =          trans('Admin/orders.push_from_stock'); break;
         }
         return $result;
     }

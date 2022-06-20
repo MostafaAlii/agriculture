@@ -188,12 +188,18 @@ use App\Http\Repositories\Admin\ProtectedHouseRepository;
 use App\Http\Repositories\Admin\AdminDepartmentRepository;
 use App\Http\Repositories\Admin\AgriToolServiceRepository;
 use App\Http\Repositories\Admin\WholeSaleProductRepository;
+use App\Http\Repositories\Admin\WholesaleRepository;
+use App\Http\Interfaces\Admin\WholesaleInterface;
+
+
 
 use App\Http\Interfaces\Admin\ProductInterface;
 use App\Http\Repositories\Admin\ProductRepository;
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register() {
+        $this->app->bind(WholesaleInterface::class, WholesaleRepository::class);
+
         $this->app->bind(CurrencyInterface::class, CurrencyRepository::class);
         $this->app->bind(UnitInterface::class, UnitRepository::class);
         $this->app->bind(OutcomeProductInterface::class, OutcomeProductRepository::class);

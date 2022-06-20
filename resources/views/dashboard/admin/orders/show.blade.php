@@ -46,17 +46,42 @@
                                     <form action="{{ route('Orders.update', encrypt($order->id)) }}" method="post">
                                         @csrf
                                         @method('PUT')
-                                        <div class="form-row align-item">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text font-weight-bold font-weight-italic">{{ trans('Admin/orders.order_status') }}</div>
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-row align-item">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text font-weight-bold font-weight-italic">{{ trans('Admin/orders.order_status') }}</div>
+                                                            </div> <!-- onchange="this.form.submit()" -->
+                                                            <select class="form-control form-control-md" id="manageOrderStatus" name="status">
+                                                                <option value="">{{ trans('Admin/orders.order_status') }}</option>
+                                                                <option value="0" {{ old('status', request()->input('status')) == '0' ? 'selected' : null }}>{{ trans('Admin/orders.ordered') }}</option>
+                                                                <option value="1" {{ old('status', request()->input('status')) == '1' ? 'selected' : null }}>{{ trans('Admin/orders.deliverd_process') }}</option>
+                                                                <option value="2" {{ old('status', request()->input('status')) == '2' ? 'selected' : null }}>{{ trans('Admin/orders.under_process') }}</option>
+                                                                <option value="3" {{ old('status', request()->input('status')) == '3' ? 'selected' : null }}>{{ trans('Admin/orders.finish') }}</option>
+                                                                <option value="4" {{ old('status', request()->input('status')) == '4' ? 'selected' : null }}>{{ trans('Admin/orders.order_reject') }}</option>
+                                                                <option value="8" {{ old('status', request()->input('status')) == '8' ? 'selected' : null }}>{{ trans('Admin/orders.push_from_stock') }}</option>
+                                                                <option value="5" {{ old('status', request()->input('status')) == '5' ? 'selected' : null }}>{{ trans('Admin/orders.canceled') }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <select class="form-control form-control-md" name="status" style="outline-style: none;" onchange="this.form.submit()">
-                                                    <option value="">{{ trans('Admin/orders.order_status') }}</option>
-                                                    <option value="ordered" {{ $order->status == 'ordered' ? 'selected' : null }}> {{ trans('Admin/orders.ordered') }} </option>
-                                                    <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : null }}> {{ trans('Admin/orders.deliverd') }} </option>
-                                                    <option value="canceled" {{ $order->status == 'canceled' ? 'selected' : null }}> {{ trans('Admin/orders.canceled') }} </option>
-                                                </select>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" id="rejectReason" style="display:none">
+                                                        <label for="exampleFormControlTextarea1">{{ trans('Admin/orders.type_reject_reason') }}</label>
+                                                        <textarea name="reason" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-actions center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="la la-check-square-o"></i> {{ __('Admin/site.save') }}
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -314,5 +339,13 @@
 @endsection
 
 @section('js')
-
+<script>
+    $(document).on('change','#manageOrderStatus',function(){
+       if($(this).val() == '4' ){
+            $('#rejectReason').show();
+       }else{
+           $('#rejectReason').hide();
+       }
+    });
+</script>
 @endsection

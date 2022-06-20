@@ -8,7 +8,7 @@ use App\Models\Area;
 use App\Models\State;
 use App\Models\Country;
 use App\Models\CountryTranslation;
-
+use App\Models\WholesaleTranslation;
 use App\Models\Province;
 use App\Models\WholeProduct;
 use App\Models\WholeProductTranslation;
@@ -38,10 +38,10 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         if($admin->type =='employee') {
-            $outcomes = OutcomeProduct::with( 'country','whole_product', 'admin','currency')
-                ->where('admin_id',  $admin->id);
+            $outcomes = OutcomeProduct::with( 'country','whole_product', 'admin','currency','wholesale')
+                ->where('admin_id',  $admin->id)->get();
         }else{
-            $outcomes = OutcomeProduct::with('country', 'whole_product', 'admin','currency');
+            $outcomes = OutcomeProduct::with('country', 'whole_product', 'admin','currency')->get();
 
         }
 
@@ -56,6 +56,12 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             })
             ->addColumn('country', function (OutcomeProduct $outcome) {
                 return $outcome->country->name;
+            })
+            ->addColumn('wholesale', function (OutcomeProduct $outcome) {
+                return $outcome->wholesale->Name;
+            })
+            ->addColumn('product', function (OutcomeProduct $outcome) {
+                return $outcome->whole_product->name;
             })
             ->addColumn('currency', function (OutcomeProduct $outcome) {
                 return $outcome->currency->Name;
@@ -109,7 +115,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
             $outcome_product->unit_id = $requestData['unit_id'];
             $outcome_product->currency_id = $requestData['currency_id'];
-            $outcome_product->admin_dep_name = $requestData['currency_id'];
+            $outcome_product->wholesale_id =$requestData['wholesale_id'];
+
 
             $outcome_product->outcome_product_amount = $requestData['outcome_product_amount'];
             $outcome_product->outcome_product_price = $requestData['outcome_product_price'];
@@ -124,8 +131,10 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
         } catch (\Exception $e) {
-            toastr()->error(__('Admin/attributes.add_wrong'));
-            return redirect()->back();
+//            toastr()->error(__('Admin/attributes.add_wrong'));
+//            return redirect()->back();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+
         }
     }
 
@@ -164,7 +173,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
             $outcome_product->country_id = $requestData['country_id'];
             $outcome_product->unit_id = $requestData['unit_id'];
             $outcome_product->currency_id = $requestData['currency_id'];
-            $outcome_product->admin_dep_name = $request->admin_dep_name;
+            $outcome_product->wholesale_id =$requestData['wholesale_id'];
 
             $outcome_product->outcome_product_amount = $requestData['outcome_product_amount'];
             $outcome_product->outcome_product_price = $requestData['outcome_product_price'];
@@ -242,11 +251,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
     public function outcome_product_statistics($request)
     {
+
         $validated = $request->validate([
 
             'start_date' => 'sometimes|nullable|date',
             'end_date' => 'sometimes|nullable|date|after_or_equal:start_date',
             'country_id'=>'sometimes|nullable|exists:countries,id',
+            'wholesale_id'=>'sometimes|nullable|exists:wholesales,id',
             'whole_product_id'=>'sometimes|nullable|exists:whole_products,id',
             'country_product_type'=>'sometimes|nullable|in:local,iraq,imported',
         ]
@@ -259,10 +270,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         $country_product_type = $request->country_product_type;
-        $wholesale_name = $request->admin_dep_name;
 
         if (!empty($request->country_id)) {
             $country_name = CountryTranslation::where('country_id', '=', $request->country_id)->pluck('name');
+
+        }
+        if (!empty($request->wholesale_id)) {
+            $wholesale_name = WholesaleTranslation::where('wholesale_id', '=', $request->wholesale_id)->pluck('Name');
 
         }
         if (!empty($request->whole_product_id)) {
@@ -278,7 +292,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $oldest = \DB::table('farmer_crops')->orderBy('date', 'asc')->first();
 
         if ($admin->type == 'admin') {
-            if ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name !=null &&
+            if ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id !=null &&
                 $request->country_product_type != null && $request->start_date && $request->end_date)
             {
                 $outcomeProductQuery1 = OutcomeProduct::query();
@@ -289,23 +303,25 @@ class OutcomeProductRepository implements OutcomeProductInterface {
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
 
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
                     ->where('country_translations.name', $country_name)
                     ->where('country_product_type', $country_product_type)
-                    ->where('outcome_products.admin_dep_name', $wholesale_name)
+                    ->where('wholesale_translations.Name', $wholesale_name)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
 
                 return view('dashboard.admin.outcome_products.outcome_products_statistics',
                     compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name !=null &&
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->wholesale_id !=null &&
                 $request->country_product_type == null && $request->start_date && $request->end_date)
             {
                 $outcomeProductQuery1 = OutcomeProduct::query();
@@ -317,19 +333,74 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
-                    ->where('outcome_products.admin_dep_name', $wholesale_name)
+                    ->where('wholesale_translations.Name', $wholesale_name)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name ==null &&
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->wholesale_id ==null &&
+                $request->country_product_type == null && $request->start_date && $request->end_date)
+            {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id !=null &&
+                $request->country_product_type == null && $request->start_date && $request->end_date )
+            {
+                $outcomeProductQuery1 = OutcomeProduct::query();
+
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $outcome_productQuery = $outcomeProductQuery1->whereRaw("date(outcome_products.outcome_product_date) >= '" . $request->start_date . "'
+             AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
+
+
+                $outcome_products = $outcome_productQuery->select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('country_product_type', $country_product_type)
+
+                    ->where('wholesale_translations.Name', $wholesale_name)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+
+            }
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->wholesale_id ==null &&
                 $request->country_product_type != null && $request->start_date && $request->end_date)
             {
                 $outcomeProductQuery1 = OutcomeProduct::query();
@@ -341,10 +412,12 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
@@ -354,7 +427,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
             }
 
-            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name ==null &&
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id ==null &&
                 $request->country_product_type == null && $request->start_date && $request->end_date)
             {
                 $outcomeProductQuery1 = OutcomeProduct::query();
@@ -365,10 +438,12 @@ class OutcomeProductRepository implements OutcomeProductInterface {
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
 
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
@@ -377,7 +452,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name==null&&
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id==null&&
                 $request->country_product_type != null && $request->start_date && $request->end_date) {
                 $outcomeProductQuery1 = OutcomeProduct::query();
 
@@ -387,10 +462,12 @@ class OutcomeProductRepository implements OutcomeProductInterface {
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
 
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
@@ -400,7 +477,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id == null && $request->whole_product_id == null && $request->admin_dep_name==null&&
+            elseif ($request->country_id == null && $request->whole_product_id == null && $request->wholesale_id==null&&
                 $request->country_product_type != null && $request->start_date && $request->end_date) {
                 $outcomeProductQuery1 = OutcomeProduct::query();
 
@@ -410,10 +487,12 @@ class OutcomeProductRepository implements OutcomeProductInterface {
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
 
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('outcome_products.country_product_type', $country_product_type)
@@ -421,7 +500,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id == null && $request->whole_product_id == null && $request->admin_dep_name==null&&
+            elseif ($request->country_id == null && $request->whole_product_id == null && $request->wholesale_id==null&&
                 $request->country_product_type == null && $request->start_date && $request->end_date )
             {
 
@@ -433,10 +512,12 @@ class OutcomeProductRepository implements OutcomeProductInterface {
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
 
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
 
@@ -444,7 +525,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id == null && $request->whole_product_id != null && $request->admin_dep_name!=null&&
+            elseif ($request->country_id == null && $request->whole_product_id != null && $request->wholesale_id!=null&&
                 $request->country_product_type == null && $request->start_date && $request->end_date) {
 
                 $outcomeProductQuery1 = OutcomeProduct::query();
@@ -455,65 +536,92 @@ class OutcomeProductRepository implements OutcomeProductInterface {
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
 
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('outcome_products.admin_dep_name', $wholesale_name)
+                    ->where('wholesale_translations.Name', $wholesale_name)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
 
-            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name!=null &&
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id!=null &&
                 $request->country_product_type != null ) {
 
                 $outcomeQuery = OutcomeProduct::query();
 
                 $outcome_products = $outcomeQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('admin_dep_name', $wholesale_name)
+                    ->where('wholesale_translations.Name', $wholesale_name)
                     ->where('country_translations.name', $country_name)
                     ->where('country_product_type', $country_product_type)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id == null && $request->whole_product_id != null && $request->admin_dep_name != null &&
+            elseif ($request->country_id == null && $request->whole_product_id != null && $request->wholesale_id != null &&
                 $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('admin_dep_name', $wholesale_name)
+                    ->where('wholesale_translations.Name', $wholesale_name)
                     ->where('country_product_type', $country_product_type)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
             }
-            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name == null &&
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id != null &&
                 $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
+                    ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('wholesale_translations.Name', $wholesale_name)
+                    ->where('country_translations.name', $country_name)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
+            }
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->wholesale_id == null &&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+                $outcome_products = OutcomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
+                    'outcome_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
+
+                    , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
@@ -522,33 +630,37 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name != null &&
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->wholesale_id != null &&
                 $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
-                    ->where('outcome_products.admin_dep_name', $wholesale_name)
+                    ->where('wholesale_translations.Name', $wholesale_name)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name == null &&
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id == null &&
                 $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
@@ -558,15 +670,17 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id != null && $request->whole_product_id != null && $request->admin_dep_name == null &&
+            elseif ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id == null &&
                 $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
@@ -577,15 +691,17 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id != null && $request->whole_product_id == null && $request->admin_dep_name == null &&
+            elseif ($request->country_id != null && $request->whole_product_id == null && $request->wholesale_id == null &&
                 $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_translations.name', $country_name)
@@ -595,16 +711,18 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id == null && $request->whole_product_id == null && $request->admin_dep_name==null&&
+            elseif ($request->country_id == null && $request->whole_product_id == null && $request->wholesale_id==null&&
                 $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
 
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('country_product_type', $country_product_type)
@@ -612,36 +730,40 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id == null && $request->whole_product_id == null && $request->admin_dep_name==null&&
+            elseif ($request->country_id == null && $request->whole_product_id == null && $request->wholesale_id==null&&
                 $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
 
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
-            elseif ($request->country_id == null && $request->whole_product_id != null && $request->admin_dep_name!=null&&
+            elseif ($request->country_id == null && $request->whole_product_id != null && $request->wholesale_id!=null&&
                 $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
 
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('admin_dep_name', $wholesale_name)
+                    ->where('wholesale_translations.Name', $wholesale_name)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
@@ -660,11 +782,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 '" . $request->start_date . "'
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id',
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
@@ -688,11 +812,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 '" . $request->start_date . "'
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id',
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
@@ -716,11 +842,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 '" . $request->start_date . "'
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id',
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
@@ -743,11 +871,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 '" . $request->start_date . "'
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id',
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
@@ -769,13 +899,14 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 '" . $request->start_date . "'
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
-                    ->join('country_translations', 'outcome_products.country_id',
-                        '=', 'country_translations.id')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
+                    ->join('country_translations', 'outcome_products.country_id','=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
                         '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
@@ -796,11 +927,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 '" . $request->start_date . "'
              AND date(outcome_products.outcome_product_date) <= '" . $request->end_date . "'");
                 $outcome_products = $outcome_productQuery->select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id',
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
@@ -817,11 +950,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
@@ -837,11 +972,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                 $request->country_product_type != null && $request->start_date == null && $request->end_date == null) {
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
@@ -857,11 +994,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)
@@ -878,11 +1017,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('outcome_products.admin_id', $admin->id)
@@ -896,11 +1037,13 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
 
                 $outcome_products = OutcomeProduct::select('country_translations.name as country',
-                    'whole_product_translations.name AS Product', 'outcome_products.admin_dep_name as admin_dep_name',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name as admin_dep_name',
                     'outcome_products.country_product_type as country_product_type'
                     , DB::raw('SUM(outcome_products.outcome_product_amount) as product_amount')
 
                     , 'outcome_products.outcome_product_date AS date')
+                    ->join('wholesale_translations', 'outcome_products.wholesale_id', '=', 'wholesale_translations.id')
+
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
                     ->where('whole_product_translations.name', $whole_product_name)

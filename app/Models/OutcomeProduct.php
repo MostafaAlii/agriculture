@@ -22,6 +22,9 @@ class OutcomeProduct extends Model {
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id');
     }
+    public function wholesale(){
+        return $this->belongsTo(Wholesale::class,'wholesale_id');
+    }
     public function admin(){
         return $this->belongsTo(Admin::class,'admin_id');
     }

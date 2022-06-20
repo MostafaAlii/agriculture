@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class IncomeProduct extends Model {
     use HasFactory;
     protected $table = "income_products";
-    protected $fillable=['unit_id','admin_id','country_id','currency_id','whole_product_id',
+    protected $fillable=['unit_id','admin_id','country_id','currency_id','whole_product_id','wholesale_id',
        'income_product_amount','income_product_price','country_product_type','income_product_date' ];
 
     public $timestamps = true;
@@ -23,6 +23,10 @@ class IncomeProduct extends Model {
 
     public function unit(){
         return $this->belongsTo(Unit::class,'unit_id');
+    }
+
+    public function wholesale(){
+        return $this->belongsTo(Wholesale::class,'wholesale_id');
     }
     public function admin(){
         return $this->belongsTo(Admin::class,'admin_id');

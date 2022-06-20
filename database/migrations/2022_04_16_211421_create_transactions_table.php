@@ -11,7 +11,7 @@ class CreateTransactionsTable extends Migration {
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->enum('mode',[Transaction::COD,Transaction::CARD,Transaction::PAYPAL]);
-            $table->enum('status',[Transaction::PENDING, Transaction::APPROVED,Transaction::DECLINED,Transaction::REFUNDED])->default(Transaction::PENDING);
+            $table->unsignedTinyInteger('status')->default(Transaction::ORDERED);
             $table->timestamps();
         });
     }
