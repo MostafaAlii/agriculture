@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\AreaInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\AreaRequest;
+use App\Http\Requests\Dashboard\AreaUpdateRequest;
+
 
 
 class AreaController extends Controller
@@ -38,7 +40,7 @@ class AreaController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(AreaRequest $request,$id) {
+    public function update(AreaUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 

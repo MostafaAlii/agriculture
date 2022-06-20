@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\UnitInterface;
 use App\Http\Requests\Dashboard\UnitRequest;
+use App\Http\Requests\Dashboard\UnitUpdateRequest;
+
 use Illuminate\Http\Request;
 class UnitController extends Controller
 {
@@ -27,7 +29,7 @@ class UnitController extends Controller
         return $this->Data->store($request);
     }
 
-    public function update(UnitRequest $request,$id) {
+    public function update(UnitUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 }

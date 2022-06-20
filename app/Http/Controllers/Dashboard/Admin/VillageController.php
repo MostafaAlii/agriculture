@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\VillageInterface;
 use App\Http\Requests\Dashboard\VillageRequest;
+use App\Http\Requests\Dashboard\VillageUpdateRequest;
+
 use Illuminate\Http\Request;
 class VillageController extends Controller
 {
@@ -34,7 +36,7 @@ class VillageController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(VillageRequest $request, $id) {
+    public function update(VillageUpdateRequest $request, $id) {
         return $this->Data->update($request,$id);
     }
 

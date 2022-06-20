@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\TreeInterface;
 use App\Http\Requests\Dashboard\TreeRequest;
+use App\Http\Requests\Dashboard\TreeUpdateRequest;
+
 
 use Illuminate\Http\Request;
 class TreeController extends Controller
@@ -30,7 +32,7 @@ class TreeController extends Controller
         return $this->Data->store($request);
     }
 
-    public function update(TreeRequest $request,$id) {
+    public function update(TreeUpdateRequest $request,$id) {
 
         return $this->Data->update($request,$id);
     }// end of update

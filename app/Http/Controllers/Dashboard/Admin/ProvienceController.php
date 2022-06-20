@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProvienceInterface;
 use App\Http\Requests\Dashboard\ProvienceRequest;
+use App\Http\Requests\Dashboard\ProvienceUpdateRequest;
+
 use Illuminate\Http\Request;
 class ProvienceController extends Controller
 {
@@ -31,7 +33,7 @@ class ProvienceController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(ProvienceRequest $request, $id) {
+    public function update(ProvienceUpdateRequest $request, $id) {
         return $this->Data->update($request,$id);
     }// end of update
 

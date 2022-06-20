@@ -21,7 +21,7 @@ class ProvienceRepository implements ProvienceInterface
 
     public function data()
     {
-        $proviences = Province::with(['country', 'areas']);
+        $proviences = Province::with(['country', 'areas'])->get();
         return DataTables::of($proviences)
             ->addColumn('country', function (Province $provience) {
                 return $provience->country->name;

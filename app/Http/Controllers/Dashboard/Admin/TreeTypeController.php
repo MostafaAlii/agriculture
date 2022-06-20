@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\TreeTypeInterface;
+use App\Http\Requests\Dashboard\TreeTypeUpdateRequest;
 use App\Http\Requests\Dashboard\TreeTypeRequest;
+
 use Illuminate\Http\Request;
 class TreeTypeController extends Controller
 {
@@ -37,7 +39,7 @@ class TreeTypeController extends Controller
 //        return $this->Data->edit($id);
 //    }// end of edit
 
-    public function update(TreeTypeRequest $request,$id) {
+    public function update(TreeTypeUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 

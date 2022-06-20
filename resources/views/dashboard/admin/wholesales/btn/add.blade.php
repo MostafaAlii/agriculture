@@ -13,8 +13,8 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label><i class="material-icons">mode_edit</i> {{ trans('Admin/currencies.enter_wholesale_name') }}</label>
-                        <input type="text" name="Name" class="form-control" placeholder="{{ trans('Admin/currencies.enter_wholesale_name_placeholder') }}" />
+                        <label><i class="material-icons">mode_edit</i> {{ trans('Admin/wholesales.enter_wholesale_name') }}</label>
+                        <input type="text" name="Name" class="form-control" placeholder="{{ trans('Admin/wholesales.enter_wholesale_name_placeholder') }}" />
                     </div>
 
                 </div>

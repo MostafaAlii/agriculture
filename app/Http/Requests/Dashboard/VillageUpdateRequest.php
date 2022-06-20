@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-class AgriServiceRequest extends FormRequest {
+class VillageUpdateRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -13,12 +13,14 @@ class AgriServiceRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'unique:agri_service_translations,name,'.$this->id,
-
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:villages,id'.$this->id,
+
 
             ],
-
+            'location_x' =>  'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'state_id' => 'required|exists:states,id',
 
 
         ];
@@ -28,6 +30,9 @@ class AgriServiceRequest extends FormRequest {
         return [
             'name.required'   => trans('Admin\validation.required'),
             'name.regex'   => trans('Admin\validation.regex'),
+            'location_x.numeric'    => trans('Admin\validation.numeric'),
+            'location_y.numeric'       => trans('Admin\validation.numeric'),
+            'state_id.required'       => trans('Admin\validation.required'),
             'name.unique'   => trans('Admin\validation.unique'),
 
 

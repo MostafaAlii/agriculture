@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label><i class="material-icons">mode_edit</i> {{ trans('Admin/bees.enter_course_desc') }}</label>
-                        <textarea type="text" name="desc" class="form-control" rows="3" placeholder="{{ trans('Admin/bees.enter_course_desc_placeholder') }}"></textarea>
+                        <textarea type="text" name="desc" class="form-control" required="required" rows="3" placeholder="{{ trans('Admin/bees.enter_course_desc_placeholder') }}"></textarea>
                     </div>
 
                 </div>

@@ -7,6 +7,8 @@ use App\Http\Interfaces\Admin\WinterCropInterface;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\Dashboard\WinterCropRequest;
+use App\Http\Requests\Dashboard\WinterCropUpdateRequest;
+
 
 class WinterCropController extends Controller
 {
@@ -33,7 +35,7 @@ class WinterCropController extends Controller
 
 
 
-    public function update(WinterCropRequest $request,$id ) {
+    public function update(WinterCropUpdateRequest $request,$id ) {
         return $this->Data->update($request,$id);
     }
 

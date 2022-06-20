@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-class CurrencyRequest extends FormRequest {
+class CurrencyUpdateRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -14,7 +14,7 @@ class CurrencyRequest extends FormRequest {
             'Name' => [
                 'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'unique:currency_translations,Name,',
+                'unique:currencies,id,'.$this->id,
 
 
             ]

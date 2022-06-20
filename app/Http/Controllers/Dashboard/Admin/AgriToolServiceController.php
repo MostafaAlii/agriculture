@@ -9,6 +9,8 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Dashboard\AgriTServiceRequest;
+use App\Http\Requests\Dashboard\AgriTServiceUpdateRequest;
+
 use App\Http\Interfaces\Admin\AgriToolServiceInterface;
 
 
@@ -36,7 +38,7 @@ class AgriToolServiceController extends Controller
     public function store(AgriTServiceRequest $request) {
         return $this->Data->store($request);
     }
-    public function update(AgriTServiceRequest $request,$id) {
+    public function update(AgriTServiceUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }
     public function destroy($id) {

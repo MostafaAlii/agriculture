@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\WaterServiceInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\WaterServiceRequest;
+use App\Http\Requests\Dashboard\WaterServiceUpdateRequest;
+
 
 
 class WaterServiceController extends Controller
@@ -31,8 +33,8 @@ class WaterServiceController extends Controller
         return $this->Data->store($request);
     }
 
-    public function update(WaterServiceRequest $request,$id) {
-        return $this->Data->store($request,$id);
+    public function update(WaterServiceUpdateRequest $request,$id) {
+        return $this->Data->update($request,$id);
     }
     public function destroy($id) {
         return $this->Data->destroy($id);

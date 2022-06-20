@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\BeeDisasterInterface;
 use App\Http\Requests\Dashboard\DisasterBeeRequest;
+use App\Http\Requests\Dashboard\DisasterBeeUpdateRequest;
+
 use Illuminate\Http\Request;
 
 
@@ -34,7 +36,7 @@ class BeeDisastersController extends Controller
         return $this->Data->store($request);
     }
 
-    public function update(DisasterBeeRequest $request,$id) {
+    public function update(DisasterBeeUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }
     public function destroy($id) {

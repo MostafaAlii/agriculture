@@ -37,12 +37,12 @@ class SummerCropRepository implements SummerCropInterface
         try {
             $validated = $request->validated();
 
-            $summer_crop = new SummerCrop();
-            $summer_crop->name = $validated['name'];
-            $summer_crop->save();
+            $summer_crop =  SummerCrop::create([
+                'name'=>$validated['name']
+            ]);
 
 
-            toastr()->success(__('Admin/summer_crops.added_successfully'));
+            toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('SummerCrops.index');
         } catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.add_wrong'));
