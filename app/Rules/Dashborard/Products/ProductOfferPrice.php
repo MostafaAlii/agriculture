@@ -9,7 +9,7 @@ class ProductOfferPrice implements Rule {
     }
 
     public function passes($attribute, $value) {
-        $price = Product::getPrice()->get();
+        $price = Product::getPrice()->first();
         foreach($price as $p) {
             if($this->special_price >= $p) {
                 return false;

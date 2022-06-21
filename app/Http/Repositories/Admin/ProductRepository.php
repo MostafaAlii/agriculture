@@ -120,14 +120,6 @@ class ProductRepository implements ProductInterface {
             }
     }
 
-    public function additionalPrice($id) {
-        $real_id                =       Crypt::decrypt($id);
-        $data                   =       [];
-        $data['product']        =       Product::findOrfail($real_id);
-
-        return view('dashboard.admin.products.prices.additionalPrice', $data);
-    }
-
     public function additionalPriceStore($request) {
   
         try {
