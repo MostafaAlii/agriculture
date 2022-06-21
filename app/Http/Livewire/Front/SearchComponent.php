@@ -49,12 +49,12 @@ class SearchComponent extends Component
     public function render()
     {
         $tags=Tag::get();
-        $newProducts = Product::where('stock',1)->where('qty','>',0)->inRandomOrder()->limit(3)->get();
+        $newProducts = Product::where('status',1)->where('stock',1)->where('qty','>',0)->inRandomOrder()->limit(3)->get();
 
         if($this->sorting=='new_to_old'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })
+            })->where('status',1)
             ->where('stock',1)
             ->orderByDesc('created_at')
             ->where('qty','>',0)
@@ -62,7 +62,7 @@ class SearchComponent extends Component
         }elseif($this->sorting=='old_to_new'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })
+            })->where('status',1)
             ->where('stock',1)
             ->orderBy('created_at')
             ->where('qty','>',0)
@@ -70,7 +70,7 @@ class SearchComponent extends Component
         }elseif($this->sorting=='price_high_to_low'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })
+            })->where('status',1)
             ->where('stock',1)
             ->where('qty','>',0)
             ->where('special_price', 0)
@@ -81,7 +81,7 @@ class SearchComponent extends Component
         }elseif($this->sorting=='price_low_to_high'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })
+            })->where('status',1)
             ->where('stock',1)
             ->where('qty','>',0)
             ->where('special_price', 0)
@@ -92,7 +92,7 @@ class SearchComponent extends Component
         }elseif($this->sorting=='newoffer_from_low_to_high'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })
+            })->where('status',1)
             ->where('stock',1)
             ->where('special_price','>',0)
             ->orderBy('special_price')
@@ -101,7 +101,7 @@ class SearchComponent extends Component
         }elseif($this->sorting=='newoffer_from_high_to_low'){
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })
+            })->where('status',1)
             ->where('stock',1)
             ->where('special_price','>',0)
             ->orderByDesc('special_price')
@@ -110,7 +110,7 @@ class SearchComponent extends Component
         }else{
             $products =Product::whereHas('translations', function ($query) {
                 $query->where('name','like','%'.$this->search.'%');
-            })
+            })->where('status',1)
             ->where('stock',1)
             ->orderBy('created_at')
             ->paginate($this->pagesize);

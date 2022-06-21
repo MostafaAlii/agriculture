@@ -68,7 +68,7 @@ label.star:before {
                         <div class="posts">
                             <!-- start item -->
                             <div class="__item">
-                            @if($workers->image->filename)
+                            @if($workers->image)
                                 <a class="mr-2" href="#">
                                         <center><img src="{{ asset('Dashboard/img/workers/'. $workers->image->filename) }}"
                                         alt="{{ asset('Dashboard/img/workers/'. $workers->image->filename) }}"
@@ -109,11 +109,11 @@ label.star:before {
                                         </div>
                                         <div class="col-12 col-md-6 col-lg-6">
 
-                                            <p><b>@lang('Admin/site.country') : </b> {{ $workers->country->name }}</p>
-                                            <p><b>@lang('Admin/site.province') : </b> {{ $workers->province->name }}</p>
-                                            <p><b>@lang('Admin/site.area') : </b> {{ $workers->area->name }}</p>
-                                            <p><b>@lang('Admin/site.state') : </b> {{ $workers->state->name }}</p>
-                                            <p><b>@lang('Admin/site.village') : </b> {{ $workers->village->name }}</p>
+                                            <p><b>@lang('Admin/site.country') : </b> {{ $workers->country->name ?? null }}</p>
+                                            <p><b>@lang('Admin/site.province') : </b> {{ $workers->province->name ?? null }}</p>
+                                            <p><b>@lang('Admin/site.area') : </b> {{ $workers->area->name ?? null }}</p>
+                                            <p><b>@lang('Admin/site.state') : </b> {{ $workers->state->name ?? null }}</p>
+                                            <p><b>@lang('Admin/site.village') : </b> {{ $workers->village->name ?? null }}</p>
 
                                         </div>
                                     </div>

@@ -53,8 +53,8 @@ class ProductDetails extends Component
     {
         // $tags=Tag::get();
         $data['product'] = Product::findorfail($this->product_id);
-        $data['newProducts'] = Product::where('stock',1)->where('qty','>',0)->latest()->limit(3)->get();
-        $data['popProducts'] = Product::where('stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(3);
+        $data['newProducts'] = Product::where('status',1)->where('stock',1)->where('qty','>',0)->latest()->limit(3)->get();
+        $data['popProducts'] = Product::where('status',1)->where('stock',1)->where('qty','>',0)->inRandomOrder()->get()->take(3);
 
         // $data['options0']=$data['product']->options()->pluck('id');
         // $data['options1']=Option::whereIn('id',$data['options0'])->get();

@@ -19,7 +19,7 @@
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="__item __item--preview">
                                     <figure class="__image">
-                                        @if($worker->image->filename)
+                                        @if($worker->image)
                                             <img  src="{{ asset('Dashboard/img/workers/'.$worker->image->filename) }}"
                                             data-src="{{ asset('Dashboard/img/workers/'.$worker->image->filename) }}"
                                             alt="demo" />
