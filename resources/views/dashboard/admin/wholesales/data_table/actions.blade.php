@@ -1,14 +1,16 @@
 <div>
-
+    @can('whole-sale-edit')
         <button type="button" class="btn btn-btn btn-info btn-sm " data-toggle="modal" data-target="#edit{{ $id }}" >
             <i class="fa fa-trash"></i>
             {{ __('Admin\wholesales.edit') }}
         </button>
-
-    <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
-        <i class="fa fa-trash"></i>
-        {{ __('Admin/wholesales.delete') }}
-    </button>
+    @endcan
+    @can('whole-sale-delete')
+        <button type="button" class="btn btn-btn btn-danger btn-sm " data-toggle="modal" data-target="#delete{{ $id }}" >
+            <i class="fa fa-trash"></i>
+            {{ __('Admin/wholesales.delete') }}
+        </button>
+    @endcan
 </div>
 
 <div class="col-lg-4 col-md-6 col-sm-12">
