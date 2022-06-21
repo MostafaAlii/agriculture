@@ -275,7 +275,7 @@ class BeekeeperRepository implements BeekeeperInterface
 
     }// end of bulkDelete
 
-    public function index_statistics(){
+    public function beekeeper_index_statistics(){
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin'));
@@ -283,7 +283,7 @@ class BeekeeperRepository implements BeekeeperInterface
 
     }
 
-    public function statistics($request)
+    public function beekeeper_statistics($request)
     {
         $validated = $request->validate([
                 'area_id'=>'sometimes|nullable|exists:areas,id',

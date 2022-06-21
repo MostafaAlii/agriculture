@@ -337,8 +337,8 @@ Route::group(
             Route::resource('BeeKeepers', BeeKeepersController::class)->except(['show']);
             Route::get('/BeeKeepers/data', [BeeKeepersController::class,'data'])->name('beekeepers.data');
             Route::delete('/BeeKeepers/bulk_delete/{ids}', [BeeKeepersController::class,'bulkDelete'])->name('beekeepers.bulk_delete');
-            Route::post('/BeeKeepers/statistic/', [BeeKeepersController::class,'statistics'])->name('beekeepers.statistics');
-            Route::get('/BeeKeepers/index_statistic/', [BeeKeepersController::class,'index_statistics'])->name('beekeepers.index_statistics');
+            Route::post('/BeeKeepers/beekeeper_statistic/', [BeeKeepersController::class,'beekeeper_statistics'])->name('beekeepers.statistics');
+            Route::get('/BeeKeepers/beekeeper_index_statistic/', [BeeKeepersController::class,'beekeeper_index_statistics'])->name('beekeepers.index_statistics');
 
             /*********end  BWholesaleseekeeper  route ********/
 
