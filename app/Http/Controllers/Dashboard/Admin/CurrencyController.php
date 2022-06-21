@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\CurrencyInterface;
 use App\Http\Requests\Dashboard\CurrencyRequest;
+use App\Http\Requests\Dashboard\CurrencyUpdateRequest;
+
 use Illuminate\Http\Request;
 class CurrencyController extends Controller
 {
@@ -31,7 +33,7 @@ class CurrencyController extends Controller
 
 
 
-    public function update(CurrencyRequest $request,$id) {
+    public function update(CurrencyUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 }

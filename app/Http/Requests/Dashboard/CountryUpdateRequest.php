@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Requests\Dashboard;
-
-use App\Models\CountryTranslation;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Country;
 
-class CountryRequest extends FormRequest
+class CountryUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -22,7 +21,9 @@ class CountryRequest extends FormRequest
             'name' => [
                 'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'unique:country_translations,name,country_id' . $this->id
+                'unique:countries,id,' .$this->id,
+//                'unique:country_translations,name,'.$this->id,
+
             ],
             'image' => 'sometimes|nullable|image|mimes:png,jpg,jpeg',
 

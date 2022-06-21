@@ -7,6 +7,8 @@ use App\Http\Interfaces\Admin\CourseBeeInterface;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\CourseBeeRequest;
+use App\Http\Requests\Dashboard\CourseBeeUpdateRequest;
+
 
 class CourseBeeController extends Controller
 {
@@ -30,7 +32,7 @@ class CourseBeeController extends Controller
     public function store(CourseBeeRequest $request) {
         return $this->Data->store($request);
     }
-    public function update(CourseBeeRequest $request,$id) {
+    public function update(CourseBeeUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }
     public function destroy($id) {

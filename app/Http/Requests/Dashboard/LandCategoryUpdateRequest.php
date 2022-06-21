@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-class LandCategoryRequest extends FormRequest {
+class LandCategoryUpdateRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -14,7 +14,7 @@ class LandCategoryRequest extends FormRequest {
             'category_name' => [
                 'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'unique:land_category_translations,category_name'.$this->id,
+                'unique:land_category_translations,category_name,'.$this->id,
 
 
             ],

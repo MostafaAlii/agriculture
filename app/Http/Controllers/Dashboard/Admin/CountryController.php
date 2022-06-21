@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\CountryInterface;
 use App\Http\Requests\Dashboard\CountryRequest;
+use App\Http\Requests\Dashboard\CountryUpdateRequest;
+
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -39,7 +41,7 @@ class CountryController extends Controller
         return $this->Data->edit($id);
     }// end of edit
 
-    public function update(CountryRequest $request,$id) {
+    public function update(CountryUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 

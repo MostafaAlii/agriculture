@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Interfaces\Admin\AgriServiceInterface;
 use App\Http\Requests\Dashboard\AgriServiceRequest;
+use App\Http\Requests\Dashboard\AgriServiceUpdateRequest;
+
 class AgriServiceController extends Controller
 {
     protected $Data;
@@ -28,8 +30,8 @@ class AgriServiceController extends Controller
         return $this->Data->store($request);
     }
 
-    public function update(AgriServiceRequest $request,$id) {
-        return $this->Data->store($request,$id);
+    public function update(AgriServiceUpdateRequest $request,$id) {
+        return $this->Data->update($request,$id);
     }
     public function destroy($id) {
         return $this->Data->destroy($id);

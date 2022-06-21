@@ -142,7 +142,7 @@
 
                 {data: 'name', name: 'name', searchable: true, sortable: false},
 
-                {data: 'provinces', name: 'provinces.name', searchable: false, sortable: false},
+                {data: 'provinces', name: 'provinces', searchable: true, sortable: false},
                 {data: 'created_at', name: 'created_at', sortable: true},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],

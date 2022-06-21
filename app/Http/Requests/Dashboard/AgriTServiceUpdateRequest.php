@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-class CurrencyRequest extends FormRequest {
+class AgriTServiceUpdateRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -11,22 +11,24 @@ class CurrencyRequest extends FormRequest {
 
         return [
 
-            'Name' => [
+            'name' => [
                 'required',
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'unique:currency_translations,Name,',
+                'unique:agri_t_services,id,'.$this->id,
 
 
             ]
+
+
+
         ];
     }
 
     public function messages() {
         return [
-            'Name.required'   => trans('Admin\validation.required'),
-            'Name.regex'   => trans('Admin\validation.regex'),
-            'Name.unique'   => trans('Admin\validation.unique'),
-
+            'name.required'   => trans('Admin\validation.required'),
+            'name.regex'   => trans('Admin\validation.regex'),
+            'name.unique'   => trans('Admin\validation.unique'),
 
 
         ];

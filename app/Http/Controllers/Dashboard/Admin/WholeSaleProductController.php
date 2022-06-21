@@ -7,6 +7,8 @@ use App\Http\Interfaces\Admin\WholeSaleProductInterface;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\Dashboard\WholeSaleProductRequest;
+use App\Http\Requests\Dashboard\WholeSaleProductUpdateRequest;
+
 
 class WholeSaleProductController extends Controller
 {
@@ -33,7 +35,7 @@ class WholeSaleProductController extends Controller
 
 
 
-    public function update(WholeSaleProductRequest $request,$id ) {
+    public function update(WholeSaleProductUpdateRequest $request,$id ) {
         return $this->Data->update($request,$id);
     }
 

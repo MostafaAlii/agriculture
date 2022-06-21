@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\WholesaleInterface;
 use App\Http\Requests\Dashboard\WholesaleRequest;
+use App\Http\Requests\Dashboard\WholesaleUpdateRequest;
+
 use Illuminate\Http\Request;
 class WholesaleController extends Controller
 {
@@ -33,8 +35,18 @@ class WholesaleController extends Controller
 
 
 
-    public function update(WholesaleRequest $request,$id) {
+    public function update(WholesaleUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
+
+
+    public function destroy($id) {
+        return $this->Data->destroy($id);
+    }// end of destroy
+
+    public function bulkDelete(Request $request) {
+        return $this->Data->bulkDelete($request);
+    }// end of bulkDelete
+
 }
 

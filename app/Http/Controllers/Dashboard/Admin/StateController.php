@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\StateInterface;
 use App\Http\Requests\Dashboard\StateRequest;
+use App\Http\Requests\Dashboard\StateUpdateRequest;
+
 use Illuminate\Http\Request;
 class StateController extends Controller
 {
@@ -35,7 +37,7 @@ class StateController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(StateRequest $request,$id) {
+    public function update(StateUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 

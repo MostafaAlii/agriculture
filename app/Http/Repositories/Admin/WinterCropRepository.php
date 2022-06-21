@@ -37,12 +37,12 @@ class WinterCropRepository implements WinterCropInterface
         try {
             $validated = $request->validated();
 
-            $winter_crop = new WinterCrop();
-            $winter_crop->name = $validated['name'];
-            $winter_crop->save();
+            $winter_crop =  WinterCrop::creat([
+                'name'=>$validated['name'],
+            ]);
 
 
-            toastr()->success(__('Admin/winter_crops.added_successfully'));
+            toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('WinterCrops.index');
         } catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.add_wrong'));

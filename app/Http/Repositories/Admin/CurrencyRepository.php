@@ -38,11 +38,11 @@ class CurrencyRepository implements CurrencyInterface
     {
         try {
             $validated = $request->validated();
+            $currency = new Currency();
+            $currency->Name = $validated['Name'];
 
-            Currency::create([
-                'Name' => $validated['Name']
-            ]);
 
+            $currency->save();
 
             toastr()->success(__('Admin/country.added_successfully'));
             return redirect()->route('Currencies.index');

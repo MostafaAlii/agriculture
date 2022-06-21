@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
-class AgriServiceRequest extends FormRequest {
+
+class DisasterBeeUpdateRequest extends FormRequest {
     public function authorize() {
         return true;
     }
@@ -13,14 +14,12 @@ class AgriServiceRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'unique:agri_service_translations,name,'.$this->id,
-
                 'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'unique:bee_disasters,id,'.$this->id,
+
 
             ],
-
-
-
+            'desc'=>'required|string'
         ];
     }
 
@@ -29,6 +28,8 @@ class AgriServiceRequest extends FormRequest {
             'name.required'   => trans('Admin\validation.required'),
             'name.regex'   => trans('Admin\validation.regex'),
             'name.unique'   => trans('Admin\validation.unique'),
+
+            'desc.required'   => trans('Admin\validation.required'),
 
 
         ];

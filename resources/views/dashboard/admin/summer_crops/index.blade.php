@@ -100,7 +100,7 @@
                     <!-- End col-12 -->
                 </div>
                 <!-- End row -->
-                @include('dashboard.admin.winter_crops.btn_.add')
+                @include('dashboard.admin.summer_crops.btn_.add')
             </section>
             <!-- End Zero configuration table -->
         </div>

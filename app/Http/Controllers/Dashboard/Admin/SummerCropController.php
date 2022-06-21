@@ -7,6 +7,8 @@ use App\Http\Interfaces\Admin\SummerCropInterface;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\Dashboard\SummerCropRequest;
+use App\Http\Requests\Dashboard\SummerCropUpdateRequest;
+
 
 class SummerCropController extends Controller
 {
@@ -33,7 +35,7 @@ class SummerCropController extends Controller
 
 
 
-    public function update(SummerCropRequest $request,$id ) {
+    public function update(SummerCropUpdateRequest $request,$id ) {
         return $this->Data->update($request,$id);
     }
 

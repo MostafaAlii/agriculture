@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\LandCategoryInterface;
 use App\Http\Requests\Dashboard\LandCategoryRequest;
+use App\Http\Requests\Dashboard\LandCategoryUpdateRequest;
+
 use Illuminate\Http\Request;
 
 class LandCategoryController extends Controller
@@ -35,7 +37,7 @@ class LandCategoryController extends Controller
 
 
 
-    public function update(LandCategoryRequest $request,$id) {
+    public function update(LandCategoryUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
 
