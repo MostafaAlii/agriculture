@@ -12,7 +12,7 @@ class OrdersController extends Controller {
         $this->middleware('permission:orders', ['only' => ['index']]);
         $this->middleware('permission:order-show', ['only' => ['showOrder']]);
         $this->middleware('permission:order-invoice-print', ['only' => ['printOrder']]);
-        //$this->middleware('permission:order-change-status', ['only' => ['update']]);
+        $this->middleware('permission:order-change-status', ['only' => ['update']]);
         $this->Data = $Data;
     }
 
@@ -31,7 +31,7 @@ class OrdersController extends Controller {
     public function printOrder($id) {
         return $this->Data->printOrder($id);
     }
-    public function update(Request $request, $id){
+    public function update(OrderUpdateStatus $request, $id){
         return $this->Data->update($request, $id);
     }
 
