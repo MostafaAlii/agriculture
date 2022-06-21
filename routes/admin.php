@@ -272,8 +272,8 @@ Route::group(
             Route::resource('FarmerServices', FarmerServiceController::class)->except(['show']);
             Route::get('/FarmerServices/data', [FarmerServiceController::class,'data'])->name('farmer_service.data');
             Route::delete('/FarmerServices/bulk_delete/{ids}', [FarmerServiceController::class,'bulkDelete'])->name('farmer_service.bulk_delete');
-            Route::get('/FarmerServices/index_statistic/', [FarmerServiceController::class,'index_statistics'])->name('farmer_index_statistics');
-            Route::post('/FarmerServices/statistic/', [FarmerServiceController::class,'statistics'])->name('farmer_service.statistics');
+            Route::get('/FarmerServices/farmer_services_index_statistics/', [FarmerServiceController::class,'farmer_services_index_statistics'])->name('farmer_service_index_statistics');
+            Route::post('/FarmerServices/statistic/', [FarmerServiceController::class,'farmer_services_statistics'])->name('farmer_service.statistics');
 
             /***********end Farmer service****/
 
@@ -307,8 +307,8 @@ Route::group(
             Route::resource('Animals', CawProjectController::class)->except(['show']);
             Route::get('/Animals/data', [CawProjectController::class,'data'])->name('animals.data');
             Route::delete('/Animals/bulk_delete/{ids}', [CawProjectController::class,'bulkDelete'])->name('animals.bulk_delete');
-            Route::get('/Animals/index_statistics/', [CawProjectController::class,'index_statistics'])->name('animals.index_statistics');
-            Route::post('/Animals/statistic/', [CawProjectController::class,'statistics'])->name('animals.statistics');
+            Route::get('/Animals/index_statistics/', [CawProjectController::class,'caw_index_statistics'])->name('animals.caw_index_statistics');
+            Route::post('/Animals/statistic/', [CawProjectController::class,'caw_statistics'])->name('animals.caw_statistics');
 
             /***********end animals ****/
 
@@ -337,8 +337,8 @@ Route::group(
             Route::resource('BeeKeepers', BeeKeepersController::class)->except(['show']);
             Route::get('/BeeKeepers/data', [BeeKeepersController::class,'data'])->name('beekeepers.data');
             Route::delete('/BeeKeepers/bulk_delete/{ids}', [BeeKeepersController::class,'bulkDelete'])->name('beekeepers.bulk_delete');
-            Route::post('/BeeKeepers/statistic/', [BeeKeepersController::class,'statistics'])->name('beekeepers.statistics');
-            Route::get('/BeeKeepers/index_statistic/', [BeeKeepersController::class,'index_statistics'])->name('beekeepers.index_statistics');
+            Route::post('/BeeKeepers/beekeeper_statistic/', [BeeKeepersController::class,'beekeeper_statistics'])->name('beekeepers.statistics');
+            Route::get('/BeeKeepers/beekeeper_index_statistic/', [BeeKeepersController::class,'beekeeper_index_statistics'])->name('beekeepers.index_statistics');
 
             /*********end  BWholesaleseekeeper  route ********/
 

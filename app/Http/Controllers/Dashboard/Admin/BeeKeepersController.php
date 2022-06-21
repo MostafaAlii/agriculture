@@ -49,13 +49,13 @@ class BeeKeepersController extends Controller
     }
 
     //index for report
-    public function index_statistics(){
-        return $this->Data->index_statistics();
+    public function beekeeper_index_statistics(){
+        return $this->Data->beekeeper_index_statistics();
 
     }
 // filter for report
-    public function statistics(Request $request){
-        return $this->Data->statistics($request);
+    public function beekeeper_statistics(Request $request){
+        return $this->Data->beekeeper_statistics($request);
 
     }
 

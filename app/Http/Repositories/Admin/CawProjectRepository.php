@@ -247,14 +247,14 @@ class CawProjectRepository implements CawProjectInterface{
     }// end of bulkDelete
 
 
-    public  function index_statistics(){
+    public  function caw_index_statistics(){
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         return view('dashboard.admin.caw_projects.statistics',compact('admin'));
     }
 
 
-    public function statistics($request)
+    public function caw_statistics($request)
     {
         $validated = $request->validate([
 

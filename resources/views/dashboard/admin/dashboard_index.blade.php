@@ -858,14 +858,14 @@
                                 <!-- Start Animal Statistics -->
                                 @can('statistics-report')
                                     <div class="col-xl-3 col-lg-6 col-12">
-                                        <a href="{{ route('animals.index_statistics') }}">
+                                        <a href="{{ route('animals.caw_index_statistics') }}">
                                             <div class="card pull-up">
                                                 <div class="card-content">
                                                     <div class="card-body">
                                                         <div class="media d-flex">
                                                             <div class="media-body text-left">
                                                                 <h3 class="gray-bg" style="color: purple;">{{ \App\Models\CawProject::where('marketing_side','like','private')->count() }}</h3>
-                                                                <h6>  {{ trans('Admin/animals.animals_private_supported') }}</h6>
+                                                                <h6>  {{ trans('Admin/animals.animals_projects_report') }}</h6>
                                                             </div>
                                                             <div>
                                                                 <i class="fa fa-list-alt" aria-hidden="true" style="color: purple;"></i>
@@ -1038,7 +1038,7 @@
                                 <!-- Start farmer-service-statistics -->
                                 @can('farmer-service-statistics')
                                     <div class="col-xl-3 col-lg-6 col-12">
-                                        <a href="{{ route('farmer_index_statistics') }}">
+                                        <a href="{{ route('farmer_service_index_statistics') }}">
                                             <div class="card pull-up">
                                                 <div class="card-content">
                                                     <div class="card-body">

@@ -10,8 +10,8 @@ interface BeekeeperInterface {
     public function destroy($id);
     public function bulkDelete($request);
 
-    public function index_statistics();
+    public function beekeeper_index_statistics();
 
-    public function statistics($request);
+    public function beekeeper_statistics($request);
 
 }
