@@ -8,7 +8,7 @@
     <section class="section section--no-pb section--custom-01">
         <div class="container">
             <div class="section-heading">
-                <h2 class="__title">{{__('setting.close')}}</h2>
+                <h2 class="">{{trans('Admin/setting.website_close')}}</h2>
             </div>
 
             <div class="row">

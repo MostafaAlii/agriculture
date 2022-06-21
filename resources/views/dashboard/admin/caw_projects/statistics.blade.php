@@ -47,7 +47,7 @@
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
 
-                                    <form class="form" method="POST" action="{{ route('animals.statistics') }}">
+                                    <form class="form" method="POST" action="{{ route('animals.caw_statistics') }}">
                                         @csrf
                                         <div class="form-body">
                                             @if($admin->type == 'employee')
@@ -185,7 +185,7 @@
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
                                                 </button>
-                                                <a type="button" href="{{route('animals.index_statistics')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+                                                <a type="button" href="{{route('animals.caw_index_statistics')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
                                             </div>
 
                                         </div>

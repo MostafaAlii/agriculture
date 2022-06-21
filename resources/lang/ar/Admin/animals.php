@@ -4,6 +4,7 @@ return [
 'count_ship'=>'عدد الأغنام و الماعز',
     'counr_caw'=>'عدد الأبقار و العجول',
 'currency'=>'العملة',
+    'animals_projects_report'=>'تقرير مشاريع الأغنام و الأبقار و الماعز',
     'action' =>'العمليات',
     'admin_departments' =>'الهيكلية الإدارية التابعة',
     'area' =>'القضاء',

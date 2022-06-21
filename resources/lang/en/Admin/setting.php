@@ -4,6 +4,7 @@ return [
     'ar_site_logo'                                             =>               'Arabic Logo',
     'en_site_logo'                                             =>               'ُEnglish Logo',
     'ku_site_logo'                                             =>               'Kurdish Logo',
+    'website_close'=>                                     'Sorry the Website is Closed Temporary',
 
     'open'=>'Open',
     'close'=>'Close',

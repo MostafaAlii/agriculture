@@ -62,14 +62,14 @@ class CawProjectController extends Controller
 
 
     //index for reort
-    public  function index_statistics()
+    public  function caw_index_statistics()
     {
-     return $this->Data->index_statistics();
+     return $this->Data->caw_index_statistics();
     }
 
    // filter for report
-    public function statistics(Request $request)
+    public function caw_statistics(Request $request)
     {
-        return $this->Data->statistics($request);
+        return $this->Data->caw_statistics($request);
     }
 }

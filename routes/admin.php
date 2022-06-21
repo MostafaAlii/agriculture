@@ -307,8 +307,8 @@ Route::group(
             Route::resource('Animals', CawProjectController::class)->except(['show']);
             Route::get('/Animals/data', [CawProjectController::class,'data'])->name('animals.data');
             Route::delete('/Animals/bulk_delete/{ids}', [CawProjectController::class,'bulkDelete'])->name('animals.bulk_delete');
-            Route::get('/Animals/index_statistics/', [CawProjectController::class,'index_statistics'])->name('animals.index_statistics');
-            Route::post('/Animals/statistic/', [CawProjectController::class,'statistics'])->name('animals.statistics');
+            Route::get('/Animals/index_statistics/', [CawProjectController::class,'caw_index_statistics'])->name('animals.caw_index_statistics');
+            Route::post('/Animals/statistic/', [CawProjectController::class,'caw_statistics'])->name('animals.caw_statistics');
 
             /***********end animals ****/
 
