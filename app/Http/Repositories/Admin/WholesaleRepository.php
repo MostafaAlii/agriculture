@@ -71,8 +71,9 @@ class WholesaleRepository implements WholesaleInterface
 
             DB::commit();
             toastr()->success(__('Admin/site.updated_successfully'));
-            return redirect()->route('Wholesale.index');
-        } catch (\Exception $e) {
+            return redirect()->route('Wholesales.index');
+        }
+        catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.edit_wrong'));
             return redirect()->back();
 

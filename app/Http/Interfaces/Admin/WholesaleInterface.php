@@ -12,6 +12,6 @@ interface WholesaleInterface {
     public function update($request, $id);
 
     public function destroy($id);
-//
-//    public function bulkDelete($ids);
+
+    public function bulkDelete($ids);
 }

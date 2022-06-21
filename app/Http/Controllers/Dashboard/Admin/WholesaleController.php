@@ -38,5 +38,15 @@ class WholesaleController extends Controller
     public function update(WholesaleUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }// end of update
+
+
+    public function destroy($id) {
+        return $this->Data->destroy($id);
+    }// end of destroy
+
+    public function bulkDelete(Request $request) {
+        return $this->Data->bulkDelete($request);
+    }// end of bulkDelete
+
 }
 

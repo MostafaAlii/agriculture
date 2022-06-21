@@ -18,7 +18,7 @@ class wholesaleFactory extends Factory
         ];
 
         return [
-            'Name'             => $this->faker->randomElement([$wholesale[0],$wholesale[1],$wholesale[2],$wholesale[3]]),
+            'Name'             => $this->faker->unique()->randomElement([$wholesale[0],$wholesale[1],$wholesale[2],$wholesale[3]]),
             ];
 
 
