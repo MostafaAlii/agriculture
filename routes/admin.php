@@ -340,7 +340,7 @@ Route::group(
             Route::post('/BeeKeepers/statistic/', [BeeKeepersController::class,'statistics'])->name('beekeepers.statistics');
             Route::get('/BeeKeepers/index_statistic/', [BeeKeepersController::class,'index_statistics'])->name('beekeepers.index_statistics');
 
-            /*********end  Beekeeper  route ********/
+            /*********end  BWholesaleseekeeper  route ********/
 
             /******* whole sale product  route********/
             Route::resource('WholeSaleProducts', WholeSaleProductController::class)->except(['show']);

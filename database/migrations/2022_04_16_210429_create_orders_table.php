@@ -27,7 +27,7 @@ class CreateOrdersTable extends Migration {
             $table->string('village');
             $table->boolean('is_shipping_different')->default(false);
             $table->string('currency')->default(Order::CURRENCY);
-            $table->enum('status',[Order::ORDERED,Order::DELIVERED,Order::CANCELED])->default(Order::ORDERED);
+            $table->unsignedTinyInteger('status')->default(Order::ORDERED);
             $table->timestamps();
         });
     }

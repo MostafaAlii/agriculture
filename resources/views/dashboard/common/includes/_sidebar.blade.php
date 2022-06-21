@@ -710,6 +710,7 @@
                                     </a>
                                 </li>
                             @can('income-products')
+                            @can('whole-sale')
                                 <li>
                                     <a class="menu-item" href="{{ route('IncomeProducts.index') }}">
                                         <i class="material-icons">list</i>
@@ -718,6 +719,7 @@
                                         </span>
                                     </a>
                                 </li>
+                            @endcan
                             @endcan
                             @can('outcome-products')
                             <li>

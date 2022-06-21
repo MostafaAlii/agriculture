@@ -18,14 +18,20 @@
             {{ trans('Admin\products.product_end_date_offer') }}
             {{ $product->special_price_end->format('Y-m-d') }}
         </span>
-        <br>
-        <span class="font-weight-bold badge badge-pill badge-dark text-center">{{ $product->getUnit()->Name }}</span>
+        @if(isset($remove_unit)&&$remove_unit==1)
+        @else
+            <br>
+            <span class="font-weight-bold badge badge-pill badge-dark text-center">{{ $product->getUnit()->Name }}</span>
+        @endif
     </div>
     @else
         <span class="font-weight-bold badge badge-pill badge-dark">
             {{ trans('Admin\products.product_main_price') }}
             {{ number_format($product->getPrice(), 2) }}
         </span>
-        <br>
-        <span class="font-weight-bold badge badge-pill badge-dark">{{ $product->getUnit()->Name }}</span>
-@endif
+        @if(isset($remove_unit)&&$remove_unit==1)
+        @else
+            <br>
+            <span class="font-weight-bold badge badge-pill badge-dark">{{ $product->getUnit()->Name }}</span>
+        @endif
+    @endif

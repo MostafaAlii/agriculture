@@ -8,7 +8,7 @@
 <div>
     <!-- start section -->
     <section class="section">
-        
+
         <div class="container">
             <!-- start posts -->
             <div class="posts posts--style-1">
@@ -19,7 +19,7 @@
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="__item __item--preview">
                                     <figure class="__image">
-                                        @if($farmer->image->filename)
+                                        @if($farmer->image)
                                             <img  src="{{ asset('Dashboard/img/farmers/'.$farmer->image->filename) }}"
                                             data-src="{{ asset('Dashboard/img/farmers/'.$farmer->image->filename) }}"
                                             alt="demo" />
@@ -30,13 +30,13 @@
                                     </figure>
                                     <div class="__content">
                                         <p class="__category"><a href="{{ route('farmer_detail',encrypt($farmer->id) ) }}">{{ $farmer->firstname.'  '.$farmer->lastname  }}</a></p>
-                                       
+
                                     </div>
                                 </div>
                             </div>
                             <!-- end item -->
                         @endforeach
-                    
+
 
                     </div>
                     {{$farmers->links('page-links_nowire')}}

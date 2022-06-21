@@ -1,5 +1,7 @@
 <?php
 namespace App\Models;
+
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -22,6 +24,17 @@ class Farmer extends Authenticatable {
     // ];
     protected $guarded = [];
     public $timestamps = true;
+    
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    
         // rel
     public function image()
     {
@@ -84,12 +97,11 @@ class Farmer extends Authenticatable {
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//---------------------expire offers for farmers products------------------
+    public function scopeExpireProducts($query) {
+        return $this->products()->whereDate('special_price_end','<',Carbon::now()->format('Y-m-d'))->get();
+    }
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }

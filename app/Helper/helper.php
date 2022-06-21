@@ -1,4 +1,5 @@
 <?php
+use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 define('PAGINATION_COUNT', 1);
@@ -9,11 +10,6 @@ if (! function_exists('admin')) {
 	}
 }
 
-if (!function_exists('aurl')) {
-	function aurl($url = null) {
-		return url('dashboard_admin/'.$url);
-	}
-}
 
 if (! function_exists('vendor')) {
 	function vendor(){
@@ -138,5 +134,20 @@ if(!function_exists('getCalcDiscountNumbers')){
             'shipping' => (float)$shipping,
             'total' => (float)$total,
         ]);
+    }
+}
+/********************************************************** */
+if (!function_exists('productPrice')) {
+    function productPrice($id, $value) {
+        $product = Product::findorfail($id);
+        $count = 0;
+        foreach ($product->units as $price) {
+            $count =  $price->pivot->price;
+        }
+        if($count > $value){
+            return true;
+        }else{
+            return false;  
+        }  
     }
 }

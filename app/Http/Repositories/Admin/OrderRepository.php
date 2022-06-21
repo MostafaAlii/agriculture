@@ -47,10 +47,29 @@ class OrderRepository implements OrderInterface {
             $orderID    =   Crypt::decrypt($id);
             $order     =   Order::findorfail($orderID);
             $order->status = $request->status;
-            if($request->status == Order::DELIVERED) {
+            if($request->status == Order::DELIVERED) { // تم الشحن
+                $order->suggestion_delivered_date = Carbon::now()->addDays(5);
+                $order->delivered_date = NULL;
+                $order->under_proces_date = NULL;
+                $order->reject_date = NULL;
+                $order->push_from_stock_date = NULL;
+                $order->canceled_date = NULL;
+            }
+            elseif($request->status == Order::UNDER_PROCESS) { // جارى تجهيز الطلب
+                $order->under_proces_date = Carbon::now();
+            }
+            elseif($request->status == Order::FINISHED) { // جارى تجهيز الطلب
                 $order->delivered_date = Carbon::now();
             }
-            elseif($request->status == Order::CANCELED) {
+            elseif($request->status == Order::REJECTED) { // رفض الطلب
+                $order->reject_date = Carbon::now();
+                $order->reason  =   $request->reason;
+            }
+            elseif($request->status == Order::PUSH_FROM_STOCK) { // الخروج من المخزن
+                $order->push_from_stock_date = Carbon::now();
+
+            }
+            elseif($request->status == Order::CANCELED) { // تم الالغاء
                 $order->canceled_date = Carbon::now();
             }
         $order->save();
@@ -59,6 +78,6 @@ class OrderRepository implements OrderInterface {
         } catch(\Exception $ex) {
             toastr()->error(__('Admin/attributes.add_wrong'));
             return redirect()->back();
-        }  
+        }
     }
 }

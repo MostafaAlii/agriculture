@@ -11,7 +11,11 @@ class WholesaleController extends Controller
 {
     protected $Data;
     public function __construct(WholesaleInterface $Data) {
-
+        $this->middleware('permission:whole-sale', ['only' => ['index']]);
+        $this->middleware('permission:whole-sale-create', ['only' => ['store']]);
+        $this->middleware('permission:whole-sale-edit', ['only' => ['update']]);
+        $this->middleware('permission:whole-sale-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:whole-sale-delete-all', ['only' => ['bulkDelete']]);
         $this->Data = $Data;
     }
 
