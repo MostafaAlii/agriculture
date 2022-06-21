@@ -216,15 +216,15 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="mt-1 form-group">
-                                                        <input type="checkbox" value="1"
-                                                            name="status"
-                                                            id="switcheryColor4"
-                                                            class="js-switch" data-color="success"
-                                                            <?php if($product->status==1)echo 'checked';?>
-                                                            />
-                                                        <label for="switcheryColor4"
-                                                            class="ml-1 card-title">{{ trans('Admin\products.product_status') }}</label>
 
+                                                        <label>{{ trans('Admin\products.product_status') }}</label>
+                                                            
+                                                            <select name="status" id="manageStock" class="form-control" style="outline-style: none;">
+                                                                <optgroup label="{{ trans('Admin\products.product_status') }}">
+                                                                    <option {{ $product->status == '1' ? "selected" : "" }} value="1">{{ __('Admin/products.active') }}</option>
+                                                                    <option {{ $product->status == '0' ? "selected" : "" }} value="0">{{ __('Admin/products.not_active') }}</option>
+                                                                </optgroup>
+                                                            </select>
                                                         @error("status")
                                                         <span class="text-danger">{{$message }}</span>
                                                         @enderror

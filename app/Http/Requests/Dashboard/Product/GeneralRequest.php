@@ -15,8 +15,10 @@ class GeneralRequest extends FormRequest {
             'tags'           =>'sometimes|nullable|array',
             'tags.*'         =>'numeric|exists:tags,id',
             'price'          =>'required|numeric|min:1|digits_between:1,12',
-            'photo'          =>'required|image|mimes:jpeg,png,jpg|max:4096',
+            'photo'          =>'sometime|nullable|image|mimes:jpeg,png,jpg|max:4096',
+            //'status'         => 'sometime|nullable|in:0,1',
         ];
+
     }
 
     public function messages() {
@@ -35,6 +37,8 @@ class GeneralRequest extends FormRequest {
             'price.digits_between'  =>  trans('Admin/products.price_digits_between'),
             'photo.required'        =>  trans('Admin/products.photo_required'),
             'photo.image'           =>  trans('Admin/products.photo_image'),
+            'status.required'       =>  trans('Admin/products.status_required'),
+            'status.in'                =>  trans('Admin/products.status_in'),
         ];
     }
 }

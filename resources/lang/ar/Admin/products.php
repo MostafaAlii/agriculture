@@ -133,5 +133,7 @@ return [
     'product_update_product_status_successfully'=>'تم تعديل حالة المنتج بنجاح',
     'active'                            =>      'مفعل',
     'not_active'                        =>      'غير مفعل',
+    'status_required'                   =>      'الحالة مطلوبة',
+    'status_in'                         =>      'يجب ان تكون الحالة مفعل او غير مفعل فقط',
 
 ];

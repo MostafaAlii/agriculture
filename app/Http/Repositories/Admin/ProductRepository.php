@@ -153,8 +153,9 @@ class ProductRepository implements ProductInterface {
     }
 
     public function update($request) {
+        //dd($request->all());
         DB::beginTransaction();
-            try{
+            //try{
                 if (!$request->has('status'))
                     $request->request->add(['status' => 0]);
                 else
@@ -164,7 +165,7 @@ class ProductRepository implements ProductInterface {
                 $product->farmer_id     = $request->farmer_id;
 
                 $product->status    = $request->status;
-                $product->product_location = $request->product_location;
+                //$product->product_location = $request->product_location;
                 $product->save();
                 // Save Translation ::
                 $product->name = $request->name;
@@ -182,11 +183,11 @@ class ProductRepository implements ProductInterface {
                 DB::commit();
                 toastr()->success(__('Admin/products.product_updated_successfully'));
                 return redirect()->route('products');
-            } catch(\Exception $ex){
-                DB::rollBack();
-                toastr()->error(__('Admin/general.wrong'));
-                return redirect()->route('products');
-            }
+            //} catch(\Exception $ex){
+            //    DB::rollBack();
+            //    toastr()->error(__('Admin/general.wrong'));
+            //    return redirect()->route('products');
+            //}
     }
 
     public function additionalStockStore($request) {
@@ -212,10 +213,6 @@ class ProductRepository implements ProductInterface {
         //return $request;
         try {
             $real_id= $request->product_id;
-            if (!$request->has('status'))
-                    $request->request->add(['status' => 0]);
-                else
-                    $request->request->add(['status' => 1]);
             Product::whereId($real_id)->update($request->only(['status']));
             toastr()->success(__('Admin/products.product_update_product_status_successfully'));
             return redirect()->route('products');
