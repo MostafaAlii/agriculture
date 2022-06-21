@@ -19,9 +19,9 @@ interface PrecipitationInterface
     public function bulkDelete($request);
 
 //    public function statistics();
-    public function index_statistic();
+    public function precipitation_index_statistic();
 
-    public function get_custom_statistics($request);
+    public function precipitation_statistics($request);
 
 
 }

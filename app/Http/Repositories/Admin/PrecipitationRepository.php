@@ -205,7 +205,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
     }// end of bulkDelete
 
-    public function index_statistic()
+    public function precipitation_index_statistic()
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
@@ -214,7 +214,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
     }
 
-    public function get_custom_statistics($request)
+    public function precipitation_statistics($request)
     {
         $validated = $request->validate([
             'area_id' => 'sometimes|nullable|exists:areas,id',
