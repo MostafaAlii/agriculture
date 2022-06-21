@@ -66,12 +66,12 @@
                             </tbody>
                             <br>
                             <tbody>
-                                
+
                                 @if($order->is_shipping_different != 0)
                                     <tr>
                                         <td width="25%"><h3>{{ trans('Admin/orders.shipping_detais') }}</h3></td>
                                     </tr>
-                                    <tr>    
+                                    <tr>
                                         <th>{{ trans('Admin/orders.order_vendor_name') }}</th>
                                         <td>{{ $order->shipping->firstname .' '. $order->shipping->lastname }}</td>
                                         <th>{{ trans('Admin/orders.order_vendor_email') }}</th>
@@ -120,7 +120,7 @@
                                 <tr>
                                     <td colspan="3"></td>
                                     <th colspan="1">{{ trans('Admin/orders.order_transaction_status') }}</th>
-                                    <td>{!! $order->transaction->getStatusForPrint() !!}</td>
+                                    <td>{!! $order->getStatusForExport() !!}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"></td>

@@ -62,6 +62,8 @@ return [
     'order_reject_reason'                      =>                   'سبب الرفــض',
     'order_push_from_stock_process_date'       =>                   'تاريخ الخروج من المخزن',
     'type_reject_reason'                       =>                   'اذكر سبب الرفض',
-
+    'status_required'                          =>                   'حالة الطلب مطلوبة يجب اختيار حالة الطلب',
+    'status_required_in'                       =>                   'يجب اختيار حالة من الحالات الموجودة فقط ليس الا',
+    'reason_required_for_reject_only'          =>                   'يرجى ذكر سبب رفض الطلب',
 
 ];
