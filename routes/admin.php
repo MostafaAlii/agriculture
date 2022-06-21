@@ -272,8 +272,8 @@ Route::group(
             Route::resource('FarmerServices', FarmerServiceController::class)->except(['show']);
             Route::get('/FarmerServices/data', [FarmerServiceController::class,'data'])->name('farmer_service.data');
             Route::delete('/FarmerServices/bulk_delete/{ids}', [FarmerServiceController::class,'bulkDelete'])->name('farmer_service.bulk_delete');
-            Route::get('/FarmerServices/index_statistic/', [FarmerServiceController::class,'index_statistics'])->name('farmer_index_statistics');
-            Route::post('/FarmerServices/statistic/', [FarmerServiceController::class,'statistics'])->name('farmer_service.statistics');
+            Route::get('/FarmerServices/farmer_services_index_statistics/', [FarmerServiceController::class,'farmer_services_index_statistics'])->name('farmer_service_index_statistics');
+            Route::post('/FarmerServices/statistic/', [FarmerServiceController::class,'farmer_services_statistics'])->name('farmer_service.statistics');
 
             /***********end Farmer service****/
 

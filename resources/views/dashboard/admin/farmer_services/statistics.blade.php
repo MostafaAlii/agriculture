@@ -130,7 +130,7 @@
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="la la-check-square-o"></i> {{ __('Admin/orchards.search') }}
                                                 </button>
-                                                <a type="button" href="{{route('farmer_index_statistics')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
+                                                <a type="button" href="{{route('farmer_service_index_statistics')}}" class="btn btn-info">{{__('Admin\p_houses.back')}}</a>
 
                                             </div>
 

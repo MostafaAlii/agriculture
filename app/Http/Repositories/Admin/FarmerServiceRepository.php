@@ -254,13 +254,13 @@ class FarmerServiceRepository implements FarmerServiceInterface {
     }
     // end of bulkDelete
 
-    public function index_statistics(){
+    public function farmer_services_index_statistics(){
         $adminID = Auth::user()->id;
         $admin=Admin::findorfail($adminID);
         return view('dashboard.admin.farmer_services.statistics',compact('admin'));
     }
 
-    public function statistics($request){
+    public function farmer_services_statistics($request){
         $validated = $request->validate([
             'area_id' => 'sometimes|nullable|exists:areas,id',
             'state_id' => 'sometimes|nullable|exists:states,id',
