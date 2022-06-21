@@ -127,8 +127,11 @@ return [
     'product_price_original'            =>'السعر الاساسى',
     'product_price_sale'                =>'السعر بعد الخصم',
     'farmereditproduct'                 =>'صفحه تعديل المنتج',
-
-
+    'product_sku'                       =>  'رمز المنتــج',
+    'product_change_status'             =>  'تغيير الحالة',
     'change '                         =>'للتحويل الى   ',
+    'product_update_product_status_successfully'=>'تم تعديل حالة المنتج بنجاح',
+    'active'                            =>      'مفعل',
+    'not_active'                        =>      'غير مفعل',
 
 ];

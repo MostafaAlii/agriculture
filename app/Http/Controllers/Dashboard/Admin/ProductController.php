@@ -54,6 +54,10 @@ class ProductController extends Controller {
         return $this->Data->edit($id);
     }
 
+    public function changeStatus(Request $request) {
+        return $this->Data->changeStatus($request);
+    }
+
     public function update(Request $request) {
         return $this->Data->update($request);
     }

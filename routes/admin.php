@@ -431,6 +431,7 @@ Route::group(
                     Route::post('/product_update', [ProductController::class,'update'])->name('product_update');
                     Route::post('price',[ProductController::class, 'additionalPriceStore'])->name('products.prices.store');
                     Route::post('stock',[ProductController::class, 'additionalStockStore'])->name('products.stock.store');
+                    Route::post('changeStatus',[ProductController::class, 'changeStatus'])->name('products.changeStatus');
                     Route::get('restore',[ProductController::class, 'restore'])->name('products.trashed');
                     Route::get('/trashed_data', [ProductController::class,'trashed_data'])->name('trashed_data');
                     Route::put('restore/{id}',[ProductController::class, 'updateRestore'])->name('products.restore');

@@ -14,6 +14,11 @@
                     {{ __('Admin/products.prices_managment') }}
                 </button>
             @endcan
+            @can('product-change-status')
+                <button type="button" class="dropdown-item btn btn-outline-primary btn-md " data-toggle="modal" data-target="#changeStatus{{ $product->id }}" >
+                    {{ __('Admin/products.product_change_status') }}
+                </button>
+            @endcan
             @can('product-stock')
                 <button type="button" class="dropdown-item btn btn-outline-success btn-md " data-toggle="modal" data-target="#stock{{ $product->id }}" >
                     {{ __('Admin/products.stock') }}
@@ -31,6 +36,10 @@
 <!-- Start Product Stock Model -->
 @include('dashboard.admin.products.data_table.btn.stock')
 <!-- End Product Stock Model -->
+
+<!-- Start Product changeStatus Model -->
+@include('dashboard.admin.products.data_table.btn.changeStatus')
+<!-- End Product changeStatus Model -->
 
 <!-- Start Product Stock Model -->
 @include('dashboard.admin.products.data_table.btn.offer_price')

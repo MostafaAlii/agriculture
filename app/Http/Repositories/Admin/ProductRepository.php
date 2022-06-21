@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Repositories\Admin;
-use App\Models\{Tag, Farmer, Product, Category, Unit};
-use Illuminate\Support\Facades\{DB, Crypt};
+use App\Traits\UploadT;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Traits\UploadT;
+use Illuminate\Support\Facades\{DB, Crypt};
 use App\Http\Interfaces\Admin\ProductInterface;
+use App\Models\{Tag, Farmer, Product, Category, Unit};
 class ProductRepository implements ProductInterface {
     use UploadT;
     public function index() {
@@ -95,7 +96,7 @@ class ProductRepository implements ProductInterface {
                     'farmer_id' => $request->farmer_id,
                     'status' => $request->status,
                     'product_location' => $request->product_location,
-                    'stock'            => Product::IN_STOCK,
+                    'sku'            =>  'PRO-' . Str::random(8),
                 ]);
                 $product->save();
                 // Save Translation ::
@@ -121,7 +122,7 @@ class ProductRepository implements ProductInterface {
     }
 
     public function additionalPriceStore($request) {
-  
+
         try {
             $productPrice  = productPrice($request->product_id,$request->special_price);
             if ($productPrice) {
@@ -132,7 +133,7 @@ class ProductRepository implements ProductInterface {
                 return redirect()->route('products');
             }else{
                 toastr()->error(__('Admin/products.special_price_must_be_less_than_main_price'));
-                return redirect()->route('products'); 
+                return redirect()->route('products');
             }
         } catch(\Exception $ex){
             toastr()->error(__('Admin/general.wrong'));
@@ -205,6 +206,23 @@ class ProductRepository implements ProductInterface {
 
     public function restore() {
         return view('dashboard.admin.products.restore');
+    }
+
+    public function changeStatus($request) {
+        //return $request;
+        try {
+            $real_id= $request->product_id;
+            if (!$request->has('status'))
+                    $request->request->add(['status' => 0]);
+                else
+                    $request->request->add(['status' => 1]);
+            Product::whereId($real_id)->update($request->only(['status']));
+            toastr()->success(__('Admin/products.product_update_product_status_successfully'));
+            return redirect()->route('products');
+        } catch(\Exception $ex){
+            toastr()->error(__('Admin/general.wrong'));
+            return redirect()->route('products');
+        }
     }
 
     public function updateRestore($request, $id) {

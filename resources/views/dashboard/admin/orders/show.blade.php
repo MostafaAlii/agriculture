@@ -90,7 +90,7 @@
                         </div>
                     @endcan
                     <!-- End Order Update Status -->
-                    <section id="collapsible">
+                    <section id="collapsible" role="tablist">
                         <div class="row">
                             <div class="col-lg-12 col-xl-12">
                                 <!-- Start Order Details -->
