@@ -175,6 +175,7 @@ return [
     'saleproducts'=>'Product On Sale',
     'popproducts'=>'Most Popular',
     'addtocart'=>'Add To Cart',
+    'addedtocart' => 'Allready added',
     'sale'=>'Sale',
     'new'=>'New',
     // 'search'=>'search for product',

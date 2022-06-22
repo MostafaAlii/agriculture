@@ -170,6 +170,7 @@ return [
     'saleproducts' => 'احدث العروض',
     'popproducts' => 'الاكثر انتشارا',
     'addtocart' => 'اضف الى القائمه',
+    'addedtocart' => 'تمت الاضافه',
     'sale' => 'عرض',
     'new' => 'جديد',
     // 'search'=>'ابحث عن المنتج',

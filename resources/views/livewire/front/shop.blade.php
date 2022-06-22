@@ -338,18 +338,34 @@
                                                         @endif
                                                         @if (Auth::guard('vendor')->user())
                                                             @if ($product->stock == 1)
-                                                                <a class="custom-btn custom-btn--medium custom-btn--style-1 add-to-cart-cartbtnbtn" title="{{ __('Admin/site.addtocart') }}"
-                                                                    href="#" id="add-to-cart-cartbtnbtn" onclick="myFunction()"
-                                                                    onClick="(function(){
-                                                                                alert('{{ __('Website/home.item_added_to_cart') }}');
-                                                                                this.innerHTML='{{ __('Website/home.adding') }}';
-                                                                                return false;
-                                                                    })();return false;"
-                                                                    wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }})"
-                                                                >
-                                                                    <i class="fontello-shopping-bag"></i>
-                                                                    {{ __('Admin/site.addtocart') }}
-                                                                </a>
+                                                            @if(Cart::instance('cart')->content()->contains('id',$product->id))
+                                                               <button id="theButton" type="submit" disabled
+                                                                   class="custom-btn custom-btn--medium custom-btn--style-2 add-to-cart-cartbtnbtn"
+                                                                       title="{{ __('Admin/site.addedtocart') }}"
+                                                                   >
+                                                                       {{ __('Admin/site.addedtocart') }}
+                                                               </button>
+                                                            @else
+                                                               <button id="theButton" type="submit"
+                                                                   class="custom-btn custom-btn--medium custom-btn--style-1 add-to-cart-cartbtnbtn"
+                                                                       title="{{ __('Admin/site.addtocart') }}"
+                                                                       {{-- onclick="disableButton()" --}}
+                                                                       {{-- disabled="{{ $isDisabled }}" --}}
+                                                                       {{-- {{ $isDisabled == false ? '' : 'disabled' }} --}}
+                                                                       {{-- onclick="myFunction()" --}}
+                                                                       onClick="(function(){
+                                                                                   alert('{{ __('Website/home.item_added_to_cart') }}');
+                                                                                   {{-- this.innerHTML='{{ __('Website/home.adding') }}'; --}}
+                                                                                   console.log('clicked');
+                                                                                   return false;
+                                                                           })();return false;"
+                                                                       wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice() }})"
+                                                                   >
+                                                                       <i class="fontello-shopping-bag"></i>
+                                                                       {{ __('Admin/site.addtocart') }}
+                                                                       {{-- {{ $addtocart }} --}}
+                                                               </button>
+                                                            @endif
                                                                 {{-- wishlist route ******************* *************************************** --}}
                                                                 <div class="product-wish">
                                                                     @if ($witems->contains($product->id))
@@ -436,9 +452,21 @@
         });
     </script>
     <script>
-        function myFunction() {
-            console.log('clicked');
-            alert('{{ __('Website/home.item_added_to_cart') }}');
+        // function myFunction() {
+        //     alert('{{ __('Website/home.item_added_to_cart') }}');
+        //     $(this).attr('disabled','disabled');
+        //     // const button = document.querySelector('#add-to-cart-cartbtnbtn');
+        //     // const disableButton = () => {
+        //     //     button.disabled = true;
+        //     // };
+        //     // button.addEventListener('click', disableButton);
+        //     console.log('clicked');
+        // }
+        function disableButton() {
+        alert('{{ __('Website/home.item_added_to_cart') }}');
+        // document.getElementById("theButton").disabled = false;
+        console.log('clicked');
         }
+        //function disable
     </script>
 @endpush
