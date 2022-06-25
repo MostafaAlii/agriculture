@@ -15,7 +15,7 @@ class GeneralRequest extends FormRequest {
             'tags'           =>'sometimes|nullable|array',
             'tags.*'         =>'numeric|exists:tags,id',
             'price'          =>'required|numeric|min:1|digits_between:1,12',
-            'photo'          =>'sometime|nullable|image|mimes:jpeg,png,jpg|max:4096',
+            'photo'          =>'sometimes|nullable|image|mimes:jpeg,png,jpg|max:4096',
             //'status'         => 'sometime|nullable|in:0,1',
         ];
 

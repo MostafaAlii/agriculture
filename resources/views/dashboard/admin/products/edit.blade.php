@@ -212,26 +212,7 @@
                                             </div>
                                             <!-- End Tags Multi Select -->
 
-                                            <!-- Start Product Status -->
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="mt-1 form-group">
-
-                                                        <label>{{ trans('Admin\products.product_status') }}</label>
-                                                            
-                                                            <select name="status" id="manageStock" class="form-control" style="outline-style: none;">
-                                                                <optgroup label="{{ trans('Admin\products.product_status') }}">
-                                                                    <option {{ $product->status == '1' ? "selected" : "" }} value="1">{{ __('Admin/products.active') }}</option>
-                                                                    <option {{ $product->status == '0' ? "selected" : "" }} value="0">{{ __('Admin/products.not_active') }}</option>
-                                                                </optgroup>
-                                                            </select>
-                                                        @error("status")
-                                                        <span class="text-danger">{{$message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Status -->
+                                            
                                             <hr>
 
                                             <!-- Start Product Description -->

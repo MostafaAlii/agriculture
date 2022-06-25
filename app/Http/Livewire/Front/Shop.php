@@ -20,19 +20,34 @@ class Shop extends Component
     public $pagesize;
     public $min_price;
     public $max_price;
-
+    public $isDisabled;
+    public $addtocart;
     public function mount(){
         $this->sorting = "default";
         $this->pagesize = 12;
         $this->min_price = 1;
         $this->max_price = 10000;
+        $this->isDisabled = false;
+        $this->addtocart = __('Admin/site.addtocart');
     }
 
     public function store($product_id,$product_name,$product_price){
         Cart::instance('cart')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
-        // session()->flash('success_message','Item addded in cart');
-        // return redirect()->route('product.cart');
         $this->emitTo('front.cart-count-component','refreshComponent');
+        // $x=Cart::instance('cart')->content()->where('id',$product_id)->pluck('id')->first();
+        // $x=Cart::instance('cart')->content()->where('id',$product_id)->first();
+        //  dd($x);
+        // $xx = Cart::instance('cart')->content()->pluck('id')->all();
+        // $xx = Cart::instance('cart')->content()->all();
+        // dd($xx);
+        // $xxx= Cart::instance('cart')->content()->where('id',$x)->first();
+        // dd($xxx);
+        // $x=Cart::instance('cart')->content()->first()->id;
+        // if($xxx){
+        //     // dd($xxx);
+        //     $this->isDisabled = true;
+        //     $this->addtocart = __('Admin/site.addedtocart');
+        // }
     }
     public function addToWishlist($product_id,$product_name,$product_price){
         Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
@@ -47,15 +62,6 @@ class Shop extends Component
           }
         }
      }
-    //  public function getPrice(){
-    //      dd(Product::units()->pivot->price->get());
-    //         // foreach(Product::get() as $product){
-    //         //     // $xx=$product->units()->price->first();
-    //         //     // return $xx;
-    //         //     dd($product->units()->first()->pivot->price);
-    //         // }
-    //         // // dd($xx);
-    //     }
     public function render()
     {
         $data['tags']=Tag::get();

@@ -8,7 +8,7 @@ class ProductChangeStatusRequest extends FormRequest {
 
     public function rules() {
         return [
-            'status'         => 'sometime|nullable|in:0,1',
+            'status'         => 'sometimes|nullable|in:0,1',
         ];
     }
 
