@@ -8,6 +8,12 @@
     direction: ltr; */
     @endif
     }
+
+</style>
+<style>
+       .start-screen[data-scroll-discover=true] .scroll-discover {
+        display: none;
+    }
 </style>
 
 @endsection

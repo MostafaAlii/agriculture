@@ -37,6 +37,10 @@
 
 											<ul>
 												<li><a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
+                                                <li > <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
+                                                <li > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
+                                                <li > <a href="{{ route('farmer') }}">{{ __('website\home.servfarmers') }}</a> </li>
+                                                <li > <a href="{{ route('servworker') }}">{{ __('website\home.servworkers') }}</a> </li>
 												<li><a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a></li>
 												<li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
    												<li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>

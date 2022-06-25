@@ -74,5 +74,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.css" integrity="sha512-qveKnGrvOChbSzAdtSs8p69eoLegyh+1hwOMbmpCViIwj7rn4oJjdmMvWOuyQlTOZgTlZA0N2PXA7iA8/2TUYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="text/javascript" src="{{ asset('frontassets/js/device.min.js') }}"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        .top-bar--style-1 .top-bar__navigation a:not(.custom-btn) {
+            color: #fff;
+            font-size: 20px !important;
+            font-weight: bolder;
+        }
+        .top-bar--style-2 .top-bar__navigation a:not(.custom-btn) {
+            color: #555;
+            font-size: 20px !important;
+            font-weight: bolder;
+        }
+    </style>
     @yield('css')
     @livewireStyles
