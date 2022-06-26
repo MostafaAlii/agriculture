@@ -47,7 +47,7 @@
                                 <div class="card-body card-dashboard">
 
 
-                                    <form class="form" method="POST" action="{{ route('precipitation_statistics') }}">
+                                    <form class="form" method="POST" action="{{ route('get_custom_statistics') }}">
                                         @csrf
                                         <div class="form-body">
                                             @if($admin->type == 'employee')
