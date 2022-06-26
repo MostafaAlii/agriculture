@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 use App\Models\UnitTranslation;
+use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -103,5 +104,10 @@ class Product extends Model {
         $ProductUnits = $this->units->pluck('id');
         $unit_id=$this->units()->whereIn('unit_id', $ProductUnits)->pluck('id')->first();
         return UnitTranslation::whereId($unit_id)->select('Name')->first();
+    }
+
+    protected static function boot() {
+        parent::boot();
+        Product::observe(ProductObserver::class);
     }
 }

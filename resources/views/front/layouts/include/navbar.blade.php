@@ -144,7 +144,7 @@
         <div class="has-submenu">
             <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
                aria-expanded="false">
-                @if (App::getLocale() == 'ar')
+                @if (App::getLocale() == 'ar' ||App::getLocale() == 'ku')
                     <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
                     {{-- <img src="{{ asset('assets/admin/images/flags/saa.jpg') }}" alt="" width="50"> --}}
                 @else
@@ -160,9 +160,8 @@
                        href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                         @if($properties['native'] == "English")
                             {{-- <i class="flag-icon flag-icon-us"></i> --}}
-
                         @elseif($properties['native'] == "العربية")
-                            <i class="flag-icon flag-icon-eg"></i>
+                            {{-- <i class="flag-icon flag-icon-eg"></i> --}}
                         @endif
                         {{ $properties['native'] }}
                     </a>

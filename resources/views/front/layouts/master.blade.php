@@ -4,6 +4,13 @@
 
 <head>
     @include('front.layouts.include.headcss')
+    <style>
+        .top-bar--style-1 .top-bar__navigation a:not(.custom-btn) {
+            color: #fff;
+            font-size: 22px;
+            font-weight: bolder;
+        }
+    </style>
 </head>
 
 

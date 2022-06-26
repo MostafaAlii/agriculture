@@ -230,7 +230,7 @@ label.star:before {
                                         @if (Auth::guard('vendor')->user() )
                                             @if($product->stock ==1)
                                                 <form class="__add-to-cart" action="#">
-                                                    <div class="quantity-counter js-quantity-counter">
+                                                    {{-- <div class="quantity-counter js-quantity-counter">
                                                         @if($product->qty  > 1)
                                                             <span class="__btn __btn--minus"
                                                                 wire:click.prevent='decreaseQty' >
@@ -251,14 +251,23 @@ label.star:before {
                                                                 wire:click.prevent='increaseQty' >
                                                             </span>
                                                         @endif
-                                                    </div>
-
+                                                    </div> --}}
+                                                    @if(Cart::instance('cart')->content()->contains('id',$product->id))
+                                                        <button class="custom-btn custom-btn--medium custom-btn--style-2" title="{{ __('Admin/site.addedtocart') }}"
+                                                        type="submit" role="button" disabled
+                                                        wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice()}})">
+                                                        {{-- <i class="fontello-shopping-bag"></i> --}}
+                                                            {{ __('Admin/site.addedtocart') }}
+                                                        </button>
+                                                    @else
                                                         <button class="custom-btn custom-btn--medium custom-btn--style-1" title="{{ __('Admin/site.addtocart') }}"
                                                         type="submit" role="button"
                                                         wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->special_price ? $product->special_price : $product->getPrice()}})">
                                                         <i class="fontello-shopping-bag"></i>
                                                             {{ __('Admin/site.addtocart') }}
                                                         </button>
+                                                    @endif
+
 
                                                         @if($witems->contains($product->id))
                                                             <button class="custom-btn custom-btn--medium custom-btn--style-1"

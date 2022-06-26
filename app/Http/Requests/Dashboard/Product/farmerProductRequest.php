@@ -18,6 +18,7 @@ class farmerProductRequest extends FormRequest {
             'photo'          =>'required|image|mimes:jpeg,png,jpg|max:2048',
             'qty'            =>'required|numeric|min:1|max:9999999999',
             'unit_id'        =>'required|exists:units,id|',
+            'status' => 'required|in:0,1',
         ];
     }
 
@@ -36,6 +37,8 @@ class farmerProductRequest extends FormRequest {
             'price.min'             =>  trans('Admin/products.price_min'),
             'price.digits_between'  =>  trans('Admin/products.price_digits_between'),
             'photo.image'           =>  trans('Admin/products.photo_image'),
+            'status.required'       =>  trans('Admin/products.status_required'),
+            'status.in'                =>  trans('Admin/products.status_in'),
         ];
     }
 }

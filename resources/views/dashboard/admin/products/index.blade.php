@@ -86,6 +86,7 @@
                                                     <th>
                                                         <input type="checkbox" name="select_all" id="select-all">
                                                     </th>
+                                                    <th>{{ __('Admin/products.product_sku') }}</th>
                                                     <th>{{ __('Admin/products.product_main_image') }}</th>
                                                     <th>{{ __('Admin/products.product_name') }}</th>
                                                     <th>{{ __('Admin/products.product_farmer') }}</th>
@@ -147,6 +148,7 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+            {data: 'sku', name: 'sku'},
             {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'name', name: 'name'},
             {data: 'farmer_name', name: 'farmer_name'},

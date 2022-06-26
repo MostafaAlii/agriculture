@@ -4,6 +4,7 @@
 
 	<head>
         @include('front.layouts.include.headcss')
+       
 	</head>
 
 	<body class="woocommerce-page catalog-page">
@@ -16,7 +17,7 @@
 			<!-- start hero -->
 			<?php
 			$slider = \App\Models\Slider::latest()->first();
-			if(isset($slider->image->filename)){
+			if(isset($slider->image)){
 				$src=$slider->image->filename;
 			}else{
 				$src='100.jpg';

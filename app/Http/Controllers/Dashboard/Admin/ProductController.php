@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProductInterface;
-use App\Http\Requests\Dashboard\Product\{GeneralRequest, ProductPriceRequest, ProductStockRequest};
+use App\Http\Requests\Dashboard\Product\{GeneralRequest, ProductPriceRequest, ProductStockRequest, ProductChangeStatusRequest};
 
 class ProductController extends Controller {
     protected $Data;
@@ -54,7 +54,11 @@ class ProductController extends Controller {
         return $this->Data->edit($id);
     }
 
-    public function update(Request $request) {
+    public function changeStatus(Request $request) {
+        return $this->Data->changeStatus($request);
+    }
+
+    public function update(GeneralRequest $request) {
         return $this->Data->update($request);
     }
 

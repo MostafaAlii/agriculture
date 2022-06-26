@@ -212,26 +212,7 @@
                                             </div>
                                             <!-- End Tags Multi Select -->
 
-                                            <!-- Start Product Status -->
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="mt-1 form-group">
-                                                        <input type="checkbox" value="1"
-                                                            name="status"
-                                                            id="switcheryColor4"
-                                                            class="js-switch" data-color="success"
-                                                            <?php if($product->status==1)echo 'checked';?>
-                                                            />
-                                                        <label for="switcheryColor4"
-                                                            class="ml-1 card-title">{{ trans('Admin\products.product_status') }}</label>
-
-                                                        @error("status")
-                                                        <span class="text-danger">{{$message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Status -->
+                                            
                                             <hr>
 
                                             <!-- Start Product Description -->
