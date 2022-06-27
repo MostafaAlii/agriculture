@@ -279,7 +279,7 @@ class LandAreaRepository implements LandAreaInterface{
                     ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
                 return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
             }
-            if ($request->village_id != null && $request->land_category_id == null) {
+            elseif ($request->village_id != null && $request->land_category_id == null) {
 
                 $statistics = LandArea::select(
                     'area_translations.name AS Area',
@@ -297,6 +297,26 @@ class LandAreaRepository implements LandAreaInterface{
                     ->where('area_translations.area_id', $area_id)
                     ->where('state_translations.state_id', $state_id)
                     ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
+                return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
+            }
+            elseif ($request->village_id == null && $request->land_category_id == null) {
+
+                $statistics = LandArea::select(
+                    'area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village',
+                    'land_category_translations.category_name as category_name',
+                    'land_category_translations.category_type as category_type',
+
+                    DB::raw('SUM(land_areas.L_area )AS Area'))
+                    ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
+                    ->where('land_areas.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
                     ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
                 return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
             }
@@ -360,6 +380,25 @@ class LandAreaRepository implements LandAreaInterface{
                     ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
                     ->where('area_translations.name', $area_name)
                     ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
+                return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
+
+            }
+            elseif ($request->area_id == null && $request->state_id == null && $request->village_id == null && $request->land_category_id == null) {
+
+                $statistics = LandArea::select(
+                    'area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village',
+                    'land_category_translations.category_name as category_name',
+                    'land_category_translations.category_type as category_type',
+
+                    DB::raw('SUM(land_areas.L_area )AS Land_Area'))
+                    ->join('area_translations', 'land_areas.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'land_areas.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'land_areas.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'land_areas.land_category_id', '=', 'land_category_translations.id')
+
                     ->GroupBy('Area', 'State', 'Village', 'category_name', 'category_type')->get();
                 return view('dashboard.admin.land_areas.statistic_land_area_details', compact('admin', 'statistics'));
 

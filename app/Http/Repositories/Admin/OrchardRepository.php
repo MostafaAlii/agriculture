@@ -407,6 +407,35 @@ class OrchardRepository implements OrchardInterface
                 return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
 
             }
+            elseif
+            ( $request->village_id ==null  && $request->land_category_id ==null && $request->supported_side == null)
+            {
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+                    ->where('orchards.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+            }
             elseif( $request->village_id !=null  && $request->land_category_id ==null && $request->supported_side == null)
             {
                 $area_id = $admin->area_id;
@@ -513,6 +542,32 @@ class OrchardRepository implements OrchardInterface
                     ->where('area_translations.name', $area_name)
                     ->where('land_category_translations.category_name', $land_category_name)
                     ->where('orchards.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                        'admin_name')
+                    ->get();
+                return view('dashboard.admin.orchards.statistics',compact('admin','statistics'));
+
+
+            }
+
+            elseif ($request->area_id ==null  && $request->state_id ==null && $request->village_id ==null
+                && $request->land_category_id ==null && $request->supported_side == null)  {
+
+                $statistics = Orchard::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name',
+                    'orchards.supported_side AS supported_side', 'admins.firstname AS admin_name',
+                    'land_category_translations.category_name AS category_name',
+
+                    DB::raw('SUM(orchards.orchard_area) As orchard_area'),
+                    DB::raw('SUM(orchards.tree_count_per_orchard) As tree_count_per_orchard')
+                )
+                    ->join('admins', 'orchards.admin_id', '=', 'admins.id')
+                    ->join('village_translations', 'orchards.village_id', '=', 'village_translations.id')
+                    ->join('area_translations', 'orchards.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
+                    ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
+                    ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
+
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();

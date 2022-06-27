@@ -47,7 +47,7 @@
                                 <div class="card-body card-dashboard">
 
 
-                                    <form class="form" method="POST" action="{{ route('get_custom_statistics') }}">
+                                    <form class="form" method="POST" action="{{ route('precipitations.statistics') }}">
                                         @csrf
                                         <div class="form-body">
                                             @if($admin->type == 'employee')
@@ -97,7 +97,7 @@
                                                     <div class="col ">
                                                         <div class="form-group">
                                                             <label for="area_id">{{ __('Admin/bees.area') }}</label>
-                                                            <select name="area_id" id="area_id" class="form-control" required>
+                                                            <select name="area_id" id="area_id" class="form-control" >
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
                                                                 </option>
                                                                 @foreach (App\Models\Area::all() as $area)

@@ -365,6 +365,30 @@ class BeekeeperRepository implements BeekeeperInterface
                 return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
 
         }
+
+            elseif ($request->village_id == null && $request->supported_side == null) {
+
+
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('bee_keepers.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
         }
         elseif ($admin->type == 'admin') {
             if ($request->area_id != null && $request->state_id != null && $request->village_id != null
@@ -408,7 +432,26 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->where('area_translations.name', $area_name)
                     ->where('state_translations.name', $state_name)
                     ->where('village_translations.name', $village_name)
-                    ->where('bee_keepers.supported_side', $supported_side)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+
+            }
+            elseif ($request->area_id == null && $request->state_id == null && $request->village_id == null
+                && $request->supported_side == null) {
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
                 return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
