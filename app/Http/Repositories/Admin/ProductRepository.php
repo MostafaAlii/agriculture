@@ -155,17 +155,9 @@ class ProductRepository implements ProductInterface {
     public function update($request) {
         //dd($request->all());
         DB::beginTransaction();
-            //try{
-                if (!$request->has('status'))
-                    $request->request->add(['status' => 0]);
-                else
-                    $request->request->add(['status' => 1]);
-
+            try{
                 $product = Product::findOrfail($request->id);
                 $product->farmer_id     = $request->farmer_id;
-
-                $product->status    = $request->status;
-                //$product->product_location = $request->product_location;
                 $product->save();
                 // Save Translation ::
                 $product->name = $request->name;
@@ -183,11 +175,11 @@ class ProductRepository implements ProductInterface {
                 DB::commit();
                 toastr()->success(__('Admin/products.product_updated_successfully'));
                 return redirect()->route('products');
-            //} catch(\Exception $ex){
-            //    DB::rollBack();
-            //    toastr()->error(__('Admin/general.wrong'));
-            //    return redirect()->route('products');
-            //}
+            } catch(\Exception $ex){
+                DB::rollBack();
+                toastr()->error(__('Admin/general.wrong'));
+                return redirect()->route('products');
+            }
     }
 
     public function additionalStockStore($request) {

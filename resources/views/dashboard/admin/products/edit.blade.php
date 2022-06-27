@@ -212,7 +212,7 @@
                                             </div>
                                             <!-- End Tags Multi Select -->
 
-                                            
+                                            <br>
                                             <hr>
 
                                             <!-- Start Product Description -->
