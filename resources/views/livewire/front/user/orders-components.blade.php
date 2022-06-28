@@ -91,6 +91,7 @@
                             <a href="{{ route('vendor.orderDetais', ['order_id'=>encrypt($order->id)]) }}" class="btn btn-success btn-sm">
                                 <i class="fa fa-eye"> </i>
                             </a>
+                            <!-- End Print Btn -->
                             @if($order->status == Order::ORDERED)
                                 <button class="btn btn-danger btn-sm" type="button"
                                 onclick="confirm('<?php echo __('Website/vendor/dashboard.cancel_confirm_msg');?>') || event.stopImmediatePropagation()"

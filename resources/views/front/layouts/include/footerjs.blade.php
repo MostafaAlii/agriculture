@@ -3,27 +3,6 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 {!! NoCaptcha::renderJs() !!}
-{{-- bootstrap 4 ************************ --}}
-{{-- <script type="text/javascript" src="{{ asset('frontassets/js2/jquery-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
-<script src="{{ asset('frontassets/js2/jquery-1.12.4.minb8ff.js?ver=1.12.4')}}"></script>
-<script src="{{ asset('frontassets/js2/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4')}}"></script>
-<script src="{{ asset('frontassets/js2/bootstrap.min.js')}}"></script>
-<script src="{{ asset('frontassets/js2/jquery.flexslider.js')}}"></script>
-<script src="{{ asset('frontassets/js2/owl.carousel.min.js')}}"></script>
-<script src="{{ asset('frontassets/js2/jquery.countdown.min.js')}}"></script>
-<script src="{{ asset('frontassets/js2/jquery.sticky.js')}}"></script>
-<script src="{{ asset('frontassets/js2/functions.js')}}"></script> --}}
-
-{{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> --}}
-
-
-{{-- bootstrap 4 ************************ --}}
-
-{{-- <script>
-     window.jQuery || document.write('<script src="frontassets/js/jquery-2.2.4.min.js"></script>')
-</script> --}}
-{{-- <script src="{{ asset('frontassets/js/jquery-2.2.4.min.js') }}"></script> --}}
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if(session('status'))
@@ -88,23 +67,9 @@ integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amn
                 }
             });
         });
-    
+
     });
 </script>
-{{-- <script>
-        window.oncontextmenu = function () {
-        return false;
-    };
 
-    document.addEventListener("keydown", function(event){
-        var key = event.key || event.keyCode;
-
-        if (key == 123) {
-            return false;
-        } else if ((event.ctrlKey && event.shiftKey && key == 73) || (event.ctrlKey && event.shiftKey && key == 74)) {
-            return false;
-        }
-    }, false);
-</script> --}}
 @livewireScripts
 

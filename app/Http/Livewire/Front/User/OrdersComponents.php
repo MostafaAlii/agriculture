@@ -57,11 +57,20 @@ class OrdersComponents extends Component {
         $order = Order::find($id);
 	    $order->status = Order::CANCELED;
 	    $order->canceled_date = Carbon::now()->format('Y-m-d');
-        /*DB::table('products')
-            ->whereId($order->orderItems->product_id)
-            ->decrementQty($order->orderItems->quantity);*/
 	    $order->save();
 	    session()->flash('order_message','Order has been canceled!');
+    }
+
+    public function printOrder($id) {
+        $order = Order::with(['orderItems'])->find($id);
+        return view('livewire.front.user.orders.print_invoice',['order'=>$order]);
+    }
+
+    public function printSelectedOrder() {
+        $all=$this->checked;
+        foreach ($all as $order_id) {
+            $this->printOrder($order_id);
+        }
     }
 
 }
