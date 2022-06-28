@@ -63,6 +63,7 @@
                 <td width="100%">
 
                 <?php
+               // if(Auth::guard('web')->user()->email == $comment->email){
                 if(Auth::guard('web')->user()){
                      $src=asset('Dashboard/img/farmers/' . $comment->image);
                 }elseif(Auth::guard('vendor')->user()){
