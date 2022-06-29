@@ -78,8 +78,7 @@ class CountryRepository implements CountryInterface {
         } catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.add_wrong'));
 
-            return redirect()->back();
-        }
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);        }
 
     }
     public function edit($id) {
@@ -185,7 +184,7 @@ class CountryRepository implements CountryInterface {
             }
         }catch (\Exception $e) {
             DB::rollBack();
-            toastr()->error(__('Admin/attributes.delete_wrong'));
+            toastr()->error(__('Admin/countries.cant_delete'));
 
             return redirect()->back();
         }

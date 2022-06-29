@@ -11,17 +11,17 @@ class CommentRepository implements CommentInterface{
             if(Auth::guard('vendor')->user()){
                 $name=Auth::guard('vendor')->user()->firstname;
                 $email=Auth::guard('vendor')->user()->email;
-                $image=Auth::guard('vendor')->user()->image->filename;
+                $image=(Auth::guard('vendor')->user()->image->filename)??'1.jpg';
             }
             if(Auth::guard('web')->user()){
                 $name=Auth::guard('web')->user()->firstname;
                 $email=Auth::guard('web')->user()->email;
-                $image=Auth::guard('web')->user()->image->filename;
+                $image=(Auth::guard('web')->user()->image->filename)??'1.jpg';
             }
             if(Auth::guard('admin')->user()){
                 $name=Auth::guard('admin')->user()->firstname;
                 $email=Auth::guard('admin')->user()->email;
-                $image=Auth::guard('admin')->user()->image->filename;
+                $image=(Auth::guard('admin')->user()->image->filename)??'1.jpg';
             }
             
             Comment::create([
@@ -42,6 +42,7 @@ class CommentRepository implements CommentInterface{
 
          } catch (\Exception $ex) {
             //dd($ex->getMessage());
+           // return redirect()->back()->withErrors(['error'=>$ex->getMessage()]);
             return redirect()->back()->withErrors(['error'=> __('Website/comments.error')]);
          }
     }

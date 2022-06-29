@@ -9,7 +9,7 @@ class UserOrderDetailsComponent extends Component
 {
     public $order_id;
     public function mount($order_id) {
-        $this->order_id = Crypt::decrypt($order_id);;
+        $this->order_id = Crypt::decrypt($order_id);
         $this->user = auth()->user();
     }
     public function render() {
@@ -22,5 +22,14 @@ class UserOrderDetailsComponent extends Component
 	    $order->canceled_date = DB::raw('CURRENT_DATE');
 	    $order->save();
 	    session()->flash('order_message','Order has been canceled!');
+    }
+
+    public function printOrder($id) {
+        //$orderID    =   Crypt::decrypt($id);
+        //$order     =   Order::findorfail($orderID);
+        $order = Order::where('user_id', $this->user->id)->whereId($this->order_id)->first();
+        //return view('dashboard.admin.orders.print_invoice',['order'=>$order]);
+        //return view('dashboard.admin.orders.ext.print', compact('order'));
+        return view('livewire.front.user.orders.print_invoice',['order'=>$order]);
     }
 }

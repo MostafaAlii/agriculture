@@ -519,6 +519,29 @@ class FarmerCropRepository implements FarmerCropInterface
 
             }
             elseif ($request->start_date==null && $request->end_date== null  &&
+                $request->area_id ==null && $request->state_id ==null && $request->village_id ==null
+                && $request->land_category_id ==null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+
+
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics','admin','land_categories'));
+
+            }
+            elseif ($request->start_date==null && $request->end_date== null  &&
                 $request->area_id !=null && $request->state_id !=null && $request->village_id ==null
                 && $request->land_category_id !=null) {
 
@@ -670,6 +693,27 @@ class FarmerCropRepository implements FarmerCropInterface
                         ->where('area_translations.area_id', $area_id)
                         ->where('state_translations.state_id', $state_id)
                         ->where('village_translations.name', $village_name)
+                        ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                        ->get();
+                    return view('dashboard.admin.farmer_crops.statistics', compact('statistics','admin','land_categories'));
+                }
+                elseif ( $request->village_id ==null && $request->land_category_id == null) {
+
+                    $statistics = FarmerCrop::select('area_translations.name AS Area',
+                        'state_translations.name AS State',
+                        'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                        DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                        DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                        'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                        ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                        ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                        ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                        ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                        ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                        ->where('farmer_crops.admin_id', $admin->id)
+                        ->where('area_translations.area_id', $area_id)
+                        ->where('state_translations.state_id', $state_id)
                         ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                         ->get();
                     return view('dashboard.admin.farmer_crops.statistics', compact('statistics','admin','land_categories'));

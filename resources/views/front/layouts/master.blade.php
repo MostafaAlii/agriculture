@@ -1093,80 +1093,24 @@
             </script>
         </div>
 
-        <div id="start-screen__content-container" class="start-screen__content-container  text-white">
+        <div id="start-screen__content-container" class="text-white start-screen__content-container">
             @foreach (\App\Models\Slider::limit(3)->get() as $slider)
-                <div class="start-screen__content__item start-screen__content__item--1  align-items-center">
+                <div class="start-screen__content__item start-screen__content__item--1 align-items-center">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-10 col-xl-8">
                                 <div class="__name">AgRO</div>
 
-                                <h2 class="__title text-white"> {{ $slider->title }}</h2>
+                                <h2 class="text-white __title"> {{ $slider->title }}</h2>
 
                                 <p class="text-center">
                                     {{ $slider->subtitle }}
                                 </p>
-
-                                {{-- <p class="text-center mt-5 mt-md-10">
-                                    <span class="d-none d-sm-block"><a
-                                                class="custom-btn custom-btn--big custom-btn--style-3"
-                                                href="#">Discover</a></span>
-
-                                    <span class="d-block d-sm-none"><a
-                                                class="custom-btn custom-btn--small custom-btn--style-3" href="#">Discover</a></span>
-                                </p> --}}
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
-            {{-- <div class="start-screen__content__item start-screen__content__item--2  align-items-center">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-12 col-md col-lg-9 col-xl-8">
-                            <div class="__name">AgRO</div>
-
-                            <h2 class="__title text-white">Best harvest <br><span>in the World</span></h2>
-
-                            <p>
-                                The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-                            </p>
-
-                            <p class="mt-5 mt-md-10">
-                                <span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-3" href="#">Discover</a></span>
-
-                                <span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-3" href="#">Discover</a></span>
-                            </p>
-                        </div>
-
-                        <div class="col-12 my-3 d-md-none"></div>
-
-                        <div class="col-12 col-md-auto col-lg-3 col-xl-4  text-center">
-                            <a class="play-btn" data-fancybox="" href="http://player.vimeo.com/video/44309170">
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
-            {{-- <div class="start-screen__content__item start-screen__content__item--3  align-items-center">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-auto col-xl-8">
-                            <div class="__name">AgRO</div>
-
-                            <h2 class="__title text-white">Live<span style="color: #fcdb5a">stock</span></h2>
-
-                            <p class="text-center mt-5 mt-md-10">
-                                <span class="d-none d-sm-block"><a class="custom-btn custom-btn--big custom-btn--style-3" href="#">Discover</a></span>
-
-                                <span class="d-block d-sm-none"><a class="custom-btn custom-btn--small custom-btn--style-3" href="#">Discover</a></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
 
         <span class="scroll-discover"></span>
@@ -1182,7 +1126,6 @@
         @elseif(app()->getLocale()=='ku')
             <link rel="stylesheet" href="{{ asset('frontassets/css/style-ar.css') }}" type="text/css">
         @else
-            {{-- <link rel="stylesheet" href="{{ asset('frontassets/css/style.min.css') }}" type="text/css"> --}}
             <link rel="stylesheet" href="{{ asset('frontassets/css/style.css') }}" type="text/css">
         @endif
 
@@ -1231,109 +1174,6 @@
     <!-- end main -->
 
     <!-- start footer -->
- {{-- <footer id="footer" class="footer--style-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-sm-auto">
-                <div class="footer__item">
-                    <a class="site-logo" href="#">
-                                @if(app()->getLocale()=='ar')
-                    <img class="img-logo  img-fluid  lazy"
-                         src="{{ setting()->ar_site_logo ?
-                        URL::asset('Dashboard/img/settingArLogo/'.setting()->ar_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ar.png')}}"  alt=""
-                         style="left: 45%;   width: 200px;height: 260px;  "/>
-                @elseif(app()->getLocale()=='ku')
-                    <img class="img-logo  img-fluid  lazy"
-                         src="{{setting()->ku_site_logo ?
-                        URL::asset('Dashboard/img/settingKuLogo/'.setting()->ku_site_logo) :
-                        URL::asset('Dashboard/img/Default/logo_ku.png')}}"
-                         alt="" style="left: 45%;    width: 200px; height: 260px;"/>
-                @elseif(app()->getLocale()=='en')
-                    <img class="img-logo  img-fluid  lazy" src="{{setting()->en_site_logo ?
-                         URL::asset('Dashboard/img/settingEnLogo/'.setting()->en_site_logo) :
-                         URL::asset('Dashboard/img/Default/logo_en.png')}}"
-                         alt="" style="left: 45%;    width: 200px;height: 260px;"/>
-
-                @endif
-
-                            </a>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm">
-                <div class="row align-items-md-center no-gutters">
-                    <div class="col-12 col-md">
-                        <div class="footer__item">
-                            <address>
-                                <p>
-                                    <span>{{ \App\Models\setting::first()->address }}</span>
-                                </p>
-
-                                <p>
-                                    {{  \App\Models\setting::first()->primary_phone }},
-                                    {{  \App\Models\setting::first()->secondery_phone }} <br>
-                                    <a href="#">{{  \App\Models\setting::first()->message_maintenance }}</a>
-                                </p>
-                            </address>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-auto">
-                        <div class="footer__item">
-                            <div class="social-btns">
-                                <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
-                                <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
-                                <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-5 col-xl-4 offset-xl-1">
-                <div class="footer__item">
-                    <h5 class="h6">{{ __('Admin/general.newslatter') }}</h5>
-                    <form class="form--horizontal" method="post"  id="ajaxform">
-                        @csrf
-                        @method('post')
-                        <div class="input-wrp">
-                            <input class="textfield" name="email" type="email" placeholder="{{ __('Website/home.email') }}" />
-                        </div>
-                        <button class="custom-btn custom-btn--medium custom-btn--style-1 save-data" type="submit" role="button">
-                            {{ __('Website/home.sub') }}
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="row flex-lg-row-reverse">
-            <div class="col-12 col-lg-6">
-                <div class="footer__item">
-                    <nav id="footer__navigation" class="navigation  text-lg-right">
-                        <ul>
-                            <li  class="active" > <a href="{{ route('front') }}">{{ __('website\home.home')}}</a> </li>
-                            <li                 > <a href="{{ route('front2') }}"> {{ __('website\home.home2') }}</a> </li>
-                            <li> <a href="{{ route('shop') }}">{{ __('website\home.shop') }}</a> </li>
-                            <li> <a href="{{ route('blog') }}">{{ __('website\home.blog') }}</a> </li>
-                            <li> <a href="{{ route('aboutUs') }}">{{ __('website\home.aboutus') }}</a> </li>
-                            <li> <a href="{{ route('contact') }}">{{ __('website\home.contactus') }}</a> </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="footer__item">
-                    <span class="__copy">  {{ trans('Admin/general.copyright') }} &copy; 2022
-                        <a class="__dev" href="#">{{ ucfirst(setting()->site_name) }}</a>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer> --}}
 @include('front.layouts.include.footer')
 <!-- end footer -->
 </div>

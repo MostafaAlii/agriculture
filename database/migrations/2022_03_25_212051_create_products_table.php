@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration {
             $table->date('special_price_end')->nullable();  // End offer Date
             $table->string('sku')->nullable();
             $table->integer('stock')->default(0);
-            $table->tinyInteger('status')->default(Product::PENDING);
+            $table->boolean('status')->default(false);
             $table->foreignId('farmer_id')->nullable()->constrained()->cascadeOnDelete();
             $table->longText('product_location')->nullable();
             $table->integer('qty')->nullable();

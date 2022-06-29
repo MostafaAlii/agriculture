@@ -63,6 +63,7 @@
                 <td width="100%">
 
                 <?php
+               // if(Auth::guard('web')->user()->email == $comment->email){
                 if(Auth::guard('web')->user()){
                      $src=asset('Dashboard/img/farmers/' . $comment->image);
                 }elseif(Auth::guard('vendor')->user()){
@@ -231,10 +232,10 @@
                                         @method('DELETE')
                                         <div class="text-right">
                                             <!-- || (Auth::guard('vendor')->user()->email == $comment->email ) -->
-                                            @if (Auth::guard('admin')->user()->email == $comment->email)
+                                            @if (Auth::guard('admin')->user()->email)
                                                 <button type="submit"
                                                     class="comment__reply custom-btn custom-btn--tiny custom-btn--style-1"
-                                                    style="margin-top: -90px;margin-right: 98px;">{{ __('website\comments.delete') }}</button>
+                                                    style="margin-top: -90px;margin-right: 175px;">{{ __('website\comments.delete') }}</button>
                                             @endif
                                         </div>
                                     </form>
