@@ -12,8 +12,17 @@
     <tr>
 
         <td width="100%" style="padding-left:<?php echo $padding; ?>px">
-            <img class="user-img img-fluid rounded-circle" style="width:50px; height:50px;border-radius: 15%;"
-                src="{{ asset('Dashboard/img/admins/' . $child->image) }}" />
+        <?php
+                if(App\Models\User::where('email',$child->email)->first()){
+                   $src=asset('Dashboard/img/users/' . $child->image);
+                }elseif(App\Models\Farmer::where('email',$child->email)->first()){
+                    $src=asset('Dashboard/img/farmers/' . $child->image);
+                }elseif(App\Models\Admin::where('email',$child->email)->first()){
+                     $src=asset('Dashboard/img/admins/' . $child->image);
+                }
+                echo'<img class="user-img img-fluid rounded-circle" style="width:50px; height:50px;border-radius: 15%;" src="'.$src.'" />';
+                ?>
+                
             <br>
             <time class="comment__date-post">{{ $child->created_at->format('Y-m-d') }}</time>
             <br>
