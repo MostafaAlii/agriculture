@@ -31,7 +31,7 @@ class ProfileRepository implements ProfileInterface{
             DB::beginTransaction();
             $adminID = Crypt::decrypt($id);
             $admin=Admin::findorfail($adminID);
-            $adminpassword = Auth::user()->password;
+            $adminpassword = Auth::guard('admin')->user()->password;
             $requestData = $request->validated();
             if($request->password){
                 $requestData['password'] = bcrypt($request->password);

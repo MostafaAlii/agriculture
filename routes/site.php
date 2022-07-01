@@ -16,7 +16,7 @@ use App\Http\Controllers\front\CategoryProductController;
 use App\Http\Controllers\Dashboard\Admin\ProfileController;
 use App\Http\Livewire\Front\User\UserOrderDetailsComponent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Controllers\front\ReviewController;
 Route::group(
     [
@@ -27,7 +27,20 @@ Route::group(
 
     ], function(){
 
-
+        // Test Pdf
+        route::get('/test-pdf', function () {
+            /*$data = [
+                'invoice' => '123456789',
+              ];*/
+            $data = [];
+            $data['order'] = \App\Models\Order::with(['orderItems', 'user', 'shipping', 'transaction'])->find(1);
+            //$data = \App\Models\Order::with(['orderItems', 'user', 'shipping', 'transaction'])->find(1);
+            //$data['setting'] = \App\Models\Setting::get();
+            //$data = $data->toArray();
+            //dd($data);
+            $pdf = PDF::loadView('front.layouts.invoice', $data);
+            return $pdf->stream('document.pdf');
+        });
         // front routes
         route::get('/',Livewire\front\Home2::class)->name('front');                    //home1
         route::get('/home2',Livewire\front\Home::class)->name('front2');               //home2
@@ -73,6 +86,7 @@ Route::group(
                 route::get('/',[VendorController::class, 'index'])->name('vendor.dashboard');
                 Route::get('/myOrders',[VendorController::class, 'orders'])->name('vendor.orders');
                 Route::get('/myOrders/Details/{order_id}',UserOrderDetailsComponent::class)->name('vendor.orderDetais');
+                Route::get('/myOrders/printOrder/{order_id}', UserOrderDetailsComponent::class, 'printOrder')->name('userOrder.print');
                 /************************************************************************************************** */
                 route::get('/ownprofile',Livewire\front\User\UserProfile::class)->name('user.ownprofile'); //user profile
                 route::get('/ownprofile/edit',Livewire\front\User\UserEditProfileComponent::class)->name('user.editownprofile'); //user Edit profile
@@ -106,20 +120,16 @@ Route::group(
 
             /************************* Start Checkout & PaymentMethod ******************************/
             Route::get('/thank-you', ThankYouComponent::class)->name('thankyou');
-            /*Route::post('/checkout/payment', [PaymentMethodController::class, 'checkout_now'])->name('checkout.paypal');
-            Route::get('/checkout/{order_id}/cancelled', [PaymentMethodController::class, 'cancelled'])->name('checkout.paypal.cancel');
-            Route::get('/checkout/{order_id}/completed', [PaymentMethodController::class, 'completed'])->name('checkout.paypal.complete');
-            Route::get('/checkout/webhook/{order?}/{env?}', [PaymentMethodController::class, 'webhook'])->name('checkout.paypal.webhook.ipn');*/
             /************************* End Checkout & PaymentMethod ******************************/
         });
 
         Route::get('/category_products/{id}',[CategoryProductController::class,'showCategoryProduct'])->name('pro_cat');
         Route::get('/review/add',[ReviewController::class,'add'])->name('review.add');
-      
+
         Route::view('/team_profile/{id}','livewire.front.team_profile')->name('team_profile');
-        
+
         Route::view('/subscripe_mail','front.emails.subscriptions.verified')->name('subscripe_mail');
-        
+
     require __DIR__.'/auth.php';
     });
 

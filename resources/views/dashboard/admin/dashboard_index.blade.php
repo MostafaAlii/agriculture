@@ -7,19 +7,19 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span
-                        class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
+                <h4 class="my-auto mb-0 content-title">Pages</h4><span
+                        class="mt-1 mb-0 mr-2 text-muted tx-13">/ Empty</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
+                <button type="button" class="ml-2 btn btn-info btn-icon"><i class="mdi mdi-filter-variant"></i></button>
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
+                <button type="button" class="ml-2 btn btn-danger btn-icon"><i class="mdi mdi-star"></i></button>
             </div>
             <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
+                <button type="button" class="ml-2 btn btn-warning btn-icon"><i class="mdi mdi-refresh"></i></button>
             </div>
             <div class="mb-3 mb-xl-0">
                 <div class="btn-group dropdown">
@@ -69,15 +69,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="info">{{ \App\Models\Admin::where('type','admin')->count() }}</h3>
                                             <h6>{{ __('Admin/site.admins') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-home info font-large-2 float-right"></i>
+                                            <i class="float-right icon-home info font-large-2"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                              style="width: 80%" aria-valuenow="80" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -95,15 +95,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="info">{{ \App\Models\Admin::where('type','employee')->count() }}</h3>
                                             <h6>{{ __('Admin/site.employees') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-emoticon-smile info font-large-2 float-right"></i>
+                                            <i class="float-right icon-emoticon-smile info font-large-2"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                              style="width: 80%" aria-valuenow="80" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -123,15 +123,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="warning">{{ \App\Models\Farmer::count() }}</h3>
                                             <h6>{{ __('Admin/site.farmer') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-users warning font-large-2 float-right"></i>
+                                            <i class="float-right icon-users warning font-large-2"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-warning" role="progressbar"
                                              style="width: 65%" aria-valuenow="65" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -151,15 +151,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="success">{{ \App\Models\User::count() }}</h3>
                                             <h6>{{ __('Admin/site.users') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-user-follow success font-large-2 float-right"></i>
+                                            <i class="float-right icon-user-follow success font-large-2"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -179,15 +179,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="success">{{ \App\Models\Worker::count() }}</h3>
                                             <h6>{{ __('Admin/site.workers') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-user-follow success font-large-2 float-right"></i>
+                                            <i class="float-right icon-user-follow success font-large-2"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -212,15 +212,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="info">{{ \App\Models\Country::count() }}</h3>
                                             <h6> {{ trans('Admin/countries.countryPageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="material-icons info font-large-2 float-right">flag</i>
+                                            <i class="float-right material-icons info font-large-2">flag</i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                              style="width: 80%" aria-valuenow="80" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -240,16 +240,16 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="warning">{{ \App\Models\Area::count() }}</h3>
                                             <h6>   {{ trans('Admin/areas.areaPageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="material-icons warning font-large-2 float-right">flag</i>
-                                            {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                            <i class="float-right material-icons warning font-large-2">flag</i>
+                                            {{-- <i class="float-right icon-users warning font-large-2"></i> --}}
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-warning" role="progressbar"
                                              style="width: 65%" aria-valuenow="65" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -269,16 +269,16 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="success">{{ \App\Models\Province::count() }}</h3>
                                             <h6>  {{ trans('Admin/proviences.proviencePageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
-                                            <i class="material-icons success font-large-2 float-right">flag</i>
+                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
+                                            <i class="float-right material-icons success font-large-2">flag</i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -298,15 +298,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="danger">{{ \App\Models\State::count() }}</h3>
                                             <h6>   {{ trans('Admin/states.statePageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="material-icons danger font-large-2 float-right">flag</i>
+                                            <i class="float-right material-icons danger font-large-2">flag</i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-danger" role="progressbar"
                                              style="width: 85%" aria-valuenow="85" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -326,15 +326,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="info">{{ \App\Models\Village::count() }}</h3>
                                             <h6>  {{ trans('Admin/villages.villagePageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="material-icons info font-large-2 float-right">flag</i>
+                                            <i class="float-right material-icons info font-large-2">flag</i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                              style="width: 80%" aria-valuenow="80" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -359,15 +359,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="danger">{{ \App\Models\Department::count() }}</h3>
                                             <h6>{{ __('Admin/site.departments') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="material-icons danger font-large-2 float-right">account_balance</i>
+                                            <i class="float-right material-icons danger font-large-2">account_balance</i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-danger" role="progressbar"
                                              style="width: 85%" aria-valuenow="85" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -387,7 +387,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="danger">{{ \App\Models\Category::count() }}</h3>
                                             <h6>{{ __('Admin/categories.categories_title_in_sidebar') }}</h6>
                                         </div>
@@ -395,7 +395,7 @@
                                             <i class="material-icons danger font-large-2">account_balance</i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-danger" role="progressbar"
                                              style="width: 85%" aria-valuenow="85" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -415,16 +415,16 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="warning">{{ \App\Models\Blog::count() }}</h3>
                                             <h6> {{ trans('Admin/site.blog') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-globe warning font-large-2 float-right"></i>
-                                            {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                            <i class="float-right icon-globe warning font-large-2"></i>
+                                            {{-- <i class="float-right icon-users warning font-large-2"></i> --}}
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-warning" role="progressbar"
                                              style="width: 65%" aria-valuenow="65" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -444,15 +444,15 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="success">{{ \App\Models\Tag::count() }}</h3>
                                             <h6>  {{ trans('Admin/site.tag') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-speech success font-large-2 float-right"></i>
+                                            <i class="float-right icon-speech success font-large-2"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -477,16 +477,16 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="info">{{ \App\Models\AdminDepartment::count() }}</h3>
                                             <h6> {{ trans('Admin/admin_departments.adminDepartmentPageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            <i class="icon-list info font-large-2 float-right"></i>
-                                            {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                            <i class="float-right icon-list info font-large-2"></i>
+                                            {{-- <i class="float-right icon-users warning font-large-2"></i> --}}
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                              style="width: 65%" aria-valuenow="65" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -506,17 +506,17 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="success">{{ \App\Models\Orchard::count() }}</h3>
                                             <h6>  {{ trans('Admin/orchards.orchards') }}</h6>
                                         </div>
                                         <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
                                             <i class="fas fa-tree fa-2x success"></i>
-                                            <i class="icon-box-item success font-large-2 float-right"></i>
+                                            <i class="float-right icon-box-item success font-large-2"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -536,7 +536,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="pink">{{ \App\Models\ProtectedHouse::count() }}</h3>
                                             <h6>  {{ trans('Admin/p_houses.protectedHousePageTitle') }}</h6>
                                         </div>
@@ -544,7 +544,7 @@
                                             <i class="fas fa-warehouse fa-2x " style="color:deeppink;"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-pink" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -564,17 +564,17 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="yellow"
                                                 style="color:greenyellow">{{ \App\Models\FarmerService::count() }}</h3>
                                             <h6>  {{ trans('Admin/services.farmerServicePageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
                                             <i class="fas fa-tractor fa-2x " style="color:yellow;"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-yellow" role="progressbar"
                                              style=" width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -599,17 +599,17 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="gray"
                                                 style="color:gray">{{ \App\Models\Precipitation::count() }}</h3>
                                             <h6> {{ trans('Admin/precipitations.precipitationsPageTitle') }}</h6>
                                         </div>
                                         <div>
                                             <i class="fas fa-cloud-showers-heavy fa-2x "
-                                               style="color:grey"></i> {{-- <i class="icon-users warning font-large-2 float-right"></i> --}}
+                                               style="color:grey"></i> {{-- <i class="float-right icon-users warning font-large-2"></i> --}}
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x2-grey-blue" role="progressbar"
                                              style="width: 65%" aria-valuenow="65" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -629,17 +629,17 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="gray-bg"
                                                 style="color: #0B0D0F;">{{ \App\Models\LandArea::count() }}</h3>
                                             <h6>  {{ trans('Admin/land_areas.landAreaPageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
                                             <i class="fas fa-adjust fa-2x" style="color: #0B0D0F"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-blue-grey" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -659,17 +659,17 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="green"
                                                 style="color:green;">{{ \App\Models\FarmerCrop::count() }}</h3>
                                             <h6>  {{ trans('Admin/crops.farmerCropsPageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
                                             <i class="fas fa-crop-simple fa-2x " style="color:green;"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -689,18 +689,18 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="yellow"
                                                 style="color:greenyellow">{{ \App\Models\CawProject::count() }}</h3>
                                             <h6>  {{ trans('Admin/animals.animalsPageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
                                             <i class="fas fa-democrat fa-2x " style="color:blue;"></i>
                                             <i class="fas fa-fish fa-2x " style="color:yellow;"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-yellow" role="progressbar"
                                              style=" width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -725,17 +725,17 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="gray-bg"
                                                 style="color: purple;">{{ \App\Models\ChickenProject::count() }}</h3>
                                             <h6>  {{ trans('Admin/animals.chickensPageTitle') }}</h6>
                                         </div>
                                         <div>
-                                            {{-- <i class="icon-user-follow success font-large-2 float-right"></i> --}}
+                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
                                             <i class="fas fa-kiwi-bird fa-2x" style="color:purple"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-purple" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -754,7 +754,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="gray-bg"
                                                 style="color:yellow;">{{ \App\Models\Beekeeper::count() }}</h3>
                                             <h6>  {{ trans('Admin/bees.beekeeperPageTitle') }}</h6>
@@ -763,7 +763,7 @@
                                             <i class="fab fa-forumbee fa-2x" style="color:yellow"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-yellow" role="progressbar"
                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -782,7 +782,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="green"
                                                 style="color:blue;">{{ \App\Models\OutcomeProduct::count() }}</h3>
                                             <h6>  {{ trans('Admin/outcome_products.outcome_productPageTitle') }}</h6>
@@ -791,7 +791,7 @@
                                             <i class="fas fa-plane-departure fa-2x " style="color:blue;"></i>
                                             <i class="fab fa-pagelines fa-2x " style="color:green;"></i>
                                         </div>
-                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                             <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                                  style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                                  aria-valuemax="100"></div>
@@ -812,7 +812,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="media d-flex">
-                                        <div class="media-body text-left">
+                                        <div class="text-left media-body">
                                             <h3 class="green"
                                                 style="color:green">{{ \App\Models\IncomeProduct::count() }}</h3>
                                             <h6>  {{ trans('Admin/income_products.income_productPageTitle') }}</h6>
@@ -822,7 +822,7 @@
                                             <i class="fas fa-leaf fa-2x " style="color:green;"></i>
                                         </div>
                                     </div>
-                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
                                              style=" width: 75%" aria-valuenow="75" aria-valuemin="0"
                                              aria-valuemax="100"></div>
@@ -847,7 +847,7 @@
                     <form action="{{route('precipitation.graph')}}" method="get">
                         @csrf
 
-                        <div class="row mt-3">
+                        <div class="mt-3 row">
                             <div class="row">
                                 <div class="form-group col-md-3">
                                     <label for="area_id"
@@ -891,7 +891,7 @@
                                     <small class="form-text text-danger">{{$message}}</small>
                                     @enderror
                                 </div>
-                                <div class="form-group  col-md-3">
+                                <div class="form-group col-md-3">
                                     <br>
                                     <button type="submit" id=""
                                             class="btn btn-info">{{trans('Admin\Site.Get_chart')}}</button>
@@ -936,7 +936,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
                                                             <h3 class="gray-bg"
                                                                 style="color: purple;">{{ \App\Models\CawProject::where('marketing_side','like','private')->count() }}</h3>
                                                             <h6>  {{ trans('Admin/animals.animals_projects_report') }}</h6>
@@ -946,7 +946,7 @@
                                                                style="color: purple;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-purple"
                                                              role="progressbar" style="width: 75%" aria-valuenow="75"
                                                              aria-valuemin="0" aria-valuemax="100"></div>
@@ -966,7 +966,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
                                                             <h3 class="gray-bg"
                                                                 style="color: green;">{{ \App\Models\ChickenProject::where('marketing_side','like','govermental')->count() }}</h3>
                                                             <h6>  {{ trans('Admin/animals.chicken_statistic_report') }}</h6>
@@ -976,7 +976,7 @@
                                                                style="color: green;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-success"
                                                              role="progressbar" style="width: 75%" aria-valuenow="75"
                                                              aria-valuemin="0" aria-valuemax="100"></div>
@@ -1012,7 +1012,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
                                                             <h3 class="gray-bg"
                                                                 style="color: purple;">{{ \App\Models\Orchard::count() }}</h3>
                                                             <h6>  {{ trans('Admin/orchards.Report_on_the_lands_planted_with_trees') }}</h6>
@@ -1022,7 +1022,7 @@
                                                                style="color: purple;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-purple"
                                                              role="progressbar" style="width: 75%" aria-valuenow="75"
                                                              aria-valuemin="0" aria-valuemax="100"></div>
@@ -1042,7 +1042,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
                                                             <h3 class="gray-bg"
                                                                 style="color: deeppink;">{{ \App\Models\ProtectedHouse::count() }}</h3>
                                                             <h6>  {{ trans('Admin/p_houses.report_on_the_number_of_greenhouses') }}</h6>
@@ -1052,7 +1052,7 @@
                                                                style="color: deeppink;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-pink" role="progressbar"
                                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                                              aria-valuemax="100"></div>
@@ -1089,7 +1089,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
 
                                                             <h3 class="gray-bg"
                                                                 style="color: green;">{{ \App\Models\BeeKeeper::count() }}</h3>
@@ -1100,7 +1100,7 @@
                                                                style="color: green;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-purple"
                                                              role="progressbar" style="width: 75%" aria-valuenow="75"
                                                              aria-valuemin="0" aria-valuemax="100"></div>
@@ -1136,7 +1136,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
                                                             <h3 class="gray-bg"
                                                                 style="color: blue;">{{ \App\Models\FarmerService::count() }}</h3>
                                                             <h6>  {{ trans('Admin/services.farmer_services_report') }}</h6>
@@ -1146,7 +1146,7 @@
                                                                style="color: blue;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                                              aria-valuemax="100"></div>
@@ -1166,7 +1166,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
                                                             <h3 class="gray-bg"
                                                                 style="color: deeppink;">{{ \App\Models\Precipitation::count() }}</h3>
                                                             <h6>  {{ trans('Admin/precipitations.precipitation_report') }}</h6>
@@ -1176,7 +1176,7 @@
                                                                style="color: deeppink;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-pink" role="progressbar"
                                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                                              aria-valuemax="100"></div>
@@ -1197,7 +1197,7 @@
                         {{--<div class="card-content">--}}
                         {{--<div class="card-body">--}}
                         {{--<div class="media d-flex">--}}
-                        {{--<div class="media-body text-left">--}}
+                        {{--<div class="text-left media-body">--}}
                         {{--<h3 class="gray-bg" style="color: orange;">{{ \App\Models\Precipitation::count() }}</h3>--}}
                         {{--<h6>  {{ trans('Admin/precipitations.precipitation_details_report') }}</h6>--}}
                         {{--</div>--}}
@@ -1205,7 +1205,7 @@
                         {{--<i class="fa fa-list-alt" aria-hidden="true" style="color: orange;"></i>--}}
                         {{--</div>--}}
                         {{--</div>--}}
-                        {{--<div class="progress progress-sm mt-1 mb-0 box-shadow-2">--}}
+                        {{--<div class="mt-1 mb-0 progress progress-sm box-shadow-2">--}}
                         {{--<div class="progress-bar bg-gradient-x-red" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>--}}
                         {{--</div>--}}
                         {{--</div>--}}
@@ -1238,7 +1238,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
 
                                                             <h3 class="gray-bg"
                                                                 style="color: blue;">{{ \App\Models\LandArea::count() }}</h3>
@@ -1249,7 +1249,7 @@
                                                                style="color: blue;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                                              aria-valuemax="100"></div>
@@ -1265,14 +1265,14 @@
 
 
                             <!-- Start farmer-crop-statistics -->
-                            @can('statistics_index')
+                            @can('farmer-crop-statistics')
                                 <div class="col-xl-3 col-lg-6 col-12">
                                     <a href="{{ route('statistics_index') }}">
                                         <div class="card pull-up">
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
 
                                                             <h3 class="gray-bg"
                                                                 style="color: yellow;">{{ \App\Models\FarmerCrop::count() }}</h3>
@@ -1283,7 +1283,7 @@
                                                                style="color: yellow;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-yellow"
                                                              role="progressbar" style="width: 75%" aria-valuenow="75"
                                                              aria-valuemin="0" aria-valuemax="100"></div>
@@ -1320,7 +1320,7 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                     <div class="media d-flex">
-                                                        <div class="media-body text-left">
+                                                        <div class="text-left media-body">
 
                                                             <h3 class="gray-bg"
                                                                 style="color: blue;">{{ \App\Models\IncomeProduct::count() }}</h3>
@@ -1331,7 +1331,7 @@
                                                                style="color: blue;"></i>
                                                         </div>
                                                     </div>
-                                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
                                                              style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                                              aria-valuemax="100"></div>
@@ -1353,7 +1353,7 @@
                                         <div class="card-content">
                                             <div class="card-body">
                                                 <div class="media d-flex">
-                                                    <div class="media-body text-left">
+                                                    <div class="text-left media-body">
 
                                                         <h3 class="gray-bg"
                                                             style="color: purple;">{{ \App\Models\OutcomeProduct::count() }}</h3>
@@ -1364,7 +1364,7 @@
                                                            style="color: purple;"></i>
                                                     </div>
                                                 </div>
-                                                <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                                <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                                     <div class="progress-bar bg-gradient-x-purple" role="progressbar"
                                                          style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                                                          aria-valuemax="100"></div>

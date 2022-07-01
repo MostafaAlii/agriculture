@@ -61,19 +61,16 @@
             <tr>
 
                 <td width="100%">
-
                 <?php
-                if(Auth::guard('web')->user()){
-                     $src=asset('Dashboard/img/farmers/' . $comment->image);
-                }elseif(Auth::guard('vendor')->user()){
-                     $src=asset('Dashboard/img/users/' . $comment->image);
-                }elseif(Auth::guard('admin')->user()){
+                if(App\Models\User::where('email',$comment->email)->first()){
+                   $src=asset('Dashboard/img/users/' . $comment->image);
+                }elseif(App\Models\Farmer::where('email',$comment->email)->first()){
+                    $src=asset('Dashboard/img/farmers/' . $comment->image);
+                }elseif(App\Models\Admin::where('email',$comment->email)->first()){
                      $src=asset('Dashboard/img/admins/' . $comment->image);
                 }
+                echo'<img class="user-img img-fluid rounded-circle" style="width:50px; height:50px;border-radius: 15%;" src="'.$src.'" />';
                 ?>
-
-                <img class="user-img img-fluid rounded-circle" style="width:50px; height:50px;border-radius: 15%;" src="{{$src}}" />
-
                     <br>
                     <time class="comment__date-post">{{ $comment->created_at->format('Y-m-d') }}</time>
                     <br>

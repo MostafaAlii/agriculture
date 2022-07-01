@@ -142,13 +142,13 @@
     {{-- translate link and flags ************************************************************** --}}
     <li class="">
         <div class="has-submenu">
-            <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
+            <a href="#" class="pl-0 d-flex nav-item nav-link country-flag1" data-toggle="dropdown"
                aria-expanded="false">
                 @if (App::getLocale() == 'ar' ||App::getLocale() == 'ku')
-                    <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+                    <strong class="my-auto ml-2 mr-2">{{ LaravelLocalization::getCurrentLocaleNative() }}</strong>
                     {{-- <img src="{{ asset('assets/admin/images/flags/saa.jpg') }}" alt="" width="50"> --}}
                 @else
-                    <strong class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+                    <strong class="my-auto ml-2 mr-2">{{ LaravelLocalization::getCurrentLocaleNative() }}</strong>
                     {{-- <img src="{{ asset('assets/admin/images/flags/hi.png') }}" alt="" width="50"> --}}
                 @endif
                 <div class="my-auto">
