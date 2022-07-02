@@ -28,6 +28,8 @@ return [
     'bardarash'=>'Bardarash',
     'akre'=>'Akri',
     'duhok'=>'Duhok',
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
+
 
 
     'update'=>'Update',

@@ -1,5 +1,7 @@
 <?php
-namespace  App\Http\Repositories\Admin;
+
+namespace App\Http\Repositories\Admin;
+
 use App\Http\Interfaces\Admin\PrecipitationInterface;
 use App\Models\Precipitation;
 use App\Models\Admin;
@@ -24,12 +26,19 @@ class PrecipitationRepository implements PrecipitationInterface
     {
         $adminId = Auth::user()->id;
         $admin = Admin::findorfail($adminId);
-        $areaID = $admin->area->id;
-        $area_name = $admin->area->name;
-        $stateID = $admin->state->id;
-        $state_name = $admin->state->name;
-        return view('dashboard.admin.precipitations.index',
-            compact('area_name', 'state_name', 'admin'));
+        if ($admin->area == Null && $admin->state == null) {
+            toastr()->error(__('Admin/services.index-wrong'));
+
+            return redirect()->back();
+        } else {
+            $areaID = $admin->area->id;
+            $area_name = $admin->area->name;
+            $stateID = $admin->state->id;
+            $state_name = $admin->state->name;
+            return view('dashboard.admin.precipitations.index',
+                compact('area_name', 'state_name', 'admin'));
+        }
+
     }
 
     public function data()
@@ -39,7 +48,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
         if ($admin->type == 'employee') {
             $precipitations = Precipitation::with('admin', 'area', 'state')
-                ->where('admin_id',  $admin->id)->get();
+                ->where('admin_id', $admin->id)->get();
         } else {
             $precipitations = Precipitation::with('admin', 'area', 'state')->get();
         }
@@ -77,7 +86,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
 
         return view('dashboard.admin.precipitations.create',
-            compact('area_name', 'areas', 'state_name', 'units', 'admin','adminId'));
+            compact('area_name', 'areas', 'state_name', 'units', 'admin', 'adminId'));
     }
 
     public function store($request)
@@ -125,7 +134,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
 
         return view('dashboard.admin.precipitations.edit',
-            compact('areas', 'state_name', 'area_name', 'admin','adminId', 'units', 'precipitation'));
+            compact('areas', 'state_name', 'area_name', 'admin', 'adminId', 'units', 'precipitation'));
     }
 
 
@@ -157,7 +166,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
     public function destroy($id)
     {
-        try{
+        try {
             $precipitationID = Crypt::decrypt($id);
             $precipitation = Precipitation::findorfail($precipitationID);
 
@@ -165,7 +174,7 @@ class PrecipitationRepository implements PrecipitationInterface
             $precipitation->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('Precipitations.index');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.delete_wrong'));
             return redirect()->back();
         }
@@ -210,7 +219,7 @@ class PrecipitationRepository implements PrecipitationInterface
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
 
-        return view('dashboard.admin.precipitations.statistics',compact('admin'));
+        return view('dashboard.admin.precipitations.statistics', compact('admin'));
 
     }
 
@@ -221,16 +230,16 @@ class PrecipitationRepository implements PrecipitationInterface
 
             'start_date' => 'sometimes|nullable|date|before:end_date',
             'end_date' => 'sometimes|nullable|date|after:start_date',
-        ],[
-            'area_id.exists'=>trans('Admin/validation.exists'),
-            'start_date.date'=>trans('Admin/validation.date'),
-            'start_date.before'=>trans('Admin/validation.before'),
-            'end_date.date'=>trans('Admin/validation.date'),
-            'end_date.after'=>trans('Admin/validation.after'),
+        ], [
+            'area_id.exists' => trans('Admin/validation.exists'),
+            'start_date.date' => trans('Admin/validation.date'),
+            'start_date.before' => trans('Admin/validation.before'),
+            'end_date.date' => trans('Admin/validation.date'),
+            'end_date.after' => trans('Admin/validation.after'),
         ]);
 
         $adminID = Auth::user()->id;
-        $admin=Admin::findorfail($adminID);
+        $admin = Admin::findorfail($adminID);
 
         if (!empty($request->area_id)) {
             $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
@@ -248,152 +257,145 @@ class PrecipitationRepository implements PrecipitationInterface
         $state_id = (!empty($_GET["state_id"])) ? ($_GET["state_id"]) : ('');
         $area_id = (!empty($_GET["area_id"])) ? ($_GET["area_id"]) : ('');
 
-        $latests = \DB::table('precipitations')->orderBy('date','desc')->first();
-        $oldest = \DB::table('precipitations')->orderBy('date','asc')->first();
+        $latests = \DB::table('precipitations')->orderBy('date', 'desc')->first();
+        $oldest = \DB::table('precipitations')->orderBy('date', 'asc')->first();
 
-if($admin->type == 'admin'){
-    if ($start_date!=null  && $start_date>=$oldest && $end_date!= null && $end_date<=$latests &&
-        $request->area_id !=null && $request->state_id !=null ) {
-        $precipitationQuery1 = Precipitation::query();
+        if ($admin->type == 'admin') {
+            if ($start_date != null && $start_date >= $oldest && $end_date != null && $end_date <= $latests &&
+                $request->area_id != null && $request->state_id != null) {
+                $precipitationQuery1 = Precipitation::query();
 
-        $start_date = date('Y-m-d', strtotime($start_date));
-        $end_date = date('Y-m-d', strtotime($end_date));
-        $precipitationQuery = $precipitationQuery1->whereRaw("date(precipitations.date) >= '" . $start_date . "'
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $precipitationQuery = $precipitationQuery1->whereRaw("date(precipitations.date) >= '" . $start_date . "'
              AND date(precipitations.date) <= '" . $end_date . "'");
 
-        $precipitations = $precipitationQuery->select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->where('area_translations.name',$area_name)
-            ->where('state_translations.name',$state_name)
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-    elseif ($start_date!=null  && $start_date>=$oldest && $end_date!= null && $end_date<=$latests && $request->area_id !=null && $request->state_id ==null) {
-        $precipitationQuery1 = Precipitation::query();
+                $precipitations = $precipitationQuery->select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            } elseif ($start_date != null && $start_date >= $oldest && $end_date != null && $end_date <= $latests && $request->area_id != null && $request->state_id == null) {
+                $precipitationQuery1 = Precipitation::query();
 
-        $start_date = date('Y-m-d', strtotime($start_date));
-        $end_date = date('Y-m-d', strtotime($end_date));
-        $precipitationQuery = $precipitationQuery1->whereRaw("date(precipitations.date) >= '" . $start_date . "'
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $precipitationQuery = $precipitationQuery1->whereRaw("date(precipitations.date) >= '" . $start_date . "'
              AND date(precipitations.date) <= '" . $end_date . "'");
-        $precipitations = $precipitationQuery->select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->where('area_translations.name',$area_name)
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-    elseif ($start_date==null  && $end_date == null &&  $request->area_id !=null && $request->state_id !=null) {
+                $precipitations = $precipitationQuery->select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            } elseif ($start_date == null && $end_date == null && $request->area_id != null && $request->state_id != null) {
 
-        $precipitations = Precipitation::select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->where('area_translations.name',$area_name)
-            ->where('state_translations.name',$state_name)
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-    elseif ($start_date==null  && $end_date == null &&  $request->area_id !=null && $request->state_id ==null) {
+                $precipitations = Precipitation::select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            } elseif ($start_date == null && $end_date == null && $request->area_id != null && $request->state_id == null) {
 
-        $precipitations = Precipitation::select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->where('area_translations.name',$area_name)
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-    elseif ($start_date==null  && $end_date == null &&  $request->area_id ==null && $request->state_id ==null) {
+                $precipitations = Precipitation::select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->where('area_translations.name', $area_name)
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            } elseif ($start_date == null && $end_date == null && $request->area_id == null && $request->state_id == null) {
 
-        $precipitations = Precipitation::select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-}elseif($admin->type == 'employee'){
-    if ($start_date!=null  && $start_date>=$oldest && $end_date!= null && $end_date<=$latests && $request->state_id !=null) {
-        $precipitationQuery1 = Precipitation::query();
+                $precipitations = Precipitation::select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            }
+        } elseif ($admin->type == 'employee') {
+            if ($start_date != null && $start_date >= $oldest && $end_date != null && $end_date <= $latests && $request->state_id != null) {
+                $precipitationQuery1 = Precipitation::query();
 
-        $start_date = date('Y-m-d', strtotime($start_date));
-        $end_date = date('Y-m-d', strtotime($end_date));
-        $precipitationQuery = $precipitationQuery1->whereRaw("date(precipitations.date) >= '" . $start_date . "'
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $precipitationQuery = $precipitationQuery1->whereRaw("date(precipitations.date) >= '" . $start_date . "'
              AND date(precipitations.date) <= '" . $end_date . "'");
 
-        $precipitations = $precipitationQuery->select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->where('state_translations.name',$state_name)
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-    elseif ($start_date!=null  && $start_date>=$oldest && $end_date!= null && $end_date<=$latests  && $request->state_id ==null) {
-        $precipitationQuery1 = Precipitation::query();
+                $precipitations = $precipitationQuery->select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->where('state_translations.name', $state_name)
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            } elseif ($start_date != null && $start_date >= $oldest && $end_date != null && $end_date <= $latests && $request->state_id == null) {
+                $precipitationQuery1 = Precipitation::query();
 
-        $start_date = date('Y-m-d', strtotime($start_date));
-        $end_date = date('Y-m-d', strtotime($end_date));
-        $precipitationQuery = $precipitationQuery1->whereRaw("date(precipitations.date) >= '" . $start_date . "'
+                $start_date = date('Y-m-d', strtotime($start_date));
+                $end_date = date('Y-m-d', strtotime($end_date));
+                $precipitationQuery = $precipitationQuery1->whereRaw("date(precipitations.date) >= '" . $start_date . "'
              AND date(precipitations.date) <= '" . $end_date . "'");
 
-        $precipitations = $precipitationQuery->select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-    elseif ($start_date==null  && $end_date == null &&   $request->state_id !=null) {
+                $precipitations = $precipitationQuery->select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            } elseif ($start_date == null && $end_date == null && $request->state_id != null) {
 
-        $precipitations = Precipitation::select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->where('state_translations.name',$state_name)
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-    elseif ($start_date==null  && $end_date == null &&   $request->state_id ==null) {
+                $precipitations = Precipitation::select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->where('state_translations.name', $state_name)
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            } elseif ($start_date == null && $end_date == null && $request->state_id == null) {
 
-        $precipitations = Precipitation::select(
-            'state_translations.name AS state','area_translations.name AS area',
-            'precipitations.date as date',
-            DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
-        )
-            ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
-            ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-            ->groupBy ('area','state','date')->get();
-        return view('dashboard.admin.precipitations.statistics',compact('admin','precipitations'));
-    }
-}
+                $precipitations = Precipitation::select(
+                    'state_translations.name AS state', 'area_translations.name AS area',
+                    'precipitations.date as date',
+                    DB::raw('AVG(precipitations.precipitation_rate) As precipitation_rate')
+                )
+                    ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
+                    ->groupBy('area', 'state', 'date')->get();
+                return view('dashboard.admin.precipitations.statistics', compact('admin', 'precipitations'));
+            }
+        }
 
 
     }

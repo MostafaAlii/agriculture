@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class BeeKeeperSeeder extends Seeder {
     public function run() {
         
-      BeeKeeper::factory()->count(30)->create();
+      BeeKeeper::factory()->count(3)->create();
     }
 }

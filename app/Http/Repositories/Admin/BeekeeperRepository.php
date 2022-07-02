@@ -27,10 +27,17 @@ class BeekeeperRepository implements BeekeeperInterface
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        $area_name = $admin->area->name;
-        $state_name = $admin->state->name;
-        return view('dashboard.admin.beekeepers.index',
-            compact('admin', 'area_name', 'state_name'));
+
+        if ($admin->area == Null && $admin->state == null) {
+            toastr()->error(__('Admin/bees.index-wrong'));
+
+            return redirect()->back();
+        } else {
+            $area_name = $admin->area->name;
+            $state_name = $admin->state->name;
+            return view('dashboard.admin.beekeepers.index',
+                compact('admin', 'area_name', 'state_name'));
+        }
 
 
     }
@@ -105,7 +112,7 @@ class BeekeeperRepository implements BeekeeperInterface
         $units = Unit::all();
 
         return view('dashboard.admin.beekeepers.create',
-            compact('admin', 'villages', 'area_name', 'areaID', 'stateID', 'state_name','adminId',
+            compact('admin', 'villages', 'area_name', 'areaID', 'stateID', 'state_name', 'adminId',
                 'disasters', 'courses', 'units'));
     }
 
@@ -202,7 +209,6 @@ class BeekeeperRepository implements BeekeeperInterface
             $beekeeper->cost = $requestData['cost'];
 
 
-
             $beekeeper->update($requestData);
             $beekeeper->beedisasters()->sync($request->disasters);
             $beekeeper->coursebees()->sync($request->courses);
@@ -275,9 +281,10 @@ class BeekeeperRepository implements BeekeeperInterface
 
     }// end of bulkDelete
 
-    public function beekeeper_index_statistics(){
+    public function beekeeper_index_statistics()
+    {
         $adminID = Auth::user()->id;
-        $admin=Admin::findorfail($adminID);
+        $admin = Admin::findorfail($adminID);
         return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin'));
 
 
@@ -286,30 +293,30 @@ class BeekeeperRepository implements BeekeeperInterface
     public function beekeeper_statistics($request)
     {
         $validated = $request->validate([
-                'area_id'=>'sometimes|nullable|exists:areas,id',
-                'state_id'=>'sometimes|nullable|exists:states,id',
+                'area_id' => 'sometimes|nullable|exists:areas,id',
+                'state_id' => 'sometimes|nullable|exists:states,id',
 
-                'village_id'=>'sometimes|nullable|exists:villages,id',
-                'supported_side'=>'sometimes|nullable|in:,private,id',
+                'village_id' => 'sometimes|nullable|exists:villages,id',
+                'supported_side' => 'sometimes|nullable|in:,private,id',
             ]
             , [
-            'area_id.exists' => trans('Admin/validation.exists'),
-            'state_id.exists' => trans('Admin/validation.exists'),
-            'village_id.exists' => trans('Admin/validation.exists'),
-        ]
+                'area_id.exists' => trans('Admin/validation.exists'),
+                'state_id.exists' => trans('Admin/validation.exists'),
+                'village_id.exists' => trans('Admin/validation.exists'),
+            ]
         );
         $adminID = Auth::user()->id;
-        $admin=Admin::findorfail($adminID);
+        $admin = Admin::findorfail($adminID);
         $supported_side = $request->supported_side;
-        if(!empty($request->area_id)){
-            $area_name = AreaTranslation::where('area_id','=',$request->area_id)->pluck('name');
+        if (!empty($request->area_id)) {
+            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
 
         }
-        if(!empty($request->state_id)){
-            $state_name = StateTranslation::where('state_id','=',$request->state_id)->pluck('name');
+        if (!empty($request->state_id)) {
+            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
         }
-        if(!empty($request->village_id)){
-            $village_name = VillageTranslation::where('village_id','=',$request->village_id)->pluck('name');
+        if (!empty($request->village_id)) {
+            $village_name = VillageTranslation::where('village_id', '=', $request->village_id)->pluck('name');
         }
 
         if ($admin->type == 'employee') {
@@ -338,35 +345,32 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
-            }
-            elseif ($request->village_id != null && $request->supported_side == null) {
+            } elseif ($request->village_id != null && $request->supported_side == null) {
 
 
-            $statistics = BeeKeeper::select('area_translations.name AS Area',
-                'state_translations.name AS State', 'village_translations.name AS village',
-                'bee_keepers.supported_side as supported_side',
-                DB::raw("COUNT(bee_keepers.village_id) As village_count"),
-                DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
-                DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
-                DB::raw('COUNT(bee_keepers.id) As beehive_count'),
-                DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
-                DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
-                ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
-                ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
-                ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
-                ->where('bee_keepers.admin_id', $admin->id)
-                ->where('area_translations.area_id', $area_id)
-                ->where('state_translations.state_id', $state_id)
-                ->where('village_translations.name', $village_name)
-                ->GroupBy('Area', 'State', 'village', 'supported_side'
-                )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                $statistics = BeeKeeper::select('area_translations.name AS Area',
+                    'state_translations.name AS State', 'village_translations.name AS village',
+                    'bee_keepers.supported_side as supported_side',
+                    DB::raw("COUNT(bee_keepers.village_id) As village_count"),
+                    DB::raw('SUM(bee_keepers.old_beehive_count) As new_beehive_count'),
+                    DB::raw('SUM(bee_keepers.new_beehive_count) As new_beehive_count'),
+                    DB::raw('COUNT(bee_keepers.id) As beehive_count'),
+                    DB::raw('COUNT(DISTINCT (bee_keepers.farmer_id)) As farmer_count'),
+                    DB::raw('SUM(bee_keepers.annual_new_product_beehive + bee_keepers.annual_old_product_beehive) As total_product'))
+                    ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
+                    ->where('bee_keepers.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'village', 'supported_side'
+                    )->get();
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
-        }
-
-            elseif ($request->village_id == null && $request->supported_side == null) {
+            } elseif ($request->village_id == null && $request->supported_side == null) {
 
 
                 $statistics = BeeKeeper::select('area_translations.name AS Area',
@@ -386,11 +390,10 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->where('state_translations.state_id', $state_id)
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
             }
-        }
-        elseif ($admin->type == 'admin') {
+        } elseif ($admin->type == 'admin') {
             if ($request->area_id != null && $request->state_id != null && $request->village_id != null
                 && $request->supported_side != null) {
                 $statistics = BeeKeeper::select('area_translations.name AS Area',
@@ -411,12 +414,10 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->where('bee_keepers.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
-            }
-
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null
-                 && $request->supported_side == null) {
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->supported_side == null) {
                 $statistics = BeeKeeper::select('area_translations.name AS Area',
                     'state_translations.name AS State', 'village_translations.name AS village',
                     'bee_keepers.supported_side as supported_side',
@@ -434,10 +435,9 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->where('village_translations.name', $village_name)
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
-            }
-            elseif ($request->area_id == null && $request->state_id == null && $request->village_id == null
+            } elseif ($request->area_id == null && $request->state_id == null && $request->village_id == null
                 && $request->supported_side == null) {
                 $statistics = BeeKeeper::select('area_translations.name AS Area',
                     'state_translations.name AS State', 'village_translations.name AS village',
@@ -451,15 +451,12 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->join('area_translations', 'bee_keepers.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
                     ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
-
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
-            }
-
-            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
-                 && $request->supported_side != null) {
+            } elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->supported_side != null) {
                 $statistics = BeeKeeper::select('area_translations.name AS Area',
                     'state_translations.name AS State', 'village_translations.name AS village',
                     'bee_keepers.supported_side as supported_side',
@@ -473,15 +470,12 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->join('state_translations', 'bee_keepers.state_id', '=', 'state_translations.id')
                     ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
                     ->where('area_translations.name', $area_name)
-
                     ->where('bee_keepers.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
-            }
-
-            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+            } elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
                 && $request->supported_side == null) {
                 $statistics = BeeKeeper::select('area_translations.name AS Area',
                     'state_translations.name AS State', 'village_translations.name AS village',
@@ -498,12 +492,10 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->where('area_translations.name', $area_name)
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
-            }
-
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
-               && $request->supported_side != null) {
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->supported_side != null) {
                 $statistics = BeeKeeper::select('area_translations.name AS Area',
                     'state_translations.name AS State', 'village_translations.name AS village',
                     'bee_keepers.supported_side as supported_side',
@@ -521,11 +513,10 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->where('bee_keepers.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
-            }
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
-               && $request->supported_side == null) {
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->supported_side == null) {
                 $statistics = BeeKeeper::select('area_translations.name AS Area',
                     'state_translations.name AS State', 'village_translations.name AS village',
                     'bee_keepers.supported_side as supported_side',
@@ -540,10 +531,9 @@ class BeekeeperRepository implements BeekeeperInterface
                     ->join('village_translations', 'bee_keepers.village_id', '=', 'village_translations.id')
                     ->where('area_translations.name', $area_name)
                     ->where('state_translations.name', $state_name)
-
                     ->GroupBy('Area', 'State', 'village', 'supported_side'
                     )->get();
-                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin','statistics'));
+                return view('dashboard.admin.beekeepers.beekeepers_statistics', compact('admin', 'statistics'));
 
             }
         }

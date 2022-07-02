@@ -13,8 +13,9 @@ class VillageRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:village_translations,name,village_id'.$this->id,
+                'string'
 
 
             ],
@@ -29,7 +30,7 @@ class VillageRequest extends FormRequest {
     public function messages() {
         return [
             'name.required'   => trans('Admin\validation.required'),
-            'name.regex'   => trans('Admin\validation.regex'),
+            'name.string'   => trans('Admin\validation.string'),
             'location_x.numeric'    => trans('Admin\validation.numeric'),
             'location_y.numeric'       => trans('Admin\validation.numeric'),
             'state_id.required'       => trans('Admin\validation.required'),

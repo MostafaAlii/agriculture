@@ -13,8 +13,9 @@ class TreeTypeUpdateRequest extends FormRequest {
 
             'tree_type' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:tree_types,id,'.$this->id,
+                'string'
 
 
             ]
@@ -24,7 +25,7 @@ class TreeTypeUpdateRequest extends FormRequest {
     public function messages() {
         return [
             'tree_type.required'   => trans('Admin\validation.required'),
-            'tree_type.regex'   => trans('Admin\validation.regex'),
+            'tree_type.string'   => trans('Admin\validation.string'),
             'tree_type.unique'   => trans('Admin\validation.unique'),
 
         ];

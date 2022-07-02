@@ -19,6 +19,7 @@ return [
     'state' =>'State',
     'land_category_name'=>'LandCategory Name',
     'land_area'=>'Land Area',
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'village' =>'Village',
     'natural_forests'=>'Nature Forest',

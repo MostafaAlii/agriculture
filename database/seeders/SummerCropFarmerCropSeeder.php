@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class SummerCropFarmerCropSeeder extends Seeder {
     public function run() {
         
-      SummerCropFarmerCrop::factory()->count(30)->create();
+      SummerCropFarmerCrop::factory()->count(3)->create();
     }
 }

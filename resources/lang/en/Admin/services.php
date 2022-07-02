@@ -6,6 +6,7 @@ return [
     'agri_t_service_count'=>'Agriculture Tool Services_count',
     'water_service_count'=>'Water Service',
     'email'=>'Email',
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'add_new_agriculture_service'=>'Add New Agriculture Service',
     'enter_service_name'=>'Enter Service Name',

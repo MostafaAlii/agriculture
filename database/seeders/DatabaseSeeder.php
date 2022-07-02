@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder {
 //            BlogSeeder::class,
 //            UnitSeeder::class,
 //            ProductTableSeeder::class,
-            SliderSeeder::class,
+//            SliderSeeder::class,
 //            TreeTypeSeeder::class,
 //            TreeSeeder::class,
 //            LandCategorySeeder::class,
@@ -67,8 +67,8 @@ class DatabaseSeeder extends Seeder {
 
         ]);
 
-//        Farmer::factory(30)->create();
-//        User::factory(30)->create();
+//        Farmer::factory(5)->create();
+//        User::factory(5)->create();
 //         // images
 //         for ($i = 1; $i <= $count ; $i++) {
 //            Image::insert([
@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder {
                     'imageable_type' => 'App\Models\Admin'
                 ]);
             }
-            // images for blog
+//            // images for blog
 //            for ($i = 1; $i <= Blog::count() ; $i++) {
 //                Image::insert([
 //                    'filename'     => 'blog-article-'.rand(1,5) . ".jpg",
@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder {
                     'imageable_type' => 'App\Models\Slider'
                 ]);
             }
-            // images for brand
+//            // images for brand
 //            for ($i = 1; $i <= Brand::count() ; $i++) {
 //                Image::insert([
 //                    'filename'     => 'brand'. rand(1,5) . ".jpg",

@@ -1,5 +1,7 @@
 <?php
-namespace  App\Http\Repositories\Admin;
+
+namespace App\Http\Repositories\Admin;
+
 use App\Models\FarmerService;
 use App\Http\Interfaces\Admin\FarmerServiceInterface;
 use App\Models\Area;
@@ -21,17 +23,25 @@ use Illuminate\Support\Facades\Storage;
 use App\Traits\UploadT;
 use Auth;
 use Yajra\DataTables\DataTables;
-class FarmerServiceRepository implements FarmerServiceInterface {
+
+class FarmerServiceRepository implements FarmerServiceInterface
+{
     public function index()
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        $areaID = $admin->area->id;
-        $area_name = $admin->area->name;
-        $stateID = $admin->state->id;
-        $state_name = $admin->state->name;
-        return view('dashboard.admin.farmer_services.index',
-            compact('admin','areaID','area_name','stateID','state_name'));
+        if ($admin->area == Null && $admin->state == null) {
+            toastr()->error(__('Admin/services.index-wrong'));
+
+            return redirect()->back();
+        } else {
+            $areaID = $admin->area->id;
+            $area_name = $admin->area->name;
+            $stateID = $admin->state->id;
+            $state_name = $admin->state->name;
+            return view('dashboard.admin.farmer_services.index',
+                compact('admin', 'areaID', 'area_name', 'stateID', 'state_name'));
+        }
 
 
     }
@@ -39,13 +49,13 @@ class FarmerServiceRepository implements FarmerServiceInterface {
     public function data()
     {
         $adminID = Auth::user()->id;
-        $admin=Admin::findorfail($adminID);
-        if($admin->type =='employee') {
-            $farmers_s = FarmerService::with('farmer', 'village','admin',
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $farmers_s = FarmerService::with('farmer', 'village', 'admin',
                 'agri_services', 'agrit_services', 'water_services')
-                ->where('admin_id',  $admin->id)
+                ->where('admin_id', $admin->id)
                 ->selectRaw('distinct farmer_services.*')->get();
-        }else{
+        } else {
             $farmers_s = FarmerService::with('farmer', 'village', 'admin',
                 'agri_services', 'agrit_services', 'water_services')
                 ->selectRaw('distinct farmer_services.*')->get();
@@ -54,21 +64,17 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             ->addColumn('record_select', 'dashboard.admin.farmer_services.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (FarmerService $farmer_service) {
-                return $farmer_service ->created_at->diffforhumans();
+                return $farmer_service->created_at->diffforhumans();
             })
             ->addColumn('farmer', function (FarmerService $farmer_service) {
-                return $farmer_service ->farmer->email;
+                return $farmer_service->farmer->email;
             })
             ->addColumn('admin', function (FarmerService $farmer_service) {
-                return $farmer_service ->admin->firstname;
+                return $farmer_service->admin->firstname;
             })
-
             ->addColumn('village', function (FarmerService $farmer_service) {
                 return $farmer_service->village->name;
             })
-
-
-
             ->addColumn('name_a', function ($farmers_s) {
                 return implode(', ', $farmers_s->agri_services->pluck('name')->toArray());
             })
@@ -81,14 +87,14 @@ class FarmerServiceRepository implements FarmerServiceInterface {
                 return implode(', ', $farmers_s->water_services->pluck('name')->toArray());
             })
             ->rawColumns(['name_w'])
-
             ->addColumn('actions', 'dashboard.admin.farmer_services.data_table.actions')
             ->rawColumns(['record_select', 'actions'])
             ->toJson();
 
     }
 
-    public function create(){
+    public function create()
+    {
 
         $adminId = Auth::user()->id;
         $admin = Admin::findorfail($adminId);
@@ -96,7 +102,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
-        $villages = Village::where('state_id',$stateID)->get();
+        $villages = Village::where('state_id', $stateID)->get();
         $agri_services = AgriService::all();
         $agri_t_services = AgriTService::all();
         $water_services = WaterService::all();
@@ -104,7 +110,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
         $states = State::all();
 
         return view('dashboard.admin.farmer_services.create',
-            compact('states','stateID','state_name', 'adminId','area_name','areaID','villages', 'agri_services', 'agri_t_services','areas','water_services'));
+            compact('states', 'stateID', 'state_name', 'adminId', 'area_name', 'areaID', 'villages', 'agri_services', 'agri_t_services', 'areas', 'water_services'));
     }
 
     public function store($request)
@@ -123,7 +129,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             $farmerService->village_id = $requestData['village_id'];
 
             $farmerService->agri_services_count = count(array_unique(array($request->agri_services)));
-            $farmerService->agri_t_services_count =  count(array_unique(array($request->agri_t_services)));
+            $farmerService->agri_t_services_count = count(array_unique(array($request->agri_t_services)));
 
             $farmerService->water_services_count = count(array_unique(array($request->water_services)));
 
@@ -146,7 +152,8 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $farmer_serviceID = Crypt::decrypt($id);
         $farmer_service = FarmerService::findorfail($farmer_serviceID);
         $adminId = Auth::user()->id;
@@ -155,7 +162,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
-        $villages = Village::where('state_id',$stateID)->get();
+        $villages = Village::where('state_id', $stateID)->get();
         $agri_services = AgriService::all();
         $agri_t_services = AgriTService::all();
         $water_services = WaterService::all();
@@ -163,18 +170,18 @@ class FarmerServiceRepository implements FarmerServiceInterface {
         $states = State::all();
 
         return view('dashboard.admin.farmer_services.edit',
-            compact('areaID','area_name','farmer_service', 'state_name','stateID','states','villages','adminId',
-                'agri_services', 'agri_t_services','areas','water_services'));
+            compact('areaID', 'area_name', 'farmer_service', 'state_name', 'stateID', 'states', 'villages', 'adminId',
+                'agri_services', 'agri_t_services', 'areas', 'water_services'));
     }
 
-    public function update($request,$id)
+    public function update($request, $id)
 
     {
         DB::beginTransaction();
         try {
             $requestData = $request->validated();
             $farmer_serviceID = Crypt::decrypt($id);
-            $farmerService =  FarmerService::findorfail($farmer_serviceID);
+            $farmerService = FarmerService::findorfail($farmer_serviceID);
 
             $farmerService->farmer_id = $requestData['farmer_id'];
             $farmerService->admin_id = $requestData['admin_id'];
@@ -183,7 +190,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             $farmerService->village_id = $requestData['village_id'];
 
             $farmerService->agri_services_count = count(array_unique(array($request->agri_services)));
-            $farmerService->agri_t_services_count =  count(array_unique(array($request->agri_t_services)));
+            $farmerService->agri_t_services_count = count(array_unique(array($request->agri_t_services)));
 
             $farmerService->water_services_count = count(array_unique(array($request->water_services)));
 
@@ -208,7 +215,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
     public function destroy($id)
     {
-        try{
+        try {
             $farmer_serviceID = Crypt::decrypt($id);
             $farmer_service = FarmerService::findorfail($farmer_serviceID);
 
@@ -216,7 +223,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('FarmerServices.index');
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
@@ -235,7 +242,7 @@ class FarmerServiceRepository implements FarmerServiceInterface {
 
                     $farmer_service = FarmerService::findorfail($farmer_services_ids);
 
-                    Orchard::destroy($farmer_services_ids);
+                    FarmerService::destroy($farmer_services_ids);
                 }
                 DB::commit();
 
@@ -252,157 +259,151 @@ class FarmerServiceRepository implements FarmerServiceInterface {
             return redirect()->back();
         }
     }
+
     // end of bulkDelete
 
-    public function farmer_services_index_statistics(){
+    public function farmer_services_index_statistics()
+    {
         $adminID = Auth::user()->id;
-        $admin=Admin::findorfail($adminID);
-        return view('dashboard.admin.farmer_services.statistics',compact('admin'));
+        $admin = Admin::findorfail($adminID);
+        return view('dashboard.admin.farmer_services.statistics', compact('admin'));
     }
 
-    public function farmer_services_statistics($request){
+    public function farmer_services_statistics($request)
+    {
         $validated = $request->validate([
             'area_id' => 'sometimes|nullable|exists:areas,id',
             'state_id' => 'sometimes|nullable|exists:states,id',
             'village_id' => 'sometimes|nullable|exists:villages,id',
 
-        ],[
+        ], [
 
         ]);
 
         $adminID = Auth::user()->id;
-            $admin=Admin::findorfail($adminID);
-            if(!empty($request->area_id)){
-                $area_name = AreaTranslation::where('area_id','=',$request->area_id)->pluck('name');
+        $admin = Admin::findorfail($adminID);
+        if (!empty($request->area_id)) {
+            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
+
+        }
+        if (!empty($request->state_id)) {
+            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
+        }
+        if (!empty($request->village_id)) {
+            $village_name = VillageTranslation::where('village_id', '=', $request->village_id)->pluck('name');
+        }
+
+        if ($admin->type == 'employee') {
+            if ($request->village_id != null) {
+
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
+                    DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
+                    DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
+                    ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_services.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer'
+                    )->get();
+                return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
 
             }
-            if(!empty($request->state_id)){
-                $state_name = StateTranslation::where('state_id','=',$request->state_id)->pluck('name');
-            }
-            if(!empty($request->village_id)){
-                $village_name = VillageTranslation::where('village_id','=',$request->village_id)->pluck('name');
-            }
+            if ($request->village_id == null) {
 
-            if($admin->type == 'employee') {
-                if ($request->village_id != null) {
-
-                    $area_id = $admin->area_id;
-                    $state_id = $admin->state_id;
-                    $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
-                        'village_translations.name AS Village', 'farmers.firstname AS farmer',
-                        DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
-                        DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
-                        DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
-                        ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
-                        ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
-                        ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
-                        ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
-                        ->where('farmer_services.admin_id', $admin->id)
-                        ->where('area_translations.area_id', $area_id)
-                        ->where('state_translations.state_id', $state_id)
-                        ->where('village_translations.name', $village_name)
-                        ->GroupBy('Area', 'State', 'Village', 'farmer'
-                        )->get();
-                    return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
-
-                }
-                if ($request->village_id == null) {
-
-                    $area_id = $admin->area_id;
-                    $state_id = $admin->state_id;
-                    $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
-                        'village_translations.name AS Village', 'farmers.firstname AS farmer',
-                        DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
-                        DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
-                        DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
-                        ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
-                        ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
-                        ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
-                        ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
-                        ->where('farmer_services.admin_id', $admin->id)
-                        ->where('area_translations.area_id', $area_id)
-                        ->where('state_translations.state_id', $state_id)
-                        ->GroupBy('Area', 'State', 'Village', 'farmer'
-                        )->get();
-                    return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
-
-                }
-            }
-            elseif($admin->type == 'admin' ) {
-                if ($request->area_id != null && $request->state_id != null && $request->village_id != null) {
-                    $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
-                        'village_translations.name AS Village', 'farmers.firstname AS farmer',
-                        DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
-                        DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
-                        DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
-                        ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
-                        ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
-                        ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
-                        ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
-                        ->where('area_translations.name', $area_name)
-                        ->where('state_translations.name', $state_name)
-                        ->where('village_translations.name', $village_name)
-                        ->GroupBy('Area', 'State', 'Village', 'farmer'
-                        )->get();
-                    return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
-
-                }
-                elseif  ($request->area_id != null && $request->state_id == null && $request->village_id == null) {
-                    $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
-                        'village_translations.name AS Village', 'farmers.firstname AS farmer',
-                        DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
-                        DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
-                        DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
-                        ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
-                        ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
-                        ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
-                        ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
-                        ->where('area_translations.name', $area_name)
-
-                        ->GroupBy('Area', 'State', 'Village', 'farmer'
-                        )->get();
-                    return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
-
-                }
-
-                elseif  ($request->area_id == null && $request->state_id == null && $request->village_id == null) {
-                    $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
-                        'village_translations.name AS Village', 'farmers.firstname AS farmer',
-                        DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
-                        DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
-                        DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
-                        ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
-                        ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
-                        ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
-                        ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
-
-                        ->GroupBy('Area', 'State', 'Village', 'farmer'
-                        )->get();
-                    return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
-
-                }
-                elseif  ($request->area_id != null && $request->state_id != null && $request->village_id == null) {
-                    $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
-                        'village_translations.name AS Village', 'farmers.firstname AS farmer',
-                        DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
-                        DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
-                        DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
-                        ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
-                        ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
-                        ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
-                        ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
-                        ->where('area_translations.name', $area_name)
-                        ->where('state_translations.name', $state_name)
-                        ->GroupBy('Area', 'State', 'Village', 'farmer'
-                        )->get();
-                    return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
-
-                }
+                $area_id = $admin->area_id;
+                $state_id = $admin->state_id;
+                $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
+                    DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
+                    DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
+                    ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_services.admin_id', $admin->id)
+                    ->where('area_translations.area_id', $area_id)
+                    ->where('state_translations.state_id', $state_id)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer'
+                    )->get();
+                return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
 
             }
+        } elseif ($admin->type == 'admin') {
+            if ($request->area_id != null && $request->state_id != null && $request->village_id != null) {
+                $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
+                    DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
+                    DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
+                    ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer'
+                    )->get();
+                return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
+
+            } elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null) {
+                $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
+                    DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
+                    DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
+                    ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer'
+                    )->get();
+                return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
+
+            } elseif ($request->area_id == null && $request->state_id == null && $request->village_id == null) {
+                $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
+                    DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
+                    DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
+                    ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
+                    ->GroupBy('Area', 'State', 'Village', 'farmer'
+                    )->get();
+                return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
+
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null) {
+                $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw("SUM(farmer_services.agri_services_count) As agri_services_count"),
+                    DB::raw("SUM(farmer_services.agri_t_services_count) As agri_t_services_count"),
+                    DB::raw("SUM(farmer_services.water_services_count) As water_services_count"))
+                    ->join('area_translations', 'farmer_services.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_services.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_services.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer'
+                    )->get();
+                return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
+
+            }
+
+        }
     }
-
-
 
 
 }

@@ -9,6 +9,6 @@ use Illuminate\Database\Seeder;
 class ChickenProjectSeeder extends Seeder {
     public function run() {
         
-      ChickenProject::factory()->count(30)->create();
+      ChickenProject::factory()->count(3)->create();
     }
 }

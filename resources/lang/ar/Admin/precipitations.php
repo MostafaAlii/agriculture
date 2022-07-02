@@ -15,6 +15,8 @@ return [
     'save'=>'حفظ',
     'precipitation_rate'=>'معدل الهطول',
     'date'=>'التاريخ',
+    'index-wrong'=>'عليك تحديد القضاء و الناحية الخاصة بالموظف المسؤول أو المدير',
+
     'precipitationsPageTitle'=>'الهطولات المطرية',
     'precipitations'=>'الهطولات المطرية',
     'newprecipitation'=>'هطولات مطرية جديدة',

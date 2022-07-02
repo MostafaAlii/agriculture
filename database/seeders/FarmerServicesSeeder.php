@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class FarmerServicesSeeder extends Seeder {
     public function run() {
 
-        FarmerService::factory()->count(30)->create();
+        FarmerService::factory()->count(3)->create();
     }
 }

@@ -13,8 +13,9 @@ class TreeRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:tree_translations,name,tree_id'.$this->id,
+                'string'
 
 
             ],
@@ -25,7 +26,7 @@ class TreeRequest extends FormRequest {
     public function messages() {
         return [
             'name.required'   => trans('Admin\validation.required'),
-            'name.regex'   => trans('Admin\validation.regex'),
+            'name.string'   => trans('Admin\validation.string'),
             'tree_type_id.required'   => trans('Admin\validation.required'),
 
             'tree_type_id.exists'   => trans('Admin\validation.exists'),

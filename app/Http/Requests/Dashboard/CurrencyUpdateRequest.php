@@ -13,7 +13,7 @@ class CurrencyUpdateRequest extends FormRequest {
 
             'Name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:currencies,id,'.$this->id,
 
 
@@ -24,7 +24,7 @@ class CurrencyUpdateRequest extends FormRequest {
     public function messages() {
         return [
             'Name.required'   => trans('Admin\validation.required'),
-            'Name.regex'   => trans('Admin\validation.regex'),
+            'Name.string'   => trans('Admin\validation.string'),
             'Name.unique'   => trans('Admin\validation.unique'),
 
 

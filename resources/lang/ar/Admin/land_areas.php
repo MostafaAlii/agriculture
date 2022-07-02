@@ -17,6 +17,7 @@ return [
     'agricultural'=>'زراعي',
     'non_agricultural'=>'غير زراعي',
     'land_category_name'=>'تصنيف الأرض',
+    'index-wrong'=>'عليك تحديد القضاء و الناحية الخاصة بالموظف المسؤول أو المدير',
 
     'land_area'=>'مساحة الأرض',
 'admin'=>'الموظف المسؤول',

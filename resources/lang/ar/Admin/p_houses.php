@@ -15,6 +15,8 @@ return [
     'international_organizations'=>'منظمات دولية',
     'private'=>'خاص',
     'govermental'=>'حكومي',
+    'index-wrong'=>'عليك تحديد القضاء و الناحية الخاصة بالموظف المسؤول أو المدير',
+
     'admin'=>'الموظف المسؤول',
     'count_protected_house'=>'عدد البيوت المحمية',
     'Database_about_greenhouses'=>'قاعدة بيانات حول البيوت المحمية',

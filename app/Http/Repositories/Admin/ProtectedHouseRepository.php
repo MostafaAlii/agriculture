@@ -27,12 +27,19 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        $areaID = $admin->area->id;
-        $area_name = $admin->area->name;
-        $stateID = $admin->state->id;
-        $state_name = $admin->state->name;
-        return view('dashboard.admin.protected_houses.index',
-            compact('admin', 'areaID', 'area_name', 'stateID', 'state_name'));
+        if ($admin->area == Null && $admin->state == null) {
+            toastr()->error(__('Admin/services.index-wrong'));
+
+            return redirect()->back();
+        } else {
+            $areaID = $admin->area->id;
+            $area_name = $admin->area->name;
+            $stateID = $admin->state->id;
+            $state_name = $admin->state->name;
+            return view('dashboard.admin.protected_houses.index',
+                compact('admin', 'areaID', 'area_name', 'stateID', 'state_name'));
+        }
+
 
 
     }

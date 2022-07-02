@@ -18,9 +18,9 @@ class ProvienceUpdateRequest extends FormRequest
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-//                'unique:province_translations,name,province_id' . $this->id,
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:provinces,id,'.$this->id,
+                'string'
 
 
 
@@ -39,7 +39,7 @@ class ProvienceUpdateRequest extends FormRequest
 
         return [
             'name.required' => trans('Admin\validation.required'),
-            'name.regex' => trans('Admin\validation.regex'),
+            'name.string' => trans('Admin\validation.string'),
             'location_x.numeric' => trans('Admin\validation.numeric'),
             'location_y.numeric' => trans('Admin\validation.numeric'),
             'country_id.required' => trans('Admin\validation.required'),

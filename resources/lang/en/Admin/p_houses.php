@@ -11,6 +11,7 @@ return [
     'editprotectedHouse'=>'Edit Protected House',
     'protected_house_add'=>'Add Protected House',
     'newprotectedHouse'=>' Add New Protected House',
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'update'=>'Update',
     'international_organizations'=>'International Organization',

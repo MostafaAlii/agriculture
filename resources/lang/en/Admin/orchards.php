@@ -2,6 +2,7 @@
 return [
     'orchards_and_settings'=>'Orchards & Settings',
 
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'action' =>'Processes',
     'farmer_inf' =>'Farmer information',

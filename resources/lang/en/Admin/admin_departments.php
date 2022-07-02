@@ -15,6 +15,7 @@ return [
     'update'=>'Update',
 
     'dep_name_ar'=>'Department Name Arabic',
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'dep_name_en'=>'Department Name English',
 

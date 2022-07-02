@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class LandAreaSeeder extends Seeder {
     public function run() {
         
-      LandArea::factory()->count(30)->create();
+      LandArea::factory()->count(3)->create();
     }
 }

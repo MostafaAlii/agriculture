@@ -9,6 +9,6 @@ use Illuminate\Database\Seeder;
 class FarmerCropSeeder extends Seeder {
     public function run() {
         
-      FarmerCrop::factory()->count(30)->create();
+      FarmerCrop::factory()->count(3)->create();
     }
 }

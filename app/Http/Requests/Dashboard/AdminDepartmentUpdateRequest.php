@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Requests\Dashboard;
-
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Country;
 
-class AdminDepartmentRequest extends FormRequest
+class AdminDepartmentUpdateRequest extends FormRequest
 {
-
     public function authorize()
     {
         return true;
@@ -26,14 +26,12 @@ class AdminDepartmentRequest extends FormRequest
                 'required',
 //                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
             'string',
-                'unique:admin_department_translations,name,admin_department_id'.$this->id,
+
+                'unique:admin_departments,id,'.$this->id,
 
             ],
 
-
         ];
-
-
     }
 
     public function messages()
@@ -46,5 +44,4 @@ class AdminDepartmentRequest extends FormRequest
 
         ];
     }
-
 }

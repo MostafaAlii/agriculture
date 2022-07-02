@@ -25,13 +25,17 @@ class LandAreaRepository implements LandAreaInterface{
     public function index() {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        $areaID = $admin->area->id;
-        $area_name = $admin->area->name;
-        $stateID = $admin->state->id;
-        $state_name = $admin->state->name;
-        $land_areas = LandArea::all();
-        return view('dashboard.admin.land_areas.index',
-            compact('admin','area_name','state_name'));
+        if ($admin->area == Null && $admin->state == null) {
+            toastr()->error(__('Admin/services.index-wrong'));
+
+            return redirect()->back();
+        } else {
+            $area_name = $admin->area->name;
+            $state_name = $admin->state->name;
+            return view('dashboard.admin.land_areas.index',
+                compact('admin','area_name','state_name'));
+        }
+
 
     }
 
