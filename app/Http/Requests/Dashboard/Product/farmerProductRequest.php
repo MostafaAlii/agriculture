@@ -8,8 +8,8 @@ class farmerProductRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name'           =>'required|string|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|unique:product_translations,name,' . $this->id,
-            'description'    =>'sometimes|string|nullable|min:10|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|max:500',
+            'name'           =>'required|string|max:100|unique:product_translations,name,' . $this->id,
+            'description'    =>'sometimes|string|nullable|min:10|max:500',
             'categories'     =>'required|array|min:1',
             'categories.*'   =>'numeric|exists:categories,id',
             'tags'           =>'sometimes|nullable|array',
