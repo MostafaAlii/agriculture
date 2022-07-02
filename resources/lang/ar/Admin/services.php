@@ -13,6 +13,8 @@ return [
     'service_name'=>'أدخل اسم الخدمة',
     'update'=>'تعديل',
     'admin'=>'الموظف المسؤول',
+    'index-wrong'=>'عليك تحديد القضاء و الناحية الخاصة بالموظف المسؤول أو المدير',
+
     'add_new_agriculture_tool_service'=>'اضافة أداة خدمة زراعية جديدة',
     'agricultureToolServicePageTitle'=>'أدوات الخدمة الزراعية',
     'add_new_agriculture_tool_service'=>'إضافة أداة خدمة زراعية جديدة',

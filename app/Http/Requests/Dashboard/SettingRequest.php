@@ -27,7 +27,8 @@ class SettingRequest extends FormRequest
             'inestegram' => 'required|url',
             'site_name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
+            'string'
 
             ],
 
@@ -68,7 +69,7 @@ class SettingRequest extends FormRequest
 
 
             'site_name.required' => trans('Admin/validation.required'),
-            'site_name.regex' => trans('Admin/validation.required'),
+            'site_name.string' => trans('Admin/validation.string'),
            'message_maintenance.required'=>trans('Admin/validation.required'),
             'message_maintenance.regex'=>trans('Admin/validation.regex'),
             'address.required'=>trans('Admin/validation.required'),

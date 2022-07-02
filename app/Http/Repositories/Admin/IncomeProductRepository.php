@@ -29,10 +29,17 @@ class IncomeProductRepository implements IncomeProductInterface {
     public function index() {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        $department_id = $admin->adminDepartment->id;
-        $adminDepartment = AdminDepartment::findorfail($department_id);
-        $dep_name = $adminDepartment->name;
-        return view('dashboard.admin.income_products.index',compact('admin','dep_name')) ;
+        if ($admin->area == Null && $admin->state == null) {
+            toastr()->error(__('Admin/services.index-wrong'));
+
+            return redirect()->back();
+        } else {
+            $department_id = $admin->adminDepartment->id;
+            $adminDepartment = AdminDepartment::findorfail($department_id);
+            $dep_name = $adminDepartment->name;
+            return view('dashboard.admin.income_products.index',compact('admin','dep_name')) ;
+        }
+
     }
 
     public function data()

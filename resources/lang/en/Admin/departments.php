@@ -5,6 +5,7 @@ return [
     'depart_name'                   =>'Name',
     'depart_desc'                   =>'Description',
     'depart_keyword'                =>'Keywords',
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'depart_country'                =>'Country',
     'depart_province'               =>'Province',

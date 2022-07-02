@@ -6,6 +6,7 @@ return [
     'count_ship'=>'Sheeps and Goats Count',
     'counr_caw'=>'Caws Count',
     'animals_projects_report'=>'Report Project for Caw Sheep And fish ',
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'action' =>'Processes',
     'admin_departments' =>'Admin Departments Related',

@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class IncomeProductSeeder extends Seeder {
     public function run() {
         
-      IncomeProduct::factory()->count(30)->create();
+      IncomeProduct::factory()->count(3)->create();
     }
 }

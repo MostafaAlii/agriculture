@@ -20,9 +20,9 @@ class CountryUpdateRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:countries,id,' .$this->id,
-//                'unique:country_translations,name,'.$this->id,
+                'string',
 
             ],
             'image' => 'sometimes|nullable|image|mimes:png,jpg,jpeg',
@@ -35,7 +35,7 @@ class CountryUpdateRequest extends FormRequest
         return [
             'name.required' => trans('Admin/validation.required'),
             'name.unique' => trans('Admin/validation.unique'),
-            'name.regex' => trans('Admin/validation.regex'),
+            'name.string' => trans('Admin/validation.string'),
             'image.image' => trans('Admin/validation.image'),
         ];
     }

@@ -9,7 +9,6 @@
         "anhskohbo/no-captcha": "^3.4",
         "astrotomic/laravel-translatable": "^11.9",
         "beyondcode/laravel-websockets": "^1.13",
-        "carlos-meneses/laravel-mpdf": "^2.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "hardevine/shoppingcart": "^3.1",

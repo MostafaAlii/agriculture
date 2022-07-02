@@ -1,6 +1,7 @@
 <?php
 return [
 
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'new_outcome_product'=>'New Outcome Product',
     'outcome_productPageTitle'=>'Outcome Products',

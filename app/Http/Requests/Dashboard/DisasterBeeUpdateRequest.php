@@ -14,7 +14,7 @@ class DisasterBeeUpdateRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:bee_disasters,id,'.$this->id,
 
 

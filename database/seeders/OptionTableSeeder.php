@@ -8,7 +8,7 @@ class OptionTableSeeder extends Seeder {
     public function run() {
         Schema::disableForeignKeyConstraints();
         DB::table('options')->truncate();
-        Option::factory()->count(35)->create();
+        Option::factory()->count(10)->create();
         Schema::enableForeignKeyConstraints();
     }
 }

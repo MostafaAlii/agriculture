@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class OrchardSeeder extends Seeder {
     public function run() {
         
-      Orchard::factory()->count(30)->create();
+      Orchard::factory()->count(3)->create();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 return [
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'crop_type'=>'Crop Type',
     'name'=>'Name',

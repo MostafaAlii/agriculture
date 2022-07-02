@@ -9,6 +9,6 @@ use Illuminate\Database\Seeder;
 class OutcomeProductSeeder extends Seeder {
     public function run() {
         
-      OutcomeProduct::factory()->count(30)->create();
+      OutcomeProduct::factory()->count(3)->create();
     }
 }

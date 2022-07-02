@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 class WinterCropSeeder extends Seeder {
     public function run() {
-        WinterCrop::factory()->count(30)->create();
+        WinterCrop::factory()->count(3)->create();
 
 
     }

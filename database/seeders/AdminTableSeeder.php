@@ -30,27 +30,27 @@ class AdminTableSeeder extends Seeder {
         $role->syncPermissions($permissions);
         $superAdmin->assignRole([$role->id]);
 
-        Admin::create([
-            'firstname'         =>  'yyy',
-            'lastname'          =>  'yyy',
-            'email'             =>  'ahmedragabyasin2020@gmail.com',
-            'phone'             =>  '01015588628',
-            'password'          =>  bcrypt('123123'),
-            'address1'          =>  'cairo',
-            'address2'          =>  'alex',
-            'birthdate'         =>  Carbon::create('2000', '01', '01'),
-            'country_id'        => 2,
-            'province_id'       => 2,
-            'area_id'           => 2,
-            'state_id'          => 2,
-            'village_id'        => 2,
-            'department_id'     => 2,
-            'admin_department_id'           =>              4,
-            'roles_name'                    =>              ["Owner"],
-            'status'                        =>              Admin::ACTIVE,
-            'remember_token'    => Str::random(10),
-        ]);
-        Admin::factory(30)->create();
+//        Admin::create([
+//            'firstname'         =>  'yyy',
+//            'lastname'          =>  'yyy',
+//            'email'             =>  'ahmedragabyasin2020@gmail.com',
+//            'phone'             =>  '01015588628',
+//            'password'          =>  bcrypt('123123'),
+//            'address1'          =>  'cairo',
+//            'address2'          =>  'alex',
+//            'birthdate'         =>  Carbon::create('2000', '01', '01'),
+//            'country_id'        => 2,
+//            'province_id'       => 2,
+//            'area_id'           => 2,
+//            'state_id'          => 2,
+//            'village_id'        => 2,
+//            'department_id'     => 2,
+//            'admin_department_id'           =>              4,
+//            'roles_name'                    =>              ["Owner"],
+//            'status'                        =>              Admin::ACTIVE,
+//            'remember_token'    => Str::random(10),
+//        ]);
+        Admin::factory(2)->create();
         Schema::enableForeignKeyConstraints();
     }
 }

@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class WholeProductSeeder extends Seeder {
     public function run() {
         
-      WholeProduct::factory()->count(30)->create();
+      WholeProduct::factory()->count(3)->create();
     }
 }

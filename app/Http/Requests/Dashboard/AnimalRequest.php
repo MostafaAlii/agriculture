@@ -23,7 +23,8 @@ class AnimalRequest extends FormRequest
             'currency_id' => 'required|exists:currencies,id',
             'project_name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
+            'string'
 
             ],
             'hall_num' =>'required|numeric',
@@ -49,7 +50,7 @@ class AnimalRequest extends FormRequest
             'currency_id.exists' => trans('Admin/validation.exists'),
             'village_id.required' => trans('Admin/validation.required'),
             'project_name.required' => trans('Admin/validation.required'),
-            'project_name.regex' => trans('Admin/validation.regex'),
+            'project_name.string' => trans('Admin/validation.string'),
             'hall_num.required' => trans('Admin/validation.required'),
             'animal_count.required' => trans('Admin/validation.required'),
             'food_source.required' => trans('Admin/validation.required'),

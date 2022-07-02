@@ -9,6 +9,6 @@ use Illuminate\Database\Seeder;
 class CawProjectSeeder extends Seeder {
     public function run() {
         
-      CawProject::factory()->count(30)->create();
+      CawProject::factory()->count(3)->create();
     }
 }

@@ -17,7 +17,7 @@ use Faker\Factory;
 
 class WorkerTableSeeder extends Seeder {
     public function run() {
-        $count = 1000;
+        $count = 10;
         $faker = Factory::create();
         DB::table('workers')->delete();
         Worker::create([

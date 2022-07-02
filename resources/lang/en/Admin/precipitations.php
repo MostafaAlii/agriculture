@@ -1,6 +1,7 @@
 <?php
 return [
 
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
 'admin'=>'Employee Responsible',
     'action' =>'Processes',

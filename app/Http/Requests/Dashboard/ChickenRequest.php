@@ -24,7 +24,8 @@ class ChickenRequest extends FormRequest
 
             'project_name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u'
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
+            'string'
 
             ],
             'hall_num' =>'required|numeric',
@@ -47,7 +48,7 @@ class ChickenRequest extends FormRequest
             'farmer_id.required' => trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
             'project_name.required' => trans('Admin/validation.required'),
-            'project_name.regex' => trans('Admin/validation.regex'),
+            'project_name.string' => trans('Admin/validation.string'),
             'farmer_id.exists' => trans('Admin/validation.exists'),
             'admin_id.exists' => trans('Admin/validation.exists'),
             'area_id.exists' => trans('Admin/validation.exists'),

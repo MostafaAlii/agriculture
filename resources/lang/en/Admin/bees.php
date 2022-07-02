@@ -17,6 +17,7 @@ return [
     'private'=>'Private',
     'govermental'=>'Govermental',
     'international_organizations'=>'International Organizations',
+    'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'count_village'=>'',
 

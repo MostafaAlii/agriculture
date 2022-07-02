@@ -26,13 +26,18 @@ class ChickenProjectRepository implements ChickenProjectInterface{
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        $areaID = $admin->area->id;
-        $area_name = $admin->area->name;
-        $stateID = $admin->state->id;
-        $state_name = $admin->state->name;
-        return view('dashboard.admin.chicken_projects.index',
-            compact('admin','areaID','area_name','stateID','state_name'));
+        if ($admin->area == Null && $admin->state == null) {
+            toastr()->error(__('Admin/animals.index-wrong'));
 
+            return redirect()->back();
+        } else {
+            $areaID = $admin->area->id;
+            $area_name = $admin->area->name;
+            $stateID = $admin->state->id;
+            $state_name = $admin->state->name;
+            return view('dashboard.admin.chicken_projects.index',
+                compact('admin','areaID','area_name','stateID','state_name'));
+        }
 
     }
     public function data()
@@ -204,12 +209,12 @@ class ChickenProjectRepository implements ChickenProjectInterface{
             DB::beginTransaction();
             if ($request->delete_select_id) {
                 $delete_select_id = explode(",", $request->delete_select_id);
-                foreach ($delete_select_id as $animal_ids) {
+                foreach ($delete_select_id as $animal_id) {
 
-                    $animal = ChickenProject::findorfail($animal_ids);
+                    $animal = ChickenProject::findorfail($animal_id);
 
-
-                    ChickenProject::destroy($animal_ids);
+                    $animal->delete();
+//                    ChickenProject::destroy($animal_id);
                 }
                 DB::commit();
 
@@ -224,6 +229,7 @@ class ChickenProjectRepository implements ChickenProjectInterface{
             toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
+//            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 
         }
 

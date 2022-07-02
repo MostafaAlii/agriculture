@@ -13,7 +13,8 @@ class WholeSaleProductUpdateRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'string',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:whole_products,id,'.$this->id,
 
 
@@ -25,7 +26,7 @@ class WholeSaleProductUpdateRequest extends FormRequest {
     public function messages() {
         return [
             'name.required'   => trans('Admin\validation.required'),
-            'name.regex'   => trans('Admin\validation.regex'),
+            'name.string'   => trans('Admin\validation.string'),
             'name.unique'   => trans('Admin\validation.unique'),
 
         ];

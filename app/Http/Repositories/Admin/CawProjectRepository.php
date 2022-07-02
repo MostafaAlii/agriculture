@@ -1,5 +1,7 @@
 <?php
-namespace  App\Http\Repositories\Admin;
+
+namespace App\Http\Repositories\Admin;
+
 use App\Http\Interfaces\Admin\CawProjectInterface;
 use App\Models\CawProject;
 use App\Models\Currency;
@@ -19,74 +21,82 @@ use Illuminate\Support\Facades\Crypt;
 use Auth;
 use Yajra\DataTables\DataTables;
 
-class CawProjectRepository implements CawProjectInterface{
+class CawProjectRepository implements CawProjectInterface
+{
 
     public function index()
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
 
-        $areaID = $admin->area->id;
-        $area_name = $admin->area->name;
-        $stateID = $admin->state->id;
-        $state_name = $admin->state->name;
-        return view('dashboard.admin.caw_projects.index',
-            compact('admin','areaID','area_name','stateID','state_name'));
+
+        if ($admin->area == Null && $admin->state == null) {
+            toastr()->error(__('Admin/animals.index-wrong'));
+
+            return redirect()->back();
+        } else {
+            $areaID = $admin->area->id;
+            $area_name = $admin->area->name;
+            $stateID = $admin->state->id;
+            $state_name = $admin->state->name;
+            return view('dashboard.admin.caw_projects.index',
+                compact('admin', 'areaID', 'area_name', 'stateID', 'state_name'));
+        }
+
     }
 
 
-    public function data()    {
+    public function data()
+    {
 
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
-            $cawProjects = CawProject::with('farmer', 'village','admin','area','state')
-                ->where('admin_id',$admin->id )->get();
+            $cawProjects = CawProject::with('farmer', 'village', 'admin', 'area', 'state')
+                ->where('admin_id', $admin->id)->get();
 
-          }
-          else {
-              $cawProjects = CawProject::with('farmer', 'village', 'admin','area','state')->get();
-          }
-            return DataTables::of($cawProjects)
-                ->addColumn('record_select', 'dashboard.admin.caw_projects.data_table.record_select')
-                ->addIndexColumn()
-                ->editColumn('created_at', function (CawProject $cawProject) {
-                    return $cawProject->created_at->diffforhumans();
-                })
-
-                 ->editColumn('type', function (CawProject $cawProject) {
-                     return view('dashboard.admin.caw_projects.data_table.type', compact('cawProject'));
-                })
-                ->editColumn('marketing_side', function (CawProject $cawProject) {
-                    return view('dashboard.admin.caw_projects.data_table.marketing_side', compact('cawProject'));
-                })
-                ->editColumn('food_source', function (CawProject $cawProject) {
-                    return view('dashboard.admin.caw_projects.data_table.food_source', compact('cawProject'));
-                })
-
-                ->addColumn('farmer', function (CawProject $cawProject) {
-                    return $cawProject->farmer->email;
-                })
-                ->addColumn('admin', function (CawProject $cawProject) {
-                    return $cawProject->admin->firstname;
-                })
-                ->addColumn('area', function (CawProject $cawProject) {
-                    return $cawProject->area->name;
-                })
-                ->addColumn('state', function (CawProject $cawProject) {
-                    return $cawProject->state->name;
-                })
-                ->addColumn('village', function (CawProject $cawProject) {
-                    return $cawProject->village->name;
-                })
-                ->addColumn('actions', 'dashboard.admin.caw_projects.data_table.actions')
-                ->rawColumns(['record_select', 'actions'])
-                ->toJson();
+        } else {
+            $cawProjects = CawProject::with('farmer', 'village', 'admin', 'area', 'state')->get();
+        }
+        return DataTables::of($cawProjects)
+            ->addColumn('record_select', 'dashboard.admin.caw_projects.data_table.record_select')
+            ->addIndexColumn()
+            ->editColumn('created_at', function (CawProject $cawProject) {
+                return $cawProject->created_at->diffforhumans();
+            })
+            ->editColumn('type', function (CawProject $cawProject) {
+                return view('dashboard.admin.caw_projects.data_table.type', compact('cawProject'));
+            })
+            ->editColumn('marketing_side', function (CawProject $cawProject) {
+                return view('dashboard.admin.caw_projects.data_table.marketing_side', compact('cawProject'));
+            })
+            ->editColumn('food_source', function (CawProject $cawProject) {
+                return view('dashboard.admin.caw_projects.data_table.food_source', compact('cawProject'));
+            })
+            ->addColumn('farmer', function (CawProject $cawProject) {
+                return $cawProject->farmer->email;
+            })
+            ->addColumn('admin', function (CawProject $cawProject) {
+                return $cawProject->admin->firstname;
+            })
+            ->addColumn('area', function (CawProject $cawProject) {
+                return $cawProject->area->name;
+            })
+            ->addColumn('state', function (CawProject $cawProject) {
+                return $cawProject->state->name;
+            })
+            ->addColumn('village', function (CawProject $cawProject) {
+                return $cawProject->village->name;
+            })
+            ->addColumn('actions', 'dashboard.admin.caw_projects.data_table.actions')
+            ->rawColumns(['record_select', 'actions'])
+            ->toJson();
 
     }
 
 
-    public function create()    {
+    public function create()
+    {
 
         $adminId = Auth::user()->id;
         $admin = Admin::findorfail($adminId);
@@ -97,13 +107,14 @@ class CawProjectRepository implements CawProjectInterface{
         $areas = Area::all();
         $states = State::all();
         $currencies = Currency::all();
-        $villages = Village::where('state_id',$stateID)->get();
+        $villages = Village::where('state_id', $stateID)->get();
         return view('dashboard.admin.caw_projects.create',
-            compact('adminId', 'admin', 'areaID', 'area_name', 'currencies','villages','areas','states','state_name','stateID'));
+            compact('adminId', 'admin', 'areaID', 'area_name', 'currencies', 'villages', 'areas', 'states', 'state_name', 'stateID'));
     }
 
 
-    public function store($request)    {
+    public function store($request)
+    {
 
         try {
 
@@ -134,9 +145,11 @@ class CawProjectRepository implements CawProjectInterface{
         } catch (\Exception $e) {
 //            toastr()->error(__('Admin/attributes.add_wrong'));
 
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);        }
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
 
     }
+
     public function edit($id)
     {
         $adminId = Auth::user()->id;
@@ -145,17 +158,17 @@ class CawProjectRepository implements CawProjectInterface{
         $area_name = $admin->area->name;
         $stateID = $admin->state->id;
         $state_name = $admin->state->name;
-        $villages = Village::where('state_id',$stateID)->get();
+        $villages = Village::where('state_id', $stateID)->get();
         $animalID = Crypt::decrypt($id);
         $animal = CawProject::findorfail($animalID);
         $currencies = Currency::all();
 
         return view('dashboard.admin.caw_projects.edit',
-            compact('area_name','state_name','admin','villages','currencies',
-                'animal','adminId','stateID','areaID'));
+            compact('area_name', 'state_name', 'admin', 'villages', 'currencies',
+                'animal', 'adminId', 'stateID', 'areaID'));
     }
 
-    public function update($request,$id)
+    public function update($request, $id)
 
     {
         try {
@@ -180,7 +193,6 @@ class CawProjectRepository implements CawProjectInterface{
             $animal->type = $requestData['type'];
 
 
-
             $animal->update($requestData);
 
             toastr()->success(__('Admin/site.added_successfully'));
@@ -197,25 +209,24 @@ class CawProjectRepository implements CawProjectInterface{
 
     public function destroy($id)
     {
-        try{
+        try {
             $animalID = Crypt::decrypt($id);
             $animal = CawProject::findorfail($animalID);
 
             $animal->delete();
             toastr()->success(__('Admin/site.deleted_successfully'));
             return redirect()->route('Animals.index');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.delete_wrong'));
 
             return redirect()->back();
         }
 
 
-
-
     }
 
-    public function bulkDelete($request) {
+    public function bulkDelete($request)
+    {
         try {
             DB::beginTransaction();
             if ($request->delete_select_id) {
@@ -235,7 +246,7 @@ class CawProjectRepository implements CawProjectInterface{
                 toastr()->error(__('Admin/site.no_data_found'));
                 return redirect()->route('Animals.index');
             }
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             toastr()->error(__('Admin/attributes.delete_wrong'));
 
@@ -247,10 +258,11 @@ class CawProjectRepository implements CawProjectInterface{
     }// end of bulkDelete
 
 
-    public  function caw_index_statistics(){
+    public function caw_index_statistics()
+    {
         $adminID = Auth::user()->id;
-        $admin=Admin::findorfail($adminID);
-        return view('dashboard.admin.caw_projects.statistics',compact('admin'));
+        $admin = Admin::findorfail($adminID);
+        return view('dashboard.admin.caw_projects.statistics', compact('admin'));
     }
 
 
@@ -260,9 +272,9 @@ class CawProjectRepository implements CawProjectInterface{
 
                 'area_id' => 'sometimes|nullable|exists:areas,id',
                 'state_id' => 'sometimes|nullable|exists:states,id',
-                'village_id'=>'sometimes|nullable|exists:villages,id',
-                'marketing_side'=>'sometimes|nullable|in:private,govermental',
-                'type'=>'sometimes|nullable|in:caw,ship,fish',
+                'village_id' => 'sometimes|nullable|exists:villages,id',
+                'marketing_side' => 'sometimes|nullable|in:private,govermental',
+                'type' => 'sometimes|nullable|in:caw,ship,fish',
             ]
 //            , [
 //            'start_date.date' => trans('Admin/validation.date'),
@@ -355,8 +367,7 @@ class CawProjectRepository implements CawProjectInterface{
                 return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
 
 
-            }
-            elseif ($request->village_id != null && $request->type == null && $request->marketing_side != null) {
+            } elseif ($request->village_id != null && $request->type == null && $request->marketing_side != null) {
 
                 $area_id = $admin->area_id;
                 $state_id = $admin->state_id;
@@ -380,8 +391,7 @@ class CawProjectRepository implements CawProjectInterface{
                 return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
 
 
-            }
-            elseif ($request->village_id != null && $request->type == null && $request->marketing_side == null) {
+            } elseif ($request->village_id != null && $request->type == null && $request->marketing_side == null) {
 
                 $area_id = $admin->area_id;
                 $state_id = $admin->state_id;
@@ -404,268 +414,242 @@ class CawProjectRepository implements CawProjectInterface{
 
 
             }
+        } elseif ($admin->type == 'admin') {
+            if ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->type != null && $request->marketing_side != null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('caw_projects.marketing_side', $marketing_side)
+                    ->where('caw_projects.type', $type)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->type != null && $request->marketing_side == null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('caw_projects.type', $type)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id == null && $request->state_id == null && $request->village_id == null && $request->type == null && $request->marketing_side == null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->type == null && $request->marketing_side != null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('caw_projects.marketing_side', $marketing_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->type == null && $request->marketing_side == null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->type != null && $request->marketing_side != null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('caw_projects.marketing_side', $marketing_side)
+                    ->where('caw_projects.type', $type)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->type == null && $request->marketing_side != null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('caw_projects.marketing_side', $marketing_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->type != null && $request->marketing_side == null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('caw_projects.type', $type)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->type == null && $request->marketing_side == null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->type == null && $request->marketing_side == null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->type != null && $request->marketing_side == null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('caw_projects.type', $type)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->type == null && $request->marketing_side != null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('caw_projects.marleting_side', $marketing_side)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            } elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->type != null && $request->marketing_side != null) {
+                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
+                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
+                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
+                )
+                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('caw_projects.marleting_side', $marketing_side)
+                    ->where('caw_projects.type', $type)
+                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type', 'marketing_side'
+                    )
+                    ->get();
+                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
+
+            }
+
+
         }
-        elseif ($admin->type == 'admin') {
-            if ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->type != null && $request->marketing_side != null)
-            {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('caw_projects.marketing_side', $marketing_side)
-                    ->where('caw_projects.type', $type)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->type != null && $request->marketing_side == null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('caw_projects.type', $type)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-            elseif ($request->area_id == null && $request->state_id == null && $request->village_id == null && $request->type == null && $request->marketing_side == null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->type == null && $request->marketing_side != null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('caw_projects.marketing_side', $marketing_side)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id != null && $request->type == null && $request->marketing_side == null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-
-            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->type != null && $request->marketing_side != null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('caw_projects.marketing_side', $marketing_side)
-                    ->where('caw_projects.type', $type)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->type == null && $request->marketing_side != null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('caw_projects.marketing_side', $marketing_side)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->type != null && $request->marketing_side == null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('caw_projects.type', $type)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null && $request->type == null && $request->marketing_side == null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->type == null && $request->marketing_side == null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->type != null && $request->marketing_side == null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('caw_projects.type', $type)
-
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->type == null && $request->marketing_side != null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('caw_projects.marleting_side', $marketing_side)
-
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-
-            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null && $request->type != null && $request->marketing_side != null) {
-                $statistics = CawProject::select('area_translations.name AS Area', 'state_translations.name AS State',
-                    'village_translations.name AS village_name', 'farmers.firstname AS farmer_name', 'farmers.phone AS phone'
-                    , 'caw_projects.type AS type', 'caw_projects.marketing_side as marketing_side'
-                    , DB::raw('SUM(caw_projects.animal_count) As animal_count')
-                )
-                    ->join('area_translations', 'caw_projects.area_id', '=', 'area_translations.id')
-                    ->join('state_translations', 'caw_projects.state_id', '=', 'state_translations.id')
-                    ->join('village_translations', 'caw_projects.village_id', '=', 'village_translations.id')
-                    ->join('farmers', 'caw_projects.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('caw_projects.marleting_side', $marketing_side)
-                    ->where('caw_projects.type', $type)
-
-
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'phone', 'type','marketing_side'
-                    )
-                    ->get();
-                return view('dashboard.admin.caw_projects.statistics', compact('admin', 'statistics'));
-
-            }
-
-
-            }
-
 
 
     }

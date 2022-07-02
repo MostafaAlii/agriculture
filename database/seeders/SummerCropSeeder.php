@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 class SummerCropSeeder extends Seeder {
     public function run() {
-        SummerCrop::factory()->count(30)->create();
+        SummerCrop::factory()->count(3)->create();
 
 
     }

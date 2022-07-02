@@ -9,6 +9,6 @@ use Illuminate\Database\Seeder;
 class OrchardTreeSeeder extends Seeder {
     public function run() {
         
-      OrchardTree::factory()->count(30)->create();
+      OrchardTree::factory()->count(3)->create();
     }
 }

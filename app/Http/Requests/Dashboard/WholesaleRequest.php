@@ -13,7 +13,8 @@ class WholesaleRequest extends FormRequest {
 
             'Name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'string',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:wholesale_translations,Name,wholesale_id' . $this->id
 
 
@@ -24,7 +25,7 @@ class WholesaleRequest extends FormRequest {
     public function messages() {
         return [
             'Name.required'   => trans('Admin\validation.required'),
-            'Name.regex'   => trans('Admin\validation.regex'),
+            'Name.string'   => trans('Admin\validation.string'),
             'Name.unique'   => trans('Admin\validation.unique'),
 
             'unique:currency_translations,Name,currency_id'.$this->id,

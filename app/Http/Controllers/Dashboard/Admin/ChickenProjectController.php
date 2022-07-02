@@ -61,7 +61,7 @@ class ChickenProjectController extends Controller
         return $this->Data->destroy($id);
     }
     public function bulkDelete(Request $request) {
-        return $this->Data->destroy($request);
+        return $this->Data->bulkDelete($request);
     }
 // index for report
     public function chicken_statistic_index() {

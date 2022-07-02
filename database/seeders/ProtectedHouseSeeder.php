@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class ProtectedHouseSeeder extends Seeder {
     public function run() {
 
-        ProtectedHouse::factory()->count(30)->create();
+        ProtectedHouse::factory()->count(3)->create();
     }
 }

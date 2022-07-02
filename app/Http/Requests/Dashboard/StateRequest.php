@@ -17,7 +17,8 @@ class StateRequest extends FormRequest
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
+            'string',
                 'unique:state_translations,name,state_id'.$this->id,
 
 
@@ -41,7 +42,7 @@ class StateRequest extends FormRequest
             'area_id.required' => trans('Admin\validation.required'),
             'area_id.exists' => trans('Admin\validation.exists'),
 
-            'name.regex' => trans('Admin\validation.regex'),
+            'name.string' => trans('Admin\validation.string'),
 
         ];
     }

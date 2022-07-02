@@ -8,6 +8,6 @@ use Illuminate\Database\Seeder;
 class PrecipitationSeeder extends Seeder {
     public function run() {
         
-      Precipitation::factory()->count(30)->create();
+      Precipitation::factory()->count(3)->create();
     }
 }
