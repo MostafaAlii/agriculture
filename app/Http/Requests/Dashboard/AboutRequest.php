@@ -8,7 +8,7 @@ class AboutRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name'          =>'required|string|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+            'name'          =>'required|string|min:3|max:100',
             'description'   =>'required|string|min:3|max:1000',
             'image'         =>'image|mimes:jpg,png,jpeg|dimensions:max_width=600,max_height=500',
         ];
@@ -24,7 +24,7 @@ class AboutRequest extends FormRequest {
             'description.required'      =>  trans('Admin/validation.required'),
             'description.min'           =>  trans('Admin/validation.min'),
             'description.string'        =>  trans('Admin/validation.string'),
-            
+
             'image.image'               =>  trans('Admin/validation.image'),
             'image.mimes'               =>  trans('Admin/validation.mimes'),
             'image.dimensions'          =>  trans('Admin/validation.dimensions'),

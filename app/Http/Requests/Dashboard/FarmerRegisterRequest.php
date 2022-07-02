@@ -11,8 +11,8 @@ class FarmerRegisterRequest extends FormRequest {
     public function rules()
     {
         $rules = [
-            'firstname'    =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'     =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'firstname'    =>'required|min:3|string',
+            'lastname'     =>'required|min:3|string',
             'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
             'email'        => ['required', 'string', 'email', 'max:255', 'unique:farmers'],
             'password'     => ['required','confirmed','min:6','max:10'],

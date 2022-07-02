@@ -11,8 +11,8 @@ class WorkerRegisterRequest extends FormRequest {
     public function rules()
     {
         $rules = [
-            'firstname'    =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'     =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'firstname'    =>'required|min:3|string',
+            'lastname'     =>'required|min:3|string',
             'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers',
             'email'        => ['required', 'string', 'email', 'max:255', 'unique:workers'],
             'password'     => ['required','confirmed','min:6','max:10'],

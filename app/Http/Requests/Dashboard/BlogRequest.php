@@ -10,8 +10,8 @@ class BlogRequest extends FormRequest {
     {
         $rules = [
 
-            'title'      => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|unique:blog_translations',
-            'body'       => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|min:5|max:100',
+            'title'      => 'required|min:3|string|unique:blog_translations',
+            'body'       => 'required|min:5|max:100',
             'admin_id'   => 'required',
             'categories' => 'required|exists:categories,id',
             'tags'       => 'required|exists:tags,id',
@@ -19,7 +19,7 @@ class BlogRequest extends FormRequest {
         ];
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
             $blog = $this->route()->parameter('id');
-            $rules['title'] = 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|unique:blogs,id,' . $blog;
+            $rules['title'] = 'required|min:3|string|unique:blogs,id,' . $blog;
         }//end of if
         return $rules;
     }

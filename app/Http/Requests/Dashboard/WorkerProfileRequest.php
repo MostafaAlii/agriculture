@@ -12,8 +12,8 @@ class WorkerProfileRequest extends FormRequest {
     {
         $rules = [
 
-            'firstname'       => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'        => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'firstname'       => 'required|min:3|string',
+            'lastname'        => 'required|min:3|string',
             'phone'           => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers',
             'birthdate'       => 'before:today',
             'country_id'      => 'required',
@@ -21,9 +21,9 @@ class WorkerProfileRequest extends FormRequest {
             'area_id'         => 'required',
             'state_id'        => 'required',
             'village_id'      => 'required',
-            'address1'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'address2'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'desc'            => 'sometimes|string|nullable|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'address1'        => 'required',
+            'address2'        => 'required',
+            'desc'            => 'sometimes|string|nullable',
             'salary'          => 'in:perday,perhour',
             'work'            => 'in:alone,team',
             'daily_price'     => 'numeric|min:1',

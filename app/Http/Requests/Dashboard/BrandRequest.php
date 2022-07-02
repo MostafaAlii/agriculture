@@ -9,7 +9,7 @@ class BrandRequest extends FormRequest {
     public function rules() {
         $rules = [
 
-            'title'    =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|unique:brand_translations',
+            'title'    =>'required|min:3|string|unique:brand_translations',
 
         ];
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
