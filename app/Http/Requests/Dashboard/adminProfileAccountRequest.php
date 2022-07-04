@@ -10,8 +10,8 @@ class adminProfileAccountRequest extends FormRequest {
     {
         $rules = [
 
-            'firstname'    => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'     => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'firstname'    => 'required|min:3|string',
+            'lastname'     => 'required|min:3|string',
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins',
             'email'        => 'required|email|unique:admins',
             'password'     => 'required|confirmed|min:6|max:10',

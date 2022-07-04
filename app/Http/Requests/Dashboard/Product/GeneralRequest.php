@@ -8,7 +8,7 @@ class GeneralRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name'           =>'required|string|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|unique:product_translations,name,' . $this->id,
+            'name'           =>'required|string|max:100|unique:product_translations,name,' . $this->id,
             'description'    =>'sometimes|string|nullable',
             'categories'     =>'required|array|min:1',
             'categories.*'   =>'numeric|exists:categories,id',

@@ -12,10 +12,9 @@ class userProfileRequest extends FormRequest {
     {
         $rules = [
 
-            'firstname'    => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'     => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'firstname'    => 'required|min:3|string',
+            'lastname'     => 'required|min:3|string',
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
-            // 'email'        => 'required|email|unique:farmers',
             'birthdate'       => 'before:today',
             'country_id'      => 'required',
             'province_id'     => 'required',
@@ -23,8 +22,8 @@ class userProfileRequest extends FormRequest {
             'state_id'        => 'required',
             'village_id'      => 'required',
             'department_id'   => 'required',
-            'address1'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'address2'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'address1'        => 'required',
+            'address2'        => 'required',
 
         ];
 
