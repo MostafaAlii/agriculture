@@ -173,7 +173,7 @@
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'precipitation_rate', name: 'precipitation_rate',searchable: true, sortable: true},
             {data: 'date', name: 'date',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin.email',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],

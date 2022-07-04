@@ -69,6 +69,8 @@
                                                     <div class="form-group">
                                                         <label for="farmer_id">{{ __('Admin/orchards.village') }}</label>
                                                         <select class="select2 form-control" name="village_id" id="village_id"  required="required">
+                                                            <option value="" selected disabled>{{ __('Admin/site.select') }}</option>
+
                                                         @foreach ($villages as $village)
                                                             <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                         @endforeach
@@ -109,7 +111,10 @@
                                                     <div class="form-group">
                                                         <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
                                                         <select class="custom-select form-control" id="customSelect" name="land_category_id"  required="required">
-                                                            @foreach($land_categories as $land_category)
+
+                                                            <option value="" selected disabled>{{ __('Admin/site.select') }}</option>
+
+                                                        @foreach($land_categories as $land_category)
                                                                 <option value="{{$land_category->id}}">{{ $land_category->category_name }}</option>
                                                             @endforeach
                                                         </select>
@@ -131,7 +136,7 @@
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/orchards.unit') }}</label>
                                                         <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required">
-                                                            <option selected disabled>--select--</option>
+                                                            <option value="" selected disabled>{{ __('Admin/site.select') }}</option>
                                                             @foreach($units as $unit)
                                                                 <option value="{{$unit->id}}">{{ $unit->Name }}</option>
                                                             @endforeach
@@ -149,7 +154,7 @@
                                                     <div class="form-group">
                                                         <label for="customSelect1-1">{{ __('Admin/orchards.supported_side') }}</label>
                                                         <select class="custom-select form-control" id="customSelect1-1" name="supported_side"  required="required">
-                                                            <option selected disabled>--select--</option>
+                                                            <option value="" selected disabled>{{ __('Admin/site.select') }}</option>
                                                                 <option value="private">{{ __('Admin\orchards.private') }}</option>
                                                             <option value="govermental">{{ __('Admin\orchards.govermental') }}</option>
                                                             <option value="international_organizations">{{ __('Admin\orchards.international_organizations') }}</option>

@@ -67,7 +67,7 @@ class FarmerServiceRepository implements FarmerServiceInterface
                 return $farmer_service->created_at->diffforhumans();
             })
             ->addColumn('farmer', function (FarmerService $farmer_service) {
-                return $farmer_service->farmer->email;
+                return $farmer_service->farmer->firstname;
             })
             ->addColumn('admin', function (FarmerService $farmer_service) {
                 return $farmer_service->admin->firstname;

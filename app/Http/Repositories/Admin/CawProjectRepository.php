@@ -74,7 +74,7 @@ class CawProjectRepository implements CawProjectInterface
                 return view('dashboard.admin.caw_projects.data_table.food_source', compact('cawProject'));
             })
             ->addColumn('farmer', function (CawProject $cawProject) {
-                return $cawProject->farmer->email;
+                return $cawProject->farmer->firstname;
             })
             ->addColumn('admin', function (CawProject $cawProject) {
                 return $cawProject->admin->firstname;

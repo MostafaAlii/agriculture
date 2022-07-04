@@ -151,7 +151,7 @@
 
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+            {data: 'farmer', name: 'farmer',searchable: true, sortable: true},
 
             {data: 'village', name: 'village',searchable: true, sortable: true},
             {data: 'project_name', name: 'project_name',searchable: true, sortable: true},

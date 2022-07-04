@@ -69,7 +69,7 @@ class ProtectedHouseRepository implements ProtectedHouseInterface
                 return view('dashboard.admin.protected_houses.data_table.status', compact('protected'));
             })
             ->addColumn('farmer', function (ProtectedHouse $protected) {
-                return $protected->farmer->email;
+                return $protected->farmer->firstname;
             })
             ->addColumn('admin', function (ProtectedHouse $protected) {
                 return $protected->admin->firstname;

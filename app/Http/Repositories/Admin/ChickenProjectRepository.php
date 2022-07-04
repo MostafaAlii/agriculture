@@ -67,7 +67,7 @@ class ChickenProjectRepository implements ChickenProjectInterface{
                 return view('dashboard.admin.chicken_projects.data_table.suse_source', compact('chickenProject'));
             })
             ->addColumn('farmer', function (ChickenProject $chickenProject) {
-                return $chickenProject ->farmer->email;
+                return $chickenProject ->farmer->firstname;
             })
             ->addColumn('admin', function (ChickenProject $chickenProject) {
                 return $chickenProject ->admin->firstname;

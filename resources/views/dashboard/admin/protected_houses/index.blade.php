@@ -160,7 +160,7 @@
             {data: 'count_protected_house', name: 'count_protected_house',searchable: true, sortable: true},
 
             {data: 'average_product_annual', name: 'average_product_annual',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin.firstname',searchable: true, sortable: true},
+            {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

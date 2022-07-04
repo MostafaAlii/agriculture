@@ -96,7 +96,7 @@
                                                                <label for="customSelect1">{{ __('Admin/p_houses.supported_side') }}</label>
                                                                <select class="custom-select form-control" id="customSelect1"
                                                                        name="supported_side"  required="required" >
-                                                                   <option selected disabled>--select--</option>
+                                                                   <option value="">{{ __('Admin/site.select') }}</option>
                                                                        <option value="private">{{ __('Admin\p_houses.private')}}</option>
                                                                    <option value="govermental">{{ __('Admin\p_houses.govermental')}}</option>
                                                                    <option value="international organizations">{{ __('Admin\p_houses.international_organizations')}}</option>

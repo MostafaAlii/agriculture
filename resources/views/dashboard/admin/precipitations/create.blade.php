@@ -106,7 +106,7 @@
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/precipitations.unit') }}</label>
                                                                 <select class="custom-select form-control" id="customSelect" name="unit_id"  required="required" >
-                                                                    <option selected disabled>--select--</option>
+                                                                    <option value="">{{ __('Admin/site.select') }}</option>
                                                                     @foreach($units as $unit)
                                                                         <option value="{{$unit->id}}">{{ $unit->Name }}</option>
                                                                     @endforeach

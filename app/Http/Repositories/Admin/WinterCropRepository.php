@@ -37,8 +37,8 @@ class WinterCropRepository implements WinterCropInterface
         try {
             $validated = $request->validated();
 
-            $winter_crop =  WinterCrop::creat([
-                'name'=>$validated['name'],
+            $winter_crop =  WinterCrop::create([
+                'name'=>$validated['name']
             ]);
 
 
@@ -47,6 +47,7 @@ class WinterCropRepository implements WinterCropInterface
         } catch (\Exception $e) {
             toastr()->error(__('Admin/attributes.add_wrong'));
             return redirect()->back();
+//            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
 
 

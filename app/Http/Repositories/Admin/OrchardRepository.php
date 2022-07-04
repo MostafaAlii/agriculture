@@ -75,10 +75,10 @@ class OrchardRepository implements OrchardInterface
                 return view('dashboard.admin.orchards.data_table.supported_side', compact('chard'));
             })
             ->addColumn('farmer', function (Orchard $chard) {
-                return $chard->farmer->email;
+                return $chard->farmer->firstname;
             })
             ->addColumn('admin', function (Orchard $chard) {
-                return $chard->admin->email;
+                return $chard->admin->firstname;
             })
             ->addColumn('area', function (Orchard $chard) {
                 return $chard->area->name;
@@ -123,7 +123,7 @@ class OrchardRepository implements OrchardInterface
 
     public function getFarmer($village_id)
     {
-        $farmers = Farmer::findorfail($village_id)->pluck('firstname', 'id');
+        $farmers = Farmer::where('village_id',$village_id)->pluck('firstname', 'id');
 
         return $farmers;
     }

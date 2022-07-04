@@ -68,7 +68,7 @@ class BeekeeperRepository implements BeekeeperInterface
                 return view('dashboard.admin.beekeepers.data_table.supported_side', compact('beekeeper'));
             })
             ->addColumn('farmer', function (BeeKeeper $beekeeper) {
-                return $beekeeper->farmer->email;
+                return $beekeeper->farmer->firstname;
             })
             ->addColumn('admin', function (BeeKeeper $beekeeper) {
                 return $beekeeper->admin->firstname;

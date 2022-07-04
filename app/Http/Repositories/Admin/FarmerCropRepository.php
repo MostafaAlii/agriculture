@@ -67,10 +67,10 @@ class FarmerCropRepository implements FarmerCropInterface
                 return $farmer_crop->created_at->diffforhumans();
             })
             ->addColumn('farmer', function (FarmerCrop $farmer_crop) {
-                return $farmer_crop->farmer->email;
+                return $farmer_crop->farmer->firstname;
             })
             ->addColumn('admin', function (FarmerCrop $farmer_crop) {
-                return $farmer_crop->admin->email;
+                return $farmer_crop->admin->firstname;
             })
             ->addColumn('village', function (FarmerCrop $farmer_crop) {
                 return $farmer_crop->village->name;

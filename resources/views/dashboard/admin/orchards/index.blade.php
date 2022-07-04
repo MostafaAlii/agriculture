@@ -152,7 +152,7 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+                {data: 'farmer', name: 'farmer',searchable: true, sortable: true},
                 {data: 'area', name: 'area',searchable: true, sortable: true},
                 {data: 'state', name: 'state',searchable: true, sortable: true},
                 {data: 'village', name: 'village.name',searchable: true, sortable: true},
@@ -162,7 +162,7 @@
                 {data: 'tree_count_per_orchard', name: 'tree_count_per_orchard',searchable: true, sortable: true},
                 {data: 'name', name: 'name',searchable: true, sortable: true},
                 {data: 'supported_side', name: 'supported_side',searchable: true, sortable: true},
-                {data: 'admin', name: 'admin.email',searchable: true, sortable: true},
+                {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
