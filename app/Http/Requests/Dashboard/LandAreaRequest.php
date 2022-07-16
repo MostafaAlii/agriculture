@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class LandAreaRequest extends FormRequest
 {
@@ -20,7 +21,16 @@ class LandAreaRequest extends FormRequest
             'state_id' => 'required|exists:states,id',
             'village_id' => 'required|exists:villages,id',
             'L_area' =>'required|numeric',
-            'land_category_id' => 'required|exists:land_categories,id',
+            'land_category_id' => [
+                'required',
+                'exists:land_categories,id',
+                Rule::unique('land_areas')->where(function ($query) {
+                    $query->where('village_id', $this->village_id)
+
+                    ->where('land_category_id', $this->land_category_id);
+                })
+            ],
+//            'land_category_id' => 'required|exists:land_categories,id',
             'unit_id'=>'required|exists:units,id',
 
 

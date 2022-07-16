@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class FarmerServiceRequest extends FormRequest
+class FarmerServiceUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -21,7 +20,7 @@ class FarmerServiceRequest extends FormRequest
             'state_id' =>  'required|exists:states,id',
             'farmer_id' => [
                 'required',
-                'unique:farmer_services,farmer_id,id'.$this->id,
+                'unique:farmer_services,id'.$this->id,
                 'exists:farmers,id',
 
 

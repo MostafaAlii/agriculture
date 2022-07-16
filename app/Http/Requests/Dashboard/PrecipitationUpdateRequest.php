@@ -5,7 +5,7 @@ namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PrecipitationRequest extends FormRequest
+class PrecipitationUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -19,15 +19,7 @@ class PrecipitationRequest extends FormRequest
             'admin_id' => 'required|exists:admins,id',
             'area_id' => 'required|exists:areas,id',
             'state_id' => 'required|exists:states,id',
-            'precipitation_rate' => [
-                'required',
-                'numeric',
-                Rule::unique('precipitations')->where(function ($query) {
-                    $query
-                        ->where('precipitation_rate', $this->precipitation_rate)
-                        ->where('date', $this->date);
-                })->ignore($this->id)
-            ],
+            'precipitation_rate' =>'required|numeric|unique:precipitations,date,id'.$this->id,
             'date' => 'required|date',
             'unit_id'=>'required|exists:units,id',
 

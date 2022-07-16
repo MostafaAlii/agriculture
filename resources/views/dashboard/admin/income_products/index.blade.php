@@ -88,7 +88,7 @@
                                                     <th>{{ __('Admin/income_products.currency') }}</th>
 
                                                     <th>{{ __('Admin/income_products.income_product_date') }}</th>
-                                                    <th>{{ __('Admin/income_products.admin') }}</th>
+                                                    {{--<th>{{ __('Admin/income_products.admin') }}</th>--}}
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -114,10 +114,12 @@
 
 <script>
     let adminsTable = $('#income-table').DataTable({
-        // dom: "tiplr",
         serverSide: true,
         processing: true,
-        dom: 'Bfrtip',
+
+        dom: 'Blfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
+
 
         buttons: [
             { text:'{{__('Admin\site.excel')}}',
@@ -145,7 +147,6 @@
 
 
         ],
-        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
@@ -167,7 +168,7 @@
             {data: 'currency', name: 'currency',searchable: true, sortable: true},
 
             {data: 'income_product_date', name: 'income_product_date',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+            // {data: 'admin', name: 'admin.firstname',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
 

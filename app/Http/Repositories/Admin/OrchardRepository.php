@@ -58,12 +58,13 @@ class OrchardRepository implements OrchardInterface
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
-            $orchards = Orchard::with('admin', 'farmer', 'village', 'trees', 'landCategory', 'area', 'state')
+            $orchards = Orchard::query('admin', 'farmer', 'village', 'trees', 'landCategory', 'area', 'state')
                 ->where('admin_id', $admin->id)
                 ->selectRaw('distinct orchards.*')->get();
         } else {
-            $orchards = Orchard::with('admin', 'farmer', 'village', 'trees', 'landCategory', 'area', 'state')
-                ->selectRaw('distinct orchards.*')->get();
+            $orchards = Orchard::query( 'farmer', 'village', 'trees', 'landCategory', 'area', 'state')
+                ->selectRaw('distinct orchards.*')
+                ->get();
         }
         return DataTables::of($orchards)
             ->addColumn('record_select', 'dashboard.admin.orchards.data_table.record_select')
@@ -77,9 +78,9 @@ class OrchardRepository implements OrchardInterface
             ->addColumn('farmer', function (Orchard $chard) {
                 return $chard->farmer->firstname;
             })
-            ->addColumn('admin', function (Orchard $chard) {
-                return $chard->admin->firstname;
-            })
+//            ->addColumn('admin', function (Orchard $chard) {
+//                return $chard->admin->firstname;
+//            })
             ->addColumn('area', function (Orchard $chard) {
                 return $chard->area->name;
             })
@@ -284,8 +285,9 @@ class OrchardRepository implements OrchardInterface
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
+        $state_id = $admin->state->id;
         $land_categories = LandCategory::all();
-        return view('dashboard.admin.orchards.statistics', compact('admin', 'land_categories'));
+        return view('dashboard.admin.orchards.statistics', compact('admin', 'land_categories','state_id'));
 
     }
 
@@ -352,7 +354,7 @@ class OrchardRepository implements OrchardInterface
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
-                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics'));
+                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics','state_id'));
 
             } elseif
             ($request->village_id != null && $request->land_category_id != null && $request->supported_side == null) {
@@ -380,7 +382,7 @@ class OrchardRepository implements OrchardInterface
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
-                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics'));
+                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics','state_id'));
 
             } elseif
             ($request->village_id != null && $request->land_category_id == null && $request->supported_side != null) {
@@ -408,7 +410,7 @@ class OrchardRepository implements OrchardInterface
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
-                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics'));
+                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics','state_id'));
 
             } elseif
             ($request->village_id == null && $request->land_category_id == null && $request->supported_side == null) {
@@ -434,7 +436,7 @@ class OrchardRepository implements OrchardInterface
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
-                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics'));
+                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics','state_id'));
 
             } elseif ($request->village_id != null && $request->land_category_id == null && $request->supported_side == null) {
                 $area_id = $admin->area_id;
@@ -461,10 +463,11 @@ class OrchardRepository implements OrchardInterface
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
-                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics'));
+                return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics','state_id'));
 
             }
-        } else if ($admin->type == 'admin') {
+        }
+        else if ($admin->type == 'admin') {
             if ($request->area_id != null && $request->state_id != null && $request->village_id != null
                 && $request->land_category_id != null && $request->supported_side != null) {
 

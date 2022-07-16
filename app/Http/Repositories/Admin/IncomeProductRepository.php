@@ -59,9 +59,9 @@ class IncomeProductRepository implements IncomeProductInterface {
             ->editColumn('created_at', function (IncomeProduct $income) {
                 return $income ->created_at->diffforhumans();
             })
-            ->editColumn('admin', function (IncomeProduct $income) {
-                return $income->admin->firstname;
-            })
+//            ->addColumn('admin', function (IncomeProduct $income) {
+//                return $income->admin->firstname;
+//            })
             ->addColumn('country', function (IncomeProduct $income) {
                 return $income->country->name;
             })
@@ -766,7 +766,8 @@ $incomeQuery = IncomeProduct::query();
                 return view('dashboard.admin.income_products.income_products_statistics', compact('income_products', 'admin'));
 
             }
-        }elseif ($admin=='employee'){
+        }
+        elseif ($admin->type =='employee'){
 
             if ($request->country_id != null && $request->whole_product_id != null &&
                 $request->country_product_type != null && $request->start_date && $request->end_date) {
@@ -943,6 +944,26 @@ $incomeQuery = IncomeProduct::query();
                     ->where('income_products.admin_id', $admin->id)
 
                     ->where('country_product_type', $country_product_type)
+                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                return view('dashboard.admin.income_products.income_products_statistics', compact('income_products', 'admin'));
+
+            }
+            elseif ($request->countrry_id != null && $request->whole_product_id == null &&
+                $request->country_product_type == null && $request->start_date == null && $request->end_date == null) {
+
+                $income_products = IncomeProduct::select('country_translations.name as country',
+                    'whole_product_translations.name AS Product', 'wholesale_translations.Name  as admin_dep_name',
+                    'income_products.country_product_type as country_product_type'
+                    , DB::raw('SUM(income_products.income_product_amount) as product_amount')
+
+                    , 'income_products.income_product_date AS date')
+                    ->join('wholesale_translations', 'income_products.wholesale_id', '=', 'wholesale_translations.id')
+
+                    ->join('country_translations', 'income_products.country_id', '=', 'country_translations.id')
+                    ->join('whole_product_translations', 'income_products.whole_product_id', '=', 'whole_product_translations.id')
+                    ->where('country_translations.name', $country_name)
+                    ->where('income_products.admin_id', $admin->id)
+
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.income_products.income_products_statistics', compact('income_products', 'admin'));
 

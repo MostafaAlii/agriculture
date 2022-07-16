@@ -5,7 +5,7 @@ namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ChickenRequest extends FormRequest
+class ChickenUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -31,7 +31,7 @@ class ChickenRequest extends FormRequest
                         ->where('suse_source', $this->suse_source)
                         ->where('food_source', $this->food_source)
                         ->where('marketing_side', $this->marketing_side);
-                }),
+                })->ignore($this->id),
 
                 'string'
 

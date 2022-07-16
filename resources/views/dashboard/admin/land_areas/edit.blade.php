@@ -64,37 +64,6 @@
                                         @method('put')
                                         <div class="form-body">
 
-                                            <div class="row mt-2">
-                                                <div class="col col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="area_id">{{ __('Admin/land_areas.area') }}</label>
-                                                        <select name="area_id" id="area_id" class="form-control"  required="required">
-                                                            <option value="">{{ __('Admin/site.select') }}</option>
-                                                            </option>
-                                                            <option value="{{$land_area->area_id }}" selected>{{ $land_area->area->name }}</option>
-                                                            @foreach ($areas as $area)
-                                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
-                                                            @endforeach
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col col-md-6">
-
-                                                    <div class="form-group">
-                                                        <label for="state_id">{{ __('Admin/land_areas.state') }}</label>
-                                                        <select class="select2 form-control" name="state_id" id="state_id"  required="required">
-                                                            <option value="{{$land_area->state_id}}" selected>{{$land_area->state->name}}</option>
-
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-
 
                                             <div class="row">
                                                 <div class="col col-md-6">
@@ -103,8 +72,13 @@
                                                         <label for="state_id">{{ __('Admin/land_areas.village') }}</label>
                                                         <select class="select2 form-control" name="village_id" id="village_id"  required="required">
                                                             <option value="{{$land_area->village_id}}" selected>{{$land_area->village->name}}</option>
-
+                                                            @foreach ($villages as $village)
+                                                                <option value="{{ $village->id }}">{{ $village->name }}</option>
+                                                            @endforeach
                                                         </select>
+                                                        <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                        <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+                                                        <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
 
                                                     </div>
                                                 </div>

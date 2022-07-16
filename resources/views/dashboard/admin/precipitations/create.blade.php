@@ -66,30 +66,30 @@
                                         <div class="form-body">
 
                                                     <div class="row mt-2">
-                                                        <div class="col col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="area_id">{{ __('Admin/precipitations.area') }}</label>
-                                                                <select name="area_id" id="area_id" class="form-control"  required="required">
-                                                                    <option value="">{{ __('Admin/site.select') }}</option>
-                                                                    </option>
-                                                                    @foreach ($areas as $area)
-                                                                        <option value="{{ $area->id }}">{{ $area->name }}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                        {{--<div class="col col-md-6">--}}
+                                                            {{--<div class="form-group">--}}
+                                                                {{--<label for="area_id">{{ __('Admin/precipitations.area') }}</label>--}}
+                                                                {{--<select name="area_id" id="area_id" class="form-control"  required="required">--}}
+                                                                    {{--<option value="">{{ __('Admin/site.select') }}</option>--}}
+                                                                    {{--</option>--}}
+                                                                    {{--@foreach ($areas as $area)--}}
+                                                                        {{--<option value="{{ $area->id }}">{{ $area->name }}</option>--}}
+                                                                    {{--@endforeach--}}
+                                                                {{--</select>--}}
 
-                                                            </div>
-                                                        </div>
-                                                        <div class="col col-md-6">
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="col col-md-6">--}}
 
-                                                            <div class="form-group">
-                                                                <label for="state_id">{{ __('Admin/precipitations.state') }}</label>
-                                                                <select class=" form-control" name="state_id" id="state_id"  required="required">
-                                                                    <option value="">{{ __('Admin/site.select') }}</option>
+                                                            {{--<div class="form-group">--}}
+                                                                {{--<label for="state_id">{{ __('Admin/precipitations.state') }}</label>--}}
+                                                                {{--<select class=" form-control" name="state_id" id="state_id"  required="required">--}}
+                                                                    {{--<option value="">{{ __('Admin/site.select') }}</option>--}}
 
-                                                                </select>
+                                                                {{--</select>--}}
 
-                                                            </div>
-                                                        </div>
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
 
                                                     </div>
 
@@ -118,6 +118,10 @@
                                                             <label>{{ __('Admin/precipitations.date') }}</label>
                                                             <input name="date"  id="precipitation_date" value=""
                                                                    required="required" class="form-control datepicker" type="date">
+                                                            <input name="admin_id"  id="admin_id"type="hidden"  value="{{$adminId}}"class="form-control">
+                                                            <input name="area_id"  id="area_id"type="hidden"  value="{{$areaID}}"class="form-control">
+                                                            <input name="state_id"  id="state_id"type="hidden"  value="{{$stateID}}"class="form-control">
+
 
                                                         </div>
                                                     </div>

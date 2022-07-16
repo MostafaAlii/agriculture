@@ -17,9 +17,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area->name }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('Areas.index') }}">{{ $area_name }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state->name }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('States.index') }}">{{ $state_name }}</a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{ route('Animals.index') }}">{{ __('Admin/animals.animals_project') }}</a>
                                 </li>
@@ -119,7 +119,8 @@
         serverSide: true,
         processing: true,
 
-        dom: 'Bfrtip',
+        dom: 'Blfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
         buttons: [
             {text:'{{trans('Admin\site.excel')}}',
                 extend: 'excel',
@@ -146,7 +147,6 @@
 
         ],
 
-        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },

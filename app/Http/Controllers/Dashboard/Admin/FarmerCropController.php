@@ -7,6 +7,8 @@ use App\Http\Interfaces\Admin\FarmerCropInterface;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\Dashboard\FarmerCropRequest;
+use App\Http\Requests\Dashboard\FarmerCropUpdateRequest;
+
 
 class FarmerCropController extends Controller
 {
@@ -39,7 +41,7 @@ class FarmerCropController extends Controller
     public function store(FarmerCropRequest $request){
         return $this->Data->store($request);
     }
-    public function update(FarmerCropRequest $request,$id){
+    public function update(FarmerCropUpdateRequest $request,$id){
         return $this->Data->update($request,$id);
     }
     public function destroy($id) {

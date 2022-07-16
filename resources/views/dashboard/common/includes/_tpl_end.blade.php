@@ -84,11 +84,11 @@
     });
 </script>
 {{-- End Switchery --}}
-<script>
-    $(function() {
-        $('.datepiker').datepiker();
-    })
-</script>
+{{--<script>--}}
+    {{--$(function() {--}}
+        {{--$('.datepiker').datepiker();--}}
+    {{--})--}}
+{{--</script>--}}
 {{-- test bulk delete 2 --}}
 <script>
     $(function() {

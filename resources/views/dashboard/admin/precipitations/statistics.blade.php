@@ -54,23 +54,26 @@
                                                 <div class="row mt-2">
                                                     <div class="col ">
                                                         <div class="form-group">
-                                                            <label for="farmer_id">{{ __('Admin/bees.state') }}</label>
-                                                            <select class="select2 form-control" name="state_id"
-                                                                    id="state_id">
-                                                                @foreach (App\Models\State::all() as $state)
-                                                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
-                                                                @endforeach
+
+                                                                    <label for="state_id">{{ __('Admin/precipitations.state') }}</label>
+                                                                    <select class="select2 form-control" name="state_id"
+                                                                            id="state_id">
+                                                                        <option value="">{{ __('Admin/site.select') }}</option>
+                                                                        <?php
+                                                                        $state_name =$admin->state->name;
+                                                                        ?>
+                                                                        {{--@foreach ($states as $State)--}}
+                                                                            <option value="{{ $state_id }}">{{ $state_name }}</option>
+                                                                        {{--@endforeach--}}
                                                             </select>
-                                                            @error('state_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+
                                                         </div>
                                                     </div>
                                                     <div class="col ">
                                                     <div class="form-group">
                                                         <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
                                                         <div class="controls">
-                                                            <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                                            <input type="date" name="start_date" id="start_date" class="form-control" placeholder="Please select start date"> <div class="help-block"></div></div>
                                                         @error('start_date')
                                                         <small class="form-text text-danger">{{$message}}</small>
                                                         @enderror
@@ -81,7 +84,7 @@
                                                         <div class="form-group">
                                                             <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
                                                             <div class="controls">
-                                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                                                <input type="date" name="end_date" id="end_date" class="form-control " placeholder="Please select end date"> <div class="help-block"></div></div>
                                                             @error('end_date')
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                             @enderror
@@ -127,8 +130,9 @@
                                                     <div class="col ">
                                                         <div class="form-group">
                                                             <h5>{{__('Admin\precipitations.from_date')}}<span class="text-danger"></span></h5>
-                                                            <div class="controls">
-                                                                <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
+                                                                <div class="controls">
+
+                                                                <input type="date" name="start_date" id="start_date" class="form-control " placeholder="Please select start date"> <div class="help-block"></div></div>
                                                             @error('start_date')
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                             @enderror
@@ -139,7 +143,8 @@
                                                         <div class="form-group">
                                                             <h5>{{__('Admin\precipitations.to_date')}}<span class="text-danger"></span></h5>
                                                             <div class="controls">
-                                                                <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
+                                                                <input type="date" name="end_date" id="end_date" class="form-control" placeholder="Please select end date">
+                                                                <div class="help-block"></div></div>
                                                             @error('end_date')
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                             @enderror
@@ -175,7 +180,7 @@
                                                     <th>{{ __('Admin/precipitations.area') }}</th>
                                                     <th>{{ __('Admin/precipitations.state') }}</th>
                                                     <th>{{ __('Admin/precipitations.precipitation_rate') }}</th>
-                                                    <th>{{ __('Admin/precipitations.date') }}</th>
+                                                    {{--<th>{{ __('Admin/precipitations.date') }}</th>--}}
 
 
                                                 </tr>
@@ -186,7 +191,7 @@
                                                     <td>{{ $statistic->area }}</td>
                                                     <td>{{ $statistic->state }}</td>
                                                     <td>{{ $statistic->precipitation_rate }}</td>
-                                                    <td>{{ $statistic->date }}</td>
+                                                    {{--<td>{{ $statistic->date }}</td>--}}
 
                                                 </tr>
                                             @endforeach

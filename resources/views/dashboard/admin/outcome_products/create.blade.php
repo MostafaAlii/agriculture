@@ -68,7 +68,7 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label for="area_id">{{ __('Admin/outcome_products.whole_product') }}</label>
-                                                                <select name="whole_product_id" id="area_id" class="form-control select2"  required="required">
+                                                                <select name="whole_product_id" id="area_id" class="select2 form-control "  required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($whole_products as $whole_product)
@@ -81,7 +81,7 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label for="area_id">{{ __('Admin/outcome_products.country') }}</label>
-                                                                <select name="country_id" id="area_id" class="form-control"  required="required">
+                                                                <select name="country_id" id="area_id" class="select2 form-control"  required="required">
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($countries as $country)
@@ -136,7 +136,7 @@
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
                                                                 <label>{{ __('Admin/outcome_products.unit') }}</label>
-                                                                <select class="custom-select form-control" id="customSelect"   name="unit_id"  required>
+                                                                <select class="select2 form-control" id="customSelect"   name="unit_id"  required>
                                                                     <option value="">{{ __('Admin/site.select') }}</option>                                                                    @foreach($units as $unit)
                                                                         <option value="{{$unit->id}}">{{ $unit->Name }}</option>
                                                                     @endforeach

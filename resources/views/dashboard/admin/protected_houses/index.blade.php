@@ -86,7 +86,7 @@
                                                     <th>{{ __('Admin/p_houses.supported_side') }}</th>
                                                     <th>{{ __('Admin/p_houses.count_protected_house') }}</th>
                                                     <th>{{ __('Admin/p_houses.average_product_annual') }}</th>
-                                                    <th>{{ __('Admin/p_houses.admin') }}</th>
+                                                    {{--<th>{{ __('Admin/p_houses.admin') }}</th>--}}
 
                                                     <th>{{ __('Admin/site.created_at') }}</th>
                                                     <th>{{ __('Admin/site.action') }}</th>
@@ -114,7 +114,9 @@
     let adminsTable = $('#p_house-table').DataTable({
         serverSide: true,
         processing: true,
-        dom: 'Bfrtip',
+
+        dom: 'Blfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
 
         buttons: [
             { text:'{{trans('Admin\site.excel')}}',
@@ -142,7 +144,6 @@
 
 
         ],
-        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
@@ -160,7 +161,7 @@
             {data: 'count_protected_house', name: 'count_protected_house',searchable: true, sortable: true},
 
             {data: 'average_product_annual', name: 'average_product_annual',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+            // {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

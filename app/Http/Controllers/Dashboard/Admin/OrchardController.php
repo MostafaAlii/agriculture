@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\OrchardInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\OrchardRequest;
+use App\Http\Requests\Dashboard\OrchardUpdateRequest;
+
 
 class OrchardController extends Controller
 {
@@ -43,7 +45,7 @@ class OrchardController extends Controller
     public function edit($id) {
         return $this->Data->edit($id);
     }
-    public function update(OrchardRequest $request, $id) {
+    public function update(OrchardUpdateRequest $request, $id) {
         return $this->Data->update($request, $id);
     }
     public function destroy($id) {

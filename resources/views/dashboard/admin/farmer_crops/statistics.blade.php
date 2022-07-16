@@ -58,16 +58,18 @@
                                                 <div class="row mt-2">
                                                     <div class="col ">
                                                         <div class="form-group">
+
                                                             <label for="farmer_id">{{ __('Admin/bees.village') }}</label>
                                                             <select class="select2 form-control" name="village_id"
-                                                                    id="state_id">
-                                                                @foreach (App\Models\Village::all() as $village)
+                                                                    id="village_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                <?php
+                                                                $villages = \App\Models\Village::where('state_id', $state_id)->get();
+                                                                ?>
+                                                                @foreach ($villages as $village)
                                                                     <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('village_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col">

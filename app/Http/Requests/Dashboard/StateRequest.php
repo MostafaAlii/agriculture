@@ -19,10 +19,11 @@ class StateRequest extends FormRequest
                 'required',
 //                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
             'string',
-                'unique:state_translations,name,state_id'.$this->id,
+                'unique:state_translations,name,area_id'.$this->id,
 
 
             ],
+
             'location_x' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'location_y' => 'numeric|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
             'area_id' => 'required|exists:areas,id',

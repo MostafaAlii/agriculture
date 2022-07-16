@@ -1,21 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard\Admin;
-use App\Models\ChickenProject;
-use App\Models\Farmer;
-use App\Models\Admin;
-use App\Models\Area;
-use App\Models\State;
-use App\Models\Village;
 
-use App\Models\AdminDepartment;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Storage;
-use App\Traits\UploadT;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests\Dashboard\ChickenRequest;
+use App\Http\Requests\Dashboard\ChickenUpdateRequest;
+
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ChickenProjectInterface;
@@ -53,7 +44,7 @@ class ChickenProjectController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(ChickenRequest $request, $id) {
+    public function update(ChickenUpdateRequest $request, $id) {
         return $this->Data->update($request,$id);
     }
 

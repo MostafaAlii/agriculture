@@ -776,7 +776,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
             }
         }
-        elseif ($admin=='employee'){
+        elseif ($admin->type =='employee'){
 
             if ($request->country_id != null && $request->whole_product_id != null &&
                 $request->country_product_type != null && $request->start_date && $request->end_date) {

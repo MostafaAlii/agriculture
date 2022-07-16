@@ -67,8 +67,9 @@
                                                     <div class="row mt-2">
                                                         <div class="col col-md-4">
                                                             <div class="form-group">
-                                                                <label for="area_id">{{ __('Admin/income_products.whole_product') }}</label>
-                                                                <select  name="whole_product_id" id="area_id" class="form-control select2" required autocomplete="on">
+                                                                <label for="area_id_2">{{ __('Admin/income_products.whole_product') }}</label>
+                                                                <select  name="whole_product_id" id="area_id_2" class="select2 form-control" required autocomplete="on">
+
                                                                     <option value="">{{ __('Admin/site.select') }}</option>
                                                                     </option>
                                                                     @foreach ($whole_products as $whole_product)

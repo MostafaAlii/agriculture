@@ -82,7 +82,7 @@
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label for="country_id">{{ __('Admin/income_products.country') }}</label>
-                                                        <select name="country_id" id="country_id" class="form-control"  required="required">
+                                                        <select name="country_id" id="country_id" class="select2 form-control"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             </option>
                                                             <option value="{{$income_product->country_id }}" selected>{{ $income_product->country->name }}</option>
@@ -97,7 +97,7 @@
 
                                                     <div class="form-group">
                                                         <label for="country_product_type-1">{{ __('Admin/income_products.country_product_type') }}</label>
-                                                        <select class="form-control" name="country_product_type" id="country_product_type-1"  required="required">
+                                                        <select class="select2 form-control" name="country_product_type" id="country_product_type-1"  required="required">
                                                             <option value="">{{ __('Admin/site.select') }}</option>
                                                             <option value="local" {{$income_product->country_product_type == 'local'?'selected':'' }}>{{ __('Admin/income_products.local') }}</option>
                                                             <option value="iraq" {{$income_product->country_product_type == 'iraq'?'selected':'' }}>{{ __('Admin/income_products.iraq') }}</option>
@@ -117,7 +117,7 @@
 
                                                     <div class="form-group">
                                                         <label for="wholesale_id-1">{{ __('Admin/income_products.wholesale') }}</label>
-                                                        <select class="custom-select form-control" id="wholesale_id-1" name="wholesale_id"  required="required">
+                                                        <select class="select2 form-control" id="wholesale_id-1" name="wholesale_id"  required="required">
                                                             <option value="{{$income_product->wholesale_id}}">{{$income_product->wholesale->Name}}</option>
 
                                                             @foreach(App\Models\Wholesale::all() as $wholesale)
@@ -160,7 +160,7 @@
                                                 <div class="col col-md-4">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/income_products.currency') }}</label>
-                                                        <select class="custom-select form-control" id="customSelect" name="currency_id"  required="required" >
+                                                        <select class="select2 form-control" id="customSelect" name="currency_id"  required="required" >
                                                             <option value="{{$income_product->currency_id}}">{{$income_product->currency->Name}}</option>                                                            @foreach($currencies as $currency)
                                                                 <option value="{{$currency->id}}">{{ $currency->Name }}</option>
                                                             @endforeach

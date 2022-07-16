@@ -84,7 +84,7 @@
                                                     <th>{{ __('Admin/land_areas.L_area') }}</th>
                                                     <th>{{ __('Admin/land_areas.unit') }}</th>
                                                     <th>{{ __('Admin/land_areas.land_category') }}</th>
-                                                    <th>{{ __('Admin/land_areas.admin') }}</th>
+                                                    {{--<th>{{ __('Admin/land_areas.admin') }}</th>--}}
 
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
@@ -113,7 +113,10 @@
     let adminsTable = $('#land-area-table').DataTable({
         serverSide: true,
         processing: true,
-        dom: 'Bfrtip',
+
+        dom: 'Blfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
+
 
         buttons: [
             { text:'{{trans('Admin\site.excel')}}',
@@ -156,7 +159,7 @@
             {data: 'L_area', name: 'L_area',searchable: true, sortable: true},
             {data: 'unit', name: 'unit',searchable: true, sortable: true},
             {data: 'landCategory', name: 'landCategory',searchable: true, sortable: true},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+            // {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
