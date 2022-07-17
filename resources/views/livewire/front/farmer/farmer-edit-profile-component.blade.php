@@ -82,7 +82,6 @@
                                     <p>
                                         <b>@lang('Admin/site.country')  : </b>
                                         <div class="input-wrp">
-                                            {{-- <div wire:ignore> --}}
                                             <select class=" textfield wide js-select" id="country_id" name="country_id" wire:model='country_id'>
                                                 <option disabled selected>{{ __('Admin/site.select') }}</option>
                                                 @foreach (\App\Models\Country::get() as $country)
@@ -91,7 +90,6 @@
                                                 </option>
                                                 @endforeach
                                             </select>
-                                        {{-- </div> --}}
                                         </div>
                                         @error('country_id')
                                         <span class="text-danger">{{ $message }}</span>
