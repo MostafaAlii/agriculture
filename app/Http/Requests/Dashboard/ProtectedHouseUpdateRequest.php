@@ -4,7 +4,8 @@ namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-class ProtectedHouseRequest extends FormRequest
+
+class ProtectedHouseUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -15,20 +16,14 @@ class ProtectedHouseRequest extends FormRequest
     public function rules()
     {
         return [
-//            'farmer_id' => [
-//                'required',
-//                'unique:protected_houses,farmer_id,id'.$this->id,
-//                'exists:farmers,id',
-//
-//
-//            ],
             'farmer_id' => [
                 'required',
-                Rule::unique('protected_houses')->where(function ($query) {
-                    $query->where('farmer_id', $this->farmer_id)
-                        ->where('supported_side', $this->supported_side);
-                })
+                'unique:protected_houses,supported_side,id'.$this->id,
+                'exists:farmers,id',
+
+
             ],
+
             'admin_id' => 'required|exists:admins,id',
             'area_id' => 'required|exists:areas,id',
             'state_id' => 'required|exists:states,id',
@@ -37,13 +32,6 @@ class ProtectedHouseRequest extends FormRequest
             'average_product_annual' =>'sometimes:nullable|numeric',
             'count_protected_house' =>'required|numeric',
             'status' => 'required|in:active,inactive',
-            'supported_side' => [
-                'required',
-                'unique:protected_houses,supported_side,id'.$this->id,
-                'in:private,govermental,international organizations',
-
-
-            ],
             'supported_side'=>'required|in:private,govermental,international organizations',
             'unit_id'=>'required|exists:units,id',
 
@@ -54,7 +42,9 @@ class ProtectedHouseRequest extends FormRequest
     {
         return [
             'farmer_id.required' => trans('Admin/validation.required'),
-           'admin_id.required' => trans('Admin/validation.required'),
+            'farmer_id.unique' => trans('Admin/validation.unique'),
+
+            'admin_id.required' => trans('Admin/validation.required'),
             'count_protected_house.required'=>trans('Admin/validation.required'),
             'village_id.required' => trans('Admin/validation.required'),
             'average_product_annual.required' => trans('Admin/validation.required'),

@@ -56,7 +56,9 @@
                                                             <label for="country_id">{{ __('Admin/income_products.country') }}</label>
                                                             <select class="select2 form-control" name="country_id"
                                                                     id="country_id">
-                                                                @foreach (App\Models\Country::all() as $country)
+                                                                <option selected value = ""disabled>{{__('Admin\orchards.select')}}</option>
+
+                                                            @foreach (App\Models\Country::all() as $country)
                                                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                                 @endforeach
                                                             </select>
@@ -67,8 +69,8 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
-                                                            <label for="customSelect">{{ __('Admin/income_products.whole_product_id') }}</label>
-                                                            <select class="custom-select form-control" id="customSelect"
+                                                            <label for="customSelect">{{ __('Admin/income_products.product') }}</label>
+                                                            <select class="select2 form-control"  id="customSelect"
                                                                     name="whole_product_id">
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
 
@@ -77,6 +79,23 @@
                                                                 @endforeach
                                                             </select>
                                                             @error('whole_product_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect1-1">{{ __('Admin/income_products.country_product_type') }}</label>
+                                                            <select class="select2 form-control"
+                                                                    id="customSelect1-1" name="country_product_type">
+                                                                <option selected value = ""disabled>{{__('Admin\orchards.select')}}</option>
+                                                                <option value="local">{{ __('Admin\income_products.local') }}</option>
+                                                                <option value="iraq">{{ __('Admin\income_products.iraq') }}</option>
+                                                                <option value="imported">{{ __('Admin\income_products.imported') }}</option>
+
+
+                                                            </select>
+                                                            @error('country_product_type')
                                                             <small class="form-text text-danger">{{$message}}</small>
                                                             @enderror
                                                         </div>
@@ -112,7 +131,7 @@
                                                     <div class="col ">
                                                         <div class="form-group">
                                                             <label for="country_id">{{ __('Admin/income_products.country') }}</label>
-                                                            <select name="country_id" id="area_id" class="form-control" >
+                                                            <select name="country_id" id="area_id" class="select2 form-control"  >
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
                                                                 </option>
                                                                 @foreach (App\Models\Country::all() as $country)
@@ -130,7 +149,7 @@
                                                     <div class="col ">
                                                         <div class="form-group">
                                                             <label for="wholesale_id">{{ __('Admin/income_products.wholesale') }}</label>
-                                                            <select name="wholesale_id" id="wholesale_id" class="form-control select2">
+                                                            <select name="wholesale_id" id="wholesale_id"class="select2 form-control" >
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
                                                                 </option>
                                                                 @foreach (App\Models\Wholesale::all() as $wholesale)
@@ -142,10 +161,11 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="customSelect">{{ __('Admin/income_products.whole_product_id') }}</label>
-                                                            <select class="custom-select form-control" id="customSelect"
+                                                            <select class="select2 form-control" id="customSelect"
                                                                     name="whole_product_id">
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
 
@@ -166,7 +186,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="customSelect1-1">{{ __('Admin/income_products.country_product_type') }}</label>
-                                                            <select class="custom-select form-control"
+                                                            <select class="select2 form-control"
                                                                     id="customSelect1-1" name="country_product_type">
                                                                 <option selected value = ""disabled>{{__('Admin\orchards.select')}}</option>
                                                                 <option value="local">{{ __('Admin\income_products.local') }}</option>

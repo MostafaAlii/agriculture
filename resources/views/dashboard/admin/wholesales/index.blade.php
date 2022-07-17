@@ -116,9 +116,37 @@
     <!-- Datatable Fire -->
     <script>
         let countriesTable = $('#wholesale_table').DataTable({
-            // dom: "tiplr",
             serverSide: true,
             processing: true,
+
+            dom: 'Blfrtip',
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
+            buttons: [
+                { text:'{{trans('Admin\site.excel')}}',
+                    extend: 'excel',
+                    orientation: 'landscape',
+                    pageSize: 'A3',
+                    exportOptions: {
+                        columns: [1]
+                    },
+                    className: 'btn btn-primary ml-1',
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [1]
+                    },
+                    autoPrint: true,
+                    orientation: 'landscape',
+                    className: 'btn btn-success ml-1',
+                    pageSize: 'A3',
+                    text:'{{trans('Admin\site.print')}}'
+                },
+
+
+
+            ],
             "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },

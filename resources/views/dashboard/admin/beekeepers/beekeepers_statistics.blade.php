@@ -53,16 +53,18 @@
                                                 <div class="row mt-2">
                                                     <div class="col ">
                                                         <div class="form-group">
+                                                            <?php
+                                                            $villages = \App\Models\Village::where('state_id', $state_id)->get();
+                                                            ?>
                                                             <label for="farmer_id">{{ __('Admin/bees.village') }}</label>
                                                             <select class="select2 form-control" name="village_id"
                                                                     id="village_id">
-                                                                @foreach (App\Models\Village::all() as $village)
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            @foreach ($villages as $village)
                                                                     <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('village_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
                                                         </div>
                                                     </div>
 
@@ -77,9 +79,7 @@
                                                                 <option value="international organizations">{{ __('Admin\bees.international_organizations') }}</option>
 
                                                             </select>
-                                                            @error('supported_side')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+
                                                         </div>
                                                     </div>
 
@@ -111,9 +111,7 @@
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
 
                                                             </select>
-                                                            @error('state_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+
 
                                                         </div>
                                                     </div>
@@ -124,9 +122,7 @@
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
 
                                                             </select>
-                                                            @error('village_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+
                                                         </div>
                                                     </div>
 
@@ -141,9 +137,7 @@
                                                                 <option value="international organizations">{{ __('Admin\bees.international_organizations') }}</option>
 
                                                             </select>
-                                                            @error('supported_side')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+
 
                                                         </div>
                                                     </div>
@@ -180,6 +174,7 @@
                                                     <th>{{ __('Admin/bees.area') }}</th>
                                                     <th>{{ __('Admin/bees.state') }}</th>
                                                     <th>{{ __('Admin/bees.count_village') }}</th>
+                                                    <th>{{ __('Admin/bees.farmer') }}</th>
                                                     <th>{{ __('Admin/bees.sum_old_beehive_count') }}</th>
                                                     <th>{{ __('Admin/bees.sum_new_beehive_count') }}</th>
                                                     <th>{{ __('Admin/bees.beehive_count') }}</th>
@@ -195,6 +190,8 @@
                                                 <td>{{$statistc->Area}}</td>
                                                 <td>{{$statistc->State}}</td>
                                                 <td>{{$statistc->village_count}}</td>
+                                                <td>{{$statistc->farmer_name}}</td>
+
                                                 <td>{{$statistc->old_beehive_count}}</td>
                                                 <td>{{$statistc->new_beehive_count}}</td>
                                                 <td>{{$statistc->beehive_count}}</td>

@@ -20,7 +20,7 @@ class CreateOrchardsTable extends Migration
             $table->foreignId('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->foreignId('village_id')->references('id')->on('villages')->onDelete('cascade');
 
-            $table->foreignId('admin_id')->references('id')->on('admins');
+            $table->foreignId('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->foreignId('land_category_id')->references('id')->on('land_categories')->onDelete('cascade');
             $table->enum('supported_side',['private','govermental','international_organizations']);
             $table->foreignId('unit_id')->references('id')->on('units');

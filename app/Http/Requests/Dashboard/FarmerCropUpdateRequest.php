@@ -5,7 +5,7 @@ namespace App\Http\Requests\Dashboard;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class FarmerCropRequest extends FormRequest
+class FarmerCropUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -21,21 +21,30 @@ class FarmerCropRequest extends FormRequest
             'admin_id'        => 'required|exists:admins,id',
             'farmer_id' => [
                 'required',
-                Rule::unique('farmer_crops')->where(function ($query) {
-                    $query->where('date', $this->date)
-
-                        ->where('land_category_id', $this->land_category_id);
-                }),
+                'unique:farmer_crops,id'.$this->id,
                 'exists:farmers,id',
 
 
             ],
             'village_id'      => 'required|exists:villages,id',
+            'land_category_id' => [
+                'required',
+                'unique:farmer_crops,land_category_id,id'.$this->id,
+                'exists:land_categories,id',
 
+
+            ],
             'land_category_id' => 'required|exists:land_categories,id',
             'winter_area_crop' => 'sometimes:nullable|numeric',
             'summer_area_crop' =>  'sometimes:nullable|numeric',
-            'date'=>'required|date',
+//            'date'=>'required|date',
+            'date' => [
+                'required',
+                'unique:farmer_crops,id'.$this->id,
+                'date',
+
+
+            ],
 
 
 //            'winter_crops.*' => [

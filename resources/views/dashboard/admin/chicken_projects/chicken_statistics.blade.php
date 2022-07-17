@@ -54,16 +54,19 @@
                                                 <div class="row mt-2">
                                                     <div class="col ">
                                                         <div class="form-group">
+                                                            <?php
+                                                            $villages = \App\Models\Village::where('state_id', $state_id)->get();
+                                                            ?>
                                                             <label for="farmer_id">{{ __('Admin/orchards.village') }}</label>
                                                             <select class="select2 form-control" name="village_id"
                                                                     id="village_id">
-                                                                @foreach (App\Models\Village::all() as $village)
+                                                                @foreach ($villages as $village)
                                                                     <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('village_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('village_id')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -75,9 +78,9 @@
                                                                 <option value="private">{{ __('Admin\animals.private') }}</option>
                                                                 <option value="govermental">{{ __('Admin\animals.govermental') }}</option>
                                                             </select>
-                                                            @error('marketing_side')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('marketing_side')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -90,9 +93,9 @@
                                                                 <option value="imported">{{ __('Admin\animals.imported') }}</option>
 
                                                             </select>
-                                                            @error('food_source')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('food_source')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -105,9 +108,9 @@
                                                                 <option value="imported">{{ __('Admin\animals.imported') }}</option>
 
                                                             </select>
-                                                            @error('suse_source')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('suse_source')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
                                                         </div>
                                                     </div>
 
@@ -126,9 +129,9 @@
                                                                     <option value="{{ $area->id }}">{{ $area->name }}</option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('area_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('area_id')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
                                                         </div>
                                                     </div>
                                                     <div class="col ">
@@ -151,9 +154,9 @@
                                                                 <option value="">{{ __('Admin/site.select') }}</option>
 
                                                             </select>
-                                                            @error('village_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('village_id')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
 
                                                         </div>
                                                     </div>
@@ -166,9 +169,9 @@
                                                                 <option value="private">{{ __('Admin\animals.private') }}</option>
                                                                 <option value="govermental">{{ __('Admin\animals.govermental') }}</option>
                                                             </select>
-                                                            @error('marketing_side')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('marketing_side')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
                                                         </div>
                                                     </div>
 
@@ -182,9 +185,9 @@
                                                                 <option value="imported">{{ __('Admin\animals.imported') }}</option>
 
                                                             </select>
-                                                            @error('food_source')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('food_source')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -197,9 +200,9 @@
                                                                 <option value="imported">{{ __('Admin\animals.imported') }}</option>
 
                                                             </select>
-                                                            @error('suse_source')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
+                                                            {{--@error('suse_source')--}}
+                                                            {{--<small class="form-text text-danger">{{$message}}</small>--}}
+                                                            {{--@enderror--}}
                                                         </div>
                                                     </div>
 

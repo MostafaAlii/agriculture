@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard\Admin;
 
 use App\Http\Requests\Dashboard\AnimalRequest;
+use App\Http\Requests\Dashboard\AnimalUpdateRequest;
+
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\CawProjectInterface;
 use Illuminate\Http\Request;
@@ -48,7 +50,7 @@ class CawProjectController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(AnimalRequest $request, $id) {
+    public function update(AnimalUpdateRequest $request, $id) {
         return $this->Data->update($request,$id);
     }
 

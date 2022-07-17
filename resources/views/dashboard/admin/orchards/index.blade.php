@@ -85,7 +85,7 @@
                                                 <th>{{ __('Admin/orchards.tree_count_per_orchard') }}</th>
                                                 <th>{{ __('Admin/orchards.trees') }}</th>
                                                 <th>{{ __('Admin/orchards.supported_side') }}</th>
-                                                <th>{{ __('Admin/orchards.admin') }}</th>
+                                                {{--<th>{{ __('Admin/orchards.admin') }}</th>--}}
 
                                                 <th>{{ __('Admin/site.created_at') }}</th>
 
@@ -112,10 +112,12 @@
 
     <script>
         let orchardsTable = $('#orchard-table').DataTable({
-            // dom: "tiplr",
             serverSide: true,
             processing: true,
-            dom: 'Bfrtip',
+
+            dom: 'Blfrtip',
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
+
 
             buttons: [
                 { text:'{{__('Admin\site.excel')}}',
@@ -143,7 +145,6 @@
 
 
             ],
-            lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
             "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
@@ -152,7 +153,7 @@
             },
             columns: [
                 {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-                {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+                {data: 'farmer', name: 'farmer',searchable: true, sortable: true},
                 {data: 'area', name: 'area',searchable: true, sortable: true},
                 {data: 'state', name: 'state',searchable: true, sortable: true},
                 {data: 'village', name: 'village.name',searchable: true, sortable: true},
@@ -162,7 +163,7 @@
                 {data: 'tree_count_per_orchard', name: 'tree_count_per_orchard',searchable: true, sortable: true},
                 {data: 'name', name: 'name',searchable: true, sortable: true},
                 {data: 'supported_side', name: 'supported_side',searchable: true, sortable: true},
-                {data: 'admin', name: 'admin.email',searchable: true, sortable: true},
+                // {data: 'admin', name: 'admin.',searchable: true, sortable: true},
 
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

@@ -162,7 +162,7 @@
                                                 <div class="col col-md-3">
                                                     <div class="form-group">
                                                         <label  for="date">{{ __('Admin/crops.date') }}</label>
-                                                        <input name="date"  value="{{$farmerCrop->date}}" id="date"typ="date"   required="required" class="form-control">
+                                                        <input name="date"  value="{{$farmerCrop->date}}" id="date"type="date"   required="required" class="form-control">
                                                     </div>
                                                 </div>
 

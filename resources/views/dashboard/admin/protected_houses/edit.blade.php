@@ -98,7 +98,7 @@
                                                         <label for="customSelect1">{{ __('Admin/p_houses.supported_side') }}</label>
                                                         <select class="custom-select form-control" id="customSelect1" name="supported_side" required="required">
                                                             <option selected disabled>{{ __('Admin/site.select') }}</option>
-                                                                <option value="{{$protected_house->supported_side}}"{{$protected_house->supported_side=='private'?'selected':''}}>{{__('Admin\p_houses.private') }}</option>
+                                                            <option value="{{$protected_house->supported_side}}"{{$protected_house->supported_side=='private'?'selected':''}}>{{__('Admin\p_houses.private') }}</option>
                                                             <option value="{{$protected_house->supported_side}}"{{$protected_house->supported_side=='govermental'?'selected':''}}>{{__('Admin\p_houses.govermental') }}</option>
                                                             <option value="{{$protected_house->supported_side}}"{{$protected_house->supported_side=='international_organizations'?'selected':''}}>{{__('Admin\p_houses.international_organizations') }}</option>
 

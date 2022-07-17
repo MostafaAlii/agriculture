@@ -17,7 +17,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Admin/site.home') }}</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ route('AdminDepartment.index') }}">{{ $admin_dep_name }}</a>
+                                <li class="breadcrumb-item"><a href="{{ route('AdminDepartments.index') }}">{{ $dep_name }}</a>
                                 </li>
 
                                 <li class="breadcrumb-item"><a href="{{route('OutcomeProducts.index')}}">{{ __('Admin/outcome_products.outcome_productPageTitle') }}</a>
@@ -115,10 +115,12 @@
 
 <script>
     let adminsTable = $('#outcome-table').DataTable({
-        // dom: "tiplr",
         serverSide: true,
         processing: true,
-        dom: 'Bfrtip',
+
+        dom: 'Blfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
+
 
         buttons: [
             { text:'{{__('Admin\site.excel')}}',
@@ -146,7 +148,6 @@
 
 
         ],
-        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },

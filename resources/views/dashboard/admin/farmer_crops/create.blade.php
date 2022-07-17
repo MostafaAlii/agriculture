@@ -70,8 +70,7 @@
                                                             <div class="form-group">
                                                                 <label for="area_id">{{ __('Admin/crops.village') }}</label>
                                                                 <select name="village_id" id="area_id" class="form-control"  required="required">
-                                                                    <option value="">{{ __('Admin/site.select') }}</option>
-                                                                    </option>
+                                                                    <option value="" selected disabled>{{ __('Admin/site.select') }}</option>
                                                                     @foreach ($villages as $village)
                                                                         <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                                     @endforeach

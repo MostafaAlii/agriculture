@@ -67,7 +67,7 @@ class FarmerServiceRepository implements FarmerServiceInterface
                 return $farmer_service->created_at->diffforhumans();
             })
             ->addColumn('farmer', function (FarmerService $farmer_service) {
-                return $farmer_service->farmer->email;
+                return $farmer_service->farmer->firstname;
             })
             ->addColumn('admin', function (FarmerService $farmer_service) {
                 return $farmer_service->admin->firstname;
@@ -266,7 +266,8 @@ class FarmerServiceRepository implements FarmerServiceInterface
     {
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
-        return view('dashboard.admin.farmer_services.statistics', compact('admin'));
+        $state_id = $admin->state->id;
+        return view('dashboard.admin.farmer_services.statistics', compact('admin','state_id'));
     }
 
     public function farmer_services_statistics($request)
@@ -313,7 +314,7 @@ class FarmerServiceRepository implements FarmerServiceInterface
                     ->where('village_translations.name', $village_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer'
                     )->get();
-                return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
+                return view('dashboard.admin.farmer_services.statistics', compact('state_id','admin', 'statistics'));
 
             }
             if ($request->village_id == null) {
@@ -334,10 +335,11 @@ class FarmerServiceRepository implements FarmerServiceInterface
                     ->where('state_translations.state_id', $state_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer'
                     )->get();
-                return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
+                return view('dashboard.admin.farmer_services.statistics', compact('state_id','admin', 'statistics'));
 
             }
-        } elseif ($admin->type == 'admin') {
+        }
+        elseif ($admin->type == 'admin') {
             if ($request->area_id != null && $request->state_id != null && $request->village_id != null) {
                 $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
                     'village_translations.name AS Village', 'farmers.firstname AS farmer',
@@ -353,7 +355,7 @@ class FarmerServiceRepository implements FarmerServiceInterface
                     ->where('village_translations.name', $village_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer'
                     )->get();
-                return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
+                return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
 
             } elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null) {
                 $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
@@ -368,7 +370,7 @@ class FarmerServiceRepository implements FarmerServiceInterface
                     ->where('area_translations.name', $area_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer'
                     )->get();
-                return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
+                return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
 
             } elseif ($request->area_id == null && $request->state_id == null && $request->village_id == null) {
                 $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
@@ -382,7 +384,7 @@ class FarmerServiceRepository implements FarmerServiceInterface
                     ->join('farmers', 'farmer_services.farmer_id', '=', 'farmers.id')
                     ->GroupBy('Area', 'State', 'Village', 'farmer'
                     )->get();
-                return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
+                return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
 
             } elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null) {
                 $statistics = FarmerService::select('area_translations.name AS Area', 'state_translations.name AS State',
@@ -398,7 +400,7 @@ class FarmerServiceRepository implements FarmerServiceInterface
                     ->where('state_translations.name', $state_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer'
                     )->get();
-                return view('dashboard.admin.farmer_services.statistics', compact('statistics', 'admin'));
+                return view('dashboard.admin.farmer_services.statistics', compact('admin', 'statistics'));
 
             }
 

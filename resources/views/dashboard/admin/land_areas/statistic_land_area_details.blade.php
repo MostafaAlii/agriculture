@@ -54,16 +54,18 @@
                                                 <div class="row mt-2">
                                                     <div class="col ">
                                                         <div class="form-group">
-                                                            <label for="farmer_id">{{ __('Admin/orchards.village') }}</label>
+
+                                                            <label for="farmer_id">{{ __('Admin/bees.village') }}</label>
                                                             <select class="select2 form-control" name="village_id"
                                                                     id="village_id">
-                                                                @foreach (App\Models\Village::all() as $village)
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                <?php
+                                                                $villages = \App\Models\Village::where('state_id', $state_id)->get();
+                                                                ?>
+                                                            @foreach ($villages as $village)
                                                                     <option value="{{ $village->id }}">{{ $village->name }}</option>
                                                                 @endforeach
                                                             </select>
-                                                            @error('village_id')
-                                                            <small class="form-text text-danger">{{$message}}</small>
-                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -71,7 +73,9 @@
                                                             <label for="customSelect">{{ __('Admin/orchards.land_category_id') }}</label>
                                                             <select class="custom-select form-control" id="customSelect"
                                                                     name="land_category_id">
-                                                                @foreach($land_categories as $land_category)
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            @foreach(\App\Models\LandCategory::all() as $land_category)
                                                                     <option value="{{$land_category->id}}">{{ $land_category->category_name }}</option>
                                                                 @endforeach
                                                             </select>

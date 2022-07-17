@@ -9,6 +9,7 @@ use App\Models\FarmerService;
 
 
 use App\Http\Requests\Dashboard\FarmerServiceRequest;
+use App\Http\Requests\Dashboard\FarmerServiceUpdateRequest;
 
 
 class FarmerServiceController extends Controller
@@ -42,7 +43,7 @@ class FarmerServiceController extends Controller
         return $this->Data->store($request);
     }
 
-    public function update(FarmerServiceRequest $request,$id) {
+    public function update(FarmerServiceUpdateRequest $request,$id) {
         return $this->Data->update($request,$id);
     }
     public function destroy($id) {

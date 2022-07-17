@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ProtectedHouseInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\Dashboard\ProtectedHouseRequest;
+use App\Http\Requests\Dashboard\ProtectedHouseUpdateRequest;
+
 
 class ProtectedHouseController extends Controller
 {
@@ -43,7 +45,7 @@ class ProtectedHouseController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(ProtectedHouseRequest $request, $id) {
+    public function update(ProtectedHouseUpdateRequest $request, $id) {
         return $this->Data->update($request, $id);
     }
 

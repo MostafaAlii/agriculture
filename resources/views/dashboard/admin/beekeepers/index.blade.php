@@ -91,7 +91,7 @@
 
                                                     <th>{{ __('Admin/bees.courses') }}</th>
                                                     <th>{{ __('Admin/bees.disasters') }}</th>
-                                                    <th>{{ __('Admin/bees.admin') }}</th>
+                                                    {{--<th>{{ __('Admin/bees.admin') }}</th>--}}
 
                                                     <th>{{ __('Admin/site.created_at') }}</th>
 
@@ -122,8 +122,8 @@
         serverSide: true,
         processing: true,
 
-        dom: 'Bfrtip',
-        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
+        dom: 'Blfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
@@ -159,7 +159,7 @@
 
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+            {data: 'farmer', name: 'farmer',searchable: true, sortable: true},
             {data: 'area', name: 'area',searchable: true, sortable: true},
             {data: 'state', name: 'state',searchable: true, sortable: true},
             {data: 'village', name: 'village',searchable: true, sortable: true},
@@ -172,7 +172,7 @@
             {data: 'supported_side', name: 'supported_side',searchable: true, sortable: true},
             {data: 'c_name', name: 'c_name'},
             {data: 'd_name', name: 'd_name'},
-            {data: 'admin', name: 'admin',searchable: true, sortable: true},
+            // {data: 'admin', name: 'admin',searchable: true, sortable: true},
 
             {data: 'created_at', name: 'created_at', searchable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},

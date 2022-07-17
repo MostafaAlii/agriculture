@@ -111,7 +111,12 @@
 
 <script>
     let adminsTable = $('#farmerservice-table').DataTable({
-        dom: 'Bfrtip',
+        serverSide: true,
+        processing: true,
+
+        dom: 'Blfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
+
         buttons: [
             { text:'{{trans('Admin\site.excel')}}',
                 extend: 'excel',
@@ -139,7 +144,6 @@
 
         ],
 
-        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },
@@ -148,7 +152,7 @@
         },
         columns: [
             {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
-            {data: 'farmer', name: 'farmer.email',searchable: true, sortable: true},
+            {data: 'farmer', name: 'farmer',searchable: true, sortable: true},
 
             {data: 'village', name: 'village',searchable: true, sortable: true},
 

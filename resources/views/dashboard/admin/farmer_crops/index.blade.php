@@ -100,7 +100,9 @@
         serverSide: true,
         processing: true,
 
-        dom: 'Bfrtip',
+        dom: 'Blfrtip',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
+
         buttons: [
             {text:'{{trans('Admin\site.excel')}}',
                 extend: 'excel',
@@ -126,7 +128,6 @@
             },
 
         ],
-        lengthMenu: [[10, 25, 50, 100, 500], [10, 25, 50, 100, 500]],
         "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },

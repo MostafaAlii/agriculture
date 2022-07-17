@@ -7,6 +7,7 @@ use App\Http\Interfaces\Admin\LandAreaInterface;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\Dashboard\LandAreaRequest;
+use App\Http\Requests\Dashboard\LandAreaUpdateRequest;
 
 
 class LandAreaController extends Controller
@@ -42,7 +43,7 @@ class LandAreaController extends Controller
         return $this->Data->edit($id);
     }
 
-    public function update(LandAreaRequest $request,$id){
+    public function update(LandAreaUpdateRequest $request,$id){
         return  $this->Data->update( $request,$id);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AnimalRequest extends FormRequest
 {
@@ -23,7 +24,13 @@ class AnimalRequest extends FormRequest
             'currency_id' => 'required|exists:currencies,id',
             'project_name' => [
                 'required',
-//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
+//
+                    Rule::unique('caw_projects')->where(function ($query) {
+                        $query->where('farmer_id', $this->farmer_id)
+                            ->where('type', $this->type)
+                            ->where('marketing_side', $this->marketing_side);
+                    }),
+
             'string'
 
             ],

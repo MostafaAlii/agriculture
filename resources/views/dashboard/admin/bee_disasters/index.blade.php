@@ -117,9 +117,37 @@
     <!-- Datatable Fire -->
     <script>
         let countriesTable = $('#bee_disaster_table').DataTable({
-            // dom: "tiplr",
-            serverSide: true,
-            processing: true,
+            dom: 'Blfrtip',
+
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 'All Record']],
+            buttons: [
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'A4',
+                    exportOptions: {
+                        columns: [ 1, 2, 3 ]
+                    },
+                    // columns: ':visible',
+                    className: 'btn btn-primary ml-1',
+
+                },
+                'excel',
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [ 1, 2, 3 ]
+                    },
+                    // columns: ':visible',
+                    autoPrint: true,
+                    orientation: 'landscape',
+                    className: 'btn btn-success ml-1',
+                    pageSize: 'A4',
+                },
+
+
+
+            ],
             "language": {
                 "url": "{{ asset('assets/admin/datatable-lang/' . app()->getLocale() . '.json') }}"
             },

@@ -67,10 +67,10 @@ class FarmerCropRepository implements FarmerCropInterface
                 return $farmer_crop->created_at->diffforhumans();
             })
             ->addColumn('farmer', function (FarmerCrop $farmer_crop) {
-                return $farmer_crop->farmer->email;
+                return $farmer_crop->farmer->firstname;
             })
             ->addColumn('admin', function (FarmerCrop $farmer_crop) {
-                return $farmer_crop->admin->email;
+                return $farmer_crop->admin->firstname;
             })
             ->addColumn('village', function (FarmerCrop $farmer_crop) {
                 return $farmer_crop->village->name;
@@ -296,7 +296,8 @@ class FarmerCropRepository implements FarmerCropInterface
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         $land_categories = LandCategory::all();
-        return view('dashboard.admin.farmer_crops.statistics', compact('admin', 'land_categories'));
+        $state_id = $admin->state->id;
+        return view('dashboard.admin.farmer_crops.statistics', compact('admin', 'land_categories','state_id'));
 
     }
 
@@ -600,9 +601,12 @@ class FarmerCropRepository implements FarmerCropInterface
 
             }
 
-        } elseif ($admin->type == 'employee') {
+        }
+        elseif ($admin->type == 'employee') {
+            $state_id = $admin->state->id;
             if ($request->start_date != null && $request->end_date != null &&
-                $request->village_id != null && $request->land_category_id != null) {
+                $request->village_id != null && $request->land_category_id != null)
+            {
                 $farmercropsQuery = FarmerCrop::whereRaw("date(farmer_crops.date) >= '" . $request->start_date . "'
              AND date(farmer_crops.date) <= '" . $request->end_date . "'");
 
@@ -625,9 +629,11 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->where('land_category_translations.category_name', $land_category_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
-                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+                return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
             } elseif ($request->start_date != null && $request->end_date != null &&
-                $request->village_id == null && $request->land_category_id == null) {
+                $request->village_id == null && $request->land_category_id == null)
+            {
+                $state_id = $admin->state->id;
                 $farmercropsQuery = FarmerCrop::whereRaw("date(farmer_crops.date) >= '" . $request->start_date . "'
              AND date(farmer_crops.date) <= '" . $request->end_date . "'");
 
@@ -647,11 +653,11 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->where('farmer_crops.admin_id', $admin->id)
                     ->where('area_translations.area_id', $area_id)
                     ->where('state_translations.state_id', $state_id)
-                    ->where('village_translations.name', $village_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
-                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+                return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
             } elseif ($request->village_id != null && $request->land_category_id == null) {
+                $state_id = $admin->state->id;
 
                 $statistics = FarmerCrop::select('area_translations.name AS Area',
                     'state_translations.name AS State',
@@ -671,8 +677,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->where('village_translations.name', $village_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
-                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+                return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
             } elseif ($request->village_id == null && $request->land_category_id == null) {
+                $state_id = $admin->state->id;
 
                 $statistics = FarmerCrop::select('area_translations.name AS Area',
                     'state_translations.name AS State',
@@ -691,8 +698,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->where('state_translations.state_id', $state_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
-                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+                return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
             } elseif ($request->village_id != null && $request->land_category_id != null) {
+                $state_id = $admin->state->id;
 
                 $statistics = FarmerCrop::select('area_translations.name AS Area',
                     'state_translations.name AS State',
@@ -713,7 +721,7 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->where('land_category_translations.category_name', $land_category_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
-                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+                return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
             }
         }
 
