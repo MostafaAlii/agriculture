@@ -142,9 +142,22 @@
                                                             @enderror
                                                         </fieldset>
                                                     </div>
-                                                    <div class="form-group myInput">
+                                                    <div class="form-group myInput mr-2">
                                                     </div>
 
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group mymoney">
+                                                        <label for="eventRegInput5">{{ __('Admin/site.money') }}<span class="text-danger">*</span></label>
+                                                        <select class="custom-select salary" id="customSelect" name="currency_id">
+                                                            <option  selected disabled>{{ __('Admin/site.select') }}</option>
+                                                            @foreach($currencies as $currency)
+                                                              <option value="{{ $currency->id }}">{{ $currency->Name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
@@ -246,7 +259,15 @@
              if(select =="perday"){
                 $('.myInput').empty()
                 $('.myInput').append(`<label for="eventRegInput5">{{ __('Admin/site.daily') }}<span class="text-danger">*</span></label>
-                                      <input type="text" id="eventRegInput5" class="form-control" name="daily_price" placeholder="{{ __('Admin/site.daily') }}" required>`)
+                                      <input type="text"
+                                             id="eventRegInput5"
+                                             class="form-control"
+                                             name="daily_price"
+                                             placeholder="{{ __('Admin/site.daily') }}" required>`)
+                // $('.mymoney').append(`
+
+                //                     `)
+
              }
             else if(select =="perhour"){
                 $('.myInput').empty()

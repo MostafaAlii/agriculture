@@ -28,7 +28,7 @@ class WorkerProfileRequest extends FormRequest {
             'work'            => 'in:alone,team',
             'daily_price'     => 'numeric|min:1',
             'hourly_price'    => 'numeric|min:1',
-
+            'currency_id'     => 'required',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

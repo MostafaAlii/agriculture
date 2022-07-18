@@ -3,6 +3,7 @@ namespace Database\Seeders;
 
 use App\Models\Area;
 use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Department;
 use App\Models\Image;
 use App\Models\Province;
@@ -35,7 +36,7 @@ class WorkerTableSeeder extends Seeder {
             'area_id'           => 1,
             'state_id'          => 1,
             'village_id'        => 1,
-            // 'department_id'     => 1,
+            'currency_id'       => 1,
             'status'            =>true,
             'remember_token'    => Str::random(10),
         ]);
@@ -55,7 +56,7 @@ class WorkerTableSeeder extends Seeder {
                 'country_id'       => $faker->numberBetween(1, Country::count()),
                 'state_id'         => $faker->numberBetween(1, State::count()),
                 'village_id'       => $faker->numberBetween(1, Village::count()),
-                // 'department_id'    => $faker->numberBetween(1, Department::count()),
+                'currency_id'      => $faker->numberBetween(1, Currency::count()),
                 'status'           => rand(0,1),
                 'salary'           => $faker->randomElement(['perhour', 'perday']),
                 'work'             => $faker->randomElement(['alone', 'team']),

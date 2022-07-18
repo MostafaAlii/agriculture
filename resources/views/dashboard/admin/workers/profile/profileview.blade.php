@@ -77,12 +77,12 @@
                             @if($worker->daily_price != null)
                                 <tr>
                                     <td>@lang('Admin/site.daily'):</td>
-                                    <td> $ {{number_format($worker->daily_price,2) }} </td>
+                                    <td>  {{number_format($worker->daily_price,2) }} {{ $worker->currency->Name }}</td>
                                 </tr>
                             @else
                                 <tr>
                                     <td>@lang('Admin/site.hourly'):</td>
-                                    <td> $ {{number_format($worker->hourly_price,2) }} </td>
+                                    <td> {{number_format($worker->hourly_price,2) }} {{ $worker->currency->Name }} </td>
                                 </tr>
                             @endif
 

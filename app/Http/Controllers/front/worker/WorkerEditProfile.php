@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\WorkerProfileRequest;
 use App\Models\Area;
 use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Province;
 use App\Models\State;
 use App\Models\Worker;
@@ -19,7 +20,8 @@ class WorkerEditProfile extends Controller
     use UploadT;
     public function editProfile()
     {
-        return view('front.worker.workerProfileEdit');
+        $currencies = Currency::all();
+        return view('front.worker.workerProfileEdit', compact('currencies'));
     }
     public function update(WorkerProfileRequest $request) {
         // dd($request);

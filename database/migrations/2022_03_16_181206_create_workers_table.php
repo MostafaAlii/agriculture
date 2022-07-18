@@ -23,14 +23,12 @@ class CreateWorkersTable extends Migration
             $table->text('desc')->nullable();
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
-            // $table->unsignedBigInteger('view')->default(0);
-            // $table->unsignedBigInteger('sales')->default(0);
             $table->foreignId('country_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('province_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('area_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('state_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('village_id')->nullable()->constrained()->cascadeOnDelete();
-            // $table->foreignId('department_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('currency_id')->nullable()->constrained()->cascadeOnDelete();
             $table->date('birthdate')->nullable();
             $table->boolean('status')->default(false);
             $table->enum('salary',['perday','perhour'])->default('perday');

@@ -3,6 +3,7 @@ namespace  App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\WorkerInterface;
 use App\Models\Admin;
 use App\Models\Area;
+use App\Models\Currency;
 use App\Models\Worker;
 use App\Notifications\NewWorker;
 use Illuminate\Http\Request;
@@ -49,8 +50,8 @@ class WorkerRepository implements WorkerInterface{
     }
 
     public function create() {
-        // $areas = Area::all();
-        return view('dashboard.admin.workers.create');
+        $currencies = Currency::all();
+        return view('dashboard.admin.workers.create',compact('currencies'));
     }
     public function store($request) {
         DB::beginTransaction();
@@ -74,8 +75,9 @@ class WorkerRepository implements WorkerInterface{
 
     public function edit($id) {
         $workerID = Crypt::decrypt($id);
+        $currencies = Currency::all();
         $worker=Worker::findorfail($workerID);
-        return view('dashboard.admin.workers.profile.profiledit', compact('worker'));
+        return view('dashboard.admin.workers.profile.profiledit', compact('worker','currencies'));
     }
 
     // public function update( $request,$id) {

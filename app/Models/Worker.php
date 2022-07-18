@@ -37,7 +37,10 @@ class Worker extends Authenticatable {
           public function village()
           {
               return $this->belongsTo(Village::class, 'village_id');
-          }
+            }
+            public function currency(): HasOne {
+                return $this->hasOne(Currency::class,'id','currency_id');
+            }
         //   public function department()
         //   {
         //       return $this->belongsTo(Department::class, 'department_id');

@@ -73,6 +73,11 @@
                                             @enderror
                                         </p>
                                         <p><b>@lang('Admin/site.email') : </b>{{ Auth::guard('web')->user()->email }} </p>
+                                        {{-- <p><b>@lang('Admin/site.country') : </b>{{ Auth::guard('web')->user()->country->name ?? null }} </p>
+                                        <p><b>@lang('Admin/site.province') : </b>{{ Auth::guard('web')->user()->province->name ?? null }} </p>
+                                        <p><b>@lang('Admin/site.area') : </b>{{ Auth::guard('web')->user()->area->name ?? null }} </p>
+                                        <p><b>@lang('Admin/site.state') : </b>{{ Auth::guard('web')->user()->state->name ?? null }} </p>
+                                        <p><b>@lang('Admin/site.village') : </b>{{ Auth::guard('web')->user()->village->name ?? null }} </p> --}}
                                         <p><b>@lang('Admin/site.phone') : </b> <input type="text" class="textfield" maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                                                 name="phone" value="{{ old('phone',Auth::guard('web')->user()->phone )}}">
                                             @error('phone')
@@ -97,32 +102,36 @@
                                     <div class="col-12 col-md-7 col-lg-6 col-xl-5">
                                         <p>
                                             <b>@lang('Admin/site.country') : </b>
-                                            <div class="input-wrp">
-                                                <select class=" textfield wide js-select select2" id="country_id" name="country_id" >
-                                                    <option disabled selected>{{ __('Admin/site.select') }}</option>
+                                            {{-- <div class="form-control"> --}}
+                                                <input readonly value="{{ Auth::guard('web')->user()->country->name ?? null }}" type="text" class="textfield">
+
+                                                {{-- <select class=" textfield wide js-select select2" id="country_id" name="country_id" >
+                                                    <option disabled selected >{{ __('Admin/site.select') }}</option>
                                                     @foreach (\App\Models\Country::get() as $country)
                                                      <option value="{{ $country->id }}" {{Auth::guard('web')->user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name ??null}}</option>
                                                     @endforeach
-                                                </select>
-                                            </div>
-                                            @error(' country_id') <span
+                                                </select> --}}
+                                            {{-- </div> --}}
+                                            {{-- @error(' country_id') <span
                                                 class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            @enderror --}}
                                         </p>
                                         <p>
                                             <b>@lang('Admin/site.province') : </b>
-                                            <div class="input-wrp">
+                                            <input readonly value="{{ Auth::guard('web')->user()->province->name ?? null }}" type="text" class="textfield">
+                                            {{-- <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="province_id" name="province_id">
                                                     <option value="{{ Auth::guard('web')->user()->province_id }}"  >{{ Auth::guard('web')->user()->province->name ??null}}</option>
                                                 </select>
                                             </div>
                                             @error('province_id')
                                                 <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            @enderror --}}
                                         </p>
                                         <p>
                                                 <b>@lang('Admin/site.area') : </b>
-                                            <div class="input-wrp">
+                                                <input readonly value="{{ Auth::guard('web')->user()->area->name ?? null }}" type="text" class="textfield">
+                                            {{-- <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="area_id" name="area_id">
                                                     <option value="{{ Auth::guard('web')->user()->area_id }}"  >{{ Auth::guard('web')->user()->area->name ??null}}</option>
 
@@ -130,11 +139,12 @@
                                             </div>
                                             @error('area_id')
                                                 <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            @enderror --}}
                                         </p>
                                         <p>
                                                 <b>@lang('Admin/site.state') : </b>
-                                            <div class="input-wrp">
+                                                <input readonly value="{{ Auth::guard('web')->user()->state->name ?? null }}" type="text" class="textfield">
+                                            {{-- <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="state_id" name="state_id">
                                                     <option value="{{ Auth::guard('web')->user()->state_id }}"  >{{ Auth::guard('web')->user()->state->name ??null}}</option>
 
@@ -142,11 +152,12 @@
                                             </div>
                                             @error('state_id')
                                                 <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            @enderror --}}
                                         </p>
                                         <p>
                                                 <b>@lang('Admin/site.village') : </b>
-                                            <div class="input-wrp">
+                                                <input readonly value="{{ Auth::guard('web')->user()->village->name ?? null }}" type="text" class="textfield">
+                                            {{-- <div class="input-wrp">
                                                 <select class="textfield wide js-select select2" id="village_id"
                                                     name="village_id">
                                                     <option value="{{ Auth::guard('web')->user()->village_id }}"  >{{ Auth::guard('web')->user()->village->name ??null}}</option>
@@ -155,7 +166,7 @@
                                             </div>
                                             @error('village_id')
                                                 <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            @enderror --}}
                                         </p>
                                         <p>
                                                 <b>@lang('Admin/site.department') : </b>

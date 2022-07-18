@@ -111,8 +111,21 @@
                                             </div>
                                         </div>
                                         <div class="myInput">
-
                                         </div>
+
+                                        {{-- <div class="row"> --}}
+                                            {{-- <div class="col-md-4"> --}}
+                                                <div class="form-group ">
+                                                    <label >{{ __('Admin/site.money') }}</label>
+                                                    <select class="textfield wide js-select select2 salary"  name="currency_id">
+                                                        <option  selected disabled>{{ __('Admin/site.select') }}</option>
+                                                        @foreach($currencies as $currency)
+                                                          <option value="{{ $currency->id }}"{{ $currency->id == Auth::guard('worker')->user()->currency->id ? 'selected':'' }}>{{ $currency->Name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            {{-- </div> --}}
+                                        {{-- </div> --}}
 
                                         <div class="spacer py-6 d-md-none"></div>
                                     </div>
