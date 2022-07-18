@@ -15,7 +15,7 @@ class AdminRequest extends FormRequest {
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins',
             'email'        => 'required|email|unique:admins',
             'password'     => 'required|confirmed|min:6|max:10',
-            'type'         => 'required|in:admin,employee',
+            'type'         => 'required|in:admin,admin_area,employee',
             'admin_department_id'=>'required|exists:admin_departments,id',
             'country_id'      => 'sometimes|nullable|exists:countries,id',
             'province_id'     => 'sometimes|nullable|exists:provinces,id',

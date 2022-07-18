@@ -47,7 +47,13 @@ class ChickenProjectRepository implements ChickenProjectInterface{
         if ($admin->type == 'employee') {
             $chickenProjects = ChickenProject::with('farmer', 'village', 'admin')
                 ->where('admin_id', $admin->id);
-        }else{
+        }
+        elseif ($admin->type == 'admin_area'){
+            $chickenProjects = ChickenProject::with('farmer', 'village', 'admin')
+                ->where('chicken_projects.area_id', $admin->area_id)
+                ->get();
+        }
+        else{
             $chickenProjects = ChickenProject::with('farmer', 'village', 'admin');
         }
 
@@ -656,6 +662,408 @@ class ChickenProjectRepository implements ChickenProjectInterface{
                     ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
                     ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
                     ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+
+
+        }
+        elseif ($admin->type == 'admin_area') {
+
+            if ($request->area_id != null && $request->state_id != null &&
+                $request->village_id != null && $request->food_source != null &&
+                $request->suse_source != null && $request->marketing_side != null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('chicken_projects.marketing_side', $marketing_side)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->where('chicken_projects.suse_source', $suse_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+
+
+            elseif ($request->area_id != null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source == null &&
+                $request->suse_source == null && $request->marketing_side == null)
+            {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null &&
+                $request->village_id == null && $request->food_source == null &&
+                $request->suse_source == null && $request->marketing_side == null)
+            {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('state_translations.name', $state_name)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id == null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source == null &&
+                $request->suse_source == null && $request->marketing_side != null)
+            {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('chicken_projects.marketing_side', $marketing_side)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id == null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source == null &&
+                $request->suse_source != null && $request->marketing_side == null)
+            {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('chicken_projects.suse_source', $suse_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id == null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source != null &&
+                $request->suse_source != null && $request->marketing_side != null)
+            {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.suse_source', $suse_source)
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('chicken_projects.marketing_side', $marketing_side)
+                    ->where('chicken_projects.food_source', $food_source)
+
+
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id == null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source != null &&
+                $request->suse_source == null && $request->marketing_side == null)
+            {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id
+                != null && $request->food_source == null && $request->suse_source == null
+                && $request->marketing_side == null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+
+            elseif ($request->area_id != null && $request->state_id != null &&
+                $request->village_id != null && $request->food_source != null &&
+                $request->suse_source != null && $request->marketing_side == null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->where('chicken_projects.suse_source', $suse_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+
+
+            elseif ($request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->food_source == null && $request->suse_source != null &&
+                $request->marketing_side != null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('chicken_projects.marketing_side', $marketing_side)
+                    ->where('chicken_projects.suse_source', $suse_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+
+
+            elseif ($request->area_id != null && $request->state_id != null &&
+                $request->village_id == null && $request->food_source != null &&
+                $request->suse_source == null && $request->marketing_side != null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('chicken_projects.marketing_side', $marketing_side)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+
+
+            elseif ($request->area_id != null && $request->state_id != null &&
+                $request->village_id == null && $request->food_source != null
+                && $request->suse_source != null && $request->marketing_side == null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->where('chicken_projects.suse_source', $suse_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+
+
+            elseif ($request->area_id != null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source != null &&
+                $request->suse_source != null && $request->marketing_side != null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('chicken_projects.marketing_side', $marketing_side)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->where('chicken_projects.suse_source', $suse_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+
+
+            elseif ($request->area_id != null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source != null &&
+                $request->suse_source == null && $request->marketing_side != null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('chicken_projects.marketing_side', $marketing_side)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->food_source != null && $request->suse_source != null
+                && $request->marketing_side == null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('chicken_projects.food_source', $food_source)
+                    ->where('chicken_projects.suse_source', $suse_source)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source == null
+                && $request->suse_source == null && $request->marketing_side != null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->where('area_translations.name', $area_name)
+                    ->where('chicken_projects.marketing_side', $marketing_side)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id == null && $request->state_id == null &&
+                $request->village_id == null && $request->food_source == null
+                && $request->suse_source == null && $request->marketing_side == null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
+                    ->get();
+                return view('dashboard.admin.chicken_projects.chicken_statistics', compact('admin', 'chicken_statistics'));
+
+            }
+            elseif ($request->area_id != null && $request->state_id != null &&
+                $request->village_id != null && $request->food_source != null &&
+                $request->suse_source == null && $request->marketing_side == null) {
+                $chicken_statistics = ChickenProject::select('area_translations.name AS Area', 'state_translations.name AS State',
+                    'farmers.firstname AS farmer_name', 'farmers.phone AS phone', 'village_translations.name AS village_name'
+                    , 'chicken_projects.project_name as project_name', 'chicken_projects.hall_num as hall_num',
+                    'chicken_projects.power as power',
+                    'chicken_projects.suse_source as suse_source',
+                    'chicken_projects.marketing_side as marketing_side', 'chicken_projects.food_source as food_source')
+                    ->join('area_translations', 'chicken_projects.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'chicken_projects.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'chicken_projects.village_id', '=', 'village_translations.id')
+                    ->join('farmers', 'chicken_projects.farmer_id', '=', 'farmers.id')
+                    ->where('chicken_projects.area_id', $admin->area_id)
                     ->where('area_translations.name', $area_name)
                     ->where('state_translations.name', $state_name)
                     ->where('village_translations.name', $village_name)

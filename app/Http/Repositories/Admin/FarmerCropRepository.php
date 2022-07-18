@@ -55,7 +55,15 @@ class FarmerCropRepository implements FarmerCropInterface
             $farmerCrops = FarmerCrop::with('admin', 'farmer', 'village', 'summer_crops', 'landCategory', 'winter_crops')
                 ->where('admin_id', $admin->id)
                 ->selectRaw('distinct farmer_crops.*')->get();
-        } else {
+        }
+        elseif($admin->type == 'admin_area'){
+
+            $farmerCrops = FarmerCrop::with('admin', 'farmer', 'village', 'summer_crops', 'landCategory', 'winter_crops')
+                ->where('area_id', $admin->area_id)
+                ->selectRaw('distinct farmer_crops.*')->get();
+
+        }
+        else {
             $farmerCrops = FarmerCrop::with('admin', 'farmer', 'village', 'summer_crops', 'winter_crops', 'landCategory')
                 ->selectRaw('distinct farmer_crops.*')->get();
         }
@@ -569,6 +577,8 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('area_translations.name', $area_name)
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
                     ->where('state_translations.name', $state_name)
                     ->where('village_translations.name', $village_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
@@ -591,6 +601,285 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+
+            }
+
+        }
+        elseif ($admin->type == 'admin_area') {
+            if ($request->area_id != null && $request->state_id != null &&
+                $request->village_id != null && $request->land_category_id != null &&
+                $request->start_date && $request->end_date) {
+
+                $farmercropsQuery = FarmerCrop::whereRaw("date(farmer_crops.date) >= '" . $request->start_date . "'
+             AND date(farmer_crops.date) <= '" . $request->end_date . "'");
+                $statistics = $farmercropsQuery->select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+            } elseif ($request->start_date && $request->end_date &&
+                $request->area_id != null && $request->state_id == null && $request->village_id == null && $request->land_category_id != null) {
+
+                $farmercropsQuery = FarmerCrop::whereRaw("date(farmer_crops.date) >= '" . $request->start_date . "'
+             AND date(farmer_crops.date) <= '" . $request->end_date . "'");
+
+                $statistics = $farmercropsQuery->select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+            } elseif ($request->start_date != null && $request->end_date != null &&
+                $request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->land_category_id == null) {
+
+                $farmercropsQuery = FarmerCrop::whereRaw("date(farmer_crops.date) >= '" . $request->start_date . "'
+             AND date(farmer_crops.date) <= '" . $request->end_date . "'");
+
+                $statistics = $farmercropsQuery->select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+            } elseif ($request->start_date == null && $request->end_date == null &&
+                $request->area_id != null && $request->state_id != null && $request->village_id != null && $request->land_category_id != null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+
+            } elseif ($request->start_date == null && $request->end_date == null &&
+                $request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->land_category_id == null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+
+            } elseif ($request->start_date == null && $request->end_date == null &&
+                $request->area_id != null && $request->state_id == null && $request->village_id == null
+                && $request->land_category_id != null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+
+            } elseif ($request->start_date == null && $request->end_date == null &&
+                $request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->land_category_id == null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+
+            } elseif ($request->start_date == null && $request->end_date == null &&
+                $request->area_id == null && $request->state_id == null && $request->village_id == null
+                && $request->land_category_id == null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+
+            } elseif ($request->start_date == null && $request->end_date == null &&
+                $request->area_id != null && $request->state_id != null && $request->village_id == null
+                && $request->land_category_id != null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('area_translations.name', $area_name)
+                    ->where('state_translations.name', $state_name)
+                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+
+            } elseif ($request->start_date == null && $request->end_date == null &&
+                $request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->land_category_id == null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('area_translations.name', $area_name)
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
+                    ->where('state_translations.name', $state_name)
+                    ->where('village_translations.name', $village_name)
+                    ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
+                    ->get();
+                return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
+
+            } elseif ($request->start_date == null && $request->end_date == null &&
+                $request->area_id != null && $request->state_id != null && $request->village_id != null
+                && $request->land_category_id != null) {
+
+                $statistics = FarmerCrop::select('area_translations.name AS Area',
+                    'state_translations.name AS State',
+                    'village_translations.name AS Village', 'farmers.firstname AS farmer',
+                    DB::raw('SUM(farmer_crops.winter_area_crop) As winter_area_crop'),
+                    DB::raw('SUM(farmer_crops.summer_area_crop) As summer_area_crop'),
+
+                    'farmer_crops.date As date', 'land_category_translations.category_name As category_name')
+                    ->join('area_translations', 'farmer_crops.area_id', '=', 'area_translations.id')
+                    ->join('state_translations', 'farmer_crops.state_id', '=', 'state_translations.id')
+                    ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
+                    ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
+                    ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
+                    ->where('farmer_crops.area_id', $admin->area_id)
+
                     ->where('area_translations.name', $area_name)
                     ->where('state_translations.name', $state_name)
                     ->where('village_translations.name', $village_name)

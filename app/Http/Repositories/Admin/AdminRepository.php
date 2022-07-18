@@ -67,7 +67,7 @@ class AdminRepository implements AdminInterface
         try {
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
-            $requestData['type'] = $request->type;
+//            $requestData['type'] = $request->type;
             Admin::create($requestData);
             $admin = Admin::latest()->first();
             $admin->assignRole($request->input('roles_name'));
@@ -78,9 +78,9 @@ class AdminRepository implements AdminInterface
             return redirect()->route('Admins.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            toastr()->success(__('Admin/attributes.add_wrong'));
-           return redirect()->back();
-            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
+//            toastr()->error(__('Admin/attributes.add_wrong'));
+//           return redirect()->back();
+             return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 
