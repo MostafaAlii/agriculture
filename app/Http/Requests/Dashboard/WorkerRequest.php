@@ -20,6 +20,7 @@ class WorkerRequest extends FormRequest {
             'work'         => 'required|in:alone,team',
             'daily_price'  => 'numeric|min:1',
             'hourly_price' => 'numeric|min:1',
+            'currency_id'     => 'required',
 
         ];
 

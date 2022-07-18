@@ -73,6 +73,11 @@
                                             @enderror
                                         </p>
                                         <p><b>@lang('Admin/site.email') : </b>{{ Auth::guard('web')->user()->email }} </p>
+                                        {{-- <p><b>@lang('Admin/site.country') : </b>{{ Auth::guard('web')->user()->country->name ?? null }} </p>
+                                        <p><b>@lang('Admin/site.province') : </b>{{ Auth::guard('web')->user()->province->name ?? null }} </p>
+                                        <p><b>@lang('Admin/site.area') : </b>{{ Auth::guard('web')->user()->area->name ?? null }} </p>
+                                        <p><b>@lang('Admin/site.state') : </b>{{ Auth::guard('web')->user()->state->name ?? null }} </p>
+                                        <p><b>@lang('Admin/site.village') : </b>{{ Auth::guard('web')->user()->village->name ?? null }} </p> --}}
                                         <p><b>@lang('Admin/site.phone') : </b> <input type="text" class="textfield" maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                                                 name="phone" value="{{ old('phone',Auth::guard('web')->user()->phone )}}">
                                             @error('phone')

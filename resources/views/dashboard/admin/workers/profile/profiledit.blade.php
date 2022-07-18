@@ -145,6 +145,19 @@
                                                 </div>
                                                 <div class="form-group myInput">
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group mymoney">
+                                                            <label for="eventRegInput5">{{ __('Admin/site.money') }}<span class="text-danger">*</span></label>
+                                                            <select class="custom-select salary" id="customSelect" name="currency_id">
+                                                                <option  selected disabled>{{ __('Admin/site.select') }}</option>
+                                                                @foreach($currencies as $currency)
+                                                                  <option value="{{ $currency->id }}"{{ $currency->id == $worker->currency->id ? 'selected':'' }}>{{ $currency->Name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>{{ __('Admin/site.password') }}<span class="text-danger">*</span></label>
