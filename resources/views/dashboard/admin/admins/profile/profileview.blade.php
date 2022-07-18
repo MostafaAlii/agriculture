@@ -69,7 +69,13 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.type'):</td>
-                                            <td>{{ $admin->type =='admin'?__('Admin/site.admins') : __('Admin/site.employee')}}</td>
+                                            @if($admin->type =='admin')
+                                                <td> {{__('Admin/site.admins')}}</td>
+                                            @elseif($admin->type =='admin_area')
+                                                <td> {{__('Admin/site.admin_area')}}<td>
+                                            @else
+                                                <td>  {{__('Admin/site.employee')}}</td>
+                                            {{--<td>{{ $admin->type =='admin'?__('Admin/site.admins') : __('Admin/site.employee')}}</td>--}}
                                         </tr>
 
                                     </tbody>

@@ -76,10 +76,26 @@
                                             <div class="col-md-6">
                                                 <fieldset class="form-group">
                                                     <select class="custom-select" id="customSelect" name="type">
-                                                        <option value="{{ $admin->type }}" selected >{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>
+                                                        <option value="{{ $admin->type }}" disabled selected >
+                                                            @if($admin->type =='admin')
+                                                                {{__('Admin/site.admins')}}
+                                                            @elseif($admin->type =='admin_area')
+                                                                {{__('Admin/site.admin_area')}}
+                                                            @else
+                                                                {{__('Admin/site.employee')}}
+                                                                {{--{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}--}}
+                                                        </option>
                                                         <option value="admin">{{ __('Admin/site.admins') }}</option>
+                                                        <option value="admin_area">{{ __('Admin/site.admin_area') }}</option>
+
                                                         <option value="employee">{{ __('Admin/site.employee') }}</option>
                                                     </select>
+
+                                                    {{--<select class="custom-select" id="customSelect" name="type">--}}
+                                                        {{--<option value="{{ $admin->type }}" selected >{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}</option>--}}
+                                                        {{--<option value="admin">{{ __('Admin/site.admins') }}</option>--}}
+                                                        {{--<option value="employee">{{ __('Admin/site.employee') }}</option>--}}
+                                                    {{--</select>--}}
                                                 </fieldset>
                                              </div>
                                              <div class="row">

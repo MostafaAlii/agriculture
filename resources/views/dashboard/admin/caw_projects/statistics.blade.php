@@ -99,6 +99,8 @@
 
 
                                                 </div>
+
+
                                             @elseif($admin->type =='admin')
 
                                                 <div class="row mt-2">
@@ -111,6 +113,83 @@
                                                                 @foreach (App\Models\Area::all() as $area)
                                                                     <option value="{{ $area->id }}">{{ $area->name }}</option>
                                                                 @endforeach
+                                                            </select>
+                                                            @error('area_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+
+                                                        <div class="form-group">
+                                                            <label for="state_id">{{ __('Admin/precipitations.state') }}</label>
+                                                            <select class=" form-control" name="state_id" id="state_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('state_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="farmer_id">{{ __('Admin/orchards.village') }}</label>
+
+                                                            <select class=" form-control" name="village_id" id="village_id">
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+
+                                                            </select>
+                                                            @error('village_id')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect">{{ __('Admin/animals.marketing_side') }}</label>
+                                                            <select class="custom-select form-control" id="customSelect"
+                                                                    name="marketing_side">
+                                                                <option selected value = ""disabled>{{__('Admin\p_houses.select')}}</option>
+                                                                <option value="private">{{ __('Admin\animals.private') }}</option>
+                                                                <option value="govermental">{{ __('Admin\animals.govermental') }}</option>
+                                                            </select>
+                                                            @error('marketing_side')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customSelect1-1">{{ __('Admin/animals.type') }}</label>
+                                                            <select class="custom-select form-control"
+                                                                    id="customSelect1-1" name="type">
+                                                                <option selected value = ""disabled>{{__('Admin\p_houses.select')}}</option>
+                                                                <option value="caw">{{ __('Admin\animals.caw') }}</option>
+                                                                <option value="ship">{{ __('Admin\animals.ship') }}</option>
+                                                                <option value="fish">{{ __('Admin\animals.fish') }}</option>
+
+                                                            </select>
+                                                            @error('type')
+                                                            <small class="form-text text-danger">{{$message}}</small>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            @elseif($admin->type =='admin_area')
+
+                                                <div class="row mt-2">
+                                                    <div class="col ">
+                                                        <div class="form-group">
+                                                            <label for="area_id">{{ __('Admin/precipitations.area') }}</label>
+                                                            <select name="area_id" id="area_id" class="form-control" >
+                                                                <option value="">{{ __('Admin/site.select') }}</option>
+                                                                <?php
+                                                                $area = App\Models\Area::findorfail($admin->area_id);
+                                                                ?>
+                                                                <option value="{{ $area->id }}">{{ $area->name }}</option>
                                                             </select>
                                                             @error('area_id')
                                                             <small class="form-text text-danger">{{$message}}</small>

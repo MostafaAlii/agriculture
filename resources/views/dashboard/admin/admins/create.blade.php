@@ -154,6 +154,8 @@
                                                         <select class="custom-select" id="customSelect" name="type">
                                                             <option selected>{{ __('Admin/site.select') }}</option>
                                                             <option value="admin">{{ __('Admin/site.admins') }}</option>
+                                                            <option value="admin_area">{{ __('Admin/site.admin_area') }}</option>
+
                                                             <option value="employee">{{ __('Admin/site.employee') }}</option>
                                                         </select>
                                                         @error('type')

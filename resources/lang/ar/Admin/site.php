@@ -94,6 +94,7 @@ return [
     'warning' => 'هل تريد الحذف ؟',
     'address' => 'العنوان',
     'admins' => 'الاداره',
+    'admin_area' => 'مدير قضاء',
     'type' => 'النوع',
     'newadmin' => 'ادمن جديد',
 

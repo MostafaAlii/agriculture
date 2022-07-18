@@ -11,7 +11,7 @@ class CreateAdminsTable extends Migration {
             $table->string('lastname');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->enum('type',['admin','employee'])->default('admin');
+            $table->enum('type',['admin','admin_area','employee'])->default('admin');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('address')->nullable();
