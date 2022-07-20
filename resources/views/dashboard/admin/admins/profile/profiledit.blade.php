@@ -118,7 +118,8 @@
                                                                     {{__('Admin/site.admin_area')}}
                                                                 @else
                                                                     {{__('Admin/site.employee')}}
-                                                                {{--{{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}}--}}
+                                                                {{-- {{$admin->type =='admin' ?  __('Admin/site.admins') : __('Admin/site.employee')}} --}}
+                                                                @endif
                                                             </option>
                                                             <option value="admin">{{ __('Admin/site.admins') }}</option>
                                                             <option value="admin_area">{{ __('Admin/site.admin_area') }}</option>

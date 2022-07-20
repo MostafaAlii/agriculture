@@ -72,9 +72,10 @@
                                             @if($admin->type =='admin')
                                                 <td> {{__('Admin/site.admins')}}</td>
                                             @elseif($admin->type =='admin_area')
-                                                <td> {{__('Admin/site.admin_area')}}<td>
+                                                <td> {{__('Admin/site.admin_area')}}</td>
                                             @else
                                                 <td>  {{__('Admin/site.employee')}}</td>
+                                            @endif
                                             {{--<td>{{ $admin->type =='admin'?__('Admin/site.admins') : __('Admin/site.employee')}}</td>--}}
                                         </tr>
 
