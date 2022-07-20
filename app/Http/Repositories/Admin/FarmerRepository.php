@@ -17,7 +17,25 @@ class FarmerRepository implements FarmerInterface{
     }
 
     public function data() {
-        $farmers = Farmer::orderByDesc('created_at')->get();
+        $adminID = Auth::user()->id;
+        $admin = Admin::findorfail($adminID);
+        if ($admin->type == 'employee') {
+            $farmers = Farmer::orderByDesc('created_at')
+                ->where('admin_id', $admin->id)
+                ->get();
+
+        }
+        elseif($admin->type == 'admin_area'){
+
+            $farmers = Farmer::orderByDesc('created_at')
+                ->where('area_id', $admin->area_id)
+                ->get();
+
+        }
+        else {
+            $farmers = Farmer::orderByDesc('created_at')->get();
+
+        }
 
         return DataTables::of($farmers)
             ->addColumn('record_select', 'dashboard.admin.farmers.data_table.record_select')

@@ -10,8 +10,8 @@
     @include('dashboard.common._partials.messages')
     <!-- Start Content Wrapper -->
     <div class="content-wrapper">
-        <div class="content-header row">
-        </div>
+        {{--<div class="content-header row">--}}
+        {{--</div>--}}
         <div class="content-body">
             <!-- users view start -->
             <section class="users-view">
@@ -53,19 +53,31 @@
                                     <tbody>
                                         <tr>
                                             <td>@lang('Admin/site.name'):</td>
-                                            <td class="users-view-username">{{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}</td>
+                                            <td class="users-view-username">
+                                                {{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.email'):</td>
-                                            <td class="users-view-email">{{ Auth::guard('admin')->user()->email }}</td>
+                                            <td class="users-view-email">
+                                                {{ Auth::guard('admin')->user()->email }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.phonenum'):</td>
-                                            <td>{{ Auth::guard('admin')->user()->phone }}</td>
+                                            <td>
+                                                {{ Auth::guard('admin')->user()->phone }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.type'):</td>
-                                            <td>{{ Auth::guard('admin')->user()->type =='admin'?__('Admin/site.admins') : __('Admin/site.employee')}}</td>
+                                                @if Auth::guard('admin')->user()->type =='admin'
+                                                <td>{{__('Admin/site.admins')}}</td>
+                                            @elseif Auth::guard('admin')->user()->type =='admin_area'
+                                            <td>{{__('Admin/site.admins')}}</td>
+                                        @else
+                                                <td>{{__('Admin/site.employee')}}</td>
+                                                @endif
                                         </tr>
 
                                     </tbody>
@@ -76,23 +88,33 @@
                                     <tbody>
                                         <tr>
                                             <td>@lang('Admin/site.birthday'):</td>
-                                            <td>{{ Auth::guard('admin')->user()->birthdate }}</td>
+                                            <td>
+                                                {{ Auth::guard('admin')->user()->birthdate }}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.country'):</td>
-                                            <td>{{ Auth::guard('admin')->user()->country->name ?? null}}</td>
+                                            <td>
+                                                {{ Auth::guard('admin')->user()->country->name ?? null}}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.province'):</td>
-                                            <td>{{ Auth::guard('admin')->user()->province->name ?? null}}</td>
+                                            <td>
+                                                {{ Auth::guard('admin')->user()->province->name ?? null}}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.area'):</td>
-                                            <td>{{ Auth::guard('admin')->user()->area->name ?? null}}</td>
+                                            <td>
+                                                {{ Auth::guard('admin')->user()->area->name ?? null}}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.state'):</td>
-                                            <td>{{ Auth::guard('admin')->user()->state->name ?? null}}</td>
+                                            <td>
+                                                {{ Auth::guard('admin')->user()->state->name ?? null}}
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.village'):</td>
