@@ -98,9 +98,9 @@ label.star:before {
                                             <p><b>@lang('Admin/site.worktype') : </b> {{$workers->work == 'alone' ?  __('Admin/site.alone') : __('Admin/site.team')}}</p>
                                             <p><b>@lang('Admin/site.salarytype') : </b> {{$workers->salary == 'perday' ?  __('Admin/site.perday') : __('Admin/site.perhour')}}</p>
                                             @if($workers->daily_price != null)
-                                               <p><b>@lang('Admin/site.daily') : </b> $ {{number_format($workers->daily_price,2) }}</p>
+                                               <p><b>@lang('Admin/site.daily') : </b>  {{number_format($workers->daily_price,2) }} {{ $workers->currency->Name }}</p>
                                             @else
-                                              <p><b>@lang('Admin/site.hourly') : </b> $ {{number_format($workers->hourly_price,2) }}</p>
+                                              <p><b>@lang('Admin/site.hourly') : </b>  {{number_format($workers->hourly_price,2) }} {{ $workers->currency->Name }}</p>
                                             @endif
                                              <p><b>@lang('Admin/site.desc') : </b> {!!  $workers->desc  !!} </p>
                                             <p><b>@lang('Admin/site.birthday') : </b> {{ $workers->birthdate }}</p>
