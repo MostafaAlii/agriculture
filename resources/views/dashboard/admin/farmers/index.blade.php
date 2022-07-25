@@ -68,6 +68,7 @@
                                                     {{-- <th>{{ __('Admin/site.country') }}</th> --}}
                                                     <th>{{ __('Admin/site.state') }}</th>
                                                     <th>{{ __('Admin/site.area') }}</th>
+                                                    <th>{{ __('Admin/site.village') }}</th>
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phonenum') }}</th>
                                                     <th>{{ __('Admin/site.productcount') }}</th>
@@ -116,6 +117,7 @@
             // {data: 'country', name: 'country'},
             {data: 'state', name: 'state'},
             {data: 'area', name: 'area'},
+            {data: 'village', name: 'village'},
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
             {data: 'productcount', name: 'productcount', searchable: false, sortable: false},

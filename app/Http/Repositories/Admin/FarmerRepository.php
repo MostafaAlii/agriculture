@@ -56,6 +56,9 @@ class FarmerRepository implements FarmerInterface{
             ->addColumn('area', function (Farmer $farmer) {
                 return $farmer->area->name ?? null;
             })
+            ->addColumn('village', function (Farmer $farmer) {
+                return $farmer->village->name ?? null;
+            })
             ->addColumn('productcount', function (Farmer $farmer) {
 
                 return view('dashboard.admin.farmers.data_table.related', compact('farmer'));
