@@ -2,6 +2,7 @@
 namespace  App\Http\Repositories\Admin;
 use App\Models\Farmer;
 use App\Http\Interfaces\Admin\FarmerInterface;
+use App\Models\Admin;
 use App\Models\Product;
 use App\Notifications\NewFarmer;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use App\Traits\UploadT;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 class FarmerRepository implements FarmerInterface{
     use UploadT;
@@ -17,13 +19,12 @@ class FarmerRepository implements FarmerInterface{
     }
 
     public function data() {
-        $adminID = Auth::user()->id;
+        $adminID = Auth::guard('admin')->user()->id;
         $admin = Admin::findorfail($adminID);
         if ($admin->type == 'employee') {
             $farmers = Farmer::orderByDesc('created_at')
-                ->where('admin_id', $admin->id)
+                ->where('state_id', $admin->state_id)
                 ->get();
-
         }
         elseif($admin->type == 'admin_area'){
 
@@ -46,8 +47,14 @@ class FarmerRepository implements FarmerInterface{
             ->addColumn('image', function (Farmer $farmer) {
                 return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
             })
-            ->addColumn('country', function (Farmer $farmer) {
-                return $farmer->country->name ?? null;
+            // ->addColumn('country', function (Farmer $farmer) {
+            //     return $farmer->country->name ?? null;
+            // })
+            ->addColumn('state', function (Farmer $farmer) {
+                return $farmer->state->name ?? null;
+            })
+            ->addColumn('area', function (Farmer $farmer) {
+                return $farmer->area->name ?? null;
             })
             ->addColumn('productcount', function (Farmer $farmer) {
 
