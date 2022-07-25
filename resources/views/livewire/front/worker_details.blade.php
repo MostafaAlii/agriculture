@@ -102,7 +102,7 @@ label.star:before {
                                             @else
                                               <p><b>@lang('Admin/site.hourly') : </b> $ {{number_format($workers->hourly_price,2) }}</p>
                                             @endif
-                                             <p><b>@lang('Admin/site.desc') : </b> {{ $workers->desc }}</p>
+                                             <p><b>@lang('Admin/site.desc') : </b> {!!  $workers->desc  !!} </p>
                                             <p><b>@lang('Admin/site.birthday') : </b> {{ $workers->birthdate }}</p>
                                             <p><b>@lang('Admin/site.address1') : </b> {{ $workers->address1 }}</p>
                                             <p><b>@lang('Admin/site.address2') : </b> {{ $workers->address2 }}</p>

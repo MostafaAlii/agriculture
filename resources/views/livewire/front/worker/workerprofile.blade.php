@@ -88,7 +88,7 @@
                     <p><b>@lang('Admin/site.area') : </b> {{ $worker->area->name ??null}}</p>
                     <p><b>@lang('Admin/site.state') : </b> {{ $worker->state->name ??null}}</p>
                     <p><b>@lang('Admin/site.village') : </b> {{ $worker->village->name ??null}}</p>
-                    <p><b>@lang('Admin/site.desc') : </b> {{ $worker->desc }}</p>
+                    <p><b>@lang('Admin/site.desc') : </b> {!!  $worker->desc  !!}</p>
                     <p><b>@lang('Admin/site.worktype') : </b> {{$worker->work == 'alone' ?  __('Admin/site.alone') : __('Admin/site.team')}}</p>
                     <p><b>@lang('Admin/site.salarytype') : </b> {{$worker->salary == 'perday' ?  __('Admin/site.perday') : __('Admin/site.perhour')}}</p>
                     @if($worker->daily_price != null)
