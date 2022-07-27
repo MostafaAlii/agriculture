@@ -1,4 +1,4 @@
-@section('title', __('website\home.farmerproduct'))
+@section('title', __('website\home.farmerproducts'))
 @section('css')
 
 @endsection

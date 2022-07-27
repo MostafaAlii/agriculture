@@ -138,4 +138,6 @@ return [
 'price_low_to_high'=>'Price Low to High',
 'newoffer_from_low_to_high'=>'New Offer From Low to High',
 'newoffer_from_high_to_low'=>'New Offer From High to Low',
+
+'farmerproducts'=>'Farmer Products',
 ];
