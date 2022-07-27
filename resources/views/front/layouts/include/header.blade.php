@@ -31,6 +31,19 @@
 
             <div id="top-bar__inner" class="top-bar__inner">
                 <div>
+                    <div class="top-bar__contacts">
+                        <span>{{ \App\Models\setting::first()->address }}</span>
+                        {{-- <span>523 Sylvan Ave, 5th Floor Mountain View, CA 940 USA</span> --}}
+                        <span><a href="#">{{  \App\Models\setting::first()->primary_phone }}</a>,&nbsp;&nbsp;
+                              <a href="#">{{  \App\Models\setting::first()->secondery_phone }}</a></span>
+
+
+                        <div class="social-btns">
+                            <a class="fontello-twitter" href="{{  \App\Models\setting::first()->twitter }}"></a>
+                            <a class="fontello-facebook" href="{{  \App\Models\setting::first()->facebook }}"></a>
+                            <a class="fontello-linkedin-squared" href="{{  \App\Models\setting::first()->inestegram }}"></a>
+                        </div>
+                    </div>
                     <nav id="top-bar__navigation" class="top-bar__navigation navigation" role="navigation">
                       @include('front.layouts.include.navbar')
                     </nav>

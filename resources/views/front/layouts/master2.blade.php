@@ -4,7 +4,7 @@
 
 	<head>
         @include('front.layouts.include.headcss')
-       
+
 	</head>
 
 	<body class="woocommerce-page catalog-page">

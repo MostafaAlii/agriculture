@@ -46,7 +46,7 @@
                 }
 
                 .vegas-overlay {
-                    opacity: .5;
+                    opacity: -.5;
                     background: url(overlays/02.png) center center
                 }
 
@@ -1002,7 +1002,14 @@
                                     return !/(Android|webOS|Phone|iPad|iPod|BlackBerry|Windows Phone)/i.test(navigator.userAgent)
                                 }
                             }(window.jQuery || window.Zepto);
-
+                            <?php
+                                $slider = \App\Models\Slider::limit(3)->get();
+                                if(isset($slider->image)){
+                                    $src=$slider->image->filename;
+                                }else{
+                                    $src='100.jpg';
+                                }
+                            ?>
                             jQuery(document).ready(function ($) {
 
                                 var slider = $('#vegas-slider'),
@@ -1011,21 +1018,20 @@
 
                                         {
                                             name: "img 1",
-                                            src: "{{ asset('Dashboard/img/sliders/100.jpg')}}"
+                                            src: "{{ asset('Dashboard/img/sliders/'.$slider[0]->image->filename) }}",
                                         },
                                         {
                                             name: "img 2",
-                                            src: "{{ asset('Dashboard/img/images/101.jpg')}}"
+                                            src: "{{ asset('Dashboard/img/sliders/'.$slider[1]->image->filename) }}",
                                         },
                                         {
                                             name: "img 3",
-                                            src: "{{ asset('Dashboard/img/images/102.jpg')}}"
+                                            src: "{{ asset('Dashboard/img/sliders/'.$slider[2]->image->filename) }}",
                                         }
                                     ],
                                     // }
                                     slider_content = $('.start-screen__content__item'),
                                     dots, a, x;
-
                                 slider.vegas({
                                     autoplay: false,
                                     timer: false,
@@ -1034,7 +1040,7 @@
                                     transitionDuration: 4000,
                                     delay: 5000,
                                     slides: slides,
-                                    overlay: "{{ asset('frontassets/img/home_img/overlays/05.png')}}",
+                                    overlay: "{{ asset('Dashboard/img/sliders/'.$src )}}",
                                     init: function (globalSettings) {
 
                                         if (this.data('dots') == true) {

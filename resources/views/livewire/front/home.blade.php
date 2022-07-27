@@ -714,7 +714,7 @@
     @include('livewire.front._home_review')
 
     <!-- start section blog-->
-    <section class="section section--no-pt section--no-pb">
+    {{-- <section class="section section--no-pt section--no-pb">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
                 <h2 class="__title">{{ __('website\home.blog') }}</h2>
@@ -769,11 +769,11 @@
             </div>
             <!-- end posts -->
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 
     <!-- start section -->
-    <section class="section">
+    {{-- <section class="section">
         <div class="container">
             <div class="partners-list">
                 <div class="js-slick" data-slick='{
@@ -830,6 +830,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 </div>
