@@ -93,6 +93,8 @@ return [
     'newworker'=>'New Worker',
     'newfarmer'=>'New Farmer',
     'farmer'=>'Farmers',
+    'farmer_created_from_dashboard'=>'Farmers From Dashboard',
+    'farmer_created_from_front'=>'Farmers from website',
     'warning' => 'Are you sure to delete ?',
 
     'phone'=>'Phone number must be 11 digits',

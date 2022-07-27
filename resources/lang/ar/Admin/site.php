@@ -91,6 +91,8 @@ return [
     'newworker' => 'عامل جديد',
     'newfarmer' => 'بائع جديد',
     'farmer' => 'المزارعين',
+    'farmer_created_from_dashboard'=>'المزارعين من لوحة التحكم',
+    'farmer_created_from_front'=>'المزارعين من الموقع',
     'warning' => 'هل تريد الحذف ؟',
     'address' => 'العنوان',
     'admins' => 'الاداره',

@@ -1,5 +1,5 @@
 <!-- start section -->
-@section('title', __('website\home.home'))
+@section('title', __('website\home.home2'))
 @section('css')
 @if(app()->getLocale()=='ar')
     <style>

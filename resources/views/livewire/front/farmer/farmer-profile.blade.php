@@ -81,15 +81,15 @@
                     <p><b>@lang('Admin/site.name')  : </b> {{ $farmer->firstname }} {{ $farmer->lastname }}</p>
                     <p><b>@lang('Admin/site.email') : </b> {{ $farmer->email }}</p>
                     <p><b>@lang('Admin/site.phonenum') : </b> {{ $farmer->phone }}</p>
-                    <p><b>@lang('Admin/site.birthday') : </b> {{ $farmer->birthdate }}</p>
-                    <p><b>@lang('Admin/site.address1') : </b> {{ $farmer->address1 }}</p>
-                    <p><b>@lang('Admin/site.address2') : </b> {{ $farmer->address2 }}</p>
-                    <p><b>@lang('Admin/site.country') : </b> {{ $farmer->country->name }}</p>
-                    <p><b>@lang('Admin/site.province') : </b> {{ $farmer->province->name }}</p>
-                    <p><b>@lang('Admin/site.area') : </b> {{ $farmer->area->name }}</p>
-                    <p><b>@lang('Admin/site.state') : </b> {{ $farmer->state->name }}</p>
-                    <p><b>@lang('Admin/site.village') : </b> {{ $farmer->village->name }}</p>
-                    <p><b>@lang('Admin/site.department') : </b> {{ $farmer->department->name }}</p>
+                    {{-- <p><b>@lang('Admin/site.birthday') : </b> {{ $farmer->birthdate }}</p>
+                    <p><b>@lang('Admin/site.address1') : </b> {{ $farmer->address1 ?? null}}</p>
+                    <p><b>@lang('Admin/site.address2') : </b> {{ $farmer->address2 ?? null}}</p>
+                    <p><b>@lang('Admin/site.country') : </b> {{ $farmer->country->name ?? null}}</p>
+                    <p><b>@lang('Admin/site.province') : </b> {{ $farmer->province->name ?? null}}</p>
+                    <p><b>@lang('Admin/site.area') : </b> {{ $farmer->area->name ?? null}}</p>
+                    <p><b>@lang('Admin/site.state') : </b> {{ $farmer->state->name ?? null}}</p>
+                    <p><b>@lang('Admin/site.village') : </b> {{ $farmer->village->name ?? null}}</p>
+                    <p><b>@lang('Admin/site.department') : </b> {{ $farmer->department->name ?? null}}</p> --}}
                     <!-- end form -->
                     <a href="{{ route('farmer.ownprofile.edit') }}"
                     class="custom-btn custom-btn--medium custom-btn--style-1"

@@ -24,7 +24,7 @@ class Farmer extends Authenticatable {
     // ];
     protected $guarded = [];
     public $timestamps = true;
-    
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -33,13 +33,18 @@ class Farmer extends Authenticatable {
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    //scope
+    public function farmerImage()
+    {
+        return asset('Dashboard/img/farmers/'. $this->image->filename);
+    }
 
-    
         // rel
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id');

@@ -204,7 +204,7 @@
                 </style>
             </div>
 
-            <div class="container">
+            {{-- <div class="container">
                 <div class="row align-items-center">
                     <?php $x=0;?>
                     @foreach($about_us as $info)
@@ -238,7 +238,7 @@
                     <?php $x++;?>
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
         </section>
         <!-- end section -->
 

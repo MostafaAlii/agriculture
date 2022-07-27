@@ -3,6 +3,8 @@ namespace  App\Http\Interfaces\Admin;
 interface farmerInterface {
     public function index();
     public function data();
+    public function farmerFront();
+    public function datafront();
     public function create();
     public function store($request);
     public function edit($id);

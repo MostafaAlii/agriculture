@@ -122,6 +122,10 @@ Route::group(
             /********************************* Start Farmer routes ************************************/
             Route::resource('farmers',FarmerController::class)->except(['show']);
             Route::get('/farmers/data', [FarmerController::class,'data'])->name('farmers.data');
+
+            Route::get('farmers/front',[FarmerController::class,'farmerFront'])->name('farmers.front');
+            Route::get('/farmers/front/data', [FarmerController::class,'datafront'])->name('farmers.datafront');
+
             Route::delete('/farmers/bulk_delete/{ids}', [FarmerController::class,'bulkDelete'])->name('farmers.bulk_delete');
             Route::get('/farmer/profile/{id}', [FarmerController::class,'showProfile'])->name('farmer.profile');
             Route::put('/farmer/profileupdate/{id}', [FarmerController::class,'updateAccount'])->name('farmer.updateAccount'); // update farmer form account

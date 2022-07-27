@@ -15,6 +15,15 @@ class FarmerRequest extends FormRequest {
             'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
             'email'        => 'required|email|unique:farmers',
             'password'     => 'required|confirmed|min:6|max:10',
+            'birthdate'       => 'date_format:Y-M-D|before:today',
+            'country_id'      => 'required',
+            'province_id'     => 'required',
+            'area_id'         => 'required',
+            'state_id'        => 'required',
+            'village_id'      => 'required',
+            'department_id'   => 'required',
+            'address1'        => 'required',
+            'address2'        => 'required',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

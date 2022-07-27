@@ -78,127 +78,22 @@
                                         <p><b>@lang('Admin/site.area') : </b>{{ Auth::guard('web')->user()->area->name ?? null }} </p>
                                         <p><b>@lang('Admin/site.state') : </b>{{ Auth::guard('web')->user()->state->name ?? null }} </p>
                                         <p><b>@lang('Admin/site.village') : </b>{{ Auth::guard('web')->user()->village->name ?? null }} </p> --}}
-                                        <p><b>@lang('Admin/site.phone') : </b> <input type="text" class="textfield" maxlength="11" minlength="11"  onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                                                name="phone" value="{{ old('phone',Auth::guard('web')->user()->phone )}}">
+                                        <p>
+                                            <b>@lang('Admin/site.phone') : </b>
+                                            <input type="text" class="textfield" maxlength="11" minlength="11"
+                                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                   name="phone" value="{{ old('phone',Auth::guard('web')->user()->phone )}}" />
                                             @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </p>
-                                        <p><b>@lang('Admin/site.address1') : </b> <input type="text" class="textfield"
-                                                name="address1" value="{{ old('address1',Auth::guard('web')->user()->address1 )}}">
-                                            @error('address1')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p><b>@lang('Admin/site.address2') : </b> <input type="text" class="textfield"
-                                                name="address2" value="{{ old('address2',Auth::guard('web')->user()->address2 )}}">
-                                            @error('address2')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
                                         <div class="spacer py-6 d-md-none"></div>
+                                        <div class="col-12 col-md-5 col-lg-6">
+                                            <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
+                                                role="button">@lang('Admin/site.edit')
+                                            </button>
+                                        </div>
                                     </div>
-
-                                    <div class="col-12 col-md-7 col-lg-6 col-xl-5">
-                                        <p>
-                                            <b>@lang('Admin/site.country') : </b>
-                                            {{-- <div class="form-control"> --}}
-                                                <input readonly value="{{ Auth::guard('web')->user()->country->name ?? null }}" type="text" class="textfield">
-
-                                                {{-- <select class=" textfield wide js-select select2" id="country_id" name="country_id" >
-                                                    <option disabled selected >{{ __('Admin/site.select') }}</option>
-                                                    @foreach (\App\Models\Country::get() as $country)
-                                                     <option value="{{ $country->id }}" {{Auth::guard('web')->user()->country_id == $country->id ? 'selected':'' }}>{{ $country->name ??null}}</option>
-                                                    @endforeach
-                                                </select> --}}
-                                            {{-- </div> --}}
-                                            {{-- @error(' country_id') <span
-                                                class="text-danger">{{ $message }}</span>
-                                            @enderror --}}
-                                        </p>
-                                        <p>
-                                            <b>@lang('Admin/site.province') : </b>
-                                            <input readonly value="{{ Auth::guard('web')->user()->province->name ?? null }}" type="text" class="textfield">
-                                            {{-- <div class="input-wrp">
-                                                <select class="textfield wide js-select select2" id="province_id" name="province_id">
-                                                    <option value="{{ Auth::guard('web')->user()->province_id }}"  >{{ Auth::guard('web')->user()->province->name ??null}}</option>
-                                                </select>
-                                            </div>
-                                            @error('province_id')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror --}}
-                                        </p>
-                                        <p>
-                                                <b>@lang('Admin/site.area') : </b>
-                                                <input readonly value="{{ Auth::guard('web')->user()->area->name ?? null }}" type="text" class="textfield">
-                                            {{-- <div class="input-wrp">
-                                                <select class="textfield wide js-select select2" id="area_id" name="area_id">
-                                                    <option value="{{ Auth::guard('web')->user()->area_id }}"  >{{ Auth::guard('web')->user()->area->name ??null}}</option>
-
-                                                </select>
-                                            </div>
-                                            @error('area_id')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror --}}
-                                        </p>
-                                        <p>
-                                                <b>@lang('Admin/site.state') : </b>
-                                                <input readonly value="{{ Auth::guard('web')->user()->state->name ?? null }}" type="text" class="textfield">
-                                            {{-- <div class="input-wrp">
-                                                <select class="textfield wide js-select select2" id="state_id" name="state_id">
-                                                    <option value="{{ Auth::guard('web')->user()->state_id }}"  >{{ Auth::guard('web')->user()->state->name ??null}}</option>
-
-                                                </select>
-                                            </div>
-                                            @error('state_id')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror --}}
-                                        </p>
-                                        <p>
-                                                <b>@lang('Admin/site.village') : </b>
-                                                <input readonly value="{{ Auth::guard('web')->user()->village->name ?? null }}" type="text" class="textfield">
-                                            {{-- <div class="input-wrp">
-                                                <select class="textfield wide js-select select2" id="village_id"
-                                                    name="village_id">
-                                                    <option value="{{ Auth::guard('web')->user()->village_id }}"  >{{ Auth::guard('web')->user()->village->name ??null}}</option>
-
-                                                </select>
-                                            </div>
-                                            @error('village_id')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror --}}
-                                        </p>
-                                        <p>
-                                                <b>@lang('Admin/site.department') : </b>
-                                            <div class="input-wrp">
-                                                <select class="textfield wide js-select select2" id="department_id"
-                                                    name="department_id">
-                                                    <option value="{{ Auth::guard('web')->user()->department_id }}"  >{{ Auth::guard('web')->user()->department->name ??null}}</option>
-                                                    @foreach (\App\Models\Department::get() as $department)
-                                                    <option value="{{ $department->id }}">{{ $department->name ??null}}</option>
-                                                   @endforeach
-                                                </select>
-                                            </div>
-                                            @error('department_id')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                        <p>
-                                                <b>@lang('Admin/site.birthday') : </b>
-                                            <div class="input-wrp">
-                                                <input type="date" class="textfield birthdate-picker" required name="birthdate"
-                                                    placeholder="Birth date" value="{{ Auth::guard('web')->user()->birthdate }}"
-                                                    data-validation-required-message="This birthdate field is required">
-                                            </div>
-                                            @error('birthdate')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </p>
-                                                <!-- end form -->
-                                    </div>
-                                    <button class="custom-btn custom-btn--medium custom-btn--style-1" type="submit"
-                                        role="button">@lang('Admin/site.edit')
-                                    </button>
                                 </div>
                             </form>
                         </div>

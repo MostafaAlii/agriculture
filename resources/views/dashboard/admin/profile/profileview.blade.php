@@ -71,13 +71,13 @@
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.type'):</td>
-                                                @if Auth::guard('admin')->user()->type =='admin'
+                                            @if (Auth::guard('admin')->user()->type =='admin')
                                                 <td>{{__('Admin/site.admins')}}</td>
-                                            @elseif Auth::guard('admin')->user()->type =='admin_area'
-                                            <td>{{__('Admin/site.admins')}}</td>
-                                        @else
-                                                <td>{{__('Admin/site.employee')}}</td>
-                                                @endif
+                                            @elseif (Auth::guard('admin')->user()->type =='admin_area')
+                                                <td>{{__('Admin/site.admins')}}</td>
+                                            @else
+                                            <td>{{__('Admin/site.employee')}}</td>
+                                            @endif
                                         </tr>
 
                                     </tbody>

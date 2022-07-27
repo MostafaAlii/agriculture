@@ -17,6 +17,9 @@ class FarmerRepository implements FarmerInterface{
     public function index() {
         return view('dashboard.admin.farmers.index');
     }
+    public function farmerFront() {
+        return view('dashboard.admin.farmers.farmer_front');
+    }
 
     public function data() {
         $adminID = Auth::guard('admin')->user()->id;
@@ -24,17 +27,19 @@ class FarmerRepository implements FarmerInterface{
         if ($admin->type == 'employee') {
             $farmers = Farmer::orderByDesc('created_at')
                 ->where('state_id', $admin->state_id)
+                ->where('department_id','!=' ,null)
                 ->get();
         }
         elseif($admin->type == 'admin_area'){
 
             $farmers = Farmer::orderByDesc('created_at')
                 ->where('area_id', $admin->area_id)
+                ->where('department_id','!=' ,null)
                 ->get();
 
         }
         else {
-            $farmers = Farmer::orderByDesc('created_at')->get();
+            $farmers = Farmer::with('image')->orderByDesc('created_at')->where('department_id','!=' ,null)->get();
 
         }
 
@@ -47,9 +52,34 @@ class FarmerRepository implements FarmerInterface{
             ->addColumn('image', function (Farmer $farmer) {
                 return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
             })
-            // ->addColumn('country', function (Farmer $farmer) {
-            //     return $farmer->country->name ?? null;
-            // })
+            ->addColumn('state', function (Farmer $farmer) {
+                return $farmer->state->name ?? null;
+            })
+            ->addColumn('area', function (Farmer $farmer) {
+                return $farmer->area->name ?? null;
+            })
+            ->addColumn('village', function (Farmer $farmer) {
+                return $farmer->village->name ?? null;
+            })
+            ->addColumn('productcount', function (Farmer $farmer) {
+
+                return view('dashboard.admin.farmers.data_table.related', compact('farmer'));
+            })
+            ->addColumn('actions', 'dashboard.admin.farmers.data_table.actions')
+            ->rawColumns([ 'record_select','actions'])
+            ->toJson();
+    }
+    public function datafront() {
+        $farmers = Farmer::with('image')->orderByDesc('created_at')->where('department_id', null)->get();
+        return DataTables::of($farmers)
+            ->addColumn('record_select', 'dashboard.admin.farmers.data_table.record_select')
+            ->addIndexColumn()
+            ->editColumn('created_at', function (Farmer $farmer) {
+                return $farmer->created_at->format('Y-m-d');
+            })
+            ->addColumn('image', function (Farmer $farmer) {
+                return view('dashboard.admin.farmers.data_table.image', compact('farmer'));
+            })
             ->addColumn('state', function (Farmer $farmer) {
                 return $farmer->state->name ?? null;
             })

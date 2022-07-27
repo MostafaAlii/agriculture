@@ -79,8 +79,15 @@
                                         <li>
                                             <a class="menu-item" href="{{ route('farmers.index') }}">
                                                 <i class="icon-user-follow" style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
-                                                <span data-i18n="{{ __('Admin/site.farmer') }}">{{ __('Admin/site.farmer')
-                                                    }}</span>
+                                                <span data-i18n="{{ __('Admin/site.farmer_created_from_dashboard') }}">
+                                                {{ __('Admin/site.farmer_created_from_dashboard') }}</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="menu-item" href="{{ route('farmers.front') }}">
+                                                <i class="icon-user-follow" style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                                                <span data-i18n="{{ __('Admin/site.farmer_created_from_front') }}">
+                                                {{ __('Admin/site.farmer_created_from_front')}}</span>
                                             </a>
                                         </li>
                                         <!-- End Farmer -->

@@ -28,7 +28,12 @@ class FarmerController extends Controller {
     public function data() {
         return $this->Data->data();
     }// end of data
-
+    public function farmerFront() {
+        return $this->Data->farmerFront();
+    }
+    public function datafront() {
+        return $this->Data->datafront();
+    }// end of data
     public function create() {
         return $this->Data->create();
     }
