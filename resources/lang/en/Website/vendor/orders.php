@@ -1,0 +1,21 @@
+<?php
+return [
+    'no_data_found'                     =>                  'Sorry Not Have Any Orders Yet',
+    'order_details'                     =>                  'Orders Details',
+    'order_ref'                         =>                  'Order Ref',
+    'order_date'                        =>                  'Order Date',
+    'order_status'                      =>                  'Status',
+    'order_delivered_date'              =>                  'Delivered Date',
+    'order_canceled_date'               =>                  'Canceled Date',
+    'product'                           =>                  'Products',
+    'total'                             =>                  'Total',
+    'subtotal'                          =>                  'Sub Total',
+    'quantity'                          =>                  'Quantity',
+    'price'                             =>                  'Price',
+    'discount'                          =>                  'Discount',
+    'tax'                               =>                  'Tax',
+    'amount'                            =>                  'Amount',
+    'transactions'                      =>                  'Transactions',
+    'transactions_mode'                 =>                  'Transaction Mode',
+    'transactions_date'                 =>                  'Transaction Date',
+];

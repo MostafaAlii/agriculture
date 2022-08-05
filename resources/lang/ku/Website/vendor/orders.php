@@ -1,0 +1,21 @@
+<?php
+return [
+    'no_data_found'                     =>                  'عفوا لا يوجد لك اى طلبــات حاليا !!',
+    'order_details'                     =>                  'تفاصــيل الطلــب',
+    'order_ref'                         =>                  'معرف الطلــب',
+    'order_date'                        =>                  'تاريخ الطلــب',
+    'order_status'                      =>                  'حالة الطلــب',
+    'order_delivered_date'              =>                  'تاريخ تسليم الطلــب',
+    'order_canceled_date'               =>                  'تاريخ الغاء الطلــب',
+    'product'                           =>                  'المنتــج',
+    'total'                             =>                  'الاجمالــى',
+    'subtotal'                          =>                  'الصافى',
+    'quantity'                          =>                  'الكميــة',
+    'price'                             =>                  'الســعر',
+    'discount'                          =>                  'الخصــم',
+    'tax'                               =>                  'الضريبة',
+    'amount'                            =>                  'المبلــغ',
+    'transactions'                      =>                  'المعامـــلات',
+    'transactions_mode'                 =>                  'نوع المعاملــه',
+    'transactions_date'                 =>                  'تاريخ المعاملــه',
+];
