@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @charset "UTF-8";
+=======
+/* @charset "UTF-8"; */
+>>>>>>> 0c8600301304f45ac0969f13a779b26329fafb1b
 
 body.compensate-for-scrollbar {
     overflow: hidden;
@@ -10,6 +14,33 @@ html {
 
 }
 
+<<<<<<< HEAD
+=======
+
+
+/* end edit of style */
+p {
+    text-align: right;
+  }
+.top-bar__contacts{
+    justify-content: end;
+}
+.top-bar__contacts a {
+    color: #fff;
+  }
+  .top-bar__contacts span:first-child {
+    margin-top: 0;
+    margin-left: 30px;
+    color: #fff;
+  }
+  .__inner .row {
+    display: flex;
+    justify-content: center;
+  }
+/* end edit of style */
+
+
+>>>>>>> 0c8600301304f45ac0969f13a779b26329fafb1b
 .section-heading--left {
     text-align: right;
   }

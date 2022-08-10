@@ -18,7 +18,6 @@
 
 @endsection
 <div>
-    <!-- start section -->
     <section class="section">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
@@ -26,8 +25,6 @@
 
                 <p>{{__('Admin\site.administrative_desc')}}</p>
             </div>
-
-            <!-- start feature -->
             <div class="feature feature--style-1">
                 <div class="__inner">
                     <div class="row">
@@ -72,7 +69,6 @@
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
                                         data-src="{{ asset('frontassets/img/feature_img/4.png') }}" alt="demo" />
                                 </i>
-
                                 <h5 class="__title">{{__('Admin\site.planning')}}</h5>
                                 <h6>{{ \App\Models\LandArea::count() }} %</h6>
                             </div>
@@ -105,8 +101,6 @@
             <!-- end feature -->
         </div>
     </section>
-    <!-- end section -->
-    <!-- start wholesale section -->
     <section class="section">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
@@ -145,19 +139,16 @@
             <!-- end feature -->
         </div>
     </section>
-    <!-- end wholesale section -->
-    <!-- start section -->
     <section class="section section--no-pt section--no-pb">
         <div class="container">
             <div class="special-offer special-offer--style-1" data-aos="zoom-in" data-aos-duration="600"
                 data-aos-offset="70">
+
                 <h2 class="text text-center lazy " style="font-size: 8rem;"
                     data-src="{{ asset('frontassets/img/special_offer_text_bg.jpg') }}">{{ __('Website/home.homesms') }}</h2>
             </div>
         </div>
     </section>
-    <!-- end section -->
-    <!-- start section -->
     <section class="section">
         <div class="d-none d-lg-block">
             <img id="bg-img-1" class="img-fluid lazy" src="{{ asset('frontassets/img/blank.gif') }}"

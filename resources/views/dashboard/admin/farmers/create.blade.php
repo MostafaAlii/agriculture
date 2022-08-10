@@ -157,7 +157,10 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
                                                     <select class="select2 form-control" id="province_id" name="province_id">
+<<<<<<< HEAD
                                                         
+=======
+>>>>>>> 0c8600301304f45ac0969f13a779b26329fafb1b
                                                     </select>
                                                     @error('province_id')
                                                     <span class="text-danger">{{$message}}</span>

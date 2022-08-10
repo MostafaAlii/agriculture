@@ -103,7 +103,6 @@ return [
     'sortlow'      =>' ژ کێم بو گەلەک ',
     'sorthigh'     =>' ژ گەلەک بو کێم ',
     'perpage'      =>' بو هەمی لاپەران  ',
-
         //cart
         'cart_remove_success'=>'تم حذف المنتج من السله',
         'all_items_removed'=>'تم حذف جميع المنتجات من السله',
@@ -120,10 +119,10 @@ return [
 
     //product details
     'item_added_to_cart'=>'تم إضافة المنتج للسله',
-    'homesms'=>' نێترین بەرهەمێ بو بەربومێ',
+    'homesms'=>'نێترین بەرهەمێ بو بەربومێ',
 
     //home2
-    'healthy'=>' بەرهەم ',
+    'healthy'=>'الصحيه',
     'life'=>'الحياة',
     'with'=>'مع',
     'fresh'=>'الطازجه',
