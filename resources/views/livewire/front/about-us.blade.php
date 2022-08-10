@@ -6,41 +6,25 @@
 <br>
 <div>
     @foreach($about_us as $info)
-   	<!-- start section -->
-<<<<<<< HEAD
-       <section class="section section--no-pb section--custom-01" style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');">
-=======
-
-       <section class="section section--no-pb " >
->>>>>>> 0c8600301304f45ac0969f13a779b26329fafb1b
-        <div class="container">
-           
-            <div class="section-heading">
-                <h2 class="__title">{{$info->title}}</h2>
+        <section class="section section--no-pb section--custom-01"
+        style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="__title">{{$info->title}}</h2>
+                </div>
+                <div class="row">
+                    <div class="row" style="height: 40rem;">
+                        <div class="col-md-6 col-sm-8 ">
+                            <p>{!! $info->description !!} </p>
+                        </div>
+                        {{-- <div class="col-md-6 col-sm-8 section--custom-01"
+                        style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');">
+                        </div> --}}
+                    </div>
+                </div>
             </div>
-
-<<<<<<< HEAD
-            <div class="row">
-                <div class="col-12 col-lg-6 col-xl-8">
-                    <p>{!! $info->description !!} </p>
-
-                </div>
-=======
-            <div class="row" style="height: 40rem;">
-                <div class="col-md-6 col-sm-8 ">
-                    <p>{!! $info->description !!} </p>
-
-                </div>
-                <div class="col-md-6 col-sm-8 section--custom-01" style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');">
-                    
-                </div>
->>>>>>> 0c8600301304f45ac0969f13a779b26329fafb1b
-            </div>
-            
-        </div>
-        <br>
-    </section>
-    <!-- end section -->
+            <br>
+        </section>
     @endforeach
 
 
