@@ -31,12 +31,11 @@
             <div class="feature feature--style-1">
                 <div class="__inner">
                     <div class="row">
-                        <!-- start item -->
                         <div class="col-6 col-sm-4 col-lg-2">
                             <div class="__item  text-center" data-aos="fade" data-aos-delay="100" data-aos-offset="100">
                                 <i class="__ico">
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                        data-src="{{ asset('frontassets/img/feature_img/1.png') }}" alt="demo" />
+                                        data-src="{{ asset('frontassets/img/feature_img/2.png') }}" alt="demo" />
                                 </i>
 
                                 <h5 class="__title">{{__('Admin\site.animal_wealth')}}
@@ -45,76 +44,61 @@
                                 <h6>{{ \App\Models\CawProject::where('marketing_side','like','govermental')->count() }} %</h6>
                             </div>
                         </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
                         <div class="col-6 col-sm-4 col-lg-2">
                             <div class="__item  text-center" data-aos="fade" data-aos-delay="200" data-aos-offset="100">
                                 <i class="__ico">
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                        data-src="{{ asset('frontassets/img/feature_img/2.png') }}" alt="demo" />
+                                        data-src="{{ asset('frontassets/img/feature_img/1.png') }}" alt="demo" />
                                 </i>
 
                                 <h5 class="__title">{{__('Admin\site.Horticulture')}}</h5>
                                 <h6>{{ \App\Models\Orchard::count() }} %</h6>
                             </div>
                         </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
                         <div class="col-6 col-sm-4 col-lg-2">
                             <div class="__item  text-center" data-aos="fade" data-aos-delay="300" data-aos-offset="100">
                                 <i class="__ico">
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                        data-src="{{ asset('frontassets/img/feature_img/hony-bee.png') }}" alt="demo" />
+                                        data-src="{{ asset('frontassets/img/feature_img/3.png') }}" alt="demo" />
                                 </i>
 
                                 <h5 class="__title">{{__('Admin\site.planet_protection')}}</h5>
                                 <h6>{{ \App\Models\BeeKeeper::count() }} %</h6>
                             </div>
                         </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
                         <div class="col-6 col-sm-4 col-lg-2">
                             <div class="__item  text-center" data-aos="fade" data-aos-delay="400" data-aos-offset="100">
                                 <i class="__ico">
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                        data-src="{{ asset('frontassets/img/feature_img/planing.png') }}" alt="demo" />
+                                        data-src="{{ asset('frontassets/img/feature_img/4.png') }}" alt="demo" />
                                 </i>
 
                                 <h5 class="__title">{{__('Admin\site.planning')}}</h5>
                                 <h6>{{ \App\Models\LandArea::count() }} %</h6>
                             </div>
                         </div>
-                        <!-- end item -->
-
-                        <!-- start item -->
-                        {{--<div class="col-6 col-sm-4 col-lg-2">--}}
-                            {{--<div class="__item  text-center" data-aos="fade" data-aos-delay="500" data-aos-offset="100">--}}
-                                {{--<i class="__ico">--}}
-                                    {{--<img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"--}}
-                                        {{--data-src="{{ asset('frontassets/img/feature_img/5.png') }}" alt="demo" />--}}
-                                {{--</i>--}}
-
-                                {{--<h5 class="__title">Awesome Wheats</h5>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        <!-- end item -->
-
-                        <!-- start item -->
                         <div class="col-6 col-sm-4 col-lg-2">
                             <div class="__item  text-center" data-aos="fade" data-aos-delay="600" data-aos-offset="100">
                                 <i class="__ico">
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                        data-src="{{ asset('frontassets/img/feature_img/6.png') }}" alt="demo" />
+                                        data-src="{{ asset('frontassets/img/feature_img/5.png') }}" alt="demo" />
                                 </i>
 
                                 <h5 class="__title">{{__('Admin\site.services')}}</h5>
                                 <h6>{{ \App\Models\FarmerService::count() }} %</h6>
                             </div>
                         </div>
-                        <!-- end item -->
+                        <div class="col-6 col-sm-4 col-lg-2">
+                            <div class="__item  text-center" data-aos="fade" data-aos-delay="600" data-aos-offset="100">
+                                <i class="__ico">
+                                    <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
+                                        data-src="{{ asset('frontassets/img/feature_img/10.png') }}" alt="demo" />
+                                </i>
+
+                                <h5 class="__title">{{__('Admin\site.farmer')}}</h5>
+                                <h6>{{ \App\Models\Farmer::count() }} %</h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,130 +106,112 @@
         </div>
     </section>
     <!-- end section -->
+    <!-- start wholesale section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-heading section-heading--center" data-aos="fade">
+                <h2 class="__title">{{__('Admin\site.wholesale')}}</h2>
 
-        <!-- start wholesale section -->
-        <section class="section">
-            <div class="container">
-                <div class="section-heading section-heading--center" data-aos="fade">
-                    <h2 class="__title">{{__('Admin\site.wholesale')}}</h2>
-
-                    <p>{{__('Admin\site.wholesale_desc')}}</p>
-                </div>
-
-                <!-- start feature -->
-                <div class="feature feature--style-1">
-                    <div class="__inner">
-                        <div class="row">
-                            <!-- start item -->
-                            <div class="col-12 col-sm-6 col-lg-6">
-                                <div class="__item  text-center" data-aos="fade" data-aos-delay="100" data-aos-offset="100">
-                                    <i class="__ico">
-                                        <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                             data-src="{{ asset('frontassets/img/feature_img/wholesale1.png') }}" alt="demo" />
-                                    </i>
-
-                                    <h5 class="__title">{{__('Admin\outcome_products.outcome_productPageTitle')}}
-
-                                    </h5>
-                                    <h6>{{ \App\Models\OutcomeProduct::count() }} %</h6>
-                                </div>
+                <p>{{__('Admin\site.wholesale_desc')}}</p>
+            </div>
+            <div class="feature feature--style-1">
+                <div class="__inner">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-lg-6">
+                            <div class="__item  text-center" data-aos="fade" data-aos-delay="100" data-aos-offset="100">
+                                <i class="__ico">
+                                    <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
+                                            data-src="{{ asset('frontassets/img/feature_img/6.png') }}" alt="demo" />
+                                </i>
+                                <h5 class="__title">{{__('Admin\outcome_products.outcome_productPageTitle')}}
+                                </h5>
+                                <h6>{{ \App\Models\OutcomeProduct::count() }} %</h6>
                             </div>
-                            <!-- end item -->
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-6">
+                            <div class="__item  text-center" data-aos="fade" data-aos-delay="200" data-aos-offset="100">
+                                <i class="__ico">
+                                    <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
+                                            data-src="{{ asset('frontassets/img/feature_img/7.png') }}" alt="demo" />
+                                </i>
 
-                            <!-- start item -->
-                            <div class="col-12 col-sm-6 col-lg-6">
-                                <div class="__item  text-center" data-aos="fade" data-aos-delay="200" data-aos-offset="100">
-                                    <i class="__ico">
-                                        <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                             data-src="{{ asset('frontassets/img/feature_img/wholesale2.png') }}" alt="demo" />
-                                    </i>
-
-                                    <h5 class="__title">{{__('Admin\income_products.income_productPageTitle')}}</h5>
-                                    <h6>{{ \App\Models\IncomeProduct::count() }} %</h6>
-                                </div>
+                                <h5 class="__title">{{__('Admin\income_products.income_productPageTitle')}}</h5>
+                                <h6>{{ \App\Models\IncomeProduct::count() }} %</h6>
                             </div>
-                            <!-- end item -->
-
-
                         </div>
                     </div>
                 </div>
-                <!-- end feature -->
             </div>
-        </section>
-        <!-- end wholesale section -->
-
+            <!-- end feature -->
+        </div>
+    </section>
+    <!-- end wholesale section -->
     <!-- start section -->
     <section class="section section--no-pt section--no-pb">
         <div class="container">
             <div class="special-offer special-offer--style-1" data-aos="zoom-in" data-aos-duration="600"
                 data-aos-offset="70">
-                <h2 class="text text-center lazy"
+                <h2 class="text text-center lazy " style="font-size: 8rem;"
                     data-src="{{ asset('frontassets/img/special_offer_text_bg.jpg') }}">{{ __('Website/home.homesms') }}</h2>
             </div>
         </div>
     </section>
     <!-- end section -->
+    <!-- start section -->
+    <section class="section">
+        <div class="d-none d-lg-block">
+            <img id="bg-img-1" class="img-fluid lazy" src="{{ asset('frontassets/img/blank.gif') }}"
+            data-src="{{ asset('frontassets/img/agro.png') }}" alt="demo" />
+            <style type="text/css">
+                #bg-img-1
+                {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    -webkit-transform: translate(-50%,-50%);
+                    -ms-transform: translate(-50%,-50%);
+                    transform: translate(-50%,-50%);
+                }
+            </style>
+        </div>
 
-        <!-- start section -->
-        <section class="section">
-            <div class="d-none d-lg-block">
-                <img id="bg-img-1" class="img-fluid lazy" src="{{ asset('frontassets/img/blank.gif') }}" data-src="{{ asset('frontassets/img/agro.png') }}" alt="demo" />
-                <style type="text/css">
-                    #bg-img-1
-                    {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        -webkit-transform: translate(-50%,-50%);
-                        -ms-transform: translate(-50%,-50%);
-                        transform: translate(-50%,-50%);
-                    }
-                </style>
-            </div>
-
-            {{-- <div class="container">
-                <div class="row align-items-center">
-                    <?php $x=0;?>
-                    @foreach($about_us as $info)
-                    <div class="col-12 col-lg-4">
-                        <div data-aos="fade-left" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
-                            <div class="section-heading">
-                                <h2 class="__title">{{ $info->title }}</h2>
-                            </div>
-
-                            <p class="d-none d-sm-block">
-                                <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{route('aboutUs')}}">{{__('Website/home.about_more')}}</a>
-                            </p>
+        {{-- <div class="container">
+            <div class="row align-items-center">
+                <?php $x=0;?>
+                @foreach($about_us as $info)
+                <div class="col-12 col-lg-4">
+                    <div data-aos="fade-left" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
+                        <div class="section-heading">
+                            <h2 class="__title">{{ $info->title }}</h2>
                         </div>
+
+                        <p class="d-none d-sm-block">
+                            <a class="custom-btn custom-btn--medium custom-btn--style-1" href="{{route('aboutUs')}}">{{__('Website/home.about_more')}}</a>
+                        </p>
                     </div>
-                    <?php if($x==0){?>
-                        <div class="col-12 my-3 d-lg-none"></div>
-
-                        <div class="col-12 col-lg-4  text-center">
-                            <div data-aos="fade-up" ddata-aos-duration="600" data-aos-offset="100">
-                                <img class="img-fluid  lazy" src="{{ asset('Dashboard/img/about/'.$info->image) }}" data-src="{{ asset('Dashboard/img/about/'.$info->image) }}" style="width:500px;height:400px" alt="demo" />
-                            </div>
-                        </div>
-                    <?php }?>
+                </div>
+                <?php if($x==0){?>
                     <div class="col-12 my-3 d-lg-none"></div>
 
-                    <div class="col-12 col-lg-4">
-                        <div data-aos="fade-right" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
-                              <p><?php echo substr($info->description,0,500);?>...</p>
+                    <div class="col-12 col-lg-4  text-center">
+                        <div data-aos="fade-up" ddata-aos-duration="600" data-aos-offset="100">
+                            <img class="img-fluid  lazy" src="{{ asset('Dashboard/img/about/'.$info->image) }}" data-src="{{ asset('Dashboard/img/about/'.$info->image) }}" style="width:500px;height:400px" alt="demo" />
                         </div>
                     </div>
-                    <?php $x++;?>
-                    @endforeach
+                <?php }?>
+                <div class="col-12 my-3 d-lg-none"></div>
+
+                <div class="col-12 col-lg-4">
+                    <div data-aos="fade-right" data-aos-delay="400" data-aos-duration="500" ddata-aos-offset="100">
+                            <p><?php echo substr($info->description,0,500);?>...</p>
+                    </div>
                 </div>
-            </div> --}}
-        </section>
-        <!-- end section -->
-
-        @include('livewire.front._counter')
-
-
-        <!-- start section -->
+                <?php $x++;?>
+                @endforeach
+            </div>
+        </div> --}}
+    </section>
+    @include('livewire.front._counter')
     <section class="section">
         <div class="container">
             <div class="section-heading section-heading--center" data-aos="fade">
@@ -260,8 +226,6 @@
             </div>
         </div>
     </section>
-    <!-- end section -->
-
     @if(count($home_category)>0)
         <!-- start section -->
         <section class="section section--no-pt section--no-pb section--gutter">

@@ -1,14 +1,14 @@
 <?php
 return [
-    'welcome_text'                          =>              'مرحبأ',
-    'email_expired_subject'                 =>              'انتهاء اشتراك النشرة البريدية',
-    'email_expired_msg'                     =>              'عفوا تم انتهاء اشتراكك فى النشرة البريدية للموقع برجاء تجديد اشتراكك مره اخرى !!',
-    'website'                               =>              'المـوقــع',
+    'welcome_text'                          =>              'سلاڤ',
+    'email_expired_subject'                 =>              ' ب دوماهی هاتنا بەشداریا نوچەیێن ئیمێلی --- ئیمێلێ تە یێ  بەب سەرڤە چوی',
+    'email_expired_msg'                     =>              ' ببورە بەشداریا تە د نوچەیێن ئیمێلی دا یا ب دوماهی هاتی، هیڤیە جارەکا دی بەشداریا خو نوی بکە   !!',
+    'website'                               =>              ' سایتێ ئەلکترونی',
 
-    'email_notexpired_subject'              =>              'احدث المنتجات التى تمت اضافتها',
-    'product_name'=>'اسم المنتج',
-    'product_image'=>'صوره المنتج',
-    'product_price'=>'سعر المنتج',
-    'product_link'=>'تفاصيل المنتج',
-    'product_rate'=>' التقييم',
+    'email_notexpired_subject'              =>              'نویترین بەرهەمێن هاتینە زێدەکرن    ',
+    'product_name'=>'ناڤێ بەرهەمی ',
+    'product_image'=>'وێنێ بەرهەمی ',
+    'product_price'=>'بهایێ بەرهەمی ',
+    'product_link'=>'پێزانینێن بەرهەمی ',
+    'product_rate'=>' هەلسەنگاندن',
 ];

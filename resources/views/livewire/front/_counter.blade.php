@@ -13,21 +13,18 @@
                                     <i class="__ico">
                                         <img class="img-fluid  lazy"
                                             src="{{ asset('frontassets/img/blank.gif') }}"
-                                            data-src="{{ asset('frontassets/img/ico/ico_count_1.png') }}"
+                                            data-src="{{ asset('frontassets/img/feature_img/11.png') }}"
                                             alt="demo" />
                                     </i>
                                 </div>
-
                                 <div class="d-table-cell align-middle">
                                     <p class="__count js-count" data-from="0" data-to="{{ Product::count() }}">{{ Product::count() }}</p>
-
                                     <p class="__title">{{ __('Admin/site.products') }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- end item -->
-
                     <!-- start item -->
                     <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-3">
                         <div class="__item" data-aos="zoom-in" data-aos-duration="350" data-aos-delay="450">
@@ -36,7 +33,8 @@
                                     <i class="__ico">
                                         <img class="img-fluid  lazy"
                                             src="{{ asset('frontassets/img/blank.gif') }}"
-                                            data-src="{{ asset('frontassets/img/ico/ico_count_3.png') }}"
+                                            {{-- data-src="{{ asset('frontassets/img/ico/ico_count_3.png') }}" --}}
+                                            data-src="{{ asset('frontassets/img/feature_img/7.png') }}"
                                             alt="demo" />
                                     </i>
                                 </div>
@@ -59,7 +57,7 @@
                                     <i class="__ico">
                                         <img class="img-fluid  lazy"
                                             src="{{ asset('frontassets/img/blank.gif') }}"
-                                            data-src="{{ asset('frontassets/img/ico/ico_count_4.png') }}"
+                                            data-src="{{ asset('frontassets/img/feature_img/8.png') }}"
                                             alt="demo" />
                                     </i>
                                 </div>
@@ -81,7 +79,7 @@
                                     <i class="__ico">
                                         <img class="img-fluid  lazy"
                                             src="{{ asset('frontassets/img/blank.gif') }}"
-                                            data-src="{{ asset('frontassets/img/ico/ico_count_4.png') }}"
+                                            data-src="{{ asset('frontassets/img/feature_img/9.png') }}"
                                             alt="demo" />
                                     </i>
                                 </div>

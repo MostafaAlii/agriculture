@@ -1,4 +1,4 @@
 <?php
 return [
-    'add_farmerPaymentMethod'                   =>                  'اضافة وسيلة دفع',
+    'add_farmerPaymentMethod'                   =>                  'رێکەکا پارەدانێ زێدەبکە',
 ];

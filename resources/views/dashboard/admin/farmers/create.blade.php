@@ -157,6 +157,7 @@
                                                 <div class="form-group">
                                                     <label>{{ __('Admin/site.province') }}</label>
                                                     <select class="select2 form-control" id="province_id" name="province_id">
+                                                        
                                                     </select>
                                                     @error('province_id')
                                                     <span class="text-danger">{{$message}}</span>
