@@ -11,7 +11,7 @@ class BlogRequest extends FormRequest {
         $rules = [
 
             'title'      => 'required|min:3|string|unique:blog_translations',
-            'body'       => 'required|min:5|max:100',
+            'body'       => 'required|min:5|string',
             'admin_id'   => 'required',
             'categories' => 'required|exists:categories,id',
             'tags'       => 'required|exists:tags,id',

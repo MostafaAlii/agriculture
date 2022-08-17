@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Interfaces\Admin\BlogInterface;
 use App\Models\BlogTranslation;
+use Illuminate\Support\Str;
 
 class BlogRepository implements BlogInterface {
     use UploadT;
@@ -21,16 +22,16 @@ class BlogRepository implements BlogInterface {
     }
 
     public function data() {
-        $blogs = Blog::get();
+        $blogs = Blog::orderBy('created_at', 'desc')->get();
         return DataTables::of($blogs)
             ->addColumn('record_select', 'dashboard.admin.blogs.data_table.record_select')
             ->addIndexColumn()
             ->editColumn('created_at', function (Blog $blog) {
                 return $blog->created_at->format('Y-m-d');
             })
-            // ->editColumn('title', function (Blog $blog) {
-            //     return $blog->title;
-            // })
+            ->editColumn('body', function (Blog $blog) {
+                return Str::limit($blog->body, 50);
+            })
             ->addColumn('image', function (Blog $blog) {
                 return view('dashboard.admin.blogs.data_table.image', compact('blog'));
             })

@@ -6,25 +6,45 @@
 <br>
 <div>
     @foreach($about_us as $info)
-        <section class="section section--no-pb section--custom-01"
-        style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');">
-            <div class="container">
-                <div class="section-heading">
-                    <h2 class="__title">{{$info->title}}</h2>
-                </div>
-                <div class="row">
-                    <div class="row" style="height: 40rem;">
-                        <div class="col-md-6 col-sm-8 ">
-                            <p>{!! $info->description !!} </p>
+        @if(app()->getLocale()=='ar' || app()->getLocale()=='ku')
+            <section class="section section--no-pb section--custom-01"
+                style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');
+                margin-left: 100px;
+                margin-bottom: 30px;">
+                    <div class="container">
+                        <div class="section-heading">
+                            <h2 class="__title">{{$info->title}}</h2>
                         </div>
-                        {{-- <div class="col-md-6 col-sm-8 section--custom-01"
-                        style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');">
-                        </div> --}}
+                        <div class="row">
+                            <div class="row" style="height: 30rem;">
+                                <div class="col-md-6 col-sm-8 " style="flex: 0 0 80%;max-width: 80%;margin-right: -164px !important;margin-top: -40px;text-align: right;">
+                                    <p>{!! $info->description !!} </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <br>
-        </section>
+                    <br>
+            </section>
+          @else
+            <section class="section section--no-pb section--custom-01"
+                style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');
+                margin-left: 100px;
+                margin-bottom: 30px;">
+                    <div class="container">
+                        <div class="section-heading">
+                            <h2 class="__title">{{$info->title}}</h2>
+                        </div>
+                        <div class="row">
+                            <div class="row" style="height: 30rem;">
+                                <div class="col-md-6 col-sm-8" style="flex: 0 0 80%;max-width: 80%;margin-right: -164px !important;margin-top: -40px;text-align: right;">
+                                    <p>{!! $info->description !!} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+            </section>
+        @endif
     @endforeach
 
 

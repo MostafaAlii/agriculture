@@ -86,11 +86,11 @@
                                         </div>
                                         <div class="col-12 ">
                                             <div class="input-wrp">
-                                                <label>{{ __('Admin/products.product_name') }} <span
-                                                        class="text-danger">*</span></label>
+                                                {{-- <label>{{ __('Admin/products.product_name') }} <span
+                                                        class="text-danger">*</span></label> --}}
                                                 <input class="textfield"
                                                     placeholder="{{ __('Admin/products.product_name_placeholder') }} *"
-                                                    name="slug" wire:model='slug' type="text" required />
+                                                    name="slug" wire:model='slug' type="hidden" required />
                                                 @error('slug')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror

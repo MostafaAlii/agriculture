@@ -346,6 +346,7 @@
                 @endcan
                 <!-- End Department Dropdown Menu -->
 
+
                 <!-- Start Category Dropdown Menu -->
                 @can('category-list')
                     <li class=" nav-item">
@@ -370,6 +371,103 @@
                     </li>
                 @endcan
                 <!-- End Category Dropdown Menu -->
+                <!-- Start Bolgs Dropdown Menu -->
+                @can('blogs-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
+                            <span class="menu-title" data-i18n="Blogs">{{ trans('Admin/site.blogstags') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start blog -->
+                            @can('blogs')
+                                <li>
+                                    <a class="menu-item" href="{{ route('blogs.index') }}">
+                                        <i class="icon-globe " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
+                                        <span data-i18n="{{ trans('Admin/site.blog') }}">
+                                            {{ trans('Admin/site.blog') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End blog -->
+                            <!-- Start tag -->
+                            @can('tags')
+                                <li>
+                                    <a class="menu-item" href="{{ route('tags.data') }}">
+                                        <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
+                                        <span data-i18n="{{ trans('Admin/site.tag') }}">
+                                            {{ trans('Admin/site.tag') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End tag -->
+                        </ul>
+                    </li>
+                @endcan
+                <!-- End Bolgs Dropdown Menu -->
+
+                <!-- Start Product Dropdown Menu -->
+                @can('products-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">grain</i>
+                            <span class="menu-title" data-i18n="">
+                                {{ trans('Admin/products.product_title_in_sidebar') }}
+                            </span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Product -->
+                            @can('products')
+                                <li>
+                                    <a class="menu-item" href="{{ route('products') }}">
+                                        <i class="material-icons">grain</i>
+                                        <span data-i18n="products">
+                                            {{ trans('Admin/products.product_title_in_sidebar') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Product -->
+                        </ul>
+                    </li>
+                @endcan
+                <!-- End Product Dropdown Menu -->
+
+                <!-- Start Orders Dropdown Menu -->
+                @can('orders-managment')
+                    <li class=" nav-item">
+                        <a href="{{-- route('admin.dashboard') --}}">
+                            <i class="material-icons">add_shopping_cart</i>
+                            <span class="menu-title" data-i18n="Orders"> {{ trans('Admin/orders.orders') }}</span>
+                        </a>
+                        <ul class="menu-content">
+                            <!-- Start Orders -->
+                            @can('orders')
+                                <li>
+                                    <a class="menu-item" href="{{ route('Orders.index') }}">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                        <span data-i18n="Options"> {{ trans('Admin/orders.order_title_in_sidebar') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            <!-- End Orders -->
+                        </ul>
+                    </li>
+                @endcan
+                <!-- End Orders Dropdown Menu -->
+
+                <!-- Start Subscriptions -->
+                @can('subscribes')
+                    <li class=" nav-item">
+                        <li>
+                            <a class="menu-item" href="{{ route('subscribe') }}">
+                                <i class="fas fa-dragon"></i>
+                                <span data-i18n="subscribe"> {{ trans('Admin/site.sub') }}</span>
+                            </a>
+                        </li>
+                    <!-- End Orders -->
+                    </li>
+                @endcan
+                <!-- Start Subscriptions -->
                 <!-- Start Admin Department Menu -->
                 @can('admin-department-list')
                     <li class=" nav-item">
@@ -742,103 +840,6 @@
                 @endcan
                 <!-- end WholeSale & settings   Menu -->
 
-                <!-- Start Bolgs Dropdown Menu -->
-                @can('blogs-managment')
-                    <li class=" nav-item">
-                        <a href="{{-- route('admin.dashboard') --}}">
-                            <i class="icon-present " style="padding: 3px;font-size: 18px;"></i>
-                            <span class="menu-title" data-i18n="Blogs">{{ trans('Admin/site.blogstags') }}</span>
-                        </a>
-                        <ul class="menu-content">
-                            <!-- Start blog -->
-                            @can('blogs')
-                                <li>
-                                    <a class="menu-item" href="{{ route('blogs.index') }}">
-                                        <i class="icon-globe " style="color: red;color: red;padding: 3px;font-size: 18px;"></i>
-                                        <span data-i18n="{{ trans('Admin/site.blog') }}">
-                                            {{ trans('Admin/site.blog') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            <!-- End blog -->
-                            <!-- Start tag -->
-                            @can('tags')
-                                <li>
-                                    <a class="menu-item" href="{{ route('tags.data') }}">
-                                        <i class="icon-speech" style="color: red;padding: 3px;font-size: 18px;"></i>
-                                        <span data-i18n="{{ trans('Admin/site.tag') }}">
-                                            {{ trans('Admin/site.tag') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            <!-- End tag -->
-                        </ul>
-                    </li>
-                @endcan
-                <!-- End Bolgs Dropdown Menu -->
-
-                <!-- Start Product Dropdown Menu -->
-                @can('products-managment')
-                    <li class=" nav-item">
-                        <a href="{{-- route('admin.dashboard') --}}">
-                            <i class="material-icons">grain</i>
-                            <span class="menu-title" data-i18n="">
-                                {{ trans('Admin/products.product_title_in_sidebar') }}
-                            </span>
-                        </a>
-                        <ul class="menu-content">
-                            <!-- Start Product -->
-                            @can('products')
-                                <li>
-                                    <a class="menu-item" href="{{ route('products') }}">
-                                        <i class="material-icons">grain</i>
-                                        <span data-i18n="products">
-                                            {{ trans('Admin/products.product_title_in_sidebar') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            <!-- End Product -->
-                        </ul>
-                    </li>
-                @endcan
-                <!-- End Product Dropdown Menu -->
-
-                <!-- Start Orders Dropdown Menu -->
-                @can('orders-managment')
-                    <li class=" nav-item">
-                        <a href="{{-- route('admin.dashboard') --}}">
-                            <i class="material-icons">add_shopping_cart</i>
-                            <span class="menu-title" data-i18n="Orders"> {{ trans('Admin/orders.orders') }}</span>
-                        </a>
-                        <ul class="menu-content">
-                            <!-- Start Orders -->
-                            @can('orders')
-                                <li>
-                                    <a class="menu-item" href="{{ route('Orders.index') }}">
-                                        <i class="material-icons">add_shopping_cart</i>
-                                        <span data-i18n="Options"> {{ trans('Admin/orders.order_title_in_sidebar') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                            <!-- End Orders -->
-                        </ul>
-                    </li>
-                @endcan
-                <!-- End Orders Dropdown Menu -->
-
-                <!-- Start Subscriptions -->
-                @can('subscribes')
-                    <li class=" nav-item">
-                        <li>
-                            <a class="menu-item" href="{{ route('subscribe') }}">
-                                <i class="fas fa-dragon"></i>
-                                <span data-i18n="subscribe"> {{ trans('Admin/site.sub') }}</span>
-                            </a>
-                        </li>
-                    <!-- End Orders -->
-                    </li>
-                @endcan
-                <!-- Start Subscriptions -->
             </ul>
             <!-- End Navigations UL -->
         </div>

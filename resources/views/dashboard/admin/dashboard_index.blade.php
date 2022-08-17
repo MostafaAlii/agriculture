@@ -124,8 +124,34 @@
                                 <div class="card-body">
                                     <div class="media d-flex">
                                         <div class="text-left media-body">
-                                            <h3 class="warning">{{ \App\Models\Farmer::count() }}</h3>
-                                            <h6>{{ __('Admin/site.farmer') }}</h6>
+                                            <h3 class="warning">{{ \App\Models\Farmer::where('department_id','!=' ,null)->count() }}</h3>
+                                            <h6>{{ __('Admin/site.farmer_created_from_dashboard') }}</h6>
+                                        </div>
+                                        <div>
+                                            <i class="float-right icon-users warning font-large-2"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar"
+                                             style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+                                             aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endcan
+            @can('farmer-list')
+                <div class="col-xl-3 col-lg-6 col-12">
+                    <a href="{{ route('farmers.front') }}">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="text-left media-body">
+                                            <h3 class="warning">{{ \App\Models\Farmer::where('department_id', null)->count() }}</h3>
+                                            <h6>{{ __('Admin/site.farmer_created_from_front') }}</h6>
                                         </div>
                                         <div>
                                             <i class="float-right icon-users warning font-large-2"></i>
@@ -232,6 +258,35 @@
                 </div>
             @endcan
         <!-- End Countries -->
+          <!-- Start Proviences -->
+          @can('provience-managment')
+                <div class="col-xl-2 col-lg-6 col-12">
+                    <a href="{{ route('Proviences.index') }}">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="text-left media-body">
+                                            <h3 class="success">{{ \App\Models\Province::count() }}</h3>
+                                            <h6>  {{ trans('Admin/proviences.proviencePageTitle') }}</h6>
+                                        </div>
+                                        <div>
+                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
+                                            <i class="float-right material-icons success font-large-2">flag</i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-success" role="progressbar"
+                                            style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+          @endcan
+  <!-- End Proviences -->
             <!-- Start Area -->
             @can('area-managment')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -261,35 +316,6 @@
                 </div>
             @endcan
         <!-- End Area -->
-            <!-- Start Proviences -->
-            @can('provience-managment')
-                <div class="col-xl-2 col-lg-6 col-12">
-                    <a href="{{ route('Proviences.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="text-left media-body">
-                                            <h3 class="success">{{ \App\Models\Province::count() }}</h3>
-                                            <h6>  {{ trans('Admin/proviences.proviencePageTitle') }}</h6>
-                                        </div>
-                                        <div>
-                                            {{-- <i class="float-right icon-user-follow success font-large-2"></i> --}}
-                                            <i class="float-right material-icons success font-large-2">flag</i>
-                                        </div>
-                                    </div>
-                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-success" role="progressbar"
-                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            @endcan
-        <!-- End Proviences -->
             <!-- Start States -->
             @can('state-managment')
                 <div class="col-xl-2 col-lg-6 col-12">
@@ -776,6 +802,7 @@
             @endcan
         <!-- Start OutcomeProducts -->
             @can('outcome-products')
+
                 <div class="col-xl-3 col-lg-6 col-12">
                     <a href="{{ route('OutcomeProducts.index') }}">
                         <div class="card pull-up">
@@ -783,19 +810,19 @@
                                 <div class="card-body">
                                     <div class="media d-flex">
                                         <div class="text-left media-body">
-                                            <h3 class="green"
-                                                style="color:blue;">{{ \App\Models\OutcomeProduct::count() }}</h3>
+                                            <h3 class="gray-bg"
+                                            style="color:blue;">{{ \App\Models\OutcomeProduct::count() }}</h3>
                                             <h6>  {{ trans('Admin/outcome_products.outcome_productPageTitle') }}</h6>
                                         </div>
                                         <div>
                                             <i class="fas fa-plane-departure fa-2x " style="color:blue;"></i>
                                             <i class="fab fa-pagelines fa-2x " style="color:green;"></i>
                                         </div>
-                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                            <div class="progress-bar bg-gradient-x-info" role="progressbar"
-                                                 style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                 aria-valuemax="100"></div>
-                                        </div>
+                                    </div>
+                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-green" role="progressbar"
+                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                             aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>

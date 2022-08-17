@@ -9,7 +9,7 @@ class AboutRequest extends FormRequest {
     public function rules() {
         return [
             'name'          =>'required|string|min:3|max:100',
-            'description'   =>'required|string|min:3|max:1000',
+            'description'   =>'required|string|min:3|max:3000',
             // 'image'         =>'image|mimes:jpg,png,jpeg|dimensions:max_width=600,max_height=500',
             'image'         =>'image|mimes:jpg,png,jpeg|max:2000',
         ];

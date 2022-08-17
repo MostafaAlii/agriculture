@@ -127,7 +127,6 @@
             {data: 'created_at', name: 'created_at', searchable: false, sortable: false},
             {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
         ],
-        order: [[8, 'desc']],
     });
         // $('#data-table-search').keyup(function () {
         //         blogsTable.search(this.value).draw();

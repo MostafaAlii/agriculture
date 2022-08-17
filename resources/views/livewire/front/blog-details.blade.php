@@ -20,12 +20,14 @@
                                     <div class="mb-6 mb-md-8">
                                         <time class="__date-post">{{ $blog->created_at->diffforhumans() }}</time>
 
-                                        <p class="__category"><a href="#">{{ $blog->title }}</a></p>
+                                        <p class="__category" style="font-size: 20px;font-weight: bold;">
+                                            <a href="#">{{ $blog->title }}</a>
+                                        </p>
 
                                         <h3 class="__title h5">{{ $blog->admin->firstname }}{{ $blog->admin->lastname }}</h3>
                                     </div>
 
-                                    <p>{{ $blog->body }}</p>
+                                    <p>{!! $blog->body !!}</p>
 
                                 </div>
                             </div>
@@ -84,12 +86,12 @@
                                             @endif
                                         @endif
                                     @endforeach
-                                   
+
                                 </ul>
                             </div>
                             <!-- end widget -->
                             @endif
-                            
+
                             @if(count($blog->tags)>0)
                             <!-- start widget -->
                             <div class="widget widget--tags">
@@ -148,7 +150,7 @@
                 $num++;
                  }
                  ?>
-                
+
             </ul>
         </div>
     </section>
