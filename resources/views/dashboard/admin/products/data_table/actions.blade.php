@@ -32,6 +32,7 @@
             <div class="dropdown-divider"></div>
         </div>
     </div>
+
 @endcan
 <!-- Start Product Stock Model -->
 @include('dashboard.admin.products.data_table.btn.stock')

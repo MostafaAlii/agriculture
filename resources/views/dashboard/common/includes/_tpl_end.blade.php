@@ -1,4 +1,6 @@
 <script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}"></script>
+<script src="{{ asset('assets/admin/vendors/js/ui/prism.min.js') }}"></script>
+
 <script src="{{ asset('assets/admin/js/jquery-ui-1.13.1/jquery-ui.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/js/treeview/treeview.js') }}"></script>
 
@@ -10,12 +12,7 @@
 <script src="{{ asset('assets/admin/vendors/js/tables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/js/tables/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/dataTables.buttons.min.js') }}"></script>
-
-<!-- BEGIN: Vendor JS-->
-<script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}"></script>
-<script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatable/buttons.server-side.js') }}"></script>
-<script src="{{ asset('assets/admin/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/bootstrap-multiselect.min.js') }}"></script>
 
 

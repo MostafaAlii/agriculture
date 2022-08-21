@@ -48,6 +48,7 @@
         {{-- font cairo --}}
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/ui/prism.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->
@@ -62,8 +63,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/core/colors/palette-gradient.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/file-uploaders/dropzone.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/js/myFun/pickadate/themes/rtl.css')}}">
-        <!-- END: Page CSS-->
-        <!-- BEGIN: Page CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/pages/user-feed.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/plugins/forms/wizard.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
@@ -110,7 +109,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview-rtl.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css-rtl/style-rtl.css') }}">
     @else
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.en-US.min.js" integrity="sha512-j8zadPEIgyqSe1Lo4LaxHZdaMCxdo4dq4O+3cYo5i3ldZ2lqVa+nTiYSDaSW804Wqd0l5ZrRqRSBgKKCtbOPtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/i18n/datepicker.en-US.min.js" integrity="sha512-j8zadPEIgyqSe1Lo4LaxHZdaMCxdo4dq4O+3cYo5i3ldZ2lqVa+nTiYSDaSW804Wqd0l5ZrRqRSBgKKCtbOPtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
@@ -140,18 +139,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/fontawesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/js/treeview/treeview.css')}}">
     <script src="{{ asset('assets/admin/js/all.min.js') }}"></script>
-    {{--noty--}}
     <link rel="stylesheet" href="{{ asset('assets/admin/noty/noty.css') }}">
     <script src="{{ asset('assets/admin/noty/noty.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/plugins/animate/animate.css')}}">
-    {{--noty--}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/cryptocoins/cryptocoins.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/charts/apexcharts.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/jstree/themes/default/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/pages/user-feed.css') }}">
-    <!-- END: Page CSS-->
     @toastr_css
-    <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/multiple-select.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/ticker.css') }}">
     @yield('css')
