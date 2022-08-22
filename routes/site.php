@@ -73,7 +73,8 @@ Route::group(
 
 
         route::get('/contactUs',Livewire\front\ContactUs::class)->name('contact');             // contact us
-        Route::get('/search',Livewire\front\SearchComponent::class)->name('product.search');  //search
+        Route::get('/search',Livewire\front\SearchComponent::class)->name('product.search');  //search product
+        Route::get('/search/farmer',Livewire\front\SearchFarmerPageComponent::class)->name('farmer.search');  //search farmer
 
 
 

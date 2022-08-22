@@ -140,4 +140,6 @@ return [
 'newoffer_from_high_to_low'=>'New Offer From High to Low',
 
 'farmerproducts'=>'Farmer Products',
+'nodata'=>'No Data',
+'selectpostion'=>'Select Position',
 ];

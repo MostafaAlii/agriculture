@@ -1,11 +1,6 @@
-@extends('front.layouts.master7')
-@section('title', __('website\home.farmer'))
 
-@section('css')
-
-@endsection
-@section('content')
 <div>
+    @section('title', __('website\home.farmer'))
     <section class="section">
         <div class="container">
             <div class="goods-catalog mb-3">
@@ -24,7 +19,7 @@
 
                 <div class="__inner">
                     <div class="row">
-                        @foreach($farmers as $farmer)
+                        @forelse($farmers as $farmer)
                             <!-- start item -->
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="__item __item--preview">
@@ -39,20 +34,28 @@
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="{{ route('farmer_detail',encrypt($farmer->id) ) }}">{{ $farmer->firstname.'  '.$farmer->lastname  }}</a></p>
-
+                                        <p class="__category">
+                                            <a href="{{ route('farmer_detail',encrypt($farmer->id) ) }}">
+                                                {{ $farmer->firstname.'  '.$farmer->lastname  }}
+                                            </a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                            <!-- end item -->
-                        @endforeach
+                        @empty
+                            <div class="col-12">
+                                <div class="alert alert-danger">
+                                    <strong>{{ __('website/home.nodata') }}</strong>
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
                     {{$farmers->links('page-links_nowire')}}
                 </div>
             </div>
         </div>
     </section>
-    @include('livewire.front._review_form')
+    {{-- @include('livewire.front._review_form') --}}
 
     <!-- start section -->
     <section class="section section--no-pt section--no-pb">
@@ -66,4 +69,4 @@
     </section>
     <!-- end section -->
 </div>
-@endsection
+

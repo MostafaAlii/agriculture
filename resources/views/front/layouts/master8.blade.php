@@ -89,8 +89,8 @@
 					}(window, document));
 				</script>
 
-				@yield('content')
-                {{-- {{ $slot }} --}}
+				{{-- @yield('content') --}}
+                {{ $slot }}
 
 			</main>
 			<!-- end main -->

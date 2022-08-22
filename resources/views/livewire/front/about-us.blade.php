@@ -50,7 +50,81 @@
 
 @include('livewire.front._counter')
 
-@include('livewire.front._team')
+{{-- @include('livewire.front._team') --}}
+  <!-- start section -->
+  <section class="section section--no-pb">
+    <div class="container">
+        {{--  --}}
+        <div class="col-12 col-md-8 col-lg-3" id="search_data">
+            <div class="spacer py-6 d-md-none"></div>
+            <div class="row align-items-center justify-content-between">
+                    {{-- <div class="col-auto">
+                        <span class="goods-filter-btn-open js-toggle-filter">
+                            <i class="fontello-filter"></i>Filter</span>
+                    </div> --}}
+                <div class="col-auto">
+                    <style>
+                        .textfield.nice-select {
+                            padding-right: 177px !important;
+                            /* display:inline !important; */
+                            display:none !important;
+                        }
+                        .textfield {
+                            /* display:none !important; */
+                            display:inline !important;
+                        }
+                    </style>
+                    <div class="input-wrp" >
+                        <select name="orderby" class=" textfield wide js-select"  wire:model='sorting'>
+                            <option value="" readOnly disabled selected>{{__('website/home.selectpostion')}}</option>
+                            @forelse($allteams as $team)
+                                <option value="{{$team->id}}" >{{$team->position}}</option>
+                            @empty
+                               <option value="">{{ __('website/home.nodata')}}</option>
+                            @endforelse
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer py-6 d-md-none"></div>
+        </div>
+        {{--  --}}
+        <div class="section-heading section-heading--center" data-aos="fade">
+            <h2 class="__title">{{__('Admin/team.title2')}}<span>{{__('Admin/team.title1')}}</span></h2>
+        </div>
+        <div class="team">
+            <div class="__inner">
+                <div class="row">
+                    @forelse ($teams as $t)
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <a href="{{route('team_profile',encrypt($t->id))}}">
+                                <div class="__item" data-aos="fade" data-aos-delay="100" data-aos-offset="0">
+                                <figure class="__image">
+                                    <img class="lazy" src="{{ asset('Dashboard/img/team/'.$t->image) }}"
+                                    data-src="{{ asset('Dashboard/img/team/'.$t->image) }}" alt="demo" />
+                                </figure>
+                                <div class="__content">
+                                    <h5 class="__title">{{$t->name}}</h5>
+                                    <span>{{$t->position}}</span>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    @empty
+                    <div class="col-12">
+                        <div class="alert alert-danger">
+                            <strong>{{ __('website/home.nodata') }}</strong>
+                        </div>
+                    </div>
+                    @endforelse
+                </div>
+                {{$teams->links('page-links_nowire')}}
+            </div>
+        </div>
+        <br>
+    </div>
+  </section>
+<!-- end section -->
 
 @include('livewire.front._brand')
 
