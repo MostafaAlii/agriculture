@@ -75,14 +75,16 @@
                         }
                     </style>
                     <div class="input-wrp" >
-                        <select name="orderby" class=" textfield wide js-select"  wire:model='sorting'>
-                            <option value="" readOnly disabled selected>{{__('website/home.selectpostion')}}</option>
-                            @forelse($allteams as $team)
-                                <option value="{{$team->id}}" >{{$team->position}}</option>
-                            @empty
-                               <option value="">{{ __('website/home.nodata')}}</option>
-                            @endforelse
-                        </select>
+                            <select  class=" textfield wide js-select"  wire:model='teamid'>
+                                <option value="" readOnly disabled selected>{{__('website/home.selectpostion')}}</option>
+                                @forelse($pos as $key=>$team)
+                                    <option value="{{$team->position}}" >{{$team->position}}</option>
+                                @empty
+                                   <option value="">{{ __('website/home.nodata')}}</option>
+                                @endforelse
+                            </select>
+                        {{-- {{ $teamid }}
+                        @dd($this->teamid); --}}
                     </div>
                 </div>
             </div>

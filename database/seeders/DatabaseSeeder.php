@@ -106,7 +106,7 @@ class DatabaseSeeder extends Seeder {
             // images for slider
             for ($i = 1; $i <= Slider::count() ; $i++) {
                 Image::insert([
-                    'filename'     => rand(100,105) . ".jpg",
+                    'filename'     => rand(100,103) . ".jpg",
                     'imageable_id' => $i,
                     'imageable_type' => 'App\Models\Slider'
                 ]);
