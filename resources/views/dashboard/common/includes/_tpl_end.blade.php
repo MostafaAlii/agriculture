@@ -1,20 +1,32 @@
 {{-- <script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js') }}"></script> --}}
 {{-- <script src="{{ asset('assets/admin/vendors/js/ui/prism.min.js') }}"></script> --}}
+    {{-- <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/tables/datatables/datatable-basic.js"></script> --}}
+
+<script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}"></script>
+<script src="{{ asset('assets/admin/vendors/js/tables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/core/app-menu.js') }}"></script>
+<script src="{{ asset('assets/admin/js/core/app.js') }}"></script>
+<script src="{{ asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js') }}"></script>
 
 <script src="{{ asset('assets/admin/js/jquery-ui-1.13.1/jquery-ui.js') }}"></script>
-<script src="{{ asset('assets/admin/vendors/js/treeview/treeview.js') }}"></script>
-
-<script src="{{ asset('assets/admin/js/myFun/myFunction.js') }}"></script>
-<script src="{{ asset('assets/admin/js/jquery.repeater.js') }}"></script>
-
-
-<script src="{{ asset('assets/admin/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/admin/vendors/js/tables/jquery.dataTables.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/admin/js/bootstrap.min.js') }}"></script> --}}
 <script src="{{ asset('assets/admin/vendors/js/tables/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/dataTables.buttons.min.js') }}"></script>
-{{-- important --}}
-<script src="{{ asset('assets/admin/vendors/js/vendors.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js') }}"></script>
+
+
+
+<script src="{{ asset('assets/admin/vendors/js/treeview/treeview.js') }}"></script>
+<script src="{{ asset('assets/admin/js/myFun/myFunction.js') }}"></script>
+<script src="{{ asset('assets/admin/js/jquery.repeater.js') }}"></script>
+{{-- important --}}
+
 {{-- important --}}
 
 <script src="{{ asset('vendor/datatable/buttons.server-side.js') }}"></script>
@@ -24,12 +36,12 @@
 <!-- END: Page Vendor JS-->
 <script src="{{ asset('assets/admin/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <!-- BEGIN: Theme JS-->
-<script src="{{ asset('assets/admin/js/core/app-menu.js') }}"></script>
-<script src="{{ asset('assets/admin/js/core/app.js') }}"></script>
+{{-- <script src="{{ asset('assets/admin/js/core/app-menu.js') }}"></script>
+<script src="{{ asset('assets/admin/js/core/app.js') }}"></script> --}}
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="{{ asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js') }}"></script>
+{{-- <script src="{{ asset('assets/admin/js/scripts/tables/datatables/datatable-basic.js') }}"></script> --}}
 <!-- END: Page JS-->
 <!-- BEGIN: Page Vendor JS-->
 <script src="{{ asset('assets/admin/vendors/js/charts/chart.min.js') }}"></script>
@@ -50,7 +62,7 @@
 <script src="{{ asset('assets/admin/vendors/js/extensions/jquery.steps.min.js') }}"></script>
 <script src="{{ asset('assets/admin/vendors/js/forms/validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/scripts/forms/select/form-select2.js') }}"></script>
-<script src="{{ asset('assets/admin/js/scripts/modal/components-modal.js') }}"></script>
+
 <script src="{{ asset('assets/admin/js/scripts/forms/wizard-steps.js') }}"></script>
 
 @toastr_js
