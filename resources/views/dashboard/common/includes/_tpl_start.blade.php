@@ -48,7 +48,7 @@
         {{-- font cairo --}}
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/vendors-rtl.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/ui/prism.min.css')}}">
+        {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/ui/prism.min.css')}}"> --}}
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/vendors/css/tables/datatable/datatables.min.css')}}">
         <!-- END: Vendor CSS-->
         <!-- BEGIN: Theme CSS-->

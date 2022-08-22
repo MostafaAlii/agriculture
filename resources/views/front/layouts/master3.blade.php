@@ -10,14 +10,14 @@
     <!-- start header -->
 @include('front.layouts.include.header3')
 <!-- end header -->
-<?php
-$slider = \App\Models\Slider::latest()->first();
-if(isset($slider->image->filename)){
-    $src=$slider->image->filename;
-}else{
-    $src='100.jpg';
-}
-?>
+    <?php
+        $slider = \App\Models\Slider::latest()->first();
+        if(isset($slider->image)){
+            $src=$slider->image->filename;
+        }else{
+            $src='100.jpg';
+        }
+    ?>
 <!-- start hero -->
     <div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
          style="background-image: url({{ asset('Dashboard/img/sliders/'.$src) }});">

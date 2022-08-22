@@ -8,7 +8,7 @@
     @foreach($about_us as $info)
         @if(app()->getLocale()=='ar' || app()->getLocale()=='ku')
             <section class="section section--no-pb section--custom-01"
-                style="background-image: url('<?php echo asset('Dashboard/img/about/'.$info->image);?>');
+            style="background-image: url('{{ asset('Dashboard/img/about/'.$info->image) }}');
                 margin-left: 100px;
                 margin-bottom: 30px;">
                     <div class="container">

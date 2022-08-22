@@ -14,7 +14,7 @@
                     {{ __('Admin/products.prices_managment') }}
                 </button>
             @endcan
-            @can('product-change-status')
+            @can('product-change-status') 
                 <button type="button" class="dropdown-item btn btn-outline-primary btn-md " data-toggle="modal" data-target="#changeStatus{{ $product->id }}" >
                     {{ __('Admin/products.product_change_status') }}
                 </button>
