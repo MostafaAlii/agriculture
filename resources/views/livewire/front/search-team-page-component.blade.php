@@ -54,33 +54,30 @@
   <!-- start section -->
   <section class="section section--no-pb">
     <div class="container">
-        <div class="goods-catalog mb-3">
-            <div class="row">
-                <div class="col-12 col-md-4 col-lg-3">
-                    <aside class="sidebar goods-filter">
-                        <span class="goods-filter-btn-close js-toggle-filter">
-                            <i class="fontello-cancel"></i>
-                        </span>
-                        <div class="goods-filter__inner">
-                            <livewire:front.search-team-component />
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </div>
-        {{-- <div class="col-12 col-md-8 col-lg-3" id="search_data">
+        <div class="col-12 col-md-8 col-lg-3" id="search_data">
             <div class="spacer py-6 d-md-none"></div>
             <div class="row align-items-center justify-content-between">
                 <div class="col-auto">
+                    <style>
+                        .textfield.nice-select {
+                            padding-right: 177px !important;
+                            /* display:inline !important; */
+                            display:none !important;
+                        }
+                        .textfield {
+                            /* display:none !important; */
+                            display:inline !important;
+                        }
+                    </style>
                    <livewire:front.search-team-component />
                 </div>
             </div>
             <div class="spacer py-6 d-md-none"></div>
-        </div> --}}
+        </div>
         <div class="section-heading section-heading--center" data-aos="fade">
             <h2 class="__title">{{__('Admin/team.title2')}}<span>{{__('Admin/team.title1')}}</span></h2>
         </div>
-        <div class="col-12 col-md-8 col-lg-10 team">
+        <div class="team">
             <div class="__inner">
                 <div class="row">
                     @forelse ($teams as $t)
@@ -125,3 +122,4 @@
     </section>
     <!-- end section -->
 </div>
+

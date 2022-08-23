@@ -13,7 +13,7 @@ class AboutUs extends Component
 {
     use WithPagination;
     // public $allteams;
-    public $teamid='cc';
+    // public $teamid='cc';
     public function mount(){
         // $this->allteams = TeamTranslation::groupBy('position')->get();
         // $this->allteams = TeamTranslation::select('position')->distinct()->get()->toArray();
@@ -24,20 +24,20 @@ class AboutUs extends Component
     }
     public function render()
     {
-        $teamid    = Str::slug($this->teamid, '-');
+        // $teamid    = Str::slug($this->teamid, '-');
         // $teamid    = $this->teamid;
         $about_us  = Cache::get('about_us')??About::first();
-        $pos       = TeamTranslation::select('position')->distinct()->get();
-        if($teamid == 'cc'){
-            $teams = Team::whereHas('translations', function ($query) use ($pos) {
-            $query->whereIn('position', $pos);
-            })->whereHas('translations', function ($q) use ($teamid) {
-                $q->where(Str::slug('position', '-'), $teamid);
-            })->paginate(6);
-            // $teams = Team::orderby('id','desc')->paginate(6);
-        }else{
-            $teams = Team::orderby('id','desc')->paginate(10);
-        }
+        // $pos       = TeamTranslation::select('position')->distinct()->get();
+        // if($teamid == 'cc'){
+        //     $teams = Team::whereHas('translations', function ($query) use ($pos) {
+        //     $query->whereIn('position', $pos);
+        //     })->whereHas('translations', function ($q) use ($teamid) {
+        //         $q->where(Str::slug('position', '-'), $teamid);
+        //     })->paginate(6);
+        // }else{
+        //     $teams = Team::orderby('id','desc')->paginate(10);
+        // }
+        $teams = Team::orderby('id','desc')->paginate(6);
 
         // if($this->teamid !=''){
         //     $data['teams']=TeamTranslation::whereIn(Str::slug('position','-'),$this->allteams)->paginate(6);
@@ -48,6 +48,6 @@ class AboutUs extends Component
         //   }
         // $data['teams']=Team::where('id',$this->teamid)
         //                     ->orderby('id','desc')->paginate(6);
-        return view('livewire.front.about-us',compact('about_us','pos','teams'))->layout('front.layouts.master3');
+        return view('livewire.front.about-us',compact('about_us','teams'))->layout('front.layouts.master3');
     }
 }
