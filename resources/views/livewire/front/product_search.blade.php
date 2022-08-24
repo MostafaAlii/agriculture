@@ -81,25 +81,31 @@
                                     <div class="stock-info in-stock">
                                         <p class="availability">
                                             <b
-                                                class="text {{ $product->in_stock == 1 ? 'text-success' : 'text-danger' }}">
-                                                {{ $product->in_stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
+                                                class="text {{ $product->stock == 1 ? 'text-success' : 'text-danger' }}">
+                                                {{ $product->stock == 1 ? __('Admin/site.stock') : __('Admin/site.outstock') }}
                                             </b>
                                         </p>
                                     </div>
                                     @if ($product->special_price > 0)
                                         <div class="product-price">
                                             <span
-                                                class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                 {{ config('app.Currency') }}</span>
+                                                class="product-price__item product-price__item--old">
+                                                {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
+                                                / {{ $product->getUnit()->Name }}
+                                            </span>
                                             <span
-                                                class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                 {{ config('app.Currency') }}</span>
+                                                class="product-price__item product-price__item--new">
+                                                {{ number_format($product->special_price, 2) }}  {{ config('app.Currency') }}
+                                                / {{ $product->getUnit()->Name }}
+                                            </span>
                                         </div>
                                     @else
                                         <div class="product-price">
                                             <span
-                                                class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
-                                                 {{ config('app.Currency') }}</span>
+                                                class="product-price__item product-price__item--new">
+                                                {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
+                                                / {{ $product->getUnit()->Name }}
+                                            </span>
                                         </div>
                                     @endif
                                     @if (Auth::guard('vendor')->user() )
