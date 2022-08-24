@@ -106,9 +106,9 @@
                             <!-- end widget -->
                             @endif
                             <!-- start widget -->
-                            <div class="widget widget--banner">
+                            {{-- <div class="widget widget--banner">
                                 <a href="#"><img class="img-fluid  lazy" src="img/blank.gif" data-src="img/widget_banner.jpg" alt="demo" /></a>
-                            </div>
+                            </div> --}}
                             <!-- end widget -->
                         </aside>
                     </div>

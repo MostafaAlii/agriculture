@@ -126,7 +126,7 @@
                             <div class="__item  text-center" data-aos="fade" data-aos-delay="200" data-aos-offset="100">
                                 <i class="__ico">
                                     <img class="img-fluid  lazy" src="{{ asset('frontassets/img/blank.gif') }}"
-                                            data-src="{{ asset('frontassets/img/feature_img/7.png') }}" alt="demo" />
+                                            data-src="{{ asset('frontassets/img/feature_img/12.png') }}" alt="demo" />
                                 </i>
 
                                 <h5 class="__title">{{__('Admin\income_products.income_productPageTitle')}}</h5>

@@ -47,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;300&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Noto Sans Arabic', sans-serif!important;}
-        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 ,a {
             font-family: 'Noto Sans Arabic', sans-serif !important;
         }
     </style>
