@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Front;
 
+use App\Models\About;
 use Cart;
 use App\Models\Review;
 use App\Models\Product;
@@ -23,7 +24,7 @@ class Home2 extends Component
           $data['home_category']=Category::whereNotNull('parent_id')->inRandomOrder()->get();
           $data['category_count']=Category::childCategory()->count();
 
-          $data['about_us']=Cache::get('about_us');
+          $data['about_us']=About::get();
 
           $data['reviews']=Review::where('show_or_hide','1')->get();
           $data['ar_logo']=Setting::select('ar_site_logo')->first();

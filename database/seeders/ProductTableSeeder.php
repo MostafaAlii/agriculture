@@ -7,7 +7,7 @@ class ProductTableSeeder extends Seeder {
     public function run() {
         Schema::disableForeignKeyConstraints();
         DB::table('products')->truncate();
-        Product::factory()->count(10)->create();
+        Product::factory()->count(50)->create();
         // Categories Attach ::
         $Categories = Category::get();
         Product::all()->each(function ($product) use ($Categories) {

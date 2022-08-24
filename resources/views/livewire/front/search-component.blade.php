@@ -109,7 +109,7 @@
                                     <h4 class="h6 widget-title">
                                         Price
                                         {{-- <span class="text-base" style=""> --}}
-                                        ${{ $min_price }} - ${{ $max_price }}
+                                         {{ config('app.Currency') }}{{ $min_price }} -  {{ config('app.Currency') }}{{ $max_price }}
                                         {{-- </span> --}}
                                     </h4>
                                     <div style="padding:10px 5px 40px 5px;">
@@ -183,12 +183,12 @@
                                                             <div class="product-price">
                                                                 <span
                                                                     class="product-price__item product-price__item--old">
-                                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                                    {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                     {{ $product->getUnit()->Name }}
                                                                 </span>
                                                                 <span
                                                                     class="product-price__item product-price__item--new">
-                                                                    {{ number_format($product->special_price, 2) }} $
+                                                                    {{ number_format($product->special_price, 2) }}  {{ config('app.Currency') }}
                                                                     {{ $product->getUnit()->Name }}
                                                                 </span>
                                                             </div>
@@ -196,7 +196,7 @@
                                                             <div class="product-price">
                                                                 <span
                                                                     class="product-price__item product-price__item--new">
-                                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                                    {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                     {{ $product->getUnit()->Name }}
                                                                 </span>
                                                             </div>
@@ -328,12 +328,12 @@
                                                                 <div class="product-price">
                                                                     <span
                                                                         class="product-price__item product-price__item--old">
-                                                                        {{ number_format($product->getPrice(), 2) }} $
+                                                                        {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                         {{ $product->getUnit()->Name }}
                                                                     </span>
                                                                     <span
                                                                         class="product-price__item product-price__item--new">
-                                                                        {{ number_format($product->special_price, 2) }} $
+                                                                        {{ number_format($product->special_price, 2) }}  {{ config('app.Currency') }}
                                                                         {{ $product->getUnit()->Name }}
                                                                     </span>
                                                                 </div>
@@ -341,7 +341,7 @@
                                                                 <div class="product-price">
                                                                     <span
                                                                         class="product-price__item product-price__item--new">
-                                                                        {{ number_format($product->getPrice(), 2) }} $
+                                                                        {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                         {{ $product->getUnit()->Name }}
                                                                     </span>
                                                                 </div>

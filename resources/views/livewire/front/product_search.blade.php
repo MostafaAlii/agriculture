@@ -27,7 +27,7 @@
     </style>
 @endsection
 
-                    
+
 <div class="col-12 col-md-12 col-lg-12">
     <div class="spacer py-6 d-md-none"></div>
 
@@ -90,16 +90,16 @@
                                         <div class="product-price">
                                             <span
                                                 class="product-price__item product-price__item--old">{{ number_format($product->price, 2) }}
-                                                $</span>
+                                                 {{ config('app.Currency') }}</span>
                                             <span
                                                 class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}
-                                                $</span>
+                                                 {{ config('app.Currency') }}</span>
                                         </div>
                                     @else
                                         <div class="product-price">
                                             <span
                                                 class="product-price__item product-price__item--new">{{ number_format($product->price, 2) }}
-                                                $</span>
+                                                 {{ config('app.Currency') }}</span>
                                         </div>
                                     @endif
                                     @if (Auth::guard('vendor')->user() )
@@ -150,4 +150,4 @@
     <div class="spacer py-5"></div>
 
 </div>
-                
+

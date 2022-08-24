@@ -179,12 +179,12 @@ label.star:before {
                                             <div class="product-price">
                                                 <span
                                                     class="product-price__item product-price__item--old">
-                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                    {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                     {{ $product->getUnit()->Name }}
                                                 </span>
                                                 <span
                                                     class="product-price__item product-price__item--new">
-                                                    {{ number_format($product->special_price, 2) }} $
+                                                    {{ number_format($product->special_price, 2) }}  {{ config('app.Currency') }}
                                                     {{ $product->getUnit()->Name }}
                                                 </span>
                                             </div>
@@ -192,7 +192,7 @@ label.star:before {
                                             <div class="product-price">
                                                 <span
                                                     class="product-price__item product-price__item--new">
-                                                    {{ number_format($product->getPrice(), 2) }} $
+                                                    {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                     {{ $product->getUnit()->Name }}
                                                 </span>
                                             </div>
@@ -406,11 +406,11 @@ label.star:before {
                                                     <div class="product-price">
                                                         <span
                                                             class="product-price__item product-price__item--old">
-                                                            {{ number_format($product->getPrice(), 2) }} $
+                                                            {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                             {{ $product->getUnit()->Name }}
                                                         </span>
                                                         <span
-                                                            class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $
+                                                            class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}  {{ config('app.Currency') }}
                                                             {{ $product->getUnit()->Name }}
                                                         </span>
                                                     </div>
@@ -418,7 +418,7 @@ label.star:before {
                                                     <div class="product-price">
                                                         <span
                                                             class="product-price__item product-price__item--new">
-                                                            {{ number_format($product->getPrice(), 2) }} $
+                                                            {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                             {{ $product->getUnit()->Name }}
                                                         </span>
                                                     </div>
@@ -575,11 +575,11 @@ label.star:before {
                                                             <div class="product-price">
                                                                 <span
                                                                     class="product-price__item product-price__item--old">
-                                                                     {{ number_format($product->getPrice(), 2) }} $
+                                                                     {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                      {{ $product->getUnit()->Name }}
                                                                 </span>
                                                                 <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }} $
+                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}  {{ config('app.Currency') }}
                                                                     {{ $product->getUnit()->Name }}
                                                                 </span>
                                                             </div>
@@ -587,7 +587,7 @@ label.star:before {
                                                             <div class="product-price">
                                                                 <span
                                                                     class="product-price__item product-price__item--new">
-                                                                     {{ number_format($product->getPrice(), 2) }} $
+                                                                     {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                      {{ $product->getUnit()->Name }}
                                                                 </span>
                                                             </div>

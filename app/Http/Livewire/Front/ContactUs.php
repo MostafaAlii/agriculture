@@ -25,8 +25,8 @@ class ContactUs extends Component
     }
     public function updated($fields){
        $this->validateOnly($fields,[
-        'firstname'    =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-        'lastname'     =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+        'firstname'    =>'required|min:3|max:100|string',
+        'lastname'     =>'required|min:3|max:100|string',
         'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
         'email'        => 'required|email|unique:contact_us,email',
         'comment'      =>'required|regex:/^[A-Za-z0-9-أ-ي-pL\s\-]+$/u|max:200',
@@ -34,15 +34,15 @@ class ContactUs extends Component
     }
     public function sendMessage(){
        $this->validate([
-        'firstname'    => 'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-        'lastname'     => 'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+        'firstname'    => 'required|min:3|max:100|string',
+        'lastname'     => 'required|min:3|max:100|string',
         'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
         'email'        => 'required|email|unique:contact_us,email',
         'comment'      => 'required|regex:/^[A-Za-z0-9-أ-ي-pL\s\-]+$/u|max:200',
        ]);
        DB::beginTransaction();
        try {
-        
+
         Contact::create([
             'firstname'=>$this->firstname,
             'lastname'=>$this->lastname,

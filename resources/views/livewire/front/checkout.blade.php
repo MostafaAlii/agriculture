@@ -328,7 +328,7 @@
                                 </div>
                                 <!-- End Payment Card Info -->
                                 @if(Session::has('checkout'))
-                                    <h6 class="title-box">Total :<p style="" class="text-primary">${{ Session::get('checkout')['total'] }}</p></h6>
+                                    <h6 class="title-box">Total :<p style="" class="text-primary"> {{ config('app.Currency') }}{{ Session::get('checkout')['total'] }}</p></h6>
                                 @endif
                                 <!-- Start Submit Button -->
                                 @if (Cart::instance('cart')->total() > 0 )

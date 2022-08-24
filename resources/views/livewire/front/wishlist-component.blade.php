@@ -122,12 +122,12 @@
                                                                         <div class="product-price">
                                                                             <span
                                                                                 class="product-price__item product-price__item--old">
-                                                                                {{ number_format($product->model->getPrice(), 2) }} $
+                                                                                {{ number_format($product->model->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                                 {{ $product->model->getUnit()->Name }}
                                                                             </span>
                                                                             <span
                                                                                 class="product-price__item product-price__item--new">
-                                                                                {{ number_format($product->model->special_price, 2) }} $
+                                                                                {{ number_format($product->model->special_price, 2) }}  {{ config('app.Currency') }}
                                                                                 {{ $product->model->getUnit()->Name }}
                                                                             </span>
                                                                         </div>
@@ -135,7 +135,7 @@
                                                                         <div class="product-price">
                                                                             <span
                                                                                 class="product-price__item product-price__item--new">
-                                                                                {{ number_format($product->model->getPrice(), 2) }} $
+                                                                                {{ number_format($product->model->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                                 {{ $product->model->getUnit()->Name }}
                                                                             </span>
                                                                         </div>

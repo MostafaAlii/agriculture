@@ -17,7 +17,7 @@ class SearchTeamPageComponent extends Component
     }
     public function render()
     {
-        $about_us  = Cache::get('about_us')??About::first();
+        $about_us  = About::get();
         $teams = Team::whereHas('translations', function ($query) {
                 $query->where('position','like','%'.$this->search.'%');
             })->orderby('id','desc')

@@ -113,7 +113,7 @@
                                                     </td>
                                                     <td>
                                                         <span
-                                                            class="__price">{{ $item->model->special_price ? number_format($item->model->special_price,2) : number_format($item->model->getPrice(), 2)}} $
+                                                            class="__price">{{ $item->model->special_price ? number_format($item->model->special_price,2) : number_format($item->model->getPrice(), 2)}}  {{ config('app.Currency') }}
                                                         </span>
                                                     </td>
                                                     <td>
@@ -158,7 +158,7 @@
 
                                                     <td>
                                                         <span
-                                                            class="__total">{{ number_format($item->subtotal, 2) }} $
+                                                            class="__total">{{ number_format($item->subtotal, 2) }}  {{ config('app.Currency') }}
                                                         </span>
                                                     </td>
 
@@ -210,17 +210,17 @@
                                             <tbody>
                                                 <tr>
                                                     <td>{{ __('Website/home.subtotal') }}:</td>
-                                                    <td>${{ Cart::instance('cart')->subtotal() }}</td>
+                                                    <td> {{ config('app.Currency') }}{{ Cart::instance('cart')->subtotal() }}</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>{{ __('Website/home.tax') }}</td>
-                                                    <td> ${{ Cart::instance('cart')->tax() }}</td>
+                                                    <td>  {{ config('app.Currency') }}{{ Cart::instance('cart')->tax() }}</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>{{ __('Website/home.total') }}</td>
-                                                    <td>${{ Cart::instance('cart')->total() }}</td>
+                                                    <td> {{ config('app.Currency') }}{{ Cart::instance('cart')->total() }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -282,12 +282,12 @@
                                                                         <div class="product-price">
                                                                             <span
                                                                                 class="product-price__item product-price__item--old">
-                                                                                {{ number_format($product->model->getPrice(), 2) }} $
+                                                                                {{ number_format($product->model->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                                 {{ $product->model->getUnit()->Name }}
                                                                             </span>
                                                                             <span
                                                                                 class="product-price__item product-price__item--new">
-                                                                                {{ number_format($product->model->special_price, 2) }} $
+                                                                                {{ number_format($product->model->special_price, 2) }}  {{ config('app.Currency') }}
                                                                                 {{ $product->model->getUnit()->Name }}
                                                                             </span>
                                                                         </div>
@@ -295,7 +295,7 @@
                                                                         <div class="product-price">
                                                                             <span
                                                                                 class="product-price__item product-price__item--new">
-                                                                                {{ number_format($product->model->getPrice(), 2) }} $
+                                                                                {{ number_format($product->model->getPrice(), 2) }}  {{ config('app.Currency') }}
                                                                                 {{ $product->model->getUnit()->Name }}
                                                                             </span>
                                                                         </div>

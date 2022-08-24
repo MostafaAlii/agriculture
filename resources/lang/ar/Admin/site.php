@@ -105,8 +105,8 @@ return [
     'loginby' => 'رقم الهاتف 11 رقم - البريد الالكتروني',
     'register' => 'سجل الان',
 
-    'signvendor' => 'تسجيل مستخدم',
-    'signfarmer' => 'تسجيل البائع',
+    'signvendor' => 'تسجيل مشترى',
+    'signfarmer' => 'تسجيل مزارع',
     'signworker' => 'تسجيل العامل',
     'newfarmer' => 'بائع او مزارع جديد',
     'newvendor' => 'مستخدم جديد',

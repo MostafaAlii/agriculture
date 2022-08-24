@@ -26,7 +26,7 @@ class AboutUs extends Component
     {
         // $teamid    = Str::slug($this->teamid, '-');
         // $teamid    = $this->teamid;
-        $about_us  = Cache::get('about_us')??About::first();
+        $about_us  = About::get();
         // $pos       = TeamTranslation::select('position')->distinct()->get();
         // if($teamid == 'cc'){
         //     $teams = Team::whereHas('translations', function ($query) use ($pos) {

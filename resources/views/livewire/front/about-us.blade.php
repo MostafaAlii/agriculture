@@ -80,7 +80,7 @@
         <div class="section-heading section-heading--center" data-aos="fade">
             <h2 class="__title">{{__('Admin/team.title2')}}<span>{{__('Admin/team.title1')}}</span></h2>
         </div>
-        <div class="col-12 col-md-8 col-lg-10 team">
+        <div class="team">
             <div class="__inner">
                 <div class="row">
                     @forelse ($teams as $t)
