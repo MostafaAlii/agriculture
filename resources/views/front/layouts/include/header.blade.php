@@ -1,5 +1,5 @@
 <header id="top-bar" class="top-bar top-bar--style-1">
-    <div class="top-bar__bg" style="background-color: #24292c;background-image: url({{ URL::asset('frontassets/img/top_bar_bg-1.jpg') }});
+    <div class="top-bar__bg" style="background-color: #24292c;background-image: url({{ URL::asset('frontassets/img/mob.jpg') }});
     background-repeat: no-repeat;background-position: left bottom;"></div>
 
     <div class="container-fluid">

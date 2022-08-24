@@ -1,5 +1,5 @@
 <header id="top-bar" class="top-bar top-bar--style-2">
-    <div class="top-bar__bg" style="background-color: #FFF;background-image: url({{ URL::asset('frontassets/img/top_bar_bg-2.png') }});background-repeat: no-repeat;background-position: center bottom;"></div>
+    <div class="top-bar__bg" style="background-color: #FFF;background-image: url({{ URL::asset('frontassets/img/mob.jpg') }});background-repeat: no-repeat;background-position: center bottom;"></div>
 
     <div class="container position-relative">
         <div class="row justify-content-between no-gutters">

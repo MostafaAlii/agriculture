@@ -1,6 +1,6 @@
 {{-- header2 for shop page --}}
 <header id="top-bar" class="top-bar top-bar--style-2">
-    <div class="top-bar__bg" style="background-color: #FFF;background-image: url({{ URL::asset('frontassets/img/top_bar_bg-2.png') }});
+    <div class="top-bar__bg" style="background-color: #FFF;background-image: url({{ URL::asset('frontassets/img/mob.jpg') }});
     background-repeat: no-repeat;background-position: center bottom;"></div>
 
     <div class="container position-relative">
