@@ -14,7 +14,7 @@ class ProductRepository implements ProductInterface {
     }
 
     public function data() {
-        $products = Product::productWithOutTrashed();
+        $products = Product::orderByDesc('created_at')->productWithOutTrashed();
         //use datatables (yajra) to handel this data
         return DataTables::of($products)
             ->addColumn('record_select',function (Product $products) {

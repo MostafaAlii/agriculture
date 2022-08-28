@@ -66,7 +66,10 @@
                                                     <th>{{ __('Admin/site.image') }}</th>
                                                     <th>{{ __('Admin/site.firstname') }}</th>
                                                     <th>{{ __('Admin/site.lastname') }}</th>
-                                                    <th>{{ __('Admin/site.country') }}</th>
+                                                    {{--<th>{{ __('Admin/site.country') }}</th>--}}
+                                                    <th>{{ __('Admin/site.area') }}</th>
+                                                    <th>{{ __('Admin/site.state') }}</th>
+
                                                     <th>{{ __('Admin/site.email') }}</th>
                                                     <th>{{ __('Admin/site.phonenum') }}</th>
                                                     <th>{{ __('Admin/site.type') }}</th>
@@ -112,7 +115,10 @@
             {data: 'image', name: 'image', searchable: false, sortable: false, width: '10%'},
             {data: 'firstname', name: 'firstname'},
             {data: 'lastname', name: 'lastname'},
-            {data: 'country', name: 'country'},
+            // {data: 'country', name: 'country'},
+            {data: 'area', name: 'area'},
+            {data: 'state', name: 'state'},
+
             {data: 'email', name: 'email'},
             {data: 'phone', name: 'phone'},
             {data: 'type', name: 'type',width: '10%'},

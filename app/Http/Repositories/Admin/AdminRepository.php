@@ -45,8 +45,12 @@ class AdminRepository implements AdminInterface
             ->addColumn('image', function (Admin $admin) {
                 return view('dashboard.admin.admins.data_table.image', compact('admin'));
             })
-            ->addColumn('country', function (Admin $admin) {
-                return $admin->country->name ?? null;
+
+            ->addColumn('area', function (Admin $admin) {
+                return $admin->area->name;
+            })
+            ->addColumn('state', function (Admin $admin) {
+                return $admin->state->name;
             })
             ->addColumn('actions', 'dashboard.admin.admins.data_table.actions')
             ->rawColumns(['record_select', 'actions'])

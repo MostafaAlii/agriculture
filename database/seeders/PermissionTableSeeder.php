@@ -354,7 +354,8 @@ class PermissionTableSeeder extends Seeder {
                 'index-outcome-imported-products-statistics',
                     'index-outcome-imported-products-statistics-filter',
                 'outcome-iraq-products-statistics',
-        ];
+            'wholesale-report',
+            ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }

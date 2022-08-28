@@ -142,32 +142,6 @@
                     </a>
                 </div>
             @endcan
-            @can('farmer-list')
-                <div class="col-xl-3 col-lg-6 col-12">
-                    <a href="{{ route('farmers.front') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="text-left media-body">
-                                            <h3 class="warning">{{ \App\Models\Farmer::where('department_id', null)->count() }}</h3>
-                                            <h6>{{ __('Admin/site.farmer_created_from_front') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="float-right icon-users warning font-large-2"></i>
-                                        </div>
-                                    </div>
-                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar"
-                                             style="width: 65%" aria-valuenow="65" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            @endcan
         <!-- End Farmer -->
             <!-- Start Vendor -->
             @can('vendor-list')
@@ -197,32 +171,32 @@
                 </div>
             @endcan
         <!-- End Vendor -->
-            <!-- Start Worker -->
-            @can('worker-list')
-                <div class="col-xl-3 col-lg-6 col-12">
-                    <a href="{{ route('workers.index') }}">
-                        <div class="card pull-up">
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div class="media d-flex">
-                                        <div class="text-left media-body">
-                                            <h3 class="success">{{ \App\Models\Worker::count() }}</h3>
-                                            <h6>{{ __('Admin/site.workers') }}</h6>
-                                        </div>
-                                        <div>
-                                            <i class="float-right icon-user-follow success font-large-2"></i>
-                                        </div>
+        <!-- Start Worker -->
+        @can('worker-list')
+            <div class="col-xl-3 col-lg-6 col-12">
+                <a href="{{ route('workers.index') }}">
+                    <div class="card pull-up">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="text-left media-body">
+                                        <h3 class="success">{{ \App\Models\Worker::count() }}</h3>
+                                        <h6>{{ __('Admin/site.workers') }}</h6>
                                     </div>
-                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                        <div class="progress-bar bg-gradient-x-success" role="progressbar"
-                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                             aria-valuemax="100"></div>
+                                    <div>
+                                        <i class="float-right icon-user-follow success font-large-2"></i>
                                     </div>
+                                </div>
+                                <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                    <div class="progress-bar bg-gradient-x-success" role="progressbar"
+                                            style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
+            </div>
         @endcan
         <!-- End Worker -->
         </div>
@@ -257,9 +231,9 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Countries -->
-          <!-- Start Proviences -->
-          @can('provience-managment')
+            <!-- End Countries -->
+            <!-- Start Proviences -->
+            @can('provience-managment')
                 <div class="col-xl-2 col-lg-6 col-12">
                     <a href="{{ route('Proviences.index') }}">
                         <div class="card pull-up">
@@ -277,16 +251,16 @@
                                     </div>
                                     <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
-                                            style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                            aria-valuemax="100"></div>
+                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                             aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-          @endcan
-  <!-- End Proviences -->
+            @endcan
+            <!-- End Proviences -->
             <!-- Start Area -->
             @can('area-managment')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -315,7 +289,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Area -->
+            <!-- End Area -->
             <!-- Start States -->
             @can('state-managment')
                 <div class="col-xl-2 col-lg-6 col-12">
@@ -343,7 +317,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End States -->
+            <!-- End States -->
             <!-- Start Villages -->
             @can('village-managment')
                 <div class="col-xl-2 col-lg-6 col-12">
@@ -370,8 +344,8 @@
                         </div>
                     </a>
                 </div>
-        @endcan
-        <!-- End Villages -->
+            @endcan
+            <!-- End Villages -->
         </div>
         <!-- End Second Row Country -->
 
@@ -404,7 +378,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Departments -->
+            <!-- End Departments -->
             <!-- Start Categories -->
             @can('category-managment')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -432,7 +406,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Categories -->
+            <!-- End Categories -->
             <!-- Start Blogs -->
             @can('blogs')
                 <div class="col-xl-2 col-lg-6 col-12">
@@ -461,7 +435,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Blogs -->
+            <!-- End Blogs -->
             <!-- Start Tags -->
             @can('tags')
                 <div class="col-xl-2 col-lg-6 col-12">
@@ -488,7 +462,7 @@
                         </div>
                     </a>
                 </div>
-        @endcan
+            @endcan
         <!-- End Tags -->
         </div>
         <!-- End Row Blog -->
@@ -523,7 +497,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End AdminDepartments -->
+            <!-- End AdminDepartments -->
             <!-- Start Orchards -->
             @can('orchard')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -553,7 +527,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Orchards -->
+            <!-- End Orchards -->
             <!-- Start ProtectedHouse -->
             @can('protect-house')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -581,7 +555,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End ProtectedHouse -->
+            <!-- End ProtectedHouse -->
             <!-- Start FarmerServices -->
             @can('farmer-service')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -610,7 +584,7 @@
                         </div>
                     </a>
                 </div>
-        @endcan
+            @endcan
         <!-- End FarmerServices -->
         </div>
         <!-- End Row Admin Department -->
@@ -646,7 +620,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Precipitations -->
+            <!-- End Precipitations -->
             <!-- Start Land Area -->
             @can('land-area')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -676,7 +650,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Land Area -->
+            <!-- End Land Area -->
             <!-- Start FarmerCrops -->
             @can('farmer-crop')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -706,7 +680,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End FarmerCrops -->
+            <!-- End FarmerCrops -->
             <!-- Start Caws Project -->
             @can('caws-project')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -736,7 +710,7 @@
                         </div>
                     </a>
                 </div>
-        @endcan
+            @endcan
         <!-- End Caws Project -->
         </div>
         <!-- End Row Precipitations -->
@@ -772,7 +746,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End Row Chicken Project -->
+            <!-- End Row Chicken Project -->
             @can('bee-keepers')
                 <div class="col-xl-3 col-lg-6 col-12">
                     <a href="{{ route('BeeKeepers.index') }}">
@@ -800,9 +774,8 @@
                     </a>
                 </div>
             @endcan
-        <!-- Start OutcomeProducts -->
+            <!-- Start OutcomeProducts -->
             @can('outcome-products')
-
                 <div class="col-xl-3 col-lg-6 col-12">
                     <a href="{{ route('OutcomeProducts.index') }}">
                         <div class="card pull-up">
@@ -811,7 +784,7 @@
                                     <div class="media d-flex">
                                         <div class="text-left media-body">
                                             <h3 class="gray-bg"
-                                            style="color:blue;">{{ \App\Models\OutcomeProduct::count() }}</h3>
+                                                style="color:blue;">{{ \App\Models\OutcomeProduct::count() }}</h3>
                                             <h6>  {{ trans('Admin/outcome_products.outcome_productPageTitle') }}</h6>
                                         </div>
                                         <div>
@@ -830,7 +803,7 @@
                     </a>
                 </div>
             @endcan
-        <!-- End OutcomeProducts -->
+            <!-- End OutcomeProducts -->
             <!-- Start IncomeProducts -->
             @can('income-products')
                 <div class="col-xl-3 col-lg-6 col-12">
@@ -859,7 +832,7 @@
                         </div>
                     </a>
                 </div>
-        @endcan
+            @endcan
         <!-- End IncomeProducts -->
         </div>
         <!-- End Row Chicken -->
@@ -869,11 +842,9 @@
         <!--End Precipitation Graph-->
         @can('precipitation-graph')
             <div class="card-body">
-
                 <div class="form-body">
                     <form action="{{route('precipitation.graph')}}" method="get">
                         @csrf
-
                         <div class="mt-3 row">
                             <div class="row">
                                 <div class="form-group col-md-3">
@@ -934,7 +905,7 @@
                 </div>
             </div>
         @endcan
-    <!--End Precipitation Graph-->
+        <!--End Precipitation Graph-->
         <hr>
         <!--------------------------------------------------------- Start Report -------------------------------------------------------------->
 
@@ -943,482 +914,509 @@
 
         {{--start test report--}}
 
-
         <div class="accordion" id="accordionExample">
-
-            <div class="card">
-                <div class="card-header">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">
-                        <i class="fa fa-plus "></i> {{__('Admin\site.reporting')}} / {{__('Admin\site.animal_wealth')}}
-                    </button>
-                </div>
-                <div class="collapse show" id="collapseOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Start Animal Statistics -->
-                            @can('statistics-report')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('animals.caw_index_statistics') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-                                                            <h3 class="gray-bg"
-                                                                style="color: purple;">{{ \App\Models\CawProject::where('marketing_side','like','private')->count() }}</h3>
-                                                            <h6>  {{ trans('Admin/animals.animals_projects_report') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: purple;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-purple"
-                                                             role="progressbar" style="width: 75%" aria-valuenow="75"
-                                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endcan
-
-                        <!-- Start Chicken Statistics Report -->
-                            @can('chicken-report-statistics')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('chicken.statistic_index') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-                                                            <h3 class="gray-bg"
-                                                                style="color: green;">{{ \App\Models\ChickenProject::where('marketing_side','like','govermental')->count() }}</h3>
-                                                            <h6>  {{ trans('Admin/animals.chicken_statistic_report') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: green;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-success"
-                                                             role="progressbar" style="width: 75%" aria-valuenow="75"
-                                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                        @endcan
-                        <!-- End Chicken Startstics Report -->
-
-                        </div>
+            {{--start animal_welth--}}
+            @can('animal-reports')
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">
+                            <i class="fa fa-plus "></i> {{__('Admin\site.reporting')}} / {{__('Admin\site.animal_wealth')}}
+                        </button>
                     </div>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo">
-                        <i class="fa fa-plus "></i>
-                        {{__('Admin\site.reporting')}} / {{__('Admin\site.Horticulture')}}
-                    </button>
-                </div>
-                <div class="collapse" id="collapseTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Start Orchard Statistics -->
-                            @can('orchard-report-statistics')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('orchards.statistics_index') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-                                                            <h3 class="gray-bg"
-                                                                style="color: purple;">{{ \App\Models\Orchard::count() }}</h3>
-                                                            <h6>  {{ trans('Admin/orchards.Report_on_the_lands_planted_with_trees') }}</h6>
+                    <div class="collapse show" id="collapseOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Start Animal Statistics -->
+                                @can('statistics-report')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('animals.caw_index_statistics') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+                                                                <h3 class="gray-bg"
+                                                                    style="color: purple;">{{ \App\Models\CawProject::where('marketing_side','like','private')->count() }}</h3>
+                                                                <h6>  {{ trans('Admin/animals.animals_projects_report') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: purple;"></i>
+                                                            </div>
                                                         </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: purple;"></i>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-purple"
+                                                                role="progressbar" style="width: 75%" aria-valuenow="75"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-purple"
-                                                             role="progressbar" style="width: 75%" aria-valuenow="75"
-                                                             aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endcan
-                        <!-- End Orchard Statistics -->
-                            <!-- Start Protect House Statistics -->
-                            @can('protected-house-statistics')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('protected_house_index') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-                                                            <h3 class="gray-bg"
-                                                                style="color: deeppink;">{{ \App\Models\ProtectedHouse::count() }}</h3>
-                                                            <h6>  {{ trans('Admin/p_houses.report_on_the_number_of_greenhouses') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: deeppink;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-pink" role="progressbar"
-                                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                             aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                        @endcan
-                        <!-- End Protect House Statistics -->
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree">
-                        <i class="fa fa-plus "></i>
-                        {{__('Admin\site.reporting')}} / {{__('Admin\site.planet_protection')}}
-                    </button>
-                </div>
-                <div class="collapse" id="collapseThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Start Beekepper Statistics -->
-                            @can('bee-keepers-statistics')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('beekeepers.index_statistics') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-
-                                                            <h3 class="gray-bg"
-                                                                style="color: green;">{{ \App\Models\BeeKeeper::count() }}</h3>
-                                                            <h6>  {{ trans('Admin/bees.Apiaries_report_to_the_judiciary') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: green;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-purple"
-                                                             role="progressbar" style="width: 75%" aria-valuenow="75"
-                                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                        @endcan
-                        <!-- End Beekepper Statistics -->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour">
-                        <i class="fa fa-plus "></i>
-                        {{__('Admin\site.reporting')}} / {{__('Admin\site.services')}}
-                    </button>
-                </div>
-                <div class="collapse" id="collapseFour" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Start farmer-service-statistics -->
-                            @can('farmer-service-statistics')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('farmer_service_index_statistics') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-                                                            <h3 class="gray-bg"
-                                                                style="color: blue;">{{ \App\Models\FarmerService::count() }}</h3>
-                                                            <h6>  {{ trans('Admin/services.farmer_services_report') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: blue;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-info" role="progressbar"
-                                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                             aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endcan
-                        <!-- End farmer-service-statistics -->
-                            <!-- Start precipitation-statistics -->
-                            @can('precipitation-statistics')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('precipitations.index_statistic') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-                                                            <h3 class="gray-bg"
-                                                                style="color: deeppink;">{{ \App\Models\Precipitation::count() }}</h3>
-                                                            <h6>  {{ trans('Admin/precipitations.precipitation_report') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: deeppink;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-pink" role="progressbar"
-                                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                             aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                        @endcan
-                        <!-- End precipitation-statistics -->
-
-                            <!-- Start precipitation-details-statistics -->
-                        {{--@can('precipitation-details-statistics')--}}
-                        {{--<div class="col-xl-3 col-lg-6 col-12">--}}
-                        {{--<a href="{{ route('precipitations.index_details_statistic') }}">--}}
-                        {{--<div class="card pull-up">--}}
-                        {{--<div class="card-content">--}}
-                        {{--<div class="card-body">--}}
-                        {{--<div class="media d-flex">--}}
-                        {{--<div class="text-left media-body">--}}
-                        {{--<h3 class="gray-bg" style="color: orange;">{{ \App\Models\Precipitation::count() }}</h3>--}}
-                        {{--<h6>  {{ trans('Admin/precipitations.precipitation_details_report') }}</h6>--}}
-                        {{--</div>--}}
-                        {{--<div>--}}
-                        {{--<i class="fa fa-list-alt" aria-hidden="true" style="color: orange;"></i>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="mt-1 mb-0 progress progress-sm box-shadow-2">--}}
-                        {{--<div class="progress-bar bg-gradient-x-red" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</a>--}}
-                        {{--</div>--}}
-                        {{--@endcan--}}
-                        <!-- End precipitation-details-statistics -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive">
-                        <i class="fa fa-plus "></i>
-                        {{__('Admin\site.reporting')}} / {{__('Admin\site.planning')}}
-                    </button>
-                </div>
-                <div class="collapse" id="collapseFive" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <!-- Start First Row -->
-                        <div class="row">
-                            <!-- Start land_areas_report -->
-                            @can('land-area-report')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('index_land_area_statistics') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-
-                                                            <h3 class="gray-bg"
-                                                                style="color: blue;">{{ \App\Models\LandArea::count() }}</h3>
-                                                            <h6>  {{ trans('Admin/land_areas.land_areas_report') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: blue;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-info" role="progressbar"
-                                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                             aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endcan
-                        <!-- End land_areas_report -->
-
-
-
-                            <!-- Start farmer-crop-statistics -->
-                            @can('farmer-crop-statistics')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('statistics_index') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-
-                                                            <h3 class="gray-bg"
-                                                                style="color: yellow;">{{ \App\Models\FarmerCrop::count() }}</h3>
-                                                            <h6>  {{ trans('Admin/crops.farmer_crops_report') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: yellow;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-yellow"
-                                                             role="progressbar" style="width: 75%" aria-valuenow="75"
-                                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endcan
-                        <!-- End farmer-crop-statistics -->
-                        </div>
-                        <!-- End First Row -->
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSix">
-                        <i class="fa fa-plus "></i>
-                        {{__('Admin\site.reporting')}} / {{__('Admin\site.wholesale')}}
-                    </button>
-                </div>
-                <div class="collapse" id="collapseSix" data-parent="#accordionExample">
-                    <div class="card-body">
-
-                        <!-- Start Second Row -->
-                        <div class="row">
-                            <!-- Start Income Product Statitistics -->
-                            @can('income-product-statistics')
-                                <div class="col-xl-3 col-lg-6 col-12">
-                                    <a href="{{ route('index_income_products') }}">
-                                        <div class="card pull-up">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <div class="media d-flex">
-                                                        <div class="text-left media-body">
-
-                                                            <h3 class="gray-bg"
-                                                                style="color: blue;">{{ \App\Models\IncomeProduct::count() }}</h3>
-                                                            <h6>  {{ trans('Admin/income_products.income_products_report') }}</h6>
-                                                        </div>
-                                                        <div>
-                                                            <i class="fa fa-list-alt" aria-hidden="true"
-                                                               style="color: blue;"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                        <div class="progress-bar bg-gradient-x-info" role="progressbar"
-                                                             style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                             aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endcan
-                        </div>
-
-                        <div class="row">
-
-                            {{--@can('index_outcome_products')--}}
-                            <div class="col-xl-3 col-lg-6 col-12">
-                                <a href="{{ route('index_outcome_products') }}">
-                                    <div class="card pull-up">
-                                        <div class="card-content">
-                                            <div class="card-body">
-                                                <div class="media d-flex">
-                                                    <div class="text-left media-body">
-
-                                                        <h3 class="gray-bg"
-                                                            style="color: purple;">{{ \App\Models\OutcomeProduct::count() }}</h3>
-                                                        <h6>  {{ trans('Admin/outcome_products.outcome_products_report') }}</h6>
-                                                    </div>
-                                                    <div>
-                                                        <i class="fa fa-list-alt" aria-hidden="true"
-                                                           style="color: purple;"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
-                                                    <div class="progress-bar bg-gradient-x-purple" role="progressbar"
-                                                         style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
-                                </a>
+                                @endcan
+
+                            <!-- Start Chicken Statistics Report -->
+                                @can('chicken-report-statistics')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('chicken.statistic_index') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+                                                                <h3 class="gray-bg"
+                                                                    style="color: green;">{{ \App\Models\ChickenProject::where('marketing_side','like','govermental')->count() }}</h3>
+                                                                <h6>  {{ trans('Admin/animals.chicken_statistic_report') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: green;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-success"
+                                                                role="progressbar" style="width: 75%" aria-valuenow="75"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                            @endcan
+                            <!-- End Chicken Startstics Report -->
+
                             </div>
-                        {{--@endcan--}}
-                        <!-- End outcome_product_statistics -->
-
-
                         </div>
-                        <!-- End Third Row -->
                     </div>
                 </div>
-            </div>
+            @endcan
+            {{--end animal_welth--}}
+            
+            {{--start Horticulture--}}
+            @can('horticulture-reports')
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo">
+                            <i class="fa fa-plus "></i>
+                            {{__('Admin\site.reporting')}} / {{__('Admin\site.Horticulture')}}
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Start Orchard Statistics -->
+                                @can('orchard-report-statistics')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('orchards.statistics_index') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+                                                                <h3 class="gray-bg"
+                                                                    style="color: purple;">{{ \App\Models\Orchard::count() }}</h3>
+                                                                <h6>  {{ trans('Admin/orchards.Report_on_the_lands_planted_with_trees') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: purple;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-purple"
+                                                                role="progressbar" style="width: 75%" aria-valuenow="75"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endcan
+                            <!-- End Orchard Statistics -->
+                                <!-- Start Protect House Statistics -->
+                                @can('protected-house-statistics')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('protected_house_index') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+                                                                <h3 class="gray-bg"
+                                                                    style="color: deeppink;">{{ \App\Models\ProtectedHouse::count() }}</h3>
+                                                                <h6>  {{ trans('Admin/p_houses.report_on_the_number_of_greenhouses') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: deeppink;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-pink" role="progressbar"
+                                                                style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                            @endcan
+                            <!-- End Protect House Statistics -->
 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            {{--end Horticulture--}}
+
+            {{--start planet_protection--}}
+            @can('beekeeper-reports')
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree">
+                            <i class="fa fa-plus "></i>
+                            {{__('Admin\site.reporting')}} / {{__('Admin\site.planet_protection')}}
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Start Beekepper Statistics -->
+                                @can('bee-keepers-statistics')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('beekeepers.index_statistics') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+
+                                                                <h3 class="gray-bg"
+                                                                    style="color: green;">{{ \App\Models\BeeKeeper::count() }}</h3>
+                                                                <h6>  {{ trans('Admin/bees.Apiaries_report_to_the_judiciary') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: green;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-purple"
+                                                                role="progressbar" style="width: 75%" aria-valuenow="75"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                            @endcan
+                            <!-- End Beekepper Statistics -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            {{--end planet_protection--}}
+
+            {{--start services--}}
+            @can('service-reports')
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour">
+                            <i class="fa fa-plus "></i>
+                            {{__('Admin\site.reporting')}} / {{__('Admin\site.services')}}
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseFour" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Start farmer-service-statistics -->
+                                @can('farmer-service-statistics')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('farmer_service_index_statistics') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+                                                                <h3 class="gray-bg"
+                                                                    style="color: blue;">{{ \App\Models\FarmerService::count() }}</h3>
+                                                                <h6>  {{ trans('Admin/services.farmer_services_report') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: blue;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-info" role="progressbar"
+                                                                style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endcan
+                            <!-- End farmer-service-statistics -->
+                                <!-- Start precipitation-statistics -->
+                                @can('precipitation-statistics')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('precipitations.index_statistic') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+                                                                <h3 class="gray-bg"
+                                                                    style="color: deeppink;">{{ \App\Models\Precipitation::count() }}</h3>
+                                                                <h6>  {{ trans('Admin/precipitations.precipitation_report') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: deeppink;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-pink" role="progressbar"
+                                                                style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                            @endcan
+                            <!-- End precipitation-statistics -->
+
+                                <!-- Start precipitation-details-statistics -->
+                            {{--@can('precipitation-details-statistics')--}}
+                            {{--<div class="col-xl-3 col-lg-6 col-12">--}}
+                            {{--<a href="{{ route('precipitations.index_details_statistic') }}">--}}
+                            {{--<div class="card pull-up">--}}
+                            {{--<div class="card-content">--}}
+                            {{--<div class="card-body">--}}
+                            {{--<div class="media d-flex">--}}
+                            {{--<div class="text-left media-body">--}}
+                            {{--<h3 class="gray-bg" style="color: orange;">{{ \App\Models\Precipitation::count() }}</h3>--}}
+                            {{--<h6>  {{ trans('Admin/precipitations.precipitation_details_report') }}</h6>--}}
+                            {{--</div>--}}
+                            {{--<div>--}}
+                            {{--<i class="fa fa-list-alt" aria-hidden="true" style="color: orange;"></i>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="mt-1 mb-0 progress progress-sm box-shadow-2">--}}
+                            {{--<div class="progress-bar bg-gradient-x-red" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</a>--}}
+                            {{--</div>--}}
+                            {{--@endcan--}}
+                            <!-- End precipitation-details-statistics -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            {{--start services--}}
+
+            {{--start planning--}}
+            @can('planning-reports')
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive">
+                            <i class="fa fa-plus "></i>
+                            {{__('Admin\site.reporting')}} / {{__('Admin\site.planning')}}
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseFive" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <!-- Start First Row -->
+                            <div class="row">
+                                <!-- Start land_areas_report -->
+                                @can('land-area-report')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('index_land_area_statistics') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+
+                                                                <h3 class="gray-bg"
+                                                                    style="color: blue;">{{ \App\Models\LandArea::count() }}</h3>
+                                                                <h6>  {{ trans('Admin/land_areas.land_areas_report') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: blue;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-info" role="progressbar"
+                                                                style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endcan
+                            <!-- End land_areas_report -->
+
+
+                                <!-- Start farmer-crop-statistics -->
+                                @can('farmer-crop-statistics')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('statistics_index') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+
+                                                                <h3 class="gray-bg"
+                                                                    style="color: yellow;">{{ \App\Models\FarmerCrop::count() }}</h3>
+                                                                <h6>  {{ trans('Admin/crops.farmer_crops_report') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: yellow;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-yellow"
+                                                                role="progressbar" style="width: 75%" aria-valuenow="75"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                            @endcan
+                            <!-- End farmer-crop-statistics -->
+                            </div>
+                            <!-- End First Row -->
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            {{--end planning--}}
+
+            {{--start wholesale--}}
+            @can('wholesale-reports')
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSix">
+                            <i class="fa fa-plus "></i>
+                            {{__('Admin\site.reporting')}} / {{__('Admin\site.wholesale')}}
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseSix" data-parent="#accordionExample">
+                        <div class="card-body">
+
+                            <!-- Start Second Row -->
+                            <div class="row">
+                                <!-- Start Income Product Statitistics -->
+                                @can('income-product-statistics')
+                                    <div class="col-xl-3 col-lg-6 col-12">
+                                        <a href="{{ route('index_income_products') }}">
+                                            <div class="card pull-up">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="media d-flex">
+                                                            <div class="text-left media-body">
+
+                                                                <h3 class="gray-bg"
+                                                                    style="color: blue;">{{ \App\Models\IncomeProduct::count() }}</h3>
+                                                                <h6>  {{ trans('Admin/income_products.income_products_report') }}</h6>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fa fa-list-alt" aria-hidden="true"
+                                                                style="color: blue;"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                            <div class="progress-bar bg-gradient-x-info" role="progressbar"
+                                                                style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endcan
+                            </div>
+
+                            <div class="row">
+
+                                {{--@can('index_outcome_products')--}}
+                                <div class="col-xl-3 col-lg-6 col-12">
+                                    <a href="{{ route('index_outcome_products') }}">
+                                        <div class="card pull-up">
+                                            <div class="card-content">
+                                                <div class="card-body">
+                                                    <div class="media d-flex">
+                                                        <div class="text-left media-body">
+
+                                                            <h3 class="gray-bg"
+                                                                style="color: purple;">{{ \App\Models\OutcomeProduct::count() }}</h3>
+                                                            <h6>  {{ trans('Admin/outcome_products.outcome_products_report') }}</h6>
+                                                        </div>
+                                                        <div>
+                                                            <i class="fa fa-list-alt" aria-hidden="true"
+                                                            style="color: purple;"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                                        <div class="progress-bar bg-gradient-x-purple" role="progressbar"
+                                                            style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            {{--@endcan--}}
+                            <!-- End outcome_product_statistics -->
+
+
+                            </div>
+                            <!-- End Third Row -->
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            {{--end wholesale--}}
         </div>
         <!-- .accordion -->
 
         {{--test report--}}
+        @can('products-managment')
         @includeWhen($latest_products,'dashboard.admin.recent_product')
+        @endcan
         <br>
         <hr>
-        @includeWhen($orders,'dashboard.admin.orders')
+        @can('orders-managment')
+            @includeWhen($orders,'dashboard.admin.orders')
+        @endcan
 
     </div>
     </div>

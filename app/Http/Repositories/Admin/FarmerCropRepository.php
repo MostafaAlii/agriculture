@@ -892,6 +892,7 @@ class FarmerCropRepository implements FarmerCropInterface
 
         }
         elseif ($admin->type == 'employee') {
+            $area_id = $admin->area->id;
             $state_id = $admin->state->id;
             if ($request->start_date != null && $request->end_date != null &&
                 $request->village_id != null && $request->land_category_id != null)
@@ -922,6 +923,7 @@ class FarmerCropRepository implements FarmerCropInterface
             } elseif ($request->start_date != null && $request->end_date != null &&
                 $request->village_id == null && $request->land_category_id == null)
             {
+                $area_id = $admin->area->id;
                 $state_id = $admin->state->id;
                 $farmercropsQuery = FarmerCrop::whereRaw("date(farmer_crops.date) >= '" . $request->start_date . "'
              AND date(farmer_crops.date) <= '" . $request->end_date . "'");
@@ -946,6 +948,7 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
             } elseif ($request->village_id != null && $request->land_category_id == null) {
+                $area_id = $admin->area->id;
                 $state_id = $admin->state->id;
 
                 $statistics = FarmerCrop::select('area_translations.name AS Area',
@@ -968,6 +971,7 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
             } elseif ($request->village_id == null && $request->land_category_id == null) {
+                $area_id = $admin->area->id;
                 $state_id = $admin->state->id;
 
                 $statistics = FarmerCrop::select('area_translations.name AS Area',
