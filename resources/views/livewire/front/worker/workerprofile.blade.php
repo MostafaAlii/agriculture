@@ -92,9 +92,9 @@
                     <p><b>@lang('Admin/site.worktype') : </b> {{$worker->work == 'alone' ?  __('Admin/site.alone') : __('Admin/site.team')}}</p>
                     <p><b>@lang('Admin/site.salarytype') : </b> {{$worker->salary == 'perday' ?  __('Admin/site.perday') : __('Admin/site.perhour')}}</p>
                     @if($worker->daily_price != null)
-                         <p><b>@lang('Admin/site.daily') : </b>  {{number_format($worker->daily_price,2) }} {{ $worker->currency->Name }}</p>
+                         <p><b>@lang('Admin/site.daily') : </b>  {{number_format($worker->daily_price,2) }} {{ $worker->currency->Name ??null}}</p>
                     @else
-                        <p><b>@lang('Admin/site.hourly') : </b>  {{number_format($worker->hourly_price,2) }} {{ $worker->currency->Name }}</p>
+                        <p><b>@lang('Admin/site.hourly') : </b>  {{number_format($worker->hourly_price,2) }} {{ $worker->currency->Name ??null}}</p>
                     @endif
                     <!-- end form -->
                     <a href="{{ route('worker.ownprofile.edit') }}"
