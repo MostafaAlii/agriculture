@@ -142,6 +142,34 @@
                     </a>
                 </div>
             @endcan
+            <!-- Start Website Farmer الفلاحين المسجلين من الموقع -->
+            @can('farmer-website-list')
+            <div class="col-xl-3 col-lg-6 col-12">
+                <a href="{{ route('farmers.front') }}">
+                    <div class="card pull-up">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="text-left media-body">
+                                        <h3 class="warning">{{ \App\Models\Farmer::where('department_id', null)->count() }}</h3>
+                                        <h6>{{ __('Admin/site.farmer_created_from_front') }}</h6>
+                                    </div>
+                                    <div>
+                                        <i class="float-right icon-users warning font-large-2"></i>
+                                    </div>
+                                </div>
+                                <div class="mt-1 mb-0 progress progress-sm box-shadow-2">
+                                    <div class="progress-bar bg-gradient-x-warning" role="progressbar"
+                                         style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+                                         aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @endcan
+            <!-- End Website Farmer الفلاحين المسجلين من الموقع -->
         <!-- End Farmer -->
             <!-- Start Vendor -->
             @can('vendor-list')
