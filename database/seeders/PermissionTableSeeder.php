@@ -23,6 +23,7 @@ class PermissionTableSeeder extends Seeder {
                     'farmer-edit',
                     'farmer-delete',
                     'farmer-delete-all',
+                'farmer-website-list',
                 // Worker ::
                 'worker-list',
                     'worker-create',
@@ -354,7 +355,7 @@ class PermissionTableSeeder extends Seeder {
                 'index-outcome-imported-products-statistics',
                     'index-outcome-imported-products-statistics-filter',
                 'outcome-iraq-products-statistics',
-            'wholesale-report',
+            'wholesale-reports',
             ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
