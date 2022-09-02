@@ -21,6 +21,7 @@ trait UploadT
             $filename = $name. '.' . $photo->getClientOriginalExtension();
 
 
+
             // insert Image
             $Image = new Image();
             $Image->filename = $filename;
@@ -129,5 +130,5 @@ trait UploadT
         return null;
 
     }
-    
+
 }

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\{DB, Crypt};
 use App\Http\Interfaces\Admin\ProductInterface;
-use App\Models\{Tag, Farmer, Product, Category, Unit};
+use App\Models\{Tag, Farmer, Product, Category, Image as ModelsImage, Unit};
+use Intervention\Image\Facades\Image;
 class ProductRepository implements ProductInterface {
     use UploadT;
     public function index() {
@@ -91,7 +92,6 @@ class ProductRepository implements ProductInterface {
                     $request->request->add(['status' => 0]);
                 else
                     $request->request->add(['status' => 1]);
-
                 $product = Product::create([
                     'farmer_id' => $request->farmer_id,
                     'status' => $request->status,

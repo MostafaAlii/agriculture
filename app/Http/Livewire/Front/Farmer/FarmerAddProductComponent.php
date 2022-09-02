@@ -64,7 +64,7 @@ class FarmerAddProductComponent extends Component
         {
             $validateData = $this->validate([
                 'newimage'       =>'required|image|mimes:jpeg,png,jpg|max:2048',
-                'product_name'   =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+                'product_name'   =>'required|min:3|max:100',
                 'cat'            =>'required|exists:categories,id|array',
                 'tag'            =>'required|exists:tags,id|array',
                 'unit'           =>'required|exists:units,id|',
@@ -88,9 +88,10 @@ class FarmerAddProductComponent extends Component
                 $product->units()->syncWithPivotValues([$this->unit],['price'=>$this->price]);
                 $product->save();
                 if($this->newimage){
-                    $image = $this->newimage->extension();
-                    $name  = $this->slug;
-                    $filename = $name. '.' . $image;
+                    // $image = $this->newimage->extension();
+                    // $name  = $this->slug;
+                    // $filename = $name. '.' . $image;
+                    $filename = $this->newimage->hashName();
                     $Image = new Image();
                     $Image->filename = $filename;
                     $Image->imageable_id = $product->id;

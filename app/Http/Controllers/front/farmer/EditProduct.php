@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\Product\farmerProductRequest;
 use App\Http\Requests\Dashboard\Product\GeneralRequest;
 use App\Models\Category;
 use App\Models\Farmer;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Tag;
 use App\Models\Unit;
@@ -21,6 +22,8 @@ class EditProduct extends Controller
     use UploadT;
     public function edit($product_id)
     {
+        // dd('hello');
+        // return 'hello';
         $real_id= Crypt::decrypt($product_id);
         $data = [];
         $data['product']        =       Product::findOrfail($real_id);
@@ -32,6 +35,8 @@ class EditProduct extends Controller
     }
 
     public function update(farmerProductRequest $request) {
+        // dd('hello');
+        // return 'hello';
         DB::beginTransaction();
             try{
                 $product = Product::findOrfail($request->id);
@@ -49,6 +54,15 @@ class EditProduct extends Controller
                     $this->deleteImage('upload_image','/products/' . $product->image->filename,$product->id);
                 }
                 $this->addImageProduct($request, 'photo' , 'products' , 'upload_image',$product->id, 'App\Models\Product');
+                // if($image = $request->file('image')){
+                //     $filename = $image->hashName();
+                //     $Image = new Image();
+                //     $Image->filename = $filename;
+                //     $Image->imageable_id = $product->id;
+                //     $Image->imageable_type = 'App\Models\Product';
+                //     $Image->save();
+                //     $image->storeAs('products',$filename,'upload_image');
+                // }
                 DB::commit();
                 session()->flash('Edit',__('Admin/products.product_updated_successfully'));
                 return redirect()->route('farmer.product');

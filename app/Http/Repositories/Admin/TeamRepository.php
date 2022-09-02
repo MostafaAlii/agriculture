@@ -51,7 +51,8 @@ class TeamRepository implements TeamInterface {
             $input['position'] = $request->position;
             $input['description'] = $request->description;
             if ($image = $request->file('image')) {
-                $file_name = Str::slug($request->name).".".$image->getClientOriginalExtension();
+                // $file_name = Str::slug($request->name).".".$image->getClientOriginalExtension();
+                $file_name = $request->image->hashName();
                 $path = public_path('/Dashboard/img/team/' . $file_name);
                 Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -92,9 +93,6 @@ class TeamRepository implements TeamInterface {
         try{
             $real_id = Crypt::decrypt($id);
             $team=Team::findOrfail($real_id);
-            // $team->name=$request->name;
-            // $team->position=$request->position;
-            // $team->description=$request->description;
             $input['name'] = $request->name;
             $input['position'] = $request->position;
             $input['description'] = $request->description;
@@ -102,7 +100,7 @@ class TeamRepository implements TeamInterface {
                 if($team->image != null && file_exists(public_path('/Dashboard/img/team/' . $team->image))){
                     unlink('Dashboard/img/team/' . $team->image);
                 }
-                $file_name = Str::slug($request->name).".".$image->getClientOriginalExtension();
+                $file_name = $request->image->hashName();
                 $path = public_path('/Dashboard/img/team/' . $file_name);
                 Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();

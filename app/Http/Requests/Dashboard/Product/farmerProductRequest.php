@@ -8,17 +8,17 @@ class farmerProductRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name'           =>'required|string|max:100|unique:product_translations,name,' . $this->id,
+            // 'name'           =>'required|string|max:100|unique:product_translations,name,' . $this->id,
             'description'    =>'sometimes|string|nullable|min:10|max:500',
             'categories'     =>'required|array|min:1',
             'categories.*'   =>'numeric|exists:categories,id',
             'tags'           =>'sometimes|nullable|array',
             'tags.*'         =>'numeric|exists:tags,id',
             'price'          =>'required|numeric|min:1|digits_between:1,12|max:9999999999',
-            'photo'          =>'required|image|mimes:jpeg,png,jpg|max:2048',
+            // 'photo'          =>'required|image|mimes:jpeg,png,jpg|max:2048',
             'qty'            =>'required|numeric|min:1|max:9999999999',
-            'unit_id'        =>'required|exists:units,id|',
-            'status' => 'required|in:0,1',
+            'unit_id'        =>'required|exists:units,id',
+            // 'status' => 'required|in:0,1',
         ];
     }
 
