@@ -39,8 +39,8 @@ class FarmerEditProfileComponent extends Component
     public $newimage;
     public function updated($fields){
         $this->validateOnly($fields,[
-            'firstname'       => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'        => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'firstname'       => 'required|min:3|string',
+            'lastname'        => 'required|min:3|string',
             'phone'           => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . Auth::guard('web')->user()->id,
             'email'           => 'required|email|unique:farmers,id,' . Auth::guard('web')->user()->id,
             'birthdate'       => 'before:today',
@@ -50,8 +50,8 @@ class FarmerEditProfileComponent extends Component
             'state_id'        => 'required',
             'village_id'      => 'required',
             'department_id'   => 'required',
-            'address1'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'address2'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'address1'        => 'required',
+            'address2'        => 'required',
 
          ]);
     }
@@ -82,8 +82,8 @@ class FarmerEditProfileComponent extends Component
     public function updateProfile()
     {
         $this->validate([
-            'firstname'       => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'lastname'        => 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'firstname'       => 'required|min:3|string',
+            'lastname'        => 'required|min:3|string',
             'phone'           => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . Auth::guard('web')->user()->id,
             'email'           => 'required|email|unique:farmers,id,' . Auth::guard('web')->user()->id,
             'birthdate'       => 'before:today',
@@ -93,8 +93,8 @@ class FarmerEditProfileComponent extends Component
             'state_id'        => 'required',
             'village_id'      => 'required',
             'department_id'   => 'required',
-            'address1'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-            'address2'        => 'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+            'address1'        => 'required',
+            'address2'        => 'required',
            ]);
         $farmer = Farmer::findOrFail(Auth::guard('web')->user()->id);
         $farmer->firstname        = $this->firstname;

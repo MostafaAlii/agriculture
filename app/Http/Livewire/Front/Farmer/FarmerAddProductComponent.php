@@ -43,12 +43,12 @@ class FarmerAddProductComponent extends Component
     {
         $this->validateOnly($propertyName, [
             'newimage'       =>'required|image|mimes:jpeg,png,jpg|max:2048',
-            'product_name'   =>'required|min:3|max:100|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+            'product_name'   =>'required|min:3|max:100',
             'cat'            =>'required|exists:categories,id|array',
             'tag'            =>'required|exists:tags,id|array',
             'unit'           =>'required|exists:units,id|',
             'price'          =>'required|numeric|min:1|digits_between:1,12|max:9999999999',
-            'desc'           =>'sometimes|string|nullable|min:10|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|max:500',
+            'desc'           =>'sometimes|string|nullable|min:10|max:500',
         ]);
         if($this->is_qty){
             $this->validateOnly($propertyName, [

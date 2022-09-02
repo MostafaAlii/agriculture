@@ -9,13 +9,13 @@ class SliderRequest extends FormRequest {
     public function rules() {
         $rules = [
 
-            'title'    =>'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|unique:slider_translations',
-            'subtitle' =>'required|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|min:5|max:100',
+            'title'    =>'required|min:3|string|unique:slider_translations',
+            'subtitle' =>'required|min:5|max:100',
 
         ];
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
             $slider = $this->route()->parameter('id');
-            $rules['title'] = 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|unique:sliders,id,' . $slider;
+            $rules['title'] = 'required|min:3|string|unique:sliders,id,' . $slider;
         }//end of if
         return $rules;
     }

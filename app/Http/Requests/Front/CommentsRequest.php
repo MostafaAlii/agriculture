@@ -5,13 +5,13 @@ class CommentsRequest extends FormRequest {
     public function rules()
     {
         return [
-         'comment'   => ['required', 'string', 'max:1000','regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/uu'],
+         'comment'   => ['required', 'string', 'max:1000'],
         ];
     }
 
     public function messages() {
         return [
-            'comment.required'         => trans('Website/comments.required'),            
+            'comment.required'         => trans('Website/comments.required'),
             'comment.max'              => trans('Website/comments.max'),
             'comment.string'           => trans('Website/comments.string'),
             'comment.regex'            => trans('Website/comments.regex'),
