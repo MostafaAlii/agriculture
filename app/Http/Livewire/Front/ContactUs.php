@@ -29,7 +29,7 @@ class ContactUs extends Component
         'lastname'     =>'required|min:3|max:100|string',
         'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
         'email'        => 'required|email|unique:contact_us,email',
-        'comment'      =>'required|regex:/^[A-Za-z0-9-أ-ي-pL\s\-]+$/u|max:200',
+        'comment'      =>'required|max:200',
        ]);
     }
     public function sendMessage(){
@@ -38,7 +38,7 @@ class ContactUs extends Component
         'lastname'     => 'required|min:3|max:100|string',
         'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
         'email'        => 'required|email|unique:contact_us,email',
-        'comment'      => 'required|regex:/^[A-Za-z0-9-أ-ي-pL\s\-]+$/u|max:200',
+        'comment'      => 'required|max:200',
        ]);
        DB::beginTransaction();
        try {
