@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Setting;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class Home extends Component
@@ -47,11 +48,15 @@ class Home extends Component
           }
 
           $data['reviews']=Review::where('show_or_hide','1')->get();
-          $data['home_category']=Category::whereNull('parent_id')->inRandomOrder()->limit(8)->get();
+
+          //this will retrieve categories that have products
+          $all_cat_ids=DB::table('product_categories')->pluck('category_id');
+          $data['home_category']=Category::whereNull('parent_id')->whereIn('id',$all_cat_ids)->inRandomOrder()->limit(8)->get();
+          
           $data['random_blog']=Blog::inRandomOrder()->limit(2)->get();
-        $data['ar_logo']=Setting::select('ar_site_logo')->first();
-        $data['en_logo']=Setting::select('en_site_logo')->first();
-        $data['ku_logo']=Setting::select('ku_site_logo')->first();
+          $data['ar_logo']=Setting::select('ar_site_logo')->first();
+          $data['en_logo']=Setting::select('en_site_logo')->first();
+          $data['ku_logo']=Setting::select('ku_site_logo')->first();
 
           $data['offer_product']=Product::whereNotNull('special_price')->where('status',1)->where('stock',1)->where('special_price_type','=','fixed')->first();
 

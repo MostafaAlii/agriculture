@@ -245,7 +245,6 @@
                                 </div>
                             </div>
                             <!-- end item -->
-
                         <?php
                         $x=1;
                         ?>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\About;
 use Cart;
+use App\Models\About;
 use App\Models\Review;
 use App\Models\Product;
 use App\Models\Setting;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -21,9 +22,13 @@ class Home2 extends Component
             Cart::instance('wishlist')->restore(Auth::guard('vendor')->user()->email);
           }
 
-          $data['home_category']=Category::whereNotNull('parent_id')->inRandomOrder()->get();
-          $data['category_count']=Category::childCategory()->count();
-
+          //this will retrieve categories that have products
+          $all_cat_ids=DB::table('product_categories')->pluck('category_id');
+          
+          $data['home_category']=Category::whereNotNull('parent_id')->whereIn('id',$all_cat_ids)->inRandomOrder()->get();
+         // $data['category_count']=Category::childCategory()->count();
+          $data['category_count']=Category::childCategory()->whereIn('id',$all_cat_ids)->count();
+          
           $data['about_us']=About::get();
 
           $data['reviews']=Review::where('show_or_hide','1')->get();
