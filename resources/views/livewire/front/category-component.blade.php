@@ -5,6 +5,7 @@
             <h4 class="h6 widget-title">{{ __('website\search.Categories') }}</h4>
             <ul class="list" id="blog_cates">
             @foreach(\App\Models\Category::get() as $cate)
+                @if($cate->products()->count()>0)
                     @if($cate->parent_id==Null)
                         <li class="list__item" id="{{$cate->id}}" onclick="javascript:search_result('products',this.id,'Category')" >
                             <a class="list__item__link" >{{$cate->name}}</a>
@@ -21,7 +22,8 @@
                             @include('livewire.front.categoryChilds', $new)
                         @endif
                     @endif
-                @endforeach
+                @endif
+            @endforeach
             </ul>
         </div>
     <!-- end widget -->

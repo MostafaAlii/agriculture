@@ -58,7 +58,9 @@
 											<ul>
 
 												@foreach($home_category as $cat)
-													<li><a href="{{route('pro_cat',encrypt($cat->id))}}">{{$cat->name}}</a></li>
+													@if($cat->products()->count()>0)
+														<li><a href="{{route('pro_cat',encrypt($cat->id))}}">{{$cat->name}}</a></li>
+													@endif
 												@endforeach
 											</ul>
 											<?php
