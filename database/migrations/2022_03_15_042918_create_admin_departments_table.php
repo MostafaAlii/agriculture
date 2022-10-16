@@ -11,8 +11,9 @@ class CreateAdminDepartmentsTable extends Migration
     {
         Schema::create('admin_departments', function (Blueprint $table) {
             $table->id();
-//            $table->string('dep_name_ar');
-//            $table->string('dep_name_en');
+            $table->string('dep_name_ar');
+            $table->string('dep_name_en');
+            $table->string('dep_name_ku');
 
             $table->string('desc')->nullable();
             $table->string('keys')->nullable();

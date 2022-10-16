@@ -4,7 +4,7 @@ return [
     'adminDepartmentPageTitle'=>'Admin Departments',
     'dashboard'=>'Dashboard',
     'admin_departments'=>'Admin Department',
-    'name'=>'Name',
+//    'name'=>'Name',
     'departments'=>'Departments',
     'keys'=>'Keys',
     'desc'=>'Description',
@@ -18,6 +18,7 @@ return [
     'index-wrong'=>'you should determine the area and state of employee responsible or admin',
 
     'dep_name_en'=>'Department Name English',
+    'dep_name_ku'=>'Department Name Kurdie',
 
 
 

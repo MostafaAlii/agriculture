@@ -249,13 +249,13 @@ class PrecipitationRepository implements PrecipitationInterface
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
 
-        if (!empty($request->area_id)) {
-            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
-
-        }
-        if (!empty($request->state_id)) {
-            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
-        }
+//        if (!empty($request->area_id)) {
+//            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
+//
+//        }
+//        if (!empty($request->state_id)) {
+//            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
+//        }
 
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
@@ -285,8 +285,8 @@ class PrecipitationRepository implements PrecipitationInterface
                 )
                     ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
+                    ->where('precipitations.area_id', $request->area_id)
+                    ->where('precipitations.state_id', $request->state_id)
                     ->groupBy('area', 'state'
 //                        , 'date'
                     )->get();
@@ -305,7 +305,7 @@ class PrecipitationRepository implements PrecipitationInterface
                 )
                     ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-                    ->where('area_translations.name', $area_name)
+                    ->where('precipitations.area_id', $request->area_id)
                     ->groupBy('area', 'state'
 //                        , 'date'
                     )->get();
@@ -319,8 +319,8 @@ class PrecipitationRepository implements PrecipitationInterface
                 )
                     ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
+                    ->where('precipitations.area_id', $request->area_id)
+                    ->where('precipitations.state_id', $request->state_id)
                     ->groupBy('area', 'state'
 //                        , 'date'
                     )->get();
@@ -334,7 +334,7 @@ class PrecipitationRepository implements PrecipitationInterface
                 )
                     ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-                    ->where('area_translations.name', $area_name)
+                    ->where('precipitations.area_id', $request->area_id)
                     ->groupBy('area', 'state'
 //                        , 'date'
                     )->get();
@@ -372,9 +372,8 @@ class PrecipitationRepository implements PrecipitationInterface
                     ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
                     ->where('precipitations.area_id', $admin->area_id)
-                    ->where('area_translations.name', $area_name)
 
-                    ->where('state_translations.name', $state_name)
+                    ->where('precipitations.state_id', $request->state_id)
                     ->groupBy('area', 'state'
 //                        , 'date'
                     )->get();
@@ -393,7 +392,6 @@ class PrecipitationRepository implements PrecipitationInterface
                 )
                     ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-                    ->where('area_translations.name', $area_name)
                     ->where('precipitations.area_id', $admin->area_id)
 
                     ->groupBy('area', 'state'
@@ -411,8 +409,7 @@ class PrecipitationRepository implements PrecipitationInterface
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
                     ->where('precipitations.area_id', $admin->area_id)
 
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
+                    ->where('precipitations.state_id', $request->state_id)
                     ->groupBy('area', 'state'
 //                        , 'date'
                     )->get();
@@ -428,7 +425,6 @@ class PrecipitationRepository implements PrecipitationInterface
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
                     ->where('precipitations.area_id', $admin->area_id)
 
-                    ->where('area_translations.name', $area_name)
                     ->groupBy('area', 'state'
 //                        , 'date'
                     )->get();
@@ -453,6 +449,7 @@ class PrecipitationRepository implements PrecipitationInterface
 
         elseif ($admin->type == 'employee') {
             $area_id = $admin->area->id;
+            $state_id = $admin->state_id;
             if ($start_date != null && $start_date >= $oldest && $end_date != null && $end_date <= $latests && $request->state_id != null)
             {
                 $precipitationQuery1 = Precipitation::query();
@@ -469,7 +466,7 @@ class PrecipitationRepository implements PrecipitationInterface
                 )
                     ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-                    ->where('state_translations.name', $state_name)
+                    ->where('precipitations.state_id', $request->state_id)
                     ->where('precipitations.admin_id', $admin->id)
 
                     ->groupBy('area', 'state'
@@ -508,7 +505,7 @@ class PrecipitationRepository implements PrecipitationInterface
                 )
                     ->join('area_translations', 'precipitations.area_id', '=', 'area_translations.id')
                     ->join('state_translations', 'precipitations.state_id', '=', 'state_translations.id')
-                    ->where('state_translations.name', $state_name)
+                    ->where('precipitations.state_id', $request->state_id)
                     ->where('precipitations.admin_id', $admin->id)
 
                     ->groupBy('area', 'state'

@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAdminDepartmentTranslationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('admin_department_translations', function (Blueprint $table) {

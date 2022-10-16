@@ -118,6 +118,7 @@
                                                 </div>
 
 
+
                                             @elseif($admin->type =='admin')
 
                                                 <div class="row mt-2">

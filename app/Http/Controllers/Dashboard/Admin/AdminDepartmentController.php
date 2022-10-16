@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\AdminDepartmentInterface;
 use App\Http\Requests\Dashboard\AdminDepartmentRequest;
-use App\Http\Requests\Dashboard\AdminDepartmentUpdateRequest;
 
 class AdminDepartmentController extends Controller
 {
@@ -34,7 +33,7 @@ class AdminDepartmentController extends Controller
 
 
 
-    public function update(AdminDepartmentUpdateRequest $request, $id) {
+    public function update(AdminDepartmentRequest $request, $id) {
         return $this->Data->update($request,$id);
     }
 

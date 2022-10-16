@@ -278,17 +278,17 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $admin = Admin::findorfail($adminID);
         $country_product_type = $request->country_product_type;
 
-        if (!empty($request->country_id)) {
-            $country_name = CountryTranslation::where('country_id', '=', $request->country_id)->pluck('name');
-
-        }
-        if (!empty($request->wholesale_id)) {
-            $wholesale_name = WholesaleTranslation::where('wholesale_id', '=', $request->wholesale_id)->pluck('Name');
-
-        }
-        if (!empty($request->whole_product_id)) {
-            $whole_product_name = WholeProductTranslation::where('whole_product_id', '=', $request->whole_product_id)->pluck('name');
-        }
+//        if (!empty($request->country_id)) {
+//            $country_name = CountryTranslation::where('country_id', '=', $request->country_id)->pluck('name');
+//
+//        }
+//        if (!empty($request->wholesale_id)) {
+//            $wholesale_name = WholesaleTranslation::where('wholesale_id', '=', $request->wholesale_id)->pluck('Name');
+//
+//        }
+//        if (!empty($request->whole_product_id)) {
+//            $whole_product_name = WholeProductTranslation::where('whole_product_id', '=', $request->whole_product_id)->pluck('name');
+//        }
 
 
         $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
@@ -298,7 +298,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
         $latests = \DB::table('farmer_crops')->orderBy('date', 'desc')->first();
         $oldest = \DB::table('farmer_crops')->orderBy('date', 'asc')->first();
 
-        if ($admin->type == 'admin') {
+        if ($admin->type == 'admin' || $admin->type =='admin_area')  {
             if ($request->country_id != null && $request->whole_product_id != null && $request->wholesale_id !=null &&
                 $request->country_product_type != null && $request->start_date && $request->end_date)
             {
@@ -318,10 +318,10 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('country_translations.name', $country_name)
-                    ->where('country_product_type', $country_product_type)
-                    ->where('wholesale_translations.Name', $wholesale_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
 
                 return view('dashboard.admin.outcome_products.outcome_products_statistics',
@@ -348,8 +348,9 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
-                    ->where('wholesale_translations.Name', $wholesale_name)
+
+                    ->where('outcome_products.country_id', $request->country_id)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
@@ -374,8 +375,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
-                    ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
+                    ->where('outcome_products.country_id', $request->country_id)
+                                 ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
             }
@@ -399,10 +400,9 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
-                    ->where('country_product_type', $country_product_type)
-
-                    ->where('wholesale_translations.Name', $wholesale_name)
+                    ->where('outcome_products.country_id', $request->country_id)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
@@ -427,7 +427,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.country_id', $request->country_id)
+
                     ->where('outcome_products.country_product_type', $country_product_type)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
@@ -453,8 +454,10 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
-                    ->where('whole_product_translations.name', $whole_product_name)
+
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
+
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
@@ -477,8 +480,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
-                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
                     ->where('outcome_products.country_product_type', $country_product_type)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
@@ -551,8 +554,10 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('wholesale_translations.Name', $wholesale_name)
+
+
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
@@ -573,10 +578,10 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('wholesale_translations.Name', $wholesale_name)
-                    ->where('country_translations.name', $country_name)
-                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
@@ -594,9 +599,9 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('wholesale_translations.Name', $wholesale_name)
-                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
             }
@@ -613,9 +618,10 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('wholesale_translations.Name', $wholesale_name)
-                    ->where('country_translations.name', $country_name)
+
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
             }
@@ -631,7 +637,9 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
+
+                    ->where('outcome_products.country_id', $request->country_id)
+
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
@@ -650,8 +658,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
-                    ->where('wholesale_translations.Name', $wholesale_name)
+                    ->where('outcome_products.country_id', $request->country_id)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
@@ -670,8 +678,10 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
-                    ->where('whole_product_translations.name', $whole_product_name)
+
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
+
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
@@ -690,9 +700,9 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
                     ->where('outcome_products.country_product_type', $country_product_type)
-                    ->where('whole_product_translations.name', $whole_product_name)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
@@ -711,7 +721,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.country_id', $request->country_id)
                     ->where('outcome_products.country_product_type', $country_product_type)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
@@ -769,8 +779,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('wholesale_translations.Name', $wholesale_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.wholesale_id', $request->wholesale_id )
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics', compact('outcome_products', 'admin'));
 
@@ -800,10 +810,11 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
                         '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
+                    ->where('outcome_products.country_product_type', $country_product_type)
+
                     ->where('outcome_products.admin_id', $admin->id)
-                    ->where('country_translations.name', $country_name)
-                    ->where('country_product_type', $country_product_type)
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
                 return view('dashboard.admin.outcome_products.outcome_products_statistics',
                     compact('outcome_products', 'admin'));
@@ -830,8 +841,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
                         '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_product_type', $country_product_type)
                     ->where('outcome_products.admin_id', $admin->id)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
@@ -860,7 +871,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
                         '=', 'whole_product_translations.id')
-                    ->where('country_product_type', $country_product_type)
+
+                    ->where('outcome_products.country_product_type', $country_product_type)
                     ->where('outcome_products.admin_id', $admin->id)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
@@ -916,7 +928,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                     ->join('country_translations', 'outcome_products.country_id','=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
                         '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+
                     ->where('outcome_products.admin_id', $admin->id)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
@@ -945,7 +958,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
                         '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id',
                         '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+
                     ->where('outcome_products.admin_id', $admin->id)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
@@ -966,8 +980,9 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('country_translations.name', $country_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_id', $request->country_id)
+
                     ->where('outcome_products.admin_id', $admin->id)
 
                     ->where('country_product_type', $country_product_type)
@@ -988,8 +1003,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+                    ->where('outcome_products.country_product_type', $country_product_type)
                     ->where('outcome_products.admin_id', $admin->id)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
@@ -1010,8 +1025,7 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
-                    ->where('country_product_type', $country_product_type)
+                    ->where('outcome_products.country_product_type', $country_product_type)
                     ->where('outcome_products.admin_id', $admin->id)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();
@@ -1053,7 +1067,8 @@ class OutcomeProductRepository implements OutcomeProductInterface {
 
                     ->join('country_translations', 'outcome_products.country_id', '=', 'country_translations.id')
                     ->join('whole_product_translations', 'outcome_products.whole_product_id', '=', 'whole_product_translations.id')
-                    ->where('whole_product_translations.name', $whole_product_name)
+                    ->where('outcome_products.whole_product_id', $request->whole_product_id)
+
                     ->where('outcome_products.admin_id', $admin->id)
 
                     ->groupBy('country', 'Product', 'country_product_type', 'date', 'admin_dep_name')->get();

@@ -32,8 +32,11 @@ class AdminDepartmentRepository implements AdminDepartmentInterface
             try {
 
                 $admin_department = new AdminDepartment();
-//                $admin_department->dep_name_ar = $dataRequest['dep_name_ar'];
-                $admin_department->name = $dataRequest['name'];
+                $admin_department->dep_name_ar = $dataRequest['dep_name_ar'];
+                $admin_department->dep_name_en = $dataRequest['dep_name_en'];
+                $admin_department->dep_name_ku = $dataRequest['dep_name_ku'];
+
+//                $admin_department->name = $dataRequest['name'];
 
                 $admin_department->keys = $dataRequest['keys'];
                 $admin_department->desc = $dataRequest['desc'];
@@ -62,7 +65,7 @@ class AdminDepartmentRepository implements AdminDepartmentInterface
     {
 
         $admin_department = AdminDepartment::findorfail($id);
-
+//dd($admin_department);
         return view('dashboard/admin/admin_department.edit', compact('admin_department'));
 
     }
@@ -70,17 +73,18 @@ class AdminDepartmentRepository implements AdminDepartmentInterface
 
     public function update($request, $id)
     {
-        {
 
             try {
-                $validated = $request->validated();
+                $dataRequest = $request->validated();
                 $admin_department = AdminDepartment::findorfail($id);
 
-                $admin_department->name = $validated['name'];
-                $admin_department->parent = $validated['parent'];
-                $admin_department->keys = $validated['keys'];
-                $admin_department->desc = $validated['desc'];
-                $admin_department->update();
+                $admin_department->dep_name_ar = $dataRequest['dep_name_ar'];
+                $admin_department->dep_name_en = $dataRequest['dep_name_en'];
+                $admin_department->dep_name_ku = $dataRequest['dep_name_ku'];
+                $admin_department->parent = $dataRequest['parent'];
+                $admin_department->keys = $dataRequest['keys'];
+                $admin_department->desc = $dataRequest['desc'];
+                $admin_department->save();
 
                 toastr()->success(__('Admin/general.success_update'));
                 return redirect()->route('AdminDepartments.index');
@@ -91,7 +95,7 @@ class AdminDepartmentRepository implements AdminDepartmentInterface
                 return redirect()->back();
 
             }
-        }
+
 
     }
 

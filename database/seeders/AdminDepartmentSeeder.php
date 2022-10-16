@@ -16,6 +16,14 @@ class AdminDepartmentSeeder extends Seeder {
 
 
         ];
+        $dep_name_ku_level_1_3_1_1= [
+            " كردي التخطيط",
+            "كردي الثروة الحيوانية",
+            "لبيوت البلاستيكية كردي",
+            "الخدماتكردي",
+
+
+        ];
         $dep_name_en_level_1_3_1_1 = [
             "Planning",
             "Animal wealth",
@@ -26,6 +34,12 @@ class AdminDepartmentSeeder extends Seeder {
         $dep_name_ar_level_1_3_1= [
             "مركز .زاويتا",
             "مركز مانغيش",
+
+
+        ];
+        $dep_name_ku_level_1_3_1= [
+            "كردي مركز .زاويتا",
+            "كردي مركز مانغيش",
 
 
         ];
@@ -44,6 +58,16 @@ class AdminDepartmentSeeder extends Seeder {
             "علوة أميدي",
 
         ];
+        $dep_name_ku_level_1_3= [
+            "كردي مركز داهوك",
+            "كردي مركز زاخو",
+            "كردي مركز أكريك",
+            "كردي علوة بارداراش",
+            "كردي مركز سوميل",
+            "كردي علوة شيخان",
+            "كردي علوة أميدي",
+
+        ];
         $dep_name_en_level_1_3 = [
             "Duhok",
             "Zakho",
@@ -60,6 +84,12 @@ class AdminDepartmentSeeder extends Seeder {
             "علوة أكري",
             "علوة بارداراش"
         ];
+        $dep_name_ku_level_1_2= [
+            "كردي علوة داهوك",
+            "كردي علوة زاخو",
+            "كردي علوة أكري",
+            "كردي علوة بارداراش"
+        ];
         $dep_name_en_level_1_2 = [
             "Duhok",
             "Zakho",
@@ -71,6 +101,11 @@ class AdminDepartmentSeeder extends Seeder {
             "قسم التسويق",
             "العلوات",
             "القسم الإداري",
+        ];
+        $dep_name_ku_level_1= [
+            "كردي قسم التسويق",
+            "كردي العلوات",
+            "كردي القسم الإداري",
         ];
         $dep_name_en_level_1 = [
             "marketing",
@@ -84,41 +119,41 @@ class AdminDepartmentSeeder extends Seeder {
 
         for ($i = 0; $i < $level_1_count ; $i++) {
             AdminDepartment::create([
-//                'dep_name_ar'          => $dep_name_ar_level_1[$i],
-//                'dep_name_en'    => $dep_name_en_level_1[$i],
-            'name'=>$dep_name_ar_level_1[$i],
+                'dep_name_ar'          => $dep_name_ar_level_1[$i],
+                'dep_name_en'          =>$dep_name_en_level_1[$i],
+                'dep_name_ku'          =>  $dep_name_ku_level_1[$i],
                 'parent' => null
             ]);
         }
         for ($i = 0; $i < $level_1_2_count ; $i++) {
             AdminDepartment::create([
-//                'dep_name_ar'          => $dep_name_ar_level_1_2[$i],
-//                'dep_name_en'    => $dep_name_en_level_1_2[$i],
-                'name'=>$dep_name_ar_level_1_2[$i],
+                'dep_name_ar'          =>    $dep_name_ar_level_1_2[$i],
+                'dep_name_en'          =>$dep_name_en_level_1_2[$i],
+                'dep_name_ku'          =>$dep_name_ku_level_1_2[$i],
                 'parent'=>'2',
             ]);
         }
         for ($i = 0; $i < $level_1_3_count ; $i++) {
             AdminDepartment::create([
-//                'dep_name_ar'          => $dep_name_ar_level_1_3[$i],
-//                'dep_name_en'    => $dep_name_en_level_1_3[$i],
-            'name'=>$dep_name_ar_level_1_3[$i],
+                'dep_name_ar'                  => $dep_name_ar_level_1_3[$i],
+                'dep_name_en'          =>$dep_name_en_level_1_3[$i],
+                'dep_name_ku'          =>$dep_name_ku_level_1_3[$i],
                 'parent'=>'3',
             ]);
         }
         for ($i = 0; $i < $level_1_3_1_count ; $i++) {
             AdminDepartment::create([
-//                'dep_name_ar'          => $dep_name_ar_level_1_3_1[$i],
-//                'dep_name_en'    => $dep_name_ar_level_1_3_1[$i],
-                'name'=>$dep_name_ar_level_1_3_1[$i],
+                'dep_name_ar'                   => $dep_name_ar_level_1_3_1[$i],
+                'dep_name_en'          =>$dep_name_en_level_1_3_1[$i],
+                'dep_name_ku'          =>$dep_name_ku_level_1_3_1[$i],
                 'parent'=>'8',
             ]);
         }
         for ($i = 0; $i < $level_1_3_1_1_count ; $i++) {
             AdminDepartment::create([
-                'name'=>$dep_name_ar_level_1_3_1_1[$i],
-//                'dep_name_ar'          => $dep_name_ar_level_1_3_1_1[$i],
-//                'dep_name_en'    => $dep_name_ar_level_1_3_1_1[$i],
+                'dep_name_ar' =>$dep_name_ku_level_1_3_1_1[$i],
+                    'dep_name_en' =>  $dep_name_ar_level_1_3_1_1[$i],
+                    'dep_name_ku'   => $dep_name_en_level_1_3_1_1[$i],
                 'parent'=>'15',
             ]);
         }

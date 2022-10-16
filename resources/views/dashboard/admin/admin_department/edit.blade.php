@@ -68,24 +68,32 @@
                                                         class="ft-settings"></i> {{trans('Admin\admin_departments.admin_departments')}}
                                             </h4>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="projectinput1">{{trans('Admin\admin_departments.name')}}</label>
-                                                        <input type="text" id="projectinput1" class="form-control" value="{{$admin_department->name}}"
-                                                               placeholder="{{trans('Admin\admin_departments.name')}}"  name="name" >
+                                                        <label for="projectinput-0">{{trans('Admin\admin_departments.dep_name_ar')}}</label>
+                                                        <input type="text" id="projectinput-0" class="form-control" value="{{$admin_department->dep_name_ar}}"
+                                                               placeholder="{{trans('Admin\admin_departments.dep_name_ar')}}"  name="dep_name_ar" >
                                                         {{--<input type="hidden" id="projectinput1" class="form-control"  name="id" >--}}
                                                     </div>
 
                                                 </div>
-                                                {{--<div class="col-md-6">--}}
-                                                    {{--<div class="form-group">--}}
-                                                        {{--<label for="projectinput1">{{trans('Admin\admin_departments.dep_name_en')}}</label>--}}
-                                                        {{--<input type="text" id="projectinput1" class="form-control" value="{{$admin_department->dep_name_en}}"--}}
-                                                               {{--placeholder="{{trans('Admin\admin_departments.dep_name_en')}}"  name="dep_name_en" >--}}
-                                                        {{--<input type="hidden" id="projectinput1" class="form-control"  name="id" >--}}
-                                                    {{--</div>--}}
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="projectinput-1">{{trans('Admin\admin_departments.dep_name_en')}}</label>
+                                                        <input type="text" id="projectinput-1" class="form-control" value="{{$admin_department->dep_name_en}}"
+                                                               placeholder="{{trans('Admin\admin_departments.dep_name_en')}}"  name="dep_name_en" >
+                                                        <input type="hidden" id="projectinput1" class="form-control"  name="id" >
+                                                    </div>
 
-                                                {{--</div>--}}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="projectinput-2">{{trans('Admin\admin_departments.dep_name_ku')}}</label>
+                                                        <input type="text" id="projectinput-2" class="form-control" value="{{$admin_department->dep_name_ku}}"
+                                                               placeholder="{{trans('Admin\admin_departments.dep_name_ku')}}"  name="dep_name_ku" >
+                                                    </div>
+
+                                                </div>
 
                                              </div>
 

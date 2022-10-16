@@ -13,10 +13,8 @@ class LandCategoryUpdateRequest extends FormRequest {
 
             'category_name' => [
                 'required',
-//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
+                'string',
                 'unique:land_category_translations,category_name,'.$this->id,
-'srting'
-
             ],
             'category_type' => [
                 'required',

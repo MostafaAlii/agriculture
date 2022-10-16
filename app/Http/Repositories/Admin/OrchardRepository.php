@@ -315,19 +315,19 @@ class OrchardRepository implements OrchardInterface
         $adminID = Auth::user()->id;
         $admin = Admin::findorfail($adminID);
         $supported_side = $request->supported_side;
-        if (!empty($request->area_id)) {
-            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
-
-        }
-        if (!empty($request->state_id)) {
-            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
-        }
-        if (!empty($request->village_id)) {
-            $village_name = VillageTranslation::where('village_id', '=', $request->village_id)->pluck('name');
-        }
-        if ($request->land_category_id != null) {
-            $land_category_name = LandCategoryTranslation::where('land_category_id', '=', $request->land_category_id)->pluck('category_name');
-        }
+//        if (!empty($request->area_id)) {
+//            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
+//
+//        }
+//        if (!empty($request->state_id)) {
+//            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
+//        }
+//        if (!empty($request->village_id)) {
+//            $village_name = VillageTranslation::where('village_id', '=', $request->village_id)->pluck('name');
+//        }
+//        if ($request->land_category_id != null) {
+//            $land_category_name = LandCategoryTranslation::where('land_category_id', '=', $request->land_category_id)->pluck('category_name');
+//        }
 
         if ($admin->type == 'employee') {
             if ($request->village_id != null && $request->land_category_id != null && $request->supported_side != null) {
@@ -349,10 +349,10 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -378,10 +378,10 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -406,9 +406,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
-                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -434,8 +434,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -460,9 +461,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
-                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -470,6 +471,8 @@ class OrchardRepository implements OrchardInterface
 
             }
         } elseif ($admin->type == 'admin') {
+            $area_id = $request->area_id;
+            $state_id = $request->state_id;
             if ($request->area_id != null && $request->state_id != null && $request->village_id != null
                 && $request->land_category_id != null && $request->supported_side != null) {
 
@@ -487,10 +490,10 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -515,7 +518,8 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
+                    ->where('orchards.area_id', $area_id)
+
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -539,8 +543,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -588,8 +593,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -613,7 +619,8 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
+                    ->where('orchards.area_id', $area_id)
+
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -638,8 +645,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -661,9 +669,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -688,9 +696,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -713,8 +721,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -738,9 +747,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -764,10 +773,10 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -789,9 +798,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -814,10 +823,10 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $state_id)
+                    ->where('orchards.village_id', $request->village_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -826,6 +835,7 @@ class OrchardRepository implements OrchardInterface
 
             }
         } elseif ($admin->type == 'admin_area') {
+            $area_id = $admin->area_id;
             if ($request->area_id != null && $request->state_id != null && $request->village_id != null
                 && $request->land_category_id != null && $request->supported_side != null) {
 
@@ -844,10 +854,10 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.area_id', $admin->area_id)
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $request->state_id)
+                    ->where('orchards.village_id', $request->village_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -873,8 +883,8 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.area_id', $admin->area_id)
-                    ->where('area_translations.name', $area_name)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+                    ->where('orchards.area_id', $area_id)
+                       ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
                 return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics'));
@@ -897,9 +907,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('orchards.area_id', $admin->area_id)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+
+                    ->where('orchards.land_category_id', $request->land_category_id)                    ->where('orchards.area_id', $admin->area_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -949,8 +959,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.area_id', $admin->area_id)
-                    ->where('area_translations.name', $area_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -975,7 +986,6 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.area_id', $admin->area_id)
-                    ->where('area_translations.name', $area_name)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -1001,9 +1011,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.area_id', $admin->area_id)
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
+
+                    ->where('orchards.state_id', $request->state_id)
+                                        ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
                 return view('dashboard.admin.orchards.statistics', compact('admin', 'statistics'));
@@ -1025,9 +1035,8 @@ class OrchardRepository implements OrchardInterface
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
                     ->where('orchards.area_id', $admin->area_id)
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.state_id', $request->state_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -1052,10 +1061,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('orchards.area_id', $admin->area_id)
-                    ->where('state_translations.name', $state_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $request->state_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -1078,9 +1086,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('orchards.area_id', $admin->area_id)
-                    ->where('state_translations.name', $state_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $request->state_id)
+
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -1104,10 +1112,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('orchards.area_id', $admin->area_id)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $request->state_id)
+                    ->where('orchards.village_id', $request->village_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -1131,11 +1138,10 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('orchards.area_id', $admin->area_id)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $request->state_id)
+                    ->where('orchards.village_id', $request->village_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
                     ->get();
@@ -1157,10 +1163,9 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('orchards.area_id', $admin->area_id)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $request->state_id)
+                    ->where('orchards.village_id', $request->village_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')
@@ -1183,11 +1188,10 @@ class OrchardRepository implements OrchardInterface
                     ->join('state_translations', 'orchards.state_id', '=', 'state_translations.id')
                     ->join('farmers', 'orchards.farmer_id', '=', 'farmers.id')
                     ->join('land_category_translations', 'orchards.land_category_id', '=', 'land_category_translations.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('orchards.area_id', $admin->area_id)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('orchards.area_id', $area_id)
+                    ->where('orchards.state_id', $request->state_id)
+                    ->where('orchards.village_id', $request->village_id)
+                    ->where('orchards.land_category_id', $request->land_category_id)
                     ->where('orchards.supported_side', $supported_side)
                     ->GroupBy('Area', 'State', 'village_name', 'farmer_name', 'supported_side', 'category_name',
                         'admin_name')

@@ -22,11 +22,25 @@ class AdminDepartmentRequest extends FormRequest
 
             'keys' => 'sometimes|nullable|string',
             'desc' => 'sometimes|nullable|string',
-            'name' => [
+            'dep_name_ar' => [
                 'required',
 //                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
             'string',
-                'unique:admin_department_translations,name,admin_department_id'.$this->id,
+                'unique:admin_departments,id'.$this->id,
+
+            ],
+            'dep_name_en' => [
+                'required',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
+                'string',
+                'unique:admin_departments,id'.$this->id,
+
+            ],
+            'dep_name_ku' => [
+                'required',
+//                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
+                'string',
+                'unique:admin_departments,id'.$this->id,
 
             ],
 

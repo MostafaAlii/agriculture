@@ -331,19 +331,19 @@ class FarmerCropRepository implements FarmerCropInterface
         $admin = Admin::findorfail($adminID);
         $land_categories = LandCategory::all();
 
-        if (!empty($request->area_id)) {
-            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
-
-        }
-        if (!empty($request->state_id)) {
-            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
-        }
-        if (!empty($request->village_id)) {
-            $village_name = VillageTranslation::where('village_id', '=', $request->village_id)->pluck('name');
-        }
-        if ($request->land_category_id != null) {
-            $land_category_name = LandCategoryTranslation::where('land_category_id', '=', $request->land_category_id)->pluck('category_name');
-        }
+//        if (!empty($request->area_id)) {
+//            $area_name = AreaTranslation::where('area_id', '=', $request->area_id)->pluck('name');
+//
+//        }
+//        if (!empty($request->state_id)) {
+//            $state_name = StateTranslation::where('state_id', '=', $request->state_id)->pluck('name');
+//        }
+//        if (!empty($request->village_id)) {
+//            $village_name = VillageTranslation::where('village_id', '=', $request->village_id)->pluck('name');
+//        }
+//        if ($request->land_category_id != null) {
+//            $land_category_name = LandCategoryTranslation::where('land_category_id', '=', $request->land_category_id)->pluck('category_name');
+//        }
 
 
         $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
@@ -374,10 +374,10 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -399,8 +399,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -423,9 +424,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -444,10 +445,10 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -468,7 +469,8 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -489,8 +491,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -511,8 +514,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+                    ->where('farmer_crops.state_id', $request->state_id)
+
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -553,9 +557,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -576,11 +580,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
-                    ->where('farmer_crops.area_id', $admin->area_id)
-
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -601,12 +603,10 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('farmer_crops.area_id', $admin->area_id)
-
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.area_id', $request->area_id)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -634,11 +634,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
-
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -662,8 +660,8 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
 
-                    ->where('area_translations.name', $area_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
+
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -687,10 +685,8 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
-
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -710,11 +706,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
-
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -737,7 +731,6 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
 
-                    ->where('area_translations.name', $area_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -760,8 +753,7 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
 
-                    ->where('area_translations.name', $area_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -783,9 +775,8 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
+                    ->where('farmer_crops.state_id', $request->state_id)
 
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -829,10 +820,8 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
-
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -853,11 +842,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('village_translations', 'farmer_crops.village_id', '=', 'village_translations.id')
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
-                    ->where('area_translations.name', $area_name)
                     ->where('farmer_crops.area_id', $admin->area_id)
-
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -879,11 +866,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.area_id', $admin->area_id)
-
-                    ->where('area_translations.name', $area_name)
-                    ->where('state_translations.name', $state_name)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.state_id', $request->state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('statistics', 'admin', 'land_categories'));
@@ -913,10 +898,10 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.area_id', $area_id)
+                    ->where('farmer_crops.state_id', $state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
@@ -942,8 +927,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
+                    ->where('farmer_crops.area_id', $area_id)
+                    ->where('farmer_crops.state_id', $state_id)
+
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
@@ -964,9 +950,9 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
-                    ->where('village_translations.name', $village_name)
+                    ->where('farmer_crops.area_id', $area_id)
+                    ->where('farmer_crops.state_id', $state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
@@ -1008,10 +994,10 @@ class FarmerCropRepository implements FarmerCropInterface
                     ->join('land_category_translations', 'farmer_crops.land_category_id', '=', 'land_category_translations.id')
                     ->join('farmers', 'farmer_crops.farmer_id', '=', 'farmers.id')
                     ->where('farmer_crops.admin_id', $admin->id)
-                    ->where('area_translations.area_id', $area_id)
-                    ->where('state_translations.state_id', $state_id)
-                    ->where('village_translations.name', $village_name)
-                    ->where('land_category_translations.category_name', $land_category_name)
+                    ->where('farmer_crops.area_id', $area_id)
+                    ->where('farmer_crops.state_id', $state_id)
+                    ->where('farmer_crops.village_id', $request->village_id)
+                    ->where('farmer_crops.land_category_id', $request->land_category_id)
                     ->GroupBy('Area', 'State', 'Village', 'farmer', 'date', 'category_name')
                     ->get();
                 return view('dashboard.admin.farmer_crops.statistics', compact('state_id','statistics', 'admin', 'land_categories'));
