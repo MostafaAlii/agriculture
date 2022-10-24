@@ -1,19 +1,11 @@
 <?php
 namespace App\Http\Repositories\Admin;
-
-use App\Models\Tag;
-use App\Models\Blog;
-use App\Models\Admin;
-use App\Traits\UploadT;
-use App\Models\Category;
-
-use App\Models\Department;
+use App\Models\{Tag, Blog, Admin, Category,Department,BlogTranslation};
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\{DB, Crypt};
 use App\Http\Interfaces\Admin\BlogInterface;
-use App\Models\BlogTranslation;
 use Illuminate\Support\Str;
+use App\Traits\UploadT;
 class BlogRepository implements BlogInterface {
     use UploadT;
     public function index() {
@@ -142,8 +134,7 @@ class BlogRepository implements BlogInterface {
     }
 
 
-    public function bulkDelete($request)
-    {
+    public function bulkDelete($request) {
         if($request->delete_select_id){
                 $delete_select_id = explode(",",$request->delete_select_id);
                 foreach($delete_select_id as $blogs_ids){
@@ -159,5 +150,5 @@ class BlogRepository implements BlogInterface {
         Blog::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('blogs.index');
-    }// end of bulkDelete
+    }
 }
