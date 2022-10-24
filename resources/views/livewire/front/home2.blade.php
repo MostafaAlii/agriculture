@@ -314,8 +314,7 @@
             <div class="__inner">
                 <div class="row">
                     <!-- start item -->
-                    @foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get()
-    as $blog)
+                    {{--@foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
                         <div class="col-12 col-sm-6 col-lg-4">
                             <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="100"
                                 data-aos-offset="0">
@@ -325,8 +324,8 @@
                                             data-src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}"
                                             alt="demo" />
                                     @else
-                                        <img src="{{ asset('frontassets/img/blank.gif') }}"
-                                            data-src="{{ asset('frontassets/img/posts_img/1.jpg') }}" alt="demo" />
+                                        <img src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}"
+                                            data-src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}" alt="demo" />
                                     @endif
                                 </figure>
                                 <div class="__content">
@@ -351,8 +350,46 @@
                                 </span>
                             </div>
                         </div>
-                    @endforeach
+                    @endforeach --}}
                     <!-- end item -->
+                    @forelse (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <div class="__item __item--preview" data-aos="flip-up" data-aos-delay="100" data-aos-offset="0">
+                                <figure class="__image">
+                                    @if (isset($blog->image->filename))
+                                    <img src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}"
+                                        data-src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}" alt="demo" />
+                                    @else
+                                    <img src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}"
+                                        data-src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}" alt="demo" />
+                                    @endif
+                                </figure>
+                                <div class="__content">
+                                    <p class="__category"><a href="{{ route('blogdetails', encrypt($blog->id)) }}">{{ $blog->admin->firstname
+                                            }}</a>
+                                    </p>
+                        
+                                    <h3 class="__title h5"><a href="{{ route('blogdetails', encrypt($blog->id)) }}">{{ $blog->title }}</a>
+                                    </h3>
+                        
+                                    <p>
+                                        {{ Str::limit($blog->body, 50) }}
+                                    </p>
+                        
+                                    <a class="custom-btn custom-btn--medium custom-btn--style-1"
+                                        href="{{ route('blogdetails', encrypt($blog->id)) }}">{{ __('website\home.readmore') }}</a>
+                                </div>
+                        
+                                <span class="__date-post">
+                                    <strong>{{ $blog->created_at->diffforhumans() }}</strong>
+                                </span>
+                            </div>
+                        </div>
+                    @empty
+                        <div>
+                            <h3 class="text-danger">{{ trans('Admin\general.blogs_not_found') }}</h3>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>

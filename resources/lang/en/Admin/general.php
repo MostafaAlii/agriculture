@@ -10,5 +10,8 @@ return [
     'copyright'                         =>                          'All Rights Reserved',
     'madeby'                            =>                          'Programming and Design',
     'newslatter'                            =>                          'Get a newslatter',
+
+
+    'blogs_not_found'                   =>                      'Sorry, no blogs found, add some from the dashboard',
 ];
 ?>

@@ -13,8 +13,14 @@
                         <div class="posts">
                             <!-- start item -->
                             <div class="__item">
-                                <img  width="100%" src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
-                                data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}" alt="demo" />
+                                
+                                @if (isset($blog->image->filename))
+                                <img width="100%" height="550px" src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}"
+                                    data-src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}" alt="demo" />
+                                @else
+                                <img width="100%" src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}"
+                                    data-src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}" alt="demo" />
+                                @endif
 
                                 <div class="__content">
                                     <div class="mb-6 mb-md-8">

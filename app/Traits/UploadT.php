@@ -89,7 +89,7 @@ trait UploadT
             }
 
             $photo = $request->file($inputname);
-            $name = Str::slug($request->input('title'));
+            $name = Str::random(3) . '_' .Str::slug($request->input('title')) . '_' .time();
             $filename = $name. '.' . $photo->getClientOriginalExtension();
             // insert Image
             $Image = new Image();

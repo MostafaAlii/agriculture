@@ -96,13 +96,13 @@ class DatabaseSeeder extends Seeder {
                 ]);
             }
           // images for blog
-           for ($i = 1; $i <= Blog::count() ; $i++) {
+           /*for ($i = 1; $i <= Blog::count() ; $i++) {
                Image::insert([
-                   'filename'     => 'blog-article-'.rand(1,5) . ".jpg",
+                   'filename'     => 'default_blog.jpg',
                    'imageable_id' => $i,
                    'imageable_type' => 'App\Models\Blog'
                ]);
-           }
+           }*/
             // images for slider
             for ($i = 1; $i <= Slider::count() ; $i++) {
                 Image::insert([

@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Interfaces\Admin\BlogInterface;
 use App\Models\BlogTranslation;
 use Illuminate\Support\Str;
-
 class BlogRepository implements BlogInterface {
     use UploadT;
     public function index() {
@@ -58,15 +57,10 @@ class BlogRepository implements BlogInterface {
     }
 
     public function store($request) {
-//dd($request->all());
         DB::beginTransaction();
         try{
 
             $requestData = $request->validated();
-
-           // Blog::create($requestData);
-           // $blog = Blog::latest()->first();
-
             $blog = new Blog;
             $blog ->admin_id = $request->admin_id;
 
@@ -107,21 +101,12 @@ class BlogRepository implements BlogInterface {
         try{
             DB::beginTransaction();
             $blogID = Crypt::decrypt($id);
-
-
             $blog=Blog::findorfail($blogID);
-
-             // $requestData = $request->validated();
-            // $blog->update($requestData);
-
             $blog ->admin_id = $request->admin_id;
             $blog->save();
-
             $blog->title=$request->title;
             $blog->body=$request->body;
             $blog->save();
-
-
             if($request->image){
                 $this->deleteImage('upload_image','/blogs/' . $blog->image->filename,$blog->id);
             }
@@ -130,8 +115,6 @@ class BlogRepository implements BlogInterface {
              // sync Categories ::
              $blog->categories()->sync($request->categories);
              $blog->tags()->sync($request->tags);
-
-
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('blogs.index');
@@ -146,7 +129,9 @@ class BlogRepository implements BlogInterface {
         try{
             $blogID = Crypt::decrypt($id);
             $blog=Blog::findorfail($blogID);
-            $this->deleteImage('upload_image','/blogs/' . $blog->image->filename,$blog->id);
+            if($blog->image && $blog->image->filename != 'default_blog.jpg'){
+                $this->deleteImage('upload_image','/blogs/' . $blog->image->filename,$blog->id);
+            }
             $blog->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('blogs.index');
@@ -163,7 +148,7 @@ class BlogRepository implements BlogInterface {
                 $delete_select_id = explode(",",$request->delete_select_id);
                 foreach($delete_select_id as $blogs_ids){
                     $blog = Blog::findorfail($blogs_ids);
-                    if($blog->image){
+                    if($blog->image && $blog->image->filename != 'default_blog.jpg'){
                         $this->deleteImage('upload_image','/blogs/' . $blog->image->filename,$blog->id);
                     }
                 }
