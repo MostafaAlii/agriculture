@@ -44,14 +44,15 @@
                                 </div>
                             </div>
                             <!-- end item -->
-                            @if (count($blogs))
-                                {{ $blogs->links('page-links') }}
-                            @endif
                         @empty
                            <div>
                                 <h3 class="text-danger">{{ trans('Admin\general.blogs_not_found') }}</h3>
                             </div> 
                         @endforelse
+
+                        @if (count($blogs))
+                                {{ $blogs->links('page-links') }}
+                            @endif
 
                     </div>
                 </div>

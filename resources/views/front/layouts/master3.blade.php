@@ -11,16 +11,16 @@
 @include('front.layouts.include.header3')
 <!-- end header -->
     <?php
-        $slider = \App\Models\Slider::latest()->first();
-        if(isset($slider->image)){
-            $src=$slider->image->filename;
+        $slider = Slider::latest()->first();
+        if(isset($slider->image_path)){
+            $src=$slider->image_path;
         }else{
-            $src='100.jpg';
+            $src= asset('Dashboard/img/Default/default_slider.jpg');
         }
     ?>
 <!-- start hero -->
     <div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
-         style="background-image: url({{ asset('Dashboard/img/sliders/'.$src) }});">
+         style="background-image: url({{ $src }});">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-7">
