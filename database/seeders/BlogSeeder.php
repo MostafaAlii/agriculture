@@ -20,13 +20,5 @@ class BlogSeeder extends Seeder {
                 $Categories->random()->pluck('id')->toArray()
             );
         });
-        Schema::enableForeignKeyConstraints();
-        for($i=1; $i <= Blog::count();$i++) {
-            Image::create([ 
-                'filename'     => rand(1,10) . ".jpg",
-                'imageable_id' => $i,
-                'imageable_type' => 'App\Models\Blog',
-            ]);
-        }
     }
 }

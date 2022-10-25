@@ -2,7 +2,6 @@
 namespace App\Models;
 use App\Traits\HasImage;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Brand extends Model {

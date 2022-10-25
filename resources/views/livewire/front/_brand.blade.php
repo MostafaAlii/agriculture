@@ -40,8 +40,8 @@
                     <img src="{{ $brand->image_path }}"
                         data-src="{{ $brand->image_path }}" alt="{{ $brand->title }}" />
                     @else
-                    <img src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}"
-                        data-src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}" alt="demo" />
+                    <img src="{{ asset('Dashboard/img/Default/default_brand.jpg') }}"
+                        data-src="{{ asset('Dashboard/img/Default/default_brand.jpg') }}" alt="demo" />
                     @endif
                 @empty
                     <div>

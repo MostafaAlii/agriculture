@@ -14,12 +14,12 @@
                             <!-- start item -->
                             <div class="__item">
                                 
-                                @if (isset($blog->image->filename))
-                                <img width="100%" height="550px" src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}"
-                                    data-src="{{ asset('Dashboard/img/blogs/' . $blog->image->filename) }}" alt="demo" />
+                                @if (isset($blog->image_path))
+                                <img width="100%" height="550px" src="{{ $blog->image_path }}"
+                                    data-src="{{ $blog->image_path }}" alt="{{ $blog->title }}" />
                                 @else
-                                <img width="100%" src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}"
-                                    data-src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}" alt="demo" />
+                                <img width="100%" src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}"
+                                    data-src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}" alt="demo" />
                                 @endif
 
                                 <div class="__content">

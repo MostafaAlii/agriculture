@@ -5,8 +5,7 @@
 
 @else
 <a href="#">
-    <img width="100%" src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}"
-        data-src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}" alt="demo" />
+    <img width="100%" src="{{ asset('Dashboard/img/Default/default_brand.jpg') }}"
+        data-src="{{ asset('Dashboard/img/Default/default_brand.jpg') }}" alt="demo" />
 </a>
-
 @endif

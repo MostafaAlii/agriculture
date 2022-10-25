@@ -87,7 +87,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                    <img src="{{ asset('Dashboard/img/blogs/'. $blog->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                        <img src="{{  $blog->image_path }}" class="img-thumbnail img-preview" data-src="{{ $blog->image_path }}" alt="{{ $blog->title }}" />
                                                     </div>
                                                 </div>
 

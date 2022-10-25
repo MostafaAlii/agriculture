@@ -11,22 +11,29 @@
             <div class="posts posts--style-1">
                 <div class="__inner">
                     <div class="row">
-                        @foreach($blogs as $blog)
+                        
+
+                        @forelse ($blogs as $blog)
                             <!-- start item -->
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="__item __item--preview">
                                     <figure class="__image">
-                                        @if(isset($blog->image->filename))
-                                            <img  src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
-                                            data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
-                                            alt="demo" />
+                            
+                                        @if($blog->image_path)
+                                        <a href="#">
+                                            <img src="{{  $blog->image_path }}" style="width: 100px; height: 100px;" alt="">
+                                        </a>
+                            
                                         @else
-                                           <img  src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}"
-                                           data-src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}" alt="demo" />
+                                        <a href="#">
+                                            <img width="100%" src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}"
+                                                data-src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}" alt="demo" />
+                                        </a>
                                         @endif
                                     </figure>
                                     <div class="__content">
-                                        <p class="__category"><a href="{{ route('blogdetails',encrypt($blog->id) ) }}">{{ $blog->admin->firstname }}</a></p>
+                                        <p class="__category"><a href="{{ route('blogdetails',encrypt($blog->id) ) }}">{{ $blog->admin->firstname
+                                                }}</a></p>
                                         <h3 class="__title h5"><a href="{{ route('blogdetails',encrypt($blog->id) ) }}">{{ $blog->title }}</a></h3>
                                         <p>{{ Str::limit($blog->body,50,) }}</p>
                                     </div>
@@ -37,11 +44,14 @@
                                 </div>
                             </div>
                             <!-- end item -->
-                        @endforeach
-                        {{-- {{ $blogs->links() }} --}}
-                        @if (count($blogs))
-                        {{ $blogs->links('page-links') }}
-                        @endif
+                            @if (count($blogs))
+                                {{ $blogs->links('page-links') }}
+                            @endif
+                        @empty
+                           <div>
+                                <h3 class="text-danger">{{ trans('Admin\general.blogs_not_found') }}</h3>
+                            </div> 
+                        @endforelse
 
                     </div>
                 </div>

@@ -1,13 +1,11 @@
-
-@if($blog->image)
+@if($blog->image_path)
 <a href="#">
-    <img src="{{ asset('Dashboard/img/blogs/'. $blog->image->filename) }}" style="width: 100px; height: 100px;" alt="">
+    <img src="{{  $blog->image_path }}" style="width: 100px; height: 100px;" alt="">
 </a>
 
 @else
 <a href="#">
-    <img width="100%" src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}"
-        data-src="{{ asset('Dashboard/img/blogs/default_blog.jpg') }}" alt="demo" />
+    <img width="100%" src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}"
+        data-src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}" alt="demo" />
 </a>
-
 @endif

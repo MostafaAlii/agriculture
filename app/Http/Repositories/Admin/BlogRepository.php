@@ -5,9 +5,9 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\{DB, Crypt};
 use App\Http\Interfaces\Admin\BlogInterface;
 use Illuminate\Support\Str;
-use App\Traits\UploadT;
+use App\Traits\HasImage;
 class BlogRepository implements BlogInterface {
-    use UploadT;
+    use HasImage;
     public function index() {
         return view('dashboard.admin.blogs.index');
     }
@@ -60,7 +60,12 @@ class BlogRepository implements BlogInterface {
             $blog->body=$request->body;
             $blog->save();
 
-            $this->addImageblog($request, 'image' , 'blogs' , 'upload_image',$blog->id, 'App\Models\Blog');
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'blog-'.time().Str::slug($request->input('title'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $blog->storeImage($image->storeAs('blogs', $filename, 'public'));
+           }
 
              // Attach Category ::
              $blog->categories()->attach($request->categories);
@@ -99,10 +104,12 @@ class BlogRepository implements BlogInterface {
             $blog->title=$request->title;
             $blog->body=$request->body;
             $blog->save();
-            if($request->image){
-                $this->deleteImage('upload_image','/blogs/' . $blog->image->filename,$blog->id);
-            }
-            $this->addImageblog($request, 'image' , 'blogs' , 'upload_image',$blog->id, 'App\Models\Blog');
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'blog-'.time().Str::slug($request->input('title'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $blog->updateImage($image->storeAs('blogs', $filename, 'public'));
+           }
 
              // sync Categories ::
              $blog->categories()->sync($request->categories);
@@ -121,9 +128,6 @@ class BlogRepository implements BlogInterface {
         try{
             $blogID = Crypt::decrypt($id);
             $blog=Blog::findorfail($blogID);
-            if($blog->image && $blog->image->filename != 'default_blog.jpg'){
-                $this->deleteImage('upload_image','/blogs/' . $blog->image->filename,$blog->id);
-            }
             $blog->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('blogs.index');
@@ -140,7 +144,8 @@ class BlogRepository implements BlogInterface {
                 foreach($delete_select_id as $blogs_ids){
                     $blog = Blog::findorfail($blogs_ids);
                     if($blog->image && $blog->image->filename != 'default_blog.jpg'){
-                        $this->deleteImage('upload_image','/blogs/' . $blog->image->filename,$blog->id);
+                        $old_photo = $blog->image->filename;
+                        $blog->deleteImage();
                     }
                 }
         }else{
