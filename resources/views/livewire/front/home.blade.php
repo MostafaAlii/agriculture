@@ -99,7 +99,7 @@
             <div class="promo-banners">
                 <div class="__inner">
                     <div class="row">
-                        @foreach (\App\Models\Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
+                        {{--@foreach (\App\Models\)
                             <div class="col-12 col-md-6 col-lg-4">
                                 @if (isset($blog->image->filename))
                                     <a class="__item" href="{{ route('blogdetails', encrypt($blog->id)) }}"><img
@@ -111,7 +111,24 @@
                                             class="img-fluid w-100" /></a>
                                 @endif
                             </div>
-                        @endforeach
+                        @endforeach --}}
+
+                        @forelse (Blog::orderByDesc('created_at')->limit(3)->get() as $blog)
+                            <div class="col-12 col-md-6 col-lg-4">
+                                @if (isset($blog->image_path))
+                                <a class="__item" href="{{ route('blogdetails', encrypt($blog->id)) }}"><img
+                                        src="{{ $blog->image_path }}" alt="{{ $blog->title }}" class="img-fluid "
+                                        style="width:620px; height:210px" /></a>
+                                @else
+                                <a class="__item" href="#"><img src="{{ asset('frontassets/img/promo-banners_img/1.jpg') }}" alt="demo"
+                                        class="img-fluid w-100" /></a>
+                                @endif
+                            </div>
+                        @empty
+                            <div>
+                                <h3 class="text-danger">{{ trans('Admin\general.blogs_not_found') }}</h3>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -301,16 +318,16 @@
                     @foreach ($newProducts as $product)
                         <div class="__item">
                             <figure class="__image">
-                                @if (isset($product->image))
+                                @if (isset($product->image_path))
                                     <a href="{{ route('product_details', encrypt($product->id)) }}">
                                         <img width="188"
-                                            src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
+                                            src="{{ $product->image_path }}"
                                             alt="demo" />
                                     </a>
                                 @else
                                     <a href="{{ route('product_details', encrypt($product->id)) }}">
                                         <img width="188"
-                                            src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                            src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
                                             alt="demo" />
                                     </a>
                                 @endif
@@ -476,13 +493,13 @@
                                         <i class="__ico">
                                         @if(!($main->products)->isEmpty())
                                             @foreach($main->products->random(1) as $pp)
-                                                 <img class="img-fluid lazy" src="{{ asset('Dashboard/img/products/' .  $pp->image->filename) }}"
-                                                data-src="{{ asset('Dashboard/img/products/' . $pp->image->filename) }}"
-                                                alt="demo" />
+                                                 <img class="img-fluid lazy" src="{{ $pp->image_path }}"
+                                                data-src="{{ $pp->image_path }}"
+                                                alt="{{ $pp->name }}" />
                                             @endforeach
                                         @else
-                                            <img class="img-fluid lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                            <img class="img-fluid lazy" src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
                                                 alt="demo" />
                                         @endif
                                         </i>
@@ -547,14 +564,14 @@
                                         <div class="col-12 col-md-6">
                                             <figure class="__image">
                                                 <a href="{{ route('product_details', encrypt($product->id)) }}">
-                                                    @if (isset($product->image))
-                                                        <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                            data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                            alt="demo" />
+                                                    @if (isset($product->image_path))
+                                                        <img src="{{ $product->image_path }}"
+                                                            data-src="{{ $product->image_path }}"
+                                                            alt="{{ $product->name }}" />
                                                     @else
-                                                        <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                            alt="demo" />
+                                                        <img src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                            data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                            alt="{{ $product->name }}" />
                                                     @endif
 
                                                 </a>
@@ -644,14 +661,14 @@
                                     <div class="__item">
                                         <figure class="__image">
                                             <a href="{{ route('product_details', encrypt($product->id)) }}">
-                                                @if (isset($product->image))
-                                                    <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                        data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                        alt="demo" />
+                                                @if (isset($product->image_path))
+                                                    <img src="{{ $product->image_path }}"
+                                                        data-src="{{ $product->image_path }}"
+                                                        alt="{{ $product->name }}" />
                                                 @else
-                                                    <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                        alt="demo" />
+                                                    <img src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                        data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                        alt="{{ $product->name }}" />
                                                 @endif
 
                                             </a>
