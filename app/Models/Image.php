@@ -15,7 +15,6 @@ class Image extends Model {
         static::deleting(function ($image){
             if(static::where('filename', $image->filename)->exists()) {
                 Storage::disk('public')->delete($image->filename);
-    
             }
         }); 
     }

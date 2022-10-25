@@ -163,58 +163,59 @@
                                 <div class="widget widget--products">
                                     <h4 class="h6 widget-title">{{ __('Admin/site.featproducts') }}</h4>
                                     <ul>
-                                        @foreach ($newProducts as $product)
+
+                                        @forelse ($newProducts as $product)
                                             <li>
                                                 <div class="row no-gutters">
                                                     <div class="col-auto __image-wrap">
                                                         <figure class="__image">
-                                                            <a
-                                                                href="{{ route('product_details', encrypt($product->id)) }}">
-                                                                @if ($product->image)
-                                                                    <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                        data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                        alt="demo" />
+                                                            <a href="{{ route('product_details', encrypt($product->id)) }}">
+                                                                @if ($product->image_path)
+                                                                <img src="{{ $product->image_path }}"
+                                                                    data-src="{{ $product->image_path }}" alt="{{ $product->name }}" />
                                                                 @else
-                                                                    <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                        alt="demo" />
+                                                                <img src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                                    data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" alt="{{ $product->name }}" />
                                                                 @endif
                                                             </a>
                                                         </figure>
                                                     </div>
-
+                                            
                                                     <div class="col">
-                                                        <h4 class="h6 __title"><a
-                                                                href="{{ route('product_details', encrypt($product->id)) }}">{{ $product->name }}</a>
+                                                        <h4 class="h6 __title">
+                                                            <a href="{{ route('product_details', encrypt($product->id)) }}">
+                                                                {{ $product->name }}
+                                                            </a>
                                                         </h4>
-                                                        <span class="score"><span
-                                                                style="width:<?php echo $product->productRate(); ?>%"></span>
+                                                        <span class="score"><span style="width:<?php echo $product->productRate(); ?>%"></span>
                                                         </span>
                                                         @if ($product->special_price > 0)
-                                                            <div class="product-price">
-                                                                <span
-                                                                    class="product-price__item product-price__item--old">
-                                                                     {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
-                                                                     {{ $product->getUnit()->Name }}
-                                                                </span>
-                                                                <span
-                                                                    class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2) }}  {{ config('app.Currency') }}
-                                                                    {{ $product->getUnit()->Name }}
-                                                                </span>
-                                                            </div>
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--old">
+                                                                {{ number_format($product->getPrice(), 2) }} {{ config('app.Currency') }}
+                                                                {{ $product->getUnit()->Name }}
+                                                            </span>
+                                                            <span class="product-price__item product-price__item--new">{{ number_format($product->special_price, 2)
+                                                                }} {{ config('app.Currency') }}
+                                                                {{ $product->getUnit()->Name }}
+                                                            </span>
+                                                        </div>
                                                         @else
-                                                            <div class="product-price">
-                                                                <span
-                                                                    class="product-price__item product-price__item--new">
-                                                                     {{ number_format($product->getPrice(), 2) }}  {{ config('app.Currency') }}
-                                                                     {{ $product->getUnit()->Name }}
-                                                                </span>
-                                                            </div>
+                                                        <div class="product-price">
+                                                            <span class="product-price__item product-price__item--new">
+                                                                {{ number_format($product->getPrice(), 2) }} {{ config('app.Currency') }}
+                                                                {{ $product->getUnit()->Name }}
+                                                            </span>
+                                                        </div>
                                                         @endif
                                                     </div>
                                                 </div>
                                             </li>
-                                        @endforeach
+                                        @empty
+                                           <div>
+                                                <h3 class="text-danger">{{ trans('Admin\general.products_not_found') }}</h3>
+                                            </div> 
+                                        @endforelse
                                     </ul>
                                 </div>
                             </div>
@@ -287,19 +288,13 @@
                                             <div class="col-12 col-sm-6 col-lg-4">
                                                 <div class="__item product-cart">
                                                     <figure class="__image">
-                                                        @if ($product->image)
-                                                            <a
-                                                                href="{{ route('product_details', encrypt($product->id)) }}">
-                                                                <img width="188"
-                                                                    src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                    data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                    alt="demo" />
+                                                        @if ($product->image_path)
+                                                            <a href="{{ route('product_details', encrypt($product->id)) }}">
+                                                                <img width="188" src="{{ $product->image_path }}" data-src="{{ $product->image_path }}" alt="{{ $product->name }}" />
                                                             </a>
                                                         @else
-                                                            <img width="188"
-                                                                src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                alt="demo" />
+                                                            <img width="188" src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                                data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" alt="{{ $product->name }}" />
                                                         @endif
                                                     </figure>
                                                     <div class="__content ">

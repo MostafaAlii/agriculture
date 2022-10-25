@@ -139,10 +139,10 @@ label.star:before {
                                 <div class="col-12 col-lg-7">
                                     <div class="__product-img">
 
-                                        @if($product->image)
-                                        <img width="330" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                        @if($product->image_path)
+                                            <img width="330" src="{{ $product->image_path }}" alt="{{ $product->name }}" />
                                         @else
-                                        <img width="330" src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                            <img width="330" src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" alt="{{ $product->name }}" />
                                         @endif
                                         @if($product->special_price >0)
                                         <span class="product-label product-label--sale">{{ __('Admin/site.sale') }}</span>
@@ -379,12 +379,12 @@ label.star:before {
                                         <div class="__item">
                                             <figure class="__image">
                                                 <a href="{{ route('product_details',encrypt($product->id)) }}">
-                                                    @if($product->image)
-                                                        <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
-                                                        data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                                    @if($product->image_path)
+                                                        <img  src="{{ $product->image_path }}"
+                                                        data-src="{{ $product->image_path }}" alt="{{ $product->name }}" />
                                                     @else
-                                                        <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                        <img  src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                        data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" alt="{{ $product->name }}" />
                                                     @endif
 
                                                 </a>

@@ -1,14 +1,14 @@
 <?php
 namespace App\Models;
+use App\Traits\HasImage;
 use App\Models\UnitTranslation;
 use App\Observers\ProductObserver;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{Model,SoftDeletes};
 use Astrotomic\Translatable\Translatable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\{HasMany, MorphMany, MorphOne, BelongsTo, MorphToMany, BelongsToMany};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\{HasMany, MorphMany, MorphOne, BelongsTo, MorphToMany, BelongsToMany};
 class Product extends Model {
-    use HasFactory, Translatable, SoftDeletes;
+    use HasFactory, Translatable, SoftDeletes, HasImage;
     const NOT_ACTIVE = 0, ACTIVE = 1, IN_STOCK = 1;
     protected $table = "products";
     protected $guarded = [];
@@ -18,6 +18,7 @@ class Product extends Model {
     public $timestamps = true;
 
     protected $hidden = ['pivot'];
+    public $appends = ['image_path'];
 
     protected $casts = [
         'deleted_at' => 'datetime:Y/m/d',
@@ -53,9 +54,6 @@ class Product extends Model {
         return $this->hasMany(Option::class);
     }
 
-    public function image(): MorphOne {
-        return $this->morphOne(Image::class, 'imageable');
-    }
 
     public function comments(): MorphMany {
         return $this->morphMany(Comment::class, 'commentable');

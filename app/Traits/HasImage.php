@@ -32,6 +32,12 @@ trait HasImage {
         }
     }
 
+    public function forceDeleteImage() {
+        if ($this->image) {
+            $this->image->forceDelete();
+        }
+    }
+
     public function getImagePathAttribute() {
         $image = $this->image;
         if (! $image) {
@@ -43,6 +49,12 @@ trait HasImage {
     public function bulkDelete($images) {
         foreach ($images as $image) {
             $image->delete();
+        }
+    }
+
+    public function forceBulkDelete($images) {
+        foreach ($images as $image) {
+            $image->forceDelete();
         }
     }
 }

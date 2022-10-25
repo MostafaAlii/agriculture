@@ -1013,9 +1013,7 @@
                             jQuery(document).ready(function ($) {
 
                                 var slider = $('#vegas-slider'),
-                                    // for (var i = 0; i < 3; i++) {
                                     slides = [
-
                                         {
                                             name: "img 1",
                                             src: @if (isset($slider[0]->image_path)) "{{ asset($slider[0]->image_path) }}" @else "{{ asset('Dashboard/img/Default/default_slider.jpg') }}" @endif,

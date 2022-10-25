@@ -67,10 +67,12 @@
                                                             <label>{{ trans('Admin/products.product_main_photo') }} <span class="text-danger">*</span></label>
                                                             <div class="col-md-11 mg-t-5 mg-md-t-0">
                                                                 <input type="file" accept="image/*" name="photo"  onchange="loadFile(event)"/>
-                                                                @if($product->image)
-                                                                    <img style="width:65px; height:65px;border-radius: 5px;" id="output" class="rounded-circle" src="{{asset('Dashboard/img/products/' . $product->image->filename)}}" alt="" />
+                                                                @if ($product->image_path)
+                                                                    <img src="{{  $product->image_path }}" style="width:65px; height:65px;border-radius: 5px;" class="rounded-circle" data-src="{{ $product->image_path }}"
+                                                                        alt="{{ $product->name }}" />
                                                                 @else
-                                                                    <img style="width:65px; height:65px;border-radius: 5px;" class="rounded-circle" src="{{asset('Dashboard/img/products/default.jpg')}}" alt="" />
+                                                                    <img src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" style="width:65px; height:65px;border-radius: 5px;" class="rounded-circle"
+                                                                       data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" alt="{{ $product->name }}" />
                                                                 @endif
                                                             </div>
                                                         </div>

@@ -1,15 +1,16 @@
 <?php
 namespace App\Http\Repositories\Admin;
-use App\Traits\UploadT;
+use App\Traits\HasImage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\{DB, Crypt};
 use App\Http\Interfaces\Admin\ProductInterface;
-use App\Models\{Tag, Farmer, Product, Category, Image as ModelsImage, Unit};
-use Intervention\Image\Facades\Image;
+use App\Models\{Tag, Farmer, Product, Category, Image, Unit};
+
 class ProductRepository implements ProductInterface {
-    use UploadT;
+    use HasImage;
     public function index() {
         return view('dashboard.admin.products.index');
     }
@@ -84,9 +85,7 @@ class ProductRepository implements ProductInterface {
     }
 
     public function generalInformationStore($request) {
-        //dd($request->all());
         DB::beginTransaction();
-            //return $request;
             try{
                 if (!$request->has('status'))
                     $request->request->add(['status' => 0]);
@@ -110,7 +109,12 @@ class ProductRepository implements ProductInterface {
                 // Attach Unit ::
                 $product->units()->syncWithPivotValues([$request->units],['price'=>$request->price]);
                 // Save Product Main Photo ::
-                $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
+                if($request->hasFile('photo')) {
+                    $image = $request->file('photo');
+                    $name = 'product-'.time().Str::slug($request->input('name'));
+                    $filename = $name .'.'.$image->getClientOriginalName();
+                    $product->storeImage($image->storeAs('products', $filename, 'public'));
+                }
                 DB::commit();
                 toastr()->success(__('Admin/products.product_store_successfully'));
                 return redirect()->route('products');
@@ -153,7 +157,6 @@ class ProductRepository implements ProductInterface {
     }
 
     public function update($request) {
-        //dd($request->all());
         DB::beginTransaction();
             try{
                 $product = Product::findOrfail($request->id);
@@ -168,10 +171,12 @@ class ProductRepository implements ProductInterface {
                 $product->tags()->sync($request->tags);
                 $product->units()->syncWithPivotValues([$request->units],['price'=>$request->price]);
                 // Save Product Main Photo ::
-                if ($request->photo) {
-                    $this->deleteImage('upload_image', '/products/' . $product->photo, $product->id);
+                if($request->hasFile('photo')) {
+                    $image = $request->file('photo');
+                    $name = 'product-'.time().Str::slug($request->input('name'));
+                    $filename = $name .'.'.$image->getClientOriginalName();
+                    $product->updateImage($image->storeAs('products', $filename, 'public'));
                 }
-                $this->verifyAndStoreImage($request, 'photo', 'products', 'upload_image', $product->id, 'App\Models\Product');
                 DB::commit();
                 toastr()->success(__('Admin/products.product_updated_successfully'));
                 return redirect()->route('products');
@@ -242,6 +247,7 @@ class ProductRepository implements ProductInterface {
         try{
             $real_id= Crypt::decrypt($id);
             Product::where('id',$real_id)->forceDelete(); //force_delete
+            Image::where('imageable_id',$real_id)->where('imageable_type','App\Models\Product')->forceDelete();
             toastr()->error(__('Admin/products.delete_done'));
             return redirect()->route('products.trashed');
         } catch (\Exception $e) {
@@ -254,7 +260,8 @@ class ProductRepository implements ProductInterface {
         try{
             if($request->delete_select_id){
                 $all_ids = explode(',',$request->delete_select_id);
-                Product::whereIn('id',$all_ids)->forceDelete(); //soft_delete
+                Product::whereIn('id',$all_ids)->forceDelete();
+                //soft_delete
                 toastr()->error(__('Admin/products.delete_done'));
                 return redirect()->route('products');
             }else{

@@ -51,22 +51,18 @@ class BlogRepository implements BlogInterface {
     public function store($request) {
         DB::beginTransaction();
         try{
-
             $requestData = $request->validated();
             $blog = new Blog;
             $blog ->admin_id = $request->admin_id;
-
             $blog->title=$request->title;
             $blog->body=$request->body;
             $blog->save();
-
             if($request->hasFile('image')) {
                 $image = $request->file('image');
                 $name = 'blog-'.time().Str::slug($request->input('title'));
                 $filename = $name .'.'.$image->getClientOriginalName();
                 $blog->storeImage($image->storeAs('blogs', $filename, 'public'));
            }
-
              // Attach Category ::
              $blog->categories()->attach($request->categories);
 
@@ -136,7 +132,6 @@ class BlogRepository implements BlogInterface {
             return redirect()->back();
         }
     }
-
 
     public function bulkDelete($request) {
         if($request->delete_select_id){
