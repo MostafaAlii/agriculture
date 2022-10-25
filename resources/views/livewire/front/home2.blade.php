@@ -267,14 +267,14 @@
                                         <figure class="__image">
                                         @if(!($cat->products)->isEmpty())
                                             @foreach($cat->products->random(1) as $pp)
-                                                 <img class="lazy" src="{{ asset('Dashboard/img/products/' .  $pp->image->filename) }}"
-                                                data-src="{{ asset('Dashboard/img/products/' . $pp->image->filename) }}"
-                                                alt="demo" />
+                                                 <img class="lazy" src="{{ $pp->image_path }}"
+                                                data-src="{{ $pp->image_path }}"
+                                                alt="{{ $pp->name }}" />
                                             @endforeach
                                         @else
-                                            <img class="lazy" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                alt="demo" />
+                                            <img class="lazy" src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                alt="{{ $pp->name }}" />
                                         @endif
                                         </figure>
                                     @endif

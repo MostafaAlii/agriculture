@@ -52,19 +52,19 @@
                         <div class="col-12 col-sm-6 col-lg-3">
                             <div class="__item">
                                 <figure class="__image">
-                                    @if ($product->image)
+                                    @if ($product->image_path)
                                         <a
                                             href="{{ route('product_details', encrypt($product->id)) }}">
                                             <img width="188"
-                                                src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                alt="demo" />
+                                                src="{{ $product->image_path }}"
+                                                data-src="{{ $product->image_path }}"
+                                                alt="{{ $product->name }}" />
                                         </a>
                                     @else
                                         <img width="188"
-                                            src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                            alt="demo" />
+                                            src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                            data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                            alt="{{ $product->name }}" />
                                     @endif
                                 </figure>
 
@@ -101,29 +101,6 @@
                                             </span>
                                         </div>
                                     @endif
-                                    {{-- @if (Auth::guard('vendor')->user() )
-                                        @if($product->stock ==1)
-                                            <a class="custom-btn custom-btn--medium custom-btn--style-1"
-                                                href="#"
-                                                wire:click.prevent="store({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }})">
-                                                <i class="fontello-shopping-bag"></i>
-                                                {{ __('Admin/site.addtocart') }}
-                                            </a>
-                                            <div class="product-wish">
-                                                @if ($witems->contains($product->id))
-                                                    <a href="#"
-                                                        wire:click.prevent=" removeWishlist({{ $product->id }}) ">
-                                                        <i class="fa fa-heart fill-heart"></i>
-                                                    </a>
-                                                @else
-                                                    <a href="#"
-                                                        wire:click.prevent=" addToWishlist({{ $product->id }},'{{ $product->name ? $product->name : ' ' }}',{{ $product->price }}) ">
-                                                        <i class="fa fa-heart"></i>
-                                                    </a>
-                                                @endif
-                                            </div>
-                                        @endif
-                                    @endif --}}
                                 </div>
                                 @if ($product->special_price > 0)
                                     <span

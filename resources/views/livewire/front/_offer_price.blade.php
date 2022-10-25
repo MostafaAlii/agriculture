@@ -42,6 +42,9 @@
 
                             <div class="row">
                                 <div class="col-12 col-lg-7 col-xl-6">
+                                    <a href="{{ route('product_details', encrypt($offer_product->id)) }}">
+                                        <img src="{{$offer_product->image_path}}" width="50%;" height="30%" style="align:center;">
+                                    </a>
                                     <div class="banner__text" data-aos="fade-left" data-delay="500">
                                         <h2 class="__title h1">
                                             <b style="display: block; color: #c6c820;">

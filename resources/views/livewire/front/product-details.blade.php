@@ -230,28 +230,6 @@ label.star:before {
                                         @if (Auth::guard('vendor')->user() )
                                             @if($product->stock ==1)
                                                 <form class="__add-to-cart" action="#">
-                                                    {{-- <div class="quantity-counter js-quantity-counter">
-                                                        @if($product->qty  > 1)
-                                                            <span class="__btn __btn--minus"
-                                                                wire:click.prevent='decreaseQty' >
-                                                            </span>
-                                                        @endif
-                                                        <input class="__q-input"
-                                                                type="text"
-                                                                name="product-quatity"
-                                                                min="1"
-                                                                max="{{ $qtymax }}"
-                                                                value="{{ $qty }}"
-                                                                onkeydown="return false"
-                                                                wire:model='qty'
-                                                                autocomplete="off"
-                                                        />
-                                                        @if($qty < $product->qty)
-                                                            <span class="__btn __btn--plus"
-                                                                wire:click.prevent='increaseQty' >
-                                                            </span>
-                                                        @endif
-                                                    </div> --}}
                                                     @if(Cart::instance('cart')->content()->contains('id',$product->id))
                                                         <button class="custom-btn custom-btn--medium custom-btn--style-2" title="{{ __('Admin/site.addedtocart') }}"
                                                         type="submit" role="button" disabled
@@ -316,29 +294,6 @@ label.star:before {
                                                     {{ $product->description }}
 
                                                 </p>
-
-                                                {{-- @if(count($options1)>0)
-                                                <div class="description-table" style="max-width: 370px;">
-                                                    <table>
-                                                        <tbody>
-
-                                                           <tr>
-                                                                <th>{{ __('website\comments.attribute') }}</th>
-                                                                <th>{{ __('website\comments.option') }}</th>
-                                                                <th>{{ __('website\comments.price') }}</th>
-                                                            </tr>
-                                                            @foreach($options1 as $opt)
-                                                                <tr>
-                                                                    <td>{{$opt->attribute->name}}</td>
-                                                                    <td>{{$opt->name}} </td>
-                                                                    <td>{{$opt->price}}</td>
-                                                                </tr>
-                                                            @endforeach
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                @endif --}}
                                             </div>
 
                                             <!-- <div class="tab-content__item <?php /*if(Session::get('div_active')=='allow'){echo'is-visible';}*/?> "> -->
@@ -476,17 +431,6 @@ label.star:before {
 
                     <div class="col-12 col-md-4 col-lg-3">
                         <aside class="sidebar">
-                            <!-- start widget -->
-                            {{-- <div class="widget widget--search">
-                                <form class="form--horizontal" action="#" method="get">
-                                    <div class="input-wrp">
-                                        <input class="textfield" name="s" type="text" placeholder="Search" />
-                                    </div>
-
-                                    <button class="custom-btn custom-btn--tiny custom-btn--style-1" type="submit" role="button">Find</button>
-                                </form>
-                            </div> --}}
-                            <!-- end widget -->
 
 
                             @if(count($product->categories)>0)
@@ -533,19 +477,6 @@ label.star:before {
                             @endif
 
 
-                            <!-- start widget -->
-                            {{-- <div class="widget">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col">
-                                        <button class="custom-btn custom-btn--medium custom-btn--style-1" role="button">Show Products</button>
-                                    </div>
-
-                                    <div class="col-auto">
-                                        <a class="clear-filter" href="#">Clear all</a>
-                                    </div>
-                                </div>
-                            </div> --}}
-                            <!-- end widget -->
 
                             <!-- start widget -->
                             <div class="widget widget--products">
@@ -558,12 +489,12 @@ label.star:before {
                                             <div class="col-auto __image-wrap">
                                                 <figure class="__image">
                                                     <a href="{{ route('product_details',encrypt($product->id)) }}">
-                                                        @if($product->image)
-                                                            <img  src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
-                                                            data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
+                                                        @if($product->image_path)
+                                                            <img  src="{{ $product->image_path }}"
+                                                            data-src="{{ $product->image_path }}" alt="{{$product->name}}" />
                                                         @else
-                                                            <img  src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                            <img  src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                            data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" alt="{{$product->name}}" />
                                                         @endif
                                                     </a>
                                                 </figure>
@@ -630,15 +561,6 @@ label.star:before {
     function myFunction() {
         console.log('clicked');
         alert('{{ __('Website/home.item_added_to_cart') }}');
-                    // this.text('{{ __('Admin/site.loading') }}');
-            //  $("this").text("{{ __('Admin/site.adding_to_cart') }}");
-            // document.getElementById("add-to-cart-cartbtnbtn").innerHTML = "{{ __('Admin/site.adding_to_cart') }}";
-            // document.getElementById("add-to-cart-cartbtnbtn").attr("disabled", true);
-            // document.getElementById("add-to-cart-cartbtnbtn").classList.add("disabled");
-            // document.getElementById("add-to-cart-cartbtnbtn").classList.remove("custom-btn--style-1");
-            // document.getElementById("add-to-cart-cartbtnbtn").classList.add("btn-loading");
-            // document.getElementById("add-to-cart-cartbtnbtn").disabled = false;
-
     }
 </script>
 @endpush

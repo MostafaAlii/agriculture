@@ -491,7 +491,17 @@
                                         data-aos-offset="100">
                                         <a href="{{route('pro_cat',encrypt($main->id))}}">
                                         <i class="__ico">
-                                        @if(!($main->products)->isEmpty())
+                                        @if (!empty($main->products->first()))
+                                            @foreach ($main->products->random(1) as $product)
+                                                <img class="img-fluid lazy" src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                            data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                    alt="{{ $product->name }}" />
+                                            @endforeach
+                                        @else 
+                                        <img class="img-fluid lazy" src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                            data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" alt="demo" />
+                                        @endif
+                                        {{--@if(!($main->products)->isEmpty())
                                             @foreach($main->products->random(1) as $pp)
                                                  <img class="img-fluid lazy" src="{{ $pp->image_path }}"
                                                 data-src="{{ $pp->image_path }}"
@@ -501,7 +511,7 @@
                                             <img class="img-fluid lazy" src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
                                                 data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
                                                 alt="demo" />
-                                        @endif
+                                        @endif--}}
                                         </i>
                                         <h5 class="__title">{{$main->name}}</h5>
                                         </a>
