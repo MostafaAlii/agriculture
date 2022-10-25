@@ -35,42 +35,19 @@
                                 }
                             }
                         ]}'>
-
-
-
-                        @foreach( \App\Models\Brand::orderByDesc('created_at')->limit(5)->get() as $brand)
-                            @if ($brand->image)
-                                <div class="__item">
-                                    <img class="img-fluid m-auto" src="{{ asset('Dashboard/img/brands/' . $brand->image->filename) }}"
-                                        alt="{{ $brand->title }}" />
-                                </div>
-                            @else
-                            <div class="__item">
-                                <img class="img-fluid m-auto" src="{{ asset('Dashboard/img/images/brands/brand1.jpg') }}"
-                                    alt="{{ $brand->title }}" />
-                            </div>
-                            @endif
-                        @endforeach
-
-                {{-- <div class="__item">
-                    <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/2.jpg') }}"
-                        alt="demo" />
-                </div>
-
-                <div class="__item">
-                    <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/3.jpg') }}"
-                        alt="demo" />
-                </div>
-
-                <div class="__item">
-                    <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/4.jpg') }}"
-                        alt="demo" />
-                </div>
-
-                <div class="__item">
-                    <img class="img-fluid m-auto" src="{{ asset('frontassets/img/partners_img/5.jpg') }}"
-                        alt="demo" />
-                </div> --}}
+                @forelse (Brand::orderByDesc('created_at')->limit(5)->get() as $brand)
+                    @if (isset($brand->image_path))
+                    <img src="{{ $brand->image_path }}"
+                        data-src="{{ $brand->image_path }}" alt="{{ $brand->title }}" />
+                    @else
+                    <img src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}"
+                        data-src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}" alt="demo" />
+                    @endif
+                @empty
+                    <div>
+                        <h6 class="text-danger">{{ trans('Admin\general.brands_not_found') }}</h6>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>

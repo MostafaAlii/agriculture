@@ -1,12 +1,12 @@
-
-@if($brand->image)
+@if($brand->image_path)
 <a href="#">
-    <img src="{{ asset('Dashboard/img/brands/'. $brand->image->filename) }}" style="width: 100px; height: 100px;" alt="">
+    <img src="{{  $brand->image_path }}" style="width: 100px; height: 100px;" alt="">
 </a>
 
 @else
 <a href="#">
-    <img src="{{ asset('Dashboard/img/images/avatar.jpg') }}" style="width: 100px;" alt="">
+    <img width="100%" src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}"
+        data-src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}" alt="demo" />
 </a>
 
 @endif

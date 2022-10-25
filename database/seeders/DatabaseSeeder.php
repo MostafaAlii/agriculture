@@ -1,10 +1,8 @@
 <?php
 namespace Database\Seeders;
-use App\Models\{Blog, Brand,Image, Product, Slider, Farmer, User};
 use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder {
     public function run() {
-        $count = 32;
         $this->call([
             PermissionTableSeeder::class,
             CurrencySeeder::class,
@@ -64,68 +62,6 @@ class DatabaseSeeder extends Seeder {
             AboutSeeder::class,
             ReviewSeeder::class,
             TeamSeeder::class,
-
         ]);
-
-        Farmer::factory(5)->create();
-        User::factory(5)->create();
-         // images
-         for ($i = 1; $i <= $count ; $i++) {
-            Image::insert([
-                'filename'     => rand(1,6) . ".jpg",
-                'imageable_id' => $i,
-                'imageable_type' => 'App\Models\User'
-            ]);
-        }
-           // images
-           for ($i = 1; $i <= $count ; $i++) {
-            Image::insert([
-                'filename'     => rand(1,6) . ".jpg",
-                'imageable_id' => $i,
-                'imageable_type' => 'App\Models\Farmer'
-            ]);
-        }
-
-
-            // images
-            for ($i = 1; $i <= $count ; $i++) {
-                Image::insert([
-                    'filename'     => rand(1,6) . ".jpg",
-                    'imageable_id' => $i,
-                    'imageable_type' => 'App\Models\Admin'
-                ]);
-            }
-          // images for blog
-           /*for ($i = 1; $i <= Blog::count() ; $i++) {
-               Image::insert([
-                   'filename'     => 'default_blog.jpg',
-                   'imageable_id' => $i,
-                   'imageable_type' => 'App\Models\Blog'
-               ]);
-           }*/
-            // images for slider
-            for ($i = 1; $i <= Slider::count() ; $i++) {
-                Image::insert([
-                    'filename'     => rand(100,103) . ".jpg",
-                    'imageable_id' => $i,
-                    'imageable_type' => 'App\Models\Slider'
-                ]);
-            }
-            // images for brand
-            for ($i = 1; $i <= Brand::count() ; $i++) {
-                Image::insert([
-                    'filename'     => 'brand'. rand(1,5) . ".jpg",
-                    'imageable_id' => $i,
-                    'imageable_type' => 'App\Models\Brand'
-                ]);
-            }
-            // images for product
-            for ($i = 1; $i <= Product::count() ; $i++) {
-                Image::insert([
-                    'filename'     => rand(1,73) . ".jpg",
-                    'imageable_id' => $i,
-                    'imageable_type' => 'App\Models\Product'
-                ]);
-            }
     }
 }

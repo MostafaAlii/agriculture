@@ -1,16 +1,13 @@
 <?php
 namespace Database\Seeders;
-use App\Models\Tag;
-use App\Models\Blog;
-use App\Models\Category;
+use App\Models\{Tag,Image, Blog,Category};
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\{DB,Schema};
 class BlogSeeder extends Seeder {
     public function run() {
         Schema::disableForeignKeyConstraints();
         DB::table('blogs')->truncate();
-        Blog::factory()->count(30)->create();
+        Blog::factory()->count(10)->create();
         $Tags = Tag::get();
         Blog::all()->each(function ($blog) use ($Tags) {
             $blog->tags()->attach(
@@ -24,5 +21,12 @@ class BlogSeeder extends Seeder {
             );
         });
         Schema::enableForeignKeyConstraints();
+        for($i=1; $i <= Blog::count();$i++) {
+            Image::create([ 
+                'filename'     => rand(1,10) . ".jpg",
+                'imageable_id' => $i,
+                'imageable_type' => 'App\Models\Blog',
+            ]);
+        }
     }
 }

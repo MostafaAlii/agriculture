@@ -1,17 +1,16 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\HasImage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Brand extends Model {
-    use HasFactory , Translatable;
+    use HasFactory , Translatable, HasImage;
     protected $table = "brands";
     protected $guarded = [];
     protected $with = ['translations'];
     public $translatedAttributes = ['title'];
     public $timestamps = true;
-
-    public function image() {
-        return $this->morphOne(Image::class, 'imageable');
-    }
+    public $appends = ['image_path'];
 }

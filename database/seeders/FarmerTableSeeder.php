@@ -1,10 +1,10 @@
 <?php
 namespace Database\Seeders;
-use App\Models\Farmer;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+use App\Models\{Farmer, Image};
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 
 class FarmerTableSeeder extends Seeder {
@@ -44,6 +44,14 @@ class FarmerTableSeeder extends Seeder {
             'department_id'     => 2,
             'remember_token' => Str::random(10),
         ]);
+        Farmer::factory(5)->create();
+        for($i=1; $i <= Farmer::count();$i++) {
+            Image::create([
+                'filename'     => rand(1,5) . ".jpg",
+                'imageable_id' => $i,
+                'imageable_type' => 'App\Models\Farmer',
+            ]);
+        }
 
     }
 }

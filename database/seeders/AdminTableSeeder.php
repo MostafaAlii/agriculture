@@ -1,7 +1,7 @@
 <?php
 namespace Database\Seeders;
 use Carbon\Carbon;
-use App\Models\Admin;
+use App\Models\{Admin, Image};
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -77,6 +77,13 @@ class AdminTableSeeder extends Seeder {
 //            'remember_token'    => Str::random(10),
 //        ]);
         Admin::factory(2)->create();
+        for($i=1; $i <= Admin::count();$i++) {
+            Image::create([
+                'filename'     => rand(1,5) . ".jpg",
+                'imageable_id' => $i,
+                'imageable_type' => 'App\Models\Admin',
+            ]);
+        }
         Schema::enableForeignKeyConstraints();
     }
 }

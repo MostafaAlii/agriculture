@@ -70,7 +70,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <img src="{{ asset('Dashboard/img/brands/'. $brand->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                    @if ( $brand->image_path)
+                                                        <img src="{{  $brand->image_path }}" class="img-thumbnail img-preview"
+                                                            data-src="{{ $brand->image_path }}" alt="{{ $brand->title }}" />
+                                                    @else
+                                                        <img src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}"
+                                                            data-src="{{ asset('Dashboard/img/brands/default_brand.jpg') }}" alt="demo" />
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

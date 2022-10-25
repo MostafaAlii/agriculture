@@ -1,15 +1,7 @@
 <?php
 namespace Database\Seeders;
 
-use App\Models\Area;
-use App\Models\Country;
-use App\Models\Currency;
-use App\Models\Department;
-use App\Models\Image;
-use App\Models\Province;
-use App\Models\State;
-use App\Models\Village;
-use App\Models\Worker;
+use App\Models\{Area, Country, Province, State,Currency, Village, Image, Worker};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -18,7 +10,7 @@ use Faker\Factory;
 
 class WorkerTableSeeder extends Seeder {
     public function run() {
-        $count = 10;
+        $count = 5;
         $faker = Factory::create();
         DB::table('workers')->delete();
         Worker::create([
@@ -69,11 +61,9 @@ class WorkerTableSeeder extends Seeder {
         foreach ($chunks as $chunk) {
             Worker::insert($chunk);
         }
-
-        // images
         for ($i = 1; $i <= $count+1 ; $i++) {
             Image::insert([
-                'filename'     => rand(1,6) . ".jpg",
+                'filename'     => rand(1,5) . ".jpg",
                 'imageable_id' => $i,
                 'imageable_type' => 'App\Models\Worker'
             ]);

@@ -1,16 +1,17 @@
 <?php
 namespace App\Http\Repositories\Admin;
-use App\Http\Interfaces\Admin\BrandInterface;
 use App\Models\Brand;
-use App\Traits\UploadT;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
+use App\Traits\{HasImage};
+use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\{Crypt, DB};
+use App\Http\Interfaces\Admin\BrandInterface;
 class BrandRepository implements BrandInterface {
-    use UploadT;
+    use  HasImage;
     public function index() {
         return view('dashboard.admin.brands.index');
     }
+    
     public function data() {
         $brands = Brand::select();
         return DataTables::of($brands)
@@ -26,6 +27,7 @@ class BrandRepository implements BrandInterface {
             ->rawColumns([ 'record_select','actions'])
             ->toJson();
     }
+    
     public function create() {
         return view('dashboard.admin.brands.create');
     }
@@ -34,16 +36,20 @@ class BrandRepository implements BrandInterface {
         DB::beginTransaction();
         try{
             $requestData = $request->validated();
-            Brand::create($requestData);
-            $brand = Brand::latest()->first();
-            $this->addImageblog($request, 'image' , 'brands' , 'upload_image',$brand->id, 'App\Models\Brand');
+            $brand = Brand::create($requestData);
+           if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'brand-'.time().Str::slug($request->input('title'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $brand->storeImage($image->storeAs('brands', $filename, 'public'));
+           }
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('brands.index');
-         } catch (\Exception $e) {
-             DB::rollBack();
-             toastr()->error(__('Admin/site.sorry'));
-             return redirect()->back();
+         }catch (\Exception $e){
+            DB::rollback();
+            toastr()->error(__('Admin/site.error'));
+            return redirect()->route('brands.index');
          }
     }
 
@@ -60,10 +66,12 @@ class BrandRepository implements BrandInterface {
             $brand=Brand::findorfail($brandID);
             $requestData = $request->validated();
             $brand->update($requestData);
-            if($request->image){
-                $this->deleteImage('upload_image','/brands/' . $brand->image->filename,$brand->id);
-            }
-            $this->addImageblog($request, 'image' , 'brands' , 'upload_image',$brand->id, 'App\Models\Brand');
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'brand-'.time().Str::slug($request->input('title'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $brand->updateImage($image->storeAs('brands', $filename, 'public'));
+           }
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('brands.index');
@@ -78,27 +86,25 @@ class BrandRepository implements BrandInterface {
         try{
             $brandID = Crypt::decrypt($id);
             $brand=Brand::findorfail($brandID);
-            $this->deleteImage('upload_image','/brands/' . $brand->image->filename,$brand->id);
             $brand->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('brands.index');
         } catch (\Exception $e) {
             toastr()->error(__('Admin/site.sorry'));
-            return redirect()->back();
+           return redirect()->back();
         }
     }
-
-
-    public function bulkDelete($request)
-    {
+    
+    public function bulkDelete($request) {
         if($request->delete_select_id){
-                $delete_select_id = explode(",",$request->delete_select_id);
-                foreach($delete_select_id as $brands_ids){
-                    $brand = Brand::findorfail($brands_ids);
-                    if($brand->image){
-                        $this->deleteImage('upload_image','/brands/' . $brand->image->filename,$brand->id);
-                    }
+            $delete_select_id = explode(",",$request->delete_select_id);
+            foreach($delete_select_id as $brands_ids){
+                $brand = Brand::findorfail($brands_ids);
+                if($brand->image && $brand->image != 'default_brand.jpg'){
+                    $old_photo = $brand->image->filename;
+                    $brand->deleteImage();
                 }
+            }
         }else{
             toastr()->error(__('Admin/site.no_data_found'));
             return redirect()->route('brands.index');
@@ -106,6 +112,5 @@ class BrandRepository implements BrandInterface {
         Brand::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('brands.index');
-    }// end of bulkDelete
-
+    }
 }
