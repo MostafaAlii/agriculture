@@ -1,13 +1,15 @@
 <?php
 namespace App\Http\Repositories\Admin;
-use App\Http\Interfaces\Admin\SliderInterface;
 use App\Models\Slider;
-use App\Traits\UploadT;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
+use App\Traits\HasImage;
+use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+use App\Http\Interfaces\Admin\SliderInterface;
+
 class SliderRepository implements SliderInterface {
-    use UploadT;
+    use HasImage;
     public function index() {
         return view('dashboard.admin.sliders.index');
     }
@@ -34,9 +36,13 @@ class SliderRepository implements SliderInterface {
         DB::beginTransaction();
         try{
             $requestData = $request->validated();
-            Slider::create($requestData);
-            $slider = Slider::latest()->first();
-            $this->addImageblog($request, 'image' , 'sliders' , 'upload_image',$slider->id, 'App\Models\Slider');
+            $slider = Slider::create($requestData);
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'slider-'.time().Str::slug($request->input('title'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $slider->storeImage($image->storeAs('sliders', $filename, 'public'));
+           }
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('sliders.index');
@@ -60,10 +66,12 @@ class SliderRepository implements SliderInterface {
             $slider=Slider::findorfail($sliderID);
             $requestData = $request->validated();
             $slider->update($requestData);
-            if($request->image){
-                $this->deleteImage('upload_image','/sliders/' . $slider->image->filename,$slider->id);
-            }
-            $this->addImageblog($request, 'image' , 'sliders' , 'upload_image',$slider->id, 'App\Models\slider');
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'slider-'.time().Str::slug($request->input('title'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $slider->updateImage($image->storeAs('sliders', $filename, 'public'));
+           }
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('sliders.index');
@@ -78,7 +86,6 @@ class SliderRepository implements SliderInterface {
         try{
             $sliderID = Crypt::decrypt($id);
             $slider=Slider::findorfail($sliderID);
-            $this->deleteImage('upload_image','/sliders/' . $slider->image->filename,$slider->id);
             $slider->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('sliders.index');
@@ -89,14 +96,14 @@ class SliderRepository implements SliderInterface {
     }
 
 
-    public function bulkDelete($request)
-    {
+    public function bulkDelete($request) {
         if($request->delete_select_id){
                 $delete_select_id = explode(",",$request->delete_select_id);
                 foreach($delete_select_id as $sliders_ids){
                     $slider = Slider::findorfail($sliders_ids);
-                    if($slider->image){
-                        $this->deleteImage('upload_image','/sliders/' . $slider->image->filename,$slider->id);
+                    if($slider->image && $slider->image != 'default_brand.jpg'){
+                        $old_photo = $slider->image->filename;
+                        $slider->deleteImage();
                     }
                 }
         }else{
@@ -106,38 +113,5 @@ class SliderRepository implements SliderInterface {
         Slider::destroy( $delete_select_id );
         toastr()->error(__('Admin/site.deleted_successfully'));
         return redirect()->route('sliders.index');
-    }// end of bulkDelete
-
-
-    // public function addImages() {
-    //     $images = Slider::get(['photo']);
-    //     return view('dashboard.admin.sliders.create', compact('images'));
-    // }
-
-    // public function saveSliderImages($request) {
-    //     $file = $request->file('dzfile');
-    //     $filename = uploadImage('sliders', $file);
-
-    //     return response()->json([
-    //         'name' => $filename,
-    //         'original_name' => $file->getClientOriginalName(),
-    //     ]);
-    // }
-
-    // public function saveSliderImagesDB($request) {
-    //     try {
-    //         $slider = new Slider();
-    //         if ($request->has('slider') && count($request->slider) > 0) {
-    //             foreach ($request->slider as $image) {
-    //                 Slider::create([
-    //                     $slider->photo => $image,
-    //                 ]);
-    //             }
-    //         }
-    //         toastr()->success(__('Admin/site.added_successfully'));
-    //          return redirect()->route('sliders.create');
-    //     } catch (\Exception $ex) {
-    //         return redirect()->route('sliders.create')->withErrors(['error'=> $ex->getMessage()]);
-    //     }
-    // }
-}
+    }
+}   

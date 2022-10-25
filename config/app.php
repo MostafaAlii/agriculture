@@ -259,6 +259,7 @@ return [
         'Product'       => App\Models\Product::class,
         'Blog'          => App\Models\Blog::class,
         'Brand'         => App\Models\Brand::class,
+        'Slider'        => App\Models\Slider::class,
     ],
     'Morasoft_ar'   =>  'فريق مورا سوفت',
     'Morasoft_en'   =>  'MoraSoft Team',

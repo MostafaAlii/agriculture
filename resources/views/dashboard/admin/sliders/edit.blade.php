@@ -77,7 +77,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <img src="{{ asset('Dashboard/img/sliders/'. $slider->image->filename) }}" class="img-thumbnail img-preview" width="100" alt="">
+                                                    @if ( $slider->image_path)
+                                                    <img src="{{  $slider->image_path }}" class="img-thumbnail img-preview" data-src="{{ $slider->image_path }}"
+                                                        alt="{{ $slider->title }}" />
+                                                    @else
+                                                    <img src="{{ asset('Dashboard/img/Default/default_slider.jpg') }}" class="img-thumbnail img-preview"
+                                                        data-src="{{ asset('Dashboard/img/Default/default_slider.jpg') }}" alt="{{ $slider->title }}" />
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

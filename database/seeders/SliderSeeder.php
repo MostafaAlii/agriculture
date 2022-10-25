@@ -9,12 +9,5 @@ class SliderSeeder extends Seeder {
         DB::table('sliders')->truncate();
         Slider::factory()->count(3)->create();
         Schema::enableForeignKeyConstraints();
-        for($i=1; $i <= Slider::count();$i++) {
-            Image::create([
-                'filename'     => rand(1,3) . ".jpg",
-                'imageable_id' => $i,
-                'imageable_type' => 'App\Models\Slider',
-            ]);
-        }
     }
 }

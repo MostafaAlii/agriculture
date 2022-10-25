@@ -1003,7 +1003,7 @@
                                 }
                             }(window.jQuery || window.Zepto);
                             <?php
-                                $slider = \App\Models\Slider::limit(3)->get();
+                                $slider = Slider::limit(3)->get();
                                 if(isset($slider->image)){
                                     $src=$slider->image->filename;
                                 }else{
@@ -1018,18 +1018,17 @@
 
                                         {
                                             name: "img 1",
-                                            src: "{{ asset('Dashboard/img/sliders/'.$slider[0]->image->filename) }}",
+                                            src: @if (isset($slider[0]->image_path)) "{{ asset($slider[0]->image_path) }}" @else "{{ asset('Dashboard/img/Default/default_slider.jpg') }}" @endif,
                                         },
                                         {
                                             name: "img 2",
-                                            src: "{{ asset('Dashboard/img/sliders/'.$slider[1]->image->filename) }}",
+                                            src: @if (isset($slider[1]->image_path)) "{{ asset($slider[1]->image_path) }}" @else "{{asset('Dashboard/img/Default/default_slider.jpg') }}" @endif,
                                         },
                                         {
                                             name: "img 3",
-                                            src: "{{ asset('Dashboard/img/sliders/'.$slider[2]->image->filename) }}",
+                                            src: @if (isset($slider[2]->image_path)) "{{ asset($slider[2]->image_path) }}" @else "{{asset('Dashboard/img/Default/default_slider.jpg') }}" @endif,
                                         }
                                     ],
-                                    // }
                                     slider_content = $('.start-screen__content__item'),
                                     dots, a, x;
                                 slider.vegas({
@@ -1100,15 +1099,15 @@
         </div>
 
         <div id="start-screen__content-container" class="text-white start-screen__content-container">
-            @foreach (\App\Models\Slider::limit(3)->get() as $slider)
+            @forelse (Slider::limit(3)->get() as $slider)
                 <div class="start-screen__content__item start-screen__content__item--1 align-items-center">
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-10 col-xl-8">
                                 <div class="__name">AgRO</div>
-
+                
                                 <h2 class="text-white __title"> {{ $slider->title }}</h2>
-
+                
                                 <p class="text-center">
                                     {{ $slider->subtitle }}
                                 </p>
@@ -1116,7 +1115,18 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="start-screen__content__item start-screen__content__item--1 align-items-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-10 col-xl-8">
+                                <div class="__name">AgRO</div>
+                                <h2 class="text-white __title">{{ trans('Admin\general.sliders_not_found') }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforelse
         </div>
 
         <span class="scroll-discover"></span>

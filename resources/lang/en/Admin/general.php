@@ -14,5 +14,6 @@ return [
 
     'blogs_not_found'                   =>                      'Sorry, no blogs found, add some from the dashboard',
     'brands_not_found'                  =>                      'Sorry, no brands found, add some from the dashboard',
+    'sliders_not_found'                 =>                      'Sorry, no sliders found, add some from the dashboard',
 ];
 ?>
