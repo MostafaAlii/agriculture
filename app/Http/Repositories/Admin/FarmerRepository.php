@@ -67,7 +67,7 @@ class FarmerRepository implements FarmerInterface{
             ->toJson();
     }
     public function datafront() {
-        $farmers = Farmer::with('image')->orderByDesc('created_at')->where('department_id', null)->get();
+        $farmers = Farmer::orderByDesc('created_at')->where('department_id', null)->get();
         return DataTables::of($farmers)
             ->addColumn('record_select', 'dashboard.admin.farmers.data_table.record_select')
             ->addIndexColumn()
@@ -111,7 +111,7 @@ class FarmerRepository implements FarmerInterface{
                     $name = 'farmer-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
                     $filename = $name .'.'.$image->getClientOriginalName();
                     $farmer->storeImage($image->storeAs('farmers', $filename, 'public'));
-                }
+            }
             //Notification::send($farmer, new NewFarmer($farmer));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
@@ -171,10 +171,10 @@ class FarmerRepository implements FarmerInterface{
                     $delete_select_id = explode(",",$request->delete_select_id);
                     foreach($delete_select_id as $farmers_ids){
                     $farmer = Farmer::findorfail($farmers_ids);
-                    if($farmer->image && $farmer->image->filename != 'default_farmer.jpg'){
-                        $old_photo = $farmer->image->filename;
-                        $farmer->deleteImage();
-                    }
+                        if($farmer->image && $farmer->image->filename != 'default_farmer.jpg'){
+                            $old_photo = $farmer->image->filename;
+                            $farmer->deleteImage();
+                        }
                     }
                 }else{
                     toastr()->error(__('Admin/site.no_data_found'));

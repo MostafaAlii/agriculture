@@ -61,12 +61,5 @@ class WorkerTableSeeder extends Seeder {
         foreach ($chunks as $chunk) {
             Worker::insert($chunk);
         }
-        for ($i = 1; $i <= $count+1 ; $i++) {
-            Image::insert([
-                'filename'     => rand(1,5) . ".jpg",
-                'imageable_id' => $i,
-                'imageable_type' => 'App\Models\Worker'
-            ]);
-        }
     }
 }

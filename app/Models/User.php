@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Traits\HasImage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,14 +11,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasImage;
     protected $table = "users";
     protected $guarded = [];
     public $timestamps = true;
-    // rel
-    public function image(): MorphOne {
-       return $this->morphOne(Image::class, 'imageable');
-    }
+    public $appends = ['image_path'];
 
     public function country(): BelongsTo {
        return $this->belongsTo(Country::class)->withDefault();

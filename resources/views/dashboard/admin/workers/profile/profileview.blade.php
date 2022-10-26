@@ -19,19 +19,9 @@
                 <div class="row">
                     <div class="col-12 col-sm-7">
                         <div class="media mb-2">
-                            @if($worker->image)
-                                <a class="mr-2" href="#">
-                                        <img src="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
-                                        alt="{{ __('Admin/site.no-image') }}"
-                                        class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                </a>
-                            @else
-                                <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
-                                    alt="{{ __('Admin/site.no-image') }}"
-                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                </a>
-                            @endif
+                            <img class="users-avatar-shadow rounded-circle img-preview" height="64" width="64"" src=" {{ $worker->image_path ?
+                            $worker->image_path : URL::asset('Dashboard/img/Default/default_worker.jpg') }}"
+                            alt="{{ $worker->firstname . ' ' .$worker->lastname }}">
                             <div class="media-body pt-25">
                                 <h4 class="media-heading">
                                 <span class="users-view-name">{{ $worker->firstname }} {{ $worker->lastname }}</span>

@@ -40,19 +40,11 @@
                                         @csrf
                                         @method('put')
                                         <div class="media mb-2">
-                                            @if($user->image)
-                                                <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/users/'. $user->image->filename) }}"
-                                                    alt="{{ __('Admin/site.no-image') }}"
-                                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                                </a>
-                                            @else
-                                                <a class="mr-2" href="#">
-                                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
-                                                    alt="{{ __('Admin/site.no-image') }}"
-                                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                                </a>
-                                            @endif
+                                            <a class="mr-2" href="#">
+                                                <img class="users-avatar-shadow rounded-circle img-preview" height="64" width="64"" src=" {{ $user->image_path ?
+                                                $user->image_path : URL::asset('Dashboard/img/Default/default_vendor.jpg') }}"
+                                                alt="{{ $user->firstname . ' ' .$user->lastname }}">
+                                            </a>
 
                                             <div class="media-body">
                                                 <h4 class="media-heading"> @lang('Admin/site.image')</h4>

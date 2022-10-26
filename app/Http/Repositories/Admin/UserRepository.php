@@ -1,21 +1,22 @@
 <?php
 namespace  App\Http\Repositories\Admin;
 use App\Models\User;
-use App\Http\Interfaces\Admin\UserInterface;
 use App\Models\Image;
+use App\Traits\HasImage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\DataTables;
-use App\Traits\UploadT;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Notification;
-// use Notification;
 use App\Notifications\NewUser;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+// use Notification;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Interfaces\Admin\UserInterface;
+use Illuminate\Support\Facades\Notification;
 
 class UserRepository implements UserInterface{
-    use UploadT;
+    use HasImage;
     public function index() {
         return view('dashboard.admin.users.index');
     }
@@ -52,8 +53,13 @@ class UserRepository implements UserInterface{
             $requestData = $request->validated();
             $requestData['password'] = bcrypt($request->password);
             $user=User::create($requestData);
-            $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
-            Notification::send($user, new NewUser($user));
+            if($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $name = 'user-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                    $filename = $name .'.'.$image->getClientOriginalName();
+                    $user->storeImage($image->storeAs('users', $filename, 'public'));
+            }
+            //Notification::send($user, new NewUser($user));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('users.index');
@@ -61,14 +67,12 @@ class UserRepository implements UserInterface{
              DB::rollBack();
              toastr()->error(__('Admin/site.sorry'));
              return redirect()->back();
-            //  return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 
     public function edit($id) {
         $userID = Crypt::decrypt($id);
         $user=User::findorfail($userID);
-        // return view('dashboard.admin.users.edit', compact('user'));
         return view('dashboard.admin.users.profile.profiledit', compact('user'));
     }
 
@@ -79,10 +83,12 @@ class UserRepository implements UserInterface{
             $user=User::findorfail($userID);
             $requestData = $request->validated();
             $user->update($requestData);
-            if($request->image){
-                $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'user-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $user->updateImage($image->storeAs('users', $filename, 'public'));
             }
-            $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('users.index');
@@ -97,17 +103,12 @@ class UserRepository implements UserInterface{
         try{
             $userID = Crypt::decrypt($id);
             $user=User::findorfail($userID);
-            if($user->image){
-                $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
-            }
             $user->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('users.index');
         } catch (\Exception $e) {
-            // toastr()->error(__('Admin/site.sorry'));
             toastr()->error(__('Admin/site.cant_delete'));
             return redirect()->back();
-            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 
@@ -118,10 +119,11 @@ class UserRepository implements UserInterface{
             if($request->delete_select_id){
                     $delete_select_id = explode(",",$request->delete_select_id);
                     foreach($delete_select_id as $users_ids){
-                    $user = User::findorfail($users_ids);
-                    if($user->image){
-                        $this->deleteImage('upload_image','/users/' . $user->image->filename,$user->id);
-                    }
+                        $user = User::findorfail($users_ids);
+                        if($user->image && $user->image->filename != 'default_vendor.jpg'){
+                            $old_photo = $user->image->filename;
+                            $user->deleteImage();
+                        }
                     }
             }else{
                 toastr()->error(__('Admin/site.no_data_found'));
@@ -157,10 +159,12 @@ class UserRepository implements UserInterface{
                 $requestData['password'] = $userpassword ;
             }
             $user->update($requestData);
-            if($request->image){
-                $this->deleteImage('upload_image','/users/' . $user->image,$user->id);
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'user-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $user->updateImage($image->storeAs('users', $filename, 'public'));
             }
-            $this->addImage($request, 'image' , 'users' , 'upload_image',$user->id, 'App\Models\User');
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('users.index');
@@ -168,9 +172,9 @@ class UserRepository implements UserInterface{
             DB::rollBack();
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
-                //  return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
+    
     public function updateInformation($request,$id) {
         try{
             $userID = Crypt::decrypt($id);

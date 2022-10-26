@@ -30,12 +30,5 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         User::factory()->count(5)->create();
-        for($i=1; $i <= User::count();$i++) {
-            Image::create([
-                'filename'     => rand(1,5) . ".jpg",
-                'imageable_id' => $i,
-                'imageable_type' => 'App\Models\User',
-            ]);
-        }
     }
 }

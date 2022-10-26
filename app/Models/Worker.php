@@ -1,23 +1,19 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\HasImage;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 class Worker extends Authenticatable {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasImage;
     protected $table = "workers";
     protected $guarded = [];
     public $timestamps = true;
-          // rel
-          public function image()
-          {
-              return $this->morphOne(Image::class, 'imageable');
-          }
           public function country()
           {
               return $this->belongsTo(Country::class, 'country_id');

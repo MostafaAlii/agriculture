@@ -1,19 +1,21 @@
 <?php
 namespace  App\Http\Repositories\Admin;
-use App\Http\Interfaces\Admin\WorkerInterface;
-use App\Models\Admin;
 use App\Models\Area;
-use App\Models\Currency;
+use App\Models\Admin;
 use App\Models\Worker;
-use App\Notifications\NewWorker;
+use App\Models\Currency;
+use App\Traits\HasImage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Notifications\NewWorker;
 use Yajra\DataTables\DataTables;
-use App\Traits\UploadT;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Notification;
+use App\Http\Interfaces\Admin\WorkerInterface;
+
 class WorkerRepository implements WorkerInterface{
-    use UploadT;
+    use HasImage;
     public function index() {
         return view('dashboard.admin.workers.index');
     }
@@ -53,6 +55,7 @@ class WorkerRepository implements WorkerInterface{
         $currencies = Currency::all();
         return view('dashboard.admin.workers.create',compact('currencies'));
     }
+    
     public function store($request) {
         DB::beginTransaction();
         try{
@@ -60,8 +63,13 @@ class WorkerRepository implements WorkerInterface{
             $requestData['password'] = bcrypt($request->password);
             Worker::create($requestData);
             $worker = Worker::latest()->first();
-            $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
-            Notification::send($worker, new NewWorker($worker));
+            if($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $name = 'worker-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                    $filename = $name .'.'.$image->getClientOriginalName();
+                    $worker->storeImage($image->storeAs('workers', $filename, 'public'));
+            }
+            //Notification::send($worker, new NewWorker($worker));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('workers.index');
@@ -80,56 +88,29 @@ class WorkerRepository implements WorkerInterface{
         return view('dashboard.admin.workers.profile.profiledit', compact('worker','currencies'));
     }
 
-    // public function update( $request,$id) {
-    //     try{
-    //         DB::beginTransaction();
-    //         $workerID = Crypt::decrypt($id);
-    //         $worker=Admin::findorfail($workerID);
-    //         $requestData = $request->validated();
-    //         $requestData['type'] = $request->type;
-    //         $worker->update($requestData);
-
-    //         if($request->image){
-    //             $this->deleteImage('upload_image','/admins/' . $worker->image->filename,$worker->id);
-    //         }
-    //         $this->addImage($request, 'image' , 'admins' , 'upload_image',$worker->id, 'App\Models\Admin');
-
-    //         DB::commit();
-    //         toastr()->success( __('Admin/site.updated_successfully'));
-    //         return redirect()->route('Admins.index');
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         toastr()->error(__('Admin/site.sorry'));
-    //         return redirect()->back();
-    //     }
-    // }
-
     public function destroy($id) {
         try{
             $workerID = Crypt::decrypt($id);
-            //  dd($workerID);
             $worker=Worker::findorfail($workerID);
-            if($worker->image){
-                $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
-            }
             $worker->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('workers.index');
         } catch (\Exception $e) {
-            // toastr()->error(__('Admin/site.sorry'));
             toastr()->error(__('Admin/site.cant_delete'));
             return redirect()->back();
         }
     }
+    
     public function bulkDelete($request) {
         try{
             if($request->delete_select_id){
                 $delete_select_id = explode(",",$request->delete_select_id);
                 foreach($delete_select_id as $workers_ids){
-                $worker = Worker::findorfail($workers_ids);
-                if($worker->image){
-                    $this->deleteImage('upload_image','/workers/' . $worker->image->filename,$worker->id);
-                }
+                    $worker = Worker::findorfail($workers_ids);
+                    if($worker->image && $worker->image->filename != 'default_worker.jpg'){
+                        $old_photo = $worker->image->filename;
+                        $worker->deleteImage();
+                    }
                 }
             }else{
                 toastr()->error(__('Admin/site.no_data_found'));
@@ -162,7 +143,6 @@ class WorkerRepository implements WorkerInterface{
             }else{
                 $requestData['password'] = $workerpassword ;
             }
-            // $requestData['status'] = $request->status;
             if($request->daily_price ){
                 $requestData['hourly_price'] = null;
             }
@@ -171,10 +151,12 @@ class WorkerRepository implements WorkerInterface{
             }
             $worker->update($requestData);
 
-            if($request->image){
-                $this->deleteImage('upload_image','/workers/' . $worker->image,$worker->id);
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'worker-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $worker->updateImage($image->storeAs('workers', $filename, 'public'));
             }
-            $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\Worker');
 
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
