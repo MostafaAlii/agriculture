@@ -87,8 +87,8 @@ class AdminRepository implements AdminInterface {
     }
 
     public function update($request, $id) {
-        dd($request);
-        //try {
+        //dd($request);
+        try {
             DB::beginTransaction();
             $adminID = Crypt::decrypt($id);
             $admin = Admin::findorfail($adminID);
@@ -104,11 +104,11 @@ class AdminRepository implements AdminInterface {
             DB::commit();
             toastr()->success(__('Admin/site.updated_successfully'));
             return redirect()->route('Admins.index');
-        /*} catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
-        }*/
+        }
     }
 
     public function destroy($id) {

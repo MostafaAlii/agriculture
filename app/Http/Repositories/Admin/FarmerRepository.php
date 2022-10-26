@@ -1,19 +1,16 @@
 <?php
 namespace  App\Http\Repositories\Admin;
-use App\Models\Farmer;
-use App\Http\Interfaces\Admin\FarmerInterface;
-use App\Models\Admin;
-use App\Models\Product;
-use App\Notifications\NewFarmer;
+use App\Traits\HasImage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Notifications\NewFarmer;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Crypt;
-use App\Traits\UploadT;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
+use App\Models\{Farmer, Admin, Product};
+use App\Http\Interfaces\Admin\FarmerInterface;
+use Illuminate\Support\Facades\{DB, Notification, Auth, Crypt};
+
 class FarmerRepository implements FarmerInterface{
-    use UploadT;
+    use HasImage;
     public function index() {
         return view('dashboard.admin.farmers.index');
     }
@@ -39,7 +36,7 @@ class FarmerRepository implements FarmerInterface{
 
         }
         else {
-            $farmers = Farmer::with('image')->orderByDesc('created_at')->where('department_id','!=' ,null)->get();
+            $farmers = Farmer::orderByDesc('created_at')->where('department_id','!=' ,null)->get();
 
         }
 
@@ -109,8 +106,13 @@ class FarmerRepository implements FarmerInterface{
             $requestData['password'] = bcrypt($request->password);
             Farmer::create($requestData);
             $farmer = Farmer::latest()->first();
-            $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
-            Notification::send($farmer, new NewFarmer($farmer));
+            if($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $name = 'farmer-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                    $filename = $name .'.'.$image->getClientOriginalName();
+                    $farmer->storeImage($image->storeAs('farmers', $filename, 'public'));
+                }
+            //Notification::send($farmer, new NewFarmer($farmer));
             DB::commit();
             toastr()->success(__('Admin/site.added_successfully'));
             return redirect()->route('farmers.index');
@@ -118,14 +120,12 @@ class FarmerRepository implements FarmerInterface{
             DB::rollBack();
            toastr()->error(__('Admin/site.sorry'));
            return redirect()->back();
-            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
          }
     }
 
     public function edit($id) {
         $farmerID = Crypt::decrypt($id);
         $farmer=Farmer::findorfail($farmerID);
-        // return view('dashboard.admin.farmers.edit', compact('farmer'));
         return view('dashboard.admin.farmers.profile.profiledit', compact('farmer'));
     }
 
@@ -136,10 +136,12 @@ class FarmerRepository implements FarmerInterface{
             $farmer=Farmer::findorfail($farmerID);
             $requestData = $request->validated();
             $farmer->update($requestData);
-            if($request->image){
-                $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'farmer-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $farmer->updateImage($image->storeAs('farmers', $filename, 'public'));
             }
-            $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('farmers.index');
@@ -154,30 +156,24 @@ class FarmerRepository implements FarmerInterface{
         try{
             $farmerID = Crypt::decrypt($id);
             $farmer=Farmer::findorfail($farmerID);
-            if($farmer->image){
-                $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
-            }
-
             $farmer->delete();
             toastr()->error(__('Admin/site.deleted_successfully'));
             return redirect()->route('farmers.index');
         } catch (\Exception $e) {
-            // toastr()->error(__('Admin/site.sorry'));
             toastr()->error(__('Admin/site.cant_delete'));
             return redirect()->back();
-            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
 
     public function bulkDelete($request) {
         try{
                 if($request->delete_select_id){
-                    // dd($request->delete_select_id);
                     $delete_select_id = explode(",",$request->delete_select_id);
                     foreach($delete_select_id as $farmers_ids){
                     $farmer = Farmer::findorfail($farmers_ids);
-                    if($farmer->image){
-                        $this->deleteImage('upload_image','/farmers/' . $farmer->image->filename,$farmer->id);
+                    if($farmer->image && $farmer->image->filename != 'default_farmer.jpg'){
+                        $old_photo = $farmer->image->filename;
+                        $farmer->deleteImage();
                     }
                     }
                 }else{
@@ -194,6 +190,7 @@ class FarmerRepository implements FarmerInterface{
         }
 
     }// end of bulkDelete
+    
     public function showProfile($id){
         $farmerID = Crypt::decrypt($id);
         $farmer=Farmer::findorfail($farmerID);
@@ -212,11 +209,12 @@ class FarmerRepository implements FarmerInterface{
             }else{
                 $requestData['password'] = $farmerpassword ;
             }
-            $farmer->update($requestData);
-            if($request->image){
-                $this->deleteImage('upload_image','/farmers/' . $farmer->image,$farmer->id);
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'farmer-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $farmer->updateImage($image->storeAs('farmers', $filename, 'public'));
             }
-            $this->addImage($request, 'image' , 'farmers' , 'upload_image',$farmer->id, 'App\Models\Farmer');
 
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
@@ -228,6 +226,7 @@ class FarmerRepository implements FarmerInterface{
             //    return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
+    
     public function updateInformation($request,$id) {
         try{
             $farmerID = Crypt::decrypt($id);
@@ -239,11 +238,9 @@ class FarmerRepository implements FarmerInterface{
         } catch (\Exception $e) {
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
-            //  return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
 
     }// end of update
-
 
     public function getProduct($id){
         $farmerID = Crypt::decrypt($id);
@@ -251,6 +248,7 @@ class FarmerRepository implements FarmerInterface{
         $far = $farmer->products()->paginate(8);
          return view('dashboard.admin.farmers.farmer_product',compact('farmer','far'));
     }
+    
     public function getProductDetails($id){
         // return 'helloooooooooo';
         $productID = Crypt::decrypt($id);

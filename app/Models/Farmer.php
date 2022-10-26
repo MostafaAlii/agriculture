@@ -1,26 +1,15 @@
 <?php
 namespace App\Models;
-
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{HasMany, MorphToMany};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Traits\HasImage;
 class Farmer extends Authenticatable {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasImage;
     protected $table = "farmers";
-    // protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'password',
-    //     'status',
-    //     'visibility',
-    //     'farmer_id',
-    // ];
     protected $guarded = [];
     public $timestamps = true;
 
@@ -33,41 +22,34 @@ class Farmer extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
     //scope
-    public function farmerImage()
-    {
+    public function farmerImage() {
         return asset('Dashboard/img/farmers/'. $this->image->filename);
     }
 
-        // rel
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
-
-    public function country()
-    {
+    public function country() {
         return $this->belongsTo(Country::class, 'country_id');
     }
-    public function province()
-    {
+    
+    public function province() {
         return $this->belongsTo(Province::class, 'province_id');
     }
-    public function area()
-    {
+    
+    public function area() {
         return $this->belongsTo(Area::class, 'area_id');
     }
-    public function state()
-    {
+    
+    public function state() {
         return $this->belongsTo(State::class, 'state_id');
     }
-    public function village()
-    {
+    
+    public function village() {
         return $this->belongsTo(Village::class, 'village_id');
     }
-    public function department()
-    {
+    
+    public function department() {
         return $this->belongsTo(Department::class, 'department_id');
     }
+    
     public function products(): HasMany {
         return $this->hasMany(Product::class);
     }
@@ -96,8 +78,7 @@ class Farmer extends Authenticatable {
     }
     /*************************************************************************************** */
 
-    public function comments()
-    {
+    public function comments() {
         return $this->morphMany(Comment::class, 'commentable');
     }
 
