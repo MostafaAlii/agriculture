@@ -3,7 +3,6 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Farmer extends Authenticatable {
-    use HasFactory, Notifiable,SoftDeletes;
+    use HasFactory, Notifiable;
     protected $table = "farmers";
     // protected $fillable = [
     //     'name',

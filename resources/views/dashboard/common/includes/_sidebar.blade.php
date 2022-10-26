@@ -3,15 +3,10 @@
     <div class="main-menu-content">
         <div class="user-profile">
             <div class="pt-1 pb-1 text-center user-info">
-                @if (isset(Auth::user()->image))
                 <a class="mr-2" href="{{ route('profile.index') }}">
-                    <img class="user-img img-fluid rounded-circle" style="width:50%; height:50%;border-radius: 15%;" class="rounded-circle" src="{{ asset('Dashboard/img/admins/' . Auth::user()->image->filename) }}" />
+                    <img class="user-img img-fluid rounded-circle" src="{{ Auth::user()->image_path ? Auth::user()->image_path : URL::asset('Dashboard/img/Default/default_admin.jpg') }}"
+                        alt="{{ Auth::user()->firstname . ' ' .Auth::user()->lastname }}">
                 </a>
-                @else
-                <a class="mr-2" href="{{ route('profile.index') }}">
-                    <img class="user-img img-fluid rounded-circle" src="{{ asset('Dashboard/img/profile.png') }}" />
-                </a>
-                @endif
                 <div class="text-center name-wrapper d-block dropdown">
                     <a class="ml-2 white dropdown-toggle" id="user-account" href="{{ route('profile.index') }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-name">{{
                             Auth::user()->firstname }}

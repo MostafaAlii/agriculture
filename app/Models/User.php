@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -11,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
-    use HasFactory, Notifiable,SoftDeletes;
+    use HasFactory, Notifiable;
     protected $table = "users";
     protected $guarded = [];
     public $timestamps = true;

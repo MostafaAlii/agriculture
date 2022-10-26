@@ -69,17 +69,14 @@
                     </li>
 
                     <li class="dropdown dropdown-user nav-item">
-                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">
-                            {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span><span class="avatar avatar-online">
-                                @if(isset(Auth::user()->image->filename))
-                                    <img src="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}"
-                                         alt="{{ asset('Dashboard/img/admins/'. Auth::user()->image->filename) }}">
-                                @else
-                                    <img src="{{ asset('Dashboard/img/admins/avatar.jpg') }}"
-                                         alt="{{ asset('Dashboard/img/admins/avatar.jpg') }}">
-                                @endif
-
-                                <i></i></span>
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                            <span class="mr-1 user-name text-bold-700">
+                                {{ Auth::user()->firstname . ' ' .Auth::user()->lastname }}
+                            </span>
+                            <span class="avatar avatar-online">
+                                <img src="{{ Auth::user()->image_path ? Auth::user()->image_path : URL::asset('Dashboard/img/Default/default_admin.jpg') }}" alt="{{ Auth::user()->firstname . ' ' .Auth::user()->lastname }}">
+                                <i></i>
+                            </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             {{-- route to go website ******************************************** --}}

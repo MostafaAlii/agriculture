@@ -1,16 +1,12 @@
-
-@if($admin->image)
+@if($admin->image_path)
 <a href="{{ route('admin.profile', encrypt($admin->id)) }}">
-    <img src="{{ asset('Dashboard/img/admins/'. $admin->image->filename) }}" style="width: 100px; height: 100px;"
-    alt="{{ __('Admin/site.no-image') }}" >
+    <img src="{{ $admin->image_path }}" style="width: 100px; height: 100px;"
+        alt="{{ $admin->firstname . ' ' . $admin->lastname }}">
 </a>
 
 @else
 <a href="{{ route('admin.profile', encrypt($admin->id)) }}">
-    <img src="{{ asset('Dashboard/img/profile.png') }}" style="width: 100px;" alt="{{ __('Admin/site.no-image') }} ">
+    <img src="{{ asset('Dashboard/img/Default/default_admin.jpg') }}" style="width: 100px;" alt="{{ $admin->firstname . ' ' . $admin->lastname }}">
 </a>
 
 @endif
-
-
-

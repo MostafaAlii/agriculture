@@ -35,7 +35,7 @@ trait UploadT
                 return redirect()->back()->withInput();
             }
             $photo = $request->file($inputname);
-            $name = Str::slug($request->input('firstname').$request->input('lastname'));
+            $name = Str::slug($request->input('firstname').$request->input('lastname')) .time();
             $filename = $name. '.' . $photo->getClientOriginalExtension();
             // insert Image
             $Image = new Image();

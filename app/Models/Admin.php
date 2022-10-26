@@ -1,35 +1,23 @@
 <?php
 namespace App\Models;
+use App\Traits\HasImage;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Permission\Traits\HasRoles;
-
-use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Znck\Eloquent\Traits\BelongsToThrough;
 class Admin extends Authenticatable {
-   use \Znck\Eloquent\Traits\BelongsToThrough;
-    use HasFactory, Notifiable, HasRoles , SoftDeletes;
+
+    use BelongsToThrough,  HasFactory, Notifiable, HasRoles, HasImage;
     
     protected $table = "admins";
     protected $guard = 'admin';
-    // protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'password',
-    //     'status',
-    //     'visibility',
-    //     'admin_id',
-    // ];
     protected $guarded = [];
     public $timestamps = true;
+    public $appends = ['image_path'];
     const ACTIVE = 1, NOT_ACTIVE = 0;
-
-    public function image() {
-        return $this->morphOne(Image::class, 'imageable');
-    }
 
     public function country() {
         return $this->belongsTo(Country::class, 'country_id');

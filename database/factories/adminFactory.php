@@ -44,14 +44,7 @@ class AdminFactory extends Factory
         ];
     }
 
-    // 'country_id'    => Country::all()->random()->id,
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function unverified()
-    {
+    public function unverified() {
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => null,
