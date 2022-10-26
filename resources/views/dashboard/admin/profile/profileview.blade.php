@@ -19,29 +19,19 @@
                 <div class="row">
                     <div class="col-12 col-sm-7">
                         <div class="media mb-2">
-                            @if(Auth::guard('admin')->user()->image)
-                                <a class="mr-2" href="#">
-                                        <img src="{{ asset('Dashboard/img/admins/'. Auth::guard('admin')->user()->image->filename) }}"
-                                        alt="{{ __('Admin/site.no-image') }}"
-                                        class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                </a>
-                            @else
-                                <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/profile.png') }}"
-                                    alt="{{ __('Admin/site.no-image') }}"
-                                    class="users-avatar-shadow rounded-circle img-preview" height="64" width="64">
-                                </a>
-                            @endif
+                            <img class="users-avatar-shadow rounded-circle img-preview" height="64" width="64"" src=" {{ auth()->user()->image_path ?
+                            auth()->user()->image_path : URL::asset('Dashboard/img/Default/default_admin.jpg') }}"
+                            alt="{{ auth()->user()->firstname . ' ' .auth()->user()->lastname }}">
                             <div class="media-body pt-25">
                                 <h4 class="media-heading">
-                                    <span class="users-view-name">{{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}</span>
+                                    <span class="users-view-name">{{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}</span>
                                 </h4>
-                                <span class="users-view-id">{{ Auth::guard('admin')->user()->email }}</span>
+                                <span class="users-view-id">{{ auth()->user()->email }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-5 px-0 d-flex justify-content-end align-items-center px-1 mb-2">
-                        <a href="{{ route('profile.edit',encrypt(Auth::guard('admin')->user()->id)) }}" class="btn btn-sm btn-primary"> @lang('Admin/site.edit')</a>
+                        <a href="{{ route('profile.edit',encrypt(auth()->user()->id)) }}" class="btn btn-sm btn-primary"> @lang('Admin/site.edit')</a>
                         <a href="{{ route('admin.dashboard') }}" class="btn btn-sm mr-25 border"> @lang('Admin/site.back')</a>
                     </div>
                 </div>
@@ -54,19 +44,19 @@
                                         <tr>
                                             <td>@lang('Admin/site.name'):</td>
                                             <td class="users-view-username">
-                                                {{ Auth::guard('admin')->user()->firstname }} {{ Auth::guard('admin')->user()->lastname }}
+                                                {{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.email'):</td>
                                             <td class="users-view-email">
-                                                {{ Auth::guard('admin')->user()->email }}
+                                                {{ auth()->user()->email }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>@lang('Admin/site.phonenum'):</td>
                                             <td>
-                                                {{ Auth::guard('admin')->user()->phone }}
+                                                {{ auth()->user()->phone }}
                                             </td>
                                         </tr>
                                         <tr>

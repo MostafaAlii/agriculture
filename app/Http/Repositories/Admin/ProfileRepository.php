@@ -1,18 +1,20 @@
 <?php
 namespace  App\Http\Repositories\Admin;
 
-use App\Http\Interfaces\Admin\ProfileInterface;
-use App\Models\Admin;
 use App\Models\Area;
-use App\Models\Country;
-use App\Models\Province;
+use App\Models\Admin;
 use App\Models\State;
+use App\Models\Country;
+use App\Traits\UploadT;
+use App\Models\Province;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Traits\UploadT;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
+use App\Http\Interfaces\Admin\ProfileInterface;
+
 class ProfileRepository implements ProfileInterface{
     use UploadT;
     public function index() {
@@ -39,12 +41,12 @@ class ProfileRepository implements ProfileInterface{
                 $requestData['password'] = $adminpassword ;
             }
             $admin->update($requestData);
-
-            if($request->image){
-                $this->deleteImage('upload_image','/admins/' . $admin->image->filename,$admin->id);
-            }
-            $this->addImage($request, 'image' , 'admins' , 'upload_image',$admin->id, 'App\Models\Admin');
-
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'admin-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $admin->updateImage($image->storeAs('admins', $filename, 'public'));
+           }
             DB::commit();
             toastr()->success( __('Admin/site.updated_successfully'));
             return redirect()->route('profile.index');
@@ -52,7 +54,6 @@ class ProfileRepository implements ProfileInterface{
             DB::rollBack();
             toastr()->error(__('Admin/site.sorry'));
             return redirect()->back();
-            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }// end of update
     public function updateInformation($request,$id) {
