@@ -8,7 +8,7 @@ class GeneralRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name'           =>'required|string|max:100|unique:product_translations,name,' . $this->id,
+            'name'           =>'required|string|max:100',
             'description'    =>'sometimes|string|nullable',
             'categories'     =>'required|array|min:1',
             'categories.*'   =>'numeric|exists:categories,id',

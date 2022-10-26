@@ -68,8 +68,8 @@
                                                         <input type="text" id="name" class="form-control"
                                                                placeholder="{{trans('Admin\about.title')}}"
                                                                name="name"
-                                                               value="{{$info->title}}">
-                                                        <input type="hidden" id="id" class="form-control" name="id" value="{{$info->id}}"
+                                                               value="{{ $info->title ?? '' }}">
+                                                        <input type="hidden" id="id" class="form-control" name="id" value="{{$info->id ?? ''}}"
                                                         >
                                                     </div>
                                                 </div>
@@ -98,7 +98,7 @@
                                                         <textarea type="text" id="description" class="form-control"
                                                                placeholder="{{trans('Admin\about.desc')}}"
                                                                   name="description">
-                                                            {!! old('description',$info->description) !!}
+                                                            {!! old('description',$info->description ?? '') !!}
                                                         </textarea>
                                                     </div>
                                                 </div>
