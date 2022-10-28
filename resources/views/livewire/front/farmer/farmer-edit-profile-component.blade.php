@@ -32,7 +32,7 @@
                             <div class="row justify-content-xl-between">
                                 <div class="col-12 col-md-5 col-lg-6">
                                     <!-- start form -->
-                                    @if($newimage)
+                                    {{--@if($newimage)
                                         <a class="mr-2" href="#">
                                                 <img src="{{ $newimage->temporaryUrl() }}"
                                                 alt="{{ $newimage->temporaryUrl() }}"
@@ -50,7 +50,10 @@
                                             alt="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
                                             class="users-avatar-shadow rounded-circle img-preview"  width="50%">
                                         </a>
-                                    @endif
+                                    @endif --}}
+                                    <img class="mr-2 users-avatar-shadow rounded-circle img-preview" height="64" width="64"" src=" {{ $farmer->image_path ?
+                                    $farmer->image_path : URL::asset('Dashboard/img/Default/default_farmer.jpg') }}"
+                                    alt="{{ $farmer->firstname . ' ' .$farmer->lastname }}">
                                     <input type="file" class="textfield" wire:model='newimage'name="image" accept="image/*">
                                     <!-- end form -->
                                     <p><b>@lang('Admin/site.firstname'): </b> <input type="text" class="textfield" wire:model='firstname'>

@@ -58,8 +58,8 @@
                                                     @enderror
                                                 @else
                                                     <a class="mr-2" href="#">
-                                                        <img src="{{ asset('Dashboard/img/products/default.jpg') }}"
-                                                            alt="{{ asset('Dashboard/img/products/default.jpg') }}"
+                                                        <img src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                            alt="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
                                                             class="users-avatar-shadow rounded-circle img-preview"
                                                             width="50%">
                                                     </a>

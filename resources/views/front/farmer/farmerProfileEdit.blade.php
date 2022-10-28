@@ -40,20 +40,10 @@
                                 @method('put')
                                 <div class="row justify-content-xl-between">
                                     <div class="col-12 col-md-5 col-lg-6">
-                                        <!-- start form -->
-                                        @if (Auth::guard('web')->user()->image)
-                                            <a class="mr-2" href="#">
-                                                <img src="{{ asset('Dashboard/img/farmers/' . Auth::guard('web')->user()->image->filename) }}"
-                                                alt="{{ __('Admin/site.no-image') }}"
-                                                    class="users-avatar-shadow rounded-circle img-preview" width="50%">
-                                            </a>
-                                        @else
-                                            <a class="mr-2" href="#">
-                                                <img src="{{ asset('Dashboard/img/profile.png') }}"
-                                                alt="{{ __('Admin/site.no-image') }}"
-                                                    class="users-avatar-shadow rounded-circle img-preview" width="50%">
-                                            </a>
-                                        @endif
+                                        
+                                        <img class="mr-2 users-avatar-shadow rounded-circle img-preview" width="35%" src=" {{ auth('web')->user()->image_path ?
+                                        auth('web')->user()->image_path : URL::asset('Dashboard/img/Default/default_farmer.jpg') }}"
+                                        alt="{{ auth('web')->user()->firstname . ' ' .auth('web')->user()->lastname }}">
                                         <input type="file" class="textfield img" name="image" accept="image/*">
                                         <!-- end form -->
 

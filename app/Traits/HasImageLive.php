@@ -1,7 +1,7 @@
 <?php
 namespace App\Traits;
 use App\Models\Image;
-trait HasImage {
+trait HasImageLive {
     /*public static function bootHasImage() {
         static ::deleting(function ($model) {
             $model->deleteImage();

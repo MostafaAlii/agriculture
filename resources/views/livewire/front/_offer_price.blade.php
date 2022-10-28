@@ -43,7 +43,9 @@
                             <div class="row">
                                 <div class="col-12 col-lg-7 col-xl-6">
                                     <a href="{{ route('product_details', encrypt($offer_product->id)) }}">
-                                        <img src="{{$offer_product->image_path}}" width="50%;" height="30%" style="align:center;">
+                                        <img width="50%;" height="30%" style="align:center;"  src=" {{ $offer_product->image_path ?
+                                        $offer_product->image_path : URL::asset('Dashboard/img/Default/default_product.jpg') }}"
+                                        alt="{{ $offer_product->name}}">
                                     </a>
                                     <div class="banner__text" data-aos="fade-left" data-delay="500">
                                         <h2 class="__title h1">

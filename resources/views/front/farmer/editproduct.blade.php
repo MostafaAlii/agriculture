@@ -44,7 +44,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-6 col-md-12 col-lg-6">
                                             <div class="input-wrp">
-                                                @if($product->image->filename)
+                                                {{--@if($product->image->filename)
                                                     <img
                                                     src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
                                                     alt="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
@@ -55,7 +55,12 @@
                                                         alt="{{ asset('Dashboard/img/products/default.jpg') }}"
                                                         class="users-avatar-shadow rounded-circle img-preview"  width="50%">
                                                     </a>
-                                                @endif
+                                                @endif --}}
+
+                                                <img class="mr-2 users-avatar-shadow rounded-circle img-preview" id="output" width="35%"
+                                                    src=" {{ $product->image_path ?
+                                                    $product->image_path : URL::asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                    alt="{{ $product->name}}">
                                             </div>
                                             <div class="input-wrp">
                                                 <input type="file" accept="image/*" name="photo" class="textfield img"  />

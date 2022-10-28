@@ -44,29 +44,14 @@
                                         <div class="col-12 col-sm-6 col-md-12 col-lg-6">
 
                                             <div class="input-wrp">
-                                                @if($newimage)
-                                                    <img
-                                                    src="{{ $newimage->temporaryUrl() }}"
-                                                    alt="{{ $newimage->temporaryUrl() }}"
-                                                    class=" img-preview users-avatar-shadow rounded-circle "  width="85px" height="85px" id="output" />
-                                                    @error('newimage')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                                @elseif($image)
-                                                    <img
-                                                        src="{{ asset('Dashboard/img/products/'. $image) }}"
-                                                        alt="{{ asset('Dashboard/img/products/'. $image) }}"
-                                                        class=" img-preview users-avatar-shadow rounded-circle "  width="85px" height="85px" id="output" />
-                                                        @error('image')
-                                                        <div class="alert alert-danger">{{ $message }}</div>
-                                                        @enderror
-                                                @else
-                                                    <a class="mr-2" href="#">
-                                                        <img src="{{ asset('Dashboard/img/products/default.jpg') }}"
-                                                        alt="{{ asset('Dashboard/img/products/default.jpg') }}"
-                                                        class="users-avatar-shadow rounded-circle img-preview"  width="50%">
-                                                    </a>
-                                                @endif
+                                                
+                                                <img class="img-preview users-avatar-shadow rounded-circle" height="64" width="64" id="output"
+                                                    src=" {{ $product->image_path ?
+                                                    $product->image_path : URL::asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                    alt="{{ Auth::user()->firstname .'_' . Auth::user()->lastname . '_' .$product->name }}">
+                                                @error('image')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="input-wrp">
                                                 <input type="file" accept="image/*" name="image" class="textfield"   wire:model='newimage'/>

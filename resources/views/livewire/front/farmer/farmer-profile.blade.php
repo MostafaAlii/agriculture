@@ -53,21 +53,9 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                     <h2>@lang('website\home.my_profile')</h2>
-
-                    <!-- start form -->
-                    @if($farmer->image)
-                        <a class="mr-2" href="#">
-                                <img src="{{ asset('Dashboard/img/farmers/'. $farmer->image->filename) }}"
-                                alt="{{ __('Admin/site.no-image') }}"
-                                class="users-avatar-shadow rounded-circle img-preview"  width="100%">
-                        </a>
-                    @else
-                        <a class="mr-2" href="#">
-                            <img src="{{ asset('Dashboard/img/profile.png') }}"
-                            alt="{{ __('Admin/site.no-image') }}"
-                            class="users-avatar-shadow rounded-circle img-preview"  width="100%">
-                        </a>
-                    @endif
+                    <img class="users-avatar-shadow rounded-circle img-preview" height="64" width="64"" src=" {{ $farmer->image_path ?
+                    $farmer->image_path : URL::asset('Dashboard/img/Default/default_farmer.jpg') }}"
+                    alt="{{ $farmer->firstname . ' ' .$farmer->lastname }}">
                     <!-- end form -->
                     <center> <span class="score" id="rate_msg" ><span style="width: <?php echo $farmer->farmerRate();?>%"></span></span></center>
 

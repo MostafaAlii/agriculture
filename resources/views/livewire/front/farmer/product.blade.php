@@ -48,15 +48,12 @@
                                     <tr>
                                         <th scope="row">{{ $index+1 }}</th>
                                         <td>
-                                            @if($product->image)
-                                                <a href="{{ route('product_details',encrypt($product->id)) }}">
-                                                    <img  width="100" src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}"
-                                                        data-src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" alt="demo" />
-                                                </a>
-                                            @else
-                                                <img  width="100" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
-                                            @endif
+                                            <a href="{{ route('product_details',encrypt($product->id)) }}">
+                                                <img class="users-avatar-shadow rounded-circle img-preview" height="64" width="64"
+                                                    src=" {{ $product->image_path ?
+                                                    $product->image_path : URL::asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                    alt="{{ Auth::user()->firstname .'_' . Auth::user()->lastname . '_' .$product->name }}">
+                                            </a>
                                         </td>
                                         <td>{{ $product->name }}</td>
                                         <td>

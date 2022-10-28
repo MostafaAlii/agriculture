@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-
+use App\Traits\HasImage;
 class FarmerAddProductComponent extends Component
 {
-    use WithFileUploads;
+    use  WithFileUploads;
     public $is_qty;
     public $newimage;
     public $product_name;
@@ -91,13 +91,13 @@ class FarmerAddProductComponent extends Component
                     // $image = $this->newimage->extension();
                     // $name  = $this->slug;
                     // $filename = $name. '.' . $image;
-                    $filename = $this->newimage->hashName();
+                    $filename = 'product-'.time().Str::slug($this->product_name) . $this->newimage->hashName();
                     $Image = new Image();
-                    $Image->filename = $filename;
+                    $Image->filename = 'products/' . $filename;
                     $Image->imageable_id = $product->id;
                     $Image->imageable_type = 'App\Models\Product';
                     $Image->save();
-                    $this->newimage->storeAs('products',$filename,'upload_image');
+                    $this->newimage->storeAs('products',$filename,'public');
                 }
                 DB::commit();
                 session()->flash('Add',__('Admin/products.product_store_successfully'));
@@ -107,7 +107,6 @@ class FarmerAddProductComponent extends Component
             DB::rollBack();
             session()->flash('error',__('Admin/site.sorry'));
             return redirect()->back();
-            // return redirect()->back()->withErrors(['Error' => $e->getMessage()]);
         }
     }
     public function render()
