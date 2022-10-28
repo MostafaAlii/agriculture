@@ -19,14 +19,10 @@
                             <div class="col-12 col-sm-6 col-lg-3">
                                 <div class="__item __item--preview">
                                     <figure class="__image">
-                                        @if($worker->image)
-                                            <img  src="{{ asset('Dashboard/img/workers/'.$worker->image->filename) }}"
-                                            data-src="{{ asset('Dashboard/img/workers/'.$worker->image->filename) }}"
-                                            alt="demo" />
-                                        @else
-                                           <img  src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}"
-                                           data-src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}" alt="demo" />
-                                        @endif
+                                        
+                                        <img class="mr-2 users-avatar-shadow rounded-circle img-preview" width="35%"
+                                            src=" {{ $worker->image_path ?
+                                            $worker->image_path : URL::asset('Dashboard/img/Default/default_worker.jpg') }}" alt="{{ $worker->firstname .' '. $worker->lastname }}">
                                     </figure>
                                     <div class="__content">
                                         <p class="__category"><a href="{{ route('worker_details',encrypt($worker->id) ) }}">{{ $worker->firstname.'  '.$worker->lastname  }}</a></p>

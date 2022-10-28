@@ -68,19 +68,13 @@ label.star:before {
                         <div class="posts">
                             <!-- start item -->
                             <div class="__item">
-                            @if($workers->image)
                                 <a class="mr-2" href="#">
-                                        <center><img src="{{ asset('Dashboard/img/workers/'. $workers->image->filename) }}"
-                                        alt="{{ asset('Dashboard/img/workers/'. $workers->image->filename) }}"
-                                        class="users-avatar-shadow rounded-circle img-preview"  width="30%"></center>
+                                    <center>
+                                      <img class="users-avatar-shadow rounded-circle img-preview" width="35%"
+                                        src=" {{ $workers->image_path ?
+                                        $workers->image_path : URL::asset('Dashboard/img/Default/default_worker.jpg') }}" alt="{{ $workers->firstname }}">
+                                    </center>
                                 </a>
-                            @else
-                                <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
-                                    alt="{{ asset('Dashboard/img/workers/avatar.jpg') }}"
-                                    class="users-avatar-shadow rounded-circle img-preview"  width="30%">
-                                 </a>
-                             @endif
                              {{-- <center> <span class="score" id="rate_msg" ><span style="width: <?php echo $workers->workerRate();?>%"></span></span></center> --}}
 
                                 <div class="__content">

@@ -29,14 +29,9 @@
                             <div class="col-12 col-sm-6 col-lg-4">
                                 <div class="__item __item--preview">
                                     <figure class="__image">
-                                        @if($farmer->image)
-                                            <img  src="{{ asset('Dashboard/img/farmers/'.$farmer->image->filename) }}"
-                                            data-src="{{ asset('Dashboard/img/farmers/'.$farmer->image->filename) }}"
-                                            alt="demo" />
-                                        @else
-                                           <img  src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}"
-                                           data-src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}" alt="demo" />
-                                        @endif
+                                        <img class="mr-2 users-avatar-shadow rounded-circle img-preview" width="35%" src=" {{ $farmer->image_path ?
+                                            $farmer->image_path : URL::asset('Dashboard/img/Default/default_farmer.jpg') }}"
+                                            alt="{{ $farmer->name }}">
                                     </figure>
                                     <div class="__content">
                                         <p class="__category"><a href="{{ route('farmer_detail',encrypt($farmer->id) ) }}">{{ $farmer->firstname.'  '.$farmer->lastname  }}</a></p>
