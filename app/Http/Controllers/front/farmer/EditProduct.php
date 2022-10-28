@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\front\farmer;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Product\farmerProductRequest;
-use App\Http\Requests\Dashboard\Product\GeneralRequest;
-use App\Models\Category;
-use App\Models\Farmer;
-use App\Models\Image;
-use App\Models\Product;
 use App\Models\Tag;
 use App\Models\Unit;
-use Illuminate\Http\Request;
+use App\Models\Image;
+use App\Models\Farmer;
+use App\Models\Product;
 use App\Traits\UploadT;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\Dashboard\Product\GeneralRequest;
+use App\Http\Requests\Dashboard\Product\farmerProductRequest;
 
 class EditProduct extends Controller
 {
@@ -50,19 +51,12 @@ class EditProduct extends Controller
                 $product->categories()->sync($request->categories);
                 $product->tags()->sync($request->tags);
                 $product->units()->syncWithPivotValues([$request->unit_id],['price'=>$request->price]);
-                if($request->photo){
-                    $this->deleteImage('upload_image','/products/' . $product->image->filename,$product->id);
-                }
-                $this->addImageProduct($request, 'photo' , 'products' , 'upload_image',$product->id, 'App\Models\Product');
-                // if($image = $request->file('image')){
-                //     $filename = $image->hashName();
-                //     $Image = new Image();
-                //     $Image->filename = $filename;
-                //     $Image->imageable_id = $product->id;
-                //     $Image->imageable_type = 'App\Models\Product';
-                //     $Image->save();
-                //     $image->storeAs('products',$filename,'upload_image');
-                // }
+                if($request->hasFile('photo')) {
+                $image = $request->file('photo');
+                $name = 'product-'.time().Str::slug($request->input('name'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $product->updateImage($image->storeAs('products', $filename, 'public'));
+            }
                 DB::commit();
                 session()->flash('Edit',__('Admin/products.product_updated_successfully'));
                 return redirect()->route('farmer.product');

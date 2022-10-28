@@ -2,11 +2,11 @@
 namespace App\Traits;
 use App\Models\Image;
 trait HasImage {
-    /*public static function bootHasImage() {
+    public static function bootHasImage() {
         static ::deleting(function ($model) {
             $model->deleteImage();
         });
-    }*/
+    }
 
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
