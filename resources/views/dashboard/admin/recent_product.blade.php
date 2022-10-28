@@ -15,11 +15,10 @@
           @foreach($latest_products as $product)
           <tr>
               <td>
-                  @if(isset($product->image->filename))
-                  <img src="{{ asset('Dashboard/img/products/'. $product->image->filename) }}" style="width: 100px;" alt="">
-                  @else
-                  <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}" style="width: 100px;" alt="">
-                  @endif
+                  
+                  <img class="mr-2 users-avatar-shadow rounded-circle img-preview" height="64" width="64" src=" {{ $product->image_path ?
+                  $product->image_path : URL::asset('Dashboard/img/Default/default_product.jpg') }}"
+                  alt="{{ $product->name }}">
               </td>
               <td><a href="{{ route('product_details', encrypt($product->id)) }}">{{$product->name}}</a></td>
               <td>
