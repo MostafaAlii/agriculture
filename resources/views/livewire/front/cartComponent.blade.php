@@ -92,19 +92,11 @@
                                                 <tr>
                                                     <td>
                                                         <figure class="__image">
-                                                            @if ($item->model->image)
-                                                                <a
-                                                                    href="{{ route('product_details', encrypt($item->model->id)) }}">
-                                                                    <img src="{{ asset('Dashboard/img/products/' . $item->model->image->filename) }}"
-                                                                        data-src="{{ asset('Dashboard/img/products/' . $item->model->image->filename) }}"
-                                                                        alt="demo" />
-                                                                </a>
-                                                            @else
-                                                                <img width="188"
-                                                                    src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                    data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                    alt="demo" />
-                                                            @endif
+                                                            <a href="{{ route('product_details', encrypt($item->model->id)) }}">
+                                                                <img  src=" {{ $item->model->image_path ?
+                                                                $item->model->image_path : URL::asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                                alt="{{ $item->model->name}}">
+                                                            </a>
                                                         </figure>
                                                     </td>
                                                     <td>
@@ -148,10 +140,10 @@
                                                             @endif
 
 
-                                                            <a href="#"
+                                                            {{--<a href="#"
                                                                 class="__name" style="color: #e71d1d;"
                                                                 wire:click.prevent='SaveForLater("{{ $item->rowId }}")'>{{ __('Admin/site.savelater') }}
-                                                            </a>
+                                                            </a>--}}
                                                         </div>
                                                     </td>
 

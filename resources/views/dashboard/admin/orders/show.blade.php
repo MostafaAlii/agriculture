@@ -110,10 +110,10 @@
                                                         <div class="row">
                                                             <div class="col-md-2">
                                                                 <figure class="figure">
-                                                                    @if ($item->product->image)
-                                                                        <img src="{{ asset('Dashboard/img/products/' . $item->product->image->filename) }}" alt="{{ $item->product->image->filename .'_'. $item->order->referance_id }}" class="rounded-circle shadow bg-light rounded" style="width: 100px; height:100px;" />
+                                                                    @if ($item->product->image_path)
+                                                                        <img src="{{ $item->product->image_path }}" alt="{{ $item->product->name .'_'. $item->order->referance_id }}" class="rounded-circle shadow bg-light rounded" style="width: 100px; height:100px;" />
                                                                     @else
-                                                                        <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}" class="rounded-circle" style="width: 120px; height:120px;" />
+                                                                        <img src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" class="rounded-circle" style="width: 120px; height:120px;" />
                                                                     @endif
                                                                 </figure>
                                                             </div>

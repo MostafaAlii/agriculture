@@ -96,7 +96,7 @@
                                                     <div class="col-12 col-sm-6 col-lg-4">
                                                         <div class="__item">
                                                             <figure class="__image">
-                                                                @if($product->model->image)
+                                                                {{--@if($product->model->image)
                                                                     <a href="{{ route('product_details',encrypt($product->model->id)) }}">
                                                                         <img  width="188" src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}"
                                                                     data-src="{{ asset('Dashboard/img/products/'. $product->model->image->filename) }}" alt="demo" />
@@ -104,7 +104,26 @@
                                                                 @else
                                                                     <img  width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
                                                                     data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
-                                                                @endif
+                                                                @endif 
+
+                                                                
+
+                                                                @if($product->image_path)
+                                                                <a href="{{ route('product_details',encrypt($product->id)) }}">
+                                                                    <img width="188" src="{{ $product->image_path }}"
+                                                                        data-src="{{ $product->image_path }}" alt="demo" />
+                                                                </a>
+                                                                @else
+                                                                <img width="188" src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
+                                                                    data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}" alt="demo" />
+                                                                @endif --}}
+
+                                                                <a href="{{ route('product_details', encrypt($product->model->id)) }}">
+                                                                    <img src=" {{ $product->model->image_path ?
+                                                                        $product->model->image_path : URL::asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                                        alt="{{ $product->model->name}}">
+                                                                </a>
+                                                                
                                                             </figure>
 
                                                             <div class="__content">
