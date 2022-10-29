@@ -198,6 +198,7 @@ class FarmerRepository implements FarmerInterface{
     }
 
     public function updateAccount($request,$id) {
+        //dd($request->all());
         try{
             DB::beginTransaction();
             $farmerID = Crypt::decrypt($id);
@@ -209,6 +210,7 @@ class FarmerRepository implements FarmerInterface{
             }else{
                 $requestData['password'] = $farmerpassword ;
             }
+            $farmer->update($requestData);
             if($request->hasFile('image')) {
                 $image = $request->file('image');
                 $name = 'farmer-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));

@@ -87,7 +87,6 @@ class AdminRepository implements AdminInterface {
     }
 
     public function update($request, $id) {
-        //dd($request);
         try {
             DB::beginTransaction();
             $adminID = Crypt::decrypt($id);
