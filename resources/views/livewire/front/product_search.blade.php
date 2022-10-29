@@ -49,20 +49,19 @@
                         <div class="col-12 col-sm-6 col-lg-4">
                             <div class="__item">
                                 <figure class="__image">
-                                    @if ($product->image->filename)
-                                        <a
-                                            href="{{ route('product_details', encrypt($product->id)) }}">
-                                            <img width="188"
-                                                src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                alt="demo" />
-                                        </a>
-                                    @else
-                                        <img width="188"
-                                            src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                            data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                            alt="demo" />
-                                    @endif
+                                    
+                                        
+                                    
+                                        @if($product->image_path)
+                                            <a href="{{ route('product_details', encrypt($product->id)) }}">
+                                                <img width="188" src="{{ $product->image_path }}" alt="{{ $product->name }}" />
+                                            </a>
+                                        @else
+                                            <a href="{{ route('product_details', encrypt($product->id)) }}">
+                                                <img width="188" src="{{ asset('Dashboard/img/Default/default_product.jpg') }}" alt="{{ $product->name }}" />
+                                            </a>
+                                        @endif
+                                    
                                 </figure>
 
                                 <div class="__content">

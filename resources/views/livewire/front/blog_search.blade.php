@@ -13,13 +13,13 @@
                                 <div class="col-12 col-sm-6 col-lg-4">
                                     <div class="__item __item--preview">
                                         <figure class="__image">
-                                            @if(isset($blog->image->filename))
-                                                <img  src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
-                                                data-src="{{ asset('Dashboard/img/blogs/'.$blog->image->filename) }}"
-                                                alt="demo" />
+                                            @if(isset($blog->image_path))
+                                                <img  src="{{ $blog->image_path }}"
+                                                data-src="{{ $blog->image_path }}"
+                                                alt="{{ $blog->title }}" />
                                             @else
-                                            <img  src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}"
-                                            data-src="{{ asset('Dashboard/img/images/blogs-img/blog-article-1.jpg') }}" alt="demo" />
+                                            <img  src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}"
+                                            data-src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}" alt="{{ $blog->title }}" />
                                             @endif
                                         </figure>
                                         <div class="__content">
