@@ -12,7 +12,7 @@ class WorkerProfileAccountRequest extends FormRequest {
 
             'firstname'    => 'required|min:3|string',
             'lastname'     => 'required|min:3|string',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers',
+            'phone'        => 'required_with:email|string|min:10|max:11|unique:workers',
             'email'        => 'required|email|unique:workers',
             'salary'       => 'in:perday,perhour',
             'work'         => 'in:alone,team',
@@ -26,7 +26,7 @@ class WorkerProfileAccountRequest extends FormRequest {
 
             $worker = $this->route()->parameter('id');
             $rules['email'] = 'required|email|unique:workers,id,' . $worker;
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers,id,' . $worker;
+            $rules['phone'] = 'required|min:10|max:11|unique:workers,id,' . $worker;
             $rules['password'] = 'confirmed';
 
         }//end of if

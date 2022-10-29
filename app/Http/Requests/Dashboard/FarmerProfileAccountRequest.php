@@ -12,7 +12,7 @@ class FarmerProfileAccountRequest extends FormRequest {
 
             'firstname'    => 'required|min:3|string',
             'lastname'     => 'required|min:3|string',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
+            'phone'        => 'required_with:email|string|min:10|max:11|unique:farmers',
             'email'        => 'required|email|unique:farmers',
             'password'     => 'required|confirmed|min:6|max:10',
             // "image"        => 'image|mimes:jpeg,png|max:4096',
@@ -23,7 +23,7 @@ class FarmerProfileAccountRequest extends FormRequest {
             $farmer = $this->route()->parameter('id');
 
             $rules['email'] = 'required|email|unique:farmers,id,' . $farmer;
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . $farmer;
+            $rules['phone'] = 'required|min:10|max:11|unique:farmers,id,' . $farmer;
             $rules['password'] = 'confirmed';
 
         }//end of if

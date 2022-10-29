@@ -14,7 +14,7 @@ class FarmerProfileRequest extends FormRequest {
 
             'firstname'    => 'required|min:3|string',
             'lastname'     => 'required|min:3|string',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers',
+            'phone'        => 'required_with:email|string|min:10|max:11|unique:farmers',
             // 'email'        => 'required|email|unique:farmers',
             // 'birthdate'       => 'before:today',
             // 'country_id'      => 'required',
@@ -29,7 +29,7 @@ class FarmerProfileRequest extends FormRequest {
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:farmers,id,' . Auth::user()->id;
+            $rules['phone'] = 'required|min:10|max:11|unique:farmers,id,' . Auth::user()->id;
         }//end of if
 
         return $rules;

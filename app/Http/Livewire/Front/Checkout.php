@@ -52,17 +52,17 @@ class Checkout extends Component {
         ]);
         if($this->ship_to_different) {
             $this->validateOnly($fields,[
-                'shipping_firstname'             =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_lastname'              =>           'required|string|regex:/^[A-Za-z-أ-ي]+$/u',
+                'shipping_firstname'             =>           'required|min:3|string',
+                'shipping_lastname'              =>           'required|string',
                 'shipping_email'                 =>           'required|email',
                 'shipping_mobile'                =>           'required|numeric|min:10',
-                'shipping_country'               =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_proviency'             =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_area'                  =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_state'                 =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_village'               =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_address1'              =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_address2'              =>           'sometimes|nullable|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_country'               =>           'required|min:3|string',
+                'shipping_proviency'             =>           'required|min:3|string',
+                'shipping_area'                  =>           'required|min:3|string',
+                'shipping_state'                 =>           'required|min:3|string',
+                'shipping_village'               =>           'required|min:3|string',
+                'shipping_address1'              =>           'required|min:3|string',
+                'shipping_address2'              =>           'sometimes|nullable|string',
             ]);
         }
         if($this->paymentmode == Transaction::CARD) {
@@ -132,17 +132,17 @@ class Checkout extends Component {
 
         if($this->ship_to_different) {
             $this->validate([
-                'shipping_firstname'             =>           'required|string|regex:/^[A-Za-z-أ-ي]+$/u',
-                'shipping_lastname'              =>           'required|string|regex:/^[A-Za-z-أ-ي]+$/u',
+                'shipping_firstname'             =>           'required|string',
+                'shipping_lastname'              =>           'required|string',
                 'shipping_email'                 =>           'required|email',
                 'shipping_mobile'                =>           'required|numeric|min:10',
-                'shipping_country'               =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_proviency'             =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_area'                  =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_state'                 =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_village'               =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_address1'              =>           'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
-                'shipping_address2'              =>           'sometimes|nullable|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u',
+                'shipping_country'               =>           'required|min:3|string',
+                'shipping_proviency'             =>           'required|min:3|string',
+                'shipping_area'                  =>           'required|min:3|string',
+                'shipping_state'                 =>           'required|min:3|string',
+                'shipping_village'               =>           'required|min:3|string|',
+                'shipping_address1'              =>           'required|min:3|string',
+                'shipping_address2'              =>           'sometimes|nullable|string',
             ]);
             $shipping = new Shipping();
             $shipping->order_id = $order->id;

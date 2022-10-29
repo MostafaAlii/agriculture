@@ -12,7 +12,7 @@ class DepartmentRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name'           =>'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/uu|unique:department_translations,name,' . $this->id,
+            'name'           =>'required|string|unique:department_translations,name,' . $this->id,
             'parent_id'      =>'required',
 
            // 'country_id'     =>'required|in:Country::all()',

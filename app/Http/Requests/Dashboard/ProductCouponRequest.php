@@ -12,7 +12,7 @@ class ProductCouponRequest extends FormRequest {
             case 'POST':
             {
                 return [
-                    'code'              => 'required|unique:product_coupons|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u',
+                    'code'              => 'required|unique:product_coupons|string',
                     'type'              => 'required|in:percentage,fixed',
                     'value'             => 'required|numeric',
                     'description'       => 'nullable',
@@ -28,7 +28,7 @@ class ProductCouponRequest extends FormRequest {
             case 'PATCH':
             {
                 return [
-                    'code'              => 'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/u|unique:product_coupons,code,'.$this->route()->parameter('id'),
+                    'code'              => 'required|string|unique:product_coupons,code,'.$this->route()->parameter('id'),
                     'type'              => 'required|in:percentage,fixed',
                     'value'             => 'required|numeric',
                     'description'       => 'nullable',

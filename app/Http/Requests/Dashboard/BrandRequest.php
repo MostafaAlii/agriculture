@@ -14,7 +14,7 @@ class BrandRequest extends FormRequest {
         ];
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
             $brand = $this->route()->parameter('id');
-            $rules['title'] = 'required|min:3|string|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|unique:brands,id,' . $brand;
+            $rules['title'] = 'required|min:3|string|unique:brands,id,' . $brand;
         }//end of if
         return $rules;
     }

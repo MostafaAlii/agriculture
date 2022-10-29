@@ -14,7 +14,7 @@ class WorkerProfileRequest extends FormRequest {
 
             'firstname'       => 'required|min:3|string',
             'lastname'        => 'required|min:3|string',
-            'phone'           => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers',
+            'phone'           => 'required_with:email|string|min:10|max:11|unique:workers',
             'birthdate'       => 'before:today',
             'country_id'      => 'required',
             'province_id'     => 'required',
@@ -34,7 +34,7 @@ class WorkerProfileRequest extends FormRequest {
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
 
             // $worker = $this->route()->parameter('id');
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:workers,id,' . Auth::guard('worker')->user()->id;
+            $rules['phone'] = 'required|min:10|max:11|unique:workers,id,' . Auth::guard('worker')->user()->id;
         }//end of if
 
         return $rules;

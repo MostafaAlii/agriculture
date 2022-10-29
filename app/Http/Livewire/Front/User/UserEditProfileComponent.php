@@ -41,7 +41,7 @@ class UserEditProfileComponent extends Component
         $this->validateOnly($fields,[
             'firstname'       => 'required|min:3|string',
             'lastname'        => 'required|min:3|string',
-            'phone'           => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id,
+            'phone'           => 'required|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id,
             'email'           => 'required|email|unique:users,id,' . Auth::guard('vendor')->user()->id,
             'birthdate'       => 'before:today',
             'country_id'      => 'required',
@@ -84,7 +84,7 @@ class UserEditProfileComponent extends Component
         $this->validate([
             'firstname'       => 'required|min:3|string',
             'lastname'        => 'required|min:3|string',
-            'phone'           => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id,
+            'phone'           => 'required|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id,
             'email'           => 'required|email|unique:users,id,' . Auth::guard('vendor')->user()->id,
             'birthdate'       => 'before:today',
             'country_id'      => 'required',

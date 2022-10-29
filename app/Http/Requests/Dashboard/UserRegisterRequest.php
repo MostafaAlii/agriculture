@@ -13,7 +13,7 @@ class UserRegisterRequest extends FormRequest {
         $rules = [
             'firstname'    =>'required|min:3|string',
             'lastname'     =>'required|min:3|string',
-            'phone'        => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
+            'phone'        => 'required|string|min:10|max:11|unique:users',
             'email'        => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'     => ['required','confirmed','min:6','max:10'],
             'g-recaptcha-response' => 'required|captcha'

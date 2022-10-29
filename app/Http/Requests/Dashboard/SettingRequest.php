@@ -20,8 +20,8 @@ class SettingRequest extends FormRequest
         return [
             'support_mail' => 'sometimes|nullable|email',
 
-            'primary_phone'         => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
-            'secondery_phone' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+            'primary_phone'         => 'required|string|min:10|max:11',
+            'secondery_phone' => 'required|string|min:10|max:11',
             'facebook' => 'required|url',
             'twitter' => 'required|url',
             'inestegram' => 'required|url',

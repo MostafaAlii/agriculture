@@ -27,7 +27,7 @@ class ContactUs extends Component
        $this->validateOnly($fields,[
         'firstname'    =>'required|min:3|max:100|string',
         'lastname'     =>'required|min:3|max:100|string',
-        'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+        'phone'        => 'required_with:email|string|min:10|max:11',
         'email'        => 'required|email|unique:contact_us,email',
         'comment'      =>'required|max:200',
        ]);
@@ -36,7 +36,7 @@ class ContactUs extends Component
        $this->validate([
         'firstname'    => 'required|min:3|max:100|string',
         'lastname'     => 'required|min:3|max:100|string',
-        'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11',
+        'phone'        => 'required_with:email|string|min:10|max:11',
         'email'        => 'required|email|unique:contact_us,email',
         'comment'      => 'required|max:200',
        ]);

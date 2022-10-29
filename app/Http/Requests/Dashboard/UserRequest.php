@@ -12,7 +12,7 @@ class UserRequest extends FormRequest {
 
             'firstname'    =>'required|min:3|string',
             'lastname'     =>'required|min:3|string',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
+            'phone'        => 'required_with:email|string|min:10|max:11|unique:users',
             'email'        => 'required|email|unique:users',
             'password'     => 'required|confirmed|min:6|max:10',
             // "image"        => 'image|mimes:jpeg,png|max:4096',
@@ -23,7 +23,7 @@ class UserRequest extends FormRequest {
             $user = $this->route()->parameter('id');
 
             $rules['email'] = 'required|email|unique:users,id,' . $user;
-            $rules['phone'] = 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . $user;
+            $rules['phone'] = 'required_with:email|string|min:10|max:11|unique:users,id,' . $user;
             $rules['password'] = '';
 
         }//end of if

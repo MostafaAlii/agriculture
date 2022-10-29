@@ -8,12 +8,12 @@ class CategoryRequest extends FormRequest {
 
     public function rules() {
         return [
-            'name'           =>'required|string|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/uu|unique:category_translations,name,' . $this->id,
+            'name'           =>'required|string|unique:category_translations,name,' . $this->id,
             'parent_id'      =>'required',
 
             'department_id'     =>'required|exists:departments,id',
 
-            'description'    =>'required|regex:/^[A-Za-z-أ-ي-pL\s\-0-9]+$/uu',
+            'description'    =>'required',
             'keyword'        =>'required',
         ];
     }

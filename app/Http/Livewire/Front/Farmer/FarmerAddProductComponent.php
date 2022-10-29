@@ -69,7 +69,7 @@ class FarmerAddProductComponent extends Component
                 'tag'            =>'required|exists:tags,id|array',
                 'unit'           =>'required|exists:units,id|',
                 'price'          =>'required|numeric|min:1|digits_between:1,12|max:9999999999',
-                'desc'           =>'sometimes|string|nullable|min:10|regex:/^[A-Za-z-أ-ي-pL\s\-]+$/u|max:500',
+                'desc'           =>'sometimes|string|nullable|min:10|max:500',
             ]);
                 if($this->is_qty ){
                     $this->validate([

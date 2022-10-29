@@ -14,7 +14,6 @@ class DisasterBeeUpdateRequest extends FormRequest {
 
             'name' => [
                 'required',
-                'regex:/^[A-Za-z-أ-ي-pL\s\-\ء]+$/u',
                 'unique:bee_disasters,id,'.$this->id,
 
 
@@ -26,7 +25,6 @@ class DisasterBeeUpdateRequest extends FormRequest {
     public function messages() {
         return [
             'name.required'   => trans('Admin\validation.required'),
-            'name.regex'   => trans('Admin\validation.regex'),
             'name.unique'   => trans('Admin\validation.unique'),
 
             'desc.required'   => trans('Admin\validation.required'),

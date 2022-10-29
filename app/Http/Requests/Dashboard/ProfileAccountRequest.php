@@ -13,7 +13,7 @@ class ProfileAccountRequest extends FormRequest {
 
             'firstname'    => 'required|min:3|string',
             'lastname'     => 'required|min:3|string',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins',
+            'phone'        => 'required_with:email|string|min:10|max:11|unique:admins',
             'email'        => 'required|email|unique:admins',
             'type'         => 'required|in:admin,employee',
             'password'     => 'required|confirmed|min:3|max:10',
@@ -26,7 +26,7 @@ class ProfileAccountRequest extends FormRequest {
             $admin = $this->route()->parameter('id');
 
             $rules['email'] = 'required|email|unique:admins,id,' . $admin;
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:admins,id,' . $admin;
+            $rules['phone'] = 'required|min:10|max:11|unique:admins,id,' . $admin;
             $rules['password'] = 'confirmed';
             $rules['type'] = '';
 

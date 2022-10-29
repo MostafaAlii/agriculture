@@ -14,7 +14,7 @@ class userProfileRequest extends FormRequest {
 
             'firstname'    => 'required|min:3|string',
             'lastname'     => 'required|min:3|string',
-            'phone'        => 'required_with:email|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users',
+            'phone'        => 'required_with:email|string|min:10|max:11|unique:users',
             'birthdate'       => 'before:today',
             'country_id'      => 'required',
             'province_id'     => 'required',
@@ -28,7 +28,7 @@ class userProfileRequest extends FormRequest {
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
-            $rules['phone'] = 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id;
+            $rules['phone'] = 'required|min:10|max:11|unique:users,id,' . Auth::guard('vendor')->user()->id;
         }//end of if
 
         return $rules;
