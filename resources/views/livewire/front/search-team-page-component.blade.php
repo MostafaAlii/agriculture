@@ -85,8 +85,11 @@
                             <a href="{{route('team_profile',encrypt($t->id))}}">
                                 <div class="__item" data-aos="fade" data-aos-delay="100" data-aos-offset="0">
                                 <figure class="__image">
-                                    <img class="lazy" src="{{ asset('Dashboard/img/team/'.$t->image) }}"
-                                    data-src="{{ asset('Dashboard/img/team/'.$t->image) }}" alt="demo" />
+                                    @if($t->image)
+                                        <img class="lazy" data-src="{{ asset('Dashboard/img/team/'.$t->image) }}" src="{{asset('Dashboard/img/team/'.$t->image)}}" alt="{{$t->name}}">
+                                    @else
+                                        <img src="{{asset('Dashboard/img/Default/default_team.jpg')}}" alt="{{$t->name}}">
+                                    @endif
                                 </figure>
                                 <div class="__content">
                                     <h5 class="__title">{{$t->name}}</h5>

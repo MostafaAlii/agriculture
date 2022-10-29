@@ -9,8 +9,9 @@
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-12" id="blog_data">
                     <div class="content-container">
-                        <?php
-                        $teams= Illuminate\Support\Facades\Cache::get('teams');
+                        -<?php
+                        //$teams= Illuminate\Support\Facades\Cache::get('teams');
+                        $teams = App\Models\Team::all();
                         ?>
                         @foreach($teams as $t)
                         @if(decrypt(request()->route('id'))==$t->id)
@@ -26,8 +27,8 @@
                                 </a>
                                 @else
                                 <a class="mr-2" href="#">
-                                    <img src="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
-                                        alt="{{ asset('Dashboard/img/farmers/avatar.jpg') }}"
+                                    <img src="{{ asset('Dashboard/img/Default/default_team.jpg') }}"
+                                        alt="{{ asset('Dashboard/img/Default/default_team.jpg') }}"
                                         class="users-avatar-shadow rounded-circle img-preview" width="30%">
                                 </a>
                                 @endif
