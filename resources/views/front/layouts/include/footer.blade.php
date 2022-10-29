@@ -50,9 +50,9 @@
 
 
 										<div class="col-6 col-sm-4">
-											<?php
-												$home_category=App\Models\Category::whereNotNull('parent_id')->inRandomOrder()->get();
-												if(count($home_category)>0){
+											{{--<?php
+												//$home_category=App\Models\Category::whereNotNull('parent_id')->inRandomOrder()->get();
+												//if(count($home_category)>0){
 											?>
 											<h5 class="footer__item__title h6">{{__('Admin/categories.department_sub')}}</h5>
 											<ul>
@@ -65,7 +65,7 @@
 											</ul>
 											<?php
 											}
-											?>
+											?>--}}
 										</div>
 
 									</div>
