@@ -148,14 +148,14 @@
                                                         <figure class="__image">
                                                             <a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">
-                                                                @if ($product->image)
-                                                                    <img src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                        data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                        alt="demo" />
+                                                                @if ($product->image_path)
+                                                                    <img src="{{ $product->image_path }}"
+                                                                        data-src="{{ $product->image_path }}"
+                                                                        alt="{{ $product->name }}" />
                                                                 @else
-                                                                    <img src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                        data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                        alt="demo" />
+                                                                    <img src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                                        data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                                        alt="{{ $product->name }}" />
                                                                 @endif
                                                             </a>
                                                         </figure>
@@ -288,19 +288,19 @@
                                             <div class="col-12 col-sm-6 col-lg-4">
                                                 <div class="__item">
                                                     <figure class="__image">
-                                                        @if ($product->image)
+                                                        @if ($product->image_path)
                                                             <a
                                                                 href="{{ route('product_details', encrypt($product->id)) }}">
                                                                 <img width="188"
-                                                                    src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                    data-src="{{ asset('Dashboard/img/products/' . $product->image->filename) }}"
-                                                                    alt="demo" />
+                                                                    src="{{ $product->image_path }}"
+                                                                    data-src="{{ $product->image_path }}"
+                                                                    alt="{{ $product->name }}" />
                                                             </a>
                                                         @else
                                                             <img width="188"
-                                                                src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                data-src="{{ asset('Dashboard/img/images/products/default.jpg') }}"
-                                                                alt="demo" />
+                                                                src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                                data-src="{{ asset('Dashboard/img/Default/default_product.jpg') }}"
+                                                                alt="{{ $product->name }}" />
                                                         @endif
                                                     </figure>
 

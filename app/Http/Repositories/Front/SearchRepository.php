@@ -1,11 +1,11 @@
 <?php
 namespace  App\Http\Repositories\Front;
 use App\Models\Blog;
-use App\Http\Interfaces\Front\SearchInterface;
 use App\Models\Product;
-
+use App\Traits\HasImage;
+use App\Http\Interfaces\Front\SearchInterface;
 class SearchRepository implements SearchInterface{
-
+    use HasImage;
     //--------------------------------------------------------------------
     public function search($id,$type) {
         
