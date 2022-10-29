@@ -68,15 +68,6 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-12 col-md-8 col-lg-3" id="search_data">
-            <div class="spacer py-6 d-md-none"></div>
-            <div class="row align-items-center justify-content-between">
-                <div class="col-auto">
-                   <livewire:front.search-team-component />
-                </div>
-            </div>
-            <div class="spacer py-6 d-md-none"></div>
-        </div> --}}
         <div class="section-heading section-heading--center" data-aos="fade">
             <h2 class="__title">{{__('Admin/team.title2')}}<span>{{__('Admin/team.title1')}}</span></h2>
         </div>
@@ -84,20 +75,25 @@
             <div class="__inner">
                 <div class="row">
                     @forelse ($teams as $t)
-                        <div class="col-12 col-md-6 col-lg-4">
-                            <a href="{{route('team_profile',encrypt($t->id))}}">
-                                <div class="__item" data-aos="fade" data-aos-delay="100" data-aos-offset="0">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="{{route('team_profile',encrypt($t->id))}}">
+                            <div class="__item" data-aos="fade" data-aos-delay="100" data-aos-offset="0">
                                 <figure class="__image">
-                                    <img class="lazy" src="{{ asset('Dashboard/img/team/'.$t->image) }}"
-                                    data-src="{{ asset('Dashboard/img/team/'.$t->image) }}" alt="demo" />
+                                    @if($t->image)
+                                        <img class="lazy" src="{{ asset('Dashboard/img/team/'.$t->image) }}"
+                                            data-src="{{ asset('Dashboard/img/team/'.$t->image) }}" alt="{{$t->name}}" />
+                                    @else
+                                        <img class="lazy" src="{{ asset('Dashboard/img/Default/default_team.jpg') }}"
+                                            data-src="{{ asset('Dashboard/img/Default/default_team.jpg') }}" alt="{{$t->name}}" />
+                                    @endif
                                 </figure>
                                 <div class="__content">
                                     <h5 class="__title">{{$t->name}}</h5>
                                     <span>{{$t->position}}</span>
                                 </div>
                             </div>
-                            </a>
-                        </div>
+                        </a>
+                    </div>
                     @empty
                     <div class="col-12">
                         <div class="alert alert-danger">

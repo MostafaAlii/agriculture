@@ -41,7 +41,7 @@
                                 <div class="row justify-content-xl-between">
                                     <div class="col-12 col-md-5 col-lg-6">
                                         <!-- start form -->
-                                        @if (Auth::guard('vendor')->user()->image)
+                                        {{--@if (Auth::guard('vendor')->user()->image)
                                             <a class="mr-2" href="#">
                                                 <img src="{{ asset('Dashboard/img/users/' . Auth::guard('vendor')->user()->image->filename) }}"
                                                 alt="{{ __('Admin/site.no-image') }}"
@@ -53,7 +53,11 @@
                                                 alt="{{ __('Admin/site.no-image') }}"
                                                     class="users-avatar-shadow rounded-circle img-preview" width="50%">
                                             </a>
-                                        @endif
+                                        @endif--}}
+                                        <img class="mr-2 users-avatar-shadow rounded-circle img-preview" width="50%"
+                                            src=" {{ auth('vendor')->user()->image_path ?
+                                            auth('vendor')->user()->image_path : URL::asset('Dashboard/img/Default/default_vendor.jpg') }}"
+                                            alt="{{ auth('vendor')->user()->firstname . ' ' . auth('vendor')->user()->lastname }}">
                                         <input type="file" class="textfield img" name="image" accept="image/*">
                                         <!-- end form -->
 

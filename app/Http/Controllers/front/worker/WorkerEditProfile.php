@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\front\worker;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\WorkerProfileRequest;
 use App\Models\Area;
+use App\Models\State;
+use App\Models\Worker;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\Province;
-use App\Models\State;
-use App\Models\Worker;
+use App\Traits\HasImage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Traits\UploadT;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Dashboard\WorkerProfileRequest;
 
 class WorkerEditProfile extends Controller
 {
-    use UploadT;
+    use HasImage;
     public function editProfile()
     {
         $currencies = Currency::all();
@@ -38,10 +39,16 @@ class WorkerEditProfile extends Controller
                 $requestData['daily_price'] = null;
             }
             $worker->update($requestData);
-            if($request->image){
+            /*if($request->image){
                 $this->deleteImage('upload_image','/workers/' . Auth::guard('worker')->user()->image,Auth::guard('worker')->user()->id);
             }
-            $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\worker');
+            $this->addImage($request, 'image' , 'workers' , 'upload_image',$worker->id, 'App\Models\worker');*/
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'farmer-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $worker->updateImage($image->storeAs('workers', $filename, 'public'));
+            }
             DB::commit();
             session()->flash('Edit',__('Admin/site.updated_successfully'));
             return redirect()->route('worker.ownprofile');

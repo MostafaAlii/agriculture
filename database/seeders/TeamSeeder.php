@@ -17,6 +17,6 @@ class TeamSeeder extends Seeder {
         Schema::enableForeignKeyConstraints();
         
         //create cache file
-        Cache::store('file')->put('teams',Team::get());
+        //Cache::store('file')->put('teams',Team::get());
     }
 }

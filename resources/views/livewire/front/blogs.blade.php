@@ -21,7 +21,7 @@
                             
                                         @if($blog->image_path)
                                         <a href="#">
-                                            <img src="{{  $blog->image_path }}" style="width: 100px; height: 100px;" alt="">
+                                            <img src="{{  $blog->image_path }}" alt="{{ $blog->title }}">
                                         </a>
                             
                                         @else

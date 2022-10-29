@@ -17,11 +17,11 @@
 			<!-- start hero -->
 			<?php
 			$slider = Slider::latest()->first();
-			if(isset($slider->image_path)){
-				$src=$slider->image_path;
-			}else{
+			//if(isset($slider->image_path)){
+			//	$src=$slider->image_path;
+			//}else{
 				$src= asset('Dashboard/img/Default/default_slider.jpg');
-			}
+			//}
 			?>
 			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
                  style="background-image: url({{ $src }});

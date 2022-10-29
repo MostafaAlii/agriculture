@@ -111,18 +111,18 @@ class UserEditProfileComponent extends Component
         $user->birthdate        = $this->birthdate;
         $user->save();
         if($this->newimage){
-            if($this->image){
+            /*if($this->image){
                 $this->deleteImage('upload_image','/users/' . Auth::guard('vendor')->user()->image->filename,Auth::guard('vendor')->user()->id);
-            }
+            }*/
             $image = $this->newimage->extension();
-            $name  = Str::slug($this->firstname . $this->lastname,'-');
-            $filename = $name. '.' . $image;
+            $filename = 'user-'.time().Str::slug($this->firstname . $this->lastname) . $this->newimage->hashName();
+            //$filename = $name. '.' . $image;
             $Image = new Image();
-            $Image->filename = $filename;
+            $Image->filename = 'users/' . $filename;
             $Image->imageable_id = Auth::guard('vendor')->user()->id;
             $Image->imageable_type = 'App\Models\User';
             $Image->save();
-            $this->newimage->storeAs('users',$filename,'upload_image');
+            $this->newimage->storeAs('users',$filename,'public');
         }
         session()->flash('message',__("Website/home.profileupdatesms"));
         return redirect()->route('user.ownprofile');

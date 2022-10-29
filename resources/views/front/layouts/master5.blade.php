@@ -15,15 +15,15 @@
 
 			<?php
 			$slider = \App\Models\Slider::latest()->first();
-			if(isset($slider->image->filename)){
-				$src=$slider->image->filename;
-			}else{
-				$src='100.jpg';
-			}
+			//if(isset($slider->image_path)){
+			//	$src=$slider->image_path;
+			//}else{
+				$src= asset('Dashboard/img/Default/default_slider.jpg');
+			//}
 			?>
 			<!-- start hero -->
 			<div id="hero" class="jarallax" data-speed="0.7" data-img-position="50% 80%"
-                 style="background-image: url({{ asset('Dashboard/img/sliders/'. $src) }});
+                 style="background-image: url({{ $src }});
                         color: #333;">
 				<div class="container">
 					<div class="row">

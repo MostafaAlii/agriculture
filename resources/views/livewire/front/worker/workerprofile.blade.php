@@ -53,21 +53,9 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                     <h2>@lang('website\home.my_profile')</h2>
-
-                    <!-- start form -->
-                    @if($worker->image)
-                        <a class="mr-2" href="#">
-                                <img src="{{ asset('Dashboard/img/workers/'. $worker->image->filename) }}"
-                                alt="{{ __('Admin/site.no-image') }}"
-                                class="users-avatar-shadow rounded-circle img-preview"  width="100%">
-                        </a>
-                    @else
-                        <a class="mr-2" href="#">
-                            <img src="{{ asset('Dashboard/img/profile.png') }}"
-                            alt="{{ __('Admin/site.no-image') }}"
-                            class="users-avatar-shadow rounded-circle img-preview"  width="100%">
-                        </a>
-                    @endif
+                    <img class="users-avatar-shadow rounded-circle img-preview" width="85%" src=" {{ $worker->image_path ?
+                    $worker->image_path : URL::asset('Dashboard/img/Default/default_worker.jpg') }}"
+                    alt="{{ $worker->firstname . ' ' .$worker->lastname }}">
                     <!-- end form -->
 
                     <div class="spacer py-6 d-md-none"></div>

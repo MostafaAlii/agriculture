@@ -14,6 +14,7 @@ class Worker extends Authenticatable {
     protected $table = "workers";
     protected $guarded = [];
     public $timestamps = true;
+    public $appends = ['image_path'];
           public function country()
           {
               return $this->belongsTo(Country::class, 'country_id');

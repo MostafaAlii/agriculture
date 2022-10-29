@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\front\user;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\userProfileRequest;
 use App\Models\Area;
-use App\Models\Country;
-use App\Models\Province;
-use App\Models\State;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\State;
+use App\Models\Country;
 use App\Traits\UploadT;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Province;
+use App\Traits\HasImage;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Dashboard\userProfileRequest;
 
 class UserEditProfile extends Controller
 {
-    use UploadT;
+    use HasImage;
     public function editProfile()
     {
         return view('front.user.userProfileEdit');
@@ -29,10 +31,16 @@ class UserEditProfile extends Controller
             $user = User::findorfail(Auth::guard('vendor')->user()->id);
             $requestData = $request->validated();
             $user->update($requestData);
-            if($request->image){
+            /*if($request->image){
                 $this->deleteImage('upload_image','/users/' . Auth::guard('vendor')->user()->image->filename,Auth::guard('vendor')->user()->id);
             }
-            $this->addImage($request, 'image' , 'users' , 'upload_image',Auth::guard('vendor')->user()->id, 'App\Models\user');
+            $this->addImage($request, 'image' , 'users' , 'upload_image',Auth::guard('vendor')->user()->id, 'App\Models\user');*/
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = 'user-'.time().Str::slug($request->input('firstname') . '_' . $request->input('lastname'));
+                $filename = $name .'.'.$image->getClientOriginalName();
+                $user->updateImage($image->storeAs('users', $filename, 'public'));
+            }
             DB::commit();
             session()->flash('Edit',__('Admin/site.updated_successfully'));
             return redirect()->route('user.ownprofile');
