@@ -16,7 +16,7 @@ class UserRegisterRequest extends FormRequest {
             'phone'        => 'required|string|min:10|max:11|unique:users',
             'email'        => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'     => ['required','confirmed','min:6','max:10'],
-            'g-recaptcha-response' => 'required|captcha'
+            //'g-recaptcha-response' => 'required|captcha'
         ];
         return $rules;
 

@@ -16,7 +16,7 @@ class FarmerRegisterRequest extends FormRequest {
             'phone'        => 'required|string|min:10|max:11|unique:farmers',
             'email'        => ['required', 'string', 'email', 'max:255', 'unique:farmers'],
             'password'     => ['required','confirmed','min:6','max:10'],
-            'g-recaptcha-response' => 'required|captcha'
+            //'g-recaptcha-response' => 'required|captcha'
         ];
         return $rules;
 
