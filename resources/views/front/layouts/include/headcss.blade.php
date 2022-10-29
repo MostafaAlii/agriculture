@@ -34,9 +34,9 @@
           <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
           <!-- END: Page CSS-->
           <style>
-          body {font-family: 'Cairo', sans-serif !important;}
-          .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+          .h1, .h2, .h3, .h4, .h5, .h6, body, h1,h2,h3,h4,h5,h6,p,span,div,li,ul,ol,table,tr,td,th,a,button,select,option,textarea, input {
             font-family: 'Cairo', sans-serif !important;
+            font-weight:bold !important;
         }
           </style>
     {{-- font cairo --}}
@@ -46,9 +46,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;300&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans Arabic', sans-serif!important;}
-        .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 ,a {
+        .h1, .h2, .h3, .h4, .h5, .h6, body, h1,h2,h3,h4,h5,h6,p,span,div,li,ul,ol,table,tr,td,th,a,button,select,option,textarea, input {
             font-family: 'Noto Sans Arabic', sans-serif !important;
+            font-weight:bold !important;
         }
     </style>
     @endif
