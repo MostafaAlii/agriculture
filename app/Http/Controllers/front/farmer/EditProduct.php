@@ -38,6 +38,7 @@ class EditProduct extends Controller
     public function update(farmerProductRequest $request) {
         // dd('hello');
         // return 'hello';
+       // return $request;
         DB::beginTransaction();
             try{
                 $product = Product::findOrfail($request->id);
