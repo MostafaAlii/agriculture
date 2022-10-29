@@ -23,71 +23,46 @@
 					"arrows": true,
 					"dots": false
 				}'>
-                {{-- @foreach (\App\Models\Slider::get() as $slider)
-                <?php if(isset($slider->image)){$scr=$slider->image->filename;}else{$scr="";}?>
-                    <div class="start-screen__slide">
-                        <div class="start-screen__bg"
-                        style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});
-                        background-position: top 30% right 30%;"></div>
-                        <div class="start-screen__content__item align-items-center">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
-                                        <h3 class="__title" style="color:#fff;">
-                                            {{ $slider->title }}
-                                        </h3>
-                                        <h4 style="background-color:rgb(169, 202, 20)">{{ $slider->subtitle }}</h4>
-                                        <p class="__text" style="color:#fff;">
-                                            {{ $slider->description }}
-                                    </div>
+                <?php if(isset($slider->image)){$scr=$slider->image_path;}else{$scr="";}?>
+                @foreach (\App\Models\Slider::get() as $slider)
+                @if($slider->image_path)
+                <div class="start-screen__slide">
+                    <div class="start-screen__bg" style="background-image: url({{ asset('Dashboard/img/Default/default_slider.jpg') }});
+                                                background-position: top 30% right 30%;">
+                    </div>
+                    <div class="start-screen__content__item align-items-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
+                                    <h3 class="__title" style="color:#fff;">
+                                        {{ $slider->title }}
+                                    </h3>
+                                    {{-- <h4 style="background-color:rgb(169, 202, 20)">{{ $slider->subtitle }}</h4> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endforeach --}}
-                @foreach (\App\Models\Slider::get() as $slider)
-                    @if($slider->image)
-                        <div class="start-screen__slide">
-                            <div
-                                class="start-screen__bg"
-                                style="background-image: url({{ asset('Dashboard/img/sliders/'. $slider->image->filename) }});
-                                background-position: top 30% right 30%;">
-                            </div>
-                            <div class="start-screen__content__item align-items-center">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
-                                            <h3 class="__title" style="color:#fff;">
-                                                {{ $slider->title }}
-                                            </h3>
-                                            {{-- <h4 style="background-color:rgb(169, 202, 20)">{{ $slider->subtitle }}</h4> --}}
-                                        </div>
-                                    </div>
+                </div>
+                @else
+                <div class="start-screen__slide">
+                    <div class="start-screen__bg" style="background-image: url({{ asset('Dashboard/img/Default/default_slider.jpg') }});
+                                            background-position: top 30% right 30%;">
+                    </div>
+                    <div class="start-screen__content__item align-items-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
+                                    <h3 class="__title" style="color:#fff;">
+                                        {{ $slider->title }}
+                                    </h3>
+                                    {{-- <h4 style="background-color:rgb(169, 202, 20)">{{ $slider->subtitle }}</h4> --}}
                                 </div>
                             </div>
                         </div>
-                    @else
-                        <div class="start-screen__slide">
-                            <div
-                            class="start-screen__bg"
-                            style="background-image: url({{ asset('Dashboard/img/profile.png') }});
-                            background-position: top 30% right 30%;">
-                            </div>
-                            <div class="start-screen__content__item align-items-center">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-10 col-md-9 col-lg-9 col-xl-8">
-                                            <h3 class="__title" style="color:#fff;">
-                                                {{ $slider->title }}
-                                            </h3>
-                                            {{-- <h4 style="background-color:rgb(169, 202, 20)">{{ $slider->subtitle }}</h4> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-            @endforeach
+                    </div>
+                </div>
+                @endif
+                @endforeach
 			</div>
 			<!-- end start screen -->
 

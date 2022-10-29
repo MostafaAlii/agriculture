@@ -120,7 +120,7 @@
                                         src="{{ $blog->image_path }}" alt="{{ $blog->title }}" class="img-fluid "
                                         style="width:620px; height:210px" /></a>
                                 @else
-                                <a class="__item" href="#"><img src="{{ asset('frontassets/img/promo-banners_img/1.jpg') }}" alt="demo"
+                                <a class="__item" href="#"><img style="width:620px; height:210px" src="{{ asset('Dashboard/img/Default/default_blog.jpg') }}" alt="{{ $blog->title }}"
                                         class="img-fluid w-100" /></a>
                                 @endif
                             </div>
